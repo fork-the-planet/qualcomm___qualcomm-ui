@@ -1,3 +1,9 @@
+import {
+  CdkDrag,
+  type CdkDragDrop,
+  CdkDragHandle,
+  CdkDropList,
+} from "@angular/cdk/drag-drop"
 import {Component, signal} from "@angular/core"
 
 import {
@@ -5,13 +11,12 @@ import {
   createAngularTable,
   TableModule,
 } from "@qualcomm-ui/angular/table"
-import {getCoreRowModel} from "@qualcomm-ui/core/table"
+import {type ColumnOrderState, getCoreRowModel} from "@qualcomm-ui/core/table"
 
 import {createUserQuery, type User, userColumns} from "./data"
-import {DraggableColumnHeaderComponent} from "./draggable-column-header"
 
 @Component({
-  imports: [TableModule, DraggableColumnHeaderComponent],
+  imports: [TableModule, CdkDropList, CdkDrag, CdkDragHandle],
   selector: "column-dnd-demo",
   template: `
     <div q-table-root>
@@ -22,13 +27,21 @@ import {DraggableColumnHeaderComponent} from "./draggable-column-header"
               headerGroup of table.getHeaderGroups();
               track headerGroup.id
             ) {
-              <tr q-table-row>
+              <tr
+                cdkDropList
+                cdkDropListOrientation="horizontal"
+                q-table-row
+                (cdkDropListDropped)="onColumnDropped($event)"
+              >
                 @for (header of headerGroup.headers; track header.id) {
-                  <th
-                    draggable-column-header
-                    [header]="header"
-                    [table]="table"
-                  ></th>
+                  @if (!header.isPlaceholder) {
+                    <th cdkDrag q-table-header-cell>
+                      <ng-container *renderHeader="header; let value">
+                        {{ value }}
+                      </ng-container>
+                      <button cdkDragHandle q-table-column-drag-handle></button>
+                    </th>
+                  }
                 }
               </tr>
             }
@@ -54,6 +67,31 @@ import {DraggableColumnHeaderComponent} from "./draggable-column-header"
 export class ColumnDndDemo {
   readonly query = createUserQuery(10)
 
+  onColumnDropped(col: CdkDragDrop<any>) {
+    this.columnOrder.update((prevOrder) => {
+      const columnOrder = [...prevOrder]
+      return this.reorderColumn(
+        columnOrder[col.previousIndex],
+        columnOrder[col.currentIndex],
+        columnOrder,
+      )
+    })
+  }
+
+  private reorderColumn(
+    draggedColumnId: string,
+    targetColumnId: string,
+    columnOrder: string[],
+  ): ColumnOrderState {
+    columnOrder.splice(
+      columnOrder.indexOf(targetColumnId),
+      0,
+      columnOrder.splice(columnOrder.indexOf(draggedColumnId), 1)[0],
+    )
+    console.debug("new order", columnOrder)
+    return columnOrder
+  }
+
   protected readonly columnOrder = signal(
     userColumns.map((column) => column.id!),
   )
@@ -62,7 +100,7 @@ export class ColumnDndDemo {
     columns: userColumns,
     data: this.query.data() || [],
     getCoreRowModel: getCoreRowModel(),
-    initialState: {
+    state: {
       columnOrder: this.columnOrder(),
     },
   }))

@@ -1,0 +1,46 @@
+.qui-component-grid__root {
+  box-sizing: border-box;
+  display: grid;
+  gap: var(--spacing-80);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin: 24px 0 0 0;
+}
+
+.qui-component-grid__item {
+  align-items: center;
+  background: var(--color-background-neutral-03);
+  border: solid 1px var(--color-border-neutral-03);
+  border-radius: var(--border-radius-md);
+  box-sizing: border-box;
+  color: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  height: auto;
+  justify-self: center;
+  margin: 0;
+  text-decoration: inherit;
+  width: 100%;
+
+  h3 {
+    margin: 0;
+  }
+
+  img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+  }
+}
+
+.qui-component-grid__item-description {
+  background: var(--color-background-neutral-02);
+  border-bottom-left-radius: var(--border-radius-md);
+  border-bottom-right-radius: var(--border-radius-md);
+  box-sizing: border-box;
+  display: flex;
+  height: 100%;
+  padding: 12px;
+  width: 100%;
+}

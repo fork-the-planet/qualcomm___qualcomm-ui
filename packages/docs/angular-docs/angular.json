@@ -19,7 +19,8 @@
             "namedChunks": false,
             "loader": {
               ".mdx": "empty",
-              ".gitkeep": "empty"
+              ".gitkeep": "empty",
+              ".svg": "file"
             },
             "scripts": []
           },

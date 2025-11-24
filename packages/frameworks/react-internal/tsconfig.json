@@ -1,0 +1,21 @@
+{
+  "extends": "@qualcomm-ui/tsconfig/tsconfig.strict.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist",
+    "files": ["types.d.ts"],
+    "paths": {
+      // fixes WebStorm usage detection, not used otherwise
+      "@qualcomm-ui/react-core/*": ["./src/*/index.ts"]
+    },
+  },
+  "include": ["./src"],
+  "references": [
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
+}

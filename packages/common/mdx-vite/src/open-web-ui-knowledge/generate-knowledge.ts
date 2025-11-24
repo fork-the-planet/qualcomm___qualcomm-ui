@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
 import {program} from "@commander-js/extra-typings"
-import {kebabCase} from "change-case"
+import type {MdxJsxAttribute, MdxJsxFlowElement} from "mdast-util-mdx-jsx"
 import {
   access,
   mkdir,
@@ -14,21 +14,26 @@ import {
 } from "node:fs/promises"
 import {basename, dirname, extname, join, resolve} from "node:path"
 import remarkFrontmatter from "remark-frontmatter"
+import remarkMdx from "remark-mdx"
 import remarkParse from "remark-parse"
 import remarkParseFrontmatter from "remark-parse-frontmatter"
 import remarkStringify from "remark-stringify"
-import {unified} from "unified"
+import {type Plugin, unified} from "unified"
+import {visit} from "unist-util-visit"
 
 import type {
   QuiComment,
   QuiCommentDisplayPart,
 } from "@qualcomm-ui/typedoc-common"
+import {kebabCase} from "@qualcomm-ui/utils/change-case"
 
 import {remarkSelfLinkHeadings} from "../docs-plugin"
 import {
   getPathnameFromPathSegments,
   getPathSegmentsFromFileName,
+  remarkRemoveJsx,
 } from "../docs-plugin/internal"
+import {extractNamesFromAttribute} from "../docs-plugin/internal/services/mdx-utils"
 
 import {loadEnv} from "./common"
 import {loadKnowledgeConfigFromEnv} from "./load-config-from-env"
@@ -267,10 +272,9 @@ async function scanPages(
     }
 
     const entries = await readdir(dirPath, {withFileTypes: true})
-    const mdxFiles = entries.filter((f) => f.name.endsWith(".mdx"))
+    const mdxFiles = entries.filter((f) => f.name.endsWith(".mdx")) ?? []
 
-    if (mdxFiles.length > 0) {
-      const mdxFile = mdxFiles[0]
+    for (const mdxFile of mdxFiles) {
       const demosFolder = entries.find((f) => f.name === "demos")
       const demosFolderPath = demosFolder
         ? join(dirPath, demosFolder.name)
@@ -503,6 +507,28 @@ async function collectRelativeImports(
   return modules
 }
 
+const replaceNpmInstallTabs: Plugin = () => {
+  return (tree, _file, done) => {
+    visit(tree, "mdxJsxFlowElement", (node: MdxJsxFlowElement) => {
+      if (node?.name === "NpmInstallTabs") {
+        const packages = node.attributes?.find(
+          (attr): attr is MdxJsxAttribute =>
+            attr.type === "mdxJsxAttribute" && attr.name === "packages",
+        )
+        const packageNames = packages ? extractNamesFromAttribute(packages) : []
+
+        Object.assign(node, {
+          lang: "shell",
+          meta: null,
+          type: "code",
+          value: `npm install ${packageNames.join(" ")}`,
+        })
+      }
+    })
+    done()
+  }
+}
+
 async function processMdxContent(
   mdxContent: string,
   pageUrl: string | undefined,
@@ -549,10 +575,11 @@ async function processMdxContent(
   } else {
     processedContent = processedContent.replace(/<TypeDocProps\s+[^>]*\/>/g, "")
   }
-  let demoRegex = /<(?:QdsDemo|CodeDemo)\s+[^>]*name="(\w+)"[^>]*\/>/g
+  let demoRegex = /<(?:QdsDemo|CodeDemo|Demo)\s+[^>]*name="(\w+)"[^>]*\/>/g
   let demoMatches = Array.from(processedContent.matchAll(demoRegex))
   if (!demoMatches.length) {
-    demoRegex = /<(?:QdsDemo|CodeDemo)\s+[^>]*node=\{Demo\.(\w+)\}[^>]*\/>/g
+    demoRegex =
+      /<(?:QdsDemo|CodeDemo|Demo)\s+[^>]*node=\{Demo\.(\w+)\}[^>]*\/>/g
     demoMatches = Array.from(processedContent.matchAll(demoRegex))
   }
   const replacements = await Promise.all(
@@ -615,6 +642,8 @@ async function processComponent(
     }
     const processor = unified()
       .use(remarkParse)
+      .use(remarkMdx)
+      .use(replaceNpmInstallTabs)
       .use(remarkFrontmatter, ["yaml"])
       .use(remarkParseFrontmatter)
       .use(remarkSelfLinkHeadings(component.url))
@@ -628,7 +657,15 @@ async function processComponent(
       docProps,
       verbose,
     )
-    const contentWithoutFrontmatter = processedContent.replace(
+    const removeJsxProcessor = unified()
+      .use(remarkParse)
+      .use(remarkMdx)
+      .use(remarkRemoveJsx)
+      .use(remarkStringify)
+    const removedJsx = String(
+      await removeJsxProcessor.process(processedContent),
+    )
+    const contentWithoutFrontmatter = removedJsx.replace(
       /^---[\s\S]*?---\n/,
       "",
     )

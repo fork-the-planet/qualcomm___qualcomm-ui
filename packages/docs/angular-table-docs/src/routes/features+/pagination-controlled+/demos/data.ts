@@ -86,10 +86,6 @@ export function makeUserData(...lens: number[]) {
   return makeDataLevel()
 }
 
-const totalCount: number = 10005
-
-const data = makeUserData(totalCount)
-
 interface FetchOptions {
   /**
    * The zero-based page index to fetch.
@@ -121,7 +117,15 @@ export interface FetchResult {
   users: User[]
 }
 
+const totalCount: number = 10005
+
+let cache: User[] = []
+
 export async function fetchData(options: FetchOptions): Promise<FetchResult> {
+  if (!cache.length) {
+    cache = makeUserData(totalCount)
+  }
+
   // Simulate some network latency
   await new Promise((r) => setTimeout(r, 500))
 
@@ -129,7 +133,7 @@ export async function fetchData(options: FetchOptions): Promise<FetchResult> {
     pageCount: Math.ceil(totalCount / options.pageSize),
     totalUsers: totalCount,
     // simulate a paginated results response
-    users: data.slice(
+    users: cache.slice(
       options.pageIndex * options.pageSize,
       (options.pageIndex + 1) * options.pageSize,
     ),
