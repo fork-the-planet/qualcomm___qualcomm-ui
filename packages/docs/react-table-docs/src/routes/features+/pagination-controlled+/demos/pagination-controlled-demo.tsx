@@ -16,18 +16,10 @@ import {CodeHighlight} from "@qualcomm-ui/react-mdx/code-highlight"
 import {fetchData, userColumns} from "./use-data"
 
 export function PaginationControlledDemo() {
-  const [{pageIndex, pageSize}, setPagination] = useState<PaginationState>({
+  const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 10,
   })
-
-  const pagination = useMemo(
-    () => ({
-      pageIndex,
-      pageSize,
-    }),
-    [pageIndex, pageSize],
-  )
 
   const {data, fetchStatus, isFetching} = useQuery({
     placeholderData: (previousData) => previousData,
