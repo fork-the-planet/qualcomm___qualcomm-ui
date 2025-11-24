@@ -63,8 +63,8 @@ import {fetchData, type FetchResult, type User, userColumns} from "./data"
       <div
         q-table-pagination
         [count]="pagination.count()"
-        [page]="paginationState().pageIndex + 1"
-        [pageSize]="paginationState().pageSize"
+        [page]="pagination.page()"
+        [pageSize]="pagination.pageSize()"
         (pageChanged)="pagination.onPageChange($event)"
       >
         <div *paginationContext="let context" q-pagination-page-metadata>
