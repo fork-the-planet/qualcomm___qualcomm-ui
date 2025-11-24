@@ -8,12 +8,12 @@ import {BadgeDirective} from "@qualcomm-ui/angular/badge"
   template: `
     <div class="flex flex-col gap-4">
       <div class="flex flex-wrap items-center gap-2">
-        <span emphasis="neutral" q-badge>Neutral</span>
-        <span emphasis="brand" q-badge>Brand</span>
-        <span emphasis="info" q-badge>Info</span>
-        <span emphasis="success" q-badge>Success</span>
-        <span emphasis="warning" q-badge>Warning</span>
-        <span emphasis="danger" q-badge>Danger</span>
+        <span emphasis="neutral" q-badge>neutral</span>
+        <span emphasis="brand" q-badge>brand</span>
+        <span emphasis="info" q-badge>info</span>
+        <span emphasis="success" q-badge>success</span>
+        <span emphasis="warning" q-badge>warning</span>
+        <span emphasis="danger" q-badge>danger</span>
       </div>
       <div class="flex flex-wrap items-center gap-2">
         <span emphasis="blue" q-badge>blue</span>

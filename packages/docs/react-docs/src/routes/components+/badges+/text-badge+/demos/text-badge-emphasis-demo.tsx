@@ -6,12 +6,12 @@ export function TextBadgeEmphasisDemo(): ReactElement {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap items-center gap-2">
-        <Badge emphasis="neutral">Neutral</Badge>
-        <Badge emphasis="brand">Brand</Badge>
-        <Badge emphasis="info">Info</Badge>
-        <Badge emphasis="success">Success</Badge>
-        <Badge emphasis="warning">Warning</Badge>
-        <Badge emphasis="danger">Danger</Badge>
+        <Badge emphasis="neutral">neutral</Badge>
+        <Badge emphasis="brand">brand</Badge>
+        <Badge emphasis="info">info</Badge>
+        <Badge emphasis="success">success</Badge>
+        <Badge emphasis="warning">warning</Badge>
+        <Badge emphasis="danger">danger</Badge>
       </div>
       <div className="flex flex-wrap items-center gap-2">
         <Badge emphasis="blue">blue</Badge>

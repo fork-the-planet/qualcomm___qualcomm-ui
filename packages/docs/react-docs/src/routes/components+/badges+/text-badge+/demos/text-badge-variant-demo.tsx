@@ -7,22 +7,22 @@ export function TextBadgeVariantDemo(): ReactElement {
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap items-center gap-2">
         <Badge emphasis="neutral" variant="subtle">
-          Neutral
+          neutral
         </Badge>
         <Badge emphasis="brand" variant="subtle">
-          Brand
+          brand
         </Badge>
         <Badge emphasis="info" variant="subtle">
-          Info
+          info
         </Badge>
         <Badge emphasis="success" variant="subtle">
-          Success
+          success
         </Badge>
         <Badge emphasis="warning" variant="subtle">
-          Warning
+          warning
         </Badge>
         <Badge emphasis="danger" variant="subtle">
-          Danger
+          danger
         </Badge>
       </div>
       <div className="flex flex-wrap items-center gap-2">
