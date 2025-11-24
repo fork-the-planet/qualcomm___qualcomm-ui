@@ -11,6 +11,9 @@
       "types": "./dist/*/index.d.ts",
       "import": "./dist/*/index.js",
       "default": "./dist/*/index.js"
+    },
+    "./styles.css": {
+      "style": "./dist/all.min.css"
     }
   },
   "private": true,
@@ -18,11 +21,13 @@
     "dist"
   ],
   "scripts": {
-    "build": "run-s clean build:js build:ts",
+    "build": "run-s clean build:js build:css build:ts",
     "clean": "shx rm -rf dist/tsbuildinfo dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map",
+    "build:css": "qui-css-utils build",
     "build:js": "tsx build.ts",
     "build:ts": "tsc -b tsconfig.lib.json",
-    "dev": "run-p watch:js watch:ts",
+    "dev": "run-p watch:css watch:js watch:ts",
+    "watch:css": "qui-css-utils watch",
     "watch:js": "tsx build.ts --watch --mode development",
     "watch:ts": "pnpm build:ts -w --preserveWatchOutput",
     "lint": "eslint --quiet",
@@ -34,6 +39,7 @@
     "esbuild": "^0.25.8",
     "@floating-ui/react": "^0.27.3",
     "@qualcomm-ui/cli": "workspace:*",
+    "@qualcomm-ui/css-utils": "workspace:*",
     "@qualcomm-ui/core": "workspace:*",
     "@qualcomm-ui/dom": "workspace:*",
     "@qualcomm-ui/esbuild": "workspace:*",

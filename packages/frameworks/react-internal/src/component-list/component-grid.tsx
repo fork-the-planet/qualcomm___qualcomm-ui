@@ -11,11 +11,11 @@ import {componentList} from "./component-list"
  */
 export function ComponentGrid(): ReactElement {
   return (
-    <div className="qui-component-grid">
+    <div className="qui-component-grid__root">
       {componentList.map((component) => (
         <Link
           key={component.name}
-          className="qui-component-grid-item"
+          className="qui-component-grid__item"
           to={component.url}
         >
           <img
@@ -24,7 +24,7 @@ export function ComponentGrid(): ReactElement {
             src={`/images/components/${component.fileName}`}
             width={200}
           />
-          <div className="qui-component-grid-item-description">
+          <div className="qui-component-grid__item-description">
             <h3 className="font-heading-xxs">{component.name}</h3>
           </div>
         </Link>
