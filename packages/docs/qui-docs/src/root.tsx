@@ -27,6 +27,10 @@ import {
   useQdsThemeContext,
 } from "@qualcomm-ui/react/qds-theme"
 import {
+  GlobalConfigContextProvider,
+  GlobalConfigContextValue,
+} from "@qualcomm-ui/react-internal/layout"
+import {
   type PackageManager,
   type RouteDemoState,
   SiteContextProvider,
@@ -46,11 +50,7 @@ import {
   useTheme,
 } from "@qualcomm-ui/react-router-utils/client"
 
-import {
-  AppDocsLayout,
-  GlobalConfigContextProvider,
-  type GlobalConfigContextValue,
-} from "./components"
+import {AppDocsLayout} from "./components"
 import {
   demoStateCookie,
   qdsBrandCookie,
