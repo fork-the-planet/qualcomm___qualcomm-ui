@@ -95,7 +95,7 @@ import {provideQdsComboboxContext} from "./qds-combobox-context.service"
                         ignoreCase
                         q-combobox-item-text
                         q-highlight
-                        [query]="inputValue()"
+                        [query]="comboboxContext.context().inputValue"
                         [text]="collection().stringifyItem(item)"
                       ></span>
                     } @else {
@@ -125,7 +125,7 @@ import {provideQdsComboboxContext} from "./qds-combobox-context.service"
                       ignoreCase
                       q-combobox-item-text
                       q-highlight
-                      [query]="inputValue()"
+                      [query]="comboboxContext.context().inputValue"
                       [text]="collection().stringifyItem(item)"
                     ></span>
                   } @else {
