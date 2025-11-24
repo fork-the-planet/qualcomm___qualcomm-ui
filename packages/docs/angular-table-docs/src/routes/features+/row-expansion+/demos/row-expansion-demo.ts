@@ -1,6 +1,13 @@
 import {Component} from "@angular/core"
 
-import {createAngularTable, TableModule} from "@qualcomm-ui/angular/table"
+import {ButtonModule} from "@qualcomm-ui/angular/button"
+import {PaginationModule} from "@qualcomm-ui/angular/pagination"
+import {ProgressRingModule} from "@qualcomm-ui/angular/progress-ring"
+import {
+  createAngularTable,
+  createTablePagination,
+  TableModule,
+} from "@qualcomm-ui/angular/table"
 import {
   getCoreRowModel,
   getExpandedRowModel,
@@ -10,10 +17,24 @@ import {
 import {createUserQuery, type User, userColumns} from "./data"
 
 @Component({
-  imports: [TableModule],
+  imports: [TableModule, PaginationModule, ButtonModule, ProgressRingModule],
   selector: "row-expansion-demo",
   template: `
     <div q-table-root>
+      <div q-table-action-bar>
+        <button
+          q-button
+          size="sm"
+          variant="outline"
+          [disabled]="query.isFetching()"
+          (click)="query.refetch()"
+        >
+          Refresh Data
+        </button>
+        @if (query.isFetching()) {
+          <div q-progress-ring size="xs"></div>
+        }
+      </div>
       <div q-table-scroll-container>
         <table q-table-table>
           <thead q-table-header>
@@ -47,6 +68,20 @@ import {createUserQuery, type User, userColumns} from "./data"
           </tbody>
         </table>
       </div>
+      <div
+        q-table-pagination
+        [count]="pagination.count()"
+        [page]="pagination.page()"
+        [pageSize]="pagination.pageSize()"
+        (pageChanged)="pagination.onPageChange($event)"
+      >
+        <div *paginationContext="let context" q-pagination-page-metadata>
+          @let meta = context.pageMetadata;
+          {{ meta.pageStart }}-{{ meta.pageEnd }} of {{ meta.count }} results
+        </div>
+
+        <div q-pagination-page-buttons></div>
+      </div>
     </div>
   `,
 })
@@ -61,4 +96,6 @@ export class RowExpansionDemo {
     getPaginationRowModel: getPaginationRowModel(),
     getSubRows: (row: User) => row.subRows,
   }))
+
+  protected pagination = createTablePagination(this.table)
 }

@@ -1,10 +1,16 @@
 import {Component} from "@angular/core"
+import {FormsModule} from "@angular/forms"
 
-import {CellComponentContextDirective} from "@qualcomm-ui/angular/table"
+import {CheckboxModule} from "@qualcomm-ui/angular/checkbox"
+import {
+  CellComponentContextDirective,
+  TableModule,
+} from "@qualcomm-ui/angular/table"
 
 import type {User} from "./data"
 
 @Component({
+  imports: [CheckboxModule, FormsModule, TableModule],
   selector: "app-username-cell",
   template: `
     <div
@@ -12,7 +18,22 @@ import type {User} from "./data"
       [style]="{
         paddingLeft: context().row.depth * 2 + 'rem',
       }"
-    ></div>
+    >
+      <label
+        q-checkbox
+        size="sm"
+        [indeterminate]="context().row.getIsSomeSelected()"
+        [ngModel]="context().row.getIsSelected()"
+        (ngModelChange)="context().row.toggleSelected($event)"
+      ></label>
+
+      @if (context().row.getCanExpand()) {
+        <div class="inline-flex items-center justify-center">
+          <button q-table-row-expand-button [row]="context().row"></button>
+        </div>
+      }
+      <span>{{ context().getValue() }}</span>
+    </div>
   `,
 })
 export class UsernameCell extends CellComponentContextDirective<User> {}
