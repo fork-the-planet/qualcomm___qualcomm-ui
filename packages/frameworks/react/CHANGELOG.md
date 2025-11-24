@@ -1,5 +1,15 @@
 # @qualcomm-ui/react
 
+## 1.2.0 (2025/11/24)
+
+### Features
+
+- add badge component
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
 ## 1.1.6 (2025/11/21)
 
 ### Code Refactoring
