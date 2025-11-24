@@ -3,18 +3,14 @@ import {useState} from "react"
 import {ChevronDown, ChevronRight} from "lucide-react"
 
 import {
-  type Column,
   type ColumnDef,
   type ExpandedState,
   getCoreRowModel,
   getExpandedRowModel,
-  getFilteredRowModel,
   getPaginationRowModel,
-  type TableInstance,
 } from "@qualcomm-ui/core/table"
 import {Button} from "@qualcomm-ui/react/button"
 import {Checkbox} from "@qualcomm-ui/react/checkbox"
-import {NumberInput} from "@qualcomm-ui/react/number-input"
 import {Pagination} from "@qualcomm-ui/react/pagination"
 import {ProgressRing} from "@qualcomm-ui/react/progress-ring"
 import {
@@ -23,7 +19,6 @@ import {
   useReactTable,
   useTablePagination,
 } from "@qualcomm-ui/react/table"
-import {TextInput} from "@qualcomm-ui/react/text-input"
 import {CodeHighlight} from "@qualcomm-ui/react-mdx/code-highlight"
 
 import {type User, useUserData} from "./use-data"
@@ -67,6 +62,7 @@ const columns: ColumnDef<User>[] = [
         <>
           <div className="flex items-center gap-2">
             <Table.ColumnHeaderAction
+              aria-label="Expand all table rows"
               icon={table.getIsAllRowsExpanded() ? ChevronDown : ChevronRight}
               onClick={table.getToggleAllRowsExpandedHandler()}
             />
@@ -120,10 +116,8 @@ export function RowExpansionDemo() {
   const table = useReactTable({
     columns,
     data,
-    filterFns: {},
     getCoreRowModel: getCoreRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSubRows: (row) => row.subRows,
     onExpandedChange: setExpanded,
@@ -169,9 +163,6 @@ export function RowExpansionDemo() {
                                 header.getContext(),
                               )}
                             </div>
-                            {header.column.getCanFilter() ? (
-                              <Filter column={header.column} table={table} />
-                            ) : null}
                           </div>
                         )}
                       </Table.HeaderCell>
@@ -220,66 +211,6 @@ export function RowExpansionDemo() {
           2,
         )}
         language="json"
-      />
-    </div>
-  )
-}
-
-interface FilterProps {
-  column: Column<User>
-  table: TableInstance<User>
-}
-
-function Filter({column, table}: FilterProps) {
-  const firstValue = table
-    .getPreFilteredRowModel()
-    .flatRows[0]?.getValue(column.id)
-
-  return typeof firstValue === "number" ? (
-    <MinMaxNumberFilter column={column} table={table} />
-  ) : (
-    <TextInput
-      className="w-32"
-      onValueChange={(value) => column.setFilterValue(value)}
-      placeholder="Search..."
-      size="sm"
-      value={(column.getFilterValue() as string) ?? ""}
-    />
-  )
-}
-
-function MinMaxNumberFilter({column}: FilterProps) {
-  const columnFilterValue = column.getFilterValue() as [number, number]
-
-  const [min, max] = columnFilterValue ?? [0, 0]
-
-  return (
-    <div className="flex w-32 gap-2">
-      <NumberInput
-        controlProps={{hidden: true}}
-        min={0}
-        onValueChange={({valueAsNumber}) =>
-          column.setFilterValue((old: [number, number]) => [
-            valueAsNumber,
-            old?.[1],
-          ])
-        }
-        placeholder="Min"
-        size="sm"
-        value={min ? `${min}` : ""}
-      />
-      <NumberInput
-        controlProps={{hidden: true}}
-        max={130}
-        onValueChange={({valueAsNumber}) =>
-          column.setFilterValue((old: [number, number]) => [
-            old?.[0],
-            valueAsNumber,
-          ])
-        }
-        placeholder="Max"
-        size="sm"
-        value={max ? `${max}` : ""}
       />
     </div>
   )

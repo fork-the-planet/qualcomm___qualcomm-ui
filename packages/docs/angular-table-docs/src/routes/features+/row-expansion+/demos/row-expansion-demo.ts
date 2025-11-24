@@ -1,13 +1,13 @@
 import {Component} from "@angular/core"
 
+import {createAngularTable, TableModule} from "@qualcomm-ui/angular/table"
 import {
-  type AngularTable,
-  createAngularTable,
-  TableModule,
-} from "@qualcomm-ui/angular/table"
-import {getCoreRowModel} from "@qualcomm-ui/core/table"
+  getCoreRowModel,
+  getExpandedRowModel,
+  getPaginationRowModel,
+} from "@qualcomm-ui/core/table"
 
-import {createUserQuery, type User} from "./data"
+import {createUserQuery, type User, userColumns} from "./data"
 
 @Component({
   imports: [TableModule],
@@ -53,9 +53,12 @@ import {createUserQuery, type User} from "./data"
 export class RowExpansionDemo {
   protected readonly query = createUserQuery(100, 5, 3)
 
-  protected table: AngularTable<User> = createAngularTable(() => ({
-    columns: [],
+  protected table = createAngularTable<User>(() => ({
+    columns: userColumns,
     data: this.query.data() || [],
     getCoreRowModel: getCoreRowModel(),
+    getExpandedRowModel: getExpandedRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSubRows: (row: User) => row.subRows,
   }))
 }
