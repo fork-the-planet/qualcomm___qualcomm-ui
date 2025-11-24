@@ -1,7 +1,7 @@
 {
   "name": "@qualcomm-ui/react-internal",
   "version": "0.0.0",
-  "description": "internal styles and utilities for documentation, used by both React and Angular documentation modules",
+  "description": "internal styles and utilities for documentation, used by the React and Angular documentation modules",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
   "repository": "https://github.com/qualcomm/qualcomm-ui",

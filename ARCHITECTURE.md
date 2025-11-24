@@ -4,7 +4,7 @@
 
 ![Architecture Diagram](./assets/qui-architecture.webp)
 
-This is a multi-layer component architecture with framework-agnostic core logic:
+This is a multi-layer component architecture with a framework-agnostic headless layer:
 
 ### Headless Layer
 
@@ -19,7 +19,7 @@ The core is framework-agnostic. `@qui/core` depends on `@qui/dom` and `@qui/util
 - `@qui/react-core`: React bindings (hooks, context, data binding)
 - `@qui/angular-core`: Angular bindings (services, directives, data binding)
 
-These wrap the headless core for specific frameworks without adding styling.
+These wrap the headless core for specific frameworks without adding styling (apart from floating element positioning).
 
 ### Design System
 
@@ -62,9 +62,9 @@ Teams implementing web components for framework integration typically create fra
 
 #### React
 
-- Refs to internal elements (Shadow DOM blocks this)
+- Refs to internal elements (closed Shadow DOM blocks this)
 - Context API across Shadow boundaries
-- Controlled component patterns for forms
+- Controlled component patterns
 
 Shadow DOM encapsulation prevents binding directly to internal elements. If a web component contains an `<input>`, you can't apply Angular's `formControlName` or React's `ref` to that input—only to whatever the web component explicitly exposes through its public API.
 
@@ -74,7 +74,7 @@ If you need framework-specific wrappers anyway, you've negated the primary benef
 
 Research into major design systems reveals a consistent pattern: framework-specific implementations are the norm.
 
-IBM Carbon and Microsoft Fluent UI maintain separate implementations for frameworks and web components. Since early 2023, Carbon has [expanded](https://carbondesignsystem.com/#explore-libraries) framework-specific implementations rather than consolidating around web components. Most companies default to React. These teams recognized that deep framework integration requires native implementations.
+IBM Carbon and Microsoft Fluent UI maintain separate implementations for frameworks and web components. Since early 2023, Carbon has [expanded](https://carbondesignsystem.com/#explore-libraries) framework-specific implementations rather than consolidating around web components. These teams recognized that deep framework integration requires native implementations.
 
 This isn't an oversight. Framework-specific libraries dominate because they can leverage each framework's full capabilities.
 

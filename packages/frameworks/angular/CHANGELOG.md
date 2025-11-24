@@ -1,5 +1,11 @@
 # @qualcomm-ui/angular
 
+## 1.3.3 (2025/11/23)
+
+### Bug Fixes
+
+- [icon]: use correct docs site url in error message
+
 ## 1.3.2 (2025/11/21)
 
 ### Miscellaneous Chores

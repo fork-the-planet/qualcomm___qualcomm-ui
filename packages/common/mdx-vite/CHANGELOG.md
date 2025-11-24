@@ -1,5 +1,15 @@
 # @qualcomm-ui/mdx-vite
 
+## 2.1.3 (2025/11/23)
+
+### Performance Improvements
+
+- [angular-demo-plugin]: remove redundant module invalidation
+
+### Bug Fixes
+
+- [angular-demo-plugin]: relative file changes trigger demo update
+
 ## 2.1.2 (2025/11/21)
 
 ### Bug Fixes
