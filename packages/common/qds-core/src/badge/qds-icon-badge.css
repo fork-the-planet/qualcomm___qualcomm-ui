@@ -1,0 +1,61 @@
+.qui-badge__root {
+  &[data-size="xxs"] {
+    --icon-radius: var(--border-radius-xs);
+    --icon-size: var(--sizing-60);
+  }
+  &[data-size="xs"] {
+    --icon-radius: var(--border-radius-xs);
+    --icon-size: var(--sizing-70);
+  }
+  &[data-size="sm"] {
+    --icon-radius: var(--border-radius-sm);
+    --icon-size: var(--sizing-80);
+  }
+  &[data-size="md"] {
+    --icon-radius: var(--border-radius-sm);
+    --icon-size: var(--sizing-90);
+  }
+  &[data-size="lg"] {
+    --icon-radius: var(--border-radius-md);
+    --icon-size: var(--sizing-120);
+  }
+  &[data-size="xl"] {
+    --icon-radius: var(--border-radius-lg);
+    --icon-size: var(--sizing-140);
+  }
+}
+
+.qui-badge__root[data-scope="icon-badge"] {
+  background: var(--badge-background);
+  border: solid var(--border-size, 0) var(--badge-border);
+  border-radius: var(--icon-radius);
+  color: var(--badge-text);
+
+  &[data-size="xxs"],
+  &[data-size="xs"],
+  &[data-size="sm"] {
+    padding: var(--spacing-20);
+  }
+
+  &[data-size="md"] {
+    padding: var(--spacing-40);
+  }
+
+  &[data-size="lg"] {
+    padding: var(--spacing-50);
+  }
+
+  &[data-size="xl"] {
+    padding: var(--spacing-60);
+  }
+}
+
+.qui-badge__icon[data-scope="icon-badge"] {
+  color: var(--icon-color, inherit);
+  --icon-size: inherit;
+}
+
+.qui-badge__root[data-scope="icon-badge"] > svg {
+  block-size: var(--icon-size);
+  inline-size: var(--icon-size);
+}
