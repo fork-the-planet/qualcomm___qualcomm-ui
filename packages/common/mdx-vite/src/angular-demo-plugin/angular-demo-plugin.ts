@@ -315,7 +315,7 @@ export function angularDemoPlugin({
     for (const [demoId, demo] of demoRegistry.entries()) {
       if (demo.sourceCode.find((entry) => entry.filePath === file)) {
         logDev(
-          `${chalk.blue.bold(LOG_PREFIX)} Re-parsing demo ${chalk.cyan(demoId)} due to imported file change: ${chalk.yellow(file)}`,
+          `${chalk.blue.bold(LOG_PREFIX)} Reloading demo ${chalk.cyan(demoId)} due to imported file change: ${chalk.yellow(file)}`,
         )
         const code = await readFile(demo.filePath, "utf-8")
         const updatedDemo = await parseAngularDemo(demo.filePath, code)
