@@ -1,5 +1,19 @@
 # @qualcomm-ui/angular
 
+## 1.4.0 (2025/11/24)
+
+### Features
+
+- add badge component
+
+### Bug Fixes
+
+- remove useless context, fix doc
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
 ## 1.3.3 (2025/11/23)
 
 ### Bug Fixes
