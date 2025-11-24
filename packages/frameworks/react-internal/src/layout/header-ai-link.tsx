@@ -18,7 +18,7 @@ export function HeaderAiLink(props: HeaderAiLinkProps): ReactElement {
       portalProps={{disabled: true}}
       trigger={
         <HeaderBar.ActionIconButton
-          aria-label="AI Chat (QC-only)"
+          aria-label="QUI AI Assistant (QC-only)"
           icon={Bot}
           render={
             <a
@@ -30,7 +30,7 @@ export function HeaderAiLink(props: HeaderAiLinkProps): ReactElement {
         />
       }
     >
-      AI Chat (QC-only)
+      QUI AI Assistant (QC-only)
     </Tooltip>
   )
 }

@@ -12,6 +12,7 @@
 @import "@qualcomm-ui/qds-core/themes/dragonwing-light.css" layer(components);
 @import "@qualcomm-ui/qds-core/themes/dragonwing-dark.css" layer(components);
 @import "@qualcomm-ui/react-mdx/styles.css" layer(components);
+@import "@qualcomm-ui/react-internal/styles.css" layer(components);
 
 @source "../../../frameworks/react-internal/src";
 
@@ -45,53 +46,6 @@ svg.fsd {
     fill: var(--color-text-neutral-primary);
     font: var(--q-font-metadata-xl-mono);
   }
-}
-
-.qui-component-grid {
-  box-sizing: border-box;
-  display: grid;
-  gap: var(--spacing-80);
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  margin: 24px 0 0 0;
-}
-
-.qui-component-grid-item {
-  align-items: center;
-  background: var(--color-background-neutral-03);
-  border: solid 1px var(--color-border-neutral-03);
-  border-radius: var(--border-radius-md);
-  box-sizing: border-box;
-  color: inherit;
-  cursor: pointer;
-  display: inline-flex;
-  flex-direction: column;
-  height: auto;
-  justify-self: center;
-  margin: 0;
-  text-decoration: inherit;
-  width: 100%;
-
-  h3 {
-    margin: 0;
-  }
-
-  img {
-    display: block;
-    height: auto;
-    max-width: 100%;
-    vertical-align: middle;
-  }
-}
-
-.qui-component-grid-item-description {
-  background: var(--color-background-neutral-02);
-  border-bottom-left-radius: var(--border-radius-md);
-  border-bottom-right-radius: var(--border-radius-md);
-  box-sizing: border-box;
-  display: flex;
-  height: 100%;
-  padding: 12px;
-  width: 100%;
 }
 
 ::view-transition-old(theme-transition),

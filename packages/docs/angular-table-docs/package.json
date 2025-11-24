@@ -38,6 +38,7 @@
     "upload-knowledge-qui": "qui-mdx-vite upload-knowledge --env .env.qui-ai"
   },
   "dependencies": {
+    "@angular/cdk": "catalog:",
     "@angular/cli": "catalog:",
     "@angular/common": "catalog:",
     "@angular/compiler": "catalog:",

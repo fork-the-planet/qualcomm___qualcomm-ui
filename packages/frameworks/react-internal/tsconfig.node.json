@@ -4,7 +4,6 @@
     "composite": true
   },
   "include": [
-    "build.ts",
-    "vitest.config.ts",
+    "*.ts"
   ]
 }

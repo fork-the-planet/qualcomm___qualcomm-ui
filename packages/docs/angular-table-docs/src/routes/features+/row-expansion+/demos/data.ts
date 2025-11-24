@@ -4,6 +4,11 @@ import {
   injectQuery,
 } from "@tanstack/angular-query-experimental"
 
+import type {ColumnDef} from "@qualcomm-ui/core/table"
+
+import {UsernameCell} from "./username-cell"
+import {UsernameHeader} from "./username-header"
+
 export interface User {
   accountStatus: string
   averageSessionDuration: number
@@ -14,6 +19,47 @@ export interface User {
   username: string
   visitCount: number
 }
+
+export const userColumns: ColumnDef<User>[] = [
+  {
+    accessorKey: "username",
+    cell: () => UsernameCell,
+    header: () => UsernameHeader,
+    id: "username",
+  },
+  {
+    accessorKey: "accountStatus",
+    header: "Account Status",
+    id: "accountStatus",
+  },
+  {
+    accessorKey: "role",
+    header: "Role",
+    id: "role",
+  },
+  {
+    accessorKey: "averageSessionDuration",
+    header: "Avg Session Duration",
+    id: "averageSessionDuration",
+  },
+  {
+    accessorKey: "companyName",
+    header: "Company Name",
+    id: "companyName",
+    minSize: 200,
+  },
+  {
+    accessorKey: "lastVisitedAt",
+    header: "Last Visited At",
+    id: "lastVisitedAt",
+    minSize: 205,
+  },
+  {
+    accessorKey: "visitCount",
+    header: "Visit Count",
+    id: "visitCount",
+  },
+]
 
 export function createUserQuery(
   ...dimensions: number[]
