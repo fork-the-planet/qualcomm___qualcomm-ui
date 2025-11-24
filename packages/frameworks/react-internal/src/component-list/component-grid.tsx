@@ -4,6 +4,11 @@ import {Link} from "react-router"
 
 import {componentList} from "./component-list"
 
+/**
+ * To consume this grid, the site must have images at `/public/images/components/*`
+ *
+ * Refer to the @qualcomm-ui/react-docs package for these.
+ */
 export function ComponentGrid(): ReactElement {
   return (
     <div className="qui-component-grid">
