@@ -80,7 +80,7 @@ Add the links to your application's `<head>` element:
 />
 ```
 
-## 4. Configure theme provider
+## 4. Configure the theme provider
 
 QUI components support both light and dark modes. Choose one of the following approaches for your site:
 
@@ -106,3 +106,68 @@ Guide coming soon
 
 - Learn more about theming in our [theming documentation](/theming/overview).
 - Use the navigation menu on the left to view component documentation and examples.
+
+## Troubleshooting
+
+### Styles aren't loading
+
+If `@qualcomm-ui/react` components are appearing without styles, check the following:
+
+- Ensure that you've [imported the CSS](./#2-import-the-css) from step 2.
+- Verify that you've [configured the html attributes](./#4-configure-the-theme-provider) from step 4.
+
+If styles still aren't appearing, inspect the DOM of your application in your browser's dev tools. Your application's `<html>` element should have at least two attributes:
+
+- `data-brand`: the QDS brand (either `qualcomm`, `snapdragon`, or `dragonwing`)
+- `data-theme`: the QDS theme (either `light` or `dark`)
+
+Your `<html>` element should look something like this:
+
+```html
+<html
+  data-brand="qualcomm"
+  data-theme="light"
+  style="color-scheme: light"
+></html>
+```
+
+Note that you need to import the corresponding CSS for the brand you've selected:
+
+```css tabs="css-brand" label="Qualcomm"
+@import "@qualcomm-ui/qds-core/themes/qualcomm-dark.css";
+@import "@qualcomm-ui/qds-core/themes/qualcomm-light.css";
+```
+
+```css tabs="css-brand" label="Snapdragon"
+@import "@qualcomm-ui/qds-core/themes/snapdragon-dark.css";
+@import "@qualcomm-ui/qds-core/themes/snapdragon-light.css";
+```
+
+```css tabs="css-brand" label="Dragonwing"
+@import "@qualcomm-ui/qds-core/themes/dragonwing-dark.css";
+@import "@qualcomm-ui/qds-core/themes/dragonwing-light.css";
+```
+
+> [!tip/Component Styles]
+> Always import component styles, regardless of the chosen brand.
+
+```css
+@import "@qualcomm-ui/qds-core/styles/components.css";
+```
+
+### Migrating from legacy QUI
+
+NextGen is independent of the legacy `@qui/react` package. Both can be installed and used in the same project without conflicts.
+
+```css
+/* this is fine */
+@import "@qui/styles/dist/all.min.css";
+@import "@qui/base/dist/all.min.css";
+
+@import "@qualcomm-ui/qds-core/styles/components.css";
+@import "@qualcomm-ui/qds-core/themes/qualcomm-dark.css";
+@import "@qualcomm-ui/qds-core/themes/qualcomm-light.css";
+```
+
+> [!note]
+> We're working on a codemod script for automatic migration. Check back regularly for updates!

@@ -184,6 +184,16 @@ If styles still aren't appearing, inspect the DOM of your application in your br
 - `data-brand`: the QDS brand (either `qualcomm`, `snapdragon`, or `dragonwing`)
 - `data-theme`: the QDS theme (either `light` or `dark`)
 
+Your `<html>` element should look something like this:
+
+```html
+<html
+  data-brand="qualcomm"
+  data-theme="light"
+  style="color-scheme: light"
+></html>
+```
+
 Note that you need to import the corresponding CSS for the brand you've selected:
 
 ```css tabs="css-brand" label="Qualcomm"
@@ -208,16 +218,6 @@ Note that you need to import the corresponding CSS for the brand you've selected
 @import "@qualcomm-ui/qds-core/styles/components.css";
 ```
 
-Your `<html>` element should look something like this:
-
-```html
-<html
-  data-brand="qualcomm"
-  data-theme="light"
-  style="color-scheme: light"
-></html>
-```
-
 ### Migrating from legacy QUI
 
 NextGen is independent of the legacy `@qui/angular` package. Both can be installed and used in the same project without conflicts.
@@ -233,4 +233,4 @@ NextGen is independent of the legacy `@qui/angular` package. Both can be install
 ```
 
 > [!note]
-> We're working on a codemod script for automatic migrations. Check back regularly for updates!
+> We're working on a codemod script for automatic migration. Check back regularly for updates!
