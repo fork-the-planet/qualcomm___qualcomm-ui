@@ -32,6 +32,17 @@ import {qdsTableApi} from "./qds-table-api"
 export class TableRowExpandButtonDirective
   implements OnInit, SignalifyInput<QdsTableRowExpandButtonProps>
 {
+  /**
+   * Whether the row is expanded. Pass in the state from the row:
+   *
+   * @example
+   * ```angular-html
+   * <button
+   *   q-table-row-expand-button
+   *   [isExpanded]="row.getIsExpanded()">
+   * </button>
+   * ```
+   */
   readonly isExpanded = input<boolean | undefined, Booleanish>(undefined, {
     transform: booleanAttribute,
   })
