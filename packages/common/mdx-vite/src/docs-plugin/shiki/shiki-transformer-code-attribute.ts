@@ -17,6 +17,11 @@ export interface TransformerCodeAttributeOptions {
    * Custom formatter for the source code.
    */
   formatter?: (code: string) => string
+
+  /**
+   * Callback fired when file processing is complete.
+   */
+  onComplete?: (codeWithoutSnippets: string) => void
 }
 
 /**
@@ -32,8 +37,9 @@ export function transformerCodeAttribute(
     name: "shiki-transformer-code-attribute",
     pre(node) {
       const strippedSource = removeCodeAnnotations(this.source)
-      node.properties[opts.attributeName ?? "data-code"] =
-        opts.formatter?.(strippedSource) ?? strippedSource
+      const formattedSource = opts.formatter?.(strippedSource) ?? strippedSource
+      node.properties[opts.attributeName ?? "data-code"] = formattedSource
+      opts.onComplete?.(formattedSource)
     },
   }
 }

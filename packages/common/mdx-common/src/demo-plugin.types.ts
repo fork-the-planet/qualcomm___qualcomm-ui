@@ -6,12 +6,15 @@ export interface SourceCodeData {
   filePath?: string
   highlighted: {
     full: string
-    preview?: string
+    preview?: string | null | undefined
   }
   raw: {
     full: string
-    preview: string
-    withoutImports: string
+    preview?: string | null | undefined
+    /**
+     * @deprecated no longer populated
+     */
+    withoutImports?: string | null | undefined
   }
 }
 

@@ -3,8 +3,25 @@
 
 import type {ShikiTransformer} from "shiki"
 
-interface TransformerPreviewBlockOptions {
-  stripMarkers?: boolean
+import {dedent} from "@qualcomm-ui/utils/dedent"
+
+export type PreviewDisplayMode = "only-preview" | "full-code"
+
+interface PreviewBlockTransformerOptions {
+  /**
+   * @option 'full-code': keep the full code (with preview markers removed) as the rendered snippet.
+   * @option 'preview-only': render only the extracted preview block as the snippet
+   *
+   * In all cases the preview block is extracted and attached to `data-preview`.
+   *
+   * @default 'full-code'
+   */
+  displayMode?: PreviewDisplayMode
+
+  /**
+   * Callback fired when file processing is complete.
+   */
+  onComplete?: (extractedPreview: string | null) => void
 }
 
 function isPreviewLine(trimmedLine: string): boolean {
@@ -16,17 +33,20 @@ function isPreviewLine(trimmedLine: string): boolean {
 }
 
 export function transformerPreviewBlock(
-  options: TransformerPreviewBlockOptions = {},
+  options: PreviewBlockTransformerOptions = {
+    displayMode: "full-code",
+  },
 ): ShikiTransformer {
-  const {stripMarkers = true} = options
   let previewContent: string | null = null
 
   return {
+    enforce: "post",
     name: "transformer-preview-block",
     pre(node) {
       if (previewContent) {
         node.properties["data-preview"] = previewContent
       }
+      options.onComplete?.(previewContent || null)
     },
     preprocess(code) {
       previewContent = null
@@ -45,9 +65,6 @@ export function transformerPreviewBlock(
           } else {
             inPreview = false
           }
-          if (!stripMarkers) {
-            resultLines.push(line)
-          }
           continue
         }
         resultLines.push(line)
@@ -57,8 +74,13 @@ export function transformerPreviewBlock(
       }
 
       if (foundPreview) {
-        previewContent = previewLines.join("\n").trim()
+        previewContent = dedent(previewLines.join("\n").trim())
+        if (options.displayMode === "only-preview") {
+          return previewContent
+        }
       }
+
+      return resultLines.join("\n").trim()
     },
   }
 }
