@@ -1,38 +1,51 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {booleanAttribute, Component, input, type OnInit} from "@angular/core"
+import {
+  booleanAttribute,
+  Component,
+  input,
+  type OnInit,
+  signal,
+} from "@angular/core"
 
-// import {START_ICON_CONTEXT_TOKEN} from "@qualcomm-ui/angular/icon"
+import {
+  END_ICON_CONTEXT_TOKEN,
+  type IconTokenContext,
+  START_ICON_CONTEXT_TOKEN,
+} from "@qualcomm-ui/angular/icon"
 import type {LucideIconOrString} from "@qualcomm-ui/angular-core/lucide"
 import {useTrackBindings} from "@qualcomm-ui/angular-core/machine"
 import type {SignalifyInput} from "@qualcomm-ui/angular-core/signals"
-import type {QdsHeaderBarNavItemProps} from "@qualcomm-ui/qds-core/header-bar"
+import {
+  headerBarClasses,
+  type QdsHeaderBarNavItemProps,
+} from "@qualcomm-ui/qds-core/header-bar"
 import type {Booleanish} from "@qualcomm-ui/utils/coercion"
 
 import {useQdsHeaderBarContext} from "./qds-header-bar-context.service"
 
 @Component({
-  //   providers: [
-  //     {
-  //       provide: START_ICON_CONTEXT_TOKEN,
-  //       useFactory: (): IconTokenContext => ({
-  //         getBindings: signal({
-  //           class: headerBarClasses.itemIcon,
-  //           "data-part": "start-icon",
-  //         }),
-  //       }),
-  //     },
-  //     {
-  //       provide: END_ICON_CONTEXT_TOKEN,
-  //       useFactory: (): IconTokenContext => ({
-  //         getBindings: signal({
-  //           class: headerBarClasses.itemIcon,
-  //           "data-part": "end-icon",
-  //         }),
-  //       }),
-  //     },
-  //   ],
+  providers: [
+    {
+      provide: START_ICON_CONTEXT_TOKEN,
+      useFactory: (): IconTokenContext => ({
+        getBindings: signal({
+          class: headerBarClasses.itemIcon,
+          "data-part": "start-icon",
+        }),
+      }),
+    },
+    {
+      provide: END_ICON_CONTEXT_TOKEN,
+      useFactory: (): IconTokenContext => ({
+        getBindings: signal({
+          class: headerBarClasses.itemIcon,
+          "data-part": "end-icon",
+        }),
+      }),
+    },
+  ],
   selector: "[q-header-bar-nav-item]",
   standalone: false,
   template: `
