@@ -39,8 +39,8 @@ export class TableRowExpandButtonDirective
    * ```angular-html
    * <button
    *   q-table-row-expand-button
-   *   [isExpanded]="row.getIsExpanded()">
-   * </button>
+   *   [isExpanded]="row.getIsExpanded()"
+   * ></button>
    * ```
    */
   readonly isExpanded = input<boolean | undefined, Booleanish>(undefined, {
