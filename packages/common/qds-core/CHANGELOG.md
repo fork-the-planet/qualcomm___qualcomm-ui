@@ -1,5 +1,15 @@
 # @qualcomm-ui/qds-core
 
+## 1.5.0 (2025/11/24)
+
+### Features
+
+- add badge component
+
+### Bug Fixes
+
+- [badge]: categories > colors
+
 ## 1.4.2 (2025/11/21)
 
 ### Miscellaneous Chores

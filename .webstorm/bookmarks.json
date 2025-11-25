@@ -176,13 +176,13 @@
       {
         "description": "angular-docs",
         "provider": "com.intellij.ide.bookmark.providers.LineBookmarkProvider",
-        "url": "file://$PROJECT_DIR$/packages/docs/angular-docs/src/routes/components+/badge+",
+        "url": "file://$PROJECT_DIR$/packages/docs/angular-docs/src/routes/components+/badges+",
         "line": "-1"
       },
       {
         "description": "react-docs",
         "provider": "com.intellij.ide.bookmark.providers.LineBookmarkProvider",
-        "url": "file://$PROJECT_DIR$/packages/docs/react-docs/src/routes/components+/badge+",
+        "url": "file://$PROJECT_DIR$/packages/docs/react-docs/src/routes/components+/badges+",
         "line": "-1"
       },
       {
