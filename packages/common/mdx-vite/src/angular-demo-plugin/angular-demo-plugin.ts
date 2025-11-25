@@ -1,6 +1,5 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
-
 import chalk from "chalk"
 import {type FSWatcher, watch} from "chokidar"
 import {glob} from "glob"
@@ -19,13 +18,16 @@ import type {Plugin, ViteDevServer} from "vite"
 
 import {
   type AngularDemoInfo,
-  type ExtractedPreview,
-  type PreviewContext,
   quiCustomDarkTheme,
   type SourceCodeData,
 } from "@qualcomm-ui/mdx-common"
 
 import {getShikiTransformers} from "../docs-plugin"
+import {
+  removeCodeAnnotations,
+  transformerCodeAttribute,
+  transformerPreviewBlock,
+} from "../docs-plugin/shiki"
 
 export interface AngularDemoPluginOptions {
   demoPattern?: string | string[]
@@ -65,11 +67,6 @@ const LOG_PREFIX = "[angular-demo]"
 
 let hasWatcherInitialized = false
 
-/**
- * Logs in dev mode only after the watcher has been initialized. Vite runs setup
- * hooks multiple times (once for each environment), so we use this approach to
- * ensure that certain messages are only logged once.
- */
 function logDev(...args: any[]) {
   if (!hasWatcherInitialized) {
     return
@@ -81,7 +78,6 @@ let demoDimensionsCache: Record<string, DOMRect> = {}
 let highlighter: Highlighter | null = null
 let initCount = 0
 const demoRegistry = new Map<string, AngularDemoInfo>()
-
 let hotUpdateDemoIds: string[] = []
 
 export function angularDemoPlugin({
@@ -96,6 +92,14 @@ export function angularDemoPlugin({
   let watcher: FSWatcher | null = null
   let devServer: ViteDevServer | null = null
 
+  const defaultShikiOptions = {
+    defaultColor: "light-dark()",
+    themes: {
+      dark: theme.dark,
+      light: theme.light,
+    },
+  }
+
   return {
     async buildEnd() {
       if (watcher) {
@@ -104,7 +108,6 @@ export function angularDemoPlugin({
         hasWatcherInitialized = false
       }
     },
-
     async buildStart() {
       if (initCount === 0) {
         initCount++
@@ -140,7 +143,6 @@ export function angularDemoPlugin({
         }
       }
     },
-
     configureServer(server) {
       devServer = server
       let dimensionUpdateTimeout: NodeJS.Timeout | null = null
@@ -173,12 +175,13 @@ export function angularDemoPlugin({
         }
       })
     },
-
     async handleHotUpdate({file, modules, server}) {
       if (!isAngularDemoFile(file)) {
         if (isCssAsset(file)) {
           return modules
-        } else if (file.endsWith("main.js")) {
+        }
+
+        if (file.endsWith("main.js")) {
           const ids = [...hotUpdateDemoIds]
           server.ws.send({
             data: {
@@ -194,6 +197,7 @@ export function angularDemoPlugin({
             type: "custom",
           })
         }
+
         return []
       }
 
@@ -259,29 +263,27 @@ export function angularDemoPlugin({
 
       return []
     },
-
     async load(id) {
       if (id === VIRTUAL_MODULE_ID) {
         return generateRegistryModule()
       }
+
       if (id.startsWith(`\0${VIRTUAL_MODULE_PREFIX}`)) {
         const pageId = id.slice(`\0${VIRTUAL_MODULE_PREFIX}`.length)
         return generatePageRegistryModule(pageId)
       }
     },
-
     name: "angular-demo-plugin",
-
     resolveId(id) {
       if (id === "virtual:angular-demo-registry") {
         return VIRTUAL_MODULE_ID
       }
+
       if (id.startsWith(VIRTUAL_MODULE_PREFIX)) {
         const pageId = id.slice(VIRTUAL_MODULE_PREFIX.length)
         return `\0${VIRTUAL_MODULE_PREFIX}${pageId}`
       }
     },
-
     writeBundle() {
       console.log(
         `${chalk.blue.bold(LOG_PREFIX)} Successfully integrated ${chalk.green(demoRegistry.size)} component demos`,
@@ -313,13 +315,16 @@ export function angularDemoPlugin({
     file: string,
   ): Promise<AngularDemoInfo[]> {
     const affectedDemos: AngularDemoInfo[] = []
+
     for (const [demoId, demo] of demoRegistry.entries()) {
       if (demo.sourceCode.find((entry) => entry.filePath === file)) {
         logDev(
           `${chalk.blue.bold(LOG_PREFIX)} Reloading demo ${chalk.cyan(demoId)} due to imported file change: ${chalk.yellow(file)}`,
         )
+
         const code = await readFile(demo.filePath, "utf-8")
         const updatedDemo = await parseAngularDemo(demo.filePath, code)
+
         if (updatedDemo) {
           delete demoDimensionsCache[updatedDemo.id]
           demoRegistry.set(updatedDemo.id, updatedDemo)
@@ -328,143 +333,71 @@ export function angularDemoPlugin({
         }
       }
     }
+
     return affectedDemos
   }
 
   async function highlightCode(
     code: string,
     language: "angular-ts" | "angular-html" = "angular-ts",
-  ): Promise<string> {
+  ): Promise<{
+    codeWithoutSnippets: string
+    highlightedCode: string
+    highlightedPreview?: string | null
+    previewCodeWithoutSnippets?: string | null
+  }> {
     if (!highlighter) {
-      return code
+      return {codeWithoutSnippets: code, highlightedCode: code}
     }
 
+    let previewCode: string | null = null
+    let codeWithoutSnippets = ""
+
     try {
-      return highlighter.codeToHtml(code, {
-        defaultColor: "light-dark()",
+      const highlightedCode = highlighter.codeToHtml(code, {
+        ...defaultShikiOptions,
         lang: language,
-        themes: {
-          dark: theme.dark,
-          light: theme.light,
-        },
         transformers: [
           ...getShikiTransformers(),
+          transformerPreviewBlock({
+            attributeName: null,
+            onComplete: (extractedPreview) => {
+              previewCode = extractedPreview
+                ? removeCodeAnnotations(extractedPreview)
+                : null
+            },
+          }),
+          transformerCodeAttribute({
+            attributeName: null,
+            onComplete: (formattedSource) => {
+              codeWithoutSnippets = formattedSource
+            },
+          }),
           {
             enforce: "post",
             name: "shiki-transformer-trim",
-            preprocess(code) {
-              return code.trim()
+            preprocess(inner) {
+              return inner.trim()
             },
           },
         ],
       })
+
+      return {
+        codeWithoutSnippets,
+        highlightedCode,
+        highlightedPreview: previewCode
+          ? extractPreviewFromHighlightedHtml(highlightedCode)
+          : null,
+        previewCodeWithoutSnippets: previewCode,
+      }
     } catch (error) {
       console.warn(
         `${chalk.blue.bold(LOG_PREFIX)} Failed to highlight code with ${language} language:`,
         error,
       )
-      return code
+      return {codeWithoutSnippets: code, highlightedCode: code}
     }
-  }
-
-  function extractAngularPreviewsAndCleanSource(
-    code: string,
-  ): ExtractedPreview {
-    const lines = code.split("\n")
-    const previewBlocks: PreviewContext[] = []
-    const cleanedLines: string[] = []
-    let inPreview = false
-    let currentBlock: string[] = []
-    let startLine = -1
-    let currentContext: "template" | "typescript" = "typescript"
-    let inTemplate = false
-    let templateDepth = 0
-
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i]
-      const trimmedLine = line.trim()
-
-      if (/template\s*:\s*[`"']/.test(line)) {
-        inTemplate = true
-        templateDepth = 0
-      }
-
-      if (inTemplate && line.includes("`")) {
-        const backticks = (line.match(/`/g) || []).length
-        templateDepth += backticks
-        if (templateDepth % 2 === 0 && backticks > 0) {
-          inTemplate = false
-        }
-      }
-
-      if (inTemplate && /['"]\s*[,}]/.test(line)) {
-        inTemplate = false
-      }
-
-      if (isPreviewLine(trimmedLine)) {
-        if (inPreview) {
-          const normalizedContent = normalizeIndentation(currentBlock)
-          previewBlocks.push({
-            content: normalizedContent,
-            context: currentContext,
-            endLine: i - 1,
-            startLine,
-          })
-          currentBlock = []
-          inPreview = false
-        } else {
-          inPreview = true
-          startLine = i + 1
-          currentContext = inTemplate ? "template" : "typescript"
-        }
-      } else {
-        cleanedLines.push(line)
-        if (inPreview) {
-          currentBlock.push(line)
-        }
-      }
-    }
-
-    function normalizeIndentation(lines: string[]): string {
-      if (lines.length === 0) {
-        return ""
-      }
-      const nonEmptyLines = lines.filter((line) => line.trim().length > 0)
-      if (nonEmptyLines.length === 0) {
-        return lines.join("\n")
-      }
-      let minIndent = Infinity
-      for (const line of nonEmptyLines) {
-        const match = line.match(/^(\s*)/)
-        const indent = match ? match[1].length : 0
-        minIndent = Math.min(minIndent, indent)
-      }
-      const normalizedLines = lines.map((line) => {
-        if (line.trim().length === 0) {
-          return line
-        }
-        return line.slice(minIndent)
-      })
-      return normalizedLines.join("\n")
-    }
-
-    const formattedPreview = previewBlocks.length
-      ? previewBlocks.map((block) => block.content).join("\n")
-      : ""
-
-    return {
-      formattedPreview,
-      previewBlocks,
-      sourceWithoutPreviews: cleanedLines.join("\n"),
-    }
-  }
-
-  function isPreviewLine(trimmedLine: string): boolean {
-    return (
-      trimmedLine === "// preview" ||
-      /^\/\*\s*preview\s*\*\/$/.test(trimmedLine) ||
-      /^<!--\s*preview\s*-->$/.test(trimmedLine)
-    )
   }
 
   async function extractRelativeImports(
@@ -472,6 +405,7 @@ export function angularDemoPlugin({
   ): Promise<RelativeImport[]> {
     try {
       const content = await readFile(filePath, "utf-8")
+
       const sourceFile = ts.createSourceFile(
         filePath,
         content,
@@ -485,13 +419,16 @@ export function angularDemoPlugin({
       function visit(node: ts.Node) {
         if (ts.isImportDeclaration(node)) {
           const moduleSpecifier = node.moduleSpecifier
+
           if (ts.isStringLiteral(moduleSpecifier)) {
             const source = moduleSpecifier.text
+
             if (isRelativeImport(source)) {
               const resolvedPath = resolveRelativeImport(source, filePath)
               relativeImports.push({resolvedPath, source})
             } else if (!isNodeBuiltin(source)) {
               const pathAliases = loadTsConfigPaths(filePath)
+
               if (isPathAliasImport(source, pathAliases)) {
                 const resolvedPath = resolvePathAlias(source, pathAliases)
                 if (resolvedPath) {
@@ -501,10 +438,12 @@ export function angularDemoPlugin({
             }
           }
         }
+
         ts.forEachChild(node, visit)
       }
 
       visit(sourceFile)
+
       return relativeImports
     } catch (error) {
       logDev(
@@ -522,6 +461,7 @@ export function angularDemoPlugin({
     if (visited.has(filePath)) {
       return []
     }
+
     visited.add(filePath)
 
     const directImports = await extractRelativeImports(filePath)
@@ -533,13 +473,7 @@ export function angularDemoPlugin({
     return Array.from(visited).slice(1)
   }
 
-  function stripImports(
-    code: string,
-    fileName: string,
-  ): {
-    imports: string[]
-    strippedCode: string
-  } {
+  function stripImports(code: string, fileName: string): string[] {
     try {
       const sourceFile = ts.createSourceFile(
         fileName,
@@ -558,46 +492,25 @@ export function angularDemoPlugin({
             start: node.getFullStart(),
           })
         }
+
         ts.forEachChild(node, visit)
       }
 
       visit(sourceFile)
 
-      const imports = importRanges.map((range) => {
+      return importRanges.map((range) => {
         let endPos = range.end
         if (code[endPos] === "\n") {
           endPos++
         }
         return code.slice(range.start, endPos).trim()
       })
-
-      importRanges.sort((a, b) => b.start - a.start)
-
-      let strippedCode = code
-      for (const range of importRanges) {
-        let endPos = range.end
-        if (strippedCode[endPos] === "\n") {
-          endPos++
-        }
-        strippedCode =
-          strippedCode.slice(0, range.start) + strippedCode.slice(endPos)
-      }
-
-      strippedCode = strippedCode.trim()
-
-      return {
-        imports,
-        strippedCode: strippedCode.replace(/^\n+/, ""),
-      }
     } catch (error) {
       logDev(
         `${chalk.blue.bold(LOG_PREFIX)} ${chalk.redBright("Failed to strip imports from")} ${chalk.cyan(fileName)}:`,
         error,
       )
-      return {
-        imports: [],
-        strippedCode: code,
-      }
+      return []
     }
   }
 
@@ -606,113 +519,13 @@ export function angularDemoPlugin({
     code: string,
   ): Promise<AngularDemoInfo | null> {
     try {
-      const {formattedPreview, sourceWithoutPreviews} =
-        extractAngularPreviewsAndCleanSource(code)
-
-      const sourceFile = ts.createSourceFile(
-        filePath,
-        sourceWithoutPreviews,
-        ts.ScriptTarget.Latest,
-        true,
-        ts.ScriptKind.TS,
-      )
-
-      let componentClass = ""
-      let selector = ""
-      let isStandalone = true
-      let templateUrl: string | null = null
-      const imports: string[] = []
-      let hasDefaultExport = false
-
-      function visit(node: ts.Node) {
-        if (ts.isImportDeclaration(node)) {
-          imports.push(node.getFullText(sourceFile).trim())
-        }
-
-        if (ts.isClassDeclaration(node)) {
-          const decorators = node.modifiers?.filter(ts.isDecorator)
-          const componentDecorator = decorators?.find((decorator) => {
-            if (ts.isCallExpression(decorator.expression)) {
-              const expression = decorator.expression.expression
-              return (
-                ts.isIdentifier(expression) && expression.text === "Component"
-              )
-            }
-            return false
-          })
-
-          if (componentDecorator && node.name) {
-            componentClass = node.name.text
-
-            if (
-              ts.isCallExpression(componentDecorator.expression) &&
-              componentDecorator.expression.arguments[0] &&
-              ts.isObjectLiteralExpression(
-                componentDecorator.expression.arguments[0],
-              )
-            ) {
-              const properties =
-                componentDecorator.expression.arguments[0].properties
-
-              const selectorProp = properties.find(
-                (prop) =>
-                  ts.isPropertyAssignment(prop) &&
-                  ts.isIdentifier(prop.name) &&
-                  prop.name.text === "selector",
-              ) as ts.PropertyAssignment | undefined
-
-              if (
-                selectorProp &&
-                ts.isStringLiteral(selectorProp.initializer)
-              ) {
-                selector = selectorProp.initializer.text
-              }
-
-              const templateUrlProp = properties.find(
-                (prop) =>
-                  ts.isPropertyAssignment(prop) &&
-                  ts.isIdentifier(prop.name) &&
-                  prop.name.text === "templateUrl",
-              ) as ts.PropertyAssignment | undefined
-
-              if (templateUrlProp) {
-                if (ts.isStringLiteral(templateUrlProp.initializer)) {
-                  templateUrl = templateUrlProp.initializer.text
-                } else if (
-                  ts.isNoSubstitutionTemplateLiteral(
-                    templateUrlProp.initializer,
-                  )
-                ) {
-                  templateUrl = templateUrlProp.initializer.text
-                }
-              }
-
-              const standaloneProp = properties.find(
-                (prop) =>
-                  ts.isPropertyAssignment(prop) &&
-                  ts.isIdentifier(prop.name) &&
-                  prop.name.text === "standalone",
-              ) as ts.PropertyAssignment | undefined
-
-              if (standaloneProp) {
-                if (
-                  standaloneProp.initializer.kind === ts.SyntaxKind.FalseKeyword
-                ) {
-                  isStandalone = false
-                }
-              }
-            }
-          }
-        }
-
-        if (ts.isExportAssignment(node) && !node.isExportEquals) {
-          hasDefaultExport = true
-        }
-
-        ts.forEachChild(node, visit)
-      }
-
-      visit(sourceFile)
+      const {
+        componentClass,
+        hasDefaultExport,
+        isStandalone,
+        selector,
+        templateUrl,
+      } = parseAngularComponentMeta(filePath, code)
 
       if (!componentClass || !selector) {
         return null
@@ -722,117 +535,37 @@ export function angularDemoPlugin({
       const pageId = extractPageId(filePath, routesDir)
       const importPath = relative(process.cwd(), filePath).replace(/\\/g, "/")
       const fileName = basename(filePath)
+      const importsWithoutStrip = stripImports(code, filePath)
 
-      const {strippedCode: codeWithoutImports} = stripImports(code, filePath)
+      const sourceCode: SourceCodeData[] = []
 
-      const highlightedFull = await highlightCode(code, "angular-ts")
-      const {highlightedPreview, highlightedWithoutPreview} =
-        extractHighlightedVariants(highlightedFull)
-
-      const sourceCode: SourceCodeData[] = [
-        {
-          fileName,
-          filePath,
-          highlighted: {
-            full: highlightedWithoutPreview,
-            preview: highlightedPreview,
-          },
-          raw: {
-            full: sourceWithoutPreviews,
-            preview: formattedPreview || "",
-            withoutImports: codeWithoutImports,
-          },
-        },
-      ]
+      const mainSourceEntry = await buildAngularSourceEntry({
+        code,
+        fileName,
+        filePath,
+        language: "angular-ts",
+      })
+      sourceCode.push(mainSourceEntry)
 
       if (templateUrl) {
-        const templatePath = resolveTemplateFile(templateUrl, filePath)
-
-        if (existsSync(templatePath)) {
-          try {
-            const templateCode = await readFile(templatePath, "utf-8")
-
-            const {
-              formattedPreview: templatePreview,
-              sourceWithoutPreviews: templateWithoutPreviews,
-            } = extractAngularPreviewsAndCleanSource(templateCode)
-
-            const highlightedTemplate = await highlightCode(
-              templateCode,
-              "angular-html",
-            )
-
-            const {
-              highlightedPreview: highlightedTemplatePreview,
-              highlightedWithoutPreview: highlightedTemplateWithoutPreview,
-            } = extractHighlightedVariants(highlightedTemplate)
-
-            sourceCode.push({
-              fileName: basename(templatePath),
-              highlighted: {
-                full: highlightedTemplateWithoutPreview,
-                preview: highlightedTemplatePreview,
-              },
-              raw: {
-                full: templateWithoutPreviews,
-                preview: templatePreview || "",
-                withoutImports: templateCode,
-              },
-            })
-          } catch (error) {
-            console.log(
-              `${chalk.blue.bold(LOG_PREFIX)} ${chalk.redBright("Failed to read template file:")} ${chalk.cyan(templatePath)}`,
-              error,
-            )
-          }
+        const templateEntry = await maybeBuildTemplateSourceEntry(
+          templateUrl,
+          filePath,
+        )
+        if (templateEntry) {
+          sourceCode.push(templateEntry)
         }
       }
 
-      const relativeImports = await collectAllImports(filePath)
-
-      for (const resolvedPath of relativeImports) {
-        try {
-          const importedCode = await readFile(resolvedPath, "utf-8")
-          const {strippedCode: importedCodeWithoutImports} = stripImports(
-            importedCode,
-            resolvedPath,
-          )
-
-          const {sourceWithoutPreviews: importedSourceWithoutSnippets} =
-            extractAngularPreviewsAndCleanSource(importedCode)
-
-          const importedFileName = basename(resolvedPath)
-          const highlightedImportedSource = await highlightCode(
-            importedSourceWithoutSnippets,
-            "angular-ts",
-          )
-
-          sourceCode.push({
-            fileName: importedFileName,
-            filePath: resolvedPath,
-            highlighted: {
-              full: highlightedImportedSource,
-              preview: "",
-            },
-            raw: {
-              full: importedSourceWithoutSnippets,
-              preview: "",
-              withoutImports: importedCodeWithoutImports,
-            },
-          })
-        } catch (error) {
-          logDev(
-            `${chalk.blue.bold(LOG_PREFIX)} ${chalk.yellowBright("Failed to process relative import:")} ${chalk.cyan(resolvedPath)}`,
-          )
-        }
-      }
+      const importedEntries = await buildImportedSourceEntries(filePath)
+      sourceCode.push(...importedEntries)
 
       return {
         componentClass,
         filePath: importPath.startsWith(".") ? importPath : `./${importPath}`,
         hasDefaultExport,
         id: demoId,
-        imports,
+        imports: importsWithoutStrip,
         initialHtml: initialHtml?.[demoId] || undefined,
         isStandalone,
         lastModified: Date.now(),
@@ -849,89 +582,219 @@ export function angularDemoPlugin({
     }
   }
 
-  function extractHighlightedVariants(highlightedHtml: string): {
-    highlightedPreview: string
-    highlightedWithoutPreview: string
-  } {
-    const preMatch = highlightedHtml.match(/^<pre[^>]*><code>/)?.[0] || ""
-    const postMatch = highlightedHtml.match(/<\/code><\/pre>$/)?.[0] || ""
-    const content = highlightedHtml.slice(preMatch.length, -postMatch.length)
-    const lines = content.split("\n")
-    const previewLines: string[] = []
-    const withoutPreviewLines: string[] = []
-    let inPreview = false
-
-    for (const line of lines) {
-      const textContent = line
-        .replace(/<[^>]*>/g, "")
-        .replace(/&#x3C;/g, "<")
-        .replace(/&#x3E;/g, ">")
-        .trim()
-
-      if (
-        textContent === "// preview" ||
-        textContent === "/* preview */" ||
-        textContent === "<!-- preview -->"
-      ) {
-        inPreview = !inPreview
-        continue
-      }
-
-      if (inPreview) {
-        previewLines.push(line)
-      }
-      withoutPreviewLines.push(line)
-    }
-
-    const normalizedPreviewLines = normalizeIndentation(previewLines)
-    const highlightedPreview =
-      normalizedPreviewLines.length > 0
-        ? `${preMatch}${normalizedPreviewLines.join("\n")}${postMatch}`
-        : ""
-    const highlightedWithoutPreview = `${preMatch}${withoutPreviewLines.join("\n")}${postMatch}`
-
-    return {highlightedPreview, highlightedWithoutPreview}
+  interface AngularComponentMeta {
+    componentClass: string
+    hasDefaultExport: boolean
+    importsFromAst: string[]
+    isStandalone: boolean
+    selector: string
+    templateUrl: string | null
   }
 
-  function normalizeIndentation(lines: string[]): string[] {
-    if (lines.length === 0) {
-      return []
-    }
-
-    const nonEmptyLines = lines.filter(
-      (line) => line.replace(/<[^>]*>/g, "").trim().length > 0,
+  function parseAngularComponentMeta(
+    filePath: string,
+    source: string,
+  ): AngularComponentMeta {
+    const sourceFile = ts.createSourceFile(
+      filePath,
+      source,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
     )
 
-    if (nonEmptyLines.length === 0) {
-      return lines
+    let componentClass = ""
+    let selector = ""
+    let isStandalone = true
+    let templateUrl: string | null = null
+    let hasDefaultExport = false
+    const importsFromAst: string[] = []
+
+    function visit(node: ts.Node) {
+      if (ts.isImportDeclaration(node)) {
+        importsFromAst.push(node.getFullText(sourceFile).trim())
+      }
+
+      if (ts.isClassDeclaration(node)) {
+        const decorators = node.modifiers?.filter(ts.isDecorator)
+        const componentDecorator = decorators?.find((decorator) => {
+          if (!ts.isCallExpression(decorator.expression)) {
+            return false
+          }
+          const expression = decorator.expression.expression
+          return ts.isIdentifier(expression) && expression.text === "Component"
+        })
+
+        if (componentDecorator && node.name) {
+          componentClass = node.name.text
+
+          if (
+            ts.isCallExpression(componentDecorator.expression) &&
+            componentDecorator.expression.arguments[0] &&
+            ts.isObjectLiteralExpression(
+              componentDecorator.expression.arguments[0],
+            )
+          ) {
+            const properties =
+              componentDecorator.expression.arguments[0].properties
+
+            const selectorProp = properties.find(
+              (prop) =>
+                ts.isPropertyAssignment(prop) &&
+                ts.isIdentifier(prop.name) &&
+                prop.name.text === "selector",
+            ) as ts.PropertyAssignment | undefined
+
+            if (selectorProp && ts.isStringLiteral(selectorProp.initializer)) {
+              selector = selectorProp.initializer.text
+            }
+
+            const templateUrlProp = properties.find(
+              (prop) =>
+                ts.isPropertyAssignment(prop) &&
+                ts.isIdentifier(prop.name) &&
+                prop.name.text === "templateUrl",
+            ) as ts.PropertyAssignment | undefined
+
+            if (templateUrlProp) {
+              const init = templateUrlProp.initializer
+              if (ts.isStringLiteral(init)) {
+                templateUrl = init.text
+              } else if (ts.isNoSubstitutionTemplateLiteral(init)) {
+                templateUrl = init.text
+              }
+            }
+
+            const standaloneProp = properties.find(
+              (prop) =>
+                ts.isPropertyAssignment(prop) &&
+                ts.isIdentifier(prop.name) &&
+                prop.name.text === "standalone",
+            ) as ts.PropertyAssignment | undefined
+
+            if (
+              standaloneProp &&
+              standaloneProp.initializer.kind === ts.SyntaxKind.FalseKeyword
+            ) {
+              isStandalone = false
+            }
+          }
+        }
+      }
+
+      if (ts.isExportAssignment(node) && !node.isExportEquals) {
+        hasDefaultExport = true
+      }
+
+      ts.forEachChild(node, visit)
     }
 
-    let minIndent = Infinity
-    for (const line of nonEmptyLines) {
-      const matches = line.match(/<span class="indent">/g)
-      if (matches) {
-        minIndent = Math.min(minIndent, matches.length)
-      } else {
-        minIndent = 0
-        break
+    visit(sourceFile)
+
+    return {
+      componentClass,
+      hasDefaultExport,
+      importsFromAst,
+      isStandalone,
+      selector,
+      templateUrl,
+    }
+  }
+
+  interface BuildAngularSourceEntryParams {
+    code: string
+    fileName: string
+    filePath: string
+    language: "angular-ts" | "angular-html"
+  }
+
+  async function buildAngularSourceEntry(
+    params: BuildAngularSourceEntryParams,
+  ): Promise<SourceCodeData> {
+    const {code, fileName, filePath, language} = params
+
+    if (params.language === "angular-ts") {
+    }
+
+    const {
+      codeWithoutSnippets,
+      highlightedCode,
+      highlightedPreview,
+      previewCodeWithoutSnippets,
+    } = await highlightCode(code, language)
+
+    return {
+      fileName,
+      filePath,
+      highlighted: {
+        full: highlightedCode,
+        preview: highlightedPreview ?? null,
+      },
+      raw: {
+        full: codeWithoutSnippets,
+        preview: previewCodeWithoutSnippets ?? null,
+      },
+    }
+  }
+
+  async function maybeBuildTemplateSourceEntry(
+    templateUrl: string,
+    fromFilePath: string,
+  ): Promise<SourceCodeData | null> {
+    const templatePath = resolveTemplateFile(templateUrl, fromFilePath)
+    if (!existsSync(templatePath)) {
+      return null
+    }
+
+    try {
+      const templateCode = await readFile(templatePath, "utf-8")
+
+      return buildAngularSourceEntry({
+        code: templateCode,
+        fileName: basename(templatePath),
+        filePath: templatePath,
+        language: "angular-html",
+      })
+    } catch (error) {
+      console.log(
+        `${chalk.blue.bold(LOG_PREFIX)} ${chalk.redBright("Failed to read template file:")} ${chalk.cyan(templatePath)}`,
+        error,
+      )
+      return null
+    }
+  }
+
+  async function buildImportedSourceEntries(
+    fromFilePath: string,
+  ): Promise<SourceCodeData[]> {
+    const sourceCode: SourceCodeData[] = []
+    const relativeImports = await collectAllImports(fromFilePath)
+
+    for (const resolvedPath of relativeImports) {
+      try {
+        const importedCode = await readFile(resolvedPath, "utf-8")
+
+        const entry = await buildAngularSourceEntry({
+          code: importedCode,
+          fileName: basename(resolvedPath),
+          filePath: resolvedPath,
+          language: "angular-ts",
+        })
+
+        sourceCode.push(entry)
+      } catch (error) {
+        logDev(
+          `${chalk.blue.bold(LOG_PREFIX)} ${chalk.yellowBright("Failed to process relative import:")} ${chalk.cyan(resolvedPath)}`,
+        )
       }
     }
 
-    if (minIndent === 0 || minIndent === Infinity) {
-      return lines
-    }
-
-    return lines.map((line) => {
-      let result = line
-      for (let i = 0; i < minIndent; i++) {
-        result = result.replace(/<span class="indent">(\s*)<\/span>/, "")
-      }
-      return result
-    })
+    return sourceCode
   }
 
   function generateRegistryModule(): string {
     const demos = Array.from(demoRegistry.values())
+
     return `// Auto-generated Angular demo registry
 export const ANGULAR_DEMOS = {
 ${demos
@@ -958,21 +821,16 @@ ${demos
   )
   .join(",\n")}
 }
-
 export function isAngularDemo(demoId) {
   return demoId in ANGULAR_DEMOS
 }
-
 export function getAngularDemoInfo(demoId) {
   return ANGULAR_DEMOS[demoId] || null
 }
-
 export function getAllAngularDemos() {
   return Object.values(ANGULAR_DEMOS)
 }
-
 export const availableAngularDemos = Object.keys(ANGULAR_DEMOS)
-
 if (import.meta.hot) {
   import.meta.hot.accept(() => {
     console.log('[angular-demo-registry] Registry updated via HMR')
@@ -1022,11 +880,9 @@ ${pageDemos
   )
   .join(",\n")}
 }
-
 export function getAngularDemoInfo(demoId) {
   return ANGULAR_DEMOS[demoId] || null
 }
-
 if (import.meta.hot) {
   import.meta.hot.accept(() => {
     console.log('[angular-demo-registry/${pageId}] Registry updated')
@@ -1092,6 +948,7 @@ if (import.meta.hot) {
       "vm",
       "zlib",
     ]
+
     return source.startsWith("node:") || NODE_BUILTINS.includes(source)
   }
 
@@ -1150,16 +1007,19 @@ if (import.meta.hot) {
             for (const [alias, targets] of Object.entries(paths)) {
               if (Array.isArray(targets) && targets.length > 0) {
                 const target = targets[0]
+
                 const pattern = new RegExp(
                   `^${alias
                     .replace("*", "(.*)")
                     .replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
                     .replace("\\(\\*\\)", "(.*)")}$`,
                 )
+
                 const replacement = resolve(
                   resolvedBaseUrl,
                   target.replace("*", "$1"),
                 )
+
                 pathAliases.push({pattern, replacement})
               }
             }
@@ -1221,9 +1081,11 @@ if (import.meta.hot) {
         if (demoEntry) {
           const [demoId] = demoEntry
           demoRegistry.delete(demoId)
+
           logDev(
             `${chalk.blue.bold(LOG_PREFIX)} Removed demo: ${chalk.red(demoId)}`,
           )
+
           triggerRegistryUpdate()
         }
       }
@@ -1233,31 +1095,36 @@ if (import.meta.hot) {
   async function handleAngularDemoUpdate(filePath: string) {
     const code = await readFile(filePath, "utf-8")
     const demoInfo = await parseAngularDemo(filePath, code)
+
     if (demoInfo) {
       demoRegistry.set(demoInfo.id, demoInfo)
     }
   }
 
   function triggerRegistryUpdate() {
-    if (devServer) {
-      const mainModule = devServer.moduleGraph.getModuleById(VIRTUAL_MODULE_ID)
-      if (mainModule) {
-        devServer.moduleGraph.invalidateModule(mainModule)
-        mainModule.lastHMRTimestamp = Date.now()
-        devServer.reloadModule(mainModule)
-      }
+    if (!devServer) {
+      return
+    }
 
-      const pageIds = new Set(
-        Array.from(demoRegistry.values()).map((demo) => demo.pageId),
-      )
-      for (const pageId of pageIds) {
-        const pageModuleId = `\0${VIRTUAL_MODULE_PREFIX}${pageId}`
-        const pageModule = devServer.moduleGraph.getModuleById(pageModuleId)
-        if (pageModule) {
-          devServer.moduleGraph.invalidateModule(pageModule)
-          pageModule.lastHMRTimestamp = Date.now()
-          devServer.reloadModule(pageModule)
-        }
+    const mainModule = devServer.moduleGraph.getModuleById(VIRTUAL_MODULE_ID)
+    if (mainModule) {
+      devServer.moduleGraph.invalidateModule(mainModule)
+      mainModule.lastHMRTimestamp = Date.now()
+      devServer.reloadModule(mainModule)
+    }
+
+    const pageIds = new Set(
+      Array.from(demoRegistry.values()).map((demo) => demo.pageId),
+    )
+
+    for (const pageId of pageIds) {
+      const pageModuleId = `\0${VIRTUAL_MODULE_PREFIX}${pageId}`
+      const pageModule = devServer.moduleGraph.getModuleById(pageModuleId)
+
+      if (pageModule) {
+        devServer.moduleGraph.invalidateModule(pageModule)
+        pageModule.lastHMRTimestamp = Date.now()
+        devServer.reloadModule(pageModule)
       }
     }
   }
@@ -1290,16 +1157,19 @@ function loadTsConfigPathsFromFile(tsconfigPath: string): PathAlias[] {
       for (const [alias, targets] of Object.entries(paths)) {
         if (Array.isArray(targets) && targets.length > 0) {
           const target = targets[0]
+
           const pattern = new RegExp(
             `^${alias
               .replace("*", "(.*)")
               .replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
               .replace("\\(\\*\\)", "(.*)")}$`,
           )
+
           const replacement = resolve(
             resolvedBaseUrl,
             target.replace("*", "$1"),
           )
+
           pathAliases.push({pattern, replacement})
         }
       }
@@ -1308,15 +1178,17 @@ function loadTsConfigPathsFromFile(tsconfigPath: string): PathAlias[] {
     const extendsPath = parseResult.config?.extends
     if (extendsPath) {
       let resolvedExtends = resolve(configDir, extendsPath)
+
       if (!resolvedExtends.endsWith(".json")) {
         resolvedExtends += ".json"
       }
+
       if (existsSync(resolvedExtends)) {
         const extendedAliases = loadTsConfigPathsFromFile(resolvedExtends)
         pathAliases.push(...extendedAliases)
       }
     }
-  } catch (error) {
+  } catch {
     return pathAliases
   }
 
@@ -1373,4 +1245,63 @@ function resolveTemplateFile(templateUrl: string, fromFile: string): string {
   }
 
   return resolved
+}
+
+function extractPreviewFromHighlightedHtml(
+  highlightedHtml: string,
+): string | null {
+  const preMatch = highlightedHtml.match(/<pre([^>]*)>/)
+  const codeMatch = highlightedHtml.match(/<code([^>]*)>(.*?)<\/code>/s)
+
+  if (!preMatch || !codeMatch) {
+    return null
+  }
+  const codeContent = codeMatch[2]
+  const parts = codeContent.split(/<span class="line/)
+  const previewLineParts = parts
+    .slice(1)
+    .filter((part) => part.includes('data-preview-line="true"'))
+
+  // strip indentation
+  const indents = previewLineParts.map((part) => {
+    const indentMatches =
+      part.match(/<span class="indent">(.+?)<\/span>/g) || []
+    let total = 0
+    for (const match of indentMatches) {
+      const content = match.match(/<span class="indent">(.+?)<\/span>/)
+      if (content) {
+        total += content[1].length
+      } else {
+        break
+      }
+    }
+    return total
+  })
+
+  const minIndent = Math.min(...indents.filter((n) => n > 0))
+  const previewLines = previewLineParts.map((part) => {
+    let processed = `<span class="line${part}`
+    let remaining = minIndent
+    while (remaining > 0 && processed.includes('<span class="indent">')) {
+      const before = processed
+      processed = processed.replace(
+        /<span class="indent">(.+?)<\/span>/,
+        (match, spaces) => {
+          if (spaces.length <= remaining) {
+            remaining -= spaces.length
+            return ""
+          } else {
+            const kept = spaces.substring(remaining)
+            remaining = 0
+            return `<span class="indent">${kept}</span>`
+          }
+        },
+      )
+      if (before === processed) {
+        break
+      }
+    }
+    return processed
+  })
+  return `<pre${preMatch[1]}><code${codeMatch[1]}>${previewLines.join("")}</code></pre>`
 }

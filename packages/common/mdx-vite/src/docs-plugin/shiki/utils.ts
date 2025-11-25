@@ -4,40 +4,48 @@
 export function removeCodeAnnotations(code: string): string {
   const lineAnnotationRegex = /\/\/\s*\[!code\s*(?:\S.*)?\]/
   const jsxBlockAnnotationRegex = /\{\s*\/\*\s*\[!code(?:\s+\S+)?\]\s*\*\/\s*\}/
+  const htmlAnnotationRegex = /<!--\s*\[!code(?:\s+\S+)?\]\s*-->/
+  const blockAnnotationRegex = /\/\*\s*\[!code(?:\s+\S+)?\]\s*\*\/\s*/ // non-JSX block
+  const inlineIncrementRegex = /(?:\/\/\s*)?\[!code \+\+\]/
+
+  function stripAnnotations(line: string): {
+    processed: string
+    touched: boolean
+  } {
+    let processed = line
+    let touched = false
+
+    const patterns = [
+      inlineIncrementRegex,
+      jsxBlockAnnotationRegex,
+      htmlAnnotationRegex,
+      blockAnnotationRegex,
+    ]
+
+    for (const pattern of patterns) {
+      const next = processed.replace(pattern, "")
+      if (next !== processed) {
+        touched = true
+        processed = next
+      }
+    }
+
+    return {processed, touched}
+  }
 
   return code
     .split("\n")
-    .map((line) => {
-      let processed = line
-      let touched = false
-
-      const next1 = processed.replace(/(?:\/\/\s*)?\[!code \+\+\]/, "")
-      if (next1 !== processed) {
-        touched = true
-        processed = next1
-      }
-
-      const next2 = processed.replace(jsxBlockAnnotationRegex, "")
-      if (next2 !== processed) {
-        touched = true
-        processed = next2
-      }
-
-      return {processed, touched}
-    })
+    .map(stripAnnotations)
     .filter(({processed, touched}) => {
       if (lineAnnotationRegex.test(processed)) {
         return false
       }
 
       const processedIsBlank = !processed.trim()
-
-      // If the line was changed by annotation removal and is now blank, drop it.
       if (touched && processedIsBlank) {
         return false
       }
 
-      // Keep untouched blank lines and all non-blank lines
       return true
     })
     .map(({processed}) => processed)
