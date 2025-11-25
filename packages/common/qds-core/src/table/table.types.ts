@@ -114,6 +114,7 @@ export interface QdsTableColumnSortActionProps {
    * The column header associated with the sort action.
    */
   header: Header<any>
+  isSorted?: false | SortDirection
 }
 
 export interface QdsTableColumnFilterProps {
