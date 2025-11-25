@@ -246,3 +246,11 @@
     transition: transform var(--animation-duration-faster) ease-in-out;
   }
 }
+
+.qui-table__column-filter-action {
+  &[data-is-filtered] {
+    .qui-icon__root {
+      fill: currentColor;
+    }
+  }
+}
