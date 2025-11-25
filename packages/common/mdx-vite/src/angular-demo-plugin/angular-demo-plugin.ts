@@ -1,7 +1,6 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {transformerRenderIndentGuides} from "@shikijs/transformers"
 import chalk from "chalk"
 import {type FSWatcher, watch} from "chokidar"
 import {glob} from "glob"
@@ -25,6 +24,8 @@ import {
   quiCustomDarkTheme,
   type SourceCodeData,
 } from "@qualcomm-ui/mdx-common"
+
+import {getShikiTransformers} from "../docs-plugin"
 
 export interface AngularDemoPluginOptions {
   demoPattern?: string | string[]
@@ -346,7 +347,16 @@ export function angularDemoPlugin({
           dark: theme.dark,
           light: theme.light,
         },
-        transformers: [transformerRenderIndentGuides()],
+        transformers: [
+          ...getShikiTransformers(),
+          {
+            enforce: "post",
+            name: "shiki-transformer-trim",
+            preprocess(code) {
+              return code.trim()
+            },
+          },
+        ],
       })
     } catch (error) {
       console.warn(
