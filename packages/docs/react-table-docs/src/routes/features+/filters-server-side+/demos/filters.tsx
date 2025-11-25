@@ -1,14 +1,12 @@
+import {useMemo} from "react"
+
+import {selectCollection} from "@qualcomm-ui/core/select"
 import type {Column, ColumnFiltersState} from "@qualcomm-ui/core/table"
 import {NumberInput} from "@qualcomm-ui/react/number-input"
+import {Select} from "@qualcomm-ui/react/select"
 import {TextInput} from "@qualcomm-ui/react/text-input"
 
-import type {User} from "./use-data"
-
-interface TableColumnFilterProps {
-  column: Column<User>
-  columnFilters: ColumnFiltersState
-  onColumnFiltersChange: (filters: ColumnFiltersState) => void
-}
+import type {User, UserColumnMeta} from "./use-data"
 
 function getFilterValue(columnFilters: ColumnFiltersState, columnId: string) {
   return columnFilters.find((f) => f.id === columnId)?.value
@@ -37,22 +35,62 @@ function setFilterValue(
   return [...columnFilters, {id: columnId, value}]
 }
 
+interface TableColumnFilterProps {
+  availableFilters?: Record<string, string[]>
+  column: Column<User, any, UserColumnMeta>
+  columnFilters: ColumnFiltersState
+  onColumnFiltersChange: (filters: ColumnFiltersState) => void
+}
+
 export function TableColumnFilter({
+  availableFilters,
   column,
   columnFilters,
   onColumnFiltersChange,
 }: TableColumnFilterProps) {
   const isNumericColumn = column.id === "visitCount"
+  const filterOptions = availableFilters?.[column.id]
 
-  return isNumericColumn ? (
-    <MinMaxNumberFilter
-      column={column}
-      columnFilters={columnFilters}
-      onColumnFiltersChange={onColumnFiltersChange}
-    />
-  ) : (
+  const collection = useMemo(
+    () => (filterOptions ? selectCollection({items: filterOptions}) : null),
+    [filterOptions],
+  )
+
+  if (isNumericColumn) {
+    return (
+      <MinMaxNumberFilter
+        column={column}
+        columnFilters={columnFilters}
+        onColumnFiltersChange={onColumnFiltersChange}
+      />
+    )
+  }
+
+  if (collection) {
+    const filterValue = getFilterValue(columnFilters, column.id) as string
+    return (
+      <Select
+        className="w-32"
+        collection={collection}
+        controlProps={{"aria-label": `Filter ${column.id}`}}
+        label={column.columnDef.meta?.filterLabel}
+        onValueChange={(details) =>
+          onColumnFiltersChange(
+            setFilterValue(columnFilters, column.id, details[0] ?? ""),
+          )
+        }
+        placeholder="All"
+        portalProps={{disabled: true}}
+        size="sm"
+        value={filterValue ? [filterValue] : []}
+      />
+    )
+  }
+
+  return (
     <TextInput
       className="w-32"
+      label={column.columnDef.meta?.filterLabel}
       onValueChange={(value) =>
         onColumnFiltersChange(setFilterValue(columnFilters, column.id, value))
       }
@@ -74,38 +112,57 @@ export function MinMaxNumberFilter({
 
   const [min, max] = filterValue ?? [0, 0]
 
+  const filterLabel = column.columnDef.meta?.filterLabel
+
+  const getNextValue = (value: [number | undefined, number | undefined]) => {
+    if (
+      (value[0] === undefined || isNaN(value[0])) &&
+      (value[1] === undefined || isNaN(value[1]))
+    ) {
+      return undefined
+    }
+    return value
+  }
+
   return (
-    <div className="flex w-32 gap-2">
-      <NumberInput
-        controlProps={{hidden: true}}
-        min={0}
-        onValueChange={({valueAsNumber}) =>
-          onColumnFiltersChange(
-            setFilterValue(columnFilters, column.id, [
-              valueAsNumber,
-              filterValue?.[1],
-            ]),
-          )
-        }
-        placeholder="Min"
-        size="sm"
-        value={min ? `${min}` : ""}
-      />
-      <NumberInput
-        controlProps={{hidden: true}}
-        max={999}
-        onValueChange={({valueAsNumber}) =>
-          onColumnFiltersChange(
-            setFilterValue(columnFilters, column.id, [
-              filterValue?.[0],
-              valueAsNumber,
-            ]),
-          )
-        }
-        placeholder="Max"
-        size="sm"
-        value={max ? `${max}` : ""}
-      />
+    <div className="flex flex-col gap-1">
+      {filterLabel ? (
+        <div className="qui-input__label">{filterLabel}</div>
+      ) : null}
+      <div className="flex w-32 gap-2">
+        <NumberInput
+          controlProps={{hidden: true}}
+          min={0}
+          onValueChange={({valueAsNumber}) =>
+            onColumnFiltersChange(
+              setFilterValue(
+                columnFilters,
+                column.id,
+                getNextValue([valueAsNumber, filterValue?.[1]]),
+              ),
+            )
+          }
+          placeholder="Min"
+          size="sm"
+          value={min ? `${min}` : ""}
+        />
+        <NumberInput
+          controlProps={{hidden: true}}
+          max={999}
+          onValueChange={({valueAsNumber}) =>
+            onColumnFiltersChange(
+              setFilterValue(
+                columnFilters,
+                column.id,
+                getNextValue([filterValue?.[0], valueAsNumber]),
+              ),
+            )
+          }
+          placeholder="Max"
+          size="sm"
+          value={max ? `${max}` : ""}
+        />
+      </div>
     </div>
   )
 }

@@ -1,7 +1,11 @@
 import {faker} from "@faker-js/faker"
 import dayjs from "dayjs"
 
-import type {ColumnDef, ColumnFiltersState} from "@qualcomm-ui/core/table"
+import type {
+  ColumnDef,
+  ColumnFiltersState,
+  SortingState,
+} from "@qualcomm-ui/core/table"
 
 export interface User {
   accountStatus: string
@@ -12,31 +16,47 @@ export interface User {
   visitCount: number
 }
 
-export const userColumns: ColumnDef<User>[] = [
+export interface UserColumnMeta {
+  filterLabel?: string
+}
+
+export const userColumns: ColumnDef<User, any, UserColumnMeta>[] = [
   {
     accessorKey: "username",
     header: "Username",
     id: "username",
+    meta: {
+      filterLabel: "Search by username",
+    },
   },
   {
     accessorKey: "role",
     header: "Role",
     id: "role",
+    meta: {
+      filterLabel: "Filter by role",
+    },
     size: 120,
   },
   {
     accessorKey: "accountStatus",
     header: "Account Status",
     id: "accountStatus",
+    meta: {
+      filterLabel: "Filter by account status",
+    },
+    minSize: 170,
   },
   {
     accessorKey: "createdAt",
+    enableColumnFilter: false,
     header: "Account Created On",
     id: "createdAt",
     minSize: 205,
   },
   {
     accessorKey: "lastVisitedAt",
+    enableColumnFilter: false,
     header: "Last Visited At",
     id: "lastVisitedAt",
     minSize: 205,
@@ -45,6 +65,9 @@ export const userColumns: ColumnDef<User>[] = [
     accessorKey: "visitCount",
     header: "Visit Count",
     id: "visitCount",
+    meta: {
+      filterLabel: "Filter by visit count",
+    },
   },
 ]
 
@@ -95,9 +118,11 @@ export interface FetchOptions {
   globalFilter: string
   pageIndex: number
   pageSize: number
+  sorting: SortingState
 }
 
 export interface FetchResult {
+  availableFilters: Record<string, string[]>
   pageCount: number
   totalUsers: number
   users: User[]
@@ -135,6 +160,37 @@ function filterUserGlobal(user: User, globalFilter: string): boolean {
   )
 }
 
+const dateColumns = new Set(["createdAt", "lastVisitedAt"])
+
+function sortUsers(users: User[], sorting: SortingState): User[] {
+  if (sorting.length === 0) {
+    return users
+  }
+
+  return [...users].sort((a, b) => {
+    for (const sort of sorting) {
+      const aValue = a[sort.id as keyof User]
+      const bValue = b[sort.id as keyof User]
+
+      let comparison = 0
+      if (typeof aValue === "number" && typeof bValue === "number") {
+        comparison = aValue - bValue
+      } else if (dateColumns.has(sort.id)) {
+        const aDate = dayjs(String(aValue), "DD MMM YYYY HH:mm:ss")
+        const bDate = dayjs(String(bValue), "DD MMM YYYY HH:mm:ss")
+        comparison = aDate.valueOf() - bDate.valueOf()
+      } else {
+        comparison = String(aValue).localeCompare(String(bValue))
+      }
+
+      if (comparison !== 0) {
+        return sort.desc ? -comparison : comparison
+      }
+    }
+    return 0
+  })
+}
+
 export async function fetchData(options: FetchOptions): Promise<FetchResult> {
   // Simulate network latency
   await new Promise((r) => setTimeout(r, 500))
@@ -154,9 +210,19 @@ export async function fetchData(options: FetchOptions): Promise<FetchResult> {
     )
   }
 
+  // Apply sorting
+  if (options.sorting.length > 0) {
+    filteredData = sortUsers(filteredData, options.sorting)
+  }
+
   const filteredCount = filteredData.length
 
   return {
+    // simulate available filters
+    availableFilters: {
+      accountStatus: ["active", "suspended", "pending"],
+      role: ["admin", "user", "moderator"],
+    },
     pageCount: Math.ceil(filteredCount / options.pageSize),
     totalUsers: filteredCount,
     users: filteredData.slice(

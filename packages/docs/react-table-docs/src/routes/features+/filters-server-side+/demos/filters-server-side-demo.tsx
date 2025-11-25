@@ -7,6 +7,7 @@ import {
   type ColumnFiltersState,
   getCoreRowModel,
   type PaginationState,
+  type SortingState,
 } from "@qualcomm-ui/core/table"
 import {Pagination} from "@qualcomm-ui/react/pagination"
 import {ProgressRing} from "@qualcomm-ui/react/progress-ring"
@@ -31,6 +32,7 @@ export function FiltersServerSideDemo() {
 
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [globalFilter, setGlobalFilter] = useState("")
+  const [sorting, setSorting] = useState<SortingState>([])
 
   const debouncedColumnFilters = useDebounce(columnFilters, 300)
   const debouncedGlobalFilter = useDebounce(globalFilter, 300)
@@ -43,12 +45,14 @@ export function FiltersServerSideDemo() {
         globalFilter: debouncedGlobalFilter,
         pageIndex: pagination.pageIndex,
         pageSize: pagination.pageSize,
+        sorting,
       }),
     queryKey: [
       "data",
       pagination,
       debouncedColumnFilters,
       debouncedGlobalFilter,
+      sorting,
     ],
   })
 
@@ -58,14 +62,17 @@ export function FiltersServerSideDemo() {
     getCoreRowModel: getCoreRowModel(),
     manualFiltering: true,
     manualPagination: true,
+    manualSorting: true,
     onColumnFiltersChange: setColumnFilters,
     onGlobalFilterChange: setGlobalFilter,
     onPaginationChange: setPagination,
+    onSortingChange: setSorting,
     pageCount: data?.pageCount,
     state: {
       columnFilters,
       globalFilter,
       pagination,
+      sorting,
     },
   })
 
@@ -79,6 +86,7 @@ export function FiltersServerSideDemo() {
         <Table.ActionBar>
           <TextInput
             className="w-56"
+            inputProps={{"aria-label": "Search all columns"}}
             onValueChange={setGlobalFilter}
             placeholder="Search all columns..."
             size="sm"
@@ -87,7 +95,7 @@ export function FiltersServerSideDemo() {
           />
           <div className="text-neutral-primary font-body-sm flex items-center gap-1">
             <span>Query:</span>
-            <span>{fetchStatus}</span>{" "}
+            <span>{fetchStatus}</span>
             {isFetching ? <ProgressRing className="ml-1" size="xs" /> : null}
           </div>
         </Table.ActionBar>
@@ -104,19 +112,26 @@ export function FiltersServerSideDemo() {
                         style={{width: header.getSize()}}
                       >
                         {header.isPlaceholder ? null : (
-                          <div className="inline-flex flex-col gap-1">
-                            <div className="inline-flex min-h-[28px] items-center justify-center">
+                          <div className="inline-flex min-h-[28px] w-full items-center justify-between gap-2">
+                            <div className="inline-flex items-center gap-1">
                               {flexRender(
                                 header.column.columnDef.header,
                                 header.getContext(),
                               )}
+                              <Table.ColumnSortAction header={header} />
                             </div>
                             {header.column.getCanFilter() ? (
-                              <TableColumnFilter
-                                column={header.column}
-                                columnFilters={columnFilters}
-                                onColumnFiltersChange={setColumnFilters}
-                              />
+                              <Table.ColumnFilterPopup
+                                canFilter={header.column.getCanFilter()}
+                                isFiltered={header.column.getIsFiltered()}
+                              >
+                                <TableColumnFilter
+                                  availableFilters={data?.availableFilters}
+                                  column={header.column}
+                                  columnFilters={columnFilters}
+                                  onColumnFiltersChange={setColumnFilters}
+                                />
+                              </Table.ColumnFilterPopup>
                             ) : null}
                           </div>
                         )}
@@ -150,7 +165,7 @@ export function FiltersServerSideDemo() {
           <Pagination.PageMetadata>
             {({count, pageEnd, pageStart}) => (
               <>
-                {!data?.pageCount ? (
+                {!data?.pageCount && isFetching ? (
                   <ProgressRing size="xs" />
                 ) : (
                   `${pageStart}-${pageEnd} of ${count} results`
@@ -165,7 +180,7 @@ export function FiltersServerSideDemo() {
       <CodeHighlight
         className="w-fit"
         code={JSON.stringify(
-          {columnFilters, globalFilter, pagination},
+          {columnFilters, globalFilter, pagination, sorting},
           null,
           2,
         )}
