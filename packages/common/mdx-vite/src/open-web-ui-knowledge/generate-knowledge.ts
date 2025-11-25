@@ -41,6 +41,7 @@ import type {WebUiKnowledgeConfig} from "./types"
 
 interface PageInfo {
   demosFolder?: string
+  id: string
   mdxFile: string
   name: string
   path: string
@@ -289,6 +290,7 @@ async function scanPages(
 
       components.push({
         demosFolder: demosFolderPath,
+        id: segments.join("-"),
         mdxFile: join(dirPath, mdxFile.name),
         name: segments.at(-1)!,
         path: dirPath,
@@ -779,7 +781,7 @@ async function generatePerPageExports({
         }
       }
 
-      const outfile = `${resolve(outputPath)}/${kebabCase(page.name)}.md`
+      const outfile = `${resolve(outputPath)}/${kebabCase(page.id)}.md`
       await writeFile(outfile, lines.join("\n"), "utf-8")
       const stats = await stat(outfile)
       totalSize += stats.size / 1024
