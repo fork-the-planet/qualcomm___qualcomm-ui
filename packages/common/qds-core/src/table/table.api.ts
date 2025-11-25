@@ -84,8 +84,8 @@ export function createQdsTableApi(normalize: PropNormalizer): QdsTableApi {
     ): QdsTableColumnFilterActionBindings {
       return normalize.button({
         className: tableClasses.columnFilterAction,
-        "data-filter-active": booleanDataAttr(
-          props.header.column.getIsFiltered(),
+        "data-is-filtered": booleanDataAttr(
+          props?.isFiltered || props.header?.column.getIsFiltered(),
         ),
       })
     },
