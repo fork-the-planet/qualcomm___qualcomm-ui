@@ -959,8 +959,9 @@ export function getAngularDemoInfo(demoId) {
     })
 
     watcher.on("add", async (filePath: string) => {
-      const fileStats = await stat(filePath)
-      if (fileStats.size === 0) {
+      const fileStats = await stat(filePath).catch(() => undefined)
+      if (!fileStats || fileStats.size === 0) {
+        console.debug("Failed to read file stats", filePath)
         return
       }
 
