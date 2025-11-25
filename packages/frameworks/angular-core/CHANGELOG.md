@@ -1,5 +1,11 @@
 # @qualcomm-ui/angular-core
 
+## 1.1.0 (2025/11/25)
+
+### Features
+
+- wire highlightMatchingText in angular combobox
+
 ## 1.0.5 (2025/11/18)
 
 ### Miscellaneous Chores
