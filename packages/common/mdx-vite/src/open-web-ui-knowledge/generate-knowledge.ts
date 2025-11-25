@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
 import {program} from "@commander-js/extra-typings"
+import type {Parent} from "mdast"
 import type {MdxJsxAttribute, MdxJsxFlowElement} from "mdast-util-mdx-jsx"
 import {
   access,
@@ -531,6 +532,209 @@ const replaceNpmInstallTabs: Plugin = () => {
   }
 }
 
+/**
+ * Replaces TypeDocProps JSX elements with JSON code blocks containing component
+ * prop documentation.
+ */
+function replaceTypeDocProps(
+  docProps: DocProps | null,
+  verbose: boolean | undefined,
+): Plugin {
+  return () => (tree, _file, done) => {
+    visit(
+      tree,
+      "mdxJsxFlowElement",
+      (
+        node: MdxJsxFlowElement,
+        index: number | undefined,
+        parent: Parent | undefined,
+      ) => {
+        if (node?.name !== "TypeDocProps") {
+          return
+        }
+        const nameAttr = node.attributes?.find(
+          (attr): attr is MdxJsxAttribute =>
+            attr.type === "mdxJsxAttribute" && attr.name === "name",
+        )
+        const isPartial = node.attributes?.some(
+          (attr): attr is MdxJsxAttribute =>
+            attr.type === "mdxJsxAttribute" && attr.name === "partial",
+        )
+        if (!docProps || !nameAttr) {
+          if (parent && index !== undefined) {
+            parent.children.splice(index, 1)
+          }
+          return
+        }
+        const propsNames = extractNamesFromAttribute(nameAttr)
+        if (propsNames.length === 0) {
+          if (parent && index !== undefined) {
+            parent.children.splice(index, 1)
+          }
+          return
+        }
+        const propsName = propsNames[0]
+        const componentProps = docProps.props[propsName]
+        if (!componentProps) {
+          if (verbose) {
+            console.log(`  TypeDocProps not found: ${propsName}`)
+          }
+          if (parent && index !== undefined) {
+            parent.children.splice(index, 1)
+          }
+          return
+        }
+        const propsDoc = extractProps(componentProps, Boolean(isPartial))
+        if (verbose) {
+          console.log(
+            `  Replaced TypeDocProps ${propsName} with API documentation`,
+          )
+        }
+        Object.assign(node, {
+          lang: "json",
+          meta: null,
+          type: "code",
+          value: JSON.stringify(propsDoc, null, 2),
+        })
+      },
+    )
+    done()
+  }
+}
+
+/**
+ * Replaces demo JSX elements (QdsDemo, CodeDemo, Demo) with code blocks
+ * containing the demo source code from the demos folder.
+ */
+function replaceDemos(
+  demosFolder: string | undefined,
+  verbose: boolean | undefined,
+  demoFiles: string[],
+): Plugin {
+  return () => async (tree) => {
+    const promises: Promise<void>[] = []
+
+    visit(
+      tree,
+      "mdxJsxFlowElement",
+      (
+        node: MdxJsxFlowElement,
+        index: number | undefined,
+        parent: Parent | undefined,
+      ) => {
+        if (
+          !node?.name ||
+          !["QdsDemo", "CodeDemo", "Demo"].includes(node.name)
+        ) {
+          return
+        }
+
+        const nameAttr = node.attributes?.find(
+          (attr): attr is MdxJsxAttribute =>
+            attr.type === "mdxJsxAttribute" && attr.name === "name",
+        )
+
+        const nodeAttr = node.attributes?.find(
+          (attr): attr is MdxJsxAttribute =>
+            attr.type === "mdxJsxAttribute" && attr.name === "node",
+        )
+
+        let demoName: string | undefined
+
+        if (nameAttr && typeof nameAttr.value === "string") {
+          demoName = nameAttr.value
+        } else if (nodeAttr?.value && typeof nodeAttr.value !== "string") {
+          const estree = nodeAttr.value.data?.estree
+          if (estree?.body?.[0]?.type === "ExpressionStatement") {
+            const expression = estree.body[0].expression
+            if (
+              expression.type === "MemberExpression" &&
+              expression.object.type === "Identifier" &&
+              expression.object.name === "Demo" &&
+              expression.property.type === "Identifier"
+            ) {
+              demoName = expression.property.name
+            }
+          }
+        }
+
+        if (!demoName) {
+          if (parent && index !== undefined) {
+            parent.children.splice(index, 1)
+          }
+          return
+        }
+
+        promises.push(
+          (async () => {
+            const kebabName = kebabCase(demoName)
+            let filePath = `${kebabName}.tsx`
+
+            if (!demosFolder) {
+              if (verbose) {
+                console.log(`  No demos folder for ${demoName}`)
+              }
+              if (parent && index !== undefined) {
+                parent.children.splice(index, 1)
+              }
+              return
+            }
+
+            let demoFilePath = join(demosFolder, filePath)
+            let isAngularDemo = false
+
+            if (!(await exists(demoFilePath))) {
+              demoFilePath = join(demosFolder, `${kebabName}.ts`)
+              if (await exists(demoFilePath)) {
+                isAngularDemo = true
+                filePath = `${kebabCase(demoName).replace("-component", ".component")}.ts`
+                demoFilePath = join(demosFolder, filePath)
+              } else {
+                console.log(`  Demo not found ${demoName}`)
+                if (parent && index !== undefined) {
+                  parent.children.splice(index, 1)
+                }
+                return
+              }
+            }
+
+            try {
+              const demoCode = await readFile(demoFilePath, "utf-8")
+              const cleanedCode = removePreviewLines(demoCode)
+
+              if (verbose) {
+                console.log(`  Replaced demo ${demoName} with source code`)
+              }
+
+              demoFiles.push(demoFilePath)
+
+              Object.assign(node, {
+                lang: isAngularDemo ? "angular-ts" : "tsx",
+                meta: null,
+                type: "code",
+                value: cleanedCode,
+              })
+            } catch (error) {
+              if (verbose) {
+                console.log(`  Error reading demo ${demoName}: ${error}`)
+              }
+              if (parent && index !== undefined) {
+                parent.children.splice(index, 1)
+              }
+            }
+          })(),
+        )
+      },
+    )
+
+    await Promise.all(promises)
+  }
+}
+
+/**
+ * Processes MDX content by transforming JSX elements (TypeDocProps, demos) into
+ * markdown, resolving relative links, and cleaning up formatting.
+ */
 async function processMdxContent(
   mdxContent: string,
   pageUrl: string | undefined,
@@ -538,97 +742,33 @@ async function processMdxContent(
   docProps: DocProps | null,
   verbose: boolean | undefined,
 ): Promise<{content: string; demoFiles: string[]}> {
-  let processedContent = mdxContent
   const demoFiles: string[] = []
+  let processedContent = mdxContent
 
   const lines = processedContent.split("\n")
   const titleLine = lines.findIndex((line) => line.startsWith("# "))
   processedContent =
     titleLine >= 0 ? lines.slice(titleLine + 1).join("\n") : processedContent
+
   if (pageUrl) {
     processedContent = processedContent.replace(
       /\[([^\]]+)\]\(\.\/#([^)]+)\)/g,
       (_, text, anchor) => `[${text}](${pageUrl}#${anchor})`,
     )
   }
-  if (docProps) {
-    const typeDocRegex =
-      /<TypeDocProps\s+name=["']([^"']+)["'](?:\s+partial)?[^>]*\/>/g
-    processedContent = processedContent.replace(
-      typeDocRegex,
-      (match, propsName) => {
-        const isPartial = /\spartial(?:\s|\/|>)/.test(match)
-        const componentProps = docProps.props[propsName]
-        if (!componentProps) {
-          if (verbose) {
-            console.log(`  TypeDocProps not found: ${propsName}`)
-          }
-          return ""
-        }
-        const propsDoc = extractProps(componentProps, isPartial)
-        if (verbose) {
-          console.log(
-            `  Replaced TypeDocProps ${propsName} with API documentation`,
-          )
-        }
-        return `**Component Props:**\n\`\`\`json\n${JSON.stringify(propsDoc, null, 2)}\n\`\`\`\n`
-      },
-    )
-  } else {
-    processedContent = processedContent.replace(/<TypeDocProps\s+[^>]*\/>/g, "")
-  }
-  let demoRegex = /<(?:QdsDemo|CodeDemo|Demo)\s+[^>]*name="(\w+)"[^>]*\/>/g
-  let demoMatches = Array.from(processedContent.matchAll(demoRegex))
-  if (!demoMatches.length) {
-    demoRegex =
-      /<(?:QdsDemo|CodeDemo|Demo)\s+[^>]*node=\{Demo\.(\w+)\}[^>]*\/>/g
-    demoMatches = Array.from(processedContent.matchAll(demoRegex))
-  }
-  const replacements = await Promise.all(
-    demoMatches.map(async (match) => {
-      const [fullMatch, demoName] = match
-      const kebabName = kebabCase(demoName)
-      let filePath = `${kebabName}.tsx`
-      if (!demosFolder) {
-        if (verbose) {
-          console.log(`  No demos folder for ${demoName}`)
-        }
-        return {match: fullMatch, replacement: ""}
-      }
-      let demoFilePath = join(demosFolder, filePath)
-      let isAngularDemo = false
-      if (!(await exists(demoFilePath))) {
-        demoFilePath = join(demosFolder, `${kebabName}.ts`)
-        if (await exists(demoFilePath)) {
-          isAngularDemo = true
-          filePath = `${kebabCase(demoName).replace("-component", ".component")}.ts`
-          demoFilePath = join(demosFolder, filePath)
-        } else {
-          console.log(`  Demo not found ${demoName}`)
-          return {match: fullMatch, replacement: ""}
-        }
-      }
-      try {
-        const demoCode = await readFile(demoFilePath, "utf-8")
-        const cleanedCode = removePreviewLines(demoCode)
-        const codeBlock = `\`\`\`${isAngularDemo ? "angular-ts" : "tsx"}\n${cleanedCode}\`\`\``
-        if (verbose) {
-          console.log(`  Replaced demo ${demoName} with source code`)
-        }
-        demoFiles.push(demoFilePath)
-        return {match: fullMatch, replacement: codeBlock}
-      } catch (error) {
-        if (verbose) {
-          console.log(`  Error reading demo ${demoName}: ${error}`)
-        }
-        return {match: fullMatch, replacement: ""}
-      }
-    }),
-  )
-  for (const {match, replacement} of replacements) {
-    processedContent = processedContent.replace(match, replacement)
-  }
+
+  const processor = unified()
+    .use(remarkParse)
+    .use(remarkMdx)
+    .use(replaceTypeDocProps(docProps, verbose))
+    .use(replaceDemos(demosFolder, verbose, demoFiles))
+    .use(remarkStringify)
+
+  const processed = await processor.process(processedContent)
+  processedContent = String(processed)
+
   processedContent = processedContent.replace(/\n\s*\n\s*\n/g, "\n\n")
+
   return {content: processedContent, demoFiles}
 }
 
