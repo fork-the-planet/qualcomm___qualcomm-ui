@@ -58,13 +58,13 @@ export function createUserQuery(
       const data = await fetch("/get-mock-user-data", {
         body: JSON.stringify({
           size: dimensions,
-          // qui-docs::omit-next-line
+          // [!code hide]
           timestamp: isInitialLoad() ? 0 : Date.now(),
         }),
         headers: {"Content-Type": "application/json"},
         method: "POST",
       }).then((res) => res.json())
-      // qui-docs::omit-next-line
+      // [!code hide]
       isInitialLoad.set(false)
       return data
     },
