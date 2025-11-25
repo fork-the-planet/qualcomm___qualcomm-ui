@@ -21,7 +21,8 @@ Server-side filtering becomes necessary when datasets are too large to load into
 
 Client-side filtering handles approximately 100,000 rows with acceptable performance for filtering, sorting, pagination, and grouping. See [Pagination Guide](/feature-guides/pagination#when-to-use-client-side-pagination) for detailed performance considerations.
 
-> **Note:** Client-side operations can handle thousands of rows. Test your specific use case before implementing server-side filtering.
+> [!tip]
+> Client-side operations can handle thousands of rows. Test your specific use case before implementing server-side filtering.
 
 Performance depends on table complexity, column count, and data size. Consider these constraints:
 
@@ -43,7 +44,8 @@ const table = useReactTable({
 })
 ```
 
-> **Note:** `manualFiltering: true` disables client-side filtering logic. The table uses the provided `data` as-is. Options described in this guide do not apply when manual filtering is enabled.
+> [!tip]
+> `manualFiltering: true` disables client-side filtering logic. The table uses the provided `data` as-is. Options described in this guide do not apply when manual filtering is enabled.
 
 ### Client-Side Global Filtering
 
@@ -132,7 +134,8 @@ return (
 
 Pass a custom filter function to the `globalFilterFn` option.
 
-> **Note:** Fuzzy filtering is a common global filter implementation. See [Fuzzy Filtering Guide](../fuzzy-filtering.md).
+> [!tip]
+> Fuzzy filtering is a common global filter implementation. See [Fuzzy Filtering Guide](/feature-guides/fuzzy-filtering).
 
 ```jsx
 const customFilterFn = (rows, columnId, filterValue) => {
@@ -163,7 +166,8 @@ const table = useReactTable({
 })
 ```
 
-> **Note:** Do not set `globalFilter` in both `initialState` and `state`. The `state` option overrides `initialState`.
+> [!warning]
+> Do not set `globalFilter` in both `initialState` and `state`. The `state` option overrides `initialState`.
 
 ### Disable Global Filtering
 

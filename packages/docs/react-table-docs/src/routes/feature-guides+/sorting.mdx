@@ -83,7 +83,8 @@ const table = useReactTable({
 })
 ```
 
-> **Note**: Do not provide `sorting` to both `initialState` and `state`. The `state` option overrides `initialState`.
+> [!warning]
+> Do not provide `sorting` to both `initialState` and `state`. The `state` option overrides `initialState`.
 
 ### Client-Side vs Server-Side Sorting
 
@@ -109,14 +110,15 @@ const table = useReactTable({
 })
 ```
 
-> **Note**: When `manualSorting` is set to `true`, the table assumes the `data` is already sorted and will not apply any sorting logic.
+> [!note]
+> When `manualSorting` is set to `true`, the table assumes the `data` is already sorted and will not apply any sorting logic.
 
 ### Client-Side Sorting
 
 Client-side sorting requires passing a sorting row model to the table. Import and use `getSortedRowModel` to transform rows into sorted rows.
 
 ```tsx
-import {useReactTable} from "@tanstack/react-table"
+import {useReactTable} from "@qualcomm-ui/react/table"
 // ...
 const table = useReactTable({
   columns,
@@ -156,7 +158,8 @@ const myCustomSortingFn: SortingFn<TData> = (
 }
 ```
 
-> **Note**: The comparison function does not need to account for ascending or descending order. The row models handle that logic. Sorting functions only need to provide a consistent comparison.
+> [!tip]
+> The comparison function does not need to account for ascending or descending order. The row models handle that logic. Sorting functions only need to provide a consistent comparison.
 
 Every sorting function receives 2 rows and a column ID and should return `-1`, `0`, or `1` in ascending order:
 
@@ -266,7 +269,8 @@ const table = useReactTable({
 })
 ```
 
-> **Note**: Explicitly set the `sortDescFirst` column option on columns with nullable values. The table may not be able to determine if a column is a number or string when it contains nullable values.
+> [!tip]
+> Explicitly set the `sortDescFirst` column option on columns with nullable values. The table may not be able to determine if a column is a number or string when it contains nullable values.
 
 #### Invert Sorting
 
@@ -294,8 +298,6 @@ If not specified, the default value for `sortUndefined` is `1`, and undefined va
 - `false` - Undefined values considered tied and sorted by the next column filter or original index
 - `-1` - Undefined values sorted with higher priority (ascending) - appear at the beginning in ascending order
 - `1` - Undefined values sorted with lower priority (descending) - appear at the end in ascending order
-
-> **Note**: `'first'` and `'last'` options added in v8.16.0
 
 ```tsx
 const columns = [

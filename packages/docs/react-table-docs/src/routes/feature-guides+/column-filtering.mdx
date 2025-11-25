@@ -29,25 +29,6 @@ Consider these constraints:
 - Fetch payload size
 - Client memory consumption
 
-### Manual Server-Side Filtering
-
-Manual server-side filtering does not require the `getFilteredRowModel` table option. Pass pre-filtered data to the table. Set `manualFiltering: true` to skip client-side filtering logic.
-
-```tsx
-import {useReactTable} from "@qualcomm-ui/react/table"
-
-const table = useReactTable({
-  data,
-  columns,
-  getCoreRowModel: getCoreRowModel(),
-  // getFilteredRowModel: getFilteredRowModel(), // not needed for manual server-side filtering
-  manualFiltering: true,
-})
-```
-
-> [!note]
-> Setting `manualFiltering: true` disables client-side filtering logic. The table uses the provided data without applying filter options. But individual columns may still configure whether they support filtering, which is used to render the filter controls in the table.
-
 ### Client-Side Filtering
 
 Client-side filtering requires passing a `getFilteredRowModel` function to the table options. Import the default function or provide a custom implementation.
@@ -63,6 +44,27 @@ const table = useReactTable({
   getFilteredRowModel: getFilteredRowModel(), // needed for client-side filtering
 })
 ```
+
+### Manual Server-Side Filtering
+
+Manual server-side filtering does not require the `getFilteredRowModel` table option. Pass pre-filtered data to the table. Set `manualFiltering: true` to skip client-side filtering logic.
+
+```tsx
+import {useReactTable} from "@qualcomm-ui/react/table"
+
+const table = useReactTable({
+  data,
+  columns,
+  getCoreRowModel: getCoreRowModel(),
+  // [!code --]
+  getFilteredRowModel: getFilteredRowModel(),
+  // [!code ++]
+  manualFiltering: true,
+})
+```
+
+> [!note]
+> Setting `manualFiltering: true` disables client-side filtering logic. The table uses the provided data without applying filter options. But individual columns may still configure whether they support filtering, which is used to render the filter controls in the table.
 
 ### Column Filter State
 
@@ -134,7 +136,8 @@ const table = useReactTable({
 })
 ```
 
-> **Note:** Do not use `initialState.columnFilters` and `state.columnFilters` together. The `state.columnFilters` value overrides `initialState.columnFilters`.
+> [!warning]
+> Do not use `initialState.columnFilters` and `state.columnFilters` together. The `state.columnFilters` value overrides `initialState.columnFilters`.
 
 ### FilterFns
 
@@ -157,7 +160,8 @@ Define custom filter functions using the `filterFn` column option or the `filter
 
 #### Custom Filter Functions
 
-> **Note:** These filter functions only run during client-side filtering.
+> [!tip]
+> These filter functions only run during client-side filtering.
 
 When defining a custom filter function in either the `filterFn` column option or the `filterFns` table option, it should have the following signature:
 
