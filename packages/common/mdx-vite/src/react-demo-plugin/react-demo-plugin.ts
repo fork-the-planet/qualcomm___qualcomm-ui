@@ -367,7 +367,7 @@ export function reactDemoPlugin({
   ): Promise<Omit<ReactDemoData, "pageId"> | null> {
     try {
       const code = await readFile(filePath, "utf-8").then(transformLines)
-      const {imports} = stripImports(code, filePath)
+      const imports = stripImports(code, filePath)
 
       const sourceCode: SourceCodeData[] = []
 
@@ -412,13 +412,7 @@ export function reactDemoPlugin({
     }
   }
 
-  function stripImports(
-    code: string,
-    fileName: string,
-  ): {
-    imports: string[]
-    strippedCode: string
-  } {
+  function stripImports(code: string, fileName: string): string[] {
     try {
       const sourceFile = ts.createSourceFile(
         fileName,
@@ -442,37 +436,15 @@ export function reactDemoPlugin({
 
       visit(sourceFile)
 
-      const imports = importRanges.map((range) => {
+      return importRanges.map((range) => {
         let endPos = range.end
         if (code[endPos] === "\n") {
           endPos++
         }
         return code.slice(range.start, endPos).trim()
       })
-
-      importRanges.sort((a, b) => b.start - a.start)
-
-      let strippedCode = code
-      for (const range of importRanges) {
-        let endPos = range.end
-        if (strippedCode[endPos] === "\n") {
-          endPos++
-        }
-        strippedCode =
-          strippedCode.slice(0, range.start) + strippedCode.slice(endPos)
-      }
-
-      strippedCode = strippedCode.trim()
-
-      return {
-        imports,
-        strippedCode: strippedCode.replace(/^\n+/, ""),
-      }
     } catch (error) {
-      return {
-        imports: [],
-        strippedCode: code,
-      }
+      return []
     }
   }
 
