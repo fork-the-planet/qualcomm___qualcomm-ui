@@ -29,7 +29,11 @@ import type {User} from "./data"
 
       @if (context().row.getCanExpand()) {
         <div class="inline-flex items-center justify-center">
-          <button q-table-row-expand-button [row]="context().row"></button>
+          <button
+            q-table-row-expand-button
+            [isExpanded]="context().row.getIsExpanded()"
+            [row]="context().row"
+          ></button>
         </div>
       }
       <span>{{ context().getValue() }}</span>

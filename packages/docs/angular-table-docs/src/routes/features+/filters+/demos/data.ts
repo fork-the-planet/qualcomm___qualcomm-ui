@@ -51,7 +51,7 @@ export const userColumns: ColumnDef<User>[] = [
 export function createUserQuery(
   ...dimensions: number[]
 ): CreateQueryResult<User[], Error> {
-  // qui-docs::omit-next-line
+  // [!code hide]
   const isInitialLoad = signal(true)
   return injectQuery<User[]>(() => ({
     queryFn: async () => {

@@ -1,0 +1,55 @@
+---
+title: Headers
+---
+
+# {frontmatter.title}
+
+## API
+
+- [Header](/api/header)
+
+## Overview
+
+Headers are equivalent to cells but are meant for the table header section.
+
+## Header Rendering
+
+Headers are stored in the `headerGroup.headers` array. Typically, you will iterate over this array to render your headers.
+
+```angular-html
+<thead q-table-header>
+  <!-- iterate over the table's header groups -->
+  @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
+    <tr q-table-row>
+      <!-- iterate over the headerGroup headers array -->
+      @for (header of headerGroup.headers; track header.id) {
+        <th q-table-header-cell [colSpan]="header.colSpan">
+          <!-- -->
+        </th>
+      }
+    </tr>
+  }
+</thead>
+```
+
+## Header Objects
+
+Header objects are similar to Cell objects. Each header object can be associated with a header cell element in your UI. There are properties and methods on header objects to interact with the table state and extract cell values based on the table's state.
+
+```angular-html
+<thead q-table-header>
+  @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
+    <tr q-table-row>
+      @for (header of headerGroup.headers; track header.id) {
+        <th *renderHeader="header; let value" q-table-header-cell align="left">
+          {{ header.isPlaceholder ? null : value }}
+        </th>
+      }
+    </tr>
+  }
+</thead>
+```
+
+### Header Parent Objects
+
+Every header stores a reference to its parent [column](/guides/columns) object and its parent [header group](/guides/header-groups) object. Use `header.column` to access the column and `header.headerGroup` to access the header group.
