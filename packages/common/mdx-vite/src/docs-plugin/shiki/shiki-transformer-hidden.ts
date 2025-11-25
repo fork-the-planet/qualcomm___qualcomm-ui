@@ -5,7 +5,6 @@ import type {ShikiTransformer} from "shiki"
  */
 export function transformerNotationHidden(): ShikiTransformer {
   return {
-    enforce: "post",
     name: "shiki-transformer-notation-hidden",
     preprocess(code) {
       const lines = code.split("\n")

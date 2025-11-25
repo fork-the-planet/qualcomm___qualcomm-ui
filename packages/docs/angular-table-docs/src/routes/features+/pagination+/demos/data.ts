@@ -53,21 +53,18 @@ export const userColumns: ColumnDef<User>[] = [
 export function createUserQuery(
   ...dimensions: number[]
 ): CreateQueryResult<User[], Error> {
-  // [!code hide]
-  const isInitialLoad = signal(true)
+  const isInitialLoad = signal(true) // [!code hide]
   return injectQuery<User[]>(() => ({
     queryFn: async () => {
       const data = await fetch("/get-mock-user-data", {
         body: JSON.stringify({
           size: dimensions,
-          // [!code hide]
-          timestamp: isInitialLoad() ? 0 : Date.now(),
+          timestamp: isInitialLoad() ? 0 : Date.now(), // [!code hide]
         }),
         headers: {"Content-Type": "application/json"},
         method: "POST",
       }).then((res) => res.json())
-      // [!code hide]
-      isInitialLoad.set(false)
+      isInitialLoad.set(false) // [!code hide]
       return data
     },
     queryKey: ["mock-user-data", "pagination", dimensions],

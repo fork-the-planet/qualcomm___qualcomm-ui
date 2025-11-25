@@ -379,7 +379,6 @@ export function angularDemoPlugin({
     let currentContext: "template" | "typescript" = "typescript"
     let inTemplate = false
     let templateDepth = 0
-    let omitNextLine = false
 
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i]
@@ -400,16 +399,6 @@ export function angularDemoPlugin({
 
       if (inTemplate && /['"]\s*[,}]/.test(line)) {
         inTemplate = false
-      }
-
-      if (omitNextLine) {
-        omitNextLine = false
-        continue
-      }
-
-      if (isOmitNextLine(trimmedLine)) {
-        omitNextLine = true
-        continue
       }
 
       if (isPreviewLine(trimmedLine)) {
@@ -871,7 +860,6 @@ export function angularDemoPlugin({
     const previewLines: string[] = []
     const withoutPreviewLines: string[] = []
     let inPreview = false
-    let omitNextLine = false
 
     for (const line of lines) {
       const textContent = line
@@ -879,16 +867,6 @@ export function angularDemoPlugin({
         .replace(/&#x3C;/g, "<")
         .replace(/&#x3E;/g, ">")
         .trim()
-
-      if (omitNextLine) {
-        omitNextLine = false
-        continue
-      }
-
-      if (textContent === "// qui-docs::omit-next-line") {
-        omitNextLine = true
-        continue
-      }
 
       if (
         textContent === "// preview" ||
@@ -1395,8 +1373,4 @@ function resolveTemplateFile(templateUrl: string, fromFile: string): string {
   }
 
   return resolved
-}
-
-function isOmitNextLine(trimmedLine: string): boolean {
-  return trimmedLine === "// qui-docs::omit-next-line"
 }

@@ -13,6 +13,10 @@ import {quiCustomDarkTheme, type ReactDemoData} from "@qualcomm-ui/mdx-common"
 import {dedent} from "@qualcomm-ui/utils/dedent"
 
 import {getShikiTransformers} from "../docs-plugin"
+import {
+  transformerCodeAttribute,
+  transformerPreviewBlock,
+} from "../docs-plugin/shiki"
 
 import {LOG_PREFIX, VIRTUAL_MODULE_IDS} from "./demo-plugin-constants"
 import type {QuiDemoPluginOptions} from "./demo-plugin-types"
@@ -236,6 +240,8 @@ export function reactDemoPlugin({
         },
         transformers: [
           ...getShikiTransformers(),
+          transformerPreviewBlock(),
+          transformerCodeAttribute(),
           {
             enforce: "post",
             name: "shiki-transformer-trim",
