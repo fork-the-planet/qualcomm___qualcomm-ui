@@ -44,7 +44,7 @@ import {type User, userColumns, users} from "./data"
     </div>
   `,
 })
-export class BasicDemo {
+export class SimpleTableDemo {
   protected table = createAngularTable<User>(() => ({
     columns: userColumns,
     data: users,

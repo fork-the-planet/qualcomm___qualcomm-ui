@@ -53,6 +53,7 @@ import {createAngularTable} from "@qualcomm-ui/angular/table"
   // ...
 })
 export class BasicDemo {
+  // [!code highlight]
   protected table = createAngularTable<User>(() => ({
     data: users,
     // ...
@@ -74,15 +75,18 @@ interface User {
   // ...
 })
 export class ExampleComponent {
+  // [!code highlight]
   protected data = signal<User[]>([])
 
   protected table: AngularTable<User> = createAngularTable(() => ({
     columns: userColumns,
+    // [!code highlight]
     data: this.data(),
     getCoreRowModel: getCoreRowModel(),
   }))
 
   updateData() {
+    // [!code highlight]
     this.data.set([{id: 1, name: "John"}])
   }
 }

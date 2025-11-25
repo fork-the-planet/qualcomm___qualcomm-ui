@@ -82,7 +82,6 @@ import {createAngularTable} from "@qualcomm-ui/angular/table"
   // ...
 })
 export class ExampleTableComponent {
-  // no default filters
   readonly columnFilters = signal<ColumnFiltersState>([])
   readonly pagination = signal<PaginationState>({
     pageIndex: 0,

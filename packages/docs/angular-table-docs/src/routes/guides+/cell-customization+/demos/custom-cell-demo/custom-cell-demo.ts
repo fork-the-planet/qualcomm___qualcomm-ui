@@ -7,7 +7,7 @@ import {type User, userColumns, users} from "./data"
 
 @Component({
   imports: [TableModule],
-  selector: "basic-demo",
+  selector: "custom-cell-demo",
   template: `
     <div q-table-root>
       <div q-table-scroll-container>
@@ -44,7 +44,7 @@ import {type User, userColumns, users} from "./data"
     </div>
   `,
 })
-export class BasicDemo {
+export class CustomCellDemo {
   protected table = createAngularTable<User>(() => ({
     columns: userColumns,
     data: users,

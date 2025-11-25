@@ -1,0 +1,190 @@
+---
+title: Table Rendering
+---
+
+import {QdsDemo} from "~components/demo"
+
+# {frontmatter.title}
+
+By now you should be familiar with this library's data model. If not, head back to the [Overview](/guides/overview) guide before you continue here.
+
+Recall the basic table component from earlier. We're going to enhance that example by rendering the data from the computed model in the template.
+
+## Rendering Process
+
+When you create or update the table, you are modifying the model's internal state. We can query the model to retrieve the computed data and pass it to our UI components.
+
+<QdsDemo name="SimpleTableDemo" />
+
+## Breakdown
+
+Let's unpack this example.
+
+### Memoization
+
+We're using signals in the template to retrieve the header and cell data from the model.
+
+```angular-html
+@for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
+  <tr q-table-row></tr>
+}
+```
+
+### UI Elements
+
+This library exports several directives which automatically apply QUI styles to the associated elements. They also accept properties for modifying the table's style in specific contexts.
+
+#### q-table-root
+
+First up is the `q-table-root` directive, which wraps the entire table structure:
+
+```angular-html
+<div q-table-root>
+  <!-- table content -->
+</div>
+```
+
+#### q-table-scroll-container
+
+The `q-table-scroll-container` directive provides horizontal scrolling for tables that exceed their container width:
+
+```angular-html
+<div q-table-root>
+  <div q-table-scroll-container>
+    <!-- table content -->
+  </div>
+</div>
+```
+
+#### q-table-table
+
+The `q-table-table` directive is applied to the semantic `<table>` element:
+
+```angular-html
+<div q-table-root>
+  <div q-table-scroll-container>
+    <table showColumnDivider q-table-table></table>
+  </div>
+</div>
+```
+
+The `q-table-table` directive accepts a single optional property: `showColumnDivider`, which enables column dividers on associated child elements.
+
+#### q-table-header
+
+The `q-table-header` directive wraps the table's header columns:
+
+```angular-html
+<table q-table-table>
+  <thead q-table-header></thead>
+</table>
+```
+
+#### q-table-row
+
+The `q-table-row` directive applies styles to the table's rows. For headers, we make a call to the table model to retrieve the header groups. This renders a row for each header group.
+
+```angular-html
+<table q-table-table>
+  <thead q-table-header>
+    @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
+      <tr q-table-row></tr>
+    }
+  </thead>
+</table>
+```
+
+#### q-table-header-cell
+
+The `q-table-header-cell` directive applies styles to the table's header cells. We use the `*renderHeader` structural directive to render the column's content. We'll elaborate more on this in the [Cell Customization](./#cell-customization) section.
+
+```angular-html
+<table q-table-table>
+  <thead q-table-header>
+    @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
+      <tr q-table-row>
+        @for (header of headerGroup.headers; track header.id) {
+          <th *renderHeader="header; let value" q-table-header-cell>
+            {{ value }}
+          </th>
+        }
+      </tr>
+    }
+  </thead>
+</table>
+```
+
+With the header section wrapped up, let's continue to the body.
+
+#### q-table-body
+
+The `q-table-body` directive applies styles to the table's body. We'll re-use the same `q-table-row` directive for the body's rows.
+
+```angular-html
+<table q-table-table>
+  <tbody q-table-body>
+    @for (row of table.getRowModel().rows; track row.id) {
+      <tr q-table-row></tr>
+    }
+  </tbody>
+</table>
+```
+
+#### q-table-cell
+
+The `q-table-cell` directive applies styles to the table's cells. Like with the header, we use the `*renderCell` structural directive to dynamically render the cell based on the table's column definitions.
+
+```angular-html
+<table q-table-table>
+  <tbody q-table-body>
+    @for (row of table.getRowModel().rows; track row.id) {
+      <tr q-table-row>
+        @for (cell of row.getVisibleCells(); track cell.id) {
+          <td q-table-cell>
+            <ng-container *renderCell="cell; let value">
+              {{ value }}
+            </ng-container>
+          </td>
+        }
+      </tr>
+    }
+  </tbody>
+</table>
+```
+
+### Bring Your Own Styles
+
+You can use the `q-table-*` directives to apply QUI styles to your tables, but they aren't required. This library gives you full control: the data model is decoupled from the presentational layer. You're free to provide your own styles or classes.
+
+```angular-html
+<table class="custom-table">
+  <thead>
+    @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
+      <tr>
+        @for (header of headerGroup.headers; track header.id) {
+          <th *renderHeader="header; let value">
+            {{ value }}
+          </th>
+        }
+      </tr>
+    }
+  </thead>
+  <tbody>
+    @for (row of table.getRowModel().rows; track row.id) {
+      <tr>
+        @for (cell of row.getVisibleCells(); track cell.id) {
+          <td q-table-cell>
+            <ng-container *renderCell="cell; let value">
+              {{ value }}
+            </ng-container>
+          </td>
+        }
+      </tr>
+    }
+  </tbody>
+</table>
+```
+
+## Cell Customization
+
+Continue to the [Cell Customization](/guides/cell-customization) guide to learn more about how to customize your table's cells.
