@@ -53,7 +53,10 @@ export interface AngularDemoInfo {
   initialHtml?: string
   isStandalone: boolean
   lastModified: number
-  pageId: string
+  /**
+   * @deprecated no longer populated
+   */
+  pageId?: string | undefined
   selector: string
   sourceCode: SourceCodeData[]
 }

@@ -62,7 +62,6 @@ interface PathAlias {
 }
 
 const VIRTUAL_MODULE_ID = "\0virtual:angular-demo-registry"
-const VIRTUAL_MODULE_PREFIX = "virtual:angular-demo-registry/"
 const LOG_PREFIX = "[angular-demo]"
 
 let hasWatcherInitialized = false
@@ -246,14 +245,6 @@ export function angularDemoPlugin({
       const mainModule = server.moduleGraph.getModuleById(VIRTUAL_MODULE_ID)
       if (mainModule) {
         server.moduleGraph.invalidateModule(mainModule)
-        await server.reloadModule(mainModule)
-      }
-
-      const pageModuleId = `\0${VIRTUAL_MODULE_PREFIX}${demoInfo.pageId}`
-      const pageModule = server.moduleGraph.getModuleById(pageModuleId)
-      if (pageModule) {
-        server.moduleGraph.invalidateModule(pageModule)
-        await server.reloadModule(pageModule)
       }
 
       const demoModule = server.moduleGraph.getModuleById(file)
@@ -267,21 +258,11 @@ export function angularDemoPlugin({
       if (id === VIRTUAL_MODULE_ID) {
         return generateRegistryModule()
       }
-
-      if (id.startsWith(`\0${VIRTUAL_MODULE_PREFIX}`)) {
-        const pageId = id.slice(`\0${VIRTUAL_MODULE_PREFIX}`.length)
-        return generatePageRegistryModule(pageId)
-      }
     },
     name: "angular-demo-plugin",
     resolveId(id) {
       if (id === "virtual:angular-demo-registry") {
         return VIRTUAL_MODULE_ID
-      }
-
-      if (id.startsWith(VIRTUAL_MODULE_PREFIX)) {
-        const pageId = id.slice(VIRTUAL_MODULE_PREFIX.length)
-        return `\0${VIRTUAL_MODULE_PREFIX}${pageId}`
       }
     },
     writeBundle() {
@@ -532,7 +513,6 @@ export function angularDemoPlugin({
       }
 
       const demoId = componentClass
-      const pageId = extractPageId(filePath, routesDir)
       const importPath = relative(process.cwd(), filePath).replace(/\\/g, "/")
       const fileName = basename(filePath)
       const importsWithoutStrip = stripImports(code, filePath)
@@ -569,7 +549,6 @@ export function angularDemoPlugin({
         initialHtml: initialHtml?.[demoId] || undefined,
         isStandalone,
         lastModified: Date.now(),
-        pageId,
         selector,
         sourceCode,
       }
@@ -582,19 +561,17 @@ export function angularDemoPlugin({
     }
   }
 
-  interface AngularComponentMeta {
+  function parseAngularComponentMeta(
+    filePath: string,
+    source: string,
+  ): {
     componentClass: string
     hasDefaultExport: boolean
     importsFromAst: string[]
     isStandalone: boolean
     selector: string
     templateUrl: string | null
-  }
-
-  function parseAngularComponentMeta(
-    filePath: string,
-    source: string,
-  ): AngularComponentMeta {
+  } {
     const sourceFile = ts.createSourceFile(
       filePath,
       source,
@@ -811,7 +788,6 @@ ${demos
           initialHtml: demo.initialHtml,
           isStandalone: demo.isStandalone,
           lastModified: demo.lastModified,
-          pageId: demo.pageId,
           selector: demo.selector,
           sourceCode: demo.sourceCode,
         },
@@ -821,85 +797,10 @@ ${demos
   )
   .join(",\n")}
 }
-export function isAngularDemo(demoId) {
-  return demoId in ANGULAR_DEMOS
-}
+
 export function getAngularDemoInfo(demoId) {
   return ANGULAR_DEMOS[demoId] || null
-}
-export function getAllAngularDemos() {
-  return Object.values(ANGULAR_DEMOS)
-}
-export const availableAngularDemos = Object.keys(ANGULAR_DEMOS)
-if (import.meta.hot) {
-  import.meta.hot.accept(() => {
-    console.log('[angular-demo-registry] Registry updated via HMR')
-  })
-  
-  if (typeof window !== 'undefined') {
-    import.meta.hot.on('angular-demo-update', (data) => {
-      console.log('[angular-demo-registry] Demo updated:', data.demoId)
-    })
-  }
 }`
-  }
-
-  function generatePageRegistryModule(pageId: string): string {
-    const pageDemos = Array.from(demoRegistry.values()).filter(
-      (demo) => demo.pageId === pageId,
-    )
-
-    if (pageDemos.length === 0) {
-      return `export function getAngularDemoInfo() { return null }
-export const ANGULAR_DEMOS = {}`
-    }
-
-    return `// Auto-generated Angular demo registry for ${pageId}
-export const ANGULAR_DEMOS = {
-${pageDemos
-  .map(
-    (demo) =>
-      `  "${demo.id}": ${JSON.stringify(
-        {
-          componentClass: demo.componentClass,
-          dimensions: demoDimensionsCache[demo.id],
-          filePath: demo.filePath,
-          hasDefaultExport: demo.hasDefaultExport,
-          id: demo.id,
-          imports: demo.imports,
-          initialHtml: demo.initialHtml,
-          isStandalone: demo.isStandalone,
-          lastModified: demo.lastModified,
-          pageId: demo.pageId,
-          selector: demo.selector,
-          sourceCode: demo.sourceCode,
-        },
-        null,
-        4,
-      )}`,
-  )
-  .join(",\n")}
-}
-export function getAngularDemoInfo(demoId) {
-  return ANGULAR_DEMOS[demoId] || null
-}
-if (import.meta.hot) {
-  import.meta.hot.accept(() => {
-    console.log('[angular-demo-registry/${pageId}] Registry updated')
-  })
-}`
-  }
-
-  function extractPageId(filePath: string, routesDir: string): string {
-    const relativePath = relative(routesDir, filePath)
-    const pathParts = relativePath.split("/")
-    const demoIndex = pathParts.findIndex((part) => part.includes("demos"))
-
-    if (demoIndex === -1) {
-      return pathParts.at(-2) || pathParts.join("/")
-    }
-
-    return pathParts.slice(0, demoIndex).join("/")
   }
 
   function isAngularDemoFile(filePath: string): boolean {
@@ -1111,21 +1012,6 @@ if (import.meta.hot) {
       devServer.moduleGraph.invalidateModule(mainModule)
       mainModule.lastHMRTimestamp = Date.now()
       devServer.reloadModule(mainModule)
-    }
-
-    const pageIds = new Set(
-      Array.from(demoRegistry.values()).map((demo) => demo.pageId),
-    )
-
-    for (const pageId of pageIds) {
-      const pageModuleId = `\0${VIRTUAL_MODULE_PREFIX}${pageId}`
-      const pageModule = devServer.moduleGraph.getModuleById(pageModuleId)
-
-      if (pageModule) {
-        devServer.moduleGraph.invalidateModule(pageModule)
-        pageModule.lastHMRTimestamp = Date.now()
-        devServer.reloadModule(pageModule)
-      }
     }
   }
 }
