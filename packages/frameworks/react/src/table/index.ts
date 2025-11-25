@@ -19,6 +19,10 @@ import {
   type TableColumnFilterActionProps,
 } from "./table-column-filter-action"
 import {
+  TableColumnFilterPopup,
+  type TableColumnFilterPopupProps,
+} from "./table-column-filter-popup"
+import {
   TableColumnHeaderAction,
   type TableColumnHeaderActionProps,
 } from "./table-column-header-action"
@@ -70,6 +74,7 @@ export type {
   TableColumnDragPreviewProps,
   TableColumnDropIndicatorProps,
   TableColumnFilterActionProps,
+  TableColumnFilterPopupProps,
   TableColumnHeaderActionProps,
   TableColumnSortActionProps,
   TableFooterProps,
@@ -159,6 +164,7 @@ type TableComponent = {
    * `<button>` element by default.
    */
   ColumnFilterAction: typeof TableColumnFilterAction
+  ColumnFilterPopup: typeof TableColumnFilterPopup
   /**
    * A general-purpose action button within a column header. Renders a `<button>`
    * element by default.
@@ -365,6 +371,7 @@ export const Table: TableComponent = {
   ColumnDragPreview: TableColumnDragPreview,
   ColumnDropIndicator: TableColumnDropIndicator,
   ColumnFilterAction: TableColumnFilterAction,
+  ColumnFilterPopup: TableColumnFilterPopup,
   ColumnHeaderAction: TableColumnHeaderAction,
   ColumnResizeHandle: TableColumnResizeHandle,
   ColumnSortAction: TableColumnSortAction,
