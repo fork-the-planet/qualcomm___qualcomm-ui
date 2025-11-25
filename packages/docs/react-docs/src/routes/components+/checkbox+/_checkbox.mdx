@@ -6,6 +6,7 @@ group: Form Controls
 import {Demo} from "~components/demo"
 import * as demos from "./demos"
 import {TypeDocAttributes, TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
+import {ComponentExplorer} from "@qualcomm-ui/react-mdx/component-explorer"
 import {Checkbox} from "@qualcomm-ui/react/checkbox"
 
 # {frontmatter.title}
@@ -109,6 +110,42 @@ The composite elements are only intended to be used as direct descendants of the
   <Checkbox.Control />
 </Checkbox.Root>
 ```
+
+## Explorer
+
+<ComponentExplorer
+  excludeParts={["hidden-input", "indicator-icon"]}
+  partDocs={{
+    root: {
+      propsName: "CheckboxRootProps",
+      attributesName: ["QdsCheckboxRootBindings", "CheckboxRootBindings"],
+    },
+    label: {
+      propsName: "CheckboxLabelProps",
+      attributesName: ["QdsCheckboxLabelBindings", "CheckboxLabelBindings"],
+    },
+    control: {
+      propsName: "CheckboxControlProps",
+      attributesName: ["QdsCheckboxControlBindings", "CheckboxControlBindings"],
+    },
+    indicator: {
+      propsName: "CheckboxIndicatorProps",
+      attributesName: [
+        "QdsCheckboxIndicatorBindings",
+        "CheckboxIndicatorBindings",
+      ],
+    },
+    "error-text": {
+      propsName: "CheckboxErrorTextProps",
+      attributesName: [
+        "QdsCheckboxErrorTextBindings",
+        "CheckboxErrorTextBindings",
+      ],
+    },
+  }}
+>
+  <Checkbox checked label="Example Checkbox" />
+</ComponentExplorer>
 
 ## API
 
