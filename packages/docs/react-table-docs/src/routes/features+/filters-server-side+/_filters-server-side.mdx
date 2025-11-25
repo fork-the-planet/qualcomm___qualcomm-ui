@@ -1,0 +1,17 @@
+---
+title: Filters (Server-side)
+---
+
+import {TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
+import {Demo} from "~components/demo"
+import * as demos from "./demos"
+
+# {frontmatter.title}
+
+Server-side filtering demo with a simulated backend API. Filter state is managed explicitly in the component and sent to the server on each change. This is the standard approach for backend integrations where the server handles filtering logic. See the [Filters Guide](/feature-guides/column-filtering) for implementation details.
+
+<Demo
+  expanded
+  name="FiltersServerSideDemo"
+  component={demos.FiltersServerSideDemo}
+/>
