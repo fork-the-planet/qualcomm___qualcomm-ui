@@ -10,7 +10,6 @@
     }
   },
   "include": [
-    "./src/routes/**/demos/*/*.ts",
     "./src/routes/**/demos/**/*.ts",
   ],
   "references": [
