@@ -1,5 +1,11 @@
 # @qualcomm-ui/react-mdx
 
+## 1.5.3 (2025/11/25)
+
+### Bug Fixes
+
+- [react-demo]: guard for missing demo data
+
 ## 1.5.2 (2025/11/25)
 
 ### Bug Fixes
