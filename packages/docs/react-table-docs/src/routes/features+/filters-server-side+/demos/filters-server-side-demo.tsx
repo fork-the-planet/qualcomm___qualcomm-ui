@@ -10,6 +10,7 @@ import {
   type SortingState,
 } from "@qualcomm-ui/core/table"
 import {Pagination} from "@qualcomm-ui/react/pagination"
+import {Popover} from "@qualcomm-ui/react/popover"
 import {ProgressRing} from "@qualcomm-ui/react/progress-ring"
 import {
   flexRender,
@@ -121,9 +122,13 @@ export function FiltersServerSideDemo() {
                               <Table.ColumnSortAction header={header} />
                             </div>
                             {header.column.getCanFilter() ? (
-                              <Table.ColumnFilterPopup
-                                canFilter={header.column.getCanFilter()}
-                                isFiltered={header.column.getIsFiltered()}
+                              <Popover
+                                trigger={
+                                  <Table.ColumnFilterAction
+                                    canFilter={header.column.getCanFilter()}
+                                    isFiltered={header.column.getIsFiltered()}
+                                  />
+                                }
                               >
                                 <TableColumnFilter
                                   availableFilters={data?.availableFilters}
@@ -131,7 +136,7 @@ export function FiltersServerSideDemo() {
                                   columnFilters={columnFilters}
                                   onColumnFiltersChange={setColumnFilters}
                                 />
-                              </Table.ColumnFilterPopup>
+                              </Popover>
                             ) : null}
                           </div>
                         )}
