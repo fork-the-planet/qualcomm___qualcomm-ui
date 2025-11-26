@@ -12,6 +12,23 @@ index ee3f232db33184169461df291fc35974622a0101..70cdd7a53db8afa9121e9eab5e956c8b
      ];
      CLIENT_ROUTE_EXPORTS = [
        ...CLIENT_NON_COMPONENT_EXPORTS,
+diff --git a/dist/static/refresh-utils.mjs b/dist/static/refresh-utils.mjs
+index 6f323f52865c74fd7b7a938006bb1bd658d01094..3ef548db9f51d0df4055ddd1385be1612fcba192 100644
+--- a/dist/static/refresh-utils.mjs
++++ b/dist/static/refresh-utils.mjs
+@@ -19,9 +19,9 @@ const enqueueUpdate = debounce(async () => {
+       manifest.routes[route.id] = route;
+       let imported = window.__reactRouterRouteModuleUpdates.get(route.id);
+       if (!imported) {
+-        throw Error(
+-          `[react-router:hmr] No module update found for route ${route.id}`,
+-        );
++        console.debug(`[react-router:hmr] No module update found for route ${route.id}`);
++        window.location.reload();
++        return;
+       }
+       let routeModule = {
+         ...imported,
 diff --git a/dist/vite.js b/dist/vite.js
 index 2dec83771a9413822c254a61fbb493c30cdb36f8..5a7afa8ba132d4ef02cb998796859797ed58805f 100644
 --- a/dist/vite.js

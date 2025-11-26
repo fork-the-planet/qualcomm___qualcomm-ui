@@ -77,7 +77,7 @@ import {fetchData, type FetchResult, type User, userColumns} from "./data"
     </div>
   `,
 })
-export class PaginationControlledDemo {
+export class PaginationServerSideDemo {
   protected readonly paginationState = signal<PaginationState>({
     pageIndex: 0,
     pageSize: 10,

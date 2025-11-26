@@ -23,7 +23,13 @@
               ".html": "text",
               ".tsx": "empty"
             },
-            "scripts": []
+            "scripts": [],
+            "fileReplacements": [
+              {
+                "replace": "src/routes/features+/pagination-controlled.tsx",
+                "with": "angular-demo-module/stub.ts"
+              }
+            ]
           },
           "configurations": {
             "production": {

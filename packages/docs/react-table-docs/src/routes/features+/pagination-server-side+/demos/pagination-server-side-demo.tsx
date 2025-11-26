@@ -15,7 +15,7 @@ import {CodeHighlight} from "@qualcomm-ui/react-mdx/code-highlight"
 
 import {fetchData, userColumns} from "./use-data"
 
-export function PaginationControlledDemo() {
+export function PaginationServerSideDemo() {
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 10,
