@@ -254,8 +254,8 @@ async function scanPages(
 ): Promise<PageInfo[]> {
   const components: PageInfo[] = []
 
-  function shouldExclude(dirPath: string): boolean {
-    const dirName = basename(dirPath)
+  function shouldExclude(fileOrDir: string): boolean {
+    const dirName = basename(fileOrDir)
     return excludePatterns.some((pattern) => {
       if (pattern.includes("*")) {
         const regex = new RegExp(`^${pattern.replace(/\*/g, ".*")}$`)
@@ -274,7 +274,10 @@ async function scanPages(
     }
 
     const entries = await readdir(dirPath, {withFileTypes: true})
-    const mdxFiles = entries.filter((f) => f.name.endsWith(".mdx")) ?? []
+    const mdxFiles =
+      entries.filter(
+        (f) => f.name.endsWith(".mdx") && !shouldExclude(f.name),
+      ) ?? []
 
     for (const mdxFile of mdxFiles) {
       const demosFolder = entries.find((f) => f.name === "demos")
@@ -291,7 +294,7 @@ async function scanPages(
 
       components.push({
         demosFolder: demosFolderPath,
-        id: segments.join("-"),
+        id: segments.join("-").trim(),
         mdxFile: join(dirPath, mdxFile.name),
         name: segments.at(-1)!,
         path: dirPath,
@@ -921,7 +924,7 @@ async function generatePerPageExports({
         }
       }
 
-      const outfile = `${resolve(outputPath)}/${kebabCase(page.id)}.md`
+      const outfile = `${resolve(outputPath)}/${kebabCase(page.id || page.name)}.md`
       await writeFile(outfile, lines.join("\n"), "utf-8")
       const stats = await stat(outfile)
       totalSize += stats.size / 1024
@@ -1027,7 +1030,7 @@ export function addGenerateKnowledgeCommand() {
     .option("-v, --verbose", "Enable verbose logging", false)
     .option(
       "--exclude <patterns...>",
-      "Exclude folder patterns (supports * wildcards)",
+      "Exclude file or folder patterns (supports * wildcards)",
       [],
     )
     .option("--base-url <url>", "Base URL for component documentation links")

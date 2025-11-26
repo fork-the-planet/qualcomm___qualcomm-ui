@@ -1,5 +1,11 @@
 # @qualcomm-ui/mdx-vite
 
+## 2.2.1 (2025/11/25)
+
+### Bug Fixes
+
+- [rag-knowledge-generator]: apply exclude CLI option to filenames
+
 ## 2.2.0 (2025/11/25)
 
 ### Features
