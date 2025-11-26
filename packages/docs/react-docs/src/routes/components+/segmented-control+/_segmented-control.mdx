@@ -24,19 +24,28 @@ It is typically used for filtering content, sorting elements or switching betwee
 
 Use the simple API to create segmented control items using minimal markup.
 
-<Demo component={demos.SegmentedControlSimpleDemo} />
+<Demo
+  name="SegmentedControlSimpleDemo"
+  component={demos.SegmentedControlSimpleDemo}
+/>
 
 ### Composite
 
 Build with the composite API for granular control. This API requires you to provide each subcomponent, but gives you full control over the structure and layout.
 
-<Demo component={demos.SegmentedControlCompositeDemo} />
+<Demo
+  name="SegmentedControlCompositeDemo"
+  component={demos.SegmentedControlCompositeDemo}
+/>
 
 ### Multiple
 
 By default, a segmented control allows for a single selection. Use the [multiple](./#multiple-1) prop to create a segmented control that allows for multiple selections.
 
-<Demo component={demos.SegmentedControlMultipleDemo} />
+<Demo
+  name="SegmentedControlMultipleDemo"
+  component={demos.SegmentedControlMultipleDemo}
+/>
 
 ### Orientation
 
@@ -45,13 +54,19 @@ Use the [orientation](./#orientation-1) prop to control the layout direction of 
 - `horizontal`: Items are laid out in a row (default).
 - `vertical`: Items are laid out in a column.
 
-<Demo component={demos.SegmentedControlOrientationDemo} />
+<Demo
+  name="SegmentedControlOrientationDemo"
+  component={demos.SegmentedControlOrientationDemo}
+/>
 
 ### Icon
 
 Use the [icon](./#icon-1) prop on the `SegmentedControl.Item` or `SegmentedControl.ItemRoot` components to add icons to the segmented control items.
 
-<Demo component={demos.SegmentedControlIconDemo} />
+<Demo
+  name="SegmentedControlIconDemo"
+  component={demos.SegmentedControlIconDemo}
+/>
 
 ### Layout
 
@@ -60,31 +75,46 @@ Use the [layout](./#layout-1) prop to control how the `SegmentedControl` is size
 - `hug`: Content-sized; width matches the items only (default).
 - `fill`: Full width; items share space evenly.
 
-<Demo component={demos.SegmentedControlLayoutDemo} />
+<Demo
+  name="SegmentedControlLayoutDemo"
+  component={demos.SegmentedControlLayoutDemo}
+/>
 
 ### Size
 
 Use the [size](./#size-1) prop to control the size of the segmented control. The available sizes are `sm`, `md` (default), and `lg`.
 
-<Demo component={demos.SegmentedControlSizeDemo} />
+<Demo
+  name="SegmentedControlSizeDemo"
+  component={demos.SegmentedControlSizeDemo}
+/>
 
 ### Variant
 
 Use the [variant](./#variant-1) prop to control the visual style of the segmented control. The available variants are `primary` (default) and `neutral`.
 
-<Demo component={demos.SegmentedControlVariantDemo} />
+<Demo
+  name="SegmentedControlVariantDemo"
+  component={demos.SegmentedControlVariantDemo}
+/>
 
 ### Disabled
 
 Use the segmented control's [disabled](./#disabled-1) prop to control the disabled state of the entire control. Use the segmented control item's [disabled](./#disabled-2) prop to control the disabled state of individual items.
 
-<Demo component={demos.SegmentedControlDisabledDemo} />
+<Demo
+  name="SegmentedControlDisabledDemo"
+  component={demos.SegmentedControlDisabledDemo}
+/>
 
 ### Controlled state
 
 Use the [value](./#value-1) prop to control the selected value of the segmented control. This allows for more complex interactions and integration with form libraries.
 
-<Demo component={demos.SegmentedControlControlledDemo} />
+<Demo
+  name="SegmentedControlControlledDemo"
+  component={demos.SegmentedControlControlledDemo}
+/>
 
 ## Accessibility
 
@@ -100,7 +130,10 @@ Users can navigate the segmented control using the keyboard. The following keys 
 While it is possible to use icon-only items in the segmented control, it is important to ensure that they are easily understood and accessible.
 Pick meaningful icons and use the `aria-label` attribute to describe their purpose.
 
-<Demo component={demos.SegmentedControlIconOnlyDemo} />
+<Demo
+  name="SegmentedControlIconOnlyDemo"
+  component={demos.SegmentedControlIconOnlyDemo}
+/>
 
 ## API
 
