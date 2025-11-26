@@ -231,15 +231,11 @@ export function CoreTreeLeafNode({
 export interface CoreTreeNodeCheckboxProps extends ElementRenderProp<"span"> {
   /**
    * React Node rendered when the node is checked.
-   *
-   * @default CheckmarkCheckedIcon
    */
   checked?: ReactNode
 
   /**
    * React Node rendered when the node is indeterminate.
-   *
-   * @default CheckmarkIndeterminateIcon
    */
   indeterminate?: ReactNode
 
