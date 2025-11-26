@@ -267,7 +267,9 @@ async function scanPages(
 
   async function scanDirectory(dirPath: string): Promise<void> {
     if (shouldExclude(dirPath)) {
-      console.log(`Excluding directory: ${basename(dirPath)}`)
+      if (verbose) {
+        console.log(`Excluding directory: ${basename(dirPath)}`)
+      }
       return
     }
 
