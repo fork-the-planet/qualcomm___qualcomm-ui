@@ -1,4 +1,12 @@
+![NPM Downloads](https://img.shields.io/npm/dw/%40qualcomm-ui%2Fcore)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/qualcomm/qualcomm-ui)
+![NPM License](https://img.shields.io/npm/l/%40qualcomm-ui%2Freact)
+![GitHub Issues or Pull Requests](https://img.shields.io/github/issues-pr-closed/qualcomm/qualcomm-ui)
+
+![Website](https://img.shields.io/website?url=https%3A%2F%2Freact-next.qui.qualcomm.com&up_message=online&down_message=offline&label=React%20Docs)
+![Website](https://img.shields.io/website?url=https%3A%2F%2Freact-table-next.qui.qualcomm.com&up_message=online&down_message=offline&label=React%20Table%20Docs)
+![Website](https://img.shields.io/website?url=https%3A%2F%2Fangular-next.qui.qualcomm.com&up_message=online&down_message=offline&label=Angular%20Docs)
+![Website](https://img.shields.io/website?url=https%3A%2F%2Fangular-table-next.qui.qualcomm.com&up_message=online&down_message=offline&label=Angular%20Table%20Docs)
 
 # Qualcomm UI (QUI)
 
