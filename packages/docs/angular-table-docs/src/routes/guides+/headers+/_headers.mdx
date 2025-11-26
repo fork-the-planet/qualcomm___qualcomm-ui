@@ -41,8 +41,10 @@ Header objects are similar to Cell objects. Each header object can be associated
   @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
     <tr q-table-row>
       @for (header of headerGroup.headers; track header.id) {
-        <th *renderHeader="header; let value" q-table-header-cell align="left">
-          {{ header.isPlaceholder ? null : value }}
+        <th q-table-header-cell align="left">
+          <ng-container *renderHeader="header; let value">
+            {{ value }}
+          </ng-container>
         </th>
       }
     </tr>

@@ -19,8 +19,10 @@ import {type User, userColumns, users} from "./data"
             ) {
               <tr q-table-row>
                 @for (header of headerGroup.headers; track header.id) {
-                  <th *renderHeader="header; let value" q-table-header-cell>
-                    {{ value }}
+                  <th q-table-header-cell>
+                    <ng-container *renderHeader="header; let value">
+                      {{ value }}
+                    </ng-container>
                   </th>
                 }
               </tr>

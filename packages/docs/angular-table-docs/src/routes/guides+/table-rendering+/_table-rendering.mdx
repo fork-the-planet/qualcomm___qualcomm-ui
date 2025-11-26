@@ -104,8 +104,10 @@ The `q-table-header-cell` directive applies styles to the table's header cells. 
     @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
       <tr q-table-row>
         @for (header of headerGroup.headers; track header.id) {
-          <th *renderHeader="header; let value" q-table-header-cell>
-            {{ value }}
+          <th q-table-header-cell>
+            <ng-container *renderHeader="header; let value">
+              {{ value }}
+            </ng-container>
           </th>
         }
       </tr>
@@ -162,8 +164,10 @@ You can use the `q-table-*` directives to apply QUI styles to your tables, but t
     @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
       <tr>
         @for (header of headerGroup.headers; track header.id) {
-          <th *renderHeader="header; let value">
-            {{ value }}
+          <th>
+            <ng-container *renderHeader="header; let value">
+              {{ value }}
+            </ng-container>
           </th>
         }
       </tr>
