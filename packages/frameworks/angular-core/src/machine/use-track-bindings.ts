@@ -15,8 +15,8 @@ import {
 
 import {isEqual} from "@qualcomm-ui/utils/equal"
 import {isFunction, isNumber, isString} from "@qualcomm-ui/utils/guard"
+import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {mergeProps} from "./merge-props"
 import type {Dict, StyleObject} from "./normalize-props"
 
 export interface TrackBindingsConfig {

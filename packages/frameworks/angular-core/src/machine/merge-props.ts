@@ -61,6 +61,8 @@ export type MergeProps<T extends readonly Props[]> = MergePropsHelper<T> & {
  * - Handlers (`on*`) are composed with `callAll`.
  * - `class` / `className` values are merged via `clsx`.
  * - `style` strings or objects are merged and normalised.
+ *
+ * @deprecated import the equivalent from `@qualcomm-ui/utils/merge-props`
  */
 export function mergeProps<T extends readonly Props[]>(
   ...sources: T
