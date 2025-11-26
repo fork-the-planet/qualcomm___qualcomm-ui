@@ -91,7 +91,7 @@ export async function publishAngular({
   try {
     const res = execaCommandSync("npm publish", {
       cwd: outDir,
-      stderr: "ignore",
+      stderr: "pipe",
       stdin: "ignore",
     })
     if (res.stdout && res.stdout.includes(`+ ${pkgJson.name}`)) {
@@ -99,7 +99,7 @@ export async function publishAngular({
       console.debug(res.stdout)
     } else if (res.stderr) {
       console.debug(`${chalk.red("✖")} Failed to publish ${pkgJson.name}.`)
-      console.debug(res.stderr)
+      console.debug(res)
       process.exit(1)
     }
   } catch (e) {
