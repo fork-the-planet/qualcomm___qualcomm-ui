@@ -41,12 +41,19 @@ function mergeStyle(
 /**
  * Construct the real resulting type so callers keep strong typing.
  */
-export type MergeProps<T extends readonly Props[]> = T extends readonly [
+type MergePropsHelper<T extends readonly Props[]> = T extends readonly [
   infer First extends Props,
   ...infer Rest extends readonly Props[],
 ]
-  ? First & MergeProps<Rest>
+  ? Omit<First, "className"> & MergePropsHelper<Rest>
   : {}
+
+/**
+ * Construct the real resulting type so callers keep strong typing.
+ */
+export type MergeProps<T extends readonly Props[]> = MergePropsHelper<T> & {
+  className?: string
+}
 
 /**
  * Angular-friendly version of `mergeProps`.

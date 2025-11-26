@@ -40,12 +40,22 @@ const css = (
 type MaybeProps = Props | undefined
 type PropsArray = Array<MaybeProps>
 
-type MergeProps<T extends PropsArray> = T extends readonly [
-  infer First extends MaybeProps,
+/**
+ * Construct the real resulting type so callers keep strong typing.
+ */
+type MergePropsHelper<T extends PropsArray> = T extends readonly [
+  infer First extends Props,
   ...infer Rest extends PropsArray,
 ]
-  ? First & MergeProps<Rest>
+  ? Omit<First, "className"> & MergePropsHelper<Rest>
   : {}
+
+/**
+ * Construct the real resulting type so callers keep strong typing.
+ */
+export type MergeProps<T extends PropsArray> = MergePropsHelper<T> & {
+  className?: string
+}
 
 /**
  * Merges N objects of type `Props` into a single one. It provides specific
