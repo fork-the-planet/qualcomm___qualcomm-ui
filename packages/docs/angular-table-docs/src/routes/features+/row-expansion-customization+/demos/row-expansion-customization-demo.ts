@@ -1,16 +1,10 @@
-import {Component} from "@angular/core"
 import {JsonPipe} from "@angular/common"
+import {Component} from "@angular/core"
 
 import {ButtonModule} from "@qualcomm-ui/angular/button"
 import {ProgressRingModule} from "@qualcomm-ui/angular/progress-ring"
-import {
-  createAngularTable,
-  TableModule,
-} from "@qualcomm-ui/angular/table"
-import {
-  getCoreRowModel,
-  getExpandedRowModel,
-} from "@qualcomm-ui/core/table"
+import {createAngularTable, TableModule} from "@qualcomm-ui/angular/table"
+import {getCoreRowModel, getExpandedRowModel} from "@qualcomm-ui/core/table"
 
 import {createUserQuery, type User, userColumns} from "./data"
 
@@ -76,7 +70,8 @@ import {createUserQuery, type User, userColumns} from "./data"
                   >
                     <pre
                       class="w-fit rounded bg-transparent p-2 font-mono text-xs"
-                    >{{ row.original | json }}</pre>
+                      >{{ row.original | json }}</pre
+                    >
                   </td>
                 </tr>
               }
