@@ -2,6 +2,7 @@ import {useMemo} from "react"
 
 import {selectCollection} from "@qualcomm-ui/core/select"
 import type {Column, ColumnFiltersState} from "@qualcomm-ui/core/table"
+import {InputLabel} from "@qualcomm-ui/react/input"
 import {NumberInput} from "@qualcomm-ui/react/number-input"
 import {Select} from "@qualcomm-ui/react/select"
 import {TextInput} from "@qualcomm-ui/react/text-input"
@@ -23,7 +24,11 @@ function setFilterValue(
   if (
     value === undefined ||
     value === "" ||
-    (Array.isArray(value) && value.every((v) => v === undefined || v === 0))
+    (Array.isArray(value) &&
+      value.every(
+        (v) =>
+          v === undefined || v === 0 || (typeof v === "number" && isNaN(v)),
+      ))
   ) {
     return columnFilters.filter((f) => f.id !== columnId)
   }
@@ -114,32 +119,24 @@ export function MinMaxNumberFilter({
 
   const filterLabel = column.columnDef.meta?.filterLabel
 
-  const getNextValue = (value: [number | undefined, number | undefined]) => {
-    if (
-      (value[0] === undefined || isNaN(value[0])) &&
-      (value[1] === undefined || isNaN(value[1]))
-    ) {
-      return undefined
-    }
-    return value
-  }
-
   return (
     <div className="flex flex-col gap-1">
-      {filterLabel ? (
-        <div className="qui-input__label">{filterLabel}</div>
-      ) : null}
+      {filterLabel ? <InputLabel>{filterLabel}</InputLabel> : null}
       <div className="flex w-32 gap-2">
         <NumberInput
           controlProps={{hidden: true}}
+          inputProps={{
+            "aria-label": filterLabel
+              ? `${filterLabel} min range`
+              : "Min range",
+          }}
           min={0}
           onValueChange={({valueAsNumber}) =>
             onColumnFiltersChange(
-              setFilterValue(
-                columnFilters,
-                column.id,
-                getNextValue([valueAsNumber, filterValue?.[1]]),
-              ),
+              setFilterValue(columnFilters, column.id, [
+                valueAsNumber,
+                filterValue?.[1],
+              ]),
             )
           }
           placeholder="Min"
@@ -148,14 +145,18 @@ export function MinMaxNumberFilter({
         />
         <NumberInput
           controlProps={{hidden: true}}
+          inputProps={{
+            "aria-label": filterLabel
+              ? `${filterLabel} max range`
+              : "Max range",
+          }}
           max={999}
           onValueChange={({valueAsNumber}) =>
             onColumnFiltersChange(
-              setFilterValue(
-                columnFilters,
-                column.id,
-                getNextValue([filterValue?.[0], valueAsNumber]),
-              ),
+              setFilterValue(columnFilters, column.id, [
+                filterValue?.[0],
+                valueAsNumber,
+              ]),
             )
           }
           placeholder="Max"

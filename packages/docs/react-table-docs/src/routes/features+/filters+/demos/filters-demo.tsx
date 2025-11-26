@@ -9,6 +9,7 @@ import {
 } from "@qualcomm-ui/core/table"
 import {Button} from "@qualcomm-ui/react/button"
 import {Pagination} from "@qualcomm-ui/react/pagination"
+import {Popover} from "@qualcomm-ui/react/popover"
 import {ProgressRing} from "@qualcomm-ui/react/progress-ring"
 import {
   flexRender,
@@ -20,7 +21,7 @@ import {TextInput} from "@qualcomm-ui/react/text-input"
 import {useDebounce} from "@qualcomm-ui/react-core/effects"
 
 import {TableColumnFilter} from "./filters"
-import {userColumns, useUserData} from "./use-data"
+import {type User, userColumns, useUserData} from "./use-data"
 
 export function FiltersDemo() {
   const {data = [], isFetching, refetch} = useUserData(100000)
@@ -34,7 +35,7 @@ export function FiltersDemo() {
   // majority of the table's data.
   const debouncedGlobalFilter = useDebounce(globalFilter, 150)
 
-  const table = useReactTable({
+  const table = useReactTable<User>({
     columns: userColumns,
     data,
     getCoreRowModel: getCoreRowModel(),
@@ -76,18 +77,27 @@ export function FiltersDemo() {
                         colSpan={header.colSpan}
                       >
                         {header.isPlaceholder ? null : (
-                          <div className="inline-flex flex-col gap-1">
-                            <div className="inline-flex min-h-[28px] items-center justify-center">
+                          <div className="inline-flex w-full items-center justify-between gap-2">
+                            <div className="inline-flex min-h-[28px] items-center">
                               {flexRender(
                                 header.column.columnDef.header,
                                 header.getContext(),
                               )}
                             </div>
                             {header.column.getCanFilter() ? (
-                              <TableColumnFilter
-                                column={header.column}
-                                table={table}
-                              />
+                              <Popover
+                                trigger={
+                                  <Table.ColumnFilterAction
+                                    canFilter={header.column.getCanFilter()}
+                                    isFiltered={header.column.getIsFiltered()}
+                                  />
+                                }
+                              >
+                                <TableColumnFilter
+                                  column={header.column}
+                                  table={table}
+                                />
+                              </Popover>
                             ) : null}
                           </div>
                         )}

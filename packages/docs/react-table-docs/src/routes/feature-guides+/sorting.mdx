@@ -2,6 +2,8 @@
 title: Sorting Guide
 ---
 
+import {TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
+
 # {frontmatter.title}
 
 ## Examples & API
@@ -398,31 +400,11 @@ const table = useReactTable({
 
 Several sorting-related APIs connect to UI or logic:
 
-**Table APIs:**
+#### Table APIs
 
 - `table.setSorting` - Set the sorting state directly
 - `table.resetSorting` - Reset sorting state to initial state or clear it
 
-**Column Sorting State:**
+#### Column APIs
 
-- `column.getCanSort` - Enable/disable sorting UI for a column
-- `column.getIsSorted` - Show visual sorting indicator
-
-**Column Sorting Actions:**
-
-- `column.getToggleSortingHandler` - Handler for sorting UI (add to icon buttons, menu items, or column headers)
-- `column.toggleSorting` - Toggle sorting manually (must pass multi-sorting parameter: `column.toggleSorting(desc, multi)`)
-- `column.clearSorting` - Clear sorting for a specific column
-
-**Column Sorting Information:**
-
-- `column.getNextSortingOrder` - Get next sort direction (for tooltips, menu items, aria-labels)
-- `column.getFirstSortDir` - Get first sort direction (for tooltips, menu items, aria-labels)
-- `column.getAutoSortDir` - Determine if first sorting direction will be ascending or descending
-- `column.getAutoSortingFn` - Get default sorting function (used internally)
-- `column.getSortingFn` - Get exact sorting function being used
-
-**Multi-Sorting:**
-
-- `column.getCanMultiSort` - Enable/disable multi-sorting UI for a column
-- `column.getSortIndex` - Get column's sort order position in multi-sort scenario (first, second, third, etc.)
+<TypeDocProps name="SortingColumn" partial />
