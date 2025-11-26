@@ -1,6 +1,9 @@
 ![NPM Downloads](https://img.shields.io/npm/dw/%40qualcomm-ui%2Fcore)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/qualcomm/qualcomm-ui)
 ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues-pr-closed/qualcomm/qualcomm-ui)
+<a href="https://github.com/qualcomm/qualcomm-ui/actions/workflows/code-quality.yml">
+<img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/qualcomm/qualcomm-ui/code-quality.yml">
+</a>
 
 ![Website](https://img.shields.io/website?url=https%3A%2F%2Freact-next.qui.qualcomm.com&up_message=online&down_message=offline&label=React%20Docs)
 ![Website](https://img.shields.io/website?url=https%3A%2F%2Freact-table-next.qui.qualcomm.com&up_message=online&down_message=offline&label=React%20Table%20Docs)
