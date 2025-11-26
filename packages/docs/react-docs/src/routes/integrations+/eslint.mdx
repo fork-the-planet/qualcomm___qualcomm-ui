@@ -2,6 +2,206 @@
 title: ESLint
 ---
 
+import {NpmInstallTabs} from "@qualcomm-ui/react-mdx/npm-install-tabs"
+
 # {frontmatter.title}
 
-Coming soon™
+QUI provides two ESLint configuration packages:
+
+- `@qualcomm-ui/eslint-config-typescript` - TypeScript rules
+- `@qualcomm-ui/eslint-config-react` - React-specific rules
+
+Both packages use ESLint's flat config format.
+
+## Installation
+
+<NpmInstallTabs
+  packages={[
+    "@qualcomm-ui/eslint-config-typescript",
+    "@qualcomm-ui/eslint-config-react",
+  ]}
+  dev
+/>
+
+## Basic Configuration
+
+Create an `eslint.config.js` file in your project root:
+
+```js
+import tsConfigs from "@qualcomm-ui/eslint-config-typescript"
+import reactConfigs from "@qualcomm-ui/eslint-config-react"
+
+export default [
+  ...tsConfigs.configs.recommended,
+  ...reactConfigs.configs.recommended,
+]
+```
+
+## TypeScript Configs
+
+The `@qualcomm-ui/eslint-config-typescript` package exports the following configurations:
+
+| Config              | Description                |
+| ------------------- | -------------------------- |
+| `base`              | Core TypeScript rules      |
+| `recommended`       | Includes all configs below |
+| `styleGuide`        | Code style enforcement     |
+| `sortKeys`          | Object key ordering        |
+| `typeChecks`        | Type-aware linting rules   |
+| `namingConventions` | Identifier naming patterns |
+| `performance`       | Performance-related rules  |
+| `strictExports`     | Export restrictions        |
+| `jsdoc`             | JSDoc comment validation   |
+
+### Style Guide Rules
+
+The `styleGuide` config enforces these conventions:
+
+- `curly` - Require braces for all control statements
+- `eqeqeq` - Require `===` and `!==` (except for `null` comparisons)
+- `@stylistic/spaced-comment` - Balanced spacing in comments
+- `@typescript-eslint/explicit-member-accessibility` - Require explicit visibility modifiers, but omit `public`
+- `comment-length/*` - Maximum 85 characters per comment line
+- `object-shorthand` - Require shorthand syntax for object properties
+- `prefer-template` - Require template literals over string concatenation
+- `prefer-const` - Require `const` for variables that are never reassigned
+- `no-var` - Disallow `var` declarations
+
+### Import Rules
+
+The style guide enforces import organization with lines between groups:
+
+```ts
+// 1. Built-in and external packages
+import {readFile} from "node:fs/promises"
+import React from "react"
+
+// 2. Internal imports
+import {utils} from "@/lib/utils"
+
+// 3. Parent imports
+import {parent} from "../parent"
+
+// 4. Sibling imports
+import {sibling} from "./sibling"
+```
+
+Additional import rules:
+
+- `import/no-duplicates` - Merge duplicate imports with inline type specifiers
+- `unused-imports/*` - Auto-remove unused imports (variables prefixed with `_` are ignored)
+
+### Private Fields
+
+The `no-restricted-syntax` rule bans the `#` private field syntax:
+
+```ts
+// Disallowed
+class Foo {
+  // [!code warning]
+  #bar = 1
+}
+
+// Use TypeScript access modifiers instead
+class Foo {
+  private bar = 1
+}
+```
+
+## React Configs
+
+The `@qualcomm-ui/eslint-config-react` package exports the following configurations:
+
+| Config        | Description                           |
+| ------------- | ------------------------------------- |
+| `base`        | Core React rules                      |
+| `recommended` | Base config plus hooks and JSX rules  |
+| `strict`      | Recommended plus React Compiler rules |
+
+### Recommended Rules
+
+The `recommended` config includes:
+
+- `react-hooks/rules-of-hooks` - Enforce Rules of Hooks
+- `react-hooks/exhaustive-deps` - Verify effect dependencies (with autofix)
+- `react/jsx-sort-props` - Sort JSX props (key and ref first)
+- `react/jsx-boolean-value` - Omit redundant `={true}` for boolean props
+- `react/self-closing-comp` - Require self-closing tags for components without children
+
+The config also blocks the default React import:
+
+```ts
+// Disallowed
+// [!code warning]
+import React from "react"
+
+// Use named imports
+import {useState, useEffect} from "react"
+```
+
+### Strict Rules (React Compiler)
+
+The `strict` config adds React Compiler rules for optimization:
+
+- `react-hooks/purity` - Enforce pure render functions
+- `react-hooks/immutability` - Enforce immutable data patterns
+- `react-hooks/use-memo` - Validate useMemo usage
+- `react-hooks/preserve-manual-memoization` - Respect manual memoization
+- `react-hooks/static-components` - Identify static components
+
+Use the `strict` config when using the React Compiler:
+
+```js
+import tsConfigs from "@qualcomm-ui/eslint-config-typescript"
+import reactConfigs from "@qualcomm-ui/eslint-config-react"
+
+export default [
+  ...tsConfigs.configs.recommended,
+  ...reactConfigs.configs.strict,
+]
+```
+
+## Configuration Examples
+
+### TypeScript Only
+
+```js
+import tsConfigs from "@qualcomm-ui/eslint-config-typescript"
+
+export default [...tsConfigs.configs.recommended]
+```
+
+### Selective Configs
+
+```js
+import tsConfigs from "@qualcomm-ui/eslint-config-typescript"
+import reactConfigs from "@qualcomm-ui/eslint-config-react"
+
+export default [
+  ...tsConfigs.configs.base,
+  ...tsConfigs.configs.styleGuide,
+  ...tsConfigs.configs.namingConventions,
+  ...reactConfigs.configs.base,
+]
+```
+
+### With Type Checking
+
+For type-aware rules, configure the parser options:
+
+```js
+import tsConfigs from "@qualcomm-ui/eslint-config-typescript"
+import reactConfigs from "@qualcomm-ui/eslint-config-react"
+
+export default [
+  ...tsConfigs.configs.recommended,
+  ...reactConfigs.configs.recommended,
+  {
+    languageOptions: {
+      parserOptions: {
+        project: "./tsconfig.json",
+      },
+    },
+  },
+]
+```
