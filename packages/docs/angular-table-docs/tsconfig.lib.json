@@ -12,7 +12,7 @@
     "./src",
     "types.d.ts"
   ],
-  "exclude": ["./src/routes/**/demos/*.ts"],
+  "exclude": ["./src/routes/**/demos/**/*.ts"],
   "references": [
     {
       "path": "./tsconfig.node.json"

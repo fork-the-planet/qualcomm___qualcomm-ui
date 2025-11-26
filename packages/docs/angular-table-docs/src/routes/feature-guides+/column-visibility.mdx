@@ -1,0 +1,149 @@
+---
+title: Column Visibility Guide
+---
+
+# {frontmatter.title}
+
+## Examples & API
+
+- [Column Visibility](/features/column-visibility)
+- [Column Visibility API](/api/features/visibility)
+
+## Guide
+
+Column visibility is controlled by a dedicated `columnVisibility` state on the table.
+
+### Column Visibility State
+
+The `columnVisibility` state is a map of column IDs to boolean values. A column is hidden when its ID is present in the map with a value of `false`. Columns are shown when their ID is absent from the map or has a value of `true`.
+
+```ts
+import {signal} from "@angular/core"
+import type {VisibilityState} from "@qualcomm-ui/core/table"
+
+// ...
+export class ExampleComponent {
+  columnVisibility = signal<VisibilityState>({
+    columnId1: true,
+    columnId2: false, // hide this column by default
+    columnId3: true,
+  })
+
+  table = createAngularTable(() => ({
+    // ...
+    state: {
+      columnVisibility: this.columnVisibility(),
+      // ...
+    },
+    onColumnVisibilityChange: (updaterOrValue) => {
+      const newVisibility =
+        typeof updaterOrValue === "function"
+          ? updaterOrValue(this.columnVisibility())
+          : updaterOrValue
+      this.columnVisibility.set(newVisibility)
+    },
+  }))
+}
+```
+
+Use `initialState` to set default column visibility without managing state externally.
+
+> [!warning]
+> Do not provide `columnVisibility` to both `initialState` and `state`. The `state` option overrides `initialState`
+
+```ts
+// ...
+export class ExampleComponent {
+  table = createAngularTable(() => ({
+    // ...
+    initialState: {
+      columnVisibility: {
+        columnId1: true,
+        columnId2: false, // hide this column by default
+        columnId3: true,
+      },
+      // ...
+    },
+  }))
+}
+```
+
+### Disable Hiding Columns
+
+By default, all columns can be hidden or shown. Set the `enableHiding` column option to `false` to prevent specific columns from being hidden.
+
+```ts
+const columns = [
+  {
+    header: "ID",
+    accessorKey: "id",
+    enableHiding: false, // disable hiding for this column
+  },
+  {
+    header: "Name",
+    accessor: "name", // can be hidden
+  },
+]
+```
+
+### Column Visibility Toggle APIs
+
+Several column API methods support rendering column visibility toggles:
+
+- `column.getCanHide` - Disables the visibility toggle for columns with `enableHiding` set to `false`
+- `column.getIsVisible` - Gets the current visibility state of the column
+- `column.toggleVisibility` - Toggles column visibility
+
+```angular-html
+@for (column of table.getAllLeafColumns(); track column.id) {
+  <label
+    q-checkbox
+    [ngModel]="column.getIsVisible()"
+    (ngModelChange)="onToggleColumn(column.id, $event)"
+  >
+    <span q-checkbox-label>{{ column.id }}</span>
+  </label>
+}
+```
+
+```ts
+// ...
+export class ExampleComponent {
+  // ...
+
+  onToggleColumn(columnId: string, checked: boolean) {
+    this.table.getColumn(columnId)?.toggleVisibility(checked)
+  }
+}
+```
+
+### Column Visibility Aware Table APIs
+
+When rendering header, body, and footer cells, use the "visible" variants of table APIs to respect column visibility state. APIs like `table.getAllLeafColumns` and `row.getAllCells` do not account for column visibility. Use `table.getVisibleLeafColumns` and `row.getVisibleCells` instead.
+
+```angular-html
+<table q-table-table>
+  <thead q-table-header>
+    <tr q-table-row>
+      @for (column of table.getVisibleLeafColumns(); track column.id) {
+        <!-- takes column visibility into account -->
+        <th q-table-header-cell>{{ column.columnDef.header }}</th>
+      }
+    </tr>
+  </thead>
+  <tbody q-table-body>
+    @for (row of table.getRowModel().rows; track row.id) {
+      <tr q-table-row>
+        @for (cell of row.getVisibleCells(); track cell.id) {
+          <!-- takes column visibility into account -->
+          <td q-table-cell>
+            <ng-container *renderCell="cell; let value">{{ value }}</ng-container>
+          </td>
+        }
+      </tr>
+    }
+  </tbody>
+</table>
+```
+
+Header Group APIs already account for column visibility.

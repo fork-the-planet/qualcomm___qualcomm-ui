@@ -11,7 +11,7 @@ import {
 } from "@qualcomm-ui/angular-core/lucide"
 import {useTrackBindings} from "@qualcomm-ui/angular-core/machine"
 import type {SignalifyInput} from "@qualcomm-ui/angular-core/signals"
-import type {Header} from "@qualcomm-ui/core/table"
+import type {Header, SortDirection} from "@qualcomm-ui/core/table"
 import type {QdsTableColumnSortActionProps} from "@qualcomm-ui/qds-core/table"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
@@ -34,6 +34,19 @@ export class TableColumnSortActionDirective
   implements OnInit, SignalifyInput<QdsTableColumnSortActionProps>
 {
   /**
+   * Whether the column is sorted. Pass in the state from the column:
+   *
+   * @example
+   * ```angular-html
+   * <button
+   *   q-table-column-sort-action
+   *   [isSorted]="column.getIsSorted()">
+   * </button>
+   * ```
+   */
+  readonly isSorted = input<false | SortDirection>(false)
+
+  /**
    * The column header associated with the sort action.
    */
   readonly header = input.required<Header<any>>()
@@ -41,7 +54,7 @@ export class TableColumnSortActionDirective
   protected readonly canSort = computed(() => this.header().column.getCanSort())
 
   protected readonly sortIcon = computed((): LucideIconOrString => {
-    const sortDirection = this.header().column.getIsSorted()
+    const sortDirection = this.isSorted() || this.header().column.getIsSorted()
     return sortDirection ? "ArrowUp" : "ArrowDownUp"
   })
 
@@ -56,6 +69,7 @@ export class TableColumnSortActionDirective
       this.inlineIconButtonApi().getRootBindings(),
       qdsTableApi.getColumnSortActionBindings({
         header: this.header(),
+        isSorted: this.isSorted() || this.header().column.getIsSorted(),
       }),
     ),
   )

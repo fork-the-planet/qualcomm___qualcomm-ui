@@ -1,9 +1,11 @@
 import {Component} from "@angular/core"
 import {Combine, Ungroup} from "lucide-angular"
 
+import {PaginationModule} from "@qualcomm-ui/angular/pagination"
 import {
   type AngularTable,
   createAngularTable,
+  createTablePagination,
   TableModule,
 } from "@qualcomm-ui/angular/table"
 import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
@@ -12,13 +14,12 @@ import {
   getExpandedRowModel,
   getGroupedRowModel,
   getPaginationRowModel,
-  type Row,
 } from "@qualcomm-ui/core/table"
 
 import {createUserQuery, type User, userColumns} from "./data"
 
 @Component({
-  imports: [TableModule],
+  imports: [TableModule, PaginationModule],
   providers: [provideIcons({Combine, Ungroup})],
   selector: "grouping-demo",
   template: `
@@ -57,7 +58,7 @@ import {createUserQuery, type User, userColumns} from "./data"
             }
           </thead>
           <tbody q-table-body>
-            @for (row of table.getRowModel().rows; track trackRow(row)) {
+            @for (row of table.getRowModel().rows; track row.id) {
               <tr q-table-row>
                 @for (cell of row.getVisibleCells(); track cell.id) {
                   <td q-table-cell>
@@ -89,11 +90,25 @@ import {createUserQuery, type User, userColumns} from "./data"
           </tbody>
         </table>
       </div>
+      <div
+        q-table-pagination
+        [count]="pagination.count()"
+        [page]="pagination.page()"
+        [pageSize]="pagination.pageSize()"
+        (pageChanged)="pagination.onPageChange($event)"
+      >
+        <div *paginationContext="let context" q-pagination-page-metadata>
+          @let meta = context.pageMetadata;
+          {{ meta.pageStart }}-{{ meta.pageEnd }} of {{ meta.count }} results
+        </div>
+
+        <div q-pagination-page-buttons></div>
+      </div>
     </div>
   `,
 })
 export class GroupingDemo {
-  protected readonly query = createUserQuery(10000)
+  protected readonly query = createUserQuery(1000)
 
   protected table: AngularTable<User> = createAngularTable(() => ({
     columns: userColumns,
@@ -106,7 +121,5 @@ export class GroupingDemo {
     getPaginationRowModel: getPaginationRowModel(),
   }))
 
-  protected trackRow(row: Row<User>) {
-    return `${row.id}-${row.getIsExpanded()}`
-  }
+  protected pagination = createTablePagination(this.table)
 }

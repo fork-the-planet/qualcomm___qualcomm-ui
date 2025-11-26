@@ -113,6 +113,8 @@ export interface SortingColumn<TData extends RowData> {
   getCanSort: () => boolean
   /**
    * Returns the first direction that should be used when sorting this column.
+   *
+   * Useful for tooltips and aria-labels.
    */
   getFirstSortDir: () => SortDirection
   /**
@@ -120,7 +122,7 @@ export interface SortingColumn<TData extends RowData> {
    */
   getIsSorted: () => false | SortDirection
   /**
-   * Returns the next sorting order.
+   * Returns the next sorting order. Useful for tooltips and aria-labels.
    */
   getNextSortingOrder: () => SortDirection | false
   /**

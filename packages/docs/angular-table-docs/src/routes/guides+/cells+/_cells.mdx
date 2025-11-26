@@ -1,0 +1,66 @@
+---
+title: Cells
+---
+
+# {frontmatter.title}
+
+## API
+
+- [Cell](/api/cell)
+
+## Overview
+
+Access cells through row instance APIs like `row.getAllCells()` or `row.getVisibleCells()`.
+
+```angular-html
+<tbody q-table-body>
+  @for (row of table.getRowModel().rows; track row.id) {
+    <tr q-table-row>
+      <!-- [!code highlight] -->
+      @for (cell of row.getVisibleCells(); track cell.id) {
+        <td q-table-cell>
+          <ng-container *renderCell="cell; let value">
+            {{ value }}
+          </ng-container>
+        </td>
+      }
+    </tr>
+  }
+</tbody>
+```
+
+- Each cell object corresponds to a `td` element. Cell objects provide properties and methods for interacting with table state and accessing cell values.
+- Every cell has a unique `id` property. Each `cell.id` is a combination of its parent row and column IDs, separated by an underscore.
+
+## Cell Rendering
+
+Access data values from a cell using `cell.getValue` or `cell.renderValue` APIs. Both cache the results of accessor functions for efficient rendering.
+
+> **Note:** `cell.getValue()` returns the raw value or `undefined`. `cell.renderValue()` returns the value or the configured `renderFallbackValue` when undefined.
+
+```angular-ts
+import {createColumnHelper} from "@qualcomm-ui/core/table"
+
+const columnHelper = createColumnHelper<Person>()
+
+const columns = [
+  columnHelper.accessor("firstName", {
+    cell: ({cell, row}) => {
+      return cell.getValue()
+    },
+  }),
+]
+// ...
+```
+
+```angular-html
+<tr q-table-row>
+  @for (cell of row.getVisibleCells(); track cell.id) {
+    <td q-table-cell>
+      <ng-container *renderCell="cell; let value">
+        {{ value }}
+      </ng-container>
+    </td>
+  }
+</tr>
+```

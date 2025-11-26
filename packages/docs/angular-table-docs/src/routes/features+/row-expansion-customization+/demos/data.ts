@@ -4,6 +4,11 @@ import {
   injectQuery,
 } from "@tanstack/angular-query-experimental"
 
+import type {ColumnDef} from "@qualcomm-ui/core/table"
+
+import {ExpanderCell} from "./expander-cell"
+import {UsernameCell} from "./username-cell"
+
 export interface User {
   accountStatus: string
   averageSessionDuration: number
@@ -14,23 +19,70 @@ export interface User {
   visitCount: number
 }
 
+export const userColumns: ColumnDef<User>[] = [
+  {
+    cell: () => ExpanderCell,
+    header: () => null,
+    id: "expander",
+    minSize: 52,
+  },
+  {
+    accessorKey: "username",
+    cell: () => UsernameCell,
+    header: "Username",
+  },
+  {
+    accessorKey: "accountStatus",
+    header: "Account Status",
+    id: "accountStatus",
+  },
+  {
+    accessorKey: "role",
+    header: "Role",
+    id: "role",
+    size: 120,
+  },
+  {
+    accessorKey: "averageSessionDuration",
+    header: "Avg Session Duration",
+    id: "averageSessionDuration",
+  },
+  {
+    accessorKey: "companyName",
+    header: "Company Name",
+    id: "companyName",
+    minSize: 200,
+  },
+  {
+    accessorKey: "lastVisitedAt",
+    header: "Last Visited At",
+    id: "lastVisitedAt",
+    minSize: 205,
+  },
+  {
+    accessorKey: "visitCount",
+    header: "Visit Count",
+    id: "visitCount",
+  },
+]
+
 export function createUserQuery(
   ...dimensions: number[]
 ): CreateQueryResult<User[], Error> {
-  // qui-docs::omit-next-line
+  // [!code hide]
   const isInitialLoad = signal(true)
   return injectQuery<User[]>(() => ({
     queryFn: async () => {
       const data = await fetch("/get-mock-user-data", {
         body: JSON.stringify({
           size: dimensions,
-          // qui-docs::omit-next-line
+          // [!code hide]
           timestamp: isInitialLoad() ? 0 : Date.now(),
         }),
         headers: {"Content-Type": "application/json"},
         method: "POST",
       }).then((res) => res.json())
-      // qui-docs::omit-next-line
+      // [!code hide]
       isInitialLoad.set(false)
       return data
     },

@@ -53,7 +53,7 @@ echo "Building application..."
 cross-env SKIP_LARGE_QUERIES=true pnpm build
 
 echo "Starting server for demo extraction..."
-pnpm start > /dev/null 2>&1 &
+cross-env SKIP_LARGE_QUERIES=true pnpm start > /dev/null 2>&1 &
 PNPM_PID=$!
 
 echo "Waiting for server to start..."
