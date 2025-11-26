@@ -161,7 +161,7 @@ export function MdxProvider({children, components}: Props): ReactNode {
           sup: (props: any) => <sup className="mdx" {...props} />,
           table: ({children, ...props}: any) => (
             <div className="mdx table-wrapper">
-              <Table.Root className="mdx" {...props}>
+              <Table.Root className="mdx" size="sm" {...props}>
                 <Table.Table className="mdx">{children}</Table.Table>
               </Table.Root>
             </div>
