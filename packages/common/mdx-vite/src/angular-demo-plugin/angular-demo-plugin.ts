@@ -207,7 +207,7 @@ export function angularDemoPlugin({
       const code = await readFile(file, "utf-8")
       const demoInfo = await parseAngularDemo(file, code)
 
-      if (!demoInfo) {
+      if (!demoInfo || !isAngularDemoEntrypoint(file)) {
         // might be an imported file
         const affectedDemos: AngularDemoInfo[] =
           await scanDemosForFileImport(file)
@@ -808,6 +808,10 @@ export function getAngularDemoInfo(demoId) {
       filePath.includes("/demos/") &&
       (filePath.endsWith(".ts") || filePath.endsWith("html"))
     )
+  }
+
+  function isAngularDemoEntrypoint(filePath: string): boolean {
+    return filePath.endsWith("-demo.ts") || filePath.endsWith("-demo.html")
   }
 
   function isCssAsset(filePath: string) {

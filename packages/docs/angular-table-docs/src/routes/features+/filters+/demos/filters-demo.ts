@@ -4,6 +4,7 @@ import {Search} from "lucide-angular"
 
 import {ButtonModule} from "@qualcomm-ui/angular/button"
 import {PaginationModule} from "@qualcomm-ui/angular/pagination"
+import {PopoverModule} from "@qualcomm-ui/angular/popover"
 import {ProgressRingModule} from "@qualcomm-ui/angular/progress-ring"
 import {
   type AngularTable,
@@ -20,6 +21,7 @@ import {
 } from "@qualcomm-ui/core/table"
 
 import {createUserQuery, type User, userColumns} from "./data"
+import {TableColumnFilter} from "./table-column-filter"
 
 @Component({
   imports: [
@@ -29,6 +31,8 @@ import {createUserQuery, type User, userColumns} from "./data"
     ButtonModule,
     ProgressRingModule,
     PaginationModule,
+    PopoverModule,
+    TableColumnFilter,
   ],
   providers: [provideIcons({Search})],
   selector: "filters-demo",
@@ -66,9 +70,30 @@ import {createUserQuery, type User, userColumns} from "./data"
               <tr q-table-row>
                 @for (header of headerGroup.headers; track header.id) {
                   <th q-table-header-cell>
-                    <ng-container *renderHeader="header; let value">
-                      {{ value }}
-                    </ng-container>
+                    <div
+                      class="inline-flex w-full items-center justify-between gap-2"
+                    >
+                      <ng-container *renderHeader="header; let value">
+                        {{ value }}
+                      </ng-container>
+                      @if (header.column.getCanFilter()) {
+                        <div q-popover>
+                          <div q-popover-anchor>
+                            <button
+                              q-popover-trigger
+                              q-table-column-filter-action
+                              [canFilter]="header.column.getCanFilter()"
+                              [isFiltered]="header.column.getIsFiltered()"
+                            ></button>
+                          </div>
+
+                          <app-table-column-filter
+                            [column]="header.column"
+                            [table]="table()"
+                          />
+                        </div>
+                      }
+                    </div>
                   </th>
                 }
               </tr>

@@ -1,4 +1,10 @@
-import {Component, computed, input} from "@angular/core"
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+  signal,
+} from "@angular/core"
 import {FormsModule} from "@angular/forms"
 
 import {TextInputModule} from "@qualcomm-ui/angular/text-input"
@@ -8,6 +14,7 @@ import type {User} from "./data"
 import {MinMaxNumberFilter} from "./min-max-number-filter"
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MinMaxNumberFilter, TextInputModule, FormsModule],
   selector: "app-table-column-filter",
   template: `
@@ -18,7 +25,7 @@ import {MinMaxNumberFilter} from "./min-max-number-filter"
         class="w-32"
         placeholder="Search..."
         size="sm"
-        [ngModel]="column().getFilterValue()"
+        [ngModel]="filterValue()"
         (ngModelChange)="onChange($event)"
       />
     }
@@ -28,6 +35,8 @@ export class TableColumnFilter {
   readonly column = input.required<Column<User>>()
   readonly table = input.required<TableInstance<User>>()
 
+  readonly filterValue = signal<string>("")
+
   protected readonly isNumberFilter = computed(
     () =>
       typeof this.table()
@@ -36,6 +45,7 @@ export class TableColumnFilter {
   )
 
   protected onChange(value: string) {
+    this.filterValue.set(value)
     this.column().setFilterValue(value)
   }
 }

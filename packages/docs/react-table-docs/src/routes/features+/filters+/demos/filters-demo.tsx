@@ -78,12 +78,10 @@ export function FiltersDemo() {
                       >
                         {header.isPlaceholder ? null : (
                           <div className="inline-flex w-full items-center justify-between gap-2">
-                            <div className="inline-flex min-h-[28px] items-center">
-                              {flexRender(
-                                header.column.columnDef.header,
-                                header.getContext(),
-                              )}
-                            </div>
+                            {flexRender(
+                              header.column.columnDef.header,
+                              header.getContext(),
+                            )}
                             {header.column.getCanFilter() ? (
                               <Popover
                                 trigger={
