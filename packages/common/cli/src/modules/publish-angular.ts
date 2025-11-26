@@ -103,7 +103,9 @@ export async function publishAngular({
       process.exit(1)
     }
   } catch (e) {
-    console.debug(`${chalk.red("✖")} Failed to publish ${pkgJson.name}.`)
+    console.debug(
+      `${chalk.red("✖")} Critical error encountered while publishing. Failed to publish ${pkgJson.name}.`,
+    )
     console.debug(e)
     process.exit(1)
   }
