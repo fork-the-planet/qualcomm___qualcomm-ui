@@ -154,10 +154,18 @@ pre.shiki.has-highlighted {
     width: 100%;
 
     &.error {
-      background: var(--color-background-support-danger-medium);
+      background: color-mix(
+        in oklch,
+        var(--color-background-support-danger) 20%,
+        transparent
+      );
     }
     &.warning {
-      background: var(--color-background-support-warning-medium);
+      background: color-mix(
+        in oklch,
+        var(--color-background-support-warning) 20%,
+        transparent
+      );
     }
 
     * {
