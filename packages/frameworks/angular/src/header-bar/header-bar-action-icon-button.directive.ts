@@ -1,20 +1,15 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {Component, input} from "@angular/core"
+import {Component, computed, input} from "@angular/core"
 
-import {
-  IconButtonDirective,
-  provideQdsIconButtonContext,
-} from "@qualcomm-ui/angular/button"
-import type {
-  QdsButtonDensity,
-  QdsButtonSize,
-  QdsButtonVariant,
-} from "@qualcomm-ui/qds-core/button"
+import {useIconButtonApi} from "@qualcomm-ui/angular/button"
+import {QuiPreloadDirective} from "@qualcomm-ui/angular/transitions"
+import type {LucideIconOrString} from "@qualcomm-ui/angular-core/lucide"
+import {useTrackBindings} from "@qualcomm-ui/angular-core/machine"
 
 @Component({
-  providers: [provideQdsIconButtonContext()],
+  hostDirectives: [QuiPreloadDirective],
   selector: "[q-header-bar-action-icon-button]",
   standalone: false,
   template: `
@@ -24,8 +19,27 @@ import type {
     }
   `,
 })
-export class HeaderBarActionIconButtonDirective extends IconButtonDirective {
-  override readonly density = input<QdsButtonDensity | undefined>("compact")
-  override readonly size = input<QdsButtonSize | undefined>("lg")
-  override readonly variant = input<QdsButtonVariant | undefined>("ghost")
+export class HeaderBarActionIconButtonDirective {
+  /**
+   * {@link https://lucide.dev/icons lucide-angular} icon.
+   */
+  readonly icon = input<LucideIconOrString>()
+
+  protected readonly iconButtonApi = useIconButtonApi({
+    density: "compact",
+    size: "lg",
+    variant: "ghost",
+  })
+
+  protected readonly iconProps = computed(() =>
+    this.iconButtonApi().getIconBindings(),
+  )
+
+  protected readonly trackBindings = useTrackBindings(() =>
+    this.iconButtonApi().getRootBindings(),
+  )
+
+  constructor() {
+    this.trackBindings()
+  }
 }

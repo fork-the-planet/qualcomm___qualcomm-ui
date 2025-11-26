@@ -3,31 +3,26 @@
 
 import {Component, computed, inject, input} from "@angular/core"
 
-import {
-  ButtonDirective,
-  provideQdsButtonContext,
-} from "@qualcomm-ui/angular/button"
+import {useButtonApi} from "@qualcomm-ui/angular/button"
 import {
   END_ICON_CONTEXT_TOKEN,
   type IconTokenContext,
   START_ICON_CONTEXT_TOKEN,
 } from "@qualcomm-ui/angular/icon"
-import type {
-  QdsButtonDensity,
-  QdsButtonSize,
-  QdsButtonVariant,
-} from "@qualcomm-ui/qds-core/button"
+import {QuiPreloadDirective} from "@qualcomm-ui/angular/transitions"
+import type {LucideIconOrString} from "@qualcomm-ui/angular-core/lucide"
+import {useTrackBindings} from "@qualcomm-ui/angular-core/machine"
 
 @Component({
+  hostDirectives: [QuiPreloadDirective],
   providers: [
-    provideQdsButtonContext(),
     {
       provide: START_ICON_CONTEXT_TOKEN,
       useFactory: (): IconTokenContext => {
         const button = inject(HeaderBarActionButtonDirective)
         return {
           getBindings: computed(() =>
-            button.buttonService.context().getStartIconBindings(),
+            button.buttonApi().getStartIconBindings(),
           ),
         }
       },
@@ -37,9 +32,7 @@ import type {
       useFactory: (): IconTokenContext => {
         const button = inject(HeaderBarActionButtonDirective)
         return {
-          getBindings: computed(() =>
-            button.buttonService.context().getEndIconBindings(),
-          ),
+          getBindings: computed(() => button.buttonApi().getEndIconBindings()),
         }
       },
     },
@@ -62,8 +55,40 @@ import type {
     </ng-content>
   `,
 })
-export class HeaderBarActionButtonDirective extends ButtonDirective {
-  override readonly density = input<QdsButtonDensity | undefined>("compact")
-  override readonly size = input<QdsButtonSize | undefined>("lg")
-  override readonly variant = input<QdsButtonVariant | undefined>("ghost")
+export class HeaderBarActionButtonDirective {
+  /**
+   * {@link https://lucide.dev/icons lucide-angular} icon, positioned after the label.
+   *
+   * @remarks
+   * To customize the element, provide it using the directive instead:
+   * ```angular-html
+   * <svg q-end-icon icon="..."></svg>
+   * ```
+   */
+  readonly endIcon = input<LucideIconOrString>()
+
+  /**
+   * {@link https://lucide.dev/icons lucide-angular} icon, positioned before the label.
+   *
+   * @remarks
+   * To customize the element, provide it using the directive instead:
+   * ```angular-html
+   * <svg q-start-icon icon="..."></svg>
+   * ```
+   */
+  readonly startIcon = input<LucideIconOrString>()
+
+  protected readonly buttonApi = useButtonApi({
+    density: "compact",
+    size: "lg",
+    variant: "ghost",
+  })
+
+  protected readonly trackBindings = useTrackBindings(() =>
+    this.buttonApi().getRootBindings(),
+  )
+
+  constructor() {
+    this.trackBindings()
+  }
 }
