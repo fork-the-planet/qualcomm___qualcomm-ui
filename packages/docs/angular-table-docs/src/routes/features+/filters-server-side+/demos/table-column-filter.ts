@@ -60,6 +60,7 @@ function setFilterValue(
     } @else if (collection()) {
       <q-select
         class="w-32"
+        disablePortal
         placeholder="All"
         size="sm"
         [collection]="collection()!"
