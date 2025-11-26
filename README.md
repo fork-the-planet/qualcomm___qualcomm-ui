@@ -5,10 +5,11 @@
 <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/qualcomm/qualcomm-ui/code-quality.yml">
 </a>
 
-<a target="_blank" href="https://react-next.qui.qualcomm.com">
+<a target="_blank" href="https://react-next.qui.qualcomm.com" style="text-decoration: none">
   <img alt="Website" src="https://img.shields.io/website?url=https%3A%2F%2Freact-next.qui.qualcomm.com&up_message=online&label=React%20Docs">
 </a>
-<a target="_blank" href="https://angular-next.qui.qualcomm.com">
+
+<a target="_blank" href="https://angular-next.qui.qualcomm.com" style="text-decoration: none">
   <img alt="Website" src="https://img.shields.io/website?url=https%3A%2F%2Fangular-next.qui.qualcomm.com&up_message=online&label=Angular%20Docs">
 </a>
 
