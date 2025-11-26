@@ -14,7 +14,7 @@
     "build:site": "react-router build",
     "build:typedoc": "qui-typedoc build",
     "watch:typedoc": "qui-typedoc watch",
-    "dev": "run-s check-angular-demo-module compile:watch",
+    "dev": "shx rm -rf .react-router && run-s check-angular-demo-module compile:watch",
     "check-angular-demo-module": "shx test -f dist/browser/main.js || pnpm build:angular --configuration development",
     "compile:watch": "run-p dev:angular dev:demo-chunks dev:app typecheck",
     "dev:angular": "ng build --watch --configuration development",

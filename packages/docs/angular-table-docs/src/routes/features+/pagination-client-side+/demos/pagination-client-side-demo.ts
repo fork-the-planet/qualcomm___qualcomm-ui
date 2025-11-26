@@ -93,7 +93,7 @@ import {createUserQuery, type User, userColumns} from "./data"
     </div>
   `,
 })
-export class PaginationDemo {
+export class PaginationClientSideDemo {
   readonly globalFilter = signal<string>("")
   protected readonly query = createUserQuery(1200)
 

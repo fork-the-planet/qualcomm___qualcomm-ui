@@ -21,7 +21,7 @@ import {fetchData, type FetchResult, type User, userColumns} from "./data"
       <div q-table-action-bar>
         <div class="text-neutral-primary font-body-sm flex items-center gap-1">
           <span>Query:</span>
-          <span>{{ query.fetchStatus() }}</span>
+          <div class="mr-1">{{ query.fetchStatus() }}</div>
           @if (query.isFetching()) {
             <div q-progress-ring size="xs"></div>
           }

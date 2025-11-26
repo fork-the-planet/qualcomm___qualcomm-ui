@@ -23,7 +23,7 @@ import {useDebounce} from "@qualcomm-ui/react-core/effects"
 import {TableColumnFilter} from "./filters"
 import {type User, userColumns, useUserData} from "./use-data"
 
-export function FiltersDemo() {
+export function FiltersClientSideDemo() {
   const {data = [], isFetching, refetch} = useUserData(100000)
 
   const [globalFilter, setGlobalFilter] = useState("")

@@ -26,6 +26,14 @@
             "scripts": [],
             "fileReplacements": [
               {
+                "replace": "src/routes/features+/filters.tsx",
+                "with": "angular-demo-module/stub.ts"
+              },
+              {
+                "replace": "src/routes/features+/pagination.tsx",
+                "with": "angular-demo-module/stub.ts"
+              },
+              {
                 "replace": "src/routes/features+/pagination-controlled.tsx",
                 "with": "angular-demo-module/stub.ts"
               }

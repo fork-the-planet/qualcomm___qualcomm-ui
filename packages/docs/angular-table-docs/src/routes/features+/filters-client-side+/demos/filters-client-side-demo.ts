@@ -131,7 +131,7 @@ import {TableColumnFilter} from "./table-column-filter"
     </div>
   `,
 })
-export class FiltersDemo {
+export class FiltersClientSideDemo {
   protected readonly query = createUserQuery(100000)
   readonly globalFilter = signal<string>("")
 
