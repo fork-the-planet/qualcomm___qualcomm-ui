@@ -1,5 +1,35 @@
 # @qualcomm-ui/mdx-vite
 
+## 2.2.0 (2025/11/25)
+
+### Features
+
+- [angular-demo-plugin]: add common transformers
+- [shiki]: add transformer-notation-hidden transformer
+- [shiki]: add preview display modes, onComplete hook, and dedent support to preview block transformer
+- [shiki]: improve removeCodeAnnotations to handle JSX block markers and cleanup blank lines
+- [angular-demo-plugin]: enhance code extraction to account for shiki annotations
+
+### Code Refactoring
+
+- [rag-knowledge-generator]: replace JSX regex with AST traversal
+- [react-demo-plugin]: extract highlighted code handling into helper and reuse for imported files
+- [angular-demo-plugin]: remove unused page modules
+- [react-demo-plugin]: centralize Shiki options and return structured highlight metadata
+- [mdx-common]: relax SourceCodeData shape and deprecate withoutImports field
+- [react-demo-plugin]: use Shiki transformers for preview extraction instead of manual HTML parsing
+- [shiki]: add completion callback to code attribute transformer
+
+### Bug Fixes
+
+- [rag-knowledge-generator]: use entire path in filename to fix collisions
+- [docs-plugin]: adjust virtual module invalidation to prevent react-router hmr conflicts
+- [angular-demo-plugin]: recovery gracefully on stat failure
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common]
+
 ## 2.1.3 (2025/11/23)
 
 ### Performance Improvements

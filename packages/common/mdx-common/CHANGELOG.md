@@ -1,5 +1,11 @@
 # @qualcomm-ui/mdx-common
 
+## 1.3.0 (2025/11/25)
+
+### Features
+
+- [mdx-common]: relax SourceCodeData shape and deprecate withoutImports field
+
 ## 1.2.0 (2025/11/19)
 
 ### Features

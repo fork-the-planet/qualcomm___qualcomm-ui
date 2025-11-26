@@ -1,5 +1,11 @@
 # @qualcomm-ui/core
 
+## 1.0.8 (2025/11/25)
+
+### Documentation
+
+- [table]: update jsdoc comments
+
 ## 1.0.7 (2025/11/18)
 
 ### Code Refactoring
