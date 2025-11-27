@@ -279,7 +279,9 @@ function SliderWithCustomMarkers() {
 ## Explorer
 
 <ComponentExplorer
+  component={demos.SliderExplorerDemo}
   excludeParts={["hidden-input"]}
+  name="SliderExplorerDemo"
   partDocs={{
     root: {
       propsName: "SliderRootProps",
@@ -326,14 +328,7 @@ function SliderWithCustomMarkers() {
       attributesName: "SliderErrorTextBindings",
     },
   }}
->
-  <Slider
-    className="sm:w-80"
-    defaultValue={[25]}
-    hint="Some contextual help here"
-    label="Choose a value"
-  />
-</ComponentExplorer>
+/>
 
 ## API
 

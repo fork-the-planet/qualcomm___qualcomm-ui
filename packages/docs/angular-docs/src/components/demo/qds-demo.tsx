@@ -28,6 +28,7 @@ export interface QdsDemoProps
   className?: string
   hideDemoBrandSwitcher?: boolean
   name: string
+  withoutUI?: boolean
 }
 
 export function QdsDemo({name, ...props}: QdsDemoProps) {
@@ -74,6 +75,7 @@ interface QdsDemoImplProps extends QdsDemoProps {
   demoInfo: AngularDemoInfo | null
   uniqueId: string
   updating?: boolean
+  withoutUI?: boolean
 }
 
 function QdsDemoImpl({
@@ -83,6 +85,7 @@ function QdsDemoImpl({
   name,
   uniqueId,
   updating,
+  withoutUI,
   wrapperProps,
   ...props
 }: QdsDemoImplProps) {
@@ -128,7 +131,7 @@ function QdsDemoImpl({
   }, [])
 
   useEffect(() => {
-    if (!mountedRef.current) {
+    if (!mountedRef.current || withoutUI) {
       return
     }
     const demo = demoRef.current!
@@ -165,7 +168,7 @@ function QdsDemoImpl({
     return () => {
       observer.disconnect()
     }
-  }, [demoInfo?.dimensions?.height, name])
+  }, [demoInfo?.dimensions?.height, name, withoutUI])
 
   useEffect(() => {
     let mounted = true
@@ -185,8 +188,32 @@ function QdsDemoImpl({
     }
   }, [])
 
+  const demoContent = (
+    <>
+      {demoInfo?.initialHtml &&
+      !demoContentRendered &&
+      !import.meta.env?.DEV ? (
+        <div
+          className="qds-demo-runner__ssr-placeholder"
+          dangerouslySetInnerHTML={{__html: demoInfo.initialHtml}}
+        ></div>
+      ) : null}
+      {/* @ts-expect-error jsx type not accounted for */}
+      <angular-demo
+        ref={codeDemoRef}
+        componentName={demoInfo?.componentClass}
+        data-demo-rendered={booleanDataAttr(demoContentRendered)}
+        filePath={demoInfo?.filePath}
+      />
+    </>
+  )
+
+  if (withoutUI) {
+    return <div ref={demoRef}>{demoContent}</div>
+  }
+
   return (
-    <Fragment>
+    <>
       <QdsAngularDemoRunner
         ref={demoRef}
         className={className}
@@ -211,24 +238,8 @@ function QdsDemoImpl({
         )}
         {...props}
       >
-        <>
-          {demoInfo?.initialHtml &&
-          !demoContentRendered &&
-          !import.meta.env?.DEV ? (
-            <div
-              className="qds-demo-runner__ssr-placeholder"
-              dangerouslySetInnerHTML={{__html: demoInfo.initialHtml}}
-            ></div>
-          ) : null}
-          {/* @ts-expect-error jsx type not accounted for */}
-          <angular-demo
-            ref={codeDemoRef}
-            componentName={demoInfo?.componentClass}
-            data-demo-rendered={booleanDataAttr(demoContentRendered)}
-            filePath={demoInfo?.filePath}
-          />
-        </>
+        {demoContent}
       </QdsAngularDemoRunner>
-    </Fragment>
+    </>
   )
 }

@@ -7,7 +7,7 @@ import {
   TypeDocAngularAttributes,
   TypeDocProps,
 } from "@qualcomm-ui/react-mdx/typedoc"
-import {QdsDemo} from "~components/demo"
+import {ComponentExplorer, QdsDemo} from "~components/demo"
 
 # {frontmatter.title}
 
@@ -275,6 +275,59 @@ import {SliderModule} from "@qualcomm-ui/angular/slider"
 })
 export class SliderWithCustomMarkers {}
 ```
+
+## Explorer
+
+<ComponentExplorer
+  excludeParts={["hidden-input"]}
+  name="SliderExplorerDemo"
+  partDocs={{
+    root: {
+      propsName: "SliderRootDirective",
+      attributesName: "SliderRootBindings",
+    },
+    label: {
+      propsName: "SliderLabelDirective",
+      attributesName: "SliderLabelBindings",
+    },
+    "value-text": {
+      propsName: "SliderValueTextDirective",
+      attributesName: "SliderValueTextBindings",
+    },
+    control: {
+      propsName: "SliderControlDirective",
+      attributesName: "SliderControlBindings",
+    },
+    track: {
+      propsName: "SliderTrackDirective",
+      attributesName: "SliderTrackBindings",
+    },
+    range: {
+      propsName: "SliderRangeDirective",
+      attributesName: "SliderRangeBindings",
+    },
+    thumb: {
+      propsName: "SliderThumbDirective",
+      attributesName: "SliderThumbBindings",
+    },
+    "marker-group": {
+      propsName: "SliderMarkerGroupDirective",
+      attributesName: "SliderMarkerGroupBindings",
+    },
+    marker: {
+      propsName: "SliderMarkerDirective",
+      attributesName: "SliderMarkerBindings",
+    },
+    hint: {
+      propsName: "SliderHintDirective",
+      attributesName: "SliderHintBindings",
+    },
+    "error-text": {
+      propsName: "SliderErrorTextDirective",
+      attributesName: "SliderErrorTextBindings",
+    },
+  }}
+/>
 
 ## API
 

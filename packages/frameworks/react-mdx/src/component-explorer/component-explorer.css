@@ -16,7 +16,6 @@
   justify-content: center;
   min-height: 300px;
   padding: var(--spacing-120);
-  position: relative;
 }
 
 .qui-component-explorer__anatomy {
@@ -63,7 +62,7 @@
     border-color: var(--color-border-neutral-03);
   }
 
-  &[data-active="true"] {
+  &[data-active] {
     background: var(--color-background-brand-primary);
     border-color: var(--color-border-brand-primary);
     color: var(--color-utility-persistent-white);

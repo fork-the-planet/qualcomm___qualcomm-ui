@@ -13,7 +13,6 @@ import {
 } from "react"
 
 import {TypeDocAttributes, TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
-import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 interface HighlightRect {
   height: number
@@ -34,7 +33,8 @@ interface PartDocumentation {
   propsName: string
 }
 
-export interface ComponentExplorerProps extends ComponentPropsWithRef<"div"> {
+export interface ComponentExplorerBaseProps
+  extends ComponentPropsWithRef<"div"> {
   /**
    * The component to explore. Should contain elements with `data-part` attributes.
    */
@@ -52,12 +52,12 @@ export interface ComponentExplorerProps extends ComponentPropsWithRef<"div"> {
   partDocs?: Record<string, PartDocumentation>
 }
 
-export function ComponentExplorer({
+export function ComponentExplorerBase({
   children,
   excludeParts = [],
   partDocs = {},
   ...props
-}: ComponentExplorerProps): ReactElement {
+}: ComponentExplorerBaseProps): ReactElement {
   const previewRef = useRef<HTMLDivElement>(null)
   const [parts, setParts] = useState<string[]>([])
   const [hoveredPart, setHoveredPart] = useState<string | null>(null)
@@ -76,14 +76,18 @@ export function ComponentExplorer({
 
     elements.forEach((element) => {
       const partName = element.getAttribute("data-part")
-      if (partName && !seenParts.has(partName)) {
+      if (
+        partName &&
+        !seenParts.has(partName) &&
+        !excludeParts.includes(partName)
+      ) {
         seenParts.add(partName)
         discoveredParts.push(partName)
       }
     })
 
     setParts(discoveredParts)
-  }, [])
+  }, [excludeParts])
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -93,26 +97,25 @@ export function ComponentExplorer({
     return () => clearTimeout(timer)
   }, [discoverParts, children])
 
-  const handlePartHover = (partName: string | null) => {
-    setHoveredPart(partName)
-  }
+  const handlePartHover = (partName: string | null) => setHoveredPart(partName)
 
-  const handlePartClick = (partName: string) => {
+  const handlePartClick = (partName: string) =>
     setSelectedPart((current) => (current === partName ? null : partName))
-  }
 
   const activePart = selectedPart || hoveredPart
 
   const updateHighlightPosition = useCallback(() => {
     const previewElement = previewRef.current
+
     if (!previewElement || !activePart) {
       setHighlightRects([])
       return
     }
 
-    const elements = previewElement.querySelectorAll<HTMLElement>("[data-part]")
-    const targetElements = Array.from(elements).filter(
-      (element) => element.getAttribute("data-part") === activePart,
+    const targetElements = Array.from(
+      previewElement.querySelectorAll<HTMLElement>(
+        `[data-part="${activePart}"]`,
+      ),
     )
 
     if (targetElements.length === 0) {
@@ -145,15 +148,10 @@ export function ComponentExplorer({
     updateHighlightPosition()
   }, [activePart, updateHighlightPosition])
 
-  const mergedProps = mergeProps(
-    {className: "qui-component-explorer__root"},
-    props,
-  )
-
   const selectedPartDoc = selectedPart ? partDocs[selectedPart] : null
 
   return (
-    <div {...mergedProps}>
+    <div {...props} className="qui-component-explorer__root">
       <div ref={previewRef} className="qui-component-explorer__preview">
         {children}
         {highlightRects.map((rect, index) => (
@@ -179,21 +177,19 @@ export function ComponentExplorer({
           </p>
         </div>
         <div className="qui-component-explorer__parts">
-          {parts
-            .filter((part) => !excludeParts.includes(part))
-            .map((part) => (
-              <button
-                key={part}
-                className="qui-component-explorer__part"
-                data-active={activePart === part ? "true" : undefined}
-                onClick={() => handlePartClick(part)}
-                onMouseEnter={() => handlePartHover(part)}
-                onMouseLeave={() => handlePartHover(null)}
-                type="button"
-              >
-                {part}
-              </button>
-            ))}
+          {parts.map((part) => (
+            <button
+              key={part}
+              className="qui-component-explorer__part"
+              data-active={activePart === part || undefined}
+              onClick={() => handlePartClick(part)}
+              onMouseEnter={() => handlePartHover(part)}
+              onMouseLeave={() => handlePartHover(null)}
+              type="button"
+            >
+              {part}
+            </button>
+          ))}
         </div>
       </div>
       {selectedPartDoc && (

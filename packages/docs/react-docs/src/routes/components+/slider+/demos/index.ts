@@ -1,6 +1,7 @@
 export * from "./slider-composite-demo"
 export * from "./slider-disabled-demo"
 export * from "./slider-display-demo"
+export * from "./slider-explorer-demo"
 export * from "./slider-focus-callback-demo"
 export * from "./slider-hint-demo"
 export * from "./slider-markers-demo"
