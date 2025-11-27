@@ -6,9 +6,12 @@ import {
   createApiContext,
 } from "@qualcomm-ui/angular-core/machine"
 import type {TreeApi} from "@qualcomm-ui/core/tree"
+import type {TreeNode} from "@qualcomm-ui/utils/collection"
 
 @Injectable()
-export class TreeContextService extends BaseApiContextService<TreeApi> {}
+export class TreeContextService<
+  T extends TreeNode,
+> extends BaseApiContextService<TreeApi<T>> {}
 
 export const [
   TREE_CONTEXT,
