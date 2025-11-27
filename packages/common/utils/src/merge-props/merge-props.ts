@@ -41,13 +41,16 @@ type MaybeProps = Props | undefined
 type PropsArray = Array<MaybeProps>
 
 /**
- * Construct the real resulting type so callers keep strong typing.
+ * Helper type that recursively strips `className` from each Props object.
  */
 type MergePropsHelper<T extends PropsArray> = T extends readonly [
   infer First extends Props,
   ...infer Rest extends PropsArray,
 ]
-  ? Omit<First, "className"> & MergePropsHelper<Rest>
+  ? // force TypeScript to distribute over union members
+    First extends any
+    ? Omit<First, "className"> & MergePropsHelper<Rest>
+    : never
   : {}
 
 /**
