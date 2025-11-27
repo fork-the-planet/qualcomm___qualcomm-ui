@@ -59,7 +59,7 @@ export default {
     {
       children: [
         {
-          children: [{id: "core"}],
+          children: [{id: "overview"}, {id: "core"}],
           id: "features",
         },
       ],
@@ -71,24 +71,6 @@ export default {
       expanded: true,
       id: "components",
       title: "Components",
-    },
-    {
-      children: [
-        {
-          id: "react-table",
-          title: "React Table",
-        },
-        {
-          id: "react",
-          title: "React",
-        },
-        {
-          id: "base",
-          title: "Base",
-        },
-      ],
-      id: "changelogs",
-      title: "Changelogs",
     },
   ],
   pageDirectory: "routes",

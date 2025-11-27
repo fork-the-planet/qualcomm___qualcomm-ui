@@ -1,5 +1,19 @@
 # @qualcomm-ui/react
 
+## 1.3.0 (2025/11/25)
+
+### Features
+
+- [input-label]: apply label bindings for standalone labels
+
+### Code Refactoring
+
+- [table]: replace deprecated lucide-react filter icon with identical alternative
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core, @qualcomm-ui/core, @qualcomm-ui/react-core]
+
 ## 1.2.0 (2025/11/24)
 
 ### Features

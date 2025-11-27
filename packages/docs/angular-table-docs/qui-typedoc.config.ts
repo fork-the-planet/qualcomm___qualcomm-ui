@@ -70,8 +70,18 @@ export default {
     const packageName = params.packageName
     return pkgImportResolvers[packageName]?.(params)
   },
-  prettyJson: true,
+  moduleWhitelist: [
+    "@qualcomm-ui/react",
+    "@qualcomm-ui/react-core",
+    "@qualcomm-ui/core",
+    "@qualcomm-ui/dom",
+    "@qualcomm-ui/qds-core",
+    "@qualcomm-ui/utils",
+  ],
+  prettyJson: false,
   typedocOptions: {
+    gitRemote: "origin",
+    gitRevision: "main",
     tsconfig: "tsconfig.typedoc.json",
   },
 } satisfies BuildOptions

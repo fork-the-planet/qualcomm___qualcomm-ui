@@ -114,13 +114,16 @@ export interface QdsTableColumnSortActionProps {
    * The column header associated with the sort action.
    */
   header: Header<any>
+  isSorted?: false | SortDirection
 }
 
 export interface QdsTableColumnFilterProps {
+  canFilter?: boolean | undefined
   /**
    * The column header associated with the filter.
    */
-  header: Header<any>
+  header?: Header<any>
+  isFiltered?: boolean | undefined
 }
 
 type TableClasses = typeof tableClasses
@@ -192,7 +195,7 @@ export interface QdsTableColumnSortActionBindings {
 
 export interface QdsTableColumnFilterActionBindings {
   className: TableClasses["columnFilterAction"]
-  "data-filter-active": BooleanDataAttr
+  "data-is-filtered": BooleanDataAttr
 }
 
 export interface QdsTableRowDragPreviewBindings {

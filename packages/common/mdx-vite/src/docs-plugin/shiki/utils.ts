@@ -2,15 +2,52 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
 export function removeCodeAnnotations(code: string): string {
-  const annotationRegex = /\/\/\s*\[!code\s*(?:\S.*)?\]/
+  const lineAnnotationRegex = /\/\/\s*\[!code\s*(?:\S.*)?\]/
+  const jsxBlockAnnotationRegex = /\{\s*\/\*\s*\[!code(?:\s+\S+)?\]\s*\*\/\s*\}/
+  const htmlAnnotationRegex = /<!--\s*\[!code(?:\s+\S+)?\]\s*-->/
+  const blockAnnotationRegex = /\/\*\s*\[!code(?:\s+\S+)?\]\s*\*\/\s*/ // non-JSX block
+  const inlineIncrementRegex = /(?:\/\/\s*)?\[!code \+\+\]/
+
+  function stripAnnotations(line: string): {
+    processed: string
+    touched: boolean
+  } {
+    let processed = line
+    let touched = false
+
+    const patterns = [
+      inlineIncrementRegex,
+      jsxBlockAnnotationRegex,
+      htmlAnnotationRegex,
+      blockAnnotationRegex,
+    ]
+
+    for (const pattern of patterns) {
+      const next = processed.replace(pattern, "")
+      if (next !== processed) {
+        touched = true
+        processed = next
+      }
+    }
+
+    return {processed, touched}
+  }
 
   return code
     .split("\n")
-    .map((line) => {
-      // keep the line if it's a ++ diff, as this is used to show the line's
-      // addition in code blocks.
-      return line.replace(/(?:\/\/\s*)?\[!code \+\+\]/, "")
+    .map(stripAnnotations)
+    .filter(({processed, touched}) => {
+      if (lineAnnotationRegex.test(processed)) {
+        return false
+      }
+
+      const processedIsBlank = !processed.trim()
+      if (touched && processedIsBlank) {
+        return false
+      }
+
+      return true
     })
-    .filter((line) => !annotationRegex.test(line))
+    .map(({processed}) => processed)
     .join("\n")
 }

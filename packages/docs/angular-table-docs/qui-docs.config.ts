@@ -48,6 +48,9 @@ export default {
         {
           id: "columns",
         },
+        {
+          id: "table-rendering",
+        },
       ],
       expanded: true,
       id: "guides",
@@ -78,24 +81,6 @@ export default {
       expanded: true,
       id: "components",
       title: "Components",
-    },
-    {
-      children: [
-        {
-          id: "react-table",
-          title: "React Table",
-        },
-        {
-          id: "react",
-          title: "React",
-        },
-        {
-          id: "base",
-          title: "Base",
-        },
-      ],
-      id: "changelogs",
-      title: "Changelogs",
     },
   ],
   pageDirectory: "routes",

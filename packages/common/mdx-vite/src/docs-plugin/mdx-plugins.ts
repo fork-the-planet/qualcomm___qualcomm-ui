@@ -27,7 +27,7 @@ import {
 import {ConfigLoader, type ConfigLoaderOptions} from "./internal"
 import {rehypeSectionize, rehypeSlug, type RehypeSlugOptions} from "./rehype"
 import {remarkAlerts, remarkCodeTabs, remarkSpoilers} from "./remark"
-import {transformerCodeAttribute} from "./shiki"
+import {transformerCodeAttribute, transformerNotationHidden} from "./shiki"
 
 /**
  * @deprecated migrate to the {@link getRehypePlugins} function
@@ -45,6 +45,7 @@ export function getShikiTransformers(): ShikiTransformer[] {
     transformerNotationHighlight(),
     transformerNotationWordHighlight(),
     transformerNotationErrorLevel(),
+    transformerNotationHidden(),
     transformerRenderIndentGuides(),
     transformerRemoveNotationEscape(),
   ]

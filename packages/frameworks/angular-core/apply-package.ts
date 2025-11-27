@@ -20,8 +20,10 @@ await writeFile(
   JSON.stringify(
     {
       ...distPkg,
+      author: rootPkg.author,
       description: rootPkg.description,
       peerDependencies: rootPkg.peerDependencies,
+      repository: rootPkg.repository,
       version: rootPkg.version,
     },
     null,

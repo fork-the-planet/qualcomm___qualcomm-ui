@@ -6,8 +6,6 @@ title: Row Expansion
 
 ## Examples & API
 
-Want to skip to the implementation? Check out these examples:
-
 - [Row Expansion](/features/row-expansion)
 - [Row Expansion Customization](/features/row-expansion)
 - [Row Expansion API](/api/features/row-expansion)
@@ -44,7 +42,7 @@ Expanded rows share their parent's column structure. Set getSubRows to define ch
 For example, if you have a data object like this:
 
 ```ts
-export interface Person {
+interface Person {
   id: number
   name: string
   age: number
@@ -143,7 +141,8 @@ function Component() {
 If you need to control the expanded state of the rows in your table, you can do so by using the expanded state and the `onExpandedChange` option. This allows you to manage the expanded state according to your requirements.
 
 ```tsx
-import {useReactTable, type ExpandedState} from "@qualcomm-ui/react/table"
+import {useReactTable} from "@qualcomm-ui/react/table"
+import type {ExpandedState} from "@qualcomm-ui/core/table"
 import {useState} from "react"
 
 const [expanded, setExpanded] = useState<ExpandedState>({})

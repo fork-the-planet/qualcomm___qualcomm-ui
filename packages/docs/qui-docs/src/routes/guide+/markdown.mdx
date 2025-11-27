@@ -249,6 +249,42 @@ console.error("Error") // [!code error]
 console.warn("Warning") // [!code warning]
 ```
 
+#### Hide lines
+
+Use `[!code hide]` to hide a line.
+
+````markdown
+```ts
+console.log("Not hidden")
+console.log("Hidden") // [\!code hide]
+console.log("Not hidden")
+```
+````
+
+```ts
+console.log("Not hidden")
+console.log("Hidden") // [!code hide]
+console.log("Not hidden")
+```
+
+You can also hide multiple lines with a single comment:
+
+````markdown
+```ts
+// [\!code hide:2]
+console.log("Hidden")
+console.log("Hidden")
+console.log("Not hidden")
+```
+````
+
+```ts
+// [!code hide:2]
+console.log("Hidden")
+console.log("Hidden")
+console.log("Not hidden")
+```
+
 ### Links
 
 All relative Markdown links are automatically converted to Remix or React Router links. This means that the target page will be prefetched. When you click on a link, the page will be loaded on the client-side, without making a full page load (SPA routing). For example:

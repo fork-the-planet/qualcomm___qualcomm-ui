@@ -1,0 +1,37 @@
+---
+title: Header Groups
+---
+
+# {frontmatter.title}
+
+## Overview
+
+Header Groups are rows of headers. Most tables have one row of headers (a single header group). However, if you define your column structure with nested columns (see: [Column Groups example](/features/column-groups)), you can have multiple rows of headers (multiple header groups).
+
+## Header Group Objects
+
+Header Group objects resemble Row objects but contain less complexity. See [Rows Guide](/guides/rows) for comparison.
+
+By default, header groups have three properties:
+
+- **id:** The unique identifier for the header group, generated from its depth (index). Useful as a track identifier in Angular templates.
+- **depth:** The zero-indexed depth of the header group, representing its row index among all header rows.
+- **headers:** An array of Header cell objects that belong to this header group (row).
+
+## Header Group Rendering
+
+To render the header cells in a header group, iterate over the `headers` array from the header group object.
+
+```angular-html
+<thead q-table-header>
+  @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
+    <tr q-table-row>
+      @for (header of headerGroup.headers; track header.id) {
+        <th q-table-header-cell [colSpan]="header.colSpan">
+          <!-- -->
+        </th>
+      }
+    </tr>
+  }
+</thead>
+```

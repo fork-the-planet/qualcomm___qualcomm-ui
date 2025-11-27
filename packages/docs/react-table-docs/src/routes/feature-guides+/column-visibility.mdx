@@ -6,8 +6,6 @@ title: Column Visibility Guide
 
 ## Examples & API
 
-Want to skip to the implementation? Check out these examples:
-
 - [Column Visibility](/features/column-visibility)
 - [Column Visibility API](/api/features/visibility)
 
@@ -38,7 +36,8 @@ const table = useReactTable({
 
 Use `initialState` to set default column visibility without managing state externally.
 
-> **Note**: Do not provide `columnVisibility` to both `initialState` and `state`. The `state` option overrides `initialState`.
+> [!warning]
+> Do not provide `columnVisibility` to both `initialState` and `state`. The `state` option overrides `initialState`.
 
 ```tsx
 const table = useReactTable({

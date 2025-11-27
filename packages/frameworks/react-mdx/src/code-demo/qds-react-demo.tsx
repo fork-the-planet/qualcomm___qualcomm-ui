@@ -181,7 +181,7 @@ export function QdsReactDemo({
 
   const runnerProps: UseRunnerProps = useMemo(() => {
     return {
-      code: sourceCode.raw.withoutImports,
+      code: sourceCode.raw.withoutImports ?? "",
       disableCache: true,
       onRendered: (error) => {
         onDemoRendered?.(error)

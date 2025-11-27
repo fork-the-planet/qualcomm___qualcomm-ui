@@ -11,6 +11,7 @@ import {countries} from "./country-list"
   imports: [ComboboxModule, PortalDirective],
   selector: "combobox-composite-demo",
   template: `
+    <!-- preview -->
     <div
       class="w-56"
       placeholder="Select a country"
@@ -34,6 +35,7 @@ import {countries} from "./country-list"
         </div>
       </ng-template>
     </div>
+    <!-- preview -->
   `,
 })
 export class ComboboxCompositeDemo {

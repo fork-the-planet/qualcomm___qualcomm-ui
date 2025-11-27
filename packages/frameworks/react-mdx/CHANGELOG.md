@@ -1,5 +1,22 @@
 # @qualcomm-ui/react-mdx
 
+## 1.5.3 (2025/11/25)
+
+### Bug Fixes
+
+- [react-demo]: guard for missing demo data
+
+## 1.5.2 (2025/11/25)
+
+### Bug Fixes
+
+- [shiki-diff-notation]: reduce opacity of removal diff
+- [qds-demo-runner]: account for adjusted demo interface
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react, @qualcomm-ui/mdx-common, @qualcomm-ui/core, @qualcomm-ui/react-core]
+
 ## 1.5.1 (2025/11/24)
 
 ### Miscellaneous Chores

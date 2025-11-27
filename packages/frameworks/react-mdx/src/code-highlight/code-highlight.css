@@ -128,7 +128,7 @@ pre.shiki .indent::before {
 
 pre.shiki.has-diff {
   .line.diff.remove {
-    opacity: 0.7;
+    opacity: 0.5;
     &::before {
       color: var(--color-icon-support-danger);
       content: "-";

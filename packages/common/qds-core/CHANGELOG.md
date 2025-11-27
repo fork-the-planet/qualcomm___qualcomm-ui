@@ -1,5 +1,20 @@
 # @qualcomm-ui/qds-core
 
+## 1.6.0 (2025/11/25)
+
+### Features
+
+- [table-column-filter-action]: add styles for selected filters
+- [table-column-filter]: loosen type guards, add inputs for filter state
+
+### Bug Fixes
+
+- [popover]: remove default width of 260px. Width is now determined based on content.
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core]
+
 ## 1.5.0 (2025/11/24)
 
 ### Features

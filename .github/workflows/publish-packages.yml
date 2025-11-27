@@ -14,7 +14,7 @@ permissions:
   contents: write
 
 jobs:
-  check-versions:
+  publish:
     runs-on: ubuntu-latest
     concurrency:
       group: PR Check Versions - ${{github.head_ref}}

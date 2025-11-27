@@ -11,7 +11,7 @@ import type {User} from "./data"
 
 @Component({
   imports: [CheckboxModule, FormsModule, TableModule],
-  selector: "app-username-cell",
+  selector: "app-username-cell-1",
   template: `
     <div
       class="inline-flex h-full items-center gap-2"
@@ -25,11 +25,20 @@ import type {User} from "./data"
         [indeterminate]="context().row.getIsSomeSelected()"
         [ngModel]="context().row.getIsSelected()"
         (ngModelChange)="context().row.toggleSelected($event)"
-      ></label>
+      >
+        <input
+          q-checkbox-hidden-input
+          [attr.aria-label]="'Toggle ' + context().column.id + ' expanded'"
+        />
+      </label>
 
       @if (context().row.getCanExpand()) {
         <div class="inline-flex items-center justify-center">
-          <button q-table-row-expand-button [row]="context().row"></button>
+          <button
+            q-table-row-expand-button
+            [isExpanded]="context().row.getIsExpanded()"
+            [row]="context().row"
+          ></button>
         </div>
       }
       <span>{{ context().getValue() }}</span>
