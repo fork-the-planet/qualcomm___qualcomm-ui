@@ -13,6 +13,8 @@ import {TreeLeafNodeDirective} from "./tree-leaf-node.directive"
 import {TreeNodeActionDirective} from "./tree-node-action.directive"
 import {TreeNodeIconDirective} from "./tree-node-icon.directive"
 import {TreeRootDirective} from "./tree-root.directive"
+import {TreeNodeIndicatorDirective} from "./tree-node-indicator.directive"
+import {TreeNodeTextDirective} from "./tree-node-text.directive"
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import {TreeRootDirective} from "./tree-root.directive"
     TreeLeafNodeDirective,
     TreeNodeActionDirective,
     TreeNodeIconDirective,
+    TreeNodeIndicatorDirective,
+    TreeNodeTextDirective,
   ],
   exports: [
     TreeRootDirective,
@@ -38,6 +42,8 @@ import {TreeRootDirective} from "./tree-root.directive"
     TreeLeafNodeDirective,
     TreeNodeActionDirective,
     TreeNodeIconDirective,
+    TreeNodeIndicatorDirective,
+    TreeNodeTextDirective,
   ],
   imports: [IconDirective, QBindDirective],
 })
