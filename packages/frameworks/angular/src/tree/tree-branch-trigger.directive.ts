@@ -1,14 +1,24 @@
-import {computed, Directive} from "@angular/core"
+import {Component, computed, input} from "@angular/core"
+import {ChevronRight} from "lucide-angular"
 
+import {type LucideIconOrString} from "@qualcomm-ui/angular-core/lucide"
 import {CoreTreeBranchTriggerDirective} from "@qualcomm-ui/angular-core/tree"
 
 import {useQdsTreeContext} from "./qds-tree-context.service"
 
-@Directive({
+@Component({
   selector: "[q-tree-branch-trigger]",
   standalone: false,
+  template: `
+    <svg [qIcon]="icon()"></svg>
+  `,
 })
 export class TreeBranchTriggerDirective extends CoreTreeBranchTriggerDirective {
+  /**
+   * @default ChevronRight
+   */
+  readonly icon = input<LucideIconOrString>(ChevronRight)
+
   protected qdsContext = useQdsTreeContext()
 
   constructor() {
