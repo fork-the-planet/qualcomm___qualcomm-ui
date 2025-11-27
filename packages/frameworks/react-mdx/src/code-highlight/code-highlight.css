@@ -168,6 +168,10 @@ pre.shiki.has-highlighted {
       );
     }
 
+    .indent::before {
+      background-color: transparent;
+    }
+
     * {
       background: transparent;
     }
