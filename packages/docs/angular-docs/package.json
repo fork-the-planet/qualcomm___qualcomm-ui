@@ -31,6 +31,7 @@
     "update-knowledge-saga": "run-s generate-knowledge-saga upload-knowledge-saga",
     "update-knowledge-qui": "run-s generate-knowledge-qui upload-knowledge-qui",
     "generate-knowledge": "qui-mdx-vite generate-llms-txt --clean --output-mode per-page --exclude '*index.mdx'",
+    "generate-knowledge-single-file": "qui-mdx-vite generate-llms-txt --clean --output-mode aggregated --exclude '*index.mdx' --env .env.saga-ai -o qui-angular-llms.txt",
     "upload-knowledge": "run-p upload-knowledge-saga upload-knowledge-qui",
     "generate-knowledge-saga": "pnpm generate-knowledge --env .env.saga-ai",
     "upload-knowledge-saga": "qui-mdx-vite upload-knowledge --env .env.saga-ai",
