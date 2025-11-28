@@ -23,6 +23,15 @@ export interface InputLabelBindings {
   id: string
 }
 
+export interface InputCounterBindings {
+  "data-disabled": BooleanDataAttr
+  "data-focus": BooleanDataAttr
+  "data-invalid": BooleanDataAttr
+  "data-max": number | undefined
+  "data-part": "counter"
+  id: string
+}
+
 export interface InputErrorTextBindings {
   "aria-live": "polite"
   "data-part": "error-text"

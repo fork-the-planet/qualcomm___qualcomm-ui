@@ -1,1 +1,9 @@
-export {}
+export * from "./text-area-label.directive"
+export * from "./text-area-counter.directive"
+export * from "./text-area-input.directive"
+export * from "./text-area-hint.directive"
+export * from "./text-area-error-text.directive"
+export * from "./text-area-root.directive"
+export * from "./text-area.component"
+export * from "./qds-text-area-context.service"
+export * from "./text-area.module"

@@ -39,6 +39,9 @@ export type PropNormalizer<Style = JSX.CSSProperties> = {
   ): NormalizedPropsDict & JSX.SelectHTMLAttributes<HTMLSelectElement> & T
   // Style property (assumes the normalizer handles extracting/transforming it)
   style: Style
+  textarea<T extends Dict>(
+    props: T,
+  ): NormalizedPropsDict & JSX.TextareaHTMLAttributes<HTMLTextAreaElement> & T
 }
 
 export function createPropNormalizer(
