@@ -1,5 +1,11 @@
 # @qualcomm-ui/qds-core
 
+## 1.6.1 (2025/11/30)
+
+### Bug Fixes
+
+- icon-button bindings normalization
+
 ## 1.6.0 (2025/11/25)
 
 ### Features

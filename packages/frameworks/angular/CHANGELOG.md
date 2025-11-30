@@ -1,5 +1,20 @@
 # @qualcomm-ui/angular
 
+## 1.7.0 (2025/11/30)
+
+### Features
+
+- angular header-bar
+
+### Bug Fixes
+
+- context token providers in nav-item
+- use buttons QDS props rather than extending them
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
 ## 1.6.0 (2025/11/30)
 
 ### Features

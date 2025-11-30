@@ -1,5 +1,11 @@
 # @qualcomm-ui/react
 
+## 1.3.1 (2025/11/30)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
 ## 1.3.0 (2025/11/25)
 
 ### Features
