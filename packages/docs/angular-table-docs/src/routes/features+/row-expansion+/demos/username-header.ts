@@ -10,7 +10,7 @@ import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 @Component({
   imports: [TableModule],
   providers: [provideIcons({ChevronDown, ChevronRight})],
-  selector: "app-username-header",
+  selector: "app-username-header-1",
   template: `
     <div class="flex items-center gap-2">
       <button

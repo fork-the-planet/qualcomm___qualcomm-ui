@@ -6,12 +6,15 @@ export interface SourceCodeData {
   filePath?: string
   highlighted: {
     full: string
-    preview?: string
+    preview?: string | null | undefined
   }
   raw: {
     full: string
-    preview: string
-    withoutImports: string
+    preview?: string | null | undefined
+    /**
+     * @deprecated no longer populated
+     */
+    withoutImports?: string | null | undefined
   }
 }
 
@@ -50,7 +53,10 @@ export interface AngularDemoInfo {
   initialHtml?: string
   isStandalone: boolean
   lastModified: number
-  pageId: string
+  /**
+   * @deprecated no longer populated
+   */
+  pageId?: string | undefined
   selector: string
   sourceCode: SourceCodeData[]
 }

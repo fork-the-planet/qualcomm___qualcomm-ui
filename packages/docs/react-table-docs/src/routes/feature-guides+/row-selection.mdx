@@ -6,8 +6,6 @@ title: Row Selection Guide
 
 ## Examples & API
 
-Want to skip to the implementation? Check out these examples:
-
 - [Row Selection Example](/features/row-selection)
 - [Row Selection API](/api/features/row-selection)
 
@@ -40,7 +38,8 @@ Even though the table instance will already manage the row selection state for y
 Use the `onRowSelectionChange` table option to hoist up the row selection state to your own scope. Then pass the row selection state back to the table instance using in the `state` table option.
 
 ```tsx
-import {useReactTable, type RowSelectionState} from "@qualcomm-ui/react/table"
+import {useReactTable} from "@qualcomm-ui/react/table"
+import type {RowSelectionState} from "@qualcomm-ui/core/table"
 import {useState} from "react"
 
 const [rowSelection, setRowSelection] = useState<RowSelectionState>({}) // manage your own row selection state

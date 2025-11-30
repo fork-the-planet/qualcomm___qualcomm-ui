@@ -12,10 +12,11 @@ title: Cells
 
 Access cells through row instance APIs like `row.getAllCells()` or `row.getVisibleCells()`.
 
-```tsx highlight="4"
+```tsx
 <Table.Body>
   {table.getRowModel().rows.map((row) => (
     <Table.Row key={row.id}>
+      {/* [!code highlight] */}
       {row.getVisibleCells().map((cell) => (
         <Table.Cell key={cell.id}>
           {flexRender(cell.column.columnDef.cell, cell.getContext())}

@@ -1,0 +1,324 @@
+---
+title: Cell Customization
+---
+
+import {QdsDemo} from "~components/demo"
+
+# {frontmatter.title}
+
+## Rendering Strategies
+
+There are three approaches to rendering table cells:
+
+### String
+
+By default, cells will display their data model value as a string. The string value is used directly as the header or cell content.
+
+```typescript
+const column: ColumnDef<User, string> = {
+  accessorKey: "username",
+  header: "Username",
+}
+```
+
+### Context Getter Function
+
+A function that receives the cell context and returns a string. Use this for simple transformations like formatting numbers or dates.
+
+```typescript
+const column1: ColumnDef<User, string> = {
+  accessorKey: "username",
+  // this approach is effectively equivalent to the string approach.
+  cell: (context: CellContext<User, string>) => context.getValue(),
+}
+
+// example of derived data.
+const column2: ColumnDef<User, number> = {
+  accessorKey: "progress",
+  // We can use this approach to format the cell's data.
+  cell: ({getValue}) => `${Math.round(getValue<number>() * 100) / 100}%`,
+}
+```
+
+The context object provides access to:
+
+| Property     | Description                                                       |
+| ------------ | ----------------------------------------------------------------- |
+| `getValue()` | Returns the cell's value from the accessor                        |
+| `row`        | The row object containing the original data and row-level methods |
+| `column`     | The column definition and column-level methods                    |
+| `cell`       | The cell object itself                                            |
+| `table`      | The table instance for accessing global state                     |
+
+### Angular Component Type
+
+The third approach involves creating and importing a separate component. This is the most flexible approach and promotes cell re-use across your application.
+
+#### Creating a Custom Cell Component
+
+To create a custom cell component:
+
+1. Extend `CellComponentContextDirective<TData, TValue>` where `TData` is your row data type and `TValue` is the column's value type
+2. Access the cell context via the `context()` signal
+
+Here's an example that renders a status column with conditional styling:
+
+<QdsDemo expanded name="CustomCellDemo" />
+
+## Cell Inputs
+
+In some cases you may need to pass data to your cells. Before you reach for custom inputs on your cells, see if some of the following patterns will work instead.
+
+### Table State
+
+Our table has built-in state management for [editable data](/features/editable-data), [filters](/features/filters), [row expansion](/features/row-expansion), [sub-components](/features/row-expansion-customization), [row selection](/features/row-selection), [sorting](/features/sorting), and more. Refer to the features section for examples of these patterns.
+
+### ColumnMeta
+
+In this scenario, the user can view a list of jobs submitted by other users. Each job has a `state` that indicates the action that will be taken.
+
+```ts
+export type JobStatus = "Approve" | "Request Information" | "Deny"
+
+export interface Job {
+  id: string | number
+  status?: JobStatus
+  user: string
+}
+```
+
+First, we define a type for the column's meta:
+
+```ts
+export interface JobStatusColumnMeta {
+  onStatusUpdate: (rowIndex: number, status: JobStatus | undefined) => void
+}
+```
+
+Next, we'll move the column definition to the table component's body so it has access to the table's `data`.
+
+```angular-ts
+// ...
+export class ExampleComponent {
+  protected readonly data = signal<Job[]>([
+    {id: 1, user: "rsmith"},
+    {id: 2, user: "jpete"},
+    {id: 3, user: "emartin"},
+  ])
+
+  columns: ColumnDef<Job>[] = [
+    // ...
+    {
+      accessorKey: "status",
+      cell: () => JobStatusCellComponent,
+      header: "State",
+      meta: {
+        onStatusUpdate: (rowIndex, status) => {
+          this.data.update((prevData: Job[]) => {
+            const data = [...prevData]
+            data[rowIndex].status = status
+            return data
+          })
+        },
+      } satisfies JobStatusColumnMeta,
+      minSize: 250,
+    },
+  ]
+  // ...
+}
+```
+
+Finally, we can update the `JobStatusCellComponent` to use the column's `meta` for updates:
+
+```ts
+// ...
+export class JobStatusCellComponent extends CellComponentContextDirective<
+  Job,
+  JobStatus,
+  JobStatusColumnMeta
+> {
+  protected onChange(state: JobStatus | undefined) {
+    this.context().column.columnDef.meta?.onStatusUpdate(
+      this.context().row.index,
+      state,
+    )
+  }
+}
+// ...
+```
+
+The following example features these changes:
+
+<QdsDemo expanded name="ColumnMetaDemo" />
+
+### Dependency Injection
+
+For more complex scenarios where multiple cells need access to shared state or functionality, use Angular's dependency injection. This pattern is particularly useful when:
+
+- Multiple cells need to read from or write to the same data source
+- You want to keep column definitions separate from the table component
+- You need to share business logic across cells
+
+First, create a service that manages the table data:
+
+```ts
+import {Injectable, signal} from "@angular/core"
+
+@Injectable()
+export class UserDataService {
+  readonly data = signal<User[]>([
+    {accountStatus: "active", username: "john_pond1" /* ... */},
+    {accountStatus: "suspended", username: "anne.m15" /* ... */},
+  ])
+
+  updateStatus(rowIndex: number, status: string) {
+    this.data.update((users) =>
+      users.map((user, index) =>
+        index === rowIndex ? {...user, accountStatus: status} : user,
+      ),
+    )
+  }
+}
+```
+
+Next, create a cell component that injects the service:
+
+```angular-ts
+@Component({
+  imports: [SelectModule, FormsModule],
+  selector: "app-editable-status-cell",
+  template: `
+    <q-select
+      size="sm"
+      [collection]="collection"
+      [ngModel]="value()"
+      (ngModelChange)="updateStatus($event)"
+    />
+  `,
+})
+export class EditableStatusCell extends CellComponentContextDirective<User, string> {
+  private readonly userDataService = inject(UserDataService)
+
+  readonly value = computed(() => [this.context().getValue()])
+
+  readonly collection = selectCollection({
+    items: ["active", "suspended", "pending"],
+  })
+
+  updateStatus(value: string[]) {
+    this.userDataService.updateStatus(this.context().row.index, value[0])
+  }
+}
+```
+
+Finally, provide the service and connect the table to the service's data:
+
+```angular-ts
+@Component({
+  imports: [TableModule],
+  providers: [UserDataService],
+  selector: "service-cell-demo",
+  template: `<!-- table template -->`,
+})
+export class ServiceCellDemo {
+  protected readonly data = inject(UserDataService).data
+
+  protected readonly table: AngularTable<User> = createAngularTable(() => ({
+    columns,
+    data: this.data(),
+    getCoreRowModel: getCoreRowModel(),
+  }))
+}
+```
+
+When the cell updates the service, the signal change propagates to the table, which re-renders with the new data. Full example:
+
+<QdsDemo expanded name="ServiceCellDemo" />
+
+### Last Resort: Customize the Cell in the Template
+
+If none of these approaches work for you, then you can always fall back to template customization. This approach should be avoided if possible. Refer to the [Pitfall](./#pitfall-template-customization) section below to learn why.
+
+```angular-html
+<div q-table-root>
+  <div q-table-scroll-container>
+    <table q-table-table showColumnDivider>
+      <tbody q-table-body>
+        @for (row of table.getRowModel().rows; track row.id) {
+          <tr q-table-row>
+            @for (cell of row.getVisibleCells(); track cell.id) {
+              <td q-table-cell>
+                @if (cell.column.id === "my-custom-cell") {
+                  <my-custom-cell [cell]="cell" />
+                } @else {
+                  <ng-container *renderCell="cell; let value">
+                    {{ value }}
+                  </ng-container>
+                }
+              </td>
+            }
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+```
+
+## Pitfall: Template Customization
+
+In a typical table, you might be accustomed to doing something like the following:
+
+```angular-html
+<!-- Prime NG table -->
+<p-table [value]="products" [tableStyle]="{'min-width': '50rem'}">
+  <ng-template pTemplate="header">
+    <tr>
+      <!-- Custom headers, omitted for brevity -->
+    </tr>
+  </ng-template>
+  <ng-template
+    pTemplate="body"
+    let-data
+    let-columns="columns"
+    let-rowIndex="rowIndex"
+  >
+    <tr>
+      <td *ngFor="let column of columns">
+        <!-- If empty placeholder is configured and there is no value,
+            show empty text instead of any body template. -->
+        <span *ngIf="column.emptyPlaceholder" class="empty-text">-</span>
+
+        <!--  switch statement for column type. Each column renders its own template. -->
+        <div *ngIf="!column.emptyPlaceholder" [ngSwitch]="column.type">
+          <ng-template ngSwitchCase="deviceList">
+            <!-- Custom template for this cell -->
+          </ng-template>
+          <ng-template ngSwitchCase="tenantLink">
+            <!-- Custom template for this cell -->
+          </ng-template>
+          <ng-template ngSwitchCase="state">
+            <div class="flex flex-1 gap-[5px]">
+              <!-- Custom template for this cell -->
+            </div>
+          </ng-template>
+          <ng-template ngSwitchCase="buildState">
+            <!-- Custom template for this cell -->
+          </ng-template>
+          <ng-template ngSwitchCase="numberLink">
+            <!-- Custom template for this cell -->
+          </ng-template>
+          <ng-template ngSwitchCase="testArtifact">
+            <!-- Custom template for this cell -->
+          </ng-template>
+          <!-- Continues for 10+ more switch cases -->
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+```
+
+While this approach may work for simple tables with limited column types, it becomes challenging to reuse this template customization as the number of column types increases. Say you need to introduce a new column type. You'd define that column type and add the code to this template. As more column types are added, this approach becomes harder to manage. The more you add, the more cluttered this base table becomes.
+
+You can solve this problem by moving the configuration from the template to column definitions. This makes it much easier to reuse each column. That said, the QUI Table may not be an ideal fit for every use case. If your tables are simple, or you don't need advanced features like sorting, pagination, or filtering, then you may be better off with a template-heavy implementation like this.

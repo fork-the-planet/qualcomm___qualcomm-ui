@@ -12,7 +12,6 @@
   padding: var(--spacing-110);
   position: relative;
   transform-origin: var(--transform-origin);
-  width: 260px;
   z-index: calc(var(--z-index-popover) + var(--layer-index));
 }
 

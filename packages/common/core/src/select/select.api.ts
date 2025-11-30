@@ -43,6 +43,7 @@ import type {
   SelectItemTextBindings,
   SelectRootBindings,
   SelectSchema,
+  SelectValueTextBindings,
 } from "./select.types"
 
 export function createSelectApi(
@@ -569,7 +570,7 @@ export function createSelectApi(
       })
     },
 
-    getValueTextBindings() {
+    getValueTextBindings(): SelectValueTextBindings {
       return normalize.element({
         "data-disabled": booleanDataAttr(disabled),
         "data-focus": booleanDataAttr(focused),

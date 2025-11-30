@@ -7,10 +7,10 @@
   flex-shrink: 0;
   height: var(--avatar-size);
   justify-content: center;
+  padding: 0;
   position: relative;
   user-select: none;
   vertical-align: top;
-
   width: var(--avatar-size);
   --avatar-radius: 9999px;
 

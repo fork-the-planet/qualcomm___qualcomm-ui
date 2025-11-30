@@ -7,16 +7,22 @@ import {removeCodeAnnotations} from "./utils"
 
 export interface TransformerCodeAttributeOptions {
   /**
-   * The name of the attribute to add to the pre element.
+   * The name of the attribute to add to the pre element. Supply as `null` to
+   * disable.
    *
    * @default 'data-code'
    */
-  attributeName?: string
+  attributeName?: string | null
 
   /**
    * Custom formatter for the source code.
    */
   formatter?: (code: string) => string
+
+  /**
+   * Callback fired when file processing is complete.
+   */
+  onComplete?: (codeWithoutSnippets: string) => void
 }
 
 /**
@@ -25,15 +31,18 @@ export interface TransformerCodeAttributeOptions {
  * `transformerNotationDiff`.
  */
 export function transformerCodeAttribute(
-  opts: TransformerCodeAttributeOptions = {},
+  opts: TransformerCodeAttributeOptions = {attributeName: "data-code"},
 ): ShikiTransformer {
   return {
     enforce: "post",
     name: "shiki-transformer-code-attribute",
     pre(node) {
       const strippedSource = removeCodeAnnotations(this.source)
-      node.properties[opts.attributeName ?? "data-code"] =
-        opts.formatter?.(strippedSource) ?? strippedSource
+      const formattedSource = opts.formatter?.(strippedSource) ?? strippedSource
+      if (opts.attributeName !== null) {
+        node.properties[opts.attributeName ?? "data-code"] = formattedSource
+      }
+      opts.onComplete?.(formattedSource)
     },
   }
 }

@@ -5,8 +5,9 @@ import type {ReactElement, ReactNode} from "react"
 
 import {Asterisk} from "lucide-react"
 
-import {inputClasses} from "@qualcomm-ui/qds-core/input"
+import {createQdsInputApi, inputClasses} from "@qualcomm-ui/qds-core/input"
 import {Icon} from "@qualcomm-ui/react/icon"
+import {normalizeProps} from "@qualcomm-ui/react-core/machine"
 import {
   type ElementRenderProp,
   PolymorphicElement,
@@ -28,6 +29,8 @@ export interface InputLabelProps extends ElementRenderProp<any> {
   required?: boolean | undefined
 }
 
+const defaultQdsApi = createQdsInputApi({size: "md"}, normalizeProps)
+
 /**
  * An accessible label that is automatically associated with the input field.
  * Renders a `<label>` element by default.
@@ -39,7 +42,10 @@ export function InputLabel({
 }: InputLabelProps): ReactElement {
   const qdsContext = useQdsInputContext(false)
 
-  const mergedProps = mergeProps(qdsContext?.getLabelBindings(), props)
+  const mergedProps = mergeProps(
+    (qdsContext ?? defaultQdsApi).getLabelBindings(),
+    props,
+  )
 
   return (
     <PolymorphicElement as="label" {...mergedProps}>

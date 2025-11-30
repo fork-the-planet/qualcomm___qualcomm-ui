@@ -37,6 +37,8 @@ export async function action({request}: ActionFunctionArgs) {
     }
     faker.seed(seed)
   }
+  // used during first build of production site to avoid baking in large queries on
+  // the initial render.
   if (process.env.SKIP_LARGE_QUERIES === "true" && body.size[0] > 5000) {
     return Response.json([])
   }

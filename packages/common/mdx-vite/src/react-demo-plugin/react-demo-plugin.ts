@@ -9,10 +9,19 @@ import {createHighlighter, type Highlighter} from "shiki"
 import * as ts from "typescript"
 import type {Plugin} from "vite"
 
-import {quiCustomDarkTheme, type ReactDemoData} from "@qualcomm-ui/mdx-common"
+import {
+  quiCustomDarkTheme,
+  type ReactDemoData,
+  type SourceCodeData,
+} from "@qualcomm-ui/mdx-common"
 import {dedent} from "@qualcomm-ui/utils/dedent"
 
 import {getShikiTransformers} from "../docs-plugin"
+import {
+  removeCodeAnnotations,
+  transformerCodeAttribute,
+  transformerPreviewBlock,
+} from "../docs-plugin/shiki"
 
 import {LOG_PREFIX, VIRTUAL_MODULE_IDS} from "./demo-plugin-constants"
 import type {QuiDemoPluginOptions} from "./demo-plugin-types"
@@ -51,6 +60,15 @@ export function reactDemoPlugin({
   transformers = [],
   transformLine,
 }: QuiDemoPluginOptions = {}): Plugin {
+  const defaultShikiOptions = {
+    defaultColor: "light-dark()",
+    lang: "tsx",
+    themes: {
+      dark: theme.dark,
+      light: theme.light,
+    },
+  }
+
   return {
     apply(config, env) {
       return (
@@ -173,69 +191,34 @@ export function reactDemoPlugin({
     }
   }
 
-  function isPreviewLine(trimmedLine: string): boolean {
-    return (
-      trimmedLine === "// preview" ||
-      /^\{\s*\/\*\s*preview\s*\*\/\s*\}$/.test(trimmedLine)
-    )
-  }
-
-  function extractPreviewsAndCleanSource(code: string): {
-    formattedPreview: string
-    sourceWithoutSnippetComments: string
-  } {
-    const lines = code.split("\n")
-    const previewBlocks: string[] = []
-    const cleanedLines: string[] = []
-    let inPreview = false
-    let currentBlock: string[] = []
-
-    for (const line of lines) {
-      const trimmedLine = line.trim()
-
-      if (isPreviewLine(trimmedLine)) {
-        if (inPreview) {
-          previewBlocks.push(currentBlock.join("\n"))
-          currentBlock = []
-          inPreview = false
-        } else {
-          inPreview = true
-        }
-        continue
-      }
-
-      cleanedLines.push(line)
-      if (inPreview) {
-        currentBlock.push(line)
-      }
-    }
-
-    const joined = previewBlocks.join("\n")
-    const split = joined.split("\n")
-    if (!split.at(-1)?.trim()) {
-      split.pop()
-    }
-
-    return {
-      formattedPreview: dedent(split.join("\n")).trim(),
-      sourceWithoutSnippetComments: cleanedLines.join("\n"),
-    }
-  }
-
-  async function highlightCode(code: string): Promise<string> {
+  async function highlightCode(code: string): Promise<{
+    codeWithoutSnippets: string
+    highlightedCode: string
+    highlightedPreview?: string | null
+    previewCodeWithoutSnippets?: string | null
+  }> {
     if (!highlighter) {
-      return code
+      return {codeWithoutSnippets: code, highlightedCode: code}
     }
+    let previewCode: string | null = null
+    let codeWithoutSnippets: string = ""
     try {
-      return highlighter.codeToHtml(code, {
-        defaultColor: "light-dark()",
-        lang: "tsx",
-        themes: {
-          dark: theme.dark,
-          light: theme.light,
-        },
+      const result = highlighter.codeToHtml(code, {
+        ...defaultShikiOptions,
         transformers: [
           ...getShikiTransformers(),
+          transformerPreviewBlock({
+            onComplete: (extractedPreview) => {
+              previewCode = extractedPreview
+                ? removeCodeAnnotations(extractedPreview)
+                : null
+            },
+          }),
+          transformerCodeAttribute({
+            onComplete: (formattedSource) => {
+              codeWithoutSnippets = formattedSource
+            },
+          }),
           {
             enforce: "post",
             name: "shiki-transformer-trim",
@@ -246,12 +229,41 @@ export function reactDemoPlugin({
           ...transformers,
         ],
       })
+
+      let highlightedPreview: string | null = null
+      if (previewCode) {
+        // rehighlight just the preview snippet
+        highlightedPreview = highlighter.codeToHtml(code, {
+          ...defaultShikiOptions,
+          transformers: [
+            ...getShikiTransformers(),
+            transformerPreviewBlock({
+              displayMode: "only-preview",
+            }),
+            {
+              enforce: "post",
+              name: "shiki-transformer-trim",
+              preprocess(code) {
+                return code.trim()
+              },
+            },
+            ...transformers,
+          ],
+        })
+      }
+
+      return {
+        codeWithoutSnippets,
+        highlightedCode: result,
+        highlightedPreview,
+        previewCodeWithoutSnippets: previewCode,
+      }
     } catch (error) {
       console.warn(
         `${chalk.magenta.bold(LOG_PREFIX)} Failed to highlight code:`,
         error,
       )
-      return code
+      return {codeWithoutSnippets: code, highlightedCode: code}
     }
   }
 
@@ -300,75 +312,6 @@ export function reactDemoPlugin({
     ].join("\n\n")
   }
 
-  function extractHighlightedVariants(highlightedHtml: string): {
-    highlightedPreview: string
-    highlightedWithoutPreview: string
-  } {
-    const preMatch = highlightedHtml.match(/^<pre[^>]*><code>/)?.[0] || ""
-    const postMatch = highlightedHtml.match(/<\/code><\/pre>$/)?.[0] || ""
-    const content = highlightedHtml.slice(preMatch.length, -postMatch.length)
-    const lines = content.split("\n")
-    const previewLines: string[] = []
-    const withoutPreviewLines: string[] = []
-    let inPreview = false
-
-    for (const line of lines) {
-      const textContent = line
-        .replace(/<[^>]*>/g, "")
-        .replace(/&#x3C;/g, "<")
-        .replace(/&#x3E;/g, ">")
-        .trim()
-      if (textContent === "// preview" || textContent === "{/* preview */}") {
-        inPreview = !inPreview
-        continue
-      }
-      if (inPreview) {
-        previewLines.push(line)
-      }
-      withoutPreviewLines.push(line)
-    }
-
-    const normalizedPreviewLines = normalizeIndentation(previewLines)
-    const highlightedPreview =
-      normalizedPreviewLines.length > 0
-        ? `${preMatch}${normalizedPreviewLines.join("\n")}${postMatch}`
-        : ""
-    const highlightedWithoutPreview = `${preMatch}${withoutPreviewLines.join("\n")}${postMatch}`
-    return {highlightedPreview, highlightedWithoutPreview}
-  }
-
-  function normalizeIndentation(lines: string[]): string[] {
-    if (lines.length === 0) {
-      return []
-    }
-    const nonEmptyLines = lines.filter(
-      (line) => line.replace(/<[^>]*>/g, "").trim().length > 0,
-    )
-    if (nonEmptyLines.length === 0) {
-      return lines
-    }
-    let minIndent = Infinity
-    for (const line of nonEmptyLines) {
-      const matches = line.match(/<span class="indent">/g)
-      if (matches) {
-        minIndent = Math.min(minIndent, matches.length)
-      } else {
-        minIndent = 0
-        break
-      }
-    }
-    if (minIndent === 0 || minIndent === Infinity) {
-      return lines
-    }
-    return lines.map((line) => {
-      let result = line
-      for (let i = 0; i < minIndent; i++) {
-        result = result.replace(/<span class="indent">(\s*)<\/span>/, "")
-      }
-      return result
-    })
-  }
-
   function transformLines(code: string): string {
     if (!transformLine) {
       return code
@@ -388,39 +331,51 @@ export function reactDemoPlugin({
     return result.join("\n")
   }
 
+  async function extractHighlightedCode(
+    filePath: string,
+    code: string,
+  ): Promise<SourceCodeData | null> {
+    try {
+      const fileName = basename(filePath)
+
+      const {
+        codeWithoutSnippets,
+        highlightedCode: highlightedCode,
+        highlightedPreview,
+        previewCodeWithoutSnippets,
+      } = await highlightCode(code)
+
+      return {
+        fileName,
+        filePath,
+        highlighted: {
+          full: highlightedCode,
+          preview: highlightedPreview,
+        },
+        raw: {
+          full: codeWithoutSnippets,
+          preview: previewCodeWithoutSnippets,
+        },
+      }
+    } catch {
+      return null
+    }
+  }
+
   async function extractFileData(
     filePath: string,
   ): Promise<Omit<ReactDemoData, "pageId"> | null> {
     try {
       const code = await readFile(filePath, "utf-8").then(transformLines)
+      const imports = stripImports(code, filePath)
 
-      const {imports, strippedCode: codeWithoutImports} = stripImports(
-        code,
-        filePath,
-      )
-      const fileName = basename(filePath)
-      const {formattedPreview, sourceWithoutSnippetComments} =
-        extractPreviewsAndCleanSource(code)
+      const sourceCode: SourceCodeData[] = []
 
-      const highlightedFull = await highlightCode(code)
+      const sourceCodeData = await extractHighlightedCode(filePath, code)
 
-      const {highlightedPreview, highlightedWithoutPreview} =
-        extractHighlightedVariants(highlightedFull)
-
-      const sourceCode = [
-        {
-          fileName,
-          highlighted: {
-            full: highlightedWithoutPreview,
-            preview: highlightedPreview,
-          },
-          raw: {
-            full: sourceWithoutSnippetComments,
-            preview: formattedPreview,
-            withoutImports: codeWithoutImports,
-          },
-        },
-      ]
+      if (sourceCodeData) {
+        sourceCode.push(sourceCodeData)
+      }
 
       const fileImports = await extractFileImports(filePath)
       if (fileImports) {
@@ -431,36 +386,23 @@ export function reactDemoPlugin({
               "utf-8",
             ).then(transformLines)
 
-            const {strippedCode: importedCodeWithoutImports} = stripImports(
-              importedCode,
+            const sourceCodeData = await extractHighlightedCode(
               relativeImport.resolvedPath,
+              importedCode,
             )
-            const {
-              sourceWithoutSnippetComments: importedSourceWithoutSnippets,
-            } = extractPreviewsAndCleanSource(importedCode)
-            const importedFileName = basename(relativeImport.resolvedPath)
-            const highlightedImportedSource = await highlightCode(
-              importedSourceWithoutSnippets,
-            )
-            sourceCode.push({
-              fileName: importedFileName,
-              highlighted: {
-                full: highlightedImportedSource,
-                preview: "",
-              },
-              raw: {
-                full: importedSourceWithoutSnippets,
-                preview: "",
-                withoutImports: importedCodeWithoutImports,
-              },
-            })
-          } catch {}
+
+            if (sourceCodeData) {
+              sourceCode.push(sourceCodeData)
+            }
+          } catch {
+            console.debug("Failed to process file", relativeImport.resolvedPath)
+          }
         }
       }
 
       return {
         demoName: createDemoName(filePath),
-        fileName,
+        fileName: sourceCodeData?.fileName || basename(filePath),
         filePath,
         imports,
         sourceCode,
@@ -470,13 +412,7 @@ export function reactDemoPlugin({
     }
   }
 
-  function stripImports(
-    code: string,
-    fileName: string,
-  ): {
-    imports: string[]
-    strippedCode: string
-  } {
+  function stripImports(code: string, fileName: string): string[] {
     try {
       const sourceFile = ts.createSourceFile(
         fileName,
@@ -500,37 +436,15 @@ export function reactDemoPlugin({
 
       visit(sourceFile)
 
-      const imports = importRanges.map((range) => {
+      return importRanges.map((range) => {
         let endPos = range.end
         if (code[endPos] === "\n") {
           endPos++
         }
         return code.slice(range.start, endPos).trim()
       })
-
-      importRanges.sort((a, b) => b.start - a.start)
-
-      let strippedCode = code
-      for (const range of importRanges) {
-        let endPos = range.end
-        if (strippedCode[endPos] === "\n") {
-          endPos++
-        }
-        strippedCode =
-          strippedCode.slice(0, range.start) + strippedCode.slice(endPos)
-      }
-
-      strippedCode = strippedCode.trim()
-
-      return {
-        imports,
-        strippedCode: strippedCode.replace(/^\n+/, ""),
-      }
     } catch (error) {
-      return {
-        imports: [],
-        strippedCode: code,
-      }
+      return []
     }
   }
 

@@ -7,7 +7,7 @@ import {glob} from "glob"
 import {readFileSync} from "node:fs"
 import {resolve} from "node:path"
 import prettyMilliseconds from "pretty-ms"
-import type {ModuleNode, PluginOption, ViteDevServer} from "vite"
+import type {PluginOption, ViteDevServer} from "vite"
 
 import type {PageDocProps, SiteData} from "@qualcomm-ui/mdx-common"
 import type {QuiPropTypes} from "@qualcomm-ui/typedoc-common"
@@ -262,7 +262,6 @@ export function quiDocsPlugin(opts?: QuiDocsPluginOptions): PluginOption {
         }
 
         if (updateFile.endsWith(".mdx")) {
-          const mods: ModuleNode[] = []
           const files = state.buildIndex(true)
 
           const moduleByFile = server.moduleGraph.getModulesByFile(updateFile)
@@ -274,10 +273,9 @@ export function quiDocsPlugin(opts?: QuiDocsPluginOptions): PluginOption {
           const virtualModule =
             server.moduleGraph.getModuleById(VIRTUAL_MODULE_ID)
           if (virtualModule) {
-            // invalidate the plugin module so that the virtual file is refreshed
-            server.moduleGraph.invalidateModule(virtualModule)
-            // can't refresh the module here, otherwise we get react router hmr
-            // conflicts. But we can send the updated site data to the site.
+            // can't reload the module here, otherwise we get react router hmr
+            // errors. But we can send the updated site data to the site so that it
+            // has the latest state.
             server.ws.send({
               data: state.siteData,
               event: "qui-docs-plugin:refresh-site-data",
@@ -288,10 +286,13 @@ export function quiDocsPlugin(opts?: QuiDocsPluginOptions): PluginOption {
             console.debug(
               "Frontmatter changed, reloading plugin to reflect changes in the page configuration",
             )
+            if (virtualModule) {
+              server.moduleGraph.invalidateModule(virtualModule)
+            }
             server.ws.send({type: "full-reload"})
             return []
           }
-          return mods
+          return virtualModule ? [virtualModule] : []
         }
       }
       return []
