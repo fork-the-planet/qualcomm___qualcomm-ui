@@ -1,0 +1,115 @@
+---
+title: Header Bar
+group: Data Display
+---
+
+import {
+  TypeDocAngularAttributes,
+  TypeDocProps,
+} from "@qualcomm-ui/react-mdx/typedoc"
+import {QdsDemo} from "~components/demo"
+
+# {frontmatter.title}
+
+A header bar provides a consistent navigation and branding area at the top of an application. It contains the application logo, title, navigation links, and action controls.
+
+```tsx
+import {HeaderBarModule} from "@qualcomm-ui/angular/header-bar"
+```
+
+## Examples
+
+> [!tip/Responsive Design]
+> These examples use Tailwind [container queries](https://tailwindcss.com/docs/responsive-design#container-queries) for mobile-first responsiveness. Tailwind is installed on our documentation sites only, and is not required to use any of our components.
+
+### Basic Usage
+
+A typical header bar includes a logo, application title, nav items, and an action bar.
+
+<QdsDemo name="HeaderBarShowcaseDemo" />
+
+### Sizes
+
+The header bar has two sizes: `sm` (default) and `lg`. The [size](./#size) input governs padding, element spacing, and height.
+
+<QdsDemo name="HeaderBarSizesDemo" />
+
+### Surfaces
+
+Use the [surface](./#surface) input to set the background color. Available options are `primary` (default) and `secondary`.
+
+<QdsDemo name="HeaderBarSurfacesDemo" />
+
+### Menu Items
+
+Render a menu nav item with the [q-header-bar-menu-item](#header-bar-menu-item) and q-menu-trigger directives. This component must be wrapped in a q-menu.
+
+<QdsDemo name="HeaderBarMenuItemDemo" />
+
+## API
+
+### q-header-bar-root
+
+<TypeDocProps name="HeaderBarRootDirective" />
+
+<TypeDocAngularAttributes name="QdsHeaderBarRootBindings" />
+
+### q-header-bar-action-bar
+
+<TypeDocProps name="HeaderBarActionBarDirective" />
+
+<TypeDocAngularAttributes name="QdsHeaderBarActionBarBindings" />
+
+### q-header-bar-action-button
+
+<TypeDocProps name="HeaderBarActionButtonDirective" />
+
+<TypeDocAngularAttributes name="QdsHeaderBarActionButtonBindings" />
+
+### q-header-bar-action-icon-button
+
+<TypeDocProps name="HeaderBarActionIconButtonDirective" />
+
+<TypeDocAngularAttributes name="QdsHeaderBarActionIconButtonBindings" />
+
+### q-header-bar-app-title
+
+<TypeDocProps name="HeaderBarAppTitleDirective" />
+
+<TypeDocAngularAttributes name="QdsHeaderBarAppTitleBindings" />
+
+### q-header-bar-divider
+
+<TypeDocProps name="HeaderBarDividerDirective" />
+
+<TypeDocAngularAttributes name="QdsHeaderBarDividerBindings" />
+
+### q-header-bar-logo
+
+<TypeDocProps name="HeaderBarLogoDirective" />
+
+<TypeDocAngularAttributes name="QdsHeaderBarLogoBindings" />
+
+### q-header-bar-menu-item
+
+<TypeDocProps name="HeaderBarMenuItemDirective" />
+
+<TypeDocAngularAttributes name="QdsHeaderBarMenuItemBindings" />
+
+### q-header-bar-nav-item
+
+<TypeDocProps name="HeaderBarNavItemDirective" />
+
+<TypeDocAngularAttributes name="QdsHeaderBarNavItemBindings" />
+
+### q-header-bar-nav
+
+<TypeDocProps name="HeaderBarNavDirective" />
+
+<TypeDocAngularAttributes name="QdsHeaderBarNavBindings" />
+
+### q-header-bar-window-controls
+
+<TypeDocProps name="HeaderBarWindowControlsDirective" />
+
+<TypeDocAngularAttributes name="QdsHeaderBarWindowControlsBindings" />
