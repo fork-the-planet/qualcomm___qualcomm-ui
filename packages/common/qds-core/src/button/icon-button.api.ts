@@ -25,13 +25,13 @@ export function createQdsIconButtonApi(
 
   return {
     getIconBindings(): QdsIconButtonIconBindings {
-      return {
+      return normalize.element({
         className: buttonClasses.icon,
         "data-density": density,
         "data-part": "icon",
         "data-scope": "icon-button",
         "data-size": size,
-      }
+      })
     },
     getRootBindings(): QdsIconButtonRootBindings {
       return normalize.button({
