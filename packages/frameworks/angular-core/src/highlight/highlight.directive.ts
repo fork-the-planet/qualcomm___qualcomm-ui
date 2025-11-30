@@ -11,7 +11,13 @@ import {highlightWord} from "@qualcomm-ui/utils/highlight-word"
   standalone: true,
   // prevent prettier formatting from introducing whitespaces in the markup
   // prettier-ignore
-  template: `@for (chunk of chunks(); track $index) {@if (chunk.match) {<mark>{{ chunk.text }}</mark>} @else {{{ chunk.text }}}}`,
+  template: `
+    @for (chunk of chunks(); track $index) {
+      @if (chunk.match) {
+        <mark>{{ chunk.text }}</mark>
+      } @else {{{chunk.text}}}
+    }
+  `,
 })
 export class HighlightDirective {
   /**
