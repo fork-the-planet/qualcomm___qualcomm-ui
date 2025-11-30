@@ -1,0 +1,234 @@
+---
+title: Pagination Guide
+---
+
+# {frontmatter.title}
+
+This library supports both client-side and server-side pagination strategies. Client-side pagination loads all data upfront and handles paging in the browser, while server-side pagination fetches data per page from your backend.
+
+## Examples & API
+
+- [Client-side Pagination Example](/features/pagination)
+- [Backend-driven Pagination Example](/features/pagination-controlled)
+- [Pagination API](/api/features/pagination)
+
+## Guide
+
+### QUI Pagination Utility
+
+QUI provides `createTablePagination` to simplify connecting table pagination state to the `@qualcomm-ui/angular/pagination` component.
+
+```ts
+import {
+  createAngularTable,
+  createTablePagination,
+} from "@qualcomm-ui/angular/table"
+
+// ...
+export class ExampleComponent {
+  table = createAngularTable(() => ({
+    // ...
+  }))
+
+  pagination = createTablePagination(this.table)
+}
+```
+
+```angular-html
+<!-- render pagination UI in your table component -->
+<div q-table-root>
+  <div q-table-scroll-container>
+    <table q-table-table>...</table>
+  </div>
+  <div
+    q-table-pagination
+    [count]="pagination.count()"
+    [page]="pagination.page()"
+    [pageSize]="pagination.pageSize()"
+    (pageChanged)="pagination.onPageChange($event)"
+  >
+    <div *paginationContext="let context" q-pagination-page-metadata>
+      @let meta = context.pageMetadata;
+      {{ meta.pageStart }}-{{ meta.pageEnd }} of {{ meta.count }} results
+    </div>
+    <div q-pagination-page-buttons></div>
+  </div>
+</div>
+```
+
+The utility returns props compatible with QUI's `Pagination` component, handling the conversion between table state (zero-indexed `pageIndex`) and pagination UI (one-indexed page numbers).
+
+### Client-Side Pagination
+
+Client-side pagination loads all data upfront. The table instance handles page logic in the browser.
+
+#### When to Use Client-Side Pagination
+
+Consider client-side pagination when:
+
+- You can afford to load all data upfront
+- Dataset size is acceptable (~10k rows or less)
+- You are not dependent on backend sorting, filtering, or pagination
+
+Performance degrades with large datasets due to memory constraints and initial load time. Consider server-side pagination for datasets larger than 10,000 rows.
+
+#### Setup Client-Side Pagination
+
+Enable client-side pagination by providing the pagination row model:
+
+```ts
+import {createAngularTable} from "@qualcomm-ui/angular/table"
+import {getCoreRowModel, getPaginationRowModel} from "@qualcomm-ui/core/table"
+
+// ...
+export class ExampleComponent {
+  table = createAngularTable(() => ({
+    columns,
+    data: this.data(),
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+  }))
+}
+```
+
+### Server-Side Pagination
+
+Server-side pagination fetches only the data needed for the current page.
+
+#### Setup Manual Pagination
+
+Set `manualPagination: true` to indicate that the `data` you provide is already paginated. The pagination row model is not needed for server-side pagination.
+
+```ts
+// ...
+export class ExampleComponent {
+  table = createAngularTable(() => ({
+    columns,
+    data: this.data(), // already paginated by your backend
+    getCoreRowModel: getCoreRowModel(),
+    manualPagination: true,
+    pageCount: totalPages, // provide total page count
+  }))
+}
+```
+
+#### Page Count
+
+Provide `pageCount` so the table knows the total number of pages. If you don't know the total count, pass `-1` for `pageCount`. This disables accurate "last page" detection, causing `getCanNextPage()` to always return `true`.
+
+```ts
+// ...
+export class ExampleComponent {
+  table = createAngularTable(() => ({
+    columns,
+    data: this.data(),
+    getCoreRowModel: getCoreRowModel(),
+    manualPagination: true,
+    pageCount: this.apiResponse().totalPages,
+  }))
+}
+```
+
+### Pagination State
+
+The `pagination` state contains:
+
+- `pageIndex`: Current page (zero-indexed)
+- `pageSize`: Number of rows per page
+
+#### Controlled State
+
+Manage pagination state in your component to respond to page changes:
+
+```ts
+// ...
+export class ExampleComponent {
+  pagination = signal({
+    pageIndex: 0,
+    pageSize: 10,
+  })
+
+  table = createAngularTable(() => ({
+    columns,
+    data: this.data(),
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    onPaginationChange: (updaterOrValue) => {
+      const newPagination =
+        typeof updaterOrValue === "function"
+          ? updaterOrValue(this.pagination())
+          : updaterOrValue
+      this.pagination.set(newPagination)
+    },
+    pageCount: this.apiResponse().totalPages,
+    state: {pagination: this.pagination()},
+  }))
+}
+```
+
+For server-side pagination, trigger data fetching when pagination state changes using an effect:
+
+```ts
+export class ExampleComponent {
+  constructor() {
+    effect(() => {
+      const pagination = this.pagination()
+      this.fetchData({
+        page: pagination.pageIndex,
+        pageSize: pagination.pageSize,
+      })
+    })
+  }
+}
+```
+
+Or use a library like [@tanstack/angular-query](https://tanstack.com/query/latest/docs/framework/angular/overview) to manage state automatically:
+
+#### Initial State
+
+Use `initialState` to set default values without managing state:
+
+```ts
+// ...
+export class ExampleComponent {
+  table = createAngularTable(() => ({
+    columns,
+    data: this.data(),
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    initialState: {
+      pagination: {
+        pageIndex: 0,
+        pageSize: 25,
+      },
+    },
+  }))
+}
+```
+
+Do not pass `pagination` to both `state` and `initialState`. The `state` option overrides `initialState`
+
+### Pagination Options
+
+#### Auto Reset Page Index
+
+By default, `pageIndex` resets to `0` when data changes, filters update, or other page-altering state changes occur. This behavior is disabled automatically when `manualPagination: true`, but can be controlled with `autoResetPageIndex`:
+
+```ts
+// ...
+export class ExampleComponent {
+  table = createAngularTable(() => ({
+    columns,
+    data: this.data(),
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    autoResetPageIndex: false, // prevent reset on data changes
+  }))
+}
+```
+
+Disabling auto-reset requires handling page index resets manually to avoid empty pages when data changes.
+
+### Pagination APIs
+
+- Refer to the [Pagination API](/api/features/pagination) for more details.

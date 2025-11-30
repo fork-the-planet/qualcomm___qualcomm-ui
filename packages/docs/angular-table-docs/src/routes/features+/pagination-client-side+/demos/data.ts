@@ -1,0 +1,73 @@
+import {signal} from "@angular/core"
+import {
+  type CreateQueryResult,
+  injectQuery,
+} from "@tanstack/angular-query-experimental"
+
+import type {ColumnDef} from "@qualcomm-ui/core/table"
+
+export interface User {
+  accountStatus: string
+  createdAt: string
+  lastVisitedAt: string
+  role: string
+  username: string
+  visitCount: number
+}
+
+export const userColumns: ColumnDef<User>[] = [
+  {
+    accessorKey: "username",
+    header: "Username",
+    id: "username",
+  },
+  {
+    accessorKey: "role",
+    header: "Role",
+    id: "role",
+  },
+  {
+    accessorKey: "accountStatus",
+    header: "Account Status",
+    id: "accountStatus",
+  },
+  {
+    accessorKey: "createdAt",
+    header: "Account Created On",
+    id: "createdAt",
+    minSize: 205,
+  },
+  {
+    accessorKey: "lastVisitedAt",
+    header: "Last Visited At",
+    id: "lastVisitedAt",
+    minSize: 205,
+  },
+  {
+    accessorKey: "visitCount",
+    header: "Visit Count",
+    id: "visitCount",
+  },
+]
+
+export function createUserQuery(
+  ...dimensions: number[]
+): CreateQueryResult<User[], Error> {
+  const isInitialLoad = signal(true) // [!code hide]
+  return injectQuery<User[]>(() => ({
+    queryFn: async () => {
+      const data = await fetch("/get-mock-user-data", {
+        body: JSON.stringify({
+          size: dimensions,
+          timestamp: isInitialLoad() ? 0 : Date.now(), // [!code hide]
+        }),
+        headers: {"Content-Type": "application/json"},
+        method: "POST",
+      }).then((res) => res.json())
+      isInitialLoad.set(false) // [!code hide]
+      return data
+    },
+    queryKey: ["mock-user-data", "pagination", dimensions],
+    refetchOnWindowFocus: false,
+  }))
+}

@@ -39,7 +39,10 @@ const results = await Promise.all(
     const {packageJson} = pkg
     const {name, private: isPrivate, version} = packageJson
 
-    if (isPrivate) {
+    if (
+      isPrivate &&
+      !["@qualcomm-ui/angular", "@qualcomm-ui/angular-core"].includes(name)
+    ) {
       return {name, skipped: true}
     }
 

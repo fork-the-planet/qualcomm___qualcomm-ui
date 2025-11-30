@@ -3,7 +3,7 @@
 
 import type {ReactElement} from "react"
 
-import {Filter} from "lucide-react"
+import {Funnel} from "lucide-react"
 
 import type {QdsTableColumnFilterProps} from "@qualcomm-ui/qds-core/table"
 import {InlineIconButton} from "@qualcomm-ui/react/inline-icon-button"
@@ -19,7 +19,7 @@ export interface TableColumnFilterActionProps
   /**
    * Lucide icon to display inside the button.
    *
-   * @default Filter
+   * @default Funnel
    */
   icon?: LucideIconOrNode
 }
@@ -29,23 +29,25 @@ export interface TableColumnFilterActionProps
  * `<button>` element by default.
  */
 export function TableColumnFilterAction({
+  canFilter: canFilterProp,
   header,
+  isFiltered,
   ...props
 }: TableColumnFilterActionProps): ReactElement | null {
-  const canFilter = header.column.getCanFilter()
+  const canFilter = canFilterProp || header?.column.getCanFilter()
 
   if (!canFilter) {
     return null
   }
 
   const mergedProps = mergeProps(
-    qdsTableApi.getColumnFilterActionBindings({header}),
+    qdsTableApi.getColumnFilterActionBindings({canFilter, header, isFiltered}),
     props,
   )
 
   return (
     <InlineIconButton
-      icon={Filter}
+      icon={Funnel}
       size="sm"
       variant="fixed"
       {...mergedProps}

@@ -57,11 +57,8 @@ Performance degrades with large datasets due to memory constraints and initial l
 Enable client-side pagination by providing the pagination row model:
 
 ```tsx
-import {
-  getCoreRowModel,
-  getPaginationRowModel,
-  useReactTable,
-} from "@tanstack/react-table"
+import {getCoreRowModel, getPaginationRowModel} from "@qualcomm-ui/core/table"
+import {useReactTable} from "@qualcomm-ui/react/table"
 
 const table = useReactTable({
   columns,

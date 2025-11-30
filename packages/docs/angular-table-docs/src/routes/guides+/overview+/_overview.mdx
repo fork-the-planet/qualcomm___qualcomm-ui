@@ -1,0 +1,69 @@
+---
+title: Overview
+---
+
+# {frontmatter.title}
+
+## Introduction
+
+`@qualcomm-ui/angular/table` is a utility for building tables and data grids in Angular applications. It provides functions and directives to manage table state, sorting, filtering, and more, while giving you complete control over the rendering of your table components.
+
+## Separation of Concerns
+
+Our table comprises two modules:
+
+- `@qualcomm-ui/core/table`: Headless utilities that contain the table logic (sorting, filtering, pagination, etc.)
+- `@qualcomm-ui/angular/table`: Prebuilt Table components featuring the QDS theme that integrate with the core module.
+
+Benefits:
+
+- Complete control over table appearance through custom styles or design frameworks.
+- Separate logic and UI updates for independent maintenance.
+
+### Prebuilt Components
+
+`@qualcomm-ui/angular/table` offers simple UI components. These components provide accessible, QDS-consistent table markup.
+
+Breakdown:
+
+```angular-ts
+import {TableModule} from "@qualcomm-ui/angular/table"
+```
+
+- `q-table-root` – `<div>` element.
+- `q-table-scroll-container` – `<div>` element.
+- `q-table-table` – `<table>` element.
+- `q-table-header` – `<thead>` element.
+- `q-table-body` – `<tbody>` element.
+- `q-table-footer` – `<tfoot>` element.
+- `q-table-row` – `<tr>` element.
+- `q-table-header-cell` – `<th>` element.
+- `q-table-cell` – `<td>` element.
+
+```angular-html
+<div q-table-root>
+  <div q-table-scroll-container>
+    <table q-table-table>
+      <thead q-table-header>
+        <tr q-table-row>
+          <th q-table-header-cell>Name</th>
+          <th q-table-header-cell>Email</th>
+        </tr>
+      </thead>
+      <tbody q-table-body>
+        <tr q-table-row>
+          <td q-table-cell>John</td>
+          <td q-table-cell>john@example.com</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+```
+
+## Next Steps
+
+- [Data Guide](/guides/data)
+- [Column Definitions Guide](/guides/column-definitions)
+- [Row Models Guide](/guides/row-models)
+- [Basic Example](/features/basic)

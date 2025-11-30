@@ -23,8 +23,7 @@ export default defineConfig({
     tsconfigPaths(),
     quiDocsPlugin(),
     reactDemoPlugin({
-      demoPattern: "src/routes/debug+/*/demos/*.tsx",
-      routesDir: "src/routes",
+      demoPattern: "./src/routes/debug+/**/demos/*.tsx",
     }),
   ],
   server: {

@@ -86,8 +86,10 @@ import {RightTable} from "./right-table"
                           : row.getVisibleCells();
                         track cell.id
                       ) {
-                        <td *renderCell="cell; let value" q-table-cell>
-                          {{ value }}
+                        <td q-table-cell>
+                          <ng-container *renderCell="cell; let value">
+                            {{ value }}
+                          </ng-container>
                         </td>
                       }
                     </tr>

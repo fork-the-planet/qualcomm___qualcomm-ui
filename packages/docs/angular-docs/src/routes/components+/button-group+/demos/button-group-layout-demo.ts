@@ -14,7 +14,7 @@ import type {QdsButtonGroupLayout} from "@qualcomm-ui/qds-core/button"
       <!-- preview -->
       @for (layout of layouts; track layout) {
         <div
-          class="border-brand-primary-subtle border-1 border-dashed p-1.5"
+          class="border-brand-primary border-1 border-dashed p-1.5"
           q-button-group
           [layout]="layout"
         >

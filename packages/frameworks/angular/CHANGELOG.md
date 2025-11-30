@@ -4,11 +4,16 @@
 
 ### Features
 
-- wire highlightMatchingText in angular combobox
+- [table-column-filter-action]: loosen type guards, add inputs for filter state
+
+### Documentation
+
+- [table-row-expand-button]: adjust jsdoc comment
+- [table-row-expand-button]: add missing jsdoc comment
 
 ### Miscellaneous Chores
 
-- **deps:** update dependencies [@qualcomm-ui/angular-core]
+- **deps:** update dependencies [@qualcomm-ui/qds-core, @qualcomm-ui/core, @qualcomm-ui/angular-core]
 
 ## 1.4.0 (2025/11/24)
 

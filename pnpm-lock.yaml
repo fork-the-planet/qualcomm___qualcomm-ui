@@ -121,7 +121,7 @@ overrides:
 
 patchedDependencies:
   '@react-router/dev@7.9.4':
-    hash: 696f81d67d813257f06fe1873cc010a3ccfef60782fde103f621d711adcdb7b6
+    hash: ca02875b988fa2e643addefa3a216f6cfd960ed91224c26fecdfdb7d5f2c67e0
     path: patches/@react-router__dev@7.9.4.patch
 
 importers:
@@ -622,6 +622,9 @@ importers:
       hast-util-heading-rank:
         specifier: ^3.0.0
         version: 3.0.0
+      hast-util-to-html:
+        specifier: ^9.0.5
+        version: 9.0.5
       hast-util-to-string:
         specifier: ^3.0.0
         version: 3.0.1
@@ -696,7 +699,7 @@ importers:
         specifier: workspace:^1.0.3
         version: link:../esbuild
       '@qualcomm-ui/mdx-common':
-        specifier: workspace:^1.2.0
+        specifier: workspace:^1.3.0
         version: link:../mdx-common
       '@qualcomm-ui/tsconfig':
         specifier: workspace:^1.0.4
@@ -783,7 +786,7 @@ importers:
         specifier: workspace:^1.0.5
         version: link:../cli
       '@qualcomm-ui/core':
-        specifier: workspace:^1.0.7
+        specifier: workspace:^1.0.8
         version: link:../core
       '@qualcomm-ui/css-utils':
         specifier: workspace:^1.0.3
@@ -1481,7 +1484,7 @@ importers:
         version: 7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3)
       '@react-router/remix-routes-option-adapter':
         specifier: 'catalog:'
-        version: 7.9.4(@react-router/dev@7.9.4(patch_hash=696f81d67d813257f06fe1873cc010a3ccfef60782fde103f621d711adcdb7b6)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1))(typescript@5.9.3)
+        version: 7.9.4(@react-router/dev@7.9.4(patch_hash=ca02875b988fa2e643addefa3a216f6cfd960ed91224c26fecdfdb7d5f2c67e0)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1))(typescript@5.9.3)
       '@react-router/serve':
         specifier: 'catalog:'
         version: 7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3)
@@ -1581,7 +1584,7 @@ importers:
         version: link:../../configs/tsconfig
       '@react-router/dev':
         specifier: 'catalog:'
-        version: 7.9.4(patch_hash=696f81d67d813257f06fe1873cc010a3ccfef60782fde103f621d711adcdb7b6)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
+        version: 7.9.4(patch_hash=ca02875b988fa2e643addefa3a216f6cfd960ed91224c26fecdfdb7d5f2c67e0)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
       '@tailwindcss/vite':
         specifier: ^4.1.11
         version: 4.1.17(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))
@@ -1755,7 +1758,7 @@ importers:
         version: 7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3)
       '@react-router/remix-routes-option-adapter':
         specifier: 'catalog:'
-        version: 7.9.4(@react-router/dev@7.9.4(patch_hash=696f81d67d813257f06fe1873cc010a3ccfef60782fde103f621d711adcdb7b6)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.0)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1))(typescript@5.9.3)
+        version: 7.9.4(@react-router/dev@7.9.4(patch_hash=ca02875b988fa2e643addefa3a216f6cfd960ed91224c26fecdfdb7d5f2c67e0)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.0)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1))(typescript@5.9.3)
       '@react-router/serve':
         specifier: 'catalog:'
         version: 7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3)
@@ -1885,7 +1888,7 @@ importers:
         version: link:../../configs/tsconfig
       '@react-router/dev':
         specifier: 'catalog:'
-        version: 7.9.4(patch_hash=696f81d67d813257f06fe1873cc010a3ccfef60782fde103f621d711adcdb7b6)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.0)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
+        version: 7.9.4(patch_hash=ca02875b988fa2e643addefa3a216f6cfd960ed91224c26fecdfdb7d5f2c67e0)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.0)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
       '@shikijs/rehype':
         specifier: ^3.13.0
         version: 3.15.0
@@ -2089,7 +2092,7 @@ importers:
         version: 7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3)
       '@react-router/remix-routes-option-adapter':
         specifier: 'catalog:'
-        version: 7.9.4(@react-router/dev@7.9.4(patch_hash=696f81d67d813257f06fe1873cc010a3ccfef60782fde103f621d711adcdb7b6)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1))(typescript@5.9.3)
+        version: 7.9.4(@react-router/dev@7.9.4(patch_hash=ca02875b988fa2e643addefa3a216f6cfd960ed91224c26fecdfdb7d5f2c67e0)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1))(typescript@5.9.3)
       '@react-router/serve':
         specifier: 'catalog:'
         version: 7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3)
@@ -2219,7 +2222,7 @@ importers:
         version: link:../../configs/tsconfig
       '@react-router/dev':
         specifier: 'catalog:'
-        version: 7.9.4(patch_hash=696f81d67d813257f06fe1873cc010a3ccfef60782fde103f621d711adcdb7b6)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
+        version: 7.9.4(patch_hash=ca02875b988fa2e643addefa3a216f6cfd960ed91224c26fecdfdb7d5f2c67e0)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
       '@shikijs/rehype':
         specifier: ^3.13.0
         version: 3.15.0
@@ -2378,7 +2381,7 @@ importers:
         version: 7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3)
       '@react-router/remix-routes-option-adapter':
         specifier: 'catalog:'
-        version: 7.9.4(@react-router/dev@7.9.4(patch_hash=696f81d67d813257f06fe1873cc010a3ccfef60782fde103f621d711adcdb7b6)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1))(typescript@5.9.3)
+        version: 7.9.4(@react-router/dev@7.9.4(patch_hash=ca02875b988fa2e643addefa3a216f6cfd960ed91224c26fecdfdb7d5f2c67e0)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1))(typescript@5.9.3)
       '@react-router/serve':
         specifier: 'catalog:'
         version: 7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3)
@@ -2454,7 +2457,7 @@ importers:
         version: link:../../configs/tsconfig
       '@react-router/dev':
         specifier: 'catalog:'
-        version: 7.9.4(patch_hash=696f81d67d813257f06fe1873cc010a3ccfef60782fde103f621d711adcdb7b6)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
+        version: 7.9.4(patch_hash=ca02875b988fa2e643addefa3a216f6cfd960ed91224c26fecdfdb7d5f2c67e0)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
       '@tailwindcss/vite':
         specifier: ^4.1.11
         version: 4.1.17(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))
@@ -2595,7 +2598,7 @@ importers:
         version: 7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3)
       '@react-router/remix-routes-option-adapter':
         specifier: 'catalog:'
-        version: 7.9.4(@react-router/dev@7.9.4(patch_hash=696f81d67d813257f06fe1873cc010a3ccfef60782fde103f621d711adcdb7b6)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1))(typescript@5.9.3)
+        version: 7.9.4(@react-router/dev@7.9.4(patch_hash=ca02875b988fa2e643addefa3a216f6cfd960ed91224c26fecdfdb7d5f2c67e0)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1))(typescript@5.9.3)
       '@react-router/serve':
         specifier: 'catalog:'
         version: 7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3)
@@ -2668,7 +2671,7 @@ importers:
         version: link:../../configs/tsconfig
       '@react-router/dev':
         specifier: 'catalog:'
-        version: 7.9.4(patch_hash=696f81d67d813257f06fe1873cc010a3ccfef60782fde103f621d711adcdb7b6)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
+        version: 7.9.4(patch_hash=ca02875b988fa2e643addefa3a216f6cfd960ed91224c26fecdfdb7d5f2c67e0)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
       '@tailwindcss/vite':
         specifier: ^4.1.11
         version: 4.1.17(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))
@@ -2812,7 +2815,7 @@ importers:
         version: 7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3)
       '@react-router/remix-routes-option-adapter':
         specifier: 'catalog:'
-        version: 7.9.4(@react-router/dev@7.9.4(patch_hash=696f81d67d813257f06fe1873cc010a3ccfef60782fde103f621d711adcdb7b6)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1))(typescript@5.9.3)
+        version: 7.9.4(@react-router/dev@7.9.4(patch_hash=ca02875b988fa2e643addefa3a216f6cfd960ed91224c26fecdfdb7d5f2c67e0)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1))(typescript@5.9.3)
       '@react-router/serve':
         specifier: 'catalog:'
         version: 7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3)
@@ -2921,7 +2924,7 @@ importers:
         version: link:../../configs/tsconfig
       '@react-router/dev':
         specifier: 'catalog:'
-        version: 7.9.4(patch_hash=696f81d67d813257f06fe1873cc010a3ccfef60782fde103f621d711adcdb7b6)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
+        version: 7.9.4(patch_hash=ca02875b988fa2e643addefa3a216f6cfd960ed91224c26fecdfdb7d5f2c67e0)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
       '@tailwindcss/vite':
         specifier: ^4.1.11
         version: 4.1.17(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))
@@ -3024,6 +3027,9 @@ importers:
       '@aws-sdk/client-route-53':
         specifier: 3.927.0
         version: 3.927.0
+      '@dnd-kit/core':
+        specifier: ^6.3.1
+        version: 6.3.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@faker-js/faker':
         specifier: ~9.6.0
         version: 9.6.0
@@ -3074,10 +3080,16 @@ importers:
         version: 7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3)
       '@react-router/remix-routes-option-adapter':
         specifier: 'catalog:'
-        version: 7.9.4(@react-router/dev@7.9.4(patch_hash=696f81d67d813257f06fe1873cc010a3ccfef60782fde103f621d711adcdb7b6)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1))(typescript@5.9.3)
+        version: 7.9.4(@react-router/dev@7.9.4(patch_hash=ca02875b988fa2e643addefa3a216f6cfd960ed91224c26fecdfdb7d5f2c67e0)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1))(typescript@5.9.3)
       '@react-router/serve':
         specifier: 'catalog:'
         version: 7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3)
+      '@shikijs/langs':
+        specifier: ^3.13.0
+        version: 3.15.0
+      '@shikijs/themes':
+        specifier: ^3.13.0
+        version: 3.15.0
       '@tanstack/react-query':
         specifier: ^5.59.16
         version: 5.90.9(react@19.2.0)
@@ -3126,6 +3138,12 @@ importers:
       react-router:
         specifier: 'catalog:'
         version: 7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      shiki:
+        specifier: ^3.13.0
+        version: 3.15.0
+      sucrase:
+        specifier: ^3.35.0
+        version: 3.35.0
       zod:
         specifier: ^3.23.8
         version: 3.25.76
@@ -3150,7 +3168,7 @@ importers:
         version: link:../../configs/tsconfig
       '@react-router/dev':
         specifier: 'catalog:'
-        version: 7.9.4(patch_hash=696f81d67d813257f06fe1873cc010a3ccfef60782fde103f621d711adcdb7b6)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
+        version: 7.9.4(patch_hash=ca02875b988fa2e643addefa3a216f6cfd960ed91224c26fecdfdb7d5f2c67e0)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
       '@tailwindcss/vite':
         specifier: ^4.1.11
         version: 4.1.17(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))
@@ -3309,16 +3327,16 @@ importers:
         specifier: 0.21.2
         version: 0.21.2(@rspack/core@1.6.4(@swc/helpers@0.5.17))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(webpack@5.102.1(esbuild@0.25.12))
       '@qualcomm-ui/angular-core':
-        specifier: workspace:^1.1.0
+        specifier: workspace:^1.0.6
         version: link:../angular-core
       '@qualcomm-ui/cli':
         specifier: workspace:^1
         version: link:../../common/cli
       '@qualcomm-ui/core':
-        specifier: workspace:^1.0.7
+        specifier: workspace:^1.0.8
         version: link:../../common/core
       '@qualcomm-ui/qds-core':
-        specifier: workspace:^1.5.0
+        specifier: workspace:^1.6.0
         version: link:../../common/qds-core
       '@qualcomm-ui/tailwind-plugin':
         specifier: workspace:^1.1.0
@@ -3489,7 +3507,7 @@ importers:
         specifier: workspace:^1
         version: link:../../common/cli
       '@qualcomm-ui/core':
-        specifier: workspace:^1.0.7
+        specifier: workspace:^1.0.8
         version: link:../../common/core
       '@qualcomm-ui/dom':
         specifier: workspace:^1.0.5
@@ -3588,16 +3606,16 @@ importers:
         specifier: workspace:^1.0.5
         version: link:../../common/cli
       '@qualcomm-ui/core':
-        specifier: workspace:^1.0.7
+        specifier: workspace:^1.0.8
         version: link:../../common/core
       '@qualcomm-ui/esbuild':
         specifier: workspace:^1.0.3
         version: link:../../common/esbuild
       '@qualcomm-ui/qds-core':
-        specifier: workspace:^1.5.0
+        specifier: workspace:^1.6.0
         version: link:../../common/qds-core
       '@qualcomm-ui/react-core':
-        specifier: workspace:^1.0.7
+        specifier: workspace:^1.0.8
         version: link:../react-core
       '@qualcomm-ui/react-test-utils':
         specifier: workspace:^1.0.0
@@ -3705,7 +3723,7 @@ importers:
         specifier: workspace:^1.0.5
         version: link:../../common/cli
       '@qualcomm-ui/core':
-        specifier: workspace:^1.0.7
+        specifier: workspace:^1.0.8
         version: link:../../common/core
       '@qualcomm-ui/dom':
         specifier: workspace:^1.0.5
@@ -3928,7 +3946,7 @@ importers:
         specifier: workspace:^1.0.5
         version: link:../../common/cli
       '@qualcomm-ui/core':
-        specifier: workspace:^1.0.7
+        specifier: workspace:^1.0.8
         version: link:../../common/core
       '@qualcomm-ui/css-utils':
         specifier: workspace:^1.0.3
@@ -3940,13 +3958,13 @@ importers:
         specifier: workspace:^1.0.3
         version: link:../../common/esbuild
       '@qualcomm-ui/mdx-common':
-        specifier: workspace:^1.2.0
+        specifier: workspace:^1.3.0
         version: link:../../common/mdx-common
       '@qualcomm-ui/react':
-        specifier: workspace:^1.2.0
+        specifier: workspace:^1.3.0
         version: link:../react
       '@qualcomm-ui/react-core':
-        specifier: workspace:^1.0.7
+        specifier: workspace:^1.0.8
         version: link:../react-core
       '@qualcomm-ui/react-test-utils':
         specifier: workspace:^1.0.0
@@ -5446,6 +5464,22 @@ packages:
   '@discoveryjs/json-ext@0.6.3':
     resolution: {integrity: sha512-4B4OijXeVNOPZlYA2oEwWOTkzyltLao+xbotHQeqN++Rv27Y6s818+n2Qkp8q+Fxhn0t/5lA5X1Mxktud8eayQ==}
     engines: {node: '>=14.17.0'}
+
+  '@dnd-kit/accessibility@3.1.1':
+    resolution: {integrity: sha512-2P+YgaXF+gRsIihwwY1gCsQSYnu9Zyj2py8kY5fFvUM1qm2WA2u639R6YNVfU4GWr+ZM5mqEsfHZZLoRONbemw==}
+    peerDependencies:
+      react: '>=16.8.0'
+
+  '@dnd-kit/core@6.3.1':
+    resolution: {integrity: sha512-xkGBRQQab4RLwgXxoqETICr6S5JlogafbhNsidmrkVv2YRs5MLwpjoF2qpiGjQt8S9AoxtIV603s0GIUpY5eYQ==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+
+  '@dnd-kit/utilities@3.2.2':
+    resolution: {integrity: sha512-+MKAJEOfaBe5SmV6t34p80MMKhjvUz0vRrvVJbPT0WElzaOJ/1xs+D+KDv+tD/NE5ujfrChEcshd4fLn0wpiqg==}
+    peerDependencies:
+      react: '>=16.8.0'
 
   '@dual-bundle/import-meta-resolve@4.2.1':
     resolution: {integrity: sha512-id+7YRUgoUX6CgV0DtuhirQWodeeA7Lf4i2x71JS/vtA5pRb/hIGWlw+G6MeXvsM+MXrz0VAydTGElX1rAfgPg==}
@@ -18953,6 +18987,24 @@ snapshots:
 
   '@discoveryjs/json-ext@0.6.3': {}
 
+  '@dnd-kit/accessibility@3.1.1(react@19.2.0)':
+    dependencies:
+      react: 19.2.0
+      tslib: 2.5.3
+
+  '@dnd-kit/core@6.3.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+    dependencies:
+      '@dnd-kit/accessibility': 3.1.1(react@19.2.0)
+      '@dnd-kit/utilities': 3.2.2(react@19.2.0)
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+      tslib: 2.5.3
+
+  '@dnd-kit/utilities@3.2.2(react@19.2.0)':
+    dependencies:
+      react: 19.2.0
+      tslib: 2.5.3
+
   '@dual-bundle/import-meta-resolve@4.2.1': {}
 
   '@emnapi/core@1.7.1':
@@ -21159,7 +21211,7 @@ snapshots:
 
   '@poppinss/exception@1.2.2': {}
 
-  '@react-router/dev@7.9.4(patch_hash=696f81d67d813257f06fe1873cc010a3ccfef60782fde103f621d711adcdb7b6)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.0)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)':
+  '@react-router/dev@7.9.4(patch_hash=ca02875b988fa2e643addefa3a216f6cfd960ed91224c26fecdfdb7d5f2c67e0)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.0)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)':
     dependencies:
       '@babel/core': 7.28.5
       '@babel/generator': 7.28.5
@@ -21209,7 +21261,7 @@ snapshots:
       - tsx
       - yaml
 
-  '@react-router/dev@7.9.4(patch_hash=696f81d67d813257f06fe1873cc010a3ccfef60782fde103f621d711adcdb7b6)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)':
+  '@react-router/dev@7.9.4(patch_hash=ca02875b988fa2e643addefa3a216f6cfd960ed91224c26fecdfdb7d5f2c67e0)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)':
     dependencies:
       '@babel/core': 7.28.5
       '@babel/generator': 7.28.5
@@ -21282,15 +21334,15 @@ snapshots:
     optionalDependencies:
       typescript: 5.9.3
 
-  '@react-router/remix-routes-option-adapter@7.9.4(@react-router/dev@7.9.4(patch_hash=696f81d67d813257f06fe1873cc010a3ccfef60782fde103f621d711adcdb7b6)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.0)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1))(typescript@5.9.3)':
+  '@react-router/remix-routes-option-adapter@7.9.4(@react-router/dev@7.9.4(patch_hash=ca02875b988fa2e643addefa3a216f6cfd960ed91224c26fecdfdb7d5f2c67e0)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.0)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1))(typescript@5.9.3)':
     dependencies:
-      '@react-router/dev': 7.9.4(patch_hash=696f81d67d813257f06fe1873cc010a3ccfef60782fde103f621d711adcdb7b6)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.0)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
+      '@react-router/dev': 7.9.4(patch_hash=ca02875b988fa2e643addefa3a216f6cfd960ed91224c26fecdfdb7d5f2c67e0)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.0)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
     optionalDependencies:
       typescript: 5.9.3
 
-  '@react-router/remix-routes-option-adapter@7.9.4(@react-router/dev@7.9.4(patch_hash=696f81d67d813257f06fe1873cc010a3ccfef60782fde103f621d711adcdb7b6)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1))(typescript@5.9.3)':
+  '@react-router/remix-routes-option-adapter@7.9.4(@react-router/dev@7.9.4(patch_hash=ca02875b988fa2e643addefa3a216f6cfd960ed91224c26fecdfdb7d5f2c67e0)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1))(typescript@5.9.3)':
     dependencies:
-      '@react-router/dev': 7.9.4(patch_hash=696f81d67d813257f06fe1873cc010a3ccfef60782fde103f621d711adcdb7b6)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
+      '@react-router/dev': 7.9.4(patch_hash=ca02875b988fa2e643addefa3a216f6cfd960ed91224c26fecdfdb7d5f2c67e0)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
     optionalDependencies:
       typescript: 5.9.3
 

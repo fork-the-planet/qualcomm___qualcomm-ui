@@ -58,7 +58,7 @@ export default {
   },
   typedocOptions: {
     gitRemote: "origin",
-    gitRevision: "dev",
+    gitRevision: "main",
     tsconfig: "tsconfig.typedoc.json",
   },
 } satisfies BuildOptions

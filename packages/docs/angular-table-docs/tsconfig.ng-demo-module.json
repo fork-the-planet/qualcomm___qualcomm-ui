@@ -23,7 +23,7 @@
       "@qualcomm-ui/core/*": ["../../common/core/dist/*/index.d.ts"]
     }
   },
-  "files": ["angular-demo-module/main.ts"],
+  "files": ["angular-demo-module/main.ts", "angular-demo-module/stub.ts"],
   "include": ["./src/routes/**/demos/**/*.ts"],
   "exclude": ["./src/**/*.mdx"],
   "angularCompilerOptions": {

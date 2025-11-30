@@ -4,6 +4,7 @@
 import {
   type ComponentPropsWithRef,
   type ReactNode,
+  useEffect,
   useMemo,
   useState,
 } from "react"
@@ -112,21 +113,30 @@ export function ReactDemo({
     state?.[name]?.expanded || expandedProp,
   )
 
+  useEffect(() => {
+    if (!demo?.fileName) {
+      console.warn(
+        "ReactDemo: no fileName found for demo",
+        Component?.name || "",
+      )
+    }
+  }, [Component, demo?.fileName])
+
   /**
    * If the activeTab is a relative file, and it's removed from the demo scope
    * (i.e., no longer imported by the demo file), reset the active tab.
    */
   useSafeLayoutEffect(() => {
     if (demo.sourceCode.every((item) => item.fileName !== activeTab)) {
-      setActiveTab(demo.sourceCode[0].fileName)
+      setActiveTab(demo.sourceCode[0]?.fileName)
     }
   }, [demo.sourceCode])
 
   useSafeLayoutEffect(() => {
-    if (demo.fileName && !activeTab) {
-      setActiveTab(demo.fileName)
+    if (demo?.fileName && !activeTab) {
+      setActiveTab(demo?.fileName)
     }
-  }, [activeTab, demo.fileName])
+  }, [activeTab, demo?.fileName])
 
   const toggleCollapsed = () => {
     queueMicrotask(() => {
@@ -137,7 +147,7 @@ export function ReactDemo({
     })
   }
 
-  const fileNames = demo.sourceCode?.map((item) => item.fileName) ?? []
+  const fileNames = demo.sourceCode?.map?.((item) => item.fileName) ?? []
 
   const activeTabSourceCode: SourceCodeData =
     (demo.sourceCode ?? []).find((item) => item.fileName === activeTab) ??
