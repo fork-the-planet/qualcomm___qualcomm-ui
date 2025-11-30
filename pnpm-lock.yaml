@@ -3327,7 +3327,7 @@ importers:
         specifier: 0.21.2
         version: 0.21.2(@rspack/core@1.6.4(@swc/helpers@0.5.17))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(webpack@5.102.1(esbuild@0.25.12))
       '@qualcomm-ui/angular-core':
-        specifier: workspace:^1.0.6
+        specifier: workspace:^1.1.0
         version: link:../angular-core
       '@qualcomm-ui/cli':
         specifier: workspace:^1
