@@ -6,7 +6,6 @@ import type {ComboboxInputValueChangeDetails} from "@qualcomm-ui/core/combobox"
 
 import {countries} from "./country-list"
 
-// TODO: highlightMatchingText prop not yet implemented in Angular
 @Component({
   imports: [ComboboxModule],
   selector: "combobox-highlight-demo",
