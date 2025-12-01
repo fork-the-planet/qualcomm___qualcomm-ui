@@ -25,6 +25,8 @@ import {
 } from "@qualcomm-ui/react-mdx/docs-layout"
 import {SiteSearch} from "@qualcomm-ui/react-mdx/site-search"
 
+import reactPkg from "../../../../../frameworks/react/package.json"
+
 interface Props extends Partial<DocsLayoutSettings> {
   /**
    * React {@link https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children children} prop.
@@ -76,6 +78,7 @@ export function AppDocsLayout({
             <HeaderLogo
               appTitle="QUI React"
               changelogHref="https://github.com/qualcomm/qualcomm-ui/tree/main/packages/frameworks/react/CHANGELOG.md"
+              changelogText={`NextGen v${reactPkg.version}`}
             />
 
             <HeaderBar.Divider />

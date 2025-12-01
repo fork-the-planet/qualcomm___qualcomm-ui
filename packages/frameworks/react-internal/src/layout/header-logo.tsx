@@ -11,14 +11,16 @@ import {MobileSidebar} from "@qualcomm-ui/react-mdx/docs-layout"
 import {GithubChangelogLink} from "./github-changelog-link"
 import {QuiLogo} from "./qui-logo"
 
-export interface HeaderLogoProps extends HeaderBarLogoProps {
+export interface HeaderLogoProps extends Omit<HeaderBarLogoProps, "children"> {
   appTitle: ReactNode
   changelogHref: string
+  changelogText: ReactNode
 }
 
 export function HeaderLogo({
   appTitle,
   changelogHref,
+  changelogText,
   ...props
 }: HeaderLogoProps): ReactElement {
   return (
@@ -33,7 +35,9 @@ export function HeaderLogo({
           <span className="whitespace-nowrap">{appTitle}</span>
         </HeaderBar.AppTitle>
       </ReactRouterLink>
-      <GithubChangelogLink href={changelogHref} />
+      <GithubChangelogLink href={changelogHref}>
+        {changelogText}
+      </GithubChangelogLink>
     </HeaderBar.Logo>
   )
 }
