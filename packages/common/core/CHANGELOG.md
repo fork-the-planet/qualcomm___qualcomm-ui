@@ -4,8 +4,7 @@
 
 ### Bug Fixes
 
-- [input]: uncontrolled components
-- imperative update
+- [input]: use defaultValue instead of value to prevent cursor jump on change
 
 ## 1.0.8 (2025/11/25)
 
