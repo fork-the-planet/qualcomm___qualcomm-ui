@@ -100,7 +100,116 @@ If you only intend to support one theme, apply the theme attribute to your app's
 
 ### Theme switching (dynamic)
 
-Guide coming soon
+Follow this step to configure your application for theme switching. The user's preferred theme will be restored when they return to the site.
+
+> [!note]
+> This approach won't work with SSR due to its reliance on `window.localStorage`. If your app is rendered on the server, you should use a cookie-based approach instead like in our [react-router](/setup/react-router) guide.
+
+```tsx
+// theme-provider.tsx
+import {
+  createContext,
+  useContext,
+  useState,
+  Dispatch,
+  SetStateAction,
+  ReactNode,
+} from "react"
+import {QdsBrand, QdsTheme} from "@qualcomm-ui/qds-core/theme"
+
+export const appThemeKey = "my-qui-app-theme-key"
+export const appBrandKey = "my-qui-app-brand-key"
+
+export interface ThemeContextValue {
+  brand: QdsBrand
+  setBrand: Dispatch<SetStateAction<QdsBrand>>
+  theme: QdsTheme
+  setTheme: Dispatch<SetStateAction<QdsTheme>>
+  toggleTheme(): void
+}
+
+const ThemeContext = createContext<ThemeContextValue | null>(null)
+
+interface ThemeProviderProps {
+  children: ReactNode
+}
+
+export function ThemeProvider({children}: ThemeProviderProps) {
+  const [theme, setTheme] = useState<QdsTheme>(() =>
+    localStorage.getItem(appThemeKey) === QdsTheme.LIGHT
+      ? QdsTheme.LIGHT
+      : QdsTheme.DARK,
+  )
+  const [brand, setBrand] = useState<QdsBrand>(() => {
+    const stored = localStorage.getItem(appBrandKey)
+    const validBrands = Object.values(QdsBrand)
+    return validBrands.includes(stored as QdsBrand)
+      ? (stored as QdsBrand)
+      : QdsBrand.QUALCOMM
+  })
+
+  const htmlElement = document.documentElement
+
+  if (htmlElement.getAttribute("data-theme") !== theme) {
+    htmlElement.setAttribute("data-theme", theme)
+    localStorage.setItem(appThemeKey, theme)
+  }
+
+  if (htmlElement.getAttribute("data-brand") !== brand) {
+    htmlElement.setAttribute("data-brand", brand)
+    localStorage.setItem(appBrandKey, brand)
+  }
+
+  const toggleTheme = () => {
+    setTheme((prev) =>
+      prev === QdsTheme.DARK ? QdsTheme.LIGHT : QdsTheme.DARK,
+    )
+  }
+
+  const context: ThemeContextValue = {
+    brand,
+    setBrand,
+    setTheme,
+    theme,
+    toggleTheme,
+  }
+
+  return (
+    <ThemeContext.Provider value={context}>{children}</ThemeContext.Provider>
+  )
+}
+
+/* Optional: export a helper hook. */
+export function useThemeContext() {
+  const themeContext = useContext(ThemeContext)
+
+  if (!themeContext) {
+    throw new Error(
+      "All calls to useThemeContext() can only be performed from a child of a <ThemeProvider>",
+    )
+  }
+
+  return themeContext
+}
+```
+
+Finally, wrap your root element with the `<ThemeProvider>` to enable theme switching:
+
+```tsx
+import {StrictMode} from "react"
+import {createRoot} from "react-dom/client"
+import {ThemeProvider} from "./theme-provider"
+import "./index.css"
+import App from "./App.tsx"
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
+  </StrictMode>,
+)
+```
 
 ## Next steps
 

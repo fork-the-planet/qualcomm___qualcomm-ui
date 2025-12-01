@@ -23,6 +23,8 @@ import {
 } from "@qualcomm-ui/react-mdx/docs-layout"
 import {SiteSearch} from "@qualcomm-ui/react-mdx/site-search"
 
+import angularPkg from "../../../../../frameworks/angular/package.json"
+
 import {DemoUpdateContextProvider} from "./demo-update-context"
 import {useAngularDemoReloader} from "./use-angular-demo-reloader"
 import {useRouterLinkInterceptor} from "./use-router-link-interceptor"
@@ -61,6 +63,7 @@ export function AppDocsLayout({children, ...props}: Props): ReactNode {
             <HeaderLogo
               appTitle="QUI Angular Table"
               changelogHref="https://github.com/qualcomm/qualcomm-ui/tree/main/packages/frameworks/angular/CHANGELOG.md"
+              changelogText={`NextGen v${angularPkg.version}`}
             />
 
             <HeaderBar.Divider />
