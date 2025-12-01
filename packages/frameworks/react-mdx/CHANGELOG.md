@@ -1,5 +1,11 @@
 # @qualcomm-ui/react-mdx
 
+## 1.5.7 (2025/12/01)
+
+### Bug Fixes
+
+- [docs-layout]: prevent crash when path segment missing
+
 ## 1.5.6 (2025/12/01)
 
 ### Bug Fixes
