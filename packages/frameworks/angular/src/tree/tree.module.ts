@@ -10,11 +10,12 @@ import {TreeBranchTriggerDirective} from "./tree-branch-trigger.directive"
 import {TreeBranchDirective} from "./tree-branch.directive"
 import {TreeLabelDirective} from "./tree-label.directive"
 import {TreeLeafNodeDirective} from "./tree-leaf-node.directive"
+import {TreeLeafDirective} from "./tree-leaf.directive"
 import {TreeNodeActionDirective} from "./tree-node-action.directive"
 import {TreeNodeIconDirective} from "./tree-node-icon.directive"
-import {TreeRootDirective} from "./tree-root.directive"
 import {TreeNodeIndicatorDirective} from "./tree-node-indicator.directive"
 import {TreeNodeTextDirective} from "./tree-node-text.directive"
+import {TreeRootDirective} from "./tree-root.directive"
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {TreeNodeTextDirective} from "./tree-node-text.directive"
     TreeNodeIconDirective,
     TreeNodeIndicatorDirective,
     TreeNodeTextDirective,
+    TreeLeafDirective,
   ],
   exports: [
     TreeRootDirective,
@@ -44,6 +46,7 @@ import {TreeNodeTextDirective} from "./tree-node-text.directive"
     TreeNodeIconDirective,
     TreeNodeIndicatorDirective,
     TreeNodeTextDirective,
+    TreeLeafDirective,
   ],
   imports: [IconDirective, QBindDirective],
 })

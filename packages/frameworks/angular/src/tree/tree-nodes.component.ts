@@ -1,4 +1,11 @@
-import {Component, computed, inject, input, type OnInit} from "@angular/core"
+import {
+  Component,
+  computed,
+  contentChild,
+  inject,
+  input,
+  type OnInit,
+} from "@angular/core"
 
 import type {SignalifyInput} from "@qualcomm-ui/angular-core/signals"
 import {
@@ -8,6 +15,8 @@ import {
 } from "@qualcomm-ui/angular-core/tree"
 import type {NodeProps} from "@qualcomm-ui/core/tree"
 import type {TreeNode} from "@qualcomm-ui/utils/collection"
+
+import {TreeLeafDirective} from "./tree-leaf.directive"
 
 @Component({
   providers: [provideTreeNodePropsContext()],
@@ -35,6 +44,8 @@ export class TreeNodesComponent<T extends TreeNode>
    * @inheritDoc
    */
   readonly node = input.required<T>()
+
+  readonly treeLeafTemplate = contentChild(TreeLeafDirective)
 
   protected treeContext = useTreeContext()
 

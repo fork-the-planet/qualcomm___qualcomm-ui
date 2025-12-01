@@ -5,7 +5,9 @@ import {
   BaseApiContextService,
   createApiContext,
 } from "@qualcomm-ui/angular-core/machine"
+import type {NodeProps} from "@qualcomm-ui/core/tree"
 import type {QdsTreeApi} from "@qualcomm-ui/qds-core/tree"
+import type {TreeNode} from "@qualcomm-ui/utils/collection"
 
 @Injectable()
 export class QdsTreeContextService extends BaseApiContextService<QdsTreeApi> {}
@@ -18,3 +20,6 @@ export const [
   "QdsTreeContext",
   QdsTreeContextService,
 )
+
+export interface TreeLeafTemplateContext<T extends TreeNode>
+  extends NodeProps<T> {}
