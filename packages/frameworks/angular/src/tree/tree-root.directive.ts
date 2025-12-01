@@ -45,7 +45,7 @@ export class TreeRootDirective
     )
   }
 
-  ngOnInit() {
+  override ngOnInit() {
     this.qdsTreeService.init(
       computed(() => createQdsTreeApi({size: this.size()}, normalizeProps)),
     )
