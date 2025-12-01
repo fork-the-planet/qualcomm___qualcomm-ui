@@ -1,5 +1,11 @@
 # @qualcomm-ui/react-mdx
 
+## 1.5.6 (2025/12/01)
+
+### Bug Fixes
+
+- [site-search]: prevent firefox search input hiding on mouseup
+
 ## 1.5.5 (2025/11/30)
 
 ### Miscellaneous Chores
