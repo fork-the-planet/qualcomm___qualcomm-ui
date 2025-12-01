@@ -5,7 +5,7 @@ import type {TreeNode} from "@qualcomm-ui/utils/collection"
 import type {TreeNodeTemplateContext} from "./qds-tree-context.service"
 
 @Directive({
-  selector: "ng-template[q-tree-leaf]",
+  selector: "ng-template[q-tree-leaf-template]",
   standalone: false,
 })
 export class TreeLeafTemplateDirective<T extends TreeNode> {

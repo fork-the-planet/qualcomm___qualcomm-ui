@@ -5,7 +5,7 @@ import type {TreeNode} from "@qualcomm-ui/utils/collection"
 import type {TreeNodeTemplateContext} from "./qds-tree-context.service"
 
 @Directive({
-  selector: "ng-template[q-tree-branch]",
+  selector: "ng-template[q-tree-branch-template]",
   standalone: false,
 })
 export class TreeBranchTemplateDirective<T extends TreeNode> {
@@ -20,7 +20,7 @@ export class TreeBranchTemplateDirective<T extends TreeNode> {
   static ngTemplateContextGuard<T extends TreeNode>(
     dir: TreeBranchTemplateDirective<T>,
     ctx: unknown,
-  ): ctx is TreeNodeTemplateContext<T> {
+  ): ctx is {$implicit: TreeNodeTemplateContext<T>} {
     return true
   }
 }
