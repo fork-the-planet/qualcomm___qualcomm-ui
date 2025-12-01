@@ -40,7 +40,7 @@ function PageLink({
   const nextPathSegments = pageLink.pathSegments
   const pathSegment =
     nextPathSegments[0] !== pathSegments[0]
-      ? capitalCase(nextPathSegments[0])
+      ? capitalCase(nextPathSegments[0] ?? "")
       : ""
 
   return bindingRenderProp(<RenderLink href={pageLink.pathname!} />, {
