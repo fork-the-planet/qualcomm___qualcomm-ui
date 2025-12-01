@@ -72,7 +72,7 @@ export interface TextInputProps extends TextInputRootProps {
   hint?: ReactNode
 
   /**
-   * Props applied to the label element.
+   * Props applied to the hint element.
    */
   hintProps?: TextInputHintProps
 

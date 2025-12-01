@@ -59,6 +59,7 @@ export interface InputInputBindings {
   "data-focus": BooleanDataAttr
   "data-invalid": BooleanDataAttr
   "data-part": "input"
+  defaultValue: string
   disabled: boolean | undefined
   form?: string
   id: string
@@ -67,7 +68,6 @@ export interface InputInputBindings {
   onChange: JSX.ChangeEventHandler<HTMLInputElement>
   onFocus: JSX.FocusEventHandler
   required?: boolean
-  value: string
 }
 
 export interface InputClearTriggerBindings {
