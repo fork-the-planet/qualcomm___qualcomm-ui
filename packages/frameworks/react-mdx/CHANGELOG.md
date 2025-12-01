@@ -1,5 +1,11 @@
 # @qualcomm-ui/react-mdx
 
+## 1.5.5 (2025/11/30)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react]
+
 ## 1.5.4 (2025/11/30)
 
 ### Miscellaneous Chores

@@ -1,5 +1,11 @@
 # @qualcomm-ui/qds-core
 
+## 1.7.0 (2025/11/30)
+
+### Features
+
+- [theme]: export theme and brand constants
+
 ## 1.6.1 (2025/11/30)
 
 ### Bug Fixes
