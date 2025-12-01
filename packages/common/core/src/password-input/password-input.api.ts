@@ -138,6 +138,7 @@ export function createPasswordInputApi(
         "data-part": "input",
         "data-readonly": booleanDataAttr(readOnly),
         "data-state": visible ? "visible" : "hidden",
+        defaultValue: context.get("value"),
         dir: prop("dir"),
         disabled,
         form: prop("form"),
@@ -161,7 +162,6 @@ export function createPasswordInputApi(
         required: prop("required"),
         spellCheck: "false",
         type: visible ? "text" : "password",
-        value: context.get("value"),
       })
     },
 
