@@ -127,6 +127,7 @@ export interface PasswordInputSchema extends MachineSchema {
     | "setFocused"
     | "setValue"
     | "setVisibility"
+    | "syncInputValue"
     | "toggleVisibility"
   >
   computed: {

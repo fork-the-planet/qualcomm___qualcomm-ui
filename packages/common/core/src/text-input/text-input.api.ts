@@ -128,6 +128,7 @@ export function createTextInputApi(
         "data-invalid": booleanDataAttr(invalid),
         "data-part": "input",
         "data-readonly": booleanDataAttr(readOnly),
+        defaultValue: context.get("value"),
         dir: prop("dir"),
         disabled,
         form: prop("form"),
@@ -151,7 +152,6 @@ export function createTextInputApi(
         required: prop("required"),
         spellCheck: "false",
         type: "text",
-        value: context.get("value"),
       })
     },
     getInputGroupBindings(): TextInputInputGroupBindings {

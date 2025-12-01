@@ -1,7 +1,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {trackFormControl} from "@qualcomm-ui/dom/query"
+import {raf, setElementValue, trackFormControl} from "@qualcomm-ui/dom/query"
 import {createMachine, type MachineConfig} from "@qualcomm-ui/utils/machine"
 
 import {domEls} from "./internal"
@@ -32,6 +32,12 @@ export const passwordInputMachine: MachineConfig<PasswordInputSchema> =
           return
         }
         context.set("visible", event.visible)
+      },
+      syncInputValue({context, scope}) {
+        const inputEl = domEls.input(scope)
+        raf(() => {
+          setElementValue(inputEl, context.get("value"))
+        })
       },
       toggleVisibility({context}) {
         context.set("visible", (prev) => !prev)
@@ -123,5 +129,10 @@ export const passwordInputMachine: MachineConfig<PasswordInputSchema> =
           },
         },
       },
+    },
+    watch({action, context, track}) {
+      track([() => context.get("value")], () => {
+        action(["syncInputValue"])
+      })
     },
   })

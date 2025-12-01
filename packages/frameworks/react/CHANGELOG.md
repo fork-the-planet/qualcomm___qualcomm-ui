@@ -1,5 +1,16 @@
 # @qualcomm-ui/react
 
+## 1.3.3 (2025/12/01)
+
+### Bug Fixes
+
+- [input]: uncontrolled components
+- imperative update
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/qds-core, @qualcomm-ui/react-core]
+
 ## 1.3.2 (2025/11/30)
 
 ### Miscellaneous Chores
