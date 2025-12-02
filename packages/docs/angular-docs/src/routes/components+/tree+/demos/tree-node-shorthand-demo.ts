@@ -20,9 +20,10 @@ interface FileNode {
     <div q-tree-root [collection]="collection">
       @for (
         node of collection.rootNode.nodes;
+        let i = $index;
         track collection.getNodeValue(node)
       ) {
-        <q-tree-nodes [indexPath]="[0]" [node]="node">
+        <q-tree-nodes [indexPath]="[i]" [node]="node">
           <ng-template
             let-branch
             q-tree-branch-template

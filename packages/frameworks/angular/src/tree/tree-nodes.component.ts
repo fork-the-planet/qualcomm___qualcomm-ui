@@ -3,6 +3,7 @@ import {
   computed,
   contentChild,
   inject,
+  Injector,
   input,
   type OnInit,
   TemplateRef,
@@ -40,6 +41,7 @@ import {TreeLeafTemplateDirective} from "./tree-leaf-template.directive"
         <ng-template
           [ngTemplateOutlet]="branchTemplate()!"
           [ngTemplateOutletContext]="templateContext()"
+          [ngTemplateOutletInjector]="injector"
         />
 
         <div q-tree-branch-content>
@@ -61,6 +63,7 @@ import {TreeLeafTemplateDirective} from "./tree-leaf-template.directive"
       <ng-template
         [ngTemplateOutlet]="leafTemplate()!"
         [ngTemplateOutletContext]="templateContext()"
+        [ngTemplateOutletInjector]="injector"
       />
     }
   `,
@@ -105,6 +108,7 @@ export class TreeNodesComponent<T extends TreeNode>
   })
 
   protected treeContext = useTreeContext()
+  readonly injector = inject(Injector, {self: true})
 
   readonly templateContext = computed<TreeNodeTemplateContext<T>>(() => ({
     $implicit: {
