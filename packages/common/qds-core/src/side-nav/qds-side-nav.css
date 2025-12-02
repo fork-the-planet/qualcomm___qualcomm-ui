@@ -87,11 +87,6 @@
   color: var(--color-text-neutral-secondary);
   font: var(--font-static-body-xs-default);
   padding: 0 var(--spacing-100) var(--spacing-90);
-
-  & + {
-    .qui-side-nav__node-root {
-    }
-  }
 }
 
 .qui-side-nav__node-root {
@@ -100,7 +95,7 @@
   border: solid 1px transparent;
   border-radius: var(--border-radius-xs);
   box-sizing: border-box;
-  color: inherit;
+  color: var(--color-interactive-text-neutral-idle);
   cursor: pointer;
   display: flex;
   font: var(--font-static-body-sm-bold);
@@ -143,6 +138,18 @@
 
   &[data-selected][data-part="leaf-node"] {
     background: var(--color-interactive-background-ghost-hover);
+  }
+
+  &[data-selected] {
+    color: var(--color-interactive-text-primary-idle);
+
+    &:hover {
+      color: var(--color-interactive-text-primary-hover);
+    }
+
+    &:active {
+      color: var(--color-interactive-text-primary-pressed);
+    }
   }
 
   &[data-disabled] {
