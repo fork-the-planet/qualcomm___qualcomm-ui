@@ -17,10 +17,7 @@ import type {
   QdsInputHintBindings,
   QdsInputInputBindings,
 } from "@qualcomm-ui/qds-core/input"
-import {
-  type MergeProps,
-  mergeProps,
-} from "@qualcomm-ui/utils/merge-props"
+import {type MergeProps, mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {useQdsInputContext} from "./qds-input-context.service"
 
