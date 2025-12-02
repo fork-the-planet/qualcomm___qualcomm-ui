@@ -1,4 +1,4 @@
-import {computed, Directive, effect, input} from "@angular/core"
+import {computed, Directive, input} from "@angular/core"
 
 import {useCollapsibleContext} from "@qualcomm-ui/angular-core/collapsible"
 import {useId} from "@qualcomm-ui/angular-core/common"
@@ -34,11 +34,4 @@ export class TreeBranchContentDirective extends CoreTreeBranchContentDirective {
       this.qdsContext().getBranchContentBindings(),
     ),
   )
-
-  constructor() {
-    super()
-    effect(() => {
-      console.debug(this.treeNodePropsContext())
-    })
-  }
 }

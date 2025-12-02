@@ -104,7 +104,7 @@ export class TreeNodesComponent<T extends TreeNode>
   readonly leafTemplate = computed(() => {
     const leafInput = this.renderLeaf()
     const leafTemplate = this.treeLeafContentChild()
-    return leafInput || leafTemplate?.template
+    return (leafInput || leafTemplate?.template) as TemplateRef<any>
   })
 
   protected treeContext = useTreeContext()

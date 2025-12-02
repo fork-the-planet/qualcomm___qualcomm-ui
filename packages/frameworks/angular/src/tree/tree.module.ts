@@ -1,6 +1,7 @@
 import {NgTemplateOutlet} from "@angular/common"
 import {NgModule} from "@angular/core"
 
+import {CheckmarkIconComponent} from "@qualcomm-ui/angular/checkmark"
 import {IconDirective} from "@qualcomm-ui/angular/icon"
 import {QBindDirective} from "@qualcomm-ui/angular-core/machine"
 
@@ -14,6 +15,8 @@ import {TreeLabelDirective} from "./tree-label.directive"
 import {TreeLeafNodeDirective} from "./tree-leaf-node.directive"
 import {TreeLeafTemplateDirective} from "./tree-leaf-template.directive"
 import {TreeNodeActionDirective} from "./tree-node-action.directive"
+import {TreeNodeCheckboxDirective} from "./tree-node-checkbox.directive"
+import {TreeNodeContextDirective} from "./tree-node-context.directive"
 import {TreeNodeIconDirective} from "./tree-node-icon.directive"
 import {TreeNodeIndicatorDirective} from "./tree-node-indicator.directive"
 import {TreeNodeTextDirective} from "./tree-node-text.directive"
@@ -36,6 +39,8 @@ import {TreeRootDirective} from "./tree-root.directive"
     TreeNodeTextDirective,
     TreeLeafTemplateDirective,
     TreeBranchTemplateDirective,
+    TreeNodeContextDirective,
+    TreeNodeCheckboxDirective,
     TreeNodesComponent,
   ],
   exports: [
@@ -53,8 +58,15 @@ import {TreeRootDirective} from "./tree-root.directive"
     TreeNodeTextDirective,
     TreeBranchTemplateDirective,
     TreeLeafTemplateDirective,
+    TreeNodeContextDirective,
+    TreeNodeCheckboxDirective,
     TreeNodesComponent,
   ],
-  imports: [IconDirective, QBindDirective, NgTemplateOutlet],
+  imports: [
+    IconDirective,
+    QBindDirective,
+    NgTemplateOutlet,
+    CheckmarkIconComponent,
+  ],
 })
 export class TreeModule {}

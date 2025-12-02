@@ -14,6 +14,27 @@ import {TreeModule} from "@qualcomm-ui/angular/tree"
 
 ## Examples
 
+### Node Shorthand
+
+We expose the `q-tree-nodes` component for rendering Branch and Leaf nodes. Use the `<ng-template q-tree-branch-template>` and `<ng-template q-tree-leaf-template>` directives to customize the content of each tree item.
+
+Note that `q-tree-nodes` automatically renders child nodes for branches, so you only have to customize the content of the node itself.
+
 <QdsDemo name="TreeNodeShorthandDemo" />
+
+### Checkbox Trees
+
+Use the `q-tree-node-checkbox` directive within each node to create a checkbox tree. The checked state of the tree can be controlled using the [checkedValue](./#checkedValue), [onCheckedChange](./#onCheckedChange), and [defaultCheckedValue](./#defaultCheckedValue) props, which follow our [controlled state](/patterns/controlled-state) pattern.
+
+<QdsDemo name="TreeCheckboxDemo" />
+
+### Checkbox selection state
+
+The Tree handles nested checkbox selection automatically:
+
+- If all of a node's children are checked, the node will also be checked.
+- If only some of a node's children are checked, the node will appear indeterminate to indicate partial selection.
+
+When you supply the [checkedValue](./#checkedValue) or [defaultCheckedValue](./#defaultCheckedValue) props, you must account for the above logic.
 
 ## API
