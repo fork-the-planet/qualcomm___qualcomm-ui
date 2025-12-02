@@ -1,16 +1,32 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
+export interface SourceCode {
+  /**
+   * The full source code file.
+   */
+  full: string
+
+  /**
+   * Optional preview, extracted from comment snippets that wrap a section of the
+   * code.
+   */
+  preview?: string | null | undefined
+}
+
 export interface SourceCodeData {
   fileName: string
   filePath?: string
-  highlighted: {
-    full: string
-    preview?: string | null | undefined
-  }
-  raw: {
-    full: string
-    preview?: string | null | undefined
+  highlighted: SourceCode
+  /**
+   * Highlighted code with tailwind classes transformed into inline styles and
+   * standalone CSS, where applicable.
+   */
+  highlightedInline?: SourceCode
+  /**
+   * @deprecated no longer populated. Raw source code data is now added to data-* attributes on the rendered `<pre>` element. The UI can query this for copying code to the clipboard.
+   */
+  raw?: SourceCode & {
     /**
      * @deprecated no longer populated
      */
