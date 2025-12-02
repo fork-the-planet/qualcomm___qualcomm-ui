@@ -5,7 +5,7 @@ import chalk from "chalk"
 import {glob} from "glob"
 import {readFile} from "node:fs/promises"
 import {basename, resolve} from "node:path"
-import {createHighlighter, type Highlighter} from "shiki"
+import {createHighlighter, type Highlighter, type ShikiTransformer} from "shiki"
 import * as ts from "typescript"
 import type {Plugin} from "vite"
 
@@ -18,10 +18,11 @@ import {dedent} from "@qualcomm-ui/utils/dedent"
 
 import {getShikiTransformers} from "../docs-plugin"
 import {
-  removeCodeAnnotations,
+  extractPreviewFromHighlightedHtml,
   transformerCodeAttribute,
   transformerPreviewBlock,
 } from "../docs-plugin/shiki"
+import {shikiTransformerTailwindToInline} from "../docs-plugin/shiki/internal"
 
 import {LOG_PREFIX, VIRTUAL_MODULE_IDS} from "./demo-plugin-constants"
 import type {QuiDemoPluginOptions} from "./demo-plugin-types"
@@ -46,6 +47,11 @@ const demoRegistry = new Map<string, ReactDemoData>()
 const pageFiles = new Map<string, string[]>()
 const relativeImportDependents = new Map<string, Set<string>>()
 
+interface HighlightCodeResult {
+  full: string
+  preview?: string | null
+}
+
 /**
  * Generates virtual modules for React demo components. Virtual modules contain
  * highlighted source code and metadata about each demo.
@@ -59,6 +65,7 @@ export function reactDemoPlugin({
   },
   transformers = [],
   transformLine,
+  transformTailwindStyles,
 }: QuiDemoPluginOptions = {}): Plugin {
   const defaultShikiOptions = {
     defaultColor: "light-dark()",
@@ -191,33 +198,28 @@ export function reactDemoPlugin({
     }
   }
 
-  async function highlightCode(code: string): Promise<{
-    codeWithoutSnippets: string
-    highlightedCode: string
-    highlightedPreview?: string | null
-    previewCodeWithoutSnippets?: string | null
-  }> {
+  async function highlightCode(
+    code: string,
+    transformers: ShikiTransformer[] = [],
+  ): Promise<HighlightCodeResult> {
     if (!highlighter) {
-      return {codeWithoutSnippets: code, highlightedCode: code}
+      return {full: code}
     }
     let previewCode: string | null = null
-    let codeWithoutSnippets: string = ""
     try {
-      const result = highlighter.codeToHtml(code, {
+      const highlightedCode = highlighter.codeToHtml(code, {
         ...defaultShikiOptions,
         transformers: [
           ...getShikiTransformers(),
+          ...transformers,
           transformerPreviewBlock({
+            attributeName: "data-preview",
             onComplete: (extractedPreview) => {
               previewCode = extractedPreview
-                ? removeCodeAnnotations(extractedPreview)
-                : null
             },
           }),
           transformerCodeAttribute({
-            onComplete: (formattedSource) => {
-              codeWithoutSnippets = formattedSource
-            },
+            attributeName: "data-code",
           }),
           {
             enforce: "post",
@@ -230,40 +232,18 @@ export function reactDemoPlugin({
         ],
       })
 
-      let highlightedPreview: string | null = null
-      if (previewCode) {
-        // rehighlight just the preview snippet
-        highlightedPreview = highlighter.codeToHtml(code, {
-          ...defaultShikiOptions,
-          transformers: [
-            ...getShikiTransformers(),
-            transformerPreviewBlock({
-              displayMode: "only-preview",
-            }),
-            {
-              enforce: "post",
-              name: "shiki-transformer-trim",
-              preprocess(code) {
-                return code.trim()
-              },
-            },
-            ...transformers,
-          ],
-        })
-      }
-
       return {
-        codeWithoutSnippets,
-        highlightedCode: result,
-        highlightedPreview,
-        previewCodeWithoutSnippets: previewCode,
+        full: highlightedCode,
+        preview: previewCode
+          ? extractPreviewFromHighlightedHtml(highlightedCode)
+          : null,
       }
     } catch (error) {
       console.warn(
         `${chalk.magenta.bold(LOG_PREFIX)} Failed to highlight code:`,
         error,
       )
-      return {codeWithoutSnippets: code, highlightedCode: code}
+      return {full: code}
     }
   }
 
@@ -338,23 +318,21 @@ export function reactDemoPlugin({
     try {
       const fileName = basename(filePath)
 
-      const {
-        codeWithoutSnippets,
-        highlightedCode: highlightedCode,
-        highlightedPreview,
-        previewCodeWithoutSnippets,
-      } = await highlightCode(code)
+      const promises: Promise<HighlightCodeResult>[] = []
+      promises.push(highlightCode(code))
+
+      if (transformTailwindStyles) {
+        promises.push(highlightCode(code, [shikiTransformerTailwindToInline()]))
+      }
+
+      const [tailwind, inline] = await Promise.all(promises)
 
       return {
         fileName,
         filePath,
         highlighted: {
-          full: highlightedCode,
-          preview: highlightedPreview,
-        },
-        raw: {
-          full: codeWithoutSnippets,
-          preview: previewCodeWithoutSnippets,
+          full: tailwind.full,
+          preview: tailwind.preview,
         },
       }
     } catch {

@@ -24,7 +24,7 @@ import {
 
 import {getShikiTransformers} from "../docs-plugin"
 import {
-  removeCodeAnnotations,
+  extractPreviewFromHighlightedHtml,
   transformerCodeAttribute,
   transformerPreviewBlock,
 } from "../docs-plugin/shiki"
@@ -59,6 +59,11 @@ interface RelativeImport {
 interface PathAlias {
   pattern: RegExp
   replacement: string
+}
+
+interface HighlightCodeResult {
+  full: string
+  preview?: string | null
 }
 
 const VIRTUAL_MODULE_ID = "\0virtual:angular-demo-registry"
@@ -321,18 +326,12 @@ export function angularDemoPlugin({
   async function highlightCode(
     code: string,
     language: "angular-ts" | "angular-html" = "angular-ts",
-  ): Promise<{
-    codeWithoutSnippets: string
-    highlightedCode: string
-    highlightedPreview?: string | null
-    previewCodeWithoutSnippets?: string | null
-  }> {
+  ): Promise<HighlightCodeResult> {
     if (!highlighter) {
-      return {codeWithoutSnippets: code, highlightedCode: code}
+      return {full: code}
     }
 
     let previewCode: string | null = null
-    let codeWithoutSnippets = ""
 
     try {
       const highlightedCode = highlighter.codeToHtml(code, {
@@ -341,18 +340,13 @@ export function angularDemoPlugin({
         transformers: [
           ...getShikiTransformers(),
           transformerPreviewBlock({
-            attributeName: null,
+            attributeName: "data-preview",
             onComplete: (extractedPreview) => {
               previewCode = extractedPreview
-                ? removeCodeAnnotations(extractedPreview)
-                : null
             },
           }),
           transformerCodeAttribute({
-            attributeName: null,
-            onComplete: (formattedSource) => {
-              codeWithoutSnippets = formattedSource
-            },
+            attributeName: "data-code",
           }),
           {
             enforce: "post",
@@ -365,19 +359,17 @@ export function angularDemoPlugin({
       })
 
       return {
-        codeWithoutSnippets,
-        highlightedCode,
-        highlightedPreview: previewCode
+        full: highlightedCode,
+        preview: previewCode
           ? extractPreviewFromHighlightedHtml(highlightedCode)
           : null,
-        previewCodeWithoutSnippets: previewCode,
       }
     } catch (error) {
       console.warn(
         `${chalk.blue.bold(LOG_PREFIX)} Failed to highlight code with ${language} language:`,
         error,
       )
-      return {codeWithoutSnippets: code, highlightedCode: code}
+      return {full: code}
     }
   }
 
@@ -693,23 +685,14 @@ export function angularDemoPlugin({
     if (params.language === "angular-ts") {
     }
 
-    const {
-      codeWithoutSnippets,
-      highlightedCode,
-      highlightedPreview,
-      previewCodeWithoutSnippets,
-    } = await highlightCode(code, language)
+    const {full, preview} = await highlightCode(code, language)
 
     return {
       fileName,
       filePath,
       highlighted: {
-        full: highlightedCode,
-        preview: highlightedPreview ?? null,
-      },
-      raw: {
-        full: codeWithoutSnippets,
-        preview: previewCodeWithoutSnippets ?? null,
+        full,
+        preview,
       },
     }
   }
@@ -1136,63 +1119,4 @@ function resolveTemplateFile(templateUrl: string, fromFile: string): string {
   }
 
   return resolved
-}
-
-function extractPreviewFromHighlightedHtml(
-  highlightedHtml: string,
-): string | null {
-  const preMatch = highlightedHtml.match(/<pre([^>]*)>/)
-  const codeMatch = highlightedHtml.match(/<code([^>]*)>(.*?)<\/code>/s)
-
-  if (!preMatch || !codeMatch) {
-    return null
-  }
-  const codeContent = codeMatch[2]
-  const parts = codeContent.split(/<span class="line/)
-  const previewLineParts = parts
-    .slice(1)
-    .filter((part) => part.includes('data-preview-line="true"'))
-
-  // strip indentation
-  const indents = previewLineParts.map((part) => {
-    const indentMatches =
-      part.match(/<span class="indent">(.+?)<\/span>/g) || []
-    let total = 0
-    for (const match of indentMatches) {
-      const content = match.match(/<span class="indent">(.+?)<\/span>/)
-      if (content) {
-        total += content[1].length
-      } else {
-        break
-      }
-    }
-    return total
-  })
-
-  const minIndent = Math.min(...indents.filter((n) => n > 0))
-  const previewLines = previewLineParts.map((part) => {
-    let processed = `<span class="line${part}`
-    let remaining = minIndent
-    while (remaining > 0 && processed.includes('<span class="indent">')) {
-      const before = processed
-      processed = processed.replace(
-        /<span class="indent">(.+?)<\/span>/,
-        (match, spaces) => {
-          if (spaces.length <= remaining) {
-            remaining -= spaces.length
-            return ""
-          } else {
-            const kept = spaces.substring(remaining)
-            remaining = 0
-            return `<span class="indent">${kept}</span>`
-          }
-        },
-      )
-      if (before === processed) {
-        break
-      }
-    }
-    return processed
-  })
-  return `<pre${preMatch[1]}><code${codeMatch[1]}>${previewLines.join("")}</code></pre>`
 }

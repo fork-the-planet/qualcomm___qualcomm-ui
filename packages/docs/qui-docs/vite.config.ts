@@ -24,6 +24,7 @@ export default defineConfig({
     quiDocsPlugin(),
     reactDemoPlugin({
       demoPattern: "./src/routes/debug+/**/demos/*.tsx",
+      transformTailwindStyles: true,
     }),
   ],
   server: {

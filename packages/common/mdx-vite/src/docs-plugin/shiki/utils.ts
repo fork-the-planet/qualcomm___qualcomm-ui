@@ -51,3 +51,62 @@ export function removeCodeAnnotations(code: string): string {
     .map(({processed}) => processed)
     .join("\n")
 }
+
+export function extractPreviewFromHighlightedHtml(
+  highlightedHtml: string,
+): string | null {
+  const preMatch = highlightedHtml.match(/<pre((?:\s+[\w-]+="[^"]*")*)>/)
+  const codeMatch = highlightedHtml.match(/<code([^>]*)>(.*?)<\/code>/s)
+
+  if (!preMatch || !codeMatch) {
+    return null
+  }
+  const codeContent = codeMatch[2]
+  const parts = codeContent.split(/<span class="line/)
+  const previewLineParts = parts
+    .slice(1)
+    .filter((part) => part.includes('data-preview-line="true"'))
+
+  // strip indentation
+  const indents = previewLineParts.map((part) => {
+    const indentMatches =
+      part.match(/<span class="indent">(.+?)<\/span>/g) || []
+    let total = 0
+    for (const match of indentMatches) {
+      const content = match.match(/<span class="indent">(.+?)<\/span>/)
+      if (content) {
+        total += content[1].length
+      } else {
+        break
+      }
+    }
+    return total
+  })
+
+  const minIndent = Math.min(...indents.filter((n) => n > 0))
+  const previewLines = previewLineParts.map((part) => {
+    let processed = `<span class="line${part}`
+    let remaining = minIndent
+    while (remaining > 0 && processed.includes('<span class="indent">')) {
+      const before = processed
+      processed = processed.replace(
+        /<span class="indent">(.+?)<\/span>/,
+        (match, spaces) => {
+          if (spaces.length <= remaining) {
+            remaining -= spaces.length
+            return ""
+          } else {
+            const kept = spaces.substring(remaining)
+            remaining = 0
+            return `<span class="indent">${kept}</span>`
+          }
+        },
+      )
+      if (before === processed) {
+        break
+      }
+    }
+    return processed
+  })
+  return `<pre${preMatch[1]}><code${codeMatch[1]}>${previewLines.join("")}</code></pre>`
+}
