@@ -1,4 +1,4 @@
-import {Component, EventEmitter, input, output, signal} from "@angular/core"
+import {Component, input, output, signal} from "@angular/core"
 import {FileText, FolderIcon, Plus, Trash} from "lucide-angular"
 
 import {IconDirective} from "@qualcomm-ui/angular/icon"
@@ -90,13 +90,13 @@ const initialCollection = createTreeCollection<FileNode>({
               <div q-tree-node-indicator></div>
               <div q-tree-branch-trigger></div>
               <svg q-tree-node-icon qIcon="FolderIcon"></svg>
-              <span q-tree-node-text>{{
-                collection().stringifyNode(branch.node)
-              }}</span>
+              <span q-tree-node-text>
+                {{ collection().stringifyNode(branch.node) }}
+              </span>
               <tree-node-actions
-                [node]="branch.node"
                 [indexPath]="branch.indexPath"
                 [isBranch]="true"
+                [node]="branch.node"
                 (add)="addNode($event)"
                 (remove)="removeNode($event)"
               />
@@ -111,13 +111,13 @@ const initialCollection = createTreeCollection<FileNode>({
             <div q-tree-leaf-node>
               <div q-tree-node-indicator></div>
               <svg q-tree-node-icon qIcon="FileText"></svg>
-              <span q-tree-node-text>{{
-                collection().stringifyNode(leaf.node)
-              }}</span>
+              <span q-tree-node-text>
+                {{ collection().stringifyNode(leaf.node) }}
+              </span>
               <tree-node-actions
-                [node]="leaf.node"
                 [indexPath]="leaf.indexPath"
                 [isBranch]="false"
+                [node]="leaf.node"
                 (remove)="removeNode($event)"
               />
             </div>
@@ -152,22 +152,22 @@ export class TreeAddRemoveDemo {
 }
 
 @Component({
-  imports: [TreeModule, IconDirective],
+  imports: [TreeModule],
   providers: [provideIcons({Plus, Trash})],
   selector: "tree-node-actions",
   template: `
     <button
-      q-tree-node-action
       aria-label="Remove node"
       icon="Trash"
+      q-tree-node-action
       size="sm"
       (click)="onRemove()"
     ></button>
     @if (isBranch()) {
       <button
-        q-tree-node-action
         aria-label="Add node"
         icon="Plus"
+        q-tree-node-action
         size="sm"
         (click)="onAdd()"
       ></button>

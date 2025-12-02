@@ -85,11 +85,11 @@ const initialCollection = createTreeCollection<FileNode>({
     >
       <q-text-input
         class="mb-1"
-        [ngModel]="query()"
-        (ngModelChange)="search($event)"
         placeholder="Search for files: 'react'"
         size="sm"
         startIcon="Search"
+        [ngModel]="query()"
+        (ngModelChange)="search($event)"
       />
       @for (
         node of collection().rootNode.nodes;

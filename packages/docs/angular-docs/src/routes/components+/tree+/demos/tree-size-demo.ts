@@ -76,8 +76,8 @@ const collection = createTreeCollection<FileNode>({
       <div
         class="w-full max-w-sm"
         q-tree-root
-        [collection]="collection"
         size="sm"
+        [collection]="collection"
       >
         <span q-tree-label>Small (sm)</span>
         <ng-container *ngTemplateOutlet="treeContent" />
@@ -86,8 +86,8 @@ const collection = createTreeCollection<FileNode>({
       <div
         class="w-full max-w-sm"
         q-tree-root
-        [collection]="collection"
         size="md"
+        [collection]="collection"
       >
         <span q-tree-label>Medium (md)</span>
         <ng-container *ngTemplateOutlet="treeContent" />

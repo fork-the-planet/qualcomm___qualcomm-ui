@@ -1,5 +1,5 @@
-import {Component, inject} from "@angular/core"
 import {JsonPipe} from "@angular/common"
+import {Component} from "@angular/core"
 
 import {TreeModule} from "@qualcomm-ui/angular/tree"
 import {useTreeContext} from "@qualcomm-ui/angular-core/tree"
@@ -12,7 +12,20 @@ interface Node {
 }
 
 @Component({
-  imports: [TreeModule, JsonPipe, TreeCheckedStateDisplay],
+  imports: [JsonPipe],
+  selector: "tree-checked-state-display",
+  template: `
+    <pre class="font-code-sm mt-4 rounded p-2">{{
+      treeContext().checkedValue | json
+    }}</pre>
+  `,
+})
+export class TreeCheckedStateDisplay {
+  protected readonly treeContext = useTreeContext()
+}
+
+@Component({
+  imports: [TreeModule, TreeCheckedStateDisplay],
   selector: "tree-checkbox-state-preview-demo",
   template: `
     <div
@@ -147,17 +160,4 @@ export class TreeCheckboxStatePreviewDemo {
       text: "",
     },
   })
-}
-
-@Component({
-  imports: [JsonPipe],
-  selector: "tree-checked-state-display",
-  template: `
-    <pre class="mt-4 rounded bg-gray-100 p-2 text-sm">{{
-      treeContext().checkedValue | json
-    }}</pre>
-  `,
-})
-export class TreeCheckedStateDisplay {
-  protected readonly treeContext = useTreeContext<Node>()
 }
