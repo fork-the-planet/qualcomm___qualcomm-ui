@@ -210,7 +210,7 @@ export class CoreTreeRootDirective<T extends TreeNode = TreeNode>
 
   protected readonly hostId = computed(() => useId(this, this.id()))
 
-  protected readonly injector = inject(Injector)
+  readonly injector = inject(Injector)
 
   protected readonly isMounted = useIsMounted()
 

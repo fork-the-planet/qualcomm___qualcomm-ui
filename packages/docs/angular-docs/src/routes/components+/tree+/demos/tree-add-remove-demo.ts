@@ -14,6 +14,49 @@ interface FileNode {
   nodes?: FileNode[]
 }
 
+@Component({
+  imports: [TreeModule],
+  providers: [provideIcons({Plus, Trash})],
+  selector: "tree-node-actions",
+  template: `
+    <button
+      aria-label="Remove node"
+      icon="Trash"
+      q-tree-node-action
+      size="sm"
+      (click)="onRemove()"
+    ></button>
+    @if (isBranch()) {
+      <button
+        aria-label="Add node"
+        icon="Plus"
+        q-tree-node-action
+        size="sm"
+        (click)="onAdd()"
+      ></button>
+    }
+  `,
+})
+export class TreeNodeActions {
+  readonly node = input.required<FileNode>()
+  readonly indexPath = input.required<number[]>()
+  readonly isBranch = input(false)
+
+  readonly add = output<{indexPath: number[]; node: FileNode}>()
+  readonly remove = output<{indexPath: number[]; node: FileNode}>()
+
+  protected readonly treeContext = useTreeContext()
+
+  onRemove() {
+    this.remove.emit({indexPath: this.indexPath(), node: this.node()})
+  }
+
+  onAdd() {
+    this.treeContext().expand([this.node().id])
+    this.add.emit({indexPath: this.indexPath(), node: this.node()})
+  }
+}
+
 const initialCollection = createTreeCollection<FileNode>({
   nodeChildren: "nodes",
   nodeText: "name",
@@ -148,48 +191,5 @@ export class TreeAddRemoveDemo {
       ...(node.nodes || []),
     ]
     this.collection.update((c) => c.replace(indexPath, {...node, nodes}))
-  }
-}
-
-@Component({
-  imports: [TreeModule],
-  providers: [provideIcons({Plus, Trash})],
-  selector: "tree-node-actions",
-  template: `
-    <button
-      aria-label="Remove node"
-      icon="Trash"
-      q-tree-node-action
-      size="sm"
-      (click)="onRemove()"
-    ></button>
-    @if (isBranch()) {
-      <button
-        aria-label="Add node"
-        icon="Plus"
-        q-tree-node-action
-        size="sm"
-        (click)="onAdd()"
-      ></button>
-    }
-  `,
-})
-export class TreeNodeActions {
-  readonly node = input.required<FileNode>()
-  readonly indexPath = input.required<number[]>()
-  readonly isBranch = input(false)
-
-  readonly add = output<{indexPath: number[]; node: FileNode}>()
-  readonly remove = output<{indexPath: number[]; node: FileNode}>()
-
-  protected readonly treeContext = useTreeContext<FileNode>()
-
-  onRemove() {
-    this.remove.emit({indexPath: this.indexPath(), node: this.node()})
-  }
-
-  onAdd() {
-    this.treeContext().expand([this.node().id])
-    this.add.emit({indexPath: this.indexPath(), node: this.node()})
   }
 }

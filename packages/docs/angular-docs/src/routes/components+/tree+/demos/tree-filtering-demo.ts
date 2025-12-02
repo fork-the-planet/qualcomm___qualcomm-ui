@@ -81,7 +81,7 @@ const initialCollection = createTreeCollection<FileNode>({
       q-tree-root
       [collection]="initialCollection"
       [expandedValue]="expanded()"
-      (expandedValueChange)="expanded.set($event)"
+      (expandedValueChanged)="expanded.set($event.expandedValue)"
     >
       <q-text-input
         class="mb-1"

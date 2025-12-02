@@ -23,6 +23,7 @@ interface FileNode {
         let i = $index;
         track collection.getNodeValue(node)
       ) {
+        <!-- preview -->
         <q-tree-nodes [indexPath]="[i]" [node]="node">
           <ng-template
             let-branch
@@ -48,6 +49,7 @@ interface FileNode {
             </div>
           </ng-template>
         </q-tree-nodes>
+        <!-- preview -->
       }
     </div>
   `,

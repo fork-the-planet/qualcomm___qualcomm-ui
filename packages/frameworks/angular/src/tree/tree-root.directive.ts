@@ -19,6 +19,7 @@ import {
 } from "./qds-tree-context.service"
 
 @Directive({
+  exportAs: "treeRoot",
   providers: [
     provideTreeContext(),
     provideRenderStrategyContext(),

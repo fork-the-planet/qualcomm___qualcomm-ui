@@ -42,6 +42,9 @@ Note that `q-tree-nodes` automatically renders child nodes for branches, so you 
 
 <QdsDemo name="TreeNodeShorthandDemo" />
 
+> [!tip/Node Types]
+> Pass the `rootNode` input to the template directives to enable TypeScript type inference. This allows `branch.node` and `leaf.node` to have your custom node type instead of the generic `TreeNode` type.
+
 ### Nodes
 
 You can bring your own recursive component to create your own abstraction for the tree.

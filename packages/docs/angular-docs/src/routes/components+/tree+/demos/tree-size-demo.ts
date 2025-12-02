@@ -1,3 +1,4 @@
+import {NgTemplateOutlet} from "@angular/common"
 import {Component} from "@angular/core"
 import {FileText, FolderIcon} from "lucide-angular"
 
@@ -68,29 +69,37 @@ const collection = createTreeCollection<FileNode>({
 })
 
 @Component({
-  imports: [TreeModule, IconDirective],
+  imports: [TreeModule, IconDirective, NgTemplateOutlet],
   providers: [provideIcons({FileText, FolderIcon})],
   selector: "tree-size-demo",
   template: `
     <div class="flex w-full flex-col gap-4">
       <div
+        #root1="treeRoot"
         class="w-full max-w-sm"
         q-tree-root
         size="sm"
         [collection]="collection"
       >
         <span q-tree-label>Small (sm)</span>
-        <ng-container *ngTemplateOutlet="treeContent" />
+        <ng-container
+          [ngTemplateOutlet]="treeContent"
+          [ngTemplateOutletInjector]="root1.injector"
+        />
       </div>
 
       <div
+        #root2="treeRoot"
         class="w-full max-w-sm"
         q-tree-root
         size="md"
         [collection]="collection"
       >
         <span q-tree-label>Medium (md)</span>
-        <ng-container *ngTemplateOutlet="treeContent" />
+        <ng-container
+          [ngTemplateOutlet]="treeContent"
+          [ngTemplateOutletInjector]="root2.injector"
+        />
       </div>
     </div>
 
