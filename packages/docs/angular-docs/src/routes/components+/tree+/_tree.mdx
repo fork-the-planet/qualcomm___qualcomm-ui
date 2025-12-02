@@ -4,13 +4,30 @@ group: Disclosure
 ---
 
 import {QdsDemo} from "~components/demo"
-import {TypeDocProps, TypeDocAttributes} from "@qualcomm-ui/react-mdx/typedoc"
+import {TypeDocProps, TypeDocAngularAttributes} from "@qualcomm-ui/react-mdx/typedoc"
 
 # {frontmatter.title}
 
-```tsx
+```ts
 import {TreeModule} from "@qualcomm-ui/angular/tree"
 ```
+
+## Overview
+
+- The tree relies on the `TreeCollection` class to manage its items. Refer to the [API](./#tree-collection) below for details.
+- Trees are composed of nodes, which are objects that describe the tree data. There are two types of nodes:
+  - A `branch` node is a node that has children.
+  - A `leaf` node is a node that does not have any children.
+- Each node has a `value` (unique identifier used for selection/expansion) and a `text` (display text).
+
+**Default object shape:**
+
+- `value` (required): unique identifier for expansion/selection
+- `text` (required): display text
+- `nodes` (optional): child nodes for branches
+- `disabled` (optional): prevents interaction when `true`
+
+These defaults can be overridden in the `TreeCollection` [constructor](./#constructor).
 
 ## Examples
 
@@ -22,9 +39,24 @@ Note that `q-tree-nodes` automatically renders child nodes for branches, so you 
 
 <QdsDemo name="TreeNodeShorthandDemo" />
 
+### Nodes
+
+You can bring your own recursive component to create your own abstraction for the tree.
+
+> [!note]
+> This approach is recommended only for advanced use cases. Most users should use the shorthand `q-tree-nodes` instead.
+
+<QdsDemo name="TreeNodesDemo" />
+
+### Default Expanded
+
+Expand nodes by default using the [defaultExpandedValue](./#defaultExpandedValue) input. Or use [expandedValue](./#expandedValue) and [expandedValueChange](./#expandedValueChange) to control the expansion manually. These inputs follow our [controlled state](/patterns/controlled-state) pattern.
+
+<QdsDemo name="TreeDefaultExpandedDemo" />
+
 ### Checkbox Trees
 
-Use the `q-tree-node-checkbox` directive within each node to create a checkbox tree. The checked state of the tree can be controlled using the [checkedValue](./#checkedValue), [onCheckedChange](./#onCheckedChange), and [defaultCheckedValue](./#defaultCheckedValue) props, which follow our [controlled state](/patterns/controlled-state) pattern.
+Use the `q-tree-node-checkbox` directive within each node to create a checkbox tree. The checked state of the tree can be controlled using the [checkedValue](./#checkedValue), [checkedValueChange](./#checkedValueChange), and [defaultCheckedValue](./#defaultCheckedValue) inputs, which follow our [controlled state](/patterns/controlled-state) pattern.
 
 <QdsDemo name="TreeCheckboxDemo" />
 
@@ -35,6 +67,197 @@ The Tree handles nested checkbox selection automatically:
 - If all of a node's children are checked, the node will also be checked.
 - If only some of a node's children are checked, the node will appear indeterminate to indicate partial selection.
 
-When you supply the [checkedValue](./#checkedValue) or [defaultCheckedValue](./#defaultCheckedValue) props, you must account for the above logic.
+When you supply the [checkedValue](./#checkedValue) or [defaultCheckedValue](./#defaultCheckedValue) inputs, you must account for the above logic.
+
+::: spoiler Example
+
+Consider the following tree:
+
+```ts
+const collection = createTreeCollection<Node>({
+  rootNode: {
+    id: "ROOT",
+    name: "",
+    nodes: [
+      {
+        id: "qualcomm",
+        name: "Qualcomm",
+        nodes: [
+          {
+            id: "sdx",
+            name: "Snapdragon X",
+            nodes: [
+              {id: "elite", name: "Snapdragon X Elite"},
+              {id: "plus", name: "Snapdragon X Plus"},
+            ],
+          },
+        ],
+      },
+    ],
+  },
+})
+```
+
+Let's say that we want to select the `sdx` node and its children by default.
+
+```ts
+@Component({
+  template: `
+    <!-- won't work, we need to supply the child nodes instead -->
+    <div q-tree-root [defaultCheckedValue]="['sdx']" [collection]="collection">
+      ...
+    </div>
+  `,
+})
+export class MyComponent {
+  // ...
+}
+```
+
+Instead, supply all the child nodes to indicate that the parent is selected:
+
+<QdsDemo name="TreeValidStateDemo" />
+
+:::
+
+The following demo shows checked state below the tree. Interact with it to see state updates:
+
+<QdsDemo name="TreeCheckboxStatePreviewDemo" />
+
+### Disabled Nodes
+
+You can disable nodes by setting the `disabled` property on the node object.
+
+<QdsDemo name="TreeDisabledNodeDemo" />
+
+### Filtering
+
+Here's an example that filters the nodes using `matchSorter`.
+
+<QdsDemo name="TreeFilteringDemo" />
+
+### Links
+
+Tree nodes can be links using Angular's `RouterLink` directive. Apply the `q-tree-branch-node` or `q-tree-leaf-node` directive to an anchor element with `[routerLink]`.
+
+<QdsDemo name="TreeLinksDemo" />
+
+### Sizes
+
+Tree item sizes are controlled using the [size](./#size) input on the root of the tree.
+
+<QdsDemo name="TreeSizeDemo" />
+
+### Add / Remove nodes
+
+The `TreeCollection` class exposes methods to handle the addition and removal of nodes. Here's an example of how to use them.
+
+<QdsDemo name="TreeAddRemoveDemo" />
 
 ## API
+
+### q-tree-root
+
+<TypeDocProps name="TreeRootDirective" />
+
+<TypeDocAngularAttributes name={["TreeRootBindings", "QdsTreeRootBindings"]} />
+
+### q-tree-nodes
+
+<TypeDocProps name="TreeNodesComponent" />
+
+### TreeCollection
+
+Note that the TreeCollection accepts a single generic type parameter, `T`, which is the object type of the node used in the collection.
+
+#### Constructor
+
+The constructor of the TreeCollection class accepts the following options:
+
+<TypeDocProps name="TreeCollectionOptions" partial />
+
+<TypeDocProps hideDefaultColumn name="TreeCollection" partial />
+
+## Element API
+
+### q-tree-label
+
+<TypeDocProps name="TreeLabelDirective" />
+
+<TypeDocAngularAttributes name={["TreeLabelBindings", "QdsTreeLabelBindings"]} />
+
+### q-tree-branch
+
+<TypeDocProps name="TreeBranchDirective" />
+
+<TypeDocAngularAttributes name={["TreeBranchBindings", "QdsTreeBranchBindings"]} />
+
+### q-tree-branch-node
+
+<TypeDocProps name="TreeBranchNodeDirective" />
+
+<TypeDocAngularAttributes name={["TreeBranchNodeBindings", "QdsTreeBranchNodeBindings"]} />
+
+### q-tree-branch-trigger
+
+<TypeDocProps name="TreeBranchTriggerDirective" />
+
+<TypeDocAngularAttributes name={["TreeBranchTriggerBindings", "QdsTreeBranchTriggerBindings"]} />
+
+### q-tree-branch-content
+
+<TypeDocProps name="TreeBranchContentDirective" />
+
+<TypeDocAngularAttributes name={["TreeBranchContentBindings", "QdsTreeBranchContentBindings"]} />
+
+### q-tree-branch-indent-guide
+
+<TypeDocProps name="TreeBranchIndentGuideDirective" />
+
+<TypeDocAngularAttributes name="TreeBranchIndentGuideBindings" />
+
+### q-tree-leaf-node
+
+<TypeDocProps name="TreeLeafNodeDirective" />
+
+<TypeDocAngularAttributes name={["TreeLeafNodeBindings", "QdsTreeLeafNodeBindings"]} />
+
+### q-tree-node-checkbox
+
+<TypeDocProps name="TreeNodeCheckboxDirective" />
+
+<TypeDocAngularAttributes name={["TreeNodeCheckboxBindings", "QdsCheckmarkRootBindings"]} />
+
+### q-tree-node-action
+
+<TypeDocProps name="TreeNodeActionDirective" />
+
+<TypeDocAngularAttributes name={["TreeNodeActionBindings", "QdsTreeNodeActionBindings"]} />
+
+### q-tree-node-indicator
+
+<TypeDocProps name="TreeNodeIndicatorDirective" />
+
+<TypeDocAngularAttributes name={["TreeNodeIndicatorBindings", "QdsTreeNodeIndicatorBindings"]} />
+
+### q-tree-node-icon
+
+<TypeDocProps name="TreeNodeIconDirective" />
+
+<TypeDocAngularAttributes name={["TreeNodeIconBindings", "QdsTreeNodeIconBindings"]} />
+
+### q-tree-node-text
+
+<TypeDocProps name="TreeNodeTextDirective" />
+
+<TypeDocAngularAttributes name={["TreeNodeTextBindings", "QdsTreeNodeTextBindings"]} />
+
+## Template Directives
+
+### q-tree-branch-template
+
+Use this directive on an `ng-template` to customize the rendering of branch nodes within `q-tree-nodes`.
+
+### q-tree-leaf-template
+
+Use this directive on an `ng-template` to customize the rendering of leaf nodes within `q-tree-nodes`.

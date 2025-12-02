@@ -1,0 +1,118 @@
+import {Component} from "@angular/core"
+import {FileText, FolderIcon} from "lucide-angular"
+
+import {IconDirective} from "@qualcomm-ui/angular/icon"
+import {TreeModule} from "@qualcomm-ui/angular/tree"
+import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
+import {createTreeCollection} from "@qualcomm-ui/core/tree"
+
+interface FileNode {
+  id: string
+  name: string
+  nodes?: FileNode[]
+}
+
+@Component({
+  imports: [TreeModule, IconDirective],
+  providers: [provideIcons({FileText, FolderIcon})],
+  selector: "tree-default-expanded-demo",
+  template: `
+    <!-- preview -->
+    <div
+      class="w-full max-w-sm"
+      q-tree-root
+      [collection]="collection"
+      [defaultExpandedValue]="['src']"
+    >
+      <!-- preview -->
+      @for (
+        node of collection.rootNode.nodes;
+        let i = $index;
+        track collection.getNodeValue(node)
+      ) {
+        <q-tree-nodes [indexPath]="[i]" [node]="node">
+          <ng-template
+            let-branch
+            q-tree-branch-template
+            [rootNode]="collection.rootNode"
+          >
+            <div q-tree-branch-node>
+              <div q-tree-node-indicator></div>
+              <div q-tree-branch-trigger></div>
+              <svg q-tree-node-icon qIcon="FolderIcon"></svg>
+              <span q-tree-node-text>{{ branch.node.name }}</span>
+            </div>
+          </ng-template>
+
+          <ng-template
+            let-leaf
+            q-tree-leaf-template
+            [rootNode]="collection.rootNode"
+          >
+            <div q-tree-leaf-node>
+              <div q-tree-node-indicator></div>
+              <svg q-tree-node-icon qIcon="FileText"></svg>
+              <span q-tree-node-text>{{ leaf.node.name }}</span>
+            </div>
+          </ng-template>
+        </q-tree-nodes>
+      }
+    </div>
+  `,
+})
+export class TreeDefaultExpandedDemo {
+  collection = createTreeCollection<FileNode>({
+    nodeChildren: "nodes",
+    nodeText: (node) => node.name,
+    nodeValue: (node) => node.id,
+    rootNode: {
+      id: "ROOT",
+      name: "",
+      nodes: [
+        {
+          id: "node_modules",
+          name: "node_modules",
+          nodes: [
+            {
+              id: "@qui",
+              name: "@qui",
+              nodes: [
+                {
+                  id: "node_modules/@qualcomm-ui/core",
+                  name: "@qualcomm-ui/core",
+                },
+                {
+                  id: "node_modules/@qualcomm-ui/react",
+                  name: "@qualcomm-ui/react",
+                },
+                {
+                  id: "node_modules/@qualcomm-ui/react-core",
+                  name: "@qualcomm-ui/react-core",
+                },
+              ],
+            },
+            {
+              id: "node_modules/@types",
+              name: "@types",
+              nodes: [
+                {id: "node_modules/@types/react", name: "react"},
+                {id: "node_modules/@types/react-dom", name: "react-dom"},
+              ],
+            },
+          ],
+        },
+        {
+          id: "src",
+          name: "src",
+          nodes: [
+            {id: "src/app.tsx", name: "app.tsx"},
+            {id: "src/index.ts", name: "index.ts"},
+          ],
+        },
+        {id: "prettier.config.js", name: "prettier.config.js"},
+        {id: "package.json", name: "package.json"},
+        {id: "tsconfig.json", name: "tsconfig.json"},
+      ],
+    },
+  })
+}
