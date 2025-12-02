@@ -1,5 +1,24 @@
 # @qualcomm-ui/react
 
+## 1.4.0 (2025/12/01)
+
+### Features
+
+- [tree]: add Tree.Context component for accessing the tree api in JSX
+
+### Bug Fixes
+
+- [popover-trigger]: loosen className type
+- [tree-node-action]: omit restricted emphasis prop
+
+### Documentation
+
+- [tree]: move JSDoc comment @default docs to react module
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils, @qualcomm-ui/react-core, @qualcomm-ui/qds-core, @qualcomm-ui/core]
+
 ## 1.3.3 (2025/12/01)
 
 ### Bug Fixes

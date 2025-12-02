@@ -1,5 +1,19 @@
 # @qualcomm-ui/angular
 
+## 1.8.0 (2025/12/01)
+
+### Features
+
+- [tree]: add tree module
+
+### Code Refactoring
+
+- [merge-props]: use shared implementation from utils package
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils, @qualcomm-ui/angular-core, @qualcomm-ui/qds-core, @qualcomm-ui/core]
+
 ## 1.7.2 (2025/12/01)
 
 ### Miscellaneous Chores

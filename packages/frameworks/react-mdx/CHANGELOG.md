@@ -1,5 +1,22 @@
 # @qualcomm-ui/react-mdx
 
+## 1.5.9 (2025/12/01)
+
+### Bug Fixes
+
+- [mdx-tables]: add box-sizing to prevent 2px overflow at full width
+- [shiki-notation-styles]: highlighted line indent color clash
+- [npm-install-tabs]: corrected language from bash to shell
+- [shiki-notation]: reduce opacity of warning and error backgrounds for contrast accessibility compliance
+
+### Styles
+
+- [mdx-tables]: reduced size from `md` to `sm`
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils, @qualcomm-ui/react, @qualcomm-ui/react-core, @qualcomm-ui/core]
+
 ## 1.5.8 (2025/12/01)
 
 ### Miscellaneous Chores

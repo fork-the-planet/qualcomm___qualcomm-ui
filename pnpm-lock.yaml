@@ -291,7 +291,7 @@ importers:
   packages/common/codemod:
     dependencies:
       '@qualcomm-ui/utils':
-        specifier: workspace:^1.0.3
+        specifier: workspace:^1.0.4
         version: link:../utils
     devDependencies:
       '@commander-js/extra-typings':
@@ -394,7 +394,7 @@ importers:
         specifier: workspace:^1.0.3
         version: link:../css-utils
       '@qualcomm-ui/dom':
-        specifier: workspace:^1.0.5
+        specifier: workspace:^1.0.6
         version: link:../dom
       '@qualcomm-ui/esbuild':
         specifier: workspace:^1.0.3
@@ -403,7 +403,7 @@ importers:
         specifier: workspace:^1.0.4
         version: link:../../configs/tsconfig
       '@qualcomm-ui/utils':
-        specifier: workspace:^1.0.3
+        specifier: workspace:^1.0.4
         version: link:../utils
       '@types/node':
         specifier: ~24.9.2
@@ -509,7 +509,7 @@ importers:
         specifier: workspace:^1.0.4
         version: link:../../configs/tsconfig
       '@qualcomm-ui/utils':
-        specifier: workspace:^1.0.3
+        specifier: workspace:^1.0.4
         version: link:../utils
       '@types/node':
         specifier: ~24.9.2
@@ -708,7 +708,7 @@ importers:
         specifier: workspace:^1.0.3
         version: link:../typedoc-common
       '@qualcomm-ui/utils':
-        specifier: workspace:^1.0.3
+        specifier: workspace:^1.0.4
         version: link:../utils
       '@types/hast':
         specifier: ^3.0.4
@@ -786,7 +786,7 @@ importers:
         specifier: workspace:^1.0.5
         version: link:../cli
       '@qualcomm-ui/core':
-        specifier: workspace:^1.0.9
+        specifier: workspace:^1.0.10
         version: link:../core
       '@qualcomm-ui/css-utils':
         specifier: workspace:^1.0.3
@@ -798,7 +798,7 @@ importers:
         specifier: workspace:^1.0.4
         version: link:../../configs/tsconfig
       '@qualcomm-ui/utils':
-        specifier: workspace:^1.0.3
+        specifier: workspace:^1.0.4
         version: link:../utils
       '@types/culori':
         specifier: ^4.0.0
@@ -1090,10 +1090,10 @@ importers:
         version: 10.1.0
       eslint-plugin-boundaries:
         specifier: ^5.0.1
-        version: 5.1.0(@typescript-eslint/parser@8.46.4(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3))(eslint@9.37.0(jiti@2.6.1))
+        version: 5.1.0(@typescript-eslint/parser@8.46.2(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.37.0(jiti@2.6.1))
       eslint-plugin-import:
         specifier: ^2.31.0
-        version: 2.32.0(@typescript-eslint/parser@8.46.4(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3))(eslint@9.37.0(jiti@2.6.1))
+        version: 2.32.0(@typescript-eslint/parser@8.46.2(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.37.0(jiti@2.6.1))
       vitest:
         specifier: ^4.0.8
         version: 4.0.9(@types/debug@4.1.12)(@types/node@24.10.1)(@vitest/browser-playwright@4.0.9)(@vitest/ui@4.0.9)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)
@@ -3327,16 +3327,16 @@ importers:
         specifier: 0.21.2
         version: 0.21.2(@rspack/core@1.6.4(@swc/helpers@0.5.17))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(webpack@5.102.1(esbuild@0.25.12))
       '@qualcomm-ui/angular-core':
-        specifier: workspace:^1.1.1
+        specifier: workspace:^1.2.0
         version: link:../angular-core
       '@qualcomm-ui/cli':
         specifier: workspace:^1
         version: link:../../common/cli
       '@qualcomm-ui/core':
-        specifier: workspace:^1.0.9
+        specifier: workspace:^1.0.10
         version: link:../../common/core
       '@qualcomm-ui/qds-core':
-        specifier: workspace:^1.7.1
+        specifier: workspace:^1.8.0
         version: link:../../common/qds-core
       '@qualcomm-ui/tailwind-plugin':
         specifier: workspace:^1.1.0
@@ -3345,7 +3345,7 @@ importers:
         specifier: workspace:^1.0.4
         version: link:../../configs/tsconfig
       '@qualcomm-ui/utils':
-        specifier: workspace:^1.0.3
+        specifier: workspace:^1.0.4
         version: link:../../common/utils
       '@tailwindcss/vite':
         specifier: ^4.1.11
@@ -3507,10 +3507,10 @@ importers:
         specifier: workspace:^1
         version: link:../../common/cli
       '@qualcomm-ui/core':
-        specifier: workspace:^1.0.9
+        specifier: workspace:^1.0.10
         version: link:../../common/core
       '@qualcomm-ui/dom':
-        specifier: workspace:^1.0.5
+        specifier: workspace:^1.0.6
         version: link:../../common/dom
       '@qualcomm-ui/tailwind-plugin':
         specifier: workspace:^1.1.0
@@ -3519,7 +3519,7 @@ importers:
         specifier: workspace:^1.0.4
         version: link:../../configs/tsconfig
       '@qualcomm-ui/utils':
-        specifier: workspace:^1.0.3
+        specifier: workspace:^1.0.4
         version: link:../../common/utils
       '@tailwindcss/vite':
         specifier: ^4.1.11
@@ -3606,16 +3606,16 @@ importers:
         specifier: workspace:^1.0.5
         version: link:../../common/cli
       '@qualcomm-ui/core':
-        specifier: workspace:^1.0.9
+        specifier: workspace:^1.0.10
         version: link:../../common/core
       '@qualcomm-ui/esbuild':
         specifier: workspace:^1.0.3
         version: link:../../common/esbuild
       '@qualcomm-ui/qds-core':
-        specifier: workspace:^1.7.1
+        specifier: workspace:^1.8.0
         version: link:../../common/qds-core
       '@qualcomm-ui/react-core':
-        specifier: workspace:^1.0.9
+        specifier: workspace:^1.0.10
         version: link:../react-core
       '@qualcomm-ui/react-test-utils':
         specifier: workspace:^1.0.0
@@ -3624,7 +3624,7 @@ importers:
         specifier: workspace:^1.0.4
         version: link:../../configs/tsconfig
       '@qualcomm-ui/utils':
-        specifier: workspace:^1.0.3
+        specifier: workspace:^1.0.4
         version: link:../../common/utils
       '@tailwindcss/vite':
         specifier: ^4.1.11
@@ -3723,10 +3723,10 @@ importers:
         specifier: workspace:^1.0.5
         version: link:../../common/cli
       '@qualcomm-ui/core':
-        specifier: workspace:^1.0.9
+        specifier: workspace:^1.0.10
         version: link:../../common/core
       '@qualcomm-ui/dom':
-        specifier: workspace:^1.0.5
+        specifier: workspace:^1.0.6
         version: link:../../common/dom
       '@qualcomm-ui/esbuild':
         specifier: workspace:^1.0.3
@@ -3738,7 +3738,7 @@ importers:
         specifier: workspace:^1.0.4
         version: link:../../configs/tsconfig
       '@qualcomm-ui/utils':
-        specifier: workspace:^1.0.3
+        specifier: workspace:^1.0.4
         version: link:../../common/utils
       '@tailwindcss/vite':
         specifier: ^4.1.11
@@ -3946,13 +3946,13 @@ importers:
         specifier: workspace:^1.0.5
         version: link:../../common/cli
       '@qualcomm-ui/core':
-        specifier: workspace:^1.0.9
+        specifier: workspace:^1.0.10
         version: link:../../common/core
       '@qualcomm-ui/css-utils':
         specifier: workspace:^1.0.3
         version: link:../../common/css-utils
       '@qualcomm-ui/dom':
-        specifier: workspace:^1.0.5
+        specifier: workspace:^1.0.6
         version: link:../../common/dom
       '@qualcomm-ui/esbuild':
         specifier: workspace:^1.0.3
@@ -3961,10 +3961,10 @@ importers:
         specifier: workspace:^1.3.0
         version: link:../../common/mdx-common
       '@qualcomm-ui/react':
-        specifier: workspace:^1.3.3
+        specifier: workspace:^1.4.0
         version: link:../react
       '@qualcomm-ui/react-core':
-        specifier: workspace:^1.0.9
+        specifier: workspace:^1.0.10
         version: link:../react-core
       '@qualcomm-ui/react-test-utils':
         specifier: workspace:^1.0.0
@@ -3976,7 +3976,7 @@ importers:
         specifier: workspace:^1.0.3
         version: link:../../common/typedoc-common
       '@qualcomm-ui/utils':
-        specifier: workspace:^1.0.3
+        specifier: workspace:^1.0.4
         version: link:../../common/utils
       '@shikijs/langs':
         specifier: ^3.13.0
@@ -7176,7 +7176,7 @@ packages:
     resolution: {integrity: sha512-RJxlQQLkaMMIuWRozy+z2vEqbaQlCuaCgVZIUCzQLYggY22LZbP5Y1+ia+FD724Ids9e+XIyOLXLrLgQSHIthw==}
     engines: {node: '>= 10.0.0'}
     bundledDependencies:
-    - napi-wasm
+      - napi-wasm
 
   '@parcel/watcher-win32-arm64@2.5.1':
     resolution: {integrity: sha512-RFzklRvmc3PkjKjry3hLF9wD7ppR4AKcWNzH7kXR7GUe0Igb3Nz8fyPwtZCSquGrhU5HhUNDr/mKBqj7tqA2Vw==}
@@ -8121,12 +8121,12 @@ packages:
     engines: {node: '>=14.0.0'}
     cpu: [wasm32]
     bundledDependencies:
-    - '@napi-rs/wasm-runtime'
-    - '@emnapi/core'
-    - '@emnapi/runtime'
-    - '@tybys/wasm-util'
-    - '@emnapi/wasi-threads'
-    - tslib
+      - '@napi-rs/wasm-runtime'
+      - '@emnapi/core'
+      - '@emnapi/runtime'
+      - '@tybys/wasm-util'
+      - '@emnapi/wasi-threads'
+      - tslib
 
   '@tailwindcss/oxide-win32-arm64-msvc@4.1.17':
     resolution: {integrity: sha512-JU5AHr7gKbZlOGvMdb4722/0aYbU+tN6lv1kONx0JK2cGsh7g148zVWLM0IKR3NeKLv+L90chBVYcJ8uJWbC9A==}
@@ -16363,37 +16363,37 @@ snapshots:
       '@nx/devkit': 22.0.3(nx@22.0.3)
       '@nx/vite': 22.0.3(@babel/traverse@7.28.5)(nx@22.0.3)(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(typescript@5.9.3)(vitest@4.0.9)
     transitivePeerDependencies:
-    - '@angular-devkit/build-angular'
-    - '@angular/build'
-    - '@azure/app-configuration'
-    - '@azure/cosmos'
-    - '@azure/data-tables'
-    - '@azure/identity'
-    - '@azure/keyvault-secrets'
-    - '@azure/storage-blob'
-    - '@capacitor/preferences'
-    - '@deno/kv'
-    - '@electric-sql/pglite'
-    - '@libsql/client'
-    - '@netlify/blobs'
-    - '@planetscale/database'
-    - '@upstash/redis'
-    - '@vercel/blob'
-    - '@vercel/functions'
-    - '@vercel/kv'
-    - aws4fetch
-    - bare-abort-controller
-    - better-sqlite3
-    - drizzle-orm
-    - encoding
-    - idb-keyval
-    - mysql2
-    - react-native-b4a
-    - rolldown
-    - sqlite3
-    - supports-color
-    - uploadthing
-    - xml2js
+      - '@angular-devkit/build-angular'
+      - '@angular/build'
+      - '@azure/app-configuration'
+      - '@azure/cosmos'
+      - '@azure/data-tables'
+      - '@azure/identity'
+      - '@azure/keyvault-secrets'
+      - '@azure/storage-blob'
+      - '@capacitor/preferences'
+      - '@deno/kv'
+      - '@electric-sql/pglite'
+      - '@libsql/client'
+      - '@netlify/blobs'
+      - '@planetscale/database'
+      - '@upstash/redis'
+      - '@vercel/blob'
+      - '@vercel/functions'
+      - '@vercel/kv'
+      - aws4fetch
+      - bare-abort-controller
+      - better-sqlite3
+      - drizzle-orm
+      - encoding
+      - idb-keyval
+      - mysql2
+      - react-native-b4a
+      - rolldown
+      - sqlite3
+      - supports-color
+      - uploadthing
+      - xml2js
 
   '@analogjs/vite-plugin-angular@2.0.5(@angular-devkit/build-angular@20.3.10(9fc0baaba47d2a20a1e4aaa9fdd19110))(@angular/build@20.3.10(9ea6bd3e46f28e0a2eadc263a1034ffa))':
     dependencies:
@@ -16410,35 +16410,35 @@ snapshots:
       radix3: 1.1.2
       xmlbuilder2: 3.1.1
     transitivePeerDependencies:
-    - '@azure/app-configuration'
-    - '@azure/cosmos'
-    - '@azure/data-tables'
-    - '@azure/identity'
-    - '@azure/keyvault-secrets'
-    - '@azure/storage-blob'
-    - '@capacitor/preferences'
-    - '@deno/kv'
-    - '@electric-sql/pglite'
-    - '@libsql/client'
-    - '@netlify/blobs'
-    - '@planetscale/database'
-    - '@upstash/redis'
-    - '@vercel/blob'
-    - '@vercel/functions'
-    - '@vercel/kv'
-    - aws4fetch
-    - bare-abort-controller
-    - better-sqlite3
-    - drizzle-orm
-    - encoding
-    - idb-keyval
-    - mysql2
-    - react-native-b4a
-    - rolldown
-    - sqlite3
-    - supports-color
-    - uploadthing
-    - xml2js
+      - '@azure/app-configuration'
+      - '@azure/cosmos'
+      - '@azure/data-tables'
+      - '@azure/identity'
+      - '@azure/keyvault-secrets'
+      - '@azure/storage-blob'
+      - '@capacitor/preferences'
+      - '@deno/kv'
+      - '@electric-sql/pglite'
+      - '@libsql/client'
+      - '@netlify/blobs'
+      - '@planetscale/database'
+      - '@upstash/redis'
+      - '@vercel/blob'
+      - '@vercel/functions'
+      - '@vercel/kv'
+      - aws4fetch
+      - bare-abort-controller
+      - better-sqlite3
+      - drizzle-orm
+      - encoding
+      - idb-keyval
+      - mysql2
+      - react-native-b4a
+      - rolldown
+      - sqlite3
+      - supports-color
+      - uploadthing
+      - xml2js
 
   '@analogjs/vitest-angular@2.0.5(@analogjs/vite-plugin-angular@2.0.5(@angular-devkit/build-angular@20.3.10(9fc0baaba47d2a20a1e4aaa9fdd19110))(@angular/build@20.3.10(9ea6bd3e46f28e0a2eadc263a1034ffa)))(@angular-devkit/architect@0.2003.10(chokidar@4.0.3))(vitest@4.0.9)':
     dependencies:
@@ -16451,7 +16451,7 @@ snapshots:
       '@angular-devkit/core': 20.3.10(chokidar@4.0.3)
       rxjs: 7.8.2
     transitivePeerDependencies:
-    - chokidar
+      - chokidar
 
   '@angular-devkit/build-angular@20.3.10(9fc0baaba47d2a20a1e4aaa9fdd19110)':
     dependencies:
@@ -16520,27 +16520,27 @@ snapshots:
       ng-packagr: 20.3.2(@angular/compiler-cli@20.3.12(@angular/compiler@20.3.12)(typescript@5.9.3))(tailwindcss@4.1.17)(tslib@2.5.3)(typescript@5.9.3)
       tailwindcss: 4.1.17
     transitivePeerDependencies:
-    - '@angular/compiler'
-    - '@rspack/core'
-    - '@swc/core'
-    - '@types/node'
-    - bufferutil
-    - chokidar
-    - debug
-    - html-webpack-plugin
-    - jiti
-    - lightningcss
-    - node-sass
-    - sass-embedded
-    - stylus
-    - sugarss
-    - supports-color
-    - tsx
-    - uglify-js
-    - utf-8-validate
-    - vitest
-    - webpack-cli
-    - yaml
+      - '@angular/compiler'
+      - '@rspack/core'
+      - '@swc/core'
+      - '@types/node'
+      - bufferutil
+      - chokidar
+      - debug
+      - html-webpack-plugin
+      - jiti
+      - lightningcss
+      - node-sass
+      - sass-embedded
+      - stylus
+      - sugarss
+      - supports-color
+      - tsx
+      - uglify-js
+      - utf-8-validate
+      - vitest
+      - webpack-cli
+      - yaml
 
   '@angular-devkit/build-webpack@0.2003.10(chokidar@4.0.3)(webpack-dev-server@5.2.2(webpack@5.101.2(esbuild@0.25.9)))(webpack@5.101.2(esbuild@0.25.9))':
     dependencies:
@@ -16549,7 +16549,7 @@ snapshots:
       webpack: 5.101.2(esbuild@0.25.12)
       webpack-dev-server: 5.2.2(webpack@5.101.2(esbuild@0.25.9))
     transitivePeerDependencies:
-    - chokidar
+      - chokidar
 
   '@angular-devkit/core@20.3.10(chokidar@4.0.3)':
     dependencies:
@@ -16570,7 +16570,7 @@ snapshots:
       ora: 8.2.0
       rxjs: 7.8.2
     transitivePeerDependencies:
-    - chokidar
+      - chokidar
 
   '@angular-eslint/builder@20.6.0(chokidar@4.0.3)(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
@@ -16579,7 +16579,7 @@ snapshots:
       eslint: 9.39.1(jiti@2.6.1)
       typescript: 5.9.3
     transitivePeerDependencies:
-    - chokidar
+      - chokidar
 
   '@angular-eslint/bundled-angular-compiler@20.6.0': {}
 
@@ -16614,12 +16614,12 @@ snapshots:
       semver: 7.7.3
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
-    - '@angular-eslint/template-parser'
-    - '@typescript-eslint/types'
-    - '@typescript-eslint/utils'
-    - chokidar
-    - eslint
-    - typescript
+      - '@angular-eslint/template-parser'
+      - '@typescript-eslint/types'
+      - '@typescript-eslint/utils'
+      - chokidar
+      - eslint
+      - typescript
 
   '@angular-eslint/template-parser@20.6.0(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
@@ -16684,17 +16684,17 @@ snapshots:
       tailwindcss: 4.1.17
       vitest: 4.0.9(@types/debug@4.1.12)(@types/node@24.10.1)(@vitest/browser-playwright@4.0.9)(@vitest/ui@4.0.9)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)
     transitivePeerDependencies:
-    - '@types/node'
-    - chokidar
-    - jiti
-    - lightningcss
-    - sass-embedded
-    - stylus
-    - sugarss
-    - supports-color
-    - terser
-    - tsx
-    - yaml
+      - '@types/node'
+      - chokidar
+      - jiti
+      - lightningcss
+      - sass-embedded
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+      - tsx
+      - yaml
 
   '@angular/build@20.3.10(a2829c1a02bc3c396f855d3c788071a1)':
     dependencies:
@@ -16740,17 +16740,17 @@ snapshots:
       tailwindcss: 4.1.17
       vitest: 4.0.9(@types/debug@4.1.12)(@types/node@24.10.1)(@vitest/browser-playwright@4.0.9)(@vitest/ui@4.0.9)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)
     transitivePeerDependencies:
-    - '@types/node'
-    - chokidar
-    - jiti
-    - lightningcss
-    - sass-embedded
-    - stylus
-    - sugarss
-    - supports-color
-    - terser
-    - tsx
-    - yaml
+      - '@types/node'
+      - chokidar
+      - jiti
+      - lightningcss
+      - sass-embedded
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+      - tsx
+      - yaml
 
   '@angular/build@20.3.10(e57e369d507e2dcb02908707abea4691)':
     dependencies:
@@ -16795,17 +16795,17 @@ snapshots:
       postcss: 8.5.6
       tailwindcss: 4.1.17
     transitivePeerDependencies:
-    - '@types/node'
-    - chokidar
-    - jiti
-    - lightningcss
-    - sass-embedded
-    - stylus
-    - sugarss
-    - supports-color
-    - terser
-    - tsx
-    - yaml
+      - '@types/node'
+      - chokidar
+      - jiti
+      - lightningcss
+      - sass-embedded
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+      - tsx
+      - yaml
 
   '@angular/cdk-experimental@20.2.13(@angular/cdk@20.2.13(@angular/common@20.3.12(@angular/core@20.3.12(@angular/compiler@20.3.12)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.3.12(@angular/compiler@20.3.12)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.3.12(@angular/compiler@20.3.12)(rxjs@7.8.2))':
     dependencies:
@@ -16842,9 +16842,9 @@ snapshots:
       yargs: 18.0.0
       zod: 3.25.76
     transitivePeerDependencies:
-    - '@types/node'
-    - chokidar
-    - supports-color
+      - '@types/node'
+      - chokidar
+      - supports-color
 
   '@angular/cli@20.3.10(@types/node@24.9.2)(chokidar@4.0.3)':
     dependencies:
@@ -16867,9 +16867,9 @@ snapshots:
       yargs: 18.0.0
       zod: 3.25.76
     transitivePeerDependencies:
-    - '@types/node'
-    - chokidar
-    - supports-color
+      - '@types/node'
+      - chokidar
+      - supports-color
 
   '@angular/common@20.3.12(@angular/core@20.3.12(@angular/compiler@20.3.12)(rxjs@7.8.2))(rxjs@7.8.2)':
     dependencies:
@@ -16891,7 +16891,7 @@ snapshots:
     optionalDependencies:
       typescript: 5.9.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@angular/compiler@20.3.12':
     dependencies:
@@ -17042,7 +17042,7 @@ snapshots:
       '@smithy/util-utf8': 4.2.0
       tslib: 2.8.1
     transitivePeerDependencies:
-    - aws-crt
+      - aws-crt
 
   '@aws-sdk/client-route-53@3.927.0':
     dependencies:
@@ -17089,7 +17089,7 @@ snapshots:
       '@smithy/util-waiter': 4.2.5
       tslib: 2.8.1
     transitivePeerDependencies:
-    - aws-crt
+      - aws-crt
 
   '@aws-sdk/client-sso@3.927.0':
     dependencies:
@@ -17132,7 +17132,7 @@ snapshots:
       '@smithy/util-utf8': 4.2.0
       tslib: 2.8.1
     transitivePeerDependencies:
-    - aws-crt
+      - aws-crt
 
   '@aws-sdk/core@3.927.0':
     dependencies:
@@ -17187,7 +17187,7 @@ snapshots:
       '@smithy/types': 4.9.0
       tslib: 2.8.1
     transitivePeerDependencies:
-    - aws-crt
+      - aws-crt
 
   '@aws-sdk/credential-provider-node@3.927.0':
     dependencies:
@@ -17204,7 +17204,7 @@ snapshots:
       '@smithy/types': 4.9.0
       tslib: 2.8.1
     transitivePeerDependencies:
-    - aws-crt
+      - aws-crt
 
   '@aws-sdk/credential-provider-process@3.927.0':
     dependencies:
@@ -17226,7 +17226,7 @@ snapshots:
       '@smithy/types': 4.9.0
       tslib: 2.8.1
     transitivePeerDependencies:
-    - aws-crt
+      - aws-crt
 
   '@aws-sdk/credential-provider-web-identity@3.927.0':
     dependencies:
@@ -17238,7 +17238,7 @@ snapshots:
       '@smithy/types': 4.9.0
       tslib: 2.8.1
     transitivePeerDependencies:
-    - aws-crt
+      - aws-crt
 
   '@aws-sdk/middleware-host-header@3.922.0':
     dependencies:
@@ -17318,7 +17318,7 @@ snapshots:
       '@smithy/util-utf8': 4.2.0
       tslib: 2.8.1
     transitivePeerDependencies:
-    - aws-crt
+      - aws-crt
 
   '@aws-sdk/region-config-resolver@3.925.0':
     dependencies:
@@ -17338,7 +17338,7 @@ snapshots:
       '@smithy/types': 4.9.0
       tslib: 2.8.1
     transitivePeerDependencies:
-    - aws-crt
+      - aws-crt
 
   '@aws-sdk/types@3.922.0':
     dependencies:
@@ -17406,7 +17406,7 @@ snapshots:
       json5: 2.2.3
       semver: 6.3.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/core@7.28.5':
     dependencies:
@@ -17426,7 +17426,7 @@ snapshots:
       json5: 2.2.3
       semver: 6.3.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/generator@7.28.3':
     dependencies:
@@ -17467,7 +17467,7 @@ snapshots:
       '@babel/traverse': 7.28.5
       semver: 6.3.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/helper-create-class-features-plugin@7.28.5(@babel/core@7.28.5)':
     dependencies:
@@ -17480,7 +17480,7 @@ snapshots:
       '@babel/traverse': 7.28.5
       semver: 6.3.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/helper-create-regexp-features-plugin@7.28.5(@babel/core@7.28.3)':
     dependencies:
@@ -17506,7 +17506,7 @@ snapshots:
       lodash.debounce: 4.0.8
       resolve: 1.22.11
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/helper-define-polyfill-provider@0.6.5(@babel/core@7.28.5)':
     dependencies:
@@ -17517,7 +17517,7 @@ snapshots:
       lodash.debounce: 4.0.8
       resolve: 1.22.11
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@babel/helper-globals@7.28.0': {}
@@ -17527,14 +17527,14 @@ snapshots:
       '@babel/traverse': 7.28.5
       '@babel/types': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/helper-module-imports@7.27.1':
     dependencies:
       '@babel/traverse': 7.28.5
       '@babel/types': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/helper-module-transforms@7.28.3(@babel/core@7.28.3)':
     dependencies:
@@ -17543,7 +17543,7 @@ snapshots:
       '@babel/helper-validator-identifier': 7.28.5
       '@babel/traverse': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/helper-module-transforms@7.28.3(@babel/core@7.28.5)':
     dependencies:
@@ -17552,7 +17552,7 @@ snapshots:
       '@babel/helper-validator-identifier': 7.28.5
       '@babel/traverse': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/helper-optimise-call-expression@7.27.1':
     dependencies:
@@ -17567,7 +17567,7 @@ snapshots:
       '@babel/helper-wrap-function': 7.28.3
       '@babel/traverse': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/helper-remap-async-to-generator@7.27.1(@babel/core@7.28.5)':
     dependencies:
@@ -17576,7 +17576,7 @@ snapshots:
       '@babel/helper-wrap-function': 7.28.3
       '@babel/traverse': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@babel/helper-replace-supers@7.27.1(@babel/core@7.28.3)':
@@ -17586,7 +17586,7 @@ snapshots:
       '@babel/helper-optimise-call-expression': 7.27.1
       '@babel/traverse': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/helper-replace-supers@7.27.1(@babel/core@7.28.5)':
     dependencies:
@@ -17595,14 +17595,14 @@ snapshots:
       '@babel/helper-optimise-call-expression': 7.27.1
       '@babel/traverse': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/helper-skip-transparent-expression-wrappers@7.27.1':
     dependencies:
       '@babel/traverse': 7.28.5
       '@babel/types': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/helper-split-export-declaration@7.24.7':
     dependencies:
@@ -17620,7 +17620,7 @@ snapshots:
       '@babel/traverse': 7.28.5
       '@babel/types': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/helpers@7.28.4':
     dependencies:
@@ -17637,7 +17637,7 @@ snapshots:
       '@babel/helper-plugin-utils': 7.27.1
       '@babel/traverse': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/plugin-bugfix-firefox-class-in-computed-class-key@7.28.5(@babel/core@7.28.5)':
     dependencies:
@@ -17645,7 +17645,7 @@ snapshots:
       '@babel/helper-plugin-utils': 7.27.1
       '@babel/traverse': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@babel/plugin-bugfix-safari-class-field-initializer-scope@7.27.1(@babel/core@7.28.3)':
@@ -17677,7 +17677,7 @@ snapshots:
       '@babel/helper-skip-transparent-expression-wrappers': 7.27.1
       '@babel/plugin-transform-optional-chaining': 7.28.5(@babel/core@7.28.3)
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining@7.27.1(@babel/core@7.28.5)':
     dependencies:
@@ -17686,7 +17686,7 @@ snapshots:
       '@babel/helper-skip-transparent-expression-wrappers': 7.27.1
       '@babel/plugin-transform-optional-chaining': 7.28.5(@babel/core@7.28.5)
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@babel/plugin-bugfix-v8-static-class-fields-redefine-readonly@7.28.3(@babel/core@7.28.3)':
@@ -17695,7 +17695,7 @@ snapshots:
       '@babel/helper-plugin-utils': 7.27.1
       '@babel/traverse': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/plugin-bugfix-v8-static-class-fields-redefine-readonly@7.28.3(@babel/core@7.28.5)':
     dependencies:
@@ -17703,7 +17703,7 @@ snapshots:
       '@babel/helper-plugin-utils': 7.27.1
       '@babel/traverse': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@babel/plugin-proposal-decorators@7.28.0(@babel/core@7.28.5)':
@@ -17713,7 +17713,7 @@ snapshots:
       '@babel/helper-plugin-utils': 7.27.1
       '@babel/plugin-syntax-decorators': 7.27.1(@babel/core@7.28.5)
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@babel/plugin-proposal-private-property-in-object@7.21.0-placeholder-for-preset-env.2(@babel/core@7.28.3)':
@@ -17794,7 +17794,7 @@ snapshots:
       '@babel/helper-remap-async-to-generator': 7.27.1(@babel/core@7.28.3)
       '@babel/traverse': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/plugin-transform-async-generator-functions@7.28.0(@babel/core@7.28.5)':
     dependencies:
@@ -17803,7 +17803,7 @@ snapshots:
       '@babel/helper-remap-async-to-generator': 7.27.1(@babel/core@7.28.5)
       '@babel/traverse': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@babel/plugin-transform-async-to-generator@7.27.1(@babel/core@7.28.3)':
@@ -17813,7 +17813,7 @@ snapshots:
       '@babel/helper-plugin-utils': 7.27.1
       '@babel/helper-remap-async-to-generator': 7.27.1(@babel/core@7.28.3)
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/plugin-transform-async-to-generator@7.27.1(@babel/core@7.28.5)':
     dependencies:
@@ -17822,7 +17822,7 @@ snapshots:
       '@babel/helper-plugin-utils': 7.27.1
       '@babel/helper-remap-async-to-generator': 7.27.1(@babel/core@7.28.5)
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@babel/plugin-transform-block-scoped-functions@7.27.1(@babel/core@7.28.3)':
@@ -17853,7 +17853,7 @@ snapshots:
       '@babel/helper-create-class-features-plugin': 7.28.5(@babel/core@7.28.3)
       '@babel/helper-plugin-utils': 7.27.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/plugin-transform-class-properties@7.27.1(@babel/core@7.28.5)':
     dependencies:
@@ -17861,7 +17861,7 @@ snapshots:
       '@babel/helper-create-class-features-plugin': 7.28.5(@babel/core@7.28.5)
       '@babel/helper-plugin-utils': 7.27.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@babel/plugin-transform-class-static-block@7.28.3(@babel/core@7.28.3)':
@@ -17870,7 +17870,7 @@ snapshots:
       '@babel/helper-create-class-features-plugin': 7.28.5(@babel/core@7.28.3)
       '@babel/helper-plugin-utils': 7.27.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/plugin-transform-class-static-block@7.28.3(@babel/core@7.28.5)':
     dependencies:
@@ -17878,7 +17878,7 @@ snapshots:
       '@babel/helper-create-class-features-plugin': 7.28.5(@babel/core@7.28.5)
       '@babel/helper-plugin-utils': 7.27.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@babel/plugin-transform-classes@7.28.4(@babel/core@7.28.3)':
@@ -17891,7 +17891,7 @@ snapshots:
       '@babel/helper-replace-supers': 7.27.1(@babel/core@7.28.3)
       '@babel/traverse': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/plugin-transform-classes@7.28.4(@babel/core@7.28.5)':
     dependencies:
@@ -17903,7 +17903,7 @@ snapshots:
       '@babel/helper-replace-supers': 7.27.1(@babel/core@7.28.5)
       '@babel/traverse': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@babel/plugin-transform-computed-properties@7.27.1(@babel/core@7.28.3)':
@@ -17925,7 +17925,7 @@ snapshots:
       '@babel/helper-plugin-utils': 7.27.1
       '@babel/traverse': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/plugin-transform-destructuring@7.28.5(@babel/core@7.28.5)':
     dependencies:
@@ -17933,7 +17933,7 @@ snapshots:
       '@babel/helper-plugin-utils': 7.27.1
       '@babel/traverse': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@babel/plugin-transform-dotall-regex@7.27.1(@babel/core@7.28.3)':
@@ -17990,7 +17990,7 @@ snapshots:
       '@babel/helper-plugin-utils': 7.27.1
       '@babel/plugin-transform-destructuring': 7.28.5(@babel/core@7.28.3)
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/plugin-transform-explicit-resource-management@7.28.0(@babel/core@7.28.5)':
     dependencies:
@@ -17998,7 +17998,7 @@ snapshots:
       '@babel/helper-plugin-utils': 7.27.1
       '@babel/plugin-transform-destructuring': 7.28.5(@babel/core@7.28.5)
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@babel/plugin-transform-exponentiation-operator@7.28.5(@babel/core@7.28.3)':
@@ -18029,7 +18029,7 @@ snapshots:
       '@babel/helper-plugin-utils': 7.27.1
       '@babel/helper-skip-transparent-expression-wrappers': 7.27.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/plugin-transform-for-of@7.27.1(@babel/core@7.28.5)':
     dependencies:
@@ -18037,7 +18037,7 @@ snapshots:
       '@babel/helper-plugin-utils': 7.27.1
       '@babel/helper-skip-transparent-expression-wrappers': 7.27.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@babel/plugin-transform-function-name@7.27.1(@babel/core@7.28.3)':
@@ -18047,7 +18047,7 @@ snapshots:
       '@babel/helper-plugin-utils': 7.27.1
       '@babel/traverse': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/plugin-transform-function-name@7.27.1(@babel/core@7.28.5)':
     dependencies:
@@ -18056,7 +18056,7 @@ snapshots:
       '@babel/helper-plugin-utils': 7.27.1
       '@babel/traverse': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@babel/plugin-transform-json-strings@7.27.1(@babel/core@7.28.3)':
@@ -18109,7 +18109,7 @@ snapshots:
       '@babel/helper-module-transforms': 7.28.3(@babel/core@7.28.3)
       '@babel/helper-plugin-utils': 7.27.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/plugin-transform-modules-amd@7.27.1(@babel/core@7.28.5)':
     dependencies:
@@ -18117,7 +18117,7 @@ snapshots:
       '@babel/helper-module-transforms': 7.28.3(@babel/core@7.28.5)
       '@babel/helper-plugin-utils': 7.27.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@babel/plugin-transform-modules-commonjs@7.27.1(@babel/core@7.28.3)':
@@ -18126,7 +18126,7 @@ snapshots:
       '@babel/helper-module-transforms': 7.28.3(@babel/core@7.28.3)
       '@babel/helper-plugin-utils': 7.27.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/plugin-transform-modules-commonjs@7.27.1(@babel/core@7.28.5)':
     dependencies:
@@ -18134,7 +18134,7 @@ snapshots:
       '@babel/helper-module-transforms': 7.28.3(@babel/core@7.28.5)
       '@babel/helper-plugin-utils': 7.27.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/plugin-transform-modules-systemjs@7.28.5(@babel/core@7.28.3)':
     dependencies:
@@ -18144,7 +18144,7 @@ snapshots:
       '@babel/helper-validator-identifier': 7.28.5
       '@babel/traverse': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/plugin-transform-modules-systemjs@7.28.5(@babel/core@7.28.5)':
     dependencies:
@@ -18154,7 +18154,7 @@ snapshots:
       '@babel/helper-validator-identifier': 7.28.5
       '@babel/traverse': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@babel/plugin-transform-modules-umd@7.27.1(@babel/core@7.28.3)':
@@ -18163,7 +18163,7 @@ snapshots:
       '@babel/helper-module-transforms': 7.28.3(@babel/core@7.28.3)
       '@babel/helper-plugin-utils': 7.27.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/plugin-transform-modules-umd@7.27.1(@babel/core@7.28.5)':
     dependencies:
@@ -18171,7 +18171,7 @@ snapshots:
       '@babel/helper-module-transforms': 7.28.3(@babel/core@7.28.5)
       '@babel/helper-plugin-utils': 7.27.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@babel/plugin-transform-named-capturing-groups-regex@7.27.1(@babel/core@7.28.3)':
@@ -18229,7 +18229,7 @@ snapshots:
       '@babel/plugin-transform-parameters': 7.27.7(@babel/core@7.28.3)
       '@babel/traverse': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/plugin-transform-object-rest-spread@7.28.4(@babel/core@7.28.5)':
     dependencies:
@@ -18240,7 +18240,7 @@ snapshots:
       '@babel/plugin-transform-parameters': 7.27.7(@babel/core@7.28.5)
       '@babel/traverse': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@babel/plugin-transform-object-super@7.27.1(@babel/core@7.28.3)':
@@ -18249,7 +18249,7 @@ snapshots:
       '@babel/helper-plugin-utils': 7.27.1
       '@babel/helper-replace-supers': 7.27.1(@babel/core@7.28.3)
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/plugin-transform-object-super@7.27.1(@babel/core@7.28.5)':
     dependencies:
@@ -18257,7 +18257,7 @@ snapshots:
       '@babel/helper-plugin-utils': 7.27.1
       '@babel/helper-replace-supers': 7.27.1(@babel/core@7.28.5)
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@babel/plugin-transform-optional-catch-binding@7.27.1(@babel/core@7.28.3)':
@@ -18277,7 +18277,7 @@ snapshots:
       '@babel/helper-plugin-utils': 7.27.1
       '@babel/helper-skip-transparent-expression-wrappers': 7.27.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/plugin-transform-optional-chaining@7.28.5(@babel/core@7.28.5)':
     dependencies:
@@ -18285,7 +18285,7 @@ snapshots:
       '@babel/helper-plugin-utils': 7.27.1
       '@babel/helper-skip-transparent-expression-wrappers': 7.27.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@babel/plugin-transform-parameters@7.27.7(@babel/core@7.28.3)':
@@ -18305,7 +18305,7 @@ snapshots:
       '@babel/helper-create-class-features-plugin': 7.28.5(@babel/core@7.28.3)
       '@babel/helper-plugin-utils': 7.27.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/plugin-transform-private-methods@7.27.1(@babel/core@7.28.5)':
     dependencies:
@@ -18313,7 +18313,7 @@ snapshots:
       '@babel/helper-create-class-features-plugin': 7.28.5(@babel/core@7.28.5)
       '@babel/helper-plugin-utils': 7.27.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@babel/plugin-transform-private-property-in-object@7.27.1(@babel/core@7.28.3)':
@@ -18323,7 +18323,7 @@ snapshots:
       '@babel/helper-create-class-features-plugin': 7.28.5(@babel/core@7.28.3)
       '@babel/helper-plugin-utils': 7.27.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/plugin-transform-private-property-in-object@7.27.1(@babel/core@7.28.5)':
     dependencies:
@@ -18332,7 +18332,7 @@ snapshots:
       '@babel/helper-create-class-features-plugin': 7.28.5(@babel/core@7.28.5)
       '@babel/helper-plugin-utils': 7.27.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@babel/plugin-transform-property-literals@7.27.1(@babel/core@7.28.3)':
@@ -18401,7 +18401,7 @@ snapshots:
       babel-plugin-polyfill-regenerator: 0.6.5(@babel/core@7.28.3)
       semver: 6.3.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/plugin-transform-runtime@7.28.5(@babel/core@7.28.5)':
     dependencies:
@@ -18413,7 +18413,7 @@ snapshots:
       babel-plugin-polyfill-regenerator: 0.6.5(@babel/core@7.28.5)
       semver: 6.3.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@babel/plugin-transform-shorthand-properties@7.27.1(@babel/core@7.28.3)':
@@ -18433,7 +18433,7 @@ snapshots:
       '@babel/helper-plugin-utils': 7.27.1
       '@babel/helper-skip-transparent-expression-wrappers': 7.27.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/plugin-transform-spread@7.27.1(@babel/core@7.28.5)':
     dependencies:
@@ -18441,7 +18441,7 @@ snapshots:
       '@babel/helper-plugin-utils': 7.27.1
       '@babel/helper-skip-transparent-expression-wrappers': 7.27.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@babel/plugin-transform-sticky-regex@7.27.1(@babel/core@7.28.3)':
@@ -18486,7 +18486,7 @@ snapshots:
       '@babel/helper-skip-transparent-expression-wrappers': 7.27.1
       '@babel/plugin-syntax-typescript': 7.27.1(@babel/core@7.28.5)
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/plugin-transform-unicode-escapes@7.27.1(@babel/core@7.28.3)':
     dependencies:
@@ -18612,7 +18612,7 @@ snapshots:
       core-js-compat: 3.46.0
       semver: 6.3.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/preset-env@7.28.5(@babel/core@7.28.5)':
     dependencies:
@@ -18688,7 +18688,7 @@ snapshots:
       core-js-compat: 3.47.0
       semver: 6.3.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@babel/preset-modules@0.1.6-no-external-plugins(@babel/core@7.28.3)':
@@ -18715,7 +18715,7 @@ snapshots:
       '@babel/plugin-transform-modules-commonjs': 7.27.1(@babel/core@7.28.5)
       '@babel/plugin-transform-typescript': 7.28.5(@babel/core@7.28.5)
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/runtime@7.28.3': {}
 
@@ -18737,7 +18737,7 @@ snapshots:
       '@babel/types': 7.28.5
       debug: 4.4.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@babel/types@7.28.5':
     dependencies:
@@ -18823,7 +18823,7 @@ snapshots:
       '@changesets/types': 6.1.0
       dotenv: 8.6.0
     transitivePeerDependencies:
-    - encoding
+      - encoding
 
   '@changesets/cli@2.29.7(@types/node@24.9.2)':
     dependencies:
@@ -18856,7 +18856,7 @@ snapshots:
       spawndamnit: 3.0.1
       term-size: 2.2.1
     transitivePeerDependencies:
-    - '@types/node'
+      - '@types/node'
 
   '@changesets/config@3.1.1':
     dependencies:
@@ -18884,7 +18884,7 @@ snapshots:
       dataloader: 1.4.0
       node-fetch: 2.7.0(encoding@0.1.13)
     transitivePeerDependencies:
-    - encoding
+      - encoding
 
   '@changesets/get-release-plan@4.0.13':
     dependencies:
@@ -19284,7 +19284,7 @@ snapshots:
       debug: 4.4.3
       minimatch: 3.1.2
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@eslint/config-helpers@0.4.2':
     dependencies:
@@ -19314,7 +19314,7 @@ snapshots:
       minimatch: 3.1.2
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@eslint/js@9.37.0': {}
 
@@ -19747,7 +19747,7 @@ snapshots:
       merge-source-map: 1.1.0
       schema-utils: 2.7.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@jsonjoy.com/base64@1.1.2(tslib@2.5.3)':
     dependencies:
@@ -19801,7 +19801,7 @@ snapshots:
       '@inquirer/type': 3.0.10(@types/node@24.10.1)
       listr2: 9.0.1
     transitivePeerDependencies:
-    - '@types/node'
+      - '@types/node'
 
   '@listr2/prompt-adapter-inquirer@3.0.1(@inquirer/prompts@7.8.2(@types/node@24.9.2))(@types/node@24.9.2)(listr2@9.0.1)':
     dependencies:
@@ -19809,7 +19809,7 @@ snapshots:
       '@inquirer/type': 3.0.10(@types/node@24.9.2)
       listr2: 9.0.1
     transitivePeerDependencies:
-    - '@types/node'
+      - '@types/node'
 
   '@lmdb/lmdb-darwin-arm64@3.4.2':
     optional: true
@@ -19873,8 +19873,8 @@ snapshots:
       semver: 7.7.3
       tar: 7.5.2
     transitivePeerDependencies:
-    - encoding
-    - supports-color
+      - encoding
+      - supports-color
 
   '@mdx-js/language-service@0.7.3':
     dependencies:
@@ -19894,7 +19894,7 @@ snapshots:
       vfile-message: 4.0.3
       vscode-uri: 3.1.0
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@mdx-js/mdx@3.1.1':
     dependencies:
@@ -19924,7 +19924,7 @@ snapshots:
       unist-util-visit: 5.0.0
       vfile: 6.0.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@mdx-js/react@3.1.1(@types/react@19.2.2)(react@19.2.0)':
     dependencies:
@@ -19940,7 +19940,7 @@ snapshots:
       source-map: 0.7.6
       vfile: 6.0.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@mdx-js/typescript-plugin@0.1.3':
     dependencies:
@@ -19949,7 +19949,7 @@ snapshots:
       remark-frontmatter: 5.0.0
       remark-gfm: 4.0.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@mjackson/node-fetch-server@0.2.0': {}
 
@@ -19968,7 +19968,7 @@ snapshots:
       zod: 3.25.76
       zod-to-json-schema: 3.24.6(zod@3.25.76)
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@modern-js/node-bundle-require@2.68.2':
     dependencies:
@@ -20004,12 +20004,12 @@ snapshots:
       chalk: 3.0.0
       commander: 11.1.0
     transitivePeerDependencies:
-    - bufferutil
-    - debug
-    - supports-color
-    - typescript
-    - utf-8-validate
-    - vue-tsc
+      - bufferutil
+      - debug
+      - supports-color
+      - typescript
+      - utf-8-validate
+      - vue-tsc
 
   '@module-federation/cli@0.21.4(typescript@5.9.3)':
     dependencies:
@@ -20019,12 +20019,12 @@ snapshots:
       chalk: 3.0.0
       commander: 11.1.0
     transitivePeerDependencies:
-    - bufferutil
-    - debug
-    - supports-color
-    - typescript
-    - utf-8-validate
-    - vue-tsc
+      - bufferutil
+      - debug
+      - supports-color
+      - typescript
+      - utf-8-validate
+      - vue-tsc
     optional: true
 
   '@module-federation/data-prefetch@0.21.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
@@ -20064,10 +20064,10 @@ snapshots:
       typescript: 5.9.3
       ws: 8.18.0
     transitivePeerDependencies:
-    - bufferutil
-    - debug
-    - supports-color
-    - utf-8-validate
+      - bufferutil
+      - debug
+      - supports-color
+      - utf-8-validate
 
   '@module-federation/dts-plugin@0.21.4(typescript@5.9.3)':
     dependencies:
@@ -20089,10 +20089,10 @@ snapshots:
       typescript: 5.9.3
       ws: 8.18.0
     transitivePeerDependencies:
-    - bufferutil
-    - debug
-    - supports-color
-    - utf-8-validate
+      - bufferutil
+      - debug
+      - supports-color
+      - utf-8-validate
     optional: true
 
   '@module-federation/enhanced@0.21.2(@rspack/core@1.6.4(@swc/helpers@0.5.17))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(webpack@5.102.1(esbuild@0.25.12))':
@@ -20115,13 +20115,13 @@ snapshots:
       typescript: 5.9.3
       webpack: 5.102.1(esbuild@0.25.12)
     transitivePeerDependencies:
-    - '@rspack/core'
-    - bufferutil
-    - debug
-    - react
-    - react-dom
-    - supports-color
-    - utf-8-validate
+      - '@rspack/core'
+      - bufferutil
+      - debug
+      - react
+      - react-dom
+      - supports-color
+      - utf-8-validate
 
   '@module-federation/enhanced@0.21.4(@rspack/core@1.6.4(@swc/helpers@0.5.17))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(webpack@5.102.1(esbuild@0.25.12))':
     dependencies:
@@ -20143,13 +20143,13 @@ snapshots:
       typescript: 5.9.3
       webpack: 5.102.1(esbuild@0.25.12)
     transitivePeerDependencies:
-    - '@rspack/core'
-    - bufferutil
-    - debug
-    - react
-    - react-dom
-    - supports-color
-    - utf-8-validate
+      - '@rspack/core'
+      - bufferutil
+      - debug
+      - react
+      - react-dom
+      - supports-color
+      - utf-8-validate
     optional: true
 
   '@module-federation/error-codes@0.21.2': {}
@@ -20186,12 +20186,12 @@ snapshots:
       chalk: 3.0.0
       find-pkg: 2.0.0
     transitivePeerDependencies:
-    - bufferutil
-    - debug
-    - supports-color
-    - typescript
-    - utf-8-validate
-    - vue-tsc
+      - bufferutil
+      - debug
+      - supports-color
+      - typescript
+      - utf-8-validate
+      - vue-tsc
 
   '@module-federation/manifest@0.21.4(typescript@5.9.3)':
     dependencies:
@@ -20201,12 +20201,12 @@ snapshots:
       chalk: 3.0.0
       find-pkg: 2.0.0
     transitivePeerDependencies:
-    - bufferutil
-    - debug
-    - supports-color
-    - typescript
-    - utf-8-validate
-    - vue-tsc
+      - bufferutil
+      - debug
+      - supports-color
+      - typescript
+      - utf-8-validate
+      - vue-tsc
     optional: true
 
   '@module-federation/node@2.7.23(@rspack/core@1.6.4(@swc/helpers@0.5.17))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(webpack@5.102.1(esbuild@0.25.12))':
@@ -20222,13 +20222,13 @@ snapshots:
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
     transitivePeerDependencies:
-    - '@rspack/core'
-    - bufferutil
-    - debug
-    - supports-color
-    - typescript
-    - utf-8-validate
-    - vue-tsc
+      - '@rspack/core'
+      - bufferutil
+      - debug
+      - supports-color
+      - typescript
+      - utf-8-validate
+      - vue-tsc
     optional: true
 
   '@module-federation/rspack@0.21.2(@rspack/core@1.6.4(@swc/helpers@0.5.17))(typescript@5.9.3)':
@@ -20245,10 +20245,10 @@ snapshots:
     optionalDependencies:
       typescript: 5.9.3
     transitivePeerDependencies:
-    - bufferutil
-    - debug
-    - supports-color
-    - utf-8-validate
+      - bufferutil
+      - debug
+      - supports-color
+      - utf-8-validate
 
   '@module-federation/rspack@0.21.4(@rspack/core@1.6.4(@swc/helpers@0.5.17))(typescript@5.9.3)':
     dependencies:
@@ -20264,10 +20264,10 @@ snapshots:
     optionalDependencies:
       typescript: 5.9.3
     transitivePeerDependencies:
-    - bufferutil
-    - debug
-    - supports-color
-    - utf-8-validate
+      - bufferutil
+      - debug
+      - supports-color
+      - utf-8-validate
     optional: true
 
   '@module-federation/runtime-core@0.21.2':
@@ -20466,7 +20466,7 @@ snapshots:
       lru-cache: 10.4.3
       socks-proxy-agent: 8.0.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@npmcli/config@8.3.4':
     dependencies:
@@ -20479,7 +20479,7 @@ snapshots:
       semver: 7.7.3
       walk-up-path: 3.0.1
     transitivePeerDependencies:
-    - bluebird
+      - bluebird
 
   '@npmcli/fs@4.0.0':
     dependencies:
@@ -20496,7 +20496,7 @@ snapshots:
       semver: 7.7.3
       which: 3.0.1
     transitivePeerDependencies:
-    - bluebird
+      - bluebird
 
   '@npmcli/git@5.0.8':
     dependencies:
@@ -20510,7 +20510,7 @@ snapshots:
       semver: 7.7.3
       which: 4.0.0
     transitivePeerDependencies:
-    - bluebird
+      - bluebird
 
   '@npmcli/git@6.0.3':
     dependencies:
@@ -20549,7 +20549,7 @@ snapshots:
       proc-log: 3.0.0
       semver: 7.7.3
     transitivePeerDependencies:
-    - bluebird
+      - bluebird
 
   '@npmcli/package-json@5.2.1':
     dependencies:
@@ -20561,7 +20561,7 @@ snapshots:
       proc-log: 4.2.0
       semver: 7.7.3
     transitivePeerDependencies:
-    - bluebird
+      - bluebird
 
   '@npmcli/package-json@6.2.0':
     dependencies:
@@ -20596,7 +20596,7 @@ snapshots:
       proc-log: 5.0.0
       which: 5.0.0
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@nx/angular@22.0.3(ad5762666b1ffc115106d842258ae440)':
     dependencies:
@@ -20626,41 +20626,41 @@ snapshots:
       '@angular/build': 20.3.10(9ea6bd3e46f28e0a2eadc263a1034ffa)
       ng-packagr: 20.3.2(@angular/compiler-cli@20.3.12(@angular/compiler@20.3.12)(typescript@5.9.3))(tailwindcss@4.1.17)(tslib@2.5.3)(typescript@5.9.3)
     transitivePeerDependencies:
-    - '@babel/traverse'
-    - '@module-federation/enhanced'
-    - '@module-federation/node'
-    - '@parcel/css'
-    - '@rspack/core'
-    - '@swc-node/register'
-    - '@swc/core'
-    - '@swc/css'
-    - '@swc/helpers'
-    - '@types/express'
-    - '@zkochan/js-yaml'
-    - bufferutil
-    - clean-css
-    - csso
-    - debug
-    - esbuild
-    - eslint
-    - html-webpack-plugin
-    - less
-    - lightningcss
-    - next
-    - node-sass
-    - nx
-    - react
-    - react-dom
-    - react-refresh
-    - supports-color
-    - typescript
-    - uglify-js
-    - utf-8-validate
-    - verdaccio
-    - vue-template-compiler
-    - vue-tsc
-    - webpack-cli
-    - webpack-hot-middleware
+      - '@babel/traverse'
+      - '@module-federation/enhanced'
+      - '@module-federation/node'
+      - '@parcel/css'
+      - '@rspack/core'
+      - '@swc-node/register'
+      - '@swc/core'
+      - '@swc/css'
+      - '@swc/helpers'
+      - '@types/express'
+      - '@zkochan/js-yaml'
+      - bufferutil
+      - clean-css
+      - csso
+      - debug
+      - esbuild
+      - eslint
+      - html-webpack-plugin
+      - less
+      - lightningcss
+      - next
+      - node-sass
+      - nx
+      - react
+      - react-dom
+      - react-refresh
+      - supports-color
+      - typescript
+      - uglify-js
+      - utf-8-validate
+      - verdaccio
+      - vue-template-compiler
+      - vue-tsc
+      - webpack-cli
+      - webpack-hot-middleware
     optional: true
 
   '@nx/devkit@22.0.3(nx@22.0.3)':
@@ -20686,13 +20686,13 @@ snapshots:
     optionalDependencies:
       '@zkochan/js-yaml': 0.0.7
     transitivePeerDependencies:
-    - '@babel/traverse'
-    - '@swc-node/register'
-    - '@swc/core'
-    - debug
-    - nx
-    - supports-color
-    - verdaccio
+      - '@babel/traverse'
+      - '@swc-node/register'
+      - '@swc/core'
+      - debug
+      - nx
+      - supports-color
+      - verdaccio
     optional: true
 
   '@nx/js@22.0.3(@babel/traverse@7.28.5)(nx@22.0.3)':
@@ -20724,12 +20724,12 @@ snapshots:
       tinyglobby: 0.2.15
       tslib: 2.5.3
     transitivePeerDependencies:
-    - '@babel/traverse'
-    - '@swc-node/register'
-    - '@swc/core'
-    - debug
-    - nx
-    - supports-color
+      - '@babel/traverse'
+      - '@swc-node/register'
+      - '@swc/core'
+      - debug
+      - nx
+      - supports-color
     optional: true
 
   '@nx/module-federation@22.0.3(@babel/traverse@7.28.5)(@swc/helpers@0.5.17)(esbuild@0.25.12)(nx@22.0.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.3)':
@@ -20747,24 +20747,24 @@ snapshots:
       tslib: 2.5.3
       webpack: 5.102.1(esbuild@0.25.12)
     transitivePeerDependencies:
-    - '@babel/traverse'
-    - '@swc-node/register'
-    - '@swc/core'
-    - '@swc/helpers'
-    - bufferutil
-    - debug
-    - esbuild
-    - next
-    - nx
-    - react
-    - react-dom
-    - supports-color
-    - typescript
-    - uglify-js
-    - utf-8-validate
-    - verdaccio
-    - vue-tsc
-    - webpack-cli
+      - '@babel/traverse'
+      - '@swc-node/register'
+      - '@swc/core'
+      - '@swc/helpers'
+      - bufferutil
+      - debug
+      - esbuild
+      - next
+      - nx
+      - react
+      - react-dom
+      - supports-color
+      - typescript
+      - uglify-js
+      - utf-8-validate
+      - verdaccio
+      - vue-tsc
+      - webpack-cli
     optional: true
 
   '@nx/nx-darwin-arm64@22.0.3':
@@ -20833,29 +20833,29 @@ snapshots:
       webpack: 5.102.1(esbuild@0.25.12)
       webpack-node-externals: 3.0.0
     transitivePeerDependencies:
-    - '@babel/traverse'
-    - '@swc-node/register'
-    - '@swc/core'
-    - '@swc/helpers'
-    - '@types/express'
-    - bufferutil
-    - debug
-    - esbuild
-    - less
-    - next
-    - node-sass
-    - nx
-    - react
-    - react-dom
-    - react-refresh
-    - supports-color
-    - typescript
-    - uglify-js
-    - utf-8-validate
-    - verdaccio
-    - vue-tsc
-    - webpack-cli
-    - webpack-hot-middleware
+      - '@babel/traverse'
+      - '@swc-node/register'
+      - '@swc/core'
+      - '@swc/helpers'
+      - '@types/express'
+      - bufferutil
+      - debug
+      - esbuild
+      - less
+      - next
+      - node-sass
+      - nx
+      - react
+      - react-dom
+      - react-refresh
+      - supports-color
+      - typescript
+      - uglify-js
+      - utf-8-validate
+      - verdaccio
+      - vue-tsc
+      - webpack-cli
+      - webpack-hot-middleware
     optional: true
 
   '@nx/vite@22.0.3(@babel/traverse@7.28.5)(nx@22.0.3)(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(typescript@5.9.3)(vitest@4.0.9)':
@@ -20872,14 +20872,14 @@ snapshots:
       vite: rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)
       vitest: 4.0.9(@types/debug@4.1.12)(@types/node@24.10.1)(@vitest/browser-playwright@4.0.9)(@vitest/ui@4.0.9)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)
     transitivePeerDependencies:
-    - '@babel/traverse'
-    - '@swc-node/register'
-    - '@swc/core'
-    - debug
-    - nx
-    - supports-color
-    - typescript
-    - verdaccio
+      - '@babel/traverse'
+      - '@swc-node/register'
+      - '@swc/core'
+      - debug
+      - nx
+      - supports-color
+      - typescript
+      - verdaccio
     optional: true
 
   '@nx/web@22.0.3(@babel/traverse@7.28.5)(nx@22.0.3)':
@@ -20891,13 +20891,13 @@ snapshots:
       picocolors: 1.1.1
       tslib: 2.5.3
     transitivePeerDependencies:
-    - '@babel/traverse'
-    - '@swc-node/register'
-    - '@swc/core'
-    - debug
-    - nx
-    - supports-color
-    - verdaccio
+      - '@babel/traverse'
+      - '@swc-node/register'
+      - '@swc/core'
+      - debug
+      - nx
+      - supports-color
+      - verdaccio
     optional: true
 
   '@nx/webpack@22.0.3(@babel/traverse@7.28.5)(@rspack/core@1.6.4(@swc/helpers@0.5.17))(esbuild@0.25.12)(lightningcss@1.30.2)(nx@22.0.3)(typescript@5.9.3)':
@@ -20939,28 +20939,28 @@ snapshots:
       webpack-node-externals: 3.0.0
       webpack-subresource-integrity: 5.1.0(webpack@5.102.1(esbuild@0.25.12))
     transitivePeerDependencies:
-    - '@babel/traverse'
-    - '@parcel/css'
-    - '@rspack/core'
-    - '@swc-node/register'
-    - '@swc/core'
-    - '@swc/css'
-    - bufferutil
-    - clean-css
-    - csso
-    - debug
-    - esbuild
-    - html-webpack-plugin
-    - lightningcss
-    - node-sass
-    - nx
-    - supports-color
-    - typescript
-    - uglify-js
-    - utf-8-validate
-    - verdaccio
-    - vue-template-compiler
-    - webpack-cli
+      - '@babel/traverse'
+      - '@parcel/css'
+      - '@rspack/core'
+      - '@swc-node/register'
+      - '@swc/core'
+      - '@swc/css'
+      - bufferutil
+      - clean-css
+      - csso
+      - debug
+      - esbuild
+      - html-webpack-plugin
+      - lightningcss
+      - node-sass
+      - nx
+      - supports-color
+      - typescript
+      - uglify-js
+      - utf-8-validate
+      - verdaccio
+      - vue-template-compiler
+      - webpack-cli
     optional: true
 
   '@nx/workspace@22.0.3':
@@ -20975,9 +20975,9 @@ snapshots:
       tslib: 2.5.3
       yargs-parser: 21.1.1
     transitivePeerDependencies:
-    - '@swc-node/register'
-    - '@swc/core'
-    - debug
+      - '@swc-node/register'
+      - '@swc/core'
+      - debug
     optional: true
 
   '@octokit/auth-token@4.0.0': {}
@@ -21246,20 +21246,20 @@ snapshots:
       '@react-router/serve': 7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3)
       typescript: 5.9.3
     transitivePeerDependencies:
-    - '@types/node'
-    - babel-plugin-macros
-    - bluebird
-    - jiti
-    - less
-    - lightningcss
-    - sass
-    - sass-embedded
-    - stylus
-    - sugarss
-    - supports-color
-    - terser
-    - tsx
-    - yaml
+      - '@types/node'
+      - babel-plugin-macros
+      - bluebird
+      - jiti
+      - less
+      - lightningcss
+      - sass
+      - sass-embedded
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+      - tsx
+      - yaml
 
   '@react-router/dev@7.9.4(patch_hash=ca02875b988fa2e643addefa3a216f6cfd960ed91224c26fecdfdb7d5f2c67e0)(@react-router/serve@7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)':
     dependencies:
@@ -21296,20 +21296,20 @@ snapshots:
       '@react-router/serve': 7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3)
       typescript: 5.9.3
     transitivePeerDependencies:
-    - '@types/node'
-    - babel-plugin-macros
-    - bluebird
-    - jiti
-    - less
-    - lightningcss
-    - sass
-    - sass-embedded
-    - stylus
-    - sugarss
-    - supports-color
-    - terser
-    - tsx
-    - yaml
+      - '@types/node'
+      - babel-plugin-macros
+      - bluebird
+      - jiti
+      - less
+      - lightningcss
+      - sass
+      - sass-embedded
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+      - tsx
+      - yaml
 
   '@react-router/express@7.9.4(express@4.21.2)(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3)':
     dependencies:
@@ -21358,8 +21358,8 @@ snapshots:
       react-router: 7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       source-map-support: 0.5.21
     transitivePeerDependencies:
-    - supports-color
-    - typescript
+      - supports-color
+      - typescript
 
   '@remix-run/node-fetch-server@0.9.0': {}
 
@@ -21674,13 +21674,13 @@ snapshots:
       webpack-dev-server: 5.2.2(webpack@5.102.1(esbuild@0.25.12))
       ws: 8.18.3
     transitivePeerDependencies:
-    - '@types/express'
-    - bufferutil
-    - debug
-    - supports-color
-    - utf-8-validate
-    - webpack
-    - webpack-cli
+      - '@types/express'
+      - bufferutil
+      - debug
+      - supports-color
+      - utf-8-validate
+      - webpack
+      - webpack-cli
     optional: true
 
   '@rspack/lite-tapable@1.1.0': {}
@@ -21700,7 +21700,7 @@ snapshots:
       '@angular-devkit/schematics': 20.3.10(chokidar@4.0.3)
       jsonc-parser: 3.3.1
     transitivePeerDependencies:
-    - chokidar
+      - chokidar
 
   '@sec-ant/readable-stream@0.4.1': {}
 
@@ -21768,14 +21768,14 @@ snapshots:
       proc-log: 5.0.0
       promise-retry: 2.0.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@sigstore/tuf@3.1.1':
     dependencies:
       '@sigstore/protobuf-specs': 0.4.3
       tuf-js: 3.1.0
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@sigstore/verify@2.1.1':
     dependencies:
@@ -22210,7 +22210,7 @@ snapshots:
       '@tanstack/react-store': 0.7.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       react: 19.2.0
     transitivePeerDependencies:
-    - react-dom
+      - react-dom
 
   '@tanstack/react-query@5.90.9(react@19.2.0)':
     dependencies:
@@ -22578,7 +22578,7 @@ snapshots:
       ts-api-utils: 2.1.0(typescript@5.9.3)
       typescript: 5.9.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@typescript-eslint/eslint-plugin@8.46.2(@typescript-eslint/parser@8.46.2(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
@@ -22595,7 +22595,7 @@ snapshots:
       ts-api-utils: 2.1.0(typescript@5.9.3)
       typescript: 5.9.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@typescript-eslint/eslint-plugin@8.46.4(@typescript-eslint/parser@8.46.4(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3))(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
@@ -22612,7 +22612,7 @@ snapshots:
       ts-api-utils: 2.1.0(typescript@5.9.3)
       typescript: 5.9.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@typescript-eslint/parser@8.46.2(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
@@ -22624,7 +22624,7 @@ snapshots:
       eslint: 9.37.0(jiti@2.6.1)
       typescript: 5.9.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@typescript-eslint/parser@8.46.2(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
@@ -22636,7 +22636,7 @@ snapshots:
       eslint: 9.39.1(jiti@2.6.1)
       typescript: 5.9.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@typescript-eslint/parser@8.46.4(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
@@ -22648,7 +22648,7 @@ snapshots:
       eslint: 9.37.0(jiti@2.6.1)
       typescript: 5.9.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@typescript-eslint/parser@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
@@ -22660,7 +22660,7 @@ snapshots:
       eslint: 9.39.1(jiti@2.6.1)
       typescript: 5.9.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@typescript-eslint/project-service@8.46.2(typescript@5.9.3)':
     dependencies:
@@ -22669,7 +22669,7 @@ snapshots:
       debug: 4.4.3
       typescript: 5.9.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@typescript-eslint/project-service@8.46.4(typescript@5.9.3)':
     dependencies:
@@ -22678,7 +22678,7 @@ snapshots:
       debug: 4.4.3
       typescript: 5.9.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@typescript-eslint/project-service@8.47.0(typescript@5.9.3)':
     dependencies:
@@ -22687,7 +22687,7 @@ snapshots:
       debug: 4.4.3
       typescript: 5.9.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@typescript-eslint/rule-tester@8.46.4(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
@@ -22700,8 +22700,8 @@ snapshots:
       lodash.merge: 4.6.2
       semver: 7.7.3
     transitivePeerDependencies:
-    - supports-color
-    - typescript
+      - supports-color
+      - typescript
 
   '@typescript-eslint/rule-tester@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
@@ -22714,8 +22714,8 @@ snapshots:
       lodash.merge: 4.6.2
       semver: 7.7.3
     transitivePeerDependencies:
-    - supports-color
-    - typescript
+      - supports-color
+      - typescript
 
   '@typescript-eslint/scope-manager@8.46.2':
     dependencies:
@@ -22754,7 +22754,7 @@ snapshots:
       ts-api-utils: 2.1.0(typescript@5.9.3)
       typescript: 5.9.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@typescript-eslint/type-utils@8.46.2(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
@@ -22766,7 +22766,7 @@ snapshots:
       ts-api-utils: 2.1.0(typescript@5.9.3)
       typescript: 5.9.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@typescript-eslint/type-utils@8.46.4(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
@@ -22778,7 +22778,7 @@ snapshots:
       ts-api-utils: 2.1.0(typescript@5.9.3)
       typescript: 5.9.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@typescript-eslint/type-utils@8.47.0(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
@@ -22790,7 +22790,7 @@ snapshots:
       ts-api-utils: 2.1.0(typescript@5.9.3)
       typescript: 5.9.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   '@typescript-eslint/types@8.46.2': {}
@@ -22813,7 +22813,7 @@ snapshots:
       ts-api-utils: 2.1.0(typescript@5.9.3)
       typescript: 5.9.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@typescript-eslint/typescript-estree@8.46.4(typescript@5.9.3)':
     dependencies:
@@ -22829,7 +22829,7 @@ snapshots:
       ts-api-utils: 2.1.0(typescript@5.9.3)
       typescript: 5.9.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@typescript-eslint/typescript-estree@8.47.0(typescript@5.9.3)':
     dependencies:
@@ -22845,7 +22845,7 @@ snapshots:
       ts-api-utils: 2.1.0(typescript@5.9.3)
       typescript: 5.9.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@typescript-eslint/utils@8.46.2(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
@@ -22856,7 +22856,7 @@ snapshots:
       eslint: 9.37.0(jiti@2.6.1)
       typescript: 5.9.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@typescript-eslint/utils@8.46.2(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
@@ -22867,7 +22867,7 @@ snapshots:
       eslint: 9.39.1(jiti@2.6.1)
       typescript: 5.9.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@typescript-eslint/utils@8.46.4(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
@@ -22878,7 +22878,7 @@ snapshots:
       eslint: 9.37.0(jiti@2.6.1)
       typescript: 5.9.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
@@ -22889,7 +22889,7 @@ snapshots:
       eslint: 9.39.1(jiti@2.6.1)
       typescript: 5.9.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@typescript-eslint/utils@8.47.0(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
@@ -22900,7 +22900,7 @@ snapshots:
       eslint: 9.39.1(jiti@2.6.1)
       typescript: 5.9.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@typescript-eslint/visitor-keys@8.46.2':
     dependencies:
@@ -22993,9 +22993,9 @@ snapshots:
       picomatch: 4.0.3
       resolve-from: 5.0.0
     transitivePeerDependencies:
-    - encoding
-    - rollup
-    - supports-color
+      - encoding
+      - rollup
+      - supports-color
 
   '@vitejs/plugin-basic-ssl@2.1.0(vite@7.1.11(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.0)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.43.1)(tsx@4.20.6)(yaml@2.8.1))':
     dependencies:
@@ -23019,7 +23019,7 @@ snapshots:
       react-refresh: 0.18.0
       vite: rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@vitest/browser-playwright@4.0.9(playwright@1.56.1)(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(vitest@4.0.9)':
     dependencies:
@@ -23029,10 +23029,10 @@ snapshots:
       tinyrainbow: 3.0.3
       vitest: 4.0.9(@types/debug@4.1.12)(@types/node@24.10.1)(@vitest/browser-playwright@4.0.9)(@vitest/ui@4.0.9)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)
     transitivePeerDependencies:
-    - bufferutil
-    - msw
-    - utf-8-validate
-    - vite
+      - bufferutil
+      - msw
+      - utf-8-validate
+      - vite
 
   '@vitest/browser-playwright@4.0.9(playwright@1.56.1)(rolldown-vite@7.2.6(@types/node@24.9.2)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(vitest@4.0.9)':
     dependencies:
@@ -23042,10 +23042,10 @@ snapshots:
       tinyrainbow: 3.0.3
       vitest: 4.0.9(@types/debug@4.1.12)(@types/node@24.9.2)(@vitest/browser-playwright@4.0.9)(@vitest/ui@4.0.9)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)
     transitivePeerDependencies:
-    - bufferutil
-    - msw
-    - utf-8-validate
-    - vite
+      - bufferutil
+      - msw
+      - utf-8-validate
+      - vite
     optional: true
 
   '@vitest/browser-playwright@4.0.9(playwright@1.56.1)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(vitest@4.0.9)':
@@ -23056,10 +23056,10 @@ snapshots:
       tinyrainbow: 3.0.3
       vitest: 4.0.9(@types/debug@4.1.12)(@types/node@24.10.1)(@vitest/browser-playwright@4.0.9)(@vitest/ui@4.0.9)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)
     transitivePeerDependencies:
-    - bufferutil
-    - msw
-    - utf-8-validate
-    - vite
+      - bufferutil
+      - msw
+      - utf-8-validate
+      - vite
     optional: true
 
   '@vitest/browser@4.0.9(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(vitest@4.0.9)':
@@ -23074,10 +23074,10 @@ snapshots:
       vitest: 4.0.9(@types/debug@4.1.12)(@types/node@24.10.1)(@vitest/browser-playwright@4.0.9)(@vitest/ui@4.0.9)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)
       ws: 8.18.3
     transitivePeerDependencies:
-    - bufferutil
-    - msw
-    - utf-8-validate
-    - vite
+      - bufferutil
+      - msw
+      - utf-8-validate
+      - vite
 
   '@vitest/browser@4.0.9(rolldown-vite@7.2.6(@types/node@24.9.2)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(vitest@4.0.9)':
     dependencies:
@@ -23091,10 +23091,10 @@ snapshots:
       vitest: 4.0.9(@types/debug@4.1.12)(@types/node@24.9.2)(@vitest/browser-playwright@4.0.9)(@vitest/ui@4.0.9)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)
       ws: 8.18.3
     transitivePeerDependencies:
-    - bufferutil
-    - msw
-    - utf-8-validate
-    - vite
+      - bufferutil
+      - msw
+      - utf-8-validate
+      - vite
     optional: true
 
   '@vitest/browser@4.0.9(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(vitest@4.0.9)':
@@ -23109,10 +23109,10 @@ snapshots:
       vitest: 4.0.9(@types/debug@4.1.12)(@types/node@24.10.1)(@vitest/browser-playwright@4.0.9)(@vitest/ui@4.0.9)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)
       ws: 8.18.3
     transitivePeerDependencies:
-    - bufferutil
-    - msw
-    - utf-8-validate
-    - vite
+      - bufferutil
+      - msw
+      - utf-8-validate
+      - vite
     optional: true
 
   '@vitest/browser@4.0.9(vite@7.2.2(@types/node@24.9.2)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(vitest@4.0.9)':
@@ -23127,10 +23127,10 @@ snapshots:
       vitest: 4.0.9(@types/debug@4.1.12)(@types/node@24.9.2)(@vitest/browser-playwright@4.0.9)(@vitest/ui@4.0.9)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)
       ws: 8.18.3
     transitivePeerDependencies:
-    - bufferutil
-    - msw
-    - utf-8-validate
-    - vite
+      - bufferutil
+      - msw
+      - utf-8-validate
+      - vite
     optional: true
 
   '@vitest/coverage-v8@4.0.9(@vitest/browser@4.0.9(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(vitest@4.0.9))(vitest@4.0.9)':
@@ -23150,7 +23150,7 @@ snapshots:
     optionalDependencies:
       '@vitest/browser': 4.0.9(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(vitest@4.0.9)
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@vitest/coverage-v8@4.0.9(@vitest/browser@4.0.9(rolldown-vite@7.2.6(@types/node@24.9.2)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(vitest@4.0.9))(vitest@4.0.9)':
     dependencies:
@@ -23169,7 +23169,7 @@ snapshots:
     optionalDependencies:
       '@vitest/browser': 4.0.9(rolldown-vite@7.2.6(@types/node@24.9.2)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(vitest@4.0.9)
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@vitest/coverage-v8@4.0.9(@vitest/browser@4.0.9(vite@7.2.2(@types/node@24.9.2)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(vitest@4.0.9))(vitest@4.0.9)':
     dependencies:
@@ -23188,7 +23188,7 @@ snapshots:
     optionalDependencies:
       '@vitest/browser': 4.0.9(vite@7.2.2(@types/node@24.9.2)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(vitest@4.0.9)
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   '@vitest/expect@4.0.9':
     dependencies:
@@ -23258,7 +23258,7 @@ snapshots:
       sirv: 3.0.2
       tinyglobby: 0.2.15
       tinyrainbow: 3.0.3
-      vitest: 4.0.9(@types/debug@4.1.12)(@types/node@24.9.2)(@vitest/browser-playwright@4.0.9)(@vitest/ui@4.0.9)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)
+      vitest: 4.0.9(@types/debug@4.1.12)(@types/node@24.10.1)(@vitest/browser-playwright@4.0.9)(@vitest/ui@4.0.9)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)
 
   '@vitest/utils@4.0.9':
     dependencies:
@@ -23492,8 +23492,8 @@ snapshots:
       typescript: 5.9.3
       typescript-eslint: 8.46.2(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)
     transitivePeerDependencies:
-    - chokidar
-    - supports-color
+      - chokidar
+      - supports-color
 
   ansi-colors@4.1.3: {}
 
@@ -23542,8 +23542,8 @@ snapshots:
       tar-stream: 3.1.7
       zip-stream: 6.0.1
     transitivePeerDependencies:
-    - bare-abort-controller
-    - react-native-b4a
+      - bare-abort-controller
+      - react-native-b4a
 
   are-docs-informative@0.0.2: {}
 
@@ -23707,7 +23707,7 @@ snapshots:
       form-data: 4.0.4
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
-    - debug
+      - debug
 
   axios@1.13.2:
     dependencies:
@@ -23715,7 +23715,7 @@ snapshots:
       form-data: 4.0.4
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
-    - debug
+      - debug
 
   axobject-query@4.1.0: {}
 
@@ -23728,7 +23728,7 @@ snapshots:
       '@babel/traverse': 7.28.5
       '@babel/types': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   babel-loader@10.0.0(@babel/core@7.28.3)(webpack@5.101.2(esbuild@0.25.9)):
     dependencies:
@@ -23751,7 +23751,7 @@ snapshots:
       '@babel/plugin-syntax-typescript': 7.27.1(@babel/core@7.28.5)
       '@babel/traverse': 7.28.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   babel-plugin-macros@3.1.0:
@@ -23768,7 +23768,7 @@ snapshots:
       '@babel/helper-define-polyfill-provider': 0.6.5(@babel/core@7.28.3)
       semver: 6.3.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   babel-plugin-polyfill-corejs2@0.4.14(@babel/core@7.28.5):
     dependencies:
@@ -23777,7 +23777,7 @@ snapshots:
       '@babel/helper-define-polyfill-provider': 0.6.5(@babel/core@7.28.5)
       semver: 6.3.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   babel-plugin-polyfill-corejs3@0.13.0(@babel/core@7.28.3):
@@ -23786,7 +23786,7 @@ snapshots:
       '@babel/helper-define-polyfill-provider': 0.6.5(@babel/core@7.28.3)
       core-js-compat: 3.46.0
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   babel-plugin-polyfill-corejs3@0.13.0(@babel/core@7.28.5):
     dependencies:
@@ -23794,7 +23794,7 @@ snapshots:
       '@babel/helper-define-polyfill-provider': 0.6.5(@babel/core@7.28.5)
       core-js-compat: 3.46.0
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   babel-plugin-polyfill-regenerator@0.6.5(@babel/core@7.28.3):
@@ -23802,14 +23802,14 @@ snapshots:
       '@babel/core': 7.28.3
       '@babel/helper-define-polyfill-provider': 0.6.5(@babel/core@7.28.3)
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   babel-plugin-polyfill-regenerator@0.6.5(@babel/core@7.28.5):
     dependencies:
       '@babel/core': 7.28.5
       '@babel/helper-define-polyfill-provider': 0.6.5(@babel/core@7.28.5)
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   babel-plugin-react-compiler@1.0.0:
@@ -23893,7 +23893,7 @@ snapshots:
       type-is: 1.6.18
       unpipe: 1.0.0
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   body-parser@2.2.0:
     dependencies:
@@ -23907,7 +23907,7 @@ snapshots:
       raw-body: 3.0.1
       type-is: 2.0.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   bonjour-service@1.3.0:
     dependencies:
@@ -24225,7 +24225,7 @@ snapshots:
       safe-buffer: 5.2.1
       vary: 1.1.2
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   concat-map@0.0.1: {}
 
@@ -24652,7 +24652,7 @@ snapshots:
       address: 1.2.2
       debug: 4.4.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   devlop@1.1.0:
@@ -25037,7 +25037,7 @@ snapshots:
       is-core-module: 2.16.1
       resolve: 1.22.11
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   eslint-import-resolver-typescript@4.4.4(eslint-plugin-import@2.32.0)(eslint@9.37.0(jiti@2.6.1)):
     dependencies:
@@ -25052,7 +25052,7 @@ snapshots:
     optionalDependencies:
       eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.46.2(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-typescript@4.4.4)(eslint@9.37.0(jiti@2.6.1))
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   eslint-mdx@3.6.2(eslint@9.37.0(jiti@2.6.1)):
     dependencies:
@@ -25071,8 +25071,8 @@ snapshots:
       uvu: 0.5.6
       vfile: 6.0.3
     transitivePeerDependencies:
-    - bluebird
-    - supports-color
+      - bluebird
+      - supports-color
 
   eslint-module-utils@2.12.1(@typescript-eslint/parser@8.46.2(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@4.4.4)(eslint@9.37.0(jiti@2.6.1)):
     dependencies:
@@ -25083,7 +25083,17 @@ snapshots:
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 4.4.4(eslint-plugin-import@2.32.0)(eslint@9.37.0(jiti@2.6.1))
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
+
+  eslint-module-utils@2.12.1(@typescript-eslint/parser@8.46.2(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint@9.37.0(jiti@2.6.1)):
+    dependencies:
+      debug: 3.2.7
+    optionalDependencies:
+      '@typescript-eslint/parser': 8.46.2(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)
+      eslint: 9.37.0(jiti@2.6.1)
+      eslint-import-resolver-node: 0.3.9
+    transitivePeerDependencies:
+      - supports-color
 
   eslint-module-utils@2.12.1(@typescript-eslint/parser@8.46.2(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint@9.39.1(jiti@2.6.1)):
     dependencies:
@@ -25093,38 +25103,28 @@ snapshots:
       eslint: 9.39.1(jiti@2.6.1)
       eslint-import-resolver-node: 0.3.9
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
-  eslint-module-utils@2.12.1(@typescript-eslint/parser@8.46.4(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint@9.37.0(jiti@2.6.1)):
-    dependencies:
-      debug: 3.2.7
-    optionalDependencies:
-      '@typescript-eslint/parser': 8.46.4(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3)
-      eslint: 9.37.0(jiti@2.6.1)
-      eslint-import-resolver-node: 0.3.9
-    transitivePeerDependencies:
-    - supports-color
-
-  eslint-plugin-boundaries@5.1.0(@typescript-eslint/parser@8.46.4(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3))(eslint@9.37.0(jiti@2.6.1)):
+  eslint-plugin-boundaries@5.1.0(@typescript-eslint/parser@8.46.2(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.37.0(jiti@2.6.1)):
     dependencies:
       chalk: 4.1.2
       eslint: 9.37.0(jiti@2.6.1)
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.46.4(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint@9.37.0(jiti@2.6.1))
+      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.46.2(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint@9.37.0(jiti@2.6.1))
       micromatch: 4.0.8
     transitivePeerDependencies:
-    - '@typescript-eslint/parser'
-    - eslint-import-resolver-typescript
-    - eslint-import-resolver-webpack
-    - supports-color
+      - '@typescript-eslint/parser'
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - supports-color
 
   eslint-plugin-comment-length@2.2.2(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3):
     dependencies:
       '@typescript-eslint/utils': 8.46.4(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3)
       eslint: 9.37.0(jiti@2.6.1)
     transitivePeerDependencies:
-    - supports-color
-    - typescript
+      - supports-color
+      - typescript
 
   eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.46.2(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-typescript@4.4.4)(eslint@9.37.0(jiti@2.6.1)):
     dependencies:
@@ -25151,9 +25151,38 @@ snapshots:
     optionalDependencies:
       '@typescript-eslint/parser': 8.46.2(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3)
     transitivePeerDependencies:
-    - eslint-import-resolver-typescript
-    - eslint-import-resolver-webpack
-    - supports-color
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - supports-color
+
+  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.46.2(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.37.0(jiti@2.6.1)):
+    dependencies:
+      '@rtsao/scc': 1.1.0
+      array-includes: 3.1.9
+      array.prototype.findlastindex: 1.2.6
+      array.prototype.flat: 1.3.3
+      array.prototype.flatmap: 1.3.3
+      debug: 3.2.7
+      doctrine: 2.1.0
+      eslint: 9.37.0(jiti@2.6.1)
+      eslint-import-resolver-node: 0.3.9
+      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.46.2(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint@9.37.0(jiti@2.6.1))
+      hasown: 2.0.2
+      is-core-module: 2.16.1
+      is-glob: 4.0.3
+      minimatch: 3.1.2
+      object.fromentries: 2.0.8
+      object.groupby: 1.0.3
+      object.values: 1.2.1
+      semver: 6.3.1
+      string.prototype.trimend: 1.0.9
+      tsconfig-paths: 3.15.0
+    optionalDependencies:
+      '@typescript-eslint/parser': 8.46.2(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)
+    transitivePeerDependencies:
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - supports-color
 
   eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.46.2(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1)):
     dependencies:
@@ -25180,38 +25209,9 @@ snapshots:
     optionalDependencies:
       '@typescript-eslint/parser': 8.46.2(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)
     transitivePeerDependencies:
-    - eslint-import-resolver-typescript
-    - eslint-import-resolver-webpack
-    - supports-color
-
-  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.46.4(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3))(eslint@9.37.0(jiti@2.6.1)):
-    dependencies:
-      '@rtsao/scc': 1.1.0
-      array-includes: 3.1.9
-      array.prototype.findlastindex: 1.2.6
-      array.prototype.flat: 1.3.3
-      array.prototype.flatmap: 1.3.3
-      debug: 3.2.7
-      doctrine: 2.1.0
-      eslint: 9.37.0(jiti@2.6.1)
-      eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.46.4(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint@9.37.0(jiti@2.6.1))
-      hasown: 2.0.2
-      is-core-module: 2.16.1
-      is-glob: 4.0.3
-      minimatch: 3.1.2
-      object.fromentries: 2.0.8
-      object.groupby: 1.0.3
-      object.values: 1.2.1
-      semver: 6.3.1
-      string.prototype.trimend: 1.0.9
-      tsconfig-paths: 3.15.0
-    optionalDependencies:
-      '@typescript-eslint/parser': 8.46.4(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3)
-    transitivePeerDependencies:
-    - eslint-import-resolver-typescript
-    - eslint-import-resolver-webpack
-    - supports-color
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - supports-color
 
   eslint-plugin-jsdoc@61.2.1(eslint@9.37.0(jiti@2.6.1)):
     dependencies:
@@ -25231,7 +25231,7 @@ snapshots:
       spdx-expression-parse: 4.0.0
       to-valid-identifier: 1.0.0
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   eslint-plugin-mdx@3.6.2(eslint@9.37.0(jiti@2.6.1)):
     dependencies:
@@ -25247,9 +25247,9 @@ snapshots:
       unified: 11.0.5
       vfile: 6.0.3
     transitivePeerDependencies:
-    - bluebird
-    - remark-lint-file-extension
-    - supports-color
+      - bluebird
+      - remark-lint-file-extension
+      - supports-color
 
   eslint-plugin-perfectionist@4.15.1(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3):
     dependencies:
@@ -25258,8 +25258,8 @@ snapshots:
       eslint: 9.37.0(jiti@2.6.1)
       natural-orderby: 5.0.0
     transitivePeerDependencies:
-    - supports-color
-    - typescript
+      - supports-color
+      - typescript
 
   eslint-plugin-prettier@5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@9.37.0(jiti@2.6.1)))(eslint@9.37.0(jiti@2.6.1))(prettier@3.6.2):
     dependencies:
@@ -25289,7 +25289,7 @@ snapshots:
       zod: 3.25.76
       zod-validation-error: 4.0.2(zod@3.25.76)
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   eslint-plugin-react@7.37.5(eslint@9.37.0(jiti@2.6.1)):
     dependencies:
@@ -25395,7 +25395,7 @@ snapshots:
     optionalDependencies:
       jiti: 2.6.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   eslint@9.39.1(jiti@2.6.1):
     dependencies:
@@ -25436,7 +25436,7 @@ snapshots:
     optionalDependencies:
       jiti: 2.6.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   espree@10.4.0:
     dependencies:
@@ -25521,7 +25521,7 @@ snapshots:
     dependencies:
       bare-events: 2.8.2
     transitivePeerDependencies:
-    - bare-abort-controller
+      - bare-abort-controller
 
   events@3.3.0: {}
 
@@ -25616,7 +25616,7 @@ snapshots:
       utils-merge: 1.0.1
       vary: 1.1.2
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   express@5.1.0:
     dependencies:
@@ -25648,7 +25648,7 @@ snapshots:
       type-is: 2.0.1
       vary: 1.1.2
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   exsolve@1.0.8: {}
 
@@ -25711,7 +25711,7 @@ snapshots:
       '@types/node': 22.19.1
       axios: 0.30.2
     transitivePeerDependencies:
-    - debug
+      - debug
 
   figures@3.2.0:
     dependencies:
@@ -25751,7 +25751,7 @@ snapshots:
       statuses: 2.0.1
       unpipe: 1.0.0
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   finalhandler@2.1.0:
     dependencies:
@@ -25762,7 +25762,7 @@ snapshots:
       parseurl: 1.3.3
       statuses: 2.0.2
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   find-cache-dir@4.0.0:
     dependencies:
@@ -26242,7 +26242,7 @@ snapshots:
       space-separated-tokens: 2.0.2
       style-to-js: 1.1.19
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   hast-util-to-estree@3.1.3:
     dependencies:
@@ -26263,7 +26263,7 @@ snapshots:
       unist-util-position: 5.0.0
       zwitch: 2.0.4
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   hast-util-to-html@9.0.5:
     dependencies:
@@ -26297,7 +26297,7 @@ snapshots:
       unist-util-position: 5.0.0
       vfile-message: 4.0.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   hast-util-to-mdast@10.1.2:
     dependencies:
@@ -26432,7 +26432,7 @@ snapshots:
       agent-base: 7.1.4
       debug: 4.4.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   http-proxy-middleware@2.0.9(@types/express@4.17.25):
     dependencies:
@@ -26444,7 +26444,7 @@ snapshots:
     optionalDependencies:
       '@types/express': 4.17.25
     transitivePeerDependencies:
-    - debug
+      - debug
 
   http-proxy-middleware@3.0.5:
     dependencies:
@@ -26455,7 +26455,7 @@ snapshots:
       is-plain-object: 5.0.0
       micromatch: 4.0.8
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   http-proxy@1.18.1(debug@4.4.3):
     dependencies:
@@ -26463,7 +26463,7 @@ snapshots:
       follow-redirects: 1.15.11(debug@4.4.3)
       requires-port: 1.0.0
     transitivePeerDependencies:
-    - debug
+      - debug
 
   http-server@14.1.1:
     dependencies:
@@ -26481,8 +26481,8 @@ snapshots:
       union: 0.5.0
       url-join: 4.0.1
     transitivePeerDependencies:
-    - debug
-    - supports-color
+      - debug
+      - supports-color
     optional: true
 
   http-shutdown@1.2.2: {}
@@ -26492,7 +26492,7 @@ snapshots:
       agent-base: 7.1.4
       debug: 4.4.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   httpxy@0.1.7: {}
 
@@ -26608,7 +26608,7 @@ snapshots:
       redis-parser: 3.0.0
       standard-as-callback: 2.1.0
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   ip-address@10.1.0: {}
 
@@ -26862,7 +26862,7 @@ snapshots:
       istanbul-lib-coverage: 3.2.2
       semver: 6.3.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   istanbul-lib-instrument@6.0.3:
     dependencies:
@@ -26872,7 +26872,7 @@ snapshots:
       istanbul-lib-coverage: 3.2.2
       semver: 7.7.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   istanbul-lib-report@3.0.1:
     dependencies:
@@ -26886,7 +26886,7 @@ snapshots:
       debug: 4.4.3
       istanbul-lib-coverage: 3.2.2
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   istanbul-reports@3.2.0:
     dependencies:
@@ -27267,7 +27267,7 @@ snapshots:
       '@npmcli/config': 8.3.4
       import-meta-resolve: 4.2.0
     transitivePeerDependencies:
-    - bluebird
+      - bluebird
 
   loader-runner@4.3.1: {}
 
@@ -27356,7 +27356,7 @@ snapshots:
       rfdc: 1.4.1
       streamroller: 3.1.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   long-timeout@0.1.1: {}
 
@@ -27432,7 +27432,7 @@ snapshots:
       promise-retry: 2.0.1
       ssri: 12.0.0
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   map-stream@0.1.0: {}
 
@@ -27490,7 +27490,7 @@ snapshots:
       micromark-util-types: 2.0.2
       unist-util-stringify-position: 4.0.0
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   mdast-util-frontmatter@2.0.1:
     dependencies:
@@ -27501,7 +27501,7 @@ snapshots:
       mdast-util-to-markdown: 2.1.2
       micromark-extension-frontmatter: 2.0.0
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   mdast-util-gfm-autolink-literal@2.0.1:
     dependencies:
@@ -27519,7 +27519,7 @@ snapshots:
       mdast-util-to-markdown: 2.1.2
       micromark-util-normalize-identifier: 2.0.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   mdast-util-gfm-strikethrough@2.0.0:
     dependencies:
@@ -27527,7 +27527,7 @@ snapshots:
       mdast-util-from-markdown: 2.0.2
       mdast-util-to-markdown: 2.1.2
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   mdast-util-gfm-table@2.0.0:
     dependencies:
@@ -27537,7 +27537,7 @@ snapshots:
       mdast-util-from-markdown: 2.0.2
       mdast-util-to-markdown: 2.1.2
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   mdast-util-gfm-task-list-item@2.0.0:
     dependencies:
@@ -27546,7 +27546,7 @@ snapshots:
       mdast-util-from-markdown: 2.0.2
       mdast-util-to-markdown: 2.1.2
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   mdast-util-gfm@3.1.0:
     dependencies:
@@ -27558,7 +27558,7 @@ snapshots:
       mdast-util-gfm-task-list-item: 2.0.0
       mdast-util-to-markdown: 2.1.2
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   mdast-util-mdx-expression@2.0.1:
     dependencies:
@@ -27569,7 +27569,7 @@ snapshots:
       mdast-util-from-markdown: 2.0.2
       mdast-util-to-markdown: 2.1.2
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   mdast-util-mdx-jsx@3.2.0:
     dependencies:
@@ -27586,7 +27586,7 @@ snapshots:
       unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   mdast-util-mdx@3.0.0:
     dependencies:
@@ -27596,7 +27596,7 @@ snapshots:
       mdast-util-mdxjs-esm: 2.0.1
       mdast-util-to-markdown: 2.1.2
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   mdast-util-mdxjs-esm@2.0.1:
     dependencies:
@@ -27607,7 +27607,7 @@ snapshots:
       mdast-util-from-markdown: 2.0.2
       mdast-util-to-markdown: 2.1.2
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   mdast-util-phrasing@4.1.0:
     dependencies:
@@ -27957,7 +27957,7 @@ snapshots:
       micromark-util-symbol: 2.0.1
       micromark-util-types: 2.0.2
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   micromatch@4.0.8:
     dependencies:
@@ -28088,7 +28088,7 @@ snapshots:
       on-finished: 2.3.0
       on-headers: 1.1.0
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   mri@1.2.0: {}
 
@@ -28270,34 +28270,34 @@ snapshots:
       youch: 4.1.0-beta.12
       youch-core: 0.3.3
     transitivePeerDependencies:
-    - '@azure/app-configuration'
-    - '@azure/cosmos'
-    - '@azure/data-tables'
-    - '@azure/identity'
-    - '@azure/keyvault-secrets'
-    - '@azure/storage-blob'
-    - '@capacitor/preferences'
-    - '@deno/kv'
-    - '@electric-sql/pglite'
-    - '@libsql/client'
-    - '@netlify/blobs'
-    - '@planetscale/database'
-    - '@upstash/redis'
-    - '@vercel/blob'
-    - '@vercel/functions'
-    - '@vercel/kv'
-    - aws4fetch
-    - bare-abort-controller
-    - better-sqlite3
-    - drizzle-orm
-    - encoding
-    - idb-keyval
-    - mysql2
-    - react-native-b4a
-    - rolldown
-    - sqlite3
-    - supports-color
-    - uploadthing
+      - '@azure/app-configuration'
+      - '@azure/cosmos'
+      - '@azure/data-tables'
+      - '@azure/identity'
+      - '@azure/keyvault-secrets'
+      - '@azure/storage-blob'
+      - '@capacitor/preferences'
+      - '@deno/kv'
+      - '@electric-sql/pglite'
+      - '@libsql/client'
+      - '@netlify/blobs'
+      - '@planetscale/database'
+      - '@upstash/redis'
+      - '@vercel/blob'
+      - '@vercel/functions'
+      - '@vercel/kv'
+      - aws4fetch
+      - bare-abort-controller
+      - better-sqlite3
+      - drizzle-orm
+      - encoding
+      - idb-keyval
+      - mysql2
+      - react-native-b4a
+      - rolldown
+      - sqlite3
+      - supports-color
+      - uploadthing
 
   node-abort-controller@3.1.1:
     optional: true
@@ -28339,7 +28339,7 @@ snapshots:
       tinyglobby: 0.2.15
       which: 5.0.0
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   node-machine-id@1.1.12:
     optional: true
@@ -28460,7 +28460,7 @@ snapshots:
       npm-package-arg: 12.0.2
       proc-log: 5.0.0
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   npm-run-all2@8.0.4:
     dependencies:
@@ -28544,7 +28544,7 @@ snapshots:
       '@nx/nx-win32-arm64-msvc': 22.0.3
       '@nx/nx-win32-x64-msvc': 22.0.3
     transitivePeerDependencies:
-    - debug
+      - debug
     optional: true
 
   nypm@0.6.2:
@@ -28791,7 +28791,7 @@ snapshots:
       ssri: 12.0.0
       tar: 6.2.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   parent-module@1.0.1:
     dependencies:
@@ -28977,7 +28977,7 @@ snapshots:
       async: 3.2.6
       debug: 4.4.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   possible-typed-array-names@1.1.0: {}
@@ -29060,7 +29060,7 @@ snapshots:
       '@rspack/core': 1.6.4(@swc/helpers@0.5.17)
       webpack: 5.101.2(esbuild@0.25.12)
     transitivePeerDependencies:
-    - typescript
+      - typescript
 
   postcss-loader@8.2.0(@rspack/core@1.6.4(@swc/helpers@0.5.17))(postcss@8.5.6)(typescript@5.9.3)(webpack@5.102.1(esbuild@0.25.12)):
     dependencies:
@@ -29072,7 +29072,7 @@ snapshots:
       '@rspack/core': 1.6.4(@swc/helpers@0.5.17)
       webpack: 5.102.1(esbuild@0.25.12)
     transitivePeerDependencies:
-    - typescript
+      - typescript
     optional: true
 
   postcss-media-query-parser@0.2.3: {}
@@ -29443,7 +29443,7 @@ snapshots:
       '@types/react': 19.2.2
       '@types/react-dom': 19.2.2(@types/react@19.2.2)
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   react-simple-code-editor@0.14.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
     dependencies:
@@ -29649,7 +29649,7 @@ snapshots:
       unified: 11.0.5
       unist-util-visit-parents: 6.0.2
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   rehype-minify-whitespace@6.0.2:
     dependencies:
@@ -29668,7 +29668,7 @@ snapshots:
       '@types/hast': 3.0.4
       hast-util-to-estree: 3.1.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   rehype-remark@10.0.1:
     dependencies:
@@ -29691,7 +29691,7 @@ snapshots:
       micromark-extension-frontmatter: 2.0.0
       unified: 11.0.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   remark-gfm@4.0.1:
     dependencies:
@@ -29702,7 +29702,7 @@ snapshots:
       remark-stringify: 11.0.0
       unified: 11.0.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   remark-mdx-frontmatter@4.0.0:
     dependencies:
@@ -29718,7 +29718,7 @@ snapshots:
       mdast-util-mdx: 3.0.0
       micromark-extension-mdxjs: 3.0.0
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   remark-parse-frontmatter@1.0.3:
     dependencies:
@@ -29733,7 +29733,7 @@ snapshots:
       micromark-util-types: 2.0.2
       unified: 11.0.5
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   remark-rehype@11.1.2:
     dependencies:
@@ -30005,7 +30005,7 @@ snapshots:
       parseurl: 1.3.3
       path-to-regexp: 8.3.0
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   rslog@1.3.0: {}
 
@@ -30255,7 +30255,7 @@ snapshots:
       range-parser: 1.2.1
       statuses: 2.0.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   send@1.2.0:
     dependencies:
@@ -30271,7 +30271,7 @@ snapshots:
       range-parser: 1.2.1
       statuses: 2.0.2
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   serialize-javascript@6.0.2:
     dependencies:
@@ -30287,7 +30287,7 @@ snapshots:
       mime-types: 2.1.35
       parseurl: 1.3.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   serve-placeholder@2.0.2:
     dependencies:
@@ -30300,7 +30300,7 @@ snapshots:
       parseurl: 1.3.3
       send: 0.19.0
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   serve-static@2.2.0:
     dependencies:
@@ -30309,7 +30309,7 @@ snapshots:
       parseurl: 1.3.3
       send: 1.2.0
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   set-cookie-parser@2.7.2: {}
 
@@ -30425,7 +30425,7 @@ snapshots:
       '@sigstore/tuf': 3.1.1
       '@sigstore/verify': 2.1.1
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   sirv@3.0.2:
     dependencies:
@@ -30474,7 +30474,7 @@ snapshots:
       debug: 4.4.3
       socks: 2.8.7
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   socks@2.8.7:
     dependencies:
@@ -30550,7 +30550,7 @@ snapshots:
       readable-stream: 3.6.2
       wbuf: 1.7.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   spdy@4.0.2:
     dependencies:
@@ -30560,7 +30560,7 @@ snapshots:
       select-hose: 2.0.0
       spdy-transport: 3.0.0
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   split@0.3.3:
     dependencies:
@@ -30624,7 +30624,7 @@ snapshots:
       debug: 4.4.3
       fs-extra: 8.1.0
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   streamx@2.23.0:
     dependencies:
@@ -30632,8 +30632,8 @@ snapshots:
       fast-fifo: 1.3.2
       text-decoder: 1.2.3
     transitivePeerDependencies:
-    - bare-abort-controller
-    - react-native-b4a
+      - bare-abort-controller
+      - react-native-b4a
 
   string-hash@1.1.3: {}
 
@@ -30863,8 +30863,8 @@ snapshots:
       table: 6.9.0
       write-file-atomic: 5.0.1
     transitivePeerDependencies:
-    - supports-color
-    - typescript
+      - supports-color
+      - typescript
 
   stylis@4.3.6: {}
 
@@ -30876,7 +30876,7 @@ snapshots:
       sax: 1.3.0
       source-map: 0.7.6
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
     optional: true
 
   sucrase@3.35.0:
@@ -30994,8 +30994,8 @@ snapshots:
       fast-fifo: 1.3.2
       streamx: 2.23.0
     transitivePeerDependencies:
-    - bare-abort-controller
-    - react-native-b4a
+      - bare-abort-controller
+      - react-native-b4a
 
   tar@6.2.1:
     dependencies:
@@ -31067,7 +31067,7 @@ snapshots:
     dependencies:
       b4a: 1.7.3
     transitivePeerDependencies:
-    - react-native-b4a
+      - react-native-b4a
 
   thenify-all@1.6.0:
     dependencies:
@@ -31251,7 +31251,7 @@ snapshots:
       debug: 4.4.3
       make-fetch-happen: 14.0.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   tunnel@0.0.6: {}
 
@@ -31358,7 +31358,7 @@ snapshots:
       eslint: 9.37.0(jiti@2.6.1)
       typescript: 5.9.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   typescript-eslint@8.46.2(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3):
     dependencies:
@@ -31369,7 +31369,7 @@ snapshots:
       eslint: 9.39.1(jiti@2.6.1)
       typescript: 5.9.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   typescript-eslint@8.46.4(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3):
     dependencies:
@@ -31380,7 +31380,7 @@ snapshots:
       eslint: 9.37.0(jiti@2.6.1)
       typescript: 5.9.3
     transitivePeerDependencies:
-    - supports-color
+      - supports-color
 
   typescript-plugin-css-modules@5.2.0(ts-node@10.9.2(@types/node@24.10.1)(typescript@5.9.3))(typescript@5.9.3):
     dependencies:
@@ -31403,8 +31403,8 @@ snapshots:
     optionalDependencies:
       stylus: 0.62.0
     transitivePeerDependencies:
-    - supports-color
-    - ts-node
+      - supports-color
+      - ts-node
 
   typescript@5.9.3: {}
 
@@ -31481,8 +31481,8 @@ snapshots:
       vfile-statistics: 3.0.0
       yaml: 2.8.1
     transitivePeerDependencies:
-    - bluebird
-    - supports-color
+      - bluebird
+      - supports-color
 
   unified@11.0.5:
     dependencies:
@@ -31801,18 +31801,18 @@ snapshots:
       pathe: 2.0.3
       vite: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.0)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)
     transitivePeerDependencies:
-    - '@types/node'
-    - jiti
-    - less
-    - lightningcss
-    - sass
-    - sass-embedded
-    - stylus
-    - sugarss
-    - supports-color
-    - terser
-    - tsx
-    - yaml
+      - '@types/node'
+      - jiti
+      - less
+      - lightningcss
+      - sass
+      - sass-embedded
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+      - tsx
+      - yaml
 
   vite-node@3.2.4(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1):
     dependencies:
@@ -31822,18 +31822,18 @@ snapshots:
       pathe: 2.0.3
       vite: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)
     transitivePeerDependencies:
-    - '@types/node'
-    - jiti
-    - less
-    - lightningcss
-    - sass
-    - sass-embedded
-    - stylus
-    - sugarss
-    - supports-color
-    - terser
-    - tsx
-    - yaml
+      - '@types/node'
+      - jiti
+      - less
+      - lightningcss
+      - sass
+      - sass-embedded
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+      - tsx
+      - yaml
 
   vite-tsconfig-paths@5.1.4(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(typescript@5.9.3):
     dependencies:
@@ -31843,8 +31843,8 @@ snapshots:
     optionalDependencies:
       vite: rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)
     transitivePeerDependencies:
-    - supports-color
-    - typescript
+      - supports-color
+      - typescript
 
   vite-tsconfig-paths@5.1.4(rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(typescript@5.9.3):
     dependencies:
@@ -31854,8 +31854,8 @@ snapshots:
     optionalDependencies:
       vite: rolldown-vite@7.2.6(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)
     transitivePeerDependencies:
-    - supports-color
-    - typescript
+      - supports-color
+      - typescript
 
   vite@7.1.11(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.0)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.43.1)(tsx@4.20.6)(yaml@2.8.1):
     dependencies:
@@ -32024,18 +32024,18 @@ snapshots:
       '@vitest/browser-playwright': 4.0.9(playwright@1.56.1)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(vitest@4.0.9)
       '@vitest/ui': 4.0.9(vitest@4.0.9)
     transitivePeerDependencies:
-    - jiti
-    - less
-    - lightningcss
-    - msw
-    - sass
-    - sass-embedded
-    - stylus
-    - sugarss
-    - supports-color
-    - terser
-    - tsx
-    - yaml
+      - jiti
+      - less
+      - lightningcss
+      - msw
+      - sass
+      - sass-embedded
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+      - tsx
+      - yaml
 
   vitest@4.0.9(@types/debug@4.1.12)(@types/node@24.9.2)(@vitest/browser-playwright@4.0.9)(@vitest/ui@4.0.9)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1):
     dependencies:
@@ -32065,18 +32065,18 @@ snapshots:
       '@vitest/browser-playwright': 4.0.9(playwright@1.56.1)(rolldown-vite@7.2.6(@types/node@24.9.2)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))(vitest@4.0.9)
       '@vitest/ui': 4.0.9(vitest@4.0.9)
     transitivePeerDependencies:
-    - jiti
-    - less
-    - lightningcss
-    - msw
-    - sass
-    - sass-embedded
-    - stylus
-    - sugarss
-    - supports-color
-    - terser
-    - tsx
-    - yaml
+      - jiti
+      - less
+      - lightningcss
+      - msw
+      - sass
+      - sass-embedded
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+      - tsx
+      - yaml
 
   vscode-jsonrpc@8.2.0: {}
 
@@ -32170,10 +32170,10 @@ snapshots:
     optionalDependencies:
       webpack: 5.101.2(esbuild@0.25.12)
     transitivePeerDependencies:
-    - bufferutil
-    - debug
-    - supports-color
-    - utf-8-validate
+      - bufferutil
+      - debug
+      - supports-color
+      - utf-8-validate
 
   webpack-dev-server@5.2.2(webpack@5.102.1(esbuild@0.25.12)):
     dependencies:
@@ -32208,10 +32208,10 @@ snapshots:
     optionalDependencies:
       webpack: 5.102.1(esbuild@0.25.12)
     transitivePeerDependencies:
-    - bufferutil
-    - debug
-    - supports-color
-    - utf-8-validate
+      - bufferutil
+      - debug
+      - supports-color
+      - utf-8-validate
     optional: true
 
   webpack-merge@5.10.0:
@@ -32273,9 +32273,9 @@ snapshots:
       watchpack: 2.4.4
       webpack-sources: 3.3.3
     transitivePeerDependencies:
-    - '@swc/core'
-    - esbuild
-    - uglify-js
+      - '@swc/core'
+      - esbuild
+      - uglify-js
 
   webpack@5.102.1(esbuild@0.25.12):
     dependencies:
@@ -32305,9 +32305,9 @@ snapshots:
       watchpack: 2.4.4
       webpack-sources: 3.3.3
     transitivePeerDependencies:
-    - '@swc/core'
-    - esbuild
-    - uglify-js
+      - '@swc/core'
+      - esbuild
+      - uglify-js
     optional: true
 
   websocket-driver@0.7.4:

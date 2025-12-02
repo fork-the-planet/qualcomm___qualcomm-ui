@@ -1,5 +1,11 @@
 # @qualcomm-ui/utils
 
+## 1.0.4 (2025/12/01)
+
+### Bug Fixes
+
+- [merge-props]: loosen merged className type for union compatibility
+
 ## 1.0.3 (2025/11/13)
 
 ### Bug Fixes
