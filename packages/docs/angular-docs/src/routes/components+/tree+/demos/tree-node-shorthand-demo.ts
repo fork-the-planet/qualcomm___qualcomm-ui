@@ -17,7 +17,7 @@ interface FileNode {
   providers: [provideIcons({FileText, FolderIcon})],
   selector: "tree-node-shorthand-demo",
   template: `
-    <div q-tree-root [collection]="collection">
+    <div class="w-full max-w-sm" q-tree-root [collection]="collection">
       @for (
         node of collection.rootNode.nodes;
         let i = $index;
