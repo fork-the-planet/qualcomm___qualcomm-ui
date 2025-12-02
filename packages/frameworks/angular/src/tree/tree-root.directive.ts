@@ -3,7 +3,10 @@ import {computed, Directive, inject, input, type OnInit} from "@angular/core"
 import {normalizeProps} from "@qualcomm-ui/angular-core/machine"
 import {provideRenderStrategyContext} from "@qualcomm-ui/angular-core/presence"
 import type {SignalifyInput} from "@qualcomm-ui/angular-core/signals"
-import {CoreTreeRootDirective} from "@qualcomm-ui/angular-core/tree"
+import {
+  CoreTreeRootDirective,
+  provideTreeContext,
+} from "@qualcomm-ui/angular-core/tree"
 import {
   createQdsTreeApi,
   type QdsTreeApiProps,
@@ -17,7 +20,7 @@ import {
 
 @Directive({
   providers: [
-    provideQdsTreeContext(),
+    provideTreeContext(),
     provideRenderStrategyContext(),
     provideQdsTreeContext(),
   ],

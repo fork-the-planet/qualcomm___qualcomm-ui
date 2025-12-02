@@ -10,8 +10,8 @@ import type {TreeNodeTemplateContext} from "./qds-tree-context.service"
 })
 export class TreeBranchTemplateDirective<T extends TreeNode> {
   /**
-   * The root node of the tree. Used for proper intellisense.
-   * See why here: https://angular.dev/guide/directives/structural-directives#type-narrowing-with-template-guards
+   * The root node of the tree. Used for type narrowing of the template guard.
+   * Learn more here: https://angular.dev/guide/directives/structural-directives#type-narrowing-with-template-guards
    */
   readonly rootNode = input<T>()
 
@@ -20,7 +20,7 @@ export class TreeBranchTemplateDirective<T extends TreeNode> {
   static ngTemplateContextGuard<T extends TreeNode>(
     dir: TreeBranchTemplateDirective<T>,
     ctx: unknown,
-  ): ctx is {$implicit: TreeNodeTemplateContext<T>} {
+  ): ctx is TreeNodeTemplateContext<T> {
     return true
   }
 }

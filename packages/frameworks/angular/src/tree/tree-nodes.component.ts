@@ -11,18 +11,20 @@ import {
 import type {SignalifyInput} from "@qualcomm-ui/angular-core/signals"
 import {
   provideTreeNodePropsContext,
+  provideTreeNodeStateContext,
   TreeNodePropsContextService,
+  TreeNodeStateContextService,
   useTreeContext,
 } from "@qualcomm-ui/angular-core/tree"
 import type {NodeProps} from "@qualcomm-ui/core/tree"
 import type {TreeNode} from "@qualcomm-ui/utils/collection"
 
 import type {TreeNodeTemplateContext} from "./qds-tree-context.service"
-import type {TreeBranchTemplateDirective} from "./tree-branch-template.directive"
+import {TreeBranchTemplateDirective} from "./tree-branch-template.directive"
 import {TreeLeafTemplateDirective} from "./tree-leaf-template.directive"
 
 @Component({
-  providers: [provideTreeNodePropsContext()],
+  providers: [provideTreeNodePropsContext(), provideTreeNodeStateContext()],
   selector: "q-tree-nodes",
   standalone: false,
   styles: [
@@ -49,17 +51,18 @@ import {TreeLeafTemplateDirective} from "./tree-leaf-template.directive"
             <q-tree-nodes
               [indexPath]="getChildIndexPath(i)"
               [node]="child"
+              [renderBranch]="branchTemplate()"
               [renderLeaf]="leafTemplate()"
             />
           }
         </div>
       </div>
+    } @else {
+      <ng-template
+        [ngTemplateOutlet]="leafTemplate()!"
+        [ngTemplateOutletContext]="templateContext()"
+      />
     }
-
-    <ng-template
-      [ngTemplateOutlet]="leafTemplate()!"
-      [ngTemplateOutletContext]="templateContext()"
-    />
   `,
 })
 export class TreeNodesComponent<T extends TreeNode>
@@ -81,9 +84,9 @@ export class TreeNodesComponent<T extends TreeNode>
 
   readonly renderLeaf = input<TemplateRef<TreeLeafTemplateDirective<T>>>()
 
-  readonly treeBranchContentChild = contentChild<TreeLeafTemplateDirective<T>>(
-    TreeLeafTemplateDirective<T>,
-  )
+  readonly treeBranchContentChild = contentChild<
+    TreeBranchTemplateDirective<T>
+  >(TreeBranchTemplateDirective<T>)
 
   readonly treeLeafContentChild = contentChild<TreeLeafTemplateDirective<T>>(
     TreeLeafTemplateDirective<T>,
@@ -104,9 +107,10 @@ export class TreeNodesComponent<T extends TreeNode>
   protected treeContext = useTreeContext()
 
   readonly templateContext = computed<TreeNodeTemplateContext<T>>(() => ({
-    $implicit: this.node(),
-    indexPath: this.indexPath(),
-    node: this.node(),
+    $implicit: {
+      indexPath: this.indexPath(),
+      node: this.node(),
+    },
   }))
 
   readonly childNodes = computed(() => {
@@ -118,12 +122,18 @@ export class TreeNodesComponent<T extends TreeNode>
     {self: true},
   )
 
+  protected treeNodeStateContextService = inject(TreeNodeStateContextService, {
+    self: true,
+  })
+
   ngOnInit() {
-    this.treeNodePropsContextService.init(
-      computed(() => ({
-        indexPath: this.indexPath(),
-        node: this.node(),
-      })),
+    const nodeProps = computed(() => ({
+      indexPath: this.indexPath(),
+      node: this.node(),
+    }))
+    this.treeNodePropsContextService.init(nodeProps)
+    this.treeNodeStateContextService.init(
+      computed(() => this.treeContext().getNodeState(nodeProps())),
     )
   }
 

@@ -21,5 +21,6 @@ export const [
   QdsTreeContextService,
 )
 
-export interface TreeNodeTemplateContext<T extends TreeNode>
-  extends NodeProps<T> {}
+export interface TreeNodeTemplateContext<T extends TreeNode> {
+  $implicit: NodeProps<T>
+}

@@ -6,10 +6,10 @@ import {TreeModule} from "@qualcomm-ui/angular/tree"
 import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 import {createTreeCollection} from "@qualcomm-ui/core/tree"
 
-interface Node {
+interface FileNode {
   id: string
   name: string
-  nodes?: Node[]
+  nodes?: FileNode[]
 }
 
 @Component({
@@ -18,36 +18,41 @@ interface Node {
   selector: "tree-node-shorthand-demo",
   template: `
     <div q-tree-root [collection]="collection">
-      <q-tree-nodes [indexPath]="[0]" [node]="collection.rootNode">
-        <ng-template
-          let-branch
-          q-tree-branch-template
-          [rootNode]="collection.rootNode"
-        >
-          <div q-tree-branch-node>
-            <button q-tree-branch-trigger></button>
-            <svg q-tree-node-icon qIcon="FolderIcon"></svg>
-            <span q-tree-node-text>{{ branch.node.name }}</span>
-          </div>
-        </ng-template>
+      @for (
+        node of collection.rootNode.nodes;
+        track collection.getNodeValue(node)
+      ) {
+        <q-tree-nodes [indexPath]="[0]" [node]="node">
+          <ng-template
+            let-branch
+            q-tree-branch-template
+            [rootNode]="collection.rootNode"
+          >
+            <div q-tree-branch-node>
+              <button q-tree-branch-trigger></button>
+              <svg q-tree-node-icon qIcon="FolderIcon"></svg>
+              <span q-tree-node-text>{{ branch.node.name }}</span>
+            </div>
+          </ng-template>
 
-        <ng-template
-          let-leaf
-          q-tree-leaf-template
-          [rootNode]="collection.rootNode"
-        >
-          <div q-tree-leaf-node>
-            <div q-tree-node-indicator></div>
-            <svg q-tree-node-icon qIcon="FileText"></svg>
-            <span q-tree-node-text>{{ leaf.node.name }}</span>
-          </div>
-        </ng-template>
-      </q-tree-nodes>
+          <ng-template
+            let-leaf
+            q-tree-leaf-template
+            [rootNode]="collection.rootNode"
+          >
+            <div q-tree-leaf-node>
+              <div q-tree-node-indicator></div>
+              <svg q-tree-node-icon qIcon="FileText"></svg>
+              <span q-tree-node-text>{{ leaf.node.name }}</span>
+            </div>
+          </ng-template>
+        </q-tree-nodes>
+      }
     </div>
   `,
 })
 export class TreeNodeShorthandDemo {
-  collection = createTreeCollection<Node>({
+  collection = createTreeCollection<FileNode>({
     nodeChildren: "nodes",
     nodeText: (node) => node.name,
     nodeValue: (node) => node.id,
