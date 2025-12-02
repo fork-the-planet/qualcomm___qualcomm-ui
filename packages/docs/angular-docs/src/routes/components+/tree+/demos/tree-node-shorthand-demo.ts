@@ -30,7 +30,7 @@ interface FileNode {
             [rootNode]="collection.rootNode"
           >
             <div q-tree-branch-node>
-              <button q-tree-branch-trigger></button>
+              <div q-tree-branch-trigger></div>
               <svg q-tree-node-icon qIcon="FolderIcon"></svg>
               <span q-tree-node-text>{{ branch.node.name }}</span>
             </div>
