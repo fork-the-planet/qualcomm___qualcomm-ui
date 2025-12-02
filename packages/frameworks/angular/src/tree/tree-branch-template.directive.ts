@@ -4,6 +4,20 @@ import type {TreeNode} from "@qualcomm-ui/utils/collection"
 
 import type {TreeNodeTemplateContext} from "./qds-tree-context.service"
 
+/**
+ * Structural directive that defines the template used to render leaf nodes in a
+ * tree. Apply this to an `ng-template` to customize how leaf nodes (nodes without
+ * children) are displayed.
+ *
+ * @example
+ * ```html
+ * <ng-template q-tree-branch-template let-node>
+ *   <div q-tree-branch-node>
+ *     <span q-tree-node-text>{{ node.item.label }}</span>
+ *   </div>
+ * </ng-template>
+ * ```
+ */
 @Directive({
   selector: "ng-template[q-tree-branch-template]",
   standalone: false,
@@ -11,7 +25,7 @@ import type {TreeNodeTemplateContext} from "./qds-tree-context.service"
 export class TreeBranchTemplateDirective<T extends TreeNode> {
   /**
    * The root node of the tree. Used for type narrowing of the template guard.
-   * Learn more here: https://angular.dev/guide/directives/structural-directives#type-narrowing-with-template-guards
+   * {@link https://angular.dev/guide/directives/structural-directives#type-narrowing-with-template-guards Learn more}
    */
   readonly rootNode = input<T>()
 

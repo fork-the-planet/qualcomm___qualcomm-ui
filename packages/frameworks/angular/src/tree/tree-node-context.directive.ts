@@ -14,7 +14,7 @@ export class TreeNodeContextDirective<
 > extends ApiContextDirective<NodeState<T>> {
   /**
    * The root node of the tree. Used for type narrowing of the template guard.
-   * Learn more here: https://angular.dev/guide/directives/structural-directives#type-narrowing-with-template-guards
+   * {@link https://angular.dev/guide/directives/structural-directives#type-narrowing-with-template-guards Learn more}
    */
   readonly rootNode = input<T>()
 
