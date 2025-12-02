@@ -829,7 +829,7 @@ describe("Tree", () => {
       expect.objectContaining({selectedValue: ["doc1"]}),
     )
 
-    await page.getByText("Document 2.pdf").click()
+    await page.getByText("Document 2.pdf").click({modifiers: ["ControlOrMeta"]})
     expect(onSelectionChange).toHaveBeenLastCalledWith(
       expect.objectContaining({selectedValue: ["doc1", "doc2"]}),
     )
