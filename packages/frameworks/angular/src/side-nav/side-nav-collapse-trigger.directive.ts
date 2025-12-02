@@ -1,23 +1,53 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {computed, Directive} from "@angular/core"
+import {Component, computed} from "@angular/core"
+import {PanelLeftClose, PanelLeftOpen} from "lucide-angular"
 
+import {useIconButtonApi} from "@qualcomm-ui/angular/button"
+import {QuiPreloadDirective} from "@qualcomm-ui/angular/transitions"
+import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 import {CoreSideNavTriggerDirective} from "@qualcomm-ui/angular-core/side-nav"
+import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {useQdsSideNavContext} from "./qds-side-nav-context.service"
 
-@Directive({
+@Component({
+  hostDirectives: [QuiPreloadDirective],
+  providers: [provideIcons({PanelLeftClose, PanelLeftOpen})],
   selector: "[q-side-nav-collapse-trigger]",
   standalone: false,
+  template: `
+    <svg
+      [q-bind]="iconProps()"
+      [qIcon]="open() ? 'PanelLeftClose' : 'PanelLeftOpen'"
+    ></svg>
+  `,
 })
 export class SideNavCollapseTriggerDirective extends CoreSideNavTriggerDirective {
-  protected qdsContext = useQdsSideNavContext()
+  protected readonly qdsContext = useQdsSideNavContext()
+
+  protected readonly open = computed(() => this.sideNavContext().open)
+
+  protected readonly iconButtonApi = useIconButtonApi({
+    density: "default",
+    size: "md",
+    variant: "ghost",
+  })
+
+  protected readonly iconProps = computed(() =>
+    this.iconButtonApi().getIconBindings(),
+  )
 
   constructor() {
     super()
     this.trackBindings.extendWith(
-      computed(() => this.qdsContext().getCollapseTriggerBindings()),
+      computed(() =>
+        mergeProps(
+          this.iconButtonApi().getRootBindings(),
+          this.qdsContext().getCollapseTriggerBindings(),
+        ),
+      ),
     )
   }
 }

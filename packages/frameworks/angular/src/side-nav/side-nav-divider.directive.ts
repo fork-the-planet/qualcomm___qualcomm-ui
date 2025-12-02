@@ -3,7 +3,12 @@
 
 import {Directive, type OnInit} from "@angular/core"
 
-import {useTrackBindings} from "@qualcomm-ui/angular-core/machine"
+import {
+  normalizeProps,
+  useTrackBindings,
+} from "@qualcomm-ui/angular-core/machine"
+import {createQdsDividerApi} from "@qualcomm-ui/qds-core/divider"
+import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {useQdsSideNavContext} from "./qds-side-nav-context.service"
 
@@ -15,7 +20,10 @@ export class SideNavDividerDirective implements OnInit {
   protected readonly qdsContext = useQdsSideNavContext()
 
   protected readonly trackBindings = useTrackBindings(() =>
-    this.qdsContext().getDividerBindings(),
+    mergeProps(
+      createQdsDividerApi({}, normalizeProps).getRootBindings(),
+      this.qdsContext().getDividerBindings(),
+    ),
   )
 
   ngOnInit() {

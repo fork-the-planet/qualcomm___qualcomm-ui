@@ -1,7 +1,7 @@
 import {Component, signal} from "@angular/core"
 import {PanelLeftClose, PanelLeftOpen} from "lucide-angular"
 
-import {IconButtonDirective} from "@qualcomm-ui/angular/button"
+import {ButtonModule} from "@qualcomm-ui/angular/button"
 import {IconDirective} from "@qualcomm-ui/angular/icon"
 import {SideNavModule} from "@qualcomm-ui/angular/side-nav"
 import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
@@ -9,7 +9,7 @@ import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 import {collection, icons} from "./items"
 
 @Component({
-  imports: [SideNavModule, IconDirective, IconButtonDirective],
+  imports: [SideNavModule, IconDirective, ButtonModule],
   providers: [provideIcons({...icons, PanelLeftClose, PanelLeftOpen})],
   selector: "side-nav-collapsed-demo",
   template: `
@@ -35,14 +35,7 @@ import {collection, icons} from "./items"
             </svg>
           </div>
           <div q-side-nav-header-title>Qualcomm</div>
-          <button
-            q-icon-button
-            q-side-nav-collapse-trigger
-            size="md"
-            variant="ghost"
-          >
-            <svg [qIcon]="open() ? 'PanelLeftClose' : 'PanelLeftOpen'"></svg>
-          </button>
+          <button q-side-nav-collapse-trigger></button>
         </header>
 
         @for (

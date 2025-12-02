@@ -4,6 +4,7 @@
 import {NgTemplateOutlet} from "@angular/common"
 import {NgModule} from "@angular/core"
 
+import {IconDirective} from "@qualcomm-ui/angular/icon"
 import {QBindDirective} from "@qualcomm-ui/angular-core/machine"
 
 import {SideNavBranchContentDirective} from "./side-nav-branch-content.directive"
@@ -87,6 +88,6 @@ import {SideNavRootDirective} from "./side-nav-root.directive"
     SideNavNodeTextDirective,
     SideNavNodesComponent,
   ],
-  imports: [QBindDirective, NgTemplateOutlet],
+  imports: [QBindDirective, NgTemplateOutlet, IconDirective],
 })
 export class SideNavModule {}

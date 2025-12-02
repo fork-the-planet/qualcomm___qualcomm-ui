@@ -32,7 +32,7 @@ import {groupedCollection, groupedIcons} from "./grouped-items"
 
         @for (group of groups; track group.key) {
           <div q-side-nav-group>
-            <hr q-side-nav-divider />
+            <div q-side-nav-divider></div>
 
             @if (group.key !== "ungrouped") {
               <div q-side-nav-group-label>{{ group.key }}</div>

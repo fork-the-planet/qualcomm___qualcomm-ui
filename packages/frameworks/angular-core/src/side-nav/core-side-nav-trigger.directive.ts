@@ -11,7 +11,8 @@ import {useSideNavContext} from "./side-nav-context.service"
 @Directive()
 export class CoreSideNavTriggerDirective implements OnInit {
   /**
-   * HTML id attribute. If omitted, a unique identifier will be generated for accessibility.
+   * HTML id attribute. If omitted, a unique identifier will be generated for
+   * accessibility.
    */
   readonly id = input<string>()
 

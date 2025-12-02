@@ -45,7 +45,6 @@ import {
         </header>
 
         <q-text-input
-          class="mx-2 mb-1"
           placeholder="Search"
           q-side-nav-filter-input
           size="sm"
