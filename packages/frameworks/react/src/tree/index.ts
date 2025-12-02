@@ -12,6 +12,7 @@ import {
   TreeBranchTrigger,
   type TreeBranchTriggerProps,
 } from "./tree-branch-trigger"
+import {TreeContext, type TreeContextProps} from "./tree-context"
 import {TreeLabel, type TreeLabelProps} from "./tree-label"
 import {TreeLeafNode, type TreeLeafNodeProps} from "./tree-leaf-node"
 import {TreeNodeAction, type TreeNodeActionProps} from "./tree-node-action"
@@ -40,6 +41,7 @@ export type {
   TreeBranchNodeProps,
   TreeBranchTriggerProps,
   TreeBranchProps,
+  TreeContextProps,
   TreeLabelProps,
   TreeLeafNodeProps,
   TreeNodeActionProps,
@@ -77,6 +79,7 @@ type TreeComponent = {
    * `<div>` element by default.
    */
   BranchTrigger: typeof TreeBranchTrigger
+  Context: typeof TreeContext
   /**
    * An optional accessible label for the tree. Renders a `<div>` element by default.
    */
@@ -125,6 +128,7 @@ export const Tree: TreeComponent = {
   BranchIndentGuide: TreeBranchIndentGuide,
   BranchNode: TreeBranchNode,
   BranchTrigger: TreeBranchTrigger,
+  Context: TreeContext,
   Label: TreeLabel,
   LeafNode: TreeLeafNode,
   NodeAction: TreeNodeAction,
