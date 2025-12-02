@@ -9,8 +9,10 @@ import type {TreeNodeTemplateContext} from "./qds-tree-context.service"
 
 /**
  * Structural directive that defines the template used to render leaf nodes in a
- * tree. Apply this to an `ng-template` to customize how leaf nodes (nodes without
- * children) are displayed.
+ * tree. Apply this to an `ng-template` to customize how branch nodes (nodes with
+ * children) are displayed. Note that this template will only customize the content
+ * of the node. The parent `<q-tree-nodes>` component renders the branch children
+ * internally.
  *
  * @example
  * ```html
