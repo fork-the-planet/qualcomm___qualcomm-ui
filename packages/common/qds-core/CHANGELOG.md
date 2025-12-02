@@ -1,5 +1,15 @@
 # @qualcomm-ui/qds-core
 
+## 1.8.0 (2025/12/01)
+
+### Features
+
+- [collapsible]: add getter function for content bindings
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils, @qualcomm-ui/core]
+
 ## 1.7.1 (2025/12/01)
 
 ### Miscellaneous Chores

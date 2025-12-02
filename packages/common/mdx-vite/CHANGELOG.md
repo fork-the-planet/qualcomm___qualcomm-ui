@@ -1,5 +1,15 @@
 # @qualcomm-ui/mdx-vite
 
+## 2.3.0 (2025/12/01)
+
+### Features
+
+- [knowledge-generator]: formatting enhancements for aggregated output mode
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils]
+
 ## 2.2.1 (2025/11/25)
 
 ### Bug Fixes

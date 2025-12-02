@@ -90,11 +90,11 @@ export class CoreTooltipRootDirective
 
   readonly hostId = computed(() => useId(this, this.id()))
 
-  private readonly isMounted = useIsMounted()
+  protected readonly isMounted = useIsMounted()
 
-  private readonly injector = inject(Injector)
+  protected readonly injector = inject(Injector)
 
-  private readonly trackBindings = useTrackBindings(() =>
+  protected readonly trackBindings = useTrackBindings(() =>
     this.tooltipContext.context().getRootBindings(),
   )
 

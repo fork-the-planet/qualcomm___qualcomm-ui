@@ -6,6 +6,9 @@ import {booleanAttribute, Component, input} from "@angular/core"
 import type {QdsCheckboxSize} from "@qualcomm-ui/qds-core/checkbox"
 import type {Booleanish} from "@qualcomm-ui/utils/coercion"
 
+/**
+ * Renders either an indeterminate checkmark or a checkmark icon.
+ */
 @Component({
   selector: "q-checkmark-icon",
   styles: [

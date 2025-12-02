@@ -411,13 +411,25 @@ async function generateLlmsTxt(
     getIntroLines(pages, projectName, description, baseUrl),
   ]
 
-  lines.push("## Documentation Content")
   lines.push("")
 
   for (const page of pages) {
-    lines.push(`# ${page.title}`)
+    const content = page.content.split("\n").map((line) => {
+      if (line.startsWith("#")) {
+        // increase heading level by 1 for pages
+        return `#${line}`
+      }
+      return line
+    })
+
+    if (content.every((line) => !line.trim())) {
+      continue
+    }
+
+    lines.push(`## ${page.title}`)
     lines.push("")
-    lines.push(page.content)
+
+    lines.push(content.join("\n"))
     lines.push("")
   }
 

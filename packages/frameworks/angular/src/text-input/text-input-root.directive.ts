@@ -10,7 +10,6 @@ import {
 } from "@qualcomm-ui/angular/input"
 import type {LucideIcon} from "@qualcomm-ui/angular-core/lucide"
 import {
-  mergeProps,
   normalizeProps,
   useTrackBindings,
 } from "@qualcomm-ui/angular-core/machine"
@@ -20,6 +19,7 @@ import {
   provideTextInputContext,
 } from "@qualcomm-ui/angular-core/text-input"
 import {createQdsInputApi, type QdsInputSize} from "@qualcomm-ui/qds-core/input"
+import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 /**
  * Groups all parts of the text input.

@@ -66,6 +66,6 @@
     "vitest": "^4.0.8"
   },
   "peerDependencies": {
-    "@qualcomm-ui/utils": "workspace:^1.0.3"
+    "@qualcomm-ui/utils": "workspace:^1.0.4"
   }
 }

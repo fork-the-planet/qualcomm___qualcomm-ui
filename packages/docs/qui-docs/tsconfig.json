@@ -11,6 +11,12 @@
   "references": [
     {
       "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "../../frameworks/react/tsconfig.lib.json"
+    },
+    {
+      "path": "../../common/mdx-vite/tsconfig.lib.json"
     }
   ]
 }

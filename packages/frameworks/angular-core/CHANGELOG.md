@@ -1,5 +1,24 @@
 # @qualcomm-ui/angular-core
 
+## 1.2.0 (2025/12/01)
+
+### Features
+
+- [tree]: add core tree directives
+
+### Bug Fixes
+
+- [merge-props]: loosen merged className type for union compatibility
+
+### Code Refactoring
+
+- [merge-props]: use shared implementation from utils package
+- [core-tooltip]: loosen member variable access modifiers
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils, @qualcomm-ui/core, @qualcomm-ui/dom]
+
 ## 1.1.1 (2025/12/01)
 
 ### Miscellaneous Chores

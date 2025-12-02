@@ -12,11 +12,12 @@ import {
 } from "@angular/core"
 
 import {useId, useOnDestroy} from "@qualcomm-ui/angular-core/common"
-import {mergeProps, useTrackBindings} from "@qualcomm-ui/angular-core/machine"
+import {useTrackBindings} from "@qualcomm-ui/angular-core/machine"
 import {
   PresenceContextService,
   usePresenceRenderer,
 } from "@qualcomm-ui/angular-core/presence"
+import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {useMenuContext} from "./menu-context.service"
 

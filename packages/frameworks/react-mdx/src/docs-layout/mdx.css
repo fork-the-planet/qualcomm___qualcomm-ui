@@ -290,6 +290,7 @@ div.mdx.table-wrapper {
   width: 100%;
 
   .qui-table__root {
+    box-sizing: border-box;
     min-width: fit-content;
   }
 }
