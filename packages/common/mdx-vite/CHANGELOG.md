@@ -4,7 +4,7 @@
 
 ### Features
 
-- [knowledge-generator]: fix formatting for aggregated output mode
+- [knowledge-generator]: formatting enhancements for aggregated output mode
 
 ### Miscellaneous Chores
 
