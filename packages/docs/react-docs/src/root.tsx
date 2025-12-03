@@ -83,7 +83,9 @@ export async function loader({
   const demoState = await demoStateCookie.parse(cookie)
 
   return {
-    demoSettings: siteState?.demoSettings ?? {transformTailwindClasses: false} satisfies DemoSettings,
+    demoSettings:
+      siteState?.demoSettings ??
+      ({transformTailwindClasses: false} satisfies DemoSettings),
     demoState: demoState ?? {},
     hideDemoBrandSwitcher: siteState?.hideDemoBrandSwitcher || false,
     packageManager: siteState?.packageManager || "npm",
