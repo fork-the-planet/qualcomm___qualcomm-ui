@@ -12,6 +12,12 @@ export interface SourceCode {
    * code.
    */
   preview?: string | null | undefined
+
+  /**
+   * CSS for classes that couldn't be inlined (e.g., hover:, sm:, focus:).
+   * Only populated when transformTailwindStyles is enabled.
+   */
+  residualCss?: string | null | undefined
 }
 
 export interface SourceCodeData {
