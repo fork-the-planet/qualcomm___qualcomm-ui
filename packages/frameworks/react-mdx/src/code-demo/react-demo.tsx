@@ -12,20 +12,15 @@ import {
 // eslint-disable-next-line no-restricted-imports
 import * as React from "react"
 
-import {ChevronsLeftRight} from "lucide-react"
-
-import type {ReactDemoData, SourceCodeData} from "@qualcomm-ui/mdx-common"
-import {Button} from "@qualcomm-ui/react/button"
+import type {ReactDemoData} from "@qualcomm-ui/mdx-common"
 import type {ColorScheme} from "@qualcomm-ui/react/qds-theme"
-import {Tab, Tabs} from "@qualcomm-ui/react/tabs"
 import {useSafeLayoutEffect} from "@qualcomm-ui/react-core/effects"
 import {useMdxDocsContext} from "@qualcomm-ui/react-mdx/context"
 import {CopyToClipboardIconButton} from "@qualcomm-ui/react-mdx/copy-to-clipboard"
 import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {getDefaultSourceCode} from "./code-demo.utils"
-import {DemoStyleToggle} from "./internal"
+import {DemoCodePanel, useDemoSourceCode} from "./internal"
 
 export interface ReactDemoProps extends ComponentPropsWithRef<"div"> {
   /**
@@ -107,7 +102,7 @@ export function ReactDemo({
 
   const [activeTab, setActiveTab] = useState<string>(demo?.fileName || "")
 
-  const {demoSettings, demoState, updateDemoState} = useMdxDocsContext()
+  const {demoState, updateDemoState} = useMdxDocsContext()
 
   const state = useMemo(() => {
     return demoState[demo.pageId] || {}
@@ -142,35 +137,14 @@ export function ReactDemo({
     }
   }, [activeTab, demo?.fileName])
 
-  const toggleCollapsed = () => {
-    queueMicrotask(() => {
-      updateDemoState(demo.pageId, name, {expanded: !expanded})
-    })
-    setExpanded((prevState) => {
-      return !prevState
-    })
-  }
-
-  const isInlineMode = demoSettings?.styleMode === "inline"
   const scheme = colorScheme || "dark"
 
-  // Only show residual CSS tab when in inline mode
-  const filteredSourceCode = isInlineMode
-    ? demo.sourceCode
-    : (demo.sourceCode ?? []).filter((item) => item.type !== "residual-css")
-
-  const fileNames = filteredSourceCode.map((item) => item.fileName)
-
-  const activeTabSourceCode: SourceCodeData =
-    filteredSourceCode.find((item) => item.fileName === activeTab) ??
-    getDefaultSourceCode()
-
-  const hasInline = !!activeTabSourceCode.highlightedInline
-  const activeHighlightedCode =
-    isInlineMode && hasInline
-      ? activeTabSourceCode.highlightedInline
-      : activeTabSourceCode.highlighted
-  const hasPreview = !!activeHighlightedCode?.preview
+  const {activeTabSourceCode, fileNames, getHighlightedCode, hasPreview} =
+    useDemoSourceCode({
+      activeTab,
+      expanded,
+      sourceCode: demo.sourceCode,
+    })
 
   const mergedProps = mergeProps(
     {
@@ -195,19 +169,17 @@ export function ReactDemo({
     }
     return (
       (expanded
-        ? activeTabSourceCode.raw?.full
-        : activeTabSourceCode.raw?.preview || activeTabSourceCode.raw?.full) ||
-      ""
+        ? activeTabSourceCode?.raw?.full
+        : activeTabSourceCode?.raw?.preview ||
+          activeTabSourceCode?.raw?.full) || ""
     )
   }
 
-  const getHighlightedCode = () => {
-    if (hasPreview) {
-      return expanded
-        ? activeHighlightedCode.full
-        : activeHighlightedCode.preview!
-    }
-    return activeHighlightedCode!.full
+  const handleExpandedChange = (newExpanded: boolean) => {
+    queueMicrotask(() => {
+      updateDemoState(demo.pageId, name, {expanded: newExpanded})
+    })
+    setExpanded(newExpanded)
   }
 
   return (
@@ -227,76 +199,24 @@ export function ReactDemo({
           >
             <Component />
           </div>
-          <div className="qui-demo-runner__tabs">
-            <div
-              className="qui-demo-runner__action-bar"
-              data-state={expanded || hasPreview ? "open" : "closed"}
-            >
-              {fileNames.length > 1 ? (
-                <Tabs.Root
-                  onValueChange={(value) => {
-                    setActiveTab(value)
-                    if (!expanded) {
-                      setExpanded(true)
-                    }
-                  }}
-                  value={expanded || hasPreview ? activeTab : null}
-                >
-                  <Tabs.List>
-                    <Tabs.Indicator />
-                    {fileNames.map((fileName) => {
-                      return (
-                        <Tab.Root key={fileName} value={fileName}>
-                          <Tab.Button
-                            onClick={() => {
-                              if (!expanded) {
-                                setExpanded(true)
-                              }
-                            }}
-                          >
-                            {fileName}
-                          </Tab.Button>
-                        </Tab.Root>
-                      )
-                    })}
-                  </Tabs.List>
-                </Tabs.Root>
-              ) : (
-                <div />
-              )}
-              <div className="qui-demo-runner__actions">
-                <Button
-                  data-brand="qualcomm"
-                  emphasis="primary"
-                  endIcon={ChevronsLeftRight}
-                  onClick={toggleCollapsed}
-                  size="sm"
-                  variant="ghost"
-                >
-                  {hasPreview
-                    ? expanded
-                      ? "Collapse Code"
-                      : "Expand Code"
-                    : expanded
-                      ? "Hide Code"
-                      : "Show Code"}
-                </Button>
-                <DemoStyleToggle />
-                <CopyToClipboardIconButton
-                  density="default"
-                  size="sm"
-                  valueOrFn={getCopyableCode}
-                />
-              </div>
-            </div>
-
-            <div
-              ref={htmlWrapperRef}
-              className="qui-docs-highlighter__root"
-              dangerouslySetInnerHTML={{__html: getHighlightedCode()}}
-              data-hidden={booleanDataAttr(!expanded && !hasPreview)}
-            ></div>
-          </div>
+          <DemoCodePanel
+            activeTab={activeTab}
+            copyButton={
+              <CopyToClipboardIconButton
+                density="default"
+                size="sm"
+                valueOrFn={getCopyableCode}
+              />
+            }
+            expanded={expanded}
+            fileNames={fileNames}
+            getHighlightedCode={getHighlightedCode}
+            hasPreview={hasPreview}
+            highlighterRef={htmlWrapperRef}
+            onExpandedChange={handleExpandedChange}
+            onTabChange={setActiveTab}
+            tabsValue={expanded || hasPreview ? activeTab : null}
+          />
         </>
       )}
     </div>
