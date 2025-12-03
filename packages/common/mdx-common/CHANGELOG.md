@@ -1,5 +1,20 @@
 # @qualcomm-ui/mdx-common
 
+## 1.4.0 (2025/12/03)
+
+### Features
+
+- [preview-blocks]: strip code annotations from preview content
+- [mdx-vite]: add transformation from tailwind to inline styles in demos
+
+### Code Refactoring
+
+- [demo-plugin]: deprecated raw source code type
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/typedoc-common]
+
 ## 1.3.0 (2025/11/25)
 
 ### Features

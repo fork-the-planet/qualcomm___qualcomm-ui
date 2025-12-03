@@ -1,5 +1,15 @@
 # @qualcomm-ui/qds-core
 
+## 1.9.0 (2025/12/03)
+
+### Features
+
+- [design-tokens]: add individual static text variables for line-height and font-size
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/utils]
+
 ## 1.8.0 (2025/12/01)
 
 ### Features
