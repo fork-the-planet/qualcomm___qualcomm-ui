@@ -121,15 +121,13 @@ export function DemoCodePanel({
         </div>
       </div>
 
-      {hasPreview || expanded ? (
-        <div
-          ref={highlighterRef}
-          className="qui-docs-highlighter__root"
-          dangerouslySetInnerHTML={{__html: getHighlightedCode()}}
-          data-hidden={booleanDataAttr(!expanded && !hasPreview)}
-          suppressHydrationWarning={suppressHydrationWarning}
-        />
-      ) : null}
+      <div
+        ref={highlighterRef}
+        className="qui-docs-highlighter__root"
+        dangerouslySetInnerHTML={{__html: getHighlightedCode()}}
+        data-hidden={booleanDataAttr(!expanded && !hasPreview)}
+        suppressHydrationWarning={suppressHydrationWarning}
+      />
     </div>
   )
 }
