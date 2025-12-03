@@ -458,7 +458,8 @@ describe("createShikiTailwindTransformer", () => {
       transformers: [transformer],
     })
 
-    // Strip HTML tags to check text content (syntax highlighting splits across spans)
+    // Strip HTML tags to check text content (syntax highlighting splits across
+    // spans)
     const textContent = html.replace(/<[^>]+>/g, "")
 
     // Should use JSX object syntax
@@ -490,7 +491,8 @@ describe("createShikiTailwindTransformer", () => {
       transformers: [transformer],
     })
 
-    // Strip HTML tags to check text content (syntax highlighting splits across spans)
+    // Strip HTML tags to check text content (syntax highlighting splits across
+    // spans)
     const textContent = html.replace(/<[^>]+>/g, "")
 
     // Should use JSX object syntax for flex, keep hover as className
