@@ -110,9 +110,12 @@ export function QdsAngularDemoRunner({
     if (!activeTabSourceCode) {
       return ""
     }
-    return expanded
-      ? activeTabSourceCode.raw.full
-      : activeTabSourceCode.raw.preview || activeTabSourceCode.raw.full
+    return (
+      (expanded
+        ? activeTabSourceCode.raw?.full
+        : activeTabSourceCode.raw?.preview || activeTabSourceCode.raw?.full) ||
+      ""
+    )
   }, [activeTabSourceCode, expanded])
 
   const getHighlightedCode = useCallback(() => {
