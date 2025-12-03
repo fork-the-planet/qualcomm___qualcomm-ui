@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
 import {
+  booleanAttribute,
   Component,
   computed,
   contentChild,
@@ -21,6 +22,7 @@ import {
   useTreeContext,
 } from "@qualcomm-ui/angular-core/tree"
 import type {NodeProps} from "@qualcomm-ui/core/tree"
+import type {Booleanish} from "@qualcomm-ui/utils/coercion"
 import type {TreeNode} from "@qualcomm-ui/utils/collection"
 
 import type {SideNavNodeTemplateContext} from "./qds-side-nav-context.service"
@@ -48,6 +50,10 @@ import {SideNavLeafTemplateDirective} from "./side-nav-leaf-template.directive"
         />
 
         <div q-side-nav-branch-content>
+          @if (showIndentGuide()) {
+            <div q-side-nav-branch-indent-guide></div>
+          }
+
           @for (
             child of childNodes();
             let i = $index;
@@ -58,6 +64,7 @@ import {SideNavLeafTemplateDirective} from "./side-nav-leaf-template.directive"
               [node]="child"
               [renderBranch]="branchTemplate()"
               [renderLeaf]="leafTemplate()"
+              [showIndentGuide]="showIndentGuide()"
             />
           }
         </div>
@@ -83,6 +90,10 @@ export class SideNavNodesComponent<T extends TreeNode>
    * The tree node
    */
   readonly node = input.required<T>()
+
+  readonly showIndentGuide = input<boolean | undefined, Booleanish>(undefined, {
+    transform: booleanAttribute,
+  })
 
   readonly renderBranch =
     input<TemplateRef<SideNavBranchTemplateDirective<T>>>()
