@@ -6,9 +6,7 @@
   ],
   "commit": false,
   "fixed": [],
-  "linked": [
-
-  ],
+  "linked": [],
   "changedFilePatterns": [
     "**",
     "!dist",
