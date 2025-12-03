@@ -6,6 +6,7 @@ import {
   type ReactNode,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react"
 // eslint-disable-next-line no-restricted-imports
@@ -19,11 +20,12 @@ import type {ColorScheme} from "@qualcomm-ui/react/qds-theme"
 import {Tab, Tabs} from "@qualcomm-ui/react/tabs"
 import {useSafeLayoutEffect} from "@qualcomm-ui/react-core/effects"
 import {useMdxDocsContext} from "@qualcomm-ui/react-mdx/context"
-import {CopyToClipboardButton} from "@qualcomm-ui/react-mdx/copy-to-clipboard"
+import {CopyToClipboardIconButton} from "@qualcomm-ui/react-mdx/copy-to-clipboard"
 import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {getDefaultSourceCode} from "./code-demo.utils"
+import {DemoStyleToggle} from "./internal"
 
 export interface ReactDemoProps extends ComponentPropsWithRef<"div"> {
   /**
@@ -101,9 +103,12 @@ export function ReactDemo({
     sourceCode: [],
   }
 
+  const htmlWrapperRef = useRef<HTMLDivElement>(null)
+
   const [activeTab, setActiveTab] = useState<string>(demo?.fileName || "")
 
-  const {demoState, updateDemoState} = useMdxDocsContext()
+  const {demoSettings, demoState, setDemoSettings, updateDemoState} =
+    useMdxDocsContext()
 
   const state = useMemo(() => {
     return demoState[demo.pageId] || {}
@@ -153,7 +158,12 @@ export function ReactDemo({
     (demo.sourceCode ?? []).find((item) => item.fileName === activeTab) ??
     getDefaultSourceCode()
 
-  const hasPreview = !!activeTabSourceCode.raw.preview
+  const hasInline = !!activeTabSourceCode.highlightedInline
+  const activeHighlightedCode =
+    hasInline && demoSettings?.styleMode === "inline"
+      ? activeTabSourceCode.highlightedInline
+      : activeTabSourceCode.highlighted
+  const hasPreview = !!activeHighlightedCode?.preview
   const scheme = colorScheme || "dark"
 
   const mergedProps = mergeProps(
@@ -166,18 +176,32 @@ export function ReactDemo({
   )
 
   const getCopyableCode = () => {
-    return expanded
-      ? activeTabSourceCode.raw.full
-      : activeTabSourceCode.raw.preview || activeTabSourceCode.raw.full
+    const ref = htmlWrapperRef.current
+    if (ref) {
+      const preElement = ref.querySelector("pre")
+      if (preElement) {
+        const dataCode = preElement.getAttribute("data-code")
+        const dataPreview = preElement.getAttribute("data-preview")
+        if (dataCode) {
+          return expanded ? dataCode : dataPreview || dataCode
+        }
+      }
+    }
+    return (
+      (expanded
+        ? activeTabSourceCode.raw?.full
+        : activeTabSourceCode.raw?.preview || activeTabSourceCode.raw?.full) ||
+      ""
+    )
   }
 
   const getHighlightedCode = () => {
     if (hasPreview) {
       return expanded
-        ? activeTabSourceCode.highlighted.full
-        : activeTabSourceCode.highlighted.preview!
+        ? activeHighlightedCode.full
+        : activeHighlightedCode.preview!
     }
-    return activeTabSourceCode.highlighted.full
+    return activeHighlightedCode!.full
   }
 
   return (
@@ -251,16 +275,21 @@ export function ReactDemo({
                       ? "Hide Code"
                       : "Show Code"}
                 </Button>
-                <CopyToClipboardButton code={getCopyableCode} />
+                <DemoStyleToggle />
+                <CopyToClipboardIconButton
+                  density="default"
+                  size="sm"
+                  valueOrFn={getCopyableCode}
+                />
               </div>
             </div>
 
-            {hasPreview || expanded ? (
-              <div
-                className="qui-docs-highlighter__root"
-                dangerouslySetInnerHTML={{__html: getHighlightedCode()}}
-              ></div>
-            ) : null}
+            <div
+              ref={htmlWrapperRef}
+              className="qui-docs-highlighter__root"
+              dangerouslySetInnerHTML={{__html: getHighlightedCode()}}
+              data-hidden={booleanDataAttr(!expanded && !hasPreview)}
+            ></div>
           </div>
         </>
       )}

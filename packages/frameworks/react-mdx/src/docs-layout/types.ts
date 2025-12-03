@@ -7,6 +7,7 @@ import type {useMDXComponents} from "@mdx-js/react"
 
 import type {BreadcrumbsItemProps} from "@qualcomm-ui/react/breadcrumbs"
 import type {
+  DemoSettings,
   MdxDocsContextValue,
   PackageManager,
   RouteDemoState,
@@ -37,7 +38,10 @@ export interface DocPropsSettings {
  * @public
  */
 export interface DocsLayoutSettings
-  extends Pick<MdxDocsContextValue, "packageManager" | "ssrUserAgent"> {
+  extends Pick<
+    MdxDocsContextValue,
+    "demoSettings" | "packageManager" | "ssrUserAgent"
+  > {
   /**
    * Demo state for each route, typically persisted via localStorage or a session
    * cookie (SSR). This preserves the expand/collapse state of each demo on reload.
@@ -73,6 +77,11 @@ export interface DocsLayoutSettings
    * @inheritDoc
    */
   mdxComponents?: ReturnType<typeof useMDXComponents>
+
+  /**
+   * Function fired when the demo settings change.
+   */
+  onDemoSettingsChange?: (settings: DemoSettings) => void
 
   /**
    * Function fired when the route demo state changes.

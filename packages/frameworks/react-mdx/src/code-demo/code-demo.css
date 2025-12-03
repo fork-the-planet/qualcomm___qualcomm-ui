@@ -189,6 +189,7 @@ pre.shiki.mdx {
 }
 
 .qui-demo-runner__actions {
+  align-items: center;
   display: inline-flex;
 }
 
