@@ -1,3 +1,6 @@
+// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+// SPDX-License-Identifier: BSD-3-Clause-Clear
+
 import type {Element, Root, Text} from "hast"
 import {fromHtml} from "hast-util-from-html"
 import {toHtml} from "hast-util-to-html"
