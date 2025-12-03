@@ -1,4 +1,6 @@
+export * from "./demo-code-panel"
 export * from "./demo-style-toggle"
 export * from "./qds-demo-theme-selector"
 export * from "./use-code-demo-preview"
+export * from "./use-demo-source-code"
 export * from "./use-qds-demo-theme"
