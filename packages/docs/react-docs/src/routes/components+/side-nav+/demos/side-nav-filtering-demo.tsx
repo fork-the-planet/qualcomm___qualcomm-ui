@@ -65,7 +65,13 @@ export function SideNavFilteringDemo() {
           <SideNav.HeaderTitle>Qualcomm</SideNav.HeaderTitle>
         </SideNav.Header>
 
-        <SideNav.FilterInput onValueChange={search} value={query} />
+        <SideNav.Divider />
+
+        <SideNav.FilterInput
+          className="mb-4"
+          onValueChange={search}
+          value={query}
+        />
 
         {collection
           .groupChildren([], (node) => node.group ?? "ungrouped", [

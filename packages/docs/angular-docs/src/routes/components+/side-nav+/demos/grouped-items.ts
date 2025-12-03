@@ -17,6 +17,7 @@ import {
 import {createTreeCollection} from "@qualcomm-ui/core/tree"
 
 export interface SideNavItem {
+  category?: string
   group?: string
   icon?: string
   id: string
@@ -65,21 +66,25 @@ export const groupedCollection = createTreeCollection<SideNavItem>({
         id: "integrations",
         nodes: [
           {
+            category: "integrations",
             icon: "Grid2x2",
             id: "marketplace",
             text: "Marketplace",
           },
           {
+            category: "integrations",
             icon: "Link",
             id: "connected",
             text: "Connected Apps",
           },
           {
+            category: "integrations",
             icon: "Key",
             id: "api-keys",
             text: "API Keys",
           },
           {
+            category: "integrations",
             icon: "Webhook",
             id: "webhooks",
             text: "Webhooks",
