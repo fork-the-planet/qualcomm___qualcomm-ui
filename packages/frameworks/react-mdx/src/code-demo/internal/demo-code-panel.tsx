@@ -24,7 +24,8 @@ export interface DemoCodePanelProps {
   expanded: boolean
   fileNames: string[]
   getHighlightedCode: () => string
-  hasPreview: boolean
+  hasInlineStyles: boolean | undefined
+  hasPreview: boolean | undefined
   /**
    * Ref for the highlighted code container (used by React demo for DOM-based
    * code copying).
@@ -49,6 +50,7 @@ export function DemoCodePanel({
   expanded,
   fileNames,
   getHighlightedCode,
+  hasInlineStyles,
   hasPreview,
   highlighterRef,
   onExpandedChange,
@@ -114,7 +116,7 @@ export function DemoCodePanel({
                 ? "Hide Code"
                 : "Show Code"}
           </Button>
-          <DemoStyleToggle />
+          {hasInlineStyles ? <DemoStyleToggle /> : null}
           {copyButton}
         </div>
       </div>

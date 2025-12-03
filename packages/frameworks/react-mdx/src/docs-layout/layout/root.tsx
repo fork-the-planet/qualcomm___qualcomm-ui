@@ -61,7 +61,7 @@ export function Root({
     demoStateProp || {},
   )
   const [demoSettings, setDemoSettings] = useState<DemoSettings>(
-    demoSettingsProp || {styleMode: "default"},
+    demoSettingsProp || {transformTailwindClasses: false},
   )
 
   const {navItems, pageDocProps, pageMap} = useSiteContext()

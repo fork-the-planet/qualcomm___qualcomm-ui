@@ -33,12 +33,9 @@ export type RouteDemoState = Record<string, DemoState>
 
 export interface DemoSettings {
   /**
-   * @option 'default': do not modify the demo styles.
-   * @option 'inline': attempt to use inline styles for styling demos, transforming tailwind classes to inline styles and dedicated css where applicable.
-   *
-   * @default 'default'
+   * If true, transform tailwind classes in demos to inline styles and vanilla CSS.
    */
-  styleMode: "default" | "inline"
+  transformTailwindClasses?: boolean
 }
 
 export interface MdxDocsContextValue {

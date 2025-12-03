@@ -31,6 +31,7 @@ import {
   GlobalConfigContextValue,
 } from "@qualcomm-ui/react-internal/layout"
 import {
+  type DemoSettings,
   type PackageManager,
   SiteContextProvider,
 } from "@qualcomm-ui/react-mdx/context"
@@ -54,6 +55,7 @@ import {qdsBrandCookie, siteStateCookie, themeCookie} from "./sessions.server"
 const siteDataFallback: SiteData = {navItems: [], pageMap: {}, searchIndex: []}
 
 interface LoaderData {
+  demoSettings: DemoSettings
   hideDemoBrandSwitcher: boolean
   packageManager: PackageManager
   qdsBrand: QdsBrand
@@ -65,12 +67,15 @@ export const loader: LoaderFunction = async ({request}) => {
   const cookie = request.headers.get("cookie")
 
   const cookieTheme = await themeCookie.parse(cookie)
-  const docState = await siteStateCookie.parse(cookie)
+  const siteState = await siteStateCookie.parse(cookie)
   const qdsTheme = await qdsBrandCookie.parse(cookie)
 
   return {
-    hideDemoBrandSwitcher: docState?.hideDemoBrandSwitcher || false,
-    packageManager: docState?.packageManager || "npm",
+    demoSettings:
+      siteState?.demoSettings ??
+      ({transformTailwindClasses: false} satisfies DemoSettings),
+    hideDemoBrandSwitcher: siteState?.hideDemoBrandSwitcher || false,
+    packageManager: siteState?.packageManager || "npm",
     qdsBrand: isQdsBrand(qdsTheme) ? qdsTheme : ("qualcomm" satisfies QdsBrand),
     ssrUserAgent: request.headers.get("user-agent"),
     theme: isTheme(cookieTheme) ? cookieTheme : Theme.DARK,
@@ -148,6 +153,12 @@ function App() {
         <GlobalConfigContextProvider value={globalConfigContext}>
           <QueryClientProvider client={queryClient}>
             <AppDocsLayout
+              demoSettings={data.demoSettings}
+              onDemoSettingsChange={(nextValue) => {
+                void updateSiteState("/action/set-site-state", {
+                  demoSettings: nextValue,
+                })
+              }}
               onPackageManagerChange={(nextValue) =>
                 updateSiteState("/action/set-site-state", {
                   packageManager: nextValue,

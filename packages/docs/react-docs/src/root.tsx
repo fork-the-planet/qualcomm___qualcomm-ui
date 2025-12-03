@@ -31,6 +31,7 @@ import {
   type GlobalConfigContextValue,
 } from "@qualcomm-ui/react-internal/layout"
 import {
+  type DemoSettings,
   type PackageManager,
   type RouteDemoState,
   SiteContextProvider,
@@ -61,6 +62,7 @@ import {
 const siteDataFallback: SiteData = {navItems: [], pageMap: {}, searchIndex: []}
 
 interface RootLoaderData {
+  demoSettings: DemoSettings
   demoState: RouteDemoState
   hideDemoBrandSwitcher: boolean
   packageManager: PackageManager
@@ -76,14 +78,15 @@ export async function loader({
   const cookie = request.headers.get("cookie")
 
   const cookieTheme = await themeCookie.parse(cookie)
-  const docState = await siteStateCookie.parse(cookie)
+  const siteState = await siteStateCookie.parse(cookie)
   const qdsBrand = await qdsBrandCookie.parse(cookie)
   const demoState = await demoStateCookie.parse(cookie)
 
   return {
+    demoSettings: siteState?.demoSettings ?? {transformTailwindClasses: false} satisfies DemoSettings,
     demoState: demoState ?? {},
-    hideDemoBrandSwitcher: docState?.hideDemoBrandSwitcher || false,
-    packageManager: docState?.packageManager || "npm",
+    hideDemoBrandSwitcher: siteState?.hideDemoBrandSwitcher || false,
+    packageManager: siteState?.packageManager || "npm",
     qdsBrand: isQdsBrand(qdsBrand) ? qdsBrand : ("qualcomm" satisfies QdsBrand),
     ssrUserAgent: request.headers.get("user-agent"),
     theme: isTheme(cookieTheme) ? cookieTheme : Theme.DARK,
@@ -162,7 +165,13 @@ function App() {
         <GlobalConfigContextProvider value={globalConfigContext}>
           <QueryClientProvider client={queryClient}>
             <AppDocsLayout
+              demoSettings={data.demoSettings}
               demoState={data.demoState}
+              onDemoSettingsChange={(nextValue) => {
+                void updateSiteState("/action/set-site-state", {
+                  demoSettings: nextValue,
+                })
+              }}
               onDemoStateChange={(nextValue) => {
                 void updateDemoState("/action/set-demo-state", nextValue)
               }}

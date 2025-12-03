@@ -139,12 +139,17 @@ export function ReactDemo({
 
   const scheme = colorScheme || "dark"
 
-  const {activeTabSourceCode, fileNames, getHighlightedCode, hasPreview} =
-    useDemoSourceCode({
-      activeTab,
-      expanded,
-      sourceCode: demo.sourceCode,
-    })
+  const {
+    activeTabSourceCode,
+    fileNames,
+    getHighlightedCode,
+    hasInlineStyles,
+    hasPreview,
+  } = useDemoSourceCode({
+    activeTab,
+    expanded,
+    sourceCode: demo.sourceCode,
+  })
 
   const mergedProps = mergeProps(
     {
@@ -211,6 +216,7 @@ export function ReactDemo({
             expanded={expanded}
             fileNames={fileNames}
             getHighlightedCode={getHighlightedCode}
+            hasInlineStyles={hasInlineStyles}
             hasPreview={hasPreview}
             highlighterRef={htmlWrapperRef}
             onExpandedChange={handleExpandedChange}
