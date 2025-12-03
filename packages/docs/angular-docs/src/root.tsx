@@ -71,7 +71,9 @@ export const loader: LoaderFunction = async ({request}) => {
   const qdsTheme = await qdsBrandCookie.parse(cookie)
 
   return {
-    demoSettings: siteState.demoSettings || {styleMode: "default"},
+    demoSettings:
+      siteState?.demoSettings ??
+      ({transformTailwindClasses: false} satisfies DemoSettings),
     hideDemoBrandSwitcher: siteState?.hideDemoBrandSwitcher || false,
     packageManager: siteState?.packageManager || "npm",
     qdsBrand: isQdsBrand(qdsTheme) ? qdsTheme : ("qualcomm" satisfies QdsBrand),
