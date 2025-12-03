@@ -694,6 +694,7 @@ export function angularDemoPlugin({
         full,
         preview,
       },
+      type: "file",
     }
   }
 

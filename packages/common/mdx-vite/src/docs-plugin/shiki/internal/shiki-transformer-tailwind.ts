@@ -76,24 +76,252 @@ export function extractClasses(source: string): string[] {
     .flat()
 }
 
-const compilerCache = new Map<string, {build(candidates: string[]): string}>()
+/**
+ * Create a fresh Tailwind compiler for each transformation.
+ * Note: Tailwind v4's compiler.build() is incremental and accumulates
+ * all candidates across calls. We must create a fresh compiler each time
+ * to avoid CSS from one demo leaking into another.
+ */
+async function createCompiler(styles: string) {
+  return compile(styles, {
+    loadStylesheet: async (id: string, base: string) => {
+      const content = await loadStylesheetContent(id)
+      return {
+        base,
+        content,
+        path: `virtual:${id}`,
+      }
+    },
+  })
+}
 
-async function getCompiler(styles: string) {
-  let compiler = compilerCache.get(styles)
-  if (!compiler) {
-    compiler = await compile(styles, {
-      loadStylesheet: async (id: string, base: string) => {
-        const content = await loadStylesheetContent(id)
-        return {
-          base,
-          content,
-          path: `virtual:${id}`,
+/**
+ * Extract CSS custom property definitions from compiled CSS.
+ * Looks in :root and :host selectors within @layer theme.
+ */
+function extractCssVariables(css: string): Map<string, string> {
+  const variables = new Map<string, string>()
+  const root = postcss.parse(css)
+
+  root.walkAtRules("layer", (atRule) => {
+    if (atRule.params !== "theme") {
+      return
+    }
+
+    atRule.walkRules(":root, :host", (rule) => {
+      rule.walkDecls((decl) => {
+        if (decl.prop.startsWith("--")) {
+          variables.set(decl.prop, decl.value)
         }
-      },
+      })
     })
-    compilerCache.set(styles, compiler)
+  })
+
+  return variables
+}
+
+/**
+ * Evaluate a calc() expression with resolved numeric values.
+ * Handles expressions like "0.25rem * 4" -> "1rem" or "1.25 / 0.875" -> "1.4286"
+ */
+function evaluateCalc(expression: string): string | null {
+  const expr = expression.trim()
+
+  // Pattern 1: number+unit operator number (e.g., "0.25rem * 4")
+  const withUnitFirst = expr.match(
+    /^([\d.]+)(rem|px|em|%|vh|vw)\s*([*/+-])\s*([\d.]+)$/,
+  )
+  if (withUnitFirst) {
+    const [, num1, unit, op, num2] = withUnitFirst
+    const result = evaluateOperation(parseFloat(num1), op, parseFloat(num2))
+    if (!Number.isFinite(result)) {
+      return null
+    }
+    return formatNumber(result) + unit
   }
-  return compiler
+
+  // Pattern 2: number operator number+unit (e.g., "4 * 0.25rem")
+  const withUnitSecond = expr.match(
+    /^([\d.]+)\s*([*/+-])\s*([\d.]+)(rem|px|em|%|vh|vw)$/,
+  )
+  if (withUnitSecond) {
+    const [, num1, op, num2, unit] = withUnitSecond
+    const result = evaluateOperation(parseFloat(num1), op, parseFloat(num2))
+    if (!Number.isFinite(result)) {
+      return null
+    }
+    return formatNumber(result) + unit
+  }
+
+  // Pattern 3: unitless (e.g., "1.25 / 0.875")
+  const unitless = expr.match(/^([\d.]+)\s*([*/+-])\s*([\d.]+)$/)
+  if (unitless) {
+    const [, num1, op, num2] = unitless
+    const result = evaluateOperation(parseFloat(num1), op, parseFloat(num2))
+    if (!Number.isFinite(result)) {
+      return null
+    }
+    return formatNumber(result)
+  }
+
+  return null
+}
+
+function evaluateOperation(a: number, op: string, b: number): number {
+  switch (op) {
+    case "*":
+      return a * b
+    case "/":
+      return a / b
+    case "+":
+      return a + b
+    case "-":
+      return a - b
+    default:
+      return NaN
+  }
+}
+
+function formatNumber(num: number): string {
+  // Avoid floating point artifacts like 0.30000000000000004
+  const rounded = Math.round(num * 10000) / 10000
+  return String(rounded)
+}
+
+/**
+ * Convert rem values to pixels (assuming 1rem = 16px).
+ */
+function remToPx(value: string): string {
+  return value.replace(/([\d.]+)rem/g, (_, num) => {
+    const px = parseFloat(num) * 16
+    return `${formatNumber(px)}px`
+  })
+}
+
+/**
+ * Find the matching closing parenthesis for a var() call.
+ * Handles nested parentheses in fallback values.
+ */
+function findVarEnd(str: string, start: number): number {
+  let depth = 0
+  for (let i = start; i < str.length; i++) {
+    if (str[i] === "(") {
+      depth++
+    } else if (str[i] === ")") {
+      depth--
+      if (depth === 0) {
+        return i
+      }
+    }
+  }
+  return -1
+}
+
+/**
+ * Parse a var() expression and return its parts.
+ */
+function parseVar(
+  str: string,
+  startIndex: number,
+): {end: number; fallback: string | null; varName: string} | null {
+  // Find "var(" starting position
+  const varStart = str.indexOf("var(", startIndex)
+  if (varStart === -1) {
+    return null
+  }
+
+  const contentStart = varStart + 4 // After "var("
+  const end = findVarEnd(str, varStart)
+  if (end === -1) {
+    return null
+  }
+
+  const content = str.slice(contentStart, end)
+
+  // Find comma separating variable name from fallback
+  let commaIndex = -1
+  let depth = 0
+  for (let i = 0; i < content.length; i++) {
+    if (content[i] === "(") {
+      depth++
+    } else if (content[i] === ")") {
+      depth--
+    } else if (content[i] === "," && depth === 0) {
+      commaIndex = i
+      break
+    }
+  }
+
+  if (commaIndex === -1) {
+    return {
+      end,
+      fallback: null,
+      varName: content.trim(),
+    }
+  }
+
+  return {
+    end,
+    fallback: content.slice(commaIndex + 1).trim(),
+    varName: content.slice(0, commaIndex).trim(),
+  }
+}
+
+/**
+ * Resolve CSS var() references and evaluate calc() expressions.
+ * Recursively resolves nested var() calls.
+ */
+function resolveCssValue(
+  value: string,
+  variables: Map<string, string>,
+  depth = 0,
+): string {
+  if (depth > 10) {
+    return value // Prevent infinite recursion
+  }
+
+  let resolved = value
+  let searchStart = 0
+
+  // Process var() calls iteratively to handle nested var() in fallbacks
+  while (true) {
+    const parsed = parseVar(resolved, searchStart)
+    if (!parsed) {
+      break
+    }
+
+    const {end, fallback, varName} = parsed
+    const varStart = resolved.indexOf("var(", searchStart)
+
+    let replacement: string
+    const varValue = variables.get(varName)
+    if (varValue !== undefined) {
+      replacement = resolveCssValue(varValue, variables, depth + 1)
+    } else if (fallback) {
+      replacement = resolveCssValue(fallback, variables, depth + 1)
+    } else {
+      // Keep original if unresolved, move past it
+      searchStart = end + 1
+      continue
+    }
+
+    resolved =
+      resolved.slice(0, varStart) + replacement + resolved.slice(end + 1)
+  }
+
+  // Evaluate calc() expressions after var() resolution
+  resolved = resolved.replace(
+    /calc\(([^)]+)\)/g,
+    (match, expression: string) => {
+      const evaluated = evaluateCalc(expression)
+      return evaluated ?? match
+    },
+  )
+
+  // Convert rem to px (1rem = 16px)
+  resolved = remToPx(resolved)
+
+  return resolved
 }
 
 interface SelectorAnalysis {
@@ -157,10 +385,12 @@ interface ParsedRule {
 
 /**
  * Parse compiled CSS and extract rules with their inlineability status.
+ * CSS variables are resolved and calc() expressions are evaluated.
  */
 function parseCompiledCss(css: string): ParsedRule[] {
   const rules: ParsedRule[] = []
   const root = postcss.parse(css)
+  const variables = extractCssVariables(css)
 
   function processRule(rule: Rule, insideAtRule: boolean) {
     const {className, inlineable} = analyzeSelector(rule.selector)
@@ -177,7 +407,8 @@ function parseCompiledCss(css: string): ParsedRule[] {
     const declarations: string[] = []
     rule.each((node) => {
       if (node.type === "decl") {
-        declarations.push(`${node.prop}: ${node.value}`)
+        const resolvedValue = resolveCssValue(node.value, variables)
+        declarations.push(`${node.prop}: ${resolvedValue}`)
       }
     })
 
@@ -264,7 +495,7 @@ export async function transformWithInlineStyles(
   html: string,
   styles: string,
 ): Promise<TransformResult> {
-  const compiler = await getCompiler(styles)
+  const compiler = await createCompiler(styles)
   const allClasses = extractClasses(html)
   const compiledCss = compiler.build(allClasses)
   const parsedRules = parseCompiledCss(compiledCss)
@@ -327,10 +558,17 @@ export async function transformWithInlineStyles(
 
 export interface ShikiTailwindTransformerOptions {
   /**
-   * Callback invoked with CSS for non-inlineable classes (hover:, sm:, etc.).
-   * Called after each transformation with deduplicated CSS rules.
+   * Callback invoked after transformation indicating whether any className/class
+   * attributes were detected in the code. Useful for conditionally applying
+   * the transformation or showing/hiding UI elements.
    */
-  onResidualCss?: (css: string) => void
+  onClassesDetected?: (detected: boolean) => void
+  /**
+   * Callback invoked with CSS rules for non-inlineable classes (hover:, sm:, etc.).
+   * Receives a Map where keys are class names and values are the CSS rule strings.
+   * This allows for deduplication when aggregating CSS from multiple files.
+   */
+  onResidualCss?: (rules: Map<string, string>) => void
   /**
    * Output format for inline styles.
    * - "html": `style="display: flex"` (HTML string syntax)
@@ -383,17 +621,6 @@ function compileClasses(
   }
 
   return {inlineStyles, remainingClasses, residualRules}
-}
-
-/**
- * Get concatenated text content from a line element.
- */
-function getLineText(lineElement: Element): string {
-  let text = ""
-  visit({children: [lineElement], type: "root"}, "text", (node: Text) => {
-    text += node.value
-  })
-  return text
 }
 
 /**
@@ -485,127 +712,87 @@ function computeLineReplacements(
   return {replacements, residualRules: allResidualRules}
 }
 
-/**
- * Apply text replacements to a line element's text nodes.
- * This handles the case where the pattern spans multiple text nodes.
- */
-function applyReplacementsToLine(
-  lineElement: Element,
-  replacements: Map<string, string>,
-): void {
-  if (replacements.size === 0) {
-    return
-  }
-
-  const textSegments: {end: number; node: Text; start: number}[] = []
-  let position = 0
-
-  visit({children: [lineElement], type: "root"}, "text", (node: Text) => {
-    const start = position
-    const end = position + node.value.length
-    textSegments.push({end, node, start})
-    position = end
-  })
-
-  const fullText = textSegments.map((s) => s.node.value).join("")
-
-  for (const [original, replacement] of replacements) {
-    const matchStart = fullText.indexOf(original)
-    if (matchStart === -1) {
-      continue
-    }
-
-    const matchEnd = matchStart + original.length
-
-    for (const segment of textSegments) {
-      const {end, node, start} = segment
-
-      if (end <= matchStart || start >= matchEnd) {
-        continue
-      }
-
-      const overlapStart = Math.max(0, matchStart - start)
-      const overlapEnd = Math.min(node.value.length, matchEnd - start)
-
-      const before = node.value.slice(0, overlapStart)
-      const after = node.value.slice(overlapEnd)
-
-      if (start <= matchStart && matchStart < end) {
-        node.value = before + replacement + after
-      } else {
-        node.value = before + after
-      }
-    }
-  }
+interface TransformSourceResult {
+  /** Whether any className/class attributes were detected in the code */
+  classesDetected: boolean
+  /** CSS rules for non-inlineable classes */
+  residualRules: Map<string, string>
+  /** Transformed source code */
+  source: string
 }
 
 /**
- * Replace class strings with inline styles in HAST text nodes.
- * Works at the line level to handle Shiki's tokenization.
- * Returns all residual CSS rules for non-inlineable classes.
+ * Transform className/class attributes to inline styles in source code.
+ * This runs BEFORE Shiki tokenization to preserve proper syntax highlighting.
  */
-function replaceClassesWithInlineStyles(
-  tree: Root,
+function transformSourceCode(
+  source: string,
   compiler: {build(candidates: string[]): string},
   styleFormat: "html" | "jsx" = "html",
-): Map<string, string> {
+): TransformSourceResult {
   const allResidualRules = new Map<string, string>()
+  let classesDetected = false
 
-  visit(tree, "element", (element: Element) => {
-    const className = element.properties?.className
-    const classAttr = element.properties?.class
+  const {replacements, residualRules} = computeLineReplacements(
+    source,
+    compiler,
+    styleFormat,
+  )
 
-    const isLine =
-      (Array.isArray(className) && className.includes("line")) ||
-      (typeof className === "string" && className.includes("line")) ||
-      (Array.isArray(classAttr) && classAttr.includes("line")) ||
-      (typeof classAttr === "string" && classAttr.includes("line"))
+  if (replacements.size > 0 || residualRules.size > 0) {
+    classesDetected = true
+  }
 
-    if (!isLine) {
-      return
-    }
+  for (const [cls, rule] of residualRules) {
+    allResidualRules.set(cls, rule)
+  }
 
-    const lineText = getLineText(element)
-    const {replacements, residualRules} = computeLineReplacements(
-      lineText,
-      compiler,
-      styleFormat,
-    )
+  // Apply all replacements to the source
+  let transformed = source
+  for (const [original, replacement] of replacements) {
+    transformed = transformed.replaceAll(original, replacement)
+  }
 
-    for (const [cls, rule] of residualRules) {
-      allResidualRules.set(cls, rule)
-    }
-
-    applyReplacementsToLine(element, replacements)
-  })
-
-  return allResidualRules
+  return {
+    classesDetected,
+    residualRules: allResidualRules,
+    source: transformed,
+  }
 }
 
 /**
  * Create a Shiki transformer that inlines Tailwind styles.
+ * Uses preprocess to transform source code BEFORE tokenization,
+ * ensuring proper syntax highlighting of the transformed output.
  * Must be called with `await` before using the transformer.
  */
 export async function createShikiTailwindTransformer(
   options: ShikiTailwindTransformerOptions,
 ): Promise<ShikiTransformer> {
-  const {onResidualCss, styleFormat = "html", styles} = options
-  const compiler = await getCompiler(styles)
+  const {
+    onClassesDetected,
+    onResidualCss,
+    styleFormat = "html",
+    styles,
+  } = options
+  const compiler = await createCompiler(styles)
 
   return {
-    enforce: "post",
     name: "shiki-transformer-tailwind-to-inline",
-    root(hast) {
-      const residualRules = replaceClassesWithInlineStyles(
-        hast,
+    preprocess(code) {
+      const {classesDetected, residualRules, source} = transformSourceCode(
+        code,
         compiler,
         styleFormat,
       )
 
+      onClassesDetected?.(classesDetected)
+
       if (onResidualCss && residualRules.size > 0) {
-        const css = [...residualRules.values()].join("\n\n")
-        onResidualCss(css)
+        onResidualCss(residualRules)
       }
+
+      return source
     },
   }
 }

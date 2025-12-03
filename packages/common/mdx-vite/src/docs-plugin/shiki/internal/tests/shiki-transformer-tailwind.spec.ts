@@ -458,10 +458,13 @@ describe("createShikiTailwindTransformer", () => {
       transformers: [transformer],
     })
 
+    // Strip HTML tags to check text content (syntax highlighting splits across spans)
+    const textContent = html.replace(/<[^>]+>/g, "")
+
     // Should use JSX object syntax
-    expect(html).toContain("style={")
-    expect(html).toContain("display: 'flex'")
-    expect(html).toContain("alignItems: 'center'")
+    expect(textContent).toContain("style={{")
+    expect(textContent).toContain("display: 'flex'")
+    expect(textContent).toContain("alignItems: 'center'")
 
     highlighter.dispose()
   })
@@ -487,24 +490,27 @@ describe("createShikiTailwindTransformer", () => {
       transformers: [transformer],
     })
 
+    // Strip HTML tags to check text content (syntax highlighting splits across spans)
+    const textContent = html.replace(/<[^>]+>/g, "")
+
     // Should use JSX object syntax for flex, keep hover as className
-    expect(html).toContain("style={")
-    expect(html).toContain("display: 'flex'")
-    expect(html).toContain("hover:bg-red-500")
+    expect(textContent).toContain("style={{")
+    expect(textContent).toContain("display: 'flex'")
+    expect(textContent).toContain("hover:bg-red-500")
 
     highlighter.dispose()
   })
 
-  test("calls onResidualCss with CSS for non-inlineable classes", async () => {
-    let residualCss = ""
+  test("calls onResidualCss with Map for non-inlineable classes", async () => {
+    let residualRules: Map<string, string> | null = null
     const [highlighter, transformer] = await Promise.all([
       createHighlighter({
         langs: ["tsx"],
         themes: ["github-light"],
       }),
       createShikiTailwindTransformer({
-        onResidualCss: (css) => {
-          residualCss = css
+        onResidualCss: (rules) => {
+          residualRules = rules
         },
         styles,
       }),
@@ -522,10 +528,13 @@ describe("createShikiTailwindTransformer", () => {
       transformers: [transformer],
     })
 
-    // Should contain CSS for hover and sm variants
-    expect(residualCss.length).toBeGreaterThan(0)
-    expect(residualCss).toContain("hover")
-    expect(residualCss).toContain("@media")
+    // Should return a Map with CSS rules for hover and sm variants
+    expect(residualRules).toBeInstanceOf(Map)
+    expect(residualRules!.size).toBeGreaterThan(0)
+
+    const cssString = [...residualRules!.values()].join("\n")
+    expect(cssString).toContain("hover")
+    expect(cssString).toContain("@media")
 
     highlighter.dispose()
   })
