@@ -55,4 +55,12 @@ export interface QuiDemoPluginOptions {
    * removing content. Return null to omit the line.
    */
   transformLine?: (line: string) => string | null
+
+  /**
+   * If `true`, tailwind styles will be transformed to inline styles and included as
+   * part of the generated source code data. This is used by the consuming
+   * `@qualcomm-ui/react-mdx` package for toggling between inline and tailwind-based
+   * styles in demos.
+   */
+  transformTailwindStyles?: boolean
 }

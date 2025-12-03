@@ -22,7 +22,7 @@ import {
   transformerCodeAttribute,
   transformerPreviewBlock,
 } from "../docs-plugin/shiki"
-import {shikiTransformerTailwindToInline} from "../docs-plugin/shiki/internal"
+import {createShikiTailwindTransformer} from "../docs-plugin/shiki/internal"
 
 import {LOG_PREFIX, VIRTUAL_MODULE_IDS} from "./demo-plugin-constants"
 import type {QuiDemoPluginOptions} from "./demo-plugin-types"
@@ -40,17 +40,18 @@ interface HandleUpdateOptions {
   filePath: string
 }
 
+interface HighlightCodeResult {
+  full: string
+  preview?: string | null
+  residualCss?: string | null
+}
+
 let highlighter: Highlighter | null = null
 let initializingHighlighter = false
 
 const demoRegistry = new Map<string, ReactDemoData>()
 const pageFiles = new Map<string, string[]>()
 const relativeImportDependents = new Map<string, Set<string>>()
-
-interface HighlightCodeResult {
-  full: string
-  preview?: string | null
-}
 
 /**
  * Generates virtual modules for React demo components. Virtual modules contain
@@ -90,8 +91,6 @@ export function reactDemoPlugin({
           highlighter = await createHighlighter({
             langs: ["tsx", "typescript"],
             themes: [theme.dark, theme.light],
-          }).finally(() => {
-            initializingHighlighter = false
           })
           console.log(
             `${chalk.magenta.bold(LOG_PREFIX)} Shiki highlighter initialized`,
@@ -101,6 +100,8 @@ export function reactDemoPlugin({
             `${chalk.magenta.bold(LOG_PREFIX)} Failed to initialize highlighter:`,
             error,
           )
+        } finally {
+          initializingHighlighter = false
         }
       }
 
@@ -200,18 +201,46 @@ export function reactDemoPlugin({
 
   async function highlightCode(
     code: string,
-    transformers: ShikiTransformer[] = [],
+    options: {
+      extraTransformers?: ShikiTransformer[]
+      onResidualCss?: (css: string) => void
+    } = {},
   ): Promise<HighlightCodeResult> {
+    const {extraTransformers = [], onResidualCss} = options
+
     if (!highlighter) {
       return {full: code}
     }
     let previewCode: string | null = null
+    let residualCss: string | null = null
+
+    const tailwindTransformers: ShikiTransformer[] = []
+    if (transformTailwindStyles && onResidualCss) {
+      const transformer = await createShikiTailwindTransformer({
+        onResidualCss: (css) => {
+          residualCss = css
+          onResidualCss(css)
+        },
+        styleFormat: "jsx",
+        styles: dedent`
+          @layer theme, base, components, utilities;
+          @import "tailwindcss/theme.css" layer(theme);
+          @import "tailwindcss/utilities.css" layer(utilities);
+          @import "@qualcomm-ui/tailwind-plugin/qui-strict.css";
+        `,
+      })
+      tailwindTransformers.push(transformer)
+    } else if (extraTransformers.length > 0) {
+      tailwindTransformers.push(...extraTransformers)
+    }
+
     try {
       const highlightedCode = highlighter.codeToHtml(code, {
         ...defaultShikiOptions,
         transformers: [
           ...getShikiTransformers(),
           ...transformers,
+          ...tailwindTransformers,
           transformerPreviewBlock({
             attributeName: "data-preview",
             onComplete: (extractedPreview) => {
@@ -237,6 +266,7 @@ export function reactDemoPlugin({
         preview: previewCode
           ? extractPreviewFromHighlightedHtml(highlightedCode)
           : null,
+        residualCss,
       }
     } catch (error) {
       console.warn(
@@ -318,22 +348,35 @@ export function reactDemoPlugin({
     try {
       const fileName = basename(filePath)
 
-      const promises: Promise<HighlightCodeResult>[] = []
-      promises.push(highlightCode(code))
+      const baseResult = await highlightCode(code)
 
+      let inlineResult: HighlightCodeResult | undefined
       if (transformTailwindStyles) {
-        promises.push(highlightCode(code, [shikiTransformerTailwindToInline()]))
+        let capturedCss: string | null = null
+        inlineResult = await highlightCode(code, {
+          onResidualCss: (css) => {
+            capturedCss = css
+          },
+        })
+        if (capturedCss) {
+          inlineResult.residualCss = capturedCss
+        }
       }
-
-      const [tailwind, inline] = await Promise.all(promises)
 
       return {
         fileName,
         filePath,
         highlighted: {
-          full: tailwind.full,
-          preview: tailwind.preview,
+          full: baseResult.full,
+          preview: baseResult.preview,
         },
+        highlightedInline: inlineResult
+          ? {
+              full: inlineResult.full,
+              preview: inlineResult.preview,
+              residualCss: inlineResult.residualCss,
+            }
+          : undefined,
       }
     } catch {
       return null

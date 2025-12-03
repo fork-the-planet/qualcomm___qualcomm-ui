@@ -5,6 +5,8 @@ import type {ShikiTransformer} from "shiki"
 
 import {dedent} from "@qualcomm-ui/utils/dedent"
 
+import {removeCodeAnnotations} from "./utils"
+
 export type PreviewDisplayMode = "only-preview" | "full-code"
 
 export interface PreviewBlockTransformerOptions {
@@ -60,10 +62,13 @@ export function transformerPreviewBlock(
     },
     name: "transformer-preview-block",
     pre(node) {
-      if (previewContent && options.attributeName != null) {
-        node.properties[options.attributeName] = previewContent
+      const content = previewContent
+        ? removeCodeAnnotations(previewContent)
+        : null
+      if (content && options.attributeName != null) {
+        node.properties[options.attributeName] = content
       }
-      options.onComplete?.(previewContent || null)
+      options.onComplete?.(content || null)
     },
     preprocess(code) {
       previewContent = null

@@ -148,6 +148,11 @@ function App() {
         <GlobalConfigContextProvider value={globalConfigContext}>
           <QueryClientProvider client={queryClient}>
             <AppDocsLayout
+              onDemoSettingsChange={(nextValue) => {
+                updateSiteState("/action/set-site-state", {
+                  demoSettings: nextValue,
+                })
+              }}
               onPackageManagerChange={(nextValue) =>
                 updateSiteState("/action/set-site-state", {
                   packageManager: nextValue,
