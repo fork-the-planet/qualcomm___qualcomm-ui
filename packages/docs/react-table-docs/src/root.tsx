@@ -26,6 +26,7 @@ import {
   type QdsThemeContextValue,
 } from "@qualcomm-ui/react/qds-theme"
 import {
+  type DemoSettings,
   type PackageManager,
   type RouteDemoState,
   SiteContextProvider,
@@ -61,16 +62,19 @@ export const loader: LoaderFunction = async ({request}) => {
   const cookie = request.headers.get("cookie")
 
   const cookieTheme = await themeCookie.parse(cookie)
-  const docState = await siteStateCookie.parse(cookie)
+  const siteState = await siteStateCookie.parse(cookie)
   const qdsTheme = await qdsThemeCookie.parse(cookie)
   const demoState = await demoStateCookie.parse(cookie)
 
   return {
+    demoSettings:
+      siteState?.demoSettings ??
+      ({transformTailwindClasses: false} satisfies DemoSettings),
     demoState: demoState ?? {},
-    hideDemoBrandSwitcher: docState?.hideDemoBrandSwitcher || false,
-    packageManager: docState?.packageManager || "npm",
+    hideDemoBrandSwitcher: siteState?.hideDemoBrandSwitcher || false,
+    packageManager: siteState?.packageManager || "npm",
     qdsBrand: isQdsBrand(qdsTheme) ? qdsTheme : ("qualcomm" satisfies QdsBrand),
-    sidebarScrollTop: docState?.sidebarScrollTop,
+    sidebarScrollTop: siteState?.sidebarScrollTop,
     ssrUserAgent: request.headers.get("user-agent"),
     theme: isTheme(cookieTheme) ? cookieTheme : Theme.DARK,
   }
@@ -87,6 +91,7 @@ function App() {
     }),
   )
   const data = useLoaderData<{
+    demoSettings: DemoSettings
     demoState: RouteDemoState
     hideDemoBrandSwitcher: boolean
     packageManager: PackageManager
@@ -147,8 +152,14 @@ function App() {
       <body>
         <QueryClientProvider client={queryClient}>
           <AppDocsLayout
+            demoSettings={data.demoSettings}
             demoState={data.demoState}
             hideDemoBrandSwitcher={data.hideDemoBrandSwitcher}
+            onDemoSettingsChange={(nextValue) => {
+              void updateSiteState("/action/set-site-state", {
+                demoSettings: nextValue,
+              })
+            }}
             onDemoStateChange={(nextValue) => {
               void updateDemoState("/action/set-demo-state", nextValue)
             }}

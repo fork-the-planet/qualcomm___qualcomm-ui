@@ -16,12 +16,11 @@ export function DemoStyleToggle(props: DemoStyleToggleProps): ReactElement {
   const toggleStyleMode = () => {
     setDemoSettings?.((prevState) => ({
       ...prevState,
-      styleMode: prevState.styleMode === "default" ? "inline" : "default",
+      transformTailwindClasses: !prevState.transformTailwindClasses,
     }))
   }
 
-  const mode = demoSettings?.styleMode ?? "default"
-  const styleMode = mode === "default" ? "Default" : "Inline"
+  const transformTailwindClasses = demoSettings?.transformTailwindClasses
 
   const mergedProps = mergeProps(
     {className: "qui-demo-runner__style-toggle"},
@@ -35,25 +34,23 @@ export function DemoStyleToggle(props: DemoStyleToggleProps): ReactElement {
           <IconButton
             emphasis="primary"
             icon={
-              mode === "default" ? (
+              transformTailwindClasses ? (
+                <CssLogo style={{"--icon-size": "16px"} as CSSProperties} />
+              ) : (
                 <TailwindLogo
                   style={{"--icon-size": "16px"} as CSSProperties}
                 />
-              ) : (
-                <CssLogo style={{"--icon-size": "16px"} as CSSProperties} />
               )
             }
             onClick={toggleStyleMode}
             size="sm"
             variant="ghost"
-          >
-            {styleMode}
-          </IconButton>
+          />
         }
       >
-        {mode === "default"
-          ? "Switch to inline styles"
-          : "Switch to tailwind styles"}
+        {transformTailwindClasses
+          ? "Switch to tailwind styles"
+          : "Switch to inline styles"}
       </Tooltip>
     </div>
   )

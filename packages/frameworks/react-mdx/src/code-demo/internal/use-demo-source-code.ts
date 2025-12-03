@@ -18,8 +18,9 @@ export interface UseDemoSourceCodeResult {
   fileNames: string[]
   filteredSourceCode: SourceCodeData[]
   getHighlightedCode: () => string
-  hasPreview: boolean
-  isInlineMode: boolean
+  hasInlineStyles: boolean | undefined
+  hasPreview: boolean | undefined
+  isInlineMode: boolean | undefined
 }
 
 const defaultSourceCode: SourceCodeData = {
@@ -35,7 +36,7 @@ export function useDemoSourceCode({
 }: UseDemoSourceCodeOptions): UseDemoSourceCodeResult {
   const {demoSettings} = useMdxDocsContext()
 
-  const isInlineMode = demoSettings?.styleMode === "inline"
+  const isInlineMode = demoSettings?.transformTailwindClasses
 
   // Only show residual CSS tab when in inline mode
   const filteredSourceCode = useMemo(
@@ -59,7 +60,9 @@ export function useDemoSourceCode({
     [activeTab, filteredSourceCode],
   )
 
-  const hasInline = !!activeTabSourceCode?.highlightedInline
+  const hasInline =
+    !!activeTabSourceCode?.highlightedInline ||
+    activeTabSourceCode?.type === "residual-css"
   const activeHighlightedCode = useMemo(
     () =>
       isInlineMode && hasInline
@@ -93,6 +96,7 @@ export function useDemoSourceCode({
     fileNames,
     filteredSourceCode,
     getHighlightedCode,
+    hasInlineStyles: hasInline,
     hasPreview,
     isInlineMode,
   }

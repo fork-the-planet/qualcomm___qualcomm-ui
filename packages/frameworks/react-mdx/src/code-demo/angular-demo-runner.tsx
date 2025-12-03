@@ -8,7 +8,6 @@ import {
   useCallback,
   useState,
 } from "react"
-import * as React from "react"
 
 import type {SourceCodeData} from "@qualcomm-ui/mdx-common"
 import {InlineNotification} from "@qualcomm-ui/react/inline-notification"
@@ -76,12 +75,17 @@ export function AngularDemoRunner({
 
   const scheme = colorScheme === "light" ? "light" : "dark"
 
-  const {activeTabSourceCode, fileNames, getHighlightedCode, hasPreview} =
-    useDemoSourceCode({
-      activeTab,
-      expanded: !!expanded,
-      sourceCode,
-    })
+  const {
+    activeTabSourceCode,
+    fileNames,
+    getHighlightedCode,
+    hasInlineStyles,
+    hasPreview,
+  } = useDemoSourceCode({
+    activeTab,
+    expanded: !!expanded,
+    sourceCode,
+  })
 
   const mergedProps = mergeProps(
     {className: "qui-docs-demo-container__root"},
@@ -148,6 +152,7 @@ export function AngularDemoRunner({
           expanded={!!expanded}
           fileNames={fileNames}
           getHighlightedCode={getHighlightedCode}
+          hasInlineStyles={hasInlineStyles}
           hasPreview={hasPreview}
           onExpandedChange={setExpanded}
           onTabChange={setActiveTab}
