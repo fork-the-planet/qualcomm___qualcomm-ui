@@ -43,7 +43,11 @@ interface HandleUpdateOptions {
 interface HighlightCodeResult {
   full: string
   preview?: string | null
-  residualCss?: string | null
+}
+
+interface ExtractedSourceCode {
+  residualRules?: Map<string, string>
+  sourceCodeData: SourceCodeData
 }
 
 let highlighter: Highlighter | null = null
@@ -89,7 +93,7 @@ export function reactDemoPlugin({
         initializingHighlighter = true
         try {
           highlighter = await createHighlighter({
-            langs: ["tsx", "typescript"],
+            langs: ["tsx", "typescript", "css"],
             themes: [theme.dark, theme.light],
           })
           console.log(
@@ -203,7 +207,8 @@ export function reactDemoPlugin({
     code: string,
     options: {
       extraTransformers?: ShikiTransformer[]
-      onResidualCss?: (css: string) => void
+      onClassesDetected?: (detected: boolean) => void
+      onResidualCss?: (rules: Map<string, string>) => void
     } = {},
   ): Promise<HighlightCodeResult> {
     const {extraTransformers = [], onResidualCss} = options
@@ -212,15 +217,14 @@ export function reactDemoPlugin({
       return {full: code}
     }
     let previewCode: string | null = null
-    let residualCss: string | null = null
 
     const tailwindTransformers: ShikiTransformer[] = []
     if (transformTailwindStyles && onResidualCss) {
       const transformer = await createShikiTailwindTransformer({
-        onResidualCss: (css) => {
-          residualCss = css
-          onResidualCss(css)
+        onClassesDetected: (detected) => {
+          options.onClassesDetected?.(detected)
         },
+        onResidualCss,
         styleFormat: "jsx",
         styles: dedent`
           @layer theme, base, components, utilities;
@@ -266,7 +270,6 @@ export function reactDemoPlugin({
         preview: previewCode
           ? extractPreviewFromHighlightedHtml(highlightedCode)
           : null,
-        residualCss,
       }
     } catch (error) {
       console.warn(
@@ -344,39 +347,45 @@ export function reactDemoPlugin({
   async function extractHighlightedCode(
     filePath: string,
     code: string,
-  ): Promise<SourceCodeData | null> {
+  ): Promise<ExtractedSourceCode | null> {
     try {
       const fileName = basename(filePath)
 
       const baseResult = await highlightCode(code)
 
       let inlineResult: HighlightCodeResult | undefined
+      let classesDetected: boolean = false
+      let residualRules: Map<string, string> | undefined
+
       if (transformTailwindStyles) {
-        let capturedCss: string | null = null
         inlineResult = await highlightCode(code, {
-          onResidualCss: (css) => {
-            capturedCss = css
+          onClassesDetected: (detected) => {
+            classesDetected = detected
+          },
+          onResidualCss: (rules) => {
+            residualRules = rules
           },
         })
-        if (capturedCss) {
-          inlineResult.residualCss = capturedCss
-        }
       }
 
       return {
-        fileName,
-        filePath,
-        highlighted: {
-          full: baseResult.full,
-          preview: baseResult.preview,
+        residualRules,
+        sourceCodeData: {
+          fileName,
+          filePath,
+          highlighted: {
+            full: baseResult.full,
+            preview: baseResult.preview,
+          },
+          highlightedInline:
+            classesDetected && inlineResult
+              ? {
+                  full: inlineResult.full,
+                  preview: inlineResult.preview,
+                }
+              : undefined,
+          type: "file",
         },
-        highlightedInline: inlineResult
-          ? {
-              full: inlineResult.full,
-              preview: inlineResult.preview,
-              residualCss: inlineResult.residualCss,
-            }
-          : undefined,
       }
     } catch {
       return null
@@ -391,11 +400,18 @@ export function reactDemoPlugin({
       const imports = stripImports(code, filePath)
 
       const sourceCode: SourceCodeData[] = []
+      // Use Map for deduplication across all files in this demo
+      const aggregatedRules = new Map<string, string>()
 
-      const sourceCodeData = await extractHighlightedCode(filePath, code)
+      const extractedMain = await extractHighlightedCode(filePath, code)
 
-      if (sourceCodeData) {
-        sourceCode.push(sourceCodeData)
+      if (extractedMain) {
+        sourceCode.push(extractedMain.sourceCodeData)
+        if (extractedMain.residualRules) {
+          for (const [className, rule] of extractedMain.residualRules) {
+            aggregatedRules.set(className, rule)
+          }
+        }
       }
 
       const fileImports = await extractFileImports(filePath)
@@ -407,13 +423,18 @@ export function reactDemoPlugin({
               "utf-8",
             ).then(transformLines)
 
-            const sourceCodeData = await extractHighlightedCode(
+            const extracted = await extractHighlightedCode(
               relativeImport.resolvedPath,
               importedCode,
             )
 
-            if (sourceCodeData) {
-              sourceCode.push(sourceCodeData)
+            if (extracted) {
+              sourceCode.push(extracted.sourceCodeData)
+              if (extracted.residualRules) {
+                for (const [className, rule] of extracted.residualRules) {
+                  aggregatedRules.set(className, rule)
+                }
+              }
             }
           } catch {
             console.debug("Failed to process file", relativeImport.resolvedPath)
@@ -421,9 +442,23 @@ export function reactDemoPlugin({
         }
       }
 
+      // Convert aggregated rules to CSS string
+      const aggregatedResidualCss =
+        aggregatedRules.size > 0
+          ? [...aggregatedRules.values()].join("\n\n")
+          : undefined
+
+      if (aggregatedResidualCss) {
+        sourceCode.push({
+          fileName: "styles.css",
+          highlighted: await highlightCode(aggregatedResidualCss),
+          type: "residual-css",
+        })
+      }
+
       return {
         demoName: createDemoName(filePath),
-        fileName: sourceCodeData?.fileName || basename(filePath),
+        fileName: extractedMain?.sourceCodeData.fileName || basename(filePath),
         filePath,
         imports,
         sourceCode,
