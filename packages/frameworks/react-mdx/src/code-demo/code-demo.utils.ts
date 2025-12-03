@@ -122,5 +122,6 @@ export function getDefaultSourceCode(): SourceCodeData {
       preview: "",
       withoutImports: "",
     },
+    type: "file",
   }
 }

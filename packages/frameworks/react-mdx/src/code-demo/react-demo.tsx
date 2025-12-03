@@ -107,8 +107,7 @@ export function ReactDemo({
 
   const [activeTab, setActiveTab] = useState<string>(demo?.fileName || "")
 
-  const {demoSettings, demoState, setDemoSettings, updateDemoState} =
-    useMdxDocsContext()
+  const {demoSettings, demoState, updateDemoState} = useMdxDocsContext()
 
   const state = useMemo(() => {
     return demoState[demo.pageId] || {}
@@ -152,19 +151,26 @@ export function ReactDemo({
     })
   }
 
-  const fileNames = demo.sourceCode?.map?.((item) => item.fileName) ?? []
+  const isInlineMode = demoSettings?.styleMode === "inline"
+  const scheme = colorScheme || "dark"
+
+  // Only show residual CSS tab when in inline mode
+  const filteredSourceCode = isInlineMode
+    ? demo.sourceCode
+    : (demo.sourceCode ?? []).filter((item) => item.type !== "residual-css")
+
+  const fileNames = filteredSourceCode.map((item) => item.fileName)
 
   const activeTabSourceCode: SourceCodeData =
-    (demo.sourceCode ?? []).find((item) => item.fileName === activeTab) ??
+    filteredSourceCode.find((item) => item.fileName === activeTab) ??
     getDefaultSourceCode()
 
   const hasInline = !!activeTabSourceCode.highlightedInline
   const activeHighlightedCode =
-    hasInline && demoSettings?.styleMode === "inline"
+    isInlineMode && hasInline
       ? activeTabSourceCode.highlightedInline
       : activeTabSourceCode.highlighted
   const hasPreview = !!activeHighlightedCode?.preview
-  const scheme = colorScheme || "dark"
 
   const mergedProps = mergeProps(
     {
