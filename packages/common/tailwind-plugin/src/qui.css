@@ -25,6 +25,18 @@
   --radius-xl: var(--border-radius-xl);
   --radius-xs: var(--border-radius-xs);
   --radius-xxl: var(--border-radius-xxl);
+  --text-2xl--line-height: var(--type-static-body-xxl-line-height);
+  --text-2xl: var(--type-static-body-xxl-font-size);
+  --text-base--line-height: var(--type-static-body-md-line-height);
+  --text-base: var(--type-static-body-md-font-size);
+  --text-lg--line-height: var(--type-static-body-lg-line-height);
+  --text-lg: var(--type-static-body-lg-font-size);
+  --text-sm--line-height: var(--type-static-body-sm-line-height);
+  --text-sm: var(--type-static-body-sm-font-size);
+  --text-xl--line-height: var(--type-static-body-xl-line-height);
+  --text-xl: var(--type-static-body-xl-font-size);
+  --text-xs--line-height: var(--type-static-body-xs-line-height);
+  --text-xs: var(--type-static-body-xs-font-size);
 }
 
 @utility bg-brand-accent-01 {background-color: var(--color-background-brand-accent-01);}

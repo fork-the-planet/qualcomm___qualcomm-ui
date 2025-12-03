@@ -90,7 +90,7 @@ export interface QdsReactDemoProps extends ComponentPropsWithRef<"div"> {
 }
 
 /**
- * @deprecated migrate to ReactDemo
+ * @deprecated no longer supported. Migrate to ReactDemo
  */
 export function QdsReactDemo({
   children,
@@ -147,20 +147,14 @@ export function QdsReactDemo({
 
   const fileNames = demo.sourceCode?.map((item) => item.fileName) ?? []
 
-  const sourceCode = demo.sourceCode?.[0] ?? getDefaultSourceCode()
   const activeTabSourceCode: SourceCodeData =
     (demo.sourceCode ?? []).find((item) => item.fileName === activeTab) ??
     getDefaultSourceCode()
 
-  const hasPreview = !!activeTabSourceCode.raw.preview
+  const hasPreview = !!activeTabSourceCode?.highlighted?.preview
   const scheme = colorScheme || "dark"
 
-  const missingDefaultExport = useMemo(
-    () =>
-      !sourceCode.raw.full.includes("export default") &&
-      !sourceCode.raw.full.includes("function Demo()"),
-    [sourceCode.raw.full],
-  )
+  const missingDefaultExport = true
 
   const scope = useMemo(
     () => ({
@@ -181,14 +175,14 @@ export function QdsReactDemo({
 
   const runnerProps: UseRunnerProps = useMemo(() => {
     return {
-      code: sourceCode.raw.withoutImports ?? "",
+      code: "",
       disableCache: true,
       onRendered: (error) => {
         onDemoRendered?.(error)
       },
       scope,
     }
-  }, [onDemoRendered, scope, sourceCode.raw.withoutImports])
+  }, [onDemoRendered, scope])
 
   const {element: demoComponent, error} = useRunner(runnerProps)
 
@@ -214,9 +208,12 @@ export function QdsReactDemo({
   }, [demo.errorMessage, demoComponent, error, missingDefaultExport, updating])
 
   const getCopyableCode = () => {
-    return expanded
-      ? activeTabSourceCode.raw.full
-      : activeTabSourceCode.raw.preview || activeTabSourceCode.raw.full
+    return (
+      (expanded
+        ? activeTabSourceCode.raw?.full
+        : activeTabSourceCode.raw?.preview || activeTabSourceCode.raw?.full) ||
+      ""
+    )
   }
 
   const getHighlightedCode = () => {

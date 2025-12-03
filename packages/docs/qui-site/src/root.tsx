@@ -18,6 +18,7 @@ import {
 import {SiteData} from "@qualcomm-ui/mdx-common"
 import {siteData} from "@qualcomm-ui/mdx-vite-plugin"
 import {
+  type DemoSettings,
   PackageManager,
   SiteContextProvider,
 } from "@qualcomm-ui/react-mdx/context"
@@ -31,6 +32,7 @@ import {
   PreventFlashOnWrongTheme,
   Theme,
   ThemeProvider,
+  updateDemoState,
   updateSiteState,
   useTheme,
 } from "@qualcomm-ui/react-router-utils/client"
@@ -48,6 +50,9 @@ export const loader: LoaderFunction = async ({request}) => {
   const siteState = await siteStateCookie.parse(cookie)
 
   return {
+    demoSettings:
+      siteState?.demoSettings ??
+      ({transformTailwindClasses: false} satisfies DemoSettings),
     packageManager: siteState?.packageManager || "npm",
     ssrUserAgent: request.headers.get("user-agent"),
     theme: isTheme(cookieTheme) ? cookieTheme : Theme.DARK,
@@ -57,6 +62,7 @@ export const loader: LoaderFunction = async ({request}) => {
 function App() {
   const [queryClient] = useState(new QueryClient())
   const data = useLoaderData<{
+    demoSettings: DemoSettings
     packageManager?: PackageManager
     ssrUserAgent: string
     theme: Theme
@@ -97,6 +103,15 @@ function App() {
       <body>
         <QueryClientProvider client={queryClient}>
           <AppDocsLayout
+            demoSettings={data.demoSettings}
+            onDemoSettingsChange={(nextValue) => {
+              void updateSiteState("/action/set-site-state", {
+                demoSettings: nextValue,
+              })
+            }}
+            onDemoStateChange={(nextValue) => {
+              void updateDemoState("/action/set-demo-state", nextValue)
+            }}
             onPackageManagerChange={(nextValue) =>
               updateSiteState("/action/set-site-state", {
                 packageManager: nextValue,

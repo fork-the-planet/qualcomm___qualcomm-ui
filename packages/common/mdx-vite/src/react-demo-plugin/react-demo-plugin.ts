@@ -5,7 +5,7 @@ import chalk from "chalk"
 import {glob} from "glob"
 import {readFile} from "node:fs/promises"
 import {basename, resolve} from "node:path"
-import {createHighlighter, type Highlighter} from "shiki"
+import {createHighlighter, type Highlighter, type ShikiTransformer} from "shiki"
 import * as ts from "typescript"
 import type {Plugin} from "vite"
 
@@ -18,10 +18,11 @@ import {dedent} from "@qualcomm-ui/utils/dedent"
 
 import {getShikiTransformers} from "../docs-plugin"
 import {
-  removeCodeAnnotations,
+  extractPreviewFromHighlightedHtml,
   transformerCodeAttribute,
   transformerPreviewBlock,
 } from "../docs-plugin/shiki"
+import {createShikiTailwindTransformer} from "../docs-plugin/shiki/internal"
 
 import {LOG_PREFIX, VIRTUAL_MODULE_IDS} from "./demo-plugin-constants"
 import type {QuiDemoPluginOptions} from "./demo-plugin-types"
@@ -37,6 +38,16 @@ import {
 interface HandleUpdateOptions {
   demoName?: string
   filePath: string
+}
+
+interface HighlightCodeResult {
+  full: string
+  preview?: string | null
+}
+
+interface ExtractedSourceCode {
+  residualRules?: Map<string, string>
+  sourceCodeData: SourceCodeData
 }
 
 let highlighter: Highlighter | null = null
@@ -59,6 +70,7 @@ export function reactDemoPlugin({
   },
   transformers = [],
   transformLine,
+  transformTailwindStyles,
 }: QuiDemoPluginOptions = {}): Plugin {
   const defaultShikiOptions = {
     defaultColor: "light-dark()",
@@ -81,10 +93,8 @@ export function reactDemoPlugin({
         initializingHighlighter = true
         try {
           highlighter = await createHighlighter({
-            langs: ["tsx", "typescript"],
+            langs: ["tsx", "typescript", "css"],
             themes: [theme.dark, theme.light],
-          }).finally(() => {
-            initializingHighlighter = false
           })
           console.log(
             `${chalk.magenta.bold(LOG_PREFIX)} Shiki highlighter initialized`,
@@ -94,6 +104,8 @@ export function reactDemoPlugin({
             `${chalk.magenta.bold(LOG_PREFIX)} Failed to initialize highlighter:`,
             error,
           )
+        } finally {
+          initializingHighlighter = false
         }
       }
 
@@ -191,33 +203,56 @@ export function reactDemoPlugin({
     }
   }
 
-  async function highlightCode(code: string): Promise<{
-    codeWithoutSnippets: string
-    highlightedCode: string
-    highlightedPreview?: string | null
-    previewCodeWithoutSnippets?: string | null
-  }> {
+  async function highlightCode(
+    code: string,
+    options: {
+      extraTransformers?: ShikiTransformer[]
+      onClassesDetected?: (detected: boolean) => void
+      onResidualCss?: (rules: Map<string, string>) => void
+    } = {},
+  ): Promise<HighlightCodeResult> {
+    const {extraTransformers = [], onResidualCss} = options
+
     if (!highlighter) {
-      return {codeWithoutSnippets: code, highlightedCode: code}
+      return {full: code}
     }
     let previewCode: string | null = null
-    let codeWithoutSnippets: string = ""
+
+    const tailwindTransformers: ShikiTransformer[] = []
+    if (transformTailwindStyles && onResidualCss) {
+      const transformer = await createShikiTailwindTransformer({
+        onClassesDetected: (detected) => {
+          options.onClassesDetected?.(detected)
+        },
+        onResidualCss,
+        styleFormat: "jsx",
+        styles: dedent`
+          @layer theme, base, components, utilities;
+          @import "tailwindcss/theme.css" layer(theme);
+          @import "tailwindcss/utilities.css" layer(utilities);
+          @import "@qualcomm-ui/tailwind-plugin/qui-strict.css";
+        `,
+      })
+      tailwindTransformers.push(transformer)
+    } else if (extraTransformers.length > 0) {
+      tailwindTransformers.push(...extraTransformers)
+    }
+
     try {
-      const result = highlighter.codeToHtml(code, {
+      const highlightedCode = highlighter.codeToHtml(code, {
         ...defaultShikiOptions,
         transformers: [
           ...getShikiTransformers(),
+          ...transformers,
+          ...tailwindTransformers,
           transformerPreviewBlock({
+            attributeName: "data-preview",
             onComplete: (extractedPreview) => {
               previewCode = extractedPreview
-                ? removeCodeAnnotations(extractedPreview)
-                : null
             },
           }),
           transformerCodeAttribute({
-            onComplete: (formattedSource) => {
-              codeWithoutSnippets = formattedSource
-            },
+            attributeName: "data-code",
           }),
           {
             enforce: "post",
@@ -230,40 +265,18 @@ export function reactDemoPlugin({
         ],
       })
 
-      let highlightedPreview: string | null = null
-      if (previewCode) {
-        // rehighlight just the preview snippet
-        highlightedPreview = highlighter.codeToHtml(code, {
-          ...defaultShikiOptions,
-          transformers: [
-            ...getShikiTransformers(),
-            transformerPreviewBlock({
-              displayMode: "only-preview",
-            }),
-            {
-              enforce: "post",
-              name: "shiki-transformer-trim",
-              preprocess(code) {
-                return code.trim()
-              },
-            },
-            ...transformers,
-          ],
-        })
-      }
-
       return {
-        codeWithoutSnippets,
-        highlightedCode: result,
-        highlightedPreview,
-        previewCodeWithoutSnippets: previewCode,
+        full: highlightedCode,
+        preview: previewCode
+          ? extractPreviewFromHighlightedHtml(highlightedCode)
+          : null,
       }
     } catch (error) {
       console.warn(
         `${chalk.magenta.bold(LOG_PREFIX)} Failed to highlight code:`,
         error,
       )
-      return {codeWithoutSnippets: code, highlightedCode: code}
+      return {full: code}
     }
   }
 
@@ -334,27 +347,44 @@ export function reactDemoPlugin({
   async function extractHighlightedCode(
     filePath: string,
     code: string,
-  ): Promise<SourceCodeData | null> {
+  ): Promise<ExtractedSourceCode | null> {
     try {
       const fileName = basename(filePath)
 
-      const {
-        codeWithoutSnippets,
-        highlightedCode: highlightedCode,
-        highlightedPreview,
-        previewCodeWithoutSnippets,
-      } = await highlightCode(code)
+      const baseResult = await highlightCode(code)
+
+      let inlineResult: HighlightCodeResult | undefined
+      let classesDetected: boolean = false
+      let residualRules: Map<string, string> | undefined
+
+      if (transformTailwindStyles) {
+        inlineResult = await highlightCode(code, {
+          onClassesDetected: (detected) => {
+            classesDetected = detected
+          },
+          onResidualCss: (rules) => {
+            residualRules = rules
+          },
+        })
+      }
 
       return {
-        fileName,
-        filePath,
-        highlighted: {
-          full: highlightedCode,
-          preview: highlightedPreview,
-        },
-        raw: {
-          full: codeWithoutSnippets,
-          preview: previewCodeWithoutSnippets,
+        residualRules,
+        sourceCodeData: {
+          fileName,
+          filePath,
+          highlighted: {
+            full: baseResult.full,
+            preview: baseResult.preview,
+          },
+          highlightedInline:
+            classesDetected && inlineResult
+              ? {
+                  full: inlineResult.full,
+                  preview: inlineResult.preview,
+                }
+              : undefined,
+          type: "file",
         },
       }
     } catch {
@@ -370,11 +400,18 @@ export function reactDemoPlugin({
       const imports = stripImports(code, filePath)
 
       const sourceCode: SourceCodeData[] = []
+      // Use Map for deduplication across all files in this demo
+      const aggregatedRules = new Map<string, string>()
 
-      const sourceCodeData = await extractHighlightedCode(filePath, code)
+      const extractedMain = await extractHighlightedCode(filePath, code)
 
-      if (sourceCodeData) {
-        sourceCode.push(sourceCodeData)
+      if (extractedMain) {
+        sourceCode.push(extractedMain.sourceCodeData)
+        if (extractedMain.residualRules) {
+          for (const [className, rule] of extractedMain.residualRules) {
+            aggregatedRules.set(className, rule)
+          }
+        }
       }
 
       const fileImports = await extractFileImports(filePath)
@@ -386,13 +423,18 @@ export function reactDemoPlugin({
               "utf-8",
             ).then(transformLines)
 
-            const sourceCodeData = await extractHighlightedCode(
+            const extracted = await extractHighlightedCode(
               relativeImport.resolvedPath,
               importedCode,
             )
 
-            if (sourceCodeData) {
-              sourceCode.push(sourceCodeData)
+            if (extracted) {
+              sourceCode.push(extracted.sourceCodeData)
+              if (extracted.residualRules) {
+                for (const [className, rule] of extracted.residualRules) {
+                  aggregatedRules.set(className, rule)
+                }
+              }
             }
           } catch {
             console.debug("Failed to process file", relativeImport.resolvedPath)
@@ -400,9 +442,23 @@ export function reactDemoPlugin({
         }
       }
 
+      // Convert aggregated rules to CSS string
+      const aggregatedResidualCss =
+        aggregatedRules.size > 0
+          ? [...aggregatedRules.values()].join("\n\n")
+          : undefined
+
+      if (aggregatedResidualCss) {
+        sourceCode.push({
+          fileName: "styles.css",
+          highlighted: await highlightCode(aggregatedResidualCss),
+          type: "residual-css",
+        })
+      }
+
       return {
         demoName: createDemoName(filePath),
-        fileName: sourceCodeData?.fileName || basename(filePath),
+        fileName: extractedMain?.sourceCodeData.fileName || basename(filePath),
         filePath,
         imports,
         sourceCode,

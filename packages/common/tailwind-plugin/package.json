@@ -14,10 +14,12 @@
       "default": "./dist/*/index.js"
     },
     "./qui.css": {
-      "style": "./dist/qui.css"
+      "style": "./dist/qui.css",
+      "default": "./dist/qui.css"
     },
     "./qui-strict.css": {
-      "style": "./dist/qui-strict.css"
+      "style": "./dist/qui-strict.css",
+      "default": "./dist/qui-strict.css"
     }
   },
   "types": "./dist/index.d.ts",
