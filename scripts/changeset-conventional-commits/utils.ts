@@ -236,6 +236,52 @@ export function getCommitsSinceRef(branch: string) {
 }
 
 /**
+ * Checks if a git tag exists
+ * @param tag - The tag name to check
+ * @returns True if the tag exists
+ */
+export function tagExists(tag: string): boolean {
+  try {
+    execSync(`git rev-parse --verify refs/tags/${tag}`, {stdio: "pipe"})
+    return true
+  } catch {
+    return false
+  }
+}
+
+/**
+ * Gets all commit hashes since a package's release tag
+ * Falls back to the base branch if the release tag doesn't exist
+ * @param packageName - The package name (e.g., "@qualcomm-ui/angular")
+ * @param version - The package's current version
+ * @param baseBranch - The base branch to fall back to
+ * @returns Array of commit hashes since the release tag or base branch
+ */
+export function getCommitsSincePackageRelease(
+  packageName: string,
+  version: string,
+  baseBranch: string,
+): string[] {
+  const releaseTag = `${packageName}@${version}`
+
+  if (tagExists(releaseTag)) {
+    return execSync(`git rev-list ${releaseTag}..HEAD`)
+      .toString()
+      .split("\n")
+      .filter(Boolean)
+      .reverse()
+  }
+
+  // Fall back to base branch
+  gitFetch(baseBranch)
+  return execSync(`git rev-list origin/${baseBranch}..HEAD`)
+    .toString()
+    .split("\n")
+    .filter(Boolean)
+    .reverse()
+}
+
+/**
  * Compares two changesets for equality
  * @param a - First changeset
  * @param b - Second changeset
