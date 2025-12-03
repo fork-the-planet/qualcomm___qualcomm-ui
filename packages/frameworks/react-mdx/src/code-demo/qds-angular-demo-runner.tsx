@@ -19,13 +19,14 @@ import {ProgressRing} from "@qualcomm-ui/react/progress-ring"
 import type {ColorScheme, QdsBrand} from "@qualcomm-ui/react/qds-theme"
 import {Tab, Tabs} from "@qualcomm-ui/react/tabs"
 import {CopyToClipboardButton} from "@qualcomm-ui/react-mdx/copy-to-clipboard"
+import {useMdxDocsContext} from "@qualcomm-ui/react-mdx/context"
 import {
   booleanDataAttr,
   type WithDataAttributes,
 } from "@qualcomm-ui/utils/attributes"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {QdsDemoThemeSelector} from "./internal"
+import {DemoStyleToggle, QdsDemoThemeSelector} from "./internal"
 
 export interface QdsAngularDemoRunnerProps
   extends ComponentPropsWithRef<"div"> {
@@ -75,25 +76,43 @@ export function QdsAngularDemoRunner({
     sourceCode?.[0]?.fileName || "",
   )
 
+  const {demoSettings} = useMdxDocsContext()
+
   const toggleExpanded = () => setExpanded((prevState) => !prevState)
 
+  const isInlineMode = demoSettings?.styleMode === "inline"
   const scheme = colorScheme === "light" ? "light" : "dark"
 
+  // Only show residual CSS tab when in inline mode
+  const filteredSourceCode = useMemo(
+    () =>
+      isInlineMode
+        ? sourceCode
+        : (sourceCode ?? []).filter((item) => item.type !== "residual-css"),
+    [sourceCode, isInlineMode],
+  )
+
   const fileNames = useMemo(
-    () => sourceCode?.map((item) => item.fileName) ?? [],
-    [sourceCode],
+    () => filteredSourceCode?.map((item) => item.fileName) ?? [],
+    [filteredSourceCode],
   )
 
   const activeTabSourceCode: SourceCodeData | undefined = useMemo(
     () =>
-      sourceCode?.find((item) => item.fileName === activeTab) ||
-      sourceCode?.[0],
-    [activeTab, sourceCode],
+      filteredSourceCode?.find((item) => item.fileName === activeTab) ||
+      filteredSourceCode?.[0],
+    [activeTab, filteredSourceCode],
   )
 
+  const hasInline = !!activeTabSourceCode?.highlightedInline
+  const activeHighlightedCode =
+    isInlineMode && hasInline
+      ? activeTabSourceCode?.highlightedInline
+      : activeTabSourceCode?.highlighted
+
   const hasPreview = useMemo(
-    () => !!activeTabSourceCode?.raw?.preview,
-    [activeTabSourceCode],
+    () => !!activeHighlightedCode?.preview,
+    [activeHighlightedCode],
   )
 
   const mergedProps = mergeProps(
@@ -119,16 +138,16 @@ export function QdsAngularDemoRunner({
   }, [activeTabSourceCode, expanded])
 
   const getHighlightedCode = useCallback(() => {
-    if (!activeTabSourceCode) {
+    if (!activeHighlightedCode) {
       return ""
     }
     if (hasPreview) {
       return expanded
-        ? activeTabSourceCode.highlighted.full
-        : activeTabSourceCode.highlighted.preview || ""
+        ? activeHighlightedCode.full
+        : activeHighlightedCode.preview || ""
     }
-    return activeTabSourceCode.highlighted.full
-  }, [activeTabSourceCode, expanded, hasPreview])
+    return activeHighlightedCode.full
+  }, [activeHighlightedCode, expanded, hasPreview])
 
   return (
     <div
@@ -215,6 +234,7 @@ export function QdsAngularDemoRunner({
                     ? "Hide Code"
                     : "Show Code"}
               </Button>
+              <DemoStyleToggle />
               <CopyToClipboardButton code={getCopyableCode()} />
             </div>
           </div>

@@ -21,6 +21,7 @@ import {
   quiCustomDarkTheme,
   type SourceCodeData,
 } from "@qualcomm-ui/mdx-common"
+import {dedent} from "@qualcomm-ui/utils/dedent"
 
 import {getShikiTransformers} from "../docs-plugin"
 import {
@@ -28,6 +29,7 @@ import {
   transformerCodeAttribute,
   transformerPreviewBlock,
 } from "../docs-plugin/shiki"
+import {createShikiTailwindTransformer} from "../docs-plugin/shiki/internal"
 
 export interface AngularDemoPluginOptions {
   demoPattern?: string | string[]
@@ -49,6 +51,12 @@ export interface AngularDemoPluginOptions {
       | ThemeRegistrationResolved
       | string
   }
+  /**
+   * When enabled, transforms Tailwind class names to inline styles in the
+   * highlighted code. Non-inlineable classes (hover:, sm:, etc.) are kept as
+   * className and their CSS rules are aggregated into a residual-css entry.
+   */
+  transformTailwindStyles?: boolean
 }
 
 interface RelativeImport {
@@ -92,6 +100,7 @@ export function angularDemoPlugin({
     dark: quiCustomDarkTheme,
     light: "github-light-high-contrast",
   },
+  transformTailwindStyles,
 }: AngularDemoPluginOptions = {}): Plugin {
   let watcher: FSWatcher | null = null
   let devServer: ViteDevServer | null = null
@@ -121,7 +130,7 @@ export function angularDemoPlugin({
       if (!highlighter) {
         try {
           highlighter = await createHighlighter({
-            langs: ["angular-ts", "angular-html"],
+            langs: ["angular-ts", "angular-html", "css"],
             themes: [theme.dark, theme.light],
           })
           logDev(`${chalk.blue.bold(LOG_PREFIX)} Shiki highlighter initialized`)
@@ -325,13 +334,37 @@ export function angularDemoPlugin({
 
   async function highlightCode(
     code: string,
-    language: "angular-ts" | "angular-html" = "angular-ts",
+    language: "angular-ts" | "angular-html" | "css" = "angular-ts",
+    options: {
+      onClassesDetected?: (detected: boolean) => void
+      onResidualCss?: (rules: Map<string, string>) => void
+    } = {},
   ): Promise<HighlightCodeResult> {
+    const {onClassesDetected, onResidualCss} = options
+
     if (!highlighter) {
       return {full: code}
     }
 
     let previewCode: string | null = null
+
+    const tailwindTransformers = []
+    if (transformTailwindStyles && onResidualCss) {
+      const transformer = await createShikiTailwindTransformer({
+        onClassesDetected: (detected) => {
+          onClassesDetected?.(detected)
+        },
+        onResidualCss,
+        styleFormat: "html",
+        styles: dedent`
+          @layer theme, base, components, utilities;
+          @import "tailwindcss/theme.css" layer(theme);
+          @import "tailwindcss/utilities.css" layer(utilities);
+          @import "@qualcomm-ui/tailwind-plugin/qui-strict.css";
+        `,
+      })
+      tailwindTransformers.push(transformer)
+    }
 
     try {
       const highlightedCode = highlighter.codeToHtml(code, {
@@ -339,6 +372,7 @@ export function angularDemoPlugin({
         lang: language,
         transformers: [
           ...getShikiTransformers(),
+          ...tailwindTransformers,
           transformerPreviewBlock({
             attributeName: "data-preview",
             onComplete: (extractedPreview) => {
@@ -510,6 +544,8 @@ export function angularDemoPlugin({
       const importsWithoutStrip = stripImports(code, filePath)
 
       const sourceCode: SourceCodeData[] = []
+      // Use Map for deduplication across all files in this demo
+      const aggregatedRules = new Map<string, string>()
 
       const mainSourceEntry = await buildAngularSourceEntry({
         code,
@@ -517,7 +553,12 @@ export function angularDemoPlugin({
         filePath,
         language: "angular-ts",
       })
-      sourceCode.push(mainSourceEntry)
+      sourceCode.push(mainSourceEntry.sourceCodeData)
+      if (mainSourceEntry.residualRules) {
+        for (const [className, rule] of mainSourceEntry.residualRules) {
+          aggregatedRules.set(className, rule)
+        }
+      }
 
       if (templateUrl) {
         const templateEntry = await maybeBuildTemplateSourceEntry(
@@ -525,12 +566,39 @@ export function angularDemoPlugin({
           filePath,
         )
         if (templateEntry) {
-          sourceCode.push(templateEntry)
+          sourceCode.push(templateEntry.sourceCodeData)
+          if (templateEntry.residualRules) {
+            for (const [className, rule] of templateEntry.residualRules) {
+              aggregatedRules.set(className, rule)
+            }
+          }
         }
       }
 
       const importedEntries = await buildImportedSourceEntries(filePath)
-      sourceCode.push(...importedEntries)
+      for (const entry of importedEntries) {
+        sourceCode.push(entry.sourceCodeData)
+        if (entry.residualRules) {
+          for (const [className, rule] of entry.residualRules) {
+            aggregatedRules.set(className, rule)
+          }
+        }
+      }
+
+      // Convert aggregated rules to CSS string
+      const aggregatedResidualCss =
+        aggregatedRules.size > 0
+          ? [...aggregatedRules.values()].join("\n\n")
+          : undefined
+
+      if (aggregatedResidualCss) {
+        const cssHighlighted = await highlightCode(aggregatedResidualCss, "css")
+        sourceCode.push({
+          fileName: "styles.css",
+          highlighted: cssHighlighted,
+          type: "residual-css",
+        })
+      }
 
       return {
         componentClass,
@@ -677,31 +745,58 @@ export function angularDemoPlugin({
     language: "angular-ts" | "angular-html"
   }
 
+  interface ExtractedSourceCode {
+    residualRules?: Map<string, string>
+    sourceCodeData: SourceCodeData
+  }
+
   async function buildAngularSourceEntry(
     params: BuildAngularSourceEntryParams,
-  ): Promise<SourceCodeData> {
+  ): Promise<ExtractedSourceCode> {
     const {code, fileName, filePath, language} = params
 
-    if (params.language === "angular-ts") {
+    const baseResult = await highlightCode(code, language)
+
+    let inlineResult: HighlightCodeResult | undefined
+    let classesDetected = false
+    let residualRules: Map<string, string> | undefined
+
+    if (transformTailwindStyles) {
+      inlineResult = await highlightCode(code, language, {
+        onClassesDetected: (detected) => {
+          classesDetected = detected
+        },
+        onResidualCss: (rules) => {
+          residualRules = rules
+        },
+      })
     }
 
-    const {full, preview} = await highlightCode(code, language)
-
     return {
-      fileName,
-      filePath,
-      highlighted: {
-        full,
-        preview,
+      residualRules,
+      sourceCodeData: {
+        fileName,
+        filePath,
+        highlighted: {
+          full: baseResult.full,
+          preview: baseResult.preview,
+        },
+        highlightedInline:
+          classesDetected && inlineResult
+            ? {
+                full: inlineResult.full,
+                preview: inlineResult.preview,
+              }
+            : undefined,
+        type: "file",
       },
-      type: "file",
     }
   }
 
   async function maybeBuildTemplateSourceEntry(
     templateUrl: string,
     fromFilePath: string,
-  ): Promise<SourceCodeData | null> {
+  ): Promise<ExtractedSourceCode | null> {
     const templatePath = resolveTemplateFile(templateUrl, fromFilePath)
     if (!existsSync(templatePath)) {
       return null
@@ -727,8 +822,8 @@ export function angularDemoPlugin({
 
   async function buildImportedSourceEntries(
     fromFilePath: string,
-  ): Promise<SourceCodeData[]> {
-    const sourceCode: SourceCodeData[] = []
+  ): Promise<ExtractedSourceCode[]> {
+    const entries: ExtractedSourceCode[] = []
     const relativeImports = await collectAllImports(fromFilePath)
 
     for (const resolvedPath of relativeImports) {
@@ -742,7 +837,7 @@ export function angularDemoPlugin({
           language: "angular-ts",
         })
 
-        sourceCode.push(entry)
+        entries.push(entry)
       } catch (error) {
         logDev(
           `${chalk.blue.bold(LOG_PREFIX)} ${chalk.yellowBright("Failed to process relative import:")} ${chalk.cyan(resolvedPath)}`,
@@ -750,7 +845,7 @@ export function angularDemoPlugin({
       }
     }
 
-    return sourceCode
+    return entries
   }
 
   function generateRegistryModule(): string {
@@ -844,7 +939,7 @@ export function getAngularDemoInfo(demoId) {
   function resolveRelativeImport(source: string, fromFile: string): string {
     const fromDir = dirname(fromFile)
     const resolved = resolve(fromDir, source)
-    const extensions = [".ts", ".tsx", ".js", ".jsx"]
+    const extensions = [".ts", ".js"]
 
     for (const ext of extensions) {
       const withExt = resolved + ext
@@ -1081,7 +1176,7 @@ function resolvePathAlias(
   for (const alias of pathAliases) {
     if (alias.pattern.test(source)) {
       const resolvedPath = source.replace(alias.pattern, alias.replacement)
-      const extensions = [".ts", ".tsx", ".js", ".jsx"]
+      const extensions = [".ts", ".js"]
 
       for (const ext of extensions) {
         const withExt = resolvedPath + ext
