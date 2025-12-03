@@ -1,6 +1,6 @@
 {
   "name": "@qualcomm-ui/qds-core",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "qds core components",
   "repository": "https://github.com/qualcomm/qualcomm-ui",
   "author": "Ryan Bower",
@@ -60,8 +60,8 @@
     "@figma/rest-api-spec": "^0.31.0",
     "@qualcomm-ui/cli": "workspace:^1.0.5",
     "@qualcomm-ui/core": "workspace:^1.0.10",
-    "@qualcomm-ui/css-utils": "workspace:^1.0.3",
-    "@qualcomm-ui/esbuild": "workspace:^1.0.3",
+    "@qualcomm-ui/css-utils": "workspace:^1.0.4",
+    "@qualcomm-ui/esbuild": "workspace:^1.0.4",
     "@qualcomm-ui/tsconfig": "workspace:^1.0.4",
     "@qualcomm-ui/utils": "workspace:^1.0.4",
     "@types/culori": "^4.0.0",

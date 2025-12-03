@@ -1,5 +1,11 @@
 # @qualcomm-ui/esbuild
 
+## 1.0.4 (2025/12/03)
+
+### Build System
+
+- [deps]: Bump glob from 11.0.3 to 11.1.0
+
 ## 1.0.3 (2025/11/13)
 
 ### Bug Fixes

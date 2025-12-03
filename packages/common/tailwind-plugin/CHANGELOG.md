@@ -1,5 +1,16 @@
 # @qualcomm-ui/tailwind-plugin
 
+## 1.2.0 (2025/12/03)
+
+### Features
+
+- [shiki]: add data-code and data-preview attributes to highlighted demo html
+- [qui-themes]: apply QDS text-\* variables to tailwind theme
+
+### Code Refactoring
+
+- [code-highlighting]: simplified internal highlighted code data structures
+
 ## 1.1.0 (2025/11/17)
 
 ### Features
