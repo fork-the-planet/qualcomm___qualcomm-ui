@@ -13,7 +13,7 @@ import {QLogoComponent} from "./q-logo.component"
   selector: "side-nav-surface-demo",
   template: `
     <div class="flex justify-center">
-      <nav q-side-nav-root [collection]="collection" surface="secondary">
+      <nav q-side-nav-root surface="secondary" [collection]="collection">
         <header q-side-nav-header>
           <div q-side-nav-header-logo>
             <q-logo />
