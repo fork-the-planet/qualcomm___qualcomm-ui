@@ -93,6 +93,9 @@ const TOKEN_MAPPINGS: Record<string, TokenMapping> = {
     nameTransform: (name) => name.replace(/^type-font-weight-/, ""),
     themeKey: "font-weight",
   },
+  "type-static-body-*": {
+    themeKey: "text-body",
+  },
 }
 
 function matchesWildcard(pattern: string, text: string): boolean {
@@ -205,13 +208,56 @@ function generateThemeVariables(
   variables: Record<string, TokenMapping>,
 ): string {
   const themeVars: string[] = []
+  const textBodyGroups = new Map<string, string[]>()
+
+  const bodyToTailwindMap: Record<string, string> = {
+    lg: "lg",
+    md: "base",
+    sm: "sm",
+    xl: "xl",
+    xs: "xs",
+    xxl: "2xl",
+  }
 
   for (const [varName, mapping] of Object.entries(variables)) {
-    if (!mapping.utilities && mapping.themeKey !== "type") {
+    if (
+      !mapping.utilities &&
+      mapping.themeKey !== "type" &&
+      mapping.themeKey !== "text-body"
+    ) {
       const utilityName = extractUtilityName(varName, mapping)
       themeVars.push(
         `  --${mapping.themeKey}-${utilityName}: var(--${varName});`,
       )
+    } else if (mapping.themeKey === "text-body") {
+      const match = varName.match(
+        /^type-static-body-(\w+)-(font-size|line-height)$/,
+      )
+      if (match) {
+        const [, size, prop] = match
+        if (!textBodyGroups.has(size)) {
+          textBodyGroups.set(size, [])
+        }
+        textBodyGroups.get(size)!.push(`${prop}:${varName}`)
+      }
+    }
+  }
+
+  for (const [size, props] of textBodyGroups) {
+    const tailwindSize = bodyToTailwindMap[size]
+    if (!tailwindSize) {
+      continue
+    }
+
+    for (const propEntry of props) {
+      const [prop, varName] = propEntry.split(":")
+      if (prop === "font-size") {
+        themeVars.push(`  --text-${tailwindSize}: var(--${varName});`)
+      } else if (prop === "line-height") {
+        themeVars.push(
+          `  --text-${tailwindSize}--line-height: var(--${varName});`,
+        )
+      }
     }
   }
 
