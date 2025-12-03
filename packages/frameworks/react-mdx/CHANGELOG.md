@@ -1,5 +1,25 @@
 # @qualcomm-ui/react-mdx
 
+## 1.6.0 (2025/12/03)
+
+### Features
+
+- [angular-demo]: add inline style toggle
+- [react-demo]: add inline style toggle
+
+### Code Refactoring
+
+- [demos]: consolidate react and angular demo logic
+- [demos]: deprecate QdsAngularDemoRunner in favor of new AngularDemoRunner (same interface)
+
+### Miscellaneous
+
+- fix demo code panel: always render so copy function works everywhere
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common, @qualcomm-ui/core, @qualcomm-ui/react, @qualcomm-ui/utils, @qualcomm-ui/react-core]
+
 ## 1.5.9 (2025/12/01)
 
 ### Bug Fixes

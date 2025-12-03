@@ -1,5 +1,21 @@
 # @qualcomm-ui/mdx-vite
 
+## 2.4.0 (2025/12/03)
+
+### Features
+
+- [mdx-vite]: add transformation from tailwind to inline styles in demos
+- [shiki]: add data-code and data-preview attributes to highlighted demo html
+- [preview-blocks]: strip code annotations from preview content
+
+### Code Refactoring
+
+- [code-highlighting]: simplified internal highlighted code data structures
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common, @qualcomm-ui/typedoc-common, @qualcomm-ui/utils]
+
 ## 2.3.0 (2025/12/01)
 
 ### Features

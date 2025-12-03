@@ -1,5 +1,11 @@
 # @qualcomm-ui/angular
 
+## 1.8.1 (2025/12/03)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core, @qualcomm-ui/core, @qualcomm-ui/angular-core, @qualcomm-ui/utils]
+
 ## 1.8.0 (2025/12/01)
 
 ### Features
