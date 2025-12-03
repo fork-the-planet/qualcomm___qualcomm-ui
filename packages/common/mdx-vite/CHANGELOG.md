@@ -4,7 +4,6 @@
 
 ### Features
 
-- [angular-demo]: add inline style toggle
 - [mdx-vite]: add transformation from tailwind to inline styles in demos
 - [shiki]: add data-code and data-preview attributes to highlighted demo html
 - [preview-blocks]: strip code annotations from preview content
