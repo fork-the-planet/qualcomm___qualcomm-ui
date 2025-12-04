@@ -3,10 +3,9 @@ title: Checkbox
 group: Form Controls
 ---
 
-import {Demo} from "~components/demo"
+import {ComponentExplorer, Demo} from "~components/demo"
 import * as demos from "./demos"
 import {TypeDocAttributes, TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
-import {ComponentExplorer} from "@qualcomm-ui/react-mdx/component-explorer"
 import {Checkbox} from "@qualcomm-ui/react/checkbox"
 
 # {frontmatter.title}
@@ -114,7 +113,9 @@ The composite elements are only intended to be used as direct descendants of the
 ## Explorer
 
 <ComponentExplorer
+  component={demos.CheckboxExplorerDemo}
   excludeParts={["hidden-input", "indicator-icon"]}
+  name="CheckboxExplorerDemo"
   partDocs={{
     root: {
       propsName: "CheckboxRootProps",
@@ -143,9 +144,7 @@ The composite elements are only intended to be used as direct descendants of the
       ],
     },
   }}
->
-  <Checkbox checked label="Example Checkbox" />
-</ComponentExplorer>
+/>
 
 ## API
 
