@@ -9,8 +9,6 @@ import {
   useRef,
   useState,
 } from "react"
-// eslint-disable-next-line no-restricted-imports
-import * as React from "react"
 
 import type {ReactDemoData} from "@qualcomm-ui/mdx-common"
 import type {ColorScheme} from "@qualcomm-ui/react/qds-theme"
