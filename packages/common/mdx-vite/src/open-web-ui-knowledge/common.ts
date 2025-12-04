@@ -67,6 +67,24 @@ export class KnowledgeApi {
     }
   }
 
+  async listKnowledge() {
+    return fetch(`${this.config.webUiUrl}/api/v1/knowledge/list`, {
+      headers: {
+        ...this.headers,
+        Accept: "application/json",
+      },
+    }).then((res) => res.json())
+  }
+
+  async listFiles() {
+    return fetch(`${this.config.webUiUrl}/api/v1/files/search?filename=*`, {
+      headers: {
+        ...this.headers,
+        Accept: "application/json",
+      },
+    }).then((res) => res.json())
+  }
+
   async listKnowledgeFiles() {
     if (this.knowledgeCache) {
       return this.knowledgeCache

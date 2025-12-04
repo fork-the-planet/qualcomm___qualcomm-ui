@@ -54,6 +54,19 @@ class Uploader {
     this.api = new KnowledgeApi(config)
   }
 
+  private async cleanUpOrphanedFiles() {
+    const files = await this.api.listFiles()
+    const knowledge = await this.api.listKnowledge()
+    const knowledgeIds = knowledge.map((k: {id: string}) => k.id)
+    for (const file of files) {
+      if (!knowledgeIds.includes(file.meta.collection_name)) {
+        await this.api.deleteFile(file.id)
+      } else if (file.data?.status === "failed") {
+        await this.api.deleteFile(file.id)
+      }
+    }
+  }
+
   private async buildHashCache(files: KnowledgeFile[]): Promise<void> {
     const results = await Promise.allSettled(
       files.map(async (f) => {
@@ -129,6 +142,7 @@ class Uploader {
   }
 
   private async uploadDirectory() {
+    await this.cleanUpOrphanedFiles()
     const fileNames = await readdir(this.config.knowledgeFilePath)
     const files = await Promise.all(
       fileNames.map(async (name) => ({
