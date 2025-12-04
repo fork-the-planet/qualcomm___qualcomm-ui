@@ -6,7 +6,6 @@ import {
   type ReactNode,
   useEffect,
   useMemo,
-  useRef,
   useState,
 } from "react"
 // eslint-disable-next-line no-restricted-imports
@@ -98,8 +97,6 @@ export function ReactDemo({
     sourceCode: [],
   }
 
-  const htmlWrapperRef = useRef<HTMLDivElement>(null)
-
   const [activeTab, setActiveTab] = useState<string>(demo?.fileName || "")
 
   const {demoState, updateDemoState} = useMdxDocsContext()
@@ -140,11 +137,12 @@ export function ReactDemo({
   const scheme = colorScheme || "dark"
 
   const {
-    activeTabSourceCode,
     fileNames,
+    getCopyableCode,
     getHighlightedCode,
     hasInlineStyles,
     hasPreview,
+    highlighterRef,
   } = useDemoSourceCode({
     activeTab,
     expanded,
@@ -159,26 +157,6 @@ export function ReactDemo({
     },
     props,
   )
-
-  const getCopyableCode = () => {
-    const ref = htmlWrapperRef.current
-    if (ref) {
-      const preElement = ref.querySelector("pre")
-      if (preElement) {
-        const dataCode = preElement.getAttribute("data-code")
-        const dataPreview = preElement.getAttribute("data-preview")
-        if (dataCode) {
-          return expanded ? dataCode : dataPreview || dataCode
-        }
-      }
-    }
-    return (
-      (expanded
-        ? activeTabSourceCode?.raw?.full
-        : activeTabSourceCode?.raw?.preview ||
-          activeTabSourceCode?.raw?.full) || ""
-    )
-  }
 
   const handleExpandedChange = (newExpanded: boolean) => {
     queueMicrotask(() => {
@@ -218,7 +196,7 @@ export function ReactDemo({
             getHighlightedCode={getHighlightedCode}
             hasInlineStyles={hasInlineStyles}
             hasPreview={hasPreview}
-            highlighterRef={htmlWrapperRef}
+            highlighterRef={highlighterRef}
             onExpandedChange={handleExpandedChange}
             onTabChange={setActiveTab}
             tabsValue={expanded || hasPreview ? activeTab : null}

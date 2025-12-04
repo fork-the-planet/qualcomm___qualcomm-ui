@@ -5,7 +5,6 @@ import {
   type ComponentPropsWithRef,
   type ReactElement,
   type ReactNode,
-  useCallback,
   useState,
 } from "react"
 
@@ -76,11 +75,12 @@ export function AngularDemoRunner({
   const scheme = colorScheme === "light" ? "light" : "dark"
 
   const {
-    activeTabSourceCode,
     fileNames,
+    getCopyableCode,
     getHighlightedCode,
     hasInlineStyles,
     hasPreview,
+    highlighterRef,
   } = useDemoSourceCode({
     activeTab,
     expanded: !!expanded,
@@ -96,18 +96,6 @@ export function AngularDemoRunner({
     {className: "qui-demo-runner__wrapper"},
     wrapperProps ?? {},
   )
-
-  const getCopyableCode = useCallback(() => {
-    if (!activeTabSourceCode) {
-      return ""
-    }
-    return (
-      (expanded
-        ? activeTabSourceCode.raw?.full
-        : activeTabSourceCode.raw?.preview || activeTabSourceCode.raw?.full) ||
-      ""
-    )
-  }, [activeTabSourceCode, expanded])
 
   return (
     <div
@@ -154,6 +142,7 @@ export function AngularDemoRunner({
           getHighlightedCode={getHighlightedCode}
           hasInlineStyles={hasInlineStyles}
           hasPreview={hasPreview}
+          highlighterRef={highlighterRef}
           onExpandedChange={setExpanded}
           onTabChange={setActiveTab}
           suppressHydrationWarning
