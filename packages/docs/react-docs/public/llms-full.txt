@@ -1,72 +1,74 @@
+# QUI React Component Library
+
 ## Components and Integrations
 
-- [Render Props](https://react-next.qui.qualcomm.com/render-props): component documentation and examples
-- [All Components](https://react-next.qui.qualcomm.com/all-components): component documentation and examples
-- [Accordion](https://react-next.qui.qualcomm.com/accordion): component documentation and examples
-- [Avatar](https://react-next.qui.qualcomm.com/avatar): component documentation and examples
-- [Icon Badge](https://react-next.qui.qualcomm.com/icon-badge): component documentation and examples
-- [Number Badge](https://react-next.qui.qualcomm.com/number-badge): component documentation and examples
-- [Status Badge](https://react-next.qui.qualcomm.com/status-badge): component documentation and examples
-- [Text Badge](https://react-next.qui.qualcomm.com/text-badge): component documentation and examples
-- [Breadcrumbs](https://react-next.qui.qualcomm.com/breadcrumbs): component documentation and examples
-- [Button](https://react-next.qui.qualcomm.com/button): component documentation and examples
-- [Button Group](https://react-next.qui.qualcomm.com/button-group): component documentation and examples
-- [Checkbox](https://react-next.qui.qualcomm.com/checkbox): component documentation and examples
-- [Collapsible](https://react-next.qui.qualcomm.com/collapsible): component documentation and examples
-- [Combobox](https://react-next.qui.qualcomm.com/combobox): component documentation and examples
-- [Dialog](https://react-next.qui.qualcomm.com/dialog): component documentation and examples
-- [Divider](https://react-next.qui.qualcomm.com/divider): component documentation and examples
-- [Drawer](https://react-next.qui.qualcomm.com/drawer): component documentation and examples
-- [Header Bar](https://react-next.qui.qualcomm.com/header-bar): component documentation and examples
-- [Icon](https://react-next.qui.qualcomm.com/icon): component documentation and examples
-- [Icon Button](https://react-next.qui.qualcomm.com/icon-button): component documentation and examples
-- [Inline Icon Button](https://react-next.qui.qualcomm.com/inline-icon-button): component documentation and examples
-- [Inline Notification](https://react-next.qui.qualcomm.com/inline-notification): component documentation and examples
-- [Link](https://react-next.qui.qualcomm.com/link): component documentation and examples
-- [Menu](https://react-next.qui.qualcomm.com/menu): component documentation and examples
-- [Number Input](https://react-next.qui.qualcomm.com/number-input): component documentation and examples
-- [Pagination](https://react-next.qui.qualcomm.com/pagination): component documentation and examples
-- [Password Input](https://react-next.qui.qualcomm.com/password-input): component documentation and examples
-- [Popover](https://react-next.qui.qualcomm.com/popover): component documentation and examples
-- [Progress](https://react-next.qui.qualcomm.com/progress): component documentation and examples
-- [Progress Ring](https://react-next.qui.qualcomm.com/progress-ring): component documentation and examples
-- [Radio](https://react-next.qui.qualcomm.com/radio): component documentation and examples
-- [Segmented Control](https://react-next.qui.qualcomm.com/segmented-control): component documentation and examples
-- [Select](https://react-next.qui.qualcomm.com/select): component documentation and examples
-- [Side Nav](https://react-next.qui.qualcomm.com/side-nav): component documentation and examples
-- [Slider](https://react-next.qui.qualcomm.com/slider): component documentation and examples
-- [Switch](https://react-next.qui.qualcomm.com/switch): component documentation and examples
-- [Table](https://react-next.qui.qualcomm.com/table): component documentation and examples
-- [Tabs](https://react-next.qui.qualcomm.com/tabs): component documentation and examples
-- [Tag](https://react-next.qui.qualcomm.com/tag): component documentation and examples
-- [Text Input](https://react-next.qui.qualcomm.com/text-input): component documentation and examples
-- [Toast Notification](https://react-next.qui.qualcomm.com/toast-notification): component documentation and examples
-- [Tooltip](https://react-next.qui.qualcomm.com/tooltip): component documentation and examples
-- [Tree](https://react-next.qui.qualcomm.com/tree): component documentation and examples
-- [ESLint](https://react-next.qui.qualcomm.com/es-lint): component documentation and examples
-- [Tailwind CSS](https://react-next.qui.qualcomm.com/tailwind-css): integration documentation and examples
-- [Attributes vs. Properties](https://react-next.qui.qualcomm.com/attributes-vs-properties): component documentation and examples
-- [Choosing Dependencies](https://react-next.qui.qualcomm.com/choosing-dependencies): component documentation and examples
-- [Controlled State](https://react-next.qui.qualcomm.com/controlled-state): component documentation and examples
-- [Enums](https://react-next.qui.qualcomm.com/enums): component documentation and examples
-- [Frontend Mastery](https://react-next.qui.qualcomm.com/frontend-mastery): component documentation and examples
-- [Introduction to JavaScript](https://react-next.qui.qualcomm.com/introduction-to-java-script): introduction and getting started
-- [Modern package.json exports](https://react-next.qui.qualcomm.com/modern-package-json-exports): component documentation and examples
-- [Overview](https://react-next.qui.qualcomm.com/overview): component documentation and examples
-- [Prefer Interfaces over Intersections](https://react-next.qui.qualcomm.com/prefer-interfaces-over-intersections): component documentation and examples
-- [Project Structure](https://react-next.qui.qualcomm.com/project-structure): component documentation and examples
-- [TypeScript Style Guide](https://react-next.qui.qualcomm.com/type-script-style-guide): component documentation and examples
-- [Avoid The Pyramid of Doom](https://react-next.qui.qualcomm.com/avoid-the-pyramid-of-doom): component documentation and examples
-- [Clean Code](https://react-next.qui.qualcomm.com/clean-code): component documentation and examples
-- [Polymorphic Components](https://react-next.qui.qualcomm.com/polymorphic-components): component documentation and examples
-- [Next.js](https://react-next.qui.qualcomm.com/next-js): component documentation and examples
-- [React Router](https://react-next.qui.qualcomm.com/react-router): component documentation and examples
-- [Tanstack Start](https://react-next.qui.qualcomm.com/tanstack-start): component documentation and examples
-- [Vite / Other](https://react-next.qui.qualcomm.com/vite-other): component documentation and examples
-- [Colors](https://react-next.qui.qualcomm.com/colors): component documentation and examples
-- [Overview](https://react-next.qui.qualcomm.com/overview): component documentation and examples
-- [Typography](https://react-next.qui.qualcomm.com/typography): component documentation and examples
-- [Z-Index](https://react-next.qui.qualcomm.com/z-index): component documentation and examples
+- [Render Props](https://react-next.qui.qualcomm.com/render-props)
+- [All Components](https://react-next.qui.qualcomm.com/components/all-components)
+- [Accordion](https://react-next.qui.qualcomm.com/components/accordion)
+- [Avatar](https://react-next.qui.qualcomm.com/components/avatar)
+- [Icon Badge](https://react-next.qui.qualcomm.com/components/badges/icon-badge)
+- [Number Badge](https://react-next.qui.qualcomm.com/components/badges/number-badge)
+- [Status Badge](https://react-next.qui.qualcomm.com/components/badges/status-badge)
+- [Text Badge](https://react-next.qui.qualcomm.com/components/badges/text-badge)
+- [Breadcrumbs](https://react-next.qui.qualcomm.com/components/breadcrumbs)
+- [Button](https://react-next.qui.qualcomm.com/components/button)
+- [Button Group](https://react-next.qui.qualcomm.com/components/button-group)
+- [Checkbox](https://react-next.qui.qualcomm.com/components/checkbox)
+- [Collapsible](https://react-next.qui.qualcomm.com/components/collapsible)
+- [Combobox](https://react-next.qui.qualcomm.com/components/combobox)
+- [Dialog](https://react-next.qui.qualcomm.com/components/dialog)
+- [Divider](https://react-next.qui.qualcomm.com/components/divider)
+- [Drawer](https://react-next.qui.qualcomm.com/components/drawer)
+- [Header Bar](https://react-next.qui.qualcomm.com/components/header-bar)
+- [Icon](https://react-next.qui.qualcomm.com/components/icon)
+- [Icon Button](https://react-next.qui.qualcomm.com/components/icon-button)
+- [Inline Icon Button](https://react-next.qui.qualcomm.com/components/inline-icon-button)
+- [Inline Notification](https://react-next.qui.qualcomm.com/components/inline-notification)
+- [Link](https://react-next.qui.qualcomm.com/components/link)
+- [Menu](https://react-next.qui.qualcomm.com/components/menu)
+- [Number Input](https://react-next.qui.qualcomm.com/components/number-input)
+- [Pagination](https://react-next.qui.qualcomm.com/components/pagination)
+- [Password Input](https://react-next.qui.qualcomm.com/components/password-input)
+- [Popover](https://react-next.qui.qualcomm.com/components/popover)
+- [Progress](https://react-next.qui.qualcomm.com/components/progress)
+- [Progress Ring](https://react-next.qui.qualcomm.com/components/progress-ring)
+- [Radio](https://react-next.qui.qualcomm.com/components/radio)
+- [Segmented Control](https://react-next.qui.qualcomm.com/components/segmented-control)
+- [Select](https://react-next.qui.qualcomm.com/components/select)
+- [Side Nav](https://react-next.qui.qualcomm.com/components/side-nav)
+- [Slider](https://react-next.qui.qualcomm.com/components/slider)
+- [Switch](https://react-next.qui.qualcomm.com/components/switch)
+- [Table](https://react-next.qui.qualcomm.com/components/table)
+- [Tabs](https://react-next.qui.qualcomm.com/components/tabs)
+- [Tag](https://react-next.qui.qualcomm.com/components/tag)
+- [Text Input](https://react-next.qui.qualcomm.com/components/text-input)
+- [Toast Notification](https://react-next.qui.qualcomm.com/components/toast)
+- [Tooltip](https://react-next.qui.qualcomm.com/components/tooltip)
+- [Tree](https://react-next.qui.qualcomm.com/components/tree)
+- [ESLint](https://react-next.qui.qualcomm.com/integrations/eslint)
+- [Tailwind CSS](https://react-next.qui.qualcomm.com/integrations/tailwind)
+- [Attributes vs. Properties](https://react-next.qui.qualcomm.com/patterns/attributes-vs-properties)
+- [Choosing Dependencies](https://react-next.qui.qualcomm.com/patterns/choosing-dependencies)
+- [Controlled State](https://react-next.qui.qualcomm.com/patterns/controlled-state)
+- [Enums](https://react-next.qui.qualcomm.com/patterns/enums)
+- [Frontend Mastery](https://react-next.qui.qualcomm.com/patterns/frontend-mastery)
+- [Introduction to JavaScript](https://react-next.qui.qualcomm.com/patterns/introduction-to-javascript)
+- [Modern package.json exports](https://react-next.qui.qualcomm.com/patterns/modern-package-exports)
+- [Overview](https://react-next.qui.qualcomm.com/patterns/overview)
+- [Prefer Interfaces over Intersections](https://react-next.qui.qualcomm.com/patterns/prefer-interfaces)
+- [Project Structure](https://react-next.qui.qualcomm.com/patterns/project-structure)
+- [TypeScript Style Guide](https://react-next.qui.qualcomm.com/patterns/typescript-style-guide)
+- [Avoid The Pyramid of Doom](https://react-next.qui.qualcomm.com/patterns/clean-code/avoid-the-pyramid-of-doom)
+- [Clean Code](https://react-next.qui.qualcomm.com/patterns/clean-code/clean-code)
+- [Polymorphic Components](https://react-next.qui.qualcomm.com/polymorphic-components)
+- [Next.js](https://react-next.qui.qualcomm.com/setup/nextjs)
+- [React Router](https://react-next.qui.qualcomm.com/setup/react-router)
+- [Tanstack Start](https://react-next.qui.qualcomm.com/setup/tanstack-start)
+- [Vite / Other](https://react-next.qui.qualcomm.com/setup/vite)
+- [Colors](https://react-next.qui.qualcomm.com/theming/colors)
+- [Overview](https://react-next.qui.qualcomm.com/theming/overview)
+- [Typography](https://react-next.qui.qualcomm.com/theming/typography)
+- [Z-Index](https://react-next.qui.qualcomm.com/theming/z-index)
 
 ## Render Props
 

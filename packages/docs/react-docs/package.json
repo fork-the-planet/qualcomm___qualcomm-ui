@@ -20,7 +20,7 @@
     "update-knowledge-saga": "run-s generate-knowledge-saga upload-knowledge-saga",
     "update-knowledge-qui": "run-s generate-knowledge-qui upload-knowledge-qui",
     "generate-knowledge": "qui-mdx-vite generate-llms-txt --clean --output-mode per-page --exclude 'installation*' 'index*'",
-    "generate-llms-txt": "qui-mdx-vite generate-llms-txt --clean --output-mode aggregated --exclude 'installation*' 'index*' --env .env.saga-ai -o qui-react-llms.txt",
+    "generate-llms-txt": "qui-mdx-vite generate-llms-txt --clean --output-mode aggregated --exclude 'installation*' 'index*' --env .env.saga-ai -o public/llms-full.txt --name 'QUI React Component Library'",
     "upload-knowledge": "run-p upload-knowledge-saga upload-knowledge-qui",
     "generate-knowledge-saga": "pnpm generate-knowledge --env .env.saga-ai",
     "upload-knowledge-saga": "qui-mdx-vite upload-knowledge --env .env.saga-ai",

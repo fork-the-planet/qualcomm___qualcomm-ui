@@ -1,5 +1,11 @@
 # @qualcomm-ui/mdx-vite
 
+## 2.5.1 (2025/12/03)
+
+### Bug Fixes
+
+- [llms-txt-generator]: use correct urls for intro page overview
+
 ## 2.5.0 (2025/12/03)
 
 ### Features
