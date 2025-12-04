@@ -11,15 +11,10 @@ import type {CliConfig, WebUiKnowledgeConfig} from "./types"
 export function loadKnowledgeConfigFromEnv(
   options: CliConfig,
 ): WebUiKnowledgeConfig {
-  const knowledgeId = process.env.KNOWLEDGE_ID
   const exclude =
     options.exclude || (process.env.FILE_EXCLUDE_PATTERN ?? "").split(",")
   const outputPath = options.outputPath || process.env.KNOWLEDGE_OUTPUT_PATH
   const prefix = process.env.PAGE_TITLE_PREFIX
-
-  if (!knowledgeId) {
-    throw new Error("Missing required KNOWLEDGE_ID environment variable")
-  }
 
   if (!outputPath) {
     throw new Error("Missing required outputPath")
@@ -42,7 +37,6 @@ export function loadKnowledgeConfigFromEnv(
     baseUrl: options.baseUrl || process.env.DOCS_SITE_BASE_URL,
     docPropsPath: resolvedConfig.typeDocProps,
     exclude,
-    knowledgeId,
     outputPath,
     pageTitlePrefix: prefix,
     routeDir,
