@@ -166,26 +166,35 @@ export async function loader({
 Then we'll read the data and set up the theme provider:
 
 ```tsx
+import {useRouteLoaderData} from "react-router"
+
+export function Layout({children}: {children: ReactNode}) {
+  const data = useRouteLoaderData<RootLoaderData>("root")
+
+  return (
+    <ThemeProvider theme={data?.qdsTheme} themeAction="/action/set-theme">
+      {children}
+    </ThemeProvider>
+  )
+}
+
 export default function App({children}) {
-  const {qdsTheme} = useLoaderData<RootLoaderData>()
+  const {qdsTheme: ssrTheme} = useLoaderData<RootLoaderData>()
+  const [theme] = useTheme()
 
   return (
     <html
       data-brand="qualcomm" // or snapdragon, or dragonwing
-      data-theme={qdsTheme}
+      data-theme={theme}
       lang="en"
-      style={{colorScheme: qdsTheme || "dark"}}
+      style={{colorScheme: theme || "dark"}}
     >
       <head>
         {/* If the cookie is empty, this component injects an inline script
-       to apply the user's system theme before hydration */}
-        <PreventFlashOnWrongTheme ssrTheme={Boolean(qdsTheme)} />
+     to apply the user's system theme before hydration */}
+        <PreventFlashOnWrongTheme ssrTheme={Boolean(ssrTheme)} />
       </head>
-      <body>
-        <ThemeProvider theme={qdsTheme} themeAction="/action/set-theme">
-          {children}
-        </ThemeProvider>
-      </body>
+      <body>{children}</body>
     </html>
   )
 }

@@ -7,7 +7,7 @@
   "type": "module",
   "version": "0.0.0",
   "scripts": {
-    "build": "run-s build:typedoc build:site",
+    "build": "run-s build:typedoc generate-llms-txt build:site",
     "build:site": "react-router build",
     "build:typedoc": "qui-typedoc build",
     "watch:typedoc": "qui-typedoc watch",
