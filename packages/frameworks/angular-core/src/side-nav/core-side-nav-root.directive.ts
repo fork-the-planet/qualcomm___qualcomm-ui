@@ -19,15 +19,9 @@ import {
   useMachine,
   useTrackBindings,
 } from "@qualcomm-ui/angular-core/machine"
-import {
-  provideRenderStrategyContext,
-  RenderStrategyContextService,
-} from "@qualcomm-ui/angular-core/presence"
+import {RenderStrategyContextService} from "@qualcomm-ui/angular-core/presence"
 import type {SignalifyInput} from "@qualcomm-ui/angular-core/signals"
-import {
-  provideTreeContext,
-  TreeContextService,
-} from "@qualcomm-ui/angular-core/tree"
+import {TreeContextService} from "@qualcomm-ui/angular-core/tree"
 import type {RenderStrategyApiProps} from "@qualcomm-ui/core/presence"
 import {
   createSideNavApi,
@@ -35,7 +29,6 @@ import {
   sideNavMachine,
 } from "@qualcomm-ui/core/side-nav"
 import {
-  type CheckedChangeDetails,
   createTreeApi,
   type ExpandedChangeDetails,
   type FocusChangeDetails,
@@ -52,10 +45,7 @@ import {TreeCollection, type TreeNode} from "@qualcomm-ui/utils/collection"
 import type {Direction} from "@qualcomm-ui/utils/direction"
 import type {Explicit} from "@qualcomm-ui/utils/guard"
 
-import {
-  provideSideNavContext,
-  SideNavContextService,
-} from "./side-nav-context.service"
+import {SideNavContextService} from "./side-nav-context.service"
 
 @Directive()
 export class CoreSideNavRootDirective<T extends TreeNode = TreeNode>
@@ -72,6 +62,7 @@ export class CoreSideNavRootDirective<T extends TreeNode = TreeNode>
 {
   /**
    * The tree collection data
+   * @inheritDoc
    */
   readonly collection = input<TreeCollection<T>>()
 
@@ -142,7 +133,8 @@ export class CoreSideNavRootDirective<T extends TreeNode = TreeNode>
   >()
 
   /**
-   * HTML id attribute. If omitted, a unique identifier will be generated for accessibility.
+   * HTML id attribute. If omitted, a unique identifier will be generated for
+   * accessibility.
    */
   readonly id = input<string>()
 
