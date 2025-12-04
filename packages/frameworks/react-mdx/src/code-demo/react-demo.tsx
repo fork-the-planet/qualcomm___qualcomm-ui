@@ -6,7 +6,6 @@ import {
   type ReactNode,
   useEffect,
   useMemo,
-  useRef,
   useState,
 } from "react"
 
@@ -95,8 +94,6 @@ export function ReactDemo({
     pageId: "",
     sourceCode: [],
   }
-
-  const htmlWrapperRef = useRef<HTMLDivElement>(null)
 
   const [activeTab, setActiveTab] = useState<string>(demo?.fileName || "")
 
