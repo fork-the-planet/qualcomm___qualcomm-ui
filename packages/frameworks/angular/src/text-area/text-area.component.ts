@@ -1,7 +1,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {booleanAttribute, Component, input} from "@angular/core"
+import {Component, input} from "@angular/core"
 
 import {provideTextAreaContext} from "@qualcomm-ui/angular-core/text-area"
 import type {Booleanish} from "@qualcomm-ui/utils/coercion"
@@ -58,7 +58,12 @@ export class TextAreaComponent extends TextAreaRootDirective {
    * - `undefined` (default): only show the counter if `maxLength` is set
    */
   readonly counter = input<boolean | undefined, Booleanish>(undefined, {
-    transform: booleanAttribute,
+    transform: (value) =>
+      value === undefined
+        ? undefined
+        : typeof value === "boolean"
+          ? value
+          : value !== "false",
   })
 
   /**
