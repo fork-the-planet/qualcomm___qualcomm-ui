@@ -129,7 +129,7 @@ export class KnowledgeApi {
   async uploadFile(
     fileBuffer: Buffer,
     name: string,
-  ): Promise<{filename?: string; id?: string}> {
+  ): Promise<{detail?: string; filename?: string; id?: string}> {
     const formData = new FormData()
     formData.append("file", new Blob([fileBuffer as BlobPart]), name)
     formData.append("knowledge_id", this.config.knowledgeId)
