@@ -101,7 +101,7 @@ class Uploader {
 
       if (result.response?.detail?.includes("Duplicate content detected")) {
         console.warn(
-          `Duplicate content: ${name} is already in knowledge base. Skipping`,
+          `Duplicate content: ${name} is already in knowledge base, skipping`,
         )
         return {skipped: true, success: true}
       }
