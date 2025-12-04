@@ -71,26 +71,30 @@ class Uploader {
 
   private async waitForFileDeletion(
     fileId: string,
+    fileName: string,
     maxAttempts = 15,
   ): Promise<boolean> {
+    const spinner = ora(`File changed, deleting ${fileName}`).start()
     for (let i = 0; i < maxAttempts; i++) {
       this.knowledgeFilesCache = null
       const knowledge = await this.api.listKnowledgeFiles()
       const stillExists = (knowledge.files ?? []).some((f) => f.id === fileId)
       if (!stillExists) {
         this.fileHashCache.delete(fileId)
+        spinner.succeed(`File ${fileId} deleted`)
         return true
       }
       await setTimeout(100 * (i + 1))
     }
-    console.warn(`File ${fileId} may not have been fully deleted`)
+    spinner.stop()
+    console.debug(`File ${fileId} may not have been fully deleted`)
     return false
   }
 
   private async uploadWithRetry(
     name: string,
     contents: string,
-    maxRetries = 6,
+    maxRetries = 10,
   ): Promise<UploadResult> {
     for (let attempt = 0; attempt < maxRetries; attempt++) {
       const result = await this.uploadFile(name, contents)
@@ -186,8 +190,7 @@ class Uploader {
 
     if (knowledgeFile) {
       await this.api.removeKnowledgeFile(knowledgeFile.id)
-      console.log(`File changed, removing old file: ${name}`)
-      await this.waitForFileDeletion(knowledgeFile.id)
+      await this.waitForFileDeletion(knowledgeFile.id, name)
     }
 
     const spinner = ora(`Uploading ${name}`).start()
