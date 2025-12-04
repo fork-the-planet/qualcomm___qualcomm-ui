@@ -1,5 +1,15 @@
 # @qualcomm-ui/mdx-vite
 
+## 2.5.0 (2025/12/03)
+
+### Features
+
+- [docs-plugin]: add toc change tracking to file metadata
+
+### Bug Fixes
+
+- [docs-plugin]: add back site data invalidation on mdx file change
+
 ## 2.4.0 (2025/12/03)
 
 ### Features

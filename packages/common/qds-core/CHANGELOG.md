@@ -1,5 +1,12 @@
 # @qualcomm-ui/qds-core
 
+## 1.9.1 (2025/12/03)
+
+### Bug Fixes
+
+- [side-nav]: adjust node primary and selected text colors
+- [divider]: add className to api root getter
+
 ## 1.9.0 (2025/12/03)
 
 ### Features

@@ -1,5 +1,11 @@
 # @qualcomm-ui/angular-core
 
+## 1.3.0 (2025/12/03)
+
+### Features
+
+- [side-nav]: add side-nav component
+
 ## 1.2.0 (2025/12/01)
 
 ### Features
