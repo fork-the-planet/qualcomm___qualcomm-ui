@@ -20,6 +20,16 @@
   padding: 16px;
 }
 
+.qui-docs-highlighter__root {
+  * .qui-code-copy-button {
+    display: none;
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    z-index: 2;
+  }
+}
+
 .shiki-wrapper,
 .qui-docs-highlighter__root {
   > .qui-code-copy-button {
