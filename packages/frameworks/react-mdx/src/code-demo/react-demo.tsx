@@ -6,6 +6,7 @@ import {
   type ReactNode,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react"
 // eslint-disable-next-line no-restricted-imports
@@ -96,6 +97,8 @@ export function ReactDemo({
     pageId: "",
     sourceCode: [],
   }
+
+  const htmlWrapperRef = useRef<HTMLDivElement>(null)
 
   const [activeTab, setActiveTab] = useState<string>(demo?.fileName || "")
 
