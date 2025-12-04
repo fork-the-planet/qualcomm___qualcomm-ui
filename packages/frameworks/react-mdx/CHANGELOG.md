@@ -1,5 +1,20 @@
 # @qualcomm-ui/react-mdx
 
+## 1.6.1 (2025/12/03)
+
+### Code Refactoring
+
+- [demo-source-code]: consolidate copyable code functionality
+
+### Bug Fixes
+
+- [copy-to-clipboard-button]: use correct positioning in type popup
+- [angular-demo-runner]: fix copy-to-clipboard action
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react]
+
 ## 1.6.0 (2025/12/03)
 
 ### Features

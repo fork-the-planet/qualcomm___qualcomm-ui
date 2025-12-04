@@ -4,8 +4,6 @@ import {defineConfig} from "vitest/config"
 
 import {getReactTestConfig} from "@qualcomm-ui/react-test-utils"
 
-const specMatch = (process.env.SPEC_MATCH ?? "src/**/*.spec.tsx").split(",")
-
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -17,6 +15,6 @@ export default defineConfig({
     }) as any,
   ],
   test: getReactTestConfig({
-    include: specMatch,
+    include: "src/**/*.spec.tsx",
   }),
 })

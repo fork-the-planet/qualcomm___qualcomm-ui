@@ -1,5 +1,15 @@
 # @qualcomm-ui/angular
 
+## 1.9.0 (2025/12/03)
+
+### Features
+
+- [side-nav]: add side-nav component
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/angular-core, @qualcomm-ui/qds-core]
+
 ## 1.8.1 (2025/12/03)
 
 ### Miscellaneous Chores
