@@ -41,12 +41,19 @@ function mergeStyle(
 /**
  * Construct the real resulting type so callers keep strong typing.
  */
-export type MergeProps<T extends readonly Props[]> = T extends readonly [
+type MergePropsHelper<T extends readonly Props[]> = T extends readonly [
   infer First extends Props,
   ...infer Rest extends readonly Props[],
 ]
-  ? First & MergeProps<Rest>
+  ? Omit<First, "className"> & MergePropsHelper<Rest>
   : {}
+
+/**
+ * Construct the real resulting type so callers keep strong typing.
+ */
+export type MergeProps<T extends readonly Props[]> = MergePropsHelper<T> & {
+  className?: string
+}
 
 /**
  * Angular-friendly version of `mergeProps`.
@@ -54,6 +61,8 @@ export type MergeProps<T extends readonly Props[]> = T extends readonly [
  * - Handlers (`on*`) are composed with `callAll`.
  * - `class` / `className` values are merged via `clsx`.
  * - `style` strings or objects are merged and normalised.
+ *
+ * @deprecated import the equivalent from `@qualcomm-ui/utils/merge-props`
  */
 export function mergeProps<T extends readonly Props[]>(
   ...sources: T

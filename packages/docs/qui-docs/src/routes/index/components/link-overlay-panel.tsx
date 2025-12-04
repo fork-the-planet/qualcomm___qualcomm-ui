@@ -30,7 +30,7 @@ export function LinkOverlayPanel({
 
   return (
     <Element
-      className={clsx("relative rounded-xl", className)}
+      className={clsx("relative block rounded-xl", className)}
       href={href}
       onMouseEnter={(event) => {
         onMouseEnter?.(event)

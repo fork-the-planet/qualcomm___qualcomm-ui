@@ -1,5 +1,60 @@
 # @qualcomm-ui/mdx-vite
 
+## 2.5.2 (2025/12/04)
+
+### Code Refactoring
+
+- [knowledge-config]: remove knowledgeId requirement from generation command
+- [generate-knowledge]: reorganize functions into class for shared state/config
+
+### Bug Fixes
+
+- [knowledge-upload]: more resilient duplication handling
+- [generate-knowledge]: remove links in aggregate output mode
+- [knowledge-upload]: do not retry upload after specific errors
+
+## 2.5.1 (2025/12/03)
+
+### Bug Fixes
+
+- [llms-txt-generator]: use correct urls for intro page overview
+
+## 2.5.0 (2025/12/03)
+
+### Features
+
+- [docs-plugin]: add toc change tracking to file metadata
+
+### Bug Fixes
+
+- [docs-plugin]: add back site data invalidation on mdx file change
+
+## 2.4.0 (2025/12/03)
+
+### Features
+
+- [mdx-vite]: add transformation from tailwind to inline styles in demos
+- [shiki]: add data-code and data-preview attributes to highlighted demo html
+- [preview-blocks]: strip code annotations from preview content
+
+### Code Refactoring
+
+- [code-highlighting]: simplified internal highlighted code data structures
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common, @qualcomm-ui/typedoc-common, @qualcomm-ui/utils]
+
+## 2.3.0 (2025/12/01)
+
+### Features
+
+- [knowledge-generator]: formatting enhancements for aggregated output mode
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils]
+
 ## 2.2.1 (2025/11/25)
 
 ### Bug Fixes

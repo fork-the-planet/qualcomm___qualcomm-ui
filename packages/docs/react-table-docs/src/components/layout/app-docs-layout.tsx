@@ -27,6 +27,8 @@ import {
 import {SiteSearch} from "@qualcomm-ui/react-mdx/site-search"
 import {updateSiteState} from "@qualcomm-ui/react-router-utils/client"
 
+import reactPkg from "../../../../../frameworks/react/package.json"
+
 interface Props extends Partial<DocsLayoutSettings> {
   /**
    * React {@link https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children children} prop.
@@ -128,6 +130,7 @@ export function AppDocsLayout({
               <HeaderLogo
                 appTitle="QUI React Table"
                 changelogHref="https://github.com/qualcomm/qualcomm-ui/tree/main/packages/frameworks/react/CHANGELOG.md"
+                changelogText={`NextGen v${reactPkg.version}`}
               />
 
               <HeaderBar.Divider />
@@ -140,7 +143,7 @@ export function AppDocsLayout({
                 <SiteSearch />
                 <HeaderRepositoryLink />
                 <GlobalConfig />
-                <HeaderAiLink modelId="cs45-qui-react-nextgen" />
+                <HeaderAiLink modelId="qui-react-nextgen-sonnet-4-5" />
                 <ThemeToggle />
               </HeaderBar.ActionBar>
             </HeaderBar.Root>

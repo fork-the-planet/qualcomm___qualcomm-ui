@@ -83,7 +83,9 @@ interface TextInputContext {
 }
 
 export interface TextInputSchema extends MachineSchema {
-  actions: ActionSchema<"setValue" | "setFocused" | "focusInputEl">
+  actions: ActionSchema<
+    "focusInputEl" | "setFocused" | "setValue" | "syncInputValue"
+  >
   computed: {
     disabled: boolean
   }

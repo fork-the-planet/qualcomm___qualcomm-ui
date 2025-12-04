@@ -1,5 +1,87 @@
 # @qualcomm-ui/react-mdx
 
+## 1.6.1 (2025/12/03)
+
+### Code Refactoring
+
+- [demo-source-code]: consolidate copyable code functionality
+
+### Bug Fixes
+
+- [copy-to-clipboard-button]: use correct positioning in type popup
+- [angular-demo-runner]: fix copy-to-clipboard action
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react]
+
+## 1.6.0 (2025/12/03)
+
+### Features
+
+- [angular-demo]: add inline style toggle
+- [react-demo]: add inline style toggle
+
+### Code Refactoring
+
+- [demos]: consolidate react and angular demo logic
+- [demos]: deprecate QdsAngularDemoRunner in favor of new AngularDemoRunner (same interface)
+
+### Miscellaneous
+
+- fix demo code panel: always render so copy function works everywhere
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common, @qualcomm-ui/core, @qualcomm-ui/react, @qualcomm-ui/utils, @qualcomm-ui/react-core]
+
+## 1.5.9 (2025/12/01)
+
+### Bug Fixes
+
+- [mdx-tables]: add box-sizing to prevent 2px overflow at full width
+- [shiki-notation-styles]: highlighted line indent color clash
+- [npm-install-tabs]: corrected language from bash to shell
+- [shiki-notation]: reduce opacity of warning and error backgrounds for contrast accessibility compliance
+
+### Styles
+
+- [mdx-tables]: reduced size from `md` to `sm`
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils, @qualcomm-ui/react, @qualcomm-ui/react-core, @qualcomm-ui/core]
+
+## 1.5.8 (2025/12/01)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/react, @qualcomm-ui/react-core]
+
+## 1.5.7 (2025/12/01)
+
+### Bug Fixes
+
+- [docs-layout]: prevent crash when path segment missing
+
+## 1.5.6 (2025/12/01)
+
+### Bug Fixes
+
+- [site-search]: prevent firefox search input hiding on mouseup
+
+## 1.5.5 (2025/11/30)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react]
+
+## 1.5.4 (2025/11/30)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react]
+
 ## 1.5.3 (2025/11/25)
 
 ### Bug Fixes

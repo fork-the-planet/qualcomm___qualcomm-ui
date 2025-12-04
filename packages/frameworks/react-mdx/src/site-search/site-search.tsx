@@ -189,6 +189,10 @@ export function SiteSearch({
             inputProps={{
               "aria-label": "Search the docs",
             }}
+            onClick={(event) => {
+              // firefox input hide on mouseUp fix
+              event.stopPropagation()
+            }}
             onFocus={() => setShowDialog(true)}
             placeholder="Search the docs"
             size="sm"

@@ -59,6 +59,7 @@ export default defineConfig({
     quiDocsPlugin(),
     reactDemoPlugin({
       demoPattern: "src/routes/**/*/demos/*.tsx",
+      transformTailwindStyles: true,
     }),
   ],
   resolve: {

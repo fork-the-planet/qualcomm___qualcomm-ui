@@ -82,6 +82,7 @@ export default defineConfig({
       ],
       initialHtml: demoElementsJson,
       routesDir: "src/routes",
+      transformTailwindStyles: true,
     }),
   ],
   server: {

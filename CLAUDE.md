@@ -74,7 +74,10 @@ For each framework (currently only react and angular), the code is organized int
     - the `button` component's documentation lives at `packages/docs/<framework>/src/routes/components+/button+/_button.mdx`.
     - the `button` component's demos live at `packages/docs/<framework>/src/routes/components+/button+/demos/*.tsx`.
 
-When translating examples from one framework to another, examine the component code to determine the appropriate interfaces. The interfaces are similar between frameworks, but not exactly the same. For example, Angular controlled state often uses Angular Forms.
+Guidelines:
+
+- When translating examples from one framework to another, examine the component code to determine the appropriate interfaces. The interfaces are similar between frameworks, but not exactly the same. For example, Angular controlled state often uses Angular Forms.
+- When attempting to run a script from a package: First check the repository root package.json for the package's alias. If it exists, run the script using `pnpm <alias> <script>`.
 
 ## Documentation Strategy
 

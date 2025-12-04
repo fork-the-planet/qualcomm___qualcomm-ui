@@ -8,8 +8,6 @@ import tsconfigPaths from "vite-tsconfig-paths"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
-const specMatch = (process.env.SPEC_MATCH ?? "src/**/*.spec.ts").split(",")
-
 export default defineConfig(({mode}) => ({
   define: {
     "import.meta.vitest": mode !== "production",
@@ -61,7 +59,7 @@ export default defineConfig(({mode}) => ({
       },
     },
     globals: true,
-    include: specMatch,
+    include: "src/**/*.spec.ts",
     reporters: ["default"],
     setupFiles: ["test/test-setup.ts"],
   },

@@ -1,7 +1,13 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {createContext, type Provider, useContext} from "react"
+import {
+  createContext,
+  type Dispatch,
+  type Provider,
+  type SetStateAction,
+  useContext,
+} from "react"
 
 import type {
   DocPropsSettings,
@@ -25,7 +31,19 @@ export type DemoState = Record<string, DemoStateEntry>
  */
 export type RouteDemoState = Record<string, DemoState>
 
+export interface DemoSettings {
+  /**
+   * If true, transform tailwind classes in demos to inline styles and vanilla CSS.
+   */
+  transformTailwindClasses?: boolean
+}
+
 export interface MdxDocsContextValue {
+  /**
+   * @default {styleMode: 'default'}
+   */
+  demoSettings?: DemoSettings
+
   /**
    * Demo state for each route, typically persisted via localStorage or a session
    * cookie (SSR). This preserves the expand/collapse state of each demo on reload.
@@ -41,6 +59,9 @@ export interface MdxDocsContextValue {
   packageManager?: PackageManager
 
   renderLink: RenderLink
+
+  setDemoSettings?: Dispatch<SetStateAction<DemoSettings>>
+
   /**
    * onChange handler for the {@link packageManager field}
    */

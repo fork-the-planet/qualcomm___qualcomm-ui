@@ -1,6 +1,6 @@
 {
   "name": "@qualcomm-ui/tailwind-plugin",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "sideEffects": false,
   "description": "Qualcomm UI Tailwind Plugin",
   "repository": "https://github.com/qualcomm/qualcomm-ui",
@@ -14,10 +14,12 @@
       "default": "./dist/*/index.js"
     },
     "./qui.css": {
-      "style": "./dist/qui.css"
+      "style": "./dist/qui.css",
+      "default": "./dist/qui.css"
     },
     "./qui-strict.css": {
-      "style": "./dist/qui-strict.css"
+      "style": "./dist/qui-strict.css",
+      "default": "./dist/qui-strict.css"
     }
   },
   "types": "./dist/index.d.ts",
@@ -45,8 +47,8 @@
   },
   "devDependencies": {
     "@qualcomm-ui/cli": "workspace:^1.0.5",
-    "@qualcomm-ui/css-utils": "workspace:^1.0.3",
-    "@qualcomm-ui/esbuild": "workspace:^1.0.3",
+    "@qualcomm-ui/css-utils": "workspace:^1.0.4",
+    "@qualcomm-ui/esbuild": "workspace:^1.0.4",
     "@qualcomm-ui/tsconfig": "workspace:^1.0.4",
     "esbuild": "^0.25.8",
     "shx": "^0.4.0",

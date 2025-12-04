@@ -10,6 +10,7 @@ import {
   PolymorphicElement,
 } from "@qualcomm-ui/react-core/system"
 import {
+  type DemoSettings,
   type MdxDocsContextValue,
   MdxDocsProvider,
   type PackageManager,
@@ -37,10 +38,12 @@ export interface RootProps
 
 export function Root({
   children,
+  demoSettings: demoSettingsProp,
   demoState: demoStateProp,
   docProps,
   hideToc,
   mdxComponents,
+  onDemoSettingsChange,
   onDemoStateChange,
   onPackageManagerChange,
   packageManager: packageManagerProp = "npm",
@@ -57,15 +60,27 @@ export function Root({
   const [demoState, setDemoState] = useState<RouteDemoState>(
     demoStateProp || {},
   )
+  const [demoSettings, setDemoSettings] = useState<DemoSettings>(
+    demoSettingsProp || {transformTailwindClasses: false},
+  )
 
   const {navItems, pageDocProps, pageMap} = useSiteContext()
 
   const mdxDocsContextValue: MdxDocsContextValue = useMemo(
     () => ({
+      demoSettings,
       demoState,
       docProps,
       packageManager,
       renderLink,
+      setDemoSettings: (updaterOrValue) => {
+        const nextState =
+          typeof updaterOrValue === "function"
+            ? updaterOrValue(demoSettings)
+            : updaterOrValue
+        setDemoSettings(nextState)
+        onDemoSettingsChange?.(nextState)
+      },
       setPackageManager: (nextState) => {
         setPackageManager(nextState)
         onPackageManagerChange?.(nextState)
@@ -92,8 +107,10 @@ export function Root({
       },
     }),
     [
+      demoSettings,
       demoState,
       docProps,
+      onDemoSettingsChange,
       onDemoStateChange,
       onPackageManagerChange,
       packageManager,

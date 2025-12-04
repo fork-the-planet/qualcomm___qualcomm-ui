@@ -346,9 +346,16 @@ await expect.element(page.getByRole('status')).toHaveTextContent('true')
    - Check that test names clearly describe scenarios
    - Confirm appropriate mocking of dependencies
 
+5. **Running tests**
+  - To run tests for a specific component, use the relative path from the module root to the test file. Example for testing the `@qualcomm-ui/angular` tree component:
+
+```shell
+# Run this from the repository root
+pnpm angular test src/tree/tree.spec.ts
+```
+
 ## What You Never Do
 
-- Never offer to run tests - assume the user will handle execution
 - Never test implementation details like internal state or private methods
 - Never use data-test-id attributes or data attributes unless absolutely necessary
 - Never write vague test names that don't explain the scenario

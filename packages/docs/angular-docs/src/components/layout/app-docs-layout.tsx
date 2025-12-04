@@ -24,6 +24,8 @@ import {
 } from "@qualcomm-ui/react-mdx/docs-layout"
 import {SiteSearch} from "@qualcomm-ui/react-mdx/site-search"
 
+import angularPkg from "../../../../../frameworks/angular/package.json"
+
 import {DemoUpdateContextProvider} from "./demo-update-context"
 import {ResetDemoDimensionsButton} from "./reset-demo-dimensions-button"
 import {useAngularDemoReloader} from "./use-angular-demo-reloader"
@@ -65,6 +67,7 @@ export function AppDocsLayout({children, ...props}: Props): ReactNode {
             <HeaderLogo
               appTitle="QUI Angular"
               changelogHref="https://github.com/qualcomm/qualcomm-ui/tree/main/packages/frameworks/angular/CHANGELOG.md"
+              changelogText={`NextGen v${angularPkg.version}`}
             />
 
             <HeaderBar.Divider />
@@ -90,7 +93,7 @@ export function AppDocsLayout({children, ...props}: Props): ReactNode {
               <ResetDemoDimensionsButton />
               <HeaderRepositoryLink />
               <GlobalConfig />
-              <HeaderAiLink modelId="cs45-qui-angular-nextgen" />
+              <HeaderAiLink modelId="qui-angular-nextgen-sonnet-4-5" />
               <ThemeToggle />
             </HeaderBar.ActionBar>
           </HeaderBar.Root>

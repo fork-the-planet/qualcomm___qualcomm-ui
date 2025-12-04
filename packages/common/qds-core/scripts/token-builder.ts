@@ -20,6 +20,7 @@ import type {DimensionRawValue} from "./token-types"
 import {
   type Brand,
   brands,
+  filterObject,
   styleOutputDir,
   type Theme,
   themes,
@@ -217,7 +218,18 @@ export class FigmaTokenBuilder {
               // shorthand equivalents, i.e. `var(--font-*)`
               removeTypographyParts: (dictionary) => {
                 if (dictionary.type?.static) {
-                  delete dictionary.type?.static
+                  dictionary.type.static = filterObject(
+                    dictionary.type.static,
+                    {
+                      hoistKeys: new Set(["default"]),
+                      keepPatterns: new Set([
+                        "default.font-size",
+                        "default.line-height",
+                        "xxxl.font-size",
+                        "xxxl.line-height",
+                      ]),
+                    },
+                  )
                 }
                 return dictionary
               },

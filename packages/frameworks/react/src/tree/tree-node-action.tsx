@@ -17,7 +17,7 @@ import {useQdsTreeContext} from "./qds-tree-context"
 
 export interface TreeNodeActionProps
   extends CoreTreeNodeActionProps,
-    Omit<InlineIconButtonProps, "variant"> {}
+    Pick<InlineIconButtonProps, "icon" | "size"> {}
 
 /**
  * An action button within a tree item's interactive area. Renders a `<button>`

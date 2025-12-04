@@ -1,5 +1,50 @@
 # @qualcomm-ui/qds-core
 
+## 1.9.1 (2025/12/03)
+
+### Bug Fixes
+
+- [side-nav]: adjust node primary and selected text colors
+- [divider]: add className to api root getter
+
+## 1.9.0 (2025/12/03)
+
+### Features
+
+- [design-tokens]: add individual static text variables for line-height and font-size
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/utils]
+
+## 1.8.0 (2025/12/01)
+
+### Features
+
+- [collapsible]: add getter function for content bindings
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils, @qualcomm-ui/core]
+
+## 1.7.1 (2025/12/01)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core]
+
+## 1.7.0 (2025/11/30)
+
+### Features
+
+- [theme]: export theme and brand constants
+
+## 1.6.1 (2025/11/30)
+
+### Bug Fixes
+
+- icon-button bindings normalization
+
 ## 1.6.0 (2025/11/25)
 
 ### Features

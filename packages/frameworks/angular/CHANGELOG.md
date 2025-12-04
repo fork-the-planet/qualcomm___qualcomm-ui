@@ -1,5 +1,79 @@
 # @qualcomm-ui/angular
 
+## 1.9.1 (2025/12/04)
+
+### Miscellaneous Chores
+
+- [peer-dependencies]: loosen `@angular/*` version range restrictions
+- **deps:** update dependencies [@qualcomm-ui/angular-core]
+
+## 1.9.0 (2025/12/03)
+
+### Features
+
+- [side-nav]: add side-nav component
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/angular-core, @qualcomm-ui/qds-core]
+
+## 1.8.1 (2025/12/03)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core, @qualcomm-ui/core, @qualcomm-ui/angular-core, @qualcomm-ui/utils]
+
+## 1.8.0 (2025/12/01)
+
+### Features
+
+- [tree]: add tree module
+
+### Code Refactoring
+
+- [merge-props]: use shared implementation from utils package
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils, @qualcomm-ui/angular-core, @qualcomm-ui/qds-core, @qualcomm-ui/core]
+
+## 1.7.2 (2025/12/01)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/qds-core, @qualcomm-ui/angular-core]
+
+## 1.7.1 (2025/11/30)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
+## 1.7.0 (2025/11/30)
+
+### Features
+
+- angular header-bar
+
+### Bug Fixes
+
+- context token providers in nav-item
+- use buttons QDS props rather than extending them
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
+## 1.6.0 (2025/11/30)
+
+### Features
+
+- wire highlightMatchingText in angular combobox
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/angular-core]
+
 ## 1.5.0 (2025/11/25)
 
 ### Features

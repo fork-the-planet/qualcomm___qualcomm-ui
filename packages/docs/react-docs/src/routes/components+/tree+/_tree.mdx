@@ -18,7 +18,7 @@ import {Tree} from "@qualcomm-ui/react/tree"
 - The tree relies on the `TreeCollection` class to manage its items. Refer to the [API](./#tree-collection) below for details.
 - Trees are composed of nodes, which are objects that describe the tree data. There are two types of nodes:
   - A `branch` node is a node that has children.
-  - A `leaf` node is a node that does not have any children.
+  - A `leaf` node is a node that does not have children.
 - Each node has a `value` (unique identifier used for selection/expansion) and a `text` (display text).
 
 **Default object shape:**
@@ -60,11 +60,11 @@ Expand nodes by default using the [defaultExpandedValue](./#defaultExpandedValue
 
 ### Checkbox Trees
 
-Use the `Tree.CheckboxNode` to create a checkbox tree. The checked state of the tree can be controlled using the [checkedValue](./#checkedValue), [onCheckedChange](./#onCheckedChange), and [defaultCheckedValue](./#defaultCheckedValue) props, which follow our [controlled state](/patterns/controlled-state) pattern.
+Use the `Tree.NodeCheckbox` to add a checkbox to each node. The checked state of the tree can be controlled using the [checkedValue](./#checkedValue), [onCheckedChange](./#onCheckedChange), and [defaultCheckedValue](./#defaultCheckedValue) props, which follow our [controlled state](/patterns/controlled-state) pattern.
 
 <Demo name="TreeCheckboxDemo" component={demos.TreeCheckboxDemo} />
 
-#### Checkbox selection state
+### Checkbox selection state
 
 The Tree handles nested checkbox selection automatically:
 
@@ -108,6 +108,7 @@ Let's say that we want to select the `sdx` node and its children by default.
 function Component() {
   return (
     // won't work, we need to supply the child nodes instead
+    // [!code warning]
     <Tree.Root defaultCheckedValue={["sdx"]} collection={collection}>
       ...
     </Tree.Root>
@@ -115,18 +116,18 @@ function Component() {
 }
 ```
 
-```tsx
-function Component() {
-  return (
-    // works as expected
-    <Tree.Root defaultCheckedValue={["elite", "plus"]} collection={collection}>
-      ...
-    </Tree.Root>
-  )
-}
-```
+Instead, supply all the child nodes to indicate that the parent is selected:
+
+<Demo name="TreeValidStateDemo" component={demos.TreeValidStateDemo} />
 
 :::
+
+The following demo shows checked state below the tree. Interact with it to see state updates:
+
+<Demo
+  name="TreeCheckboxStatePreviewDemo"
+  component={demos.TreeCheckboxStatePreviewDemo}
+/>
 
 ### Disabled Nodes
 

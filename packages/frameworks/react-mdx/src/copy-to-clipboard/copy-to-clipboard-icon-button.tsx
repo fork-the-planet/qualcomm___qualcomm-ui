@@ -30,13 +30,14 @@ export function CopyToClipboardIconButton({
 
   return (
     <IconButton
+      aria-label="Copy code to clipboard"
       className="qui-code-copy-button"
       density="compact"
       emphasis="primary"
       icon={isCopied ? Check : Copy}
       size="md"
       tabIndex={0}
-      title="Copy code"
+      title="Copy code to clipboard"
       variant="ghost"
       {...mergedProps}
     />

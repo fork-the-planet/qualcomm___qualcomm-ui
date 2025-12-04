@@ -1,5 +1,48 @@
 # @qualcomm-ui/angular-core
 
+## 1.3.1 (2025/12/04)
+
+### Miscellaneous Chores
+
+- [peer-dependencies]: loosen `@angular/*` version range restrictions
+
+## 1.3.0 (2025/12/03)
+
+### Features
+
+- [side-nav]: add side-nav component
+
+## 1.2.0 (2025/12/01)
+
+### Features
+
+- [tree]: add core tree directives
+
+### Bug Fixes
+
+- [merge-props]: loosen merged className type for union compatibility
+
+### Code Refactoring
+
+- [merge-props]: use shared implementation from utils package
+- [core-tooltip]: loosen member variable access modifiers
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils, @qualcomm-ui/core, @qualcomm-ui/dom]
+
+## 1.1.1 (2025/12/01)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core]
+
+## 1.1.0 (2025/11/30)
+
+### Features
+
+- wire highlightMatchingText in angular combobox
+
 ## 1.0.6 (2025/11/25)
 
 ### Miscellaneous Chores

@@ -1,7 +1,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {type ReactElement, useMemo} from "react"
+import {type ReactElement, type ReactNode, useMemo} from "react"
 
 import {createQdsCheckmarkApi} from "@qualcomm-ui/qds-core/checkmark"
 import {
@@ -16,7 +16,21 @@ import {
 } from "@qualcomm-ui/react-core/tree"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-export interface TreeNodeCheckboxProps extends CoreTreeNodeCheckboxProps {}
+export interface TreeNodeCheckboxProps extends CoreTreeNodeCheckboxProps {
+  /**
+   * React Node rendered when the node is checked.
+   *
+   * @default CheckmarkCheckedIcon
+   */
+  checked?: ReactNode
+
+  /**
+   * React Node rendered when the node is indeterminate.
+   *
+   * @default CheckmarkIndeterminateIcon
+   */
+  indeterminate?: ReactNode
+}
 
 /**
  * A checkbox control within a tree item. Renders a `<span>` element by default.

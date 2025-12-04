@@ -11,6 +11,8 @@ import {fileURLToPath} from "node:url"
 
 import {kebabCase} from "@qualcomm-ui/utils/change-case"
 
+import type {TokenSignature} from "./token-types"
+
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export const styleOutputDir = resolve(__dirname, "../src/styles")
@@ -108,4 +110,60 @@ export async function updateFoundationsFile(
     JSON.stringify(response, null, 2),
     "utf-8",
   )
+}
+
+type NestedDict = {[key: string]: TokenSignature<any, any> | NestedDict}
+
+interface FilterOptions {
+  hoistKeys?: Set<string>
+  keepPatterns: Set<string>
+  parentKey?: string | null
+}
+
+function isTokenValue(obj: unknown): obj is TokenSignature<any, any> {
+  return (
+    typeof obj === "object" && obj !== null && "$type" in obj && "$value" in obj
+  )
+}
+
+/**
+ * Recursively filters a nested token dictionary, keeping only branches
+ * that terminate in tokens matching `{parentKey}.{key}` patterns.
+ *
+ * @param obj - Nested dictionary to filter
+ * @param options.keepPatterns - Patterns to match against final two keys before token (e.g., "default.line-height")
+ * @param options.hoistKeys - Keys to remove, merging their children into the parent level
+ * @param options.parentKey - Internal: tracks parent key during recursion
+ * @returns Filtered dictionary or null if empty
+ */
+export function filterObject(
+  obj: NestedDict,
+  options: FilterOptions,
+): NestedDict | null {
+  const {hoistKeys = new Set(), keepPatterns, parentKey = null} = options
+  const result: NestedDict = {}
+
+  for (const [key, value] of Object.entries(obj)) {
+    if (isTokenValue(value)) {
+      const pattern = `${parentKey}.${key}`
+      if (keepPatterns.has(pattern)) {
+        result[key] = value
+      }
+    } else if (typeof value === "object" && value !== null) {
+      const filtered = filterObject(value, {
+        hoistKeys,
+        keepPatterns,
+        parentKey: key,
+      })
+      if (filtered) {
+        if (hoistKeys.has(key)) {
+          Object.assign(result, filtered)
+        } else {
+          result[key] = filtered
+        }
+      }
+    }
+  }
+
+  return Object.keys(result).length > 0 ? result : null
 }

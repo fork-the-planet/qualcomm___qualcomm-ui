@@ -4,13 +4,6 @@ import {playwright} from "@vitest/browser-playwright"
 import viteTsconfigPaths from "vite-tsconfig-paths"
 import {defineConfig} from "vitest/config"
 
-const specMatchEnv = (process.env.SPEC_MATCH ?? "src/**/*.spec.tsx").split(",")
-const testComponent = process.env.TEST_COMPONENT
-
-const specMatch = testComponent
-  ? testComponent.split(",").map((c) => `src/${c}/**/*.spec.tsx`)
-  : specMatchEnv
-
 export default defineConfig({
   plugins: [tailwindcss(), viteTsconfigPaths(), react({}) as any],
   test: {
@@ -44,7 +37,7 @@ export default defineConfig({
       },
     },
     globals: true,
-    include: specMatch,
+    include: "src/**/*.spec.tsx",
     passWithNoTests: true,
     setupFiles: ["@qualcomm-ui/react-test-utils/src/react-test-setup.ts"],
   },

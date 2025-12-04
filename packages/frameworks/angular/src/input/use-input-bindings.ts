@@ -17,7 +17,7 @@ import type {
   QdsInputHintBindings,
   QdsInputInputBindings,
 } from "@qualcomm-ui/qds-core/input"
-import {mergeProps} from "@qualcomm-ui/utils/merge-props"
+import {type MergeProps, mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {useQdsInputContext} from "./qds-input-context.service"
 
@@ -40,7 +40,7 @@ export function useInputInput(): UseInputInputReturn {
 export interface UseInputClearTriggerReturn {
   getIconBindings: Signal<QdsInlineIconButtonIconBindings>
   getRootBindings: Signal<
-    QdsInlineIconButtonRootBindings & QdsInputClearTriggerBindings
+    MergeProps<[QdsInlineIconButtonRootBindings, QdsInputClearTriggerBindings]>
   >
 }
 

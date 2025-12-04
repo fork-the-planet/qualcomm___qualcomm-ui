@@ -74,6 +74,7 @@ export default defineConfig({
         }
         return line
       },
+      transformTailwindStyles: true,
     }),
   ],
   server: {

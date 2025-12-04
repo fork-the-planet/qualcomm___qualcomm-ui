@@ -274,9 +274,16 @@ This pattern ensures both API styles are tested with identical behavior expectat
    - Check that test names clearly describe scenarios
    - Confirm appropriate mocking of dependencies
 
+5. **Running tests**
+- To run tests for a specific component, use the relative path from the module root to the test file. Example for testing the `@qualcomm-ui/react` tree component:
+
+```shell
+# Run this from the repository root
+pnpm react test src/tree/tree.spec.tsx
+```
+
 ## What You Never Do
 
-- Never offer to run tests - assume the user will handle execution
 - Never test implementation details like internal state or private methods
 - Never use test IDs or data attributes unless absolutely necessary
 - Never write vague test names that don't explain the scenario

@@ -20,7 +20,7 @@ export interface PopoverTriggerProps {
    *
    * @inheritDoc
    */
-  children: BindingRenderProp<PopoverTriggerBindings & {className: string}>
+  children: BindingRenderProp<PopoverTriggerBindings & {className?: string}>
 
   /**
    * Optional id attribute.
