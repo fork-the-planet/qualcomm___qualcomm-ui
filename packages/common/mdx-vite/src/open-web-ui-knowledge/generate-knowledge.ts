@@ -462,7 +462,6 @@ class KnowledgeGenerator {
 
     const parts: string[] = []
 
-    // Format summary
     if (comment.summary && comment.summary.length > 0) {
       const summaryText = this.formatCommentParts(comment.summary)
       if (summaryText.trim()) {
@@ -470,19 +469,16 @@ class KnowledgeGenerator {
       }
     }
 
-    // Format block tags
     if (comment.blockTags && comment.blockTags.length > 0) {
       for (const blockTag of comment.blockTags) {
         const tagContent = this.formatCommentParts(blockTag.content)
         if (tagContent.trim()) {
           const tagName = blockTag.tag.replace("@", "")
 
-          // Skip default tags since they're handled separately
           if (tagName === "default" || tagName === "defaultValue") {
             continue
           }
 
-          // Special handling for other tags
           if (tagName === "example") {
             parts.push(`**Example:**\n\`\`\`\n${tagContent.trim()}\n\`\`\``)
           } else {
@@ -502,13 +498,11 @@ class KnowledgeGenerator {
           case "text":
             return part.text
           case "code":
-            // Clean up malformed code blocks like "```ts\ntrue\n```"
             const codeText = part.text
               .replace(/```\w*\n?/g, "") // Remove opening code blocks with optional language
               .replace(/\n?```/g, "") // Remove closing code blocks
               .trim()
 
-            // If it's still multi-line after cleanup, use code block
             if (codeText.includes("\n")) {
               return `\`\`\`\n${codeText}\n\`\`\``
             } else {
@@ -516,6 +510,7 @@ class KnowledgeGenerator {
             }
           default:
             if (
+              this.config.outputMode === "per-page" &&
               "tag" in part &&
               part.tag === "@link" &&
               typeof part.target === "string"
@@ -846,7 +841,6 @@ class KnowledgeGenerator {
     for (const page of pages) {
       const content = page.content.split("\n").map((line) => {
         if (line.startsWith("#")) {
-          // increase heading level by 1 for pages
           return `#${line}`
         }
         return line
