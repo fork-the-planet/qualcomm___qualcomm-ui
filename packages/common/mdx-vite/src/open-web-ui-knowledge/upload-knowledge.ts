@@ -74,9 +74,16 @@ class Uploader {
     for (const file of files) {
       let result = await this.uploadFile(file.name, file.contents)
       while (!result.success && result.count && result.count < 5) {
-        console.debug("Failed to upload, retrying with count: ", result.count)
-        await setTimeout(100)
-        result = await this.uploadFile(file.name, file.contents, result.count)
+        if (
+          result.response?.detail &&
+          result.response.detail.includes("Duplicate content detected")
+        ) {
+          result.count = 5
+        } else {
+          console.debug("Failed to upload, retrying with count: ", result.count)
+          await setTimeout(100)
+          result = await this.uploadFile(file.name, file.contents, result.count)
+        }
       }
       if (result.skipped) {
         skippedFiles.push(file.name)
@@ -108,6 +115,7 @@ class Uploader {
     count = 0,
   ): Promise<{
     count?: number
+    response?: Record<string, string>
     skipped?: boolean
     success: boolean
   }> {
@@ -160,7 +168,7 @@ class Uploader {
 
     if (knowledgeFile) {
       await this.api.removeKnowledgeFile(knowledgeFile.id)
-      console.log(`Removed existing file: ${name}`)
+      console.log(`File changed, removed old file: ${name}`)
     }
 
     const spinner = ora(`Uploading ${name}`).start()
@@ -170,7 +178,7 @@ class Uploader {
     if (!uploadResponse.id || !uploadResponse.filename) {
       spinner.fail(`Error uploading ${name}, exiting`)
       console.debug(uploadResponse)
-      return {success: false}
+      return {response: uploadResponse, success: false}
     }
 
     // give the upload time to register on the backend
@@ -186,7 +194,7 @@ class Uploader {
     } else {
       spinner.fail(`Failed to associate ${name} with knowledge base`)
       console.debug(addResponse)
-      return {count: count + 1, success: false}
+      return {count: count + 1, response: addResponse, success: false}
     }
   }
 
