@@ -1,5 +1,18 @@
 # @qualcomm-ui/mdx-vite
 
+## 2.5.2 (2025/12/04)
+
+### Code Refactoring
+
+- [knowledge-config]: remove knowledgeId requirement from generation command
+- [generate-knowledge]: reorganize functions into class for shared state/config
+
+### Bug Fixes
+
+- [knowledge-upload]: more resilient duplication handling
+- [generate-knowledge]: remove links in aggregate output mode
+- [knowledge-upload]: do not retry upload after specific errors
+
 ## 2.5.1 (2025/12/03)
 
 ### Bug Fixes

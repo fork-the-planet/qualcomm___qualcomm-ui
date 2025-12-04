@@ -1,5 +1,11 @@
 # @qualcomm-ui/angular-core
 
+## 1.3.1 (2025/12/04)
+
+### Miscellaneous Chores
+
+- [peer-dependencies]: loosen `@angular/*` version range restrictions
+
 ## 1.3.0 (2025/12/03)
 
 ### Features
