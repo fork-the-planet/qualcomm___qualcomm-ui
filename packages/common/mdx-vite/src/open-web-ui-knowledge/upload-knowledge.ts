@@ -3,14 +3,7 @@
 
 import {program} from "@commander-js/extra-typings"
 import {createHash} from "node:crypto"
-import {
-  access,
-  mkdir,
-  readdir,
-  readFile,
-  stat,
-  writeFile,
-} from "node:fs/promises"
+import {access, readdir, readFile, stat} from "node:fs/promises"
 import {resolve} from "node:path"
 import {setTimeout} from "node:timers/promises"
 import ora from "ora"
@@ -39,13 +32,94 @@ function calculateFileHash(fileData: string) {
   return createHash("sha256").update(normalized).digest("hex")
 }
 
+interface UploadResult {
+  response?: Record<string, string>
+  skipped?: boolean
+  success: boolean
+}
+
+interface KnowledgeFile {
+  id: string
+  meta: {name: string}
+}
+
 class Uploader {
   private config: Config
   readonly api: KnowledgeApi
+  private fileHashCache: Map<string, string> = new Map()
+  private knowledgeFilesCache: KnowledgeFile[] | null = null
 
   constructor(config: Config) {
     this.config = config
     this.api = new KnowledgeApi(config)
+  }
+
+  private async buildHashCache(files: KnowledgeFile[]): Promise<void> {
+    const results = await Promise.allSettled(
+      files.map(async (f) => {
+        const data = await this.api.downloadFile(f.id)
+        if (data) {
+          this.fileHashCache.set(f.id, calculateFileHash(data))
+        }
+      }),
+    )
+    const failures = results.filter((r) => r.status === "rejected")
+    if (failures.length > 0) {
+      console.warn(`Failed to cache ${failures.length} file hashes`)
+    }
+  }
+
+  private async waitForFileDeletion(
+    fileId: string,
+    fileName: string,
+    maxAttempts = 15,
+  ): Promise<boolean> {
+    const spinner = ora(`File changed, deleting ${fileName}`).start()
+    for (let i = 0; i < maxAttempts; i++) {
+      this.knowledgeFilesCache = null
+      const knowledge = await this.api.listKnowledgeFiles()
+      const stillExists = (knowledge.files ?? []).some((f) => f.id === fileId)
+      if (!stillExists) {
+        this.fileHashCache.delete(fileId)
+        spinner.succeed(`File ${fileId} deleted`)
+        return true
+      }
+      await setTimeout(100 * (i + 1))
+    }
+    spinner.stop()
+    console.debug(`File ${fileId} may not have been fully deleted`)
+    return false
+  }
+
+  private async uploadWithRetry(
+    name: string,
+    contents: string,
+    maxRetries = 10,
+  ): Promise<UploadResult> {
+    for (let attempt = 0; attempt < maxRetries; attempt++) {
+      const result = await this.uploadFile(name, contents)
+
+      if (result.success) {
+        return result
+      }
+
+      if (result.response?.detail?.includes("Duplicate content detected")) {
+        console.warn(
+          `Duplicate content: ${name} is already in knowledge base, skipping`,
+        )
+        return {skipped: true, success: true}
+      }
+
+      if (attempt < maxRetries - 1) {
+        const delay = 100 * Math.pow(2, attempt)
+        console.debug(
+          `Retrying ${name} in ${delay}ms (attempt ${attempt + 2}/${maxRetries})`,
+        )
+        await setTimeout(delay)
+      }
+    }
+    console.debug(`Failed to upload ${name}`)
+    return {success: false}
   }
 
   get headers() {
@@ -65,35 +139,32 @@ class Uploader {
         name,
       })),
     )
-    const skippedFiles: string[] = []
+
+    const knowledge = await this.api.listKnowledgeFiles()
+    this.knowledgeFilesCache = knowledge.files ?? []
+    await this.buildHashCache(this.knowledgeFilesCache)
+
+    let skippedCount = 0
     let successCount = 0
     let failureCount = 0
-    // fill cache
-    await this.api.listKnowledgeFiles()
 
     for (const file of files) {
-      let result = await this.uploadFile(file.name, file.contents)
-      while (!result.success && result.count && result.count < 5) {
-        console.debug("Failed to upload, retrying with count: ", result.count)
-        await setTimeout(100)
-        result = await this.uploadFile(file.name, file.contents, result.count)
-      }
+      const result = await this.uploadWithRetry(file.name, file.contents)
       if (result.skipped) {
-        skippedFiles.push(file.name)
-      }
-      if (result.success) {
+        skippedCount++
+      } else if (result.success) {
         successCount++
       } else {
         failureCount++
       }
     }
 
-    if (skippedFiles.length > 0) {
+    if (skippedCount > 0) {
       console.debug(
-        `Skipped uploading ${skippedFiles.length} files because their contents did not change`,
+        `Skipped uploading ${skippedCount} files because their contents did not change`,
       )
     }
-    const uploadCount = successCount - skippedFiles.length
+    const uploadCount = Math.abs(successCount)
     if (uploadCount) {
       console.debug(`Successfully uploaded ${uploadCount} files`)
     }
@@ -105,76 +176,34 @@ class Uploader {
   private async uploadFile(
     name: string,
     contents: string,
-    count = 0,
-  ): Promise<{
-    count?: number
-    skipped?: boolean
-    success: boolean
-  }> {
-    const knowledge = await this.api.listKnowledgeFiles()
-    const knowledgeFile = (knowledge.files ?? []).find(
-      (f) => f.meta.name === name,
-    )
+  ): Promise<UploadResult> {
+    const knowledgeFiles = this.knowledgeFilesCache ?? []
+    const knowledgeFile = knowledgeFiles.find((f) => f.meta.name === name)
+    const contentHash = calculateFileHash(contents)
 
-    if (knowledgeFile) {
-      console.debug("Found existing file:", knowledgeFile?.meta.name)
-
-      const data = await this.api.downloadFile(knowledgeFile.id)
-
-      if (!this.config.force && data) {
-        if (calculateFileHash(data) === calculateFileHash(contents)) {
-          return {skipped: true, success: true}
-        }
-
-        await mkdir(resolve(process.cwd(), `./temp/diff`), {
-          recursive: true,
-        }).catch()
-        await writeFile(
-          resolve(process.cwd(), `./temp/diff/${name}-current.md`),
-          contents,
-          "utf-8",
-        )
-        await writeFile(
-          resolve(process.cwd(), `./temp/diff/${name}-owui.md`),
-          data,
-          "utf-8",
-        )
-
-        const dataLines = data.split("\n")
-        const contentLines = contents.split("\n")
-
-        if (dataLines.length === contentLines.length) {
-          const allLinesMatch = dataLines.every(
-            (line, i) => line === contentLines[i],
-          )
-          if (allLinesMatch) {
-            return {skipped: true, success: true}
-          }
-        }
+    if (knowledgeFile && !this.config.force) {
+      const existingHash = this.fileHashCache.get(knowledgeFile.id)
+      if (existingHash === contentHash) {
+        return {skipped: true, success: true}
       }
     }
 
+    if (knowledgeFile) {
+      await this.api.removeKnowledgeFile(knowledgeFile.id)
+      await this.waitForFileDeletion(knowledgeFile.id, name)
+    }
+
+    const spinner = ora(`Uploading ${name}`).start()
     const fileBuffer = await readFile(
       resolve(this.config.knowledgeFilePath, name),
     )
 
-    if (knowledgeFile) {
-      await this.api.removeKnowledgeFile(knowledgeFile.id)
-      console.log(`Removed existing file: ${name}`)
-    }
-
-    const spinner = ora(`Uploading ${name}`).start()
-
     const uploadResponse = await this.api.uploadFile(fileBuffer, name)
 
     if (!uploadResponse.id || !uploadResponse.filename) {
-      spinner.fail(`Error uploading ${name}, exiting`)
-      console.debug(uploadResponse)
-      return {success: false}
+      spinner.fail(`Error uploading ${name}`)
+      return {response: uploadResponse, success: false}
     }
-
-    // give the upload time to register on the backend
-    await setTimeout(500)
 
     spinner.text = `Associating ${name} with knowledge base`
 
@@ -182,11 +211,11 @@ class Uploader {
 
     if (addResponse.name) {
       spinner.succeed(`${name} associated with knowledge base`)
+      this.fileHashCache.set(uploadResponse.id, contentHash)
       return {success: true}
     } else {
-      spinner.fail(`Failed to associate ${name} with knowledge base`)
-      console.debug(addResponse)
-      return {count: count + 1, success: false}
+      spinner.stop()
+      return {response: addResponse, success: false}
     }
   }
 

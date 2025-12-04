@@ -21,14 +21,9 @@ export interface WebUiKnowledgeConfig {
    * Include relative imports for demo files.
    */
   includeImports?: boolean
-  /**
-   * Include a section about the QUI Tailwind Plugin variables in the generated
-   * LLMs.txt
-   */
-  knowledgeId: string
   metadata?: string[] | undefined
   /**
-   * Optional name header for the project.
+   * Optional name for the project.
    */
   name?: string
   outputMode: "per-page" | "aggregated"
@@ -38,7 +33,7 @@ export interface WebUiKnowledgeConfig {
    */
   pageTitlePrefix?: string
   /**
-   * Resolved route dir from
+   * Resolved route dir from the root of the project.
    */
   routeDir: string
 
@@ -48,12 +43,7 @@ export interface WebUiKnowledgeConfig {
 export interface CliConfig
   extends Omit<
     WebUiKnowledgeConfig,
-    | "docPropsPath"
-    | "knowledgeId"
-    | "outputPath"
-    | "routeDir"
-    | "webUiKey"
-    | "webUiUrl"
+    "docPropsPath" | "knowledgeId" | "outputPath" | "routeDir"
   > {
   /**
    * Path to the environment file for this request. Variables like the knowledge
