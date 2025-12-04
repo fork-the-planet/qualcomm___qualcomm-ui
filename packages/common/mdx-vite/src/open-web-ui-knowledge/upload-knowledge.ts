@@ -186,7 +186,7 @@ class Uploader {
 
     if (knowledgeFile) {
       await this.api.removeKnowledgeFile(knowledgeFile.id)
-      console.log(`File changed, removed old file: ${name}`)
+      console.log(`File changed, removing old file: ${name}`)
       await this.waitForFileDeletion(knowledgeFile.id)
     }
 
