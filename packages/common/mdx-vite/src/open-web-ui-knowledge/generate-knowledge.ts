@@ -49,13 +49,6 @@ interface PageInfo {
   url: string | undefined
 }
 
-interface ProcessedPage {
-  content: string
-  demoFiles: string[]
-  frontmatter: Record<string, string>
-  title: string
-}
-
 interface ImportedModule {
   content: string
   path: string
@@ -364,7 +357,6 @@ function getIntroLines(
   pages: Array<ProcessedPage>,
   projectName?: string,
   description?: string,
-  baseUrl?: string,
 ) {
   const lines: string[] = []
 
@@ -382,20 +374,8 @@ function getIntroLines(
   lines.push("")
 
   for (const page of pages) {
-    const url = baseUrl
-      ? `${baseUrl}/${kebabCase(page.title)}`
-      : `#${kebabCase(page.title)}`
-    if (page.title.includes("Introduction")) {
-      lines.push(`- [${page.title}](${url}): introduction and getting started`)
-    } else if (page.title.includes("Tailwind")) {
-      lines.push(
-        `- [${page.title}](${url}): integration documentation and examples`,
-      )
-    } else {
-      lines.push(
-        `- [${page.title}](${url}): component documentation and examples`,
-      )
-    }
+    const url = page.url ?? `#${kebabCase(page.title)}`
+    lines.push(`- [${page.title}](${url})`)
   }
 
   return lines.join("\n")
@@ -405,11 +385,8 @@ async function generateLlmsTxt(
   pages: Array<ProcessedPage>,
   projectName?: string,
   description?: string,
-  baseUrl?: string,
 ): Promise<string> {
-  const lines: string[] = [
-    getIntroLines(pages, projectName, description, baseUrl),
-  ]
+  const lines: string[] = [getIntroLines(pages, projectName, description)]
 
   lines.push("")
 
@@ -441,6 +418,7 @@ interface ProcessedPage {
   demoFiles: string[]
   frontmatter: Record<string, string>
   title: string
+  url: string | undefined
 }
 
 interface ImportedModule {
@@ -833,6 +811,7 @@ async function processComponent(
       demoFiles,
       frontmatter,
       title,
+      url: component.url,
     }
   } catch (error) {
     console.error(`Error processing component ${component.name}:`, error)
@@ -1004,7 +983,6 @@ export async function generate({
       processedPages,
       name,
       description,
-      baseUrl,
     )
     await mkdir(dirname(outputPath), {recursive: true}).catch()
     await writeFile(outputPath, llmsTxtContent, "utf-8")

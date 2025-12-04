@@ -41,6 +41,7 @@ export interface WebUiKnowledgeConfig {
    * Resolved route dir from
    */
   routeDir: string
+
   verbose?: boolean
 }
 
