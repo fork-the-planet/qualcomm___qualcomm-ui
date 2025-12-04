@@ -38,7 +38,31 @@ These keys can be customized via the `TreeCollection` [constructor](./#construct
 
 ### Node Shorthand
 
-We expose the `<q-side-nav-nodes>` shorthand for rendering nodes. Use the `<ng-template q-side-nav-branch-template>` and `<ng-template q-side-nav-leaf-template>` directives to customize the content of each tree node.
+We expose the `<q-side-nav-nodes>` shorthand for rendering nested nodes. Use the following directives to customize the tree nodes:
+
+```angular-html tabs="nodes" label="branch"
+<ng-template
+  let-branch
+  q-side-nav-branch-template
+  [rootNode]="collection.rootNode"
+>
+  <div q-side-nav-branch-node>
+    <!-- ... -->
+  </div>
+</ng-template>
+```
+
+```angular-html tabs="nodes" label="leaf"
+<ng-template
+  let-leaf
+  q-side-nav-leaf-template
+  [rootNode]="collection.rootNode"
+>
+  <div q-side-nav-leaf-node>
+    <!-- ... -->
+  </div>
+</ng-template>
+```
 
 Note that `<q-side-nav-nodes>` automatically renders child nodes for branches, so you only have to customize the content of the node itself.
 
