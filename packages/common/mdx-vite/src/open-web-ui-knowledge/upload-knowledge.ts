@@ -71,7 +71,7 @@ class Uploader {
 
   private async waitForFileDeletion(
     fileId: string,
-    maxAttempts = 10,
+    maxAttempts = 15,
   ): Promise<boolean> {
     for (let i = 0; i < maxAttempts; i++) {
       this.knowledgeFilesCache = null
@@ -90,7 +90,7 @@ class Uploader {
   private async uploadWithRetry(
     name: string,
     contents: string,
-    maxRetries = 3,
+    maxRetries = 6,
   ): Promise<UploadResult> {
     for (let attempt = 0; attempt < maxRetries; attempt++) {
       const result = await this.uploadFile(name, contents)
@@ -114,6 +114,7 @@ class Uploader {
         await setTimeout(delay)
       }
     }
+    console.debug(`Failed to upload ${name}`)
     return {success: false}
   }
 
