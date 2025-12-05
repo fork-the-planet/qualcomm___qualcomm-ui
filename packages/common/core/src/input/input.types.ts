@@ -33,6 +33,7 @@ export interface InputErrorTextBindings {
 export interface InputHintBindings {
   "data-disabled": BooleanDataAttr
   "data-part": "hint"
+  hidden: boolean
   id: string
 }
 

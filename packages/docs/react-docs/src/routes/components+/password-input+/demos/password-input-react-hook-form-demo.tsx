@@ -91,11 +91,7 @@ export function PasswordInputReactHookFormDemo() {
               return (
                 <PasswordInput
                   errorText={errors.password?.message}
-                  hint={
-                    shouldShowError("password")
-                      ? null
-                      : "must be 8+ characters with at least 1 number, lowercase, uppercase, and special character."
-                  }
+                  hint="must be 8+ characters with at least 1 number, lowercase, uppercase, and special character."
                   invalid={!!shouldShowError("password")}
                   label="Password"
                   onValueChange={onChange}

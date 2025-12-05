@@ -405,6 +405,7 @@ export function createSelectApi(
         "data-part": "hint",
         "data-scope": "select",
         dir: prop("dir"),
+        hidden: !!invalid,
         id: domIds.hint(scope),
       })
     },
