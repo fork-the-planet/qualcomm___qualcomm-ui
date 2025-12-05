@@ -235,6 +235,7 @@ class Uploader {
         return {success: true}
       } catch (e) {
         console.warn(`Failed to update existing file ${name}:`, e)
+        return {success: false}
       }
     }
 
@@ -370,6 +371,9 @@ export function addUploadKnowledgeCommand() {
       }
       const filesApi = new FilesApi(apiConfig)
       const knowledgeApi = new KnowledgeApi(apiConfig)
+      const cleaner = new KnowledgeCleaner(sharedConfig)
+
+      await cleaner.cleanUpOrphanedFiles()
 
       const knowledge = await knowledgeApi.getById(sharedConfig.knowledgeId)
       const knowledgeFiles = knowledge.files ?? []
