@@ -1,5 +1,11 @@
 # @qualcomm-ui/react-mdx
 
+## 1.6.2 (2025/12/05)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/react, @qualcomm-ui/react-core]
+
 ## 1.6.1 (2025/12/03)
 
 ### Code Refactoring

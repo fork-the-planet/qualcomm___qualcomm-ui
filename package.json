@@ -50,7 +50,8 @@
     "changeset-generate": "tsx scripts/changeset-conventional-commits/main.ts",
     "bump": "pnpm changeset version",
     "consolidate-changelogs": "tsx scripts/changeset-conventional-commits/consolidate-changelogs.ts",
-    "prep-release": "run-s changeset-generate bump consolidate-changelogs"
+    "prep-release": "run-s changeset-generate bump consolidate-changelogs",
+    "prep-release-from-tags": "pnpm changeset-generate --from-release-tags && pnpm bump && pnpm consolidate-changelogs"
   },
   "devDependencies": {
     "@actions/core": "^1.11.1",
