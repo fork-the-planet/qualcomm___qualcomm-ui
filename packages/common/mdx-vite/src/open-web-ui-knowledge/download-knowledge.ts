@@ -26,12 +26,18 @@ export function addDownloadKnowledgeCommand() {
       const knowledge = await knowledgeApi.getById(config.knowledgeId)
       for (const file of knowledge.files ?? []) {
         const fileName = file.meta?.name as string | undefined
-        if (!fileName) continue
+        if (!fileName) {
+          continue
+        }
 
         try {
           const content = await filesApi.getDataContent(file.id)
           if (content?.content) {
-            await writeFile(resolve(opts.outputDir, fileName), content.content, "utf-8")
+            await writeFile(
+              resolve(opts.outputDir, fileName),
+              content.content,
+              "utf-8",
+            )
           }
         } catch {
           console.warn(`Failed to download ${fileName}`)

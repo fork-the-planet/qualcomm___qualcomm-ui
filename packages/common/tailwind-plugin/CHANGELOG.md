@@ -1,5 +1,11 @@
 # @qualcomm-ui/tailwind-plugin
 
+## 1.3.0 (2025/12/04)
+
+### Features
+
+- [theme-data]: add data structures and types for theme data
+
 ## 1.2.0 (2025/12/03)
 
 ### Features
