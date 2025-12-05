@@ -214,6 +214,18 @@ const replaceNpmInstallTabs: Plugin = () => {
   }
 }
 
+function getPath(obj: Record<string, unknown>, path: string): unknown {
+  return path
+    .split(".")
+    .reduce<unknown>(
+      (acc, key) =>
+        acc && typeof acc === "object"
+          ? (acc as Record<string, unknown>)[key]
+          : undefined,
+      obj,
+    )
+}
+
 /**
  * Generator class that encapsulates all knowledge generation logic with shared
  * config.
@@ -547,6 +559,79 @@ class KnowledgeGenerator {
    * Creates a remark plugin that replaces TypeDocProps JSX elements with JSON
    * code blocks containing component prop documentation.
    */
+  private async replaceThemeNodes(): Promise<Plugin> {
+    let themes: any | null = null
+    try {
+      // may not be available since this is an optional dependency
+      themes = await import("@qualcomm-ui/tailwind-plugin/theme")
+    } catch {
+      return () => {}
+    }
+
+    const handlers: Record<string, (node: MdxJsxFlowElement) => unknown> = {
+      ColorTable: (node) => {
+        const path = this.getAttrExpression(node, "data")
+        return path && getPath(themes, path)
+      },
+      FontTable: (node) => {
+        const path = this.getAttrExpression(node, "data")
+        return path && getPath(themes, path)
+      },
+      ThemePropertyTable: (node) => {
+        const path = this.getAttrExpression(node, "data")
+        const property = this.getAttrExpression(node, "cssProperty")
+        const data = path && getPath(themes, path)
+        return path && property ? {cssPropertyName: property, data} : undefined
+      },
+    }
+
+    return () => (tree, _file, done) => {
+      visit(tree, "mdxJsxFlowElement", (node: MdxJsxFlowElement) => {
+        const handler = node.name && handlers[node.name]
+        if (!handler) {
+          return
+        }
+
+        const data = handler(node)
+        if (!data) {
+          console.warn(`No theme data for ${node.name}`)
+          return
+        }
+
+        Object.assign(node, {
+          lang: "json",
+          meta: null,
+          type: "code",
+          value: JSON.stringify(data, null, 2),
+        })
+      })
+      done()
+    }
+  }
+
+  private getAttrExpression(
+    node: MdxJsxFlowElement,
+    name: string,
+  ): string | null {
+    const attr = node.attributes?.find(
+      (a): a is MdxJsxAttribute =>
+        a.type === "mdxJsxAttribute" && a.name === name,
+    )
+    if (!attr?.value) {
+      return null
+    }
+    if (typeof attr.value === "string") {
+      return attr.value
+    } else if (typeof attr.value === "object" && "value" in attr.value) {
+      return attr.value.value
+    }
+    return null
+  }
+
+  /**
+   * Creates a remark plugin that replaces TypeDocProps JSX elements with JSON
+   * code blocks containing component prop documentation.
+   */
   private replaceTypeDocProps(): Plugin {
     return () => (tree, _file, done) => {
       visit(
@@ -767,6 +852,7 @@ class KnowledgeGenerator {
       .use(remarkParse)
       .use(remarkMdx)
       .use(this.replaceTypeDocProps())
+      .use(await this.replaceThemeNodes())
       .use(this.replaceDemos(demosFolder, demoFiles))
       .use(remarkStringify)
 
