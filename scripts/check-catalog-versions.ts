@@ -61,12 +61,7 @@ try {
     interactive: opts.interactive,
     packageFile: tempPackageJson,
     reject: opts.reject,
-    target: opts.target as
-      | "latest"
-      | "newest"
-      | "greatest"
-      | "minor"
-      | "patch",
+    target: opts.target as "latest" | "newest" | "greatest" | "minor" | "patch",
     upgrade: opts.upgrade,
   })) as Record<string, string> | undefined
 
@@ -95,5 +90,5 @@ try {
     }
   }
 } finally {
-  await rm(tempDir, {recursive: true, force: true})
+  await rm(tempDir, {force: true, recursive: true})
 }
