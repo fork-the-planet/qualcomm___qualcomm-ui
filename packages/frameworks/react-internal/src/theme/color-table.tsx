@@ -4,8 +4,7 @@
 import {useEffect, useState} from "react"
 
 import {useTheme} from "@qualcomm-ui/react-router-utils/client"
-
-import type {ColorData} from "./theme-colors"
+import type {ColorData} from "@qualcomm-ui/tailwind-plugin/theme"
 
 interface ColorTableProps {
   data: ColorData[]
