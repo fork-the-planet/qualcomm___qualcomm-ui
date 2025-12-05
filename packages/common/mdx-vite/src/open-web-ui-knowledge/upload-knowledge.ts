@@ -231,6 +231,7 @@ class Uploader {
         )
         const spinner = ora(`Updating ${name}`).start()
         await this.filesApi.updateDataContent(fileId, fileString)
+        await this.knowledgeApi.updateFile(this.config.knowledgeId, fileId)
         spinner.succeed(`Updated ${name}`)
         return {success: true}
       } catch (e) {
