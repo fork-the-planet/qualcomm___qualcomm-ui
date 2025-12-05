@@ -42,6 +42,7 @@
     "lint": "turbo run lint --continue",
     "lint:ci": "turbo run lint --concurrency 6",
     "test:unit:ci": "turbo run test:unit:ci --concurrency 2",
+    "check-updates": "ncu -c 2 -w",
     "doc-gen": "turbo run build:typedoc",
     "publish:all": "run-s changeset-publish publish-angular",
     "publish-angular": "pnpm -r run publish-angular-package",
@@ -81,6 +82,7 @@
     "execa": "^9.6.0",
     "glob": "^11.1.0",
     "ignore": "^7.0.5",
+    "npm-check-updates": "^19.1.2",
     "npm-run-all2": "^8.0.4",
     "playwright": "1.56.1",
     "prettier": "^3.6.2",
@@ -96,7 +98,8 @@
     "tsx": "^4.20.6",
     "turbo": "2.6.1",
     "typescript": "5.9.3",
-    "typescript-eslint": "catalog:"
+    "typescript-eslint": "catalog:",
+    "yaml": "^2.8.2"
   },
   "resolutions": {
     "playwright": "1.56.1",

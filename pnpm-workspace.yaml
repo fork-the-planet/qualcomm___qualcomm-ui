@@ -41,8 +41,8 @@ catalog:
   '@typescript-eslint/utils': 8.46.2
   esbuild: 0.25.11
   eslint: 9.39.1
-  react: 19.2.0
-  react-dom: 19.2.0
+  react: 19.2.1
+  react-dom: 19.2.1
   react-router: 7.9.4
   tsx: 4.20.6
   typescript-eslint: 8.46.2
