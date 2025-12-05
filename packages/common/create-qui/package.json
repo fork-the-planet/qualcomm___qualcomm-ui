@@ -9,8 +9,9 @@
   "publishConfig": {
     "access": "public"
   },
-  "bin": "./dist/index.cjs",
+  "bin": "./lib/cli.cjs",
   "files": [
+    "lib",
     "dist"
   ],
   "scripts": {
@@ -22,7 +23,9 @@
     "dev": "run-p watch:cli watch:types",
     "watch:cli": "tsx build.ts --mode development --watch",
     "watch:types": "tsc -b tsconfig.lib.json -w --preserveWatchOutput --force",
-    "lint": "eslint --quiet"
+    "lint": "eslint --quiet",
+    "prepublishOnly": "qui-cli pre-publish",
+    "postpublish": "qui-cli post-publish"
   },
   "dependencies": {
     "@clack/prompts": "1.0.0-alpha.6",
