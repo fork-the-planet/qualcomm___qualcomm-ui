@@ -3,21 +3,38 @@
 
 import {program} from "@commander-js/extra-typings"
 import {createHash} from "node:crypto"
+import {writeFileSync} from "node:fs"
 import {access, readdir, readFile, stat} from "node:fs/promises"
 import {resolve} from "node:path"
 import {setTimeout} from "node:timers/promises"
 import ora from "ora"
 
 import {
-  getConfigFromEnv,
+  type ApiConfig,
+  type FileMetadataResponse,
+  FilesApi,
+  type FileUploadResponse,
   KnowledgeApi,
-  loadEnv,
-  type SharedConfig,
-} from "./common"
+  type KnowledgeFilesResponse,
+} from "./api"
+import {getConfigFromEnv, loadEnv, type SharedConfig} from "./common"
+import {KnowledgeCleaner} from "./knowledge-cleaner"
 
 interface Config extends SharedConfig {
-  force: boolean
+  force?: boolean
   knowledgeFilePath: string
+}
+
+interface KnowledgeFile {
+  id: string
+  meta: {name?: string}
+}
+
+function toKnowledgeFile(file: FileMetadataResponse): KnowledgeFile {
+  return {
+    id: file.id,
+    meta: {name: file.meta?.name as string | undefined},
+  }
 }
 
 /**
@@ -32,47 +49,48 @@ function calculateFileHash(fileData: string) {
   return createHash("sha256").update(normalized).digest("hex")
 }
 
+interface UploadError {
+  addResponse?: KnowledgeFilesResponse
+  detail?: string
+  fileId?: string
+  uploadResponse?: FileUploadResponse
+}
+
 interface UploadResult {
-  response?: Record<string, string>
+  error?: UploadError
   skipped?: boolean
   success: boolean
 }
 
-interface KnowledgeFile {
-  id: string
-  meta: {name: string}
-}
-
 class Uploader {
-  private config: Config
-  readonly api: KnowledgeApi
+  readonly config: Config
+  readonly knowledgeApi: KnowledgeApi
+  readonly filesApi: FilesApi
   private fileHashCache: Map<string, string> = new Map()
   private knowledgeFilesCache: KnowledgeFile[] | null = null
+  private cleaner: KnowledgeCleaner
 
   constructor(config: Config) {
     this.config = config
-    this.api = new KnowledgeApi(config)
-  }
-
-  private async cleanUpOrphanedFiles() {
-    const files = await this.api.listFiles()
-    const knowledge = await this.api.listKnowledge()
-    const knowledgeIds = knowledge.map((k: {id: string}) => k.id)
-    for (const file of files) {
-      if (!knowledgeIds.includes(file.meta.collection_name)) {
-        await this.api.deleteFile(file.id)
-      } else if (file.data?.status === "failed") {
-        await this.api.deleteFile(file.id)
-      }
+    const apiConfig: ApiConfig = {
+      apiKey: config.webUiKey,
+      baseUrl: config.webUiUrl,
     }
+    this.knowledgeApi = new KnowledgeApi(apiConfig)
+    this.filesApi = new FilesApi(apiConfig)
+    this.cleaner = new KnowledgeCleaner(config)
   }
 
   private async buildHashCache(files: KnowledgeFile[]): Promise<void> {
     const results = await Promise.allSettled(
       files.map(async (f) => {
-        const data = await this.api.downloadFile(f.id)
-        if (data) {
-          this.fileHashCache.set(f.id, calculateFileHash(data))
+        try {
+          const content = await this.filesApi.getDataContent(f.id)
+          if (content?.content) {
+            this.fileHashCache.set(f.id, calculateFileHash(content.content))
+          }
+        } catch {
+          // File may not have content yet
         }
       }),
     )
@@ -90,11 +108,11 @@ class Uploader {
     const spinner = ora(`File changed, deleting ${fileName}`).start()
     for (let i = 0; i < maxAttempts; i++) {
       this.knowledgeFilesCache = null
-      const knowledge = await this.api.listKnowledgeFiles()
+      const knowledge = await this.knowledgeApi.getById(this.config.knowledgeId)
       const stillExists = (knowledge.files ?? []).some((f) => f.id === fileId)
       if (!stillExists) {
         this.fileHashCache.delete(fileId)
-        spinner.succeed(`File ${fileId} deleted`)
+        spinner.succeed(`File deleted: ${fileId}`)
         return true
       }
       await setTimeout(100 * (i + 1))
@@ -116,10 +134,19 @@ class Uploader {
         return result
       }
 
-      if (result.response?.detail?.includes("Duplicate content detected")) {
+      if (result.error?.detail?.includes("Duplicate content detected")) {
         console.warn(
           `Duplicate content: ${name} is already in knowledge base, skipping`,
         )
+        if (result.error.fileId) {
+          try {
+            console.debug(`Removing duplicate file: ${result.error.fileId}`)
+            await this.filesApi.delete(result.error.fileId)
+            await this.waitForFileDeletion(result.error.fileId, name)
+          } catch (e) {
+            console.debug("Failed to remove duplicate file", e)
+          }
+        }
         return {skipped: true, success: true}
       }
 
@@ -135,14 +162,7 @@ class Uploader {
     return {success: false}
   }
 
-  get headers() {
-    return {
-      Authorization: `Bearer ${this.config.webUiKey}`,
-    }
-  }
-
   private async uploadDirectory() {
-    await this.cleanUpOrphanedFiles()
     const fileNames = await readdir(this.config.knowledgeFilePath)
     const files = await Promise.all(
       fileNames.map(async (name) => ({
@@ -154,8 +174,8 @@ class Uploader {
       })),
     )
 
-    const knowledge = await this.api.listKnowledgeFiles()
-    this.knowledgeFilesCache = knowledge.files ?? []
+    const knowledge = await this.knowledgeApi.getById(this.config.knowledgeId)
+    this.knowledgeFilesCache = (knowledge.files ?? []).map(toKnowledgeFile)
     await this.buildHashCache(this.knowledgeFilesCache)
 
     let skippedCount = 0
@@ -203,8 +223,19 @@ class Uploader {
     }
 
     if (knowledgeFile) {
-      await this.api.removeKnowledgeFile(knowledgeFile.id)
-      await this.waitForFileDeletion(knowledgeFile.id, name)
+      try {
+        const fileId = knowledgeFile.id
+        const fileString = await readFile(
+          resolve(this.config.knowledgeFilePath, name),
+          "utf-8",
+        )
+        const spinner = ora(`Updating ${name}`).start()
+        await this.filesApi.updateDataContent(fileId, fileString)
+        spinner.succeed(`Updated ${name}`)
+        return {success: true}
+      } catch (e) {
+        console.warn(`Failed to update existing file ${name}:`, e)
+      }
     }
 
     const spinner = ora(`Uploading ${name}`).start()
@@ -212,24 +243,44 @@ class Uploader {
       resolve(this.config.knowledgeFilePath, name),
     )
 
-    const uploadResponse = await this.api.uploadFile(fileBuffer, name)
+    let uploadedFileId: string | undefined = undefined
+    try {
+      const uploadResponse = await this.filesApi.upload(fileBuffer, name, {
+        processInBackground: false,
+      })
 
-    if (!uploadResponse.id || !uploadResponse.filename) {
+      uploadedFileId = uploadResponse.id
+
+      if (!uploadResponse.id || !uploadResponse.filename) {
+        spinner.fail(`Error uploading ${name}`)
+        return {
+          error: {fileId: uploadResponse.id, uploadResponse},
+          success: false,
+        }
+      }
+
+      spinner.text = `Associating ${name} with knowledge base`
+
+      const addResponse = await this.knowledgeApi.addFile(
+        this.config.knowledgeId,
+        uploadResponse.id,
+      )
+
+      if (addResponse.name) {
+        spinner.succeed(`${name} associated with knowledge base`)
+        this.fileHashCache.set(uploadResponse.id, contentHash)
+        return {success: true}
+      } else {
+        spinner.stop()
+        return {
+          error: {addResponse, fileId: uploadResponse.id},
+          success: false,
+        }
+      }
+    } catch (e) {
       spinner.fail(`Error uploading ${name}`)
-      return {response: uploadResponse, success: false}
-    }
-
-    spinner.text = `Associating ${name} with knowledge base`
-
-    const addResponse = await this.api.associateFile(uploadResponse.id)
-
-    if (addResponse.name) {
-      spinner.succeed(`${name} associated with knowledge base`)
-      this.fileHashCache.set(uploadResponse.id, contentHash)
-      return {success: true}
-    } else {
-      spinner.stop()
-      return {response: addResponse, success: false}
+      const detail = e instanceof Error ? e.message : String(e)
+      return {error: {detail, fileId: uploadedFileId}, success: false}
     }
   }
 
@@ -246,12 +297,33 @@ class Uploader {
     if (stats.isDirectory()) {
       return this.uploadDirectory()
     } else {
-      // TODO: add
+      console.error("Not a directory, can't upload.")
     }
   }
 }
 
 export function addUploadKnowledgeCommand() {
+  function getUploader(
+    knowledgePath: string | undefined,
+    forceUpload?: boolean,
+  ) {
+    const sharedConfig = getConfigFromEnv()
+
+    const knowledgeFilePath = knowledgePath || process.env.KNOWLEDGE_OUTPUT_PATH
+
+    if (!knowledgeFilePath) {
+      throw new Error(
+        "KNOWLEDGE_FILE_PATH must be set or provided as the --path option",
+      )
+    }
+
+    return new Uploader({
+      ...sharedConfig,
+      force: forceUpload,
+      knowledgeFilePath,
+    })
+  }
+
   program
     .name("upload-knowledge")
     .description("Upload files to OpenWebUI knowledge base")
@@ -264,23 +336,73 @@ export function addUploadKnowledgeCommand() {
     .action(async (options) => {
       loadEnv()
 
+      return getUploader(options.path, options.force).uploadKnowledge()
+    })
+
+  program
+    .command("get-knowledge-files")
+    .description("Get files from OpenWebUI knowledge base")
+    .option("-p, --path <path>", "Path to file or folder relative to script")
+    .action(async (options) => {
+      loadEnv()
+
+      const uploader = getUploader(options.path)
+
+      const files = await uploader.filesApi.search("*")
+      console.debug(`found ${files.length} files`)
+      writeFileSync(
+        resolve(uploader.config.knowledgeFilePath, "files.json"),
+        JSON.stringify(files, null, 2),
+        "utf-8",
+      )
+    })
+
+  program
+    .command("clear-knowledge")
+    .description("Remove all files from the knowledge base collection")
+    .action(async () => {
+      loadEnv()
+
       const sharedConfig = getConfigFromEnv()
+      const apiConfig: ApiConfig = {
+        apiKey: sharedConfig.webUiKey,
+        baseUrl: sharedConfig.webUiUrl,
+      }
+      const filesApi = new FilesApi(apiConfig)
+      const knowledgeApi = new KnowledgeApi(apiConfig)
 
-      const knowledgeFilePath =
-        options.path || process.env.KNOWLEDGE_OUTPUT_PATH
+      const knowledge = await knowledgeApi.getById(sharedConfig.knowledgeId)
+      const knowledgeFiles = knowledge.files ?? []
 
-      if (!knowledgeFilePath) {
-        throw new Error(
-          "KNOWLEDGE_FILE_PATH must be set or provided as the --path option",
-        )
+      if (!knowledge) {
+        console.log("Knowledge base not found")
+        return
       }
 
-      const uploader = new Uploader({
-        ...sharedConfig,
-        force: options.force || false,
-        knowledgeFilePath,
-      })
+      const files = await filesApi
+        .list(false)
+        .then((files) =>
+          files.filter((file) => file.meta?.collection_name === knowledge.id),
+        )
 
-      return uploader.uploadKnowledge()
+      if (files.length === 0) {
+        console.log("No files in knowledge base")
+        return
+      }
+
+      console.log(`Removing ${files.length} files from knowledge base...`)
+
+      for (const file of files) {
+        if (knowledgeFiles.some((f) => f.id === file.id)) {
+          await knowledgeApi.removeFile(knowledge.id, file.id, true)
+        } else {
+          // file was already removed from knowledge, but still exists in file
+          // storage.
+          await filesApi.delete(file.id)
+        }
+        console.log(`Removed ${file.id}`)
+      }
+
+      console.log(`Removed ${files.length} files`)
     })
 }
