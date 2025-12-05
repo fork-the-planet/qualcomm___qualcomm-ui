@@ -42,6 +42,7 @@
     "debug-knowledge-files": "qui-mdx-vite get-knowledge-files --env .env.qui-ai"
   },
   "dependencies": {
+    "@angular/animations": "catalog:",
     "@angular/cli": "catalog:",
     "@angular/common": "catalog:",
     "@angular/compiler": "catalog:",

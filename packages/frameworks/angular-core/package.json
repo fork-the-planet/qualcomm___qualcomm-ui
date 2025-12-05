@@ -36,6 +36,7 @@
     "@analogjs/platform": "catalog:",
     "@analogjs/vite-plugin-angular": "catalog:",
     "@analogjs/vitest-angular": "catalog:",
+    "@angular/animations": "catalog:",
     "@angular/build": "catalog:",
     "@angular-devkit/architect": "catalog:",
     "@angular-devkit/build-angular": "catalog:",
