@@ -1,6 +1,6 @@
 {
   "name": "@qualcomm-ui/tailwind-plugin",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "sideEffects": false,
   "description": "Qualcomm UI Tailwind Plugin",
   "repository": "https://github.com/qualcomm/qualcomm-ui",
@@ -8,10 +8,15 @@
   "license": "BSD-3-Clause-Clear",
   "type": "module",
   "exports": {
-    "./*": {
-      "types": "./dist/*/index.d.ts",
-      "import": "./dist/*/index.js",
-      "default": "./dist/*/index.js"
+    "./vscode": {
+      "types": "./dist/vscode/index.d.ts",
+      "import": "./dist/vscode/index.js",
+      "default": "./dist/vscode/index.js"
+    },
+    "./theme": {
+      "types": "./dist/theme/index.d.ts",
+      "import": "./dist/theme/index.js",
+      "default": "./dist/theme/index.js"
     },
     "./qui.css": {
       "style": "./dist/qui.css",
@@ -22,7 +27,6 @@
       "default": "./dist/qui-strict.css"
     }
   },
-  "types": "./dist/index.d.ts",
   "publishConfig": {
     "access": "public"
   },

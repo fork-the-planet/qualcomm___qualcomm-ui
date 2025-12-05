@@ -1,5 +1,27 @@
 # @qualcomm-ui/mdx-vite
 
+## 2.5.3 (2025/12/04)
+
+### Bug Fixes
+
+- [knowledge]: improve duplicate detection and retry handling
+- [knowledge]: avoid reuploading unchanged knowledge files
+- [knowledge]: stop persisting debug file dump
+- [knowledge]: resolve optional theme data and emit json blocks
+- [knowledge]: return failure when file update fails
+- [knowledge]: clean orphaned files before upload
+- [knowledge]: prevent duplicate file uploads
+- [knowledge]: refactor api client to avoid duplicates
+
+### Code Refactoring
+
+- [open-web-ui]: introduce typed files/knowledge api client
+- [knowledge]: migrate upload/download to new api layer
+
+### Miscellaneous Chores
+
+- [knowledge]: add cleaner for orphaned and failed files
+
 ## 2.5.2 (2025/12/04)
 
 ### Code Refactoring
