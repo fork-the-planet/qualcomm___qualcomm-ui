@@ -1,5 +1,11 @@
 # @qualcomm-ui/mdx-vite
 
+## 2.5.4 (2025/12/05)
+
+### Bug Fixes
+
+- [knowledge]: ensure updated files are re-indexed
+
 ## 2.5.3 (2025/12/04)
 
 ### Bug Fixes
