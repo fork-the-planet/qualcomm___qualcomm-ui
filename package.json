@@ -38,6 +38,7 @@
     "angular-ssr": "pnpm -C packages/debug-apps/angular-ssr",
     "angular-csr": "pnpm -C packages/debug-apps/angular-csr",
     "react-ssr": "pnpm -C packages/debug-apps/react-ssr",
+    "create-qui": "pnpm -C packages/common/create-qui",
     "test": "turbo run test",
     "lint": "turbo run lint --continue",
     "lint:ci": "turbo run lint --concurrency 6",
