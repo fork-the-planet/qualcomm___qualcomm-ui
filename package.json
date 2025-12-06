@@ -73,6 +73,8 @@
     "@qualcomm-ui/eslint-config-react": "workspace:*",
     "@qualcomm-ui/eslint-config-typescript": "workspace:*",
     "@qualcomm-ui/eslint-plugin-path-alias": "workspace:*",
+    "@qualcomm-ui/eslint-plugin-angular": "workspace:*",
+    "@qualcomm-ui/eslint-plugin-react": "workspace:*",
     "@qualcomm-ui/tailwind-plugin": "workspace:*",
     "@types/node": "~24.9.2",
     "chalk": "^5.6.2",

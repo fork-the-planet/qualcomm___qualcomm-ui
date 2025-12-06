@@ -5,6 +5,7 @@ import quiEslintAngular from "@qualcomm-ui/eslint-config-angular"
 import quiEslintMdx from "@qualcomm-ui/eslint-config-mdx"
 import quiEslintReact from "@qualcomm-ui/eslint-config-react"
 import quiEslintTs from "@qualcomm-ui/eslint-config-typescript"
+import {angularPlugin} from "@qualcomm-ui/eslint-plugin-angular"
 import quiPathAlias from "@qualcomm-ui/eslint-plugin-path-alias"
 
 const languageOptions = {
@@ -110,6 +111,7 @@ export default defineConfig(
       quiEslintAngular.configs.templatePrettier,
       quiEslintAngular.configs.templateAttributeOrder,
       quiEslintAngular.configs.templateSelfClosingTags,
+      angularPlugin.configs.recommended,
     ],
     files: [
       "packages/*/{angular,angular-*}/**/*.html",

@@ -6,39 +6,139 @@ import {NpmInstallTabs} from "@qualcomm-ui/react-mdx/npm-install-tabs"
 
 # {frontmatter.title}
 
-QUI provides two ESLint configuration packages for Angular projects:
+> [!tip/Optional Integration]
+> Our ESLint integration is not required to use the QUI component library.
+
+## Plugin
+
+We provide an eslint plugin that enforces best-practices for accessibility and component consumption. This guide assumes you've already set up and configured ESLint. If not, we recommend starting with the [configs](./#configs) section below.
+
+### Installation
+
+<NpmInstallTabs packages={["@qualcomm-ui/eslint-plugin-angular"]} dev />
+
+### Setup
+
+## Configs
+
+We provide shared ESLint configurations to enforce consistent code style and quality across projects. These packages wrap popular open source plugins and provide a common baseline that makes it easier for developers to move between codebases.
+
+### Overview
+
+Two packages are available for Angular projects:
 
 - `@qualcomm-ui/eslint-config-typescript` - TypeScript rules
 - `@qualcomm-ui/eslint-config-angular` - Angular-specific rules
 
 Both packages use ESLint's flat config format.
 
-## Installation
+An example project featuring the recommended configuration is available at https://github.com/qualcomm/qualcomm-ui-templates/tree/main/templates/angular-ssr
+
+### Installation
 
 <NpmInstallTabs
   packages={[
     "@qualcomm-ui/eslint-config-typescript",
     "@qualcomm-ui/eslint-config-angular",
+    "eslint",
+    "globals",
+    "typescript-eslint",
   ]}
   dev
 />
 
-## Basic Configuration
+### Suggested Configuration
+
+> [!note/Type-aware rules]
+> The recommended configuration uses type-aware linting. Learn more [here](./#type-aware-rules) about potential pitfalls.
 
 Create an `eslint.config.js` file in your project root:
 
 ```js
-import angularConfigs from "@qualcomm-ui/eslint-config-angular"
-import tsConfigs from "@qualcomm-ui/eslint-config-typescript"
+import {defineConfig} from "eslint/config"
+import globals from "globals"
+import * as tseslint from "typescript-eslint"
 
-export default [
-  ...tsConfigs.configs.recommended,
-  angularConfigs.configs.baseTypescript,
-  angularConfigs.configs.typescript,
-]
+import quiEslintAngular from "@qualcomm-ui/eslint-config-angular"
+import quiEslintTs from "@qualcomm-ui/eslint-config-typescript"
+
+const tsLanguageOptions = {
+  globals: globals.browser,
+  parser: tseslint.parser,
+  parserOptions: {
+    projectService: true,
+  },
+}
+
+export default defineConfig([
+  {
+    ignores: [
+      "**/.angular/",
+      "**/dist/",
+      "**/node_modules/",
+      "**/build/",
+      "**/coverage/",
+      "**/.turbo/",
+      "**/out/",
+      "**/out-tsc/",
+      "**/temp/",
+      "**/vite.config.ts.timestamp*",
+    ],
+  },
+  {
+    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+    },
+  },
+  // JS
+  {
+    extends: [
+      quiEslintTs.configs.base,
+      quiEslintTs.configs.sortKeys,
+      quiEslintTs.configs.styleGuide,
+    ],
+    files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
+    languageOptions: {globals: globals.browser},
+  },
+  // TS
+  {
+    extends: [
+      ...quiEslintTs.configs.recommended,
+      quiEslintTs.configs.performance,
+      quiEslintTs.configs.strictExports,
+    ],
+    files: ["**/*.{ts,tsx}"],
+    languageOptions: tsLanguageOptions,
+  },
+  // Angular
+  {
+    extends: [
+      ...quiEslintTs.configs.recommended,
+      quiEslintTs.configs.performance,
+      quiEslintAngular.configs.baseTypescript,
+      quiEslintAngular.configs.typescript,
+    ],
+    files: ["src/**/*.ts"],
+    languageOptions: tsLanguageOptions,
+  },
+  {
+    extends: [
+      quiEslintAngular.configs.baseTemplate,
+      quiEslintAngular.configs.templatePrettier,
+      quiEslintAngular.configs.templateAttributeOrder,
+      quiEslintAngular.configs.templateSelfClosingTags,
+    ],
+    files: ["src/**/*.html"],
+  },
+])
 ```
 
-## TypeScript Configs
+Continue reading to learn about these options.
+
+### Config Deep Dive
+
+#### TypeScript Configs
 
 The `@qualcomm-ui/eslint-config-typescript` package exports the following configurations:
 
@@ -54,9 +154,7 @@ The `@qualcomm-ui/eslint-config-typescript` package exports the following config
 | `strictExports`     | Export restrictions        |
 | `jsdoc`             | JSDoc comment validation   |
 
-See the [React ESLint documentation](/integrations/eslint) for details on TypeScript config rules.
-
-## Angular Configs
+#### Angular Configs
 
 The `@qualcomm-ui/eslint-config-angular` package exports the following configurations:
 
@@ -69,7 +167,13 @@ The `@qualcomm-ui/eslint-config-angular` package exports the following configura
 | `templateAttributeOrder`  | Enforces consistent attribute ordering       |
 | `templateSelfClosingTags` | Requires self-closing tags for void elements |
 
-### TypeScript Rules
+#### Type-Aware Rules
+
+Both the TypeScript and Angular configs include type-aware rules that require type information. Files matched by your ESLint config's `files` patterns must be included in the nearest `tsconfig.json` (or referenced project if you're using project references).
+
+If ESLint errors with "file not found in any configured project," ensure the file is included in your tsconfig's `files` or `include` patterns.
+
+#### TypeScript Rules
 
 The `typescript` config enforces these conventions:
 
@@ -83,7 +187,7 @@ The following rules are disabled to allow flexibility:
 - `@angular-eslint/directive-class-suffix` - Directive class naming not enforced
 - `@angular-eslint/no-host-metadata-property` - Host bindings in metadata allowed
 
-### Template Attribute Order
+##### Template Attribute Order
 
 The `templateAttributeOrder` config enforces this order for template attributes:
 
@@ -109,88 +213,14 @@ The `templateAttributeOrder` config enforces this order for template attributes:
 
 Attributes within each group are sorted alphabetically.
 
-### Self-Closing Tags
+##### Self-Closing Tags
 
 The `templateSelfClosingTags` config requires self-closing syntax for components without content:
 
 ```html
 <!-- Disallowed -->
-<qui-icon name="check"></qui-icon>
+<q-text-input></q-text-input>
 
 <!-- Required -->
-<qui-icon name="check" />
-```
-
-## Configuration Examples
-
-### TypeScript and Components
-
-```js
-import angularConfigs from "@qualcomm-ui/eslint-config-angular"
-import tsConfigs from "@qualcomm-ui/eslint-config-typescript"
-
-export default [
-  {
-    files: ["**/*.ts"],
-    extends: [
-      ...tsConfigs.configs.recommended,
-      angularConfigs.configs.baseTypescript,
-      angularConfigs.configs.typescript,
-    ],
-  },
-]
-```
-
-### Templates with Prettier
-
-```js
-import angularConfigs from "@qualcomm-ui/eslint-config-angular"
-import tsConfigs from "@qualcomm-ui/eslint-config-typescript"
-
-export default [
-  {
-    files: ["**/*.ts"],
-    extends: [
-      ...tsConfigs.configs.recommended,
-      angularConfigs.configs.baseTypescript,
-      angularConfigs.configs.typescript,
-    ],
-  },
-  {
-    files: ["**/*.html"],
-    extends: [
-      angularConfigs.configs.baseTemplate,
-      angularConfigs.configs.templatePrettier,
-      angularConfigs.configs.templateAttributeOrder,
-      angularConfigs.configs.templateSelfClosingTags,
-    ],
-  },
-]
-```
-
-### With Type Checking
-
-For type-aware rules, configure the parser options:
-
-```js
-import angularConfigs from "@qualcomm-ui/eslint-config-angular"
-import tsConfigs from "@qualcomm-ui/eslint-config-typescript"
-import tseslint from "typescript-eslint"
-
-export default [
-  {
-    files: ["**/*.ts"],
-    extends: [
-      ...tsConfigs.configs.recommended,
-      angularConfigs.configs.baseTypescript,
-      angularConfigs.configs.typescript,
-    ],
-    languageOptions: {
-      parser: tseslint.parser,
-      parserOptions: {
-        projectService: true,
-      },
-    },
-  },
-]
+<q-text-input />
 ```

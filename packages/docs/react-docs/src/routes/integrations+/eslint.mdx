@@ -6,14 +6,25 @@ import {NpmInstallTabs} from "@qualcomm-ui/react-mdx/npm-install-tabs"
 
 # {frontmatter.title}
 
-QUI provides two ESLint configuration packages:
+> [!tip/Optional Integration]
+> Our ESLint integration is not required to use the QUI component library.
+
+## Plugins
+
+## Configs
+
+We provide shared ESLint configurations to enforce consistent code style and quality across projects. These packages wrap popular open source plugins and provide a common baseline that makes it easier for developers to move between codebases.
+
+### Overview
+
+Two packages are available for React projects:
 
 - `@qualcomm-ui/eslint-config-typescript` - TypeScript rules
 - `@qualcomm-ui/eslint-config-react` - React-specific rules
 
 Both packages use ESLint's flat config format.
 
-## Installation
+### Installation
 
 <NpmInstallTabs
   packages={[
@@ -23,7 +34,10 @@ Both packages use ESLint's flat config format.
   dev
 />
 
-## Basic Configuration
+### Suggested Configuration
+
+> [!note/Type-aware rules]
+> The recommended configuration uses type-aware linting. Learn more [here](./#type-aware-rules) about potential pitfalls.
 
 Create an `eslint.config.js` file in your project root:
 
@@ -37,7 +51,7 @@ export default [
 ]
 ```
 
-## TypeScript Configs
+### TypeScript Configs
 
 The `@qualcomm-ui/eslint-config-typescript` package exports the following configurations:
 
@@ -53,7 +67,7 @@ The `@qualcomm-ui/eslint-config-typescript` package exports the following config
 | `strictExports`     | Export restrictions        |
 | `jsdoc`             | JSDoc comment validation   |
 
-### Style Guide Rules
+#### Style Guide Rules
 
 The `styleGuide` config enforces these conventions:
 
@@ -67,7 +81,7 @@ The `styleGuide` config enforces these conventions:
 - `prefer-const` - Require `const` for variables that are never reassigned
 - `no-var` - Disallow `var` declarations
 
-### Import Rules
+#### Import Rules
 
 The style guide enforces import organization with lines between groups:
 
@@ -91,7 +105,7 @@ Additional import rules:
 - `import/no-duplicates` - Merge duplicate imports with inline type specifiers
 - `unused-imports/*` - Auto-remove unused imports (variables prefixed with `_` are ignored)
 
-### Private Fields
+#### Private Fields
 
 The `no-restricted-syntax` rule bans the `#` private field syntax:
 
@@ -108,7 +122,7 @@ class Foo {
 }
 ```
 
-## React Configs
+### React Configs
 
 The `@qualcomm-ui/eslint-config-react` package exports the following configurations:
 
@@ -118,7 +132,7 @@ The `@qualcomm-ui/eslint-config-react` package exports the following configurati
 | `recommended` | Base config plus hooks and JSX rules  |
 | `strict`      | Recommended plus React Compiler rules |
 
-### Recommended Rules
+#### Recommended Rules
 
 The `recommended` config includes:
 
@@ -139,7 +153,7 @@ import React from "react"
 import {useState, useEffect} from "react"
 ```
 
-### Strict Rules (React Compiler)
+#### Strict Rules (React Compiler)
 
 The `strict` config adds React Compiler rules for optimization:
 
@@ -161,47 +175,23 @@ export default [
 ]
 ```
 
-## Configuration Examples
+### Type-Aware Rules
 
-### TypeScript Only
+The TypeScript configs include type-aware rules that require type information. Files matched by your ESLint config's `files` patterns must be included in the nearest `tsconfig.json`.
 
-```js
-import tsConfigs from "@qualcomm-ui/eslint-config-typescript"
+If ESLint errors with "file not found in any configured project," ensure the file is included in your tsconfig's `files` or `include` patterns.
 
-export default [...tsConfigs.configs.recommended]
-```
+### Minimal Configuration
 
-### Selective Configs
+For a simpler setup without type-aware rules:
 
 ```js
 import tsConfigs from "@qualcomm-ui/eslint-config-typescript"
 import reactConfigs from "@qualcomm-ui/eslint-config-react"
 
 export default [
-  ...tsConfigs.configs.base,
-  ...tsConfigs.configs.styleGuide,
-  ...tsConfigs.configs.namingConventions,
-  ...reactConfigs.configs.base,
-]
-```
-
-### With Type Checking
-
-For type-aware rules, configure the parser options:
-
-```js
-import tsConfigs from "@qualcomm-ui/eslint-config-typescript"
-import reactConfigs from "@qualcomm-ui/eslint-config-react"
-
-export default [
-  ...tsConfigs.configs.recommended,
-  ...reactConfigs.configs.recommended,
-  {
-    languageOptions: {
-      parserOptions: {
-        project: "./tsconfig.json",
-      },
-    },
-  },
+  tsConfigs.configs.base,
+  tsConfigs.configs.styleGuide,
+  reactConfigs.configs.base,
 ]
 ```

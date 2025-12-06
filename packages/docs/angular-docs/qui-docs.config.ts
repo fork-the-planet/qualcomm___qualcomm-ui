@@ -20,6 +20,7 @@ export default {
     },
     {
       id: "integrations",
+      title: "Integrations & Configs",
     },
     {
       separator: true,
