@@ -8,6 +8,9 @@ const createRule = ESLintUtils.RuleCreator(
     `https://github.com/qualcomm/qualcomm-ui/tree/main/packages/configs/eslint-plugin-react#${name}`,
 )
 
+const QUI_PACKAGES = ["@qualcomm-ui/react", "@qualcomm-ui/react-internal"]
+const COMPONENTS_REQUIRING_LABEL = ["IconButton"]
+
 function getAttributeValue(attribute) {
   if (!attribute || !attribute.value) {
     return null
@@ -54,26 +57,62 @@ function hasValidAriaLabel(attributes) {
   return false
 }
 
-const COMPONENTS_REQUIRING_LABEL = ["IconButton"]
-
 export const accessibleName = createRule({
   create(context) {
-    return {
-      JSXOpeningElement(node) {
-        const elementName =
-          node.name.type === "JSXIdentifier"
-            ? node.name.name
-            : node.name.type === "JSXMemberExpression"
-              ? node.name.property.name
-              : null
+    const importedComponents = new Map()
+    const namespaceImports = new Set()
 
-        if (!elementName || !COMPONENTS_REQUIRING_LABEL.includes(elementName)) {
+    return {
+      ImportDeclaration(node) {
+        const source = node.source.value
+        if (!QUI_PACKAGES.includes(source)) {
+          return
+        }
+
+        for (const specifier of node.specifiers) {
+          if (specifier.type === "ImportSpecifier") {
+            const importedName = specifier.imported.name
+            const localName = specifier.local.name
+            if (COMPONENTS_REQUIRING_LABEL.includes(importedName)) {
+              importedComponents.set(localName, importedName)
+            }
+          } else if (specifier.type === "ImportNamespaceSpecifier") {
+            namespaceImports.add(specifier.local.name)
+          }
+        }
+      },
+
+      JSXOpeningElement(node) {
+        let originalName = null
+
+        if (node.name.type === "JSXIdentifier") {
+          const name = node.name.name
+          if (importedComponents.has(name)) {
+            originalName = importedComponents.get(name)
+          }
+        } else if (node.name.type === "JSXMemberExpression") {
+          const objectName =
+            node.name.object.type === "JSXIdentifier"
+              ? node.name.object.name
+              : null
+          const propertyName = node.name.property.name
+
+          if (
+            objectName &&
+            namespaceImports.has(objectName) &&
+            COMPONENTS_REQUIRING_LABEL.includes(propertyName)
+          ) {
+            originalName = propertyName
+          }
+        }
+
+        if (!originalName) {
           return
         }
 
         if (!hasValidAriaLabel(node.attributes)) {
           context.report({
-            data: {componentName: elementName},
+            data: {componentName: originalName},
             messageId: "missingLabel",
             node,
           })
@@ -85,7 +124,7 @@ export const accessibleName = createRule({
   meta: {
     docs: {
       description:
-        "Enforce that certain components have an aria-label or aria-labelledby attribute for accessibility.",
+        "Enforce that certain QUI components have an aria-label or aria-labelledby attribute for accessibility.",
     },
     messages: {
       missingLabel:

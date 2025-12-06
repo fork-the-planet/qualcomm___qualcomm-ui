@@ -9,7 +9,50 @@ import {NpmInstallTabs} from "@qualcomm-ui/react-mdx/npm-install-tabs"
 > [!tip/Optional Integration]
 > Our ESLint integration is not required to use the QUI component library.
 
-## Plugins
+## Plugin
+
+We provide an ESLint plugin that enforces best-practices for accessibility and component consumption. This guide assumes you've already set up and configured ESLint. If not, we recommend starting with the [configs](./#configs) section below.
+
+> [!note/In Development]
+> This plugin is currently in development. New rules will be added over time.
+
+### Installation
+
+<NpmInstallTabs packages={["@qualcomm-ui/eslint-plugin-react"]} dev />
+
+### Setup
+
+Add the plugin to your ESLint configuration:
+
+```js
+import {defineConfig} from "eslint/config"
+import {reactPlugin} from "@qualcomm-ui/eslint-plugin-react"
+
+export default defineConfig([
+  {
+    files: ["**/*.{jsx,tsx}"],
+    extends: [reactPlugin.configs.recommended],
+  },
+])
+```
+
+### Rules
+
+#### `accessible-name`
+
+Enforces that certain QUI components have an `aria-label` or `aria-labelledby` attribute for accessibility.
+
+**Affected components:**
+- `IconButton`
+
+```jsx
+// Invalid
+<IconButton icon={<CloseIcon />} />
+
+// Valid
+<IconButton icon={<CloseIcon />} aria-label="Close dialog" />
+<IconButton icon={<CloseIcon />} aria-labelledby="close-label" />
+```
 
 ## Configs
 

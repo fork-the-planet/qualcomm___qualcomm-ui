@@ -26,61 +26,119 @@ const ruleTester = new RuleTester({
 ruleTester.run("accessible-name", accessibleName, {
   invalid: [
     {
-      code: `<IconButton />`,
+      code: `
+        import {IconButton} from "@qualcomm-ui/react"
+        const App = () => <IconButton />
+      `,
       errors: [{messageId: "missingLabel"}],
     },
     {
-      code: `<IconButton icon={<Icon />} />`,
+      code: `
+        import {IconButton} from "@qualcomm-ui/react"
+        const App = () => <IconButton icon={<Icon />} />
+      `,
       errors: [{messageId: "missingLabel"}],
     },
     {
-      code: `<IconButton aria-label="" />`,
+      code: `
+        import {IconButton} from "@qualcomm-ui/react"
+        const App = () => <IconButton aria-label="" />
+      `,
       errors: [{messageId: "missingLabel"}],
     },
     {
-      code: `<IconButton aria-labelledby="" />`,
+      code: `
+        import {IconButton} from "@qualcomm-ui/react"
+        const App = () => <IconButton aria-labelledby="" />
+      `,
       errors: [{messageId: "missingLabel"}],
     },
     {
-      code: `<IconButton aria-label={""} />`,
+      code: `
+        import {IconButton} from "@qualcomm-ui/react"
+        const App = () => <IconButton aria-label={""} />
+      `,
       errors: [{messageId: "missingLabel"}],
     },
     {
-      code: `<IconButton onClick={handleClick}><Icon /></IconButton>`,
+      code: `
+        import {IconButton as IB} from "@qualcomm-ui/react"
+        const App = () => <IB />
+      `,
       errors: [{messageId: "missingLabel"}],
     },
     {
-      code: `<Foo.IconButton />`,
+      code: `
+        import * as QUI from "@qualcomm-ui/react"
+        const App = () => <QUI.IconButton />
+      `,
+      errors: [{messageId: "missingLabel"}],
+    },
+    {
+      code: `
+        import {IconButton} from "@qualcomm-ui/react-internal"
+        const App = () => <IconButton />
+      `,
       errors: [{messageId: "missingLabel"}],
     },
   ],
   valid: [
     {
-      code: `<IconButton aria-label="Close" />`,
+      code: `
+        import {IconButton} from "@qualcomm-ui/react"
+        const App = () => <IconButton aria-label="Close" />
+      `,
     },
     {
-      code: `<IconButton aria-labelledby="close-label" />`,
+      code: `
+        import {IconButton} from "@qualcomm-ui/react"
+        const App = () => <IconButton aria-labelledby="close-label" />
+      `,
     },
     {
-      code: `<IconButton aria-label="Delete item" icon={<DeleteIcon />} />`,
+      code: `
+        import {IconButton} from "@qualcomm-ui/react"
+        const App = () => <IconButton aria-label="Delete" icon={<DeleteIcon />} />
+      `,
     },
     {
-      code: `<IconButton aria-label={label} />`,
+      code: `
+        import {IconButton} from "@qualcomm-ui/react"
+        const App = () => <IconButton aria-label={label} />
+      `,
     },
     {
-      code: `<IconButton aria-labelledby={labelId} />`,
+      code: `
+        import {IconButton as IB} from "@qualcomm-ui/react"
+        const App = () => <IB aria-label="Edit" />
+      `,
     },
     {
-      code: `<Button>Click me</Button>`,
+      code: `
+        import * as QUI from "@qualcomm-ui/react"
+        const App = () => <QUI.IconButton aria-label="Search" />
+      `,
     },
     {
-      code: `<div aria-label="test" />`,
+      code: `<IconButton />`,
     },
     {
-      code: `<IconButton aria-label={"Search"} />`,
+      code: `
+        import {IconButton} from "other-library"
+        const App = () => <IconButton />
+      `,
     },
     {
-      code: `<Namespace.IconButton aria-label="Edit" />`,
+      code: `
+        const IconButton = () => <button />
+        const App = () => <IconButton />
+      `,
+    },
+    {
+      code: `
+        import {Button} from "@qualcomm-ui/react"
+        const App = () => <Button>Click me</Button>
+      `,
     },
   ],
 })

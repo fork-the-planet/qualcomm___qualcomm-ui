@@ -11,13 +11,51 @@ import {NpmInstallTabs} from "@qualcomm-ui/react-mdx/npm-install-tabs"
 
 ## Plugin
 
-We provide an eslint plugin that enforces best-practices for accessibility and component consumption. This guide assumes you've already set up and configured ESLint. If not, we recommend starting with the [configs](./#configs) section below.
+We provide an ESLint plugin that enforces best-practices for accessibility and component consumption. This guide assumes you've already set up and configured ESLint. If not, we recommend starting with the [configs](./#configs) section below.
+
+> [!note/In Development]
+> This plugin is currently in development. New rules will be added over time.
 
 ### Installation
 
 <NpmInstallTabs packages={["@qualcomm-ui/eslint-plugin-angular"]} dev />
 
 ### Setup
+
+Add the plugin to your ESLint configuration:
+
+```js
+import {defineConfig} from "eslint/config"
+import angularEslint from "angular-eslint"
+import {angularPlugin} from "@qualcomm-ui/eslint-plugin-angular"
+
+export default defineConfig([
+  {
+    files: ["**/*.html"],
+    extends: [angularPlugin.configs.recommended],
+  },
+])
+```
+
+### Rules
+
+#### `accessible-name`
+
+Enforces that certain QUI components have an `aria-label` or `aria-labelledby` attribute for accessibility.
+
+**Affected directives:**
+
+- `q-icon-button`
+
+```html
+<!-- Invalid -->
+<button q-icon-button icon="close"></button>
+
+<!-- Valid -->
+<button q-icon-button icon="close" aria-label="Close dialog"></button>
+<button q-icon-button icon="close" aria-labelledby="close-label"></button>
+<button q-icon-button icon="close" [attr.aria-label]="closeLabel"></button>
+```
 
 ## Configs
 

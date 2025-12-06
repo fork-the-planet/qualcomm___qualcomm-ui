@@ -1,6 +1,6 @@
 import {config, plugin, rules} from "./plugin.js"
 
-export default {
+export const reactPlugin = {
   configs: {
     recommended: config,
   },
