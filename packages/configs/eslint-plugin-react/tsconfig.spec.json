@@ -1,9 +1,8 @@
 {
   "extends": "@qualcomm-ui/tsconfig/tsconfig.node.json",
   "compilerOptions": {
-    "composite": true,
     "jsx": "preserve",
     "noEmit": true
   },
-  "include": ["./tests"]
+  "include": ["./tests", "./src"]
 }

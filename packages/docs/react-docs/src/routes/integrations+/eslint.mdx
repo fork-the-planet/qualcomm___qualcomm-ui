@@ -26,12 +26,12 @@ Add the plugin to your ESLint configuration:
 
 ```js
 import {defineConfig} from "eslint/config"
-import {reactPlugin} from "@qualcomm-ui/eslint-plugin-react"
+import {config} from "@qualcomm-ui/eslint-plugin-react"
 
 export default defineConfig([
   {
     files: ["**/*.{jsx,tsx}"],
-    extends: [reactPlugin.configs.recommended],
+    extends: [config],
   },
 ])
 ```
