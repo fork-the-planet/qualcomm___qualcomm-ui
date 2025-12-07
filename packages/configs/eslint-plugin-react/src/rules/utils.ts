@@ -1,12 +1,16 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {TSESTree} from "@typescript-eslint/utils"
+import {AST_NODE_TYPES, type TSESTree} from "@typescript-eslint/utils"
 
-export const QUI_PACKAGES = [
-  "@qualcomm-ui/react",
-  "@qualcomm-ui/react-internal",
+export const QUI_PACKAGE_PREFIXES = [
+  "@qualcomm-ui/react/",
+  "@qualcomm-ui/react-internal/",
 ] as const
+
+export function isQUIPackage(source: string): boolean {
+  return QUI_PACKAGE_PREFIXES.some((prefix) => source.startsWith(prefix))
+}
 
 export function getAttributeValue(
   attribute: TSESTree.JSXAttribute,
@@ -14,12 +18,12 @@ export function getAttributeValue(
   if (!attribute.value) {
     return null
   }
-  if (attribute.value.type === "Literal") {
+  if (attribute.value.type === AST_NODE_TYPES.Literal) {
     return attribute.value.value
   }
-  if (attribute.value.type === "JSXExpressionContainer") {
+  if (attribute.value.type === AST_NODE_TYPES.JSXExpressionContainer) {
     const expression = attribute.value.expression
-    if (expression.type === "Literal") {
+    if (expression.type === AST_NODE_TYPES.Literal) {
       return expression.value
     }
     return expression
@@ -31,13 +35,13 @@ export function hasValidAriaLabel(
   attributes: (TSESTree.JSXAttribute | TSESTree.JSXSpreadAttribute)[],
 ): boolean {
   for (const attr of attributes) {
-    if (attr.type !== "JSXAttribute" || !attr.name) {
+    if (attr.type !== AST_NODE_TYPES.JSXAttribute || !attr.name) {
       continue
     }
     const attrName =
-      attr.name.type === "JSXIdentifier"
+      attr.name.type === AST_NODE_TYPES.JSXIdentifier
         ? attr.name.name
-        : attr.name.type === "JSXNamespacedName"
+        : attr.name.type === AST_NODE_TYPES.JSXNamespacedName
           ? `${attr.name.namespace.name}:${attr.name.name.name}`
           : null
 
@@ -51,19 +55,21 @@ export function hasValidAriaLabel(
   return false
 }
 
-export function getJSXElementName(
-  name: TSESTree.JSXOpeningElement["name"],
-): {identifier: string | null; property: string | null; namespace: string | null} {
-  if (name.type === "JSXIdentifier") {
+export function getJSXElementName(name: TSESTree.JSXOpeningElement["name"]): {
+  identifier: string | null
+  namespace: string | null
+  property: string | null
+} {
+  if (name.type === AST_NODE_TYPES.JSXIdentifier) {
     return {identifier: name.name, namespace: null, property: null}
   }
-  if (name.type === "JSXMemberExpression") {
+  if (name.type === AST_NODE_TYPES.JSXMemberExpression) {
     const property = name.property.name
-    if (name.object.type === "JSXIdentifier") {
+    if (name.object.type === AST_NODE_TYPES.JSXIdentifier) {
       return {identifier: name.object.name, namespace: null, property}
     }
-    if (name.object.type === "JSXMemberExpression") {
-      if (name.object.object.type === "JSXIdentifier") {
+    if (name.object.type === AST_NODE_TYPES.JSXMemberExpression) {
+      if (name.object.object.type === AST_NODE_TYPES.JSXIdentifier) {
         return {
           identifier: name.object.property.name,
           namespace: name.object.object.name,

@@ -9,7 +9,6 @@ export function AvatarSizeDemo(): ReactElement {
   return (
     <div className="flex items-center gap-4">
       {/* preview */}
-
       {sizes.map((size) => (
         <div key={size} className="flex flex-col items-center gap-2">
           <Avatar.Root size={size}>

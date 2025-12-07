@@ -1,9 +1,9 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {ESLintUtils} from "@typescript-eslint/utils"
+import {AST_NODE_TYPES, ESLintUtils} from "@typescript-eslint/utils"
 
-import {getJSXElementName, hasValidAriaLabel, QUI_PACKAGES} from "./utils"
+import {getJSXElementName, hasValidAriaLabel, isQUIPackage} from "./utils"
 
 const createRule = ESLintUtils.RuleCreator(
   (name) =>
@@ -14,7 +14,6 @@ const COMPONENTS_REQUIRING_LABEL = [
   "IconButton",
   "InlineIconButton",
   "HeaderBarActionIconButton",
-  "Avatar",
 ] as const
 
 type MessageIds = "missingLabel"
@@ -27,14 +26,14 @@ export const accessibleName = createRule<[], MessageIds>({
     return {
       ImportDeclaration(node) {
         const source = node.source.value
-        if (!QUI_PACKAGES.includes(source as (typeof QUI_PACKAGES)[number])) {
+        if (typeof source !== "string" || !isQUIPackage(source)) {
           return
         }
 
         for (const specifier of node.specifiers) {
-          if (specifier.type === "ImportSpecifier") {
+          if (specifier.type === AST_NODE_TYPES.ImportSpecifier) {
             const importedName =
-              specifier.imported.type === "Identifier"
+              specifier.imported.type === AST_NODE_TYPES.Identifier
                 ? specifier.imported.name
                 : specifier.imported.value
             const localName = specifier.local.name
@@ -45,7 +44,9 @@ export const accessibleName = createRule<[], MessageIds>({
             ) {
               importedComponents.set(localName, importedName)
             }
-          } else if (specifier.type === "ImportNamespaceSpecifier") {
+          } else if (
+            specifier.type === AST_NODE_TYPES.ImportNamespaceSpecifier
+          ) {
             namespaceImports.add(specifier.local.name)
           }
         }

@@ -47,6 +47,7 @@ export function TreeFilteringDemo(): ReactElement {
     >
       <TextInput
         className="mb-1"
+        label="test"
         onValueChange={search}
         placeholder="Search for files: 'react'"
         size="sm"

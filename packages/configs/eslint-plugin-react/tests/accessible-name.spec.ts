@@ -26,56 +26,56 @@ describe("accessible-name", () => {
       invalid: [
         {
           code: `
-            import {IconButton} from "@qualcomm-ui/react"
+            import {IconButton} from "@qualcomm-ui/react/button"
             const App = () => <IconButton />
           `,
           errors: [{messageId: "missingLabel"}],
         },
         {
           code: `
-            import {IconButton} from "@qualcomm-ui/react"
+            import {IconButton} from "@qualcomm-ui/react/button"
             const App = () => <IconButton icon={<Icon />} />
           `,
           errors: [{messageId: "missingLabel"}],
         },
         {
           code: `
-            import {IconButton} from "@qualcomm-ui/react"
+            import {IconButton} from "@qualcomm-ui/react/button"
             const App = () => <IconButton aria-label="" />
           `,
           errors: [{messageId: "missingLabel"}],
         },
         {
           code: `
-            import {IconButton} from "@qualcomm-ui/react"
+            import {IconButton} from "@qualcomm-ui/react/button"
             const App = () => <IconButton aria-labelledby="" />
           `,
           errors: [{messageId: "missingLabel"}],
         },
         {
           code: `
-            import {IconButton} from "@qualcomm-ui/react"
+            import {IconButton} from "@qualcomm-ui/react/button"
             const App = () => <IconButton aria-label={""} />
           `,
           errors: [{messageId: "missingLabel"}],
         },
         {
           code: `
-            import {IconButton as IB} from "@qualcomm-ui/react"
+            import {IconButton as IB} from "@qualcomm-ui/react/button"
             const App = () => <IB />
           `,
           errors: [{messageId: "missingLabel"}],
         },
         {
           code: `
-            import * as QUI from "@qualcomm-ui/react"
-            const App = () => <QUI.IconButton />
+            import * as Button from "@qualcomm-ui/react/button"
+            const App = () => <Button.IconButton />
           `,
           errors: [{messageId: "missingLabel"}],
         },
         {
           code: `
-            import {IconButton} from "@qualcomm-ui/react-internal"
+            import {IconButton} from "@qualcomm-ui/react-internal/button"
             const App = () => <IconButton />
           `,
           errors: [{messageId: "missingLabel"}],
@@ -84,38 +84,38 @@ describe("accessible-name", () => {
       valid: [
         {
           code: `
-            import {IconButton} from "@qualcomm-ui/react"
+            import {IconButton} from "@qualcomm-ui/react/button"
             const App = () => <IconButton aria-label="Close" />
           `,
         },
         {
           code: `
-            import {IconButton} from "@qualcomm-ui/react"
+            import {IconButton} from "@qualcomm-ui/react/button"
             const App = () => <IconButton aria-labelledby="close-label" />
           `,
         },
         {
           code: `
-            import {IconButton} from "@qualcomm-ui/react"
+            import {IconButton} from "@qualcomm-ui/react/button"
             const App = () => <IconButton aria-label="Delete" icon={<DeleteIcon />} />
           `,
         },
         {
           code: `
-            import {IconButton} from "@qualcomm-ui/react"
+            import {IconButton} from "@qualcomm-ui/react/button"
             const App = () => <IconButton aria-label={label} />
           `,
         },
         {
           code: `
-            import {IconButton as IB} from "@qualcomm-ui/react"
+            import {IconButton as IB} from "@qualcomm-ui/react/button"
             const App = () => <IB aria-label="Edit" />
           `,
         },
         {
           code: `
-            import * as QUI from "@qualcomm-ui/react"
-            const App = () => <QUI.IconButton aria-label="Search" />
+            import * as Button from "@qualcomm-ui/react/button"
+            const App = () => <Button.IconButton aria-label="Search" />
           `,
         },
       ],
@@ -127,15 +127,15 @@ describe("accessible-name", () => {
       invalid: [
         {
           code: `
-            import {InlineIconButton} from "@qualcomm-ui/react"
+            import {InlineIconButton} from "@qualcomm-ui/react/inline-icon-button"
             const App = () => <InlineIconButton icon={Search} />
           `,
           errors: [{messageId: "missingLabel"}],
         },
         {
           code: `
-            import * as QUI from "@qualcomm-ui/react"
-            const App = () => <QUI.InlineIconButton icon={Search} />
+            import * as IIB from "@qualcomm-ui/react/inline-icon-button"
+            const App = () => <IIB.InlineIconButton icon={Search} />
           `,
           errors: [{messageId: "missingLabel"}],
         },
@@ -143,13 +143,13 @@ describe("accessible-name", () => {
       valid: [
         {
           code: `
-            import {InlineIconButton} from "@qualcomm-ui/react"
+            import {InlineIconButton} from "@qualcomm-ui/react/inline-icon-button"
             const App = () => <InlineIconButton icon={Search} aria-label="Search" />
           `,
         },
         {
           code: `
-            import {InlineIconButton} from "@qualcomm-ui/react"
+            import {InlineIconButton} from "@qualcomm-ui/react/inline-icon-button"
             const App = () => <InlineIconButton icon={Close} aria-labelledby="close-label" />
           `,
         },
@@ -162,7 +162,7 @@ describe("accessible-name", () => {
       invalid: [
         {
           code: `
-            import {HeaderBarActionIconButton} from "@qualcomm-ui/react"
+            import {HeaderBarActionIconButton} from "@qualcomm-ui/react/header-bar"
             const App = () => <HeaderBarActionIconButton icon={Menu} />
           `,
           errors: [{messageId: "missingLabel"}],
@@ -171,49 +171,8 @@ describe("accessible-name", () => {
       valid: [
         {
           code: `
-            import {HeaderBarActionIconButton} from "@qualcomm-ui/react"
+            import {HeaderBarActionIconButton} from "@qualcomm-ui/react/header-bar"
             const App = () => <HeaderBarActionIconButton icon={Menu} aria-label="Open menu" />
-          `,
-        },
-      ],
-    })
-  })
-
-  describe("Avatar", () => {
-    ruleTester.run("Avatar", accessibleName, {
-      invalid: [
-        {
-          code: `
-            import {Avatar} from "@qualcomm-ui/react"
-            const App = () => <Avatar src="/user.jpg" />
-          `,
-          errors: [{messageId: "missingLabel"}],
-        },
-        {
-          code: `
-            import {Avatar as UserAvatar} from "@qualcomm-ui/react"
-            const App = () => <UserAvatar src="/user.jpg" />
-          `,
-          errors: [{messageId: "missingLabel"}],
-        },
-      ],
-      valid: [
-        {
-          code: `
-            import {Avatar} from "@qualcomm-ui/react"
-            const App = () => <Avatar src="/user.jpg" aria-label="John Doe" />
-          `,
-        },
-        {
-          code: `
-            import {Avatar} from "@qualcomm-ui/react"
-            const App = () => <Avatar src="/user.jpg" aria-labelledby="user-name" />
-          `,
-        },
-        {
-          code: `
-            import {Avatar} from "other-library"
-            const App = () => <Avatar src="/user.jpg" />
           `,
         },
       ],
@@ -239,7 +198,7 @@ describe("accessible-name", () => {
         },
         {
           code: `
-            import {Button} from "@qualcomm-ui/react"
+            import {Button} from "@qualcomm-ui/react/button"
             const App = () => <Button>Click me</Button>
           `,
         },

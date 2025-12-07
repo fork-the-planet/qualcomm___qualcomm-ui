@@ -6,8 +6,8 @@ export function SwitchStatesDemo(): ReactElement {
   return (
     <div className="flex flex-col gap-3">
       {/* preview */}
-      <Switch />
-      <Switch defaultChecked />
+      <Switch aria-label="Toggle" />
+      <Switch aria-label="Toggle" defaultChecked />
       {/* preview */}
     </div>
   )

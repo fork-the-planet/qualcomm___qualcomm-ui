@@ -1,14 +1,17 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {TSESTree} from "@typescript-eslint/utils"
-import {ESLintUtils} from "@typescript-eslint/utils"
+import {
+  AST_NODE_TYPES,
+  ESLintUtils,
+  type TSESTree,
+} from "@typescript-eslint/utils"
 
 import {
   getAttributeValue,
   getJSXElementName,
   hasValidAriaLabel,
-  QUI_PACKAGES,
+  isQUIPackage,
 } from "./utils"
 
 const createRule = ESLintUtils.RuleCreator(
@@ -30,13 +33,13 @@ function hasAriaHidden(
   attributes: (TSESTree.JSXAttribute | TSESTree.JSXSpreadAttribute)[],
 ): boolean {
   for (const attr of attributes) {
-    if (attr.type !== "JSXAttribute" || !attr.name) {
+    if (attr.type !== AST_NODE_TYPES.JSXAttribute || !attr.name) {
       continue
     }
     const attrName =
-      attr.name.type === "JSXIdentifier"
+      attr.name.type === AST_NODE_TYPES.JSXIdentifier
         ? attr.name.name
-        : attr.name.type === "JSXNamespacedName"
+        : attr.name.type === AST_NODE_TYPES.JSXNamespacedName
           ? `${attr.name.namespace.name}:${attr.name.name.name}`
           : null
 
@@ -73,6 +76,125 @@ function getJSXElementComponentName(
   return null
 }
 
+function elementHasTextContent(element: TSESTree.JSXElement): boolean {
+  for (const child of element.children) {
+    if (child.type === AST_NODE_TYPES.JSXText) {
+      const text = child.value.trim()
+      if (text.length > 0) {
+        return true
+      }
+    }
+
+    if (
+      child.type === AST_NODE_TYPES.JSXExpressionContainer &&
+      child.expression.type !== AST_NODE_TYPES.JSXEmptyExpression
+    ) {
+      return true
+    }
+
+    if (child.type === AST_NODE_TYPES.JSXElement) {
+      if (elementHasTextContent(child)) {
+        return true
+      }
+    }
+  }
+  return false
+}
+
+function checkSiblingsForText(
+  element: TSESTree.JSXElement,
+  excludeChild: TSESTree.Node,
+): boolean {
+  for (const sibling of element.children) {
+    if (sibling === excludeChild) {
+      continue
+    }
+
+    if (sibling.type === AST_NODE_TYPES.JSXText) {
+      const text = sibling.value.trim()
+      if (text.length > 0) {
+        return true
+      }
+    }
+
+    if (
+      sibling.type === AST_NODE_TYPES.JSXExpressionContainer &&
+      sibling.expression.type !== AST_NODE_TYPES.JSXEmptyExpression
+    ) {
+      return true
+    }
+
+    if (sibling.type === AST_NODE_TYPES.JSXElement) {
+      if (elementHasTextContent(sibling)) {
+        return true
+      }
+    }
+  }
+  return false
+}
+
+function hasSiblingTextContent(node: TSESTree.JSXOpeningElement): boolean {
+  let current: TSESTree.Node | undefined = node.parent
+  let child: TSESTree.Node = node
+
+  while (current) {
+    if (current.type === AST_NODE_TYPES.JSXElement) {
+      if (checkSiblingsForText(current, child)) {
+        return true
+      }
+    }
+    child = current
+    current = current.parent
+  }
+
+  return false
+}
+
+function parentHasTextContent(
+  node: TSESTree.JSXOpeningElement,
+  importedParents: Map<string, string>,
+  namespaceImports: Set<string>,
+): boolean {
+  let current: TSESTree.Node | undefined = node.parent
+
+  while (current) {
+    if (current.type === AST_NODE_TYPES.JSXElement) {
+      const componentName = getJSXElementComponentName(
+        current,
+        importedParents,
+        namespaceImports,
+      )
+
+      if (componentName) {
+        for (const child of current.children) {
+          if (child.type === AST_NODE_TYPES.JSXText) {
+            const text = child.value.trim()
+            if (text.length > 0) {
+              return true
+            }
+          }
+
+          if (
+            child.type === AST_NODE_TYPES.JSXExpressionContainer &&
+            child.expression.type !== AST_NODE_TYPES.JSXEmptyExpression
+          ) {
+            return true
+          }
+
+          if (child.type === AST_NODE_TYPES.JSXElement) {
+            if (elementHasTextContent(child)) {
+              return true
+            }
+          }
+        }
+      }
+    }
+    current = current.parent
+  }
+
+  return false
+}
+
 function hasAccessibleParent(
   node: TSESTree.JSXOpeningElement,
   importedParents: Map<string, string>,
@@ -81,14 +203,17 @@ function hasAccessibleParent(
   let current: TSESTree.Node | undefined = node.parent
 
   while (current) {
-    if (current.type === "JSXElement") {
+    if (current.type === AST_NODE_TYPES.JSXElement) {
       const componentName = getJSXElementComponentName(
         current,
         importedParents,
         namespaceImports,
       )
 
-      if (componentName && hasValidAriaLabel(current.openingElement.attributes)) {
+      if (
+        componentName &&
+        hasValidAriaLabel(current.openingElement.attributes)
+      ) {
         return true
       }
     }
@@ -107,14 +232,14 @@ export const iconDecorative = createRule<[], MessageIds>({
     return {
       ImportDeclaration(node) {
         const source = node.source.value
-        if (!QUI_PACKAGES.includes(source as (typeof QUI_PACKAGES)[number])) {
+        if (typeof source !== "string" || !isQUIPackage(source)) {
           return
         }
 
         for (const specifier of node.specifiers) {
-          if (specifier.type === "ImportSpecifier") {
+          if (specifier.type === AST_NODE_TYPES.ImportSpecifier) {
             const importedName =
-              specifier.imported.type === "Identifier"
+              specifier.imported.type === AST_NODE_TYPES.Identifier
                 ? specifier.imported.name
                 : specifier.imported.value
             const localName = specifier.local.name
@@ -134,7 +259,9 @@ export const iconDecorative = createRule<[], MessageIds>({
             ) {
               importedParents.set(localName, importedName)
             }
-          } else if (specifier.type === "ImportNamespaceSpecifier") {
+          } else if (
+            specifier.type === AST_NODE_TYPES.ImportNamespaceSpecifier
+          ) {
             namespaceImports.add(specifier.local.name)
           }
         }
@@ -151,9 +278,7 @@ export const iconDecorative = createRule<[], MessageIds>({
           property &&
           !namespace &&
           namespaceImports.has(identifier) &&
-          ICON_COMPONENTS.includes(
-            property as (typeof ICON_COMPONENTS)[number],
-          )
+          ICON_COMPONENTS.includes(property as (typeof ICON_COMPONENTS)[number])
         ) {
           originalName = property
         }
@@ -163,6 +288,14 @@ export const iconDecorative = createRule<[], MessageIds>({
         }
 
         if (hasAccessibleParent(node, importedParents, namespaceImports)) {
+          return
+        }
+
+        if (parentHasTextContent(node, importedParents, namespaceImports)) {
+          return
+        }
+
+        if (hasSiblingTextContent(node)) {
           return
         }
 

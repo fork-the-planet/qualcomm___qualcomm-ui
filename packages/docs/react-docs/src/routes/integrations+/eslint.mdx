@@ -43,7 +43,10 @@ export default defineConfig([
 Enforces that certain QUI components have an `aria-label` or `aria-labelledby` attribute for accessibility.
 
 **Affected components:**
+
 - `IconButton`
+- `InlineIconButton`
+- `HeaderBarActionIconButton`
 
 ```jsx
 // Invalid
@@ -52,6 +55,75 @@ Enforces that certain QUI components have an `aria-label` or `aria-labelledby` a
 // Valid
 <IconButton icon={<CloseIcon />} aria-label="Close dialog" />
 <IconButton icon={<CloseIcon />} aria-labelledby="close-label" />
+```
+
+#### `avatar-image-alt`
+
+Enforces that `Avatar.Image` components have an `alt` attribute for accessibility.
+
+```jsx
+// Invalid - no alt
+<Avatar.Root>
+  <Avatar.Image src="/user.jpg" />
+</Avatar.Root>
+
+// Valid
+<Avatar.Root>
+  <Avatar.Image alt="John Doe" src="/user.jpg" />
+  <Avatar.Content>JD</Avatar.Content>
+</Avatar.Root>
+```
+
+#### `icon-decorative`
+
+Enforces that `Icon` components are either marked as decorative with `aria-hidden="true"` or have an accessible label.
+
+Icons inside labeled parent components (like `IconButton` with `aria-label`) are automatically considered decorative and don't require additional attributes.
+
+```jsx
+// Invalid - no accessibility information
+<Icon icon={SearchIcon} />
+
+// Valid - decorative icon
+<Icon icon={SearchIcon} aria-hidden="true" />
+
+// Valid - meaningful icon with label
+<Icon icon={WarningIcon} aria-label="Warning" />
+
+// Valid - icon inside labeled parent
+<IconButton aria-label="Search">
+  <Icon icon={SearchIcon} />
+</IconButton>
+```
+
+#### `input-label-association`
+
+Enforces that form input components have proper label association for accessibility. Supports both simple and compound component patterns.
+
+**Affected components:**
+
+- `TextInput`
+- `NumberInput`
+- `PasswordInput`
+- `Select`
+- `Combobox`
+- `Slider`
+- `Switch`
+- `Checkbox`
+- `Radio`
+
+```jsx
+// Invalid - no label
+<TextInput placeholder="Enter name" />
+
+// Valid - aria-label
+<TextInput placeholder="Enter name" aria-label="Full name" />
+
+// Valid - compound component with Label
+<TextInput.Root>
+  <TextInput.Label>Full name</TextInput.Label>
+  <TextInput.Input placeholder="Enter name" />
+</TextInput.Root>
 ```
 
 ## Configs
