@@ -1,5 +1,11 @@
 # @qualcomm-ui/qds-core
 
+## 1.9.3 (2025/12/08)
+
+### Bug Fixes
+
+- [theme]: correct theme types export
+
 ## 1.9.2 (2025/12/05)
 
 ### Miscellaneous Chores

@@ -1,5 +1,15 @@
 # @qualcomm-ui/react-mdx
 
+## 1.6.3 (2025/12/08)
+
+### Bug Fixes
+
+- [a11y]: add aria labels to interactive controls
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common, @qualcomm-ui/react]
+
 ## 1.6.2 (2025/12/05)
 
 ### Miscellaneous Chores

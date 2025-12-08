@@ -1,5 +1,19 @@
 # @qualcomm-ui/angular
 
+## 1.10.0 (2025/12/08)
+
+### Features
+
+- [menu]: add menu-item label directive
+
+### Bug Fixes
+
+- [header-bar-action-icon-button]: track bindings after init
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
 ## 1.9.2 (2025/12/05)
 
 ### Miscellaneous Chores

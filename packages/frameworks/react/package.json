@@ -1,7 +1,7 @@
 {
   "name": "@qualcomm-ui/react",
   "sideEffects": false,
-  "version": "1.4.3",
+  "version": "1.5.0",
   "description": "QUI React components",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
@@ -43,7 +43,7 @@
     "@qualcomm-ui/cli": "workspace:^1.0.5",
     "@qualcomm-ui/core": "workspace:^1.0.11",
     "@qualcomm-ui/esbuild": "workspace:^1.0.4",
-    "@qualcomm-ui/qds-core": "workspace:^1.9.2",
+    "@qualcomm-ui/qds-core": "workspace:^1.9.3",
     "@qualcomm-ui/react-core": "workspace:^1.0.11",
     "@qualcomm-ui/react-test-utils": "workspace:^1.0.0",
     "@qualcomm-ui/tsconfig": "workspace:^1.0.4",
@@ -80,7 +80,7 @@
   "peerDependencies": {
     "@tanstack/react-virtual": ">=3.13.9",
     "@qualcomm-ui/core": "workspace:^1.0.11",
-    "@qualcomm-ui/qds-core": "workspace:^1.9.2",
+    "@qualcomm-ui/qds-core": "workspace:^1.9.3",
     "@qualcomm-ui/react-core": "workspace:^1.0.11",
     "@qualcomm-ui/utils": "workspace:^1.0.4",
     "lucide-react": ">=0.379.0 <1",
