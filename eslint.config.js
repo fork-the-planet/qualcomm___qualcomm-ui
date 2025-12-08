@@ -5,9 +5,9 @@ import quiEslintAngular from "@qualcomm-ui/eslint-config-angular"
 import quiEslintMdx from "@qualcomm-ui/eslint-config-mdx"
 import quiEslintReact from "@qualcomm-ui/eslint-config-react"
 import quiEslintTs from "@qualcomm-ui/eslint-config-typescript"
-import {angularPlugin} from "@qualcomm-ui/eslint-plugin-angular"
+import quiEslintPluginAngular from "@qualcomm-ui/eslint-plugin-angular"
 import quiPathAlias from "@qualcomm-ui/eslint-plugin-path-alias"
-import {config} from "@qualcomm-ui/eslint-plugin-react"
+import quiEslintPluginReact from "@qualcomm-ui/eslint-plugin-react"
 
 const languageOptions = {
   parser: tseslint.parser,
@@ -112,7 +112,7 @@ export default defineConfig(
       quiEslintAngular.configs.templatePrettier,
       quiEslintAngular.configs.templateAttributeOrder,
       quiEslintAngular.configs.templateSelfClosingTags,
-      angularPlugin.configs.recommended,
+      quiEslintPluginAngular.configs.recommended,
     ],
     files: [
       "packages/*/{angular,angular-*}/**/*.html",
@@ -140,7 +140,7 @@ export default defineConfig(
       ...quiEslintTs.configs.recommended,
       quiEslintReact.configs.base,
       quiEslintReact.configs.recommended,
-      config,
+      quiEslintPluginReact.config,
     ],
     files: [
       "packages/*/{qui-site,react-docs,qui-docs,react-vscode-docs}/**/*.{ts,tsx}",
