@@ -36,7 +36,7 @@ jobs:
         turborepo-remote-cache-secret-key: ${{ secrets.TURBOREPO_REMOTE_CACHE_SECRET_KEY }}
 
     - name: build eslint plugins
-      run: pnpm build --filter="./packages/configs/*"
+      run: pnpm build --filter='@qualcomm-ui/eslint-plugin-angular...' --filter='@qualcomm-ui/eslint-plugin-react...'
 
     - name: Restore timing data
       uses: actions/cache/restore@v3
