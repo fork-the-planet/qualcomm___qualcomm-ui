@@ -137,7 +137,7 @@ export function TextInput({
   hint,
   hintProps,
   inputGroupProps,
-  inputProps,
+  inputProps: inputPropsProp,
   label,
   labelProps,
   placeholder,
@@ -146,6 +146,17 @@ export function TextInput({
   const labelContent = label || labelProps?.children
   const errorTextContent = errorText || errorTextProps?.children
   const hintContent = hint || hintProps?.children
+
+  const inputProps = {
+    ...inputPropsProp,
+  }
+
+  // prevent undefined labels from overwriting defaults
+  if (ariaLabel !== undefined) {
+    inputProps["aria-label"] = ariaLabel
+  } else if (ariaLabelledBy !== undefined) {
+    inputProps["aria-labelledby"] = ariaLabelledBy
+  }
 
   const ids = {
     errorText: useOptionalContentId(errorTextContent, errorTextProps),
@@ -165,8 +176,6 @@ export function TextInput({
 
       <TextInputInputGroup {...inputGroupProps}>
         <TextInputInput
-          aria-label={ariaLabel}
-          aria-labelledby={ariaLabelledBy}
           placeholder={placeholder}
           {...inputProps}
           id={ids.input}
