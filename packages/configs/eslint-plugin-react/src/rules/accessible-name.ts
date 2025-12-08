@@ -14,7 +14,7 @@ const COMPONENTS_REQUIRING_LABEL = [
   "IconButton",
   "InlineIconButton",
   "HeaderBarActionIconButton",
-] as const
+]
 
 type MessageIds = "missingLabel"
 
@@ -37,11 +37,7 @@ export const accessibleName = createRule<[], MessageIds>({
                 ? specifier.imported.name
                 : specifier.imported.value
             const localName = specifier.local.name
-            if (
-              COMPONENTS_REQUIRING_LABEL.includes(
-                importedName as (typeof COMPONENTS_REQUIRING_LABEL)[number],
-              )
-            ) {
+            if (COMPONENTS_REQUIRING_LABEL.includes(importedName)) {
               importedComponents.set(localName, importedName)
             }
           } else if (
@@ -63,9 +59,7 @@ export const accessibleName = createRule<[], MessageIds>({
           property &&
           !namespace &&
           namespaceImports.has(identifier) &&
-          COMPONENTS_REQUIRING_LABEL.includes(
-            property as (typeof COMPONENTS_REQUIRING_LABEL)[number],
-          )
+          COMPONENTS_REQUIRING_LABEL.includes(property)
         ) {
           originalName = property
         }
