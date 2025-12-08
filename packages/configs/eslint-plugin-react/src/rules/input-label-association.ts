@@ -19,17 +19,22 @@ const createRule = ESLintUtils.RuleCreator(
     `https://github.com/qualcomm/qualcomm-ui/tree/main/packages/configs/eslint-plugin-react#${name}`,
 )
 
-const INPUT_COMPONENTS = [
-  "TextInput",
-  "NumberInput",
-  "PasswordInput",
-  "Select",
-  "Combobox",
-  "Slider",
-  "Switch",
-  "Checkbox",
-  "Radio",
-] as const
+const INPUT_COMPONENTS: {
+  /**
+   * The name of the composite element that should receive the aria-* attributes.
+   */
+  compositeElementProps: string
+  name: string
+}[] = [
+  {compositeElementProps: "inputProps", name: "TextInput"},
+  {compositeElementProps: "inputProps", name: "NumberInput"},
+  {compositeElementProps: "inputProps", name: "PasswordInput"},
+  {compositeElementProps: "controlProps", name: "Select"},
+  {compositeElementProps: "controlProps", name: "Combobox"},
+  {compositeElementProps: "hiddenInputProps", name: "Switch"},
+  {compositeElementProps: "hiddenInputProps", name: "Checkbox"},
+  {compositeElementProps: "hiddenInputProps", name: "Radio"},
+]
 
 type MessageIds = "missingLabel" | "missingLabelChild"
 
@@ -315,11 +320,7 @@ export const inputLabelAssociation = createRule<[], MessageIds>({
                 ? specifier.imported.name
                 : specifier.imported.value
             const localName = specifier.local.name
-            if (
-              INPUT_COMPONENTS.includes(
-                importedName as (typeof INPUT_COMPONENTS)[number],
-              )
-            ) {
+            if (INPUT_COMPONENTS.find(({name}) => name === importedName)) {
               importedComponents.set(localName, importedName)
             }
           } else if (
@@ -354,9 +355,7 @@ export const inputLabelAssociation = createRule<[], MessageIds>({
           property !== "Root" &&
           !namespace &&
           namespaceImports.has(identifier) &&
-          INPUT_COMPONENTS.includes(
-            property as (typeof INPUT_COMPONENTS)[number],
-          )
+          INPUT_COMPONENTS.find(({name}) => name === property)
         ) {
           originalName = property
           localName = property
@@ -365,9 +364,7 @@ export const inputLabelAssociation = createRule<[], MessageIds>({
           identifier &&
           property === "Root" &&
           namespaceImports.has(namespace) &&
-          INPUT_COMPONENTS.includes(
-            identifier as (typeof INPUT_COMPONENTS)[number],
-          )
+          INPUT_COMPONENTS.find(({name}) => name === identifier)
         ) {
           originalName = identifier
           localName = identifier
@@ -401,8 +398,15 @@ export const inputLabelAssociation = createRule<[], MessageIds>({
           }
         }
 
+        const component = INPUT_COMPONENTS.find(
+          ({name}) => name === originalName,
+        )!
+
         context.report({
-          data: {componentName: originalName},
+          data: {
+            componentName: originalName,
+            compositeElementProps: component.compositeElementProps,
+          },
           messageId: isCompoundRoot ? "missingLabelChild" : "missingLabel",
           node,
         })
@@ -417,7 +421,7 @@ export const inputLabelAssociation = createRule<[], MessageIds>({
     },
     messages: {
       missingLabel:
-        "{{componentName}} must have a non-empty label prop, or aria-label/aria-labelledby in inputProps/controlProps for accessibility.",
+        "{{componentName}} must have a non-empty label prop, or aria-label/aria-labelledby in {{compositeElementProps}} for accessibility.",
       missingLabelChild:
         "{{componentName}}.Root must have a non-empty {{componentName}}.Label child or aria-label/aria-labelledby attribute for accessibility.",
     },

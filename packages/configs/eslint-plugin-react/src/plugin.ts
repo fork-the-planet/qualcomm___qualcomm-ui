@@ -3,17 +3,11 @@
 
 import type {ESLint, Linter} from "eslint"
 
-import {
-  accessibleName,
-  avatarImageAlt,
-  iconDecorative,
-  inputLabelAssociation,
-} from "./rules"
+import {accessibleName, avatarImageAlt, inputLabelAssociation} from "./rules"
 
 export const rules = {
   "accessible-name": accessibleName,
   "avatar-image-alt": avatarImageAlt,
-  "icon-decorative": iconDecorative,
   "input-label-association": inputLabelAssociation,
 }
 
@@ -31,7 +25,6 @@ export const config: Linter.Config[] = [
     rules: {
       "@qualcomm-ui/react/accessible-name": "error",
       "@qualcomm-ui/react/avatar-image-alt": "error",
-      "@qualcomm-ui/react/icon-decorative": "error",
       "@qualcomm-ui/react/input-label-association": "error",
     },
   },
