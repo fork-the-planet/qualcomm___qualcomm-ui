@@ -85,6 +85,15 @@ jobs:
 
     - uses: ./.github/actions/init-node-and-install
 
+    - uses: ./.github/actions/init-remote-cache
+      with:
+        turborepo-remote-cache-bucket-name: ${{ secrets.TURBOREPO_REMOTE_CACHE_BUCKET_NAME }}
+        turborepo-remote-cache-access-key: ${{ secrets.TURBOREPO_REMOTE_CACHE_ACCESS_KEY }}
+        turborepo-remote-cache-secret-key: ${{ secrets.TURBOREPO_REMOTE_CACHE_SECRET_KEY }}
+
+    - name: build eslint plugins
+      run: pnpm build --filter='@qualcomm-ui/eslint-plugin-angular...' --filter='@qualcomm-ui/eslint-plugin-react...'
+
     - name: unit tests
       run: pnpm run test:unit:ci
 
