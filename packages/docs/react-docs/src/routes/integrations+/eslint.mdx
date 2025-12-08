@@ -18,6 +18,8 @@ We provide an ESLint plugin that enforces best-practices for accessibility and c
 
 ### Installation
 
+This plugin is provided in ESM format. You will need `"type": "module"` in your project's package.json to consume them.
+
 <NpmInstallTabs packages={["@qualcomm-ui/eslint-plugin-react"]} dev />
 
 ### Setup
@@ -135,6 +137,8 @@ Enforces that form input components have proper label association for accessibil
 We provide shared ESLint configurations to enforce consistent code style and quality across our internal projects. These packages wrap popular open source plugins and provide a common baseline that makes it easier for developers to move between codebases.
 
 ### Overview
+
+Our configs are provided in ESM format. You will need `"type": "module"` in your project's package.json to consume them.
 
 Two packages are available for React projects:
 
@@ -298,6 +302,7 @@ import * as tseslint from "typescript-eslint"
 
 import quiEslintReact from "@qualcomm-ui/eslint-config-react"
 import quiEslintTs from "@qualcomm-ui/eslint-config-typescript"
+import quiEslintPluginReact from "@qualcomm-ui/eslint-plugin-react"
 
 const tsLanguageOptions = {
   parser: tseslint.parser,
@@ -326,7 +331,7 @@ const eslintConfig = defineConfig([
       quiEslintTs.configs.sortKeys,
       quiEslintTs.configs.styleGuide,
     ],
-    // recommendation: scope these to your src directory in your package(s).
+    // recommendation: scope these to your source files in your package(s).
     files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
   },
   // TS
@@ -336,8 +341,8 @@ const eslintConfig = defineConfig([
       quiEslintTs.configs.performance,
       quiEslintTs.configs.strictExports,
     ],
-    // recommendation: scope these to your src directory in your package(s).
-    files: ["**/*.{ts,tsx}"],
+    // recommendation: scope these to your source files in your package(s).
+    files: ["**/*.ts"],
     languageOptions: tsLanguageOptions,
   },
   // React
@@ -347,8 +352,10 @@ const eslintConfig = defineConfig([
       quiEslintTs.configs.performance,
       quiEslintReact.configs.base,
       quiEslintReact.configs.recommended,
+      // optional: include the plugin as well
+      quiEslintPluginReact.config,
     ],
-    // recommendation: scope these to your src directory in your package(s).
+    // recommendation: scope these to your source files in your package(s).
     files: ["**/*.{ts,tsx}"],
     languageOptions: tsLanguageOptions,
   },

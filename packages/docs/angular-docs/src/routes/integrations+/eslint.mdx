@@ -18,6 +18,8 @@ We provide an ESLint plugin that enforces best-practices for accessibility and c
 
 ### Installation
 
+Our configs are provided in ESM format. You will need `"type": "module"` in your project's package.json to consume them.
+
 <NpmInstallTabs packages={["@qualcomm-ui/eslint-plugin-angular"]} dev />
 
 ### Setup
@@ -200,6 +202,7 @@ import * as tseslint from "typescript-eslint"
 
 import quiEslintAngular from "@qualcomm-ui/eslint-config-angular"
 import quiEslintTs from "@qualcomm-ui/eslint-config-typescript"
+import quiEslintPluginAngular from "@qualcomm-ui/eslint-plugin-angular"
 
 const tsLanguageOptions = {
   globals: globals.browser,
@@ -247,6 +250,7 @@ export default defineConfig([
       quiEslintTs.configs.performance,
       quiEslintTs.configs.strictExports,
     ],
+    // recommendation: scope these to your source files in your package(s).
     files: ["**/*.{ts,tsx}"],
     languageOptions: tsLanguageOptions,
   },
@@ -257,8 +261,11 @@ export default defineConfig([
       quiEslintTs.configs.performance,
       quiEslintAngular.configs.baseTypescript,
       quiEslintAngular.configs.typescript,
+      // optional: include the plugin as well
+      quiEslintPluginAngular.config,
     ],
-    files: ["src/**/*.ts"],
+    // recommendation: scope these to your source files in your package(s).
+    files: ["**/*.ts"],
     languageOptions: tsLanguageOptions,
   },
   {
@@ -267,8 +274,11 @@ export default defineConfig([
       quiEslintAngular.configs.templatePrettier,
       quiEslintAngular.configs.templateAttributeOrder,
       quiEslintAngular.configs.templateSelfClosingTags,
+      // optional: include the plugin as well
+      quiEslintPluginAngular.config,
     ],
-    files: ["src/**/*.html"],
+    // recommendation: scope these to your source files in your package(s).
+    files: ["**/*.html"],
   },
 ])
 ```
