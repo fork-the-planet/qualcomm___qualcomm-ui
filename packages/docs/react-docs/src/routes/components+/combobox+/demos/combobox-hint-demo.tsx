@@ -20,10 +20,10 @@ export function ComboboxHintDemo() {
   return (
     // preview
     <Combobox
+      aria-label="Country"
       className="w-48"
       collection={collection}
       hint="Optional hint"
-      inputProps={{"aria-label": "Country"}}
       onInputValueChange={handleInputChange}
       placeholder="Select a country"
     />

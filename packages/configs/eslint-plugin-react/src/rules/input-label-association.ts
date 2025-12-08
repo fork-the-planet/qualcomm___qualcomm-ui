@@ -21,19 +21,57 @@ const createRule = ESLintUtils.RuleCreator(
 
 const INPUT_COMPONENTS: {
   /**
-   * The name of the composite element that should receive the aria-* attributes.
+   * The name of the composite element on the component that should receive the
+   * aria-* attributes.
+   */
+  compositeElementName: string
+  /**
+   * The name of the composite element's props prop on the component that
+   * should receive the aria-* attributes.
    */
   compositeElementProps: string
   name: string
 }[] = [
-  {compositeElementProps: "inputProps", name: "TextInput"},
-  {compositeElementProps: "inputProps", name: "NumberInput"},
-  {compositeElementProps: "inputProps", name: "PasswordInput"},
-  {compositeElementProps: "controlProps", name: "Select"},
-  {compositeElementProps: "controlProps", name: "Combobox"},
-  {compositeElementProps: "hiddenInputProps", name: "Switch"},
-  {compositeElementProps: "hiddenInputProps", name: "Checkbox"},
-  {compositeElementProps: "hiddenInputProps", name: "Radio"},
+  {
+    compositeElementName: "Input",
+    compositeElementProps: "inputProps",
+    name: "TextInput",
+  },
+  {
+    compositeElementName: "Input",
+    compositeElementProps: "inputProps",
+    name: "NumberInput",
+  },
+  {
+    compositeElementName: "Input",
+    compositeElementProps: "inputProps",
+    name: "PasswordInput",
+  },
+  {
+    compositeElementName: "Control",
+    compositeElementProps: "controlProps",
+    name: "Select",
+  },
+  {
+    compositeElementName: "Control",
+    compositeElementProps: "inputProps",
+    name: "Combobox",
+  },
+  {
+    compositeElementName: "HiddenInput",
+    compositeElementProps: "hiddenInputProps",
+    name: "Switch",
+  },
+  {
+    compositeElementName: "HiddenInput",
+    compositeElementProps: "hiddenInputProps",
+    name: "Checkbox",
+  },
+  {
+    compositeElementName: "HiddenInput",
+    compositeElementProps: "hiddenInputProps",
+    name: "Radio",
+  },
 ]
 
 type MessageIds = "missingLabel" | "missingLabelChild"
@@ -58,10 +96,9 @@ function hasLabelProp(
   return false
 }
 
-const ARIA_LABEL_PROPS = ["inputProps", "controlProps"]
-
-function hasAriaLabelInProps(
+function hasAriaLabelInCompositeProps(
   attributes: (TSESTree.JSXAttribute | TSESTree.JSXSpreadAttribute)[],
+  compositeElementProps: string,
 ): boolean {
   for (const attr of attributes) {
     if (attr.type !== AST_NODE_TYPES.JSXAttribute || !attr.name) {
@@ -70,7 +107,7 @@ function hasAriaLabelInProps(
     const attrName =
       attr.name.type === AST_NODE_TYPES.JSXIdentifier ? attr.name.name : null
 
-    if (attrName && ARIA_LABEL_PROPS.includes(attrName) && attr.value) {
+    if (attrName === compositeElementProps && attr.value) {
       if (
         attr.value.type === AST_NODE_TYPES.JSXExpressionContainer &&
         attr.value.expression.type === AST_NODE_TYPES.ObjectExpression
@@ -393,7 +430,18 @@ export const inputLabelAssociation = createRule<[], MessageIds>({
           if (hasLabelProp(node.attributes)) {
             return
           }
-          if (hasAriaLabelInProps(node.attributes)) {
+          if (hasValidAriaLabel(node.attributes)) {
+            return
+          }
+          const component = INPUT_COMPONENTS.find(
+            ({name}) => name === originalName,
+          )!
+          if (
+            hasAriaLabelInCompositeProps(
+              node.attributes,
+              component.compositeElementProps,
+            )
+          ) {
             return
           }
         }
@@ -405,6 +453,7 @@ export const inputLabelAssociation = createRule<[], MessageIds>({
         context.report({
           data: {
             componentName: originalName,
+            compositeElementName: component.compositeElementName,
             compositeElementProps: component.compositeElementProps,
           },
           messageId: isCompoundRoot ? "missingLabelChild" : "missingLabel",
@@ -421,9 +470,9 @@ export const inputLabelAssociation = createRule<[], MessageIds>({
     },
     messages: {
       missingLabel:
-        "{{componentName}} must have a non-empty label prop, or aria-label/aria-labelledby in {{compositeElementProps}} for accessibility.",
+        "{{componentName}} must have a non-empty label prop or aria-label/aria-labelledby attribute.",
       missingLabelChild:
-        "{{componentName}}.Root must have a non-empty {{componentName}}.Label child or aria-label/aria-labelledby attribute for accessibility.",
+        "{{componentName}}.Root must have a non-empty {{componentName}}.Label child or aria-label/aria-labelledby on {{componentName}}.{{compositeElementName}} for accessibility.",
     },
     schema: [],
     type: "problem",

@@ -26,12 +26,12 @@ Add the plugin to your ESLint configuration:
 
 ```js
 import {defineConfig} from "eslint/config"
-import {config} from "@qualcomm-ui/eslint-plugin-react"
+import quiEslintPluginReact from "@qualcomm-ui/eslint-plugin-react"
 
 export default defineConfig([
   {
     files: ["**/*.{jsx,tsx}"],
-    extends: [config],
+    extends: [quiEslintPluginReact.config],
   },
 ])
 ```
@@ -48,13 +48,13 @@ Enforces that certain QUI components have an `aria-label` or `aria-labelledby` a
 - `InlineIconButton`
 - `HeaderBarActionIconButton`
 
-```jsx
+```tsx
 // Invalid
-<IconButton icon={<CloseIcon />} />
+<IconButton icon={/*...*/} />
 
 // Valid
-<IconButton icon={<CloseIcon />} aria-label="Close dialog" />
-<IconButton icon={<CloseIcon />} aria-labelledby="close-label" />
+<IconButton icon={/*...*/} aria-label="Close dialog" />
+<IconButton icon={/*...*/} aria-labelledby="close-label" />
 ```
 
 #### `avatar-image-alt`
@@ -74,61 +74,64 @@ Enforces that `Avatar.Image` components have an `alt` attribute for accessibilit
 </Avatar.Root>
 ```
 
-#### `icon-decorative`
-
-Enforces that `Icon` components are either marked as decorative with `aria-hidden="true"` or have an accessible label.
-
-Icons inside labeled parent components (like `IconButton` with `aria-label`) are automatically considered decorative and don't require additional attributes.
-
-```jsx
-// Invalid - no accessibility information
-<Icon icon={SearchIcon} />
-
-// Valid - decorative icon
-<Icon icon={SearchIcon} aria-hidden="true" />
-
-// Valid - meaningful icon with label
-<Icon icon={WarningIcon} aria-label="Warning" />
-
-// Valid - icon inside labeled parent
-<IconButton aria-label="Search">
-  <Icon icon={SearchIcon} />
-</IconButton>
-```
-
 #### `input-label-association`
 
 Enforces that form input components have proper label association for accessibility. Supports both simple and compound component patterns.
 
 **Affected components:**
 
-- `TextInput`
-- `NumberInput`
-- `PasswordInput`
-- `Select`
-- `Combobox`
-- `Slider`
-- `Switch`
-- `Checkbox`
-- `Radio`
+| Component       | Composite Element | Composite Props    |
+| --------------- | ----------------- | ------------------ |
+| `TextInput`     | `Input`           | `inputProps`       |
+| `NumberInput`   | `Input`           | `inputProps`       |
+| `PasswordInput` | `Input`           | `inputProps`       |
+| `Combobox`      | `Control`         | `inputProps`       |
+| `Select`        | `Control`         | `controlProps`     |
+| `Switch`        | `HiddenInput`     | `hiddenInputProps` |
+| `Checkbox`      | `HiddenInput`     | `hiddenInputProps` |
+| `Radio`         | `HiddenInput`     | `hiddenInputProps` |
 
-```jsx
+**Simple component usage:**
+
+```tsx
 // Invalid - no label
 <TextInput placeholder="Enter name" />
 
-// Valid - aria-label
-<TextInput placeholder="Enter name" aria-label="Full name" />
+// Valid - label prop
+<TextInput label="Full name" placeholder="Enter name" />
 
-// Valid - compound component with Label
+// Valid - direct aria-label (these are forwarded to the internal input element)
+<TextInput aria-label="Full name" placeholder="Enter name" />
+
+// Valid - aria-label in composite props
+<TextInput inputProps={{"aria-label": "Full name"}} placeholder="Enter name" />
+<Switch hiddenInputProps={{"aria-label": "Enable notifications"}} />
+```
+
+**Compound component usage:**
+
+```jsx
+// Invalid - no label
+<TextInput.Root>
+  <TextInput.Input placeholder="Enter name" />
+</TextInput.Root>
+
+// Valid - Label child
 <TextInput.Root>
   <TextInput.Label>Full name</TextInput.Label>
   <TextInput.Input placeholder="Enter name" />
 </TextInput.Root>
+
+// Valid - aria-label on composite element
+<Switch.Root>
+  <Switch.HiddenInput aria-label="Enable notifications" />
+  <Switch.Control />
+</Switch.Root>
 ```
 
 ## Configs
 
-We provide shared ESLint configurations to enforce consistent code style and quality across projects. These packages wrap popular open source plugins and provide a common baseline that makes it easier for developers to move between codebases.
+We provide shared ESLint configurations to enforce consistent code style and quality across our projects. These packages wrap popular open source plugins and provide a common baseline that makes it easier for developers to move between codebases.
 
 ### Overview
 
@@ -149,22 +152,7 @@ Both packages use ESLint's flat config format.
   dev
 />
 
-### Suggested Configuration
-
-> [!note/Type-aware rules]
-> The recommended configuration uses type-aware linting. Learn more [here](./#type-aware-rules) about potential pitfalls.
-
-Create an `eslint.config.js` file in your project root:
-
-```js
-import tsConfigs from "@qualcomm-ui/eslint-config-typescript"
-import reactConfigs from "@qualcomm-ui/eslint-config-react"
-
-export default [
-  ...tsConfigs.configs.recommended,
-  ...reactConfigs.configs.recommended,
-]
-```
+Skip ahead to the [Suggested Configuration](#suggested-configuration) section for a complete setup, or continue reading to learn more about the individual configs.
 
 ### TypeScript Configs
 
@@ -296,17 +284,74 @@ The TypeScript configs include type-aware rules that require type information. F
 
 If ESLint errors with "file not found in any configured project," ensure the file is included in your tsconfig's `files` or `include` patterns.
 
-### Minimal Configuration
+### Suggested Configuration
 
-For a simpler setup without type-aware rules:
+> [!note/Type-aware rules]
+> This configuration uses type-aware linting. Learn more [here](./#type-aware-rules) about potential pitfalls.
+
+Create an `eslint.config.js` file in your project root:
 
 ```js
-import tsConfigs from "@qualcomm-ui/eslint-config-typescript"
-import reactConfigs from "@qualcomm-ui/eslint-config-react"
+import {defineConfig} from "eslint/config"
+import * as tseslint from "typescript-eslint"
 
-export default [
-  tsConfigs.configs.base,
-  tsConfigs.configs.styleGuide,
-  reactConfigs.configs.base,
-]
+import quiEslintReact from "@qualcomm-ui/eslint-config-react"
+import quiEslintTs from "@qualcomm-ui/eslint-config-typescript"
+
+const tsLanguageOptions = {
+  parser: tseslint.parser,
+  parserOptions: {
+    projectService: true,
+  },
+}
+
+const eslintConfig = defineConfig([
+  {
+    ignores: [
+      "**/dist/",
+      "**/node_modules/",
+      "**/build/",
+      "**/coverage/",
+      "**/.turbo/",
+      "**/out/",
+      "**/out-tsc/",
+      "**/temp/",
+    ],
+  },
+  // JS
+  {
+    extends: [
+      quiEslintTs.configs.base,
+      quiEslintTs.configs.sortKeys,
+      quiEslintTs.configs.styleGuide,
+    ],
+    // recommendation: scope these to your src directory in your package(s).
+    files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
+  },
+  // TS
+  {
+    extends: [
+      ...quiEslintTs.configs.recommended,
+      quiEslintTs.configs.performance,
+      quiEslintTs.configs.strictExports,
+    ],
+    // recommendation: scope these to your src directory in your package(s).
+    files: ["**/*.{ts,tsx}"],
+    languageOptions: tsLanguageOptions,
+  },
+  // React
+  {
+    extends: [
+      ...quiEslintTs.configs.recommended,
+      quiEslintTs.configs.performance,
+      quiEslintReact.configs.base,
+      quiEslintReact.configs.recommended,
+    ],
+    // recommendation: scope these to your src directory in your package(s).
+    files: ["**/*.{ts,tsx}"],
+    languageOptions: tsLanguageOptions,
+  },
+])
+
+export default eslintConfig
 ```

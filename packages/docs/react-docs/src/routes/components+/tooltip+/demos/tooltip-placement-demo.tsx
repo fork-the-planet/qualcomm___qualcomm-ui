@@ -31,6 +31,7 @@ export function TooltipPlacementDemo(): ReactElement {
         positioning={{placement}}
         trigger={
           <Select
+            aria-label="Select a position"
             collection={positions}
             onValueChange={(value) => setPlacement(value[0] as Placement)}
             positioning={{sameWidth: true}}

@@ -23,9 +23,9 @@ export function ComboboxControlledStateDemo() {
   return (
     // preview
     <Combobox
+      aria-label="Country"
       className="w-48"
       collection={collection}
-      inputProps={{"aria-label": "Country"}}
       onInputValueChange={handleInputChange}
       onValueChange={(details) => setValue(details.value)}
       placeholder="Select a country"

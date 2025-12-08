@@ -9,13 +9,20 @@ export function NumberInputSizesDemo(): ReactElement {
     <div className="flex flex-col items-start gap-4">
       {/* preview */}
       <NumberInput
+        aria-label="sm demo"
         className="w-56"
         placeholder="sm"
         size="sm"
         startIcon={Sigma}
       />
-      <NumberInput className="w-64" placeholder="md" startIcon={Sigma} />
       <NumberInput
+        aria-label="md demo"
+        className="w-64"
+        placeholder="md"
+        startIcon={Sigma}
+      />
+      <NumberInput
+        aria-label="lg demo"
         className="w-72"
         placeholder="lg"
         size="lg"

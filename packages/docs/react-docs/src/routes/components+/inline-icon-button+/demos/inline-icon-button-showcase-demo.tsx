@@ -7,7 +7,7 @@ import {InlineIconButton} from "@qualcomm-ui/react/inline-icon-button"
 export function InlineIconButtonShowcaseDemo(): ReactElement {
   return (
     // preview
-    <InlineIconButton icon={X} />
+    <InlineIconButton aria-label="Close" icon={X} />
     // preview
   )
 }

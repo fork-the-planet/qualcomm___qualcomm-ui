@@ -12,9 +12,24 @@ export function IconButtonEmphasisDemo(): ReactElement {
       <div className="text-neutral-primary font-heading-xs">Danger</div>
 
       {/* preview */}
-      <IconButton emphasis="neutral" icon={ExternalLink} variant="fill" />
-      <IconButton emphasis="primary" icon={ExternalLink} variant="fill" />
-      <IconButton emphasis="danger" icon={ExternalLink} variant="fill" />
+      <IconButton
+        aria-label="Navigate"
+        emphasis="neutral"
+        icon={ExternalLink}
+        variant="fill"
+      />
+      <IconButton
+        aria-label="Navigate"
+        emphasis="primary"
+        icon={ExternalLink}
+        variant="fill"
+      />
+      <IconButton
+        aria-label="Navigate"
+        emphasis="danger"
+        icon={ExternalLink}
+        variant="fill"
+      />
       {/* preview */}
     </div>
   )

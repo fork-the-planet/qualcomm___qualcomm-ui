@@ -54,13 +54,6 @@ describe("input-label-association", () => {
         },
         {
           code: `
-            import {Slider} from "@qualcomm-ui/react/slider"
-            const App = () => <Slider />
-          `,
-          errors: [{messageId: "missingLabel"}],
-        },
-        {
-          code: `
             import {Switch} from "@qualcomm-ui/react/switch"
             const App = () => <Switch />
           `,
@@ -236,12 +229,6 @@ describe("input-label-association", () => {
         },
         {
           code: `
-            import {Slider} from "@qualcomm-ui/react/slider"
-            const App = () => <Slider label="Volume" />
-          `,
-        },
-        {
-          code: `
             import {Switch} from "@qualcomm-ui/react/switch"
             const App = () => <Switch label="Enable notifications" />
           `,
@@ -297,7 +284,7 @@ describe("input-label-association", () => {
         {
           code: `
             import {Combobox} from "@qualcomm-ui/react/combobox"
-            const App = () => <Combobox inputProps={{"aria-label": "Country"}} />
+            const App = () => <Combobox controlProps={{"aria-label": "Country"}} />
           `,
         },
       ],
@@ -322,6 +309,54 @@ describe("input-label-association", () => {
           code: `
             import {Select} from "@qualcomm-ui/react/select"
             const App = () => <Select controlProps={{ariaLabel: label}} />
+          `,
+        },
+      ],
+    })
+
+    ruleTester.run("with hiddenInputProps aria-label", inputLabelAssociation, {
+      invalid: [],
+      valid: [
+        {
+          code: `
+            import {Switch} from "@qualcomm-ui/react/switch"
+            const App = () => <Switch hiddenInputProps={{"aria-label": "Toggle"}} />
+          `,
+        },
+        {
+          code: `
+            import {Checkbox} from "@qualcomm-ui/react/checkbox"
+            const App = () => <Checkbox hiddenInputProps={{"aria-labelledby": "checkbox-label"}} />
+          `,
+        },
+      ],
+    })
+
+    ruleTester.run("with direct aria-label attribute", inputLabelAssociation, {
+      invalid: [],
+      valid: [
+        {
+          code: `
+            import {TextInput} from "@qualcomm-ui/react/text-input"
+            const App = () => <TextInput aria-label="Email" />
+          `,
+        },
+        {
+          code: `
+            import {TextInput} from "@qualcomm-ui/react/text-input"
+            const App = () => <TextInput aria-labelledby="email-label" />
+          `,
+        },
+        {
+          code: `
+            import {Switch} from "@qualcomm-ui/react/switch"
+            const App = () => <Switch aria-label="Toggle feature" />
+          `,
+        },
+        {
+          code: `
+            import {Select} from "@qualcomm-ui/react/select"
+            const App = () => <Select aria-label="Country" />
           `,
         },
       ],
