@@ -1280,7 +1280,14 @@ importers:
         version: 8.48.1(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3)
 
   packages/configs/eslint-plugin-angular:
+    dependencies:
+      eslint:
+        specifier: ^9.0.0
+        version: 9.39.1(jiti@2.6.1)
     devDependencies:
+      '@eslint/core':
+        specifier: ^1.0.0
+        version: 1.0.0
       '@qualcomm-ui/cli':
         specifier: workspace:^1.0.3
         version: link:../../common/cli
@@ -1296,6 +1303,21 @@ importers:
       angular-eslint:
         specifier: ^20.6.0
         version: 20.6.0(chokidar@4.0.3)(eslint@9.39.1(jiti@2.6.1))(typescript-eslint@8.48.1(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(typescript@5.9.3)
+      esbuild:
+        specifier: ^0.25.8
+        version: 0.25.12
+      npm-run-all2:
+        specifier: ^8.0.4
+        version: 8.0.4
+      shx:
+        specifier: ^0.4.0
+        version: 0.4.0
+      tsx:
+        specifier: ^4.20.3
+        version: 4.20.6
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
       typescript-eslint:
         specifier: 'catalog:'
         version: 8.48.1(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)

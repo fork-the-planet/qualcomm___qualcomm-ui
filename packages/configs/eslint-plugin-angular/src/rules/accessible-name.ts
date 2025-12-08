@@ -3,45 +3,42 @@
 
 import {ESLintUtils} from "@typescript-eslint/utils"
 
+import {hasDirective, hasValidAriaLabel, type TemplateNode} from "./utils"
+
 const createRule = ESLintUtils.RuleCreator(
   (name) =>
     `https://github.com/qualcomm/qualcomm-ui/tree/main/packages/configs/eslint-plugin-angular#${name}`,
 )
 
-const DIRECTIVES_REQUIRING_LABEL = ["q-icon-button"]
+const DIRECTIVES_REQUIRING_LABEL = [
+  "q-icon-button",
+  "q-inline-icon-button",
+] as const
 
-function hasDirective(node, directiveName) {
-  return node.attributes.some((attr) => attr.name === directiveName)
-}
+type MessageIds = "missingLabel"
 
-function hasValidAriaLabel(node) {
-  for (const attr of node.attributes) {
-    if (attr.name === "aria-label" || attr.name === "aria-labelledby") {
-      if (attr.value && attr.value.trim() !== "") {
-        return true
-      }
-    }
-  }
-
-  for (const input of node.inputs) {
-    if (input.name === "aria-label" || input.name === "aria-labelledby") {
-      return true
-    }
-  }
-
-  return false
-}
-
-export const accessibleName = createRule({
+export const accessibleName = createRule<[], MessageIds>({
   create(context) {
-    const parserServices = context.sourceCode.parserServices
+    const parserServices = context.sourceCode.parserServices as
+      | {
+          convertElementSourceSpanToLoc?: (
+            context: unknown,
+            node: unknown,
+          ) => {
+            end: {column: number; line: number}
+            start: {column: number; line: number}
+          }
+        }
+      | undefined
 
     if (!parserServices || !parserServices.convertElementSourceSpanToLoc) {
       return {}
     }
 
+    const convertLoc = parserServices.convertElementSourceSpanToLoc
+
     return {
-      Element(node) {
+      Element(node: TemplateNode) {
         const matchedDirective = DIRECTIVES_REQUIRING_LABEL.find((directive) =>
           hasDirective(node, directive),
         )
@@ -53,7 +50,7 @@ export const accessibleName = createRule({
         if (!hasValidAriaLabel(node)) {
           context.report({
             data: {componentName: matchedDirective},
-            loc: parserServices.convertElementSourceSpanToLoc(context, node),
+            loc: convertLoc(context, node),
             messageId: "missingLabel",
           })
         }

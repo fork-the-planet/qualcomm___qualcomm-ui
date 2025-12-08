@@ -112,7 +112,7 @@ export default defineConfig(
       quiEslintAngular.configs.templatePrettier,
       quiEslintAngular.configs.templateAttributeOrder,
       quiEslintAngular.configs.templateSelfClosingTags,
-      quiEslintPluginAngular.configs.recommended,
+      quiEslintPluginAngular.config,
     ],
     files: [
       "packages/*/{angular,angular-*}/**/*.html",

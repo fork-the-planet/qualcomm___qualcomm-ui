@@ -1,8 +1,7 @@
 import {RuleTester} from "@typescript-eslint/rule-tester"
 import {afterAll, describe, it} from "vitest"
 
-// @ts-expect-error
-import {accessibleName} from "../rules/accessible-name.js"
+import {accessibleName} from "../src/rules/accessible-name"
 
 RuleTester.afterAll = afterAll
 RuleTester.it = it
@@ -52,6 +51,9 @@ ruleTester.run("accessible-name", accessibleName, {
     },
     {
       code: `<button q-icon-button [attr.aria-label]="label"></button>`,
+    },
+    {
+      code: `<button q-icon-button [attr.aria-label]="'label'"></button>`,
     },
     {
       code: `<button q-icon-button [attr.aria-labelledby]="labelId"></button>`,
