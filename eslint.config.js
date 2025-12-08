@@ -148,6 +148,12 @@ export default defineConfig(
     languageOptions,
   },
 
+  {
+    extends: [quiEslintPluginReact.config],
+    files: ["packages/*/react-mdx/**/*.{ts,tsx}"],
+    languageOptions,
+  },
+
   // gradually adopt strict config
   {
     extends: [
