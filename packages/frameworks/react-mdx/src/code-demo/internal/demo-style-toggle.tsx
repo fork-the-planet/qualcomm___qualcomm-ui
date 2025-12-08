@@ -35,6 +35,7 @@ export function DemoStyleToggle(props: DemoStyleToggleProps): ReactElement {
       <Tooltip
         trigger={
           <IconButton
+            aria-label="Toggle demo style mode"
             emphasis="primary"
             icon={
               transformTailwindClasses ? (
