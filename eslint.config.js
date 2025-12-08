@@ -78,6 +78,7 @@ export default defineConfig(
       ...quiEslintTs.configs.recommended,
       quiEslintAngular.configs.baseTypescript,
       quiEslintAngular.configs.typescript,
+      quiEslintPluginAngular.config,
     ],
     files: [
       "packages/*/{angular,angular-*}/**/*.ts",

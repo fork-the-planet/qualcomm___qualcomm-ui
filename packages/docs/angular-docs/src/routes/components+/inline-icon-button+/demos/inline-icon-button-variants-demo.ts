@@ -8,16 +8,24 @@ import {InlineIconButtonComponent} from "@qualcomm-ui/angular/inline-icon-button
   template: `
     <div class="flex flex-col items-center justify-center gap-3">
       <!-- preview -->
-      <button q-inline-icon-button></button>
+      <button aria-label="Close" q-inline-icon-button></button>
       <!-- preview -->
-      <div class="bg-[var(--color-utility-persistent-white)] p-2">
+      <div class="bg-persistent-white p-2">
         <!-- preview -->
-        <button emphasis="persistent-black" q-inline-icon-button></button>
+        <button
+          aria-label="Close"
+          emphasis="persistent-black"
+          q-inline-icon-button
+        ></button>
         <!-- preview -->
       </div>
-      <div class="bg-[var(--color-utility-persistent-black)] p-2">
+      <div class="bg-persistent-black p-2">
         <!-- preview -->
-        <button emphasis="persistent-white" q-inline-icon-button></button>
+        <button
+          aria-label="Close"
+          emphasis="persistent-white"
+          q-inline-icon-button
+        ></button>
         <!-- preview -->
       </div>
     </div>
