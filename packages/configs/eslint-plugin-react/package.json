@@ -17,12 +17,12 @@
     "accessibility",
     "a11y"
   ],
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     }
   },
   "files": [
@@ -45,6 +45,7 @@
   "devDependencies": {
     "@eslint/core": "^1.0.0",
     "@qualcomm-ui/cli": "workspace:^1.0.3",
+    "@qualcomm-ui/esbuild": "workspace:*",
     "@qualcomm-ui/tsconfig": "workspace:*",
     "@typescript-eslint/rule-tester": "8.48.1",
     "@typescript-eslint/utils": "catalog:",

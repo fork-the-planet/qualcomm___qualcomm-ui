@@ -1,18 +1,8 @@
-import esbuild, {type BuildOptions} from "esbuild"
+import type {BuildOptions} from "esbuild"
+
+import {buildOrWatch, hasArg, logPlugin} from "@qualcomm-ui/esbuild"
 
 import pkg from "./package.json"
-
-function hasArg(argv: string[], key: string) {
-  return argv.includes(key)
-}
-
-async function buildOrWatch(options: BuildOptions, watch: boolean) {
-  if (watch) {
-    await esbuild.context(options).then((ctx) => ctx.watch())
-  } else {
-    await esbuild.build(options)
-  }
-}
 
 async function build(argv: string[]) {
   const IS_WATCH = hasArg(argv, "--watch")
@@ -25,8 +15,10 @@ async function build(argv: string[]) {
       ...Object.keys(pkg.peerDependencies ?? {}),
     ],
     format: "esm",
+    metafile: true,
     outfile: "./dist/index.js",
     platform: "node",
+    plugins: [logPlugin({bundleSizeOptions: {logMode: "all"}})],
     sourcemap: true,
     target: "es2022",
     tsconfig: "tsconfig.lib.json",

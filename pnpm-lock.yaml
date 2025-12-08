@@ -1291,6 +1291,9 @@ importers:
       '@qualcomm-ui/cli':
         specifier: workspace:^1.0.3
         version: link:../../common/cli
+      '@qualcomm-ui/esbuild':
+        specifier: workspace:*
+        version: link:../../common/esbuild
       '@qualcomm-ui/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
@@ -1361,6 +1364,9 @@ importers:
       '@qualcomm-ui/cli':
         specifier: workspace:^1.0.3
         version: link:../../common/cli
+      '@qualcomm-ui/esbuild':
+        specifier: workspace:*
+        version: link:../../common/esbuild
       '@qualcomm-ui/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig

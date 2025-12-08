@@ -1,16 +1,8 @@
-import esbuild, {type BuildOptions} from "esbuild"
+import type {BuildOptions} from "esbuild"
 
-function hasArg(argv: string[], key: string) {
-  return argv.includes(key)
-}
+import {buildOrWatch, hasArg, logPlugin} from "@qualcomm-ui/esbuild"
 
-async function buildOrWatch(options: BuildOptions, watch: boolean) {
-  if (watch) {
-    await esbuild.context(options).then((ctx) => ctx.watch())
-  } else {
-    await esbuild.build(options)
-  }
-}
+import pkg from "./package.json"
 
 async function build(argv: string[]) {
   const IS_WATCH = hasArg(argv, "--watch")
@@ -18,10 +10,15 @@ async function build(argv: string[]) {
   const buildOpts: BuildOptions = {
     bundle: true,
     entryPoints: ["./src/index.ts"],
-    external: ["@typescript-eslint/utils", "eslint"],
+    external: [
+      ...Object.keys(pkg.devDependencies ?? {}),
+      ...Object.keys(pkg.peerDependencies ?? {}),
+    ],
     format: "esm",
+    metafile: true,
     outfile: "./dist/index.js",
     platform: "node",
+    plugins: [logPlugin({bundleSizeOptions: {logMode: "all"}})],
     sourcemap: true,
     target: "es2022",
     tsconfig: "tsconfig.lib.json",
