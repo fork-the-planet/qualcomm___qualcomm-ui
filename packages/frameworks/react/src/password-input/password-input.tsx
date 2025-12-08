@@ -42,6 +42,19 @@ import {
 
 export interface PasswordInputProps extends PasswordInputRootProps {
   /**
+   * {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-label aria-label}
+   * attribute, forwarded to the input element.
+   */
+  "aria-label"?: string | undefined
+
+  /**
+   * {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-labelledby aria-labelledby}
+   * attribute, forwarded to the input element. If you provide a {@link label},
+   * omit this prop.
+   */
+  "aria-labelledby"?: string | undefined
+
+  /**
    * The simple PasswordInput doesn't support children.
    */
   children?: never
@@ -129,6 +142,8 @@ export interface PasswordInputProps extends PasswordInputRootProps {
 }
 
 export function PasswordInput({
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
   clearable,
   errorIndicatorProps,
   errorText,
@@ -168,6 +183,8 @@ export function PasswordInput({
 
       <PasswordInputInputGroup {...inputGroupProps}>
         <PasswordInputInput
+          aria-label={ariaLabel}
+          aria-labelledby={ariaLabelledBy}
           placeholder={placeholder}
           {...inputProps}
           id={ids.input}

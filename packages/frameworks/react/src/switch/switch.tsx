@@ -18,6 +18,19 @@ import {SwitchThumb, type SwitchThumbProps} from "./switch-thumb"
 
 export interface SwitchProps extends SwitchRootProps {
   /**
+   * {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-label aria-label}
+   * attribute, forwarded to the hidden input element.
+   */
+  "aria-label"?: string | undefined
+
+  /**
+   * {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-labelledby aria-labelledby}
+   * attribute, forwarded to the hidden input element. If you provide a {@link
+   * label}, omit this prop.
+   */
+  "aria-labelledby"?: string | undefined
+
+  /**
    * The simple Switch doesn't support children.
    */
   children?: never
@@ -61,6 +74,8 @@ export interface SwitchProps extends SwitchRootProps {
 }
 
 export function Switch({
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
   controlProps,
   errorText,
   errorTextProps,
@@ -83,7 +98,12 @@ export function Switch({
 
   return (
     <SwitchRoot {...props} ids={ids}>
-      <SwitchHiddenInput {...hiddenInputProps} id={ids.hiddenInput} />
+      <SwitchHiddenInput
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
+        {...hiddenInputProps}
+        id={ids.hiddenInput}
+      />
       <SwitchControl {...controlProps}>
         <SwitchThumb {...thumbProps} />
       </SwitchControl>

@@ -30,6 +30,19 @@ import {TextInputRoot, type TextInputRootProps} from "./text-input-root"
 
 export interface TextInputProps extends TextInputRootProps {
   /**
+   * {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-label aria-label}
+   * attribute, forwarded to the input element.
+   */
+  "aria-label"?: string | undefined
+
+  /**
+   * {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-labelledby aria-labelledby}
+   * attribute, forwarded to the input element. If you provide a {@link label},
+   * omit this prop.
+   */
+  "aria-labelledby"?: string | undefined
+
+  /**
    * The simple TextInput doesn't support children.
    */
   children?: never
@@ -114,6 +127,8 @@ export interface TextInputProps extends TextInputRootProps {
 }
 
 export function TextInput({
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
   clearable = true,
   clearTriggerProps,
   errorIndicatorProps,
@@ -150,6 +165,8 @@ export function TextInput({
 
       <TextInputInputGroup {...inputGroupProps}>
         <TextInputInput
+          aria-label={ariaLabel}
+          aria-labelledby={ariaLabelledBy}
           placeholder={placeholder}
           {...inputProps}
           id={ids.input}

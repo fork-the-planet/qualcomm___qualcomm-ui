@@ -25,6 +25,19 @@ import {CheckboxRoot, type CheckboxRootProps} from "./checkbox-root"
 
 export interface CheckboxProps extends CheckboxRootProps {
   /**
+   * {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-label aria-label}
+   * attribute, forwarded to the hidden input element.
+   */
+  "aria-label"?: string | undefined
+
+  /**
+   * {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-labelledby aria-labelledby}
+   * attribute, forwarded to the hidden input element. If you provide a {@link
+   * label}, omit this prop.
+   */
+  "aria-labelledby"?: string | undefined
+
+  /**
    * The simple Checkbox doesn't support children.
    */
   children?: never
@@ -73,6 +86,8 @@ export interface CheckboxProps extends CheckboxRootProps {
 }
 
 export function Checkbox({
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
   controlProps,
   errorText,
   errorTextProps,
@@ -95,7 +110,12 @@ export function Checkbox({
 
   return (
     <CheckboxRoot {...props} id={ids.root} ids={ids}>
-      <CheckboxHiddenInput {...hiddenInputProps} id={ids.hiddenInput} />
+      <CheckboxHiddenInput
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
+        {...hiddenInputProps}
+        id={ids.hiddenInput}
+      />
       <CheckboxControl {...controlProps}>
         <CheckboxIndicator {...indicatorProps} />
       </CheckboxControl>
