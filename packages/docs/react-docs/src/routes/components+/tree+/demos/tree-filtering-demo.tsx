@@ -46,8 +46,8 @@ export function TreeFilteringDemo(): ReactElement {
       onExpandedValueChange={({expandedValue}) => setExpanded(expandedValue)}
     >
       <TextInput
+        aria-label="Search for files"
         className="mb-1"
-        label="test"
         onValueChange={search}
         placeholder="Search for files: 'react'"
         size="sm"
