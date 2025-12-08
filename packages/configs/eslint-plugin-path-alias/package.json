@@ -15,7 +15,9 @@
     "config"
   ],
   "main": "index.js",
+  "types": "index.d.ts",
   "files": [
+    "index.d.ts",
     "index.js",
     "plugin.js",
     "rules/"
@@ -27,6 +29,7 @@
     "postpublish": "qui-cli post-publish"
   },
   "devDependencies": {
+    "@eslint/core": "^1.0.0",
     "@qualcomm-ui/cli": "workspace:^1.0.3",
     "@qualcomm-ui/tsconfig": "workspace:*",
     "@typescript-eslint/utils": "catalog:",
