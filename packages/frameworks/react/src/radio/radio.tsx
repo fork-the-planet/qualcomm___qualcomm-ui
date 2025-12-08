@@ -60,19 +60,27 @@ export function Radio({
   "aria-label": ariaLabel,
   "aria-labelledby": ariaLabelledBy,
   controlProps,
-  hiddenInputProps,
+  hiddenInputProps: hiddenInputPropsProp,
   label,
   labelProps,
   ...props
 }: RadioProps): ReactElement {
   const labelContent = label || labelProps?.children
+
+  const hiddenInputProps = {
+    ...hiddenInputPropsProp,
+  }
+
+  if (ariaLabel !== undefined) {
+    hiddenInputProps["aria-label"] = ariaLabel
+  }
+  if (ariaLabelledBy !== undefined) {
+    hiddenInputProps["aria-labelledby"] = ariaLabelledBy
+  }
+
   return (
     <RadioRoot {...props}>
-      <RadioHiddenInput
-        aria-label={ariaLabel}
-        aria-labelledby={ariaLabelledBy}
-        {...hiddenInputProps}
-      />
+      <RadioHiddenInput {...hiddenInputProps} />
       <RadioControl {...controlProps} />
       {labelContent ? (
         <RadioLabel {...labelProps}>{labelContent}</RadioLabel>

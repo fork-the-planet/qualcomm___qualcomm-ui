@@ -7,7 +7,7 @@ import {
   type TSESTree,
 } from "@typescript-eslint/utils"
 
-import {getJSXElementName, isQUIPackage} from "./utils"
+import {getJsxElementName, isQuiPackage} from "./utils"
 
 const createRule = ESLintUtils.RuleCreator(
   (name) =>
@@ -54,7 +54,7 @@ export const avatarImageAlt = createRule<[], MessageIds>({
     return {
       ImportDeclaration(node) {
         const source = node.source.value
-        if (typeof source !== "string" || !isQUIPackage(source)) {
+        if (typeof source !== "string" || !isQuiPackage(source)) {
           return
         }
 
@@ -77,7 +77,7 @@ export const avatarImageAlt = createRule<[], MessageIds>({
       },
 
       JSXOpeningElement(node) {
-        const {identifier, namespace, property} = getJSXElementName(node.name)
+        const {identifier, namespace, property} = getJsxElementName(node.name)
 
         let isAvatarImage = false
 

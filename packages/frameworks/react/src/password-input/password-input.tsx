@@ -151,7 +151,7 @@ export function PasswordInput({
   hint,
   hintProps,
   inputGroupProps,
-  inputProps,
+  inputProps: inputPropsProp,
   label,
   labelProps,
   placeholder,
@@ -161,6 +161,17 @@ export function PasswordInput({
   const labelContent = label || labelProps?.children
   const errorTextContent = errorText || errorTextProps?.children
   const hintContent = hint || hintProps?.children
+
+  const inputProps = {
+    ...inputPropsProp,
+  }
+
+  if (ariaLabel !== undefined) {
+    inputProps["aria-label"] = ariaLabel
+  }
+  if (ariaLabelledBy !== undefined) {
+    inputProps["aria-labelledby"] = ariaLabelledBy
+  }
 
   const visibilityTriggerId = useControlledId(visibilityTriggerProps?.id)
 
@@ -183,8 +194,6 @@ export function PasswordInput({
 
       <PasswordInputInputGroup {...inputGroupProps}>
         <PasswordInputInput
-          aria-label={ariaLabel}
-          aria-labelledby={ariaLabelledBy}
           placeholder={placeholder}
           {...inputProps}
           id={ids.input}

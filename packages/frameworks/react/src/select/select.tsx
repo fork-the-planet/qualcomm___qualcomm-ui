@@ -172,13 +172,24 @@ export function Select({
   labelProps,
   portalProps,
   positionerProps,
-  selectProps,
+  selectProps: selectPropsProp,
   valueTextProps,
   ...props
 }: SelectProps): ReactElement {
   const labelContent = label || labelProps?.children
   const hintContent = hint || hintProps?.children
   const errorTextContent = errorText || errorTextProps?.children
+
+  const selectProps = {
+    ...selectPropsProp,
+  }
+
+  if (ariaLabel !== undefined) {
+    selectProps["aria-label"] = ariaLabel
+  }
+  if (ariaLabelledBy !== undefined) {
+    selectProps["aria-labelledby"] = ariaLabelledBy
+  }
 
   const ids = {
     clearTrigger: useOptionalContentId(clearable, clearTriggerProps),
@@ -219,12 +230,7 @@ export function Select({
         </SelectErrorText>
       ) : null}
 
-      <SelectHiddenSelect
-        aria-label={ariaLabel}
-        aria-labelledby={ariaLabelledBy}
-        {...selectProps}
-        id={ids.hiddenSelect}
-      />
+      <SelectHiddenSelect {...selectProps} id={ids.hiddenSelect} />
 
       <Portal {...portalProps}>
         <SelectPositioner {...positionerProps} id={ids.positioner}>

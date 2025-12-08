@@ -3,7 +3,7 @@
 
 import {AST_NODE_TYPES, ESLintUtils} from "@typescript-eslint/utils"
 
-import {getJSXElementName, hasValidAriaLabel, isQUIPackage} from "./utils"
+import {getJsxElementName, hasValidAriaLabel, isQuiPackage} from "./utils"
 
 const createRule = ESLintUtils.RuleCreator(
   (name) =>
@@ -26,7 +26,7 @@ export const accessibleName = createRule<[], MessageIds>({
     return {
       ImportDeclaration(node) {
         const source = node.source.value
-        if (typeof source !== "string" || !isQUIPackage(source)) {
+        if (typeof source !== "string" || !isQuiPackage(source)) {
           return
         }
 
@@ -53,7 +53,7 @@ export const accessibleName = createRule<[], MessageIds>({
       },
 
       JSXOpeningElement(node) {
-        const {identifier, namespace, property} = getJSXElementName(node.name)
+        const {identifier, namespace, property} = getJsxElementName(node.name)
         let originalName: string | null = null
 
         if (identifier && !property && importedComponents.has(identifier)) {

@@ -27,12 +27,21 @@ Add the plugin to your ESLint configuration:
 ```js
 import {defineConfig} from "eslint/config"
 import angularEslint from "angular-eslint"
-import {angularPlugin} from "@qualcomm-ui/eslint-plugin-angular"
+import angularPlugin from "@qualcomm-ui/eslint-plugin-angular"
 
 export default defineConfig([
+  // ...the rest of your config
   {
+    // your component files
+    files: ["**/*.ts"],
+    extends: [...angularEslint.configs.tsRecommended, angularPlugin.config],
+    plugins: {"@angular-eslint": angularEslint.tsPlugin},
+    processor: angularEslint.processInlineTemplates,
+  },
+  {
+    // your component html files
     files: ["**/*.html"],
-    extends: [angularPlugin.configs.recommended],
+    extends: [angularEslint.configs.templateRecommended, angularPlugin.config],
   },
 ])
 ```
@@ -46,6 +55,7 @@ Enforces that certain QUI components have an `aria-label` or `aria-labelledby` a
 **Affected directives:**
 
 - `q-icon-button`
+- `q-inline-icon-button`
 
 ```html
 <!-- Invalid -->
@@ -59,7 +69,7 @@ Enforces that certain QUI components have an `aria-label` or `aria-labelledby` a
 
 ## Configs
 
-We provide shared ESLint configurations to enforce consistent code style and quality across projects. These packages wrap popular open source plugins and provide a common baseline that makes it easier for developers to move between codebases.
+We provide shared ESLint configurations to enforce consistent code style and quality across our internal projects. These packages wrap popular open source plugins and provide a common baseline that makes it easier for developers to move between codebases.
 
 ### Overview
 
@@ -69,8 +79,6 @@ Two packages are available for Angular projects:
 - `@qualcomm-ui/eslint-config-angular` - Angular-specific rules
 
 Both packages use ESLint's flat config format.
-
-An example project featuring the recommended configuration is available at https://github.com/qualcomm/qualcomm-ui-templates/tree/main/templates/angular-ssr
 
 ### Installation
 
@@ -85,94 +93,9 @@ An example project featuring the recommended configuration is available at https
   dev
 />
 
-### Suggested Configuration
+An example project featuring the complete configuration is available at https://github.com/qualcomm/qualcomm-ui-templates/tree/main/templates/angular-ssr
 
-> [!note/Type-aware rules]
-> The recommended configuration uses type-aware linting. Learn more [here](./#type-aware-rules) about potential pitfalls.
-
-Create an `eslint.config.js` file in your project root:
-
-```js
-import {defineConfig} from "eslint/config"
-import globals from "globals"
-import * as tseslint from "typescript-eslint"
-
-import quiEslintAngular from "@qualcomm-ui/eslint-config-angular"
-import quiEslintTs from "@qualcomm-ui/eslint-config-typescript"
-
-const tsLanguageOptions = {
-  globals: globals.browser,
-  parser: tseslint.parser,
-  parserOptions: {
-    projectService: true,
-  },
-}
-
-export default defineConfig([
-  {
-    ignores: [
-      "**/.angular/",
-      "**/dist/",
-      "**/node_modules/",
-      "**/build/",
-      "**/coverage/",
-      "**/.turbo/",
-      "**/out/",
-      "**/out-tsc/",
-      "**/temp/",
-      "**/vite.config.ts.timestamp*",
-    ],
-  },
-  {
-    languageOptions: {
-      ecmaVersion: "latest",
-      sourceType: "module",
-    },
-  },
-  // JS
-  {
-    extends: [
-      quiEslintTs.configs.base,
-      quiEslintTs.configs.sortKeys,
-      quiEslintTs.configs.styleGuide,
-    ],
-    files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
-    languageOptions: {globals: globals.browser},
-  },
-  // TS
-  {
-    extends: [
-      ...quiEslintTs.configs.recommended,
-      quiEslintTs.configs.performance,
-      quiEslintTs.configs.strictExports,
-    ],
-    files: ["**/*.{ts,tsx}"],
-    languageOptions: tsLanguageOptions,
-  },
-  // Angular
-  {
-    extends: [
-      ...quiEslintTs.configs.recommended,
-      quiEslintTs.configs.performance,
-      quiEslintAngular.configs.baseTypescript,
-      quiEslintAngular.configs.typescript,
-    ],
-    files: ["src/**/*.ts"],
-    languageOptions: tsLanguageOptions,
-  },
-  {
-    extends: [
-      quiEslintAngular.configs.baseTemplate,
-      quiEslintAngular.configs.templatePrettier,
-      quiEslintAngular.configs.templateAttributeOrder,
-      quiEslintAngular.configs.templateSelfClosingTags,
-    ],
-    files: ["src/**/*.html"],
-  },
-])
-```
-
-Continue reading to learn about these options.
+Skip ahead to the [Example Configuration](./#example-configuration) section for a complete setup, or continue reading to learn more about the individual configs.
 
 ### Config Deep Dive
 
@@ -261,4 +184,91 @@ The `templateSelfClosingTags` config requires self-closing syntax for components
 
 <!-- Required -->
 <q-text-input />
+```
+
+### Example Configuration
+
+> [!note/Type-aware rules]
+> This configuration uses type-aware linting. Learn more [here](./#type-aware-rules) about potential pitfalls.
+
+Create an `eslint.config.js` file in your project root:
+
+```js
+import {defineConfig} from "eslint/config"
+import globals from "globals"
+import * as tseslint from "typescript-eslint"
+
+import quiEslintAngular from "@qualcomm-ui/eslint-config-angular"
+import quiEslintTs from "@qualcomm-ui/eslint-config-typescript"
+
+const tsLanguageOptions = {
+  globals: globals.browser,
+  parser: tseslint.parser,
+  parserOptions: {
+    projectService: true,
+  },
+}
+
+export default defineConfig([
+  {
+    ignores: [
+      "**/.angular/",
+      "**/dist/",
+      "**/node_modules/",
+      "**/build/",
+      "**/coverage/",
+      "**/.turbo/",
+      "**/out/",
+      "**/out-tsc/",
+      "**/temp/",
+      "**/vite.config.ts.timestamp*",
+    ],
+  },
+  {
+    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+    },
+  },
+  // JS
+  {
+    extends: [
+      quiEslintTs.configs.base,
+      quiEslintTs.configs.sortKeys,
+      quiEslintTs.configs.styleGuide,
+    ],
+    files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
+    languageOptions: {globals: globals.browser},
+  },
+  // TS
+  {
+    extends: [
+      ...quiEslintTs.configs.recommended,
+      quiEslintTs.configs.performance,
+      quiEslintTs.configs.strictExports,
+    ],
+    files: ["**/*.{ts,tsx}"],
+    languageOptions: tsLanguageOptions,
+  },
+  // Angular
+  {
+    extends: [
+      ...quiEslintTs.configs.recommended,
+      quiEslintTs.configs.performance,
+      quiEslintAngular.configs.baseTypescript,
+      quiEslintAngular.configs.typescript,
+    ],
+    files: ["src/**/*.ts"],
+    languageOptions: tsLanguageOptions,
+  },
+  {
+    extends: [
+      quiEslintAngular.configs.baseTemplate,
+      quiEslintAngular.configs.templatePrettier,
+      quiEslintAngular.configs.templateAttributeOrder,
+      quiEslintAngular.configs.templateSelfClosingTags,
+    ],
+    files: ["src/**/*.html"],
+  },
+])
 ```

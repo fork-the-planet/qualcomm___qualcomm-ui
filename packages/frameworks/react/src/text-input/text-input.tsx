@@ -154,7 +154,8 @@ export function TextInput({
   // prevent undefined labels from overwriting defaults
   if (ariaLabel !== undefined) {
     inputProps["aria-label"] = ariaLabel
-  } else if (ariaLabelledBy !== undefined) {
+  }
+  if (ariaLabelledBy !== undefined) {
     inputProps["aria-labelledby"] = ariaLabelledBy
   }
 

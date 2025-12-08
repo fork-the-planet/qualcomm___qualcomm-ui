@@ -8,7 +8,7 @@ export const QUI_PACKAGE_PREFIXES = [
   "@qualcomm-ui/react-internal/",
 ] as const
 
-export function isQUIPackage(source: string): boolean {
+export function isQuiPackage(source: string): boolean {
   return QUI_PACKAGE_PREFIXES.some((prefix) => source.startsWith(prefix))
 }
 
@@ -55,7 +55,7 @@ export function hasValidAriaLabel(
   return false
 }
 
-export function getJSXElementName(name: TSESTree.JSXOpeningElement["name"]): {
+export function getJsxElementName(name: TSESTree.JSXOpeningElement["name"]): {
   identifier: string | null
   namespace: string | null
   property: string | null

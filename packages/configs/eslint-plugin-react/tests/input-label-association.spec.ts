@@ -284,7 +284,7 @@ describe("input-label-association", () => {
         {
           code: `
             import {Combobox} from "@qualcomm-ui/react/combobox"
-            const App = () => <Combobox controlProps={{"aria-label": "Country"}} />
+            const App = () => <Combobox inputProps={{"aria-label": "Country"}} />
           `,
         },
       ],
@@ -357,6 +357,18 @@ describe("input-label-association", () => {
           code: `
             import {Select} from "@qualcomm-ui/react/select"
             const App = () => <Select aria-label="Country" />
+          `,
+        },
+        {
+          code: `
+            import {Checkbox} from "@qualcomm-ui/react/checkbox"
+            const App = () => <Checkbox aria-label="Accept terms" />
+          `,
+        },
+        {
+          code: `
+            import {Radio} from "@qualcomm-ui/react/radio"
+            const App = () => <Radio aria-label="Option A" />
           `,
         },
       ],

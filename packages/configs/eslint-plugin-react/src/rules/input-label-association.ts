@@ -9,9 +9,9 @@ import {
 
 import {
   getAttributeValue,
-  getJSXElementName,
+  getJsxElementName,
   hasValidAriaLabel,
-  isQUIPackage,
+  isQuiPackage,
 } from "./utils"
 
 const createRule = ESLintUtils.RuleCreator(
@@ -346,7 +346,7 @@ export const inputLabelAssociation = createRule<[], MessageIds>({
     return {
       ImportDeclaration(node) {
         const source = node.source.value
-        if (typeof source !== "string" || !isQUIPackage(source)) {
+        if (typeof source !== "string" || !isQuiPackage(source)) {
           return
         }
 
@@ -369,7 +369,7 @@ export const inputLabelAssociation = createRule<[], MessageIds>({
       },
 
       JSXOpeningElement(node) {
-        const {identifier, namespace, property} = getJSXElementName(node.name)
+        const {identifier, namespace, property} = getJsxElementName(node.name)
         let originalName: string | null = null
         let localName: string | null = null
         let isCompoundRoot = false

@@ -79,7 +79,7 @@ export function Switch({
   controlProps,
   errorText,
   errorTextProps,
-  hiddenInputProps,
+  hiddenInputProps: hiddenInputPropsProp,
   label,
   labelProps,
   thumbProps,
@@ -87,6 +87,17 @@ export function Switch({
 }: SwitchProps): ReactElement {
   const labelContent = label || labelProps?.children
   const errorTextContent = errorText || errorTextProps?.children
+
+  const hiddenInputProps = {
+    ...hiddenInputPropsProp,
+  }
+
+  if (ariaLabel !== undefined) {
+    hiddenInputProps["aria-label"] = ariaLabel
+  }
+  if (ariaLabelledBy !== undefined) {
+    hiddenInputProps["aria-labelledby"] = ariaLabelledBy
+  }
 
   const ids = {
     errorText: useOptionalContentId(errorTextContent, errorTextProps),
@@ -98,12 +109,7 @@ export function Switch({
 
   return (
     <SwitchRoot {...props} ids={ids}>
-      <SwitchHiddenInput
-        aria-label={ariaLabel}
-        aria-labelledby={ariaLabelledBy}
-        {...hiddenInputProps}
-        id={ids.hiddenInput}
-      />
+      <SwitchHiddenInput {...hiddenInputProps} id={ids.hiddenInput} />
       <SwitchControl {...controlProps}>
         <SwitchThumb {...thumbProps} />
       </SwitchControl>

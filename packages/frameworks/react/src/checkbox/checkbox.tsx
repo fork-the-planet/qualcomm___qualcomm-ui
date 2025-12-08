@@ -91,7 +91,7 @@ export function Checkbox({
   controlProps,
   errorText,
   errorTextProps,
-  hiddenInputProps,
+  hiddenInputProps: hiddenInputPropsProp,
   indicatorProps,
   label,
   labelProps,
@@ -99,6 +99,17 @@ export function Checkbox({
 }: CheckboxProps): ReactElement {
   const labelContent = label || labelProps?.children
   const errorTextContent = errorText || errorTextProps?.children
+
+  const hiddenInputProps = {
+    ...hiddenInputPropsProp,
+  }
+
+  if (ariaLabel !== undefined) {
+    hiddenInputProps["aria-label"] = ariaLabel
+  }
+  if (ariaLabelledBy !== undefined) {
+    hiddenInputProps["aria-labelledby"] = ariaLabelledBy
+  }
 
   const ids: Partial<CheckboxElementIds> = {
     errorText: useOptionalContentId(errorTextContent, errorTextProps),
@@ -110,12 +121,7 @@ export function Checkbox({
 
   return (
     <CheckboxRoot {...props} id={ids.root} ids={ids}>
-      <CheckboxHiddenInput
-        aria-label={ariaLabel}
-        aria-labelledby={ariaLabelledBy}
-        {...hiddenInputProps}
-        id={ids.hiddenInput}
-      />
+      <CheckboxHiddenInput {...hiddenInputProps} id={ids.hiddenInput} />
       <CheckboxControl {...controlProps}>
         <CheckboxIndicator {...indicatorProps} />
       </CheckboxControl>

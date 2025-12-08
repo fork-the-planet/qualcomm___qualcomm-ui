@@ -188,7 +188,7 @@ export function Combobox<T extends CollectionItem = CollectionItem>({
   highlightMatchingText,
   hint,
   hintProps,
-  inputProps,
+  inputProps: inputPropsProp,
   label,
   labelProps,
   portalProps,
@@ -203,6 +203,17 @@ export function Combobox<T extends CollectionItem = CollectionItem>({
   const labelContent = label || labelProps?.children
   const hintContent = hint || hintProps?.children
   const errorTextContent = errorText || errorTextProps?.children
+
+  const inputProps = {
+    ...inputPropsProp,
+  }
+
+  if (ariaLabel !== undefined) {
+    inputProps["aria-label"] = ariaLabel
+  }
+  if (ariaLabelledBy !== undefined) {
+    inputProps["aria-labelledby"] = ariaLabelledBy
+  }
 
   const ids = {
     clearTrigger: useOptionalContentId(
@@ -228,12 +239,7 @@ export function Combobox<T extends CollectionItem = CollectionItem>({
         </ComboboxLabel>
       ) : null}
       <ComboboxControl {...controlProps} id={ids.control}>
-        <ComboboxInput
-          aria-label={ariaLabel}
-          aria-labelledby={ariaLabelledBy}
-          {...inputProps}
-          id={ids.input}
-        />
+        <ComboboxInput {...inputProps} id={ids.input} />
         <ComboboxClearTrigger {...clearTriggerProps} id={ids.clearTrigger} />
         <ComboboxErrorIndicator {...errorIndicatorProps} />
         <ComboboxTrigger {...triggerProps} id={ids.trigger} />
