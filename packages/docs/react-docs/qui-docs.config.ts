@@ -15,8 +15,8 @@ export default {
       id: "setup",
     },
     {
-      children: [{id: "tailwind"}],
       id: "integrations",
+      title: "Integrations & Configs",
     },
     {separator: true},
     {sectionTitle: "Theming & Patterns"},

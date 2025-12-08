@@ -38,6 +38,19 @@ import {ComboboxVirtualContent} from "./combobox-virtual-content"
 export interface ComboboxProps<T extends CollectionItem>
   extends ComboboxRootProps<T> {
   /**
+   * {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-label aria-label}
+   * attribute, forwarded to the input element.
+   */
+  "aria-label"?: string | undefined
+
+  /**
+   * {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-labelledby aria-labelledby}
+   * attribute, forwarded to the input element. If you provide a {@link label},
+   * omit this prop.
+   */
+  "aria-labelledby"?: string | undefined
+
+  /**
    * Props applied to the clear trigger element. To prevent this element from
    * rendering, pass `{hidden: true}`
    *
@@ -162,6 +175,8 @@ export interface ComboboxProps<T extends CollectionItem>
 }
 
 export function Combobox<T extends CollectionItem = CollectionItem>({
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
   clearTriggerProps,
   contentProps,
   controlProps,
@@ -173,7 +188,7 @@ export function Combobox<T extends CollectionItem = CollectionItem>({
   highlightMatchingText,
   hint,
   hintProps,
-  inputProps,
+  inputProps: inputPropsProp,
   label,
   labelProps,
   portalProps,
@@ -188,6 +203,17 @@ export function Combobox<T extends CollectionItem = CollectionItem>({
   const labelContent = label || labelProps?.children
   const hintContent = hint || hintProps?.children
   const errorTextContent = errorText || errorTextProps?.children
+
+  const inputProps = {
+    ...inputPropsProp,
+  }
+
+  if (ariaLabel !== undefined) {
+    inputProps["aria-label"] = ariaLabel
+  }
+  if (ariaLabelledBy !== undefined) {
+    inputProps["aria-labelledby"] = ariaLabelledBy
+  }
 
   const ids = {
     clearTrigger: useOptionalContentId(

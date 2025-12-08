@@ -19,6 +19,7 @@ import {MenuItemCommandDirective} from "./menu-item-command.directive"
 import {MenuItemGroupLabelDirective} from "./menu-item-group-label.directive"
 import {MenuItemGroupDirective} from "./menu-item-group.directive"
 import {MenuItemIndicatorComponent} from "./menu-item-indicator.component"
+import {MenuItemLabelDirective} from "./menu-item-label.directive"
 import {MenuItemStartIconComponent} from "./menu-item-start-icon.component"
 import {MenuItemDirective} from "./menu-item.directive"
 import {MenuPositionerComponent} from "./menu-positioner.component"
@@ -50,6 +51,7 @@ import {MenuComponent} from "./menu.component"
     MenuButtonComponent,
     MenuCheckboxItemDirective,
     MenuRadioItemGroupDirective,
+    MenuItemLabelDirective,
   ],
   exports: [
     MenuComponent,
@@ -70,6 +72,7 @@ import {MenuComponent} from "./menu.component"
     MenuButtonComponent,
     MenuCheckboxItemDirective,
     MenuRadioItemGroupDirective,
+    MenuItemLabelDirective,
   ],
   imports: [
     QBindDirective,

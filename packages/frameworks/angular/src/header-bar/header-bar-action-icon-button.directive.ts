@@ -1,7 +1,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {Component, computed, input} from "@angular/core"
+import {Component, computed, input, type OnInit} from "@angular/core"
 
 import {useIconButtonApi} from "@qualcomm-ui/angular/button"
 import {QuiPreloadDirective} from "@qualcomm-ui/angular/transitions"
@@ -19,7 +19,7 @@ import {useTrackBindings} from "@qualcomm-ui/angular-core/machine"
     }
   `,
 })
-export class HeaderBarActionIconButtonDirective {
+export class HeaderBarActionIconButtonDirective implements OnInit {
   /**
    * {@link https://lucide.dev/icons lucide-angular} icon.
    */
@@ -39,7 +39,7 @@ export class HeaderBarActionIconButtonDirective {
     this.iconButtonApi().getRootBindings(),
   )
 
-  constructor() {
+  ngOnInit() {
     this.trackBindings()
   }
 }

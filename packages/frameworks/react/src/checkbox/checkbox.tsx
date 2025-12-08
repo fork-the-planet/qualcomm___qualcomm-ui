@@ -25,6 +25,19 @@ import {CheckboxRoot, type CheckboxRootProps} from "./checkbox-root"
 
 export interface CheckboxProps extends CheckboxRootProps {
   /**
+   * {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-label aria-label}
+   * attribute, forwarded to the hidden input element.
+   */
+  "aria-label"?: string | undefined
+
+  /**
+   * {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-labelledby aria-labelledby}
+   * attribute, forwarded to the hidden input element. If you provide a {@link
+   * label}, omit this prop.
+   */
+  "aria-labelledby"?: string | undefined
+
+  /**
    * The simple Checkbox doesn't support children.
    */
   children?: never
@@ -73,10 +86,12 @@ export interface CheckboxProps extends CheckboxRootProps {
 }
 
 export function Checkbox({
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
   controlProps,
   errorText,
   errorTextProps,
-  hiddenInputProps,
+  hiddenInputProps: hiddenInputPropsProp,
   indicatorProps,
   label,
   labelProps,
@@ -84,6 +99,17 @@ export function Checkbox({
 }: CheckboxProps): ReactElement {
   const labelContent = label || labelProps?.children
   const errorTextContent = errorText || errorTextProps?.children
+
+  const hiddenInputProps = {
+    ...hiddenInputPropsProp,
+  }
+
+  if (ariaLabel !== undefined) {
+    hiddenInputProps["aria-label"] = ariaLabel
+  }
+  if (ariaLabelledBy !== undefined) {
+    hiddenInputProps["aria-labelledby"] = ariaLabelledBy
+  }
 
   const ids: Partial<CheckboxElementIds> = {
     errorText: useOptionalContentId(errorTextContent, errorTextProps),

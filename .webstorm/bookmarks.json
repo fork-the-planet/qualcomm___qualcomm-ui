@@ -172,6 +172,50 @@
     ]
   },
   {
+    "avatar": [
+      {
+        "description": "angular-docs",
+        "provider": "com.intellij.ide.bookmark.providers.LineBookmarkProvider",
+        "url": "file://$PROJECT_DIR$/packages/docs/angular-docs/src/routes/components+/avatar+"
+      },
+      {
+        "description": "react-docs",
+        "provider": "com.intellij.ide.bookmark.providers.LineBookmarkProvider",
+        "url": "file://$PROJECT_DIR$/packages/docs/react-docs/src/routes/components+/avatar+"
+      },
+      {
+        "description": "angular",
+        "provider": "com.intellij.ide.bookmark.providers.LineBookmarkProvider",
+        "url": "file://$PROJECT_DIR$/packages/frameworks/angular/src/avatar"
+      },
+      {
+        "description": "angular-core",
+        "provider": "com.intellij.ide.bookmark.providers.LineBookmarkProvider",
+        "url": "file://$PROJECT_DIR$/packages/frameworks/angular-core/src/avatar"
+      },
+      {
+        "description": "react",
+        "provider": "com.intellij.ide.bookmark.providers.LineBookmarkProvider",
+        "url": "file://$PROJECT_DIR$/packages/frameworks/react/src/avatar"
+      },
+      {
+        "description": "react-core",
+        "provider": "com.intellij.ide.bookmark.providers.LineBookmarkProvider",
+        "url": "file://$PROJECT_DIR$/packages/frameworks/react-core/src/avatar"
+      },
+      {
+        "description": "core",
+        "provider": "com.intellij.ide.bookmark.providers.LineBookmarkProvider",
+        "url": "file://$PROJECT_DIR$/packages/common/core/src/avatar"
+      },
+      {
+        "description": "qds-core",
+        "provider": "com.intellij.ide.bookmark.providers.LineBookmarkProvider",
+        "url": "file://$PROJECT_DIR$/packages/common/qds-core/src/avatar"
+      }
+    ]
+  },
+  {
     "badge": [
       {
         "description": "angular-docs",

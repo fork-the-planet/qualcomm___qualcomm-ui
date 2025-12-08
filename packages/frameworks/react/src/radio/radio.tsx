@@ -13,6 +13,19 @@ import {RadioRoot, type RadioRootProps} from "./radio-root"
 
 export interface RadioProps extends RadioRootProps {
   /**
+   * {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-label aria-label}
+   * attribute, forwarded to the hidden input element.
+   */
+  "aria-label"?: string | undefined
+
+  /**
+   * {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-labelledby aria-labelledby}
+   * attribute, forwarded to the hidden input element. If you provide a {@link
+   * label}, omit this prop.
+   */
+  "aria-labelledby"?: string | undefined
+
+  /**
    * The simple Radio doesn't support children.
    */
   children?: never
@@ -44,13 +57,27 @@ export interface RadioProps extends RadioRootProps {
 }
 
 export function Radio({
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
   controlProps,
-  hiddenInputProps,
+  hiddenInputProps: hiddenInputPropsProp,
   label,
   labelProps,
   ...props
 }: RadioProps): ReactElement {
   const labelContent = label || labelProps?.children
+
+  const hiddenInputProps = {
+    ...hiddenInputPropsProp,
+  }
+
+  if (ariaLabel !== undefined) {
+    hiddenInputProps["aria-label"] = ariaLabel
+  }
+  if (ariaLabelledBy !== undefined) {
+    hiddenInputProps["aria-labelledby"] = ariaLabelledBy
+  }
+
   return (
     <RadioRoot {...props}>
       <RadioHiddenInput {...hiddenInputProps} />

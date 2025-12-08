@@ -16,18 +16,21 @@ import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 
       <!-- preview -->
       <button
+        aria-label="External Link"
         emphasis="neutral"
         icon="ExternalLink"
         q-icon-button
         variant="fill"
       ></button>
       <button
+        aria-label="External Link"
         emphasis="primary"
         icon="ExternalLink"
         q-icon-button
         variant="fill"
       ></button>
       <button
+        aria-label="External Link"
         emphasis="danger"
         icon="ExternalLink"
         q-icon-button

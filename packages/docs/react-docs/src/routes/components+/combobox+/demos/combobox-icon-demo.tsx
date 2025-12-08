@@ -22,10 +22,10 @@ export function ComboboxIconDemo() {
   return (
     // preview
     <Combobox
+      aria-label="Country"
       className="w-48"
       collection={collection}
       icon={MapPin}
-      inputProps={{"aria-label": "Country"}}
       onInputValueChange={handleInputChange}
       placeholder="Select a country"
     />

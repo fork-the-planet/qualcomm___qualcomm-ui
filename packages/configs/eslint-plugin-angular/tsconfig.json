@@ -1,0 +1,14 @@
+{
+  "extends": "@qualcomm-ui/tsconfig/tsconfig.esnext.json",
+  "references": [
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
+}

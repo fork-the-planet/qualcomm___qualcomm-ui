@@ -20,27 +20,27 @@ export function ComboboxSizesDemo() {
   return (
     <div className="flex flex-col items-center gap-4">
       <Combobox
+        aria-label="City"
         className="w-40"
         collection={collection}
-        inputProps={{"aria-label": "City"}}
         onInputValueChange={handleInputChange}
         placeholder="sm"
         positioning={{sameWidth: true}}
         size="sm"
       />
       <Combobox
+        aria-label="City"
         className="w-48"
         collection={collection}
-        inputProps={{"aria-label": "City"}}
         onInputValueChange={handleInputChange}
         placeholder="md"
         positioning={{sameWidth: true}}
         size="md"
       />
       <Combobox
+        aria-label="City"
         className="w-56"
         collection={collection}
-        inputProps={{"aria-label": "City"}}
         onInputValueChange={handleInputChange}
         placeholder="lg"
         positioning={{sameWidth: true}}

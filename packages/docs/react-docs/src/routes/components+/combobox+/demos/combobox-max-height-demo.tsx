@@ -20,10 +20,10 @@ export function ComboboxMaxHeightDemo() {
   return (
     // preview
     <Combobox
+      aria-label="Country"
       className="w-48"
       collection={collection}
       contentProps={{style: {maxHeight: 240}}}
-      inputProps={{"aria-label": "Country"}}
       onInputValueChange={handleInputChange}
       placeholder="Select a country"
       positioning={{sameWidth: true}}

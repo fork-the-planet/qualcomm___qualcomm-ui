@@ -44,6 +44,6 @@
     "@angular/compiler-cli": "catalog:",
     "@types/express": "^5.0.1",
     "@types/node": "~24.9.2",
-    "typescript": "5.9.3"
+    "typescript": "catalog:"
   }
 }
