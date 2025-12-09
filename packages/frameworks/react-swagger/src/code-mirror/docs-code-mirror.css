@@ -1,0 +1,24 @@
+.q-code-mirror {
+  position: relative;
+
+  .actions-wrapper {
+    position: absolute;
+    right: 20px;
+    top: 4px;
+    display: inline-flex;
+    justify-content: flex-end;
+  }
+
+  .cm-scroller {
+    font-size: 14px;
+    font-family: var(--q-font-mono);
+  }
+}
+
+.cm-gutter {
+  background-color: var(--q-background-2);
+
+  .cm-activeLineGutter {
+    background-color: var(--q-background-2);
+  }
+}

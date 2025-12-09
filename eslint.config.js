@@ -189,7 +189,7 @@ export default defineConfig(
       quiEslintReact.configs.recommended,
     ],
     files: [
-      "packages/*/{react-mdx,react,react-core,react-docs,react-internal,react-table-docs,react-router-utils,react-vscode}/**/*.{ts,tsx}",
+      "packages/*/{react-mdx,react,react-core,react-docs,react-internal,react-swagger,react-table-docs,react-router-utils,react-vscode}/**/*.{ts,tsx}",
       "packages/docs/angular-docs/src/**/*.tsx",
     ],
     languageOptions,
@@ -211,19 +211,7 @@ export default defineConfig(
   {
     extends: [quiPathAlias.configs.recommended],
     files: [
-      "packages/*/{angular-core,angular,core,dom,react-mdx,qds-core,react-core,utils}/**/*.{ts,tsx}",
-    ],
-    languageOptions,
-  },
-
-  // react (nextgen only)
-  {
-    extends: [quiPathAlias.configs.recommended],
-    files: ["packages/frameworks/react/src/**/*.{ts,tsx}"],
-    ignores: [
-      "packages/frameworks/react/src/legacy/**/*",
-      "packages/frameworks/react/src/components/*/internal/q-*.{ts,tsx}",
-      "packages/frameworks/react/src/components/*/q-*.{ts,tsx}",
+      "packages/*/{angular-core,angular,core,dom,react-mdx,qds-core,react,react-core,utils}/**/*.{ts,tsx}",
     ],
     languageOptions,
   },

@@ -1,0 +1,17 @@
+.api-key-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.oauth-wrapper {
+  padding-top: 16px;
+}
+
+.oauth2-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
