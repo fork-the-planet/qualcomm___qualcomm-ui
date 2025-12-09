@@ -8,7 +8,7 @@ ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
 
 RUN set -ex; \
    apt-get update; \
-   apt-get install -y --no-install-recommends lsof curl wget; \
+   apt-get install -y --no-install-recommends lsof curl git wget; \
    rm -rf /var/lib/apt/lists/*
 
 # install and build
