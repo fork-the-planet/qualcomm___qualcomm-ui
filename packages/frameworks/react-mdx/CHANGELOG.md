@@ -1,5 +1,15 @@
 # @qualcomm-ui/react-mdx
 
+## 1.7.0 (2025/12/08)
+
+### Features
+
+- [docs-layout]: add last updated metadata display
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common]
+
 ## 1.6.3 (2025/12/08)
 
 ### Bug Fixes
