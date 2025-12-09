@@ -5,6 +5,7 @@ import chalk from "chalk"
 import {execSync} from "node:child_process"
 import {createHash} from "node:crypto"
 import {readFileSync} from "node:fs"
+import {relative} from "node:path"
 import remarkFrontmatter from "remark-frontmatter"
 import remarkParse from "remark-parse"
 import remarkParseFrontmatter from "remark-parse-frontmatter"
@@ -24,6 +25,12 @@ export interface GitMetadata {
   updatedOn?: string
 }
 
+function getRepoRoot(): string {
+  return execSync("git rev-parse --show-toplevel", {
+    encoding: "utf-8",
+  }).trim()
+}
+
 /**
  * Gets the last git commit metadata for a file.
  * Returns undefined values if the file is not tracked by git or if git is
@@ -38,11 +45,17 @@ export function getGitMetadata(
   }
 
   try {
+    const repoRoot = getRepoRoot()
+    const relativePath = relative(repoRoot, filePath)
     const format = mode === "user-and-timestamp" ? "%cI%n%aN" : "%cI"
-    const result = execSync(`git log -1 --format=${format} -- "${filePath}"`, {
-      encoding: "utf-8",
-      stdio: ["pipe", "pipe", "pipe"],
-    }).trim()
+    const result = execSync(
+      `git log -1 --format=${format} -- "${relativePath}"`,
+      {
+        cwd: repoRoot,
+        encoding: "utf-8",
+        stdio: ["pipe", "pipe", "pipe"],
+      },
+    ).trim()
 
     if (!result) {
       return {}
