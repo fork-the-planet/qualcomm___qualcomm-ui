@@ -48,6 +48,7 @@ export function getGitMetadata(
     const repoRoot = getRepoRoot()
     const relativePath = relative(repoRoot, filePath)
     const format = mode === "user-and-timestamp" ? "%cI%n%aN" : "%cI"
+    console.debug({filePath, relativePath, repoRoot})
     const result = execSync(
       `git log -1 --format=${format} -- "${relativePath}"`,
       {
