@@ -33,6 +33,8 @@ export const frontmatterSchema: ZodObject<{}> =
     restricted: z.boolean().optional(),
     sideNavTitle: z.string().optional(),
     title: z.string(),
+    updatedBy: z.string().optional(),
+    updatedOn: z.string().optional(),
   })
 
 /**

@@ -61,6 +61,13 @@ export const configSchema = implement<QuiDocsConfig>().with({
   hotUpdateIgnore: z.instanceof(RegExp).optional(),
   navConfig: z.array(z.union([routeMetaSchema, navMetaSchema])).optional(),
   pageDirectory: z.string().optional(),
+  pageTimestampMetadata: z
+    .union([
+      z.literal("off"),
+      z.literal("timestamp"),
+      z.literal("user-and-timestamp"),
+    ])
+    .optional(),
   routingStrategy: z
     .union([
       z.literal("vite-generouted"),
