@@ -26,9 +26,6 @@ jobs:
     - name: clone
       id: install
       uses: actions/checkout@v4
-      with:
-        # Ensure that docs sites can apply the proper timestamps to pages, which are git-based.
-        fetch-depth: 0
 
     - uses: ./.github/actions/init-node-and-install
 
