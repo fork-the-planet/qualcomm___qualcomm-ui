@@ -1,3 +1,6 @@
+// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+// SPDX-License-Identifier: BSD-3-Clause-Clear
+
 import type {ComponentPropsWithoutRef, ReactElement} from "react"
 
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
