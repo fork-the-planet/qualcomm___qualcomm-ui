@@ -739,7 +739,7 @@ importers:
         specifier: workspace:^1.0.4
         version: link:../esbuild
       '@qualcomm-ui/mdx-common':
-        specifier: workspace:^1.4.0
+        specifier: workspace:^1.5.0
         version: link:../mdx-common
       '@qualcomm-ui/tsconfig':
         specifier: workspace:^1.0.4
@@ -1316,7 +1316,7 @@ importers:
         specifier: ^0.4.0
         version: 0.4.0
       tsx:
-        specifier: ^4.20.3
+        specifier: ^4.20.6
         version: 4.20.6
       typescript:
         specifier: 5.9.3
@@ -1386,7 +1386,7 @@ importers:
         specifier: ^0.4.0
         version: 0.4.0
       tsx:
-        specifier: ^4.20.3
+        specifier: ^4.20.6
         version: 4.20.6
       typescript:
         specifier: 5.9.3
@@ -4050,6 +4050,9 @@ importers:
       babel-plugin-react-compiler:
         specifier: ^1.0.0
         version: 1.0.0
+      dayjs:
+        specifier: ^1.11.19
+        version: 1.11.19
       esbuild:
         specifier: ^0.25.8
         version: 0.25.12

@@ -114,5 +114,6 @@ export default {
     },
   ],
   pageDirectory: "routes",
+  pageTimestampMetadata: "user-and-timestamp",
   typeDocProps: ".typedoc/doc-props.json",
 } satisfies QuiDocsConfig

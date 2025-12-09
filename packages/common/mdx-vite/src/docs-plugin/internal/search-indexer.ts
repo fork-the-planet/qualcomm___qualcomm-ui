@@ -108,6 +108,7 @@ export class SearchIndexer {
       addons.fileCache ||
       new MarkdownFileReader(
         process.env.NODE_ENV === "development" && !this.config.disableCache,
+        this.config.pageTimestampMetadata,
       )
   }
 
@@ -172,6 +173,8 @@ export class SearchIndexer {
       title: defined(routeMeta.title)
         ? routeMeta.title || ""
         : frontmatter.title || "",
+      updatedBy: frontmatter.updatedBy,
+      updatedOn: frontmatter.updatedOn,
     }
   }
 

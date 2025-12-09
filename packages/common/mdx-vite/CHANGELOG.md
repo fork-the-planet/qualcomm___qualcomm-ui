@@ -1,5 +1,20 @@
 # @qualcomm-ui/mdx-vite
 
+## 2.6.0 (2025/12/08)
+
+### Features
+
+- [docs]: add git-derived updated metadata to pages
+- [docs]: populate page updatedOn/updatedBy from git history
+
+### Tests
+
+- [docs]: mock git child_process calls in docs indexer specs
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common]
+
 ## 2.5.4 (2025/12/05)
 
 ### Bug Fixes
