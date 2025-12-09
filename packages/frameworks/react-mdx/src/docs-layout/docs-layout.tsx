@@ -6,6 +6,7 @@ import type {ReactNode} from "react"
 import type {ElementRenderProp} from "@qualcomm-ui/react-core/system"
 
 import {Layout} from "./layout"
+import {UpdatedOn} from "./layout/updated-on"
 import type {DocsLayoutSettings} from "./types"
 
 export interface DocsLayoutProps extends DocsLayoutSettings {
@@ -42,6 +43,8 @@ export function DocsLayout({
                 <Layout.Breadcrumbs rootBreadcrumb={rootBreadcrumb} />
 
                 {children}
+
+                <UpdatedOn />
 
                 {!hidePageLinks && <Layout.PageLinks />}
               </Layout.MainContent>
