@@ -54,6 +54,7 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "babel-plugin-react-compiler": "^1.0.0",
+    "dayjs": "^1.11.19",
     "lucide-react": "0.525.0",
     "quick-lru": "^7.2.0",
     "react": "catalog:",
