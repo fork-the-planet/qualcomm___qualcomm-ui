@@ -1,5 +1,11 @@
 # @qualcomm-ui/mdx-vite
 
+## 2.6.1 (2025/12/08)
+
+### Bug Fixes
+
+- [mdx-vite]: resolve git metadata repo root
+
 ## 2.6.0 (2025/12/08)
 
 ### Features
