@@ -4,7 +4,7 @@
     "baseUrl": "./",
     "composite": true,
     "moduleResolution": "bundler",
-    "tsBuildInfoFile": "dist/.tsbuildinfo",
+    "tsBuildInfoFile": "node_modules/.tmp/tsbuildinfo",
     "module": "esnext",
     "target": "esnext"
   },

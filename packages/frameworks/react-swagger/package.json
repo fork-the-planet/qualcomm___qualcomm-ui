@@ -12,6 +12,10 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./styles.css": {
+      "style": "./dist/all.min.css",
+      "default": "./dist/all.min.css"
     }
   },
   "types": "./dist/index.d.ts",
@@ -22,13 +26,15 @@
     "dist"
   ],
   "scripts": {
-    "build": "run-s clean build:js build:ts",
-    "clean": "shx rm -rf node_modules/.tmp/tsbuildinfo dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map",
+    "build": "run-s clean build:js build:ts build:css",
+    "clean": "shx rm -rf node_modules/.tmp/tsbuildinfo dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map dist/all.min.css",
     "build:js": "tsx build.ts",
     "build:ts": "tsc -b tsconfig.lib.json",
-    "dev": "run-p watch:js watch:ts",
+    "build:css": "qui-css-utils build",
+    "dev": "run-p watch:js watch:ts watch:css",
     "watch:js": "tsx build.ts --watch --mode development",
     "watch:ts": "pnpm build:ts -w --preserveWatchOutput",
+    "watch:css": "qui-css-utils watch",
     "lint": "eslint --quiet",
     "test": "vitest -c vitest.config.ts --run",
     "test:coverage": "vitest -c vitest.config.ts --run --coverage",

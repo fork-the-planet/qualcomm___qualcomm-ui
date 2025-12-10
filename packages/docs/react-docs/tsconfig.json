@@ -3,21 +3,23 @@
   "compilerOptions": {
     "baseUrl": "./",
     "module": "esnext",
-    "target": "esnext"
+    "target": "esnext",
+    "paths": {
+      // fixes WebStorm usage detection, not used otherwise
+      "@qualcomm-ui/react/*": ["../../frameworks/react/src/*"],
+      "@qualcomm-ui/react-core/*": ["../../frameworks/react-core/src/*"],
+      "@qualcomm-ui/core/*": ["../../common/core/src/*"],
+      "@qualcomm-ui/dom/*": ["../../common/dom/src/*"],
+      "@qualcomm-ui/qds-core/*": ["../../common/qds-core/src/*"],
+      "@qualcomm-ui/utils/*": ["../../common/utils/src/*"]
+    }
   },
-  "include": [
-    "types.d.ts",
-    "./src"
-  ],
   "references": [
+    {
+      "path": "./tsconfig.lib.json"
+    },
     {
       "path": "./tsconfig.node.json"
     },
-    {
-      "path": "../../frameworks/react/tsconfig.lib.json"
-    },
-    {
-      "path": "../../common/mdx-vite/tsconfig.lib.json"
-    }
   ]
 }

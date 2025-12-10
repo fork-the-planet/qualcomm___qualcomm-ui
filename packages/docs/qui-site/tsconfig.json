@@ -1,15 +1,42 @@
 {
-  "extends": "@qualcomm-ui/tsconfig/tsconfig.react-docs.json",
+  "extends": "@qualcomm-ui/tsconfig/tsconfig.strict.json",
   "compilerOptions": {
-    "baseUrl": "./"
+    "composite": true,
+    "baseUrl": "./",
+    "outDir": "./dist",
+    "paths": {
+      // fixes WebStorm usage detection, not used otherwise
+      "@qualcomm-ui/react/*": ["./src/*/index.ts"],
+      "~test-utils/runner": ["./test-utils/runner.ts"],
+      "@qualcomm-ui/core/*": ["../../common/core/src/*"],
+      "@qualcomm-ui/dom/*": ["../../common/dom/src/*"],
+      "@qualcomm-ui/qds-core/*": ["../../common/qds-core/src/*"],
+      "@qualcomm-ui/react-core/*": ["../react-core/src/*"],
+      "@qualcomm-ui/utils/*": ["../../common/utils/src/*"]
+    }
   },
-  "include": [
-    "types.d.ts",
-    "./src"
-  ],
+  "include": ["./src"],
   "references": [
     {
+      "path": "./tsconfig.lib.json"
+    },
+    {
       "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "../react-core/tsconfig.lib.json"
+    },
+    {
+      "path": "../../common/core/tsconfig.lib.json"
+    },
+    {
+      "path": "../../common/qds-core/tsconfig.lib.json"
+    },
+    {
+      "path": "../../common/utils/tsconfig.lib.json"
     }
   ]
 }

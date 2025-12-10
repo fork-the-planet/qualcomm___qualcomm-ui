@@ -3,25 +3,21 @@
   "compilerOptions": {
     "baseUrl": "./",
     "composite": true,
-    "moduleResolution": "bundler",
-    "tsBuildInfoFile": "node_modules/.tmp/tsbuildinfo",
+    "outDir": "./dist",
+    "rootDir": "./src",
     "module": "esnext",
     "target": "esnext"
   },
   "include": [
-    "./src",
-    "types.d.ts"
+    "types.d.ts",
+    "./src"
   ],
-  "exclude": ["./src/routes/**/demos/*.ts"],
   "references": [
     {
-      "path": "./tsconfig.node.json"
+      "path": "../../frameworks/react/tsconfig.lib.json"
     },
     {
       "path": "../../common/mdx-vite/tsconfig.lib.json"
-    },
-    {
-      "path": "../../frameworks/react-internal/tsconfig.lib.json"
     }
   ]
 }
