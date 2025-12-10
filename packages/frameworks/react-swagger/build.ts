@@ -11,6 +11,7 @@ async function build(argv: string[]) {
     },
     bundle: true,
     external: [
+      ...Object.keys(pkg.dependencies ?? {}),
       ...Object.keys(pkg.devDependencies ?? {}),
       ...Object.keys(pkg.peerDependencies ?? {}),
       "@tanstack/virtual-core",

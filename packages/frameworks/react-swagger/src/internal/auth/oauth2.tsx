@@ -8,6 +8,8 @@ import {TextInput} from "@qualcomm-ui/react/text-input"
 
 import type {GetComponent} from "../types"
 
+import {authorizeOauth2} from "./utils"
+
 Oauth2.displayName = "Oauth2"
 
 export interface Oauth2Props {

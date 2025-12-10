@@ -29,8 +29,8 @@ export function AuthorizationPopup({
   return (
     <Dialog.Root
       defaultOpen
-      onOpenChange={(details) => {
-        if (!details.open) {
+      onOpenChange={(open) => {
+        if (!open) {
           close()
         }
       }}
