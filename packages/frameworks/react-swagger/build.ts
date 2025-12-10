@@ -10,6 +10,7 @@ async function build(argv: string[]) {
       js: `"use client";`,
     },
     bundle: true,
+    entryPoints: ["./src/index.ts"],
     external: [
       ...Object.keys(pkg.dependencies ?? {}),
       ...Object.keys(pkg.devDependencies ?? {}),

@@ -1,30 +1,23 @@
 {
-  "extends": "@qualcomm-ui/tsconfig/tsconfig.strict.json",
+  "extends": "@qualcomm-ui/tsconfig/tsconfig.react-docs.json",
   "compilerOptions": {
-    "composite": true,
     "baseUrl": "./",
-    "incremental": true,
+    "composite": true,
     "outDir": "./dist",
     "rootDir": "./src",
-    "tsBuildInfoFile": "node_modules/.tmp/tsbuildinfo",
-    "paths": {
-      "@qualcomm-ui/react/*": ["./src/*/index.ts"],
-    }
+    "module": "esnext",
+    "target": "esnext"
   },
-  "include": ["./src"],
-  "exclude": ["./src/**/*.spec.tsx"],
+  "include": [
+    "types.d.ts",
+    "./src"
+  ],
   "references": [
     {
-      "path": "../react-core/tsconfig.lib.json"
+      "path": "../../frameworks/react/tsconfig.lib.json"
     },
     {
-      "path": "../../common/core/tsconfig.lib.json"
-    },
-    {
-      "path": "../../common/qds-core/tsconfig.lib.json"
-    },
-    {
-      "path": "../../common/utils/tsconfig.lib.json"
+      "path": "../../common/mdx-vite/tsconfig.lib.json"
     }
   ]
 }
