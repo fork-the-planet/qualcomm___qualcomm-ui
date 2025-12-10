@@ -85,7 +85,7 @@ export function OperationSummary({
             event.stopPropagation()
           }}
           render={<Link href={`#${id}`} />}
-          size="md"
+          size="sm"
           style={{marginRight: 8}}
           variant="outline"
         />
@@ -112,7 +112,7 @@ export function OperationSummary({
         <Icon
           className={clsx("collapse-icon", {"is-open": isShown})}
           icon={ChevronUpIcon}
-          size={24}
+          size="sm"
         />
       </button>
       {allowAnonymous ? null : (

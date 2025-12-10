@@ -32,6 +32,8 @@ export function AuthorizeOperationBtn(
       }
       icon={isAuthorized ? LockIcon : LockOpenIcon}
       onClick={onClick}
+      size="sm"
+      variant="ghost"
     />
   )
 }

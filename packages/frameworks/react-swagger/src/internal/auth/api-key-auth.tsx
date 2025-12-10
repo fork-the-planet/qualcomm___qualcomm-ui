@@ -44,7 +44,7 @@ export function ApiKeyAuth(props: ApiKeyAuthProps) {
 
   return (
     <div className="api-key-wrapper">
-      <h4 className="text-primary q-font-heading-sm-subtle">
+      <h4 className="api-key-wrapper-header">
         <code>{name || schema.get("name")}</code> (apiKey)
         <JumpToPath path={["securityDefinitions", name]} />
       </h4>
@@ -53,12 +53,12 @@ export function ApiKeyAuth(props: ApiKeyAuthProps) {
         <Markdown source={schema.get("description")} />
       </Row>
       <Row>
-        <p className="text-primary q-font-body-sm">
+        <p className="text-body-sm">
           Name: <code className="qui-code">{schema.get("name")}</code>
         </p>
       </Row>
       <Row>
-        <p className="text-primary q-font-body-sm">
+        <p className="text-body-sm">
           In: <code className="qui-code">{schema.get("in")}</code>
         </p>
       </Row>

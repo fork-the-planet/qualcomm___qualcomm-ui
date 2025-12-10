@@ -95,7 +95,7 @@ export function Models(props: ModelsProps): ReactNode {
           aria-label="Model visibility icon"
           className={clsx("collapse-icon", {"is-open": showModels})}
           icon={ChevronUpIcon}
-          size="lg"
+          size="md"
         />
       </button>
 

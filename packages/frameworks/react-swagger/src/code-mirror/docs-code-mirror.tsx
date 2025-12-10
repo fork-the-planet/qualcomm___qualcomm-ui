@@ -8,8 +8,7 @@ import {DownloadIcon} from "lucide-react"
 import type {QdsTheme} from "@qualcomm-ui/qds-core/theme"
 import {IconButton} from "@qualcomm-ui/react/button"
 import {Tooltip} from "@qualcomm-ui/react/tooltip"
-
-import {CopyToClipboard} from "./copy-to-clipboard"
+import {CopyToClipboardIconButton} from "@qualcomm-ui/react-mdx/copy-to-clipboard"
 
 DocsCodeMirror.displayName = "DocsCodeMirror"
 
@@ -77,13 +76,16 @@ export function DocsCodeMirror({
                   emphasis="primary"
                   icon={DownloadIcon}
                   onClick={handleDownload}
+                  variant="ghost"
                 />
               }
             >
               Download
             </Tooltip>
           )}
-          {copyable ? <CopyToClipboard getValue={() => value} /> : null}
+          {copyable ? (
+            <CopyToClipboardIconButton valueOrFn={() => value} />
+          ) : null}
         </div>
       ) : null}
     </div>

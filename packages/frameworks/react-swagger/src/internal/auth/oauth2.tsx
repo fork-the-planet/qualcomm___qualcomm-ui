@@ -174,7 +174,7 @@ export function Oauth2(props: Oauth2Props): ReactNode {
 
   return (
     <div className="oauth2-wrapper">
-      <h4 className="q-font-heading-xs-subtle">
+      <h4 className="font-heading-xs text-neutral-primary">
         {name} (OAuth2, {flowToDisplay}){" "}
         <JumpToPath path={["securityDefinitions", name]} />
       </h4>
@@ -184,12 +184,12 @@ export function Oauth2(props: Oauth2Props): ReactNode {
       {isAuthorized && <h6>Authorized</h6>}
 
       {oidcUrl && (
-        <p className="text-primary q-font-body-sm">
+        <p className="text-body-sm">
           OpenID Connect URL: <code className="qui-code">{oidcUrl}</code>
         </p>
       )}
       {(flow === AUTH_FLOW_IMPLICIT || flow === AUTH_FLOW_ACCESS_CODE) && (
-        <p className="text-primary q-font-body-sm">
+        <p className="text-body-sm">
           Authorization URL:{" "}
           <code className="qui-code">{schema.get("authorizationUrl")}</code>
         </p>
@@ -197,11 +197,11 @@ export function Oauth2(props: Oauth2Props): ReactNode {
       {(flow === AUTH_FLOW_PASSWORD ||
         flow === AUTH_FLOW_ACCESS_CODE ||
         flow === AUTH_FLOW_APPLICATION) && (
-        <p className="text-primary q-font-body-sm">
+        <p className="text-body-sm">
           Token URL:<code className="qui-code"> {schema.get("tokenUrl")}</code>
         </p>
       )}
-      <p className="text-primary q-font-body-sm">
+      <p className="text-body-sm">
         Flow: <code className="qui-code">{flowToDisplay}</code>
       </p>
 

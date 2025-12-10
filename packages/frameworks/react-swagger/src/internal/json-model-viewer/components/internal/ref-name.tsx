@@ -28,6 +28,7 @@ export function RefName({inspect, isArray, refName}: RefNameProps): ReactNode {
         icon={Link2Icon}
         render={<Link href={`#model-${refName}`} />}
         size="sm"
+        variant="ghost"
       />
     </span>
   )

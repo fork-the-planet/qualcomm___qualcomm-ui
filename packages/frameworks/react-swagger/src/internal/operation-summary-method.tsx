@@ -1,7 +1,6 @@
 import type {ReactNode} from "react"
 
-import type {ButtonProps} from "@qualcomm-ui/react/button"
-import {Button} from "@qualcomm-ui/react/button"
+import {Button, type ButtonProps} from "@qualcomm-ui/react/button"
 import {clsx} from "@qualcomm-ui/utils/clsx"
 
 OperationSummaryMethod.displayName = "OperationSummaryMethod"
@@ -53,6 +52,7 @@ export function OperationSummaryMethod({
       {...buttonProps}
       className={clsx(buttonProps?.className, "qui-method-button", method)}
       render={<div />}
+      size="sm"
       tabIndex={-1}
       variant="fill"
     >

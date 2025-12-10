@@ -1,8 +1,13 @@
 .api-key-wrapper {
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 2px;
+}
+
+.api-key-wrapper-header {
+  color: var(--color-text-neutral-primary);
+  font: var(--font-static-heading-xxs-default);
 }
 
 .oauth-wrapper {
@@ -10,8 +15,13 @@
 }
 
 .oauth2-wrapper {
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 6px;
+}
+
+.text-body-sm {
+  color: var(--color-text-neutral-primary);
+  font: var(--font-static-body-sm-default);
 }

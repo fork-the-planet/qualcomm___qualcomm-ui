@@ -120,7 +120,7 @@ export function OperationTag(props: Props) {
           <Icon
             className={clsx("collapse-icon", {"is-open": showTag})}
             icon={ChevronUpIcon}
-            size="xl"
+            size="md"
           />
         </button>
       </h3>

@@ -4357,6 +4357,9 @@ importers:
       '@qualcomm-ui/react-core':
         specifier: workspace:^1.0.11
         version: link:../react-core
+      '@qualcomm-ui/react-mdx':
+        specifier: workspace:^1.7.0
+        version: link:../react-mdx
       '@qualcomm-ui/react-test-utils':
         specifier: workspace:^1.0.0
         version: link:../react-test-utils

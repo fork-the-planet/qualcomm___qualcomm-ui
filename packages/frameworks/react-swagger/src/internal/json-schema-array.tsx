@@ -190,6 +190,7 @@ export function JsonSchemaArray(props: JsonSchemaProps) {
                     }
                     icon={MinusIcon}
                     onClick={() => removeItem(i)}
+                    size="sm"
                     variant="outline"
                   />
                 ) : null}
