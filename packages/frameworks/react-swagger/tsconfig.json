@@ -3,6 +3,14 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist",
+    "paths": {
+      "@qualcomm-ui/core/*": ["../../common/core/src/*"],
+      "@qualcomm-ui/dom/*": ["../../common/dom/src/*"],
+      "@qualcomm-ui/qds-core/*": ["../../common/qds-core/src/*"],
+      "@qualcomm-ui/react/*": ["../react/src/*"],
+      "@qualcomm-ui/react-core/*": ["../react-core/src/*"],
+      "@qualcomm-ui/utils/*": ["../../common/utils/src/*"]
+    }
   },
   "include": ["./src"],
   "references": [

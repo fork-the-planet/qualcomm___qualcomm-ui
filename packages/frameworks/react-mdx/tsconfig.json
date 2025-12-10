@@ -5,7 +5,15 @@
     "outDir": "./dist",
     "moduleResolution": "Bundler",
     "paths": {
-      "@qualcomm-ui/react-mdx/*": ["./src/*/index.ts"]
+      "@qualcomm-ui/react-mdx/*": ["./src/*/index.ts"],
+      // temporary fix for broken resolution in WebStorm 2025.3
+      "@qualcomm-ui/core/*": ["../../common/core/src/*"],
+      "@qualcomm-ui/dom/*": ["../../common/dom/src/*"],
+      "@qualcomm-ui/mdx-common/*": ["../../common/mdx-common/src/*"],
+      "@qualcomm-ui/qds-core/*": ["../../common/qds-core/src/*"],
+      "@qualcomm-ui/react/*": ["../react/src/*"],
+      "@qualcomm-ui/react-core/*": ["../react-core/src/*"],
+      "@qualcomm-ui/utils/*": ["../../common/utils/src/*"]
     }
   },
   "include": ["./src"],
