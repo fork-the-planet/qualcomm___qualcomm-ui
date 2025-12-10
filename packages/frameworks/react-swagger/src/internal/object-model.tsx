@@ -1,4 +1,4 @@
-import type {ReactNode} from "react"
+import {type ReactNode, useEffect} from "react"
 
 import {ChevronUpIcon} from "lucide-react"
 
@@ -35,6 +35,12 @@ export function ObjectModel(props: ObjectModelProps): ReactNode {
 
   const theme = useThemeContext()
 
+  useEffect(() => {
+    if (props.activeInHash && !props?.expanded) {
+      props.onToggle?.(props.name!, !props.expanded)
+    }
+  }, [props])
+
   if (!schema) {
     return null
   }
@@ -51,7 +57,7 @@ export function ObjectModel(props: ObjectModelProps): ReactNode {
       className="object-model-expand-button"
       endIcon={ChevronUpIcon}
       onClick={() => props.onToggle?.(props.name!, !props.expanded)}
-      variant={props.activeInHash ? "outline" : "ghost"}
+      variant="ghost"
     >
       {isRef && schema.get("$$ref") && (
         <span className="model-hint">{schema.get("$$ref") as string}</span>

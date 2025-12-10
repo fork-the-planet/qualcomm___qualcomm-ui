@@ -1,4 +1,4 @@
-import {type ReactNode, useEffect, useRef, useState} from "react"
+import {type ReactNode, useCallback, useEffect, useRef, useState} from "react"
 
 import {ChevronUpIcon} from "lucide-react"
 
@@ -43,10 +43,10 @@ export function ModelCollapse({
     setExpanded(expandedProp)
   }, [expandedProp])
 
-  const toggleCollapsed = () => {
+  const toggleCollapsed = useCallback(() => {
     onToggle?.(modelName, !expanded)
     setExpanded((prevState) => !prevState)
-  }
+  }, [expanded, modelName, onToggle])
 
   useEffect(() => {
     if (
@@ -55,6 +55,9 @@ export function ModelCollapse({
       modelId &&
       window.location.hash === `#${modelId}`
     ) {
+      if (!expanded) {
+        toggleCollapsed()
+      }
       const anchor = document.getElementById(modelId)
       if (anchor) {
         anchor.scrollIntoView()
@@ -63,7 +66,7 @@ export function ModelCollapse({
     // Only scroll after first mounting the component.
     // We do this because the swagger component is mounted after the page loads.
     mounted.current = true
-  }, [modelId, modelName, onToggle])
+  }, [modelId, modelName, onToggle, expanded, toggleCollapsed])
 
   if (expanded && hideSelfOnExpand) {
     return <span className={classes || ""}>{children}</span>
@@ -76,7 +79,7 @@ export function ModelCollapse({
         endIcon={<Icon className="collapse-icon" icon={ChevronUpIcon} />}
         id={modelId}
         onClick={toggleCollapsed}
-        variant={activeInHash ? "outline" : "ghost"}
+        variant="ghost"
       >
         {title && <span>{title}</span>}
       </Button>
