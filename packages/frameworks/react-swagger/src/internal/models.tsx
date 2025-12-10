@@ -1,6 +1,6 @@
 import type {ReactNode} from "react"
 
-import Im, {Map} from "immutable"
+import Im from "immutable"
 import {ChevronUpIcon} from "lucide-react"
 
 import {Collapsible} from "@qualcomm-ui/react/collapsible"
@@ -110,8 +110,8 @@ export function Models(props: ModelsProps): ReactNode {
               const schemaValue = specSelectors.specResolvedSubtree(fullPath)
               const rawSchemaValue = specSelectors.specJson().getIn(fullPath)
 
-              const schema = Map.isMap(schemaValue) ? schemaValue : Im.Map()
-              const rawSchema = Map.isMap(rawSchemaValue)
+              const schema = Im.Map.isMap(schemaValue) ? schemaValue : Im.Map()
+              const rawSchema = Im.Map.isMap(rawSchemaValue)
                 ? rawSchemaValue
                 : Im.Map()
 

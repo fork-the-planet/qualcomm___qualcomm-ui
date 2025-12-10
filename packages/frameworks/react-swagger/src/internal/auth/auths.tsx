@@ -1,7 +1,6 @@
-import type {FormEvent, MouseEvent} from "react"
-import {useState} from "react"
+import {type FormEvent, type MouseEvent, useState} from "react"
 
-import {Map} from "immutable"
+import type {Map} from "immutable"
 
 import {Button} from "@qualcomm-ui/react/button"
 

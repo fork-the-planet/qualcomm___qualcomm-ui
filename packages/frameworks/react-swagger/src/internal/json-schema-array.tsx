@@ -1,6 +1,6 @@
 import {useEffect, useMemo, useState} from "react"
 
-import {fromJS, List} from "immutable"
+import immutable from "immutable"
 import {MinusIcon, PlusIcon} from "lucide-react"
 
 import {selectCollection} from "@qualcomm-ui/core/select"
@@ -14,11 +14,11 @@ import type {JsonSchemaProps} from "./types"
 JsonSchemaArray.displayName = "JsonSchemaArray"
 
 function valueOrEmptyList(value: unknown) {
-  return List.isList(value)
+  return immutable.List.isList(value)
     ? value
     : Array.isArray(value)
-      ? fromJS(value)
-      : List()
+      ? immutable.fromJS(value)
+      : immutable.List()
 }
 
 export function JsonSchemaArray(props: JsonSchemaProps) {
@@ -46,7 +46,7 @@ export function JsonSchemaArray(props: JsonSchemaProps) {
     }
   }, [value, valueProp])
 
-  const onChange = (updatedValue: List<any>) => {
+  const onChange = (updatedValue: immutable.List<any>) => {
     onChangeProp?.(updatedValue)
   }
 
@@ -125,7 +125,9 @@ export function JsonSchemaArray(props: JsonSchemaProps) {
 
   if (schemaItemsEnum && enumCollection) {
     const selectValue =
-      value instanceof List ? (value as any).toArray() : Array.from(value)
+      value instanceof immutable.List
+        ? (value as immutable.List<any>).toArray()
+        : Array.from(value)
     return (
       <Select
         className="q-swagger-input"
@@ -144,7 +146,7 @@ export function JsonSchemaArray(props: JsonSchemaProps) {
     <div className="json-schema-array">
       {shouldRenderValue
         ? value.map((item: any, i: number) => {
-            const itemErrors = fromJS([
+            const itemErrors = immutable.fromJS([
               ...errors
                 .filter((err: any) => err.index === i)
                 .map((e: any) => e.error),

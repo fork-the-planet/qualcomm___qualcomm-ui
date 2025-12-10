@@ -12,7 +12,7 @@
       "@qualcomm-ui/utils/*": ["../../common/utils/src/*"]
     }
   },
-  "include": ["./src"],
+  "include": ["./src", "./src/internal"],
   "references": [
     {
       "path": "./tsconfig.lib.json"

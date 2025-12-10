@@ -1,6 +1,6 @@
 import {useEffect, useMemo} from "react"
 
-import {fromJS} from "immutable"
+import immutable from "immutable"
 
 import {selectCollection} from "@qualcomm-ui/core/select"
 import {Select} from "@qualcomm-ui/react/select"
@@ -25,11 +25,13 @@ export function ContentType({
   value = null,
 }: ContentTypeProps) {
   const contentTypes = useMemo(() => {
-    return fromJS(contentTypesProp)
+    return immutable.fromJS(contentTypesProp)
   }, [contentTypesProp])
 
   const collection = useMemo(() => {
-    if (!contentTypes || !contentTypes.size) return null
+    if (!contentTypes || !contentTypes.size) {
+      return null
+    }
     return selectCollection({items: contentTypes.toArray()})
   }, [contentTypes])
 

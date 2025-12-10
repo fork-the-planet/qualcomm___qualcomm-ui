@@ -4,11 +4,17 @@ hidden: true
 ---
 
 import {Demo} from "~components/demo"
+import {DocSwagger} from "~components/layout"
+import json from "./fota-api.json"
 import * as demos from "./demos"
 
 # {frontmatter.title}
 
 Test page for Tailwind inline style transformation.
+
+## Swagger UI
+
+<DocSwagger spec={json} />
 
 ## Simple Inlineable Classes
 

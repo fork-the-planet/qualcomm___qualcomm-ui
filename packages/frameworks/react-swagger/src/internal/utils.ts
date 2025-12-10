@@ -2,7 +2,7 @@ import type {HTMLAttributes, ReactNode} from "react"
 
 import {sanitizeUrl as braintreeSanitizeUrl} from "@braintree/sanitize-url"
 import cssEscape from "css.escape"
-import {Iterable, List} from "immutable"
+import immutable from "immutable"
 
 export function sanitizeUrl(url: unknown) {
   if (typeof url !== "string" || url === "") {
@@ -150,11 +150,11 @@ export const escapeDeepLinkPath = (str: string) =>
   cssEscape(createDeepLinkPath(str).replace(/%20/g, "_"))
 
 export function getList(iterable: any, keys: any) {
-  if (!Iterable.isIterable(iterable)) {
-    return List()
+  if (!immutable.Iterable.isIterable(iterable)) {
+    return immutable.List()
   }
   const val = iterable.getIn(Array.isArray(keys) ? keys : [keys])
-  return List.isList(val) ? val : List()
+  return immutable.List.isList(val) ? val : immutable.List()
 }
 
 export const getExtensions = (defObj: any) =>

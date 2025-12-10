@@ -1,7 +1,6 @@
-import type {ReactNode} from "react"
-import {useCallback, useEffect, useMemo} from "react"
+import {type ReactNode, useCallback, useEffect, useMemo} from "react"
 
-import {List, OrderedMap} from "immutable"
+import immutable, {type List} from "immutable"
 
 import {selectCollection} from "@qualcomm-ui/core/select"
 import {Select} from "@qualcomm-ui/react/select"
@@ -29,9 +28,10 @@ export function Servers({
   setServerVariableValue,
 }: ServersProps): ReactNode {
   const currentServerDefinition =
-    servers.find((s) => s.get("url") === currentServer) || OrderedMap()
+    servers.find((s) => s.get("url") === currentServer) ||
+    immutable.OrderedMap()
   const currentServerVariableDefs =
-    currentServerDefinition.get("variables") || OrderedMap()
+    currentServerDefinition.get("variables") || immutable.OrderedMap()
   const shouldShowVariableUI = currentServerVariableDefs.size !== 0
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export function Servers({
     }
 
     const currentServerVariableDefs =
-      currentServerDefinition.get("variables") || OrderedMap()
+      currentServerDefinition.get("variables") || immutable.OrderedMap()
     currentServerVariableDefs.map((val: any, key: any) => {
       setServerVariableValue({
         key,

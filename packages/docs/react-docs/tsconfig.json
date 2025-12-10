@@ -2,8 +2,7 @@
   "extends": "@qualcomm-ui/tsconfig/tsconfig.react-docs.json",
   "compilerOptions": {
     "baseUrl": "./",
-    "module": "esnext",
-    "target": "esnext",
+    "moduleResolution": "bundler",
     "paths": {
       // fixes WebStorm usage detection, not used otherwise
       "@qualcomm-ui/react/*": ["../../frameworks/react/src/*"],
@@ -14,9 +13,13 @@
       "@qualcomm-ui/utils/*": ["../../common/utils/src/*"]
     }
   },
+  "include": ["./src/**/*.mdx"],
   "references": [
     {
       "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.mdx.json"
     },
     {
       "path": "./tsconfig.node.json"

@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react"
 
-import {List} from "immutable"
+import immutable from "immutable"
 
 import {Collapsible} from "@qualcomm-ui/react/collapsible"
 import {InlineNotification} from "@qualcomm-ui/react/inline-notification"
@@ -55,7 +55,7 @@ export function Operation({
   request,
   response,
   specActions,
-  specPath = List(),
+  specPath = immutable.List(),
   specSelectors,
   toggleShown,
 }: Props) {

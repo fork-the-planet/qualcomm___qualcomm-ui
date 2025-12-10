@@ -5,8 +5,8 @@
     "composite": true,
     "outDir": "./dist",
     "rootDir": "./src",
-    "module": "esnext",
-    "target": "esnext"
+    "moduleResolution": "bundler",
+    "tsBuildInfoFile": "node_modules/.tmp/tsbuildinfo"
   },
   "include": [
     "types.d.ts",

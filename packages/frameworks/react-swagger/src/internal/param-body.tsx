@@ -1,6 +1,6 @@
 import {type ReactNode, useCallback, useEffect, useState} from "react"
 
-import {fromJS} from "immutable"
+import immutable from "immutable"
 import {Edit2Icon, XIcon} from "lucide-react"
 
 import {Button} from "@qualcomm-ui/react/button"
@@ -35,7 +35,7 @@ export function ParamBody({
   language,
   onChange: onChangeProp,
   onChangeConsumes,
-  param = fromJS({}),
+  param = immutable.fromJS({}),
   pathMethod,
   specSelectors,
 }: ParamBodyProps): ReactNode {
@@ -97,7 +97,7 @@ export function ParamBody({
   const consumes =
     consumesProp && consumesProp.size
       ? consumesProp
-      : fromJS(["application/json"])
+      : immutable.fromJS(["application/json"])
 
   const {isEditBox, value} = state
 
