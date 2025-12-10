@@ -24,17 +24,17 @@ export function PropDescriptionInlineTag({
         <Link
           endIcon={ExternalLink}
           href={target as string}
-          size="md"
+          size="sm"
           target="_blank"
         >
           {text}
         </Link>
       ) : text.startsWith("/") ? (
-        <Link render={<RenderLink href={text} />} size="md">
+        <Link render={<RenderLink href={text} />} size="sm">
           {text}
         </Link>
       ) : (
-        <Link render={<RenderLink href={`#${text}`} />} size="md">
+        <Link render={<RenderLink href={`#${text}`} />} size="sm">
           {text}
         </Link>
       ),
