@@ -1,8 +1,10 @@
-import {ChangeEvent, ReactNode} from "react"
+import {type ChangeEvent, type ReactNode, useMemo} from "react"
 
-import {QCombobox, QTextInput} from "@qui/react"
+import {selectCollection} from "@qualcomm-ui/core/select"
+import {Select} from "@qualcomm-ui/react/select"
+import {TextInput} from "@qualcomm-ui/react/text-input"
 
-import {JsonSchemaProps} from "./types"
+import type {JsonSchemaProps} from "./types"
 
 JsonSchemaString.displayName = "JsonSchemaString"
 
@@ -16,11 +18,8 @@ export function JsonSchemaString({
   schema,
   value: valueProp,
 }: JsonSchemaProps): ReactNode {
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value =
-      schema && schema.get("type") === "file"
-        ? e.target.files?.[0]
-        : e.target.value
+  const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.files?.[0]
     onChangeProp?.(value, keyName)
   }
 
@@ -31,17 +30,23 @@ export function JsonSchemaString({
   const value = valueProp ? valueProp : ""
   const errors = errorsProp.toJS ? errorsProp.toJS() : []
 
-  if (enumValue) {
+  const enumCollection = useMemo(() => {
+    if (!enumValue) {
+      return null
+    }
+    return selectCollection({items: [...enumValue]})
+  }, [enumValue])
+
+  if (enumValue && enumCollection) {
     return (
-      <QCombobox
+      <Select
         className="q-swagger-input"
         clearable={!required}
-        disableOptionToggle={required}
+        collection={enumCollection}
         disabled={disabled}
-        error={errors.length ? errors[0] : ""}
-        onChange={(event, value) => onChangeProp?.(value)}
-        options={[...enumValue]}
-        value={value}
+        invalid={errors.length > 0}
+        onValueChange={(value) => onChangeProp?.(value[0])}
+        value={value ? [value] : []}
       />
     )
   }
@@ -54,19 +59,20 @@ export function JsonSchemaString({
     return (
       <input
         disabled={isDisabled}
-        onChange={(event) => onChange(event as ChangeEvent<HTMLInputElement>)}
+        onChange={(event) => onFileChange(event)}
         type="file"
       />
     )
   }
 
   return (
-    <QTextInput
+    <TextInput
       className="q-swagger-input"
       disabled={isDisabled}
-      error={errors.length ? errors[0] : ""}
+      errorText={errors.length ? errors[0] : ""}
       inputProps={{type: format && format === "password" ? "password" : "text"}}
-      onChange={(event) => onChange(event as ChangeEvent<HTMLInputElement>)}
+      invalid={errors.length > 0}
+      onValueChange={(val) => onChangeProp?.(val, keyName)}
       placeholder={description}
       value={value}
     />

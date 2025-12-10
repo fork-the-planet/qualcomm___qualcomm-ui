@@ -1,8 +1,9 @@
-import {FormEvent, MouseEvent, useState} from "react"
+import type {FormEvent, MouseEvent} from "react"
+import {useState} from "react"
 
 import {Map} from "immutable"
 
-import {QButton} from "@qui/react"
+import {Button} from "@qualcomm-ui/react/button"
 
 interface AuthsProps {
   authActions: any
@@ -81,26 +82,26 @@ export function Auths(props: AuthsProps) {
           {defs}
           <div className="auth-btn-wrapper">
             {nonOauthDefinitions.size === authorizedAuth.size ? (
-              <QButton
+              <Button
                 aria-label="Remove authorization"
                 onClick={logoutClick}
                 variant="outline"
               >
                 Logout
-              </QButton>
+              </Button>
             ) : (
-              <QButton
+              <Button
                 aria-label="Apply credentials"
-                color="primary"
+                emphasis="primary"
                 type="submit"
                 variant="fill"
               >
                 Authorize
-              </QButton>
+              </Button>
             )}
-            <QButton onClick={close} variant="outline">
+            <Button onClick={close} variant="outline">
               Close
-            </QButton>
+            </Button>
           </div>
         </form>
       )}

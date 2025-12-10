@@ -5,6 +5,9 @@ import {useJsonViewerStore} from "../../stores"
 import {defineEasyType} from "./define-easy-type"
 
 export const stringType = defineEasyType<string>({
+  colorKey: "base09",
+  deserialize: (value) => value,
+  is: (value) => typeof value === "string",
   Renderer: (props) => {
     const [showRest, setShowRest] = useState(false)
     const collapseStringsAfterLength = useJsonViewerStore(
@@ -37,9 +40,6 @@ export const stringType = defineEasyType<string>({
       </span>
     )
   },
-  colorKey: "base09",
-  deserialize: (value) => value,
-  is: (value) => typeof value === "string",
   serialize: (value) => value,
   type: "string",
 })

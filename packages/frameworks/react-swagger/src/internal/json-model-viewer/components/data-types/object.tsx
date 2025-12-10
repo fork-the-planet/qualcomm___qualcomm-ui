@@ -1,8 +1,8 @@
-import {ReactNode, useMemo, useState} from "react"
+import {type ReactNode, useMemo, useState} from "react"
 
 import {InfinityIcon} from "lucide-react"
 
-import {QIcon} from "@qui/react"
+import {Icon} from "@qualcomm-ui/react/icon"
 
 import {useIsCycleReference, useTextColor} from "../../hooks"
 import {useJsonViewerStore} from "../../stores"
@@ -65,7 +65,7 @@ function PreObjectType(props: DataItemProps<any>): ReactNode {
 
       {isTrap && !props.inspect && (
         <>
-          <QIcon className="inline-icon" icon={InfinityIcon} style={{color}} />
+          <Icon className="inline-icon" icon={InfinityIcon} style={{color}} />
           {isTrap}
         </>
       )}
@@ -188,7 +188,7 @@ export function ObjectType(props: DataItemProps<any>): ReactNode {
       return (
         <DataKeyPair
           path={[]}
-          prevValue={props.prevValue as any}
+          prevValue={props.prevValue}
           value={value.properties}
         />
       )
@@ -209,7 +209,7 @@ export function ObjectType(props: DataItemProps<any>): ReactNode {
         <DataKeyPair
           key={key}
           path={path}
-          prevValue={(props.prevValue as any)?.[key]}
+          prevValue={props.prevValue?.[key]}
           value={value}
         />
       )
@@ -268,7 +268,7 @@ export function ObjectType(props: DataItemProps<any>): ReactNode {
 
 export const objectType: DataType<object> = {
   Component: ObjectType,
+  is: (value) => typeof value === "object",
   PostComponent: PostObjectType,
   PreComponent: PreObjectType,
-  is: (value) => typeof value === "object",
 }

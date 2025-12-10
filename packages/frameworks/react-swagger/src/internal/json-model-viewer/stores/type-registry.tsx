@@ -1,6 +1,12 @@
-import {createContext, memo, SetStateAction, useContext, useMemo} from "react"
+import {
+  createContext,
+  memo,
+  type SetStateAction,
+  useContext,
+  useMemo,
+} from "react"
 
-import {createStore, StoreApi, useStore} from "zustand"
+import {createStore, type StoreApi, useStore} from "zustand"
 
 import {
   arraySchemaType,

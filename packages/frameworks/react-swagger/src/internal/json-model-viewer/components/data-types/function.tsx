@@ -84,7 +84,7 @@ const FunctionType: FC<DataItemProps<Function>> = (props) => {
 
 export const functionType: DataType<Function> = {
   Component: FunctionType,
+  is: (value) => typeof value === "function",
   PostComponent: PostFunctionType,
   PreComponent: PreFunctionType,
-  is: (value) => typeof value === "function",
 }

@@ -1,8 +1,9 @@
-import {ReactNode, useEffect, useRef, useState} from "react"
+import {type ReactNode, useEffect, useRef, useState} from "react"
 
 import {ChevronUpIcon} from "lucide-react"
 
-import {QButton, QIcon} from "@qui/react"
+import {Button} from "@qualcomm-ui/react/button"
+import {Icon} from "@qualcomm-ui/react/icon"
 
 ModelCollapse.displayName = "ModelCollapse"
 
@@ -70,15 +71,15 @@ export function ModelCollapse({
 
   return (
     <span>
-      <QButton
+      <Button
         aria-expanded={expanded}
-        endIcon={<QIcon className="collapse-icon" icon={ChevronUpIcon} />}
+        endIcon={<Icon className="collapse-icon" icon={ChevronUpIcon} />}
         id={modelId}
         onClick={toggleCollapsed}
         variant={activeInHash ? "outline" : "ghost"}
       >
         {title && <span>{title}</span>}
-      </QButton>
+      </Button>
 
       {!expanded && <span>{collapsedContent}</span>}
 

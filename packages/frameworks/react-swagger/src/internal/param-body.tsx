@@ -1,13 +1,13 @@
-import {ReactNode, useCallback, useEffect, useState} from "react"
+import {type ReactNode, useCallback, useEffect, useState} from "react"
 
 import {fromJS} from "immutable"
 import {Edit2Icon, XIcon} from "lucide-react"
 
-import {QButton} from "@qui/react"
+import {Button} from "@qualcomm-ui/react/button"
 
 import {DocsCodeMirror} from "../code-mirror"
 
-import {GetComponent} from "./types"
+import type {GetComponent} from "./types"
 import {useThemeContext} from "./use-theme-context"
 
 ParamBody.displayName = "ParamBody"
@@ -127,23 +127,23 @@ export function ParamBody({
         {!isExecute ? null : (
           <div className="body-param-edit">
             {isEditBox ? (
-              <QButton
-                color="negative"
+              <Button
+                emphasis="danger"
                 endIcon={XIcon}
                 onClick={toggleIsEditBox}
                 variant="outline"
               >
                 Cancel
-              </QButton>
+              </Button>
             ) : (
-              <QButton
-                color="primary"
+              <Button
+                emphasis="primary"
                 endIcon={Edit2Icon}
                 onClick={toggleIsEditBox}
                 variant="fill"
               >
                 Edit
-              </QButton>
+              </Button>
             )}
           </div>
         )}

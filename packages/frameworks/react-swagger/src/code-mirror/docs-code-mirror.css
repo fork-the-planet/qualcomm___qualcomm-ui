@@ -10,15 +10,14 @@
   }
 
   .cm-scroller {
-    font-size: 14px;
-    font-family: var(--q-font-mono);
+    font: var(--font-static-code-sm-default);
   }
 }
 
 .cm-gutter {
-  background-color: var(--q-background-2);
+  background-color: var(--color-background-neutral-02);
 
   .cm-activeLineGutter {
-    background-color: var(--q-background-2);
+    background-color: var(--color-background-neutral-02);
   }
 }

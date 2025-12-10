@@ -1,18 +1,19 @@
-import {MouseEvent, ReactNode, SyntheticEvent, useState} from "react"
+import {type ReactNode, type SyntheticEvent, useState} from "react"
 
-import {QButton, QCheckbox, QCombobox, QTextInput} from "@qui/react"
-import SwaggerUI from "@qui/swagger-ui-react"
+import {selectCollection} from "@qualcomm-ui/core/select"
+import {Button} from "@qualcomm-ui/react/button"
+import {Checkbox} from "@qualcomm-ui/react/checkbox"
+import {Select} from "@qualcomm-ui/react/select"
+import {TextInput} from "@qualcomm-ui/react/text-input"
 
-const oauth2Authorize = SwaggerUI.oauth2Authorize
-
-import {GetComponent} from "../types"
+import type {GetComponent} from "../types"
 
 Oauth2.displayName = "Oauth2"
 
 export interface Oauth2Props {
   authActions: any
-  authSelectors: any
   authorized?: any
+  authSelectors: any
   errActions: any
   errSelectors: any
   getComponent: GetComponent
@@ -25,8 +26,8 @@ export interface Oauth2Props {
 
 export function Oauth2(props: Oauth2Props): ReactNode {
   const {
-    authSelectors,
     authorized,
+    authSelectors,
     errSelectors,
     getComponent,
     name,
@@ -71,7 +72,7 @@ export function Oauth2(props: Oauth2Props): ReactNode {
     const authConfigs = authSelectors.getConfigs()
 
     errActions.clear({authId: name, source: "auth", type: "auth"})
-    oauth2Authorize({
+    authorizeOauth2({
       auth: state,
       authActions,
       authConfigs,
@@ -209,11 +210,10 @@ export function Oauth2(props: Oauth2Props): ReactNode {
               <code className="qui-code">{state.username}</code>
             ) : (
               <Col desktop={10} tablet={10}>
-                <QTextInput
-                  autoFocus
-                  data-name="username"
+                <TextInput
+                  inputProps={{autoFocus: true, "data-name": "username"}}
                   label="Username:"
-                  onChange={(event, value) => onInputChange("username", value)}
+                  onValueChange={(value) => onInputChange("username", value)}
                 />
               </Col>
             )}
@@ -224,12 +224,14 @@ export function Oauth2(props: Oauth2Props): ReactNode {
               <code className="qui-code">******</code>
             ) : (
               <Col desktop={10} tablet={10}>
-                <QTextInput
+                <TextInput
                   className="q-swagger-input"
-                  data-name="password"
-                  id="oauth_password"
-                  inputProps={{type: "password"}}
-                  onChange={(event, value) => onInputChange("password", value)}
+                  inputProps={{
+                    "data-name": "password",
+                    id: "oauth_password",
+                    type: "password",
+                  }}
+                  onValueChange={(value) => onInputChange("password", value)}
                 />
               </Col>
             )}
@@ -240,13 +242,21 @@ export function Oauth2(props: Oauth2Props): ReactNode {
               <code> {state.passwordType} </code>
             ) : (
               <Col desktop={10} tablet={10}>
-                <QCombobox
-                  data-name="passwordType"
-                  id="password_type"
-                  onChange={(event, value) =>
-                    onInputChange("passwordType", value)
+                <Select
+                  collection={selectCollection({
+                    items: [
+                      {label: "Authorization header", value: "basic"},
+                      {label: "Request body", value: "request-body"},
+                    ],
+                  })}
+                  controlProps={{
+                    "data-name": "passwordType",
+                    id: "password_type",
+                  }}
+                  defaultValue={["basic"]}
+                  onValueChange={(value) =>
+                    onInputChange("passwordType", value[0])
                   }
-                  options={["Authorization header", "Request body"]}
                 />
               </Col>
             )}
@@ -261,15 +271,17 @@ export function Oauth2(props: Oauth2Props): ReactNode {
           <Row>
             <label htmlFor={`client_id_${flow}`}>client_id:</label>
             {isAuthorized ? (
-              <QTextInput clearable={false} disabled value="******" />
+              <TextInput clearable={false} disabled value="******" />
             ) : (
               <Col desktop={10} tablet={10}>
-                <QTextInput
+                <TextInput
                   className="q-swagger-input"
-                  data-name="clientId"
                   defaultValue={state.clientId}
-                  id={`client_id_${flow}`}
-                  onChange={(event, value) => onInputChange("clientId", value)}
+                  inputProps={{
+                    "data-name": "clientId",
+                    id: `client_id_${flow}`,
+                  }}
+                  onValueChange={(value) => onInputChange("clientId", value)}
                 />
               </Col>
             )}
@@ -282,18 +294,18 @@ export function Oauth2(props: Oauth2Props): ReactNode {
         <Row>
           <label htmlFor={`client_secret_${flow}`}>client_secret:</label>
           {isAuthorized ? (
-            <QTextInput clearable={false} disabled value="******" />
+            <TextInput clearable={false} disabled value="******" />
           ) : (
             <Col desktop={10} tablet={10}>
-              <QTextInput
+              <TextInput
                 className="q-swagger-input"
-                data-name="clientSecret"
                 defaultValue={state.clientSecret}
-                id={`client_secret_${flow}`}
-                inputProps={{type: "password"}}
-                onChange={(event, value) =>
-                  onInputChange("clientSecret", value)
-                }
+                inputProps={{
+                  "data-name": "clientSecret",
+                  id: `client_secret_${flow}`,
+                  type: "password",
+                }}
+                onValueChange={(value) => onInputChange("clientSecret", value)}
               />
             </Col>
           )}
@@ -315,23 +327,18 @@ export function Oauth2(props: Oauth2Props): ReactNode {
             .map((description: any, name: string) => {
               return (
                 <Row key={name}>
-                  <QCheckbox
+                  <Checkbox
                     checked={state.scopes.includes(name)}
-                    data-value={name}
+                    controlProps={{"data-value": name}}
                     disabled={isAuthorized}
-                    inputProps={{["data-value"]: name} as any}
                     label={
                       <div className="text">
                         <p className="name">{name}</p>
                         <p className="description">{description}</p>
                       </div>
                     }
-                    onChange={(event, checked) => {
+                    onCheckedChange={(checked) => {
                       onScopeChange(name, checked)
-                    }}
-                    onClick={(event: MouseEvent) => {
-                      event.preventDefault()
-                      onScopeChange(name, !state.scopes.includes(name))
                     }}
                   />
                 </Row>
@@ -347,26 +354,26 @@ export function Oauth2(props: Oauth2Props): ReactNode {
       <div className="auth-btn-wrapper">
         {isValid &&
           (isAuthorized ? (
-            <QButton
+            <Button
               aria-label="Remove authorization"
               onClick={logout}
               variant="fill"
             >
               Logout
-            </QButton>
+            </Button>
           ) : (
-            <QButton
+            <Button
               aria-label="Apply given OAuth2 credentials"
-              color="primary"
+              emphasis="primary"
               onClick={authorize}
               variant="fill"
             >
               Authorize
-            </QButton>
+            </Button>
           ))}
-        <QButton onClick={close} variant="outline">
+        <Button onClick={close} variant="outline">
           Close
-        </QButton>
+        </Button>
       </div>
     </div>
   )

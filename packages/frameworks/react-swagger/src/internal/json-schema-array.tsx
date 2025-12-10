@@ -1,13 +1,15 @@
-import {useEffect, useState} from "react"
+import {useEffect, useMemo, useState} from "react"
 
 import {fromJS, List} from "immutable"
 import {MinusIcon, PlusIcon} from "lucide-react"
 
-import {QButton, QCombobox, QIconButton} from "@qui/react"
+import {selectCollection} from "@qualcomm-ui/core/select"
+import {Button, IconButton} from "@qualcomm-ui/react/button"
+import {Select} from "@qualcomm-ui/react/select"
 
 import {JsonSchemaArrayItemFile} from "./json-schema-array-item-file"
 import {JsonSchemaArrayItemText} from "./json-schema-array-item-text"
-import {JsonSchemaProps} from "./types"
+import type {JsonSchemaProps} from "./types"
 
 JsonSchemaArray.displayName = "JsonSchemaArray"
 
@@ -114,20 +116,26 @@ export function JsonSchemaArray(props: JsonSchemaProps) {
     isArrayItemText = true
   }
 
-  if (schemaItemsEnum) {
-    const comboboxValue =
+  const enumCollection = useMemo(() => {
+    if (!schemaItemsEnum) {
+      return null
+    }
+    return selectCollection({items: schemaItemsEnum.toArray()})
+  }, [schemaItemsEnum])
+
+  if (schemaItemsEnum && enumCollection) {
+    const selectValue =
       value instanceof List ? (value as any).toArray() : Array.from(value)
     return (
-      <QCombobox
+      <Select
         className="q-swagger-input"
         clearable={!required}
-        disableOptionToggle={required}
+        collection={enumCollection}
         disabled={disabled}
-        error={errors.length ? errors[0] : ""}
+        invalid={errors.length > 0}
         multiple
-        onChange={(event, value) => onEnumChange(value)}
-        options={schemaItemsEnum.toArray()}
-        value={comboboxValue}
+        onValueChange={(value) => onEnumChange(value)}
+        value={selectValue}
       />
     )
   }
@@ -172,7 +180,7 @@ export function JsonSchemaArray(props: JsonSchemaProps) {
                   />
                 )}
                 {!disabled ? (
-                  <QIconButton
+                  <IconButton
                     aria-label={
                       needsRemoveError?.length
                         ? needsRemoveError[0]
@@ -188,16 +196,16 @@ export function JsonSchemaArray(props: JsonSchemaProps) {
           })
         : null}
       {!disabled ? (
-        <QButton
+        <Button
           aria-label={arrayErrors.length ? arrayErrors[0] : ""}
           className="qui-json-schema-array-add-btn"
-          color={arrayErrors.length ? "negative" : "neutral"}
+          emphasis={arrayErrors.length ? "danger" : "neutral"}
           endIcon={PlusIcon}
           onClick={addItem}
           variant="fill"
         >
           Add {schemaItemsType ? `${schemaItemsType} ` : ""}item
-        </QButton>
+        </Button>
       ) : null}
     </div>
   )

@@ -1,6 +1,6 @@
 import {PlayIcon} from "lucide-react"
 
-import {QButton} from "@qui/react"
+import {Button} from "@qualcomm-ui/react/button"
 
 interface ExecuteProps {
   disabled?: boolean
@@ -96,16 +96,16 @@ export function Execute(props: ExecuteProps) {
 
   const {disabled} = props
   return (
-    <QButton
+    <Button
       className="execute-button"
-      color="primary"
       disabled={disabled}
+      emphasis="primary"
       endIcon={PlayIcon}
       onClick={onClick}
-      size="l"
+      size="lg"
       variant="fill"
     >
       Execute
-    </QButton>
+    </Button>
   )
 }

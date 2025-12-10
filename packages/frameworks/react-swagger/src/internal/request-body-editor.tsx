@@ -1,8 +1,8 @@
-import {ReactNode, useEffect, useState} from "react"
+import {type ReactNode, useEffect, useState} from "react"
 
 import {DocsCodeMirror} from "../code-mirror"
 
-import {GetComponent} from "./types"
+import type {GetComponent} from "./types"
 import {useThemeContext} from "./use-theme-context"
 import {stringify} from "./utils"
 

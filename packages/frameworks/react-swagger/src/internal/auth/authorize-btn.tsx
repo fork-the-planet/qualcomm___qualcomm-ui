@@ -1,8 +1,8 @@
 import {LockIcon, LockOpenIcon} from "lucide-react"
 
-import {QButton} from "@qui/react"
+import {Button} from "@qualcomm-ui/react/button"
 
-import {GetComponent} from "../types"
+import type {GetComponent} from "../types"
 
 interface AuthorizeBtnProps {
   getComponent: GetComponent
@@ -21,14 +21,14 @@ export function AuthorizeBtn({
 
   return (
     <div className="auth-wrapper">
-      <QButton
-        color="primary"
+      <Button
+        emphasis="primary"
         endIcon={isAuthorized ? LockIcon : LockOpenIcon}
         onClick={onClick}
         variant="fill"
       >
         Authorize
-      </QButton>
+      </Button>
       {showPopup && <AuthorizationPopup />}
     </div>
   )

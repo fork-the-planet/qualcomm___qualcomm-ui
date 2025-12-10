@@ -1,9 +1,9 @@
-import {ReactNode} from "react"
+import type {ReactNode} from "react"
 
 import {Link2Icon} from "lucide-react"
 
-import {clsx} from "@qui/base"
-import {QIconButton} from "@qui/react"
+import {IconButton} from "@qualcomm-ui/react/button"
+import {clsx} from "@qualcomm-ui/utils/clsx"
 
 import {useJsonViewerStore} from "../../stores"
 
@@ -23,12 +23,11 @@ export function RefName({inspect, isArray, refName}: RefNameProps): ReactNode {
         {refName}
         {isArray ? "[]" : ""}
       </span>
-      <QIconButton
-        as={Link}
-        dense
-        href={`#model-${refName}`}
+      <IconButton
+        density="compact"
         icon={Link2Icon}
-        size="s"
+        render={<Link href={`#model-${refName}`} />}
+        size="sm"
       />
     </span>
   )

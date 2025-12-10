@@ -10,10 +10,10 @@ const displayOptions: Intl.DateTimeFormatOptions = {
 }
 
 export const dateType = defineEasyType<Date>({
+  colorKey: "base0D",
+  is: (value) => value instanceof Date,
   Renderer: ({value}) => (
     <>{value.toLocaleTimeString("en-us", displayOptions)}</>
   ),
-  colorKey: "base0D",
-  is: (value) => value instanceof Date,
   type: "date",
 })

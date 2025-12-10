@@ -1,8 +1,8 @@
-import {ReactNode} from "react"
+import type {ReactNode} from "react"
 
-import {clsx} from "@qui/base"
+import {clsx} from "@qualcomm-ui/utils/clsx"
 
-import {GetComponent} from "./types"
+import type {GetComponent} from "./types"
 import {useSwaggerContext} from "./use-swagger-context"
 
 Layout.displayName = "Layout"

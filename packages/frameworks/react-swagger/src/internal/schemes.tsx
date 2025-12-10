@@ -1,6 +1,8 @@
-import {ReactNode, useCallback, useEffect} from "react"
+import type {ReactNode} from "react"
+import {useCallback, useEffect, useMemo} from "react"
 
-import {QCombobox} from "@qui/react"
+import {selectCollection} from "@qualcomm-ui/core/select"
+import {Select} from "@qualcomm-ui/react/select"
 
 Schemes.displayName = "Schemes"
 
@@ -22,6 +24,10 @@ export function Schemes(props: Props): ReactNode {
     [method, path, specActions],
   )
 
+  const collection = useMemo(() => {
+    return selectCollection({items: schemes.valueSeq().toArray()})
+  }, [schemes])
+
   useEffect(() => {
     if (!currentScheme || !schemes.includes(currentScheme)) {
       setSchemes(schemes.first())
@@ -29,14 +35,13 @@ export function Schemes(props: Props): ReactNode {
   }, [currentScheme, schemes, setSchemes])
 
   return (
-    <QCombobox
+    <Select
       clearable={false}
-      disableOptionToggle
+      collection={collection}
       label="Schemes"
-      onChange={(_, value) => setSchemes(value)}
-      options={schemes.valueSeq().toArray()}
+      onValueChange={(value) => setSchemes(value[0])}
       style={{minWidth: 100}}
-      value={currentScheme}
+      value={currentScheme ? [currentScheme] : []}
     />
   )
 }

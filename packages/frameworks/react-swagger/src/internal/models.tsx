@@ -1,12 +1,13 @@
-import {ReactNode} from "react"
+import type {ReactNode} from "react"
 
 import Im, {Map} from "immutable"
 import {ChevronUpIcon} from "lucide-react"
 
-import {clsx} from "@qui/base"
-import {QCollapse, QIcon} from "@qui/react"
+import {Collapsible} from "@qualcomm-ui/react/collapsible"
+import {Icon} from "@qualcomm-ui/react/icon"
+import {clsx} from "@qualcomm-ui/utils/clsx"
 
-import {GetComponent} from "./types"
+import type {GetComponent} from "./types"
 import {useJumpToHash} from "./use-jump-to-hash"
 import {useSwaggerContext} from "./use-swagger-context"
 
@@ -90,99 +91,101 @@ export function Models(props: ModelsProps): ReactNode {
         onClick={() => layoutActions.show(specPathBase, !showModels)}
       >
         {isOAS3 ? "Schemas" : "Models"}
-        <QIcon
+        <Icon
           aria-label="Model visibility icon"
           className={clsx("collapse-icon", {"is-open": showModels})}
           icon={ChevronUpIcon}
-          size="l"
+          size="lg"
         />
       </button>
 
-      <QCollapse in={showModels}>
-        {definitions
-          .entrySeq()
-          .map(([name]: any) => {
-            const fullPath = [...specPathBase, name]
-            const specPath = Im.List(fullPath)
+      <Collapsible.Root open={showModels}>
+        <Collapsible.Content>
+          {definitions
+            .entrySeq()
+            .map(([name]: any) => {
+              const fullPath = [...specPathBase, name]
+              const specPath = Im.List(fullPath)
 
-            const schemaValue = specSelectors.specResolvedSubtree(fullPath)
-            const rawSchemaValue = specSelectors.specJson().getIn(fullPath)
+              const schemaValue = specSelectors.specResolvedSubtree(fullPath)
+              const rawSchemaValue = specSelectors.specJson().getIn(fullPath)
 
-            const schema = Map.isMap(schemaValue) ? schemaValue : Im.Map()
-            const rawSchema = Map.isMap(rawSchemaValue)
-              ? rawSchemaValue
-              : Im.Map()
+              const schema = Map.isMap(schemaValue) ? schemaValue : Im.Map()
+              const rawSchema = Map.isMap(rawSchemaValue)
+                ? rawSchemaValue
+                : Im.Map()
 
-            const displayName =
-              schema.get("title") || rawSchema.get("title") || name
-            const isShown = layoutSelectors.isShown(fullPath, false)
+              const displayName =
+                schema.get("title") || rawSchema.get("title") || name
+              const isShown = layoutSelectors.isShown(fullPath, false)
 
-            if (isShown && schema.size === 0 && rawSchema.size > 0) {
-              // Firing an action in a container render is not great,
-              // but it works for now.
-              props.specActions.requestResolvedSubtree(fullPath)
-            }
+              if (isShown && schema.size === 0 && rawSchema.size > 0) {
+                // Firing an action in a container render is not great,
+                // but it works for now.
+                props.specActions.requestResolvedSubtree(fullPath)
+              }
 
-            const activeInHash = nameFromHash && nameFromHash === name
+              const activeInHash = nameFromHash && nameFromHash === name
 
-            const content = (
-              <ModelWrapper
-                activeInHash={activeInHash}
-                displayName={displayName}
-                expandDepth={defaultModelsExpandDepth}
-                fullPath={fullPath}
-                getComponent={getComponent}
-                getConfigs={getConfigs}
-                includeReadOnly
-                includeWriteOnly
-                layoutActions={layoutActions}
-                layoutSelectors={layoutSelectors}
-                name={name}
-                schema={schema || Im.Map()}
-                specPath={specPath}
-                specSelectors={specSelectors}
-              />
-            )
-
-            const title = (
-              <span className="model-box">
-                <span className="model model-title">{displayName}</span>
-              </span>
-            )
-
-            const modelId = `model-${name}`
-
-            return (
-              <div
-                key={`models-section-${name}`}
-                ref={onLoadModel}
-                className="model-container"
-                data-name={name}
-              >
-                <span className="model-box-anchor" id={modelId}></span>
-                <ModelCollapse
+              const content = (
+                <ModelWrapper
                   activeInHash={activeInHash}
-                  classes="model-box"
-                  collapsedContent=""
                   displayName={displayName}
-                  expanded={defaultModelsExpandDepth > 0 && isShown}
-                  getHash={props.fn.getHash}
-                  hideSelfOnExpand
+                  expandDepth={defaultModelsExpandDepth}
+                  fullPath={fullPath}
+                  getComponent={getComponent}
+                  getConfigs={getConfigs}
+                  includeReadOnly
+                  includeWriteOnly
                   layoutActions={layoutActions}
                   layoutSelectors={layoutSelectors}
-                  modelId={modelId}
-                  modelName={name}
-                  onToggle={handleToggle}
+                  name={name}
+                  schema={schema || Im.Map()}
                   specPath={specPath}
-                  title={title}
+                  specSelectors={specSelectors}
+                />
+              )
+
+              const title = (
+                <span className="model-box">
+                  <span className="model model-title">{displayName}</span>
+                </span>
+              )
+
+              const modelId = `model-${name}`
+
+              return (
+                <div
+                  key={`models-section-${name}`}
+                  ref={onLoadModel}
+                  className="model-container"
+                  data-name={name}
                 >
-                  {content}
-                </ModelCollapse>
-              </div>
-            )
-          })
-          .toArray()}
-      </QCollapse>
+                  <span className="model-box-anchor" id={modelId}></span>
+                  <ModelCollapse
+                    activeInHash={activeInHash}
+                    classes="model-box"
+                    collapsedContent=""
+                    displayName={displayName}
+                    expanded={defaultModelsExpandDepth > 0 && isShown}
+                    getHash={props.fn.getHash}
+                    hideSelfOnExpand
+                    layoutActions={layoutActions}
+                    layoutSelectors={layoutSelectors}
+                    modelId={modelId}
+                    modelName={name}
+                    onToggle={handleToggle}
+                    specPath={specPath}
+                    title={title}
+                  >
+                    {content}
+                  </ModelCollapse>
+                </div>
+              )
+            })
+            .toArray()}
+        </Collapsible.Content>
+      </Collapsible.Root>
     </section>
   )
 }

@@ -1,9 +1,6 @@
 import {defineEasyType} from "./define-easy-type"
 
 export const stringSchemaType = defineEasyType<string>({
-  Renderer: () => {
-    return <span className="data-value">string</span>
-  },
   colorKey: "base09",
   is: (value: unknown) =>
     !!(
@@ -12,5 +9,8 @@ export const stringSchemaType = defineEasyType<string>({
       "type" in value &&
       value.type === "string"
     ),
+  Renderer: () => {
+    return <span className="data-value">string</span>
+  },
   type: "string",
 })

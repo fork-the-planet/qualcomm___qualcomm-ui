@@ -1,6 +1,6 @@
 import {DocsCodeMirror} from "../code-mirror"
 
-import {GetComponent} from "./types"
+import type {GetComponent} from "./types"
 import {useThemeContext} from "./use-theme-context"
 import {jsFileDownload} from "./utils"
 

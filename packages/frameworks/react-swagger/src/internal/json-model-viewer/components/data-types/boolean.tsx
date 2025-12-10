@@ -1,7 +1,6 @@
 import {defineEasyType} from "./define-easy-type"
 
 export const booleanType = defineEasyType<boolean>({
-  Renderer: ({value}) => <>{value ? "true" : "false"}</>,
   colorKey: "base0E",
   deserialize: (value) => {
     if (value === "true") {
@@ -13,6 +12,7 @@ export const booleanType = defineEasyType<boolean>({
     throw new Error("Invalid boolean value")
   },
   is: (value) => typeof value === "boolean",
+  Renderer: ({value}) => <>{value ? "true" : "false"}</>,
   serialize: (value) => value.toString(),
   type: "bool",
 })

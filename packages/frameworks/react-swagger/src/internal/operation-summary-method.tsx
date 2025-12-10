@@ -1,7 +1,8 @@
-import {ReactNode} from "react"
+import type {ReactNode} from "react"
 
-import {clsx} from "@qui/base"
-import {QButton, QButtonProps} from "@qui/react"
+import type {ButtonProps} from "@qualcomm-ui/react/button"
+import {Button} from "@qualcomm-ui/react/button"
+import {clsx} from "@qualcomm-ui/utils/clsx"
 
 OperationSummaryMethod.displayName = "OperationSummaryMethod"
 
@@ -9,34 +10,36 @@ export interface OperationSummaryMethodProps {
   method: string
 }
 
-const propsMap: Record<string, QButtonProps<"div">> = {
+const propsMap: Record<string, Partial<ButtonProps>> = {
   delete: {
-    color: "negative",
+    emphasis: "danger",
   },
   get: {
-    color: "positive",
+    className: "q-method-get",
+    emphasis: "primary",
   },
   head: {
     className: "q-purple",
-    color: "positive",
+    emphasis: "primary",
   },
   options: {
     className: "q-kiwi",
-    color: "positive",
+    emphasis: "primary",
   },
   patch: {
     className: "q-orange",
-    color: "warning",
+    emphasis: "neutral",
   },
   post: {
-    color: "primary",
+    emphasis: "primary",
   },
   put: {
-    color: "warning",
+    className: "q-method-put",
+    emphasis: "neutral",
   },
   trace: {
     className: "q-teal",
-    color: "positive",
+    emphasis: "primary",
   },
 }
 
@@ -46,14 +49,14 @@ export function OperationSummaryMethod({
   const buttonProps = propsMap[method]
 
   return (
-    <QButton
+    <Button
       {...buttonProps}
-      as="div"
       className={clsx(buttonProps?.className, "qui-method-button", method)}
+      render={<div />}
       tabIndex={-1}
       variant="fill"
     >
       {method.toUpperCase()}
-    </QButton>
+    </Button>
   )
 }

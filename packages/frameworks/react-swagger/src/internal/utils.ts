@@ -1,4 +1,4 @@
-import {HTMLAttributes, ReactNode} from "react"
+import type {HTMLAttributes, ReactNode} from "react"
 
 import {sanitizeUrl as braintreeSanitizeUrl} from "@braintree/sanitize-url"
 import cssEscape from "css.escape"
@@ -18,14 +18,14 @@ export function jsFileDownload(
   mime?: string,
   bom?: any,
 ) {
-  let blobData = typeof bom !== "undefined" ? [bom, data] : [data]
-  let blob = new Blob(blobData, {type: mime || "application/octet-stream"})
+  const blobData = typeof bom !== "undefined" ? [bom, data] : [data]
+  const blob = new Blob(blobData, {type: mime || "application/octet-stream"})
 
-  let blobURL =
+  const blobURL =
     window.URL && window.URL.createObjectURL
       ? window.URL.createObjectURL(blob)
       : window.webkitURL.createObjectURL(blob)
-  let tempLink = document.createElement("a")
+  const tempLink = document.createElement("a")
   tempLink.style.display = "none"
   tempLink.href = blobURL
   tempLink.setAttribute("download", filename)
@@ -153,7 +153,7 @@ export function getList(iterable: any, keys: any) {
   if (!Iterable.isIterable(iterable)) {
     return List()
   }
-  let val = iterable.getIn(Array.isArray(keys) ? keys : [keys])
+  const val = iterable.getIn(Array.isArray(keys) ? keys : [keys])
   return List.isList(val) ? val : List()
 }
 

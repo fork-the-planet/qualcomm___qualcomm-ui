@@ -169,9 +169,9 @@ export function createDataType<ValueType = unknown>(
   PostComponent: ComponentType<DataItemProps<ValueType>>,
 ): {
   Component: ComponentType<DataItemProps<ValueType>>
+  is: (value: unknown, path: Path) => boolean
   PostComponent: ComponentType<DataItemProps<ValueType>>
   PreComponent: ComponentType<DataItemProps<ValueType>>
-  is: (value: unknown, path: Path) => boolean
 }
 /**
  * @deprecated use `defineDataType` instead
@@ -186,9 +186,9 @@ export function createDataType<ValueType = unknown>(
 ): {
   Component: ComponentType<DataItemProps<ValueType>>
   Editor: ComponentType<DataItemProps<ValueType>>
+  is: (value: unknown, path: Path) => boolean
   PostComponent: ComponentType<DataItemProps<ValueType>>
   PreComponent: ComponentType<DataItemProps<ValueType>>
-  is: (value: unknown, path: Path) => boolean
 }
 /**
  * @deprecated use `defineDataType` instead
@@ -196,9 +196,9 @@ export function createDataType<ValueType = unknown>(
 export function createDataType<ValueType = unknown>(
   is: (value: unknown, path: Path) => boolean,
   Component: ComponentType<DataItemProps<ValueType>>,
-  Editor?: ComponentType<EditorProps<ValueType>> | undefined,
-  PreComponent?: ComponentType<DataItemProps<ValueType>> | undefined,
-  PostComponent?: ComponentType<DataItemProps<ValueType>> | undefined,
+  Editor?: ComponentType<EditorProps<ValueType>>,
+  PreComponent?: ComponentType<DataItemProps<ValueType>>,
+  PostComponent?: ComponentType<DataItemProps<ValueType>>,
 ): any {
   if (process.env.NODE_ENV !== "production") {
     console.warn(
@@ -208,9 +208,9 @@ export function createDataType<ValueType = unknown>(
   return {
     Component,
     Editor,
+    is,
     PostComponent,
     PreComponent,
-    is,
   }
 }
 
@@ -219,11 +219,11 @@ export function createDataType<ValueType = unknown>(
  */
 export function defineDataType<ValueType = unknown>({
   Component,
+  deserialize,
   Editor,
+  is,
   PostComponent,
   PreComponent,
-  deserialize,
-  is,
   serialize,
 }: {
   /**
@@ -231,12 +231,27 @@ export function defineDataType<ValueType = unknown>({
    */
   Component: ComponentType<DataItemProps<ValueType>>
   /**
+   * Converts a string representation of a value back to a value of this data type.
+   *
+   * Throws an error if the input is invalid, in which case the editor will ignore
+   * the change.
+   */
+  deserialize?: (value: string) => ValueType
+  /**
    * An optional custom editor component for editing values of this data type.
    *
    * You must also provide a `serialize` and `deserialize` function to enable this
    * feature.
    */
   Editor?: ComponentType<EditorProps<string>>
+  /**
+   * Determines whether a given value belongs to this data type.
+   *
+   * @param value The value to check
+   * @param path The path to the value within the input data structure
+   * @returns `true` if the value belongs to this data type, `false` otherwise
+   */
+  is: (value: unknown, path: Path) => boolean
   /**
    * An optional component to render after the value.
    *
@@ -250,32 +265,17 @@ export function defineDataType<ValueType = unknown>({
    */
   PreComponent?: ComponentType<DataItemProps<ValueType>>
   /**
-   * Converts a string representation of a value back to a value of this data type.
-   *
-   * Throws an error if the input is invalid, in which case the editor will ignore
-   * the change.
-   */
-  deserialize?: (value: string) => ValueType
-  /**
-   * Determines whether a given value belongs to this data type.
-   *
-   * @param value The value to check
-   * @param path The path to the value within the input data structure
-   * @returns `true` if the value belongs to this data type, `false` otherwise
-   */
-  is: (value: unknown, path: Path) => boolean
-  /**
    * Convert the value of this data type to a string for editing
    */
   serialize?: (value: ValueType) => string
 }): DataType<ValueType> {
   return {
     Component,
+    deserialize,
     Editor,
+    is,
     PostComponent,
     PreComponent,
-    deserialize,
-    is,
     serialize,
   }
 }

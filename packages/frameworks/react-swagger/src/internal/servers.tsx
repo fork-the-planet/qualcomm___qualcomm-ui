@@ -1,8 +1,11 @@
-import {ReactNode, useCallback, useEffect} from "react"
+import type {ReactNode} from "react"
+import {useCallback, useEffect, useMemo} from "react"
 
 import {List, OrderedMap} from "immutable"
 
-import {QCombobox, QTextInput} from "@qui/react"
+import {selectCollection} from "@qualcomm-ui/core/select"
+import {Select} from "@qualcomm-ui/react/select"
+import {TextInput} from "@qualcomm-ui/react/text-input"
 
 interface ServersProps {
   // Use 'any[]' for ImPropTypes.list
@@ -81,16 +84,19 @@ export function Servers({
 
   const serversOpts = servers.toArray().map((schema) => schema.get("url"))
 
+  const serversCollection = useMemo(() => {
+    return selectCollection({items: serversOpts})
+  }, [serversOpts])
+
   return (
     <div className="servers">
-      <QCombobox
+      <Select
         className="q-swagger-input"
         clearable={false}
-        disableOptionToggle
-        id="servers"
-        onChange={(event, value) => handleServerChange(value)}
-        options={serversOpts}
-        value={currentServer}
+        collection={serversCollection}
+        controlProps={{id: "servers"}}
+        onValueChange={(value) => handleServerChange(value[0])}
+        value={currentServer ? [currentServer] : []}
       />
 
       {shouldShowVariableUI && (
@@ -111,16 +117,20 @@ export function Servers({
                     <td>{name}</td>
                     <td>
                       {opts.length ? (
-                        <QCombobox
-                          onChange={(event, value) =>
-                            handleServerVariableChange(name, value)
+                        <Select
+                          collection={selectCollection({items: opts})}
+                          onValueChange={(value) =>
+                            handleServerVariableChange(name, value[0])
                           }
-                          options={opts}
-                          value={getServerVariable(currentServer, name)}
+                          value={
+                            getServerVariable(currentServer, name)
+                              ? [getServerVariable(currentServer, name)]
+                              : []
+                          }
                         />
                       ) : (
-                        <QTextInput
-                          onChange={(event, value) =>
+                        <TextInput
+                          onValueChange={(value) =>
                             handleServerVariableChange(name, value)
                           }
                           value={getServerVariable(currentServer, name) || ""}

@@ -1,4 +1,4 @@
-import {ReactNode} from "react"
+import type {ReactNode} from "react"
 
 import {useJsonViewerStore} from "../../stores"
 import type {DataItemProps, DataType} from "../../type"
@@ -48,7 +48,7 @@ function ArrayType(props: DataItemProps<any>) {
 
 export const arraySchemaType: DataType<object> = {
   Component: ArrayType,
+  is: (value) => isReferenceArray(value),
   PostComponent: PostArrayType,
   PreComponent: PreArrayType,
-  is: (value) => isReferenceArray(value),
 }

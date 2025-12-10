@@ -1,8 +1,8 @@
 import {createContext, useContext} from "react"
 
-import {QuiTheme} from "@qui/base"
+import type {QdsTheme} from "@qualcomm-ui/qds-core/theme"
 
-const ThemeContext = createContext<QuiTheme>("dark")
+const ThemeContext = createContext<QdsTheme>("dark")
 
 export const ThemeContextProvider = ThemeContext.Provider
 

@@ -2,34 +2,50 @@
   min-width: 90px;
 
   &.q-teal {
-    background-color: var(--q-teal-500);
+    background-color: var(--color-category-teal-medium);
     &:hover {
       transition: background-color 161ms ease;
-      background-color: var(--q-teal-600);
+      background-color: var(--color-category-teal-strong);
     }
   }
 
   &.q-purple {
-    background-color: var(--q-purple-500);
+    background-color: var(--color-category-purple-medium);
     &:hover {
       transition: background-color 161ms ease;
-      background-color: var(--q-purple-600);
+      background-color: var(--color-category-purple-strong);
     }
   }
 
   &.q-kiwi {
-    background-color: var(--q-kiwi-500);
+    background-color: var(--color-category-kiwi-medium);
     &:hover {
       transition: background-color 161ms ease;
-      background-color: var(--q-kiwi-600);
+      background-color: var(--color-category-kiwi-strong);
     }
   }
 
   &.q-orange {
-    background-color: var(--q-orange-400);
+    background-color: var(--color-category-orange-medium);
     &:hover {
       transition: background-color 161ms ease;
-      background-color: var(--q-orange-500);
+      background-color: var(--color-category-orange-strong);
+    }
+  }
+
+  &.q-method-get {
+    background-color: var(--color-category-green-medium);
+    &:hover {
+      transition: background-color 161ms ease;
+      background-color: var(--color-category-green-strong);
+    }
+  }
+
+  &.q-method-put {
+    background-color: var(--color-category-yellow-medium);
+    &:hover {
+      transition: background-color 161ms ease;
+      background-color: var(--color-category-yellow-strong);
     }
   }
 }

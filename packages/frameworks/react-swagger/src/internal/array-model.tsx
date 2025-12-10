@@ -1,7 +1,7 @@
-import {ReactNode} from "react"
+import type {ReactNode} from "react"
 
 import {JsonModelViewer} from "./json-model-viewer"
-import {GetComponent, Schema} from "./types"
+import type {GetComponent, Schema} from "./types"
 import {useThemeContext} from "./use-theme-context"
 
 ArrayModel.displayName = "ArrayModel"

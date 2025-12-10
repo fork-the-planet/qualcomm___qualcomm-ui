@@ -1,4 +1,4 @@
-import {List, OrderedMap} from "immutable"
+import type {List, OrderedMap} from "immutable"
 
 export type GetComponent = (name: string, flag?: boolean) => any
 

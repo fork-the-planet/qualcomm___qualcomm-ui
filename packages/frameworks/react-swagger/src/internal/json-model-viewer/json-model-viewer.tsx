@@ -1,6 +1,6 @@
 import {
-  FC,
-  ReactElement,
+  type FC,
+  type ReactElement,
   useCallback,
   useContext,
   useEffect,
@@ -8,7 +8,7 @@ import {
   useRef,
 } from "react"
 
-import {clsx} from "@qui/base"
+import {clsx} from "@qualcomm-ui/utils/clsx"
 
 import {DataKeyPair} from "./components"
 import {

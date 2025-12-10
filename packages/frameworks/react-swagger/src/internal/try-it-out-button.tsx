@@ -1,8 +1,8 @@
-import {MouseEventHandler, ReactNode} from "react"
+import type {MouseEventHandler, ReactNode} from "react"
 
 import {FlaskConicalIcon, RotateCcw, XIcon} from "lucide-react"
 
-import {QButton} from "@qui/react"
+import {Button} from "@qualcomm-ui/react/button"
 
 TryItOutButton.displayName = "TryItOutButton"
 
@@ -29,33 +29,33 @@ export function TryItOutButton({
   return (
     <div className={showReset ? "try-out btn-group" : "try-out"}>
       {enabled ? (
-        <QButton
-          color="negative"
+        <Button
+          emphasis="danger"
           endIcon={XIcon}
           onClick={onCancelClick}
           variant="outline"
         >
           Cancel
-        </QButton>
+        </Button>
       ) : (
-        <QButton
-          color="primary"
+        <Button
+          emphasis="primary"
           endIcon={FlaskConicalIcon}
           onClick={onTryoutClick}
           variant="outline"
         >
           Try it out
-        </QButton>
+        </Button>
       )}
       {showReset && (
-        <QButton
-          color="warning"
+        <Button
+          emphasis="neutral"
           endIcon={RotateCcw}
           onClick={onResetClick}
           variant="outline"
         >
           Reset
-        </QButton>
+        </Button>
       )}
     </div>
   )

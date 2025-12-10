@@ -17,6 +17,12 @@
     },
     {
       "path": "../../common/mdx-vite/tsconfig.lib.json"
+    },
+    {
+      "path": "../../common/core/tsconfig.lib.json"
+    },
+    {
+      "path": "../../common/utils/tsconfig.lib.json"
     }
   ]
 }

@@ -2,9 +2,11 @@ import {useEffect, useState} from "react"
 
 import {List} from "immutable"
 
-import {QCollapse, QInlineAlert, QProgressBar} from "@qui/react"
+import {Collapsible} from "@qualcomm-ui/react/collapsible"
+import {InlineNotification} from "@qualcomm-ui/react/inline-notification"
+import {Progress} from "@qualcomm-ui/react/progress"
 
-import {GetComponent} from "./types"
+import type {GetComponent} from "./types"
 import {
   escapeDeepLinkPath,
   getExtensions,
@@ -134,7 +136,7 @@ export function Operation({
   const body = (
     <div className="opblock-body">
       {(operation && operation.size) || operation === null ? null : (
-        <QProgressBar />
+        <Progress />
       )}
       {deprecated && (
         <h4 className="opblock-title_normal"> Warning: Deprecated</h4>
@@ -219,13 +221,13 @@ export function Operation({
       !allowTryItOut ||
       validationErrors.length <= 0 ? null : (
         <div className="errors-wrapper">
-          <QInlineAlert
-            color="negative"
+          <InlineNotification
             description={
               <div>
                 Please correct the following validation errors and try again.
               </div>
             }
+            emphasis="danger"
             label="Error"
           />
         </div>
@@ -257,7 +259,7 @@ export function Operation({
         )}
       </div>
 
-      {executeInProgress ? <QProgressBar /> : <div style={{height: 4}}></div>}
+      {executeInProgress ? <Progress /> : <div style={{height: 4}}></div>}
 
       {!responses ? null : (
         <Responses
@@ -308,7 +310,9 @@ export function Operation({
         toggleShown={toggleShown}
       />
       {loaded ? (
-        <QCollapse in={isShown}>{body}</QCollapse>
+        <Collapsible.Root open={isShown}>
+          <Collapsible.Content>{body}</Collapsible.Content>
+        </Collapsible.Root>
       ) : (
         <Collapse isOpened={isShown}>{body}</Collapse>
       )}

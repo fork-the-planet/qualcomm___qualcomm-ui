@@ -3,13 +3,16 @@ import {useJsonViewerStore} from "../../stores"
 import {defineEasyType} from "./define-easy-type"
 
 export const nullType = defineEasyType<null>({
+  colorKey: "base08",
+  displayTypeLabel: false,
+  is: (value) => value === null,
   Renderer: () => {
     const backgroundColor = useJsonViewerStore(
       (store) => store.colorspace.base02,
     )
     return (
       <div
-        className="rounded-sm px-0.5 py-[1px] q-font-metadata-md-mono"
+        className="q-font-metadata-md-mono rounded-sm px-0.5 py-[1px]"
         style={{
           backgroundColor,
         }}
@@ -18,8 +21,5 @@ export const nullType = defineEasyType<null>({
       </div>
     )
   },
-  colorKey: "base08",
-  displayTypeLabel: false,
-  is: (value) => value === null,
   type: "null",
 })

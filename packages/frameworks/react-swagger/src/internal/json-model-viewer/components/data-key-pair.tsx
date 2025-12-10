@@ -1,6 +1,6 @@
 import {
-  CSSProperties,
-  MouseEvent,
+  type CSSProperties,
+  type MouseEvent,
   useCallback,
   useEffect,
   useMemo,
@@ -9,8 +9,8 @@ import {
 
 import {ChevronRightIcon} from "lucide-react"
 
-import {clsx} from "@qui/base"
-import {QIcon} from "@qui/react"
+import {Icon} from "@qualcomm-ui/react/icon"
+import {clsx} from "@qualcomm-ui/utils/clsx"
 
 import {useInspect, useTextColor} from "../hooks"
 import {useJsonViewerStore, useTypeComponents} from "../stores"
@@ -161,7 +161,7 @@ export function DataKeyPair(props: DataKeyPairProps) {
       >
         {expandable ? (
           <span className="inline-icon expand-icon">
-            <QIcon
+            <Icon
               className="inline-icon"
               icon={ChevronRightIcon}
               style={{

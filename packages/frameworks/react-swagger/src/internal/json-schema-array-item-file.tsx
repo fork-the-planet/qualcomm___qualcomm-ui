@@ -1,6 +1,6 @@
-import {ChangeEvent, ReactNode} from "react"
+import type {ChangeEvent, ReactNode} from "react"
 
-import {JsonSchemaProps} from "./types"
+import type {JsonSchemaProps} from "./types"
 
 JsonSchemaArrayItemFile.displayName = "JsonSchemaArrayItemFile"
 

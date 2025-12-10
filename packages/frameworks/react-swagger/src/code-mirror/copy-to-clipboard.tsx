@@ -1,6 +1,6 @@
 import {
-  ComponentProps,
-  ReactElement,
+  type ComponentProps,
+  type ReactElement,
   useCallback,
   useEffect,
   useState,
@@ -8,7 +8,7 @@ import {
 
 import {CheckIcon, CopyIcon} from "lucide-react"
 
-import {QIconButton} from "@qui/react"
+import {IconButton} from "@qualcomm-ui/react/button"
 
 export interface CopyToClipboardProps
   extends Omit<ComponentProps<"button">, "color" | "ref"> {
@@ -54,11 +54,11 @@ export function CopyToClipboard({
   )
 
   return (
-    <QIconButton
-      color="primary"
+    <IconButton
+      emphasis="primary"
       icon={isCopied ? CheckIcon : CopyIcon}
       onClick={handleClick}
-      size="s"
+      size="sm"
       tabIndex={0}
       title="Copy code"
       {...props}

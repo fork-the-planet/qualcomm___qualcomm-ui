@@ -19,6 +19,12 @@
     },
     {
       "path": "../../common/qds-core/tsconfig.lib.json"
+    },
+    {
+      "path": "../react/tsconfig.lib.json"
+    },
+    {
+      "path": "../react-core/tsconfig.lib.json"
     }
   ]
 }

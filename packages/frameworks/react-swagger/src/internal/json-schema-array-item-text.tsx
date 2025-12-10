@@ -1,8 +1,8 @@
-import {ChangeEvent, ReactNode} from "react"
+import type {ReactNode} from "react"
 
-import {QTextInput} from "@qui/react"
+import {TextInput} from "@qualcomm-ui/react/text-input"
 
-import {JsonSchemaProps} from "./types"
+import type {JsonSchemaProps} from "./types"
 
 JsonSchemaArrayItemText.displayName = "JsonSchemaArrayItemText"
 
@@ -16,8 +16,8 @@ export function JsonSchemaArrayItemText(props: JsonSchemaProps): ReactNode {
     value: valueProp = "",
   } = props
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    onChangeProp(e.target.value, keyName)
+  const onChange = (value: string) => {
+    onChangeProp(value, keyName)
   }
 
   const errors = errorsProp.toJS ? errorsProp.toJS() : []
@@ -25,11 +25,12 @@ export function JsonSchemaArrayItemText(props: JsonSchemaProps): ReactNode {
   const value = valueProp || ""
 
   return (
-    <QTextInput
+    <TextInput
       className="q-swagger-input"
       disabled={disabled}
-      error={errors.length ? errors[0] : ""}
-      onChange={(event) => onChange(event as ChangeEvent<HTMLInputElement>)}
+      errorText={errors.length ? errors[0] : ""}
+      invalid={errors.length > 0}
+      onValueChange={onChange}
       placeholder={description}
       value={value}
     />

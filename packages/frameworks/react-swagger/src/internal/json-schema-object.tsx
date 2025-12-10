@@ -1,8 +1,8 @@
-import {ReactNode} from "react"
+import type {ReactNode} from "react"
 
 import {DocsCodeMirror} from "../code-mirror"
 
-import {JsonSchemaProps} from "./types"
+import type {JsonSchemaProps} from "./types"
 import {useThemeContext} from "./use-theme-context"
 import {stringify} from "./utils"
 

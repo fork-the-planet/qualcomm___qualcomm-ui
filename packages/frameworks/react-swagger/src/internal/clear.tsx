@@ -1,6 +1,6 @@
 import {Trash2Icon} from "lucide-react"
 
-import {QButton} from "@qui/react"
+import {Button} from "@qualcomm-ui/react/button"
 
 interface ClearProps {
   method: string
@@ -16,8 +16,8 @@ export function Clear(props: ClearProps) {
   }
 
   return (
-    <QButton endIcon={Trash2Icon} onClick={onClick} size="l" variant="fill">
+    <Button endIcon={Trash2Icon} onClick={onClick} size="lg" variant="fill">
       Clear
-    </QButton>
+    </Button>
   )
 }

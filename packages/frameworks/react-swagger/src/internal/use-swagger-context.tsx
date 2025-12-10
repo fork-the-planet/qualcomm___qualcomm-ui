@@ -1,6 +1,6 @@
 import {createContext, useContext} from "react"
 
-import {QuiSwaggerContext} from "./types"
+import type {QuiSwaggerContext} from "./types"
 
 const SwaggerContext = createContext<QuiSwaggerContext | null>(null)
 

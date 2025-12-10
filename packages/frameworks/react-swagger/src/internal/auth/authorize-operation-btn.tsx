@@ -1,8 +1,8 @@
-import {MouseEvent, ReactNode} from "react"
+import type {MouseEvent, ReactNode} from "react"
 
 import {LockIcon, LockOpenIcon} from "lucide-react"
 
-import {QIconButton} from "@qui/react"
+import {IconButton} from "@qualcomm-ui/react/button"
 
 AuthorizeOperationBtn.displayName = "AuthorizeOperationBtn"
 
@@ -24,7 +24,7 @@ export function AuthorizeOperationBtn(
   const {isAuthorized} = props
 
   return (
-    <QIconButton
+    <IconButton
       aria-label={
         isAuthorized
           ? "authorization button locked"

@@ -1,12 +1,6 @@
-import {
-  QDialog,
-  QDialogBody,
-  QDialogCloseButton,
-  QDialogContent,
-  QDialogHeader,
-} from "@qui/react"
+import {Dialog} from "@qualcomm-ui/react/dialog"
 
-import {GetComponent} from "../types"
+import type {GetComponent} from "../types"
 
 interface AuthorizationPopupProps {
   authActions: any
@@ -33,19 +27,19 @@ export function AuthorizationPopup({
   const Auths = getComponent("auths")
 
   return (
-    <>
-      <QDialog
-        defaultOpen
-        dismissAction={<QDialogCloseButton onClick={close} />}
-        onOpenChange={(open) => {
-          if (!open) {
-            close()
-          }
-        }}
-      >
-        <QDialogContent className="swagger-ui">
-          <QDialogHeader>Available Authorizations</QDialogHeader>
-          <QDialogBody className="authorization-popup-dialog-body">
+    <Dialog.Root
+      defaultOpen
+      onOpenChange={(details) => {
+        if (!details.open) {
+          close()
+        }
+      }}
+    >
+      <Dialog.FloatingPortal>
+        <Dialog.Body className="swagger-ui">
+          <Dialog.CloseButton />
+          <Dialog.Heading>Available Authorizations</Dialog.Heading>
+          <Dialog.Description className="authorization-popup-dialog-body">
             {definitions.valueSeq().map((definition: any, key: any) => (
               <Auths
                 key={key}
@@ -58,9 +52,9 @@ export function AuthorizationPopup({
                 specSelectors={specSelectors}
               />
             ))}
-          </QDialogBody>
-        </QDialogContent>
-      </QDialog>
-    </>
+          </Dialog.Description>
+        </Dialog.Body>
+      </Dialog.FloatingPortal>
+    </Dialog.Root>
   )
 }

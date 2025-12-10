@@ -19,51 +19,51 @@ Migrate legacy QUI components (`@qui/react`, `@qui/base`) to modern QUI componen
 
 ### Auth Components
 
-- [ ] `src/internal/auth/api-key-auth.tsx` - Migrate `QTextInput`
-- [ ] `src/internal/auth/basic-auth.tsx` - Migrate `QTextInput`
-- [ ] `src/internal/auth/oauth2.tsx` - Migrate `QButton`, `QCheckbox`, `QCombobox`, `QTextInput`
-- [ ] `src/internal/auth/authorization-popup.tsx` - Migrate `QButton`, `QDialog`, `QDialogBody`, `QDialogFooter`, `QDialogHeader`
-- [ ] `src/internal/auth/authorize-btn.tsx` - Migrate `QButton`
-- [ ] `src/internal/auth/authorize-operation-btn.tsx` - Migrate `QIconButton`
-- [ ] `src/internal/auth/auths.tsx` - Migrate `QButton`
+- [x] `src/internal/auth/api-key-auth.tsx` - Migrate `QTextInput`
+- [x] `src/internal/auth/basic-auth.tsx` - Migrate `QTextInput`
+- [x] `src/internal/auth/oauth2.tsx` - Migrate `QButton`, `QCheckbox`, `QCombobox`, `QTextInput`
+- [x] `src/internal/auth/authorization-popup.tsx` - Migrate `QDialog`, `QDialogBody`, `QDialogHeader`
+- [x] `src/internal/auth/authorize-btn.tsx` - Migrate `QButton`
+- [x] `src/internal/auth/authorize-operation-btn.tsx` - Migrate `QIconButton`
+- [x] `src/internal/auth/auths.tsx` - Migrate `QButton`
 
 ### Core Internal Components
 
-- [ ] `src/internal/clear.tsx` - Migrate `QButton`
-- [ ] `src/internal/content-type.tsx` - Migrate `QCombobox`
-- [ ] `src/internal/execute.tsx` - Migrate `QButton`
-- [ ] `src/internal/layout.tsx` - Migrate `clsx` from `@qui/base`
-- [ ] `src/internal/model-collapse.tsx` - Migrate `QButton`, `QIcon`
-- [ ] `src/internal/model-example.tsx` - Migrate `QTab`, `QTabList`, `QTabPanel`, `QTabPanels`, `QTabs`
-- [ ] `src/internal/models.tsx` - Migrate `clsx`, `QCollapse`, `QIcon`
-- [ ] `src/internal/object-model.tsx` - Migrate `QButton`
-- [ ] `src/internal/operation.tsx` - Migrate `QCollapse`, `QInlineAlert`, `QProgressBar`
-- [ ] `src/internal/operation-summary.tsx` - Migrate `clsx`, `QIcon`, `QIconButton`
-- [ ] `src/internal/operation-summary-method.tsx` - Migrate `clsx`, `QButton`, `QButtonProps`
-- [ ] `src/internal/operation-tag.tsx` - Migrate `clsx`, `QCollapse`, `QIcon`, `QLink`
-- [ ] `src/internal/param-body.tsx` - Migrate `QButton`
-- [ ] `src/internal/schemes.tsx` - Migrate `QCombobox`
-- [ ] `src/internal/servers.tsx` - Migrate `QCombobox`, `QTextInput`
-- [ ] `src/internal/try-it-out-button.tsx` - Migrate `QButton`
-- [ ] `src/internal/use-theme-context.tsx` - Migrate `QuiTheme` from `@qui/base`
+- [x] `src/internal/clear.tsx` - Migrate `QButton`
+- [x] `src/internal/content-type.tsx` - Migrate `QCombobox`
+- [x] `src/internal/execute.tsx` - Migrate `QButton`
+- [x] `src/internal/layout.tsx` - Migrate `clsx` from `@qui/base`
+- [x] `src/internal/model-collapse.tsx` - Migrate `QButton`, `QIcon`
+- [x] `src/internal/model-example.tsx` - Migrate `QTab`, `QTabList`, `QTabPanel`, `QTabPanels`, `QTabs`
+- [x] `src/internal/models.tsx` - Migrate `clsx`, `QCollapse`, `QIcon`
+- [x] `src/internal/object-model.tsx` - Migrate `QButton`
+- [x] `src/internal/operation.tsx` - Migrate `QCollapse`, `QInlineAlert`, `QProgressBar`
+- [x] `src/internal/operation-summary.tsx` - Migrate `clsx`, `QIcon`, `QIconButton`
+- [x] `src/internal/operation-summary-method.tsx` - Migrate `clsx`, `QButton`, `QButtonProps`
+- [x] `src/internal/operation-tag.tsx` - Migrate `clsx`, `QCollapse`, `QIcon`, `QLink`
+- [x] `src/internal/param-body.tsx` - Migrate `QButton`
+- [x] `src/internal/schemes.tsx` - Migrate `QCombobox`
+- [x] `src/internal/servers.tsx` - Migrate `QCombobox`, `QTextInput`
+- [x] `src/internal/try-it-out-button.tsx` - Migrate `QButton`
+- [x] `src/internal/use-theme-context.tsx` - Migrate `QuiTheme` from `@qui/base`
 
 ### JSON Schema Components
 
-- [ ] `src/internal/json-schema-array.tsx` - Migrate `QButton`, `QCombobox`, `QIconButton`
-- [ ] `src/internal/json-schema-array-item-text.tsx` - Migrate `QTextInput`
-- [ ] `src/internal/json-schema-string.tsx` - Migrate `QCombobox`, `QTextInput`
+- [x] `src/internal/json-schema-array.tsx` - Migrate `QButton`, `QCombobox`, `QIconButton`
+- [x] `src/internal/json-schema-array-item-text.tsx` - Migrate `QTextInput`
+- [x] `src/internal/json-schema-string.tsx` - Migrate `QCombobox`, `QTextInput`
 
 ### JSON Model Viewer Components
 
-- [ ] `src/internal/json-model-viewer/json-model-viewer.tsx` - Migrate `clsx`
-- [ ] `src/internal/json-model-viewer/components/data-key-pair.tsx` - Migrate `clsx`, `QIcon`
-- [ ] `src/internal/json-model-viewer/components/data-types/object.tsx` - Migrate `QIcon`
-- [ ] `src/internal/json-model-viewer/components/internal/ref-name.tsx` - Migrate `clsx`, `QIconButton`
+- [x] `src/internal/json-model-viewer/json-model-viewer.tsx` - Migrate `clsx`
+- [x] `src/internal/json-model-viewer/components/data-key-pair.tsx` - Migrate `clsx`, `QIcon`
+- [x] `src/internal/json-model-viewer/components/data-types/object.tsx` - Migrate `QIcon`
+- [x] `src/internal/json-model-viewer/components/internal/ref-name.tsx` - Migrate `clsx`, `QIconButton`
 
 ### CodeMirror Components
 
-- [ ] `src/code-mirror/docs-code-mirror.tsx` - Migrate `QuiTheme`, `QIconButton`, `QTooltip`, `QTooltipTrigger`, `QTooltipContent`
-- [ ] `src/code-mirror/copy-to-clipboard.tsx` - Migrate `QIconButton`, `QTooltip`, `QTooltipTrigger`, `QTooltipContent`
+- [x] `src/code-mirror/docs-code-mirror.tsx` - Migrate `QuiTheme`, `QIconButton`, `QTooltip`, `QTooltipTrigger`, `QTooltipContent`
+- [x] `src/code-mirror/copy-to-clipboard.tsx` - Migrate `QIconButton`
 
 ---
 
@@ -73,43 +73,59 @@ Update CSS files to use modern qds-core CSS variables.
 
 ### CSS Files
 
-- [ ] `src/internal/json-model-viewer/json-model-viewer.css`
-  - `--q-background-3`, `--q-background-2`
-  - `--q-font-mono`, `--q-font-size-body-s`
-  - `--q-font-metadata-md`, `--q-font-body-sm-strong`
-  - `--q-font-stretch-body`
-- [ ] `src/internal/operation-summary-method.css`
-  - `--q-teal-500`, `--q-teal-600`
-  - `--q-purple-500`, `--q-purple-600`
-  - `--q-kiwi-500`, `--q-kiwi-600`
-  - `--q-orange-400`, `--q-orange-500`
-- [ ] `src/code-mirror/docs-code-mirror.css`
-  - `--q-font-mono`
-  - `--q-background-2`
-- [ ] `src/internal/input.css` - Review for variable usage
-- [ ] `src/internal/auth/authorization-popup.css` - Review for variable usage
-- [ ] `src/internal/auth/auth.css` - Review for variable usage
+- [x] `src/internal/json-model-viewer/json-model-viewer.css`
+  - `--q-background-3` → `--color-background-neutral-03`
+  - `--q-background-2` → `--color-background-neutral-02`
+  - `--q-font-mono` + `--q-font-size-body-s` → `--font-static-code-sm-default`
+  - `--q-font-metadata-md` → `--font-static-body-xs-default`
+  - `--q-font-body-sm-strong` → `--font-static-code-sm-bold`
+- [x] `src/internal/operation-summary-method.css`
+  - `--q-teal-500/600` → `--color-category-teal-medium/strong`
+  - `--q-purple-500/600` → `--color-category-purple-medium/strong`
+  - `--q-kiwi-500/600` → `--color-category-kiwi-medium/strong`
+  - `--q-orange-400/500` → `--color-category-orange-medium/strong`
+  - Added `--color-category-green-medium/strong` for GET method
+  - Added `--color-category-yellow-medium/strong` for PUT method
+- [x] `src/code-mirror/docs-code-mirror.css`
+  - `--q-font-mono` → `--font-static-code-sm-default`
+  - `--q-background-2` → `--color-background-neutral-02`
+- [x] `src/internal/input.css` - No legacy variables found
+- [x] `src/internal/auth/authorization-popup.css` - No legacy variables found
+- [x] `src/internal/auth/auth.css` - No legacy variables found
 
 ### Variable Mapping Reference
 
 | Legacy Variable | Modern Variable (qds-core) |
 |-----------------|---------------------------|
-| `--q-background-2` | TBD |
-| `--q-background-3` | TBD |
-| `--q-font-mono` | TBD |
-| `--q-font-size-body-s` | TBD |
-| `--q-teal-500/600` | TBD |
-| `--q-purple-500/600` | TBD |
-| `--q-kiwi-500/600` | TBD |
-| `--q-orange-400/500` | TBD |
+| `--q-background-2` | `--color-background-neutral-02` |
+| `--q-background-3` | `--color-background-neutral-03` |
+| `--q-font-mono` | `--font-static-code-sm-default` (font shorthand) |
+| `--q-font-size-body-s` | `--font-static-body-sm-default` (font shorthand) |
+| `--q-font-metadata-md` | `--font-static-body-xs-default` |
+| `--q-font-body-sm-strong` | `--font-static-code-sm-bold` |
+| `--q-teal-500/600` | `--color-category-teal-medium/strong` |
+| `--q-purple-500/600` | `--color-category-purple-medium/strong` |
+| `--q-kiwi-500/600` | `--color-category-kiwi-medium/strong` |
+| `--q-orange-400/500` | `--color-category-orange-medium/strong` |
+
+### Reference Locations
+
+- **Legacy CSS variables:** `/home/rbower/code/qui-main/packages/styles`
+- **Legacy components:** `/home/rbower/code/qui-main/packages/react`
+- **Modern color docs:** `packages/docs/react-docs/temp/qui-ai/theming-colors.md`
+- **Modern typography docs:** `packages/docs/react-docs/temp/qui-ai/theming-typography.md`
 
 ---
 
 ## Post-Migration
 
-- [ ] Update package.json dependencies (remove `@qui/react`, `@qui/base` if no longer needed)
+- [x] Update package.json dependencies (package.json already uses modern `@qualcomm-ui/*` deps)
+- [x] Verify no `@qui/react` or `@qui/base` imports remain in source files
 - [ ] Run tests to verify migration
-- [ ] Build package to verify no compilation errors
+- [ ] Build package - Note: Build has TypeScript errors unrelated to QUI migration:
+  - Pre-existing `import type` issues (verbatimModuleSyntax)
+  - Missing module type declarations (immutable, zustand, @uiw/codemirror-*, @qui/swagger-ui-react)
+  - TypeScript strict mode issues with `data-*` attributes in typed props
 
 ---
 
@@ -130,7 +146,9 @@ Update CSS files to use modern qds-core CSS variables.
 | `QTab/QTabs`                | `Tabs` from `@qualcomm-ui/react/tabs`              | `components-tabs.md`              |
 | `QTextInput`                | `TextInput` from `@qualcomm-ui/react/text-input`   | `components-text-input.md`        |
 | `QTooltip`                  | `Tooltip` from `@qualcomm-ui/react/tooltip`        | `components-tooltip.md`           |
-| `clsx` (`@qui/base`)        | `clsx` from `clsx` package (or `@qualcomm-ui/utils`)| N/A                              |
-| `QuiTheme` (`@qui/base`)    | See theming docs                                   | `theming-overview.md`             |
+| `clsx` (`@qui/base`)        | `clsx` from `@qualcomm-ui/utils/clsx`              | N/A                              |
+| `QuiTheme` (`@qui/base`)    | `QdsTheme` from `@qualcomm-ui/qds-core/theme`      | `theming-overview.md`             |
 
 **Docs location:** `packages/docs/react-docs/temp/qui-ai/`
+
+**API Preference:** Use the **simple API** (e.g., `<Button>`, `<Select>`) over the composite API (`Component.Root`, etc.) unless granular control is needed.

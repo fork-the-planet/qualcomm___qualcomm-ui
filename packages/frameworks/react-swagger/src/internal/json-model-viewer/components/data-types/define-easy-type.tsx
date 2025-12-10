@@ -1,4 +1,4 @@
-import {ComponentType, FC, memo} from "react"
+import {type ComponentType, type FC, memo} from "react"
 
 import {useJsonViewerStore} from "../../stores"
 import type {Colorspace} from "../../theme/base16"
@@ -9,9 +9,9 @@ export type EasyTypeConfig<Value> = Pick<
   DataType<Value>,
   "is" | "serialize" | "deserialize"
 > & {
-  Renderer: ComponentType<DataItemProps<Value>>
   colorKey: keyof Colorspace
   displayTypeLabel?: boolean
+  Renderer: ComponentType<DataItemProps<Value>>
   type: string
 }
 /**
@@ -26,11 +26,11 @@ export type EasyTypeConfig<Value> = Pick<
  * @param Renderer The component to render the value.
  */
 export function defineEasyType<Value>({
-  Renderer,
   colorKey,
   deserialize,
   displayTypeLabel = true,
   is,
+  Renderer,
   serialize,
   type,
 }: EasyTypeConfig<Value>): DataType<Value> {

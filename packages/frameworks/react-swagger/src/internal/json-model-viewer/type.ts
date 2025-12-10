@@ -6,7 +6,7 @@ import type {
   SetStateAction,
 } from "react"
 
-import {RenderLink} from "../utils"
+import type {RenderLink} from "../utils"
 
 import type {Colorspace} from "./theme/base16"
 
@@ -69,12 +69,27 @@ export type DataType<ValueType = unknown> = {
    */
   Component: ComponentType<DataItemProps<ValueType>>
   /**
+   * Converts a string representation of a value back to a value of this data type.
+   *
+   * Throws an error if the input is invalid, in which case the editor will ignore
+   * the change.
+   */
+  deserialize?: (value: string) => ValueType
+  /**
    * An optional custom editor component for editing values of this data type.
    *
    * You must also provide a `serialize` and `deserialize` function to enable this
    * feature.
    */
   Editor?: ComponentType<EditorProps<string>>
+  /**
+   * Determines whether a given value belongs to this data type.
+   *
+   * @param value The value to check
+   * @param path The path to the value within the input data structure
+   * @returns `true` if the value belongs to this data type, `false` otherwise
+   */
+  is: (value: unknown, path: Path) => boolean
   /**
    * An optional component to render after the value.
    *
@@ -87,21 +102,6 @@ export type DataType<ValueType = unknown> = {
    * In collapsed mode, it will still be rendered as a prefix.
    */
   PreComponent?: ComponentType<DataItemProps<ValueType>>
-  /**
-   * Converts a string representation of a value back to a value of this data type.
-   *
-   * Throws an error if the input is invalid, in which case the editor will ignore
-   * the change.
-   */
-  deserialize?: (value: string) => ValueType
-  /**
-   * Determines whether a given value belongs to this data type.
-   *
-   * @param value The value to check
-   * @param path The path to the value within the input data structure
-   * @returns `true` if the value belongs to this data type, `false` otherwise
-   */
-  is: (value: unknown, path: Path) => boolean
   /**
    * Convert the value of this data type to a string for editing
    */

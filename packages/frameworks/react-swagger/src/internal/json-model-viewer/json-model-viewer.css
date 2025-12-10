@@ -3,13 +3,12 @@
 }
 
 .light .json-model-viewer {
-  background-color: var(--q-background-3);
+  background-color: var(--color-background-neutral-03);
 }
 
 .json-model-viewer {
   user-select: none;
-  font-family: var(--q-font-mono);
-  font-size: var(--q-font-size-body-s);
+  font: var(--font-static-code-sm-default);
   width: 100%;
   padding: 6px 8px 6px 24px;
   border-radius: 5px;
@@ -18,7 +17,7 @@
 
   .model-gutter {
     width: 17px;
-    background-color: var(--q-background-2);
+    background-color: var(--color-background-neutral-02);
     position: absolute;
     left: 0;
     top: 0;
@@ -109,7 +108,7 @@
   .data-size-label {
     display: inline-block;
     margin-left: 4px;
-    font: var(--q-font-metadata-md);
+    font: var(--font-static-body-xs-default);
   }
 
   .data-ref-name-wrapper {
@@ -121,9 +120,7 @@
   .data-ref-name {
     display: inline-block;
     margin: 0 0 0 8px;
-    font: var(--q-font-body-sm-strong);
-    font-family: var(--q-font-mono);
-    font-stretch: var(--q-font-stretch-body);
+    font: var(--font-static-code-sm-bold);
 
     &.inspect {
       margin: 0 0 0 8px;

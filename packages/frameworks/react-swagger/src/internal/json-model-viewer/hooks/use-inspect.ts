@@ -1,4 +1,10 @@
-import {Dispatch, SetStateAction, useCallback, useEffect, useState} from "react"
+import {
+  type Dispatch,
+  type SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react"
 
 import {useJsonViewerStore} from "../stores"
 

@@ -2,9 +2,9 @@ import {useCallback, useEffect, useMemo, useRef, useState} from "react"
 
 import randomBytes from "randombytes"
 
-import {QTab, QTabList, QTabPanel, QTabPanels, QTabs} from "@qui/react"
+import {Tab, Tabs} from "@qualcomm-ui/react/tabs"
 
-import {GetComponent, Schema} from "./types"
+import type {GetComponent, Schema} from "./types"
 
 const usePrevious = (value: any) => {
   const ref = useRef(undefined)
@@ -88,58 +88,56 @@ export function ModelExample({
 
   return (
     <div className="model-example">
-      <QTabs
-        index={activeTab === "example" ? 0 : 1}
-        onChange={(index) => {
-          onTabChange(index === 0 ? "example" : "model")
-        }}
-      >
-        <QTabList>
-          <QTab>{isExecute ? "Edit Value" : "Example"}</QTab>
-          {schema ? <QTab>{isOAS3 ? "Schema" : "Model"}</QTab> : null}
-        </QTabList>
-        <QTabPanels>
-          <QTabPanel>
+      <Tabs.Root onValueChange={onTabChange} value={activeTab}>
+        <Tabs.List>
+          <Tabs.Indicator />
+          <Tab.Root value="example">
+            <Tab.Button>{isExecute ? "Edit Value" : "Example"}</Tab.Button>
+          </Tab.Root>
+          {schema ? (
+            <Tab.Root value="model">
+              <Tab.Button>{isOAS3 ? "Schema" : "Model"}</Tab.Button>
+            </Tab.Root>
+          ) : null}
+        </Tabs.List>
+        <Tabs.Panel value="example">
+          <div
+            aria-hidden={activeTab !== tabs.example}
+            aria-labelledby={exampleTabId}
+            data-name="examplePanel"
+            id={examplePanelId}
+            tabIndex={0}
+          >
+            {example ? (
+              example
+            ) : (
+              <HighlightCode>(no example available</HighlightCode>
+            )}
+          </div>
+        </Tabs.Panel>
+        {schema ? (
+          <Tabs.Panel value="model">
             <div
-              aria-hidden={activeTab !== tabs.example}
-              aria-labelledby={exampleTabId}
-              data-name="examplePanel"
-              id={examplePanelId}
-              role="tabpanel"
+              aria-hidden={activeTab === tabs.example}
+              aria-labelledby={modelTabId}
+              data-name="modelPanel"
+              id={modelPanelId}
               tabIndex={0}
             >
-              {example ? (
-                example
-              ) : (
-                <HighlightCode>(no example available</HighlightCode>
-              )}
+              <ModelWrapper
+                expandDepth={defaultModelExpandDepth}
+                getComponent={getComponent}
+                getConfigs={getConfigs}
+                includeReadOnly={includeReadOnly}
+                includeWriteOnly={includeWriteOnly}
+                schema={schema}
+                specPath={specPath}
+                specSelectors={specSelectors}
+              />
             </div>
-          </QTabPanel>
-          {schema ? (
-            <QTabPanel>
-              <div
-                aria-hidden={activeTab === tabs.example}
-                aria-labelledby={modelTabId}
-                data-name="modelPanel"
-                id={modelPanelId}
-                role="tabpanel"
-                tabIndex={0}
-              >
-                <ModelWrapper
-                  expandDepth={defaultModelExpandDepth}
-                  getComponent={getComponent}
-                  getConfigs={getConfigs}
-                  includeReadOnly={includeReadOnly}
-                  includeWriteOnly={includeWriteOnly}
-                  schema={schema}
-                  specPath={specPath}
-                  specSelectors={specSelectors}
-                />
-              </div>
-            </QTabPanel>
-          ) : null}
-        </QTabPanels>
-      </QTabs>
+          </Tabs.Panel>
+        ) : null}
+      </Tabs.Root>
     </div>
   )
 }

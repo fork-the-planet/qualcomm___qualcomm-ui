@@ -1,10 +1,15 @@
-import {createContext, SetStateAction, useContext} from "react"
+import {createContext, type SetStateAction, useContext} from "react"
 
-import {create, StoreApi, useStore} from "zustand"
+import {create, type StoreApi, useStore} from "zustand"
 
-import {darkColorspace, JsonViewerOnChange, JsonViewerProps, Path} from ".."
-import {RenderLink} from "../../utils"
-import {Colorspace} from "../theme/base16"
+import {
+  darkColorspace,
+  type JsonViewerOnChange,
+  type JsonViewerProps,
+  type Path,
+} from ".."
+import type {RenderLink} from "../../utils"
+import type {Colorspace} from "../theme/base16"
 import type {JsonViewerKeyRenderer} from "../type"
 
 const DefaultKeyRenderer: JsonViewerKeyRenderer = () => null

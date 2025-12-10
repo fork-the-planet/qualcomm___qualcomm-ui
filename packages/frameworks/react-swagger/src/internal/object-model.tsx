@@ -1,11 +1,11 @@
-import {ReactNode} from "react"
+import type {ReactNode} from "react"
 
 import {ChevronUpIcon} from "lucide-react"
 
-import {QButton} from "@qui/react"
+import {Button} from "@qualcomm-ui/react/button"
 
 import {JsonModelViewer} from "./json-model-viewer"
-import {GetComponent, Schema} from "./types"
+import type {GetComponent, Schema} from "./types"
 import {useThemeContext} from "./use-theme-context"
 
 ObjectModel.displayName = "ObjectModelOriginal"
@@ -47,7 +47,7 @@ export function ObjectModel(props: ObjectModelProps): ReactNode {
   const title = (schema.get("title") as string) || displayName || name
 
   const titleEl = title ? (
-    <QButton
+    <Button
       className="object-model-expand-button"
       endIcon={ChevronUpIcon}
       onClick={() => props.onToggle?.(props.name!, !props.expanded)}
@@ -57,7 +57,7 @@ export function ObjectModel(props: ObjectModelProps): ReactNode {
         <span className="model-hint">{schema.get("$$ref") as string}</span>
       )}
       <span className="model-title__text">{title}</span>
-    </QButton>
+    </Button>
   ) : null
 
   const renderLink = props.getComponent("RenderLink")

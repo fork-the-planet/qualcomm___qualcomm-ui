@@ -1,16 +1,13 @@
 import {type ReactNode, useMemo} from "react"
 
-import type {QuiTheme} from "@qui/base"
-import {
-  QIconButton,
-  QTooltip,
-  QTooltipContent,
-  QTooltipTrigger,
-} from "@qui/react"
 import {langs} from "@uiw/codemirror-extensions-langs"
 import {githubDark, githubLight} from "@uiw/codemirror-theme-github"
 import CodeMirror, {type ReactCodeMirrorProps} from "@uiw/react-codemirror"
 import {DownloadIcon} from "lucide-react"
+
+import type {QdsTheme} from "@qualcomm-ui/qds-core/theme"
+import {IconButton} from "@qualcomm-ui/react/button"
+import {Tooltip} from "@qualcomm-ui/react/tooltip"
 
 import {CopyToClipboard} from "./copy-to-clipboard"
 
@@ -21,7 +18,7 @@ export interface DocsCodeMirrorProps extends ReactCodeMirrorProps {
   downloadable?: boolean
   handleDownload?: () => void
   language: string | undefined
-  theme?: QuiTheme
+  theme?: QdsTheme
   value: string
 }
 
@@ -40,7 +37,7 @@ export function DocsCodeMirror({
   const extensions = useMemo(() => {
     switch (language) {
       case "bash":
-        return [langs.shell()]
+        return [langs.bash()]
       case "html":
         return [langs.html()]
       case "xml":
@@ -72,18 +69,19 @@ export function DocsCodeMirror({
       {copyable || downloadable ? (
         <div className="actions-wrapper">
           {!downloadable ? null : (
-            <QTooltip>
-              <QTooltipTrigger>
-                <QIconButton
+            <Tooltip
+              trigger={
+                <IconButton
                   aria-label="Download"
-                  color="primary"
-                  dense
+                  density="compact"
+                  emphasis="primary"
                   icon={DownloadIcon}
                   onClick={handleDownload}
                 />
-              </QTooltipTrigger>
-              <QTooltipContent>Download</QTooltipContent>
-            </QTooltip>
+              }
+            >
+              Download
+            </Tooltip>
           )}
           {copyable ? <CopyToClipboard getValue={() => value} /> : null}
         </div>

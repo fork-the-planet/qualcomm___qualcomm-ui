@@ -1,8 +1,8 @@
 import {useState} from "react"
 
-import {QTextInput} from "@qui/react"
+import {TextInput} from "@qualcomm-ui/react/text-input"
 
-import {GetComponent} from "../types"
+import type {GetComponent} from "../types"
 
 interface ApiKeyAuthProps {
   authorized: any
@@ -64,13 +64,13 @@ export function ApiKeyAuth(props: ApiKeyAuthProps) {
       </Row>
       <Row>
         {value ? (
-          <QTextInput clearable={false} disabled value="******" />
+          <TextInput clearable={false} disabled value="******" />
         ) : (
           <Col>
-            <QTextInput
-              autoFocus
+            <TextInput
               className="q-swagger-input"
-              onChange={(event, value) => onChange(value)}
+              inputProps={{autoFocus: true}}
+              onValueChange={onChange}
             />
           </Col>
         )}

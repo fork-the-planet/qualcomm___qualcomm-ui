@@ -3,6 +3,9 @@ import {useJsonViewerStore} from "../../stores"
 import {defineEasyType} from "./define-easy-type"
 
 export const undefinedType = defineEasyType<undefined>({
+  colorKey: "base05",
+  displayTypeLabel: false,
+  is: (value) => value === undefined,
   Renderer: () => {
     const backgroundColor = useJsonViewerStore(
       (store) => store.colorspace.base02,
@@ -13,8 +16,5 @@ export const undefinedType = defineEasyType<undefined>({
       </div>
     )
   },
-  colorKey: "base05",
-  displayTypeLabel: false,
-  is: (value) => value === undefined,
   type: "undefined",
 })

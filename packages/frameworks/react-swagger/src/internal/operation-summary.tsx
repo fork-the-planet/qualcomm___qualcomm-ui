@@ -1,15 +1,16 @@
-import {MouseEvent, ReactNode} from "react"
+import type {MouseEvent, ReactNode} from "react"
 
-import {List} from "immutable"
+import type {List} from "immutable"
 import {toString} from "lodash-es"
 import {ChevronUpIcon, Link2} from "lucide-react"
 
-import {clsx} from "@qui/base"
-import {QIcon, QIconButton} from "@qui/react"
+import {IconButton} from "@qualcomm-ui/react/button"
+import {Icon} from "@qualcomm-ui/react/icon"
+import {clsx} from "@qualcomm-ui/utils/clsx"
 
-import {GetComponent} from "./types"
+import type {GetComponent} from "./types"
 import {useJumpToHash} from "./use-jump-to-hash"
-import {RenderLink} from "./utils"
+import type {RenderLink} from "./utils"
 
 OperationSummary.displayName = "OperationSummary"
 
@@ -75,9 +76,7 @@ export function OperationSummary({
         className="opblock-summary-control"
         onClick={toggleShown}
       >
-        <QIconButton
-          as={Link}
-          href={`#${id}`}
+        <IconButton
           icon={Link2}
           onClick={(event: MouseEvent) => {
             if (!isShown) {
@@ -85,7 +84,8 @@ export function OperationSummary({
             }
             event.stopPropagation()
           }}
-          size="m"
+          render={<Link href={`#${id}`} />}
+          size="md"
           style={{marginRight: 8}}
           variant="outline"
         />
@@ -109,7 +109,7 @@ export function OperationSummary({
             {originalOperationId || operationId}
           </span>
         ) : null}
-        <QIcon
+        <Icon
           className={clsx("collapse-icon", {"is-open": isShown})}
           icon={ChevronUpIcon}
           size={24}

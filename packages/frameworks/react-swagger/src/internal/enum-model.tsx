@@ -1,7 +1,7 @@
-import {ReactNode} from "react"
+import type {ReactNode} from "react"
 
-import {JsonModelViewer, JsonViewerKeyRenderer} from "./json-model-viewer"
-import {GetComponent} from "./types"
+import {JsonModelViewer, type JsonViewerKeyRenderer} from "./json-model-viewer"
+import type {GetComponent} from "./types"
 import {useThemeContext} from "./use-theme-context"
 
 EnumModel.displayName = "EnumModel"

@@ -1,8 +1,8 @@
-import {ChangeEvent, useState} from "react"
+import {type ChangeEvent, useState} from "react"
 
-import {QTextInput} from "@qui/react"
+import {TextInput} from "@qualcomm-ui/react/text-input"
 
-import {GetComponent} from "../types"
+import type {GetComponent} from "../types"
 
 interface BasicAuthProps {
   authorized: any
@@ -57,17 +57,18 @@ export function BasicAuth(props: BasicAuthProps) {
       <Row>
         <label htmlFor="auth_username">Username:</label>
         {username ? (
-          <QTextInput clearable={false} disabled value={username} />
+          <TextInput clearable={false} disabled value={username} />
         ) : (
           <Col>
-            <QTextInput
-              autoFocus
-              id="auth_username"
-              inputProps={{type: "text"}}
-              name="password"
-              onChange={(event) =>
-                onChange(event as ChangeEvent<HTMLInputElement>)
-              }
+            <TextInput
+              inputProps={{
+                autoFocus: true,
+                id: "auth_username",
+                name: "username",
+                onChange: (event: ChangeEvent<HTMLInputElement>) =>
+                  onChange(event),
+                type: "text",
+              }}
             />
           </Col>
         )}
@@ -75,16 +76,18 @@ export function BasicAuth(props: BasicAuthProps) {
       <Row>
         <label htmlFor="auth_password">Password:</label>
         {username ? (
-          <QTextInput clearable={false} disabled value="******" />
+          <TextInput clearable={false} disabled value="******" />
         ) : (
           <Col>
-            <QTextInput
-              id="auth_password"
-              inputProps={{autoComplete: "new-password", type: "password"}}
-              name="password"
-              onChange={(event) =>
-                onChange(event as ChangeEvent<HTMLInputElement>)
-              }
+            <TextInput
+              inputProps={{
+                autoComplete: "new-password",
+                id: "auth_password",
+                name: "password",
+                onChange: (event: ChangeEvent<HTMLInputElement>) =>
+                  onChange(event),
+                type: "password",
+              }}
             />
           </Col>
         )}

@@ -1,11 +1,13 @@
-import {ReactNode} from "react"
+import type {ReactNode} from "react"
 
 import {ChevronUpIcon, ExternalLinkIcon} from "lucide-react"
 
-import {clsx} from "@qui/base"
-import {QCollapse, QIcon, QLink} from "@qui/react"
+import {Collapsible} from "@qualcomm-ui/react/collapsible"
+import {Icon} from "@qualcomm-ui/react/icon"
+import {Link} from "@qualcomm-ui/react/link"
+import {clsx} from "@qualcomm-ui/utils/clsx"
 
-import {GetComponent} from "./types"
+import type {GetComponent} from "./types"
 import {
   createDeepLinkPath,
   escapeDeepLinkPath,
@@ -98,16 +100,15 @@ export function OperationTag(props: Props) {
         )}
 
         {!tagExternalDocsUrl ? null : (
-          <QLink
-            as="a"
+          <Link
             className="info__externaldocs external-link"
             endIcon={ExternalLinkIcon}
             href={sanitizeUrl(tagExternalDocsUrl)}
             onClick={(e: any) => e.stopPropagation()}
-            target="_blank"
+            render={<a target="_blank" />}
           >
             {tagExternalDocsDescription || tagExternalDocsUrl}
-          </QLink>
+          </Link>
         )}
 
         <button
@@ -116,7 +117,7 @@ export function OperationTag(props: Props) {
           onClick={() => layoutActions.show(isShownKey, !showTag)}
           title={showTag ? "Collapse operation" : "Expand operation"}
         >
-          <QIcon
+          <Icon
             className={clsx("collapse-icon", {"is-open": showTag})}
             icon={ChevronUpIcon}
             size="xl"
@@ -124,7 +125,9 @@ export function OperationTag(props: Props) {
         </button>
       </h3>
 
-      <QCollapse in={showTag}>{children}</QCollapse>
+      <Collapsible.Root open={showTag}>
+        <Collapsible.Content>{children}</Collapsible.Content>
+      </Collapsible.Root>
     </div>
   )
 }

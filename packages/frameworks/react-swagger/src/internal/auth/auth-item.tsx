@@ -1,4 +1,4 @@
-import {GetComponent, Schema} from "../types"
+import type {GetComponent, Schema} from "../types"
 
 interface AuthItemProps {
   authorized: any

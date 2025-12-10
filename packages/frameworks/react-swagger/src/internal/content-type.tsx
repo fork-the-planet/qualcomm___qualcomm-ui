@@ -2,7 +2,8 @@ import {useEffect, useMemo} from "react"
 
 import {fromJS} from "immutable"
 
-import {QCombobox} from "@qui/react"
+import {selectCollection} from "@qualcomm-ui/core/select"
+import {Select} from "@qualcomm-ui/react/select"
 
 export interface ContentTypeProps {
   ariaControls?: string
@@ -27,6 +28,11 @@ export function ContentType({
     return fromJS(contentTypesProp)
   }, [contentTypesProp])
 
+  const collection = useMemo(() => {
+    if (!contentTypes || !contentTypes.size) return null
+    return selectCollection({items: contentTypes.toArray()})
+  }, [contentTypes])
+
   useEffect(() => {
     if (contentTypes && onChange) {
       onChange(contentTypes.first())
@@ -46,22 +52,20 @@ export function ContentType({
     }
   }, [contentTypes, onChange, value])
 
-  if (!contentTypes || !contentTypes.size) {
+  if (!contentTypes || !contentTypes.size || !collection) {
     return null
   }
 
   return (
     <div>
-      <QCombobox
-        aria-controls={ariaControls}
-        aria-label={ariaLabel}
+      <Select
         className="q-swagger-input"
         clearable={false}
-        disableOptionToggle
+        collection={collection}
+        controlProps={{"aria-controls": ariaControls, "aria-label": ariaLabel}}
         label={label}
-        onChange={(event, value) => onChange?.(value)}
-        options={contentTypes.toArray()}
-        value={value}
+        onValueChange={(value) => onChange?.(value[0])}
+        value={value ? [value] : []}
       />
     </div>
   )

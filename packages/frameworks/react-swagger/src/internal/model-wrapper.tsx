@@ -1,6 +1,6 @@
-import {ReactNode} from "react"
+import type {ReactNode} from "react"
 
-import {GetComponent} from "./types"
+import type {GetComponent} from "./types"
 
 interface Props {
   displayName?: string
