@@ -1,0 +1,31 @@
+{
+  "extends": "@qualcomm-ui/tsconfig/tsconfig.strict.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist",
+    "paths": {
+      "@qualcomm-ui/core/*": ["../../common/core/src/*"],
+      "@qualcomm-ui/dom/*": ["../../common/dom/src/*"],
+      "@qualcomm-ui/qds-core/*": ["../../common/qds-core/src/*"],
+      "@qualcomm-ui/react/*": ["../react/src/*"],
+      "@qualcomm-ui/react-core/*": ["../react-core/src/*"],
+      "@qualcomm-ui/react-mdx/*": ["../react-mdx/src/*"],
+      "@qualcomm-ui/utils/*": ["../../common/utils/src/*"]
+    }
+  },
+  "include": ["./src", "./src/internal"],
+  "references": [
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "../react/tsconfig.lib.json"
+    },
+    {
+      "path": "../react-core/tsconfig.lib.json"
+    }
+  ]
+}

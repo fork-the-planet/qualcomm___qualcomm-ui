@@ -1,24 +1,20 @@
 {
-  "name": "@qualcomm-ui/react-swagger",
+  "name": "@qualcomm-ui/react-open-api",
   "sideEffects": false,
   "version": "0.0.1",
-  "description": "Swagger component replacements using QUI React",
+  "description": "React Open API UI components based on scalar",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
   "repository": "https://github.com/qualcomm/qualcomm-ui",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "default": "./dist/index.js"
-    },
-    "./styles.css": {
-      "style": "./dist/all.min.css",
-      "default": "./dist/all.min.css"
+    "./*": {
+      "types": "./dist/*/index.d.ts",
+      "import": "./dist/*/index.js",
+      "default": "./dist/*/index.js"
     }
   },
-  "types": "./dist/index.d.ts",
+  "types": "./dist/stub.d.ts",
   "publishConfig": {
     "access": "public"
   },
@@ -39,76 +35,52 @@
     "prepublishOnly": "qui-cli pre-publish",
     "postpublish": "qui-cli post-publish"
   },
-  "dependencies": {
-    "@braintree/sanitize-url": "^7.1.1",
-    "@uiw/codemirror-extensions-langs": "^4.25.3",
-    "@uiw/codemirror-theme-github": "^4.25.3",
-    "@uiw/react-codemirror": "^4.25.3",
-    "css.escape": "^1.5.1",
-    "immutable": "^3.8.2",
-    "lodash-es": "^4.17.21",
-    "randombytes": "^2.1.0",
-    "sha.js": "^2.4.12",
-    "swagger-ui": "^5.30.3",
-    "swagger-ui-react": "^5.30.3",
-    "url-parse": "^1.5.10",
-    "zustand": "^4.5.2"
-  },
   "devDependencies": {
+    "@babel/core": "^7.28.4",
+    "esbuild": "^0.25.8",
+    "@floating-ui/react": "^0.27.3",
     "@qualcomm-ui/css-utils": "workspace:*",
     "@qualcomm-ui/cli": "workspace:^1.0.5",
     "@qualcomm-ui/core": "workspace:^1.0.11",
+    "@qualcomm-ui/dom": "workspace:^1.0.6",
     "@qualcomm-ui/esbuild": "workspace:^1.0.4",
-    "@qualcomm-ui/qds-core": "workspace:^1.9.3",
     "@qualcomm-ui/react": "workspace:^1.5.0",
     "@qualcomm-ui/react-core": "workspace:^1.0.11",
-    "@qualcomm-ui/react-mdx": "workspace:^1.7.0",
     "@qualcomm-ui/react-test-utils": "workspace:^1.0.0",
     "@qualcomm-ui/tsconfig": "workspace:^1.0.4",
     "@qualcomm-ui/utils": "workspace:^1.0.4",
     "@tailwindcss/vite": "^4.1.11",
     "@tanstack/react-virtual": "^3.13.12",
     "@types/babel__core": "^7.20.5",
-    "@types/css.escape": "^1.5.2",
-    "@types/immutable": "^3",
-    "@types/lodash-es": "^4.17.12",
-    "@types/randombytes": "^2.0.3",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "@types/react-transition-group": "^4.4.6",
-    "@types/sha.js": "^2.4.4",
-    "@types/swagger-ui": "^5.21.1",
-    "@types/swagger-ui-react": "^5.18.0",
-    "@types/url-parse": "^1.4.11",
+    "@vitejs/plugin-react": "^5.1.0",
     "@vitest/browser": "^4.0.8",
     "@vitest/browser-playwright": "^4.0.8",
     "@vitest/coverage-v8": "^4.0.8",
     "@vitest/ui": "^4.0.8",
-    "swagger-ui-react": "^5.30.3",
     "babel-plugin-react-compiler": "^1.0.0",
-    "esbuild": "^0.25.8",
     "lucide-react": "0.525.0",
     "playwright": "1.56.1",
-    "quick-lru": "^7.2.0",
     "react": "catalog:",
     "react-compiler-runtime": "^1.0.0",
     "react-dom": "catalog:",
     "shx": "^0.4.0",
     "tailwindcss": "^4.1.17",
     "tsx": "^4.20.6",
-    "typescript-plugin-css-modules": "^5.0.1",
     "vite": "npm:rolldown-vite@7.2.10",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^4.0.8",
+    "vitest-browser-react": "^2.0.2"
   },
   "peerDependencies": {
-    "@tanstack/react-virtual": ">=3.13.9",
     "@qualcomm-ui/core": "workspace:^1.0.11",
-    "@qualcomm-ui/qds-core": "workspace:^1.9.3",
-    "@qualcomm-ui/react-core": "workspace:^1.0.11",
+    "@qualcomm-ui/dom": "workspace:^1.0.6",
     "@qualcomm-ui/utils": "workspace:^1.0.4",
+    "@tanstack/react-virtual": ">=3.13.9",
     "lucide-react": ">=0.379.0 <1",
-    "react": ">=19.0.0",
-    "react-dom": ">=19.0.0"
+    "react": ">=19.2.1",
+    "react-dom": ">=19.2.1"
   },
   "nyc": {
     "reporter": [

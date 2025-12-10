@@ -424,7 +424,7 @@
   }
   .response-col_status {
     color: var(--color-text-neutral-primary);
-    padding-right: 4px;
+    padding: 0 6px 6px 0;
   }
   .response-col_status .response-undocumented {
     color: var(--color-text-neutral-secondary);
@@ -434,7 +434,7 @@
     color: var(--color-text-neutral-primary);
     font: var(--font-static-body-sm-default);
     max-width: 40em;
-    padding-left: 2em;
+    padding: 8px;
   }
   .response-col_links .response-undocumented {
     color: var(--color-text-neutral-secondary);
@@ -1150,16 +1150,14 @@
   }
   table tbody tr td:first-of-type {
     min-width: 6em;
-    padding: 10px 6px 0 0;
+    padding: 6px 12px;
   }
   table thead tr td,
   table thead tr th {
     border-bottom: 1px solid var(--color-border-neutral-01);
     color: var(--color-text-neutral-primary);
-    font-family: var(--type-font-family-secondary);
-    font-size: 12px;
-    font-weight: var(--type-font-weight-heading-bold);
-    padding: 12px 0;
+    font: var(--font-static-body-sm-bold);
+    padding: 6px 12px;
     text-align: left;
   }
   .parameters-col_description {
@@ -1179,13 +1177,8 @@
   }
   .parameter__name {
     color: var(--color-text-neutral-primary);
-    font-family: var(--type-font-family-secondary);
-    font-size: 16px;
-    font-weight: var(--type-font-weight-body-default);
+    font: var(--font-static-body-md-bold);
     margin-right: 0.75em;
-  }
-  .parameter__name.required {
-    font-weight: var(--type-font-weight-heading-bold);
   }
   .parameter__name.required span {
     color: var(--color-text-support-danger);
@@ -1200,7 +1193,7 @@
   }
   .parameter__extension,
   .parameter__in {
-    color: gray;
+    color: var(--color-text-neutral-secondary);
     font: var(--font-static-code-sm-bold);
     font-style: italic;
   }
@@ -1242,7 +1235,7 @@
     min-width: 6em;
   }
   .response__extension {
-    color: gray;
+    color: var(--color-text-neutral-secondary);
     font: var(--font-static-code-sm-bold);
     font-style: italic;
   }
@@ -1675,7 +1668,7 @@
     color: var(--color-category-purple-strong);
   }
   .json-schema-2020-12__attribute--muted {
-    color: gray;
+    color: var(--color-text-neutral-secondary);
   }
   .json-schema-2020-12__attribute--warning {
     color: var(--color-text-support-danger);
@@ -1853,4 +1846,10 @@
 .light .model-toggle:after {
   background: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path style="fill:rgb(100,100,100)" d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>')
     50% no-repeat;
+}
+
+.responses-table {
+  tr {
+    border-bottom: 1px solid var(--color-border-neutral-01);
+  }
 }
