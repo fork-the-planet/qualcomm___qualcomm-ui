@@ -42,19 +42,13 @@
   .opblock-tag {
     align-items: center;
     border-bottom: 1px solid var(--color-border-neutral-01);
-    cursor: pointer;
-    display: flex;
-    padding: 10px 20px 10px 10px;
-    transition: all 0.2s;
-  }
-  .opblock-tag {
-    align-items: center;
     color: var(--color-text-neutral-primary);
-
+    cursor: pointer;
     display: inline-flex;
-    font-family: var(--type-font-family-secondary);
-    font-size: 24px;
+    font: var(--font-static-heading-sm-default);
     margin: 0 0 5px;
+    padding: 20px 12px 16px 12px;
+    transition: all 0.2s;
 
     .markdown > p {
       margin: 0;
@@ -73,7 +67,6 @@
   }
   .opblock-tag > div {
     flex: 1 1 150px;
-    font-weight: var(--type-font-weight-body-default);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -165,10 +158,10 @@
     position: relative;
   }
   .opblock .tab-header .tab-item.active h4 span:after {
-    background: var(--color-background-neutral-10);
-    bottom: -15px;
+    background: var(--color-utility-focus-border);
+    bottom: -20px;
     content: "";
-    height: 4px;
+    height: 3px;
     left: 50%;
     position: absolute;
     transform: translateX(-50%);
