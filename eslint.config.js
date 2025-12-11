@@ -195,6 +195,14 @@ export default defineConfig(
     languageOptions,
   },
 
+  {
+    files: ["packages/*/react-swagger/**/*.{ts,tsx}"],
+    languageOptions,
+    rules: {
+      "react/prop-types": "off",
+    },
+  },
+
   // react compiler
   {
     extends: [quiEslintReact.configs.strict],
