@@ -1,3 +1,6 @@
+// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+// SPDX-License-Identifier: BSD-3-Clause-Clear
+
 import {
   createContext,
   memo,
@@ -27,7 +30,7 @@ import {
 } from "../components/data-types"
 import type {DataItemProps, DataType, Path} from "../type"
 
-function memorizeDataType<Type>(dataType: DataType<Type>): DataType<Type> {
+function memoizeDataType<Type>(dataType: DataType<Type>): DataType<Type> {
   function compare(
     prevProps: Readonly<DataItemProps<Type>>,
     nextProps: Readonly<DataItemProps<Type>>,
@@ -58,20 +61,20 @@ function memorizeDataType<Type>(dataType: DataType<Type>): DataType<Type> {
 }
 
 export const predefinedTypes: DataType<any>[] = [
-  memorizeDataType(booleanType),
-  memorizeDataType(dateType),
-  memorizeDataType(nullType),
-  memorizeDataType(undefinedType),
-  memorizeDataType(stringType),
-  memorizeDataType(functionType),
-  memorizeDataType(nanType),
-  memorizeDataType(intType),
-  memorizeDataType(floatType),
-  memorizeDataType(bigIntType),
-  memorizeDataType(stringSchemaType),
-  memorizeDataType(numberSchemaType),
-  memorizeDataType(booleanSchemaType),
-  memorizeDataType(arraySchemaType),
+  memoizeDataType(booleanType),
+  memoizeDataType(dateType),
+  memoizeDataType(nullType),
+  memoizeDataType(undefinedType),
+  memoizeDataType(stringType),
+  memoizeDataType(functionType),
+  memoizeDataType(nanType),
+  memoizeDataType(intType),
+  memoizeDataType(floatType),
+  memoizeDataType(bigIntType),
+  memoizeDataType(stringSchemaType),
+  memoizeDataType(numberSchemaType),
+  memoizeDataType(booleanSchemaType),
+  memoizeDataType(arraySchemaType),
 ]
 
 type TypeRegistryState = {

@@ -1,3 +1,9 @@
+// Modified from https://github.com/swagger-api/swagger-ui
+// Apache-2.0
+// Changes from Qualcomm Technologies, Inc. are provided under the following license:
+// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+// SPDX-License-Identifier: BSD-3-Clause-Clear
+
 import {useEffect, useMemo, useState} from "react"
 
 import immutable from "immutable"
