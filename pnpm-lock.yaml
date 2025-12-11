@@ -315,6 +315,9 @@ importers:
       '@commander-js/extra-typings':
         specifier: ^14.0.0
         version: 14.0.0(commander@14.0.2)
+      '@qualcomm-ui/cli':
+        specifier: workspace:*
+        version: link:../cli
       '@qualcomm-ui/esbuild':
         specifier: workspace:^1.0.4
         version: link:../esbuild

@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "@commander-js/extra-typings": "^14.0.0",
+    "@qualcomm-ui/cli": "workspace:*",
     "@qualcomm-ui/esbuild": "workspace:^1.0.4",
     "@qualcomm-ui/tsconfig": "workspace:^1.0.4",
     "@types/mdast": "^4.0.4",
