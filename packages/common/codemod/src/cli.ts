@@ -10,7 +10,7 @@ import {
   reactRouterUtils,
 } from "./modules"
 import {processDirs} from "./process-dirs"
-import {type ImportTransformEntry, processClassTransforms} from "./transformers"
+import {processClassTransforms} from "./transformers"
 
 const logModeOpt = new Option("--log-mode <logMode>", "Log mode")
   .choices(["info", "verbose"])
@@ -26,22 +26,77 @@ const dryRunOption = new Option(
   "Preview changes without writing files",
 )
 
-function addMigration(name: string, transforms: ImportTransformEntry[]) {
-  return program
-    .command(name)
-    .addOption(directoryOption)
-    .addOption(logModeOpt)
-    .addOption(dryRunOption)
-    .summary(`Update @qualcomm-ui/${name} imports to the latest version`)
-    .action(async (opts) => {
-      return processDirs(transforms, {...opts, dryRun: opts.dryRun ?? false})
-    })
+interface MigrateOptions {
+  dir: string
+  dryRun: boolean
+  logMode: "info" | "verbose"
 }
 
-addMigration("react-router-utils", reactRouterUtils)
+const migrations: Record<string, (opts: MigrateOptions) => Promise<void>> = {
+  "@qui/react-router-utils": async (opts) => {
+    await processDirs(reactRouterUtils, opts)
+  },
+  "@qui/tailwind-plugin": async (opts) => {
+    console.log(
+      opts.dryRun
+        ? "Running in dry-run mode (no files will be modified)...\n"
+        : "Migrating Tailwind classes...\n",
+    )
+
+    const result = await processClassTransforms(
+      [opts.dir],
+      allTailwindTransforms,
+      {dryRun: opts.dryRun, logMode: opts.logMode},
+    )
+
+    console.log("\n---")
+    console.log(
+      `Summary: ${result.totalChanges} changes in ${result.filesChanged} file(s)`,
+    )
+    if (opts.dryRun) {
+      console.log("(dry-run, no files modified)")
+    }
+  },
+}
+
+const moduleNames = Object.keys(migrations) as [string, ...string[]]
+
+const moduleOption = new Option("-m, --module <module>", "Module to migrate")
+  .choices(moduleNames)
+  .makeOptionMandatory()
+
+program
+  .command("migrate")
+  .addOption(moduleOption)
+  .addOption(directoryOption)
+  .addOption(logModeOpt)
+  .addOption(dryRunOption)
+  .summary("Run migrations for QUI packages")
+  .description(
+    `Migrate QUI package imports and classes to the latest version.
+
+Available modules:
+  @qui/react-router-utils  Update imports to @qualcomm-ui/react-router-utils
+  @qui/tailwind-plugin     Migrate Tailwind classes to QDS tokens (requires Tailwind v4)
+
+Examples:
+  qui-codemod migrate -m @qui/react-router-utils -d "src/**"
+  qui-codemod migrate -m @qui/tailwind-plugin -d "src/**" --dry-run`,
+  )
+  .action(async (opts) => {
+    const migration = migrations[opts.module]
+    await migration({
+      dir: opts.dir,
+      dryRun: opts.dryRun ?? false,
+      logMode: opts.logMode,
+    })
+  })
 
 program
   .command("analyze-exports")
+  .description(
+    "A dev utility that analyzes exports in a directory and prints a report. Useful for generating migration configs from legacy libraries.",
+  )
   .addOption(directoryOption)
   .option(
     "-p, --package-name <packageName>",
@@ -58,50 +113,6 @@ program
       )
     } else {
       analyzer.printReport()
-    }
-  })
-
-program
-  .command("tailwind")
-  .addOption(directoryOption)
-  .addOption(logModeOpt)
-  .option("--dry-run", "Preview changes without writing files")
-  .summary("Migrate Tailwind classes from @qui/tailwind-plugin to QDS tokens")
-  .description(
-    `Migrates CSS class names from the old QUI Tailwind plugin to the new QDS token-based system. This requires Tailwind v4.
-
-Supported file types:
-  - React: .tsx, .jsx (className, cn(), clsx(), cva())
-  - Angular: .html, .ts (class attribute, host bindings)
-  - CSS/SCSS: .css, .scss (@apply directives, class selectors)
-
-Examples:
-  qui-codemod tailwind -d "src/**"
-  qui-codemod tailwind -d "src/**" --dry-run
-  qui-codemod tailwind -d "src/components/**/*.tsx" --log-mode verbose`,
-  )
-  .action(async (opts) => {
-    const dryRun = opts.dryRun ?? false
-    const logMode = opts.logMode
-
-    console.log(
-      dryRun
-        ? "Running in dry-run mode (no files will be modified)...\n"
-        : "Migrating Tailwind classes...\n",
-    )
-
-    const result = await processClassTransforms(
-      [opts.dir],
-      allTailwindTransforms,
-      {dryRun, logMode},
-    )
-
-    console.log("\n---")
-    console.log(
-      `Summary: ${result.totalChanges} changes in ${result.filesChanged} file(s)`,
-    )
-    if (dryRun) {
-      console.log("(dry-run, no files modified)")
     }
   })
 

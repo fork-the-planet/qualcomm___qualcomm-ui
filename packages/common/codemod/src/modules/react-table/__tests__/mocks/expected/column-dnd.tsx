@@ -1,11 +1,11 @@
 // @ts-nocheck
 "use client"
 
-import { flexRender, Table, useReactTable } from "@qui/react/table"
+import { flexRender, Table, useReactTable } from "@qualcomm-ui/react/table"
 import { FC, useState } from "react"
 import { GripVertical } from "lucide-react"
 import { useDrag, useDrop } from "react-dnd"
-import { Column, ColumnDef, ColumnOrderState, getCoreRowModel, Header } from "@qui/core/table"
+import { Column, ColumnDef, ColumnOrderState, getCoreRowModel, Header } from "@qualcomm-ui/core/table"
 import { CodeHighlight } from "@qui/mdx-docs"
 import { QButton, QIconButton, QProgressCircle } from "@qui/react"
 import { Person, usePersonData } from "~utils/data"

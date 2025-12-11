@@ -1,6 +1,6 @@
 // @ts-nocheck
-import { flexRender, useReactTable, Table } from "@qui/react/table"
-import { createColumnHelper, getCoreRowModel } from "@qui/core/table"
+import { flexRender, useReactTable, Table } from "@qualcomm-ui/react/table"
+import { createColumnHelper, getCoreRowModel } from "@qualcomm-ui/core/table"
 import { useState } from "react"
 
 

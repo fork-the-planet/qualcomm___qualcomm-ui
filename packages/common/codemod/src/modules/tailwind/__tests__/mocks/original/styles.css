@@ -1,5 +1,5 @@
 .custom-button {
-  @apply bg-1 text-primary border border-default rounded px-4 py-2;
+  @apply bg-1 text-primary border-default rounded border px-4 py-2;
 }
 
 .custom-button:hover {
@@ -11,7 +11,7 @@
 }
 
 .custom-card {
-  @apply bg-2 border border-subtle rounded-lg p-6;
+  @apply bg-2 border-subtle rounded-lg border p-6;
 }
 
 .custom-card-header {

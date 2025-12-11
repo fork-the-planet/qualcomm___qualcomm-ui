@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { Table as MyTable, Table as MyBody, Table as MyCell, Table as MyHeader, Table as MyHead, Table as MyRow } from "@qui/react/table"
+import { Table as MyTable, Table as MyBody, Table as MyCell, Table as MyHeader, Table as MyHead, Table as MyRow } from "@qualcomm-ui/react/table"
 import { useState } from "react"
 
 
