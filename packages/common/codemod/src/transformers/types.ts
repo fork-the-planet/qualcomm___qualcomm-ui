@@ -1,6 +1,20 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
+import type {SourceFile} from "ts-morph"
+
+export interface TransformContext {
+  /** Map from original import name → name as used in code (alias or original) */
+  importAliasMap: Map<string, string>
+  options: ImportTransformEntry
+  sourceFile: SourceFile
+}
+
+export interface TransformPlugin {
+  name: string
+  transform: (ctx: TransformContext) => boolean
+}
+
 interface VariableTransformer {
   name: string
   renameTo: string
@@ -9,6 +23,23 @@ interface VariableTransformer {
 interface JsxWrapper {
   name: string
   wrapWith: string[]
+}
+
+export interface ClassTransformEntry {
+  /** Pattern to match (string for exact match, regex for pattern matching) */
+  pattern: string | RegExp
+  /** Replacement string or function that receives match and capture groups */
+  replacement: string | ((match: string, ...groups: string[]) => string)
+}
+
+export interface ClassTransformResult {
+  changed: boolean
+  changes: Array<{
+    file: string
+    line: number
+    newClass: string
+    oldClass: string
+  }>
 }
 
 export interface ImportTransformEntry {

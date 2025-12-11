@@ -6,15 +6,15 @@ import {writeFile} from "node:fs/promises"
 
 import {modImports} from "./mod-imports"
 import {
+  allTailwindTransforms,
   angular,
   base,
   ExportAnalyzer,
   mdxDocs,
-  react,
-  reactRouterUtils,
+  reactRouterUtilsClient,
   reactTableTransforms,
 } from "./modules"
-import type {ImportTransformEntry} from "./transformers"
+import {type ImportTransformEntry, processClassTransforms} from "./transformers"
 
 const logModeOpt = new Option("--log-mode <logMode>", "Log mode")
   .choices(["info", "verbose"])
@@ -37,10 +37,9 @@ function addMigration(name: string, transforms: ImportTransformEntry[]) {
 }
 
 addMigration("angular", angular)
-addMigration("react", react)
 addMigration("base", base)
 addMigration("mdx-docs", mdxDocs)
-addMigration("react-router-utils", reactRouterUtils)
+addMigration("react-router-utils", reactRouterUtilsClient)
 addMigration("react-table", reactTableTransforms)
 
 program
@@ -61,6 +60,50 @@ program
       )
     } else {
       analyzer.printReport()
+    }
+  })
+
+program
+  .command("tailwind")
+  .addOption(directoryOption)
+  .addOption(logModeOpt)
+  .option("--dry-run", "Preview changes without writing files")
+  .summary("Migrate Tailwind classes from @qui/tailwind-plugin to QDS tokens")
+  .description(
+    `Migrates CSS class names from the old QUI Tailwind plugin to the new QDS token-based system.
+
+Supported file types:
+  - React: .tsx, .jsx (className, cn(), clsx(), cva())
+  - Angular: .html, .ts (class attribute, host bindings)
+  - CSS/SCSS: .css, .scss (@apply directives, class selectors)
+
+Examples:
+  qui-codemod tailwind -d "src/**"
+  qui-codemod tailwind -d "src/**" --dry-run
+  qui-codemod tailwind -d "src/components/**/*.tsx" --log-mode verbose`,
+  )
+  .action(async (opts) => {
+    const dryRun = opts.dryRun ?? false
+    const logMode = opts.logMode
+
+    console.log(
+      dryRun
+        ? "Running in dry-run mode (no files will be modified)...\n"
+        : "Migrating Tailwind classes...\n",
+    )
+
+    const result = await processClassTransforms(
+      [opts.dir],
+      allTailwindTransforms,
+      {dryRun, logMode},
+    )
+
+    console.log("\n---")
+    console.log(
+      `Summary: ${result.totalChanges} changes in ${result.filesChanged} file(s)`,
+    )
+    if (dryRun) {
+      console.log("(dry-run, no files modified)")
     }
   })
 

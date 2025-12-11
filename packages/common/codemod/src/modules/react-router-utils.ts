@@ -4,9 +4,8 @@
 import {createImportModEntries} from "../mod-imports"
 import type {ImportTransformEntry} from "../transformers"
 
-export const reactRouterUtils: ImportTransformEntry[] = createImportModEntries(
-  "@qui/react-router-utils",
-  [
+export const reactRouterUtilsClient: ImportTransformEntry[] =
+  createImportModEntries("@qui/react-router-utils", [
     {
       imports: [
         "createThemeAction",
@@ -36,7 +35,9 @@ export const reactRouterUtils: ImportTransformEntry[] = createImportModEntries(
         "updateSiteState",
         "createUpdateAction",
       ],
-      targetPackage: "@qui/react-router-utils/client",
+      targetPackage: "@qualcomm-ui/react-router-utils/client",
     },
-  ],
-)
+  ])
+
+export const reactRouterUtilsServer: ImportTransformEntry[] =
+  createImportModEntries("@qui/react-router-utils", [])
