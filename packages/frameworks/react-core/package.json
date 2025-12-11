@@ -1,12 +1,19 @@
 {
   "name": "@qualcomm-ui/react-core",
-  "sideEffects": false,
   "version": "1.0.12",
   "description": "Design-agnostic React building blocks and utilities.",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
   "repository": "https://github.com/qualcomm/qualcomm-ui",
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "types": "./dist/stub.d.ts",
   "exports": {
     "./*": {
       "types": "./dist/*/index.d.ts",
@@ -14,13 +21,6 @@
       "default": "./dist/*/index.js"
     }
   },
-  "types": "./dist/stub.d.ts",
-  "publishConfig": {
-    "access": "public"
-  },
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "build": "run-s clean build:js build:ts",
     "clean": "shx rm -rf dist/tsbuildinfo dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map",

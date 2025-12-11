@@ -2,14 +2,19 @@
   "name": "@qualcomm-ui/qds-core",
   "version": "1.9.4",
   "description": "qds core components",
-  "repository": "https://github.com/qualcomm/qualcomm-ui",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
+  "repository": "https://github.com/qualcomm/qualcomm-ui",
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
+  "sideEffects": false,
   "files": [
     "dist",
     "package.json"
   ],
+  "types": "./dist/stub.d.ts",
   "exports": {
     "./*": {
       "types": "./dist/*/index.d.ts",
@@ -35,11 +40,6 @@
     "./styles/components.css": {
       "style": "./dist/components.min.css"
     }
-  },
-  "types": "./dist/stub.d.ts",
-  "sideEffects": false,
-  "publishConfig": {
-    "access": "public"
   },
   "scripts": {
     "build": "run-s clean build:js build:css build:ts",

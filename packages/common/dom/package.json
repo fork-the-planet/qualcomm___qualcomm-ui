@@ -2,10 +2,19 @@
   "name": "@qualcomm-ui/dom",
   "version": "1.0.7",
   "description": "DOM utilities and helpers.",
-  "repository": "https://github.com/qualcomm/qualcomm-ui",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
+  "repository": "https://github.com/qualcomm/qualcomm-ui",
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "types": "./dist/stub.d.ts",
   "exports": {
     "./*": {
       "types": "./dist/*/index.d.ts",
@@ -14,15 +23,6 @@
       "default": "./dist/*/index.js"
     }
   },
-  "types": "./dist/stub.d.ts",
-  "sideEffects": false,
-  "publishConfig": {
-    "access": "public"
-  },
-  "files": [
-    "dist",
-    "package.json"
-  ],
   "scripts": {
     "build": "run-s clean build:js build:ts",
     "clean": "shx rm -rf dist/tsbuildinfo dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map",

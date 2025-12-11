@@ -4,12 +4,12 @@
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
   "repository": "https://github.com/qualcomm/qualcomm-ui",
-  "files": [
-    "tsconfig.*.json"
-  ],
   "publishConfig": {
     "access": "public"
   },
+  "files": [
+    "tsconfig.*.json"
+  ],
   "scripts": {
     "prepublishOnly": "qui-cli pre-publish",
     "postpublish": "qui-cli post-publish"

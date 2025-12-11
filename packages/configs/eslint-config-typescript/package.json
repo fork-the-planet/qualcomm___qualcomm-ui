@@ -5,15 +5,11 @@
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
   "repository": "https://github.com/qualcomm/qualcomm-ui",
-  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
-  "keywords": [
-    "eslint",
-    "config"
-  ],
-  "main": "index.js",
-  "module": "index.js",
-  "types": "index.d.ts",
+  "sideEffects": false,
   "files": [
     "index.d.ts",
     "index.js",
@@ -26,9 +22,9 @@
     "type-checks.js",
     "strict-exports.js"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
+  "main": "index.js",
+  "module": "index.js",
+  "types": "index.d.ts",
   "devDependencies": {
     "@eslint/core": "^1.0.0",
     "@qualcomm-ui/cli": "workspace:^1.0.2",
@@ -55,5 +51,9 @@
     "prettier": ">=3.5.3",
     "typescript": ">=5.7.3",
     "typescript-eslint": ">=8.31.1"
-  }
+  },
+  "keywords": [
+    "eslint",
+    "config"
+  ]
 }

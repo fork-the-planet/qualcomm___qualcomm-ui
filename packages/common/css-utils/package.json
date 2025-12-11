@@ -5,25 +5,25 @@
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
   "repository": "https://github.com/qualcomm/qualcomm-ui",
-  "type": "module",
   "publishConfig": {
     "access": "public"
+  },
+  "type": "module",
+  "bin": {
+    "qui-css-utils": "./lib/cli.cjs"
   },
   "files": [
     "dist",
     "lib"
   ],
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "require": "./dist/index.cjs",
       "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
       "default": "./dist/index.js"
     }
-  },
-  "types": "dist/index.d.ts",
-  "bin": {
-    "qui-css-utils": "./lib/cli.cjs"
   },
   "scripts": {
     "build": "run-s clean build:js build:ts",

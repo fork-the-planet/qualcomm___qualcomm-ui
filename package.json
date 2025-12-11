@@ -2,8 +2,8 @@
   "name": "@qualcomm-ui/root",
   "version": "0.0.0",
   "description": "@qui monorepo",
-  "private": true,
   "repository": "https://github.com/qualcomm/qualcomm-ui",
+  "private": true,
   "type": "module",
   "scripts": {
     "clean-tsbuildinfo": "shx rm -rf packages/*/*/dist/tsbuildinfo packages/*/*/node_modules/.tmp/tsbuildinfo",
@@ -109,9 +109,9 @@
     "typescript-eslint": "catalog:",
     "yaml": "^2.8.2"
   },
+  "packageManager": "pnpm@10.24.0+sha512.01ff8ae71b4419903b65c60fb2dc9d34cf8bb6e06d03bde112ef38f7a34d6904c424ba66bea5cdcf12890230bf39f9580473140ed9c946fef328b6e5238a345a",
   "resolutions": {
     "playwright": "1.56.1",
     "typescript": "5.9.3"
-  },
-  "packageManager": "pnpm@10.24.0+sha512.01ff8ae71b4419903b65c60fb2dc9d34cf8bb6e06d03bde112ef38f7a34d6904c424ba66bea5cdcf12890230bf39f9580473140ed9c946fef328b6e5238a345a"
+  }
 }
