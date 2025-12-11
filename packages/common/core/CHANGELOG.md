@@ -1,5 +1,15 @@
 # @qualcomm-ui/core
 
+## 1.0.12 (2025/12/10)
+
+### Bug Fixes
+
+- [select]: prevent indicator from receiving focus on tab
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils, @qualcomm-ui/dom]
+
 ## 1.0.11 (2025/12/05)
 
 ### Bug Fixes
