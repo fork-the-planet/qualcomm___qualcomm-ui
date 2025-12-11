@@ -1,5 +1,11 @@
 # @qualcomm-ui/angular-core
 
+## 1.3.3 (2025/12/10)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/utils, @qualcomm-ui/dom]
+
 ## 1.3.2 (2025/12/05)
 
 ### Miscellaneous Chores

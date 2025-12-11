@@ -1,5 +1,11 @@
 # @qualcomm-ui/mdx-vite
 
+## 2.6.2 (2025/12/10)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils]
+
 ## 2.6.1 (2025/12/08)
 
 ### Bug Fixes

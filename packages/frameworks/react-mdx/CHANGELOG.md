@@ -1,5 +1,15 @@
 # @qualcomm-ui/react-mdx
 
+## 1.7.1 (2025/12/10)
+
+### Bug Fixes
+
+- [typedoc-descriptions]: Link size matches font size
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/react, @qualcomm-ui/react-core, @qualcomm-ui/utils]
+
 ## 1.7.0 (2025/12/08)
 
 ### Features

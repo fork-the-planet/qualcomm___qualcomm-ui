@@ -1,3 +1,6 @@
+// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+// SPDX-License-Identifier: BSD-3-Clause-Clear
+
 import {createContext, type SetStateAction, useContext} from "react"
 
 import {create, type StoreApi, useStore} from "zustand"
@@ -113,9 +116,8 @@ export const JsonViewerStoreContext = createContext<StoreApi<JsonViewerState>>(
 
 export const JsonViewerProvider = JsonViewerStoreContext.Provider
 
-export const useJsonViewerStore = <U extends unknown>(
+export const useJsonViewerStore = <U>(
   selector: (state: JsonViewerState) => U,
-  equalityFn?: (a: U, b: U) => boolean,
 ) => {
   const store = useContext(JsonViewerStoreContext)
 
@@ -125,5 +127,5 @@ export const useJsonViewerStore = <U extends unknown>(
     )
   }
 
-  return useStore(store, selector, equalityFn)
+  return useStore(store, selector)
 }
