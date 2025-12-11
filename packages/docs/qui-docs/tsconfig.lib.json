@@ -9,6 +9,11 @@
     "target": "esnext",
     "moduleResolution": "bundler",
     "tsBuildInfoFile": "node_modules/.tmp/tsbuildinfo",
+    "types": [
+      "vite/client",
+      "@qualcomm-ui/mdx-vite/docs-plugin",
+      "@qualcomm-ui/mdx-vite/react-demo-plugin",
+    ],
     "paths": {
       // fixes WebStorm usage detection, not used otherwise
       "~assets/*": ["./src/assets/*"],
@@ -17,7 +22,6 @@
     }
   },
   "include": [
-    "types.d.ts",
     "./src"
   ],
   "references": [
