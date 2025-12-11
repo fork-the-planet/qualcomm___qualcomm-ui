@@ -1,12 +1,16 @@
 {
   "name": "@qualcomm-ui/react-swagger",
-  "sideEffects": false,
   "version": "0.0.1",
   "description": "Swagger component replacements using QUI React",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
   "repository": "https://github.com/qualcomm/qualcomm-ui",
   "type": "module",
+  "sideEffects": false,
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -18,26 +22,22 @@
       "default": "./dist/all.min.css"
     }
   },
-  "types": "./dist/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "build": "run-s clean build:js build:ts build:css",
-    "clean": "shx rm -rf node_modules/.tmp/tsbuildinfo dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map dist/all.min.css",
+    "build:css": "qui-css-utils build",
     "build:js": "tsx build.ts",
     "build:ts": "tsc -b tsconfig.lib.json",
-    "build:css": "qui-css-utils build",
+    "clean": "shx rm -rf node_modules/.tmp/tsbuildinfo dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map dist/all.min.css",
     "dev": "run-p watch:js watch:ts watch:css",
-    "watch:js": "tsx build.ts --watch --mode development",
-    "watch:ts": "pnpm build:ts -w --preserveWatchOutput",
-    "watch:css": "qui-css-utils watch",
     "lint": "eslint --quiet",
+    "postpublish": "qui-cli post-publish",
     "prepublishOnly": "qui-cli pre-publish",
-    "postpublish": "qui-cli post-publish"
+    "watch:css": "qui-css-utils watch",
+    "watch:js": "tsx build.ts --watch --mode development",
+    "watch:ts": "pnpm build:ts -w --preserveWatchOutput"
   },
   "dependencies": {
     "@braintree/sanitize-url": "^7.1.1",
@@ -51,13 +51,12 @@
     "sha.js": "^2.4.12",
     "swagger-ui": "^5.30.3",
     "swagger-ui-react": "^5.30.3",
-    "url-parse": "^1.5.10",
-    "zustand": "^4.5.2"
+    "url-parse": "^1.5.10"
   },
   "devDependencies": {
-    "@qualcomm-ui/css-utils": "workspace:*",
     "@qualcomm-ui/cli": "workspace:^1.0.5",
     "@qualcomm-ui/core": "workspace:^1.0.11",
+    "@qualcomm-ui/css-utils": "workspace:*",
     "@qualcomm-ui/esbuild": "workspace:^1.0.4",
     "@qualcomm-ui/qds-core": "workspace:^1.9.3",
     "@qualcomm-ui/react": "workspace:^1.5.0",
@@ -84,7 +83,6 @@
     "@vitest/browser-playwright": "^4.0.8",
     "@vitest/coverage-v8": "^4.0.8",
     "@vitest/ui": "^4.0.8",
-    "swagger-ui-react": "^5.30.3",
     "babel-plugin-react-compiler": "^1.0.0",
     "esbuild": "^0.25.8",
     "lucide-react": "0.525.0",
@@ -94,33 +92,23 @@
     "react-compiler-runtime": "^1.0.0",
     "react-dom": "catalog:",
     "shx": "^0.4.0",
+    "swagger-ui-react": "^5.30.3",
     "tailwindcss": "^4.1.17",
     "tsx": "^4.20.6",
     "typescript-plugin-css-modules": "^5.0.1",
     "vite": "npm:rolldown-vite@7.2.10",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^5.1.4",
+    "zustand": "^4.5.2"
   },
   "peerDependencies": {
-    "@tanstack/react-virtual": ">=3.13.9",
     "@qualcomm-ui/core": "workspace:^1.0.11",
     "@qualcomm-ui/qds-core": "workspace:^1.9.3",
     "@qualcomm-ui/react-core": "workspace:^1.0.11",
     "@qualcomm-ui/utils": "workspace:^1.0.4",
+    "@tanstack/react-virtual": ">=3.13.9",
     "lucide-react": ">=0.379.0 <1",
     "react": ">=19.0.0",
-    "react-dom": ">=19.0.0"
-  },
-  "nyc": {
-    "reporter": [
-      "cobertura",
-      "html"
-    ],
-    "extension": [
-      ".js",
-      ".cjs",
-      ".mjs",
-      ".ts",
-      ".tsx"
-    ]
+    "react-dom": ">=19.0.0",
+    "zustand": ">=4.5.2"
   }
 }

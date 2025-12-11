@@ -17,18 +17,6 @@ export function createCodeChallenge(codeVerifier: any) {
   )
 }
 
-const btoa = (str: any) => {
-  let buffer
-
-  if (str instanceof Buffer) {
-    buffer = str
-  } else {
-    buffer = Buffer.from(str.toString(), "utf-8")
-  }
-
-  return buffer.toString("base64")
-}
-
 function sanitizeUrl(url: any): string {
   if (typeof url !== "string" || url.trim() === "") {
     return ""
@@ -150,7 +138,7 @@ export function authorizeOauth2({
     query.push(`scope=${encodeURIComponent(scopesArray.join(scopeSeparator))}`)
   }
 
-  const state = btoa(new Date())
+  const state = btoa(new Date().toString())
 
   query.push(`state=${encodeURIComponent(state)}`)
 

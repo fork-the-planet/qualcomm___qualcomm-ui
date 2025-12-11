@@ -91,7 +91,7 @@ export function Servers({
   return (
     <div className="servers">
       <Select
-        className="q-swagger-input"
+        className="swagger-input"
         clearable={false}
         collection={serversCollection}
         controlProps={{id: "servers"}}

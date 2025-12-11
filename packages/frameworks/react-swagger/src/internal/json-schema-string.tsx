@@ -67,7 +67,7 @@ export function JsonSchemaString({
 
   return (
     <TextInput
-      className="q-swagger-input"
+      className="swagger-input"
       disabled={isDisabled}
       errorText={errors.length ? errors[0] : ""}
       inputProps={{type: format && format === "password" ? "password" : "text"}}

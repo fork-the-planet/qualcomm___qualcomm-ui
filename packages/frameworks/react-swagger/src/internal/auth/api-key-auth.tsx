@@ -1,6 +1,6 @@
 import {useState} from "react"
 
-import {TextInput} from "@qualcomm-ui/react/text-input"
+import {PasswordInput} from "@qualcomm-ui/react/password-input"
 
 import type {GetComponent} from "../types"
 
@@ -63,17 +63,14 @@ export function ApiKeyAuth(props: ApiKeyAuthProps) {
         </p>
       </Row>
       <Row>
-        {value ? (
-          <TextInput clearable={false} disabled value="******" />
-        ) : (
-          <Col>
-            <TextInput
-              className="q-swagger-input"
-              inputProps={{autoFocus: true}}
-              onValueChange={onChange}
-            />
-          </Col>
-        )}
+        <Col>
+          <PasswordInput
+            className="swagger-input"
+            disabled={!!value}
+            inputProps={{autoFocus: true}}
+            onValueChange={onChange}
+          />
+        </Col>
       </Row>
       {errors.valueSeq().map((error: any, key: number) => (
         <AuthError key={key} error={error} />

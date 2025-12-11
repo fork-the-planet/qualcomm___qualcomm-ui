@@ -3,6 +3,7 @@ import {type ReactNode, type SyntheticEvent, useState} from "react"
 import {selectCollection} from "@qualcomm-ui/core/select"
 import {Button} from "@qualcomm-ui/react/button"
 import {Checkbox} from "@qualcomm-ui/react/checkbox"
+import {PasswordInput} from "@qualcomm-ui/react/password-input"
 import {Select} from "@qualcomm-ui/react/select"
 import {TextInput} from "@qualcomm-ui/react/text-input"
 
@@ -208,61 +209,42 @@ export function Oauth2(props: Oauth2Props): ReactNode {
       {flow !== AUTH_FLOW_PASSWORD ? null : (
         <Row>
           <Row>
-            {isAuthorized ? (
-              <code className="qui-code">{state.username}</code>
-            ) : (
-              <Col desktop={10} tablet={10}>
-                <TextInput
-                  inputProps={{autoFocus: true, "data-name": "username"}}
-                  label="Username:"
-                  onValueChange={(value) => onInputChange("username", value)}
-                />
-              </Col>
-            )}
+            <Col desktop={10} tablet={10}>
+              <TextInput
+                disabled={isAuthorized}
+                inputProps={{autoFocus: true, "data-name": "username"}}
+                label="Username"
+                onValueChange={(value) => onInputChange("username", value)}
+              />
+            </Col>
           </Row>
           <Row>
-            <label htmlFor="oauth_password">password:</label>
-            {isAuthorized ? (
-              <code className="qui-code">******</code>
-            ) : (
-              <Col desktop={10} tablet={10}>
-                <TextInput
-                  className="q-swagger-input"
-                  inputProps={{
-                    "data-name": "password",
-                    id: "oauth_password",
-                    type: "password",
-                  }}
-                  onValueChange={(value) => onInputChange("password", value)}
-                />
-              </Col>
-            )}
+            <Col desktop={10} tablet={10}>
+              <PasswordInput
+                className="swagger-input"
+                disabled={isAuthorized}
+                onValueChange={(value) => onInputChange("password", value)}
+              />
+            </Col>
           </Row>
           <Row>
-            <label htmlFor="password_type">Client credentials location:</label>
-            {isAuthorized ? (
-              <code> {state.passwordType} </code>
-            ) : (
-              <Col desktop={10} tablet={10}>
-                <Select
-                  collection={selectCollection({
-                    items: [
-                      {label: "Authorization header", value: "basic"},
-                      {label: "Request body", value: "request-body"},
-                    ],
-                  })}
-                  controlProps={{
-                    "data-name": "passwordType",
-                    id: "password_type",
-                  }}
-                  defaultValue={["basic"]}
-                  onValueChange={(value) =>
-                    onInputChange("passwordType", value[0])
-                  }
-                  size="sm"
-                />
-              </Col>
-            )}
+            <Col desktop={10} tablet={10}>
+              <Select
+                collection={selectCollection({
+                  items: [
+                    {label: "Authorization header", value: "basic"},
+                    {label: "Request body", value: "request-body"},
+                  ],
+                })}
+                defaultValue={["basic"]}
+                disabled={isAuthorized}
+                label="Client credentials location:"
+                onValueChange={(value) =>
+                  onInputChange("passwordType", value[0])
+                }
+                size="sm"
+              />
+            </Col>
           </Row>
         </Row>
       )}
@@ -272,22 +254,15 @@ export function Oauth2(props: Oauth2Props): ReactNode {
         flow === AUTH_FLOW_PASSWORD) &&
         (!isAuthorized || (isAuthorized && state.clientId)) && (
           <Row>
-            <label htmlFor={`client_id_${flow}`}>client_id:</label>
-            {isAuthorized ? (
-              <TextInput clearable={false} disabled value="******" />
-            ) : (
-              <Col desktop={10} tablet={10}>
-                <TextInput
-                  className="q-swagger-input"
-                  defaultValue={state.clientId}
-                  inputProps={{
-                    "data-name": "clientId",
-                    id: `client_id_${flow}`,
-                  }}
-                  onValueChange={(value) => onInputChange("clientId", value)}
-                />
-              </Col>
-            )}
+            <Col desktop={10} tablet={10}>
+              <TextInput
+                className="swagger-input"
+                defaultValue={state.clientId}
+                disabled={isAuthorized}
+                label="client_id"
+                onValueChange={(value) => onInputChange("clientId", value)}
+              />
+            </Col>
           </Row>
         )}
 
@@ -295,23 +270,15 @@ export function Oauth2(props: Oauth2Props): ReactNode {
         flow === AUTH_FLOW_ACCESS_CODE ||
         flow === AUTH_FLOW_PASSWORD) && (
         <Row>
-          <label htmlFor={`client_secret_${flow}`}>client_secret:</label>
-          {isAuthorized ? (
-            <TextInput clearable={false} disabled value="******" />
-          ) : (
-            <Col desktop={10} tablet={10}>
-              <TextInput
-                className="q-swagger-input"
-                defaultValue={state.clientSecret}
-                inputProps={{
-                  "data-name": "clientSecret",
-                  id: `client_secret_${flow}`,
-                  type: "password",
-                }}
-                onValueChange={(value) => onInputChange("clientSecret", value)}
-              />
-            </Col>
-          )}
+          <Col desktop={10} tablet={10}>
+            <PasswordInput
+              className="swagger-input"
+              defaultValue={state.clientSecret}
+              disabled={isAuthorized}
+              label="client_secret"
+              onValueChange={(value) => onInputChange("clientSecret", value)}
+            />
+          </Col>
         </Row>
       )}
 

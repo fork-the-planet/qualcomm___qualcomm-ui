@@ -4,6 +4,7 @@ import immutable from "immutable"
 
 import {selectCollection} from "@qualcomm-ui/core/select"
 import {Select} from "@qualcomm-ui/react/select"
+import {useEffectOnce} from "@qualcomm-ui/react-core/effects"
 
 export interface ContentTypeProps {
   ariaControls?: string
@@ -35,12 +36,11 @@ export function ContentType({
     return selectCollection({items: contentTypes.toArray()})
   }, [contentTypes])
 
-  useEffect(() => {
+  useEffectOnce(() => {
     if (contentTypes && onChange) {
       onChange(contentTypes.first())
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  })
 
   useEffect(() => {
     if (
@@ -67,6 +67,10 @@ export function ContentType({
         "aria-label": ariaLabel || "Content Type",
       }}
       label={label?.trim() || undefined}
+      onClick={(event) => {
+        // something is causing this to click twice, so the menu never opens.
+        event.preventDefault()
+      }}
       onValueChange={(value) => onChange?.(value[0])}
       size="sm"
       style={{minWidth: 180}}

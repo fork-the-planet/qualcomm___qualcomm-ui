@@ -130,7 +130,7 @@ export function JsonSchemaArray(props: JsonSchemaProps) {
         : Array.from(value)
     return (
       <Select
-        className="q-swagger-input"
+        className="swagger-input"
         clearable={!required}
         collection={enumCollection}
         disabled={disabled}

@@ -6,6 +6,10 @@
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
   "type": "module",
+  "files": [
+    "dist",
+    "package.json"
+  ],
   "exports": {
     "./*": {
       "types": "./dist/*/index.d.ts",
@@ -37,10 +41,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": [
-    "dist",
-    "package.json"
-  ],
   "scripts": {
     "build": "run-s clean build:js build:css build:ts",
     "clean": "shx rm -rf dist/tsbuildinfo dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map dist/**/*.css",

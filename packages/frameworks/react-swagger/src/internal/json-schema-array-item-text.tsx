@@ -26,7 +26,7 @@ export function JsonSchemaArrayItemText(props: JsonSchemaProps): ReactNode {
 
   return (
     <TextInput
-      className="q-swagger-input"
+      className="swagger-input"
       disabled={disabled}
       errorText={errors.length ? errors[0] : ""}
       invalid={errors.length > 0}
