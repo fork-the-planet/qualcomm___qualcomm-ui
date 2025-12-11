@@ -16,7 +16,7 @@
     "dev:app": "vite -c vite.config.ts",
     "lint": "eslint --quiet",
     "start": "cross-env NODE_ENV=production react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc -w --preserveWatchOutput",
+    "typecheck": "react-router typegen && tsc -b tsconfig.lib.json -w --preserveWatchOutput",
     "generate-llms-txt": "qui-mdx-vite generate-llms-txt --clean --output-mode aggregated --exclude 'installation*' 'index*' -o public/llms-full.txt --name 'QUI React Component Library' --base-url 'https://react-next.qui.qualcomm.com'",
     "generate-knowledge": "qui-mdx-vite generate-llms-txt --clean --output-mode per-page --exclude 'installation*' 'index*' --base-url 'https://react-next.qui.qualcomm.com' --metadata framework=react",
     "debug-knowledge-saga": "qui-mdx-vite get-knowledge-files --env .env.saga-ai",

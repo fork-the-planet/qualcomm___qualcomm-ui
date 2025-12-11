@@ -27,6 +27,7 @@ import {
   type IdProp,
   PolymorphicElement,
 } from "@qualcomm-ui/react-core/system"
+import type {ComponentDataAttributes} from "@qualcomm-ui/utils/attributes"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {
@@ -157,6 +158,7 @@ export function CoreSelectPositioner({
 
 export interface CoreSelectControlProps
   extends ElementRenderProp<"div">,
+    ComponentDataAttributes,
     IdProp {}
 
 export function CoreSelectControl({

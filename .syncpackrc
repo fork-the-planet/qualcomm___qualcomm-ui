@@ -17,5 +17,26 @@
       "preferVersion": "highestSemver",
       "dependencyTypes": ["dev", "prod"]
     }
+  ],
+  "sortFirst": [
+    "name",
+    "version",
+    "description",
+    "author",
+    "license",
+    "repository",
+    "type",
+    "sideEffects",
+    "main",
+    "module",
+    "typings",
+    "types",
+    "files",
+    "exports",
+    "publishConfig",
+    "scripts",
+    "dependencies",
+    "devDependencies",
+    "peerDependencies"
   ]
 }

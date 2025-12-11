@@ -1,5 +1,17 @@
 # @qualcomm-ui/react
 
+## 1.5.1 (2025/12/10)
+
+### Bug Fixes
+
+- [checkbox-control]: loosen data attribute prop restrictions
+- [text-input-input]: loosen data attribute prop restrictions
+- [core-select-control]: loosen data attribute prop restrictions
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/react-core, @qualcomm-ui/utils, @qualcomm-ui/qds-core]
+
 ## 1.5.0 (2025/12/08)
 
 ### Features

@@ -37,6 +37,7 @@ import type {
   SelectErrorIndicatorBindings,
   SelectErrorTextBindings,
   SelectHintBindings,
+  SelectIndicatorBindings,
   SelectItemBindings,
   SelectItemGroupBindings,
   SelectItemIndicatorBindings,
@@ -410,7 +411,7 @@ export function createSelectApi(
       })
     },
 
-    getIndicatorBindings() {
+    getIndicatorBindings(): SelectIndicatorBindings {
       return normalize.element({
         "aria-hidden": true,
         "data-disabled": booleanDataAttr(disabled),
@@ -420,6 +421,7 @@ export function createSelectApi(
         "data-scope": "select",
         "data-state": open ? "open" : "closed",
         dir: prop("dir"),
+        tabIndex: -1,
       })
     },
 

@@ -4,8 +4,7 @@
     "baseUrl": "./",
     "outDir": "./dist",
     "paths": {
-      "@qualcomm-ui/dom/*": ["./src/*/index.ts"],
-      "@qualcomm-ui/utils/*": ["../utils/src/*"]
+      "@qualcomm-ui/dom/*": ["./src/*/index.ts"]
     }
   },
   "include": ["./src"],

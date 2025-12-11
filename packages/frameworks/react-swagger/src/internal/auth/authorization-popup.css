@@ -1,0 +1,6 @@
+.authorization-popup-dialog-body {
+  flex: 0;
+  max-height: calc(100vh - 100px);
+  min-height: fit-content;
+  overflow-y: auto;
+}

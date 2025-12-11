@@ -12,5 +12,25 @@
     }
   },
   "include": ["./src"],
-  "exclude": ["./src/**/*.spec.tsx"]
+  "exclude": ["./src/**/*.spec.tsx"],
+  "references": [
+    {
+      "path": "../react/tsconfig.lib.json"
+    },
+    {
+      "path": "../react-core/tsconfig.lib.json"
+    },
+    {
+      "path": "../../common/core/tsconfig.lib.json"
+    },
+    {
+      "path": "../../common/mdx-vite/tsconfig.lib.json"
+    },
+    {
+      "path": "../../common/qds-core/tsconfig.lib.json"
+    },
+    {
+      "path": "../../common/utils/tsconfig.lib.json"
+    }
+  ]
 }

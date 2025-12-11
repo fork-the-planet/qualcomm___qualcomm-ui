@@ -1,7 +1,11 @@
 {
-  "extends": "@qualcomm-ui/tsconfig/jsconfig.mdx.json",
+  "extends": "@qualcomm-ui/tsconfig/tsconfig.node.json",
   "compilerOptions": {
+    "allowJs": true,
+    "composite": true,
     "baseUrl": "./",
+    "rootDir": "./src",
+    "moduleResolution": "bundler",
     "paths": {
       "~assets/*": ["./src/assets/*"],
       "~components/*": ["./src/components/*"],
@@ -9,7 +13,6 @@
     }
   },
   "include": [
-    "types.d.ts",
     "./src/**/*.mdx"
   ]
 }

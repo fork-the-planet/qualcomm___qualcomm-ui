@@ -18,7 +18,7 @@
     "dev:app": "vite -c vite.config.ts",
     "lint": "eslint --quiet",
     "start": "cross-env NODE_ENV=production react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc -w --preserveWatchOutput",
+    "typecheck": "react-router typegen && tsc -b tsconfig.lib.json -w --preserveWatchOutput",
     "update-lazy-demo-map": "qui-mdx-vite generate-lazy-demo-map -r src/routes -o src/components/demo/lazy-demo-loader.ts"
   },
   "dependencies": {
@@ -33,6 +33,7 @@
     "@qualcomm-ui/react": "workspace:*",
     "@qualcomm-ui/react-core": "workspace:*",
     "@qualcomm-ui/react-router-utils": "workspace:*",
+    "@qualcomm-ui/react-swagger": "workspace:*",
     "@qualcomm-ui/tailwind-plugin": "workspace:*",
     "@qualcomm-ui/typedoc": "workspace:*",
     "@qualcomm-ui/typedoc-common": "workspace:*",
