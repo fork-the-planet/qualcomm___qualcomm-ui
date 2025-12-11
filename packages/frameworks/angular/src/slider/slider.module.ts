@@ -4,6 +4,8 @@
 import {CommonModule} from "@angular/common"
 import {NgModule} from "@angular/core"
 
+import {IconDirective} from "@qualcomm-ui/angular/icon"
+
 import {SliderControlDirective} from "./slider-control.directive"
 import {SliderErrorTextDirective} from "./slider-error-text.directive"
 import {SliderHiddenInputDirective} from "./slider-hidden-input.directive"
@@ -64,6 +66,6 @@ import {SliderComponent} from "./slider.component"
     SliderThumbsComponent,
     SliderMarkersComponent,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, IconDirective],
 })
 export class SliderModule {}
