@@ -1,5 +1,56 @@
 # @qualcomm-ui/react-mdx
 
+## 1.7.1 (2025/12/10)
+
+### Bug Fixes
+
+- [typedoc-descriptions]: Link size matches font size
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/react, @qualcomm-ui/react-core, @qualcomm-ui/utils]
+
+## 1.7.0 (2025/12/08)
+
+### Features
+
+- [docs-layout]: add last updated metadata display
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common]
+
+## 1.6.3 (2025/12/08)
+
+### Bug Fixes
+
+- [a11y]: add aria labels to interactive controls
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common, @qualcomm-ui/react]
+
+## 1.6.2 (2025/12/05)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/react, @qualcomm-ui/react-core]
+
+## 1.6.1 (2025/12/03)
+
+### Code Refactoring
+
+- [demo-source-code]: consolidate copyable code functionality
+
+### Bug Fixes
+
+- [copy-to-clipboard-button]: use correct positioning in type popup
+- [angular-demo-runner]: fix copy-to-clipboard action
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react]
+
 ## 1.6.0 (2025/12/03)
 
 ### Features

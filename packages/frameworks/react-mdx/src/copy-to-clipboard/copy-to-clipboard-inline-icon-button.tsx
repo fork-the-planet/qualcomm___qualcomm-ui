@@ -34,6 +34,7 @@ export function CopyToClipboardInlineIconButton({
 
   return (
     <InlineIconButton
+      aria-label="Copy code"
       icon={isCopied ? Check : Copy}
       size="md"
       tabIndex={0}

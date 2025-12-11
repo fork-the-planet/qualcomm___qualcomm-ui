@@ -4,14 +4,14 @@
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
   "repository": "https://github.com/qualcomm/qualcomm-ui",
-  "type": "module",
   "private": true,
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "type": "module",
   "files": [
     "dist",
     "src"
   ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "clean": "shx rm -rf dist",
     "compile": "run-p build:js build:ts",
@@ -44,7 +44,7 @@
     "react-dom": "catalog:",
     "shx": "^0.4.0",
     "vite-tsconfig-paths": "^5.1.4",
-    "vite": "npm:rolldown-vite@7.2.6",
+    "vite": "npm:rolldown-vite@7.2.10",
     "vitest": "^4.0.8",
     "vitest-browser-react": "^2.0.2"
   }

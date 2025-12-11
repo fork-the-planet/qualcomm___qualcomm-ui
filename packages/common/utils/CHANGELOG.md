@@ -1,5 +1,11 @@
 # @qualcomm-ui/utils
 
+## 1.1.0 (2025/12/10)
+
+### Features
+
+- [attributes]: add ComponentDataAttributes utility type
+
 ## 1.0.4 (2025/12/01)
 
 ### Bug Fixes

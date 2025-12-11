@@ -1,5 +1,46 @@
 # @qualcomm-ui/react
 
+## 1.5.1 (2025/12/10)
+
+### Bug Fixes
+
+- [checkbox-control]: loosen data attribute prop restrictions
+- [text-input-input]: loosen data attribute prop restrictions
+- [core-select-control]: loosen data attribute prop restrictions
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/react-core, @qualcomm-ui/utils, @qualcomm-ui/qds-core]
+
+## 1.5.0 (2025/12/08)
+
+### Features
+
+- [switch]: forward aria-label and aria-labelledby to hidden input
+- [text-input]: forward aria-label and aria-labelledby to hidden input
+- [combobox]: forward aria-label and aria-labelledby to hidden input
+- [password-input]: forward aria-label and aria-labelledby to hidden input
+- [select]: forward aria-label and aria-labelledby to hidden input
+- [radio]: forward aria-label and aria-labelledby to hidden input
+- [react]: add aria labelling to simple controls
+- [checkbox]: forward aria-label and aria-labelledby to hidden input
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
+## 1.4.3 (2025/12/05)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/qds-core, @qualcomm-ui/react-core]
+
+## 1.4.2 (2025/12/03)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
 ## 1.4.1 (2025/12/03)
 
 ### Miscellaneous Chores

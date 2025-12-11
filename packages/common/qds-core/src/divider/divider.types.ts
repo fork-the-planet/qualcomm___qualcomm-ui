@@ -1,6 +1,8 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
+import type {dividerClasses} from "./divider.classes"
+
 export type QdsDividerOrientation = "horizontal" | "vertical"
 
 export type QdsDividerVariant = "subtle" | "normal" | "strong"
@@ -25,6 +27,7 @@ export interface QdsDividerApiProps {
 }
 
 export interface QdsDividerRootBindings {
+  className: (typeof dividerClasses)["root"]
   "data-variant": QdsDividerVariant
   role: "separator"
 }

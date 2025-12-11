@@ -9,6 +9,7 @@ export function IconButtonDensityDemo(): ReactElement {
     <div className="grid justify-items-center gap-4">
       {/* preview */}
       <IconButton
+        aria-label="Navigate"
         density="compact"
         emphasis="primary"
         icon={ExternalLink}
@@ -16,6 +17,7 @@ export function IconButtonDensityDemo(): ReactElement {
         variant="fill"
       />
       <IconButton
+        aria-label="Navigate"
         density="compact"
         emphasis="primary"
         icon={ExternalLink}
@@ -23,6 +25,7 @@ export function IconButtonDensityDemo(): ReactElement {
         variant="fill"
       />
       <IconButton
+        aria-label="Navigate"
         density="compact"
         emphasis="primary"
         icon={ExternalLink}

@@ -8,6 +8,10 @@ export type WithDataAttributes<T extends NonNullable<unknown>> = T & {
   [key: `data-${string}`]: string | boolean | undefined
 }
 
+export type ComponentDataAttributes = {
+  [key: `data-${string}`]: string | number | boolean | undefined
+}
+
 export type DataAttributes = {
   [key: `data-${string}`]: any
 }

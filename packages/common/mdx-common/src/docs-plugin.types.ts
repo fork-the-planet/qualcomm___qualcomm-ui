@@ -100,6 +100,18 @@ export interface PageFrontmatter {
    * The title of the page.
    */
   title: string
+
+  /**
+   * Full name of the person who last updated the page, derived from git commit
+   * history.
+   */
+  updatedBy?: string
+
+  /**
+   * ISO 8601 timestamp of when the page was last updated, derived from git
+   * commit history.
+   */
+  updatedOn?: string
 }
 
 export interface PageSectionContent {

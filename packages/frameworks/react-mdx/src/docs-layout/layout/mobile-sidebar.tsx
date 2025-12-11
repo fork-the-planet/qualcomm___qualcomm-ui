@@ -57,6 +57,7 @@ export function MobileSidebar({
                         {children}
                         <Drawer.CloseTrigger>
                           <IconButton
+                            aria-label="Close sidebar"
                             className="qui-docs-sidebar__mobile-close-trigger"
                             density="compact"
                             icon={PanelLeftClose}

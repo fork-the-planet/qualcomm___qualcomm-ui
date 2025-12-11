@@ -20,9 +20,9 @@ export function ComboboxAriaLabelDemo() {
   return (
     // preview
     <Combobox
+      aria-label="Country"
       className="w-48"
       collection={collection}
-      inputProps={{"aria-label": "Country"}}
       onInputValueChange={handleInputChange}
       placeholder="Select a country"
     />

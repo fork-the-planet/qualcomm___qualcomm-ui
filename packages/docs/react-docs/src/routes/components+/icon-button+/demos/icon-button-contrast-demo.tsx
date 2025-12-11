@@ -10,40 +10,46 @@ export function IconButtonContrastDemo(): ReactElement {
       {/* preview */}
       <div className="bg-persistent-black flex gap-6 p-4">
         <IconButton
+          aria-label="Navigate"
           emphasis="white-persistent"
           icon={ExternalLink}
           variant="fill"
         />
         <IconButton
+          aria-label="Navigate"
           emphasis="white-persistent"
           icon={ExternalLink}
           variant="outline"
         />
         <IconButton
+          aria-label="Navigate"
           emphasis="white-persistent"
-          icon={ExternalLink}
-          variant="ghost"
-        />
-      </div>
-
-      <div className="bg-persistent-white flex gap-6 p-4">
-        <IconButton
-          emphasis="black-persistent"
-          icon={ExternalLink}
-          variant="fill"
-        />
-        <IconButton
-          emphasis="black-persistent"
-          icon={ExternalLink}
-          variant="outline"
-        />
-        <IconButton
-          emphasis="black-persistent"
           icon={ExternalLink}
           variant="ghost"
         />
       </div>
       {/* preview */}
+
+      <div className="bg-persistent-white flex gap-6 p-4">
+        <IconButton
+          aria-label="Navigate"
+          emphasis="black-persistent"
+          icon={ExternalLink}
+          variant="fill"
+        />
+        <IconButton
+          aria-label="Navigate"
+          emphasis="black-persistent"
+          icon={ExternalLink}
+          variant="outline"
+        />
+        <IconButton
+          aria-label="Navigate"
+          emphasis="black-persistent"
+          icon={ExternalLink}
+          variant="ghost"
+        />
+      </div>
     </div>
   )
 }

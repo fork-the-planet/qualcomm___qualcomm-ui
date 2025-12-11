@@ -30,6 +30,19 @@ import {TextInputRoot, type TextInputRootProps} from "./text-input-root"
 
 export interface TextInputProps extends TextInputRootProps {
   /**
+   * {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-label aria-label}
+   * attribute, forwarded to the input element.
+   */
+  "aria-label"?: string | undefined
+
+  /**
+   * {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-labelledby aria-labelledby}
+   * attribute, forwarded to the input element. If you provide a {@link label},
+   * omit this prop.
+   */
+  "aria-labelledby"?: string | undefined
+
+  /**
    * The simple TextInput doesn't support children.
    */
   children?: never
@@ -114,6 +127,8 @@ export interface TextInputProps extends TextInputRootProps {
 }
 
 export function TextInput({
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
   clearable = true,
   clearTriggerProps,
   errorIndicatorProps,
@@ -122,7 +137,7 @@ export function TextInput({
   hint,
   hintProps,
   inputGroupProps,
-  inputProps,
+  inputProps: inputPropsProp,
   label,
   labelProps,
   placeholder,
@@ -131,6 +146,18 @@ export function TextInput({
   const labelContent = label || labelProps?.children
   const errorTextContent = errorText || errorTextProps?.children
   const hintContent = hint || hintProps?.children
+
+  const inputProps = {
+    ...inputPropsProp,
+  }
+
+  // prevent undefined labels from overwriting defaults
+  if (ariaLabel !== undefined) {
+    inputProps["aria-label"] = ariaLabel
+  }
+  if (ariaLabelledBy !== undefined) {
+    inputProps["aria-labelledby"] = ariaLabelledBy
+  }
 
   const ids = {
     errorText: useOptionalContentId(errorTextContent, errorTextProps),

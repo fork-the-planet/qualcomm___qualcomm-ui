@@ -15,9 +15,24 @@ import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
       <div class="text-neutral-primary font-heading-xs">Ghost</div>
 
       <!-- preview -->
-      <button icon="ExternalLink" q-icon-button variant="fill"></button>
-      <button icon="ExternalLink" q-icon-button variant="outline"></button>
-      <button icon="ExternalLink" q-icon-button variant="ghost"></button>
+      <button
+        aria-label="External Link"
+        icon="ExternalLink"
+        q-icon-button
+        variant="fill"
+      ></button>
+      <button
+        aria-label="External Link"
+        icon="ExternalLink"
+        q-icon-button
+        variant="outline"
+      ></button>
+      <button
+        aria-label="External Link"
+        icon="ExternalLink"
+        q-icon-button
+        variant="ghost"
+      ></button>
       <!-- preview -->
     </div>
   `,

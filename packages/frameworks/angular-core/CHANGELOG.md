@@ -1,5 +1,29 @@
 # @qualcomm-ui/angular-core
 
+## 1.3.3 (2025/12/10)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/utils, @qualcomm-ui/dom]
+
+## 1.3.2 (2025/12/05)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core]
+
+## 1.3.1 (2025/12/04)
+
+### Miscellaneous Chores
+
+- [peer-dependencies]: loosen `@angular/*` version range restrictions
+
+## 1.3.0 (2025/12/03)
+
+### Features
+
+- [side-nav]: add side-nav component
+
 ## 1.2.0 (2025/12/01)
 
 ### Features

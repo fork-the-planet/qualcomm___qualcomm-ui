@@ -5,7 +5,7 @@
     "outDir": "./dist",
     "moduleResolution": "Bundler",
     "paths": {
-      "@qualcomm-ui/react-mdx/*": ["./src/*/index.ts"]
+      "@qualcomm-ui/react-mdx/*": ["./src/*/index.ts"],
     }
   },
   "include": ["./src"],

@@ -273,9 +273,11 @@ export function quiDocsPlugin(opts?: QuiDocsPluginOptions): PluginOption {
           const virtualModule =
             server.moduleGraph.getModuleById(VIRTUAL_MODULE_ID)
           if (virtualModule) {
-            // can't reload the module here, otherwise we get react router hmr
-            // errors. But we can send the updated site data to the site so that it
-            // has the latest state.
+            // invalidate the module so that it gets re-evaluated on next refresh
+            server.moduleGraph.invalidateModule(virtualModule)
+
+            // Send the updated site data to the site so that it has the latest
+            // state.
             server.ws.send({
               data: state.siteData,
               event: "qui-docs-plugin:refresh-site-data",

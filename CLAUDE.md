@@ -79,6 +79,11 @@ Guidelines:
 - When translating examples from one framework to another, examine the component code to determine the appropriate interfaces. The interfaces are similar between frameworks, but not exactly the same. For example, Angular controlled state often uses Angular Forms.
 - When attempting to run a script from a package: First check the repository root package.json for the package's alias. If it exists, run the script using `pnpm <alias> <script>`.
 
+### Design Tokens
+
+- Design tokens are located in the `packages/common/qds-core/src/styles` directory. The format is the same for each supported brand and theme. Use `qualcomm-dark.css` as a reference.
+- The Tailwind Plugin is located in the `packages/common/tailwind-plugin` directory.
+
 ## Documentation Strategy
 
 When writing documentation, follow these guidelines:

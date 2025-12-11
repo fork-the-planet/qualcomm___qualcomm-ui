@@ -15,8 +15,8 @@ export default {
       id: "setup",
     },
     {
-      children: [{id: "tailwind"}],
       id: "integrations",
+      title: "Integrations & Configs",
     },
     {separator: true},
     {sectionTitle: "Theming & Patterns"},
@@ -114,5 +114,6 @@ export default {
     },
   ],
   pageDirectory: "routes",
+  pageTimestampMetadata: "user-and-timestamp",
   typeDocProps: ".typedoc/doc-props.json",
 } satisfies QuiDocsConfig

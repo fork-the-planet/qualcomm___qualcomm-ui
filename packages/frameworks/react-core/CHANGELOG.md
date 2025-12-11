@@ -1,5 +1,23 @@
 # @qualcomm-ui/react-core
 
+## 1.0.12 (2025/12/10)
+
+### Bug Fixes
+
+- [checkbox-control]: loosen data attribute prop restrictions
+- [text-input-input]: loosen data attribute prop restrictions
+- [core-select-control]: loosen data attribute prop restrictions
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/utils, @qualcomm-ui/dom]
+
+## 1.0.11 (2025/12/05)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core]
+
 ## 1.0.10 (2025/12/01)
 
 ### Documentation

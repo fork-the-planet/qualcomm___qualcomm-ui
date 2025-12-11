@@ -366,3 +366,17 @@ pre.qui-docs-code {
 .qui-docs-sidebar__mobile-close-trigger {
   margin-left: auto;
 }
+
+.qui-docs__updated-on-wrapper {
+  align-items: center;
+  display: flex;
+  font: var(--font-static-body-sm-default);
+  gap: 4px;
+  justify-content: flex-end;
+  padding-top: var(--qui-mdx-margin-default);
+}
+
+.qui-docs__updated-on-time,
+.qui-docs__updated-by {
+  font: var(--font-static-body-sm-bold);
+}

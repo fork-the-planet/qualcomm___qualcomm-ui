@@ -30,7 +30,7 @@ export function LinkOverlayPanel({
 
   return (
     <Element
-      className={clsx("relative rounded-xl", className)}
+      className={clsx("relative block rounded-xl", className)}
       href={href}
       onMouseEnter={(event) => {
         onMouseEnter?.(event)
@@ -46,6 +46,7 @@ export function LinkOverlayPanel({
       {hover ? (
         <div className="absolute right-2 bottom-2">
           <IconButton
+            aria-label="Continue"
             emphasis="primary"
             icon={isInternalLink ? ChevronRightIcon : ExternalLinkIcon}
             size="sm"

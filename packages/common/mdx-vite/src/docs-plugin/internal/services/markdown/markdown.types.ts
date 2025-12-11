@@ -22,9 +22,14 @@ export interface IndexedPage {
 export interface CompiledMdxFileMetadata {
   changed: {
     /**
-     * True if the file's frontmatter has changed since the last build.
+     * true if the file's frontmatter has changed since the last build.
      */
     frontmatter?: boolean | undefined
+
+    /**
+     * true if the file's toc has changed since the last build.
+     */
+    toc?: boolean | undefined
   }
   filePath: string
 }

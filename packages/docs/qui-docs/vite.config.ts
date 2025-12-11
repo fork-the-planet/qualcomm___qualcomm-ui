@@ -12,6 +12,9 @@ import {
 } from "@qualcomm-ui/mdx-vite"
 
 export default defineConfig({
+  define: {
+    global: "globalThis",
+  },
   plugins: [
     tailwindcss(),
     mdx({

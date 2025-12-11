@@ -1,0 +1,302 @@
+---
+title: Side Nav
+group: Disclosure
+---
+
+import {QdsDemo} from "~components/demo"
+import {
+  TypeDocProps,
+  TypeDocAngularAttributes,
+} from "@qualcomm-ui/react-mdx/typedoc"
+
+# {frontmatter.title}
+
+```ts
+import {SideNavModule} from "@qualcomm-ui/angular/side-nav"
+```
+
+## Overview
+
+The side nav is an extension of our [tree](/components/tree) component.
+
+- The Side Navigation relies on the `TreeCollection` class to manage its items. Refer to the [API](./#tree-collection) below for details.
+- Like with the tree, Side Navigations are composed of nodes, which are objects that describe the navigation data. There are two types of nodes:
+  - A `branch` node has children.
+  - A `leaf` node does not have any children.
+- Each node has a `value` (unique identifier used for expansion) and a `text` (display text).
+
+**Default object shape:**
+
+- `value` (required): unique identifier for expansion/selection
+- `text` (required): display text
+- `nodes` (optional): child nodes for branches
+- `disabled` (optional): prevents interaction when `true`
+
+These keys can be customized via the `TreeCollection` [constructor](./#constructor).
+
+## Examples
+
+### Node Shorthand
+
+We expose the `<q-side-nav-nodes>` shorthand for rendering nested nodes. Use the following directives to customize the tree nodes:
+
+```angular-html tabs="nodes" label="branch"
+<ng-template
+  let-branch
+  q-side-nav-branch-template
+  [rootNode]="collection.rootNode"
+>
+  <div q-side-nav-branch-node>
+    <!-- ... -->
+  </div>
+</ng-template>
+```
+
+```angular-html tabs="nodes" label="leaf"
+<ng-template
+  let-leaf
+  q-side-nav-leaf-template
+  [rootNode]="collection.rootNode"
+>
+  <div q-side-nav-leaf-node>
+    <!-- ... -->
+  </div>
+</ng-template>
+```
+
+Note that `<q-side-nav-nodes>` automatically renders child nodes for branches, so you only have to customize the content of the node itself.
+
+<QdsDemo name="SideNavNodeShorthandDemo" />
+
+> [!tip/Node Types]
+> Pass the `rootNode` input to the template directives to enable TypeScript type inference. This allows `branch.node` and `leaf.node` to have your custom node type instead of the generic `TreeNode` type.
+
+### Grouping
+
+Group nodes using the collection's [groupChildren](./#groupChildren) method. This should be called on the top-level node of your SideNav. Nested groups are not supported.
+
+<QdsDemo name="SideNavGroupsDemo" />
+
+### Default Expanded
+
+Expand nodes by default using the [defaultExpandedValue](./#defaultExpandedValue) input. Or use [expandedValue](./#expandedValue) and [expandedValueChange](./#expandedValueChange) to control the expansion manually. These inputs follow our [controlled state](/patterns/controlled-state) pattern.
+
+<QdsDemo name="SideNavDefaultExpandedDemo" />
+
+### Disabled Nodes
+
+You can disable nodes by setting the `disabled` property on the node object.
+
+<QdsDemo name="SideNavDisabledNodeDemo" />
+
+### Collapsed
+
+Side Nav can be collapsed to render only the top-level icons.
+
+The open state of the panel can be controlled using the [open](./#open), [openChanged](./#openChanged) and [defaultOpen](./#defaultOpen) inputs. These inputs follow our [controlled state](/patterns/controlled-state) pattern.
+
+<QdsDemo name="SideNavCollapsedDemo" />
+
+### Filtering
+
+Here's an example that filters the items using `matchSorter`.
+
+<QdsDemo name="SideNavFilteringDemo" />
+
+### Links
+
+Side Nav nodes can be links. Apply the `q-side-nav-leaf-node` directive to an anchor element with `routerLink` to create navigable links.
+
+<QdsDemo name="SideNavLinksDemo" />
+
+### Surface
+
+Use the `surface` input to change the background color of the Side Nav.
+
+<QdsDemo name="SideNavSurfaceDemo" />
+
+## API
+
+### q-side-nav-root
+
+<TypeDocProps name="SideNavRootDirective" />
+
+<TypeDocAngularAttributes
+  name={["TreeRootBindings", "QdsSideNavRootBindings"]}
+/>
+
+### q-side-nav-nodes
+
+<TypeDocProps name="SideNavNodesComponent" />
+
+### TreeCollection
+
+Note that the TreeCollection accepts a single generic type parameter, `T`, which is the object type of the node used in the collection.
+
+#### Constructor
+
+The constructor of the TreeCollection class accepts the following options:
+
+<TypeDocProps name="TreeCollectionOptions" partial />
+
+<TypeDocProps hideDefaultColumn name="TreeCollection" partial />
+
+## Element API
+
+### q-side-nav-header
+
+<TypeDocProps name="SideNavHeaderDirective" />
+
+<TypeDocAngularAttributes
+  name={["SideNavHeaderBindings", "QdsSideNavHeaderBindings"]}
+/>
+
+### q-side-nav-header-logo
+
+<TypeDocProps name="SideNavHeaderLogoDirective" />
+
+<TypeDocAngularAttributes
+  name={["SideNavHeaderLogoBindings", "QdsSideNavHeaderLogoBindings"]}
+/>
+
+### q-side-nav-header-title
+
+<TypeDocProps name="SideNavHeaderTitleDirective" />
+
+<TypeDocAngularAttributes
+  name={["SideNavHeaderTitleBindings", "QdsSideNavHeaderTitleBindings"]}
+/>
+
+### q-side-nav-header-action
+
+<TypeDocProps name="SideNavHeaderActionDirective" />
+
+<TypeDocAngularAttributes
+  name={["SideNavHeaderActionBindings", "QdsSideNavHeaderActionBindings"]}
+/>
+
+### q-side-nav-collapse-trigger
+
+<TypeDocProps name="SideNavCollapseTriggerDirective" />
+
+<TypeDocAngularAttributes
+  name={["SideNavTriggerBindings", "QdsSideNavCollapseTriggerBindings"]}
+/>
+
+### q-side-nav-group
+
+<TypeDocProps name="SideNavGroupDirective" />
+
+<TypeDocAngularAttributes name={["QdsSideNavGroupBindings"]} />
+
+### q-side-nav-group-label
+
+<TypeDocProps name="SideNavGroupLabelDirective" />
+
+<TypeDocAngularAttributes name={["QdsSideNavGroupLabelBindings"]} />
+
+### q-side-nav-divider
+
+<TypeDocProps name="SideNavDividerDirective" />
+
+<TypeDocAngularAttributes name={["QdsSideNavDividerBindings"]} />
+
+### q-side-nav-branch
+
+<TypeDocProps name="SideNavBranchDirective" />
+
+<TypeDocAngularAttributes
+  name={["TreeBranchBindings", "QdsSideNavBranchBindings"]}
+/>
+
+### q-side-nav-branch-node
+
+<TypeDocProps name="SideNavBranchNodeDirective" />
+
+<TypeDocAngularAttributes
+  name={["TreeBranchNodeBindings", "QdsSideNavBranchNodeBindings"]}
+/>
+
+### q-side-nav-branch-trigger
+
+<TypeDocProps name="SideNavBranchTriggerDirective" />
+
+<TypeDocAngularAttributes
+  name={["TreeBranchTriggerBindings", "QdsSideNavBranchTriggerBindings"]}
+/>
+
+### q-side-nav-branch-content
+
+<TypeDocProps name="SideNavBranchContentDirective" />
+
+<TypeDocAngularAttributes
+  name={["TreeBranchContentBindings", "QdsSideNavBranchContentBindings"]}
+/>
+
+### q-side-nav-branch-indent-guide
+
+<TypeDocProps name="SideNavBranchIndentGuideDirective" />
+
+<TypeDocAngularAttributes name={["TreeBranchIndentGuideBindings"]} />
+
+### q-side-nav-leaf-node
+
+<TypeDocProps name="SideNavLeafNodeDirective" />
+
+<TypeDocAngularAttributes
+  name={["TreeLeafNodeBindings", "QdsSideNavLeafNodeBindings"]}
+/>
+
+### q-side-nav-node-icon
+
+<TypeDocProps name="SideNavNodeIconDirective" />
+
+<TypeDocAngularAttributes
+  name={["TreeNodeIconBindings", "QdsSideNavNodeIconBindings"]}
+/>
+
+### q-side-nav-node-text
+
+<TypeDocProps name="SideNavNodeTextDirective" />
+
+<TypeDocAngularAttributes name={["TreeNodeTextBindings"]} />
+
+### q-side-nav-node-indicator
+
+<TypeDocProps name="SideNavNodeIndicatorDirective" />
+
+<TypeDocAngularAttributes
+  name={["TreeNodeIndicatorBindings", "QdsSideNavNodeIndicatorBindings"]}
+/>
+
+### q-side-nav-node-action
+
+<TypeDocProps name="SideNavNodeActionDirective" />
+
+<TypeDocAngularAttributes
+  name={["TreeNodeActionBindings", "QdsSideNavNodeActionBindings"]}
+/>
+
+### q-side-nav-node-accessory
+
+<TypeDocProps name="SideNavNodeAccessoryDirective" />
+
+<TypeDocAngularAttributes name={["QdsSideNavNodeAccessoryBindings"]} />
+
+### q-side-nav-filter-input
+
+<TypeDocProps name="SideNavFilterInputDirective" />
+
+<TypeDocAngularAttributes name={["QdsSideNavFilterInputBindings"]} />
+
+## Template Directives
+
+### q-side-nav-branch-template
+
+<TypeDocProps name="SideNavBranchTemplateDirective" />
+
+### q-side-nav-leaf-template
+
+<TypeDocProps name="SideNavLeafTemplateDirective" />
+
+Use this directive on an `ng-template` to customize the rendering of leaf nodes within `q-side-nav-nodes`.

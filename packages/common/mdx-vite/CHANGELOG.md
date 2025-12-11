@@ -1,5 +1,89 @@
 # @qualcomm-ui/mdx-vite
 
+## 2.6.2 (2025/12/10)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils]
+
+## 2.6.1 (2025/12/08)
+
+### Bug Fixes
+
+- [mdx-vite]: resolve git metadata repo root
+
+## 2.6.0 (2025/12/08)
+
+### Features
+
+- [docs]: add git-derived updated metadata to pages
+- [docs]: populate page updatedOn/updatedBy from git history
+
+### Tests
+
+- [docs]: mock git child_process calls in docs indexer specs
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common]
+
+## 2.5.4 (2025/12/05)
+
+### Bug Fixes
+
+- [knowledge]: ensure updated files are re-indexed
+
+## 2.5.3 (2025/12/04)
+
+### Bug Fixes
+
+- [knowledge]: improve duplicate detection and retry handling
+- [knowledge]: avoid reuploading unchanged knowledge files
+- [knowledge]: stop persisting debug file dump
+- [knowledge]: resolve optional theme data and emit json blocks
+- [knowledge]: return failure when file update fails
+- [knowledge]: clean orphaned files before upload
+- [knowledge]: prevent duplicate file uploads
+- [knowledge]: refactor api client to avoid duplicates
+
+### Code Refactoring
+
+- [open-web-ui]: introduce typed files/knowledge api client
+- [knowledge]: migrate upload/download to new api layer
+
+### Miscellaneous Chores
+
+- [knowledge]: add cleaner for orphaned and failed files
+
+## 2.5.2 (2025/12/04)
+
+### Code Refactoring
+
+- [knowledge-config]: remove knowledgeId requirement from generation command
+- [generate-knowledge]: reorganize functions into class for shared state/config
+
+### Bug Fixes
+
+- [knowledge-upload]: more resilient duplication handling
+- [generate-knowledge]: remove links in aggregate output mode
+- [knowledge-upload]: do not retry upload after specific errors
+
+## 2.5.1 (2025/12/03)
+
+### Bug Fixes
+
+- [llms-txt-generator]: use correct urls for intro page overview
+
+## 2.5.0 (2025/12/03)
+
+### Features
+
+- [docs-plugin]: add toc change tracking to file metadata
+
+### Bug Fixes
+
+- [docs-plugin]: add back site data invalidation on mdx file change
+
 ## 2.4.0 (2025/12/03)
 
 ### Features

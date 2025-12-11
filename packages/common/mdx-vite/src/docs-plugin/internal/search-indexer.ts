@@ -108,6 +108,7 @@ export class SearchIndexer {
       addons.fileCache ||
       new MarkdownFileReader(
         process.env.NODE_ENV === "development" && !this.config.disableCache,
+        this.config.pageTimestampMetadata,
       )
   }
 
@@ -172,6 +173,8 @@ export class SearchIndexer {
       title: defined(routeMeta.title)
         ? routeMeta.title || ""
         : frontmatter.title || "",
+      updatedBy: frontmatter.updatedBy,
+      updatedOn: frontmatter.updatedOn,
     }
   }
 
@@ -187,11 +190,15 @@ export class SearchIndexer {
       changed: {},
       filePath,
     }
+
+    let previousPage: IndexedPage | undefined = undefined
+
     if (!cached) {
       const previousData = this.fileCache.readCache(filePath)
       if (previousData) {
         const cachedFm = JSON.stringify(previousData.frontmatter)
         const currentFm = JSON.stringify(frontmatter)
+        previousPage = previousData.page
         if (cachedFm !== currentFm) {
           metadata.changed.frontmatter = true
         }
@@ -229,6 +236,17 @@ export class SearchIndexer {
     }
 
     const {sections, toc} = indexedPage
+
+    if (previousPage) {
+      for (let i = 0; i < toc.length; i++) {
+        const previousHeading = previousPage.toc[i]
+        const currentHeading = toc[i]
+        if (previousHeading?.id !== currentHeading.id) {
+          metadata.changed.toc = true
+          break
+        }
+      }
+    }
 
     if (toc.length) {
       this._pageMap[defaultSection.pathname].toc = toc

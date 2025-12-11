@@ -12,9 +12,9 @@ export function IconButtonVariantsDemo(): ReactElement {
       <div className="text-neutral-primary font-heading-xs">Ghost</div>
 
       {/* preview */}
-      <IconButton icon={ExternalLink} variant="fill" />
-      <IconButton icon={ExternalLink} variant="outline" />
-      <IconButton icon={ExternalLink} variant="ghost" />
+      <IconButton aria-label="Navigate" icon={ExternalLink} variant="fill" />
+      <IconButton aria-label="Navigate" icon={ExternalLink} variant="outline" />
+      <IconButton aria-label="Navigate" icon={ExternalLink} variant="ghost" />
       {/* preview */}
     </div>
   )

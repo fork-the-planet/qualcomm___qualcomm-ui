@@ -269,6 +269,7 @@ export function createComboboxApi(
         ...commonBindings,
         "data-disabled": booleanDataAttr(disabled),
         "data-part": "hint",
+        hidden: invalid,
         id: props.id,
       })
     },

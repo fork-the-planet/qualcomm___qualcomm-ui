@@ -1,0 +1,31 @@
+.api-key-wrapper {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.api-key-wrapper-header {
+  color: var(--color-text-neutral-primary);
+  font: var(--font-static-heading-xxs-default);
+}
+
+.oauth-wrapper {
+  padding-top: 16px;
+}
+
+.oauth2-wrapper {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.oauth2-heading {
+  font: var(--font-static-heading-xxs-default);
+}
+
+.text-body-sm {
+  color: var(--color-text-neutral-primary);
+  font: var(--font-static-body-sm-default);
+}

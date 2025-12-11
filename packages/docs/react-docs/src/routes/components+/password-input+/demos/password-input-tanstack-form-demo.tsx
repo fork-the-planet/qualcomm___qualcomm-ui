@@ -76,11 +76,7 @@ export function PasswordInputTanstackFormDemo() {
             return (
               <PasswordInput
                 errorText={field.state.meta.errors?.at(0)}
-                hint={
-                  isInvalid
-                    ? null
-                    : "must be 8+ characters with at least 1 number, lowercase, uppercase, and special character."
-                }
+                hint="must be 8+ characters with at least 1 number, lowercase, uppercase, and special character."
                 invalid={isInvalid}
                 label="Password"
                 name={field.name}

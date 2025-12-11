@@ -107,6 +107,7 @@ export function createTextInputApi(
         "data-disabled": booleanDataAttr(disabled),
         "data-part": "hint",
         dir: prop("dir"),
+        hidden: !!invalid,
         id: domIds.hint(scope),
       })
     },

@@ -12,22 +12,72 @@ export function IconButtonVariantCombinationsDemo(): ReactElement {
       <span className="text-neutral-primary font-heading-xs">Ghost</span>
 
       {/* preview */}
-      <IconButton emphasis="neutral" icon={Search} variant="fill" />
-      <IconButton emphasis="neutral" icon={Search} variant="outline" />
-      <IconButton emphasis="neutral" icon={Search} variant="ghost" />
-
-      <IconButton emphasis="primary" icon={Search} variant="fill" />
-      <IconButton emphasis="primary" icon={Search} variant="outline" />
-      <IconButton emphasis="primary" icon={Search} variant="ghost" />
-
-      <IconButton emphasis="danger" icon={Search} variant="fill" />
-      <IconButton emphasis="danger" icon={Search} variant="outline" />
-      <IconButton emphasis="danger" icon={Search} variant="ghost" />
-
-      <IconButton disabled icon={Search} variant="fill" />
-      <IconButton disabled icon={Search} variant="outline" />
-      <IconButton disabled icon={Search} variant="ghost" />
+      <IconButton
+        aria-label="Search"
+        emphasis="neutral"
+        icon={Search}
+        variant="fill"
+      />
+      <IconButton
+        aria-label="Search"
+        emphasis="neutral"
+        icon={Search}
+        variant="outline"
+      />
+      <IconButton
+        aria-label="Search"
+        emphasis="neutral"
+        icon={Search}
+        variant="ghost"
+      />
       {/* preview */}
+
+      <IconButton
+        aria-label="Search"
+        emphasis="primary"
+        icon={Search}
+        variant="fill"
+      />
+      <IconButton
+        aria-label="Search"
+        emphasis="primary"
+        icon={Search}
+        variant="outline"
+      />
+      <IconButton
+        aria-label="Search"
+        emphasis="primary"
+        icon={Search}
+        variant="ghost"
+      />
+
+      <IconButton
+        aria-label="Search"
+        emphasis="danger"
+        icon={Search}
+        variant="fill"
+      />
+      <IconButton
+        aria-label="Search"
+        emphasis="danger"
+        icon={Search}
+        variant="outline"
+      />
+      <IconButton
+        aria-label="Search"
+        emphasis="danger"
+        icon={Search}
+        variant="ghost"
+      />
+
+      <IconButton aria-label="Search" disabled icon={Search} variant="fill" />
+      <IconButton
+        aria-label="Search"
+        disabled
+        icon={Search}
+        variant="outline"
+      />
+      <IconButton aria-label="Search" disabled icon={Search} variant="ghost" />
     </div>
   )
 }

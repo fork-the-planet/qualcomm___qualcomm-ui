@@ -12,6 +12,7 @@ import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
     <div class="grid justify-items-center gap-4">
       <!-- preview -->
       <button
+        aria-label="External Link"
         emphasis="primary"
         icon="ExternalLink"
         q-icon-button
@@ -19,6 +20,7 @@ import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
         variant="fill"
       ></button>
       <button
+        aria-label="External Link"
         emphasis="primary"
         icon="ExternalLink"
         q-icon-button
@@ -26,6 +28,7 @@ import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
         variant="fill"
       ></button>
       <button
+        aria-label="External Link"
         emphasis="primary"
         icon="ExternalLink"
         q-icon-button

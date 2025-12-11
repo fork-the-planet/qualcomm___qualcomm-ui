@@ -2,16 +2,12 @@
   "extends": "@qualcomm-ui/tsconfig/tsconfig.react-docs.json",
   "compilerOptions": {
     "baseUrl": "./",
-    "module": "ESNext",
+    "moduleResolution": "bundler",
   },
-  "include": [
-    "types.d.ts",
-    "./src",
-  ],
-  "exclude": ["./src/**/*.mdx"],
+  "include": ["./src/**/*.mdx"],
   "references": [
     {
-      "path": "./tsconfig.mdx.json"
+      "path": "./tsconfig.lib.json"
     },
     {
       "path": "./tsconfig.node.json"

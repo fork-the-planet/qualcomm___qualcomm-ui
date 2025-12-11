@@ -1,0 +1,22 @@
+{
+  "extends": "@qualcomm-ui/tsconfig/tsconfig.strict.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist",
+  },
+  "include": ["./src"],
+  "references": [
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "../react/tsconfig.lib.json"
+    },
+    {
+      "path": "../react-core/tsconfig.lib.json"
+    }
+  ]
+}

@@ -49,13 +49,6 @@ interface PageInfo {
   url: string | undefined
 }
 
-interface ProcessedPage {
-  content: string
-  demoFiles: string[]
-  frontmatter: Record<string, string>
-  title: string
-}
-
 interface ImportedModule {
   content: string
   path: string
@@ -95,137 +88,20 @@ interface SimplifiedProp {
   type: string
 }
 
+interface ProcessedPage {
+  content: string
+  demoFiles: string[]
+  frontmatter: Record<string, string>
+  title: string
+  url: string | undefined
+}
+
+// Pure utility functions (no config dependency)
+
 async function exists(dirPath: string): Promise<boolean> {
   return access(dirPath)
     .then(() => true)
     .catch(() => false)
-}
-
-async function loadDocProps(
-  routesFolder: string,
-  docPropsPath: string | undefined,
-  verbose: boolean | undefined,
-): Promise<DocProps | null> {
-  const resolvedDocPropsPath = docPropsPath
-    ? (await exists(docPropsPath))
-      ? docPropsPath
-      : resolve(process.cwd(), docPropsPath)
-    : join(dirname(routesFolder), "doc-props.json")
-
-  if (!(await exists(resolvedDocPropsPath))) {
-    if (verbose) {
-      console.log(`Doc props file not found at: ${resolvedDocPropsPath}`)
-    }
-    return null
-  }
-
-  try {
-    const content = await readFile(resolvedDocPropsPath, "utf-8")
-    const docProps = JSON.parse(content) as DocProps
-    if (verbose) {
-      console.log(`Loaded doc props from: ${resolvedDocPropsPath}`)
-      console.log(`Found ${Object.keys(docProps.props).length} component types`)
-    }
-    return docProps
-  } catch (error) {
-    if (verbose) {
-      console.log(`Error loading doc props: ${error}`)
-    }
-    return null
-  }
-}
-
-function formatComment(comment: QuiComment | null): string {
-  if (!comment) {
-    return ""
-  }
-
-  const parts: string[] = []
-
-  // Format summary
-  if (comment.summary && comment.summary.length > 0) {
-    const summaryText = formatCommentParts(comment.summary)
-    if (summaryText.trim()) {
-      parts.push(summaryText.trim())
-    }
-  }
-
-  // Format block tags
-  if (comment.blockTags && comment.blockTags.length > 0) {
-    for (const blockTag of comment.blockTags) {
-      const tagContent = formatCommentParts(blockTag.content)
-      if (tagContent.trim()) {
-        const tagName = blockTag.tag.replace("@", "")
-
-        // Skip default tags since they're handled separately
-        if (tagName === "default" || tagName === "defaultValue") {
-          continue
-        }
-
-        // Special handling for other tags
-        if (tagName === "example") {
-          parts.push(`**Example:**\n\`\`\`\n${tagContent.trim()}\n\`\`\``)
-        } else {
-          parts.push(`**${tagName}:** ${tagContent.trim()}`)
-        }
-      }
-    }
-  }
-
-  return parts.join("\n\n")
-}
-
-function formatCommentParts(parts: QuiCommentDisplayPart[]): string {
-  return parts
-    .map((part) => {
-      switch (part.kind) {
-        case "text":
-          return part.text
-        case "code":
-          // Clean up malformed code blocks like "```ts\ntrue\n```"
-          const codeText = part.text
-            .replace(/```\w*\n?/g, "") // Remove opening code blocks with optional language
-            .replace(/\n?```/g, "") // Remove closing code blocks
-            .trim()
-
-          // If it's still multi-line after cleanup, use code block
-          if (codeText.includes("\n")) {
-            return `\`\`\`\n${codeText}\n\`\`\``
-          } else {
-            return codeText
-          }
-        default:
-          if (
-            "tag" in part &&
-            part.tag === "@link" &&
-            typeof part.target === "string"
-          ) {
-            return `[${part.text}](${part.target})`
-          }
-          return part.text
-      }
-    })
-    .join("")
-    .replace(/\n/g, " ")
-    .replace(/\s+/g, " ")
-    .trim()
-}
-
-function convertPropInfo(
-  propInfo: PropInfo,
-  isPartial: boolean,
-  propType: "input" | "output" | undefined = undefined,
-): SimplifiedProp {
-  return {
-    name: propInfo.name,
-    type: extractBestType(propInfo),
-    ...(propInfo.defaultValue && {
-      defaultValue: cleanDefaultValue(propInfo.defaultValue),
-    }),
-    description: formatComment(propInfo.comment || null),
-    propType,
-    required: extractRequired(propInfo, isPartial) || undefined,
-  }
 }
 
 function extractBestType(propInfo: PropInfo): string {
@@ -246,111 +122,12 @@ function cleanDefaultValue(defaultValue: string): string {
   return defaultValue.replace(/^\n+/, "").replace(/\n+$/, "").trim()
 }
 
-async function scanPages(
-  routesFolder: string,
-  verbose: boolean | undefined,
-  excludePatterns: string[] = [],
-  baseUrl: string | undefined,
-): Promise<PageInfo[]> {
-  const components: PageInfo[] = []
-
-  function shouldExclude(fileOrDir: string): boolean {
-    const dirName = basename(fileOrDir)
-    return excludePatterns.some((pattern) => {
-      if (pattern.includes("*")) {
-        const regex = new RegExp(`^${pattern.replace(/\*/g, ".*")}$`)
-        return regex.test(dirName)
-      }
-      return dirName === pattern
-    })
-  }
-
-  async function scanDirectory(dirPath: string): Promise<void> {
-    if (shouldExclude(dirPath)) {
-      if (verbose) {
-        console.log(`Excluding directory: ${basename(dirPath)}`)
-      }
-      return
-    }
-
-    const entries = await readdir(dirPath, {withFileTypes: true})
-    const mdxFiles =
-      entries.filter(
-        (f) => f.name.endsWith(".mdx") && !shouldExclude(f.name),
-      ) ?? []
-
-    for (const mdxFile of mdxFiles) {
-      const demosFolder = entries.find((f) => f.name === "demos")
-      const demosFolderPath = demosFolder
-        ? join(dirPath, demosFolder.name)
-        : undefined
-
-      // TODO: load routing strategy from qui-docs config.
-      const segments = getPathSegmentsFromFileName(
-        join(dirPath, mdxFile.name),
-        routesFolder,
-      )
-      const url = getPathnameFromPathSegments(segments)
-
-      components.push({
-        demosFolder: demosFolderPath,
-        id: segments.join("-").trim(),
-        mdxFile: join(dirPath, mdxFile.name),
-        name: segments.at(-1)!,
-        path: dirPath,
-        url: baseUrl ? new URL(url, baseUrl).toString() : undefined,
-      })
-
-      if (verbose) {
-        console.log(`Found component: ${basename(dirPath)}`)
-        console.log(`  Demos folder: ${demosFolderPath || "NOT FOUND"}`)
-      }
-    }
-
-    for (const entry of entries) {
-      const fullPath = join(dirPath, entry.name)
-      const stats = await stat(fullPath)
-      if (stats.isDirectory()) {
-        await scanDirectory(fullPath)
-      }
-    }
-  }
-
-  await scanDirectory(routesFolder)
-  return components
-}
-
 function isPreviewLine(trimmedLine: string): boolean {
   return (
     trimmedLine === "// preview" ||
     /^\{\s*\/\*\s*preview\s*\*\/\s*\}$/.test(trimmedLine) ||
     /^<!--\s*preview\s*-->$/.test(trimmedLine)
   )
-}
-
-function extractProps(
-  props: ComponentProps,
-  isPartial: boolean,
-): SimplifiedProp[] {
-  const propsInfo: SimplifiedProp[] = []
-
-  if (props.props?.length) {
-    propsInfo.push(
-      ...props.props.map((prop) => convertPropInfo(prop, isPartial)),
-    )
-  }
-  if (props.input?.length) {
-    propsInfo.push(
-      ...props.input.map((prop) => convertPropInfo(prop, isPartial, "input")),
-    )
-  }
-  if (props.output?.length) {
-    propsInfo.push(
-      ...props.output.map((prop) => convertPropInfo(prop, isPartial, "output")),
-    )
-  }
-
-  return propsInfo
 }
 
 function removePreviewLines(code: string): string {
@@ -360,92 +137,19 @@ function removePreviewLines(code: string): string {
     .join("\n")
 }
 
-function getIntroLines(
-  pages: Array<ProcessedPage>,
-  projectName?: string,
-  description?: string,
-  baseUrl?: string,
-) {
+function getIntroLines(projectName?: string, description?: string) {
   const lines: string[] = []
 
   if (projectName) {
     lines.push(`# ${projectName}`)
-    lines.push("")
   }
 
   if (description) {
+    lines.push("")
     lines.push(`> ${description}`)
-    lines.push("")
-  }
-
-  lines.push("## Components and Integrations")
-  lines.push("")
-
-  for (const page of pages) {
-    const url = baseUrl
-      ? `${baseUrl}/${kebabCase(page.title)}`
-      : `#${kebabCase(page.title)}`
-    if (page.title.includes("Introduction")) {
-      lines.push(`- [${page.title}](${url}): introduction and getting started`)
-    } else if (page.title.includes("Tailwind")) {
-      lines.push(
-        `- [${page.title}](${url}): integration documentation and examples`,
-      )
-    } else {
-      lines.push(
-        `- [${page.title}](${url}): component documentation and examples`,
-      )
-    }
   }
 
   return lines.join("\n")
-}
-
-async function generateLlmsTxt(
-  pages: Array<ProcessedPage>,
-  projectName?: string,
-  description?: string,
-  baseUrl?: string,
-): Promise<string> {
-  const lines: string[] = [
-    getIntroLines(pages, projectName, description, baseUrl),
-  ]
-
-  lines.push("")
-
-  for (const page of pages) {
-    const content = page.content.split("\n").map((line) => {
-      if (line.startsWith("#")) {
-        // increase heading level by 1 for pages
-        return `#${line}`
-      }
-      return line
-    })
-
-    if (content.every((line) => !line.trim())) {
-      continue
-    }
-
-    lines.push(`## ${page.title}`)
-    lines.push("")
-
-    lines.push(content.join("\n"))
-    lines.push("")
-  }
-
-  return lines.join("\n")
-}
-
-interface ProcessedPage {
-  content: string
-  demoFiles: string[]
-  frontmatter: Record<string, string>
-  title: string
-}
-
-interface ImportedModule {
-  content: string
-  path: string
 }
 
 function extractRelativeImports(content: string): string[] {
@@ -481,48 +185,11 @@ async function resolveModulePath(
   return null
 }
 
-async function collectRelativeImports(
-  filePath: string,
-  visited: Set<string> = new Set(),
-  verbose: boolean | undefined,
-): Promise<ImportedModule[]> {
-  const normalizedPath = resolve(filePath)
-  if (visited.has(normalizedPath)) {
-    return []
-  }
-  visited.add(normalizedPath)
-  const modules: ImportedModule[] = []
-  try {
-    const content = await readFile(normalizedPath, "utf-8")
-    const relativeImports = extractRelativeImports(content)
-    for (const importPath of relativeImports) {
-      const resolvedPath = await resolveModulePath(importPath, normalizedPath)
-      if (!resolvedPath) {
-        if (verbose) {
-          console.log(
-            `  Could not resolve import: ${importPath} from ${normalizedPath}`,
-          )
-        }
-        continue
-      }
-      const importContent = await readFile(resolvedPath, "utf-8")
-      modules.push({
-        content: importContent,
-        path: resolvedPath,
-      })
-      const nestedModules = await collectRelativeImports(
-        resolvedPath,
-        visited,
-        verbose,
-      )
-      modules.push(...nestedModules)
-    }
-  } catch (error) {
-    if (verbose) {
-      console.log(`  Error processing ${normalizedPath}: ${error}`)
-    }
-  }
-  return modules
+function extractMetadata(metadata: string[] | undefined): string[][] {
+  return (metadata ?? []).map((current) => {
+    const [key, value] = current.split("=")
+    return [key, value]
+  })
 }
 
 const replaceNpmInstallTabs: Plugin = () => {
@@ -547,485 +214,858 @@ const replaceNpmInstallTabs: Plugin = () => {
   }
 }
 
+function getPath(obj: Record<string, unknown>, path: string): unknown {
+  return path
+    .split(".")
+    .reduce<unknown>(
+      (acc, key) =>
+        acc && typeof acc === "object"
+          ? (acc as Record<string, unknown>)[key]
+          : undefined,
+      obj,
+    )
+}
+
 /**
- * Replaces TypeDocProps JSX elements with JSON code blocks containing component
- * prop documentation.
+ * Generator class that encapsulates all knowledge generation logic with shared
+ * config.
  */
-function replaceTypeDocProps(
-  docProps: DocProps | null,
-  verbose: boolean | undefined,
-): Plugin {
-  return () => (tree, _file, done) => {
-    visit(
-      tree,
-      "mdxJsxFlowElement",
-      (
-        node: MdxJsxFlowElement,
-        index: number | undefined,
-        parent: Parent | undefined,
-      ) => {
-        if (node?.name !== "TypeDocProps") {
-          return
-        }
-        const nameAttr = node.attributes?.find(
-          (attr): attr is MdxJsxAttribute =>
-            attr.type === "mdxJsxAttribute" && attr.name === "name",
+class KnowledgeGenerator {
+  private readonly config: WebUiKnowledgeConfig
+  private docProps: DocProps | null = null
+
+  constructor(config: WebUiKnowledgeConfig) {
+    this.config = config
+  }
+
+  async run(): Promise<void> {
+    const extractedMetadata = extractMetadata(this.config.metadata)
+
+    if (this.config.verbose) {
+      console.log(`Scanning pages in: ${this.config.routeDir}`)
+      if (this.config.exclude?.length) {
+        console.log(`Excluding patterns: ${this.config.exclude.join(", ")}`)
+      }
+    }
+
+    const [docProps, pages] = await Promise.all([
+      this.loadDocProps(),
+      this.scanPages(),
+    ])
+
+    this.docProps = docProps
+
+    if (pages.length === 0) {
+      console.log("No pages found.")
+      return
+    }
+
+    if (this.config.verbose) {
+      console.log(`Found ${pages.length} page(s)`)
+    }
+
+    const processedPages: ProcessedPage[] = []
+    for (const page of pages) {
+      try {
+        const processed = await this.processComponent(page)
+        processedPages.push(processed)
+      } catch (error) {
+        console.error(`Failed to process page: ${page.name}`)
+        process.exit(1)
+      }
+    }
+
+    if (this.config.clean) {
+      await rm(this.config.outputPath, {force: true, recursive: true}).catch(
+        () => {},
+      )
+    }
+
+    if (this.config.outputMode === "aggregated") {
+      await this.generateAggregatedOutput(processedPages, pages)
+    } else {
+      await mkdir(this.config.outputPath, {recursive: true}).catch(() => {})
+      await this.generatePerPageExports(
+        pages,
+        processedPages,
+        extractedMetadata,
+      )
+    }
+  }
+
+  private async loadDocProps(): Promise<DocProps | null> {
+    const resolvedDocPropsPath = this.config.docPropsPath
+      ? (await exists(this.config.docPropsPath))
+        ? this.config.docPropsPath
+        : resolve(process.cwd(), this.config.docPropsPath)
+      : join(dirname(this.config.routeDir), "doc-props.json")
+
+    if (!(await exists(resolvedDocPropsPath))) {
+      if (this.config.verbose) {
+        console.log(`Doc props file not found at: ${resolvedDocPropsPath}`)
+      }
+      return null
+    }
+
+    try {
+      const content = await readFile(resolvedDocPropsPath, "utf-8")
+      const docProps = JSON.parse(content) as DocProps
+      if (this.config.verbose) {
+        console.log(`Loaded doc props from: ${resolvedDocPropsPath}`)
+        console.log(
+          `Found ${Object.keys(docProps.props).length} component types`,
         )
-        const isPartial = node.attributes?.some(
-          (attr): attr is MdxJsxAttribute =>
-            attr.type === "mdxJsxAttribute" && attr.name === "partial",
+      }
+      return docProps
+    } catch (error) {
+      if (this.config.verbose) {
+        console.log(`Error loading doc props: ${error}`)
+      }
+      return null
+    }
+  }
+
+  private async scanPages(): Promise<PageInfo[]> {
+    const components: PageInfo[] = []
+    const excludePatterns = this.config.exclude ?? []
+
+    const shouldExclude = (fileOrDir: string): boolean => {
+      const dirName = basename(fileOrDir)
+      return excludePatterns.some((pattern) => {
+        if (pattern.includes("*")) {
+          const regex = new RegExp(`^${pattern.replace(/\*/g, ".*")}$`)
+          return regex.test(dirName)
+        }
+        return dirName === pattern
+      })
+    }
+
+    const scanDirectory = async (dirPath: string): Promise<void> => {
+      if (shouldExclude(dirPath)) {
+        if (this.config.verbose) {
+          console.log(`Excluding directory: ${basename(dirPath)}`)
+        }
+        return
+      }
+
+      const entries = await readdir(dirPath, {withFileTypes: true})
+      const mdxFiles =
+        entries.filter(
+          (f) => f.name.endsWith(".mdx") && !shouldExclude(f.name),
+        ) ?? []
+
+      for (const mdxFile of mdxFiles) {
+        const demosFolder = entries.find((f) => f.name === "demos")
+        const demosFolderPath = demosFolder
+          ? join(dirPath, demosFolder.name)
+          : undefined
+
+        const segments = getPathSegmentsFromFileName(
+          join(dirPath, mdxFile.name),
+          this.config.routeDir,
         )
-        if (!docProps || !nameAttr) {
-          if (parent && index !== undefined) {
-            parent.children.splice(index, 1)
+        const url = getPathnameFromPathSegments(segments)
+
+        components.push({
+          demosFolder: demosFolderPath,
+          id: segments.join("-").trim(),
+          mdxFile: join(dirPath, mdxFile.name),
+          name: segments.at(-1)!,
+          path: dirPath,
+          url: this.config.baseUrl
+            ? new URL(url, this.config.baseUrl).toString()
+            : undefined,
+        })
+
+        if (this.config.verbose) {
+          console.log(`Found component: ${basename(dirPath)}`)
+          console.log(`  Demos folder: ${demosFolderPath || "NOT FOUND"}`)
+        }
+      }
+
+      for (const entry of entries) {
+        const fullPath = join(dirPath, entry.name)
+        const stats = await stat(fullPath)
+        if (stats.isDirectory()) {
+          await scanDirectory(fullPath)
+        }
+      }
+    }
+
+    await scanDirectory(this.config.routeDir)
+    return components
+  }
+
+  private async collectRelativeImports(
+    filePath: string,
+    visited: Set<string> = new Set(),
+  ): Promise<ImportedModule[]> {
+    const normalizedPath = resolve(filePath)
+    if (visited.has(normalizedPath)) {
+      return []
+    }
+    visited.add(normalizedPath)
+    const modules: ImportedModule[] = []
+    try {
+      const content = await readFile(normalizedPath, "utf-8")
+      const relativeImports = extractRelativeImports(content)
+      for (const importPath of relativeImports) {
+        const resolvedPath = await resolveModulePath(importPath, normalizedPath)
+        if (!resolvedPath) {
+          if (this.config.verbose) {
+            console.log(
+              `  Could not resolve import: ${importPath} from ${normalizedPath}`,
+            )
           }
+          continue
+        }
+        const importContent = await readFile(resolvedPath, "utf-8")
+        modules.push({
+          content: importContent,
+          path: resolvedPath,
+        })
+        const nestedModules = await this.collectRelativeImports(
+          resolvedPath,
+          visited,
+        )
+        modules.push(...nestedModules)
+      }
+    } catch (error) {
+      if (this.config.verbose) {
+        console.log(`  Error processing ${normalizedPath}: ${error}`)
+      }
+    }
+    return modules
+  }
+
+  private extractProps(
+    props: ComponentProps,
+    isPartial: boolean,
+  ): SimplifiedProp[] {
+    const propsInfo: SimplifiedProp[] = []
+
+    if (props.props?.length) {
+      propsInfo.push(
+        ...props.props.map((prop) => this.convertPropInfo(prop, isPartial)),
+      )
+    }
+    if (props.input?.length) {
+      propsInfo.push(
+        ...props.input.map((prop) =>
+          this.convertPropInfo(prop, isPartial, "input"),
+        ),
+      )
+    }
+    if (props.output?.length) {
+      propsInfo.push(
+        ...props.output.map((prop) =>
+          this.convertPropInfo(prop, isPartial, "output"),
+        ),
+      )
+    }
+
+    return propsInfo
+  }
+
+  private formatComment(comment: QuiComment | null): string {
+    if (!comment) {
+      return ""
+    }
+
+    const parts: string[] = []
+
+    if (comment.summary && comment.summary.length > 0) {
+      const summaryText = this.formatCommentParts(comment.summary)
+      if (summaryText.trim()) {
+        parts.push(summaryText.trim())
+      }
+    }
+
+    if (comment.blockTags && comment.blockTags.length > 0) {
+      for (const blockTag of comment.blockTags) {
+        const tagContent = this.formatCommentParts(blockTag.content)
+        if (tagContent.trim()) {
+          const tagName = blockTag.tag.replace("@", "")
+
+          if (tagName === "default" || tagName === "defaultValue") {
+            continue
+          }
+
+          if (tagName === "example") {
+            parts.push(`**Example:**\n\`\`\`\n${tagContent.trim()}\n\`\`\``)
+          } else {
+            parts.push(`**${tagName}:** ${tagContent.trim()}`)
+          }
+        }
+      }
+    }
+
+    return parts.join("\n\n")
+  }
+
+  private formatCommentParts(parts: QuiCommentDisplayPart[]): string {
+    return parts
+      .map((part) => {
+        switch (part.kind) {
+          case "text":
+            return part.text
+          case "code":
+            const codeText = part.text
+              .replace(/```\w*\n?/g, "") // Remove opening code blocks with optional language
+              .replace(/\n?```/g, "") // Remove closing code blocks
+              .trim()
+
+            if (codeText.includes("\n")) {
+              return `\`\`\`\n${codeText}\n\`\`\``
+            } else {
+              return codeText
+            }
+          default:
+            if (
+              this.config.outputMode === "per-page" &&
+              "tag" in part &&
+              part.tag === "@link" &&
+              typeof part.target === "string"
+            ) {
+              return `[${part.text}](${part.target})`
+            }
+            return part.text
+        }
+      })
+      .join("")
+      .replace(/\n/g, " ")
+      .replace(/\s+/g, " ")
+      .trim()
+  }
+
+  private convertPropInfo(
+    propInfo: PropInfo,
+    isPartial: boolean,
+    propType: "input" | "output" | undefined = undefined,
+  ): SimplifiedProp {
+    return {
+      name: propInfo.name,
+      type: extractBestType(propInfo),
+      ...(propInfo.defaultValue && {
+        defaultValue: cleanDefaultValue(propInfo.defaultValue),
+      }),
+      description: this.formatComment(propInfo.comment || null),
+      propType,
+      required: extractRequired(propInfo, isPartial) || undefined,
+    }
+  }
+
+  /**
+   * Creates a remark plugin that replaces TypeDocProps JSX elements with JSON
+   * code blocks containing component prop documentation.
+   */
+  private async replaceThemeNodes(): Promise<Plugin> {
+    let themes: any | null = null
+    try {
+      // may not be available since this is an optional dependency
+      themes = await import("@qualcomm-ui/tailwind-plugin/theme")
+    } catch {
+      return () => {}
+    }
+
+    const handlers: Record<string, (node: MdxJsxFlowElement) => unknown> = {
+      ColorTable: (node) => {
+        const path = this.getAttrExpression(node, "data")
+        return path && getPath(themes, path)
+      },
+      FontTable: (node) => {
+        const path = this.getAttrExpression(node, "data")
+        return path && getPath(themes, path)
+      },
+      ThemePropertyTable: (node) => {
+        const path = this.getAttrExpression(node, "data")
+        const property = this.getAttrExpression(node, "cssProperty")
+        const data = path && getPath(themes, path)
+        return path && property ? {cssPropertyName: property, data} : undefined
+      },
+    }
+
+    return () => (tree, _file, done) => {
+      visit(tree, "mdxJsxFlowElement", (node: MdxJsxFlowElement) => {
+        const handler = node.name && handlers[node.name]
+        if (!handler) {
           return
         }
-        const propsNames = extractNamesFromAttribute(nameAttr)
-        if (propsNames.length === 0) {
-          if (parent && index !== undefined) {
-            parent.children.splice(index, 1)
-          }
+
+        const data = handler(node)
+        if (!data) {
+          console.warn(`No theme data for ${node.name}`)
           return
         }
-        const propsName = propsNames[0]
-        const componentProps = docProps.props[propsName]
-        if (!componentProps) {
-          if (verbose) {
-            console.log(`  TypeDocProps not found: ${propsName}`)
-          }
-          if (parent && index !== undefined) {
-            parent.children.splice(index, 1)
-          }
-          return
-        }
-        const propsDoc = extractProps(componentProps, Boolean(isPartial))
-        if (verbose) {
-          console.log(
-            `  Replaced TypeDocProps ${propsName} with API documentation`,
-          )
-        }
+
         Object.assign(node, {
           lang: "json",
           meta: null,
           type: "code",
-          value: JSON.stringify(propsDoc, null, 2),
+          value: JSON.stringify(data, null, 2),
         })
-      },
-    )
-    done()
+      })
+      done()
+    }
   }
-}
 
-/**
- * Replaces demo JSX elements (QdsDemo, CodeDemo, Demo) with code blocks
- * containing the demo source code from the demos folder.
- */
-function replaceDemos(
-  demosFolder: string | undefined,
-  verbose: boolean | undefined,
-  demoFiles: string[],
-): Plugin {
-  return () => async (tree) => {
-    const promises: Promise<void>[] = []
+  private getAttrExpression(
+    node: MdxJsxFlowElement,
+    name: string,
+  ): string | null {
+    const attr = node.attributes?.find(
+      (a): a is MdxJsxAttribute =>
+        a.type === "mdxJsxAttribute" && a.name === name,
+    )
+    if (!attr?.value) {
+      return null
+    }
+    if (typeof attr.value === "string") {
+      return attr.value
+    } else if (typeof attr.value === "object" && "value" in attr.value) {
+      return attr.value.value
+    }
+    return null
+  }
 
-    visit(
-      tree,
-      "mdxJsxFlowElement",
-      (
-        node: MdxJsxFlowElement,
-        index: number | undefined,
-        parent: Parent | undefined,
-      ) => {
-        if (
-          !node?.name ||
-          !["QdsDemo", "CodeDemo", "Demo"].includes(node.name)
-        ) {
-          return
-        }
+  /**
+   * Creates a remark plugin that replaces TypeDocProps JSX elements with JSON
+   * code blocks containing component prop documentation.
+   */
+  private replaceTypeDocProps(): Plugin {
+    return () => (tree, _file, done) => {
+      visit(
+        tree,
+        "mdxJsxFlowElement",
+        (
+          node: MdxJsxFlowElement,
+          index: number | undefined,
+          parent: Parent | undefined,
+        ) => {
+          if (node?.name !== "TypeDocProps") {
+            return
+          }
+          const nameAttr = node.attributes?.find(
+            (attr): attr is MdxJsxAttribute =>
+              attr.type === "mdxJsxAttribute" && attr.name === "name",
+          )
+          const isPartial = node.attributes?.some(
+            (attr): attr is MdxJsxAttribute =>
+              attr.type === "mdxJsxAttribute" && attr.name === "partial",
+          )
+          if (!this.docProps || !nameAttr) {
+            if (parent && index !== undefined) {
+              parent.children.splice(index, 1)
+            }
+            return
+          }
+          const propsNames = extractNamesFromAttribute(nameAttr)
+          if (propsNames.length === 0) {
+            if (parent && index !== undefined) {
+              parent.children.splice(index, 1)
+            }
+            return
+          }
+          const propsName = propsNames[0]
+          const componentProps = this.docProps.props[propsName]
+          if (!componentProps) {
+            if (this.config.verbose) {
+              console.log(`  TypeDocProps not found: ${propsName}`)
+            }
+            if (parent && index !== undefined) {
+              parent.children.splice(index, 1)
+            }
+            return
+          }
+          const propsDoc = this.extractProps(componentProps, Boolean(isPartial))
+          if (this.config.verbose) {
+            console.log(
+              `  Replaced TypeDocProps ${propsName} with API documentation`,
+            )
+          }
+          Object.assign(node, {
+            lang: "json",
+            meta: null,
+            type: "code",
+            value: JSON.stringify(propsDoc, null, 2),
+          })
+        },
+      )
+      done()
+    }
+  }
 
-        const nameAttr = node.attributes?.find(
-          (attr): attr is MdxJsxAttribute =>
-            attr.type === "mdxJsxAttribute" && attr.name === "name",
-        )
+  /**
+   * Creates a remark plugin that replaces demo JSX elements (QdsDemo, CodeDemo,
+   * Demo) with code blocks containing the demo source code from the demos folder.
+   */
+  private replaceDemos(
+    demosFolder: string | undefined,
+    demoFiles: string[],
+  ): Plugin {
+    return () => async (tree) => {
+      const promises: Promise<void>[] = []
 
-        const nodeAttr = node.attributes?.find(
-          (attr): attr is MdxJsxAttribute =>
-            attr.type === "mdxJsxAttribute" && attr.name === "node",
-        )
+      visit(
+        tree,
+        "mdxJsxFlowElement",
+        (
+          node: MdxJsxFlowElement,
+          index: number | undefined,
+          parent: Parent | undefined,
+        ) => {
+          if (
+            !node?.name ||
+            !["QdsDemo", "CodeDemo", "Demo"].includes(node.name)
+          ) {
+            return
+          }
 
-        let demoName: string | undefined
+          const nameAttr = node.attributes?.find(
+            (attr): attr is MdxJsxAttribute =>
+              attr.type === "mdxJsxAttribute" && attr.name === "name",
+          )
 
-        if (nameAttr && typeof nameAttr.value === "string") {
-          demoName = nameAttr.value
-        } else if (nodeAttr?.value && typeof nodeAttr.value !== "string") {
-          const estree = nodeAttr.value.data?.estree
-          if (estree?.body?.[0]?.type === "ExpressionStatement") {
-            const expression = estree.body[0].expression
-            if (
-              expression.type === "MemberExpression" &&
-              expression.object.type === "Identifier" &&
-              expression.object.name === "Demo" &&
-              expression.property.type === "Identifier"
-            ) {
-              demoName = expression.property.name
+          const nodeAttr = node.attributes?.find(
+            (attr): attr is MdxJsxAttribute =>
+              attr.type === "mdxJsxAttribute" && attr.name === "node",
+          )
+
+          let demoName: string | undefined
+
+          if (nameAttr && typeof nameAttr.value === "string") {
+            demoName = nameAttr.value
+          } else if (nodeAttr?.value && typeof nodeAttr.value !== "string") {
+            const estree = nodeAttr.value.data?.estree
+            if (estree?.body?.[0]?.type === "ExpressionStatement") {
+              const expression = estree.body[0].expression
+              if (
+                expression.type === "MemberExpression" &&
+                expression.object.type === "Identifier" &&
+                expression.object.name === "Demo" &&
+                expression.property.type === "Identifier"
+              ) {
+                demoName = expression.property.name
+              }
             }
           }
-        }
 
-        if (!demoName) {
-          if (parent && index !== undefined) {
-            parent.children.splice(index, 1)
-          }
-          return
-        }
-
-        promises.push(
-          (async () => {
-            const kebabName = kebabCase(demoName)
-            let filePath = `${kebabName}.tsx`
-
-            if (!demosFolder) {
-              if (verbose) {
-                console.log(`  No demos folder for ${demoName}`)
-              }
-              if (parent && index !== undefined) {
-                parent.children.splice(index, 1)
-              }
-              return
+          if (!demoName) {
+            if (parent && index !== undefined) {
+              parent.children.splice(index, 1)
             }
+            return
+          }
 
-            let demoFilePath = join(demosFolder, filePath)
-            let isAngularDemo = false
+          promises.push(
+            (async () => {
+              const kebabName = kebabCase(demoName)
+              let filePath = `${kebabName}.tsx`
 
-            if (!(await exists(demoFilePath))) {
-              demoFilePath = join(demosFolder, `${kebabName}.ts`)
-              if (await exists(demoFilePath)) {
-                isAngularDemo = true
-                filePath = `${kebabCase(demoName).replace("-component", ".component")}.ts`
-                demoFilePath = join(demosFolder, filePath)
-              } else {
-                console.log(`  Demo not found ${demoName}`)
+              if (!demosFolder) {
+                if (this.config.verbose) {
+                  console.log(`  No demos folder for ${demoName}`)
+                }
                 if (parent && index !== undefined) {
                   parent.children.splice(index, 1)
                 }
                 return
               }
-            }
 
-            try {
-              const demoCode = await readFile(demoFilePath, "utf-8")
-              const cleanedCode = removePreviewLines(demoCode)
+              let demoFilePath = join(demosFolder, filePath)
+              let isAngularDemo = false
 
-              if (verbose) {
-                console.log(`  Replaced demo ${demoName} with source code`)
+              if (!(await exists(demoFilePath))) {
+                demoFilePath = join(demosFolder, `${kebabName}.ts`)
+                if (await exists(demoFilePath)) {
+                  isAngularDemo = true
+                  filePath = `${kebabCase(demoName).replace("-component", ".component")}.ts`
+                  demoFilePath = join(demosFolder, filePath)
+                } else {
+                  console.log(`  Demo not found ${demoName}`)
+                  if (parent && index !== undefined) {
+                    parent.children.splice(index, 1)
+                  }
+                  return
+                }
               }
 
-              demoFiles.push(demoFilePath)
+              try {
+                const demoCode = await readFile(demoFilePath, "utf-8")
+                const cleanedCode = removePreviewLines(demoCode)
 
-              Object.assign(node, {
-                lang: isAngularDemo ? "angular-ts" : "tsx",
-                meta: null,
-                type: "code",
-                value: cleanedCode,
-              })
-            } catch (error) {
-              if (verbose) {
-                console.log(`  Error reading demo ${demoName}: ${error}`)
+                if (this.config.verbose) {
+                  console.log(`  Replaced demo ${demoName} with source code`)
+                }
+
+                demoFiles.push(demoFilePath)
+
+                Object.assign(node, {
+                  lang: isAngularDemo ? "angular-ts" : "tsx",
+                  meta: null,
+                  type: "code",
+                  value: cleanedCode,
+                })
+              } catch (error) {
+                if (this.config.verbose) {
+                  console.log(`  Error reading demo ${demoName}: ${error}`)
+                }
+                if (parent && index !== undefined) {
+                  parent.children.splice(index, 1)
+                }
               }
-              if (parent && index !== undefined) {
-                parent.children.splice(index, 1)
-              }
-            }
-          })(),
-        )
-      },
+            })(),
+          )
+        },
+      )
+
+      await Promise.all(promises)
+    }
+  }
+
+  /**
+   * Processes MDX content by transforming JSX elements (TypeDocProps, demos)
+   * into markdown, resolving relative links, and cleaning up formatting.
+   */
+  private async processMdxContent(
+    mdxContent: string,
+    pageUrl: string | undefined,
+    demosFolder: string | undefined,
+  ): Promise<{content: string; demoFiles: string[]}> {
+    const demoFiles: string[] = []
+    let processedContent = mdxContent
+
+    const lines = processedContent.split("\n")
+    const titleLine = lines.findIndex((line) => line.startsWith("# "))
+    processedContent =
+      titleLine >= 0 ? lines.slice(titleLine + 1).join("\n") : processedContent
+
+    processedContent = processedContent.replace(
+      /\[([^\]]+)\]\(\.\/#([^)]+)\)/g,
+      (_, text, anchor) =>
+        pageUrl && this.config.outputMode === "per-page"
+          ? `[${text}](${pageUrl}#${anchor})`
+          : text,
     )
 
-    await Promise.all(promises)
+    const processor = unified()
+      .use(remarkParse)
+      .use(remarkMdx)
+      .use(this.replaceTypeDocProps())
+      .use(await this.replaceThemeNodes())
+      .use(this.replaceDemos(demosFolder, demoFiles))
+      .use(remarkStringify)
+
+    const processed = await processor.process(processedContent)
+    processedContent = String(processed)
+
+    processedContent = processedContent.replace(/\n\s*\n\s*\n/g, "\n\n")
+
+    return {content: processedContent, demoFiles}
+  }
+
+  private async processComponent(component: PageInfo): Promise<ProcessedPage> {
+    try {
+      const mdxContent = await readFile(component.mdxFile, "utf-8")
+      if (this.config.verbose) {
+        console.log(`Processing page: ${component.name}`)
+      }
+      const processor = unified()
+        .use(remarkParse)
+        .use(remarkMdx)
+        .use(replaceNpmInstallTabs)
+        .use(remarkFrontmatter, ["yaml"])
+        .use(remarkParseFrontmatter)
+
+      if (this.config.outputMode === "per-page") {
+        processor.use(remarkSelfLinkHeadings(component.url))
+      }
+
+      processor.use(remarkStringify)
+      const parsed = await processor.process(mdxContent)
+      const frontmatter = (parsed.data as any)?.frontmatter || {}
+      const {content: processedContent, demoFiles} =
+        await this.processMdxContent(
+          String(parsed),
+          component.url,
+          component.demosFolder,
+        )
+      const removeJsxProcessor = unified()
+        .use(remarkParse)
+        .use(remarkMdx)
+        .use(remarkRemoveJsx)
+        .use(remarkStringify)
+      const removedJsx = String(
+        await removeJsxProcessor.process(processedContent),
+      )
+      const contentWithoutFrontmatter = removedJsx.replace(
+        /^---[\s\S]*?---\n/,
+        "",
+      )
+      const title = frontmatter.title || component.name
+
+      return {
+        content: contentWithoutFrontmatter.trim(),
+        demoFiles,
+        frontmatter,
+        title,
+        url: component.url,
+      }
+    } catch (error) {
+      console.error(`Error processing component ${component.name}:`, error)
+      throw error
+    }
+  }
+
+  private async generateLlmsTxt(pages: Array<ProcessedPage>): Promise<string> {
+    const lines: string[] = [
+      getIntroLines(this.config.name, this.config.description),
+    ]
+
+    lines.push("")
+
+    for (const page of pages) {
+      const content = page.content.split("\n").map((line) => {
+        if (line.startsWith("#")) {
+          return `#${line}`
+        }
+        return line
+      })
+
+      if (content.every((line) => !line.trim())) {
+        continue
+      }
+
+      lines.push(`## ${page.title}`)
+      lines.push("")
+
+      lines.push(content.join("\n"))
+      lines.push("")
+    }
+
+    return lines.join("\n")
+  }
+
+  private async generateAggregatedOutput(
+    processedPages: ProcessedPage[],
+    pages: PageInfo[],
+  ): Promise<void> {
+    const llmsTxtContent = await this.generateLlmsTxt(processedPages)
+    await mkdir(dirname(this.config.outputPath), {recursive: true}).catch(
+      () => {},
+    )
+    await writeFile(this.config.outputPath, llmsTxtContent, "utf-8")
+    const outputStats = await stat(this.config.outputPath)
+    const outputSizeKb = (outputStats.size / 1024).toFixed(1)
+    console.log(
+      `Generated ${this.config.outputPath} with ${pages.length} component(s) at: ${this.config.outputPath}`,
+    )
+    console.log(`File size: ${outputSizeKb} KB`)
+  }
+
+  private async generatePerPageExports(
+    pages: PageInfo[],
+    processedPages: ProcessedPage[],
+    metadata: string[][],
+  ): Promise<void> {
+    await mkdir(dirname(this.config.outputPath), {recursive: true}).catch(
+      () => {},
+    )
+    const count = processedPages.length
+    let totalSize = 0
+    await Promise.all(
+      processedPages.map(async (processedPage, index) => {
+        const page = pages[index]
+        const lines: string[] = []
+        if (metadata.length || page.url) {
+          lines.push("---")
+          if (page.url) {
+            lines.push(`url: ${page.url}`)
+          }
+          if (metadata.length) {
+            for (const [key, value] of metadata) {
+              lines.push(`${key}: ${value}`)
+            }
+          }
+          lines.push("---")
+          lines.push("")
+        }
+
+        lines.push(`# ${processedPage.title}`)
+        lines.push("")
+        if (processedPage.frontmatter?.title) {
+          page.name = processedPage.frontmatter.title
+        }
+        let content = processedPage.content
+        if (this.config.pageTitlePrefix) {
+          content = content.replace(
+            `# ${page.name}`,
+            `# ${this.config.pageTitlePrefix} ${page.name}`,
+          )
+          page.name = `${this.config.pageTitlePrefix} ${page.name}`
+        }
+        lines.push(content)
+        lines.push("")
+
+        if (this.config.includeImports && processedPage.demoFiles.length > 0) {
+          if (this.config.verbose) {
+            console.log(
+              `Collecting imports for ${page.name} from ${processedPage.demoFiles.length} demo files`,
+            )
+          }
+
+          const allImports: ImportedModule[] = []
+          for (const demoFile of processedPage.demoFiles) {
+            const imports = await this.collectRelativeImports(
+              demoFile,
+              new Set(),
+            )
+            allImports.push(...imports)
+          }
+
+          const uniqueImports = Array.from(
+            new Map(allImports.map((m) => [m.path, m])).values(),
+          )
+
+          if (this.config.verbose) {
+            console.log(
+              `  Collected ${uniqueImports.length} unique import modules`,
+            )
+          }
+
+          if (uniqueImports.length > 0) {
+            lines.push("## Related Source Files")
+            lines.push("")
+            for (const importedModule of uniqueImports) {
+              const ext = extname(importedModule.path).slice(1)
+              lines.push(`### ${basename(importedModule.path)}`)
+              lines.push("")
+              lines.push(`\`\`\`${ext}`)
+              lines.push(importedModule.content)
+              lines.push("```")
+              lines.push("")
+            }
+          }
+        }
+
+        const outfile = `${resolve(this.config.outputPath)}/${kebabCase(page.id || page.name)}.md`
+        await writeFile(outfile, lines.join("\n"), "utf-8")
+        const stats = await stat(outfile)
+        totalSize += stats.size / 1024
+      }),
+    )
+    console.log(`Generated ${count} component(s) in ${this.config.outputPath}`)
+    console.log(`Folder size: ${totalSize.toFixed(1)} KB`)
   }
 }
 
 /**
- * Processes MDX content by transforming JSX elements (TypeDocProps, demos) into
- * markdown, resolving relative links, and cleaning up formatting.
+ * Generates knowledge documentation from MDX files.
+ * This is the main entry point that maintains backwards compatibility.
  */
-async function processMdxContent(
-  mdxContent: string,
-  pageUrl: string | undefined,
-  demosFolder: string | undefined,
-  docProps: DocProps | null,
-  verbose: boolean | undefined,
-): Promise<{content: string; demoFiles: string[]}> {
-  const demoFiles: string[] = []
-  let processedContent = mdxContent
-
-  const lines = processedContent.split("\n")
-  const titleLine = lines.findIndex((line) => line.startsWith("# "))
-  processedContent =
-    titleLine >= 0 ? lines.slice(titleLine + 1).join("\n") : processedContent
-
-  if (pageUrl) {
-    processedContent = processedContent.replace(
-      /\[([^\]]+)\]\(\.\/#([^)]+)\)/g,
-      (_, text, anchor) => `[${text}](${pageUrl}#${anchor})`,
-    )
-  }
-
-  const processor = unified()
-    .use(remarkParse)
-    .use(remarkMdx)
-    .use(replaceTypeDocProps(docProps, verbose))
-    .use(replaceDemos(demosFolder, verbose, demoFiles))
-    .use(remarkStringify)
-
-  const processed = await processor.process(processedContent)
-  processedContent = String(processed)
-
-  processedContent = processedContent.replace(/\n\s*\n\s*\n/g, "\n\n")
-
-  return {content: processedContent, demoFiles}
-}
-
-async function processComponent(
-  component: PageInfo,
-  docProps: DocProps | null,
-  verbose: boolean | undefined,
-): Promise<ProcessedPage> {
-  try {
-    const mdxContent = await readFile(component.mdxFile, "utf-8")
-    if (verbose) {
-      console.log(`Processing page: ${component.name}`)
-    }
-    const processor = unified()
-      .use(remarkParse)
-      .use(remarkMdx)
-      .use(replaceNpmInstallTabs)
-      .use(remarkFrontmatter, ["yaml"])
-      .use(remarkParseFrontmatter)
-      .use(remarkSelfLinkHeadings(component.url))
-      .use(remarkStringify)
-    const parsed = await processor.process(mdxContent)
-    const frontmatter = (parsed.data as any)?.frontmatter || {}
-    const {content: processedContent, demoFiles} = await processMdxContent(
-      String(parsed),
-      component.url,
-      component.demosFolder,
-      docProps,
-      verbose,
-    )
-    const removeJsxProcessor = unified()
-      .use(remarkParse)
-      .use(remarkMdx)
-      .use(remarkRemoveJsx)
-      .use(remarkStringify)
-    const removedJsx = String(
-      await removeJsxProcessor.process(processedContent),
-    )
-    const contentWithoutFrontmatter = removedJsx.replace(
-      /^---[\s\S]*?---\n/,
-      "",
-    )
-    const title = frontmatter.title || component.name
-
-    return {
-      content: contentWithoutFrontmatter.trim(),
-      demoFiles,
-      frontmatter,
-      title,
-    }
-  } catch (error) {
-    console.error(`Error processing component ${component.name}:`, error)
-    throw error
-  }
-}
-
-async function generatePerPageExports({
-  includeImports,
-  metadata,
-  outputPath,
-  pages,
-  pageTitlePrefix,
-  processedPages,
-  verbose,
-}: {
-  includeImports?: boolean
-  metadata: string[][]
-  outputPath: string
-  pages: PageInfo[]
-  pageTitlePrefix?: string
-  processedPages: ProcessedPage[]
-  verbose: boolean | undefined
-}) {
-  await mkdir(dirname(outputPath), {recursive: true}).catch()
-  const count = processedPages.length
-  let totalSize = 0
-  await Promise.all(
-    processedPages.map(async (processedPage, index) => {
-      const page = pages[index]
-      const lines: string[] = []
-      if (metadata.length || page.url) {
-        lines.push("---")
-        if (page.url) {
-          lines.push(`url: ${page.url}`)
-        }
-        if (metadata.length) {
-          for (const [key, value] of metadata) {
-            lines.push(`${key}: ${value}`)
-          }
-        }
-        lines.push("---")
-        lines.push("")
-      }
-
-      lines.push(`# ${processedPage.title}`)
-      lines.push("")
-      if (processedPage.frontmatter?.title) {
-        page.name = processedPage.frontmatter.title
-      }
-      let content = processedPage.content
-      if (pageTitlePrefix) {
-        content = content.replace(
-          `# ${page.name}`,
-          `# ${pageTitlePrefix} ${page.name}`,
-        )
-        page.name = `${pageTitlePrefix} ${page.name}`
-      }
-      lines.push(content)
-      lines.push("")
-
-      if (includeImports && processedPage.demoFiles.length > 0) {
-        if (verbose) {
-          console.log(
-            `Collecting imports for ${page.name} from ${processedPage.demoFiles.length} demo files`,
-          )
-        }
-
-        const allImports: ImportedModule[] = []
-        for (const demoFile of processedPage.demoFiles) {
-          const imports = await collectRelativeImports(
-            demoFile,
-            new Set(),
-            verbose,
-          )
-          allImports.push(...imports)
-        }
-
-        const uniqueImports = Array.from(
-          new Map(allImports.map((m) => [m.path, m])).values(),
-        )
-
-        if (verbose) {
-          console.log(
-            `  Collected ${uniqueImports.length} unique import modules`,
-          )
-        }
-
-        if (uniqueImports.length > 0) {
-          lines.push("## Related Source Files")
-          lines.push("")
-          for (const importedModule of uniqueImports) {
-            const ext = extname(importedModule.path).slice(1)
-            lines.push(`### ${basename(importedModule.path)}`)
-            lines.push("")
-            lines.push(`\`\`\`${ext}`)
-            lines.push(importedModule.content)
-            lines.push("```")
-            lines.push("")
-          }
-        }
-      }
-
-      const outfile = `${resolve(outputPath)}/${kebabCase(page.id || page.name)}.md`
-      await writeFile(outfile, lines.join("\n"), "utf-8")
-      const stats = await stat(outfile)
-      totalSize += stats.size / 1024
-    }),
-  )
-  console.log(`Generated ${count} component(s) in ${outputPath}`)
-  console.log(`Folder size: ${totalSize.toFixed(1)} KB`)
-}
-
-function extractMetadata(metadata: string[] | undefined): string[][] {
-  return (metadata ?? []).map((current) => {
-    const [key, value] = current.split("=")
-    return [key, value]
-  })
-}
-
-export async function generate({
-  baseUrl,
-  clean,
-  description,
-  docPropsPath,
-  exclude,
-  includeImports,
-  metadata,
-  name,
-  outputMode,
-  outputPath,
-  pageTitlePrefix,
-  routeDir,
-  verbose,
-}: WebUiKnowledgeConfig): Promise<void> {
-  const extractedMetadata = extractMetadata(metadata)
-  if (verbose) {
-    console.log(`Scanning pages in: ${routeDir}`)
-    if (exclude?.length) {
-      console.log(`Excluding patterns: ${exclude.join(", ")}`)
-    }
-  }
-  const [docProps, pages] = await Promise.all([
-    loadDocProps(routeDir, docPropsPath, verbose),
-    scanPages(routeDir, verbose, exclude, baseUrl),
-  ])
-  if (pages.length === 0) {
-    console.log("No pages found.")
-    return
-  }
-  if (verbose) {
-    console.log(`Found ${pages.length} page(s)`)
-  }
-  const processedPages: ProcessedPage[] = []
-  for (const page of pages) {
-    try {
-      const processed = await processComponent(page, docProps, verbose)
-      processedPages.push(processed)
-    } catch (error) {
-      console.error(`Failed to process page: ${page.name}`)
-      process.exit(1)
-    }
-  }
-  if (clean) {
-    await rm(outputPath, {force: true, recursive: true}).catch()
-  }
-  if (outputMode === "aggregated") {
-    const llmsTxtContent = await generateLlmsTxt(
-      processedPages,
-      name,
-      description,
-      baseUrl,
-    )
-    await mkdir(dirname(outputPath), {recursive: true}).catch()
-    await writeFile(outputPath, llmsTxtContent, "utf-8")
-    const outputStats = await stat(outputPath)
-    const outputSizeKb = (outputStats.size / 1024).toFixed(1)
-    console.log(
-      `Generated ${outputPath} with ${pages.length} component(s) at: ${outputPath}`,
-    )
-    console.log(`File size: ${outputSizeKb} KB`)
-  } else {
-    await mkdir(outputPath, {recursive: true}).catch()
-    await generatePerPageExports({
-      includeImports,
-      metadata: extractedMetadata,
-      outputPath,
-      pages,
-      pageTitlePrefix,
-      processedPages,
-      verbose,
-    })
-  }
+export async function generate(config: WebUiKnowledgeConfig): Promise<void> {
+  const generator = new KnowledgeGenerator(config)
+  await generator.run()
 }
 
 export function addGenerateKnowledgeCommand() {

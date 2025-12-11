@@ -9,6 +9,17 @@ export type RoutingStrategy =
   | ((filePath: string) => string[])
 
 /**
+ * Controls how page timestamp metadata is populated from git history.
+ * - "off": No timestamp data is added
+ * - "timestamp": Only `updatedOn` is populated
+ * - "user-and-timestamp": Both `updatedOn` and `updatedBy` are populated
+ */
+export type PageTimestampMetadataMode =
+  | "off"
+  | "timestamp"
+  | "user-and-timestamp"
+
+/**
  * Side nav item data.
  */
 export interface NavMeta {
@@ -158,6 +169,13 @@ export interface SearchIndexerOptions {
    * directory.
    */
   pageDirectory: string
+
+  /**
+   * Controls how page timestamp metadata is populated from git history.
+   *
+   * @default "off"
+   */
+  pageTimestampMetadata?: PageTimestampMetadataMode
 
   /**
    * Strategy to use for building each route's path segments.  Omit this property if

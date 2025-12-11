@@ -1,7 +1,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {useMemo} from "react"
+import {type RefObject, useCallback, useMemo, useRef} from "react"
 
 import type {SourceCode, SourceCodeData} from "@qualcomm-ui/mdx-common"
 import {useMdxDocsContext} from "@qualcomm-ui/react-mdx/context"
@@ -17,9 +17,11 @@ export interface UseDemoSourceCodeResult {
   activeTabSourceCode: SourceCodeData | undefined
   fileNames: string[]
   filteredSourceCode: SourceCodeData[]
+  getCopyableCode: () => string
   getHighlightedCode: () => string
   hasInlineStyles: boolean | undefined
   hasPreview: boolean | undefined
+  highlighterRef: RefObject<HTMLDivElement | null>
   isInlineMode: boolean | undefined
 }
 
@@ -90,14 +92,42 @@ export function useDemoSourceCode({
     }
   }, [activeHighlightedCode, expanded, hasPreview])
 
+  const highlighterRef = useRef<HTMLDivElement>(null)
+
+  const getCopyableCode = useCallback(() => {
+    const ref = highlighterRef.current
+    if (ref) {
+      const preElement = ref.querySelector("pre")
+      if (preElement) {
+        const dataCode = preElement.getAttribute("data-code")
+        const dataPreview = preElement.getAttribute("data-preview")
+        if (dataCode) {
+          return expanded ? dataCode : dataPreview || dataCode
+        }
+      }
+    }
+    return (
+      (expanded
+        ? activeTabSourceCode?.raw?.full
+        : activeTabSourceCode?.raw?.preview ||
+          activeTabSourceCode?.raw?.full) || ""
+    )
+  }, [
+    activeTabSourceCode?.raw?.full,
+    activeTabSourceCode?.raw?.preview,
+    expanded,
+  ])
+
   return {
     activeHighlightedCode,
     activeTabSourceCode,
     fileNames,
     filteredSourceCode,
+    getCopyableCode,
     getHighlightedCode,
     hasInlineStyles: hasInline,
     hasPreview,
+    highlighterRef,
     isInlineMode,
   }
 }

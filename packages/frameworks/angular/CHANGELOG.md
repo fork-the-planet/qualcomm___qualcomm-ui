@@ -1,5 +1,48 @@
 # @qualcomm-ui/angular
 
+## 1.10.1 (2025/12/10)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/utils, @qualcomm-ui/qds-core, @qualcomm-ui/angular-core]
+
+## 1.10.0 (2025/12/08)
+
+### Features
+
+- [menu]: add menu-item label directive
+
+### Bug Fixes
+
+- [header-bar-action-icon-button]: track bindings after init
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
+## 1.9.2 (2025/12/05)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/qds-core, @qualcomm-ui/angular-core]
+
+## 1.9.1 (2025/12/04)
+
+### Miscellaneous Chores
+
+- [peer-dependencies]: loosen `@angular/*` version range restrictions
+- **deps:** update dependencies [@qualcomm-ui/angular-core]
+
+## 1.9.0 (2025/12/03)
+
+### Features
+
+- [side-nav]: add side-nav component
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/angular-core, @qualcomm-ui/qds-core]
+
 ## 1.8.1 (2025/12/03)
 
 ### Miscellaneous Chores

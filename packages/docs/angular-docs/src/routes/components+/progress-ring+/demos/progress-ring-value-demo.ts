@@ -21,6 +21,7 @@ import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
       <!-- preview -->
       <div class="flex gap-2">
         <button
+          aria-label="Decrease Progress"
           icon="Minus"
           q-icon-button
           size="sm"
@@ -28,6 +29,7 @@ import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
           (click)="decrement()"
         ></button>
         <button
+          aria-label="Increase Progress"
           icon="Plus"
           q-icon-button
           size="sm"

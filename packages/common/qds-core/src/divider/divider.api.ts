@@ -3,6 +3,7 @@
 
 import type {PropNormalizer} from "@qualcomm-ui/utils/machine"
 
+import {dividerClasses} from "./divider.classes"
 import type {
   QdsDividerApi,
   QdsDividerApiProps,
@@ -18,6 +19,7 @@ export function createQdsDividerApi(
       return normalizer.element({
         "aria-orientation":
           props.orientation === "vertical" ? "vertical" : "horizontal",
+        className: dividerClasses.root,
         "data-variant": props.variant || "normal",
         role: "separator",
       })
