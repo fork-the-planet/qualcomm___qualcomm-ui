@@ -18,6 +18,7 @@
       "dependencyTypes": ["dev", "prod"]
     }
   ],
+  "sortAz": [],
   "sortFirst": [
     "name",
     "version",
@@ -25,15 +26,17 @@
     "author",
     "license",
     "repository",
+    "private",
+    "publishConfig",
     "type",
+    "bin",
     "sideEffects",
+    "files",
     "main",
     "module",
     "typings",
     "types",
-    "files",
     "exports",
-    "publishConfig",
     "scripts",
     "dependencies",
     "devDependencies",

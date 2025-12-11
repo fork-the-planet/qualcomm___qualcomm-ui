@@ -6,11 +6,15 @@
     "moduleResolution": "bundler",
     "tsBuildInfoFile": "node_modules/.tmp/tsbuildinfo",
     "module": "esnext",
-    "target": "esnext"
+    "target": "esnext",
+    "types": [
+      "vite/client",
+      "@qualcomm-ui/mdx-vite/docs-plugin",
+      "@qualcomm-ui/mdx-vite/angular-demo-plugin"
+    ]
   },
   "include": [
     "./src",
-    "types.d.ts"
   ],
   "exclude": ["./src/routes/**/demos/**/*.ts"],
   "references": [

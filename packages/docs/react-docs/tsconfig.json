@@ -10,9 +10,6 @@
       "path": "./tsconfig.lib.json"
     },
     {
-      "path": "./tsconfig.mdx.json"
-    },
-    {
       "path": "./tsconfig.node.json"
     },
   ]

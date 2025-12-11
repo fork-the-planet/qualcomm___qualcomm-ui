@@ -1,6 +1,7 @@
 {
   "name": "angular-csr",
   "version": "0.0.0",
+  "private": true,
   "scripts": {
     "ng": "ng",
     "dev": "ng serve",
@@ -8,7 +9,6 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "catalog:",
     "@angular/cdk": "catalog:",

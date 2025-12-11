@@ -7,7 +7,7 @@
     "module": "esnext",
     "target": "esnext",
   },
-  "include": ["./src", "types.d.ts"],
+  "include": ["./src"],
   "exclude": ["./src/routes/**/demos/*.ts"],
   "references": [
     {

@@ -4,16 +4,16 @@
   "description": "Codemod for version updates",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
-  "type": "module",
   "repository": "https://github.com/qualcomm/qualcomm-ui",
-  "bin": {
-    "qui-codemod": "./lib/cli.cjs"
-  },
-  "sideEffects": false,
   "private": true,
   "publishConfig": {
     "access": "public"
   },
+  "type": "module",
+  "bin": {
+    "qui-codemod": "./lib/cli.cjs"
+  },
+  "sideEffects": false,
   "files": [
     "dist",
     "lib"

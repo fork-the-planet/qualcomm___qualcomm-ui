@@ -5,7 +5,15 @@
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
   "repository": "https://github.com/qualcomm/qualcomm-ui",
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "types": "./dist/stub.d.ts",
   "exports": {
     "./*": {
       "types": "./dist/*/index.d.ts",
@@ -15,17 +23,6 @@
     "./styles.css": {
       "style": "./dist/all.min.css"
     }
-  },
-  "types": "./dist/stub.d.ts",
-  "files": [
-    "dist",
-    "package.json"
-  ],
-  "engines": {
-    "node": ">=20"
-  },
-  "publishConfig": {
-    "access": "public"
   },
   "scripts": {
     "build": "run-s clean build:js build:css build:ts",
@@ -114,6 +111,9 @@
     "react-shiki": ">=0.8.0",
     "shiki": ">=3.13.0",
     "sucrase": ">=3.35.0"
+  },
+  "engines": {
+    "node": ">=20"
   },
   "optionalDependencies": {
     "my-ua-parser": "^2.0.4"

@@ -1,11 +1,11 @@
 {
   "name": "@qualcomm-ui/react-docs",
+  "version": "0.0.0",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
   "repository": "https://github.com/qualcomm/qualcomm-ui",
   "private": true,
   "type": "module",
-  "version": "0.0.0",
   "scripts": {
     "build": "run-s build:typedoc generate-llms-txt build:site",
     "build:site": "react-router build --mode production",
