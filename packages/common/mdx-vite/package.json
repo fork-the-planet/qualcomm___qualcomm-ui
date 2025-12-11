@@ -2,13 +2,21 @@
   "name": "@qualcomm-ui/mdx-vite",
   "version": "2.6.2",
   "description": "Vite documentation plugin for applications that use MDX",
-  "repository": "https://github.com/qualcomm/qualcomm-ui",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
+  "repository": "https://github.com/qualcomm/qualcomm-ui",
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "bin": {
     "qui-mdx-vite": "./lib/cli.js"
   },
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -24,14 +32,6 @@
     "./react-demo-plugin": {
       "types": "./dist/react-demo-plugin/virtual.d.ts"
     }
-  },
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist",
-    "lib"
-  ],
-  "publishConfig": {
-    "access": "public"
   },
   "scripts": {
     "build": "run-s clean compile",
@@ -51,9 +51,6 @@
     "test:coverage": "pnpm test -- --coverage",
     "test:watch": "vitest -c vitest.config.ts",
     "test:unit:ci": "cross-env NODE_OPTIONS='' vitest -c vitest.config.ts --run --pool=threads"
-  },
-  "engines": {
-    "node": ">=20"
   },
   "dependencies": {
     "@shikijs/rehype": "^3.13.0",
@@ -138,6 +135,9 @@
     "shiki": ">=3.7.0",
     "typescript": ">=5.5.4",
     "vite": ">=7 <8"
+  },
+  "engines": {
+    "node": ">=20"
   },
   "optionalDependencies": {
     "@qualcomm-ui/tailwind-plugin": "workspace:^1.3.0",

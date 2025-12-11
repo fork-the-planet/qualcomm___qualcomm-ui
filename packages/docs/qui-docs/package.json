@@ -1,14 +1,14 @@
 {
   "name": "@qualcomm-ui/qui-docs",
+  "version": "0.0.0",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
   "repository": "https://github.com/qualcomm/qualcomm-ui",
   "private": true,
-  "type": "module",
-  "version": "0.0.0",
   "publishConfig": {
     "access": "public"
   },
+  "type": "module",
   "scripts": {
     "build": "run-s build:typedoc build:site",
     "build:site": "react-router build",

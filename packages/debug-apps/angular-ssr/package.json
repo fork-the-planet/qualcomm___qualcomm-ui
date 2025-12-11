@@ -1,6 +1,7 @@
 {
   "name": "angular-ssr",
   "version": "0.0.2",
+  "private": true,
   "type": "module",
   "scripts": {
     "ng": "ng",
@@ -10,7 +11,6 @@
     "test": "ng test",
     "serve:ssr:angular-ssr": "node dist/angular-ssr/server/server.mjs"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "catalog:",
     "@angular/cdk": "catalog:",

@@ -1,11 +1,11 @@
 {
   "name": "@qualcomm-ui/angular-table-docs",
+  "version": "0.0.0",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
   "repository": "https://github.com/qualcomm/qualcomm-ui",
   "private": true,
   "type": "module",
-  "version": "0.0.0",
   "scripts": {
     "build:prod": "./scripts/build-prod.sh",
     "build": "run-s build:typedoc generate-llms-txt build:web",
