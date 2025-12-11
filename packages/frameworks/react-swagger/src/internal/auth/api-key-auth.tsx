@@ -65,6 +65,7 @@ export function ApiKeyAuth(props: ApiKeyAuthProps) {
       <Row>
         <Col>
           <PasswordInput
+            aria-label={schema.get("name")}
             className="swagger-input"
             disabled={!!value}
             inputProps={{autoFocus: true}}
