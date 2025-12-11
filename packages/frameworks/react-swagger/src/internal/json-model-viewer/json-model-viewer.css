@@ -7,21 +7,21 @@
 }
 
 .json-model-viewer {
-  user-select: none;
-  font: var(--font-static-code-sm-default);
-  width: 100%;
-  padding: 6px 8px 6px 24px;
   border-radius: 5px;
+  font: var(--font-static-code-sm-default);
   min-width: 400px;
+  padding: 6px 8px 6px 24px;
   position: relative;
+  user-select: none;
+  width: 100%;
 
   .model-gutter {
-    width: 17px;
     background-color: var(--color-background-neutral-02);
-    position: absolute;
-    left: 0;
-    top: 0;
     height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 17px;
   }
 }
 
@@ -35,15 +35,15 @@
   }
 
   .data-type-label {
-    margin: 0 2px;
     display: inline-block;
-    user-select: none;
+    margin: 0 2px;
     opacity: 0.8;
+    user-select: none;
   }
 
   .indicator {
-    margin-right: 2px;
     display: inline-block;
+    margin-right: 2px;
   }
 
   .rest-spread {
@@ -83,10 +83,10 @@
   }
 
   .expand-icon {
+    height: 16px;
+    left: 0;
     margin-right: 2px;
     position: absolute;
-    left: 0;
-    height: 16px;
   }
 
   .data-object > .data-key-pair {
@@ -107,8 +107,8 @@
 
   .data-size-label {
     display: inline-block;
-    margin-left: 4px;
     font: var(--font-static-body-xs-default);
+    margin-left: 4px;
   }
 
   .data-ref-name-wrapper {
@@ -119,8 +119,8 @@
 
   .data-ref-name {
     display: inline-block;
-    margin: 0 0 0 8px;
     font: var(--font-static-code-sm-bold);
+    margin: 0 0 0 8px;
 
     &.inspect {
       margin: 0 0 0 8px;
@@ -128,8 +128,8 @@
   }
 
   .data-object-body {
-    user-select: none;
     padding: 2px;
+    user-select: none;
     &:hover {
       cursor: pointer;
     }
