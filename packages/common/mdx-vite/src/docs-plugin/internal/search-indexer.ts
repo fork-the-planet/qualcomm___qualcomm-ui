@@ -266,12 +266,14 @@ export class SearchIndexer {
       this._pageDocProps[defaultSection.pathname] = docProps
     }
 
-    this.fileCache.updateCache(filePath, fileContents, {
-      frontmatter,
-      page: indexedPage,
-      pageDocProps: docProps,
-      pageDocPropSections: docPropSections,
-    })
+    if (!cached) {
+      this.fileCache.updateCache(filePath, fileContents, {
+        frontmatter,
+        page: indexedPage,
+        pageDocProps: docProps,
+        pageDocPropSections: docPropSections,
+      })
+    }
 
     // omit entries from pages that are explicitly omitted from the index.
     if (frontmatter.hideFromSearch) {

@@ -182,13 +182,27 @@ export class MarkdownFileReader {
       })
     }
 
-    if (!frontmatter.updatedOn || !frontmatter.updatedBy) {
+    // In dev mode, only fetch git metadata for new files (not in cache).
+    // For file updates, reuse cached git metadata to avoid repeated git calls.
+    // In production mode, always fetch fresh git metadata.
+    const existingCache = this.mdxCache[filepath]
+    const shouldFetchGitMetadata = !this.enabled || !existingCache
+
+    if (shouldFetchGitMetadata) {
       const gitMetadata = getGitMetadata(filepath, this.pageTimestampMetadata)
       if (!frontmatter.updatedOn && gitMetadata.updatedOn) {
         frontmatter.updatedOn = gitMetadata.updatedOn
       }
       if (!frontmatter.updatedBy && gitMetadata.updatedBy) {
         frontmatter.updatedBy = gitMetadata.updatedBy
+      }
+    } else if (!cached && existingCache) {
+      // Dev mode cache miss (file updated) - reuse git metadata from previous cache
+      if (!frontmatter.updatedOn && existingCache.frontmatter.updatedOn) {
+        frontmatter.updatedOn = existingCache.frontmatter.updatedOn
+      }
+      if (!frontmatter.updatedBy && existingCache.frontmatter.updatedBy) {
+        frontmatter.updatedBy = existingCache.frontmatter.updatedBy
       }
     }
 

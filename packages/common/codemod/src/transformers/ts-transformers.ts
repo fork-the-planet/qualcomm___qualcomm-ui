@@ -4,8 +4,12 @@
 import {Project, type SourceFile} from "ts-morph"
 
 import {plugins} from "./plugins"
-import type {ImportTransformEntry, TransformContext} from "./types"
-import {mergeImports} from "./utils/merge-imports"
+import type {
+  ImportTransformEntry,
+  TransformContext,
+  TransformOptions,
+} from "./types"
+import {mergeImports} from "./utils"
 
 function createContext(
   sourceFile: SourceFile,
@@ -33,6 +37,7 @@ function createContext(
 export function transformTs(
   filePath: string,
   optionsArray: ImportTransformEntry[],
+  transformOptions: TransformOptions = {},
 ): boolean {
   const project = new Project({
     manipulationSettings: {
@@ -59,7 +64,7 @@ export function transformTs(
     }
   }
 
-  if (needsSave) {
+  if (needsSave && !transformOptions.dryRun) {
     mergeImports(sourceFile)
     sourceFile.insertText(0, leadingTrivia)
     sourceFile.saveSync()

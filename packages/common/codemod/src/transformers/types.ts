@@ -79,3 +79,10 @@ export interface ImportTransformEntry {
    */
   variableTransformers?: VariableTransformer[]
 }
+
+export interface TransformOptions {
+  /**
+   * Preview changes without writing files.
+   */
+  dryRun?: boolean
+}

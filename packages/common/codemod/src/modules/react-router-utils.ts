@@ -1,43 +1,65 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {createImportModEntries} from "../mod-imports"
 import type {ImportTransformEntry} from "../transformers"
 
-export const reactRouterUtilsClient: ImportTransformEntry[] =
-  createImportModEntries("@qui/react-router-utils", [
-    {
-      imports: [
-        "createThemeAction",
-        "createThemeSessionResolver",
-        "ThemeProvider",
-        "useTheme",
-        "themes",
-        "Theme",
-        "isTheme",
-        "PreventFlashOnWrongTheme",
-        "createThemeAction",
-        "ThemeMetadata",
-        "ThemeProviderProps",
-        "ThemeProvider",
-        "PreventFlashOnWrongTheme",
-        "useTheme",
-        "isTheme",
-        "themes",
-        "mediaQuery",
-        "ThemeSessionResolver",
-        "createThemeSessionResolver",
-        "useBroadcastChannel",
-        "useCorrectCssTransition",
-        "updateDemoState",
-        "createDemoStateUpdateAction",
-        "SiteState",
-        "updateSiteState",
-        "createUpdateAction",
-      ],
-      targetPackage: "@qualcomm-ui/react-router-utils/client",
-    },
-  ])
-
-export const reactRouterUtilsServer: ImportTransformEntry[] =
-  createImportModEntries("@qui/react-router-utils", [])
+export const reactRouterUtils: ImportTransformEntry[] = [
+  {
+    imports: [
+      "updateDemoState",
+      "createDemoStateUpdateAction",
+      "SiteState",
+      "updateSiteState",
+      "createUpdateAction",
+      "createThemeAction",
+      "createThemeSessionResolver",
+      "ThemeProvider",
+      "useTheme",
+      "themes",
+      "Theme",
+      "isTheme",
+      "PreventFlashOnWrongTheme",
+      "createThemeAction",
+      "Theme",
+      "ThemeMetadata",
+      "ThemeProviderProps",
+      "ThemeProvider",
+      "PreventFlashOnWrongTheme",
+      "useTheme",
+      "isTheme",
+      "Theme",
+      "themes",
+      "mediaQuery",
+      "ThemeSessionResolver",
+      "createThemeSessionResolver",
+      "useBroadcastChannel",
+      "useCorrectCssTransition",
+    ],
+    sourcePackage: "@qui/react-router-utils",
+    targetPackage: "@qualcomm-ui/react-router-utils/client",
+  },
+  {
+    imports: [
+      "ConfigRoute",
+      "RouteManifest",
+      "DefineRouteFunction",
+      "RouteInfo",
+      "DefineRouteOptions",
+      "DefineRouteChildren",
+      "VisitFilesFunction",
+      "FlatRoutesOptions",
+      "DefineRoutesFunction",
+      "hybridRoutes",
+      "isRouteModuleFile",
+      "isIndexRoute",
+      "getRouteInfo",
+      "createRoutePath",
+      "getRouteSegments",
+      "defaultVisitFiles",
+      "createRouteId",
+      "normalizeSlashes",
+    ],
+    sourcePackage: "@qui/react-router-utils",
+    targetPackage: "@qualcomm-ui/react-router-utils/node",
+  },
+]

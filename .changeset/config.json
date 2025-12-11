@@ -28,7 +28,6 @@
   "ignore": [
     "@qualcomm-ui/angular-docs",
     "@qualcomm-ui/angular-table-docs",
-    "@qualcomm-ui/codemod",
     "@qualcomm-ui/react-docs",
     "@qualcomm-ui/react-internal",
     "@qualcomm-ui/qui-docs",

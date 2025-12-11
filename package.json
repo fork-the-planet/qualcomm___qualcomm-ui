@@ -72,6 +72,7 @@
     "@eslint/js": "catalog:",
     "@manypkg/get-packages": "^3.1.0",
     "@octokit/rest": "^22.0.1",
+    "@qualcomm-ui/codemod": "workspace:*",
     "@qualcomm-ui/eslint-config-angular": "workspace:*",
     "@qualcomm-ui/eslint-config-mdx": "workspace:*",
     "@qualcomm-ui/eslint-config-react": "workspace:*",

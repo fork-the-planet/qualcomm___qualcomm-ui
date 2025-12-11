@@ -4,16 +4,12 @@
 import {Option, program} from "@commander-js/extra-typings"
 import {writeFile} from "node:fs/promises"
 
-import {modImports} from "./mod-imports"
 import {
   allTailwindTransforms,
-  angular,
-  base,
   ExportAnalyzer,
-  mdxDocs,
-  reactRouterUtilsClient,
-  reactTableTransforms,
+  reactRouterUtils,
 } from "./modules"
+import {processDirs} from "./process-dirs"
 import {type ImportTransformEntry, processClassTransforms} from "./transformers"
 
 const logModeOpt = new Option("--log-mode <logMode>", "Log mode")
@@ -25,22 +21,24 @@ const directoryOption = new Option(
   "Directory to process (supports file globs)",
 ).makeOptionMandatory()
 
+const dryRunOption = new Option(
+  "--dry-run",
+  "Preview changes without writing files",
+)
+
 function addMigration(name: string, transforms: ImportTransformEntry[]) {
   return program
     .command(name)
     .addOption(directoryOption)
     .addOption(logModeOpt)
-    .summary(`Update @qui/${name} imports to the latest version`)
+    .addOption(dryRunOption)
+    .summary(`Update @qualcomm-ui/${name} imports to the latest version`)
     .action(async (opts) => {
-      return modImports(transforms, opts)
+      return processDirs(transforms, {...opts, dryRun: opts.dryRun ?? false})
     })
 }
 
-addMigration("angular", angular)
-addMigration("base", base)
-addMigration("mdx-docs", mdxDocs)
-addMigration("react-router-utils", reactRouterUtilsClient)
-addMigration("react-table", reactTableTransforms)
+addMigration("react-router-utils", reactRouterUtils)
 
 program
   .command("analyze-exports")
@@ -70,7 +68,7 @@ program
   .option("--dry-run", "Preview changes without writing files")
   .summary("Migrate Tailwind classes from @qui/tailwind-plugin to QDS tokens")
   .description(
-    `Migrates CSS class names from the old QUI Tailwind plugin to the new QDS token-based system.
+    `Migrates CSS class names from the old QUI Tailwind plugin to the new QDS token-based system. This requires Tailwind v4.
 
 Supported file types:
   - React: .tsx, .jsx (className, cn(), clsx(), cva())

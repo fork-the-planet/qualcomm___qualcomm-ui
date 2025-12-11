@@ -12,14 +12,20 @@ import {
   transformTs,
 } from "./transformers" // Adjust import path as needed
 
+interface ProcessDirectoryContext {
+  changedFiles: Set<string>
+  dryRun: boolean
+  processedFiles: Set<string>
+}
+
 /**
  * Process all TypeScript/TSX files in a directory
  */
 export async function processDirectory(
   directoryPath: string,
   options: ImportTransformEntry | ImportTransformEntry[],
-  recursive = true,
-  retVal: {changedFiles: Set<string>; processedFiles: Set<string>},
+  recursive: boolean,
+  ctx: ProcessDirectoryContext,
 ): Promise<void> {
   const files = await readdir(directoryPath)
   const optionsArray = Array.isArray(options) ? options : [options]
@@ -30,20 +36,20 @@ export async function processDirectory(
       const stats = await stat(filePath)
 
       if (stats.isDirectory() && recursive) {
-        await processDirectory(filePath, options, recursive, retVal)
+        await processDirectory(filePath, options, recursive, ctx)
       } else if (stats.isFile()) {
         const isTypeScriptFile =
           filePath.endsWith(".ts") || filePath.endsWith(".tsx")
         const isMdxFile = filePath.endsWith(".mdx")
 
         if (isTypeScriptFile || isMdxFile) {
-          retVal.processedFiles.add(filePath)
+          ctx.processedFiles.add(filePath)
           const transformed = isTypeScriptFile
-            ? transformTs(filePath, optionsArray)
-            : await transformMdx(filePath, optionsArray)
+            ? transformTs(filePath, optionsArray, {dryRun: ctx.dryRun})
+            : await transformMdx(filePath, optionsArray, {dryRun: ctx.dryRun})
 
           if (transformed) {
-            retVal.changedFiles.add(filePath)
+            ctx.changedFiles.add(filePath)
           }
         }
       }
@@ -72,12 +78,17 @@ export interface ImportTransformConfig {
    */
   dir: string
   /**
+   * Preview changes without writing files.
+   * @default false
+   */
+  dryRun?: boolean
+  /**
    * @default "info"
    */
   logMode?: "info" | "verbose"
 }
 
-export async function modImports(
+export async function processDirs(
   entries: ImportTransformEntry[],
   config: ImportTransformConfig,
 ): Promise<void> {
@@ -89,6 +100,11 @@ export async function modImports(
   ).then((dirs) => dirs.flat())
 
   const logMode = config.logMode || "info"
+  const dryRun = config.dryRun ?? false
+
+  if (dryRun) {
+    console.log("Running in dry-run mode (no files will be modified)...\n")
+  }
 
   if (logMode === "verbose") {
     console.log(
@@ -109,6 +125,7 @@ export async function modImports(
       directories.map((dir) =>
         processDirectory(dir, sourceEntries, true, {
           changedFiles,
+          dryRun,
           processedFiles,
         }),
       ),
@@ -123,8 +140,9 @@ export async function modImports(
     console.log(Array.from(changedFiles).sort().join("\n"))
   }
 
+  const suffix = dryRun ? " (dry-run, no files modified)" : ""
   spinner.succeed(
-    `Processed ${processedFiles.size} files (${changedFiles.size} updates)`,
+    `Processed ${processedFiles.size} files (${changedFiles.size} updates)${suffix}`,
   )
 }
 
