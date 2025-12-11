@@ -16,7 +16,7 @@ export function Clear(props: ClearProps) {
   }
 
   return (
-    <Button endIcon={Trash2Icon} onClick={onClick} size="lg" variant="fill">
+    <Button endIcon={Trash2Icon} onClick={onClick} variant="outline">
       Clear
     </Button>
   )

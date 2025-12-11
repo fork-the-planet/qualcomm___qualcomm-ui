@@ -137,6 +137,7 @@ export function JsonSchemaArray(props: JsonSchemaProps) {
         invalid={errors.length > 0}
         multiple
         onValueChange={(value) => onEnumChange(value)}
+        size="sm"
         value={selectValue}
       />
     )

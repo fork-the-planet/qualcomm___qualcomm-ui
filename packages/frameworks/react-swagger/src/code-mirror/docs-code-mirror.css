@@ -2,11 +2,11 @@
   position: relative;
 
   .actions-wrapper {
+    display: inline-flex;
+    justify-content: flex-end;
     position: absolute;
     right: 20px;
     top: 4px;
-    display: inline-flex;
-    justify-content: flex-end;
   }
 
   .cm-scroller {

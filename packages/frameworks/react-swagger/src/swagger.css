@@ -27,6 +27,14 @@
     padding: 0 20px;
     width: 100%;
   }
+
+  .schemes-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 0 16px;
+  }
+
   .opblock-tag-section {
     display: flex;
     flex-direction: column;
@@ -260,7 +268,7 @@
   }
   .opblock .opblock-summary-description {
     color: var(--color-text-neutral-primary);
-    font: var(--font-static-body-lg-default);
+    font: var(--font-static-body-sm-default);
     word-break: break-word;
   }
   .opblock .opblock-summary-path-description-wrapper {
@@ -390,12 +398,11 @@
     padding-left: 0;
   }
   .execute-wrapper {
-    padding: 20px;
+    &[data-enabled] {
+      padding: 20px;
+    }
+
     text-align: right;
-  }
-  .execute-wrapper .btn {
-    padding: 8px 40px;
-    width: 100%;
   }
   .body-param-options {
     display: flex;
@@ -434,7 +441,7 @@
     color: var(--color-text-neutral-primary);
     font: var(--font-static-body-sm-default);
     max-width: 40em;
-    padding: 8px;
+    padding: 8px 12px;
   }
   .response-col_links .response-undocumented {
     color: var(--color-text-neutral-secondary);
@@ -592,13 +599,13 @@
   }
   .response-control-media-type__accept-message {
     color: var(--color-text-neutral-secondary);
-    font: var(--font-static-body-sm-default);
+    font: var(--font-static-body-xs-default);
+    margin-top: 4px;
   }
   .response-control-examples__title,
   .response-control-media-type__title {
     display: block;
-    font: var(--font-static-body-md-default);
-    margin-bottom: 4px;
+    font: var(--font-static-body-sm-default);
   }
   @keyframes blinker {
     50% {
@@ -961,9 +968,6 @@
     cursor: pointer;
   }
   section.models.is-open {
-    padding: 0 0 20px;
-  }
-  section.models.is-open {
     h4,
     .model-collapse-title {
       border-bottom: 1px solid var(--color-border-neutral-01);
@@ -980,8 +984,7 @@
       color: var(--color-text-neutral-primary);
       cursor: pointer;
       display: flex;
-      font-family: var(--type-font-family-secondary);
-      font-size: 16px;
+      font: var(--font-static-body-md-default);
       margin: 0;
       padding: 10px 20px 10px 10px;
     }
@@ -1001,8 +1004,7 @@
   }
   section.models h5 {
     color: var(--color-text-neutral-secondary);
-    font-family: var(--type-font-family-secondary);
-    font-size: 16px;
+    font: var(--font-static-body-sm-bold);
     margin: 0 0 10px;
   }
   section.models .model-jump-to-path {
@@ -1022,7 +1024,7 @@
     transition: all 0.5s;
   }
   section.models .model-container:last-of-type {
-    padding: 0 20px;
+    border-bottom: 0;
   }
   section.models .model-container .models-jump-to-path {
     opacity: 0.65;
@@ -1145,6 +1147,7 @@
     font-style: italic;
   }
   table tbody tr td {
+    font: var(--font-static-body-sm-default);
     vertical-align: top;
   }
   table tbody tr td:first-of-type {
@@ -1161,11 +1164,15 @@
   }
   .parameters-col_description {
     margin-bottom: 2em;
+    padding: 8px 12px;
     width: 99%;
   }
-  .parameters-col_description input {
-    max-width: 340px;
-    width: 100%;
+  .parameters-col_description {
+    .qui-input__root,
+    .qui-select__root {
+      max-width: 340px;
+      width: 100%;
+    }
   }
   .parameters-col_description select {
     border-width: 1px;
@@ -1176,8 +1183,7 @@
   }
   .parameter__name {
     color: var(--color-text-neutral-primary);
-    font: var(--font-static-body-md-bold);
-    margin-right: 0.75em;
+    font: var(--font-static-body-sm-bold);
   }
   .parameter__name.required span {
     color: var(--color-text-support-danger);
@@ -1219,16 +1225,16 @@
   }
   .col_header {
     color: var(--color-text-neutral-primary);
-    font: var(--font-static-body-lg-default);
-    padding-right: 4px;
+    font: var(--font-static-body-sm-bold);
+    padding: 8px 12px;
   }
   .response-col_description {
+    padding: 8px 12px;
     width: 99%;
   }
   .response-col_description .markdown p,
   .response-col_description .renderedMarkdown p {
     margin: 0;
-    padding: 8px 12px;
   }
   .response-col_links {
     min-width: 6em;
@@ -1255,12 +1261,10 @@
   }
   .topbar a {
     align-items: center;
-    color: #fff;
+    color: var(--color-text-neutral-primary);
     display: flex;
     flex: 1;
-    font-family: var(--type-font-family-secondary);
-    font-size: 1.5em;
-    font-weight: var(--type-font-weight-heading-bold);
+    font: var(--font-static-body-md-bold);
     max-width: 300px;
     -webkit-text-decoration: none;
     text-decoration: none;
@@ -1297,20 +1301,18 @@
     text-align: right;
   }
   .topbar .download-url-wrapper .select-label select {
-    border: 2px solid #62a03f;
+    border: 2px solid var(--color-category-green-medium);
     box-shadow: none;
     flex: 2;
     outline: none;
     width: 100%;
   }
   .topbar .download-url-wrapper .download-url-button {
-    background: #62a03f;
+    background: var(--color-category-green-medium);
     border: none;
     border-radius: 0 4px 4px 0;
-    color: #fff;
-    font-family: var(--type-font-family-secondary);
-    font-size: 16px;
-    font-weight: var(--type-font-weight-heading-bold);
+    color: var(--color-text-neutral-primary);
+    font: var(--font-static-body-sm-bold);
     padding: 4px 30px;
   }
   @media (max-width: 550px) {
@@ -1319,7 +1321,7 @@
     }
   }
   .info {
-    margin: 50px 0;
+    margin: 16px 0;
   }
   .info.failed-config {
     margin-left: auto;
@@ -1340,8 +1342,7 @@
   .info p,
   .info table {
     color: var(--color-text-neutral-primary);
-    font-family: var(--type-font-family-secondary);
-    font-size: 14px;
+    font: var(--font-static-body-sm-default);
   }
   .info h1,
   .info h2,
@@ -1349,11 +1350,9 @@
   .info h4,
   .info h5 {
     color: var(--color-text-neutral-primary);
-    font-family: var(--type-font-family-secondary);
   }
   .info a {
     color: var(--color-interactive-text-link-default-idle);
-    font-family: var(--type-font-family-secondary);
     font-size: 14px;
     transition: color 161ms ease;
   }
@@ -1388,7 +1387,7 @@
   }
   .info .title small pre {
     color: var(--color-text-neutral-primary);
-    font-family: var(--type-font-family-secondary);
+    font: var(--font-static-code-sm-default);
     margin: 0;
     padding: 0;
   }
@@ -1402,8 +1401,8 @@
     margin-right: 1em;
   }
   .auth-wrapper {
+    align-self: flex-end;
     display: flex;
-    flex: 1;
     justify-content: flex-end;
   }
   .auth-wrapper .authorize {
@@ -1850,5 +1849,10 @@
 .responses-table {
   tr {
     border-bottom: 1px solid var(--color-border-neutral-01);
+  }
+  tbody {
+    td {
+      font: var(--font-static-body-sm-default);
+    }
   }
 }

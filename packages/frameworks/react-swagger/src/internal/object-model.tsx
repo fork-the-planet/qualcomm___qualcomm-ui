@@ -1,4 +1,4 @@
-import {type ReactNode, useEffect} from "react"
+import {type ReactNode, useEffect, useRef} from "react"
 
 import {ChevronUpIcon} from "lucide-react"
 
@@ -35,10 +35,13 @@ export function ObjectModel(props: ObjectModelProps): ReactNode {
 
   const theme = useThemeContext()
 
+  const mounted = useRef(false)
+
   useEffect(() => {
-    if (props.activeInHash && !props?.expanded) {
+    if (!props.expanded && !mounted.current) {
       props.onToggle?.(props.name!, !props.expanded)
     }
+    mounted.current = true
   }, [props])
 
   if (!schema) {

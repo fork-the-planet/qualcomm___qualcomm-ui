@@ -24,11 +24,10 @@ export interface ModelCollapseProps {
 }
 
 export function ModelCollapse({
-  activeInHash,
   children,
   classes,
   collapsedContent = "{...}",
-  expanded: expandedProp = false,
+  expanded: expandedProp = true,
   hideSelfOnExpand = false,
   modelId,
   modelName,
@@ -55,9 +54,6 @@ export function ModelCollapse({
       modelId &&
       window.location.hash === `#${modelId}`
     ) {
-      if (!expanded) {
-        toggleCollapsed()
-      }
       const anchor = document.getElementById(modelId)
       if (anchor) {
         anchor.scrollIntoView()
@@ -66,7 +62,7 @@ export function ModelCollapse({
     // Only scroll after first mounting the component.
     // We do this because the swagger component is mounted after the page loads.
     mounted.current = true
-  }, [modelId, modelName, onToggle, expanded, toggleCollapsed])
+  }, [modelId, modelName, onToggle, expanded])
 
   if (expanded && hideSelfOnExpand) {
     return <span className={classes || ""}>{children}</span>

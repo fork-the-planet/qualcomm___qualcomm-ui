@@ -40,12 +40,12 @@ export function JsonSchemaString({
   if (enumValue && enumCollection) {
     return (
       <Select
-        className="q-swagger-input"
         clearable={!required}
         collection={enumCollection}
         disabled={disabled}
         invalid={errors.length > 0}
         onValueChange={(value) => onChangeProp?.(value[0])}
+        size="sm"
         value={value ? [value] : []}
       />
     )
@@ -74,6 +74,7 @@ export function JsonSchemaString({
       invalid={errors.length > 0}
       onValueChange={(val) => onChangeProp?.(val, keyName)}
       placeholder={description}
+      size="sm"
       value={value}
     />
   )

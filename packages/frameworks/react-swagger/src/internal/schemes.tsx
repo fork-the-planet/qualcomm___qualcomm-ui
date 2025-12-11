@@ -1,5 +1,4 @@
-import type {ReactNode} from "react"
-import {useCallback, useEffect, useMemo} from "react"
+import {type ReactNode, useCallback, useEffect, useMemo} from "react"
 
 import {selectCollection} from "@qualcomm-ui/core/select"
 import {Select} from "@qualcomm-ui/react/select"
@@ -40,6 +39,7 @@ export function Schemes(props: Props): ReactNode {
       collection={collection}
       label="Schemes"
       onValueChange={(value) => setSchemes(value[0])}
+      size="sm"
       style={{minWidth: 100}}
       value={currentScheme ? [currentScheme] : []}
     />

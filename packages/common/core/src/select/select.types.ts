@@ -526,6 +526,7 @@ export interface SelectIndicatorBindings extends CommonBindings {
   "data-part": "indicator"
   "data-readonly": BooleanDataAttr
   "data-state": "open" | "closed"
+  tabIndex: -1
 }
 
 export interface SelectItemBindings extends CommonBindings {

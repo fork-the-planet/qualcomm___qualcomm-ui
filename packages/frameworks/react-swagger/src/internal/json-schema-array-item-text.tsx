@@ -32,6 +32,7 @@ export function JsonSchemaArrayItemText(props: JsonSchemaProps): ReactNode {
       invalid={errors.length > 0}
       onValueChange={onChange}
       placeholder={description}
+      size="sm"
       value={value}
     />
   )

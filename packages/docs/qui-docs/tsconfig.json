@@ -3,14 +3,17 @@
   "compilerOptions": {
     "baseUrl": "./",
     "moduleResolution": "bundler",
+    "module": "nodenext",
+    "paths": {
+      "~assets/*": ["./src/assets/*"],
+      "~components/*": ["./src/components/*"],
+      "~utils/*": ["./src/utils/*"]
+    }
   },
-  "include": ["./src"],
+  "include": ["./src/**/*.mdx"],
   "references": [
     {
       "path": "./tsconfig.lib.json"
-    },
-    {
-      "path": "./tsconfig.mdx.json"
     },
     {
       "path": "./tsconfig.node.json"

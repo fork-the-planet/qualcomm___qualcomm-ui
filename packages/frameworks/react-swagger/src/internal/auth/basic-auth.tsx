@@ -1,5 +1,6 @@
-import {type ChangeEvent, useState} from "react"
+import {useState} from "react"
 
+import {PasswordInput} from "@qualcomm-ui/react/password-input"
 import {TextInput} from "@qualcomm-ui/react/text-input"
 
 import type {GetComponent} from "../types"
@@ -25,9 +26,8 @@ export function BasicAuth(props: BasicAuthProps) {
     return (authorized && authorized.getIn([name, "value"])) || {}
   }
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChange = (value: string, name: string) => {
     const {onChange} = props
-    const {name, value} = e.target
     const newValue = {...state.value, [name]: value}
     setState({...state, value: newValue})
     onChange(state)
@@ -55,39 +55,44 @@ export function BasicAuth(props: BasicAuthProps) {
         <Markdown source={schema.get("description")} />
       </Row>
       <Row>
-        <label htmlFor="auth_username">Username:</label>
         {username ? (
-          <TextInput clearable={false} disabled value={username} />
+          <TextInput
+            clearable={false}
+            disabled
+            label="Username"
+            value={username}
+          />
         ) : (
           <Col>
             <TextInput
               inputProps={{
                 autoFocus: true,
                 id: "auth_username",
-                name: "username",
-                onChange: (event: ChangeEvent<HTMLInputElement>) =>
-                  onChange(event),
-                type: "text",
               }}
+              label="Username"
+              name="username"
+              onValueChange={(value) => onChange(value, "username")}
             />
           </Col>
         )}
       </Row>
       <Row>
-        <label htmlFor="auth_password">Password:</label>
         {username ? (
-          <TextInput clearable={false} disabled value="******" />
+          <PasswordInput
+            clearable={false}
+            disabled
+            label="Password"
+            value={((state.value as any)?.[state.name] as string) || ""}
+          />
         ) : (
           <Col>
-            <TextInput
+            <PasswordInput
               inputProps={{
-                autoComplete: "new-password",
                 id: "auth_password",
-                name: "password",
-                onChange: (event: ChangeEvent<HTMLInputElement>) =>
-                  onChange(event),
-                type: "password",
               }}
+              label="Password"
+              name="password"
+              onValueChange={(value) => onChange(value, "password")}
             />
           </Col>
         )}

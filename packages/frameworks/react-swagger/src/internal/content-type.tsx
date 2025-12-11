@@ -59,16 +59,18 @@ export function ContentType({
   }
 
   return (
-    <div>
-      <Select
-        className="q-swagger-input"
-        clearable={false}
-        collection={collection}
-        controlProps={{"aria-controls": ariaControls, "aria-label": ariaLabel}}
-        label={label}
-        onValueChange={(value) => onChange?.(value[0])}
-        value={value ? [value] : []}
-      />
-    </div>
+    <Select
+      clearable={false}
+      collection={collection}
+      controlProps={{
+        "aria-controls": ariaControls,
+        "aria-label": ariaLabel || "Content Type",
+      }}
+      label={label?.trim() || undefined}
+      onValueChange={(value) => onChange?.(value[0])}
+      size="sm"
+      style={{minWidth: 180}}
+      value={value ? [value] : []}
+    />
   )
 }

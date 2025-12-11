@@ -5,6 +5,7 @@ import immutable from "immutable"
 import {Collapsible} from "@qualcomm-ui/react/collapsible"
 import {InlineNotification} from "@qualcomm-ui/react/inline-notification"
 import {Progress} from "@qualcomm-ui/react/progress"
+import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 
 import type {GetComponent} from "./types"
 import {
@@ -239,6 +240,7 @@ export function Operation({
             ? "execute-wrapper"
             : "btn-group"
         }
+        data-enabled={booleanDataAttr(tryItOutEnabled)}
       >
         {!tryItOutEnabled || !allowTryItOut ? null : (
           <Execute

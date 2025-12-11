@@ -34,6 +34,7 @@ export function AuthorizationPopup({
           close()
         }
       }}
+      size="md"
     >
       <Dialog.FloatingPortal>
         <Dialog.Body className="swagger-ui">

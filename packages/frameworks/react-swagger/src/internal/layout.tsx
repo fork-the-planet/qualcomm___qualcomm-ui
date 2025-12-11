@@ -125,7 +125,7 @@ export function Layout({
               hideTitleSection ? "title-hidden" : "",
             )}
           >
-            <Col className="schemes wrapper" mobile={12}>
+            <div className="schemes-wrapper">
               {hasServers || hasSchemes ? (
                 <div className="schemes-server-container">
                   {hasServers ? <ServersContainer /> : null}
@@ -133,7 +133,7 @@ export function Layout({
                 </div>
               ) : null}
               {hasSecurityDefinitions ? <AuthorizeBtnContainer /> : null}
-            </Col>
+            </div>
           </div>
         ) : null}
 

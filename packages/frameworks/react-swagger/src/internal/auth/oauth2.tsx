@@ -174,7 +174,7 @@ export function Oauth2(props: Oauth2Props): ReactNode {
 
   return (
     <div className="oauth2-wrapper">
-      <h4 className="font-heading-xs text-neutral-primary">
+      <h4 className="oauth2-heading">
         {name} (OAuth2, {flowToDisplay}){" "}
         <JumpToPath path={["securityDefinitions", name]} />
       </h4>
@@ -259,6 +259,7 @@ export function Oauth2(props: Oauth2Props): ReactNode {
                   onValueChange={(value) =>
                     onInputChange("passwordType", value[0])
                   }
+                  size="sm"
                 />
               </Col>
             )}

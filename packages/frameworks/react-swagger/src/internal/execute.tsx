@@ -102,7 +102,6 @@ export function Execute(props: ExecuteProps) {
       emphasis="primary"
       endIcon={PlayIcon}
       onClick={onClick}
-      size="lg"
       variant="fill"
     >
       Execute

@@ -21,6 +21,10 @@
   gap: 6px;
 }
 
+.oauth2-heading {
+  font: var(--font-static-heading-xxs-default);
+}
+
 .text-body-sm {
   color: var(--color-text-neutral-primary);
   font: var(--font-static-body-sm-default);

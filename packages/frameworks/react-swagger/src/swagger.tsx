@@ -191,6 +191,7 @@ export function Swagger({
       <ThemeContextProvider value={theme}>
         <SwaggerUI
           defaultModelExpandDepth={1000}
+          defaultModelRendering="model"
           defaultModelsExpandDepth={1000}
           layout="Layout"
           plugins={plugins}
