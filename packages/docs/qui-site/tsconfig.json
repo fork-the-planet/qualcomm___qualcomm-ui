@@ -4,15 +4,6 @@
     "baseUrl": "./",
     "module": "esnext",
     "target": "esnext",
-    "paths": {
-      // fixes WebStorm usage detection, not used otherwise
-      "@qualcomm-ui/react/*": ["../../frameworks/react/src/*"],
-      "@qualcomm-ui/react-core/*": ["../../frameworks/react-core/src/*"],
-      "@qualcomm-ui/core/*": ["../../common/core/src/*"],
-      "@qualcomm-ui/dom/*": ["../../common/dom/src/*"],
-      "@qualcomm-ui/qds-core/*": ["../../common/qds-core/src/*"],
-      "@qualcomm-ui/utils/*": ["../../common/utils/src/*"]
-    }
   },
   "references": [
     {

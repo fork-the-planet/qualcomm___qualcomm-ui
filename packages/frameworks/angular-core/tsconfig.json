@@ -8,10 +8,6 @@
     "paths": {
       // fixes WebStorm usage detection, not used otherwise
       "@qualcomm-ui/angular-core/*": ["./src/*/index.ts"],
-      "@qualcomm-ui/core/*": ["../../common/core/src/*"],
-      "@qualcomm-ui/dom/*": ["../../common/dom/src/*"],
-      "@qualcomm-ui/qds-core/*": ["../../common/qds-core/src/*"],
-      "@qualcomm-ui/utils/*": ["../../common/utils/src/*"]
     }
   },
   "include": ["./src"],
