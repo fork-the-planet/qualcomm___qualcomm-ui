@@ -1,5 +1,19 @@
 # @qualcomm-ui/angular
 
+## 1.11.0 (2025/12/11)
+
+### Features
+
+- [text-area]: add component
+
+### Bug Fixes
+
+- [slider]: show error indicator icon when invalid
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core, @qualcomm-ui/core, @qualcomm-ui/angular-core]
+
 ## 1.10.1 (2025/12/10)
 
 ### Miscellaneous Chores

@@ -1,5 +1,11 @@
 # @qualcomm-ui/core
 
+## 1.1.0 (2025/12/11)
+
+### Features
+
+- [text-area]: add component
+
 ## 1.0.12 (2025/12/10)
 
 ### Bug Fixes

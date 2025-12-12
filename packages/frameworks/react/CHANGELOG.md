@@ -1,5 +1,20 @@
 # @qualcomm-ui/react
 
+## 1.6.0 (2025/12/11)
+
+### Features
+
+- [text-area]: add component
+
+### Bug Fixes
+
+- [slider]: show error indicator icon when invalid
+fix(radio-group): show error indicator icon when invalid
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core, @qualcomm-ui/core, @qualcomm-ui/react-core]
+
 ## 1.5.1 (2025/12/10)
 
 ### Bug Fixes

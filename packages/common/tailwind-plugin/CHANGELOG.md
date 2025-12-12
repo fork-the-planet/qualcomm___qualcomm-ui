@@ -1,5 +1,20 @@
 # @qualcomm-ui/tailwind-plugin
 
+## 1.4.0 (2025/12/11)
+
+### Features
+
+- [shadows]: add box-shadow utility classes
+- [tailwind-plugin]: add missing utility tokens
+
+### Bug Fixes
+
+- [tailwind-plugin]: align utility token mappings
+
+### Code Refactoring
+
+- [plugin-generator]: use array instead of record for consistent processing order
+
 ## 1.3.0 (2025/12/04)
 
 ### Features
