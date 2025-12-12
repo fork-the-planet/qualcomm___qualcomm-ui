@@ -1,6 +1,6 @@
 import {Component, input, output} from "@angular/core"
 import {render} from "@testing-library/angular"
-import {page, userEvent} from "@vitest/browser/context"
+import {page, userEvent} from "vitest/browser"
 import {describe, expect, test, vi} from "vitest"
 
 import {SliderModule} from "@qualcomm-ui/angular/slider"
