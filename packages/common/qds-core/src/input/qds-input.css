@@ -92,6 +92,7 @@
 
   &[data-invalid] {
     border-color: var(--color-interactive-border-danger-idle);
+    outline: solid 1px var(--color-interactive-border-danger-idle);
   }
 
   &[data-readonly] {
@@ -102,6 +103,7 @@
 
   &[data-focus] {
     border-color: var(--color-utility-focus-border);
+    outline: solid 1px var(--color-utility-focus-border);
   }
 
   &[data-disabled] {
