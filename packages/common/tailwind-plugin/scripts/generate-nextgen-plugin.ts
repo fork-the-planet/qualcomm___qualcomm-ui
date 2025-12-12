@@ -45,22 +45,22 @@ const TOKEN_MAPPINGS: Record<string, TokenMapping> = {
     themeKey: "color",
     utilities: [Utility.TEXT, Utility.BG, Utility.BORDER],
   },
+  "color-*surface*": {
+    themeKey: "color",
+    utilities: [Utility.BG],
+  },
+  "color-*utility*": {
+    themeKey: "color",
+    utilities: [Utility.TEXT, Utility.BG, Utility.BORDER],
+  },
   "color-*icon*": {
     nameTransform: (name) => `icon-${name}`,
     themeKey: "color",
     utilities: [Utility.TEXT],
   },
-  "color-*surface*": {
-    themeKey: "color",
-    utilities: [Utility.BG],
-  },
   "color-*text*": {
     themeKey: "color",
     utilities: [Utility.TEXT],
-  },
-  "color-*utility*": {
-    themeKey: "color",
-    utilities: [Utility.BG, Utility.BORDER],
   },
   "font-*": {
     themeKey: "type",
