@@ -6,19 +6,16 @@ import type {ReactElement, ReactNode} from "react"
 import {AlertCircle} from "lucide-react"
 
 import {IconOrNode} from "@qualcomm-ui/react/icon"
-import {useSliderErrorText} from "@qualcomm-ui/react-core/slider"
 import {
   type ElementRenderProp,
-  type IdProp,
   PolymorphicElement,
 } from "@qualcomm-ui/react-core/system"
+import {useTextAreaErrorText} from "@qualcomm-ui/react-core/text-area"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useQdsSliderContext} from "./qds-slider-context"
+import {useQdsTextAreaContext} from "./qds-text-area-context"
 
-export interface SliderErrorTextProps
-  extends IdProp,
-    ElementRenderProp<"span"> {
+export interface TextAreaErrorTextProps extends ElementRenderProp<"div"> {
   /**
    * React {@link https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children children} prop.
    */
@@ -26,15 +23,17 @@ export interface SliderErrorTextProps
 }
 
 /**
- * The error message below the slider. Renders a `<span>` element by default.
+ * Error message displayed when the textarea is invalid. Renders a `<div>` element by
+ * default.
  */
-export function SliderErrorText({
+export function TextAreaErrorText({
   children,
   id,
   ...props
-}: SliderErrorTextProps): ReactElement {
-  const contextProps = useSliderErrorText({id})
-  const qdsContext = useQdsSliderContext()
+}: TextAreaErrorTextProps): ReactElement {
+  const contextProps = useTextAreaErrorText({id})
+  const qdsContext = useQdsTextAreaContext()
+
   const mergedProps = mergeProps(
     contextProps,
     qdsContext.getErrorTextBindings(),
@@ -42,7 +41,7 @@ export function SliderErrorText({
   )
 
   return (
-    <PolymorphicElement as="span" {...mergedProps}>
+    <PolymorphicElement as="div" {...mergedProps}>
       <IconOrNode icon={AlertCircle} />
       {children}
     </PolymorphicElement>
