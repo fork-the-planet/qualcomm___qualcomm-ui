@@ -60,12 +60,11 @@ export const tailwindClassTransforms: ClassTransformEntry[] = [
 
   {pattern: "text-primary", replacement: "text-neutral-primary"},
   {pattern: "text-secondary", replacement: "text-neutral-secondary"},
-  {pattern: "text-disabled", replacement: "text-disabled-text"},
   {pattern: "text-error", replacement: "text-support-danger"},
   {pattern: "text-link", replacement: "text-link-default-idle"},
   {pattern: "text-contrast-primary", replacement: "text-neutral-inverse"},
   {pattern: "text-contrast-secondary", replacement: "text-neutral-secondary"},
-  {pattern: "text-contrast-disabled", replacement: "text-disabled-text"},
+  {pattern: "text-contrast-disabled", replacement: "text-disabled"},
   {pattern: "text-semantic-informative", replacement: "text-support-info"},
   {pattern: "text-semantic-negative", replacement: "text-support-danger"},
   {pattern: "text-semantic-positive", replacement: "text-support-success"},
