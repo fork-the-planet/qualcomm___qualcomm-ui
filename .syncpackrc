@@ -41,6 +41,7 @@
     "dependencies",
     "devDependencies",
     "peerDependencies",
+    "optionalDependencies",
     "resolutions"
   ]
 }

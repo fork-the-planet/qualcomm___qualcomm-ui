@@ -112,10 +112,10 @@
     "shiki": ">=3.13.0",
     "sucrase": ">=3.35.0"
   },
-  "engines": {
-    "node": ">=20"
-  },
   "optionalDependencies": {
     "my-ua-parser": "^2.0.4"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
