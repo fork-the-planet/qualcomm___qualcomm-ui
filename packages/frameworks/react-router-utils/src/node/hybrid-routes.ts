@@ -1,10 +1,9 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import minimatch from "minimatch"
+import {minimatch} from "minimatch"
 import {readdirSync, statSync} from "node:fs"
-import {extname, join, relative, resolve, sep} from "node:path"
-import win32 from "node:path/win32"
+import {extname, join, relative, resolve, sep, win32} from "node:path"
 
 export interface ConfigRoute {
   /**

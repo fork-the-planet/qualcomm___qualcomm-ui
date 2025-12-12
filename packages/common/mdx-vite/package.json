@@ -1,6 +1,6 @@
 {
   "name": "@qualcomm-ui/mdx-vite",
-  "version": "2.6.3",
+  "version": "2.6.4",
   "description": "Vite documentation plugin for applications that use MDX",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",

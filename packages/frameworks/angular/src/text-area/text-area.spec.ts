@@ -6,8 +6,8 @@ import {
   Validators,
 } from "@angular/forms"
 import {render} from "@testing-library/angular"
-import {page, userEvent} from "@vitest/browser/context"
 import {describe, expect, test} from "vitest"
+import {page, userEvent} from "vitest/browser"
 
 import {TextAreaModule} from "@qualcomm-ui/angular/text-area"
 
