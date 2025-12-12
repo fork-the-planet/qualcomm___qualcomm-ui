@@ -9,7 +9,7 @@
 ### Bug Fixes
 
 - [slider]: show error indicator icon when invalid
-fix(radio-group): show error indicator icon when invalid
+- [radio-group]: show error indicator icon when invalid
 
 ### Miscellaneous Chores
 
