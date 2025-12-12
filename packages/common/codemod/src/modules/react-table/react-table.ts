@@ -7,9 +7,9 @@ export const reactTableTransforms: ImportTransformEntry[] = [
   {
     imports: [{name: "Table", renameTo: "TableInstance"}],
     sourcePackage: "@qui/table-core",
-    targetPackage: "@qui/core/table",
+    targetPackage: "@qualcomm-ui/core/table",
   },
-  {sourcePackage: "@qui/table-core", targetPackage: "@qui/core/table"},
+  {sourcePackage: "@qui/table-core", targetPackage: "@qualcomm-ui/core/table"},
   {
     imports: [
       "ColumnSizingTableState",
@@ -220,7 +220,7 @@ export const reactTableTransforms: ImportTransformEntry[] = [
       "filterFns",
     ],
     sourcePackage: "@qui/react-table",
-    targetPackage: "@qui/core/table",
+    targetPackage: "@qualcomm-ui/core/table",
   },
   {
     imports: [
@@ -246,7 +246,7 @@ export const reactTableTransforms: ImportTransformEntry[] = [
       },
     ],
     sourcePackage: "@qui/react-table",
-    targetPackage: "@qui/react/table",
+    targetPackage: "@qualcomm-ui/react/table",
     variableTransformers: [
       {
         name: "QTable",
@@ -284,5 +284,8 @@ export const reactTableTransforms: ImportTransformEntry[] = [
     targetPackage: "@qui/react-table",
   },
   // adjust the remaining imports
-  {sourcePackage: "@qui/react-table", targetPackage: "@qui/react/table"},
+  {
+    sourcePackage: "@qui/react-table",
+    targetPackage: "@qualcomm-ui/react/table",
+  },
 ]

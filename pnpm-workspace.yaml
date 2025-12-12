@@ -30,11 +30,11 @@ catalog:
   '@angular/router': ~20.3.15
   '@angular/ssr': ~20.3.12
   '@eslint/js': 9.39.1
-  '@react-router/dev': 7.9.4
-  '@react-router/express': 7.9.4
-  '@react-router/node': 7.9.4
-  '@react-router/remix-routes-option-adapter': 7.9.4
-  '@react-router/serve': 7.9.4
+  '@react-router/dev': 7.10.1
+  '@react-router/express': 7.10.1
+  '@react-router/node': 7.10.1
+  '@react-router/remix-routes-option-adapter': 7.10.1
+  '@react-router/serve': 7.10.1
   '@types/react': 19.2.7
   '@types/react-dom': 19.2.3
   '@typescript-eslint/eslint-plugin': 8.48.1
@@ -44,7 +44,7 @@ catalog:
   eslint: 9.39.1
   react: 19.2.1
   react-dom: 19.2.1
-  react-router: 7.9.4
+  react-router: 7.10.1
   tsx: 4.21.0
   typescript-eslint: 8.48.1
 
@@ -69,4 +69,4 @@ onlyBuiltDependencies:
   - unrs-resolver
 
 patchedDependencies:
-  '@react-router/dev@7.9.4': patches/@react-router__dev@7.9.4.patch
+  '@react-router/dev@7.10.1': patches/@react-router__dev@7.10.1.patch

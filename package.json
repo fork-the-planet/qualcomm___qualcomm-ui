@@ -42,6 +42,7 @@
     "eslint-plugin-angular": "pnpm -C packages/configs/eslint-plugin-angular",
     "eslint-plugin-react": "pnpm -C packages/configs/eslint-plugin-react",
     "react-swagger": "pnpm -C packages/frameworks/react-swagger",
+    "codemod": "pnpm -C packages/common/codemod",
     "test": "turbo run test",
     "lint": "turbo run lint --continue",
     "lint:ci": "turbo run lint --concurrency 6",
@@ -71,6 +72,7 @@
     "@eslint/js": "catalog:",
     "@manypkg/get-packages": "^3.1.0",
     "@octokit/rest": "^22.0.1",
+    "@qualcomm-ui/codemod": "workspace:*",
     "@qualcomm-ui/eslint-config-angular": "workspace:*",
     "@qualcomm-ui/eslint-config-mdx": "workspace:*",
     "@qualcomm-ui/eslint-config-react": "workspace:*",
@@ -100,7 +102,7 @@
     "stylelint-config-standard": "^39.0.1",
     "stylelint-order": "^7.0.0",
     "stylelint-prettier": "^5.0.3",
-    "syncpack": "14.0.0-alpha.27",
+    "syncpack": "14.0.0-alpha.32",
     "tailwindcss": "^4.1.17",
     "tsx": "^4.20.6",
     "turbo": "2.6.3",
@@ -108,9 +110,9 @@
     "typescript-eslint": "catalog:",
     "yaml": "^2.8.2"
   },
-  "packageManager": "pnpm@10.24.0+sha512.01ff8ae71b4419903b65c60fb2dc9d34cf8bb6e06d03bde112ef38f7a34d6904c424ba66bea5cdcf12890230bf39f9580473140ed9c946fef328b6e5238a345a",
   "resolutions": {
     "playwright": "1.56.1",
     "typescript": "5.9.3"
-  }
+  },
+  "packageManager": "pnpm@10.24.0+sha512.01ff8ae71b4419903b65c60fb2dc9d34cf8bb6e06d03bde112ef38f7a34d6904c424ba66bea5cdcf12890230bf39f9580473140ed9c946fef328b6e5238a345a"
 }

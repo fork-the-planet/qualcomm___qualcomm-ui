@@ -1,5 +1,11 @@
 # @qualcomm-ui/react-swagger
 
+## 1.0.2 (2025/12/11)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core, @qualcomm-ui/core, @qualcomm-ui/react-core]
+
 ## 1.0.1 (2025/12/10)
 
 ### Miscellaneous Chores

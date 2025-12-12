@@ -1,5 +1,15 @@
 # @qualcomm-ui/react-mdx
 
+## 1.7.2 (2025/12/11)
+
+### Bug Fixes
+
+- [docs-layout]: fix header light-mode background-color
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react, @qualcomm-ui/core, @qualcomm-ui/react-core]
+
 ## 1.7.1 (2025/12/10)
 
 ### Bug Fixes

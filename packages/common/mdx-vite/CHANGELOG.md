@@ -1,5 +1,16 @@
 # @qualcomm-ui/mdx-vite
 
+## 2.6.3 (2025/12/11)
+
+### Bug Fixes
+
+- [docs-plugin]: skip git metadata for cached files
+- [docs-plugin]: skip cache update for unchanged files
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/tailwind-plugin]
+
 ## 2.6.2 (2025/12/10)
 
 ### Miscellaneous Chores

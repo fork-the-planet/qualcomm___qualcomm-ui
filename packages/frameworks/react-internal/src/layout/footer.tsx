@@ -32,7 +32,7 @@ export function Footer(props: FooterProps): ReactElement {
         </Link>
         . Head over to the{" "}
         <Link
-          href="https://github.com/qualcomm/qualcomm-ui-templates/tree/main/templates/qui-docs-template"
+          href="https://github.com/qualcomm/qualcomm-ui-templates/tree/main/templates/react-qui-docs"
           size="md"
           target="_blank"
         >

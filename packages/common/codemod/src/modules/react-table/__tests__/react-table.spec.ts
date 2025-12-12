@@ -1,7 +1,7 @@
-import {cpSync, mkdirSync, readdirSync, rmSync} from "node:fs"
+import {cpSync, mkdirSync, readdirSync, readFileSync, rmSync} from "node:fs"
 import {dirname, resolve} from "node:path"
 import {fileURLToPath} from "node:url"
-import {describe, test} from "vitest"
+import {describe, expect, test} from "vitest"
 
 import {transformTs} from "../../../transformers"
 import {reactTableTransforms} from "../react-table"
@@ -27,8 +27,12 @@ describe("react-table-migrations", () => {
   const files = readdirSync(dirs.actual).filter((file) => file.endsWith(".tsx"))
 
   for (const file of files) {
-    test(file, async () => {
+    test(file, () => {
       transformTs(resolve(dirs.actual, file), reactTableTransforms)
+
+      const actual = readFileSync(resolve(dirs.actual, file), "utf-8")
+      const expected = readFileSync(resolve(dirs.expected, file), "utf-8")
+      expect(actual).toBe(expected)
     })
   }
 })

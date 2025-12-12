@@ -41,21 +41,58 @@ You are a pragmatic software engineer who prioritizes correctness and clarity ov
 
 ## Comment Guidelines
 
-**Avoid redundant comments that restate obvious code:**
+**Avoid redundant comments that restate obvious code**
 
-```ts
-// BAD: Redundant
-const users = await db.getUsers() // Get users from database
+- Remove obvious comments: Delete comments that merely restate what the code clearly does (e.g., '// increment counter' above 'counter++')
 
-// GOOD: No comment needed
-const users = await db.getUsers()
+### Comment Review Criteria
+
+When adding comments, always double-check and ask yourself:
+
+- Does this comment add value beyond what well-named code already communicates?
+- Does it explain business logic, edge cases, or architectural decisions? → Keep
+- Would this help a new developer understand non-obvious behavior? → Keep
+
+### Examples
+
+#### Remove (obvious)
+
+```
+// Increment the counter
+counter += 1
+
+// Check if user is present
+if (!user) {
+    return
+}
+
+// Loop through items
+for (let item in items) {
+    process(item)
+}
 ```
 
-**Only include comments for non-obvious business logic or complex algorithms:**
+#### Keep (information that can't otherwise be inferred)
 
 ```ts
-// GOOD: Explains why, not what
-const discountRate = baseRate * 0.85 // Corporate policy: 15% discount for bulk orders
+/**
+ * Safari has historically had inconsistent behavior with programmatically
+ * focusing hidden or visually obscured form elements
+ */
+if (isSafari()) {
+  element.focus()
+}
+```
+
+Always keep JSDoc documentation comments:
+
+```ts
+export interface ConfigLoaderOptions {
+  /**
+   * Path to the qui-docs config file. This is automatically detected if omitted.
+   */
+  configFile?: string
+}
 ```
 
 ## Repository Structure

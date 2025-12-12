@@ -1,5 +1,15 @@
 # @qualcomm-ui/angular-core
 
+## 1.4.0 (2025/12/11)
+
+### Features
+
+- [text-area]: add component
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core]
+
 ## 1.3.3 (2025/12/10)
 
 ### Miscellaneous Chores

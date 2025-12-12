@@ -1,5 +1,19 @@
 # @qualcomm-ui/qds-core
 
+## 1.10.0 (2025/12/11)
+
+### Features
+
+- [text-area]: add component
+
+### Bug Fixes
+
+- [input]: adjust outline color when invalid
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core]
+
 ## 1.9.4 (2025/12/10)
 
 ### Miscellaneous Chores

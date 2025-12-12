@@ -1,7 +1,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {createImportModEntries} from "../mod-imports"
+import {createImportModEntries} from "../process-dirs"
 import type {ImportTransformEntry} from "../transformers"
 
 export const mdxDocs: ImportTransformEntry[] = createImportModEntries(
@@ -10,7 +10,7 @@ export const mdxDocs: ImportTransformEntry[] = createImportModEntries(
     // re-exports from @qui/mdx-docs-common were removed
     {
       imports: ["SiteData"],
-      targetPackage: "@qui/mdx-docs-common",
+      targetPackage: "@qualcomm-ui/mdx-common",
     },
     // the rest of these entries are @qui/mdx-docs imports.
     {
@@ -52,7 +52,7 @@ export const mdxDocs: ImportTransformEntry[] = createImportModEntries(
         "DocPropsSettings",
         "DocsLayoutSettings",
       ],
-      targetPackage: "@qui/mdx-docs/docs-layout",
+      targetPackage: "@qualcomm-ui/react-mdx/docs-layout",
     },
     {
       imports: [
@@ -91,7 +91,7 @@ export const mdxDocs: ImportTransformEntry[] = createImportModEntries(
         "useTypeDocContext",
         "TypeDocContextProvider",
       ],
-      targetPackage: "@qui/mdx-docs/typedoc",
+      targetPackage: "@qualcomm-ui/react-mdx/typedoc",
     },
     {
       imports: [
@@ -115,43 +115,7 @@ export const mdxDocs: ImportTransformEntry[] = createImportModEntries(
         "formatPreview",
         "useLiveCodeEditor",
       ],
-      targetPackage: "@qui/mdx-docs/code-demo",
-    },
-    {
-      imports: [
-        "sortChildren",
-        "makeChildPath",
-        "stopPropagation",
-        "setChildrenProps",
-        "TreeConfig",
-        "useTreeContext",
-        "TreeContextProvider",
-        "TreeFileProps",
-        "TreeFile",
-        "TreeFolderProps",
-        "TreeFolder",
-        "TreeIndents",
-        "TreeProps",
-        "Tree",
-      ],
-      targetPackage: "@qui/mdx-docs/file-tree",
-    },
-    {
-      imports: [
-        "RunnerProps",
-        "Runner",
-        "transform",
-        "normalizeCode",
-        "Scope",
-        "RunnerOptions",
-        "UseRunnerProps",
-        "UseRunnerReturn",
-        "useRunner",
-        "generateElement",
-        "createRequire",
-        "importCode",
-      ],
-      targetPackage: "@qui/mdx-docs/runner",
+      targetPackage: "@qualcomm-ui/react-mdx/code-demo",
     },
     {
       imports: [
@@ -165,7 +129,7 @@ export const mdxDocs: ImportTransformEntry[] = createImportModEntries(
         "doSiteSearch",
         "useSiteSearch",
       ],
-      targetPackage: "@qui/mdx-docs/site-search",
+      targetPackage: "@qualcomm-ui/react-mdx/site-search",
     },
     {
       imports: [
@@ -177,7 +141,7 @@ export const mdxDocs: ImportTransformEntry[] = createImportModEntries(
         "useSiteContext",
         "SiteContextProvider",
       ],
-      targetPackage: "@qui/mdx-docs/site-map",
+      targetPackage: "@qualcomm-ui/react-mdx/context",
     },
     {
       imports: [
@@ -187,7 +151,7 @@ export const mdxDocs: ImportTransformEntry[] = createImportModEntries(
         "UseCopyToClipboard",
         "useCopyToClipboard",
       ],
-      targetPackage: "@qui/mdx-docs/copy-to-clipboard",
+      targetPackage: "@qualcomm-ui/react-mdx/copy-to-clipboard",
     },
     {
       imports: [
@@ -196,31 +160,62 @@ export const mdxDocs: ImportTransformEntry[] = createImportModEntries(
         "useMdxDocsContext",
         "MdxDocsProvider",
       ],
-      targetPackage: "@qui/mdx-docs/mdx-docs-context",
+      targetPackage: "@qualcomm-ui/react-mdx/context",
     },
     {
-      imports: ["HighlightProp", "HighlightMatches", "HighlightTerms"],
-      targetPackage: "@qui/mdx-docs/highlight",
+      imports: [
+        {name: "HighlightProp", renameTo: "UseHighlightProps"},
+        {name: "HighlightMatches", renameTo: "HighlightText"},
+        {name: "HighlightTerms", renameTo: "useHighlight"},
+      ],
+      targetPackage: "@qualcomm-ui/react-core/highlight",
     },
     {
       imports: ["CodeHighlightProps", "CodeHighlight"],
-      targetPackage: "@qui/mdx-docs/code-highlight",
+      targetPackage: "@qualcomm-ui/react-mdx/code-highlight",
     },
     {
       imports: ["NotFoundProps", "NotFound"],
-      targetPackage: "@qui/mdx-docs/not-found",
+      targetPackage: "@qualcomm-ui/react-mdx/not-found",
     },
     {
       imports: ["NpmCommandTabsProps", "NpmInstallTabs"],
-      targetPackage: "@qui/mdx-docs/npm-install-tabs",
+      targetPackage: "@qualcomm-ui/react-mdx/npm-install-tabs",
     },
     {
       imports: ["DeprecatedModule"],
-      targetPackage: "@qui/mdx-docs/deprecated-module",
+      targetPackage: "@qualcomm-ui/react-mdx/deprecated-module",
     },
     {
       imports: ["ReactLogo"],
-      targetPackage: "@qui/mdx-docs/react-logo",
+      targetPackage: "@qualcomm-ui/react-mdx/react-logo",
+    },
+    // Tree component renamed to FileTree, helper exports removed
+    {
+      imports: [{name: "Tree", renameTo: "FileTree"}],
+      importsToRemove: [
+        "sortChildren",
+        "makeChildPath",
+        "stopPropagation",
+        "setChildrenProps",
+        "TreeConfig",
+        "useTreeContext",
+        "TreeContextProvider",
+        "TreeFileProps",
+        "TreeFile",
+        "TreeFolderProps",
+        "TreeFolder",
+        "TreeIndents",
+        "TreeProps",
+      ],
+      targetPackage: "@qualcomm-ui/react-mdx/file-tree",
+    },
+    // Tip component removed - no replacement (include in imports to trigger
+    // processing)
+    {
+      imports: ["TipIcon", "Tip", "TipStatus"],
+      importsToRemove: ["TipIcon", "Tip", "TipStatus"],
+      targetPackage: "@qualcomm-ui/react-mdx",
     },
   ],
 )
