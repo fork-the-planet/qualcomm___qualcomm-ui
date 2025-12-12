@@ -119,6 +119,94 @@ Lists denote nesting with alternating list styles based on the nesting level.
 | Header    |    Title    | Here's this |
 | Paragraph |    Text     |    And more |
 
+### Links
+
+All relative Markdown links are automatically converted to Remix or React Router links. This means that the target page will be prefetched. When you click on a link, the page will be loaded on the client-side, without making a full page load (SPA routing). For example:
+
+```markdown
+Click [here](/introduction) to learn more.
+```
+
+...will compile to:
+
+```markdown
+import {Link} from "react-router"
+
+Click <Link prefetch="viewport" to="/introduction">here</Link> to learn more.
+```
+
+#### External Links
+
+Similarly, all links starting with `https://` are converted to external links.
+
+```markdown
+Check out the [official documentation](https://react.dev) to learn more.
+```
+
+...will compile to:
+
+```markdown
+Check out the <a href="https://react.dev" target="_blank">here</a> to learn more.
+```
+
+### Alerts
+
+Our blockquotes are enhanced to enable inline alerts.
+
+```markdown
+> [!note]
+> We recommend that you use [folders](https://remix.run/docs/en/main/file-conventions/routes#folders-for-organization) for organizing your routes.
+```
+
+> [!note]
+> We recommend that you use [folders](https://remix.run/docs/en/main/file-conventions/routes#folders-for-organization) for organizing your routes.
+
+#### Custom Title
+
+Use a forward slash `/` to change the title of the alert:
+
+```markdown
+> [!note/Custom Title]
+> Neat, a custom title
+```
+
+> [!note/Custom Title]
+> Neat, a custom title
+
+#### Alert Variants
+
+Customize the status color using `[!tip]`, `[!success]`, `[!warning]`, or `[!caution]`:
+
+> [!tip]
+> We recommend that you use [folders](https://remix.run/docs/en/main/file-conventions/routes#folders-for-organization) for organizing your routes.
+
+> [!success]
+> We recommend that you use [folders](https://remix.run/docs/en/main/file-conventions/routes#folders-for-organization) for organizing your routes.
+
+> [!warning]
+> We recommend that you use [folders](https://remix.run/docs/en/main/file-conventions/routes#folders-for-organization) for organizing your routes.
+
+> [!caution]
+> We recommend that you use [folders](https://remix.run/docs/en/main/file-conventions/routes#folders-for-organization) for organizing your routes.
+
+### Spoilers
+
+Surround your content with a spoiler to hide it until the user clicks on the button:
+
+```markdown
+::: spoiler Click to reveal
+
+I'm a spoiler!
+
+:::
+```
+
+::: spoiler Click to reveal
+
+I'm a spoiler!
+
+:::
+
 ### Code Blocks
 
 Code blocks are syntax highlighted using [Shiki](https://shiki.style/guide/). We've enabled most [common transformers](https://shiki.style/packages/transformers#transformers) by default, detailed below:
@@ -284,73 +372,3 @@ console.log("Hidden")
 console.log("Hidden")
 console.log("Not hidden")
 ```
-
-### Links
-
-All relative Markdown links are automatically converted to Remix or React Router links. This means that the target page will be prefetched. When you click on a link, the page will be loaded on the client-side, without making a full page load (SPA routing). For example:
-
-```markdown
-Click [here](/introduction) to learn more.
-```
-
-...will compile to:
-
-```markdown
-import {Link} from "react-router"
-
-Click <Link prefetch="viewport" to="/introduction">here</Link> to learn more.
-```
-
-#### External Links
-
-Similarly, all links starting with `https://` are converted to external links.
-
-```markdown
-Check out the [official documentation](https://react.dev) to learn more.
-```
-
-...will compile to:
-
-```markdown
-Check out the <a href="https://react.dev" target="_blank">here</a> to learn more.
-```
-
-### Alerts
-
-Our blockquotes are enhanced to enable inline alerts.
-
-```markdown
-> [!note]
-> We recommend that you use [folders](https://remix.run/docs/en/main/file-conventions/routes#folders-for-organization) for organizing your routes.
-```
-
-> [!note]
-> We recommend that you use [folders](https://remix.run/docs/en/main/file-conventions/routes#folders-for-organization) for organizing your routes.
-
-#### Custom Title
-
-Use a forward slash `/` to change the title of the alert:
-
-```markdown
-> [!note/Custom Title]
-> Neat, a custom title
-```
-
-> [!note/Custom Title]
-> Neat, a custom title
-
-#### Alert Variants
-
-Customize the status color using `[!tip]`, `[!success]`, `[!warning]`, or `[!caution]`:
-
-> [!tip]
-> We recommend that you use [folders](https://remix.run/docs/en/main/file-conventions/routes#folders-for-organization) for organizing your routes.
-
-> [!success]
-> We recommend that you use [folders](https://remix.run/docs/en/main/file-conventions/routes#folders-for-organization) for organizing your routes.
-
-> [!warning]
-> We recommend that you use [folders](https://remix.run/docs/en/main/file-conventions/routes#folders-for-organization) for organizing your routes.
-
-> [!caution]
-> We recommend that you use [folders](https://remix.run/docs/en/main/file-conventions/routes#folders-for-organization) for organizing your routes.
