@@ -119,23 +119,6 @@ export const mdxDocs: ImportTransformEntry[] = createImportModEntries(
     },
     {
       imports: [
-        "RunnerProps",
-        "Runner",
-        "transform",
-        "normalizeCode",
-        "Scope",
-        "RunnerOptions",
-        "UseRunnerProps",
-        "UseRunnerReturn",
-        "useRunner",
-        "generateElement",
-        "createRequire",
-        "importCode",
-      ],
-      targetPackage: "@qualcomm-ui/react-mdx/runner",
-    },
-    {
-      imports: [
         "GroupedResultItemProps",
         "GroupedResultItem",
         "SearchResultItemProps",
@@ -158,7 +141,7 @@ export const mdxDocs: ImportTransformEntry[] = createImportModEntries(
         "useSiteContext",
         "SiteContextProvider",
       ],
-      targetPackage: "@qualcomm-ui/react-mdx/site-map",
+      targetPackage: "@qualcomm-ui/react-mdx/context",
     },
     {
       imports: [
@@ -177,11 +160,15 @@ export const mdxDocs: ImportTransformEntry[] = createImportModEntries(
         "useMdxDocsContext",
         "MdxDocsProvider",
       ],
-      targetPackage: "@qualcomm-ui/react-mdx/mdx-docs-context",
+      targetPackage: "@qualcomm-ui/react-mdx/context",
     },
     {
-      imports: ["HighlightProp", "HighlightMatches", "HighlightTerms"],
-      targetPackage: "@qualcomm-ui/react-mdx/highlight",
+      imports: [
+        {name: "HighlightProp", renameTo: "UseHighlightProps"},
+        {name: "HighlightMatches", renameTo: "HighlightText"},
+        {name: "HighlightTerms", renameTo: "useHighlight"},
+      ],
+      targetPackage: "@qualcomm-ui/react-core/highlight",
     },
     {
       imports: ["CodeHighlightProps", "CodeHighlight"],
@@ -202,6 +189,33 @@ export const mdxDocs: ImportTransformEntry[] = createImportModEntries(
     {
       imports: ["ReactLogo"],
       targetPackage: "@qualcomm-ui/react-mdx/react-logo",
+    },
+    // Tree component renamed to FileTree, helper exports removed
+    {
+      imports: [{name: "Tree", renameTo: "FileTree"}],
+      importsToRemove: [
+        "sortChildren",
+        "makeChildPath",
+        "stopPropagation",
+        "setChildrenProps",
+        "TreeConfig",
+        "useTreeContext",
+        "TreeContextProvider",
+        "TreeFileProps",
+        "TreeFile",
+        "TreeFolderProps",
+        "TreeFolder",
+        "TreeIndents",
+        "TreeProps",
+      ],
+      targetPackage: "@qualcomm-ui/react-mdx/file-tree",
+    },
+    // Tip component removed - no replacement (include in imports to trigger
+    // processing)
+    {
+      imports: ["TipIcon", "Tip", "TipStatus"],
+      importsToRemove: ["TipIcon", "Tip", "TipStatus"],
+      targetPackage: "@qualcomm-ui/react-mdx",
     },
   ],
 )

@@ -7,6 +7,7 @@ import {writeFile} from "node:fs/promises"
 import {
   allTailwindTransforms,
   ExportAnalyzer,
+  mdxDocs,
   reactRouterUtils,
 } from "./modules"
 import {processDirs} from "./process-dirs"
@@ -33,6 +34,9 @@ interface MigrateOptions {
 }
 
 const migrations: Record<string, (opts: MigrateOptions) => Promise<void>> = {
+  "@qui/mdx-docs": async (opts) => {
+    await processDirs(mdxDocs, opts)
+  },
   "@qui/react-router-utils": async (opts) => {
     await processDirs(reactRouterUtils, opts)
   },
@@ -76,10 +80,12 @@ program
     `Migrate QUI package imports and classes to the latest version.
 
 Available modules:
+  @qui/mdx-docs            Update imports to @qualcomm-ui/react-mdx subpaths
   @qui/react-router-utils  Update imports to @qualcomm-ui/react-router-utils
   @qui/tailwind-plugin     Migrate Tailwind classes to QDS tokens (requires Tailwind v4)
 
 Examples:
+  qui-codemod migrate -m @qui/mdx-docs -d "src/**"
   qui-codemod migrate -m @qui/react-router-utils -d "src/**"
   qui-codemod migrate -m @qui/tailwind-plugin -d "src/**" --dry-run`,
   )
