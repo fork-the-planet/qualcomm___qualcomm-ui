@@ -145,6 +145,7 @@ function extractUtilityName(
   if (mapping.utilities) {
     const cleanName = variableName
       .replace(/^color-/, "")
+      .replace(/^shadow-/, "")
       .replace(/(background|border|icon|text|surface|utility)-/, "")
       .replace(/^interactive-/, "")
     return mapping.nameTransform ? mapping.nameTransform(cleanName) : cleanName
@@ -178,6 +179,10 @@ function generateUtilityDeclarations(
           case Utility.BORDER:
             cssProperty = "border-color"
             utilityPrefix = "border"
+            break
+          case Utility.SHADOW:
+            cssProperty = "box-shadow"
+            utilityPrefix = "shadow"
             break
           case Utility.TEXT:
             cssProperty = "color"
