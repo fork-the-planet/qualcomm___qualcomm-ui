@@ -129,19 +129,19 @@ export const tailwindClassTransforms: ClassTransformEntry[] = [
 export const tailwindVariableTransforms: ClassTransformEntry[] = [
   {
     pattern: /var\(--q-background-1\)/g,
-    replacement: "var(--color-surface-primary)",
+    replacement: "var(--color-background-neutral-01)",
   },
   {
     pattern: /var\(--q-background-2\)/g,
-    replacement: "var(--color-surface-secondary)",
+    replacement: "var(--color-background-neutral-02)",
   },
   {
     pattern: /var\(--q-background-3\)/g,
-    replacement: "var(--color-surface-raised)",
+    replacement: "var(--color-background-neutral-03)",
   },
   {
     pattern: /var\(--q-background-4\)/g,
-    replacement: "var(--color-surface-overlay)",
+    replacement: "var(--color-background-neutral-04)",
   },
   {
     pattern: /var\(--q-text-1-primary\)/g,

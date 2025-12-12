@@ -37,7 +37,7 @@
 }
 
 .custom-container {
-  background-color: var(--color-surface-secondary);
+  background-color: var(--color-background-neutral-02);
   border-color: var(--color-border-neutral-01);
 }
 
@@ -60,11 +60,11 @@
 }
 
 .bg-neutral-00 {
-  background-color: var(--color-surface-primary);
+  background-color: var(--color-background-neutral-01);
 }
 
 .bg-neutral-01 {
-  background-color: var(--color-surface-secondary);
+  background-color: var(--color-background-neutral-02);
 }
 
 .text-neutral-primary {
