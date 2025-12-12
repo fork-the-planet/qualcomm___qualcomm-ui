@@ -24,6 +24,12 @@
   width: 100%;
 }
 
+[data-theme="light"][data-brand="qualcomm"] {
+  .qui-docs__header {
+    background: var(--background-primary);
+  }
+}
+
 .qui-docs__header {
   background: var(--color-surface-secondary);
   border-bottom: solid 1px var(--color-border-neutral-01);
