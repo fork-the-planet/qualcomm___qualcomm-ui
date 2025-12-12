@@ -37,17 +37,16 @@
     "postpublish": "qui-cli post-publish"
   },
   "dependencies": {
-    "minimatch": "^5.1.0",
     "my-ua-parser": "^2.0.4"
   },
   "devDependencies": {
     "@qualcomm-ui/cli": "workspace:^1.0.5",
     "@qualcomm-ui/esbuild": "workspace:^1.0.4",
     "@qualcomm-ui/tsconfig": "workspace:^1.0.4",
-    "@types/minimatch": "^5.1.2",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "esbuild": "^0.25.8",
+    "minimatch": "^10.1.1",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-router": "catalog:",
