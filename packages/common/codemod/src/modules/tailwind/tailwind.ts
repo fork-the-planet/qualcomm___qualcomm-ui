@@ -115,10 +115,10 @@ export const tailwindClassTransforms: ClassTransformEntry[] = [
   {pattern: "q-text-error", replacement: "text-support-danger"},
 
   {pattern: "q-elevation-1", replacement: "shadow-lowest"},
-  {pattern: "q-elevation-3", replacement: "shadow-low"},
+  {pattern: "q-elevation-2", replacement: "shadow-low"},
   {pattern: "q-elevation-3", replacement: "shadow-medium"},
-  {pattern: "q-elevation-3", replacement: "shadow-high"},
-  {pattern: "q-elevation-3", replacement: "shadow-highest"},
+  {pattern: "q-elevation-4", replacement: "shadow-high"},
+  {pattern: "q-elevation-5", replacement: "shadow-highest"},
 
   {pattern: "rounded-2xl", replacement: "rounded-xxl"},
 

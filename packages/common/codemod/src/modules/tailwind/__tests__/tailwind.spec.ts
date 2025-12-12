@@ -132,8 +132,8 @@ describe("individual transform tests", () => {
     const bg2 = transforms.find((t) => t.pattern === "bg-2")
     const bgContrast = transforms.find((t) => t.pattern === "bg-contrast-4")
 
-    expect(bg1?.replacement).toBe("bg-primary")
-    expect(bg2?.replacement).toBe("bg-secondary")
+    expect(bg1?.replacement).toBe("bg-neutral-00")
+    expect(bg2?.replacement).toBe("bg-neutral-01")
     expect(bgContrast?.replacement).toBe("bg-neutral-07")
   })
 

@@ -1,9 +1,9 @@
 .custom-button {
-  @apply bg-primary text-neutral-primary border-neutral-01 rounded border px-4 py-2;
+  @apply bg-neutral-00 text-neutral-primary border-neutral-01 rounded border px-4 py-2;
 }
 
 .custom-button:hover {
-  @apply bg-secondary border-neutral-02;
+  @apply bg-neutral-01 border-neutral-02;
 }
 
 .custom-button:focus {
@@ -11,7 +11,7 @@
 }
 
 .custom-card {
-  @apply bg-secondary border-neutral-00 rounded-lg border p-6;
+  @apply bg-neutral-01 border-neutral-00 rounded-lg border p-6;
 }
 
 .custom-card-header {
@@ -47,7 +47,7 @@
 }
 
 .custom-code {
-  @apply font-code-md bg-primary rounded px-2;
+  @apply font-code-md bg-neutral-00 rounded px-2;
   font-family: var(--type-font-family-tertiary);
 }
 
@@ -59,11 +59,11 @@
   @apply text-neutral-secondary font-body-sm;
 }
 
-.bg-primary {
+.bg-neutral-00 {
   background-color: var(--color-surface-primary);
 }
 
-.bg-secondary {
+.bg-neutral-01 {
   background-color: var(--color-surface-secondary);
 }
 

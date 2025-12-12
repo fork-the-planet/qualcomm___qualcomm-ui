@@ -3,7 +3,7 @@ import {clsx} from "clsx"
 
 export function FeatureCard() {
   return (
-    <div className="relative col-span-1 hidden min-h-[300px] items-center gap-5 overflow-hidden bg-secondary px-6 py-6">
+    <div className="relative col-span-1 hidden min-h-[300px] items-center gap-5 overflow-hidden bg-neutral-01 px-6 py-6">
       <h1 className="inline-flex flex-col gap-1 font-heading-xxxl">
         <span>Make beautiful documentation</span>
       </h1>
@@ -41,7 +41,7 @@ export function ContrastDemo() {
 
 export function BorderDemo() {
   return (
-    <div className="flex w-full rounded-sm border border-neutral-02 bg-secondary px-3 py-2">
+    <div className="flex w-full rounded-sm border border-neutral-02 bg-neutral-01 px-3 py-2">
       <span className="text-neutral-primary">This section features the dark theme</span>
     </div>
   )
@@ -76,7 +76,7 @@ export function TabsDemo() {
 
 export function PlaygroundDemo() {
   return (
-    <div className="border-neutral-02 bg-secondary flex flex-col items-center gap-8 rounded p-10">
+    <div className="border-neutral-02 bg-neutral-02 flex flex-col items-center gap-8 rounded p-10">
       <div className="border-neutral-02 w-full border-t pt-8">
         Preview content
       </div>
@@ -90,7 +90,7 @@ export function SkeletonDemo() {
 
 export function CodeDemo() {
   return (
-    <code className="font-code-md bg-primary rounded px-2 py-1">
+    <code className="font-code-md bg-neutral-00 rounded px-2 py-1">
       const example = true
     </code>
   )
@@ -105,7 +105,7 @@ export function StrongTextDemo() {
 }
 
 export function RoundedDemo() {
-  return <div className="rounded-xxl bg-raised p-4">Rounded container</div>
+  return <div className="rounded-xxl bg-neutral-02 p-4">Rounded container</div>
 }
 
 export function FontStretchDemo() {

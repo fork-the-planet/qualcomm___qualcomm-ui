@@ -14,7 +14,7 @@ export class TabsDemoComponent {}
 @Component({
   selector: "app-stepper-demo",
   template: `
-    <div class="border-neutral-02 bg-secondary grid gap-8 rounded border p-10">
+    <div class="border-neutral-02 bg-neutral-01 grid gap-8 rounded border p-10">
       <div class="text-neutral-primary font-heading-xxs">Layout</div>
       <div class="text-neutral-primary font-heading-xxs">Orientation</div>
       <div class="text-neutral-primary font-heading-xxs">Variant</div>
@@ -94,7 +94,7 @@ export class PageLinksComponent {}
 @Component({
   host: {
     class:
-      "border-neutral-02 bg-secondary flex flex-col items-center gap-8 rounded border p-10",
+      "border-neutral-02 bg-neutral-02 flex flex-col items-center gap-8 rounded border p-10",
   },
   selector: "app-playground",
   template: `
@@ -106,7 +106,7 @@ export class PlaygroundComponent {}
 @Component({
   selector: "app-code-block",
   template: `
-    <code class="font-code-md bg-primary rounded px-2">const x = 1</code>
+    <code class="font-code-md bg-neutral-00 rounded px-2">const x = 1</code>
     <code class="font-code-sm-bold">bold code</code>
   `,
 })
