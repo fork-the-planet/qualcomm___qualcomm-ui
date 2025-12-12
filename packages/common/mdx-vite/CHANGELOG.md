@@ -1,5 +1,21 @@
 # @qualcomm-ui/mdx-vite
 
+## 2.6.4 (2025/12/12)
+
+### Tests
+
+- [docs-plugin]: add coverage for code annotation stripping
+- [docs-plugin]: add unit tests for code annotation removal
+- [docs-plugin]: move vitest specs to **tests** structure
+
+### Documentation
+
+- [markdown]: reorder markdown guide sections for clarity
+
+### Bug Fixes
+
+- [docs-plugin]: annotations do not hide lines from copy data
+
 ## 2.6.3 (2025/12/11)
 
 ### Bug Fixes
