@@ -11,17 +11,21 @@ import type {CliConfig, WebUiKnowledgeConfig} from "./types"
 export function loadKnowledgeConfigFromEnv(
   options: CliConfig,
 ): WebUiKnowledgeConfig {
+  const configLoader = new ConfigLoader({})
+  const resolvedConfig = configLoader.loadConfig()
+  const fileConfig = resolvedConfig.knowledge?.owui
+
   const exclude =
-    options.exclude || (process.env.FILE_EXCLUDE_PATTERN ?? "").split(",")
-  const outputPath = options.outputPath || process.env.KNOWLEDGE_OUTPUT_PATH
-  const prefix = process.env.PAGE_TITLE_PREFIX
+    options.exclude ??
+    fileConfig?.exclude ??
+    (process.env.FILE_EXCLUDE_PATTERN ?? "").split(",").filter(Boolean)
+
+  const outputPath =
+    options.outputPath ?? fileConfig?.outputPath ?? process.env.KNOWLEDGE_OUTPUT_PATH
 
   if (!outputPath) {
     throw new Error("Missing required outputPath")
   }
-
-  const configLoader = new ConfigLoader({})
-  const resolvedConfig = configLoader.loadConfig()
 
   const routeDir = join(
     resolvedConfig.appDirectory,
@@ -33,12 +37,17 @@ export function loadKnowledgeConfigFromEnv(
   }
 
   return {
+    ...fileConfig,
     ...options,
-    baseUrl: options.baseUrl || process.env.DOCS_SITE_BASE_URL,
+    baseUrl:
+      options.baseUrl ?? fileConfig?.baseUrl ?? process.env.DOCS_SITE_BASE_URL,
     docPropsPath: resolvedConfig.typeDocProps,
     exclude,
     outputPath,
-    pageTitlePrefix: prefix,
+    pageTitlePrefix:
+      options.pageTitlePrefix ??
+      fileConfig?.pageTitlePrefix ??
+      process.env.PAGE_TITLE_PREFIX,
     routeDir,
   }
 }

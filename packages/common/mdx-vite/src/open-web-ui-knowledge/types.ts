@@ -1,54 +1,22 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-export interface WebUiKnowledgeConfig {
-  baseUrl?: string
-  /**
-   * Clean the output path before generating.
-   */
+import type {KnowledgeIntegrationConfig} from "../docs-plugin/types"
+
+export interface WebUiKnowledgeConfig extends KnowledgeIntegrationConfig {
   clean?: boolean
-  /**
-   * Optional description for the project.
-   */
-  description?: string
   docPropsPath?: string
-  /**
-   * Paths to exclude, relative to the resolved page directory
-   * (`${appDirectory}/${pageDirectory}`)
-   */
-  exclude?: string[]
-  /**
-   * Include relative imports for demo files.
-   */
-  includeImports?: boolean
-  metadata?: string[] | undefined
-  /**
-   * Optional name for the project.
-   */
-  name?: string
   outputMode: "per-page" | "aggregated"
   outputPath: string
-  /**
-   * Prefix to prepend to each page title.
-   */
-  pageTitlePrefix?: string
-  /**
-   * Resolved route dir from the root of the project.
-   */
   routeDir: string
-
   verbose?: boolean
 }
 
 export interface CliConfig
   extends Omit<
     WebUiKnowledgeConfig,
-    "docPropsPath" | "knowledgeId" | "outputPath" | "routeDir"
+    "docPropsPath" | "outputPath" | "routeDir"
   > {
-  /**
-   * Path to the environment file for this request. Variables like the knowledge
-   * id, auth keys, and OWUI endpoint are defined here.
-   */
   envFilePath?: string
   outputPath?: string
 }

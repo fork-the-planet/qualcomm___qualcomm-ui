@@ -142,6 +142,60 @@ export interface QuiDocsTypeDocOptions {
   includeInSearchIndex?: boolean | undefined
 }
 
+export interface KnowledgeIntegrationConfig {
+  /**
+   * Base URL for documentation links in the generated output.
+   */
+  baseUrl?: string
+
+  /**
+   * Description for the knowledge output.
+   */
+  description?: string
+
+  /**
+   * Paths to exclude, relative to the resolved page directory.
+   */
+  exclude?: string[]
+
+  /**
+   * Include relative imports for demo files.
+   */
+  includeImports?: boolean
+
+  /**
+   * Metadata key-value pairs to include in output.
+   */
+  metadata?: string[]
+
+  /**
+   * Name for the knowledge output.
+   */
+  name?: string
+
+  /**
+   * Output mode for knowledge generation.
+   */
+  outputMode?: "per-page" | "aggregated"
+
+  /**
+   * Output path for generated knowledge files.
+   */
+  outputPath?: string
+
+  /**
+   * Prefix to prepend to each page title.
+   */
+  pageTitlePrefix?: string
+}
+
+export interface KnowledgeConfig {
+  /**
+   * Configuration for Open WebUI knowledge integration.
+   */
+  owui?: KnowledgeIntegrationConfig
+}
+
 export interface SearchIndexerOptions {
   /**
    * Disable the file cache. This cache stores the result of parsed MDX files based
@@ -218,6 +272,11 @@ export interface QuiDocsConfig
    * Matched files will not trigger a rebuild on hot update.
    */
   hotUpdateIgnore?: RegExp
+
+  /**
+   * Knowledge generation configuration for LLM integrations.
+   */
+  knowledge?: KnowledgeConfig
 
   /**
    * Name of the directory where the MDX pages are located. NOT the full path to the

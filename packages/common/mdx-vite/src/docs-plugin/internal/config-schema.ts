@@ -4,6 +4,8 @@
 import {z, type ZodObject, type ZodSchema} from "zod"
 
 import type {
+  KnowledgeConfig,
+  KnowledgeIntegrationConfig,
   NavMeta,
   QuiDocsConfig,
   QuiDocsTypeDocOptions,
@@ -43,6 +45,23 @@ const typeDocPropsSchema = implement<QuiDocsTypeDocOptions>().with({
   includeInSearchIndex: z.boolean().optional(),
 })
 
+const knowledgeIntegrationSchema =
+  implement<KnowledgeIntegrationConfig>().with({
+    baseUrl: z.string().optional(),
+    description: z.string().optional(),
+    exclude: z.array(z.string()).optional(),
+    includeImports: z.boolean().optional(),
+    metadata: z.array(z.string()).optional(),
+    name: z.string().optional(),
+    outputMode: z.union([z.literal("per-page"), z.literal("aggregated")]).optional(),
+    outputPath: z.string().optional(),
+    pageTitlePrefix: z.string().optional(),
+  })
+
+const knowledgeConfigSchema = implement<KnowledgeConfig>().with({
+  owui: knowledgeIntegrationSchema.optional(),
+})
+
 export const configSchema = implement<QuiDocsConfig>().with({
   appDirectory: z.string().optional(),
   disableCache: z.boolean().optional(),
@@ -59,6 +78,7 @@ export const configSchema = implement<QuiDocsConfig>().with({
     )
     .optional(),
   hotUpdateIgnore: z.instanceof(RegExp).optional(),
+  knowledge: knowledgeConfigSchema.optional(),
   navConfig: z.array(z.union([routeMetaSchema, navMetaSchema])).optional(),
   pageDirectory: z.string().optional(),
   pageTimestampMetadata: z
