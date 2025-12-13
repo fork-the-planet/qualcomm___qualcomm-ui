@@ -53,24 +53,6 @@ export default {
       id: "api",
       title: "API",
     },
-    {
-      children: [
-        {
-          id: "mdx-docs",
-        },
-        {
-          id: "mdx-vite",
-        },
-        {
-          id: "react",
-        },
-        {
-          id: "base",
-        },
-      ],
-      id: "changelogs",
-      title: "Changelogs",
-    },
   ],
   pageDirectory: "routes",
   pageTimestampMetadata: "user-and-timestamp",

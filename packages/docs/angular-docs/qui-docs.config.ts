@@ -64,17 +64,6 @@ export default {
       id: "components",
       title: "Components",
     },
-    {
-      children: [
-        {
-          id: "angular",
-        },
-        {
-          id: "tailwind-plugin",
-        },
-      ],
-      id: "changelogs",
-    },
   ],
   pageDirectory: "routes",
   pageTimestampMetadata: "user-and-timestamp",
