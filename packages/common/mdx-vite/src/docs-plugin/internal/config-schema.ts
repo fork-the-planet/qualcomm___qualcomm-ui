@@ -45,18 +45,21 @@ const typeDocPropsSchema = implement<QuiDocsTypeDocOptions>().with({
   includeInSearchIndex: z.boolean().optional(),
 })
 
-const knowledgeIntegrationSchema =
-  implement<KnowledgeIntegrationConfig>().with({
+const knowledgeIntegrationSchema = implement<KnowledgeIntegrationConfig>().with(
+  {
     baseUrl: z.string().optional(),
     description: z.string().optional(),
     exclude: z.array(z.string()).optional(),
     includeImports: z.boolean().optional(),
     metadata: z.array(z.string()).optional(),
     name: z.string().optional(),
-    outputMode: z.union([z.literal("per-page"), z.literal("aggregated")]).optional(),
+    outputMode: z
+      .union([z.literal("per-page"), z.literal("aggregated")])
+      .optional(),
     outputPath: z.string().optional(),
     pageTitlePrefix: z.string().optional(),
-  })
+  },
+)
 
 const knowledgeConfigSchema = implement<KnowledgeConfig>().with({
   owui: knowledgeIntegrationSchema.optional(),
@@ -88,12 +91,7 @@ export const configSchema = implement<QuiDocsConfig>().with({
       z.literal("user-and-timestamp"),
     ])
     .optional(),
-  routingStrategy: z
-    .union([
-      z.literal("vite-generouted"),
-      z.function(z.tuple([z.string()]), z.array(z.string())),
-    ])
-    .optional(),
+  routingStrategy: z.union([z.literal("vite-generouted"), z.any()]).optional(),
   typeDocProps: z.string().optional(),
   typeDocPropsOptions: typeDocPropsSchema.optional(),
 })

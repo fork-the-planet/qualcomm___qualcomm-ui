@@ -75,7 +75,7 @@
     "react-router": "catalog:",
     "shiki": "^3.13.0",
     "sucrase": "^3.35.0",
-    "zod": "^3.23.8",
+    "zod": "^4.1.13",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
