@@ -1007,7 +1007,7 @@ class KnowledgeGenerator {
         lines.push(content)
         lines.push("")
 
-        if (this.config.includeImports && processedPage.demoFiles.length > 0) {
+        if (processedPage.demoFiles.length > 0) {
           if (this.config.verbose) {
             console.log(
               `Collecting imports for ${page.name} from ${processedPage.demoFiles.length} demo files`,

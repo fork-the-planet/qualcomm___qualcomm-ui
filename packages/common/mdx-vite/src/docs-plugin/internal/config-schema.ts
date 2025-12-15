@@ -50,7 +50,6 @@ const knowledgeIntegrationSchema = implement<KnowledgeIntegrationConfig>().with(
     baseUrl: z.string().optional(),
     description: z.string().optional(),
     exclude: z.array(z.string()).optional(),
-    includeImports: z.boolean().optional(),
     metadata: z.array(z.string()).optional(),
     name: z.string().optional(),
     outputMode: z

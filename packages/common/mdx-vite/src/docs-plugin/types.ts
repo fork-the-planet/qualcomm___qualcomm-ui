@@ -159,11 +159,6 @@ export interface KnowledgeIntegrationConfig {
   exclude?: string[]
 
   /**
-   * Include relative imports for demo files.
-   */
-  includeImports?: boolean
-
-  /**
    * Metadata key-value pairs to include in output.
    */
   metadata?: string[]
