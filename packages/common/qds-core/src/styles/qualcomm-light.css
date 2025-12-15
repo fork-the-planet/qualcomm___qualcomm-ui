@@ -205,6 +205,7 @@
   --border-width-none: 0;
   --border-width-sm: 1px;
   --border-width-xl: 4px;
+  --canvas-width: 375;
   --font-dynamic-display-lg: var(--type-font-weight-display-regular) 53px / 60px var(--type-font-family-primary);
   --font-dynamic-display-md: var(--type-font-weight-display-regular) 40px / 46px var(--type-font-family-primary);
   --font-dynamic-heading-lg-bold: var(--type-font-weight-heading-bold) 26px / 32px var(--type-font-family-secondary);
