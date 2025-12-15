@@ -21,7 +21,9 @@ export function loadKnowledgeConfigFromEnv(
     (process.env.FILE_EXCLUDE_PATTERN ?? "").split(",").filter(Boolean)
 
   const outputPath =
-    options.outputPath ?? fileConfig?.outputPath ?? process.env.KNOWLEDGE_OUTPUT_PATH
+    options.outputPath ??
+    fileConfig?.outputPath ??
+    process.env.KNOWLEDGE_OUTPUT_PATH
 
   if (!outputPath) {
     throw new Error("Missing required outputPath")
