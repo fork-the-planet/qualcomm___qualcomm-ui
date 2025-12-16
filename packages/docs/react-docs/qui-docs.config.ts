@@ -1,118 +1,143 @@
-import type {QuiDocsConfig} from "@qualcomm-ui/mdx-vite"
+import {readFileSync} from "node:fs"
+import {resolve} from "node:path"
+
+import type {NavConfig, QuiDocsConfig} from "@qualcomm-ui/mdx-vite"
+
+const navConfig: NavConfig[] = [
+  {sectionTitle: "Getting Started"},
+  {
+    hidden: true,
+    id: "_index",
+  },
+  {
+    id: "installation",
+  },
+  {
+    id: "setup",
+  },
+  {
+    id: "integrations",
+    title: "Integrations & Configs",
+  },
+  {separator: true},
+  {sectionTitle: "Theming & Patterns"},
+  {
+    children: [{id: "overview"}],
+    id: "theming",
+  },
+  {
+    children: [
+      {
+        id: "overview",
+      },
+      {
+        id: "introduction-to-javascript",
+      },
+      {
+        children: [{id: "clean-code"}],
+        id: "clean-code",
+        ignoreRouteMetaOrder: true,
+      },
+    ],
+    id: "patterns",
+    title: "Patterns & Best Practices",
+  },
+  {separator: true},
+  {
+    sectionTitle: "Composition",
+  },
+  {
+    id: "polymorphic-components",
+  },
+  {
+    id: "render-props",
+  },
+  {separator: true},
+  {
+    children: [
+      {
+        id: "all-components",
+      },
+      {
+        group: "Data Display",
+        id: "badges",
+        ignoreRouteMetaOrder: true,
+      },
+    ],
+    expanded: true,
+    groupOrder: [
+      "Buttons",
+      "Form Controls",
+      "Data Display",
+      "Overlays",
+      "Disclosure",
+      "Feedback",
+    ],
+    id: "components",
+    title: "Components",
+  },
+  {separator: true},
+  {
+    children: [
+      {
+        id: "getting-started",
+      },
+      {
+        id: "overview",
+      },
+      {
+        id: "component-authoring",
+      },
+      {
+        id: "base-component",
+      },
+      {
+        id: "react-component",
+      },
+      {
+        id: "react-documentation",
+      },
+      {
+        id: "testing-guidelines",
+      },
+    ],
+    id: "contribution-guidelines",
+  },
+  {
+    id: "troubleshooting",
+  },
+  {
+    hidden: true,
+    hideBreadcrumbs: true,
+    hidePageLinks: true,
+    hideSideNav: true,
+    id: "debug",
+  },
+]
 
 export default {
   appDirectory: "src",
-  navConfig: [
-    {sectionTitle: "Getting Started"},
-    {
-      hidden: true,
-      id: "_index",
-    },
-    {
-      id: "installation",
-    },
-    {
-      id: "setup",
-    },
-    {
-      id: "integrations",
-      title: "Integrations & Configs",
-    },
-    {separator: true},
-    {sectionTitle: "Theming & Patterns"},
-    {
-      children: [{id: "overview"}],
-      id: "theming",
-    },
-    {
-      children: [
+  knowledge: {
+    global: {
+      baseUrl: "https://react-next.qui.qualcomm.com",
+      exclude: ["**/installation+/**", "index.mdx"],
+      extraFiles: [
         {
-          id: "overview",
-        },
-        {
-          id: "introduction-to-javascript",
-        },
-        {
-          children: [{id: "clean-code"}],
-          id: "clean-code",
-          ignoreRouteMetaOrder: true,
+          contents: readFileSync(
+            resolve(__dirname, "../../frameworks/react/CHANGELOG.md"),
+            "utf-8",
+          )
+            .split("\n")
+            .slice(2)
+            .join("\n"),
+          id: "react-changelog",
+          title: "Changelog",
         },
       ],
-      id: "patterns",
-      title: "Patterns & Best Practices",
+      metadata: {framework: "react"},
     },
-    {separator: true},
-    {
-      sectionTitle: "Composition",
-    },
-    {
-      id: "polymorphic-components",
-    },
-    {
-      id: "render-props",
-    },
-    {separator: true},
-    {
-      children: [
-        {
-          id: "all-components",
-        },
-        {
-          group: "Data Display",
-          id: "badges",
-          ignoreRouteMetaOrder: true,
-        },
-      ],
-      expanded: true,
-      groupOrder: [
-        "Buttons",
-        "Form Controls",
-        "Data Display",
-        "Overlays",
-        "Disclosure",
-        "Feedback",
-      ],
-      id: "components",
-      title: "Components",
-    },
-    {separator: true},
-    {
-      children: [
-        {
-          id: "getting-started",
-        },
-        {
-          id: "overview",
-        },
-        {
-          id: "component-authoring",
-        },
-        {
-          id: "base-component",
-        },
-        {
-          id: "react-component",
-        },
-        {
-          id: "react-documentation",
-        },
-        {
-          id: "testing-guidelines",
-        },
-      ],
-      id: "contribution-guidelines",
-    },
-    {
-      id: "troubleshooting",
-    },
-    {
-      hidden: true,
-      hideBreadcrumbs: true,
-      hidePageLinks: true,
-      hideSideNav: true,
-      id: "debug",
-    },
-  ],
+  },
+  navConfig,
   pageDirectory: "routes",
   pageTimestampMetadata: "user-and-timestamp",
   typeDocProps: ".typedoc/doc-props.json",
