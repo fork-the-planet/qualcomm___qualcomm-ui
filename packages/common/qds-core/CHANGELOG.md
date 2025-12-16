@@ -4,7 +4,7 @@
 
 ### Bug Fixes
 
-- [design-tokens]: use variables for snapdragon font families ([5912997](https://github.com/qualcomm/qualcomm-ui/commit/59129974836ecf4c7925c4b8420e3f372c2f4fc6))
+- [design-tokens]: use variables for snapdragon font families
 
 ## 1.10.0 (2025/12/11)
 

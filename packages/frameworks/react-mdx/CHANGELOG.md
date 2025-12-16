@@ -4,7 +4,7 @@
 
 ### Bug Fixes
 
-- [layout]: increase main content width when toc or side nav hidden ([5912997](https://github.com/qualcomm/qualcomm-ui/commit/59129974836ecf4c7925c4b8420e3f372c2f4fc6))
+- [layout]: increase main content width when toc or side nav hidden
 
 ### Miscellaneous Chores
 

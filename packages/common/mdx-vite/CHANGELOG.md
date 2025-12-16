@@ -4,13 +4,13 @@
 
 ### Features
 
-- [knowledge]: add configuration to qui-docs.config.ts ([5912997](https://github.com/qualcomm/qualcomm-ui/commit/59129974836ecf4c7925c4b8420e3f372c2f4fc6))
-- [knowledge]: add extraFiles config option ([5912997](https://github.com/qualcomm/qualcomm-ui/commit/59129974836ecf4c7925c4b8420e3f372c2f4fc6))
-- [knowledge]: improve exclude processing with minimatch ([5912997](https://github.com/qualcomm/qualcomm-ui/commit/59129974836ecf4c7925c4b8420e3f372c2f4fc6))
+- [knowledge]: add configuration to qui-docs.config.ts
+- [knowledge]: add extraFiles config option
+- [knowledge]: improve exclude processing with minimatch
 
 ### Miscellaneous Chores
 
-- [deps]: update zod to v4 ([5912997](https://github.com/qualcomm/qualcomm-ui/commit/59129974836ecf4c7925c4b8420e3f372c2f4fc6))
+- [deps]: update zod to v4
 
 ## 2.6.4 (2025/12/12)
 
