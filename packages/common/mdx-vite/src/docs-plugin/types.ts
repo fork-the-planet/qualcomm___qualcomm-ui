@@ -154,14 +154,25 @@ export interface KnowledgeIntegrationConfig {
   description?: string
 
   /**
-   * Paths to exclude, relative to the resolved page directory.
+   * Glob patterns to exclude, relative to the resolved page directory. Supports
+   * full glob syntax via minimatch.
+   *
+   * @example
+   * ```ts
+   * exclude: ['**\/internal/**', 'guide/drafts/*', '*.draft.mdx']
+   * ```
    */
   exclude?: string[]
 
   /**
-   * Metadata key-value pairs to include in output.
+   * Extra files to include in knowledge output beyond the generated page content.
    */
-  metadata?: string[]
+  extraFiles?: KnowledgeExtraFile[]
+
+  /**
+   * Metadata key-value pairs to include in per-page output.
+   */
+  metadata?: Record<string, string>
 
   /**
    * Name for the knowledge output.
@@ -184,11 +195,31 @@ export interface KnowledgeIntegrationConfig {
   pageTitlePrefix?: string
 }
 
+/**
+ * Extra content to include in knowledge output.
+ */
+export interface KnowledgeExtraFile {
+  /**
+   * The markdown content for this file.
+   */
+  contents: string
+
+  /**
+   * Unique identifier for this file, used for the output filename.
+   */
+  id: string
+
+  /**
+   * Display name/title for this content.
+   */
+  title: string
+}
+
 export interface KnowledgeConfig {
   /**
-   * Configuration for Open WebUI knowledge integration.
+   * Configuration for all knowledge integrations.
    */
-  owui?: KnowledgeIntegrationConfig
+  global?: KnowledgeIntegrationConfig
 }
 
 export interface SearchIndexerOptions {

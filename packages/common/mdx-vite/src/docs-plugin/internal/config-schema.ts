@@ -5,6 +5,7 @@ import {z, type ZodObject, type ZodSchema} from "zod"
 
 import type {
   KnowledgeConfig,
+  KnowledgeExtraFile,
   KnowledgeIntegrationConfig,
   NavMeta,
   QuiDocsConfig,
@@ -45,12 +46,19 @@ const typeDocPropsSchema = implement<QuiDocsTypeDocOptions>().with({
   includeInSearchIndex: z.boolean().optional(),
 })
 
+const knowledgeExtraFileSchema = implement<KnowledgeExtraFile>().with({
+  contents: z.string(),
+  id: z.string(),
+  title: z.string(),
+})
+
 const knowledgeIntegrationSchema = implement<KnowledgeIntegrationConfig>().with(
   {
     baseUrl: z.string().optional(),
     description: z.string().optional(),
     exclude: z.array(z.string()).optional(),
-    metadata: z.array(z.string()).optional(),
+    extraFiles: z.array(knowledgeExtraFileSchema).optional(),
+    metadata: z.record(z.string(), z.string()).optional(),
     name: z.string().optional(),
     outputMode: z
       .union([z.literal("per-page"), z.literal("aggregated")])
@@ -61,7 +69,7 @@ const knowledgeIntegrationSchema = implement<KnowledgeIntegrationConfig>().with(
 )
 
 const knowledgeConfigSchema = implement<KnowledgeConfig>().with({
-  owui: knowledgeIntegrationSchema.optional(),
+  global: knowledgeIntegrationSchema.optional(),
 })
 
 export const configSchema = implement<QuiDocsConfig>().with({

@@ -8,15 +8,24 @@ import {ConfigLoader} from "../docs-plugin/internal"
 
 import type {CliConfig, WebUiKnowledgeConfig} from "./types"
 
+function parseCliMetadata(
+  cliMetadata: string[] | undefined,
+): Record<string, string> | undefined {
+  if (!cliMetadata?.length) {
+    return undefined
+  }
+  return Object.fromEntries(cliMetadata.map((entry) => entry.split("=")))
+}
+
 export function loadKnowledgeConfigFromEnv(
   options: CliConfig,
 ): WebUiKnowledgeConfig {
   const configLoader = new ConfigLoader({})
   const resolvedConfig = configLoader.loadConfig()
-  const fileConfig = resolvedConfig.knowledge?.owui
+  const fileConfig = resolvedConfig.knowledge?.global
 
   const exclude =
-    options.exclude ??
+    (options.exclude?.length ? options.exclude : undefined) ??
     fileConfig?.exclude ??
     (process.env.FILE_EXCLUDE_PATTERN ?? "").split(",").filter(Boolean)
 
@@ -38,6 +47,12 @@ export function loadKnowledgeConfigFromEnv(
     throw new Error(`Route directory ${routeDir} does not exist`)
   }
 
+  const cliMetadata = parseCliMetadata(options.metadata)
+  const mergedMetadata =
+    fileConfig?.metadata || cliMetadata
+      ? {...fileConfig?.metadata, ...cliMetadata}
+      : undefined
+
   return {
     ...fileConfig,
     ...options,
@@ -45,6 +60,8 @@ export function loadKnowledgeConfigFromEnv(
       options.baseUrl ?? fileConfig?.baseUrl ?? process.env.DOCS_SITE_BASE_URL,
     docPropsPath: resolvedConfig.typeDocProps,
     exclude,
+    extraFiles: fileConfig?.extraFiles,
+    metadata: mergedMetadata,
     outputPath,
     pageTitlePrefix:
       options.pageTitlePrefix ??
