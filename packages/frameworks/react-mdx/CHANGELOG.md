@@ -1,5 +1,15 @@
 # @qualcomm-ui/react-mdx
 
+## 1.7.3 (2025/12/15)
+
+### Bug Fixes
+
+- [layout]: increase main content width when toc or side nav hidden ([5912997](https://github.com/qualcomm/qualcomm-ui/commit/59129974836ecf4c7925c4b8420e3f372c2f4fc6))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react]
+
 ## 1.7.2 (2025/12/11)
 
 ### Bug Fixes

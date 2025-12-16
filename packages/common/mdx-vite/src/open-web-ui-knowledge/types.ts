@@ -7,9 +7,9 @@ import type {
 } from "../docs-plugin/types"
 
 export interface WebUiKnowledgeConfig extends KnowledgeIntegrationConfig {
-  extraFiles?: KnowledgeExtraFile[]
   clean?: boolean
   docPropsPath?: string
+  extraFiles?: KnowledgeExtraFile[]
   outputMode: "per-page" | "aggregated"
   outputPath: string
   routeDir: string
