@@ -1,0 +1,5 @@
+---
+"@qualcomm-ui/mdx-vite": minor
+---
+
+feat(knowledge): add extraFiles config option
