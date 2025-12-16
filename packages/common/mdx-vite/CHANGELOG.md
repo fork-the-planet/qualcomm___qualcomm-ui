@@ -1,5 +1,17 @@
 # @qualcomm-ui/mdx-vite
 
+## 2.7.0 (2025/12/15)
+
+### Features
+
+- [knowledge]: add configuration to qui-docs.config.ts
+- [knowledge]: add extraFiles config option
+- [knowledge]: improve exclude processing with minimatch
+
+### Miscellaneous Chores
+
+- [deps]: update zod to v4
+
 ## 2.6.4 (2025/12/12)
 
 ### Tests

@@ -1,5 +1,11 @@
 # @qualcomm-ui/qds-core
 
+## 1.10.1 (2025/12/15)
+
+### Bug Fixes
+
+- [design-tokens]: use variables for snapdragon font families
+
 ## 1.10.0 (2025/12/11)
 
 ### Features

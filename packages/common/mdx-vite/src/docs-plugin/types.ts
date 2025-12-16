@@ -142,6 +142,86 @@ export interface QuiDocsTypeDocOptions {
   includeInSearchIndex?: boolean | undefined
 }
 
+export interface KnowledgeIntegrationConfig {
+  /**
+   * Base URL for documentation links in the generated output.
+   */
+  baseUrl?: string
+
+  /**
+   * Description for the knowledge output.
+   */
+  description?: string
+
+  /**
+   * Glob patterns to exclude, relative to the resolved page directory. Supports
+   * full glob syntax via minimatch.
+   *
+   * @example
+   * ```ts
+   * exclude: ['**\/internal/**', 'guide/drafts/*', '*.draft.mdx']
+   * ```
+   */
+  exclude?: string[]
+
+  /**
+   * Extra files to include in knowledge output beyond the generated page content.
+   */
+  extraFiles?: KnowledgeExtraFile[]
+
+  /**
+   * Metadata key-value pairs to include in per-page output.
+   */
+  metadata?: Record<string, string>
+
+  /**
+   * Name for the knowledge output.
+   */
+  name?: string
+
+  /**
+   * Output mode for knowledge generation.
+   */
+  outputMode?: "per-page" | "aggregated"
+
+  /**
+   * Output path for generated knowledge files.
+   */
+  outputPath?: string
+
+  /**
+   * Prefix to prepend to each page title.
+   */
+  pageTitlePrefix?: string
+}
+
+/**
+ * Extra content to include in knowledge output.
+ */
+export interface KnowledgeExtraFile {
+  /**
+   * The markdown content for this file.
+   */
+  contents: string
+
+  /**
+   * Unique identifier for this file, used for the output filename.
+   */
+  id: string
+
+  /**
+   * Display name/title for this content.
+   */
+  title: string
+}
+
+export interface KnowledgeConfig {
+  /**
+   * Configuration for all knowledge integrations.
+   */
+  global?: KnowledgeIntegrationConfig
+}
+
 export interface SearchIndexerOptions {
   /**
    * Disable the file cache. This cache stores the result of parsed MDX files based
@@ -218,6 +298,11 @@ export interface QuiDocsConfig
    * Matched files will not trigger a rebuild on hot update.
    */
   hotUpdateIgnore?: RegExp
+
+  /**
+   * Knowledge generation configuration for LLM integrations.
+   */
+  knowledge?: KnowledgeConfig
 
   /**
    * Name of the directory where the MDX pages are located. NOT the full path to the

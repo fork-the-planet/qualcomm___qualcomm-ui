@@ -1,6 +1,6 @@
 {
   "name": "@qualcomm-ui/mdx-vite",
-  "version": "2.6.4",
+  "version": "2.7.0",
   "description": "Vite documentation plugin for applications that use MDX",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
@@ -106,6 +106,7 @@
     "esbuild": "^0.25.8",
     "hastscript": "^9.0.0",
     "lodash-es": "^4.17.21",
+    "minimatch": "^10.1.1",
     "ora": "^9.0.0",
     "postcss": "^8.5.6",
     "postcss-selector-parser": "^7.1.1",
@@ -121,20 +122,22 @@
     "typescript": "catalog:",
     "vite": "npm:rolldown-vite@7.2.10",
     "vitest": "^4.0.8",
-    "zod": "^3.23.8"
+    "zod": "^4.1.13"
   },
   "peerDependencies": {
     "@qualcomm-ui/mdx-common": "workspace:^1.5.0",
     "@qualcomm-ui/typedoc-common": "workspace:^1.0.3",
     "@qualcomm-ui/utils": "workspace:^1.1.0",
     "lodash-es": ">=4.17.21 <5",
+    "minimatch": ">=10",
     "rehype-mdx-code-props": ">=3 <4",
     "remark-frontmatter": ">=5 <6",
     "remark-gfm": ">=4 <5",
     "remark-mdx-frontmatter": ">=4 <5",
     "shiki": ">=3.7.0",
     "typescript": ">=5.5.4",
-    "vite": ">=7 <8"
+    "vite": ">=7 <8",
+    "zod": ">=4.1.0"
   },
   "optionalDependencies": {
     "@qualcomm-ui/tailwind-plugin": "workspace:^1.4.0",

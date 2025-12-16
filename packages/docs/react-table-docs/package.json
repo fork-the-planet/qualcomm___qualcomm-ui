@@ -16,8 +16,8 @@
     "lint": "eslint --quiet",
     "start": "cross-env NODE_ENV=production react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc -b tsconfig.lib.json -w --preserveWatchOutput",
-    "generate-llms-txt": "qui-mdx-vite generate-llms-txt --clean --output-mode aggregated --exclude '*installation.mdx' '*index.mdx' -o public/llms-full.txt --name 'QUI React Table Documentation' --base-url 'https://react-table-next.qui.qualcomm.com' --metadata category=table framework=react",
-    "generate-knowledge": "qui-mdx-vite generate-llms-txt --clean --output-mode per-page --exclude '*installation.mdx' '*index.mdx' --metadata category=table framework=react --base-url 'https://react-table-next.qui.qualcomm.com'",
+    "generate-llms-txt": "qui-mdx-vite generate-llms-txt --clean --output-mode aggregated -o public/llms-full.txt --name 'QUI React Table Documentation'",
+    "generate-knowledge": "qui-mdx-vite generate-llms-txt --clean --output-mode per-page",
     "upload-knowledge": "run-p upload-knowledge-saga upload-knowledge-qui",
     "update-knowledge-saga": "run-s generate-knowledge-saga upload-knowledge-saga",
     "generate-knowledge-saga": "pnpm generate-knowledge --env .env.saga-ai",
@@ -75,7 +75,7 @@
     "react-router": "catalog:",
     "shiki": "^3.13.0",
     "sucrase": "^3.35.0",
-    "zod": "^3.23.8",
+    "zod": "^4.1.13",
     "zustand": "^4.5.2"
   },
   "devDependencies": {

@@ -4,6 +4,9 @@
 import {z, type ZodObject, type ZodSchema} from "zod"
 
 import type {
+  KnowledgeConfig,
+  KnowledgeExtraFile,
+  KnowledgeIntegrationConfig,
   NavMeta,
   QuiDocsConfig,
   QuiDocsTypeDocOptions,
@@ -43,6 +46,32 @@ const typeDocPropsSchema = implement<QuiDocsTypeDocOptions>().with({
   includeInSearchIndex: z.boolean().optional(),
 })
 
+const knowledgeExtraFileSchema = implement<KnowledgeExtraFile>().with({
+  contents: z.string(),
+  id: z.string(),
+  title: z.string(),
+})
+
+const knowledgeIntegrationSchema = implement<KnowledgeIntegrationConfig>().with(
+  {
+    baseUrl: z.string().optional(),
+    description: z.string().optional(),
+    exclude: z.array(z.string()).optional(),
+    extraFiles: z.array(knowledgeExtraFileSchema).optional(),
+    metadata: z.record(z.string(), z.string()).optional(),
+    name: z.string().optional(),
+    outputMode: z
+      .union([z.literal("per-page"), z.literal("aggregated")])
+      .optional(),
+    outputPath: z.string().optional(),
+    pageTitlePrefix: z.string().optional(),
+  },
+)
+
+const knowledgeConfigSchema = implement<KnowledgeConfig>().with({
+  global: knowledgeIntegrationSchema.optional(),
+})
+
 export const configSchema = implement<QuiDocsConfig>().with({
   appDirectory: z.string().optional(),
   disableCache: z.boolean().optional(),
@@ -59,6 +88,7 @@ export const configSchema = implement<QuiDocsConfig>().with({
     )
     .optional(),
   hotUpdateIgnore: z.instanceof(RegExp).optional(),
+  knowledge: knowledgeConfigSchema.optional(),
   navConfig: z.array(z.union([routeMetaSchema, navMetaSchema])).optional(),
   pageDirectory: z.string().optional(),
   pageTimestampMetadata: z
@@ -68,12 +98,7 @@ export const configSchema = implement<QuiDocsConfig>().with({
       z.literal("user-and-timestamp"),
     ])
     .optional(),
-  routingStrategy: z
-    .union([
-      z.literal("vite-generouted"),
-      z.function(z.tuple([z.string()]), z.array(z.string())),
-    ])
-    .optional(),
+  routingStrategy: z.union([z.literal("vite-generouted"), z.any()]).optional(),
   typeDocProps: z.string().optional(),
   typeDocPropsOptions: typeDocPropsSchema.optional(),
 })

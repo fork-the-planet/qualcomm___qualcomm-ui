@@ -28,8 +28,8 @@
     "start": "cross-env NODE_ENV=production react-router-serve ./build/server/index.js",
     "generate-page-map": "qui-mdx-vite generate-page-map -o ./scripts/temp/site-data.json",
     "build-demo-html": "tsx scripts/build-demo-html.ts",
-    "generate-llms-txt": "qui-mdx-vite generate-llms-txt --clean --output-mode aggregated --exclude '*index.mdx' -o public/llms-full.txt --name 'QUI Angular Documentation' --base-url 'https://angular-next.qui.qualcomm.com'",
-    "generate-knowledge": "qui-mdx-vite generate-llms-txt --clean --output-mode per-page --exclude '*index.mdx' --metadata framework=angular category=core-components",
+    "generate-llms-txt": "qui-mdx-vite generate-llms-txt --clean --output-mode aggregated -o public/llms-full.txt --name 'QUI Angular Documentation'",
+    "generate-knowledge": "qui-mdx-vite generate-llms-txt --clean --output-mode per-page",
     "upload-knowledge": "run-p upload-knowledge-saga upload-knowledge-qui",
     "update-knowledge-saga": "run-s generate-knowledge-saga upload-knowledge-saga",
     "generate-knowledge-saga": "pnpm generate-knowledge --env .env.saga-ai --metadata env=saga-prod",
@@ -106,7 +106,7 @@
     "sucrase": "^3.35.0",
     "tslib": "~2.5.3",
     "unist-util-visit": "^5.0.0",
-    "zod": "^3.23.8",
+    "zod": "^4.1.13",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
