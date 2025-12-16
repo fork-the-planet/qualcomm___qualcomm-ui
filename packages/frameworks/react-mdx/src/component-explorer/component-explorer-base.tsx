@@ -5,32 +5,19 @@ import {
   type ComponentPropsWithRef,
   type ReactElement,
   type ReactNode,
-  useCallback,
   useEffect,
   useLayoutEffect,
   useRef,
   useState,
 } from "react"
 
-import {TypeDocAttributes, TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
+import {useMdxDocsContext} from "@qualcomm-ui/react-mdx/context"
 
 interface HighlightRect {
   height: number
   left: number
   top: number
   width: number
-}
-
-interface PartDocumentation {
-  /**
-   * The name(s) of the TypeDoc interface(s) for attributes.
-   */
-  attributesName: string | string[]
-
-  /**
-   * The name of the TypeDoc interface for props.
-   */
-  propsName: string
 }
 
 export interface ComponentExplorerBaseProps
@@ -46,75 +33,62 @@ export interface ComponentExplorerBaseProps
   excludeParts?: string[]
 
   /**
-   * Documentation configuration for each part.
-   * Maps part names to their TypeDoc interface names.
+   * Links to API documentation for each part.
+   * Maps part names to anchor URLs (e.g., "#slider-root").
    */
-  partDocs?: Record<string, PartDocumentation>
+  partLinks?: Record<string, string>
 }
 
 export function ComponentExplorerBase({
   children,
   excludeParts = [],
-  partDocs = {},
+  partLinks = {},
   ...props
 }: ComponentExplorerBaseProps): ReactElement {
+  const {renderLink: Link} = useMdxDocsContext()
   const previewRef = useRef<HTMLDivElement>(null)
   const [parts, setParts] = useState<string[]>([])
   const [hoveredPart, setHoveredPart] = useState<string | null>(null)
-  const [selectedPart, setSelectedPart] = useState<string | null>(null)
   const [highlightRects, setHighlightRects] = useState<HighlightRect[]>([])
-
-  const discoverParts = useCallback(() => {
-    if (!previewRef.current) {
-      return
-    }
-
-    const elements =
-      previewRef.current.querySelectorAll<HTMLElement>("[data-part]")
-    const discoveredParts: string[] = []
-    const seenParts = new Set<string>()
-
-    elements.forEach((element) => {
-      const partName = element.getAttribute("data-part")
-      if (
-        partName &&
-        !seenParts.has(partName) &&
-        !excludeParts.includes(partName)
-      ) {
-        seenParts.add(partName)
-        discoveredParts.push(partName)
-      }
-    })
-
-    setParts(discoveredParts)
-  }, [excludeParts])
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      discoverParts()
+      if (!previewRef.current) {
+        return
+      }
+
+      const elements =
+        previewRef.current.querySelectorAll<HTMLElement>("[data-part]")
+      const seen = new Set<string>()
+
+      const discovered = Array.from(elements)
+        .map((el) => el.getAttribute("data-part"))
+        .filter((part): part is string => {
+          if (!part || seen.has(part) || excludeParts.includes(part)) {
+            return false
+          }
+          seen.add(part)
+          return true
+        })
+
+      setParts(discovered)
     }, 100)
 
     return () => clearTimeout(timer)
-  }, [discoverParts, children])
+  }, [children, excludeParts])
 
-  const handlePartHover = (partName: string | null) => setHoveredPart(partName)
-
-  const handlePartClick = (partName: string) =>
-    setSelectedPart((current) => (current === partName ? null : partName))
-
-  const activePart = selectedPart || hoveredPart
-
-  const updateHighlightPosition = useCallback(() => {
+  useLayoutEffect(() => {
     const previewElement = previewRef.current
 
-    if (!previewElement || !activePart) {
+    if (!previewElement || !hoveredPart) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- DOM measurement requires post-render setState
       setHighlightRects([])
       return
     }
 
     const targetElements = Array.from(
       previewElement.querySelectorAll<HTMLElement>(
-        `[data-part="${activePart}"]`,
+        `[data-part="${hoveredPart}"]`,
       ),
     )
 
@@ -136,19 +110,7 @@ export function ComponentExplorerBase({
     })
 
     setHighlightRects(rects)
-  }, [activePart])
-
-  useLayoutEffect(() => {
-    if (!activePart) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setHighlightRects([])
-      return
-    }
-
-    updateHighlightPosition()
-  }, [activePart, updateHighlightPosition])
-
-  const selectedPartDoc = selectedPart ? partDocs[selectedPart] : null
+  }, [hoveredPart])
 
   return (
     <div {...props} className="qui-component-explorer__root">
@@ -173,38 +135,38 @@ export function ComponentExplorerBase({
             Component Anatomy
           </h3>
           <p className="qui-component-explorer__anatomy-subtitle">
-            Hover to highlight, click to select parts
+            Hover to highlight, click to view API
           </p>
         </div>
         <div className="qui-component-explorer__parts">
-          {parts.map((part) => (
-            <button
-              key={part}
-              className="qui-component-explorer__part"
-              data-active={activePart === part || undefined}
-              onClick={() => handlePartClick(part)}
-              onMouseEnter={() => handlePartHover(part)}
-              onMouseLeave={() => handlePartHover(null)}
-              type="button"
-            >
-              {part}
-            </button>
-          ))}
+          {parts.map((part) => {
+            const link = partLinks[part]
+
+            return link ? (
+              <Link
+                key={part}
+                className="qui-component-explorer__part"
+                data-active={hoveredPart === part || undefined}
+                href={link}
+                onMouseEnter={() => setHoveredPart(part)}
+                onMouseLeave={() => setHoveredPart(null)}
+              >
+                {part}
+              </Link>
+            ) : (
+              <span
+                key={part}
+                className="qui-component-explorer__part"
+                data-active={hoveredPart === part || undefined}
+                onMouseEnter={() => setHoveredPart(part)}
+                onMouseLeave={() => setHoveredPart(null)}
+              >
+                {part}
+              </span>
+            )
+          })}
         </div>
       </div>
-      {selectedPartDoc && (
-        <div className="qui-component-explorer__documentation">
-          <div className="qui-component-explorer__documentation-header">
-            <h4 className="qui-component-explorer__documentation-title">
-              {selectedPart}
-            </h4>
-          </div>
-          <div className="qui-component-explorer__documentation-content">
-            <TypeDocProps name={selectedPartDoc.propsName} />
-            <TypeDocAttributes name={selectedPartDoc.attributesName} />
-          </div>
-        </div>
-      )}
     </div>
   )
 }

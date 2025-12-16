@@ -2,9 +2,7 @@
   border: solid var(--border-width-sm) var(--color-border-neutral-02);
   border-radius: var(--border-radius-md);
   display: grid;
-  gap: 0;
   grid-template-columns: 1fr 300px;
-  grid-template-rows: auto auto;
   margin-top: var(--spacing-120);
   overflow: hidden;
 }
@@ -53,10 +51,12 @@
   border: solid var(--border-width-sm) var(--color-border-neutral-02);
   border-radius: var(--border-radius-md);
   color: var(--color-text-neutral);
-  cursor: pointer;
+  cursor: default;
+  display: block;
   font: var(--font-static-body-sm-default);
   padding: var(--spacing-80) var(--spacing-90);
   text-align: left;
+  text-decoration: none;
 
   &:hover {
     background: var(--color-background-neutral-03);
@@ -73,6 +73,10 @@
     outline: solid var(--border-width-md) var(--color-utility-focus-border);
     outline-offset: var(--spacing-20);
   }
+}
+
+a.qui-component-explorer__part {
+  cursor: pointer;
 }
 
 .qui-component-explorer__highlight {
@@ -132,28 +136,6 @@
   .qui-component-explorer__highlight {
     animation: none;
   }
-}
-
-.qui-component-explorer__documentation {
-  border-top: solid var(--border-width-sm) var(--color-border-neutral-02);
-  grid-column: 1 / -1;
-  padding: var(--spacing-110);
-}
-
-.qui-component-explorer__documentation-header {
-  margin-bottom: var(--spacing-100);
-}
-
-.qui-component-explorer__documentation-title {
-  color: var(--color-text-neutral-primary);
-  font: var(--font-static-heading-md-default);
-  margin: 0;
-}
-
-.qui-component-explorer__documentation-content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-110);
 }
 
 @media (max-width: 768px) {
