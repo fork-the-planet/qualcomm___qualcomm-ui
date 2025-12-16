@@ -3,7 +3,7 @@
 
 import {useEffect, useState} from "react"
 
-import type {BasicThemeData} from "./theme.types"
+import type {BasicThemeData} from "@qualcomm-ui/tailwind-plugin/theme"
 
 interface ThemePropertyTableProps {
   cssProperty: string

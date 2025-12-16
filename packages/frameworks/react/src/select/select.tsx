@@ -32,6 +32,19 @@ import {SelectValueText, type SelectValueTextProps} from "./select-value-text"
 
 export interface SelectProps extends SelectRootProps {
   /**
+   * {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-label aria-label}
+   * attribute, forwarded to the hidden select element.
+   */
+  "aria-label"?: string | undefined
+
+  /**
+   * {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-labelledby aria-labelledby}
+   * attribute, forwarded to the hidden select element. If you provide a {@link
+   * label}, omit this prop.
+   */
+  "aria-labelledby"?: string | undefined
+
+  /**
    * When `true`, renders a clear button that resets the input value on click.
    * The button only appears when the input has a value.
    *
@@ -143,6 +156,8 @@ export interface SelectProps extends SelectRootProps {
 }
 
 export function Select({
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
   clearable = true,
   clearTriggerProps,
   contentProps,
@@ -157,13 +172,24 @@ export function Select({
   labelProps,
   portalProps,
   positionerProps,
-  selectProps,
+  selectProps: selectPropsProp,
   valueTextProps,
   ...props
 }: SelectProps): ReactElement {
   const labelContent = label || labelProps?.children
   const hintContent = hint || hintProps?.children
   const errorTextContent = errorText || errorTextProps?.children
+
+  const selectProps = {
+    ...selectPropsProp,
+  }
+
+  if (ariaLabel !== undefined) {
+    selectProps["aria-label"] = ariaLabel
+  }
+  if (ariaLabelledBy !== undefined) {
+    selectProps["aria-labelledby"] = ariaLabelledBy
+  }
 
   const ids = {
     clearTrigger: useOptionalContentId(clearable, clearTriggerProps),

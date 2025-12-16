@@ -108,6 +108,7 @@ export class SearchIndexer {
       addons.fileCache ||
       new MarkdownFileReader(
         process.env.NODE_ENV === "development" && !this.config.disableCache,
+        this.config.pageTimestampMetadata,
       )
   }
 
@@ -172,6 +173,8 @@ export class SearchIndexer {
       title: defined(routeMeta.title)
         ? routeMeta.title || ""
         : frontmatter.title || "",
+      updatedBy: frontmatter.updatedBy,
+      updatedOn: frontmatter.updatedOn,
     }
   }
 
@@ -263,12 +266,14 @@ export class SearchIndexer {
       this._pageDocProps[defaultSection.pathname] = docProps
     }
 
-    this.fileCache.updateCache(filePath, fileContents, {
-      frontmatter,
-      page: indexedPage,
-      pageDocProps: docProps,
-      pageDocPropSections: docPropSections,
-    })
+    if (!cached) {
+      this.fileCache.updateCache(filePath, fileContents, {
+        frontmatter,
+        page: indexedPage,
+        pageDocProps: docProps,
+        pageDocPropSections: docPropSections,
+      })
+    }
 
     // omit entries from pages that are explicitly omitted from the index.
     if (frontmatter.hideFromSearch) {

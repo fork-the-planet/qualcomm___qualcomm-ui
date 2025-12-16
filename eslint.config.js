@@ -5,7 +5,9 @@ import quiEslintAngular from "@qualcomm-ui/eslint-config-angular"
 import quiEslintMdx from "@qualcomm-ui/eslint-config-mdx"
 import quiEslintReact from "@qualcomm-ui/eslint-config-react"
 import quiEslintTs from "@qualcomm-ui/eslint-config-typescript"
+import quiEslintPluginAngular from "@qualcomm-ui/eslint-plugin-angular"
 import quiPathAlias from "@qualcomm-ui/eslint-plugin-path-alias"
+import quiEslintPluginReact from "@qualcomm-ui/eslint-plugin-react"
 
 const languageOptions = {
   parser: tseslint.parser,
@@ -76,6 +78,7 @@ export default defineConfig(
       ...quiEslintTs.configs.recommended,
       quiEslintAngular.configs.baseTypescript,
       quiEslintAngular.configs.typescript,
+      quiEslintPluginAngular.config,
     ],
     files: [
       "packages/*/{angular,angular-*}/**/*.ts",
@@ -110,6 +113,7 @@ export default defineConfig(
       quiEslintAngular.configs.templatePrettier,
       quiEslintAngular.configs.templateAttributeOrder,
       quiEslintAngular.configs.templateSelfClosingTags,
+      quiEslintPluginAngular.config,
     ],
     files: [
       "packages/*/{angular,angular-*}/**/*.html",
@@ -137,10 +141,17 @@ export default defineConfig(
       ...quiEslintTs.configs.recommended,
       quiEslintReact.configs.base,
       quiEslintReact.configs.recommended,
+      quiEslintPluginReact.config,
     ],
     files: [
       "packages/*/{qui-site,react-docs,qui-docs,react-vscode-docs}/**/*.{ts,tsx}",
     ],
+    languageOptions,
+  },
+
+  {
+    extends: [quiEslintPluginReact.config],
+    files: ["packages/*/react-mdx/**/*.{ts,tsx}"],
     languageOptions,
   },
 
@@ -178,10 +189,18 @@ export default defineConfig(
       quiEslintReact.configs.recommended,
     ],
     files: [
-      "packages/*/{react-mdx,react,react-core,react-docs,react-internal,react-table-docs,react-router-utils,react-vscode}/**/*.{ts,tsx}",
+      "packages/*/{react-mdx,react,react-core,react-docs,react-internal,react-swagger,react-table-docs,react-router-utils,react-vscode}/**/*.{ts,tsx}",
       "packages/docs/angular-docs/src/**/*.tsx",
     ],
     languageOptions,
+  },
+
+  {
+    files: ["packages/*/react-swagger/**/*.{ts,tsx}"],
+    languageOptions,
+    rules: {
+      "react/prop-types": "off",
+    },
   },
 
   // react compiler
@@ -200,19 +219,7 @@ export default defineConfig(
   {
     extends: [quiPathAlias.configs.recommended],
     files: [
-      "packages/*/{angular-core,angular,core,dom,react-mdx,qds-core,react-core,utils}/**/*.{ts,tsx}",
-    ],
-    languageOptions,
-  },
-
-  // react (nextgen only)
-  {
-    extends: [quiPathAlias.configs.recommended],
-    files: ["packages/frameworks/react/src/**/*.{ts,tsx}"],
-    ignores: [
-      "packages/frameworks/react/src/legacy/**/*",
-      "packages/frameworks/react/src/components/*/internal/q-*.{ts,tsx}",
-      "packages/frameworks/react/src/components/*/q-*.{ts,tsx}",
+      "packages/*/{angular-core,angular,core,dom,react-mdx,qds-core,react,react-core,utils}/**/*.{ts,tsx}",
     ],
     languageOptions,
   },

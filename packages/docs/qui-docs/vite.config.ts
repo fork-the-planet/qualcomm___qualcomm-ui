@@ -12,6 +12,9 @@ import {
 } from "@qualcomm-ui/mdx-vite"
 
 export default defineConfig({
+  define: {
+    global: "globalThis",
+  },
   plugins: [
     tailwindcss(),
     mdx({
@@ -28,6 +31,6 @@ export default defineConfig({
     }),
   ],
   server: {
-    port: 3110,
+    port: 3500,
   },
 })

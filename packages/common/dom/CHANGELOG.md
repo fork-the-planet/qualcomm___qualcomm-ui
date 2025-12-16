@@ -1,5 +1,11 @@
 # @qualcomm-ui/dom
 
+## 1.0.7 (2025/12/10)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils]
+
 ## 1.0.6 (2025/12/01)
 
 ### Miscellaneous Chores

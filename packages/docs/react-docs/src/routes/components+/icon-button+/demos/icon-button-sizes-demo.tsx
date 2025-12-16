@@ -9,18 +9,21 @@ export function IconButtonSizesDemo(): ReactElement {
     <div className="grid justify-items-center gap-4">
       {/* preview */}
       <IconButton
+        aria-label="Navigate"
         emphasis="primary"
         icon={ExternalLink}
         size="sm"
         variant="fill"
       />
       <IconButton
+        aria-label="Navigate"
         emphasis="primary"
         icon={ExternalLink}
         size="md"
         variant="fill"
       />
       <IconButton
+        aria-label="Navigate"
         emphasis="primary"
         icon={ExternalLink}
         size="lg"

@@ -1,5 +1,43 @@
 # @qualcomm-ui/qds-core
 
+## 1.10.1 (2025/12/15)
+
+### Bug Fixes
+
+- [design-tokens]: use variables for snapdragon font families
+
+## 1.10.0 (2025/12/11)
+
+### Features
+
+- [text-area]: add component
+
+### Bug Fixes
+
+- [input]: adjust outline color when invalid
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core]
+
+## 1.9.4 (2025/12/10)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/utils]
+
+## 1.9.3 (2025/12/08)
+
+### Bug Fixes
+
+- [theme]: correct theme types export
+
+## 1.9.2 (2025/12/05)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core]
+
 ## 1.9.1 (2025/12/03)
 
 ### Bug Fixes

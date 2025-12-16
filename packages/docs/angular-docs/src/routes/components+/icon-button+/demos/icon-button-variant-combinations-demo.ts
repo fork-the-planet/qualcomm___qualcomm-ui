@@ -15,18 +15,21 @@ import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
       <span class="text-neutral-primary font-heading-xs">Ghost</span>
 
       <button
+        aria-label="External Link"
         emphasis="neutral"
         icon="Search"
         q-icon-button
         variant="fill"
       ></button>
       <button
+        aria-label="External Link"
         emphasis="neutral"
         icon="Search"
         q-icon-button
         variant="outline"
       ></button>
       <button
+        aria-label="External Link"
         emphasis="neutral"
         icon="Search"
         q-icon-button
@@ -34,18 +37,21 @@ import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
       ></button>
 
       <button
+        aria-label="External Link"
         emphasis="primary"
         icon="Search"
         q-icon-button
         variant="fill"
       ></button>
       <button
+        aria-label="External Link"
         emphasis="primary"
         icon="Search"
         q-icon-button
         variant="outline"
       ></button>
       <button
+        aria-label="External Link"
         emphasis="primary"
         icon="Search"
         q-icon-button
@@ -53,27 +59,48 @@ import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
       ></button>
 
       <button
+        aria-label="External Link"
         emphasis="danger"
         icon="Search"
         q-icon-button
         variant="fill"
       ></button>
       <button
+        aria-label="External Link"
         emphasis="danger"
         icon="Search"
         q-icon-button
         variant="outline"
       ></button>
       <button
+        aria-label="External Link"
         emphasis="danger"
         icon="Search"
         q-icon-button
         variant="ghost"
       ></button>
 
-      <button disabled icon="Search" q-icon-button variant="fill"></button>
-      <button disabled icon="Search" q-icon-button variant="outline"></button>
-      <button disabled icon="Search" q-icon-button variant="ghost"></button>
+      <button
+        aria-label="External Link"
+        disabled
+        icon="Search"
+        q-icon-button
+        variant="fill"
+      ></button>
+      <button
+        aria-label="External Link"
+        disabled
+        icon="Search"
+        q-icon-button
+        variant="outline"
+      ></button>
+      <button
+        aria-label="External Link"
+        disabled
+        icon="Search"
+        q-icon-button
+        variant="ghost"
+      ></button>
     </div>
   `,
 })

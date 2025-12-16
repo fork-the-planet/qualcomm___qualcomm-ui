@@ -21,10 +21,10 @@ export function ComboboxIconCustomizationDemo() {
   return (
     // preview
     <Combobox
+      aria-label="Country"
       className="w-48"
       collection={collection}
       icon={<ProgressRing size="xs" />}
-      inputProps={{"aria-label": "Country"}}
       onInputValueChange={handleInputChange}
       placeholder="Select a country"
     />

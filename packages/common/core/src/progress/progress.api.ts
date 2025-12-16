@@ -132,6 +132,7 @@ export function createProgressApi(
       return normalize.element({
         ...commonBindings,
         "data-part": "hint",
+        hidden: !!prop("invalid"),
         id: domIds.hint(scope),
       })
     },

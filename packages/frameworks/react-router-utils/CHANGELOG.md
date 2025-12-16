@@ -1,5 +1,11 @@
 # @qualcomm-ui/react-router-utils
 
+## 1.0.7 (2025/12/12)
+
+### Bug Fixes
+
+- [react-router-utils]: switch to named minimatch import and align with v10 api
+
 ## 1.0.6 (2025/11/21)
 
 ### Bug Fixes

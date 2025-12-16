@@ -4,6 +4,7 @@
 import {program} from "@commander-js/extra-typings"
 import type {Parent} from "mdast"
 import type {MdxJsxAttribute, MdxJsxFlowElement} from "mdast-util-mdx-jsx"
+import {minimatch} from "minimatch"
 import {
   access,
   mkdir,
@@ -13,7 +14,7 @@ import {
   stat,
   writeFile,
 } from "node:fs/promises"
-import {basename, dirname, extname, join, resolve} from "node:path"
+import {basename, dirname, extname, join, relative, resolve} from "node:path"
 import remarkFrontmatter from "remark-frontmatter"
 import remarkMdx from "remark-mdx"
 import remarkParse from "remark-parse"
@@ -185,11 +186,10 @@ async function resolveModulePath(
   return null
 }
 
-function extractMetadata(metadata: string[] | undefined): string[][] {
-  return (metadata ?? []).map((current) => {
-    const [key, value] = current.split("=")
-    return [key, value]
-  })
+function extractMetadata(
+  metadata: Record<string, string> | undefined,
+): [string, string][] {
+  return Object.entries(metadata ?? {})
 }
 
 const replaceNpmInstallTabs: Plugin = () => {
@@ -212,6 +212,18 @@ const replaceNpmInstallTabs: Plugin = () => {
     })
     done()
   }
+}
+
+function getPath(obj: Record<string, unknown>, path: string): unknown {
+  return path
+    .split(".")
+    .reduce<unknown>(
+      (acc, key) =>
+        acc && typeof acc === "object"
+          ? (acc as Record<string, unknown>)[key]
+          : undefined,
+      obj,
+    )
 }
 
 /**
@@ -278,6 +290,7 @@ class KnowledgeGenerator {
         processedPages,
         extractedMetadata,
       )
+      await this.generateExtraFiles(extractedMetadata)
     }
   }
 
@@ -317,21 +330,22 @@ class KnowledgeGenerator {
     const components: PageInfo[] = []
     const excludePatterns = this.config.exclude ?? []
 
-    const shouldExclude = (fileOrDir: string): boolean => {
-      const dirName = basename(fileOrDir)
-      return excludePatterns.some((pattern) => {
-        if (pattern.includes("*")) {
-          const regex = new RegExp(`^${pattern.replace(/\*/g, ".*")}$`)
-          return regex.test(dirName)
-        }
-        return dirName === pattern
-      })
+    const shouldExclude = (absolutePath: string): boolean => {
+      if (excludePatterns.length === 0) {
+        return false
+      }
+      const relativePath = relative(this.config.routeDir, absolutePath)
+      return excludePatterns.some((pattern) =>
+        minimatch(relativePath, pattern, {matchBase: true}),
+      )
     }
 
     const scanDirectory = async (dirPath: string): Promise<void> => {
       if (shouldExclude(dirPath)) {
         if (this.config.verbose) {
-          console.log(`Excluding directory: ${basename(dirPath)}`)
+          console.log(
+            `Excluding directory: ${relative(this.config.routeDir, dirPath)}`,
+          )
         }
         return
       }
@@ -339,7 +353,8 @@ class KnowledgeGenerator {
       const entries = await readdir(dirPath, {withFileTypes: true})
       const mdxFiles =
         entries.filter(
-          (f) => f.name.endsWith(".mdx") && !shouldExclude(f.name),
+          (f) =>
+            f.name.endsWith(".mdx") && !shouldExclude(join(dirPath, f.name)),
         ) ?? []
 
       for (const mdxFile of mdxFiles) {
@@ -366,7 +381,7 @@ class KnowledgeGenerator {
         })
 
         if (this.config.verbose) {
-          console.log(`Found component: ${basename(dirPath)}`)
+          console.log(`Found file: ${basename(dirPath)}`)
           console.log(`  Demos folder: ${demosFolderPath || "NOT FOUND"}`)
         }
       }
@@ -541,6 +556,79 @@ class KnowledgeGenerator {
       propType,
       required: extractRequired(propInfo, isPartial) || undefined,
     }
+  }
+
+  /**
+   * Creates a remark plugin that replaces TypeDocProps JSX elements with JSON
+   * code blocks containing component prop documentation.
+   */
+  private async replaceThemeNodes(): Promise<Plugin> {
+    let themes: any | null = null
+    try {
+      // may not be available since this is an optional dependency
+      themes = await import("@qualcomm-ui/tailwind-plugin/theme")
+    } catch {
+      return () => {}
+    }
+
+    const handlers: Record<string, (node: MdxJsxFlowElement) => unknown> = {
+      ColorTable: (node) => {
+        const path = this.getAttrExpression(node, "data")
+        return path && getPath(themes, path)
+      },
+      FontTable: (node) => {
+        const path = this.getAttrExpression(node, "data")
+        return path && getPath(themes, path)
+      },
+      ThemePropertyTable: (node) => {
+        const path = this.getAttrExpression(node, "data")
+        const property = this.getAttrExpression(node, "cssProperty")
+        const data = path && getPath(themes, path)
+        return path && property ? {cssPropertyName: property, data} : undefined
+      },
+    }
+
+    return () => (tree, _file, done) => {
+      visit(tree, "mdxJsxFlowElement", (node: MdxJsxFlowElement) => {
+        const handler = node.name && handlers[node.name]
+        if (!handler) {
+          return
+        }
+
+        const data = handler(node)
+        if (!data) {
+          console.warn(`No theme data for ${node.name}`)
+          return
+        }
+
+        Object.assign(node, {
+          lang: "json",
+          meta: null,
+          type: "code",
+          value: JSON.stringify(data, null, 2),
+        })
+      })
+      done()
+    }
+  }
+
+  private getAttrExpression(
+    node: MdxJsxFlowElement,
+    name: string,
+  ): string | null {
+    const attr = node.attributes?.find(
+      (a): a is MdxJsxAttribute =>
+        a.type === "mdxJsxAttribute" && a.name === name,
+    )
+    if (!attr?.value) {
+      return null
+    }
+    if (typeof attr.value === "string") {
+      return attr.value
+    } else if (typeof attr.value === "object" && "value" in attr.value) {
+      return attr.value.value
+    }
+    return null
   }
 
   /**
@@ -767,6 +855,7 @@ class KnowledgeGenerator {
       .use(remarkParse)
       .use(remarkMdx)
       .use(this.replaceTypeDocProps())
+      .use(await this.replaceThemeNodes())
       .use(this.replaceDemos(demosFolder, demoFiles))
       .use(remarkStringify)
 
@@ -872,15 +961,53 @@ class KnowledgeGenerator {
     const outputStats = await stat(this.config.outputPath)
     const outputSizeKb = (outputStats.size / 1024).toFixed(1)
     console.log(
-      `Generated ${this.config.outputPath} with ${pages.length} component(s) at: ${this.config.outputPath}`,
+      `Generated ${this.config.outputPath} with ${pages.length} files(s) at: ${this.config.outputPath}`,
     )
     console.log(`File size: ${outputSizeKb} KB`)
+  }
+
+  private async generateExtraFiles(
+    metadata: [string, string][],
+  ): Promise<void> {
+    const extraFiles = this.config.extraFiles ?? []
+    if (extraFiles.length === 0) {
+      return
+    }
+
+    let totalSize = 0
+    await Promise.all(
+      extraFiles.map(async (extraFile) => {
+        const lines: string[] = []
+        if (metadata.length) {
+          lines.push("---")
+          for (const [key, value] of metadata) {
+            lines.push(`${key}: ${value}`)
+          }
+          lines.push("---")
+          lines.push("")
+        }
+
+        lines.push(`# ${extraFile.title}`)
+        lines.push("")
+        lines.push(extraFile.contents)
+        lines.push("")
+
+        const outfile = `${resolve(this.config.outputPath)}/${kebabCase(extraFile.id)}.md`
+        await writeFile(outfile, lines.join("\n"), "utf-8")
+        const stats = await stat(outfile)
+        totalSize += stats.size / 1024
+      }),
+    )
+
+    console.log(
+      `Generated ${extraFiles.length} extra file(s) (${totalSize.toFixed(1)} KB)`,
+    )
   }
 
   private async generatePerPageExports(
     pages: PageInfo[],
     processedPages: ProcessedPage[],
-    metadata: string[][],
+    metadata: [string, string][],
   ): Promise<void> {
     await mkdir(dirname(this.config.outputPath), {recursive: true}).catch(
       () => {},
@@ -921,7 +1048,7 @@ class KnowledgeGenerator {
         lines.push(content)
         lines.push("")
 
-        if (this.config.includeImports && processedPage.demoFiles.length > 0) {
+        if (processedPage.demoFiles.length > 0) {
           if (this.config.verbose) {
             console.log(
               `Collecting imports for ${page.name} from ${processedPage.demoFiles.length} demo files`,
@@ -968,7 +1095,7 @@ class KnowledgeGenerator {
         totalSize += stats.size / 1024
       }),
     )
-    console.log(`Generated ${count} component(s) in ${this.config.outputPath}`)
+    console.log(`Generated ${count} files(s) in ${this.config.outputPath}`)
     console.log(`Folder size: ${totalSize.toFixed(1)} KB`)
   }
 }
@@ -996,7 +1123,7 @@ export function addGenerateKnowledgeCommand() {
     .option("-v, --verbose", "Enable verbose logging", false)
     .option(
       "--exclude <patterns...>",
-      "Exclude file or folder patterns (supports * wildcards)",
+      "Glob patterns to exclude (e.g., **/internal/**, guide/drafts/*)",
       [],
     )
     .option("--base-url <url>", "Base URL for component documentation links")

@@ -1,5 +1,11 @@
 # @qualcomm-ui/mdx-common
 
+## 1.5.0 (2025/12/08)
+
+### Features
+
+- [docs]: add frontmatter fields for update metadata
+
 ## 1.4.0 (2025/12/03)
 
 ### Features

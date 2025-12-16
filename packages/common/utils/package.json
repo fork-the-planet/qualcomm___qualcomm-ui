@@ -1,27 +1,27 @@
 {
   "name": "@qualcomm-ui/utils",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "A comprehensive utility library providing essential functions for array manipulation, DOM operations and attributes, class name management, type coercion, equality checks, functional programming helpers, type guards, numeric operations, object manipulation, timing utilities, and more.",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
   "repository": "https://github.com/qualcomm/qualcomm-ui",
-  "type": "module",
-  "exports": {
-    "./*": {
-      "types": "./dist/*/index.d.ts",
-      "require": "./dist/*/index.cjs",
-      "import": "./dist/*/index.js",
-      "default": "./dist/*/index.js"
-    }
-  },
-  "types": "./dist/stub.d.ts",
-  "sideEffects": false,
   "publishConfig": {
     "access": "public"
   },
+  "type": "module",
+  "sideEffects": false,
   "files": [
     "dist"
   ],
+  "types": "./dist/stub.d.ts",
+  "exports": {
+    "./*": {
+      "types": "./dist/*/index.d.ts",
+      "import": "./dist/*/index.js",
+      "require": "./dist/*/index.cjs",
+      "default": "./dist/*/index.js"
+    }
+  },
   "scripts": {
     "build": "run-s clean build:js build:ts",
     "clean": "shx rm -rf dist/tsbuildinfo dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map",
@@ -48,7 +48,7 @@
     "pretty-ms": "^9.3.0",
     "shx": "^0.4.0",
     "tsx": "^4.20.6",
-    "typescript": "5.9.3",
+    "typescript": "catalog:",
     "vitest": "^4.0.8"
   }
 }

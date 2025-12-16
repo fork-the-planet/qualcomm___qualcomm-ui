@@ -3,6 +3,8 @@
 
 import type {ReactElement, ReactNode} from "react"
 
+import {AlertCircle} from "lucide-react"
+
 import {
   InputErrorText,
   type InputErrorTextProps,
@@ -32,5 +34,9 @@ export function RadioGroupErrorText({
     props,
   )
 
-  return <InputErrorText {...mergedProps}>{children}</InputErrorText>
+  return (
+    <InputErrorText icon={AlertCircle} {...mergedProps}>
+      {children}
+    </InputErrorText>
+  )
 }

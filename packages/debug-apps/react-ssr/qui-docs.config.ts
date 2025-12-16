@@ -1,4 +1,4 @@
-import {QuiDocsConfig} from "@qualcomm-ui/mdx-vite"
+import type {QuiDocsConfig} from "@qualcomm-ui/mdx-vite"
 
 export default {
   appDirectory: "src",
@@ -14,4 +14,5 @@ export default {
     },
   ],
   pageDirectory: "routes",
+  pageTimestampMetadata: "user-and-timestamp",
 } satisfies QuiDocsConfig

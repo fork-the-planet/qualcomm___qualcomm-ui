@@ -1,5 +1,99 @@
 # @qualcomm-ui/mdx-vite
 
+## 2.7.0 (2025/12/15)
+
+### Features
+
+- [knowledge]: add configuration to qui-docs.config.ts
+- [knowledge]: add extraFiles config option
+- [knowledge]: improve exclude processing with minimatch
+
+### Miscellaneous Chores
+
+- [deps]: update zod to v4
+
+## 2.6.4 (2025/12/12)
+
+### Tests
+
+- [docs-plugin]: add coverage for code annotation stripping
+- [docs-plugin]: add unit tests for code annotation removal
+- [docs-plugin]: move vitest specs to **tests** structure
+
+### Documentation
+
+- [markdown]: reorder markdown guide sections for clarity
+
+### Bug Fixes
+
+- [docs-plugin]: annotations do not hide lines from copy data
+
+## 2.6.3 (2025/12/11)
+
+### Bug Fixes
+
+- [docs-plugin]: skip git metadata for cached files
+- [docs-plugin]: skip cache update for unchanged files
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/tailwind-plugin]
+
+## 2.6.2 (2025/12/10)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils]
+
+## 2.6.1 (2025/12/08)
+
+### Bug Fixes
+
+- [mdx-vite]: resolve git metadata repo root
+
+## 2.6.0 (2025/12/08)
+
+### Features
+
+- [docs]: add git-derived updated metadata to pages
+- [docs]: populate page updatedOn/updatedBy from git history
+
+### Tests
+
+- [docs]: mock git child_process calls in docs indexer specs
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common]
+
+## 2.5.4 (2025/12/05)
+
+### Bug Fixes
+
+- [knowledge]: ensure updated files are re-indexed
+
+## 2.5.3 (2025/12/04)
+
+### Bug Fixes
+
+- [knowledge]: improve duplicate detection and retry handling
+- [knowledge]: avoid reuploading unchanged knowledge files
+- [knowledge]: stop persisting debug file dump
+- [knowledge]: resolve optional theme data and emit json blocks
+- [knowledge]: return failure when file update fails
+- [knowledge]: clean orphaned files before upload
+- [knowledge]: prevent duplicate file uploads
+- [knowledge]: refactor api client to avoid duplicates
+
+### Code Refactoring
+
+- [open-web-ui]: introduce typed files/knowledge api client
+- [knowledge]: migrate upload/download to new api layer
+
+### Miscellaneous Chores
+
+- [knowledge]: add cleaner for orphaned and failed files
+
 ## 2.5.2 (2025/12/04)
 
 ### Code Refactoring

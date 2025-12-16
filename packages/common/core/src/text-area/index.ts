@@ -1,1 +1,4 @@
-export {}
+export * from "./text-area.api"
+export * from "./text-area.machine"
+export * from "./text-area.props"
+export type * from "./text-area.types"

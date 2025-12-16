@@ -20,83 +20,103 @@ type Utility = (typeof Utility)[keyof typeof Utility]
 interface TokenMapping {
   ignore?: boolean
   nameTransform?: (name: string) => string
+  pattern: string
   themeKey: string
   utilities?: Utility[]
 }
 
-const TOKEN_MAPPINGS: Record<string, TokenMapping> = {
-  "border-radius-*": {
+const TOKEN_MAPPINGS: TokenMapping[] = [
+  {
     nameTransform: (name) => name.replace(/^border-radius-/, ""),
+    pattern: "border-radius-*",
     themeKey: "radius",
   },
-  "border-width-*": {
+  {
     nameTransform: (name) => name.replace(/^border-width-/, ""),
+    pattern: "border-width-*",
     themeKey: "border",
   },
-  "color-*background*": {
+  {
+    pattern: "color-*background*",
     themeKey: "color",
     utilities: [Utility.BG],
   },
-  "color-*border*": {
+  {
+    pattern: "color-*border*",
     themeKey: "color",
     utilities: [Utility.BORDER],
   },
-  "color-*category*": {
+  {
+    pattern: "color-*category*",
     themeKey: "color",
     utilities: [Utility.TEXT, Utility.BG, Utility.BORDER],
   },
-  "color-*icon*": {
-    nameTransform: (name) => `icon-${name}`,
-    themeKey: "color",
-    utilities: [Utility.TEXT],
-  },
-  "color-*surface*": {
+  {
+    pattern: "color-*surface*",
     themeKey: "color",
     utilities: [Utility.BG],
   },
-  "color-*text*": {
+  // Must come before color-*icon* and color-*text* to match utility tokens first
+  {
+    pattern: "color-*utility*",
+    themeKey: "color",
+    utilities: [Utility.TEXT, Utility.BG, Utility.BORDER],
+  },
+  {
+    nameTransform: (name) => `icon-${name}`,
+    pattern: "color-*icon*",
     themeKey: "color",
     utilities: [Utility.TEXT],
   },
-  "color-*utility*": {
+  {
+    pattern: "color-*text*",
     themeKey: "color",
-    utilities: [Utility.BG, Utility.BORDER],
+    utilities: [Utility.TEXT],
   },
-  "font-*": {
+  {
+    pattern: "font-*",
     themeKey: "type",
   },
-  "icon-stroke-*": {
+  {
     ignore: true,
+    pattern: "icon-stroke-*",
     themeKey: "icon-stroke",
   },
-  "scrim-*": {
+  {
     ignore: true,
+    pattern: "scrim-*",
     themeKey: "scrim",
   },
-  "shadow-*": {
+  {
+    pattern: "shadow-*",
     themeKey: "shadow",
     utilities: [Utility.SHADOW],
   },
-  "sizing-*": {
+  {
     ignore: true,
+    pattern: "sizing-*",
     themeKey: "sizing",
   },
-  "spacing-*": {
+  {
     ignore: true,
+    pattern: "spacing-*",
     themeKey: "spacing",
   },
-  "type-font-family-*": {
+  {
     nameTransform: (name) => name.replace(/^type-font-family-/, ""),
+    pattern: "type-font-family-*",
     themeKey: "font-family",
   },
-  "type-font-weight-*": {
+  {
     nameTransform: (name) => name.replace(/^type-font-weight-/, ""),
+    pattern: "type-font-weight-*",
     themeKey: "font-weight",
   },
-  "type-static-body-*": {
+  {
+    pattern: "type-static-body-*",
     themeKey: "text-body",
   },
-}
+]
 
 function matchesWildcard(pattern: string, text: string): boolean {
   const regex = new RegExp(`^${pattern.replace(/\*/g, ".*")}$`)
@@ -109,8 +129,8 @@ function transformVariables(
   const themeVariables: Record<string, TokenMapping> = {}
   for (const [varName] of Object.entries(variables)) {
     let matched = false
-    for (const [pattern, mapping] of Object.entries(TOKEN_MAPPINGS)) {
-      if (matchesWildcard(pattern, varName)) {
+    for (const mapping of TOKEN_MAPPINGS) {
+      if (matchesWildcard(mapping.pattern, varName)) {
         if (mapping.ignore) {
           matched = true
           break
@@ -145,6 +165,7 @@ function extractUtilityName(
   if (mapping.utilities) {
     const cleanName = variableName
       .replace(/^color-/, "")
+      .replace(/^shadow-/, "")
       .replace(/(background|border|icon|text|surface|utility)-/, "")
       .replace(/^interactive-/, "")
     return mapping.nameTransform ? mapping.nameTransform(cleanName) : cleanName
@@ -169,26 +190,43 @@ function generateUtilityDeclarations(
       for (const category of mapping.utilities) {
         let cssProperty: string
         let utilityPrefix: string
+        let redundantSuffix: string | undefined
 
         switch (category) {
           case Utility.BG:
+            // Skip bg utilities for icon/text colors
+            if (varName.endsWith("-icon") || varName.endsWith("-text")) {
+              continue
+            }
             cssProperty = "background-color"
             utilityPrefix = "bg"
+            redundantSuffix = "-background"
             break
           case Utility.BORDER:
             cssProperty = "border-color"
             utilityPrefix = "border"
+            redundantSuffix = "-border"
+            break
+          case Utility.SHADOW:
+            cssProperty = "box-shadow"
+            utilityPrefix = "shadow"
             break
           case Utility.TEXT:
             cssProperty = "color"
             utilityPrefix = "text"
+            redundantSuffix = "-text"
             break
           default:
             continue
         }
 
+        const finalUtilityName =
+          redundantSuffix && utilityName.endsWith(redundantSuffix)
+            ? utilityName.slice(0, -redundantSuffix.length)
+            : utilityName
+
         utilities.push(
-          `@utility ${utilityPrefix}-${utilityName} {${cssProperty}: var(--${varName});}`,
+          `@utility ${utilityPrefix}-${finalUtilityName} {${cssProperty}: var(--${varName});}`,
         )
       }
     } else if (mapping.themeKey === "type") {

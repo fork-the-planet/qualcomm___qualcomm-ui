@@ -9,12 +9,16 @@ import {
   type IdProp,
   PolymorphicElement,
 } from "@qualcomm-ui/react-core/system"
+import type {ComponentDataAttributes} from "@qualcomm-ui/utils/attributes"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {CheckboxIndicator} from "./checkbox-indicator"
 import {useQdsCheckboxContext} from "./qds-checkbox-context"
 
-export interface CheckboxControlProps extends IdProp, ElementRenderProp<"div"> {
+export interface CheckboxControlProps
+  extends IdProp,
+    ElementRenderProp<"div">,
+    ComponentDataAttributes {
   /**
    * React {@link https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children children} prop.
    *

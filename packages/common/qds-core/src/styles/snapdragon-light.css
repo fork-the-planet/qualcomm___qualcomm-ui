@@ -205,6 +205,7 @@
   --border-width-none: 0;
   --border-width-sm: 1px;
   --border-width-xl: 4px;
+  --canvas-width: 375;
   --font-dynamic-display-lg: var(--type-font-weight-display-regular) 53px / 64px var(--type-font-family-primary);
   --font-dynamic-display-md: var(--type-font-weight-display-regular) 40px / 44px var(--type-font-family-primary);
   --font-dynamic-heading-lg-bold: var(--type-font-weight-heading-bold) 26px / 32px var(--type-font-family-secondary);
@@ -235,20 +236,20 @@
   --font-static-code-xs-bold: var(--type-font-weight-code-bold) 12px / 18px var(--type-font-family-tertiary);
   --font-static-code-xs-default: var(--type-font-weight-code-default) 12px / 18px var(--type-font-family-tertiary);
   --font-static-display-lg: var(--type-font-weight-display-regular) 84px / 100px var(--type-font-family-primary);
-  --font-static-display-md: var(--type-font-weight-display-regular) 65px / 72px Qualcomm Next;
+  --font-static-display-md: var(--type-font-weight-display-regular) 65px / 74px var(--type-font-family-primary);
   --font-static-heading-lg-bold: var(--type-font-weight-heading-bold) 28px / 34px var(--type-font-family-secondary);
   --font-static-heading-lg-default: var(--type-font-weight-heading-default) 28px / 34px var(--type-font-family-secondary);
-  --font-static-heading-md-bold: var(--type-font-weight-heading-bold) 24px / 30px Roboto Flex;
+  --font-static-heading-md-bold: var(--type-font-weight-heading-bold) 24px / 30px var(--type-font-family-secondary);
   --font-static-heading-md-default: var(--type-font-weight-heading-default) 24px / 30px var(--type-font-family-secondary);
   --font-static-heading-sm-bold: var(--type-font-weight-heading-bold) 20px / 24px var(--type-font-family-secondary);
   --font-static-heading-sm-default: var(--type-font-weight-heading-default) 20px / 24px var(--type-font-family-secondary);
-  --font-static-heading-xl: var(--type-font-weight-heading-regular) 36px / 40px Qualcomm Next;
+  --font-static-heading-xl: var(--type-font-weight-heading-regular) 36px / 42px var(--type-font-family-primary);
   --font-static-heading-xs-bold: var(--type-font-weight-heading-bold) 17px / 20px var(--type-font-family-secondary);
-  --font-static-heading-xs-default: var(--type-font-weight-heading-default) 17px / 20px Roboto Flex;
-  --font-static-heading-xxl: var(--type-font-weight-heading-regular) 44px / 48px var(--type-font-family-primary);
+  --font-static-heading-xs-default: var(--type-font-weight-heading-default) 17px / 20px var(--type-font-family-secondary);
+  --font-static-heading-xxl: var(--type-font-weight-heading-regular) 44px / 50px var(--type-font-family-primary);
   --font-static-heading-xxs-bold: var(--type-font-weight-heading-bold) 14px / 18px var(--type-font-family-secondary);
   --font-static-heading-xxs-default: var(--type-font-weight-heading-default) 14px / 18px var(--type-font-family-secondary);
-  --font-static-heading-xxxl: var(--type-font-weight-heading-regular) 53px / 58px var(--type-font-family-primary);
+  --font-static-heading-xxxl: var(--type-font-weight-heading-regular) 53px / 60px var(--type-font-family-primary);
   --icon-stroke-lg: 2px;
   --icon-stroke-md: 1.75px;
   --icon-stroke-sm: 1.5px;
@@ -360,5 +361,5 @@
   --type-static-heading-xxs-font-size: 14px;
   --type-static-heading-xxs-line-height: 18px;
   --type-static-heading-xxxl-font-size: 53px;
-  --type-static-heading-xxxl-line-height: 58px;
+  --type-static-heading-xxxl-line-height: 60px;
 }

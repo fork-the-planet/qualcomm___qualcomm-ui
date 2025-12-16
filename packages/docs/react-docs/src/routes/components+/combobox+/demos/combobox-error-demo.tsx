@@ -23,10 +23,10 @@ export function ComboboxErrorDemo() {
   return (
     // preview
     <Combobox
+      aria-label="Country"
       className="w-48"
       collection={collection}
       errorText="You must select a country"
-      inputProps={{"aria-label": "Country"}}
       invalid={!value.length}
       onInputValueChange={handleInputChange}
       onValueChange={(details) => setValue(details.value)}

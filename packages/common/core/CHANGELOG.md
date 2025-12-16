@@ -1,5 +1,27 @@
 # @qualcomm-ui/core
 
+## 1.1.0 (2025/12/11)
+
+### Features
+
+- [text-area]: add component
+
+## 1.0.12 (2025/12/10)
+
+### Bug Fixes
+
+- [select]: prevent indicator from receiving focus on tab
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils, @qualcomm-ui/dom]
+
+## 1.0.11 (2025/12/05)
+
+### Bug Fixes
+
+- auto-hide form elements `hint` when invalid ([90bbc26](https://github.com/qualcomm/qualcomm-ui/commit/90bbc26e2d3d71066d29af3c122ff18c4b68b3ed))
+
 ## 1.0.10 (2025/12/01)
 
 ### Miscellaneous Chores

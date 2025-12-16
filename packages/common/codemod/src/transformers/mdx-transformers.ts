@@ -9,7 +9,7 @@ import remarkParseFrontmatter from "remark-parse-frontmatter"
 import remarkStringify from "remark-stringify"
 import {unified} from "unified"
 
-import type {ImportTransformEntry} from "./types"
+import type {ImportTransformEntry, TransformOptions} from "./types"
 
 export interface MdxSections {
   contentSection: string
@@ -20,6 +20,7 @@ export interface MdxSections {
 export async function transformMdx(
   filePath: string,
   optionsArray: ImportTransformEntry[],
+  transformOptions: TransformOptions = {},
 ): Promise<boolean> {
   try {
     let content = await readFile(filePath, "utf-8")
@@ -36,7 +37,7 @@ export async function transformMdx(
       }
     }
 
-    if (hasAnyChanges) {
+    if (hasAnyChanges && !transformOptions.dryRun) {
       await writeFile(filePath, content, "utf-8")
     }
 

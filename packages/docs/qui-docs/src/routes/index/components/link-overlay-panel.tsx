@@ -46,6 +46,7 @@ export function LinkOverlayPanel({
       {hover ? (
         <div className="absolute right-2 bottom-2">
           <IconButton
+            aria-label="Continue"
             emphasis="primary"
             icon={isInternalLink ? ChevronRightIcon : ExternalLinkIcon}
             size="sm"

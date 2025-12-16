@@ -3,7 +3,7 @@
 
 import {useEffect, useState} from "react"
 
-import type {FontData} from "./theme-fonts"
+import type {FontData} from "@qualcomm-ui/tailwind-plugin/theme"
 
 interface FontTableProps {
   data: FontData[]

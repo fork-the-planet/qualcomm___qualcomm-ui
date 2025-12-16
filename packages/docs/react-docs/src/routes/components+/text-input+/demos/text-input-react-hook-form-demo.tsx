@@ -59,6 +59,7 @@ export function TextInputReactHookFormDemo() {
           <TextInput
             className="w-full"
             errorText={error?.message}
+            hint="Including apartment or suite number"
             invalid={!!error}
             label="Street Address"
             onValueChange={onChange}

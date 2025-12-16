@@ -2,24 +2,28 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
 export function removeCodeAnnotations(code: string): string {
+  const hideAnnotationRegex = /\/\/\s*\[!code\s+hide(?::\d+)?\]/
   const lineAnnotationRegex = /\/\/\s*\[!code\s*(?:\S.*)?\]/
   const jsxBlockAnnotationRegex = /\{\s*\/\*\s*\[!code(?:\s+\S+)?\]\s*\*\/\s*\}/
   const htmlAnnotationRegex = /<!--\s*\[!code(?:\s+\S+)?\]\s*-->/
-  const blockAnnotationRegex = /\/\*\s*\[!code(?:\s+\S+)?\]\s*\*\/\s*/ // non-JSX block
+  const blockAnnotationRegex = /\/\*\s*\[!code(?:\s+\S+)?\]\s*\*\/\s*/
   const inlineIncrementRegex = /(?:\/\/\s*)?\[!code \+\+\]/
 
   function stripAnnotations(line: string): {
+    hasHideAnnotation: boolean
     processed: string
     touched: boolean
   } {
     let processed = line
     let touched = false
+    const hasHideAnnotation = hideAnnotationRegex.test(line)
 
     const patterns = [
       inlineIncrementRegex,
       jsxBlockAnnotationRegex,
       htmlAnnotationRegex,
       blockAnnotationRegex,
+      lineAnnotationRegex,
     ]
 
     for (const pattern of patterns) {
@@ -30,14 +34,14 @@ export function removeCodeAnnotations(code: string): string {
       }
     }
 
-    return {processed, touched}
+    return {hasHideAnnotation, processed, touched}
   }
 
   return code
     .split("\n")
     .map(stripAnnotations)
-    .filter(({processed, touched}) => {
-      if (lineAnnotationRegex.test(processed)) {
+    .filter(({hasHideAnnotation, processed, touched}) => {
+      if (hasHideAnnotation) {
         return false
       }
 

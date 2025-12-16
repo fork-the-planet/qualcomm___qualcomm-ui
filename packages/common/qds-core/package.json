@@ -1,11 +1,20 @@
 {
   "name": "@qualcomm-ui/qds-core",
-  "version": "1.9.1",
+  "version": "1.10.1",
   "description": "qds core components",
-  "repository": "https://github.com/qualcomm/qualcomm-ui",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
+  "repository": "https://github.com/qualcomm/qualcomm-ui",
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "types": "./dist/stub.d.ts",
   "exports": {
     "./*": {
       "types": "./dist/*/index.d.ts",
@@ -32,15 +41,6 @@
       "style": "./dist/components.min.css"
     }
   },
-  "types": "./dist/stub.d.ts",
-  "sideEffects": false,
-  "publishConfig": {
-    "access": "public"
-  },
-  "files": [
-    "dist",
-    "package.json"
-  ],
   "scripts": {
     "build": "run-s clean build:js build:css build:ts",
     "clean": "shx rm -rf dist/tsbuildinfo dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map dist/**/*.css",
@@ -59,11 +59,11 @@
   "devDependencies": {
     "@figma/rest-api-spec": "^0.31.0",
     "@qualcomm-ui/cli": "workspace:^1.0.5",
-    "@qualcomm-ui/core": "workspace:^1.0.10",
+    "@qualcomm-ui/core": "workspace:^1.1.0",
     "@qualcomm-ui/css-utils": "workspace:^1.0.4",
     "@qualcomm-ui/esbuild": "workspace:^1.0.4",
     "@qualcomm-ui/tsconfig": "workspace:^1.0.4",
-    "@qualcomm-ui/utils": "workspace:^1.0.4",
+    "@qualcomm-ui/utils": "workspace:^1.1.0",
     "@types/culori": "^4.0.0",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "~24.9.2",
@@ -74,15 +74,15 @@
     "lodash-es": "^4.17.21",
     "postcss": "^8.5.6",
     "postcss-nested": "^7.0.2",
-    "postcss-selector-parser": "^7.1.0",
+    "postcss-selector-parser": "^7.1.1",
     "shx": "^0.4.0",
     "style-dictionary": "^5.1.1",
     "style-dictionary-utils": "~4.1.1",
     "tsx": "^4.20.6",
-    "typescript": "5.9.3"
+    "typescript": "catalog:"
   },
   "peerDependencies": {
-    "@qualcomm-ui/core": "workspace:^1.0.10",
-    "@qualcomm-ui/utils": "workspace:^1.0.4"
+    "@qualcomm-ui/core": "workspace:^1.1.0",
+    "@qualcomm-ui/utils": "workspace:^1.1.0"
   }
 }

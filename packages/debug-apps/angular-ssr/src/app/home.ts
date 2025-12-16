@@ -1,5 +1,6 @@
-import {Component, inject} from "@angular/core"
+import {Component, computed, inject} from "@angular/core"
 import {RouterLink} from "@angular/router"
+import {Moon, Sun} from "lucide-angular"
 
 import {ButtonModule} from "@qualcomm-ui/angular/button"
 import {LinkDirective} from "@qualcomm-ui/angular/link"
@@ -16,7 +17,11 @@ import {QdsThemeService} from "@qualcomm-ui/angular/theme"
   `,
   template: `
     <div class="container">
-      <button q-button (click)="themeService.toggleTheme()">
+      <button
+        q-button
+        [endIcon]="themeIcon()"
+        (click)="themeService.toggleTheme()"
+      >
         Toggle Theme
       </button>
 
@@ -36,6 +41,10 @@ import {QdsThemeService} from "@qualcomm-ui/angular/theme"
 })
 export class Home {
   protected readonly themeService = inject(QdsThemeService)
+
+  readonly themeIcon = computed(() =>
+    this.themeService.theme() === "light" ? Sun : Moon,
+  )
 
   groups = [
     {name: "Accordion", path: "/accordion"},

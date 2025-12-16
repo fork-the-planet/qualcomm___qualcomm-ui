@@ -3,6 +3,9 @@
 
 import type {ReactElement, ReactNode} from "react"
 
+import {AlertCircle} from "lucide-react"
+
+import {IconOrNode} from "@qualcomm-ui/react/icon"
 import {useSliderErrorText} from "@qualcomm-ui/react-core/slider"
 import {
   type ElementRenderProp,
@@ -40,6 +43,7 @@ export function SliderErrorText({
 
   return (
     <PolymorphicElement as="span" {...mergedProps}>
+      <IconOrNode icon={AlertCircle} />
       {children}
     </PolymorphicElement>
   )

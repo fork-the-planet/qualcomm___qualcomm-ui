@@ -1,4 +1,4 @@
-import {Component, inject} from "@angular/core"
+import {Component, inject, signal} from "@angular/core"
 import {
   FormBuilder,
   type FormGroup,
@@ -62,7 +62,7 @@ import {TextInputModule} from "@qualcomm-ui/angular/text-input"
           q-button
           type="submit"
           variant="fill"
-          [disabled]="isSubmitting"
+          [disabled]="isSubmitting()"
         >
           Save Address
         </button>
@@ -71,7 +71,7 @@ import {TextInputModule} from "@qualcomm-ui/angular/text-input"
   `,
 })
 export class TextInputReactiveFormsDemo {
-  isSubmitting = false
+  readonly isSubmitting = signal(false)
 
   readonly addressForm: FormGroup
   private fb = inject(FormBuilder)
@@ -95,11 +95,11 @@ export class TextInputReactiveFormsDemo {
 
   onSubmit() {
     if (this.addressForm.valid) {
-      this.isSubmitting = true
+      this.isSubmitting.set(true)
       console.log("Form submitted:", this.addressForm.value)
       // Simulate API call
       setTimeout(() => {
-        this.isSubmitting = false
+        this.isSubmitting.set(false)
       }, 1000)
     } else {
       // Mark all fields as touched to show validation errors

@@ -68,7 +68,9 @@ export function PropDescriptionSeeTags({hideTitle, seeTags}: Props): ReactNode {
             const {text, url} = formatSingleLink(tag.content[0])
             return (
               <li key={index}>
-                <Link render={<RenderLink href={url} />}>{text}</Link>
+                <Link render={<RenderLink href={url} />} size="sm">
+                  {text}
+                </Link>
               </li>
             )
           }
@@ -84,7 +86,9 @@ export function PropDescriptionSeeTags({hideTitle, seeTags}: Props): ReactNode {
                     const {text, url} = formatSingleLink(content)
                     return (
                       <li key={content.text}>
-                        <Link render={<RenderLink href={url} />}>{text}</Link>
+                        <Link render={<RenderLink href={url} />} size="sm">
+                          {text}
+                        </Link>
                       </li>
                     )
                   })}

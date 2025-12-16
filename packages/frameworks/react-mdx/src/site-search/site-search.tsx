@@ -227,7 +227,10 @@ export function SiteSearch({
                 })}
                 ref={dialogInputContainerRef}
                 className="q-background-2"
-                inputProps={{ref: dialogInputRef}}
+                inputProps={{
+                  "aria-label": "Search the docs",
+                  ref: dialogInputRef,
+                }}
                 onValueChange={onInputChange}
                 placeholder="Search the docs"
                 size="lg"

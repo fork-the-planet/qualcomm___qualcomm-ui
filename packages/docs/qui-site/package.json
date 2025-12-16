@@ -1,11 +1,11 @@
 {
   "name": "@qualcomm-ui/qui-site",
+  "version": "0.0.0",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
   "repository": "https://github.com/qualcomm/qualcomm-ui",
   "private": true,
   "type": "module",
-  "version": "0.0.0",
   "scripts": {
     "build": "react-router build",
     "dev": "run-p dev:app typecheck",
@@ -50,7 +50,7 @@
     "react-device-detect": "^2.2.3",
     "react-dom": "catalog:",
     "react-router": "catalog:",
-    "zod": "^3.23.8",
+    "zod": "^4.1.13",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
@@ -82,9 +82,9 @@
     "shx": "^0.4.0",
     "tailwindcss": "^4.1.17",
     "tsx": "^4.20.6",
-    "typescript": "5.9.3",
+    "typescript": "catalog:",
     "unified": "^11.0.5",
-    "vite": "npm:rolldown-vite@7.2.6",
+    "vite": "npm:rolldown-vite@7.2.10",
     "vite-tsconfig-paths": "^5.1.4"
   },
   "engines": {

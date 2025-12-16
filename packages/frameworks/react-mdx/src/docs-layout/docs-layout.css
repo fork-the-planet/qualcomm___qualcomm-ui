@@ -24,6 +24,12 @@
   width: 100%;
 }
 
+[data-theme="light"][data-brand="qualcomm"] {
+  .qui-docs__header {
+    background: var(--background-primary);
+  }
+}
+
 .qui-docs__header {
   background: var(--color-surface-secondary);
   border-bottom: solid 1px var(--color-border-neutral-01);
@@ -207,18 +213,24 @@
     }
 
     &[data-hide-side-nav] {
+      .qui-docs__main-content {
+        max-width: unset;
+      }
       grid-template-columns:
         minmax(600px, calc(900px + var(--qui-side-nav-width)))
         240px;
     }
 
     &[data-hide-toc] {
-      grid-template-columns: var(--qui-side-nav-width) minmax(600px, 950px);
+      grid-template-columns: var(--qui-side-nav-width) minmax(
+          600px,
+          calc(1600px - var(--qui-side-nav-width))
+        );
 
       .qui-docs__main-content {
         max-width: unset;
         --content-padding-top: 20px;
-        --content-padding-right: 28px;
+        --content-padding-right: 42px;
         --content-padding-bottom: 32px;
         --content-padding-left: 42px;
       }
@@ -246,12 +258,15 @@
     }
 
     &[data-hide-toc] {
-      grid-template-columns: var(--qui-side-nav-width) minmax(600px, 950px);
+      grid-template-columns: var(--qui-side-nav-width) minmax(
+          600px,
+          calc(1600px - var(--qui-side-nav-width))
+        );
 
       .qui-docs__main-content {
         max-width: 1600px;
         --content-padding-top: 20px;
-        --content-padding-right: 28px;
+        --content-padding-right: 42px;
         --content-padding-bottom: 32px;
         --content-padding-left: 42px;
       }
@@ -365,4 +380,18 @@ pre.qui-docs-code {
 
 .qui-docs-sidebar__mobile-close-trigger {
   margin-left: auto;
+}
+
+.qui-docs__updated-on-wrapper {
+  align-items: center;
+  display: flex;
+  font: var(--font-static-body-sm-default);
+  gap: 4px;
+  justify-content: flex-end;
+  padding-top: var(--qui-mdx-margin-default);
+}
+
+.qui-docs__updated-on-time,
+.qui-docs__updated-by {
+  font: var(--font-static-body-sm-bold);
 }

@@ -5,7 +5,8 @@ import {program} from "@commander-js/extra-typings"
 import {mkdir, writeFile} from "node:fs/promises"
 import {resolve} from "node:path"
 
-import {getConfigFromEnv, KnowledgeApi, loadEnv} from "./common"
+import {FilesApi, KnowledgeApi} from "./api"
+import {getConfigFromEnv, loadEnv} from "./common"
 
 export function addDownloadKnowledgeCommand() {
   program
@@ -17,18 +18,29 @@ export function addDownloadKnowledgeCommand() {
 
       await mkdir(opts.outputDir, {recursive: true}).catch()
 
-      const api = new KnowledgeApi(getConfigFromEnv())
+      const config = getConfigFromEnv()
+      const apiConfig = {apiKey: config.webUiKey, baseUrl: config.webUiUrl}
+      const knowledgeApi = new KnowledgeApi(apiConfig)
+      const filesApi = new FilesApi(apiConfig)
 
-      const knowledge = await api.listKnowledgeFiles()
-      for (const file of knowledge.files) {
-        const data = await api.downloadFile(file.id)
+      const knowledge = await knowledgeApi.getById(config.knowledgeId)
+      for (const file of knowledge.files ?? []) {
+        const fileName = file.meta?.name as string | undefined
+        if (!fileName) {
+          continue
+        }
 
-        if (data) {
-          await writeFile(
-            resolve(opts.outputDir, file.meta.name),
-            data,
-            "utf-8",
-          )
+        try {
+          const content = await filesApi.getDataContent(file.id)
+          if (content?.content) {
+            await writeFile(
+              resolve(opts.outputDir, fileName),
+              content.content,
+              "utf-8",
+            )
+          }
+        } catch {
+          console.warn(`Failed to download ${fileName}`)
         }
       }
     })

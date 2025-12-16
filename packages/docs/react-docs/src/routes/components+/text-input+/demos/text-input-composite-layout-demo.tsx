@@ -8,9 +8,11 @@ export function TextInputCompositeLayoutDemo(): ReactElement {
       {/* preview */}
       <TextInput.Root size="sm">
         <div className="flex items-center gap-4">
-          <TextInput.Label className="font-body-sm-bold w-48">
-            Project Name
-          </TextInput.Label>
+          <>
+            <TextInput.Label className="font-body-sm-bold w-48">
+              Project Name
+            </TextInput.Label>
+          </>
           <TextInput.InputGroup>
             <TextInput.Input placeholder="QVSCE" />
           </TextInput.InputGroup>

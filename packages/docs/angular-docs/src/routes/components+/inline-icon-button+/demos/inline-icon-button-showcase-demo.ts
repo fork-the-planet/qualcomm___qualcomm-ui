@@ -7,7 +7,7 @@ import {InlineIconButtonComponent} from "@qualcomm-ui/angular/inline-icon-button
   selector: "inline-icon-button-showcase-demo",
   template: `
     <!-- preview -->
-    <button q-inline-icon-button></button>
+    <button aria-label="Close" q-inline-icon-button></button>
     <!-- preview -->
   `,
 })

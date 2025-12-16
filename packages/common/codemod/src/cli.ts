@@ -4,17 +4,14 @@
 import {Option, program} from "@commander-js/extra-typings"
 import {writeFile} from "node:fs/promises"
 
-import {modImports} from "./mod-imports"
 import {
-  angular,
-  base,
+  allTailwindTransforms,
   ExportAnalyzer,
   mdxDocs,
-  react,
   reactRouterUtils,
-  reactTableTransforms,
 } from "./modules"
-import type {ImportTransformEntry} from "./transformers"
+import {processDirs} from "./process-dirs"
+import {processClassTransforms} from "./transformers"
 
 const logModeOpt = new Option("--log-mode <logMode>", "Log mode")
   .choices(["info", "verbose"])
@@ -25,26 +22,87 @@ const directoryOption = new Option(
   "Directory to process (supports file globs)",
 ).makeOptionMandatory()
 
-function addMigration(name: string, transforms: ImportTransformEntry[]) {
-  return program
-    .command(name)
-    .addOption(directoryOption)
-    .addOption(logModeOpt)
-    .summary(`Update @qui/${name} imports to the latest version`)
-    .action(async (opts) => {
-      return modImports(transforms, opts)
-    })
+const dryRunOption = new Option(
+  "--dry-run",
+  "Preview changes without writing files",
+)
+
+interface MigrateOptions {
+  dir: string
+  dryRun: boolean
+  logMode: "info" | "verbose"
 }
 
-addMigration("angular", angular)
-addMigration("react", react)
-addMigration("base", base)
-addMigration("mdx-docs", mdxDocs)
-addMigration("react-router-utils", reactRouterUtils)
-addMigration("react-table", reactTableTransforms)
+const migrations: Record<string, (opts: MigrateOptions) => Promise<void>> = {
+  "@qui/mdx-docs": async (opts) => {
+    await processDirs(mdxDocs, opts)
+  },
+  "@qui/react-router-utils": async (opts) => {
+    await processDirs(reactRouterUtils, opts)
+  },
+  "@qui/tailwind-plugin": async (opts) => {
+    console.log(
+      opts.dryRun
+        ? "Running in dry-run mode (no files will be modified)...\n"
+        : "Migrating Tailwind classes...\n",
+    )
+
+    const result = await processClassTransforms(
+      [opts.dir],
+      allTailwindTransforms,
+      {dryRun: opts.dryRun, logMode: opts.logMode},
+    )
+
+    console.log("\n---")
+    console.log(
+      `Summary: ${result.totalChanges} changes in ${result.filesChanged} file(s)`,
+    )
+    if (opts.dryRun) {
+      console.log("(dry-run, no files modified)")
+    }
+  },
+}
+
+const moduleNames = Object.keys(migrations) as [string, ...string[]]
+
+const moduleOption = new Option("-m, --module <module>", "Module to migrate")
+  .choices(moduleNames)
+  .makeOptionMandatory()
+
+program
+  .command("migrate")
+  .addOption(moduleOption)
+  .addOption(directoryOption)
+  .addOption(logModeOpt)
+  .addOption(dryRunOption)
+  .summary("Run migrations for QUI packages")
+  .description(
+    `Migrate QUI package imports and classes to the latest version.
+
+Available modules:
+  @qui/mdx-docs            Update imports to @qualcomm-ui/react-mdx subpaths
+  @qui/react-router-utils  Update imports to @qualcomm-ui/react-router-utils
+  @qui/tailwind-plugin     Migrate Tailwind classes to QDS tokens (requires Tailwind v4)
+
+Examples:
+  qui-codemod migrate -m @qui/mdx-docs -d "src/**"
+  qui-codemod migrate -m @qui/react-router-utils -d "src/**"
+  qui-codemod migrate -m @qui/tailwind-plugin -d "src/**" --dry-run`,
+  )
+  .action(async (opts) => {
+    const migration = migrations[opts.module]
+    await migration({
+      dir: opts.dir,
+      dryRun: opts.dryRun ?? false,
+      logMode: opts.logMode,
+    })
+  })
 
 program
   .command("analyze-exports")
+  .description(
+    "A dev utility that analyzes exports in a directory and prints a report. Useful for generating migration configs from legacy libraries.",
+  )
   .addOption(directoryOption)
   .option(
     "-p, --package-name <packageName>",

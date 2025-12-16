@@ -146,6 +146,7 @@ export interface ProgressErrorTextBindings extends ProgressCommonBindings {
 
 export interface ProgressHintBindings extends ProgressCommonBindings {
   "data-part": "hint"
+  hidden: boolean
   id: string
 }
 
