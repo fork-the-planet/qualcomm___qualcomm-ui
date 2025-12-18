@@ -279,21 +279,20 @@ function SliderWithCustomMarkers() {
 
 <ComponentExplorer
   component={demos.SliderExplorerDemo}
-  excludeParts={["hidden-input"]}
-  name="SliderExplorerDemo"
-  partLinks={{
-    root: "#slider-root",
-    label: "#slider-label",
-    "value-text": "#slider-value-text",
-    control: "#slider-control",
-    track: "#slider-track",
-    range: "#slider-range",
-    thumb: "#slider-thumb",
-    "marker-group": "#slider-marker-group",
-    marker: "#slider-marker",
-    hint: "#slider-hint",
-    "error-text": "#slider-error-text",
-  }}
+  linkPrefix="slider"
+  parts={[
+    "root",
+    "label",
+    "value-text",
+    "control",
+    "track",
+    "range",
+    "thumb",
+    "marker-group",
+    "marker",
+    "hint",
+    "error-text",
+  ]}
 />
 
 ## API

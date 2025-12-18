@@ -279,21 +279,21 @@ export class SliderWithCustomMarkers {}
 ## Explorer
 
 <ComponentExplorer
-  excludeParts={["hidden-input"]}
+  linkPrefix="q-slider"
   name="SliderExplorerDemo"
-  partLinks={{
-    root: "#q-slider-root",
-    label: "#q-slider-label",
-    "value-text": "#q-slider-value-text",
-    control: "#q-slider-control",
-    track: "#q-slider-track",
-    range: "#q-slider-range",
-    thumb: "#q-slider-thumb",
-    "marker-group": "#q-slider-marker-group",
-    marker: "#q-slider-marker",
-    hint: "#q-slider-hint",
-    "error-text": "#q-slider-error-text",
-  }}
+  parts={[
+    "root",
+    "label",
+    "value-text",
+    "control",
+    "track",
+    {name: "range", link: "#q-slider-range"}, // link override example
+    "thumb",
+    "marker-group",
+    "marker",
+    "hint",
+    "error-text",
+  ]}
 />
 
 ## API

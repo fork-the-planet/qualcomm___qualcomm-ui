@@ -27,8 +27,8 @@ export interface QdsDemoProps
   extends Pick<QdsAngularDemoRunnerProps, "expanded" | "wrapperProps"> {
   className?: string
   hideDemoBrandSwitcher?: boolean
+  hideDemoControls?: boolean
   name: string
-  withoutUI?: boolean
 }
 
 export function QdsDemo({name, ...props}: QdsDemoProps) {
@@ -73,19 +73,19 @@ export function QdsDemo({name, ...props}: QdsDemoProps) {
 
 interface QdsDemoImplProps extends QdsDemoProps {
   demoInfo: AngularDemoInfo | null
+  hideDemoControls?: boolean
   uniqueId: string
   updating?: boolean
-  withoutUI?: boolean
 }
 
 function QdsDemoImpl({
   className,
   demoInfo,
   hideDemoBrandSwitcher: hideDemoBrandSwitcherProp,
+  hideDemoControls,
   name,
   uniqueId,
   updating,
-  withoutUI,
   wrapperProps,
   ...props
 }: QdsDemoImplProps) {
@@ -131,7 +131,7 @@ function QdsDemoImpl({
   }, [])
 
   useEffect(() => {
-    if (!mountedRef.current || withoutUI) {
+    if (!mountedRef.current || hideDemoControls) {
       return
     }
     const demo = demoRef.current!
@@ -168,7 +168,7 @@ function QdsDemoImpl({
     return () => {
       observer.disconnect()
     }
-  }, [demoInfo?.dimensions?.height, name, withoutUI])
+  }, [demoInfo?.dimensions?.height, name, hideDemoControls])
 
   useEffect(() => {
     let mounted = true
@@ -208,7 +208,7 @@ function QdsDemoImpl({
     </>
   )
 
-  if (withoutUI) {
+  if (hideDemoControls) {
     return <div ref={demoRef}>{demoContent}</div>
   }
 

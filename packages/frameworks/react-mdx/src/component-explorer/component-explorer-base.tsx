@@ -5,7 +5,6 @@ import {
   type ComponentPropsWithRef,
   type ReactElement,
   type ReactNode,
-  useEffect,
   useLayoutEffect,
   useRef,
   useState,
@@ -20,62 +19,71 @@ interface HighlightRect {
   width: number
 }
 
+export type ComponentPart =
+  | string
+  | {
+      /**
+       * Custom part doc link if auto-generation is not desired.
+       */
+      link: string
+      /**
+       * Part name, matching the `data-part` attribute value.
+       */
+      name: string
+    }
+
 export interface ComponentExplorerBaseProps
   extends ComponentPropsWithRef<"div"> {
   /**
-   * The component to explore. Should contain elements with `data-part` attributes.
+   * The component demo to explore.
    */
   children: ReactNode
 
   /**
-   * Array of part names to exclude from the component anatomy list.
+   * Prefix for API documentation links.
+   * e.g.
+   * "slider" -> "#slider-root" (React)
+   * "q-slider" -> "#q-slider-root" (Angular)
    */
-  excludeParts?: string[]
+  linkPrefix?: string
 
   /**
-   * Links to API documentation for each part.
-   * Maps part names to anchor URLs (e.g., "#slider-root").
+   * Array of parts.
    */
-  partLinks?: Record<string, string>
+  parts: ComponentPart[]
+}
+
+function generatePartLink(
+  partName: string,
+  linkPrefix: string | undefined,
+): string | undefined {
+  return linkPrefix ? `#${linkPrefix}-${partName}` : undefined
+}
+
+function getPartName(part: ComponentPart): string {
+  return typeof part === "string" ? part : part.name
+}
+
+function getPartLink(
+  part: ComponentPart,
+  linkPrefix: string | undefined,
+): string | undefined {
+  if (typeof part === "object" && "link" in part) {
+    return part.link
+  }
+  return generatePartLink(getPartName(part), linkPrefix)
 }
 
 export function ComponentExplorerBase({
   children,
-  excludeParts = [],
-  partLinks = {},
+  linkPrefix,
+  parts,
   ...props
 }: ComponentExplorerBaseProps): ReactElement {
   const {renderLink: Link} = useMdxDocsContext()
   const previewRef = useRef<HTMLDivElement>(null)
-  const [parts, setParts] = useState<string[]>([])
   const [hoveredPart, setHoveredPart] = useState<string | null>(null)
   const [highlightRects, setHighlightRects] = useState<HighlightRect[]>([])
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!previewRef.current) {
-        return
-      }
-
-      const elements =
-        previewRef.current.querySelectorAll<HTMLElement>("[data-part]")
-      const seen = new Set<string>()
-
-      const discovered = Array.from(elements)
-        .map((el) => el.getAttribute("data-part"))
-        .filter((part): part is string => {
-          if (!part || seen.has(part) || excludeParts.includes(part)) {
-            return false
-          }
-          seen.add(part)
-          return true
-        })
-
-      setParts(discovered)
-    }, 100)
-
-    return () => clearTimeout(timer)
-  }, [children, excludeParts])
 
   useLayoutEffect(() => {
     const previewElement = previewRef.current
@@ -140,28 +148,29 @@ export function ComponentExplorerBase({
         </div>
         <div className="qui-component-explorer__parts">
           {parts.map((part) => {
-            const link = partLinks[part]
+            const partName = getPartName(part)
+            const link = getPartLink(part, linkPrefix)
 
             return link ? (
               <Link
-                key={part}
+                key={partName}
                 className="qui-component-explorer__part"
-                data-active={hoveredPart === part || undefined}
+                data-active={hoveredPart === partName || undefined}
                 href={link}
-                onMouseEnter={() => setHoveredPart(part)}
+                onMouseEnter={() => setHoveredPart(partName)}
                 onMouseLeave={() => setHoveredPart(null)}
               >
-                {part}
+                {partName}
               </Link>
             ) : (
               <span
-                key={part}
+                key={partName}
                 className="qui-component-explorer__part"
-                data-active={hoveredPart === part || undefined}
-                onMouseEnter={() => setHoveredPart(part)}
+                data-active={hoveredPart === partName || undefined}
+                onMouseEnter={() => setHoveredPart(partName)}
                 onMouseLeave={() => setHoveredPart(null)}
               >
-                {part}
+                {partName}
               </span>
             )
           })}

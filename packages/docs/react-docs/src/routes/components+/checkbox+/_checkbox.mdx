@@ -114,15 +114,8 @@ The composite elements are only intended to be used as direct descendants of the
 
 <ComponentExplorer
   component={demos.CheckboxExplorerDemo}
-  excludeParts={["hidden-input", "indicator-icon"]}
-  name="CheckboxExplorerDemo"
-  partLinks={{
-    root: "#checkbox-root",
-    label: "#checkbox-label",
-    control: "#checkbox-control",
-    indicator: "#checkbox-indicator",
-    "error-text": "#checkbox-error-text",
-  }}
+  linkPrefix="checkbox"
+  parts={["root", "label", "control", "indicator", "error-text"]}
 />
 
 ## API

@@ -20,7 +20,7 @@ export function ComponentExplorer({name, ...props}: ComponentExplorerProps) {
   return (
     <ComponentExplorerBase {...props}>
       <div data-brand={brand || "qualcomm"} data-theme={scheme}>
-        <QdsDemo name={name} withoutUI />
+        <QdsDemo hideDemoControls name={name} />
       </div>
     </ComponentExplorerBase>
   )
