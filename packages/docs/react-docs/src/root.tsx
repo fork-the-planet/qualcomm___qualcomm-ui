@@ -8,7 +8,6 @@ import {
   isRouteErrorResponse,
   Links,
   type LoaderFunctionArgs,
-  Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
@@ -103,8 +102,10 @@ function App() {
   const {brand} = useQdsThemeContext()
 
   const location = useLocation()
-  const title = siteData.pageMap[location.pathname]?.title || ""
-  const appTitle = title ? `QUI | ${title}` : "QUI React"
+  const pageData = siteData.pageMap[location.pathname]
+  const title = pageData?.title || ""
+  const description = pageData?.description || ""
+  const appTitle = title ? `${title} | QUI` : "QUI React"
   const portalContainerRef = useRef<HTMLDivElement>(null)
   const [hideDemoBrandSwitcher, setHideDemoBrandSwitcher] = useState<boolean>(
     data.hideDemoBrandSwitcher,
@@ -132,7 +133,9 @@ function App() {
       <head>
         <meta charSet="utf-8" />
         <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <Meta />
+        <title>{appTitle}</title>
+        {description ? <meta content={description} name="description" /> : null}
+        <meta content="QUI React Documentation" name="application-name"></meta>
         <Links />
         <link
           href="/favicon/favicon-96x96.png"
@@ -148,7 +151,6 @@ function App() {
           sizes="180x180"
         />
         <link href="/favicon/site.webmanifest" rel="manifest" />
-        <title>{appTitle}</title>
 
         <PreventFlashOnWrongTheme ssrTheme={Boolean(theme)} />
 
