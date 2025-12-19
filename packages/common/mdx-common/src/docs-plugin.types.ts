@@ -45,6 +45,11 @@ export interface PageFrontmatter {
   categories?: string[]
 
   /**
+   * Page description
+   */
+  description?: string
+
+  /**
    * Used for grouping pages at the same level under a common section heading.
    */
   group?: string
@@ -232,8 +237,6 @@ export interface PageSection extends PageFrontmatter {
 /**
  * The PageMap is a record of the available routes in the application. Each key is
  * the route's pathname.
- *
- * @public
  */
 export type PageMap = Record<string, PageSection>
 
