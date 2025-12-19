@@ -97,6 +97,11 @@ interface ProcessedPage {
   url: string | undefined
 }
 
+interface MdxFlowExpression {
+  type: "mdxFlowExpression"
+  value: string
+}
+
 // Pure utility functions (no config dependency)
 
 async function exists(dirPath: string): Promise<boolean> {
@@ -826,6 +831,39 @@ class KnowledgeGenerator {
     }
   }
 
+  private replaceFrontmatterDescription(
+    frontmatter: Record<string, any>,
+  ): Plugin {
+    return () => (tree) => {
+      visit(
+        tree,
+        "mdxFlowExpression",
+        (
+          node: MdxFlowExpression,
+          index: number | undefined,
+          parent: Parent | undefined,
+        ) => {
+          if (
+            node.value.trim() !== "frontmatter.description" ||
+            index === undefined ||
+            !parent
+          ) {
+            return
+          }
+
+          if (frontmatter.description) {
+            parent.children.splice(index, 1, {
+              children: [{type: "text", value: frontmatter.description}],
+              type: "paragraph",
+            })
+          } else {
+            parent.children.splice(index, 1)
+          }
+        },
+      )
+    }
+  }
+
   /**
    * Processes MDX content by transforming JSX elements (TypeDocProps, demos)
    * into markdown, resolving relative links, and cleaning up formatting.
@@ -834,6 +872,7 @@ class KnowledgeGenerator {
     mdxContent: string,
     pageUrl: string | undefined,
     demosFolder: string | undefined,
+    frontmatter: Record<string, any>,
   ): Promise<{content: string; demoFiles: string[]}> {
     const demoFiles: string[] = []
     let processedContent = mdxContent
@@ -855,6 +894,7 @@ class KnowledgeGenerator {
       .use(remarkParse)
       .use(remarkMdx)
       .use(this.replaceTypeDocProps())
+      .use(this.replaceFrontmatterDescription(frontmatter))
       .use(await this.replaceThemeNodes())
       .use(this.replaceDemos(demosFolder, demoFiles))
       .use(remarkStringify)
@@ -892,6 +932,7 @@ class KnowledgeGenerator {
           String(parsed),
           component.url,
           component.demosFolder,
+          frontmatter,
         )
       const removeJsxProcessor = unified()
         .use(remarkParse)

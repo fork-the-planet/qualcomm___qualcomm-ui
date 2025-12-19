@@ -39,7 +39,8 @@
     "generate-knowledge-qui": "pnpm generate-knowledge --env .env.qui-ai --metadata env=qui-prod",
     "upload-knowledge-qui": "qui-mdx-vite upload-knowledge --env .env.qui-ai",
     "delete-knowledge-files-qui": "qui-mdx-vite clear-knowledge --env .env.qui-ai",
-    "debug-knowledge-files": "qui-mdx-vite get-knowledge-files --env .env.qui-ai"
+    "debug-knowledge-files": "qui-mdx-vite get-knowledge-files --env .env.qui-ai",
+    "update-knowledge-all": "run-s update-knowledge-qui update-knowledge-saga"
   },
   "dependencies": {
     "@angular/animations": "catalog:",
