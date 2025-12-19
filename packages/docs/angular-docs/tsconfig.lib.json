@@ -2,6 +2,7 @@
   "extends": "@qualcomm-ui/tsconfig/tsconfig.react-docs.json",
   "compilerOptions": {
     "baseUrl": "./",
+    "outDir": "node_modules/.tmp/out",
     "composite": true,
     "moduleResolution": "bundler",
     "tsBuildInfoFile": "node_modules/.tmp/tsbuildinfo",

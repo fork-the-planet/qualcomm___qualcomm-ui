@@ -148,6 +148,7 @@ export class SearchIndexer {
           this.metaJson,
           routeMeta?.title || frontmatter.title || "",
         ),
+      description: frontmatter.description,
       hidden: defined(routeMeta.hidden) ? routeMeta.hidden : frontmatter.hidden,
       hideBreadcrumbs: defined(routeMeta.hideBreadcrumbs)
         ? routeMeta.hideBreadcrumbs

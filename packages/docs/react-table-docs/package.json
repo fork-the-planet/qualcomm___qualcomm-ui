@@ -29,7 +29,7 @@
     "generate-knowledge-qui-test": "pnpm generate-knowledge --env .env.qui-ai-test",
     "upload-knowledge-qui-test": "qui-mdx-vite upload-knowledge --env .env.qui-ai-test",
     "debug-knowledge-files": "qui-mdx-vite get-knowledge-files --env .env.qui-ai-test",
-    "update-lazy-demo-map": "qui-mdx-vite generate-lazy-demo-map -r src/routes -o src/components/demo/lazy-demo-loader.ts"
+    "update-knowledge-all": "run-s update-knowledge-qui update-knowledge-saga"
   },
   "dependencies": {
     "@atlaskit/pragmatic-drag-and-drop": "^1.7.7",

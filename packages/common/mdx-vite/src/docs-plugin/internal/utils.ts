@@ -22,6 +22,7 @@ export function defined<T>(value: T | null | undefined): value is T {
 export const frontmatterSchema: ZodObject<{}> =
   implement<PageFrontmatter>().with({
     categories: z.string().array().optional(),
+    description: z.string().optional(),
     group: z.string().optional(),
     hidden: z.boolean().optional(),
     hideBreadcrumbs: z.boolean().optional(),

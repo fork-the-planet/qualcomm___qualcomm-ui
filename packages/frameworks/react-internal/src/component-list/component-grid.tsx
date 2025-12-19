@@ -5,6 +5,8 @@ import type {ReactElement} from "react"
 
 import {Link} from "react-router"
 
+import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
+
 import {componentList} from "./component-list"
 
 /**
@@ -19,16 +21,25 @@ export function ComponentGrid(): ReactElement {
         <Link
           key={component.name}
           className="qui-component-grid__item"
+          data-planned={booleanDataAttr(component.planned)}
           to={component.url}
         >
+          {component.planned ? (
+            <div className="qui-component-grid__planned-text">Coming soon</div>
+          ) : null}
           <img
             alt={component.name}
-            height={150}
+            className="qui-component-grid__image"
+            height={200}
             src={`/images/components/${component.fileName}`}
-            width={200}
           />
           <div className="qui-component-grid__item-description">
-            <h3 className="font-heading-xxs">{component.name}</h3>
+            <h3 className="font-heading-sm text-neutral-primary">
+              {component.name}
+            </h3>
+            <p className="font-body-sm text-neutral-secondary">
+              {component.description}
+            </p>
           </div>
         </Link>
       ))}

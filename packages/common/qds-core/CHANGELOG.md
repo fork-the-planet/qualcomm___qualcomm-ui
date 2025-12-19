@@ -1,5 +1,11 @@
 # @qualcomm-ui/qds-core
 
+## 1.10.2 (2025/12/18)
+
+### Bug Fixes
+
+- missing invalid checked checkbox style
+
 ## 1.10.1 (2025/12/15)
 
 ### Bug Fixes
