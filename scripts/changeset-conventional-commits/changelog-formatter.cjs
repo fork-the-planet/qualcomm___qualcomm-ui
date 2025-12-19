@@ -72,7 +72,7 @@ const changelogFunctions = {
       line += ` ([#${prNumber}](https://github.com/${options.repo}/issues/${prNumber}))`
     }
 
-    if (changeset.commit) {
+    if (changeset.commit && options.includeCommitLinks !== false) {
       const shortCommit = changeset.commit.slice(0, 7)
       line += ` ([${shortCommit}](https://github.com/${options.repo}/commit/${changeset.commit}))`
     }
