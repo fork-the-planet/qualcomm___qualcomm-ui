@@ -72,8 +72,8 @@ export default function foo(a: number, b: number) {
 }
 ```
 
-- When using default exports, the programmer using the exported symbol has to come up with a name for it, which can lead to inconsistency in a codebase. In contrast, with a named export, the programmer doesn't have to think about what to call it unless there’s a conflict with another identifier in their module.
-- Since default exports can be named anything in the codebase other than what it’s actually called, it can be difficult to refactor or ensure consistency.
+- When using default exports, the programmer using the exported symbol has to come up with a name for it, which can lead to inconsistency in a codebase. In contrast, with a named export, the programmer doesn't have to think about what to call it unless there's a conflict with another identifier in their module.
+- Since default exports can be named anything in the codebase other than what it's actually called, it can be difficult to refactor or ensure consistency.
 
 Prefer named exports instead:
 
@@ -786,7 +786,7 @@ Use strict equality checks (`===` and `!==`) instead of loose equality checks (`
 
 The double equality operators cause error-prone type coercions that are harder to understand.
 
-- Strict equality checks ensure that both the value and type of the operands are compared, which aligns with TypeScript’s type safety goals.
+- Strict equality checks ensure that both the value and type of the operands are compared, which aligns with TypeScript's type safety goals.
 - Using strict equality checks can help prevent bugs and make your code more reliable.
 - Strict equality checks can help you avoid the need to remember type conversion rules while checking for equality, which can make your code more readable and less error-prone.
 
