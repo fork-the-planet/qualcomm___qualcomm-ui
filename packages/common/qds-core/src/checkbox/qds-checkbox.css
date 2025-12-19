@@ -67,6 +67,16 @@
       border-color: var(--color-utility-disabled-border);
       color: var(--color-utility-disabled-text);
     }
+
+    &[data-invalid] {
+      background: var(--color-interactive-background-danger-idle);
+      border-color: var(--color-interactive-background-danger-idle);
+
+      &[data-hover] {
+        background: var(--color-interactive-background-danger-hover);
+        border-color: var(--color-interactive-border-danger-hover);
+      }
+    }
   }
 
   &[data-invalid][data-state="unchecked"] {
