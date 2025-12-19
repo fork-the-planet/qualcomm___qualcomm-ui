@@ -1,5 +1,11 @@
 # @qualcomm-ui/react-mdx
 
+## 1.7.4 (2025/12/18)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common, @qualcomm-ui/react]
+
 ## 1.7.3 (2025/12/15)
 
 ### Bug Fixes

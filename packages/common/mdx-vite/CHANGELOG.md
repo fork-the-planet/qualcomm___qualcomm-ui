@@ -1,5 +1,15 @@
 # @qualcomm-ui/mdx-vite
 
+## 2.8.0 (2025/12/18)
+
+### Features
+
+- [remark-plugins]: add support for frontmatter descriptions ([c482297](https://github.com/qualcomm/qualcomm-ui/commit/c4822975506ebce79e39fe31b1c1ed3f793649c7))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common]
+
 ## 2.7.0 (2025/12/15)
 
 ### Features
