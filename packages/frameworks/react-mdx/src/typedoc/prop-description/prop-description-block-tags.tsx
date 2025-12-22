@@ -45,7 +45,12 @@ const tagComponents: Record<
   "@example": ({tag}) => {
     return (
       <div className="doc-props-description__example-tag">
-        <PropDescriptionSummary summary={tag.content} />
+        <SpoilerRoot>
+          <SpoilerSummary>Example</SpoilerSummary>
+          <SpoilerContent>
+            <PropDescriptionSummary summary={tag.content} />
+          </SpoilerContent>
+        </SpoilerRoot>
       </div>
     )
   },

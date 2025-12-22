@@ -349,7 +349,8 @@ pre.qui-docs-code {
   font: var(--font-static-body-sm-bold);
 }
 
-.doc-props-description__remarks-tag {
+.doc-props-description__remarks-tag,
+.doc-props-description__example-tag {
   font: var(--font-static-body-sm-default);
   pre.shiki-code {
     border: solid 1px var(--color-border-neutral-01);
@@ -361,7 +362,6 @@ pre.qui-docs-code {
     margin-top: 0;
   }
   .mdx-spoiler__trigger {
-    font: var(--font-static-body-xs-bold);
     height: 32px;
     padding: 0;
   }
