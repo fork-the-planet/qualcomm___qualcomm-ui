@@ -6,7 +6,7 @@ import {useCallback, useEffect, useState} from "react"
 import {useCopyToClipboardContext} from "./copy-to-clipboard-context"
 
 export interface UseCopyToClipboardProps {
-  valueOrFn: (() => string) | string
+  valueOrFn: (() => Promise<string>) | (() => string) | string
 }
 
 export interface UseCopyToClipboard {
@@ -34,15 +34,17 @@ export function useCopyToClipboard(
     }
   }, [isCopied])
 
-  const copyToClipboard = useCallback(() => {
+  const copyToClipboard = useCallback(async () => {
     if (!navigator?.clipboard) {
       console.error("Access to clipboard rejected!")
     }
-    const value = typeof valueOrFn === "function" ? valueOrFn() : valueOrFn
+    const value =
+      typeof valueOrFn === "function" ? await (valueOrFn() as any) : valueOrFn
     if (!value) {
       console.error("No value to copy!")
       return
     }
+
     void navigator.clipboard
       .writeText(value)
       .catch(() => console.error("Failed to copy!"))

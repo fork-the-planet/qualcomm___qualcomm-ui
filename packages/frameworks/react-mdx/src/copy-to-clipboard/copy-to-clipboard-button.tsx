@@ -10,7 +10,7 @@ import {useCopyToClipboard} from "@qualcomm-ui/react-mdx/copy-to-clipboard"
 import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 
 export interface CopyButtonProps {
-  code: string | (() => string)
+  code: string | (() => string) | (() => Promise<string>)
 }
 
 export function CopyToClipboardButton({code}: CopyButtonProps): ReactElement {
