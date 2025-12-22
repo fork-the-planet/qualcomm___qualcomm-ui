@@ -243,7 +243,7 @@ class KnowledgeGenerator {
     this.config = config
   }
 
-  async run(): Promise<void> {
+  async run(): Promise<string[]> {
     const extractedMetadata = extractMetadata(this.config.metadata)
 
     if (this.config.verbose) {
@@ -262,7 +262,7 @@ class KnowledgeGenerator {
 
     if (pages.length === 0) {
       console.log("No pages found.")
-      return
+      return []
     }
 
     if (this.config.verbose) {
@@ -297,6 +297,8 @@ class KnowledgeGenerator {
       )
       await this.generateExtraFiles(extractedMetadata)
     }
+
+    return pages.map((page) => page.id)
   }
 
   private async loadDocProps(): Promise<DocProps | null> {
@@ -1143,11 +1145,11 @@ class KnowledgeGenerator {
 
 /**
  * Generates knowledge documentation from MDX files.
- * This is the main entry point that maintains backwards compatibility.
+ * Returns an array of page IDs that were generated.
  */
-export async function generate(config: WebUiKnowledgeConfig): Promise<void> {
+export async function generate(config: WebUiKnowledgeConfig): Promise<string[]> {
   const generator = new KnowledgeGenerator(config)
-  await generator.run()
+  return generator.run()
 }
 
 export function addGenerateKnowledgeCommand() {

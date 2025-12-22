@@ -318,7 +318,29 @@ export type PagePropTypes = QuiPropTypes & {
 
 export type PageDocProps = Record<string, PagePropTypes>
 
+export interface SiteDataExports {
+  /**
+   * Base URL path for exported markdown files.
+   */
+  basePath: string
+
+  /**
+   * Whether markdown exports are enabled.
+   */
+  enabled: boolean
+
+  /**
+   * List of page IDs that have markdown exports available.
+   */
+  pages: string[]
+}
+
 export interface SiteData {
+  /**
+   * Markdown export configuration and available pages.
+   */
+  exports?: SiteDataExports
+
   /**
    * Nav items, typically used for the site's side navigation.
    *

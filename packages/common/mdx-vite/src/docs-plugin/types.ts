@@ -165,6 +165,11 @@ export interface KnowledgeIntegrationConfig {
   exclude?: string[]
 
   /**
+   * Configuration for per-page markdown exports served from the public directory.
+   */
+  exports?: KnowledgeExportsConfig
+
+  /**
    * Extra files to include in knowledge output beyond the generated page content.
    */
   extraFiles?: KnowledgeExtraFile[]
@@ -213,6 +218,47 @@ export interface KnowledgeExtraFile {
    * Display name/title for this content.
    */
   title: string
+}
+
+/**
+ * Configuration for per-page markdown exports. Inherits from parent
+ * KnowledgeIntegrationConfig unless overridden.
+ */
+export interface KnowledgeExportsConfig {
+  /**
+   * Enable per-page markdown exports. When true, generates downloadable
+   * markdown files during build and exposes export metadata in siteData.
+   *
+   * @default false
+   */
+  enabled?: boolean
+
+  /**
+   * Glob patterns to exclude from exports. Overrides the parent exclude config.
+   */
+  exclude?: string[]
+
+  /**
+   * Extra files to include in exports. Overrides the parent extraFiles config.
+   */
+  extraFiles?: KnowledgeExtraFile[]
+
+  /**
+   * Metadata key-value pairs for exports. Overrides the parent metadata config.
+   */
+  metadata?: Record<string, string>
+
+  /**
+   * Prefix to prepend to each page title. Overrides the parent pageTitlePrefix.
+   */
+  pageTitlePrefix?: string
+
+  /**
+   * Output directory for exported markdown files, relative to public dir.
+   *
+   * @default 'exports/md'
+   */
+  staticPath?: string
 }
 
 export interface KnowledgeConfig {

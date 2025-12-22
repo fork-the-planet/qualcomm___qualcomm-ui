@@ -5,13 +5,14 @@ import chalk from "chalk"
 import chokidar from "chokidar"
 import {glob} from "glob"
 import {readFileSync} from "node:fs"
-import {resolve} from "node:path"
+import {join, resolve} from "node:path"
 import prettyMilliseconds from "pretty-ms"
-import type {PluginOption, ViteDevServer} from "vite"
+import type {PluginOption, ResolvedConfig, ViteDevServer} from "vite"
 
 import type {PageDocProps, SiteData} from "@qualcomm-ui/mdx-common"
 import type {QuiPropTypes} from "@qualcomm-ui/typedoc-common"
 
+import {generate} from "../open-web-ui-knowledge/generate-knowledge"
 import {
   type CompiledMdxFile,
   ConfigLoader,
@@ -19,6 +20,7 @@ import {
   type ResolvedQuiDocsConfig,
   SearchIndexer,
 } from "./internal"
+import type {KnowledgeExportsConfig} from "./types"
 
 const isDev = process.env.NODE_ENV === "development"
 
@@ -42,15 +44,24 @@ export interface QuiDocsPluginOptions {
 
 const VIRTUAL_MODULE_ID = "\0@qualcomm-ui/mdx-vite-plugin"
 
+interface ExportsState {
+  basePath: string
+  enabled: boolean
+  pages: string[]
+}
+
 /**
  * TODO: adjust when https://github.com/vitejs/vite/discussions/16358 lands.
  */
 class PluginState {
   buildCount: number = 0
+  config: ResolvedQuiDocsConfig | null = null
   configFilePath: string = ""
   docPropsFilePath: string = ""
+  exports: ExportsState = {basePath: "", enabled: false, pages: []}
   indexer!: SearchIndexer
   configLoader: ConfigLoader | null = null
+  knowledgeConfig: ResolvedQuiDocsConfig["knowledge"] = undefined
   routesDir!: string
   servers: ViteDevServer[] = []
   timeout: ReturnType<typeof setTimeout> | undefined = undefined
@@ -60,6 +71,10 @@ class PluginState {
 
   init(cwd: string) {
     this.cwd = cwd
+  }
+
+  getCwd() {
+    return this.cwd
   }
 
   get docPropsDirectory() {
@@ -72,8 +87,11 @@ class PluginState {
     )
   }
 
-  get siteData(): SiteData {
+  get siteData(): SiteData & {config: Omit<ResolvedQuiDocsConfig, "filePath">; exports: ExportsState} {
+    const {filePath: _filePath, ...config} = this.config ?? {} as ResolvedQuiDocsConfig
     return {
+      config,
+      exports: this.exports,
       navItems: state.indexer.navItems,
       pageDocProps: state.indexer.pageDocProps as unknown as PageDocProps,
       pageMap: state.indexer.pageMap,
@@ -96,16 +114,27 @@ class PluginState {
   }
 
   createIndexer(config: ResolvedQuiDocsConfig) {
+    this.config = config
     this.configFilePath = config.filePath
     this.docPropsFilePath = config.typeDocProps
       ? fixPath(resolve(this.cwd, config.typeDocProps))
       : ""
     this.routesDir = fixPath(resolve(config.appDirectory, config.pageDirectory))
+    this.knowledgeConfig = config.knowledge
     this.indexer = new SearchIndexer({
       ...config,
       srcDir: fixPath(resolve(this.cwd, config.appDirectory)),
       typeDocProps: this.resolveDocProps(),
     })
+
+    const exportsConfig = config.knowledge?.global?.exports
+    const exportsEnabled = exportsConfig?.enabled ?? false
+    const exportsPath = exportsConfig?.staticPath ?? "exports/md"
+    this.exports = {
+      basePath: exportsEnabled ? `/${exportsPath}` : "",
+      enabled: exportsEnabled,
+      pages: [],
+    }
   }
 
   buildIndex(shouldLog: boolean): CompiledMdxFile[] {
@@ -195,6 +224,38 @@ class PluginState {
         })
       })
   }
+
+  async generateExports(publicDir: string): Promise<void> {
+    if (!this.exports.enabled || !this.knowledgeConfig?.global) {
+      return
+    }
+
+    const globalConfig = this.knowledgeConfig.global
+    const exportsConfig = globalConfig.exports ?? {}
+    const exportsPath = exportsConfig.staticPath ?? "exports/md"
+    const outputPath = join(publicDir, exportsPath)
+
+    const startTime = Date.now()
+
+    const pageIds = await generate({
+      baseUrl: globalConfig.baseUrl,
+      clean: true,
+      docPropsPath: this.docPropsFilePath || undefined,
+      exclude: exportsConfig.exclude ?? globalConfig.exclude,
+      extraFiles: exportsConfig.extraFiles ?? globalConfig.extraFiles,
+      metadata: exportsConfig.metadata ?? globalConfig.metadata,
+      outputMode: "per-page",
+      outputPath,
+      pageTitlePrefix: exportsConfig.pageTitlePrefix ?? globalConfig.pageTitlePrefix,
+      routeDir: this.routesDir,
+    })
+
+    this.exports.pages = pageIds
+
+    console.debug(
+      `${chalk.magenta.bold(`@qualcomm-ui/mdx-vite/docs-plugin:`)} Generated markdown exports in: ${chalk.blueBright.bold(prettyMilliseconds(Date.now() - startTime))}`,
+    )
+  }
 }
 
 const state = new PluginState()
@@ -208,6 +269,8 @@ export function quiDocsPlugin(opts?: QuiDocsPluginOptions): PluginOption {
   const config = configLoader.loadConfig()
   state.createIndexer(config)
 
+  let viteConfig: ResolvedConfig
+
   return {
     apply(config, env) {
       return (
@@ -219,16 +282,29 @@ export function quiDocsPlugin(opts?: QuiDocsPluginOptions): PluginOption {
       state.buildIndex(state.buildCount > 0)
       state.buildCount++
     },
+    configResolved(resolved) {
+      viteConfig = resolved
+    },
     configureServer: (server) => {
       if (!isDev) {
         return
       }
       state.initWatchers(opts?.configFile)
+
+      if (state.exports.enabled) {
+        const publicDir = join(state.getCwd(), "public")
+        state.generateExports(publicDir)
+      }
+
       server.watcher.on("add", (path: string) => {
         if (path.endsWith(".mdx")) {
           state.handleChange({
-            onComplete: () => {
+            onComplete: async () => {
               server.ws.send({type: "full-reload"})
+              if (state.exports.enabled) {
+                const publicDir = join(state.getCwd(), "public")
+                await state.generateExports(publicDir)
+              }
             },
           })
         }
@@ -236,8 +312,12 @@ export function quiDocsPlugin(opts?: QuiDocsPluginOptions): PluginOption {
       server.watcher.on("unlink", (path: string) => {
         if (path.endsWith(".mdx")) {
           state.handleChange({
-            onComplete: () => {
+            onComplete: async () => {
               server.ws.send({type: "full-reload"})
+              if (state.exports.enabled) {
+                const publicDir = join(state.getCwd(), "public")
+                await state.generateExports(publicDir)
+              }
             },
           })
         }
@@ -311,6 +391,12 @@ export function quiDocsPlugin(opts?: QuiDocsPluginOptions): PluginOption {
         return VIRTUAL_MODULE_ID
       }
       return undefined
+    },
+    async writeBundle() {
+      if (!isDev && state.exports.enabled) {
+        const publicDir = viteConfig.publicDir || join(state.getCwd(), "public")
+        await state.generateExports(publicDir)
+      }
     },
   }
 }

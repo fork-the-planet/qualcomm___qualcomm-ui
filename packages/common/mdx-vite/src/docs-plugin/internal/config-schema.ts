@@ -5,6 +5,7 @@ import {z, type ZodObject, type ZodSchema} from "zod"
 
 import type {
   KnowledgeConfig,
+  KnowledgeExportsConfig,
   KnowledgeExtraFile,
   KnowledgeIntegrationConfig,
   NavMeta,
@@ -52,11 +53,21 @@ const knowledgeExtraFileSchema = implement<KnowledgeExtraFile>().with({
   title: z.string(),
 })
 
+const knowledgeExportsSchema = implement<KnowledgeExportsConfig>().with({
+  enabled: z.boolean().optional(),
+  exclude: z.array(z.string()).optional(),
+  extraFiles: z.array(knowledgeExtraFileSchema).optional(),
+  metadata: z.record(z.string(), z.string()).optional(),
+  pageTitlePrefix: z.string().optional(),
+  staticPath: z.string().optional(),
+})
+
 const knowledgeIntegrationSchema = implement<KnowledgeIntegrationConfig>().with(
   {
     baseUrl: z.string().optional(),
     description: z.string().optional(),
     exclude: z.array(z.string()).optional(),
+    exports: knowledgeExportsSchema.optional(),
     extraFiles: z.array(knowledgeExtraFileSchema).optional(),
     metadata: z.record(z.string(), z.string()).optional(),
     name: z.string().optional(),
