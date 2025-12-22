@@ -7,7 +7,7 @@ import {MDXProvider, type useMDXComponents} from "@mdx-js/react"
 
 import {Link} from "@qualcomm-ui/react/link"
 import {Table} from "@qualcomm-ui/react/table"
-import {useMdxDocsContext} from "@qualcomm-ui/react-mdx/context"
+import {useMdxDocsContext, useSiteContext} from "@qualcomm-ui/react-mdx/context"
 import {
   SpoilerContent,
   SpoilerRoot,
@@ -15,6 +15,34 @@ import {
 } from "@qualcomm-ui/react-mdx/spoiler"
 
 import {AnchorHeader, CodeTabs, ShikiPre} from "./internal"
+import {useMdxDocsLayoutContext} from "./layout/use-mdx-docs-layout"
+
+function getChildrenText(children: ReactNode): string {
+  if (typeof children === "string") return children
+  if (typeof children === "number") return String(children)
+  if (Array.isArray(children)) return children.map(getChildrenText).join("")
+  if (children && typeof children === "object" && "props" in children) {
+    return getChildrenText((children as {props: {children?: ReactNode}}).props.children)
+  }
+  return ""
+}
+
+function MdxH1({children, id, ...props}: {children?: ReactNode; id?: string}): ReactNode {
+  const {pageMap} = useSiteContext()
+  const {pathname} = useMdxDocsLayoutContext()
+  const page = pageMap[pathname]
+
+  const childText = getChildrenText(children)
+  if (page?.title === childText) {
+    return null
+  }
+
+  return (
+    <h1 className="mdx" id={id || undefined} {...props}>
+      {children}
+    </h1>
+  )
+}
 
 interface Props {
   /**
@@ -95,13 +123,7 @@ export function MdxProvider({children, components}: Props): ReactNode {
           },
           CodeTabs,
           em: (props) => <em className="mdx" {...props} />,
-          h1: ({children, id, ...props}) => {
-            return (
-              <h1 className="mdx" id={id || undefined} {...props}>
-                {children}
-              </h1>
-            )
-          },
+          h1: MdxH1,
           h2: ({children, id}) => {
             return (
               <AnchorHeader
