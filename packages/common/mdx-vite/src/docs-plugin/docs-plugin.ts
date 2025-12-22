@@ -65,6 +65,7 @@ class PluginState {
   routesDir!: string
   servers: ViteDevServer[] = []
   timeout: ReturnType<typeof setTimeout> | undefined = undefined
+  exportsTimeout: ReturnType<typeof setTimeout> | undefined = undefined
   watching = false
 
   private cwd!: string
@@ -258,8 +259,18 @@ class PluginState {
     this.exports.pages = pageIds
 
     console.debug(
-      `${chalk.magenta.bold(`@qualcomm-ui/mdx-vite/docs-plugin:`)} Generated markdown exports in: ${chalk.blueBright.bold(prettyMilliseconds(Date.now() - startTime))}`,
+      `${chalk.magenta.bold(`@qualcomm-ui/mdx-vite/docs-plugin:`)} Generated Markdown exports in: ${chalk.blueBright.bold(prettyMilliseconds(Date.now() - startTime))}`,
     )
+  }
+
+  debouncedGenerateExports(publicDir: string): void {
+    if (!this.exports.enabled) {
+      return
+    }
+    clearTimeout(this.exportsTimeout)
+    this.exportsTimeout = setTimeout(() => {
+      void this.generateExports(publicDir)
+    }, 500)
   }
 }
 
@@ -308,26 +319,22 @@ export function quiDocsPlugin(opts?: QuiDocsPluginOptions): PluginOption {
 
       server.watcher.on("add", (path: string) => {
         if (path.endsWith(".mdx")) {
+          const publicDir = join(state.getCwd(), "public")
           state.handleChange({
-            onComplete: async () => {
+            onComplete: () => {
               server.ws.send({type: "full-reload"})
-              if (state.exports.enabled) {
-                const publicDir = join(state.getCwd(), "public")
-                await state.generateExports(publicDir)
-              }
+              state.debouncedGenerateExports(publicDir)
             },
           })
         }
       })
       server.watcher.on("unlink", (path: string) => {
         if (path.endsWith(".mdx")) {
+          const publicDir = join(state.getCwd(), "public")
           state.handleChange({
-            onComplete: async () => {
+            onComplete: () => {
               server.ws.send({type: "full-reload"})
-              if (state.exports.enabled) {
-                const publicDir = join(state.getCwd(), "public")
-                await state.generateExports(publicDir)
-              }
+              state.debouncedGenerateExports(publicDir)
             },
           })
         }

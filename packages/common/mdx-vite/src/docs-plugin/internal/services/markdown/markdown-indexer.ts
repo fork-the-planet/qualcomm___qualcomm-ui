@@ -21,6 +21,7 @@ import type {
 
 import {rehypeSlug} from "../../../rehype/rehype-slug"
 import {remarkAlerts} from "../../../remark/remark-alerts"
+import {remarkFrontmatterInterpolation} from "../../../remark/remark-frontmatter-interpolation"
 
 import type {IndexedPage, IndexedSection} from "./markdown.types"
 import {remarkRemoveMermaidCodeBlocks} from "./remark-remove-code-blocks"
@@ -136,6 +137,7 @@ export class MarkdownIndexer {
       .use(remarkParse)
       .use(remarkGfm)
       .use(remarkAlerts)
+      .use(remarkFrontmatterInterpolation, frontmatter)
       .use(remarkRehype)
       .use(rehypeStringify)
       .processSync(fileContents)
@@ -143,12 +145,6 @@ export class MarkdownIndexer {
     let contents = file.toString()
 
     contents = contents.substring(contents.indexOf("<h1>"))
-
-    for (const [key, value] of Object.entries(frontmatter)) {
-      if (typeof value === "string" || typeof value === "number") {
-        contents = contents.replaceAll(`frontmatter.${key}`, `${value}`)
-      }
-    }
 
     const htmlAst = unified()
       .data("settings", {fragment: true})

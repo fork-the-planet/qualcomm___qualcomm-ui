@@ -28,7 +28,7 @@ describe("remarkFrontmatterDescription", () => {
 Some content`
 
     const result = await process(input)
-    expect(result).toContain('<p className="mdx">')
+    expect(result).toContain('<p className="mdx qui-docs__page-description">')
     expect(result).toContain("{frontmatter.description}")
     expect(result).toContain("</p>")
   })
@@ -42,7 +42,7 @@ Some content`
 
     const result = await process(input)
     // Whitespace inside expressions is normalized, so this should still wrap
-    expect(result).toContain('<p className="mdx">')
+    expect(result).toContain('<p className="mdx qui-docs__page-description">')
   })
 
   test("does not wrap other expressions", async () => {
@@ -55,7 +55,7 @@ Some content`
 Some content`
 
     const result = await process(input)
-    expect(result).not.toContain('<p className="mdx">')
+    expect(result).not.toContain('<p className="mdx qui-docs__page-description">')
   })
 
   test("preserves other content", async () => {
@@ -83,7 +83,7 @@ Some paragraph content.`
 {frontmatter.description}`
 
     const result = await process(input)
-    const matches = result.match(/<p className="mdx">/g)
+    const matches = result.match(/<p className="mdx qui-docs__page-description">/g)
     expect(matches).toHaveLength(2)
   })
 })
