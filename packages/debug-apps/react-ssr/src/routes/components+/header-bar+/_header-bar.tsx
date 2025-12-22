@@ -1,7 +1,7 @@
-import MenuItemDemo from "@qualcomm-ui/react-docs/components+/header-bar+/demos/header-bar-menu-item-demo"
-import ShowcaseDemo from "@qualcomm-ui/react-docs/components+/header-bar+/demos/header-bar-showcase-demo"
-import SizesDemo from "@qualcomm-ui/react-docs/components+/header-bar+/demos/header-bar-sizes-demo"
-import SurfacesDemo from "@qualcomm-ui/react-docs/components+/header-bar+/demos/header-bar-surfaces-demo"
+import {HeaderBarMenuItemDemo as MenuItemDemo} from "@qualcomm-ui/react-docs/components+/header-bar+/demos/header-bar-menu-item-demo"
+import {HeaderBarShowcaseDemo as ShowcaseDemo} from "@qualcomm-ui/react-docs/components+/header-bar+/demos/header-bar-showcase-demo"
+import {HeaderBarSizesDemo as SizesDemo} from "@qualcomm-ui/react-docs/components+/header-bar+/demos/header-bar-sizes-demo"
+import {HeaderBarSurfacesDemo as SurfacesDemo} from "@qualcomm-ui/react-docs/components+/header-bar+/demos/header-bar-surfaces-demo"
 
 const demos = [
   {component: MenuItemDemo, title: "Menu Item"},

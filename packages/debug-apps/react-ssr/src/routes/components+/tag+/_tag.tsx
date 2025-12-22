@@ -1,9 +1,9 @@
-import EmphasisDemo from "@qualcomm-ui/react-docs/components+/tag+/demos/tag-emphasis-demo"
-import IconsDemo from "@qualcomm-ui/react-docs/components+/tag+/demos/tag-icons-demo"
-import RadiusDemo from "@qualcomm-ui/react-docs/components+/tag+/demos/tag-radius-demo"
-import SizesDemo from "@qualcomm-ui/react-docs/components+/tag+/demos/tag-sizes-demo"
-import StatesDemo from "@qualcomm-ui/react-docs/components+/tag+/demos/tag-states-demo"
-import VariantsDemo from "@qualcomm-ui/react-docs/components+/tag+/demos/tag-variants-demo"
+import {TagEmphasisDemo as EmphasisDemo} from "@qualcomm-ui/react-docs/components+/tag+/demos/tag-emphasis-demo"
+import {TagIconsDemo as IconsDemo} from "@qualcomm-ui/react-docs/components+/tag+/demos/tag-icons-demo"
+import {TagRadiusDemo as RadiusDemo} from "@qualcomm-ui/react-docs/components+/tag+/demos/tag-radius-demo"
+import {TagSizesDemo as SizesDemo} from "@qualcomm-ui/react-docs/components+/tag+/demos/tag-sizes-demo"
+import {TagStatesDemo as StatesDemo} from "@qualcomm-ui/react-docs/components+/tag+/demos/tag-states-demo"
+import {TagVariantsDemo as VariantsDemo} from "@qualcomm-ui/react-docs/components+/tag+/demos/tag-variants-demo"
 
 const demos = [
   {component: EmphasisDemo, title: "Emphasis"},

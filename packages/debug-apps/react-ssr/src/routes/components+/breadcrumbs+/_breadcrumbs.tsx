@@ -1,7 +1,7 @@
-import DisabledDemo from "@qualcomm-ui/react-docs/components+/breadcrumbs+/demos/breadcrumbs-disabled-demo"
-import EmphasisDemo from "@qualcomm-ui/react-docs/components+/breadcrumbs+/demos/breadcrumbs-emphasis-demo"
-import LinksDemo from "@qualcomm-ui/react-docs/components+/breadcrumbs+/demos/breadcrumbs-links-demo"
-import SizesDemo from "@qualcomm-ui/react-docs/components+/breadcrumbs+/demos/breadcrumbs-sizes-demo"
+import {BreadcrumbsDisabledDemo as DisabledDemo} from "@qualcomm-ui/react-docs/components+/breadcrumbs+/demos/breadcrumbs-disabled-demo"
+import {BreadcrumbsEmphasisDemo as EmphasisDemo} from "@qualcomm-ui/react-docs/components+/breadcrumbs+/demos/breadcrumbs-emphasis-demo"
+import {BreadcrumbsLinksDemo as LinksDemo} from "@qualcomm-ui/react-docs/components+/breadcrumbs+/demos/breadcrumbs-links-demo"
+import {BreadcrumbsSizesDemo as SizesDemo} from "@qualcomm-ui/react-docs/components+/breadcrumbs+/demos/breadcrumbs-sizes-demo"
 
 const demos = [
   {component: DisabledDemo, title: "Disabled"},

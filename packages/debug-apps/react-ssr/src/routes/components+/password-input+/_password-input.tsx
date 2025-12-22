@@ -1,10 +1,10 @@
-import CompositeDemo from "@qualcomm-ui/react-docs/components+/password-input+/demos/password-input-composite-demo"
-import ControlledValueDemo from "@qualcomm-ui/react-docs/components+/password-input+/demos/password-input-controlled-value-demo"
-import ControlledVisibilityDemo from "@qualcomm-ui/react-docs/components+/password-input+/demos/password-input-controlled-visibility-demo"
-import IconsDemo from "@qualcomm-ui/react-docs/components+/password-input+/demos/password-input-icons-demo"
-import ReactHookFormDemo from "@qualcomm-ui/react-docs/components+/password-input+/demos/password-input-react-hook-form-demo"
-import SimpleDemo from "@qualcomm-ui/react-docs/components+/password-input+/demos/password-input-simple-demo"
-import TanstackFormDemo from "@qualcomm-ui/react-docs/components+/password-input+/demos/password-input-tanstack-form-demo"
+import {PasswordInputCompositeDemo as CompositeDemo} from "@qualcomm-ui/react-docs/components+/password-input+/demos/password-input-composite-demo"
+import {PasswordInputControlledValueDemo as ControlledValueDemo} from "@qualcomm-ui/react-docs/components+/password-input+/demos/password-input-controlled-value-demo"
+import {PasswordInputControlledVisibilityDemo as ControlledVisibilityDemo} from "@qualcomm-ui/react-docs/components+/password-input+/demos/password-input-controlled-visibility-demo"
+import {PasswordInputIconsDemo as IconsDemo} from "@qualcomm-ui/react-docs/components+/password-input+/demos/password-input-icons-demo"
+import {PasswordInputReactHookFormDemo as ReactHookFormDemo} from "@qualcomm-ui/react-docs/components+/password-input+/demos/password-input-react-hook-form-demo"
+import {PasswordInputSimpleDemo as SimpleDemo} from "@qualcomm-ui/react-docs/components+/password-input+/demos/password-input-simple-demo"
+import {PasswordInputTanstackFormDemo as TanstackFormDemo} from "@qualcomm-ui/react-docs/components+/password-input+/demos/password-input-tanstack-form-demo"
 
 const demos = [
   {component: CompositeDemo, title: "Composite"},

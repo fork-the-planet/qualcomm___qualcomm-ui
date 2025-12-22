@@ -1,9 +1,9 @@
-import ActionDemo from "@qualcomm-ui/react-docs/components+/inline-notification+/demos/inline-notification-action-demo"
-import CompositeDemo from "@qualcomm-ui/react-docs/components+/inline-notification+/demos/inline-notification-composite-demo"
-import DismissableDemo from "@qualcomm-ui/react-docs/components+/inline-notification+/demos/inline-notification-dismissable-demo"
-import EmphasisDemo from "@qualcomm-ui/react-docs/components+/inline-notification+/demos/inline-notification-emphasis-demo"
-import LayoutDemo from "@qualcomm-ui/react-docs/components+/inline-notification+/demos/inline-notification-layout-demo"
-import SimpleDemo from "@qualcomm-ui/react-docs/components+/inline-notification+/demos/inline-notification-simple-demo"
+import {InlineNotificationActionDemo as ActionDemo} from "@qualcomm-ui/react-docs/components+/inline-notification+/demos/inline-notification-action-demo"
+import {InlineNotificationCompositeDemo as CompositeDemo} from "@qualcomm-ui/react-docs/components+/inline-notification+/demos/inline-notification-composite-demo"
+import {InlineNotificationDismissableDemo as DismissableDemo} from "@qualcomm-ui/react-docs/components+/inline-notification+/demos/inline-notification-dismissable-demo"
+import {InlineNotificationEmphasisDemo as EmphasisDemo} from "@qualcomm-ui/react-docs/components+/inline-notification+/demos/inline-notification-emphasis-demo"
+import {InlineNotificationLayoutDemo as LayoutDemo} from "@qualcomm-ui/react-docs/components+/inline-notification+/demos/inline-notification-layout-demo"
+import {InlineNotificationSimpleDemo as SimpleDemo} from "@qualcomm-ui/react-docs/components+/inline-notification+/demos/inline-notification-simple-demo"
 
 const demos = [
   {component: ActionDemo, title: "Action"},

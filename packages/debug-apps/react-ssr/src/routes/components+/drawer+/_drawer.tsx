@@ -1,7 +1,7 @@
-import ControlledStateDemo from "@qualcomm-ui/react-docs/components+/drawer+/demos/drawer-controlled-state-demo"
-import CustomContainerDemo from "@qualcomm-ui/react-docs/components+/drawer+/demos/drawer-custom-container-demo"
-import PlacementDemo from "@qualcomm-ui/react-docs/components+/drawer+/demos/drawer-placement-demo"
-import PlacementStartDemo from "@qualcomm-ui/react-docs/components+/drawer+/demos/drawer-placement-start-demo"
+import {DrawerControlledStateDemo as ControlledStateDemo} from "@qualcomm-ui/react-docs/components+/drawer+/demos/drawer-controlled-state-demo"
+import {DrawerCustomContainerDemo as CustomContainerDemo} from "@qualcomm-ui/react-docs/components+/drawer+/demos/drawer-custom-container-demo"
+import {DrawerPlacementDemo as PlacementDemo} from "@qualcomm-ui/react-docs/components+/drawer+/demos/drawer-placement-demo"
+import {DrawerPlacementStartDemo as PlacementStartDemo} from "@qualcomm-ui/react-docs/components+/drawer+/demos/drawer-placement-start-demo"
 
 const demos = [
   {component: ControlledStateDemo, title: "Controlled State"},

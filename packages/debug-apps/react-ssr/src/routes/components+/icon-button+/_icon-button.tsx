@@ -1,9 +1,9 @@
-import ContrastDemo from "@qualcomm-ui/react-docs/components+/icon-button+/demos/icon-button-contrast-demo"
-import DensityDemo from "@qualcomm-ui/react-docs/components+/icon-button+/demos/icon-button-density-demo"
-import EmphasisDemo from "@qualcomm-ui/react-docs/components+/icon-button+/demos/icon-button-emphasis-demo"
-import SizesDemo from "@qualcomm-ui/react-docs/components+/icon-button+/demos/icon-button-sizes-demo"
-import VariantCombinationsDemo from "@qualcomm-ui/react-docs/components+/icon-button+/demos/icon-button-variant-combinations-demo"
-import VariantsDemo from "@qualcomm-ui/react-docs/components+/icon-button+/demos/icon-button-variants-demo"
+import {IconButtonContrastDemo as ContrastDemo} from "@qualcomm-ui/react-docs/components+/icon-button+/demos/icon-button-contrast-demo"
+import {IconButtonDensityDemo as DensityDemo} from "@qualcomm-ui/react-docs/components+/icon-button+/demos/icon-button-density-demo"
+import {IconButtonEmphasisDemo as EmphasisDemo} from "@qualcomm-ui/react-docs/components+/icon-button+/demos/icon-button-emphasis-demo"
+import {IconButtonSizesDemo as SizesDemo} from "@qualcomm-ui/react-docs/components+/icon-button+/demos/icon-button-sizes-demo"
+import {IconButtonVariantCombinationsDemo as VariantCombinationsDemo} from "@qualcomm-ui/react-docs/components+/icon-button+/demos/icon-button-variant-combinations-demo"
+import {IconButtonVariantsDemo as VariantsDemo} from "@qualcomm-ui/react-docs/components+/icon-button+/demos/icon-button-variants-demo"
 
 const demos = [
   {component: ContrastDemo, title: "Contrast"},

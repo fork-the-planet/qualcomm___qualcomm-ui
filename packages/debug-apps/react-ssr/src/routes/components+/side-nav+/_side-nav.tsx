@@ -1,11 +1,11 @@
-import CollapsedDemo from "@qualcomm-ui/react-docs/components+/side-nav+/demos/side-nav-collapsed-demo"
-import DefaultExpandedDemo from "@qualcomm-ui/react-docs/components+/side-nav+/demos/side-nav-default-expanded-demo"
-import DisabledNodeDemo from "@qualcomm-ui/react-docs/components+/side-nav+/demos/side-nav-disabled-node-demo"
-import FilteringDemo from "@qualcomm-ui/react-docs/components+/side-nav+/demos/side-nav-filtering-demo"
-import GroupsDemo from "@qualcomm-ui/react-docs/components+/side-nav+/demos/side-nav-groups-demo"
-import LinksDemo from "@qualcomm-ui/react-docs/components+/side-nav+/demos/side-nav-links-demo"
-import NodeShorthandDemo from "@qualcomm-ui/react-docs/components+/side-nav+/demos/side-nav-node-shorthand-demo"
-import SurfaceDemo from "@qualcomm-ui/react-docs/components+/side-nav+/demos/side-nav-surface-demo"
+import {SideNavCollapsedDemo as CollapsedDemo} from "@qualcomm-ui/react-docs/components+/side-nav+/demos/side-nav-collapsed-demo"
+import {SideNavDefaultExpandedDemo as DefaultExpandedDemo} from "@qualcomm-ui/react-docs/components+/side-nav+/demos/side-nav-default-expanded-demo"
+import {SideNavDisabledNodeDemo as DisabledNodeDemo} from "@qualcomm-ui/react-docs/components+/side-nav+/demos/side-nav-disabled-node-demo"
+import {SideNavFilteringDemo as FilteringDemo} from "@qualcomm-ui/react-docs/components+/side-nav+/demos/side-nav-filtering-demo"
+import {SideNavGroupsDemo as GroupsDemo} from "@qualcomm-ui/react-docs/components+/side-nav+/demos/side-nav-groups-demo"
+import {SideNavLinksDemo as LinksDemo} from "@qualcomm-ui/react-docs/components+/side-nav+/demos/side-nav-links-demo"
+import {SideNavNodeShorthandDemo as NodeShorthandDemo} from "@qualcomm-ui/react-docs/components+/side-nav+/demos/side-nav-node-shorthand-demo"
+import {SideNavSurfaceDemo as SurfaceDemo} from "@qualcomm-ui/react-docs/components+/side-nav+/demos/side-nav-surface-demo"
 
 const demos = [
   {component: CollapsedDemo, title: "Collapsed"},

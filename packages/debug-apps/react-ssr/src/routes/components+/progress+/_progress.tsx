@@ -1,9 +1,9 @@
-import CompositeDemo from "@qualcomm-ui/react-docs/components+/progress+/demos/progress-composite-demo"
-import EmphasisDemo from "@qualcomm-ui/react-docs/components+/progress+/demos/progress-emphasis-demo"
-import ErrorTextDemo from "@qualcomm-ui/react-docs/components+/progress+/demos/progress-error-text-demo"
-import LabelOrientationDemo from "@qualcomm-ui/react-docs/components+/progress+/demos/progress-label-orientation-demo"
-import SimpleDemo from "@qualcomm-ui/react-docs/components+/progress+/demos/progress-simple-demo"
-import SizeDemo from "@qualcomm-ui/react-docs/components+/progress+/demos/progress-size-demo"
+import {ProgressCompositeDemo as CompositeDemo} from "@qualcomm-ui/react-docs/components+/progress+/demos/progress-composite-demo"
+import {ProgressEmphasisDemo as EmphasisDemo} from "@qualcomm-ui/react-docs/components+/progress+/demos/progress-emphasis-demo"
+import {ProgressErrorTextDemo as ErrorTextDemo} from "@qualcomm-ui/react-docs/components+/progress+/demos/progress-error-text-demo"
+import {ProgressLabelOrientationDemo as LabelOrientationDemo} from "@qualcomm-ui/react-docs/components+/progress+/demos/progress-label-orientation-demo"
+import {ProgressSimpleDemo as SimpleDemo} from "@qualcomm-ui/react-docs/components+/progress+/demos/progress-simple-demo"
+import {ProgressSizeDemo as SizeDemo} from "@qualcomm-ui/react-docs/components+/progress+/demos/progress-size-demo"
 
 const demos = [
   {component: CompositeDemo, title: "Composite"},

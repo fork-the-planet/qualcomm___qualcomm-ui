@@ -1,9 +1,9 @@
-import ControlledStateDemo from "@qualcomm-ui/react-docs/components+/pagination+/demos/pagination-controlled-state-demo"
-import MetadataDemo from "@qualcomm-ui/react-docs/components+/pagination+/demos/pagination-metadata-demo"
-import PageSizeDemo from "@qualcomm-ui/react-docs/components+/pagination+/demos/pagination-page-size-demo"
-import RangesDemo from "@qualcomm-ui/react-docs/components+/pagination+/demos/pagination-ranges-demo"
-import ShowcaseDemo from "@qualcomm-ui/react-docs/components+/pagination+/demos/pagination-showcase-demo"
-import SizesDemo from "@qualcomm-ui/react-docs/components+/pagination+/demos/pagination-sizes-demo"
+import {PaginationControlledStateDemo as ControlledStateDemo} from "@qualcomm-ui/react-docs/components+/pagination+/demos/pagination-controlled-state-demo"
+import {PaginationMetadataDemo as MetadataDemo} from "@qualcomm-ui/react-docs/components+/pagination+/demos/pagination-metadata-demo"
+import {PaginationPageSizeDemo as PageSizeDemo} from "@qualcomm-ui/react-docs/components+/pagination+/demos/pagination-page-size-demo"
+import {PaginationRangesDemo as RangesDemo} from "@qualcomm-ui/react-docs/components+/pagination+/demos/pagination-ranges-demo"
+import {PaginationShowcaseDemo as ShowcaseDemo} from "@qualcomm-ui/react-docs/components+/pagination+/demos/pagination-showcase-demo"
+import {PaginationSizesDemo as SizesDemo} from "@qualcomm-ui/react-docs/components+/pagination+/demos/pagination-sizes-demo"
 
 const demos = [
   {component: ControlledStateDemo, title: "Controlled State"},
