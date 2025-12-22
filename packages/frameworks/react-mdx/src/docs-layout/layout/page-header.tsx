@@ -1,7 +1,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {ReactNode} from "react"
+import {type ReactNode, useEffect} from "react"
 
 import {Check, Copy, Download} from "lucide-react"
 
@@ -13,14 +13,15 @@ import {useCopyToClipboard} from "@qualcomm-ui/react-mdx/copy-to-clipboard"
 
 import {useMdxDocsLayoutContext} from "./use-mdx-docs-layout"
 
-function pathnameToExportId(pathname: string): string {
-  return pathname.replace(/^\//, "").replace(/\//g, "-") || "index"
+function pathnameToExportId(pathSegments: string[]): string {
+  return pathSegments.join("-")
 }
 
 export function PageHeader(): ReactNode {
   const {exports, pageMap} = useSiteContext()
   const {pathname} = useMdxDocsLayoutContext()
-  const exportId = pathnameToExportId(pathname)
+  const page = pageMap[pathname]
+  const exportId = pathnameToExportId(page?.pathSegments || [])
   const hasExport = exports?.enabled && exports.pages.includes(exportId)
   // example: `/exports/md/guide-markdown.md
   const exportUrl = hasExport ? `${exports.basePath}/${exportId}.md` : null
@@ -37,17 +38,19 @@ export function PageHeader(): ReactNode {
       })
   }
 
+  useEffect(() => {
+    console.debug(exportUrl)
+  }, [exportUrl])
+
   const {copyToClipboard, isCopied} = useCopyToClipboard({
     valueOrFn: getExportAsText,
   })
-
-  const page = pageMap[pathname]
 
   if (!page) {
     return null
   }
 
-  const {description, title} = page
+  const {title} = page
 
   return (
     <header className="qui-docs__page-header">
@@ -99,9 +102,6 @@ export function PageHeader(): ReactNode {
           </div>
         )}
       </div>
-      {description && (
-        <p className="qui-docs__page-header-description">{description}</p>
-      )}
     </header>
   )
 }
