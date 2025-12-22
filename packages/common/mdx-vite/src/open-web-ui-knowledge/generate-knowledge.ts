@@ -833,7 +833,7 @@ class KnowledgeGenerator {
     }
   }
 
-  private replaceFrontmatterDescription(
+  private replaceFrontmatterExpressions(
     frontmatter: Record<string, any>,
   ): Plugin {
     return () => (tree) => {
@@ -863,6 +863,21 @@ class KnowledgeGenerator {
           }
         },
       )
+
+      const root = tree as Parent
+      const h1Index = root.children.findIndex((node: any) => {
+        if (node.type !== "heading" || node.depth !== 1) {
+          return false
+        }
+        return node.children?.some(
+          (child: any) =>
+            child.type === "mdxTextExpression" &&
+            child.value?.includes("frontmatter"),
+        )
+      })
+      if (h1Index >= 0) {
+        root.children.splice(h1Index, 1)
+      }
     }
   }
 
@@ -890,8 +905,9 @@ class KnowledgeGenerator {
     const processor = unified()
       .use(remarkParse)
       .use(remarkMdx)
+      .use(remarkFrontmatter, ["yaml"])
       .use(this.replaceTypeDocProps())
-      .use(this.replaceFrontmatterDescription(frontmatter))
+      .use(this.replaceFrontmatterExpressions(frontmatter))
       .use(await this.replaceThemeNodes())
       .use(this.replaceDemos(demosFolder, demoFiles))
       .use(remarkStringify)
@@ -934,6 +950,7 @@ class KnowledgeGenerator {
       const removeJsxProcessor = unified()
         .use(remarkParse)
         .use(remarkMdx)
+        .use(remarkFrontmatter, ["yaml"])
         .use(remarkRemoveJsx)
         .use(remarkStringify)
       const removedJsx = String(
@@ -1142,7 +1159,9 @@ class KnowledgeGenerator {
  * Generates knowledge documentation from MDX files.
  * Returns an array of page IDs that were generated.
  */
-export async function generate(config: WebUiKnowledgeConfig): Promise<string[]> {
+export async function generate(
+  config: WebUiKnowledgeConfig,
+): Promise<string[]> {
   const generator = new KnowledgeGenerator(config)
   return generator.run()
 }

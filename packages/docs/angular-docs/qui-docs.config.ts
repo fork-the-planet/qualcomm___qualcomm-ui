@@ -73,6 +73,10 @@ export default {
     global: {
       baseUrl: "https://angular-next.qui.qualcomm.com",
       exclude: ["index.mdx"],
+      exports: {
+        enabled: true,
+        exclude: [],
+      },
       extraFiles: [
         {
           contents: readFileSync(

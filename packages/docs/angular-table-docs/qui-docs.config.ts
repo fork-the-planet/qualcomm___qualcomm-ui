@@ -91,6 +91,10 @@ export default {
     global: {
       baseUrl: "https://angular-table-next.qui.qualcomm.com",
       exclude: ["installation.mdx", "index/_index.mdx"],
+      exports: {
+        enabled: true,
+        exclude: [],
+      },
       extraFiles: [
         {
           contents: readFileSync(

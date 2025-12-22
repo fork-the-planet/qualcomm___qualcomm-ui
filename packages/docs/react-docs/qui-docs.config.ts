@@ -121,6 +121,10 @@ export default {
     global: {
       baseUrl: "https://react-next.qui.qualcomm.com",
       exclude: ["**/installation+/**", "index.mdx"],
+      exports: {
+        enabled: true,
+        exclude: [],
+      },
       extraFiles: [
         {
           contents: readFileSync(
