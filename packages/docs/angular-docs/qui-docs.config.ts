@@ -41,6 +41,9 @@ const navConfig: NavConfig[] = [
   {
     children: [
       {
+        id: "overview",
+      },
+      {
         group: "Data Display",
         id: "badges",
         ignoreRouteMetaOrder: true,
