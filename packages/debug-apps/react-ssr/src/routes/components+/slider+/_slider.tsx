@@ -18,6 +18,8 @@ import {SliderValueCallbackDemo as ValueCallbackDemo} from "@qualcomm-ui/react-d
 import {SliderVariantDemo as VariantDemo} from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-variant-demo"
 import {SliderVerticalDemo as VerticalDemo} from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-vertical-demo"
 
+import {DemoPageLayout} from "~/components/demo-page-layout"
+
 const demos = [
   {component: CompositeDemo, title: "Composite"},
   {component: DisabledDemo, title: "Disabled"},
@@ -41,16 +43,5 @@ const demos = [
 ]
 
 export default function SliderDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="slider" demos={demos} />
 }

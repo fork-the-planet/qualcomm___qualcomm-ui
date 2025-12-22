@@ -10,6 +10,8 @@ import {TextInputSizesDemo as SizesDemo} from "@qualcomm-ui/react-docs/component
 import {TextInputStatesDemo as StatesDemo} from "@qualcomm-ui/react-docs/components+/text-input+/demos/text-input-states-demo"
 import {TextInputTanstackFormDemo as TanstackFormDemo} from "@qualcomm-ui/react-docs/components+/text-input+/demos/text-input-tanstack-form-demo"
 
+import {DemoPageLayout} from "~/components/demo-page-layout"
+
 const demos = [
   {component: ClearTriggerDemo, title: "Clear Trigger"},
   {component: CompositeDemo, title: "Composite"},
@@ -25,16 +27,5 @@ const demos = [
 ]
 
 export default function TextInputDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="text-input" demos={demos} />
 }

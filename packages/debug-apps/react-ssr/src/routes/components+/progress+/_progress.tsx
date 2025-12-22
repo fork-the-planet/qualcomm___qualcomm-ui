@@ -5,6 +5,8 @@ import {ProgressLabelOrientationDemo as LabelOrientationDemo} from "@qualcomm-ui
 import {ProgressSimpleDemo as SimpleDemo} from "@qualcomm-ui/react-docs/components+/progress+/demos/progress-simple-demo"
 import {ProgressSizeDemo as SizeDemo} from "@qualcomm-ui/react-docs/components+/progress+/demos/progress-size-demo"
 
+import {DemoPageLayout} from "~/components/demo-page-layout"
+
 const demos = [
   {component: CompositeDemo, title: "Composite"},
   {component: EmphasisDemo, title: "Emphasis"},
@@ -15,16 +17,5 @@ const demos = [
 ]
 
 export default function ProgressDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="progress" demos={demos} />
 }

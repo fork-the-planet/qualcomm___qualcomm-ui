@@ -6,6 +6,8 @@ import {DialogOutsideScrollDemo as OutsideScrollDemo} from "@qualcomm-ui/react-d
 import {DialogPlacementDemo as PlacementDemo} from "@qualcomm-ui/react-docs/components+/dialog+/demos/dialog-placement-demo"
 import {DialogSizesDemo as SizesDemo} from "@qualcomm-ui/react-docs/components+/dialog+/demos/dialog-sizes-demo"
 
+import {DemoPageLayout} from "~/components/demo-page-layout"
+
 const demos = [
   {component: AlertDialogDemo, title: "Alert Dialog"},
   {component: ControlledStateDemo, title: "Controlled State"},
@@ -17,16 +19,5 @@ const demos = [
 ]
 
 export default function DialogDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="dialog" demos={demos} />
 }

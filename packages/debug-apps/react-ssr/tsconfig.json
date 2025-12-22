@@ -2,9 +2,11 @@
   "extends": "@qualcomm-ui/tsconfig/tsconfig.react-docs.json",
   "compilerOptions": {
     "baseUrl": "./",
+    "types": ["vite/client"],
     "paths": {
       "@qualcomm-ui/react-docs/*": ["../../docs/react-docs/src/routes/*"],
-      "@qualcomm-ui/react-docs-utils/*": ["../../docs/react-docs/src/utils/*"]
+      "@qualcomm-ui/react-docs-utils/*": ["../../docs/react-docs/src/utils/*"],
+      "~/*": ["./src/*"]
     }
   },
   "include": [

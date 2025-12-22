@@ -4,6 +4,8 @@ import {LinkIconsDemo as IconsDemo} from "@qualcomm-ui/react-docs/components+/li
 import {LinkRenderPropDemo as RenderPropDemo} from "@qualcomm-ui/react-docs/components+/link+/demos/link-render-prop-demo"
 import {LinkSizesDemo as SizesDemo} from "@qualcomm-ui/react-docs/components+/link+/demos/link-sizes-demo"
 
+import {DemoPageLayout} from "~/components/demo-page-layout"
+
 const demos = [
   {component: ColorsDemo, title: "Colors"},
   {component: DisabledDemo, title: "Disabled"},
@@ -13,16 +15,5 @@ const demos = [
 ]
 
 export default function LinkDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="link" demos={demos} />
 }

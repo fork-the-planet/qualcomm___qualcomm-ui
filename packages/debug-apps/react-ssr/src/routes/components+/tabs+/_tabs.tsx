@@ -10,6 +10,8 @@ import {TabsLineSizesDemo as LineSizesDemo} from "@qualcomm-ui/react-docs/compon
 import {TabsLinksDemo as LinksDemo} from "@qualcomm-ui/react-docs/components+/tabs+/demos/tabs-links-demo"
 import {TabsVerticalDemo as VerticalDemo} from "@qualcomm-ui/react-docs/components+/tabs+/demos/tabs-vertical-demo"
 
+import {DemoPageLayout} from "~/components/demo-page-layout"
+
 const demos = [
   {component: AddRemoveDemo, title: "Add Remove"},
   {component: ContainedSizesDemo, title: "Contained Sizes"},
@@ -25,16 +27,5 @@ const demos = [
 ]
 
 export default function TabsDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="tabs" demos={demos} />
 }

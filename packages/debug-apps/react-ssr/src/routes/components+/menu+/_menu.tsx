@@ -13,6 +13,8 @@ import {MenuRadioGroupDemo as RadioGroupDemo} from "@qualcomm-ui/react-docs/comp
 import {MenuSizesDemo as SizesDemo} from "@qualcomm-ui/react-docs/components+/menu+/demos/menu-sizes-demo"
 import {MenuWithinDialogDemo as WithinDialogDemo} from "@qualcomm-ui/react-docs/components+/menu+/demos/menu-within-dialog-demo"
 
+import {DemoPageLayout} from "~/components/demo-page-layout"
+
 const demos = [
   {component: AnchorPointDemo, title: "Anchor Point"},
   {component: AvatarDemo, title: "Avatar"},
@@ -31,16 +33,5 @@ const demos = [
 ]
 
 export default function MenuDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="menu" demos={demos} />
 }

@@ -16,6 +16,8 @@ import {SelectTanstackFormDemo as TanstackFormDemo} from "@qualcomm-ui/react-doc
 import {SelectWithinDialogDemo as WithinDialogDemo} from "@qualcomm-ui/react-docs/components+/select+/demos/select-within-dialog-demo"
 import {SelectWithinPopoverDemo as WithinPopoverDemo} from "@qualcomm-ui/react-docs/components+/select+/demos/select-within-popover-demo"
 
+import {DemoPageLayout} from "~/components/demo-page-layout"
+
 const demos = [
   {component: AriaLabelDemo, title: "Aria Label"},
   {component: CompositeDemo, title: "Composite"},
@@ -37,16 +39,5 @@ const demos = [
 ]
 
 export default function SelectDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="select" demos={demos} />
 }

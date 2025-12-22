@@ -7,6 +7,8 @@ import {ToastPauseDemo as PauseDemo} from "@qualcomm-ui/react-docs/components+/t
 import {ToastPersistentDemo as PersistentDemo} from "@qualcomm-ui/react-docs/components+/toast+/demos/toast-persistent-demo"
 import {ToastPlacementDemo as PlacementDemo} from "@qualcomm-ui/react-docs/components+/toast+/demos/toast-placement-demo"
 
+import {DemoPageLayout} from "~/components/demo-page-layout"
+
 const demos = [
   {component: ActionDemo, title: "Action"},
   {component: DurationDemo, title: "Duration"},
@@ -19,16 +21,5 @@ const demos = [
 ]
 
 export default function ToastDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="toast" demos={demos} />
 }

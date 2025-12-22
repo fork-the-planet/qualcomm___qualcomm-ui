@@ -7,6 +7,8 @@ import {SideNavLinksDemo as LinksDemo} from "@qualcomm-ui/react-docs/components+
 import {SideNavNodeShorthandDemo as NodeShorthandDemo} from "@qualcomm-ui/react-docs/components+/side-nav+/demos/side-nav-node-shorthand-demo"
 import {SideNavSurfaceDemo as SurfaceDemo} from "@qualcomm-ui/react-docs/components+/side-nav+/demos/side-nav-surface-demo"
 
+import {DemoPageLayout} from "~/components/demo-page-layout"
+
 const demos = [
   {component: CollapsedDemo, title: "Collapsed"},
   {component: DefaultExpandedDemo, title: "Default Expanded"},
@@ -19,16 +21,5 @@ const demos = [
 ]
 
 export default function SideNavDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="side-nav" demos={demos} />
 }

@@ -5,6 +5,8 @@ import {PaginationRangesDemo as RangesDemo} from "@qualcomm-ui/react-docs/compon
 import {PaginationShowcaseDemo as ShowcaseDemo} from "@qualcomm-ui/react-docs/components+/pagination+/demos/pagination-showcase-demo"
 import {PaginationSizesDemo as SizesDemo} from "@qualcomm-ui/react-docs/components+/pagination+/demos/pagination-sizes-demo"
 
+import {DemoPageLayout} from "~/components/demo-page-layout"
+
 const demos = [
   {component: ControlledStateDemo, title: "Controlled State"},
   {component: MetadataDemo, title: "Metadata"},
@@ -15,16 +17,5 @@ const demos = [
 ]
 
 export default function PaginationDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="pagination" demos={demos} />
 }

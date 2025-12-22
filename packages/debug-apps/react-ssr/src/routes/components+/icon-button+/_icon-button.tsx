@@ -5,6 +5,8 @@ import {IconButtonSizesDemo as SizesDemo} from "@qualcomm-ui/react-docs/componen
 import {IconButtonVariantCombinationsDemo as VariantCombinationsDemo} from "@qualcomm-ui/react-docs/components+/icon-button+/demos/icon-button-variant-combinations-demo"
 import {IconButtonVariantsDemo as VariantsDemo} from "@qualcomm-ui/react-docs/components+/icon-button+/demos/icon-button-variants-demo"
 
+import {DemoPageLayout} from "~/components/demo-page-layout"
+
 const demos = [
   {component: ContrastDemo, title: "Contrast"},
   {component: DensityDemo, title: "Density"},
@@ -15,16 +17,5 @@ const demos = [
 ]
 
 export default function IconButtonDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="icon-button" demos={demos} />
 }

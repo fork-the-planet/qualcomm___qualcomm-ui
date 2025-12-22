@@ -7,6 +7,8 @@ import {CheckboxSizesDemo as SizesDemo} from "@qualcomm-ui/react-docs/components
 import {CheckboxStatesDemo as StatesDemo} from "@qualcomm-ui/react-docs/components+/checkbox+/demos/checkbox-states-demo"
 import {CheckboxTanstackFormDemo as TanstackFormDemo} from "@qualcomm-ui/react-docs/components+/checkbox+/demos/checkbox-tanstack-form-demo"
 
+import {DemoPageLayout} from "~/components/demo-page-layout"
+
 const demos = [
   {component: CompositeLayoutDemo, title: "Composite Layout"},
   {component: ControlledDemo, title: "Controlled"},
@@ -19,16 +21,5 @@ const demos = [
 ]
 
 export default function CheckboxDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="checkbox" demos={demos} />
 }

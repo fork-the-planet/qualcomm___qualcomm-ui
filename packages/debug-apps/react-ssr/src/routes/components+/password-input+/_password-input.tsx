@@ -6,6 +6,8 @@ import {PasswordInputReactHookFormDemo as ReactHookFormDemo} from "@qualcomm-ui/
 import {PasswordInputSimpleDemo as SimpleDemo} from "@qualcomm-ui/react-docs/components+/password-input+/demos/password-input-simple-demo"
 import {PasswordInputTanstackFormDemo as TanstackFormDemo} from "@qualcomm-ui/react-docs/components+/password-input+/demos/password-input-tanstack-form-demo"
 
+import {DemoPageLayout} from "~/components/demo-page-layout"
+
 const demos = [
   {component: CompositeDemo, title: "Composite"},
   {component: ControlledValueDemo, title: "Controlled Value"},
@@ -17,16 +19,5 @@ const demos = [
 ]
 
 export default function PasswordInputDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="password-input" demos={demos} />
 }

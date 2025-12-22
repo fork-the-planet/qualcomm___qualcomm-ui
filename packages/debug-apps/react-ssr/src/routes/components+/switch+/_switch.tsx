@@ -7,6 +7,8 @@ import {SwitchSizesDemo as SizesDemo} from "@qualcomm-ui/react-docs/components+/
 import {SwitchStatesDemo as StatesDemo} from "@qualcomm-ui/react-docs/components+/switch+/demos/switch-states-demo"
 import {SwitchTanstackFormDemo as TanstackFormDemo} from "@qualcomm-ui/react-docs/components+/switch+/demos/switch-tanstack-form-demo"
 
+import {DemoPageLayout} from "~/components/demo-page-layout"
+
 const demos = [
   {component: CompositeLayoutDemo, title: "Composite Layout"},
   {component: ControlledDemo, title: "Controlled"},
@@ -19,16 +21,5 @@ const demos = [
 ]
 
 export default function SwitchDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="switch" demos={demos} />
 }

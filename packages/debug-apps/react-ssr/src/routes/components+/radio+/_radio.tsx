@@ -8,6 +8,8 @@ import {RadioSimpleDemo as SimpleDemo} from "@qualcomm-ui/react-docs/components+
 import {RadioSizesDemo as SizesDemo} from "@qualcomm-ui/react-docs/components+/radio+/demos/radio-sizes-demo"
 import {RadioTanstackFormDemo as TanstackFormDemo} from "@qualcomm-ui/react-docs/components+/radio+/demos/radio-tanstack-form-demo"
 
+import {DemoPageLayout} from "~/components/demo-page-layout"
+
 const demos = [
   {component: CompositeDemo, title: "Composite"},
   {component: CompositeLayoutDemo, title: "Composite Layout"},
@@ -21,16 +23,5 @@ const demos = [
 ]
 
 export default function RadioDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="radio" demos={demos} />
 }

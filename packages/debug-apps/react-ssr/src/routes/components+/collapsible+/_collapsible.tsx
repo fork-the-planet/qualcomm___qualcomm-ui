@@ -1,22 +1,13 @@
 import {CollapsibleControlledStateDemo as ControlledStateDemo} from "@qualcomm-ui/react-docs/components+/collapsible+/demos/collapsible-controlled-state-demo"
 import {CollapsibleShowcaseDemo as ShowcaseDemo} from "@qualcomm-ui/react-docs/components+/collapsible+/demos/collapsible-showcase-demo"
 
+import {DemoPageLayout} from "~/components/demo-page-layout"
+
 const demos = [
   {component: ControlledStateDemo, title: "Controlled State"},
   {component: ShowcaseDemo, title: "Showcase"},
 ]
 
 export default function CollapsibleDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="collapsible" demos={demos} />
 }

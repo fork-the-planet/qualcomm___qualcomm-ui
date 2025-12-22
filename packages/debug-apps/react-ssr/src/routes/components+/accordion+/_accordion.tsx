@@ -12,6 +12,8 @@ import {AccordionSimpleDemo as SimpleDemo} from "@qualcomm-ui/react-docs/compone
 import {AccordionSizeDemo as SizeDemo} from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-size-demo"
 import {AccordionUncontainedDemo as UncontainedDemo} from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-uncontained-demo"
 
+import {DemoPageLayout} from "~/components/demo-page-layout"
+
 const demos = [
   {component: CollapsibleDemo, title: "Collapsible"},
   {component: CompositeDemo, title: "Composite"},
@@ -29,16 +31,5 @@ const demos = [
 ]
 
 export default function AccordionDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="accordion" demos={demos} />
 }

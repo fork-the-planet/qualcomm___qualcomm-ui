@@ -7,6 +7,8 @@ import {NumberInputSizesDemo as SizesDemo} from "@qualcomm-ui/react-docs/compone
 import {NumberInputStatesDemo as StatesDemo} from "@qualcomm-ui/react-docs/components+/number-input+/demos/number-input-states-demo"
 import {NumberInputStepDemo as StepDemo} from "@qualcomm-ui/react-docs/components+/number-input+/demos/number-input-step-demo"
 
+import {DemoPageLayout} from "~/components/demo-page-layout"
+
 const demos = [
   {component: CompositeDemo, title: "Composite"},
   {component: ControlledDemo, title: "Controlled"},
@@ -19,16 +21,5 @@ const demos = [
 ]
 
 export default function NumberInputDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="number-input" demos={demos} />
 }

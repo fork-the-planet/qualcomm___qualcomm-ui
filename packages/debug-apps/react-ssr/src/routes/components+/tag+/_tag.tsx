@@ -5,6 +5,8 @@ import {TagSizesDemo as SizesDemo} from "@qualcomm-ui/react-docs/components+/tag
 import {TagStatesDemo as StatesDemo} from "@qualcomm-ui/react-docs/components+/tag+/demos/tag-states-demo"
 import {TagVariantsDemo as VariantsDemo} from "@qualcomm-ui/react-docs/components+/tag+/demos/tag-variants-demo"
 
+import {DemoPageLayout} from "~/components/demo-page-layout"
+
 const demos = [
   {component: EmphasisDemo, title: "Emphasis"},
   {component: IconsDemo, title: "Icons"},
@@ -15,16 +17,5 @@ const demos = [
 ]
 
 export default function TagDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="tag" demos={demos} />
 }

@@ -24,6 +24,8 @@ import {ComboboxVirtualDemo as VirtualDemo} from "@qualcomm-ui/react-docs/compon
 import {ComboboxWithinDialogDemo as WithinDialogDemo} from "@qualcomm-ui/react-docs/components+/combobox+/demos/combobox-within-dialog-demo"
 import {ComboboxWithinPopoverDemo as WithinPopoverDemo} from "@qualcomm-ui/react-docs/components+/combobox+/demos/combobox-within-popover-demo"
 
+import {DemoPageLayout} from "~/components/demo-page-layout"
+
 const demos = [
   {component: AriaLabelDemo, title: "Aria Label"},
   {component: AsyncDemo, title: "Async"},
@@ -53,16 +55,5 @@ const demos = [
 ]
 
 export default function ComboboxDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="combobox" demos={demos} />
 }

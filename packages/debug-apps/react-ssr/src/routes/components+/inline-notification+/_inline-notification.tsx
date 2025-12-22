@@ -5,6 +5,8 @@ import {InlineNotificationEmphasisDemo as EmphasisDemo} from "@qualcomm-ui/react
 import {InlineNotificationLayoutDemo as LayoutDemo} from "@qualcomm-ui/react-docs/components+/inline-notification+/demos/inline-notification-layout-demo"
 import {InlineNotificationSimpleDemo as SimpleDemo} from "@qualcomm-ui/react-docs/components+/inline-notification+/demos/inline-notification-simple-demo"
 
+import {DemoPageLayout} from "~/components/demo-page-layout"
+
 const demos = [
   {component: ActionDemo, title: "Action"},
   {component: CompositeDemo, title: "Composite"},
@@ -15,16 +17,5 @@ const demos = [
 ]
 
 export default function InlineNotificationDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="inline-notification" demos={demos} />
 }
