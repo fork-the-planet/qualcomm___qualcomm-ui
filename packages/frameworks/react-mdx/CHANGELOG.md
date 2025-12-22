@@ -1,5 +1,25 @@
 # @qualcomm-ui/react-mdx
 
+## 1.8.0 (2025/12/22)
+
+### Features
+
+- [copy-to-clipboard]: allow async copy value provider
+- [docs-layout]: add copy and download export actions to eligible pages
+- [docs-layout]: add page header with export actions
+
+### Styles
+
+- [typedoc]: improve prop example rendering with collapsible
+
+### Bug Fixes
+
+- [file-tree]: branch trigger placement
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common, @qualcomm-ui/react]
+
 ## 1.7.4 (2025/12/18)
 
 ### Miscellaneous Chores
