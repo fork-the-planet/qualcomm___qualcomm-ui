@@ -1,9 +1,10 @@
 ---
 title: AI Knowledge
-description: Export documentation as LLM-ready markdown files.
+description: Export documentation as LLM-ready Markdown files.
 ---
 
 import {FileTree} from "@qualcomm-ui/react-mdx/file-tree"
+import {TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
 
 # {frontmatter.title}
 
@@ -32,9 +33,10 @@ The page exports feature generates downloadable markdown files during build and 
 Enable page exports in your `qui-docs.config.ts`:
 
 ```typescript
-import {defineConfig} from "@qualcomm-ui/mdx-vite"
+import type {QuiDocsConfig} from "@qualcomm-ui/mdx-vite"
 
-export default defineConfig({
+export default {
+  // ... existing config
   knowledge: {
     global: {
       baseUrl: "https://docs.example.com",
@@ -44,23 +46,18 @@ export default defineConfig({
       },
     },
   },
-})
+} satisfies QuiDocsConfig
 ```
 
 ### Options
 
-| Option | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `enabled` | `boolean` | `false` | Enable per-page markdown exports |
-| `staticPath` | `string` | `'exports/md'` | Output directory relative to public dir |
-| `exclude` | `string[]` | `[]` | Glob patterns to exclude from exports |
-| `metadata` | `Record<string, string>` | `{}` | Key-value pairs to include in frontmatter |
-| `pageTitlePrefix` | `string` | `undefined` | Prefix to prepend to each page title |
-| `extraFiles` | `KnowledgeExtraFile[]` | `[]` | Additional files to include in exports |
+#### KnowledgeExportsConfig
+
+<TypeDocProps name="KnowledgeExportsConfig" partial />
 
 ### Output Format
 
-Each exported markdown file includes:
+Each exported Markdown file includes:
 
 - YAML frontmatter with the page URL and any configured metadata
 - Page title as an `h1` heading
@@ -69,7 +66,7 @@ Each exported markdown file includes:
 
 Example output:
 
-```markdown
+````markdown
 ---
 url: https://docs.example.com/components/button
 ---
@@ -80,23 +77,23 @@ A button triggers an action or event when activated.
 
 ## Usage
 
-\`\`\`tsx
+```tsx
 import {Button} from "@qualcomm-ui/react/button"
 
 export function BasicButton() {
   return <Button>Click me</Button>
 }
-\`\`\`
 ```
+````
 
 ### UI Integration
 
 When exports are enabled, the page header displays:
 
-- **Copy Page button**: Copies the page content as markdown to the clipboard
-- **Download menu**: Provides options to copy or download the page as a `.md` file
+- **Copy Page button**: Copies the page content as Markdown to the clipboard
+- **Context menu**: Provides options to copy or download the page as a `.md` file
 
-The UI only appears on pages that have been successfully exported.
+These actions only appear on pages that have been successfully exported.
 
 ## Knowledge Generation CLI
 
@@ -105,29 +102,49 @@ The `generate-llms-txt` command creates knowledge bases from your documentation 
 ### Basic Usage
 
 ```shell
-qui-mdx-vite generate-llms-txt --output-mode per-page
+qui-mdx-vite generate-llms-txt --output-mode per-page -o ./knowledge
 ```
 
-### Output Modes
+### Configuration Priority
 
-| Mode | Description |
-| :--- | :--- |
-| `per-page` | Generates individual markdown files for each page |
+Configuration is resolved in the following order (highest to lowest):
+
+1. CLI options
+2. Config file (`qui-docs.config.ts`) - see [Configuration Reference](./#configuration-reference)
+3. Environment variables
+
+### CLI Options
+
+| Option                     | Description                                       |
+| :------------------------- | :------------------------------------------------ |
+| `-m, --output-mode <mode>` | Required. Output mode: `per-page` or `aggregated` |
+| `-o, --outputPath <path>`  | Output file or directory                          |
+| `-n, --name <name>`        | Project name for the output header                |
+| `-d, --description <desc>` | Project description                               |
+| `--base-url <url>`         | Base URL for documentation links                  |
+| `--exclude <patterns...>`  | Glob patterns to exclude                          |
+| `--metadata <pairs...>`    | Metadata key-value pairs (format: `key=value`)    |
+| `--clean`                  | Clean output path before generating               |
+| `-v, --verbose`            | Enable verbose logging                            |
+| `--env <path>`             | Load environment variables from a specific file   |
+
+#### Output Modes
+
+| Mode         | Description                                             |
+| :----------- | :------------------------------------------------------ |
+| `per-page`   | Generates individual Markdown files for each page       |
 | `aggregated` | Generates a single `llms.txt` file containing all pages |
 
-### Options
+### Environment Variables
 
-| Option | Description |
-| :--- | :--- |
-| `-m, --output-mode <mode>` | Required. Output mode: `per-page` or `aggregated` |
-| `-o, --outputPath <path>` | Output file or directory |
-| `-n, --name <name>` | Project name for the output header |
-| `-d, --description <desc>` | Project description |
-| `--base-url <url>` | Base URL for documentation links |
-| `--exclude <patterns...>` | Glob patterns to exclude |
-| `--metadata <pairs...>` | Metadata key-value pairs (format: `key=value`) |
-| `--clean` | Clean output path before generating |
-| `-v, --verbose` | Enable verbose logging |
+Environment variables serve as fallbacks when values are not specified via CLI or config file:
+
+| Variable                | Description                              |
+| :---------------------- | :--------------------------------------- |
+| `DOCS_SITE_BASE_URL`    | Base URL for documentation links         |
+| `KNOWLEDGE_OUTPUT_PATH` | Output path for generated files          |
+| `FILE_EXCLUDE_PATTERN`  | Comma-separated glob patterns to exclude |
+| `PAGE_TITLE_PREFIX`     | Prefix to prepend to page titles         |
 
 ### Examples
 
@@ -152,17 +169,7 @@ qui-mdx-vite generate-llms-txt \
   --metadata "version=1.0.0" "framework=react"
 ```
 
-### Environment Configuration
-
-The CLI reads configuration from environment variables. Create an `.env` file to configure paths:
-
-```shell
-# .env
-QUI_DOCS_ROUTE_DIR=src/routes
-QUI_DOCS_DOC_PROPS_PATH=src/doc-props.json
-```
-
-Load a specific env file with the `--env` flag:
+Load environment from a specific file:
 
 ```shell
 qui-mdx-vite generate-llms-txt --output-mode per-page --env .env.production
@@ -170,57 +177,25 @@ qui-mdx-vite generate-llms-txt --output-mode per-page --env .env.production
 
 ## Configuration Reference
 
-Full configuration example with all options:
+The file-based configuration is applied to the `knowledge.global` property.
 
 ```typescript
-import {defineConfig} from "@qualcomm-ui/mdx-vite"
+// qui-docs.config.ts
+import type {QuiDocsConfig} from "@qualcomm-ui/mdx-vite"
 
-export default defineConfig({
+export default {
+  // ...
   knowledge: {
     global: {
-      // Base URL for page links in generated output
-      baseUrl: "https://docs.example.com",
-
-      // Project name and description
-      name: "My Component Library",
-      description: "Documentation for the component library",
-
-      // Glob patterns to exclude from all knowledge outputs
-      exclude: ["**/internal/**", "guide/drafts/*"],
-
-      // Metadata included in frontmatter of generated files
-      metadata: {
-        version: "1.0.0",
-        framework: "react",
-      },
-
-      // Prefix prepended to page titles
-      pageTitlePrefix: "React:",
-
-      // Configuration for page exports (served from public dir)
-      exports: {
-        enabled: true,
-        staticPath: "exports/md",
-
-        // Override global settings for exports
-        exclude: ["**/api/**"],
-        metadata: {
-          exportedAt: new Date().toISOString(),
-        },
-      },
-
-      // Additional files to include in output
-      extraFiles: [
-        {
-          id: "getting-started",
-          title: "Getting Started",
-          contents: "# Quick Start\n\nInstall the package...",
-        },
-      ],
+      // KnowledgeIntegrationConfig
     },
   },
-})
+} satisfies QuiDocsConfig
 ```
+
+### KnowledgeIntegrationConfig
+
+<TypeDocProps name="KnowledgeIntegrationConfig" partial />
 
 ### Configuration Inheritance
 
