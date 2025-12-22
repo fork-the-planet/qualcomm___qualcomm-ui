@@ -20,10 +20,6 @@ import type {
 } from "@qualcomm-ui/mdx-common"
 
 import {rehypeSlug} from "../../../rehype/rehype-slug"
-import {
-  remarkFrontmatterDescription,
-  remarkFrontmatterTitle,
-} from "../../../remark"
 import {remarkAlerts} from "../../../remark/remark-alerts"
 import {remarkFrontmatterInterpolation} from "../../../remark/remark-frontmatter-interpolation"
 

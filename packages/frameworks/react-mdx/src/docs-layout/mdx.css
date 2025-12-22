@@ -416,12 +416,6 @@ hr.mdx {
   }
 }
 
-.qui-docs__page-header-description {
-  color: var(--color-text-neutral-secondary);
-  font: var(--font-static-body-lg-default);
-  margin-top: 8px;
-}
-
 .qui-docs__page-header-actions {
   align-items: center;
   display: flex;
