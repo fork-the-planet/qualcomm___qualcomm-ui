@@ -3,7 +3,8 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@qualcomm-ui/react-docs/*": ["../../docs/react-docs/src/routes/*"]
+      "@qualcomm-ui/react-docs/*": ["../../docs/react-docs/src/routes/*"],
+      "@qualcomm-ui/react-docs-utils/*": ["../../docs/react-docs/src/utils/*"]
     }
   },
   "include": [
