@@ -1,7 +1,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {type ReactNode, useEffect} from "react"
+import type {ReactNode} from "react"
 
 import {Check, Copy, Download} from "lucide-react"
 
@@ -38,10 +38,6 @@ export function PageHeader(): ReactNode {
       })
   }
 
-  useEffect(() => {
-    console.debug(exportUrl)
-  }, [exportUrl])
-
   const {copyToClipboard, isCopied} = useCopyToClipboard({
     valueOrFn: getExportAsText,
   })
@@ -55,7 +51,7 @@ export function PageHeader(): ReactNode {
   return (
     <header className="qui-docs__page-header">
       <div className="qui-docs__page-header-title-row">
-        <h1 className="mdx">{title}</h1>
+        <h1 className="mdx qui-docs__page-title">{title}</h1>
         {exportUrl && (
           <div className="qui-docs__page-header-actions">
             <Button

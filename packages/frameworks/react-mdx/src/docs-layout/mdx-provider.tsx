@@ -7,42 +7,15 @@ import {MDXProvider, type useMDXComponents} from "@mdx-js/react"
 
 import {Link} from "@qualcomm-ui/react/link"
 import {Table} from "@qualcomm-ui/react/table"
-import {useMdxDocsContext, useSiteContext} from "@qualcomm-ui/react-mdx/context"
+import {useMdxDocsContext} from "@qualcomm-ui/react-mdx/context"
 import {
   SpoilerContent,
   SpoilerRoot,
   SpoilerSummary,
 } from "@qualcomm-ui/react-mdx/spoiler"
+import {clsx} from "@qualcomm-ui/utils/clsx"
 
-import {AnchorHeader, CodeTabs, ShikiPre} from "./internal"
-import {useMdxDocsLayoutContext} from "./layout/use-mdx-docs-layout"
-
-function getChildrenText(children: ReactNode): string {
-  if (typeof children === "string") return children
-  if (typeof children === "number") return String(children)
-  if (Array.isArray(children)) return children.map(getChildrenText).join("")
-  if (children && typeof children === "object" && "props" in children) {
-    return getChildrenText((children as {props: {children?: ReactNode}}).props.children)
-  }
-  return ""
-}
-
-function MdxH1({children, id, ...props}: {children?: ReactNode; id?: string}): ReactNode {
-  const {pageMap} = useSiteContext()
-  const {pathname} = useMdxDocsLayoutContext()
-  const page = pageMap[pathname]
-
-  const childText = getChildrenText(children)
-  if (page?.title === childText) {
-    return null
-  }
-
-  return (
-    <h1 className="mdx" id={id || undefined} {...props}>
-      {children}
-    </h1>
-  )
-}
+import {AnchorHeader, CodeTabs, MdxH1, ShikiPre} from "./internal"
 
 interface Props {
   /**
@@ -170,7 +143,9 @@ export function MdxProvider({children, components}: Props): ReactNode {
           img: (props) => <img className="mdx" {...props} />,
           li: (props) => <li className="mdx" {...props} />,
           ol: (props) => <ol className="mdx" {...props} />,
-          p: (props) => <p className="mdx" {...props} />,
+          p: ({className, ...props}) => (
+            <p className={clsx(className, "mdx")} {...props} />
+          ),
           pre: ({children, ...props}) => {
             return <ShikiPre {...props}>{children}</ShikiPre>
           },
