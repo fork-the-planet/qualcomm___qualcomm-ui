@@ -879,11 +879,6 @@ class KnowledgeGenerator {
     const demoFiles: string[] = []
     let processedContent = mdxContent
 
-    const lines = processedContent.split("\n")
-    const titleLine = lines.findIndex((line) => line.startsWith("# "))
-    processedContent =
-      titleLine >= 0 ? lines.slice(titleLine + 1).join("\n") : processedContent
-
     processedContent = processedContent.replace(
       /\[([^\]]+)\]\(\.\/#([^)]+)\)/g,
       (_, text, anchor) =>
