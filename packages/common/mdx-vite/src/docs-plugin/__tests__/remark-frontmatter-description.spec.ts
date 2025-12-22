@@ -1,6 +1,3 @@
-// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-// SPDX-License-Identifier: BSD-3-Clause-Clear
-
 import remarkMdx from "remark-mdx"
 import remarkParse from "remark-parse"
 import remarkStringify from "remark-stringify"
@@ -55,7 +52,9 @@ Some content`
 Some content`
 
     const result = await process(input)
-    expect(result).not.toContain('<p className="mdx qui-docs__page-description">')
+    expect(result).not.toContain(
+      '<p className="mdx qui-docs__page-description">',
+    )
   })
 
   test("preserves other content", async () => {
@@ -83,7 +82,9 @@ Some paragraph content.`
 {frontmatter.description}`
 
     const result = await process(input)
-    const matches = result.match(/<p className="mdx qui-docs__page-description">/g)
+    const matches = result.match(
+      /<p className="mdx qui-docs__page-description">/g,
+    )
     expect(matches).toHaveLength(2)
   })
 })
