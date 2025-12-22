@@ -221,7 +221,7 @@ export interface KnowledgeExtraFile {
 }
 
 /**
- * Configuration for per-page markdown exports. Inherits from parent
+ * Configuration for per-page Markdown exports. Inherits from parent
  * KnowledgeIntegrationConfig unless overridden.
  */
 export interface KnowledgeExportsConfig {

@@ -13,6 +13,7 @@ import type {PageDocProps, SiteData} from "@qualcomm-ui/mdx-common"
 import type {QuiPropTypes} from "@qualcomm-ui/typedoc-common"
 
 import {generate} from "../open-web-ui-knowledge/generate-knowledge"
+
 import {
   type CompiledMdxFile,
   ConfigLoader,
@@ -20,7 +21,6 @@ import {
   type ResolvedQuiDocsConfig,
   SearchIndexer,
 } from "./internal"
-import type {KnowledgeExportsConfig} from "./types"
 
 const isDev = process.env.NODE_ENV === "development"
 
@@ -87,8 +87,12 @@ class PluginState {
     )
   }
 
-  get siteData(): SiteData & {config: Omit<ResolvedQuiDocsConfig, "filePath">; exports: ExportsState} {
-    const {filePath: _filePath, ...config} = this.config ?? {} as ResolvedQuiDocsConfig
+  get siteData(): SiteData & {
+    config: Omit<ResolvedQuiDocsConfig, "filePath">
+    exports: ExportsState
+  } {
+    const {filePath: _filePath, ...config} =
+      this.config ?? ({} as ResolvedQuiDocsConfig)
     return {
       config,
       exports: this.exports,
@@ -246,7 +250,8 @@ class PluginState {
       metadata: exportsConfig.metadata ?? globalConfig.metadata,
       outputMode: "per-page",
       outputPath,
-      pageTitlePrefix: exportsConfig.pageTitlePrefix ?? globalConfig.pageTitlePrefix,
+      pageTitlePrefix:
+        exportsConfig.pageTitlePrefix ?? globalConfig.pageTitlePrefix,
       routeDir: this.routesDir,
     })
 
@@ -281,11 +286,16 @@ export function quiDocsPlugin(opts?: QuiDocsPluginOptions): PluginOption {
     buildStart: async () => {
       state.buildIndex(state.buildCount > 0)
       state.buildCount++
+
+      if (!isDev && state.exports.enabled) {
+        const publicDir = viteConfig.publicDir || join(state.getCwd(), "public")
+        await state.generateExports(publicDir)
+      }
     },
     configResolved(resolved) {
       viteConfig = resolved
     },
-    configureServer: (server) => {
+    configureServer: async (server) => {
       if (!isDev) {
         return
       }
@@ -293,7 +303,7 @@ export function quiDocsPlugin(opts?: QuiDocsPluginOptions): PluginOption {
 
       if (state.exports.enabled) {
         const publicDir = join(state.getCwd(), "public")
-        state.generateExports(publicDir)
+        await state.generateExports(publicDir)
       }
 
       server.watcher.on("add", (path: string) => {
@@ -391,12 +401,6 @@ export function quiDocsPlugin(opts?: QuiDocsPluginOptions): PluginOption {
         return VIRTUAL_MODULE_ID
       }
       return undefined
-    },
-    async writeBundle() {
-      if (!isDev && state.exports.enabled) {
-        const publicDir = viteConfig.publicDir || join(state.getCwd(), "public")
-        await state.generateExports(publicDir)
-      }
     },
   }
 }
