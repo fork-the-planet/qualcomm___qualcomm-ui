@@ -37,7 +37,7 @@ export const remarkFrontmatterDescription: Plugin<[], Root> = () => {
             {
               name: "className",
               type: "mdxJsxAttribute",
-              value: "mdx",
+              value: "mdx qui-docs__page-description",
             },
           ],
           children: [node],

@@ -36,6 +36,7 @@ export default defineConfig(
       "./packages/docs/angular*/public/*.js",
       "./packages/common/codemod/src/**/__tests__/mocks/**/*.tsx",
       "**/temp/",
+      "**/public/exports/md/**",
     ],
   },
   {

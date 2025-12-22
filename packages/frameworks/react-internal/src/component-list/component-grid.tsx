@@ -17,32 +17,36 @@ import {componentList} from "./component-list"
 export function ComponentGrid(): ReactElement {
   return (
     <div className="qui-component-grid__root">
-      {componentList.map((component) => (
-        <Link
-          key={component.name}
-          className="qui-component-grid__item"
-          data-planned={booleanDataAttr(component.planned)}
-          to={component.url}
-        >
-          {component.planned ? (
-            <div className="qui-component-grid__planned-text">Coming soon</div>
-          ) : null}
-          <img
-            alt={component.name}
-            className="qui-component-grid__image"
-            height={200}
-            src={`/images/components/${component.fileName}`}
-          />
-          <div className="qui-component-grid__item-description">
-            <h3 className="font-heading-sm text-neutral-primary">
-              {component.name}
-            </h3>
-            <p className="font-body-sm text-neutral-secondary">
-              {component.description}
-            </p>
-          </div>
-        </Link>
-      ))}
+      {componentList.map((component) => {
+        return (
+          <Link
+            key={component.name}
+            className="qui-component-grid__item"
+            data-planned={booleanDataAttr(component.planned)}
+            to={component.url}
+          >
+            {component.planned ? (
+              <div className="qui-component-grid__planned-text">
+                Coming soon
+              </div>
+            ) : null}
+            <img
+              alt={component.name}
+              className="qui-component-grid__image"
+              height={200}
+              src={`/images/components/${component.fileName}`}
+            />
+            <div className="qui-component-grid__item-description">
+              <h3 className="font-heading-sm text-neutral-primary">
+                {component.name}
+              </h3>
+              <p className="font-body-sm text-neutral-secondary">
+                {component.description}
+              </p>
+            </div>
+          </Link>
+        )
+      })}
     </div>
   )
 }

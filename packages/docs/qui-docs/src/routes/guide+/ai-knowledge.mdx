@@ -1,0 +1,249 @@
+---
+title: AI Knowledge
+description: Export documentation as LLM-ready Markdown files.
+---
+
+import {FileTree} from "@qualcomm-ui/react-mdx/file-tree"
+import {TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
+
+# {frontmatter.title}
+
+{frontmatter.description}
+
+## Overview
+
+QUI Docs provides two mechanisms for generating LLM-compatible documentation:
+
+- **Page Exports**: Generate downloadable markdown files for each documentation page, served from the public directory
+- **Knowledge Generation**: CLI tool for creating aggregated or per-page knowledge bases for OpenWebUI and other LLM platforms
+
+Both features transform MDX content into clean markdown by:
+
+- Replacing `<TypeDocProps />` components with JSON property documentation
+- Inlining demo source code from referenced demo files
+- Converting theme tables to JSON data
+- Resolving relative imports and links
+
+## Page Exports
+
+The page exports feature generates downloadable markdown files during build and dev server initialization. When enabled, each documentation page displays a "Copy Page" button and download menu in the page header.
+
+### Configuration
+
+Enable page exports in your `qui-docs.config.ts`:
+
+```typescript
+import type {QuiDocsConfig} from "@qualcomm-ui/mdx-vite"
+
+export default {
+  // ... existing config
+  knowledge: {
+    global: {
+      baseUrl: "https://docs.example.com",
+      exports: {
+        enabled: true,
+        staticPath: "exports/md",
+      },
+    },
+  },
+} satisfies QuiDocsConfig
+```
+
+### Options
+
+#### KnowledgeExportsConfig
+
+<TypeDocProps name="KnowledgeExportsConfig" partial />
+
+### Output Format
+
+Each exported Markdown file includes:
+
+- YAML frontmatter with the page URL and any configured metadata
+- Page title as an `h1` heading
+- Processed content with demos and TypeDoc props expanded
+- Related source files from demo imports (when applicable)
+
+Example output:
+
+````markdown
+---
+url: https://docs.example.com/components/button
+---
+
+# Button
+
+A button triggers an action or event when activated.
+
+## Usage
+
+```tsx
+import {Button} from "@qualcomm-ui/react/button"
+
+export function BasicButton() {
+  return <Button>Click me</Button>
+}
+```
+````
+
+### UI Integration
+
+When exports are enabled, the page header displays:
+
+- **Copy Page button**: Copies the page content as Markdown to the clipboard
+- **Context menu**: Provides options to copy or download the page as a `.md` file
+
+These actions only appear on pages that have been successfully exported.
+
+## Knowledge Generation CLI
+
+The `generate-llms-txt` command creates knowledge bases from your documentation for use with OpenWebUI or other LLM platforms.
+
+### Basic Usage
+
+```shell
+qui-mdx-vite generate-llms-txt --output-mode per-page -o ./knowledge
+```
+
+### Configuration Priority
+
+Configuration is resolved in the following order (highest to lowest):
+
+1. CLI options
+2. Config file (`qui-docs.config.ts`) - see [Configuration Reference](./#configuration-reference)
+3. Environment variables
+
+### CLI Options
+
+| Option                     | Description                                       |
+| :------------------------- | :------------------------------------------------ |
+| `-m, --output-mode <mode>` | Required. Output mode: `per-page` or `aggregated` |
+| `-o, --outputPath <path>`  | Output file or directory                          |
+| `-n, --name <name>`        | Project name for the output header                |
+| `-d, --description <desc>` | Project description                               |
+| `--base-url <url>`         | Base URL for documentation links                  |
+| `--exclude <patterns...>`  | Glob patterns to exclude                          |
+| `--metadata <pairs...>`    | Metadata key-value pairs (format: `key=value`)    |
+| `--clean`                  | Clean output path before generating               |
+| `-v, --verbose`            | Enable verbose logging                            |
+| `--env <path>`             | Load environment variables from a specific file   |
+
+#### Output Modes
+
+| Mode         | Description                                             |
+| :----------- | :------------------------------------------------------ |
+| `per-page`   | Generates individual Markdown files for each page       |
+| `aggregated` | Generates a single `llms.txt` file containing all pages |
+
+### Environment Variables
+
+Environment variables serve as fallbacks when values are not specified via CLI or config file:
+
+| Variable                | Description                              |
+| :---------------------- | :--------------------------------------- |
+| `DOCS_SITE_BASE_URL`    | Base URL for documentation links         |
+| `KNOWLEDGE_OUTPUT_PATH` | Output path for generated files          |
+| `FILE_EXCLUDE_PATTERN`  | Comma-separated glob patterns to exclude |
+| `PAGE_TITLE_PREFIX`     | Prefix to prepend to page titles         |
+
+### Examples
+
+Generate an aggregated llms.txt file:
+
+```shell
+qui-mdx-vite generate-llms-txt \
+  --output-mode aggregated \
+  -o public/llms-full.txt \
+  --name "My Component Library" \
+  --clean
+```
+
+Generate per-page exports with exclusions:
+
+```shell
+qui-mdx-vite generate-llms-txt \
+  --output-mode per-page \
+  -o knowledge-base \
+  --exclude "**/internal/**" "**/drafts/**" \
+  --base-url "https://docs.example.com" \
+  --metadata "version=1.0.0" "framework=react"
+```
+
+Load environment from a specific file:
+
+```shell
+qui-mdx-vite generate-llms-txt --output-mode per-page --env .env.production
+```
+
+## Configuration Reference
+
+The file-based configuration is applied to the `knowledge.global` property.
+
+```typescript
+// qui-docs.config.ts
+import type {QuiDocsConfig} from "@qualcomm-ui/mdx-vite"
+
+export default {
+  // ...
+  knowledge: {
+    global: {
+      // KnowledgeIntegrationConfig
+    },
+  },
+} satisfies QuiDocsConfig
+```
+
+### KnowledgeIntegrationConfig
+
+<TypeDocProps name="KnowledgeIntegrationConfig" partial />
+
+### Configuration Inheritance
+
+The `exports` configuration inherits from the parent `global` configuration:
+
+- `exclude`, `metadata`, `pageTitlePrefix`, and `extraFiles` in `exports` override the parent values
+- When not specified in `exports`, values fall back to `global`
+
+## Output Structure
+
+### Per-Page Mode
+
+Per-page output creates a directory with individual markdown files:
+
+<FileTree
+  className="mt-4"
+  expandedValue={["exports/md"]}
+  items={[
+    {
+      name: "exports/md",
+      items: [
+        {name: "components-button.md"},
+        {name: "components-input.md"},
+        {name: "guide-getting-started.md"},
+        {name: "guide-theming.md"},
+      ],
+    },
+  ]}
+/>
+
+File names derive from the page's URL path with slashes replaced by hyphens.
+
+### Aggregated Mode
+
+Aggregated output creates a single file with all pages concatenated:
+
+```markdown
+# My Component Library
+
+> Documentation for the component library
+
+## Button
+
+A button triggers an action or event...
+
+## Input
+
+A text input field...
+```
+
+Headings in individual pages are demoted by one level to maintain hierarchy.

@@ -41,6 +41,9 @@ const navConfig: NavConfig[] = [
   {
     children: [
       {
+        id: "overview",
+      },
+      {
         group: "Data Display",
         id: "badges",
         ignoreRouteMetaOrder: true,
@@ -72,7 +75,11 @@ export default {
   knowledge: {
     global: {
       baseUrl: "https://angular-next.qui.qualcomm.com",
-      exclude: ["index.mdx"],
+      exclude: ["index.mdx", "**/components+/overview*"],
+      exports: {
+        enabled: true,
+        exclude: ["**/components+/overview*"],
+      },
       extraFiles: [
         {
           contents: readFileSync(

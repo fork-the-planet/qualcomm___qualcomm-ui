@@ -1,5 +1,12 @@
 # @qualcomm-ui/mdx-common
 
+## 1.7.0 (2025/12/22)
+
+### Features
+
+- [docs-plugin]: add knowledge build to docs-plugin
+- [knowledge]: add live knowledge exports configuration
+
 ## 1.6.0 (2025/12/18)
 
 ### Features

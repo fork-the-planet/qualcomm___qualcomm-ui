@@ -1,5 +1,25 @@
 # @qualcomm-ui/mdx-vite
 
+## 2.9.0 (2025/12/22)
+
+### Features
+
+- [docs-plugin]: add knowledge build to docs-plugin
+- [mdx]: add AST-based frontmatter interpolation
+- [knowledge]: add live knowledge exports configuration
+
+### Code Refactoring
+
+- [mdx]: tag frontmatter.description paragraphs with qui-docs\_\_page-description class
+
+### Tests
+
+- [mdx]: add coverage for frontmatter interpolation behavior
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common]
+
 ## 2.8.0 (2025/12/18)
 
 ### Features

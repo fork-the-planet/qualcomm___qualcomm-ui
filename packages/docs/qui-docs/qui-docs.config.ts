@@ -55,6 +55,16 @@ const navConfig: NavConfig[] = [
 
 export default {
   appDirectory: "src",
+  knowledge: {
+    global: {
+      baseUrl: "https://docs-next.qui.qualcomm.com",
+      exclude: ["**/debug+/**"],
+      exports: {
+        enabled: true,
+        exclude: ["**/debug+/**", "*guide+/swagger*"],
+      },
+    },
+  },
   navConfig,
   pageDirectory: "routes",
   pageTimestampMetadata: "user-and-timestamp",

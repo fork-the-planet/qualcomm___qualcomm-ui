@@ -82,3 +82,7 @@
   padding: 20px;
   width: 100%;
 }
+
+.qui-component-grid__image {
+  min-height: 200px;
+}

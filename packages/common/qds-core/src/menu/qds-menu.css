@@ -1,14 +1,16 @@
 .qui-menu__button {
   background: transparent;
   .qui-button__icon {
-    &[data-placement="end"] {
+    &[data-placement="end"],
+    &[data-scope="icon-button"] {
       transition: transform var(--animation-duration-faster) ease-out;
     }
   }
   &[data-scope="menu"][data-part="trigger"][data-state="open"],
   &[data-state="open"][aria-haspopup="menu"] {
     .qui-button__icon {
-      &[data-placement="end"] {
+      &[data-placement="end"],
+      &[data-scope="icon-button"] {
         transform: rotate(180deg);
       }
     }

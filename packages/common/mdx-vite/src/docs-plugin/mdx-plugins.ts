@@ -30,6 +30,7 @@ import {
   remarkAlerts,
   remarkCodeTabs,
   remarkFrontmatterDescription,
+  remarkFrontmatterTitle,
   remarkSpoilers,
 } from "./remark"
 import {transformerCodeAttribute, transformerNotationHidden} from "./shiki"
@@ -117,6 +118,7 @@ export function getRemarkPlugins(): PluggableList {
     remarkGfm,
     remarkAlerts,
     remarkCodeTabs,
+    remarkFrontmatterTitle,
     remarkFrontmatterDescription,
     remarkSpoilers,
   ]

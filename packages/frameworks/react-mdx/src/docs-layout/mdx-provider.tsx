@@ -13,8 +13,9 @@ import {
   SpoilerRoot,
   SpoilerSummary,
 } from "@qualcomm-ui/react-mdx/spoiler"
+import {clsx} from "@qualcomm-ui/utils/clsx"
 
-import {AnchorHeader, CodeTabs, ShikiPre} from "./internal"
+import {AnchorHeader, CodeTabs, MdxH1, ShikiPre} from "./internal"
 
 interface Props {
   /**
@@ -95,13 +96,7 @@ export function MdxProvider({children, components}: Props): ReactNode {
           },
           CodeTabs,
           em: (props) => <em className="mdx" {...props} />,
-          h1: ({children, id, ...props}) => {
-            return (
-              <h1 className="mdx" id={id || undefined} {...props}>
-                {children}
-              </h1>
-            )
-          },
+          h1: MdxH1,
           h2: ({children, id}) => {
             return (
               <AnchorHeader
@@ -148,7 +143,9 @@ export function MdxProvider({children, components}: Props): ReactNode {
           img: (props) => <img className="mdx" {...props} />,
           li: (props) => <li className="mdx" {...props} />,
           ol: (props) => <ol className="mdx" {...props} />,
-          p: (props) => <p className="mdx" {...props} />,
+          p: ({className, ...props}) => (
+            <p className={clsx(className, "mdx")} {...props} />
+          ),
           pre: ({children, ...props}) => {
             return <ShikiPre {...props}>{children}</ShikiPre>
           },

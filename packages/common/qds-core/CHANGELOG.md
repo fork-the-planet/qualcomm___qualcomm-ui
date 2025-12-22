@@ -1,5 +1,11 @@
 # @qualcomm-ui/qds-core
 
+## 1.10.3 (2025/12/22)
+
+### Bug Fixes
+
+- [menu-icon-button]: rotate icon when open
+
 ## 1.10.2 (2025/12/18)
 
 ### Bug Fixes
