@@ -72,10 +72,10 @@ export default {
   knowledge: {
     global: {
       baseUrl: "https://angular-next.qui.qualcomm.com",
-      exclude: ["index.mdx"],
+      exclude: ["index.mdx", "**/components+/overview*"],
       exports: {
         enabled: true,
-        exclude: [],
+        exclude: ["**/components+/overview*"],
       },
       extraFiles: [
         {

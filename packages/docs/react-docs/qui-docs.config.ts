@@ -56,7 +56,7 @@ const navConfig: NavConfig[] = [
   {
     children: [
       {
-        id: "all-components",
+        id: "overview",
       },
       {
         group: "Data Display",
@@ -120,10 +120,10 @@ export default {
   knowledge: {
     global: {
       baseUrl: "https://react-next.qui.qualcomm.com",
-      exclude: ["**/installation+/**", "index.mdx"],
+      exclude: ["**/installation+/**", "index.mdx", "**/components+/overview*"],
       exports: {
         enabled: true,
-        exclude: [],
+        exclude: ["**/components+/overview*"],
       },
       extraFiles: [
         {
