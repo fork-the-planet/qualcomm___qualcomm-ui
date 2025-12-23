@@ -137,6 +137,14 @@ export default {
           id: "react-changelog",
           title: "Changelog",
         },
+        {
+          contents: readFileSync(
+            resolve(__dirname, "./public/component-manifest.md"),
+            "utf-8",
+          ),
+          id: "component-list",
+          title: "Component List",
+        },
       ],
       metadata: {framework: "react"},
     },

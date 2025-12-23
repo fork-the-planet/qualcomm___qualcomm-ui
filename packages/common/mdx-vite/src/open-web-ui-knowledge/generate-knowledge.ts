@@ -29,7 +29,6 @@ import type {
 } from "@qualcomm-ui/typedoc-common"
 import {kebabCase} from "@qualcomm-ui/utils/change-case"
 
-import {remarkSelfLinkHeadings} from "../docs-plugin"
 import {
   getPathnameFromPathSegments,
   getPathSegmentsFromFileName,
@@ -229,6 +228,49 @@ function getPath(obj: Record<string, unknown>, path: string): unknown {
           : undefined,
       obj,
     )
+}
+
+function escapeText(value: string): string {
+  return value.replace(/\n/g, " ")
+}
+
+function propsToDefinitionList(props: SimplifiedProp[]): string {
+  if (props.length === 0) {
+    return ""
+  }
+
+  return props
+    .map((prop) => {
+      const parts = [`- **${prop.name}** (\`${escapeText(prop.type)}\``]
+
+      if (prop.defaultValue) {
+        parts.push(`, default: \`${escapeText(prop.defaultValue)}\``)
+      }
+      if (prop.required) {
+        parts.push(", required")
+      }
+
+      parts.push(")")
+
+      if (prop.description) {
+        parts.push(` - ${escapeText(prop.description)}`)
+      }
+
+      return parts.join("")
+    })
+    .join("\n")
+}
+
+function themeDataToJson(data: unknown, cssPropertyName?: string): string {
+  if (!data || typeof data !== "object") {
+    return ""
+  }
+
+  if (cssPropertyName) {
+    return JSON.stringify({cssProperty: cssPropertyName, data}, null, 2)
+  }
+
+  return JSON.stringify(data, null, 2)
 }
 
 /**
@@ -531,13 +573,16 @@ class KnowledgeGenerator {
               return codeText
             }
           default:
+            // render link text only, but remove certain text altogether
             if (
               this.config.outputMode === "per-page" &&
               "tag" in part &&
               part.tag === "@link" &&
               typeof part.target === "string"
             ) {
-              return `[${part.text}](${part.target})`
+              if (part.text === "Learn more") {
+                return ""
+              }
             }
             return part.text
         }
@@ -566,8 +611,8 @@ class KnowledgeGenerator {
   }
 
   /**
-   * Creates a remark plugin that replaces TypeDocProps JSX elements with JSON
-   * code blocks containing component prop documentation.
+   * Creates a remark plugin that replaces theme JSX elements with
+   * markdown tables containing theme data.
    */
   private async replaceThemeNodes(): Promise<Plugin> {
     let themes: any | null = null
@@ -608,11 +653,31 @@ class KnowledgeGenerator {
           return
         }
 
+        let markdownTable: string
+        if (
+          typeof data === "object" &&
+          data !== null &&
+          "cssPropertyName" in data &&
+          "data" in data
+        ) {
+          const {cssPropertyName, data: themeData} = data as {
+            cssPropertyName: string
+            data: unknown
+          }
+          markdownTable = themeDataToJson(themeData, cssPropertyName)
+        } else {
+          markdownTable = themeDataToJson(data)
+        }
+
+        if (!markdownTable) {
+          return
+        }
+
         Object.assign(node, {
           lang: "json",
           meta: null,
           type: "code",
-          value: JSON.stringify(data, null, 2),
+          value: markdownTable,
         })
       })
       done()
@@ -639,8 +704,8 @@ class KnowledgeGenerator {
   }
 
   /**
-   * Creates a remark plugin that replaces TypeDocProps JSX elements with JSON
-   * code blocks containing component prop documentation.
+   * Creates a remark plugin that replaces TypeDocProps JSX elements with
+   * markdown tables containing component prop documentation.
    */
   private replaceTypeDocProps(): Plugin {
     return () => (tree, _file, done) => {
@@ -693,11 +758,39 @@ class KnowledgeGenerator {
               `  Replaced TypeDocProps ${propsName} with API documentation`,
             )
           }
+
+          const regularProps = propsDoc.filter((p) => p.propType === undefined)
+          const inputs = propsDoc.filter((p) => p.propType === "input")
+          const outputs = propsDoc.filter((p) => p.propType === "output")
+
+          const sections: string[] = []
+
+          if (regularProps.length > 0) {
+            sections.push(propsToDefinitionList(regularProps))
+          }
+
+          if (inputs.length > 0) {
+            sections.push(`**Inputs**\n\n${propsToDefinitionList(inputs)}`)
+          }
+
+          if (outputs.length > 0) {
+            sections.push(`**Outputs**\n\n${propsToDefinitionList(outputs)}`)
+          }
+
+          const markdownContent = sections.join("\n\n")
+
+          if (!markdownContent) {
+            if (parent && index !== undefined) {
+              parent.children.splice(index, 1)
+            }
+            return
+          }
+
           Object.assign(node, {
-            lang: "json",
+            lang: null,
             meta: null,
             type: "code",
-            value: JSON.stringify(propsDoc, null, 2),
+            value: markdownContent,
           })
         },
       )
@@ -932,12 +1025,7 @@ class KnowledgeGenerator {
         .use(replaceNpmInstallTabs)
         .use(remarkFrontmatter, ["yaml"])
         .use(remarkParseFrontmatter)
-
-      if (this.config.outputMode === "per-page") {
-        processor.use(remarkSelfLinkHeadings(component.url))
-      }
-
-      processor.use(remarkStringify)
+        .use(remarkStringify)
       const parsed = await processor.process(mdxContent)
       const frontmatter = (parsed.data as any)?.frontmatter || {}
       const {content: processedContent, demoFiles} =
@@ -956,10 +1044,9 @@ class KnowledgeGenerator {
       const removedJsx = String(
         await removeJsxProcessor.process(processedContent),
       )
-      const contentWithoutFrontmatter = removedJsx.replace(
-        /^---[\s\S]*?---\n/,
-        "",
-      )
+      const contentWithoutFrontmatter = removedJsx
+        .replace(/^---[\s\S]*?---\n/, "")
+        .replace(/(^#{1,6} .*\\<[^>]+)>/gm, "$1\\>")
       const title = frontmatter.title || component.name
 
       return {
@@ -1093,6 +1180,11 @@ class KnowledgeGenerator {
           page.name = processedPage.frontmatter.title
         }
         let content = processedPage.content
+        // Remove duplicate h1 if content starts with the same title
+        content = content.replace(
+          new RegExp(`^# ${processedPage.title}\\n+`, ""),
+          "",
+        )
         if (this.config.pageTitlePrefix) {
           content = content.replace(
             `# ${page.name}`,
