@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
 import {program} from "@commander-js/extra-typings"
-import type {Parent} from "mdast"
+import type {Link, Parent} from "mdast"
 import type {MdxJsxAttribute, MdxJsxFlowElement} from "mdast-util-mdx-jsx"
 import {minimatch} from "minimatch"
 import {
@@ -704,6 +704,25 @@ class KnowledgeGenerator {
   }
 
   /**
+   * Creates a remark plugin that transforms relative URLs to absolute URLs.
+   */
+  private transformRelativeUrls(pageUrl: string | undefined): Plugin {
+    const baseUrl = this.config.baseUrl
+    return () => (tree) => {
+      if (!baseUrl || this.config.outputMode !== "per-page") {
+        return
+      }
+      visit(tree, "link", (node: Link) => {
+        if (node.url.startsWith("/")) {
+          node.url = `${baseUrl}${node.url}`
+        } else if (node.url.startsWith("./#") && pageUrl) {
+          node.url = `${pageUrl}${node.url.slice(2)}`
+        }
+      })
+    }
+  }
+
+  /**
    * Creates a remark plugin that replaces TypeDocProps JSX elements with
    * markdown tables containing component prop documentation.
    */
@@ -985,15 +1004,6 @@ class KnowledgeGenerator {
     frontmatter: Record<string, any>,
   ): Promise<{content: string; demoFiles: string[]}> {
     const demoFiles: string[] = []
-    let processedContent = mdxContent
-
-    processedContent = processedContent.replace(
-      /\[([^\]]+)\]\(\.\/#([^)]+)\)/g,
-      (_, text, anchor) =>
-        pageUrl && this.config.outputMode === "per-page"
-          ? `[${text}](${pageUrl}#${anchor})`
-          : text,
-    )
 
     const processor = unified()
       .use(remarkParse)
@@ -1003,12 +1013,11 @@ class KnowledgeGenerator {
       .use(this.replaceFrontmatterExpressions(frontmatter))
       .use(await this.replaceThemeNodes())
       .use(this.replaceDemos(demosFolder, demoFiles))
+      .use(this.transformRelativeUrls(pageUrl))
       .use(remarkStringify)
 
-    const processed = await processor.process(processedContent)
-    processedContent = String(processed)
-
-    processedContent = processedContent.replace(/\n\s*\n\s*\n/g, "\n\n")
+    const processed = await processor.process(mdxContent)
+    const processedContent = String(processed).replace(/\n\s*\n\s*\n/g, "\n\n")
 
     return {content: processedContent, demoFiles}
   }
