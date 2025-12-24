@@ -314,7 +314,7 @@ class KnowledgeGenerator {
     const processedPages: ProcessedPage[] = []
     for (const page of pages) {
       try {
-        const processed = await this.processComponent(page)
+        const processed = await this.processMdxPage(page)
         processedPages.push(processed)
       } catch (error) {
         console.error(`Failed to process page: ${page.name}`)
@@ -706,7 +706,7 @@ class KnowledgeGenerator {
   /**
    * Creates a remark plugin that transforms relative URLs to absolute URLs.
    */
-  private transformRelativeUrls(pageUrl: string | undefined): Plugin {
+  private transformRelativeUrls(pageUrl?: string): Plugin {
     const baseUrl = this.config.baseUrl
     return () => (tree) => {
       if (!baseUrl || this.config.outputMode !== "per-page") {
@@ -1022,11 +1022,11 @@ class KnowledgeGenerator {
     return {content: processedContent, demoFiles}
   }
 
-  private async processComponent(component: PageInfo): Promise<ProcessedPage> {
+  private async processMdxPage(pageInfo: PageInfo): Promise<ProcessedPage> {
     try {
-      const mdxContent = await readFile(component.mdxFile, "utf-8")
+      const mdxContent = await readFile(pageInfo.mdxFile, "utf-8")
       if (this.config.verbose) {
-        console.log(`Processing page: ${component.name}`)
+        console.log(`Processing page: ${pageInfo.name}`)
       }
       const processor = unified()
         .use(remarkParse)
@@ -1040,8 +1040,8 @@ class KnowledgeGenerator {
       const {content: processedContent, demoFiles} =
         await this.processMdxContent(
           String(parsed),
-          component.url,
-          component.demosFolder,
+          pageInfo.url,
+          pageInfo.demosFolder,
           frontmatter,
         )
       const removeJsxProcessor = unified()
@@ -1056,17 +1056,17 @@ class KnowledgeGenerator {
       const contentWithoutFrontmatter = removedJsx
         .replace(/^---[\s\S]*?---\n/, "")
         .replace(/(^#{1,6} .*\\<[^>]+)>/gm, "$1\\>")
-      const title = frontmatter.title || component.name
+      const title = frontmatter.title || pageInfo.name
 
       return {
         content: contentWithoutFrontmatter.trim(),
         demoFiles,
         frontmatter,
         title,
-        url: component.url,
+        url: pageInfo.url,
       }
     } catch (error) {
-      console.error(`Error processing component ${component.name}:`, error)
+      console.error(`Error processing component ${pageInfo.name}:`, error)
       throw error
     }
   }
@@ -1128,6 +1128,19 @@ class KnowledgeGenerator {
     let totalSize = 0
     await Promise.all(
       extraFiles.map(async (extraFile) => {
+        let contents = extraFile.contents
+        if (extraFile.processAsMdx) {
+          const removeJsxProcessor = unified()
+            .use(remarkParse)
+            .use(remarkMdx)
+            .use(remarkFrontmatter, ["yaml"])
+            .use(remarkRemoveJsx)
+            .use(this.transformRelativeUrls())
+            .use(remarkStringify)
+
+          contents = String(await removeJsxProcessor.process(contents))
+        }
+
         const lines: string[] = []
         if (metadata.length) {
           lines.push("---")
@@ -1138,9 +1151,11 @@ class KnowledgeGenerator {
           lines.push("")
         }
 
-        lines.push(`# ${extraFile.title}`)
-        lines.push("")
-        lines.push(extraFile.contents)
+        if (extraFile.title) {
+          lines.push(`# ${extraFile.title}`)
+          lines.push("")
+        }
+        lines.push(contents)
         lines.push("")
 
         const outfile = `${resolve(this.config.outputPath)}/${kebabCase(extraFile.id)}.md`

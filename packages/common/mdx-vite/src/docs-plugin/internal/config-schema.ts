@@ -50,7 +50,8 @@ const typeDocPropsSchema = implement<QuiDocsTypeDocOptions>().with({
 const knowledgeExtraFileSchema = implement<KnowledgeExtraFile>().with({
   contents: z.string(),
   id: z.string(),
-  title: z.string(),
+  processAsMdx: z.boolean().optional(),
+  title: z.string().optional(),
 })
 
 const knowledgeExportsSchema = implement<KnowledgeExportsConfig>().with({

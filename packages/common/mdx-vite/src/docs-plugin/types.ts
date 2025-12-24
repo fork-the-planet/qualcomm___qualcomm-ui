@@ -201,11 +201,11 @@ export interface KnowledgeIntegrationConfig {
 }
 
 /**
- * Extra content to include in knowledge output.
+ * Extra content to include in knowledge output. Assumed to be Markdown.
  */
 export interface KnowledgeExtraFile {
   /**
-   * The markdown content for this file.
+   * The Markdown content for this file.
    */
   contents: string
 
@@ -215,9 +215,16 @@ export interface KnowledgeExtraFile {
   id: string
 
   /**
-   * Display name/title for this content.
+   * Whether to process this file as MDX content, replacing relative URLs and
+   * applying other transformations as if the file were authored as mdx
+   * documentation.
    */
-  title: string
+  processAsMdx?: boolean
+
+  /**
+   * Display title for this content.
+   */
+  title?: string
 }
 
 /**

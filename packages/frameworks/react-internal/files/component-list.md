@@ -1,3 +1,5 @@
+# Component List
+
 | Component                                              | Description | Status |
 |--------------------------------------------------------|-------------|--------|
 | [Accordion](/components/accordion)                     | Expand and collapse content sections to organize information efficiently. | |
