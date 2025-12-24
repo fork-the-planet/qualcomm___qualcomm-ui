@@ -1,5 +1,11 @@
 # @qualcomm-ui/core
 
+## 1.2.0 (2025/12/24)
+
+### Features
+
+- add toggle api
+
 ## 1.1.0 (2025/12/11)
 
 ### Features

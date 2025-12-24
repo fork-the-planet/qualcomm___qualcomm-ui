@@ -1,5 +1,11 @@
 # @qualcomm-ui/qds-core
 
+## 1.10.4 (2025/12/24)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core]
+
 ## 1.10.3 (2025/12/22)
 
 ### Bug Fixes

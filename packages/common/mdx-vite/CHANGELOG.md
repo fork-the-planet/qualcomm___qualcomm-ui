@@ -1,5 +1,17 @@
 # @qualcomm-ui/mdx-vite
 
+## 2.10.0 (2025/12/24)
+
+### Features
+
+- [knowledge-files]: optionally process extra files as mdx
+- [knowledge]: consolidate generated markdown
+- [knowledge]: add relative link transformer
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common]
+
 ## 2.9.0 (2025/12/22)
 
 ### Features
