@@ -1,26 +1,8 @@
-import {
-  isRouteErrorResponse,
-  LoaderFunctionArgs,
-  redirect,
-  useRouteError,
-} from "react-router"
+import {isRouteErrorResponse, LoaderFunction, useRouteError} from "react-router"
 
-import {siteData} from "@qualcomm-ui/mdx-vite-plugin"
 import {NotFound} from "@qualcomm-ui/react-mdx/not-found"
 
-export function loader({request}: LoaderFunctionArgs) {
-  const url = new URL(request.url)
-  const pages = siteData.exports?.pages ?? []
-
-  if (url.pathname.endsWith(".md") && pages.length) {
-    try {
-      const exportId = url.pathname.split("/").join("-").substring(1)
-      return redirect(`/exports/md/${exportId}`)
-    } catch {
-      // file doesn't exist, fall through to 404
-    }
-  }
-
+export const loader: LoaderFunction = () => {
   throw new Response("Not Found", {status: 404}) as any
 }
 

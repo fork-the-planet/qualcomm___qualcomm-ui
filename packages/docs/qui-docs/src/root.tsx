@@ -14,7 +14,6 @@ import {
   ScrollRestoration,
   useLoaderData,
   useLocation,
-  useRouteError,
 } from "react-router"
 
 import type {SiteData} from "@qualcomm-ui/mdx-common"
@@ -268,8 +267,7 @@ export default function AppWithProviders() {
   )
 }
 
-export function ErrorBoundary() {
-  const error = useRouteError()
+export function ErrorBoundary({error}: any) {
   let jsx
   if (isRouteErrorResponse(error)) {
     jsx = (
