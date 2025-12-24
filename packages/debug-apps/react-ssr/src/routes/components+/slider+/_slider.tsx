@@ -1,22 +1,24 @@
-import CompositeDemo from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-composite-demo"
-import DisabledDemo from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-disabled-demo"
-import DisplayDemo from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-display-demo"
-import FocusCallbackDemo from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-focus-callback-demo"
-import HintDemo from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-hint-demo"
-import MarkersDemo from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-markers-demo"
-import MinMaxStepDemo from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-min-max-step-demo"
-import MinStepsDemo from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-min-steps-demo"
-import OriginDemo from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-origin-demo"
-import RangeDemo from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-range-demo"
-import ReactHookFormDemo from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-react-hook-form-demo"
-import SideMarkersDemo from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-side-markers-demo"
-import SimpleDemo from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-simple-demo"
-import SizeDemo from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-size-demo"
-import TanstackFormDemo from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-tanstack-form-demo"
-import TooltipDemo from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-tooltip-demo"
-import ValueCallbackDemo from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-value-callback-demo"
-import VariantDemo from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-variant-demo"
-import VerticalDemo from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-vertical-demo"
+import {SliderCompositeDemo as CompositeDemo} from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-composite-demo"
+import {SliderDisabledDemo as DisabledDemo} from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-disabled-demo"
+import {SliderDisplayDemo as DisplayDemo} from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-display-demo"
+import {SliderFocusCallbackDemo as FocusCallbackDemo} from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-focus-callback-demo"
+import {SliderHintDemo as HintDemo} from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-hint-demo"
+import {SliderMarkersDemo as MarkersDemo} from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-markers-demo"
+import {SliderMinMaxStepDemo as MinMaxStepDemo} from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-min-max-step-demo"
+import {SliderMinStepsDemo as MinStepsDemo} from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-min-steps-demo"
+import {SliderOriginDemo as OriginDemo} from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-origin-demo"
+import {SliderRangeDemo as RangeDemo} from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-range-demo"
+import {SliderReactHookFormDemo as ReactHookFormDemo} from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-react-hook-form-demo"
+import {SliderSideMarkersDemo as SideMarkersDemo} from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-side-markers-demo"
+import {SliderSimpleDemo as SimpleDemo} from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-simple-demo"
+import {SliderSizeDemo as SizeDemo} from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-size-demo"
+import {SliderTanstackFormDemo as TanstackFormDemo} from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-tanstack-form-demo"
+import {SliderTooltipDemo as TooltipDemo} from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-tooltip-demo"
+import {SliderValueCallbackDemo as ValueCallbackDemo} from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-value-callback-demo"
+import {SliderVariantDemo as VariantDemo} from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-variant-demo"
+import {SliderVerticalDemo as VerticalDemo} from "@qualcomm-ui/react-docs/components+/slider+/demos/slider-vertical-demo"
+
+import {DemoPageLayout} from "~/components/demo-page-layout"
 
 const demos = [
   {component: CompositeDemo, title: "Composite"},
@@ -41,16 +43,5 @@ const demos = [
 ]
 
 export default function SliderDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="slider" demos={demos} />
 }

@@ -1,14 +1,16 @@
-import AddRemoveDemo from "@qualcomm-ui/react-docs/components+/tabs+/demos/tabs-add-remove-demo"
-import ContainedSizesDemo from "@qualcomm-ui/react-docs/components+/tabs+/demos/tabs-contained-sizes-demo"
-import ContextDemo from "@qualcomm-ui/react-docs/components+/tabs+/demos/tabs-context-demo"
-import ControlledValueDemo from "@qualcomm-ui/react-docs/components+/tabs+/demos/tabs-controlled-value-demo"
-import DisabledDemo from "@qualcomm-ui/react-docs/components+/tabs+/demos/tabs-disabled-demo"
-import HorizontalDemo from "@qualcomm-ui/react-docs/components+/tabs+/demos/tabs-horizontal-demo"
-import IconsDemo from "@qualcomm-ui/react-docs/components+/tabs+/demos/tabs-icons-demo"
-import LazyMountedDemo from "@qualcomm-ui/react-docs/components+/tabs+/demos/tabs-lazy-mounted-demo"
-import LineSizesDemo from "@qualcomm-ui/react-docs/components+/tabs+/demos/tabs-line-sizes-demo"
-import LinksDemo from "@qualcomm-ui/react-docs/components+/tabs+/demos/tabs-links-demo"
-import VerticalDemo from "@qualcomm-ui/react-docs/components+/tabs+/demos/tabs-vertical-demo"
+import {TabsAddRemoveDemo as AddRemoveDemo} from "@qualcomm-ui/react-docs/components+/tabs+/demos/tabs-add-remove-demo"
+import {TabsContainedSizesDemo as ContainedSizesDemo} from "@qualcomm-ui/react-docs/components+/tabs+/demos/tabs-contained-sizes-demo"
+import {TabsContextDemo as ContextDemo} from "@qualcomm-ui/react-docs/components+/tabs+/demos/tabs-context-demo"
+import {TabsControlledValueDemo as ControlledValueDemo} from "@qualcomm-ui/react-docs/components+/tabs+/demos/tabs-controlled-value-demo"
+import {TabsDisabledDemo as DisabledDemo} from "@qualcomm-ui/react-docs/components+/tabs+/demos/tabs-disabled-demo"
+import {TabsHorizontalDemo as HorizontalDemo} from "@qualcomm-ui/react-docs/components+/tabs+/demos/tabs-horizontal-demo"
+import {TabsIconsDemo as IconsDemo} from "@qualcomm-ui/react-docs/components+/tabs+/demos/tabs-icons-demo"
+import {TabsLazyMountedDemo as LazyMountedDemo} from "@qualcomm-ui/react-docs/components+/tabs+/demos/tabs-lazy-mounted-demo"
+import {TabsLineSizesDemo as LineSizesDemo} from "@qualcomm-ui/react-docs/components+/tabs+/demos/tabs-line-sizes-demo"
+import {TabsLinksDemo as LinksDemo} from "@qualcomm-ui/react-docs/components+/tabs+/demos/tabs-links-demo"
+import {TabsVerticalDemo as VerticalDemo} from "@qualcomm-ui/react-docs/components+/tabs+/demos/tabs-vertical-demo"
+
+import {DemoPageLayout} from "~/components/demo-page-layout"
 
 const demos = [
   {component: AddRemoveDemo, title: "Add Remove"},
@@ -25,16 +27,5 @@ const demos = [
 ]
 
 export default function TabsDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="tabs" demos={demos} />
 }

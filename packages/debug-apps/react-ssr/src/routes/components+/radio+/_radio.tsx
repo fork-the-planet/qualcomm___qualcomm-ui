@@ -1,12 +1,14 @@
-import CompositeDemo from "@qualcomm-ui/react-docs/components+/radio+/demos/radio-composite-demo"
-import CompositeLayoutDemo from "@qualcomm-ui/react-docs/components+/radio+/demos/radio-composite-layout-demo"
-import ControlledDemo from "@qualcomm-ui/react-docs/components+/radio+/demos/radio-controlled-demo"
-import DisabledDemo from "@qualcomm-ui/react-docs/components+/radio+/demos/radio-disabled-demo"
-import OrientationDemo from "@qualcomm-ui/react-docs/components+/radio+/demos/radio-orientation-demo"
-import ReactHookFormDemo from "@qualcomm-ui/react-docs/components+/radio+/demos/radio-react-hook-form-demo"
-import SimpleDemo from "@qualcomm-ui/react-docs/components+/radio+/demos/radio-simple-demo"
-import SizesDemo from "@qualcomm-ui/react-docs/components+/radio+/demos/radio-sizes-demo"
-import TanstackFormDemo from "@qualcomm-ui/react-docs/components+/radio+/demos/radio-tanstack-form-demo"
+import {RadioCompositeDemo as CompositeDemo} from "@qualcomm-ui/react-docs/components+/radio+/demos/radio-composite-demo"
+import {RadioCompositeLayoutDemo as CompositeLayoutDemo} from "@qualcomm-ui/react-docs/components+/radio+/demos/radio-composite-layout-demo"
+import {RadioControlledDemo as ControlledDemo} from "@qualcomm-ui/react-docs/components+/radio+/demos/radio-controlled-demo"
+import {RadioDisabledDemo as DisabledDemo} from "@qualcomm-ui/react-docs/components+/radio+/demos/radio-disabled-demo"
+import {RadioOrientationDemo as OrientationDemo} from "@qualcomm-ui/react-docs/components+/radio+/demos/radio-orientation-demo"
+import {RadioReactHookFormDemo as ReactHookFormDemo} from "@qualcomm-ui/react-docs/components+/radio+/demos/radio-react-hook-form-demo"
+import {RadioSimpleDemo as SimpleDemo} from "@qualcomm-ui/react-docs/components+/radio+/demos/radio-simple-demo"
+import {RadioSizesDemo as SizesDemo} from "@qualcomm-ui/react-docs/components+/radio+/demos/radio-sizes-demo"
+import {RadioTanstackFormDemo as TanstackFormDemo} from "@qualcomm-ui/react-docs/components+/radio+/demos/radio-tanstack-form-demo"
+
+import {DemoPageLayout} from "~/components/demo-page-layout"
 
 const demos = [
   {component: CompositeDemo, title: "Composite"},
@@ -21,16 +23,5 @@ const demos = [
 ]
 
 export default function RadioDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="radio" demos={demos} />
 }

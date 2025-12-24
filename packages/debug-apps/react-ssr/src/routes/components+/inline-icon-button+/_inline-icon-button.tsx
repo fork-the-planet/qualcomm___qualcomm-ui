@@ -1,5 +1,7 @@
-import ShowcaseDemo from "@qualcomm-ui/react-docs/components+/inline-icon-button+/demos/inline-icon-button-showcase-demo"
-import VariantsDemo from "@qualcomm-ui/react-docs/components+/inline-icon-button+/demos/inline-icon-button-variants-demo"
+import {InlineIconButtonShowcaseDemo as ShowcaseDemo} from "@qualcomm-ui/react-docs/components+/inline-icon-button+/demos/inline-icon-button-showcase-demo"
+import {InlineIconButtonVariantsDemo as VariantsDemo} from "@qualcomm-ui/react-docs/components+/inline-icon-button+/demos/inline-icon-button-variants-demo"
+
+import {DemoPageLayout} from "~/components/demo-page-layout"
 
 const demos = [
   {component: ShowcaseDemo, title: "Showcase"},
@@ -7,16 +9,5 @@ const demos = [
 ]
 
 export default function InlineIconButtonDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="inline-icon-button" demos={demos} />
 }
