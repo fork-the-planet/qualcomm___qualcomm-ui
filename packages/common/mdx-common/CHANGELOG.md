@@ -1,5 +1,11 @@
 # @qualcomm-ui/mdx-common
 
+## 1.8.0 (2025/12/24)
+
+### Features
+
+- [types]: add KnowledgePageData type
+
 ## 1.7.0 (2025/12/22)
 
 ### Features

@@ -130,12 +130,19 @@ export default {
           contents: readFileSync(
             resolve(__dirname, "../../frameworks/react/CHANGELOG.md"),
             "utf-8",
-          )
-            .split("\n")
-            .slice(2)
-            .join("\n"),
+          ).replace("# @qualcomm-ui/react", "# @qualcomm-ui/react Changelog"),
           id: "react-changelog",
-          title: "Changelog",
+        },
+        {
+          contents: readFileSync(
+            resolve(
+              __dirname,
+              "../../frameworks/react-internal/files/component-list.md",
+            ),
+            "utf-8",
+          ),
+          id: "component-list",
+          processAsMdx: true,
         },
       ],
       metadata: {framework: "react"},

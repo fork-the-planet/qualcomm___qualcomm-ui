@@ -25,9 +25,9 @@
     "update-knowledge-qui": "run-s generate-knowledge-qui upload-knowledge-qui",
     "generate-knowledge-qui": "pnpm generate-knowledge --env .env.qui-ai",
     "upload-knowledge-qui": "qui-mdx-vite upload-knowledge --env .env.qui-ai",
-    "update-knowledge-qui-test": "run-s generate-knowledge-qui-test upload-knowledge-qui-test",
-    "generate-knowledge-qui-test": "pnpm generate-knowledge --env .env.qui-ai-test",
-    "upload-knowledge-qui-test": "qui-mdx-vite upload-knowledge --env .env.qui-ai-test",
+    "update-knowledge-saga-ai-test": "run-s generate-knowledge-saga-ai-test upload-knowledge-saga-ai-test",
+    "generate-knowledge-saga-ai-test": "pnpm generate-knowledge --env .env.saga-ai-test",
+    "upload-knowledge-saga-ai-test": "qui-mdx-vite upload-knowledge --env .env.saga-ai-test",
     "debug-knowledge-files": "qui-mdx-vite get-knowledge-files --env .env.qui-ai-test",
     "update-knowledge-all": "run-s update-knowledge-qui update-knowledge-saga"
   },

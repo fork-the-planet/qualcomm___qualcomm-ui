@@ -42,6 +42,7 @@
     "@qualcomm-ui/css-utils": "workspace:*",
     "@qualcomm-ui/dom": "workspace:*",
     "@qualcomm-ui/esbuild": "workspace:*",
+    "@qualcomm-ui/mdx-common": "workspace:*",
     "@qualcomm-ui/react": "workspace:*",
     "@qualcomm-ui/react-core": "workspace:*",
     "@qualcomm-ui/react-mdx": "workspace:*",

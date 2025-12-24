@@ -37,6 +37,7 @@ export default defineConfig(
       "./packages/common/codemod/src/**/__tests__/mocks/**/*.tsx",
       "**/temp/",
       "**/public/exports/md/**",
+      "**/frameworks/react-internal/files/component-list.md",
     ],
   },
   {

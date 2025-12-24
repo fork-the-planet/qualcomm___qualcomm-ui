@@ -1,5 +1,15 @@
 # @qualcomm-ui/react-mdx
 
+## 1.8.1 (2025/12/24)
+
+### Bug Fixes
+
+- [page-titles]: check for duplicate title using text content
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/mdx-common, @qualcomm-ui/react, @qualcomm-ui/react-core]
+
 ## 1.8.0 (2025/12/22)
 
 ### Features

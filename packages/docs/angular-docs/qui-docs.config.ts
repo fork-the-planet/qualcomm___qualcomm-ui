@@ -85,12 +85,22 @@ export default {
           contents: readFileSync(
             resolve(__dirname, "../../frameworks/angular/CHANGELOG.md"),
             "utf-8",
-          )
-            .split("\n")
-            .slice(2)
-            .join("\n"),
+          ).replace(
+            "# @qualcomm-ui/angular",
+            "# @qualcomm-ui/angular Changelog",
+          ),
           id: "angular-changelog",
-          title: "Changelog",
+        },
+        {
+          contents: readFileSync(
+            resolve(
+              __dirname,
+              "../../frameworks/react-internal/files/component-list.md",
+            ),
+            "utf-8",
+          ),
+          id: "component-list",
+          processAsMdx: true,
         },
       ],
       metadata: {

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
 import {program} from "@commander-js/extra-typings"
-import type {Parent} from "mdast"
+import type {Link, Parent} from "mdast"
 import type {MdxJsxAttribute, MdxJsxFlowElement} from "mdast-util-mdx-jsx"
 import {minimatch} from "minimatch"
 import {
@@ -23,13 +23,13 @@ import remarkStringify from "remark-stringify"
 import {type Plugin, unified} from "unified"
 import {visit} from "unist-util-visit"
 
+import type {KnowledgePageData} from "@qualcomm-ui/mdx-common"
 import type {
   QuiComment,
   QuiCommentDisplayPart,
 } from "@qualcomm-ui/typedoc-common"
 import {kebabCase} from "@qualcomm-ui/utils/change-case"
 
-import {remarkSelfLinkHeadings} from "../docs-plugin"
 import {
   getPathnameFromPathSegments,
   getPathSegmentsFromFileName,
@@ -40,15 +40,6 @@ import {extractNamesFromAttribute} from "../docs-plugin/internal/services/mdx-ut
 import {loadEnv} from "./common"
 import {loadKnowledgeConfigFromEnv} from "./load-config-from-env"
 import type {WebUiKnowledgeConfig} from "./types"
-
-interface PageInfo {
-  demosFolder?: string
-  id: string
-  mdxFile: string
-  name: string
-  path: string
-  url: string | undefined
-}
 
 interface ImportedModule {
   content: string
@@ -231,6 +222,49 @@ function getPath(obj: Record<string, unknown>, path: string): unknown {
     )
 }
 
+function escapeText(value: string): string {
+  return value.replace(/\n/g, " ")
+}
+
+function propsToDefinitionList(props: SimplifiedProp[]): string {
+  if (props.length === 0) {
+    return ""
+  }
+
+  return props
+    .map((prop) => {
+      const parts = [`- **${prop.name}** (\`${escapeText(prop.type)}\``]
+
+      if (prop.defaultValue) {
+        parts.push(`, default: \`${escapeText(prop.defaultValue)}\``)
+      }
+      if (prop.required) {
+        parts.push(", required")
+      }
+
+      parts.push(")")
+
+      if (prop.description) {
+        parts.push(` - ${escapeText(prop.description)}`)
+      }
+
+      return parts.join("")
+    })
+    .join("\n")
+}
+
+function themeDataToJson(data: unknown, cssPropertyName?: string): string {
+  if (!data || typeof data !== "object") {
+    return ""
+  }
+
+  if (cssPropertyName) {
+    return JSON.stringify({cssProperty: cssPropertyName, data}, null, 2)
+  }
+
+  return JSON.stringify(data, null, 2)
+}
+
 /**
  * Generator class that encapsulates all knowledge generation logic with shared
  * config.
@@ -243,7 +277,7 @@ class KnowledgeGenerator {
     this.config = config
   }
 
-  async run(): Promise<string[]> {
+  async run(): Promise<KnowledgePageData[]> {
     const extractedMetadata = extractMetadata(this.config.metadata)
 
     if (this.config.verbose) {
@@ -272,7 +306,7 @@ class KnowledgeGenerator {
     const processedPages: ProcessedPage[] = []
     for (const page of pages) {
       try {
-        const processed = await this.processComponent(page)
+        const processed = await this.processMdxPage(page)
         processedPages.push(processed)
       } catch (error) {
         console.error(`Failed to process page: ${page.name}`)
@@ -298,7 +332,7 @@ class KnowledgeGenerator {
       await this.generateExtraFiles(extractedMetadata)
     }
 
-    return pages.map((page) => page.id)
+    return pages
   }
 
   private async loadDocProps(): Promise<DocProps | null> {
@@ -333,8 +367,8 @@ class KnowledgeGenerator {
     }
   }
 
-  private async scanPages(): Promise<PageInfo[]> {
-    const components: PageInfo[] = []
+  private async scanPages(): Promise<KnowledgePageData[]> {
+    const components: KnowledgePageData[] = []
     const excludePatterns = this.config.exclude ?? []
 
     const shouldExclude = (absolutePath: string): boolean => {
@@ -378,10 +412,11 @@ class KnowledgeGenerator {
 
         components.push({
           demosFolder: demosFolderPath,
+          filePath: dirPath,
           id: segments.join("-").trim(),
           mdxFile: join(dirPath, mdxFile.name),
           name: segments.at(-1)!,
-          path: dirPath,
+          pathname: url,
           url: this.config.baseUrl
             ? new URL(url, this.config.baseUrl).toString()
             : undefined,
@@ -531,13 +566,16 @@ class KnowledgeGenerator {
               return codeText
             }
           default:
+            // render link text only, but remove certain text altogether
             if (
               this.config.outputMode === "per-page" &&
               "tag" in part &&
               part.tag === "@link" &&
               typeof part.target === "string"
             ) {
-              return `[${part.text}](${part.target})`
+              if (part.text === "Learn more") {
+                return ""
+              }
             }
             return part.text
         }
@@ -566,8 +604,8 @@ class KnowledgeGenerator {
   }
 
   /**
-   * Creates a remark plugin that replaces TypeDocProps JSX elements with JSON
-   * code blocks containing component prop documentation.
+   * Creates a remark plugin that replaces theme JSX elements with
+   * markdown tables containing theme data.
    */
   private async replaceThemeNodes(): Promise<Plugin> {
     let themes: any | null = null
@@ -608,11 +646,31 @@ class KnowledgeGenerator {
           return
         }
 
+        let markdownTable: string
+        if (
+          typeof data === "object" &&
+          data !== null &&
+          "cssPropertyName" in data &&
+          "data" in data
+        ) {
+          const {cssPropertyName, data: themeData} = data as {
+            cssPropertyName: string
+            data: unknown
+          }
+          markdownTable = themeDataToJson(themeData, cssPropertyName)
+        } else {
+          markdownTable = themeDataToJson(data)
+        }
+
+        if (!markdownTable) {
+          return
+        }
+
         Object.assign(node, {
           lang: "json",
           meta: null,
           type: "code",
-          value: JSON.stringify(data, null, 2),
+          value: markdownTable,
         })
       })
       done()
@@ -639,8 +697,27 @@ class KnowledgeGenerator {
   }
 
   /**
-   * Creates a remark plugin that replaces TypeDocProps JSX elements with JSON
-   * code blocks containing component prop documentation.
+   * Creates a remark plugin that transforms relative URLs to absolute URLs.
+   */
+  private transformRelativeUrls(pageUrl?: string): Plugin {
+    const baseUrl = this.config.baseUrl
+    return () => (tree) => {
+      if (!baseUrl || this.config.outputMode !== "per-page") {
+        return
+      }
+      visit(tree, "link", (node: Link) => {
+        if (node.url.startsWith("/")) {
+          node.url = `${baseUrl}${node.url}`
+        } else if (node.url.startsWith("./#") && pageUrl) {
+          node.url = `${pageUrl}${node.url.slice(2)}`
+        }
+      })
+    }
+  }
+
+  /**
+   * Creates a remark plugin that replaces TypeDocProps JSX elements with
+   * markdown tables containing component prop documentation.
    */
   private replaceTypeDocProps(): Plugin {
     return () => (tree, _file, done) => {
@@ -693,11 +770,39 @@ class KnowledgeGenerator {
               `  Replaced TypeDocProps ${propsName} with API documentation`,
             )
           }
+
+          const regularProps = propsDoc.filter((p) => p.propType === undefined)
+          const inputs = propsDoc.filter((p) => p.propType === "input")
+          const outputs = propsDoc.filter((p) => p.propType === "output")
+
+          const sections: string[] = []
+
+          if (regularProps.length > 0) {
+            sections.push(propsToDefinitionList(regularProps))
+          }
+
+          if (inputs.length > 0) {
+            sections.push(`**Inputs**\n\n${propsToDefinitionList(inputs)}`)
+          }
+
+          if (outputs.length > 0) {
+            sections.push(`**Outputs**\n\n${propsToDefinitionList(outputs)}`)
+          }
+
+          const markdownContent = sections.join("\n\n")
+
+          if (!markdownContent) {
+            if (parent && index !== undefined) {
+              parent.children.splice(index, 1)
+            }
+            return
+          }
+
           Object.assign(node, {
-            lang: "json",
+            lang: null,
             meta: null,
             type: "code",
-            value: JSON.stringify(propsDoc, null, 2),
+            value: markdownContent,
           })
         },
       )
@@ -892,15 +997,6 @@ class KnowledgeGenerator {
     frontmatter: Record<string, any>,
   ): Promise<{content: string; demoFiles: string[]}> {
     const demoFiles: string[] = []
-    let processedContent = mdxContent
-
-    processedContent = processedContent.replace(
-      /\[([^\]]+)\]\(\.\/#([^)]+)\)/g,
-      (_, text, anchor) =>
-        pageUrl && this.config.outputMode === "per-page"
-          ? `[${text}](${pageUrl}#${anchor})`
-          : text,
-    )
 
     const processor = unified()
       .use(remarkParse)
@@ -910,21 +1006,22 @@ class KnowledgeGenerator {
       .use(this.replaceFrontmatterExpressions(frontmatter))
       .use(await this.replaceThemeNodes())
       .use(this.replaceDemos(demosFolder, demoFiles))
+      .use(this.transformRelativeUrls(pageUrl))
       .use(remarkStringify)
 
-    const processed = await processor.process(processedContent)
-    processedContent = String(processed)
-
-    processedContent = processedContent.replace(/\n\s*\n\s*\n/g, "\n\n")
+    const processed = await processor.process(mdxContent)
+    const processedContent = String(processed).replace(/\n\s*\n\s*\n/g, "\n\n")
 
     return {content: processedContent, demoFiles}
   }
 
-  private async processComponent(component: PageInfo): Promise<ProcessedPage> {
+  private async processMdxPage(
+    pageInfo: KnowledgePageData,
+  ): Promise<ProcessedPage> {
     try {
-      const mdxContent = await readFile(component.mdxFile, "utf-8")
+      const mdxContent = await readFile(pageInfo.mdxFile, "utf-8")
       if (this.config.verbose) {
-        console.log(`Processing page: ${component.name}`)
+        console.log(`Processing page: ${pageInfo.name}`)
       }
       const processor = unified()
         .use(remarkParse)
@@ -932,19 +1029,14 @@ class KnowledgeGenerator {
         .use(replaceNpmInstallTabs)
         .use(remarkFrontmatter, ["yaml"])
         .use(remarkParseFrontmatter)
-
-      if (this.config.outputMode === "per-page") {
-        processor.use(remarkSelfLinkHeadings(component.url))
-      }
-
-      processor.use(remarkStringify)
+        .use(remarkStringify)
       const parsed = await processor.process(mdxContent)
       const frontmatter = (parsed.data as any)?.frontmatter || {}
       const {content: processedContent, demoFiles} =
         await this.processMdxContent(
           String(parsed),
-          component.url,
-          component.demosFolder,
+          pageInfo.url,
+          pageInfo.demosFolder,
           frontmatter,
         )
       const removeJsxProcessor = unified()
@@ -956,21 +1048,20 @@ class KnowledgeGenerator {
       const removedJsx = String(
         await removeJsxProcessor.process(processedContent),
       )
-      const contentWithoutFrontmatter = removedJsx.replace(
-        /^---[\s\S]*?---\n/,
-        "",
-      )
-      const title = frontmatter.title || component.name
+      const contentWithoutFrontmatter = removedJsx
+        .replace(/^---[\s\S]*?---\n/, "")
+        .replace(/(^#{1,6} .*\\<[^>]+)>/gm, "$1\\>")
+      const title = frontmatter.title || pageInfo.name
 
       return {
         content: contentWithoutFrontmatter.trim(),
         demoFiles,
         frontmatter,
         title,
-        url: component.url,
+        url: pageInfo.url,
       }
     } catch (error) {
-      console.error(`Error processing component ${component.name}:`, error)
+      console.error(`Error processing component ${pageInfo.name}:`, error)
       throw error
     }
   }
@@ -1006,7 +1097,7 @@ class KnowledgeGenerator {
 
   private async generateAggregatedOutput(
     processedPages: ProcessedPage[],
-    pages: PageInfo[],
+    pages: KnowledgePageData[],
   ): Promise<void> {
     const llmsTxtContent = await this.generateLlmsTxt(processedPages)
     await mkdir(dirname(this.config.outputPath), {recursive: true}).catch(
@@ -1032,6 +1123,19 @@ class KnowledgeGenerator {
     let totalSize = 0
     await Promise.all(
       extraFiles.map(async (extraFile) => {
+        let contents = extraFile.contents
+        if (extraFile.processAsMdx) {
+          const removeJsxProcessor = unified()
+            .use(remarkParse)
+            .use(remarkMdx)
+            .use(remarkFrontmatter, ["yaml"])
+            .use(remarkRemoveJsx)
+            .use(this.transformRelativeUrls())
+            .use(remarkStringify)
+
+          contents = String(await removeJsxProcessor.process(contents))
+        }
+
         const lines: string[] = []
         if (metadata.length) {
           lines.push("---")
@@ -1042,9 +1146,11 @@ class KnowledgeGenerator {
           lines.push("")
         }
 
-        lines.push(`# ${extraFile.title}`)
-        lines.push("")
-        lines.push(extraFile.contents)
+        if (extraFile.title) {
+          lines.push(`# ${extraFile.title}`)
+          lines.push("")
+        }
+        lines.push(contents)
         lines.push("")
 
         const outfile = `${resolve(this.config.outputPath)}/${kebabCase(extraFile.id)}.md`
@@ -1060,7 +1166,7 @@ class KnowledgeGenerator {
   }
 
   private async generatePerPageExports(
-    pages: PageInfo[],
+    pages: KnowledgePageData[],
     processedPages: ProcessedPage[],
     metadata: [string, string][],
   ): Promise<void> {
@@ -1093,6 +1199,11 @@ class KnowledgeGenerator {
           page.name = processedPage.frontmatter.title
         }
         let content = processedPage.content
+        // Remove duplicate h1 if content starts with the same title
+        content = content.replace(
+          new RegExp(`^# ${processedPage.title}\\n+`, ""),
+          "",
+        )
         if (this.config.pageTitlePrefix) {
           content = content.replace(
             `# ${page.name}`,
@@ -1157,11 +1268,11 @@ class KnowledgeGenerator {
 
 /**
  * Generates knowledge documentation from MDX files.
- * Returns an array of page IDs that were generated.
+ * Returns an array of pages that were generated.
  */
 export async function generate(
   config: WebUiKnowledgeConfig,
-): Promise<string[]> {
+): Promise<KnowledgePageData[]> {
   const generator = new KnowledgeGenerator(config)
   return generator.run()
 }
