@@ -318,9 +318,40 @@ export type PagePropTypes = QuiPropTypes & {
 
 export type PageDocProps = Record<string, PagePropTypes>
 
+export interface KnowledgePageData {
+  demosFolder?: string
+
+  /**
+   * Absolute path to the file on disk
+   */
+  filePath: string
+
+  /**
+   * Unique identifier for this page, generated from the file's path relative to the
+   * docs site's routes folder.
+   */
+  id: string
+
+  mdxFile: string
+
+  name: string
+
+  /**
+   * Relative path to the page from the root of the site
+   *
+   * @example `/components/button`
+   */
+  pathname: string
+
+  /**
+   * Full link to the page
+   */
+  url: string | undefined
+}
+
 export interface SiteDataExports {
   /**
-   * Base URL path for exported markdown files.
+   * Base URL path for exported Markdown files.
    */
   basePath: string
 
@@ -330,9 +361,9 @@ export interface SiteDataExports {
   enabled: boolean
 
   /**
-   * List of page IDs that have markdown exports available.
+   * List of page IDs that have Markdown exports available.
    */
-  pages: string[]
+  pages: KnowledgePageData[]
 }
 
 export interface SiteData {

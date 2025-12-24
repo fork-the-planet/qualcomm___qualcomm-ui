@@ -23,6 +23,7 @@ import remarkStringify from "remark-stringify"
 import {type Plugin, unified} from "unified"
 import {visit} from "unist-util-visit"
 
+import type {KnowledgePageData} from "@qualcomm-ui/mdx-common"
 import type {
   QuiComment,
   QuiCommentDisplayPart,
@@ -39,15 +40,6 @@ import {extractNamesFromAttribute} from "../docs-plugin/internal/services/mdx-ut
 import {loadEnv} from "./common"
 import {loadKnowledgeConfigFromEnv} from "./load-config-from-env"
 import type {WebUiKnowledgeConfig} from "./types"
-
-interface PageInfo {
-  demosFolder?: string
-  id: string
-  mdxFile: string
-  name: string
-  path: string
-  url: string | undefined
-}
 
 interface ImportedModule {
   content: string
@@ -285,7 +277,7 @@ class KnowledgeGenerator {
     this.config = config
   }
 
-  async run(): Promise<string[]> {
+  async run(): Promise<KnowledgePageData[]> {
     const extractedMetadata = extractMetadata(this.config.metadata)
 
     if (this.config.verbose) {
@@ -340,7 +332,7 @@ class KnowledgeGenerator {
       await this.generateExtraFiles(extractedMetadata)
     }
 
-    return pages.map((page) => page.id)
+    return pages
   }
 
   private async loadDocProps(): Promise<DocProps | null> {
@@ -375,8 +367,8 @@ class KnowledgeGenerator {
     }
   }
 
-  private async scanPages(): Promise<PageInfo[]> {
-    const components: PageInfo[] = []
+  private async scanPages(): Promise<KnowledgePageData[]> {
+    const components: KnowledgePageData[] = []
     const excludePatterns = this.config.exclude ?? []
 
     const shouldExclude = (absolutePath: string): boolean => {
@@ -420,10 +412,11 @@ class KnowledgeGenerator {
 
         components.push({
           demosFolder: demosFolderPath,
+          filePath: dirPath,
           id: segments.join("-").trim(),
           mdxFile: join(dirPath, mdxFile.name),
           name: segments.at(-1)!,
-          path: dirPath,
+          pathname: url,
           url: this.config.baseUrl
             ? new URL(url, this.config.baseUrl).toString()
             : undefined,
@@ -1022,7 +1015,9 @@ class KnowledgeGenerator {
     return {content: processedContent, demoFiles}
   }
 
-  private async processMdxPage(pageInfo: PageInfo): Promise<ProcessedPage> {
+  private async processMdxPage(
+    pageInfo: KnowledgePageData,
+  ): Promise<ProcessedPage> {
     try {
       const mdxContent = await readFile(pageInfo.mdxFile, "utf-8")
       if (this.config.verbose) {
@@ -1102,7 +1097,7 @@ class KnowledgeGenerator {
 
   private async generateAggregatedOutput(
     processedPages: ProcessedPage[],
-    pages: PageInfo[],
+    pages: KnowledgePageData[],
   ): Promise<void> {
     const llmsTxtContent = await this.generateLlmsTxt(processedPages)
     await mkdir(dirname(this.config.outputPath), {recursive: true}).catch(
@@ -1171,7 +1166,7 @@ class KnowledgeGenerator {
   }
 
   private async generatePerPageExports(
-    pages: PageInfo[],
+    pages: KnowledgePageData[],
     processedPages: ProcessedPage[],
     metadata: [string, string][],
   ): Promise<void> {
@@ -1273,11 +1268,11 @@ class KnowledgeGenerator {
 
 /**
  * Generates knowledge documentation from MDX files.
- * Returns an array of page IDs that were generated.
+ * Returns an array of pages that were generated.
  */
 export async function generate(
   config: WebUiKnowledgeConfig,
-): Promise<string[]> {
+): Promise<KnowledgePageData[]> {
   const generator = new KnowledgeGenerator(config)
   return generator.run()
 }

@@ -9,7 +9,11 @@ import {join, resolve} from "node:path"
 import prettyMilliseconds from "pretty-ms"
 import type {PluginOption, ResolvedConfig, ViteDevServer} from "vite"
 
-import type {PageDocProps, SiteData} from "@qualcomm-ui/mdx-common"
+import type {
+  KnowledgePageData,
+  PageDocProps,
+  SiteData,
+} from "@qualcomm-ui/mdx-common"
 import type {QuiPropTypes} from "@qualcomm-ui/typedoc-common"
 
 import {generate} from "../open-web-ui-knowledge/generate-knowledge"
@@ -47,7 +51,7 @@ const VIRTUAL_MODULE_ID = "\0@qualcomm-ui/mdx-vite-plugin"
 interface ExportsState {
   basePath: string
   enabled: boolean
-  pages: string[]
+  pages: KnowledgePageData[]
 }
 
 /**

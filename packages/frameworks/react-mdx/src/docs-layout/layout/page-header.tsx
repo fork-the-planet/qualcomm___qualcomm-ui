@@ -22,7 +22,8 @@ export function PageHeader(): ReactNode {
   const {pathname} = useMdxDocsLayoutContext()
   const page = pageMap[pathname]
   const exportId = pathnameToExportId(page?.pathSegments || [])
-  const hasExport = exports?.enabled && exports.pages.includes(exportId)
+  const hasExport =
+    exports?.enabled && exports.pages.find((page) => page.pathname === pathname)
   // example: `/exports/md/guide-markdown.md
   const exportUrl = hasExport ? `${exports.basePath}/${exportId}.md` : null
 
