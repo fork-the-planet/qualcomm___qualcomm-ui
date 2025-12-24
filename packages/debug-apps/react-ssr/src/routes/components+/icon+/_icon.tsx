@@ -1,5 +1,7 @@
-import ShowcaseDemo from "@qualcomm-ui/react-docs/components+/icon+/demos/icon-showcase-demo"
-import SizesDemo from "@qualcomm-ui/react-docs/components+/icon+/demos/icon-sizes-demo"
+import {IconShowcaseDemo as ShowcaseDemo} from "@qualcomm-ui/react-docs/components+/icon+/demos/icon-showcase-demo"
+import {IconSizesDemo as SizesDemo} from "@qualcomm-ui/react-docs/components+/icon+/demos/icon-sizes-demo"
+
+import {DemoPageLayout} from "~/components/demo-page-layout"
 
 const demos = [
   {component: ShowcaseDemo, title: "Showcase"},
@@ -7,16 +9,5 @@ const demos = [
 ]
 
 export default function IconDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="icon" demos={demos} />
 }

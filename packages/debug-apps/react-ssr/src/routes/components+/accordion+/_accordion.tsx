@@ -1,16 +1,18 @@
-import CollapsibleDemo from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-collapsible-demo"
-import CompositeDemo from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-composite-demo"
-import CompositeLayoutDemo from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-composite-layout-demo"
-import ControlledStateDemo from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-controlled-state-demo"
-import DefaultValueDemo from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-default-value-demo"
-import DisabledDemo from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-disabled-demo"
-import FocusCallbackDemo from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-focus-callback-demo"
-import IconDemo from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-icon-demo"
-import MultipleDemo from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-multiple-demo"
-import SecondaryTextDemo from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-secondary-text-demo"
-import SimpleDemo from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-simple-demo"
-import SizeDemo from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-size-demo"
-import UncontainedDemo from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-uncontained-demo"
+import {AccordionCollapsibleDemo as CollapsibleDemo} from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-collapsible-demo"
+import {AccordionCompositeDemo as CompositeDemo} from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-composite-demo"
+import {AccordionCompositeLayoutDemo as CompositeLayoutDemo} from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-composite-layout-demo"
+import {AccordionControlledStateDemo as ControlledStateDemo} from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-controlled-state-demo"
+import {AccordionDefaultValueDemo as DefaultValueDemo} from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-default-value-demo"
+import {AccordionDisabledDemo as DisabledDemo} from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-disabled-demo"
+import {AccordionFocusCallbackDemo as FocusCallbackDemo} from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-focus-callback-demo"
+import {AccordionIconDemo as IconDemo} from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-icon-demo"
+import {AccordionMultipleDemo as MultipleDemo} from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-multiple-demo"
+import {AccordionSecondaryTextDemo as SecondaryTextDemo} from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-secondary-text-demo"
+import {AccordionSimpleDemo as SimpleDemo} from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-simple-demo"
+import {AccordionSizeDemo as SizeDemo} from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-size-demo"
+import {AccordionUncontainedDemo as UncontainedDemo} from "@qualcomm-ui/react-docs/components+/accordion+/demos/accordion-uncontained-demo"
+
+import {DemoPageLayout} from "~/components/demo-page-layout"
 
 const demos = [
   {component: CollapsibleDemo, title: "Collapsible"},
@@ -29,16 +31,5 @@ const demos = [
 ]
 
 export default function AccordionDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="accordion" demos={demos} />
 }

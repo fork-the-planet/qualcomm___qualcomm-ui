@@ -1,7 +1,9 @@
-import ControlledStateDemo from "@qualcomm-ui/react-docs/components+/drawer+/demos/drawer-controlled-state-demo"
-import CustomContainerDemo from "@qualcomm-ui/react-docs/components+/drawer+/demos/drawer-custom-container-demo"
-import PlacementDemo from "@qualcomm-ui/react-docs/components+/drawer+/demos/drawer-placement-demo"
-import PlacementStartDemo from "@qualcomm-ui/react-docs/components+/drawer+/demos/drawer-placement-start-demo"
+import {DrawerControlledStateDemo as ControlledStateDemo} from "@qualcomm-ui/react-docs/components+/drawer+/demos/drawer-controlled-state-demo"
+import {DrawerCustomContainerDemo as CustomContainerDemo} from "@qualcomm-ui/react-docs/components+/drawer+/demos/drawer-custom-container-demo"
+import {DrawerPlacementDemo as PlacementDemo} from "@qualcomm-ui/react-docs/components+/drawer+/demos/drawer-placement-demo"
+import {DrawerPlacementStartDemo as PlacementStartDemo} from "@qualcomm-ui/react-docs/components+/drawer+/demos/drawer-placement-start-demo"
+
+import {DemoPageLayout} from "~/components/demo-page-layout"
 
 const demos = [
   {component: ControlledStateDemo, title: "Controlled State"},
@@ -11,16 +13,5 @@ const demos = [
 ]
 
 export default function DrawerDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="drawer" demos={demos} />
 }

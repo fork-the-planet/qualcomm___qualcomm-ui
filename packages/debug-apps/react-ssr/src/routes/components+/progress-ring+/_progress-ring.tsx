@@ -1,9 +1,11 @@
-import CompositeDemo from "@qualcomm-ui/react-docs/components+/progress-ring+/demos/progress-ring-composite-demo"
-import SimpleDemo from "@qualcomm-ui/react-docs/components+/progress-ring+/demos/progress-ring-simple-demo"
-import SizesDemo from "@qualcomm-ui/react-docs/components+/progress-ring+/demos/progress-ring-sizes-demo"
-import ThicknessDemo from "@qualcomm-ui/react-docs/components+/progress-ring+/demos/progress-ring-thickness-demo"
-import ValueDemo from "@qualcomm-ui/react-docs/components+/progress-ring+/demos/progress-ring-value-demo"
-import ValueTextDemo from "@qualcomm-ui/react-docs/components+/progress-ring+/demos/progress-ring-value-text-demo"
+import {ProgressRingCompositeDemo as CompositeDemo} from "@qualcomm-ui/react-docs/components+/progress-ring+/demos/progress-ring-composite-demo"
+import {ProgressRingSimpleDemo as SimpleDemo} from "@qualcomm-ui/react-docs/components+/progress-ring+/demos/progress-ring-simple-demo"
+import {ProgressRingSizesDemo as SizesDemo} from "@qualcomm-ui/react-docs/components+/progress-ring+/demos/progress-ring-sizes-demo"
+import {ProgressRingThicknessDemo as ThicknessDemo} from "@qualcomm-ui/react-docs/components+/progress-ring+/demos/progress-ring-thickness-demo"
+import {ProgressRingValueDemo as ValueDemo} from "@qualcomm-ui/react-docs/components+/progress-ring+/demos/progress-ring-value-demo"
+import {ProgressRingValueTextDemo as ValueTextDemo} from "@qualcomm-ui/react-docs/components+/progress-ring+/demos/progress-ring-value-text-demo"
+
+import {DemoPageLayout} from "~/components/demo-page-layout"
 
 const demos = [
   {component: CompositeDemo, title: "Composite"},
@@ -15,16 +17,5 @@ const demos = [
 ]
 
 export default function ProgressRingDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="progress-ring" demos={demos} />
 }

@@ -1,9 +1,11 @@
-import CloseEventsDemo from "@qualcomm-ui/react-docs/components+/tooltip+/demos/tooltip-close-events-demo"
-import CompositeDemo from "@qualcomm-ui/react-docs/components+/tooltip+/demos/tooltip-composite-demo"
-import ControlledStateDemo from "@qualcomm-ui/react-docs/components+/tooltip+/demos/tooltip-controlled-state-demo"
-import DisabledDemo from "@qualcomm-ui/react-docs/components+/tooltip+/demos/tooltip-disabled-demo"
-import PlacementDemo from "@qualcomm-ui/react-docs/components+/tooltip+/demos/tooltip-placement-demo"
-import SimpleDemo from "@qualcomm-ui/react-docs/components+/tooltip+/demos/tooltip-simple-demo"
+import {TooltipCloseEventsDemo as CloseEventsDemo} from "@qualcomm-ui/react-docs/components+/tooltip+/demos/tooltip-close-events-demo"
+import {TooltipCompositeDemo as CompositeDemo} from "@qualcomm-ui/react-docs/components+/tooltip+/demos/tooltip-composite-demo"
+import {TooltipControlledStateDemo as ControlledStateDemo} from "@qualcomm-ui/react-docs/components+/tooltip+/demos/tooltip-controlled-state-demo"
+import {TooltipDisabledDemo as DisabledDemo} from "@qualcomm-ui/react-docs/components+/tooltip+/demos/tooltip-disabled-demo"
+import {TooltipPlacementDemo as PlacementDemo} from "@qualcomm-ui/react-docs/components+/tooltip+/demos/tooltip-placement-demo"
+import {TooltipSimpleDemo as SimpleDemo} from "@qualcomm-ui/react-docs/components+/tooltip+/demos/tooltip-simple-demo"
+
+import {DemoPageLayout} from "~/components/demo-page-layout"
 
 const demos = [
   {component: CloseEventsDemo, title: "Close Events"},
@@ -15,16 +17,5 @@ const demos = [
 ]
 
 export default function TooltipDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="tooltip" demos={demos} />
 }
