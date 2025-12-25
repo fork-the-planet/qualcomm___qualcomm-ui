@@ -1,5 +1,4 @@
 import {createReadableStreamFromReadable} from "@react-router/node"
-import {exists} from "fs-extra"
 import {isbot} from "isbot"
 import {readFile} from "node:fs/promises"
 import {dirname, resolve} from "node:path"
@@ -16,6 +15,7 @@ import {
 } from "react-router"
 
 import {siteData} from "@qualcomm-ui/mdx-vite-plugin"
+import {exists} from "@qualcomm-ui/node-utils/fs"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
