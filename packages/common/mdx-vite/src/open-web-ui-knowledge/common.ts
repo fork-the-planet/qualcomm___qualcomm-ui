@@ -8,7 +8,6 @@ import type {GlobalCliOpts} from "./types"
 
 export function loadEnv() {
   const options: GlobalCliOpts = program.optsWithGlobals()
-  console.debug(options)
   if (options.env) {
     config({path: options.env})
   } else {
