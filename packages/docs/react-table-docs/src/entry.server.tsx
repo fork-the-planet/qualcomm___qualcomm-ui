@@ -1,6 +1,9 @@
 import {createReadableStreamFromReadable} from "@react-router/node"
 import {isbot} from "isbot"
+import {readFile} from "node:fs/promises"
+import {dirname, resolve} from "node:path"
 import {PassThrough} from "node:stream"
+import {fileURLToPath} from "node:url"
 import {
   renderToPipeableStream,
   type RenderToPipeableStreamOptions,
@@ -12,6 +15,9 @@ import {
 } from "react-router"
 
 import {siteData} from "@qualcomm-ui/mdx-vite-plugin"
+import {exists} from "@qualcomm-ui/node-utils/fs"
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export const streamTimeout = 5_000
 
@@ -33,17 +39,23 @@ export default async function handleRequest(
   // raw knowledge `.md` routes
   const url = new URL(request.url)
   const pages = siteData.exports?.pages ?? []
+
   if (url.pathname.endsWith(".md") && pages.length) {
+    const exportsPath = import.meta.env.DEV
+      ? resolve(__dirname, "../public/exports/md")
+      : resolve(__dirname, "../client/exports/md")
     try {
       const exportId = url.pathname.split("/").join("-").substring(1)
-      const fileUrl = new URL(`/exports/md/${exportId}`, url.origin)
-      const contents = await fetch(fileUrl, {
-        headers: {"Content-Type": "text/plain"},
-      }).then((res) => res.text())
-      return new Response(contents, {
-        headers: {"Content-Type": "text/plain"},
-        status: 200,
-      })
+
+      const filePath = resolve(exportsPath, exportId)
+      if (await exists(filePath)) {
+        const contents = await readFile(filePath, "utf-8")
+        responseHeaders.set("Content-Type", "text/plain")
+        return new Response(contents, {
+          headers: responseHeaders,
+          status: 200,
+        })
+      }
     } catch {
       // file doesn't exist, continue as normal
     }

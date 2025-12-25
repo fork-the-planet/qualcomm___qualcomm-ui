@@ -1,5 +1,11 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 2.10.1 (2025/12/25)
+
+### Miscellaneous Chores
+
+- remove config debug log
+
 ## 2.10.0 (2025/12/24)
 
 ### Features
