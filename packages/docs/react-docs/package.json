@@ -44,6 +44,7 @@
     "@qualcomm-ui/core": "workspace:*",
     "@qualcomm-ui/dom": "workspace:*",
     "@qualcomm-ui/mdx-common": "workspace:*",
+    "@qualcomm-ui/node-utils": "workspace:*",
     "@qualcomm-ui/qds-core": "workspace:*",
     "@qualcomm-ui/react": "workspace:*",
     "@qualcomm-ui/react-core": "workspace:*",

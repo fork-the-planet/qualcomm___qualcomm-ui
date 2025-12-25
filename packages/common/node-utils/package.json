@@ -1,7 +1,7 @@
 {
-  "name": "@qualcomm-ui/utils",
-  "version": "1.1.0",
-  "description": "A browser-safe, comprehensive utility library providing essential functions for array manipulation, DOM operations, class name management, type coercion, equality checks, functional programming helpers, type guards, numeric operations, object manipulation, timing utilities, and more",
+  "name": "@qualcomm-ui/node-utils",
+  "version": "1.0.0",
+  "description": "A Node.js utility library",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
   "repository": "https://github.com/qualcomm/qualcomm-ui",
@@ -24,7 +24,7 @@
   },
   "scripts": {
     "build": "run-s clean build:js build:ts",
-    "clean": "shx rm -rf dist/tsbuildinfo dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map",
+    "clean": "shx rm -rf node_modules/.tmp/tsbuildinfo dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map",
     "build:js": "tsx build.ts",
     "build:ts": "tsc -b tsconfig.lib.json",
     "dev": "run-p watch:js watch:ts",

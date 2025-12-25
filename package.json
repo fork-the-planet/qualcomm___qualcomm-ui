@@ -32,6 +32,7 @@
     "core": "pnpm -C packages/common/core",
     "dom": "pnpm -C packages/common/dom",
     "mdx-vite": "pnpm -C packages/common/mdx-vite",
+    "node-utils": "pnpm -C packages/common/node-utils",
     "qds-core": "pnpm -C packages/common/qds-core",
     "tailwind-plugin": "pnpm -C packages/common/tailwind-plugin",
     "utils": "pnpm -C packages/common/utils",

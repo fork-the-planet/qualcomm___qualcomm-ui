@@ -177,7 +177,7 @@ export default defineConfig(
       quiEslintTs.configs.strictExports,
     ],
     files: [
-      "packages/*/{dom,qds-core,mdx-common,utils,react-test-utils}/**/*.ts",
+      "packages/*/{dom,qds-core,mdx-common,node-utils,utils,react-test-utils}/**/*.ts",
     ],
     languageOptions,
   },
