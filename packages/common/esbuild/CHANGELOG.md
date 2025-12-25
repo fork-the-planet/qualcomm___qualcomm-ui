@@ -1,4 +1,4 @@
-# @qualcomm-ui/esbuild
+# @qualcomm-ui/esbuild Changelog
 
 ## 1.0.4 (2025/12/03)
 

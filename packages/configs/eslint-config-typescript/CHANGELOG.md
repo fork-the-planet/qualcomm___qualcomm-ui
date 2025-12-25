@@ -1,4 +1,4 @@
-# @qualcomm-ui/eslint-config-typescript
+# @qualcomm-ui/eslint-config-typescript Changelog
 
 ## 1.1.0 (2025/11/21)
 

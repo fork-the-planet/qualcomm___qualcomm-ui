@@ -1,4 +1,4 @@
-# @qualcomm-ui/cli
+# @qualcomm-ui/cli Changelog
 
 ## 1.0.5 (2025/11/13)
 

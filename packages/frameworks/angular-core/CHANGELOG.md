@@ -1,4 +1,4 @@
-# @qualcomm-ui/angular-core
+# @qualcomm-ui/angular-core Changelog
 
 ## 1.4.1 (2025/12/24)
 

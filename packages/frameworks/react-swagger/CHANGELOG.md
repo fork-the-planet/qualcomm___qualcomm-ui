@@ -1,4 +1,4 @@
-# @qualcomm-ui/react-swagger
+# @qualcomm-ui/react-swagger Changelog
 
 ## 1.0.6 (2025/12/24)
 

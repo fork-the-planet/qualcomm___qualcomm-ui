@@ -1,4 +1,4 @@
-# @qualcomm-ui/mdx-vite
+# @qualcomm-ui/mdx-vite Changelog
 
 ## 2.10.0 (2025/12/24)
 

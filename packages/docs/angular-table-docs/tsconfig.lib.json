@@ -9,6 +9,7 @@
     "module": "esnext",
     "target": "esnext",
     "types": [
+      "node",
       "vite/client",
       "@qualcomm-ui/mdx-vite/docs-plugin",
       "@qualcomm-ui/mdx-vite/angular-demo-plugin"

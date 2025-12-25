@@ -1,4 +1,4 @@
-# @qualcomm-ui/react-mdx
+# @qualcomm-ui/react-mdx Changelog
 
 ## 1.8.1 (2025/12/24)
 

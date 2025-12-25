@@ -1,4 +1,4 @@
-# @qualcomm-ui/tsconfig
+# @qualcomm-ui/tsconfig Changelog
 
 ## 1.0.4 (2025/11/21)
 

@@ -1,4 +1,4 @@
-# @qualcomm-ui/eslint-config-react
+# @qualcomm-ui/eslint-config-react Changelog
 
 ## 1.1.0 (2025/11/21)
 

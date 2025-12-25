@@ -1,4 +1,4 @@
-# @qualcomm-ui/core
+# @qualcomm-ui/core Changelog
 
 ## 1.2.0 (2025/12/24)
 
