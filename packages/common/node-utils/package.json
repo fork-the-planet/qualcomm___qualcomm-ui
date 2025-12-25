@@ -1,6 +1,6 @@
 {
   "name": "@qualcomm-ui/node-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Node.js utility library",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
