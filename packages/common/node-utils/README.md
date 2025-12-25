@@ -1,11 +1,6 @@
 # @qualcomm-ui/utils
 
-A comprehensive utility library providing essential functions for array manipulation, DOM operations and attributes, class name management, type coercion, equality checks, functional programming helpers, type guards, numeric operations, object manipulation, timing utilities, and more.
-
-For documentation and usage guides:
-
-- [React documentation](https://react-next.qui.qualcomm.com/)
-- [Angular documentation](https://angular-next.qui.qualcomm.com/)
+A Node.js utility library providing simple extensions on top of Node.js built-ins.
 
 ## License
 
