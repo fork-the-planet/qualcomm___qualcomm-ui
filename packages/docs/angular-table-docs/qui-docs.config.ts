@@ -100,12 +100,15 @@ export default {
           contents: readFileSync(
             resolve(__dirname, "../../frameworks/angular/CHANGELOG.md"),
             "utf-8",
-          )
-            .split("\n")
-            .slice(2)
-            .join("\n"),
+          ),
           id: "angular-changelog",
-          title: "Changelog",
+        },
+        {
+          contents: readFileSync(
+            resolve(__dirname, "../../common/core/CHANGELOG.md"),
+            "utf-8",
+          ),
+          id: "core-changelog",
         },
       ],
       metadata: {

@@ -1,4 +1,4 @@
-# @qualcomm-ui/eslint-config-mdx
+# @qualcomm-ui/eslint-config-mdx Changelog
 
 ## 1.1.0 (2025/11/21)
 

@@ -1,4 +1,4 @@
-# @qualcomm-ui/eslint-config-angular
+# @qualcomm-ui/eslint-config-angular Changelog
 
 ## 1.1.0 (2025/11/21)
 

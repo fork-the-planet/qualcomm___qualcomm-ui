@@ -87,15 +87,18 @@ export default {
           contents: readFileSync(
             resolve(__dirname, "../../frameworks/react/CHANGELOG.md"),
             "utf-8",
-          )
-            .split("\n")
-            .slice(2)
-            .join("\n"),
+          ),
           id: "react-changelog",
-          title: "Changelog",
+        },
+        {
+          contents: readFileSync(
+            resolve(__dirname, "../../common/core/CHANGELOG.md"),
+            "utf-8",
+          ).replace("# @qualcomm-ui/core", "# @qualcomm-ui/core Changelog"),
+          id: "react-changelog",
         },
       ],
-      metadata: {category: "table", framework: "react"},
+      metadata: {category: "table"},
     },
   },
   navConfig,

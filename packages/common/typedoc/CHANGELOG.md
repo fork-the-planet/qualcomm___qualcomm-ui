@@ -1,4 +1,4 @@
-# @qualcomm-ui/typedoc
+# @qualcomm-ui/typedoc Changelog
 
 ## 1.0.3 (2025/11/13)
 

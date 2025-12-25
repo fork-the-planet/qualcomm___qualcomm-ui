@@ -1,4 +1,4 @@
-# @qualcomm-ui/eslint-plugin-path-alias
+# @qualcomm-ui/eslint-plugin-path-alias Changelog
 
 ## 1.1.0 (2025/12/08)
 

@@ -1,4 +1,4 @@
-# @qualcomm-ui/react-core
+# @qualcomm-ui/react-core Changelog
 
 ## 1.1.1 (2025/12/24)
 

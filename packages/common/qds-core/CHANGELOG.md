@@ -1,4 +1,4 @@
-# @qualcomm-ui/qds-core
+# @qualcomm-ui/qds-core Changelog
 
 ## 1.10.4 (2025/12/24)
 

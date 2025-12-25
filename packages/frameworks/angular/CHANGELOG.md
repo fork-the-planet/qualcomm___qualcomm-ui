@@ -1,4 +1,4 @@
-# @qualcomm-ui/angular
+# @qualcomm-ui/angular Changelog
 
 ## 1.11.4 (2025/12/24)
 

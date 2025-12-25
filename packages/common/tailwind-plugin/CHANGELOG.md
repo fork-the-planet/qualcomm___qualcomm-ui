@@ -1,4 +1,4 @@
-# @qualcomm-ui/tailwind-plugin
+# @qualcomm-ui/tailwind-plugin Changelog
 
 ## 1.4.0 (2025/12/11)
 

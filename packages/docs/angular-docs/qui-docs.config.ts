@@ -85,11 +85,15 @@ export default {
           contents: readFileSync(
             resolve(__dirname, "../../frameworks/angular/CHANGELOG.md"),
             "utf-8",
-          ).replace(
-            "# @qualcomm-ui/angular",
-            "# @qualcomm-ui/angular Changelog",
           ),
           id: "angular-changelog",
+        },
+        {
+          contents: readFileSync(
+            resolve(__dirname, "../../common/core/CHANGELOG.md"),
+            "utf-8",
+          ),
+          id: "core-changelog",
         },
         {
           contents: readFileSync(
