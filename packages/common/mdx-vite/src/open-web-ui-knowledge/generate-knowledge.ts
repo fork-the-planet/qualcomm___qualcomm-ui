@@ -398,6 +398,8 @@ class KnowledgeGenerator {
             f.name.endsWith(".mdx") && !shouldExclude(join(dirPath, f.name)),
         ) ?? []
 
+      const pageIdPrefix = this.config.pageIdPrefix ?? ""
+
       for (const mdxFile of mdxFiles) {
         const demosFolder = entries.find((f) => f.name === "demos")
         const demosFolderPath = demosFolder
@@ -413,7 +415,7 @@ class KnowledgeGenerator {
         components.push({
           demosFolder: demosFolderPath,
           filePath: dirPath,
-          id: segments.join("-").trim(),
+          id: `${pageIdPrefix ? `${pageIdPrefix}-` : ""}${segments.join("-").trim()}`,
           mdxFile: join(dirPath, mdxFile.name),
           name: segments.at(-1)!,
           pathname: url,

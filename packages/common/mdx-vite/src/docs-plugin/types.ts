@@ -195,6 +195,11 @@ export interface KnowledgeIntegrationConfig {
   outputPath?: string
 
   /**
+   * Prefix to prepend to each page ID.
+   */
+  pageIdPrefix?: string
+
+  /**
    * Prefix to prepend to each page title.
    */
   pageTitlePrefix?: string

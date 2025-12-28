@@ -79,6 +79,7 @@ const knowledgeIntegrationSchema = implement<KnowledgeIntegrationConfig>().with(
       .union([z.literal("per-page"), z.literal("aggregated")])
       .optional(),
     outputPath: z.string().optional(),
+    pageIdPrefix: z.string().optional(),
     pageTitlePrefix: z.string().optional(),
   },
 )
@@ -95,6 +96,7 @@ const knowledgeEnvironmentSchema = implement<KnowledgeEnvironment>().with({
     .union([z.literal("per-page"), z.literal("aggregated")])
     .optional(),
   outputPath: z.string(),
+  pageIdPrefix: z.string().optional(),
   pageTitlePrefix: z.string().optional(),
 })
 
