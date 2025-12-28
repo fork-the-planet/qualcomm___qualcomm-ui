@@ -26,13 +26,21 @@ export interface WebUiKnowledgeConfig extends KnowledgeIntegrationConfig {
  */
 export interface ResolvedOpenWebUiIntegration {
   /**
-   * Integration name (key from integrations.openWebUi).
+   * API key for authentication.
    */
-  name: string
+  apiKey: string
   /**
    * Environment name this integration references.
    */
   environment: string
+  /**
+   * Knowledge base ID.
+   */
+  knowledgeId: string
+  /**
+   * Integration name (key from integrations.openWebUi).
+   */
+  name: string
   /**
    * Output path from the referenced environment.
    */
@@ -41,14 +49,6 @@ export interface ResolvedOpenWebUiIntegration {
    * OpenWebUI instance URL.
    */
   url: string
-  /**
-   * API key for authentication.
-   */
-  apiKey: string
-  /**
-   * Knowledge base ID.
-   */
-  knowledgeId: string
 }
 
 export interface CliConfig

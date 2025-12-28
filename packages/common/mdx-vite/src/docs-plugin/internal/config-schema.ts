@@ -99,8 +99,8 @@ const knowledgeEnvironmentSchema = implement<KnowledgeEnvironment>().with({
 })
 
 const openWebUiIntegrationSchema = implement<OpenWebUiIntegration>().with({
-  environment: z.string(),
   envFile: z.string().optional(),
+  environment: z.string(),
 })
 
 const knowledgeIntegrationsSchema = implement<KnowledgeIntegrations>().with({
@@ -108,8 +108,8 @@ const knowledgeIntegrationsSchema = implement<KnowledgeIntegrations>().with({
 })
 
 const knowledgeConfigSchema = implement<KnowledgeConfig>().with({
-  global: knowledgeIntegrationSchema.optional(),
   environments: z.record(z.string(), knowledgeEnvironmentSchema).optional(),
+  global: knowledgeIntegrationSchema.optional(),
   integrations: knowledgeIntegrationsSchema.optional(),
 })
 

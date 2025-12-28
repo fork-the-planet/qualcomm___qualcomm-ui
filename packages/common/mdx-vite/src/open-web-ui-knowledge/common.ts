@@ -62,7 +62,7 @@ export function loadOpenWebUiEnv(
   integrationName: string,
 ): OpenWebUiCredentials {
   const envFilePath = integration.envFile ?? `.env.${integration.environment}`
-  config({path: envFilePath, override: true})
+  config({override: true, path: envFilePath})
 
   const url = process.env.OPEN_WEB_UI_URL ?? process.env.WEB_UI_URL
   const apiKey = process.env.OPEN_WEB_UI_API_KEY ?? process.env.WEB_UI_KEY

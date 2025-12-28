@@ -285,16 +285,16 @@ export interface KnowledgeEnvironment extends KnowledgeIntegrationConfig {
  */
 export interface OpenWebUiIntegration {
   /**
-   * Which environment's output to upload. Must match a key in
-   * `knowledge.environments`.
-   */
-  environment: string
-
-  /**
    * Path to env file containing `OPEN_WEB_UI_*` variables. Defaults to
    * `.env.{environment}` by convention.
    */
   envFile?: string
+
+  /**
+   * Which environment's output to upload. Must match a key in
+   * `knowledge.environments`.
+   */
+  environment: string
 }
 
 /**
@@ -311,15 +311,15 @@ export interface KnowledgeIntegrations {
 
 export interface KnowledgeConfig {
   /**
-   * Shared configuration inherited by all environments.
-   */
-  global?: KnowledgeIntegrationConfig
-
-  /**
    * Named generation environments. Each environment can override global
    * settings and specifies its own output path.
    */
   environments?: Record<string, KnowledgeEnvironment>
+
+  /**
+   * Shared configuration inherited by all environments.
+   */
+  global?: KnowledgeIntegrationConfig
 
   /**
    * Platform-specific integration configurations for uploading generated

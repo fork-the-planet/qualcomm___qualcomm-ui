@@ -11,20 +11,20 @@ import type {
   OpenWebUiIntegration,
 } from "../docs-plugin/types"
 
-import type {CliConfig, ResolvedOpenWebUiIntegration, WebUiKnowledgeConfig} from "./types"
+import type {CliConfig, WebUiKnowledgeConfig} from "./types"
 
 interface LoadEnvironmentConfigsOptions {
-  /** Filter to specific environment names */
-  environments?: string[]
   /** CLI options that override config */
   cliOptions?: Partial<CliConfig>
+  /** Filter to specific environment names */
+  environments?: string[]
 }
 
 interface LoadOpenWebUiIntegrationsOptions {
-  /** Filter to specific integration names */
-  integrations?: string[]
   /** Filter to integrations referencing specific environments */
   environments?: string[]
+  /** Filter to specific integration names */
+  integrations?: string[]
 }
 
 function parseCliMetadata(
@@ -100,10 +100,11 @@ function mergeEnvironmentConfig(
   return {
     ...global,
     ...environment,
-    metadata: global?.metadata || environment.metadata
-      ? {...global?.metadata, ...environment.metadata}
-      : undefined,
     extraFiles: environment.extraFiles ?? global?.extraFiles,
+    metadata:
+      global?.metadata || environment.metadata
+        ? {...global?.metadata, ...environment.metadata}
+        : undefined,
   }
 }
 
@@ -132,7 +133,7 @@ export function loadEnvironmentConfigs(
 
   if (!environments || Object.keys(environments).length === 0) {
     const legacyConfig = loadKnowledgeConfigFromEnv(
-      options.cliOptions as CliConfig ?? {outputMode: "per-page"},
+      (options.cliOptions as CliConfig) ?? {outputMode: "per-page"},
     )
     return [legacyConfig]
   }
@@ -189,7 +190,11 @@ export function loadEnvironmentConfigs(
  */
 export function loadOpenWebUiIntegrations(
   options: LoadOpenWebUiIntegrationsOptions = {},
-): Array<{integration: OpenWebUiIntegration; name: string; outputPath: string}> {
+): Array<{
+  integration: OpenWebUiIntegration
+  name: string
+  outputPath: string
+}> {
   const configLoader = new ConfigLoader({})
   const resolvedConfig = configLoader.loadConfig()
   const knowledgeConfig = resolvedConfig.knowledge

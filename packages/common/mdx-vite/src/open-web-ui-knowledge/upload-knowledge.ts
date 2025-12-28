@@ -17,7 +17,12 @@ import {
   KnowledgeApi,
   type KnowledgeFilesResponse,
 } from "./api"
-import {getConfigFromEnv, loadEnv, resolveOpenWebUiIntegration, type SharedConfig} from "./common"
+import {
+  getConfigFromEnv,
+  loadEnv,
+  resolveOpenWebUiIntegration,
+  type SharedConfig,
+} from "./common"
 import {KnowledgeCleaner} from "./knowledge-cleaner"
 import {loadOpenWebUiIntegrations} from "./load-config-from-env"
 
@@ -373,7 +378,11 @@ export function addUploadKnowledgeCommand() {
         console.log(`\n[${name}] Uploading to OpenWebUI...`)
 
         try {
-          const resolved = resolveOpenWebUiIntegration(name, integration, outputPath)
+          const resolved = resolveOpenWebUiIntegration(
+            name,
+            integration,
+            outputPath,
+          )
           const uploader = new Uploader({
             force: options.force,
             knowledgeFilePath: options.path ?? resolved.outputPath,
@@ -393,8 +402,9 @@ export function addUploadKnowledgeCommand() {
 
       if (integrations.length > 1) {
         console.log(
-          `\nUploaded to ${successCount} integration(s)` +
-            (failureCount > 0 ? `, ${failureCount} failed` : ""),
+          `\nUploaded to ${successCount} integration(s)${
+            failureCount > 0 ? `, ${failureCount} failed` : ""
+          }`,
         )
       }
     })
