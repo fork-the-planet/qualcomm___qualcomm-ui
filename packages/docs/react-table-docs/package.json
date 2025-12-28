@@ -18,18 +18,8 @@
     "typecheck": "react-router typegen && tsc -b tsconfig.lib.json -w --preserveWatchOutput",
     "generate-llms-txt": "qui-mdx-vite generate-llms-txt --clean --output-mode aggregated -o public/llms-full.txt --name 'QUI React Table Documentation'",
     "generate-knowledge": "qui-mdx-vite generate-llms-txt --clean --output-mode per-page",
-    "upload-knowledge": "run-p upload-knowledge-saga upload-knowledge-qui",
-    "update-knowledge-saga": "run-s generate-knowledge-saga upload-knowledge-saga",
-    "generate-knowledge-saga": "pnpm generate-knowledge --env .env.saga-ai",
-    "upload-knowledge-saga": "qui-mdx-vite upload-knowledge --env .env.saga-ai",
-    "update-knowledge-qui": "run-s generate-knowledge-qui upload-knowledge-qui",
-    "generate-knowledge-qui": "pnpm generate-knowledge --env .env.qui-ai",
-    "upload-knowledge-qui": "qui-mdx-vite upload-knowledge --env .env.qui-ai",
-    "update-knowledge-saga-ai-test": "run-s generate-knowledge-saga-ai-test upload-knowledge-saga-ai-test",
-    "generate-knowledge-saga-ai-test": "pnpm generate-knowledge --env .env.saga-ai-test",
-    "upload-knowledge-saga-ai-test": "qui-mdx-vite upload-knowledge --env .env.saga-ai-test",
-    "debug-knowledge-files": "qui-mdx-vite get-knowledge-files --env .env.qui-ai-test",
-    "update-knowledge-all": "run-s update-knowledge-saga-ai-test update-knowledge-qui update-knowledge-saga"
+    "upload-knowledge": "qui-mdx-vite upload-knowledge",
+    "update-knowledge": "run-s generate-knowledge upload-knowledge"
   },
   "dependencies": {
     "@atlaskit/pragmatic-drag-and-drop": "^1.7.7",
