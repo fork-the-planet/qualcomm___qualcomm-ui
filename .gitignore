@@ -30,6 +30,7 @@ packages/**/build-metafile.json
 packages/docs/*/public/*.js
 packages/docs/*/public/*.js.map
 packages/docs/*/public/llms-full.txt
+packages/docs/*/knowledge/
 .wireit
 .lint-cache
 

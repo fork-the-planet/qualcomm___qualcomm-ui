@@ -5,10 +5,13 @@ import {z, type ZodObject, type ZodSchema} from "zod"
 
 import type {
   KnowledgeConfig,
+  KnowledgeEnvironment,
   KnowledgeExportsConfig,
   KnowledgeExtraFile,
   KnowledgeIntegrationConfig,
+  KnowledgeIntegrations,
   NavMeta,
+  OpenWebUiIntegration,
   QuiDocsConfig,
   QuiDocsTypeDocOptions,
   RouteMeta,
@@ -80,8 +83,34 @@ const knowledgeIntegrationSchema = implement<KnowledgeIntegrationConfig>().with(
   },
 )
 
+const knowledgeEnvironmentSchema = implement<KnowledgeEnvironment>().with({
+  baseUrl: z.string().optional(),
+  description: z.string().optional(),
+  exclude: z.array(z.string()).optional(),
+  exports: knowledgeExportsSchema.optional(),
+  extraFiles: z.array(knowledgeExtraFileSchema).optional(),
+  metadata: z.record(z.string(), z.string()).optional(),
+  name: z.string().optional(),
+  outputMode: z
+    .union([z.literal("per-page"), z.literal("aggregated")])
+    .optional(),
+  outputPath: z.string(),
+  pageTitlePrefix: z.string().optional(),
+})
+
+const openWebUiIntegrationSchema = implement<OpenWebUiIntegration>().with({
+  environment: z.string(),
+  envFile: z.string().optional(),
+})
+
+const knowledgeIntegrationsSchema = implement<KnowledgeIntegrations>().with({
+  openWebUi: z.record(z.string(), openWebUiIntegrationSchema).optional(),
+})
+
 const knowledgeConfigSchema = implement<KnowledgeConfig>().with({
   global: knowledgeIntegrationSchema.optional(),
+  environments: z.record(z.string(), knowledgeEnvironmentSchema).optional(),
+  integrations: knowledgeIntegrationsSchema.optional(),
 })
 
 export const configSchema = implement<QuiDocsConfig>().with({

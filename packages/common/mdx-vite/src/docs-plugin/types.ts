@@ -268,11 +268,64 @@ export interface KnowledgeExportsConfig {
   staticPath?: string
 }
 
+/**
+ * Environment-specific knowledge generation configuration. Extends the base
+ * integration config with a required output path.
+ */
+export interface KnowledgeEnvironment extends KnowledgeIntegrationConfig {
+  /**
+   * Output directory for this environment's generated knowledge files.
+   */
+  outputPath: string
+}
+
+/**
+ * OpenWebUI integration configuration. References a generation environment
+ * and specifies how to load credentials.
+ */
+export interface OpenWebUiIntegration {
+  /**
+   * Which environment's output to upload. Must match a key in
+   * `knowledge.environments`.
+   */
+  environment: string
+
+  /**
+   * Path to env file containing `OPEN_WEB_UI_*` variables. Defaults to
+   * `.env.{environment}` by convention.
+   */
+  envFile?: string
+}
+
+/**
+ * Container for platform-specific integration configurations.
+ */
+export interface KnowledgeIntegrations {
+  /**
+   * OpenWebUI integration configurations. Each key is an integration name,
+   * and the value specifies which environment to upload and where to load
+   * credentials from.
+   */
+  openWebUi?: Record<string, OpenWebUiIntegration>
+}
+
 export interface KnowledgeConfig {
   /**
-   * Configuration for all knowledge integrations.
+   * Shared configuration inherited by all environments.
    */
   global?: KnowledgeIntegrationConfig
+
+  /**
+   * Named generation environments. Each environment can override global
+   * settings and specifies its own output path.
+   */
+  environments?: Record<string, KnowledgeEnvironment>
+
+  /**
+   * Platform-specific integration configurations for uploading generated
+   * knowledge to external services.
+   */
+  integrations?: KnowledgeIntegrations
 }
 
 export interface SearchIndexerOptions {

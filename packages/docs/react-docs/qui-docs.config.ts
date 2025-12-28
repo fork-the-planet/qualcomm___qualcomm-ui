@@ -115,9 +115,48 @@ const navConfig: NavConfig[] = [
   },
 ]
 
+const extraFiles = [
+  {
+    contents: readFileSync(
+      resolve(__dirname, "../../frameworks/react/CHANGELOG.md"),
+      "utf-8",
+    ),
+    id: "react-changelog",
+  },
+  {
+    contents: readFileSync(
+      resolve(__dirname, "../../common/core/CHANGELOG.md"),
+      "utf-8",
+    ),
+    id: "core-changelog",
+  },
+  {
+    contents: readFileSync(
+      resolve(
+        __dirname,
+        "../../frameworks/react-internal/files/component-list.md",
+      ),
+      "utf-8",
+    ),
+    id: "component-list",
+    processAsMdx: true,
+  },
+]
+
 export default {
   appDirectory: "src",
   knowledge: {
+    environments: {
+      "qui-ai": {
+        outputPath: "./knowledge/qui-ai",
+      },
+      "saga-ai": {
+        outputPath: "./knowledge/saga-ai",
+      },
+      "saga-ai-test": {
+        outputPath: "./knowledge/saga-ai-test",
+      },
+    },
     global: {
       baseUrl: "https://react-next.qui.qualcomm.com",
       exclude: ["**/installation+/**", "index.mdx", "**/components+/overview*"],
@@ -125,33 +164,20 @@ export default {
         enabled: true,
         exclude: ["**/components+/overview*"],
       },
-      extraFiles: [
-        {
-          contents: readFileSync(
-            resolve(__dirname, "../../frameworks/react/CHANGELOG.md"),
-            "utf-8",
-          ),
-          id: "react-changelog",
+      extraFiles,
+    },
+    integrations: {
+      openWebUi: {
+        "qui-ai": {
+          environment: "qui-ai",
         },
-        {
-          contents: readFileSync(
-            resolve(__dirname, "../../common/core/CHANGELOG.md"),
-            "utf-8",
-          ),
-          id: "core-changelog",
+        "saga-ai": {
+          environment: "saga-ai",
         },
-        {
-          contents: readFileSync(
-            resolve(
-              __dirname,
-              "../../frameworks/react-internal/files/component-list.md",
-            ),
-            "utf-8",
-          ),
-          id: "component-list",
-          processAsMdx: true,
+        "saga-ai-test": {
+          environment: "saga-ai-test",
         },
-      ],
+      },
     },
   },
   navConfig,

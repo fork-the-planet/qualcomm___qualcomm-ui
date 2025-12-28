@@ -29,7 +29,7 @@
     "generate-knowledge-saga-ai-test": "pnpm generate-knowledge --env .env.saga-ai-test",
     "upload-knowledge-saga-ai-test": "qui-mdx-vite upload-knowledge --env .env.saga-ai-test",
     "debug-knowledge-files": "qui-mdx-vite get-knowledge-files --env .env.qui-ai-test",
-    "update-knowledge-all": "run-s update-knowledge-qui update-knowledge-saga"
+    "update-knowledge-all": "run-s update-knowledge-saga-ai-test update-knowledge-qui update-knowledge-saga"
   },
   "dependencies": {
     "@atlaskit/pragmatic-drag-and-drop": "^1.7.7",

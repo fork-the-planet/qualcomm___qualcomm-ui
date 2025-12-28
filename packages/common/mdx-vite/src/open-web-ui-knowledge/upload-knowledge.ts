@@ -17,8 +17,9 @@ import {
   KnowledgeApi,
   type KnowledgeFilesResponse,
 } from "./api"
-import {getConfigFromEnv, loadEnv, type SharedConfig} from "./common"
+import {getConfigFromEnv, loadEnv, resolveOpenWebUiIntegration, type SharedConfig} from "./common"
 import {KnowledgeCleaner} from "./knowledge-cleaner"
+import {loadOpenWebUiIntegrations} from "./load-config-from-env"
 
 interface Config extends SharedConfig {
   force?: boolean
@@ -335,10 +336,67 @@ export function addUploadKnowledgeCommand() {
       "--force",
       "force upload files, even if their contents have not changed",
     )
+    .option(
+      "-i, --integration <integrations>",
+      "Comma-separated list of integrations to upload to (default: all)",
+    )
+    .option(
+      "-e, --environment <environments>",
+      "Comma-separated list of environments to filter integrations by (default: all)",
+    )
     .action(async (options) => {
       loadEnv()
 
-      return getUploader(options.path, options.force).uploadKnowledge()
+      const integrationFilter = options.integration
+        ?.split(",")
+        .map((e) => e.trim())
+        .filter(Boolean)
+      const environmentFilter = options.environment
+        ?.split(",")
+        .map((e) => e.trim())
+        .filter(Boolean)
+
+      const integrations = loadOpenWebUiIntegrations({
+        environments: environmentFilter,
+        integrations: integrationFilter,
+      })
+
+      if (integrations.length === 0) {
+        console.log("No integrations configured, using legacy env vars")
+        return getUploader(options.path, options.force).uploadKnowledge()
+      }
+
+      let successCount = 0
+      let failureCount = 0
+
+      for (const {integration, name, outputPath} of integrations) {
+        console.log(`\n[${name}] Uploading to OpenWebUI...`)
+
+        try {
+          const resolved = resolveOpenWebUiIntegration(name, integration, outputPath)
+          const uploader = new Uploader({
+            force: options.force,
+            knowledgeFilePath: options.path ?? resolved.outputPath,
+            knowledgeId: resolved.knowledgeId,
+            webUiKey: resolved.apiKey,
+            webUiUrl: resolved.url,
+          })
+
+          await uploader.uploadKnowledge()
+          successCount++
+          console.log(`[${name}] Upload complete`)
+        } catch (error) {
+          failureCount++
+          console.error(`[${name}] Upload failed:`, error)
+        }
+      }
+
+      if (integrations.length > 1) {
+        console.log(
+          `\nUploaded to ${successCount} integration(s)` +
+            (failureCount > 0 ? `, ${failureCount} failed` : ""),
+        )
+      }
     })
 
   program
