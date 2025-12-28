@@ -181,7 +181,14 @@ class Uploader {
     )
 
     const knowledge = await this.knowledgeApi.getById(this.config.knowledgeId)
-    this.knowledgeFilesCache = (knowledge.files ?? []).map(toKnowledgeFile)
+    const receivedFiles = knowledge.files?.length
+      ? knowledge.files.map(toKnowledgeFile)
+      : await this.filesApi
+          .list()
+          .then((res) =>
+            res.filter((file) => file.meta.collection_name === knowledge.id),
+          )
+    this.knowledgeFilesCache = receivedFiles
     await this.buildHashCache(this.knowledgeFilesCache)
 
     let skippedCount = 0
@@ -220,6 +227,7 @@ class Uploader {
     const knowledgeFiles = this.knowledgeFilesCache ?? []
     const knowledgeFile = knowledgeFiles.find((f) => f.meta.name === name)
     const contentHash = calculateFileHash(contents)
+    console.debug(knowledgeFile)
 
     if (knowledgeFile && !this.config.force) {
       const existingHash = this.fileHashCache.get(knowledgeFile.id)
