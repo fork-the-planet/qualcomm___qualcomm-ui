@@ -119,6 +119,7 @@ Configuration is resolved in the following order (highest to lowest):
 | :------------------------- | :------------------------------------------------ |
 | `-m, --output-mode <mode>` | Required. Output mode: `per-page` or `aggregated` |
 | `-o, --outputPath <path>`  | Output file or directory                          |
+| `-e, --environment <envs>` | Comma-separated list of environments to generate  |
 | `-n, --name <name>`        | Project name for the output header                |
 | `-d, --description <desc>` | Project description                               |
 | `--base-url <url>`         | Base URL for documentation links                  |
@@ -177,7 +178,12 @@ qui-mdx-vite generate-llms-txt --output-mode per-page --env .env.production
 
 ## Configuration Reference
 
-The file-based configuration is applied to the `knowledge.global` property.
+Knowledge generation supports two configuration patterns:
+
+1. **Single environment** - Use `knowledge.global` for simple setups
+2. **Multi-environment** - Use `knowledge.environments` to generate to multiple outputs with different configurations
+
+### Single Environment Configuration
 
 ```typescript
 // qui-docs.config.ts
@@ -187,15 +193,67 @@ export default {
   // ...
   knowledge: {
     global: {
-      // KnowledgeIntegrationConfig
+      baseUrl: "https://docs.example.com",
+      outputPath: "./knowledge",
+      // KnowledgeIntegrationConfig options...
     },
   },
 } satisfies QuiDocsConfig
 ```
 
+### Multi-Environment Configuration
+
+Define multiple environments to generate knowledge to different outputs. Each environment inherits from `global` and can override any property.
+
+```typescript
+// qui-docs.config.ts
+import type {QuiDocsConfig} from "@qualcomm-ui/mdx-vite"
+import {readFileSync} from "node:fs"
+
+const changelogContents = readFileSync("../some-package/CHANGELOG.md")
+
+export default {
+  knowledge: {
+    // Shared configuration inherited by all environments
+    global: {
+      baseUrl: "https://docs.example.com",
+      exclude: ["**/internal/**"],
+      extraFiles: [{contents: changelogContents, id: "changelog"}],
+    },
+    // Named environments with specific output paths
+    environments: {
+      production: {
+        outputPath: "./knowledge/prod",
+      },
+      staging: {
+        outputPath: "./knowledge/staging",
+        // Override global settings for this environment
+        baseUrl: "https://staging.docs.example.com",
+      },
+    },
+  },
+} satisfies QuiDocsConfig
+```
+
+Generate knowledge for specific environments using the `-e` flag:
+
+```shell
+# Generate for all environments
+qui-mdx-vite generate-llms-txt --output-mode per-page
+
+# Generate for specific environments
+qui-mdx-vite generate-llms-txt --output-mode per-page -e production,staging
+```
+
 ### KnowledgeIntegrationConfig
 
 <TypeDocProps name="KnowledgeIntegrationConfig" partial />
+
+### KnowledgeEnvironment
+
+Extends `KnowledgeIntegrationConfig` with a required output path:
+
+<TypeDocProps name="KnowledgeEnvironment" partial />
 
 ### Configuration Inheritance
 
@@ -203,6 +261,8 @@ The `exports` configuration inherits from the parent `global` configuration:
 
 - `exclude`, `metadata`, `pageTitlePrefix`, and `extraFiles` in `exports` override the parent values
 - When not specified in `exports`, values fall back to `global`
+
+Environment configurations also inherit from `global`, with environment-specific values taking precedence.
 
 ## Output Structure
 
@@ -247,3 +307,89 @@ A text input field...
 ```
 
 Headings in individual pages are demoted by one level to maintain hierarchy.
+
+## OpenWebUI Integration
+
+Upload generated knowledge directly to OpenWebUI instances. Integrations connect environments to OpenWebUI knowledge bases and manage credentials through environment files.
+
+### Configuration
+
+Define integrations that reference your environments:
+
+```typescript
+// qui-docs.config.ts
+export default {
+  knowledge: {
+    environments: {
+      production: {
+        outputPath: "./knowledge/prod",
+      },
+      staging: {
+        outputPath: "./knowledge/staging",
+      },
+    },
+    integrations: {
+      openWebUi: {
+        // Integration name references an environment
+        "prod-webui": {
+          environment: "production",
+        },
+        "staging-webui": {
+          environment: "staging",
+          envFile: ".env.staging", // Optional: custom env file path
+        },
+      },
+    },
+  },
+} satisfies QuiDocsConfig
+```
+
+### OpenWebUiIntegration
+
+<TypeDocProps name="OpenWebUiIntegration" partial />
+
+### Credential Management
+
+Each integration loads credentials from environment files by convention:
+
+- Integration with `environment: "production"` loads `.env.production`
+- Override with `envFile: ".env.custom"` for non-standard paths
+
+Required environment variables in each env file:
+
+| Variable                   | Description                |
+| :------------------------- | :------------------------- |
+| `OPEN_WEB_UI_URL`          | OpenWebUI instance URL     |
+| `OPEN_WEB_UI_API_KEY`      | API key for authentication |
+| `OPEN_WEB_UI_KNOWLEDGE_ID` | Target knowledge base ID   |
+
+Legacy variable names (`WEB_UI_URL`, `WEB_UI_KEY`, `KNOWLEDGE_ID`) are supported as fallbacks.
+
+### Upload Command
+
+Upload knowledge to configured OpenWebUI integrations:
+
+```shell
+# Upload to all integrations
+qui-mdx-vite upload-knowledge
+
+# Upload to specific integrations
+qui-mdx-vite upload-knowledge -i prod-webui,staging-webui
+
+# Filter by environment
+qui-mdx-vite upload-knowledge -e production
+
+# Force upload even if content unchanged
+qui-mdx-vite upload-knowledge --force
+```
+
+#### Upload CLI Options
+
+| Option                      | Description                                         |
+| :-------------------------- | :-------------------------------------------------- |
+| `-p, --path <path>`         | Override knowledge file path                        |
+| `-i, --integration <names>` | Comma-separated list of integrations to upload to   |
+| `-e, --environment <envs>`  | Filter integrations by environment                  |
+| `--force`                   | Force upload files even if contents haven't changed |
+
+When no integrations are configured, the upload command falls back to legacy single-environment behavior using `WEB_UI_*` environment variables.
