@@ -28,9 +28,10 @@ export interface SharedConfig {
  * Used for legacy single-environment setups.
  */
 export function getConfigFromEnv(): SharedConfig {
-  const openWebUiUrl = process.env.WEB_UI_URL
-  const openWebUiKey = process.env.WEB_UI_KEY
-  const knowledgeId = process.env.KNOWLEDGE_ID
+  const openWebUiUrl = process.env.WEB_UI_URL || process.env.OPEN_WEB_UI_URL
+  const openWebUiKey = process.env.WEB_UI_KEY || process.env.OPEN_WEB_UI_API_KEY
+  const knowledgeId =
+    process.env.KNOWLEDGE_ID || process.env.OPEN_WEB_UI_KNOWLEDGE_ID
 
   if (!openWebUiUrl || !openWebUiKey || !knowledgeId) {
     throw new Error("WEB_UI_URL, WEB_UI_KEY, and KNOWLEDGE_ID must be set")

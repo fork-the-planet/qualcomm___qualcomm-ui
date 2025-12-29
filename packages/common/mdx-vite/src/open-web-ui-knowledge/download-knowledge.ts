@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
 import {program} from "@commander-js/extra-typings"
+import dotenv from "dotenv"
 import {mkdir, writeFile} from "node:fs/promises"
 import {resolve} from "node:path"
 
@@ -13,8 +14,13 @@ export function addDownloadKnowledgeCommand() {
     .command("download-knowledge")
     .description("Download files from an Open Web UI knowledge base")
     .requiredOption("-o, --output-dir <outputDir>", "Folder path")
+    .requiredOption("-e, --environment <environments>", "environment to load")
     .action(async (opts) => {
       loadEnv()
+
+      const env = opts.environment
+
+      dotenv.config({path: `.env.${env}`})
 
       await mkdir(opts.outputDir, {recursive: true}).catch()
 
