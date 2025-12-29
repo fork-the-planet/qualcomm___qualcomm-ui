@@ -1,6 +1,7 @@
 import {useMemo, useState} from "react"
 
 import {
+  type ColumnDef,
   type ColumnResizeDirection,
   type ColumnResizeMode,
   getCoreRowModel,
@@ -10,10 +11,50 @@ import {Radio, RadioGroup} from "@qualcomm-ui/react/radio"
 import {flexRender, Table, useReactTable} from "@qualcomm-ui/react/table"
 import {CodeHighlight} from "@qualcomm-ui/react-mdx/code-highlight"
 
-import {columns, useUserData} from "./use-data"
+import {type User, useUserData} from "./use-data"
 
 export function ColumnSizingDemo() {
   const {data = [], refetch} = useUserData(5)
+
+  // always memoize your columns
+  const columns: ColumnDef<User>[] = useMemo(
+    () => [
+      {
+        accessorKey: "username",
+        header: "Username",
+        id: "username",
+      },
+      {
+        accessorKey: "role",
+        header: "Role",
+        id: "role",
+        size: 120,
+      },
+      {
+        accessorKey: "accountStatus",
+        header: "Account Status",
+        id: "accountStatus",
+      },
+      {
+        accessorKey: "createdAt",
+        header: "Account Created On",
+        id: "createdAt",
+        minSize: 205,
+      },
+      {
+        accessorKey: "lastVisitedAt",
+        header: "Last Visited At",
+        id: "lastVisitedAt",
+        minSize: 205,
+      },
+      {
+        accessorKey: "visitCount",
+        header: "Visit Count",
+        id: "visitCount",
+      },
+    ],
+    [],
+  )
 
   const [columnResizeMode, setColumnResizeMode] =
     useState<ColumnResizeMode>("onChange")

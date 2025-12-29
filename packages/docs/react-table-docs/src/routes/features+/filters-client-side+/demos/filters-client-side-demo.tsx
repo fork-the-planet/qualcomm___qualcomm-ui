@@ -1,8 +1,9 @@
-import {useState} from "react"
+import {useMemo, useState} from "react"
 
 import {Search} from "lucide-react"
 
 import {
+  type ColumnDef,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
@@ -21,10 +22,53 @@ import {TextInput} from "@qualcomm-ui/react/text-input"
 import {useDebounce} from "@qualcomm-ui/react-core/effects"
 
 import {TableColumnFilter} from "./filters"
-import {type User, userColumns, useUserData} from "./use-data"
+import {type User, type UserColumnMeta, useUserData} from "./use-data"
 
 export function FiltersClientSideDemo() {
   const {data = [], isFetching, refetch} = useUserData(100000)
+
+  // always memoize your columns
+  const userColumns: ColumnDef<User, any, UserColumnMeta>[] = useMemo(
+    () => [
+      {
+        accessorKey: "firstName",
+        header: "First Name",
+        id: "firstName",
+        meta: {filterLabel: "First Name"},
+      },
+      {
+        accessorKey: "lastName",
+        header: "Last Name",
+        id: "lastName",
+        meta: {filterLabel: "Last Name"},
+      },
+      {
+        accessorKey: "username",
+        header: "Username",
+        id: "username",
+        meta: {filterLabel: "Username"},
+      },
+      {
+        accessorKey: "visitCount",
+        header: "Visit Count",
+        id: "visitCount",
+        meta: {filterLabel: "Visit Count"},
+      },
+      {
+        accessorKey: "role",
+        header: "Role",
+        id: "role",
+        meta: {filterLabel: "Role"},
+      },
+      {
+        accessorKey: "accountStatus",
+        header: "Account Status",
+        id: "accountStatus",
+        meta: {filterLabel: "Account Status"},
+      },
+    ],
+    [],
+  )
 
   const [globalFilter, setGlobalFilter] = useState("")
 

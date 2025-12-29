@@ -1,4 +1,4 @@
-import {useState} from "react"
+import {useMemo, useState} from "react"
 
 import {ChevronDown, ChevronRight} from "lucide-react"
 
@@ -23,92 +23,96 @@ import {CodeHighlight} from "@qualcomm-ui/react-mdx/code-highlight"
 
 import {type User, useUserData} from "./use-data"
 
-const columns: ColumnDef<User>[] = [
-  {
-    accessorKey: "username",
-    cell: ({getValue, row}) => {
-      const indeterminate = row.getIsSomeSelected()
-      const checked = row.getIsSelected()
-      return (
-        <div
-          className="inline-flex h-full items-center gap-2"
-          style={{
-            // Since rows are flattened by default,
-            // we can use the row.depth property
-            // and paddingLeft to visually indicate the depth
-            // of the row
-            paddingLeft: `${row.depth * 2}rem`,
-          }}
-        >
-          <>
-            <Checkbox
-              checked={checked}
-              indeterminate={indeterminate}
-              onCheckedChange={(nextState) => row.toggleSelected(nextState)}
-              size="sm"
-            />
-            {row.getCanExpand() ? (
-              <div className="inline-flex items-center justify-center">
-                <Table.RowExpandButton row={row} />
-              </div>
-            ) : null}
-            <span>{getValue() as string}</span>
-          </>
-        </div>
-      )
-    },
-    header: ({table}) => {
-      return (
-        <>
-          <div className="flex items-center gap-2">
-            <Table.ColumnHeaderAction
-              aria-label="Expand all table rows"
-              icon={table.getIsAllRowsExpanded() ? ChevronDown : ChevronRight}
-              onClick={table.getToggleAllRowsExpandedHandler()}
-            />
-            <span>Username</span>
-          </div>
-        </>
-      )
-    },
-    id: "username",
-  },
-  {
-    accessorKey: "accountStatus",
-    header: "Account Status",
-    id: "accountStatus",
-  },
-  {
-    accessorKey: "role",
-    header: "Role",
-    id: "role",
-  },
-  {
-    accessorKey: "averageSessionDuration",
-    header: "Avg Session Duration",
-    id: "averageSessionDuration",
-  },
-  {
-    accessorKey: "companyName",
-    header: "Company Name",
-    id: "companyName",
-    minSize: 200,
-  },
-  {
-    accessorKey: "lastVisitedAt",
-    header: "Last Visited At",
-    id: "lastVisitedAt",
-    minSize: 205,
-  },
-  {
-    accessorKey: "visitCount",
-    header: "Visit Count",
-    id: "visitCount",
-  },
-]
-
 export function RowExpansionDemo() {
   const {data = [], isFetching, refetch} = useUserData(100, 5, 3)
+
+  // always memoize your columns
+  const columns: ColumnDef<User>[] = useMemo(
+    () => [
+      {
+        accessorKey: "username",
+        cell: ({getValue, row}) => {
+          const indeterminate = row.getIsSomeSelected()
+          const checked = row.getIsSelected()
+          return (
+            <div
+              className="inline-flex h-full items-center gap-2"
+              style={{
+                // Since rows are flattened by default,
+                // we can use the row.depth property
+                // and paddingLeft to visually indicate the depth
+                // of the row
+                paddingLeft: `${row.depth * 2}rem`,
+              }}
+            >
+              <>
+                <Checkbox
+                  checked={checked}
+                  indeterminate={indeterminate}
+                  onCheckedChange={(nextState) => row.toggleSelected(nextState)}
+                  size="sm"
+                />
+                {row.getCanExpand() ? (
+                  <div className="inline-flex items-center justify-center">
+                    <Table.RowExpandButton row={row} />
+                  </div>
+                ) : null}
+                <span>{getValue() as string}</span>
+              </>
+            </div>
+          )
+        },
+        header: ({table}) => {
+          return (
+            <>
+              <div className="flex items-center gap-2">
+                <Table.ColumnHeaderAction
+                  aria-label="Expand all table rows"
+                  icon={table.getIsAllRowsExpanded() ? ChevronDown : ChevronRight}
+                  onClick={table.getToggleAllRowsExpandedHandler()}
+                />
+                <span>Username</span>
+              </div>
+            </>
+          )
+        },
+        id: "username",
+      },
+      {
+        accessorKey: "accountStatus",
+        header: "Account Status",
+        id: "accountStatus",
+      },
+      {
+        accessorKey: "role",
+        header: "Role",
+        id: "role",
+      },
+      {
+        accessorKey: "averageSessionDuration",
+        header: "Avg Session Duration",
+        id: "averageSessionDuration",
+      },
+      {
+        accessorKey: "companyName",
+        header: "Company Name",
+        id: "companyName",
+        minSize: 200,
+      },
+      {
+        accessorKey: "lastVisitedAt",
+        header: "Last Visited At",
+        id: "lastVisitedAt",
+        minSize: 205,
+      },
+      {
+        accessorKey: "visitCount",
+        header: "Visit Count",
+        id: "visitCount",
+      },
+    ],
+    [],
+  )
   const refreshData = () => refetch()
 
   const [expanded, setExpanded] = useState<ExpandedState>({})

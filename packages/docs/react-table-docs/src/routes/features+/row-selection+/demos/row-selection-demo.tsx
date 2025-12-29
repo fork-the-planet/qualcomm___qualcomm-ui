@@ -1,11 +1,15 @@
-import {useState} from "react"
+import {useMemo, useState} from "react"
+
+import dayjs from "dayjs"
 
 import {
+  type ColumnDef,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
 } from "@qualcomm-ui/core/table"
 import {Button} from "@qualcomm-ui/react/button"
+import {Checkbox} from "@qualcomm-ui/react/checkbox"
 import {Pagination} from "@qualcomm-ui/react/pagination"
 import {ProgressRing} from "@qualcomm-ui/react/progress-ring"
 import {
@@ -17,13 +21,90 @@ import {
 import {TextInput} from "@qualcomm-ui/react/text-input"
 import {useDebounce} from "@qualcomm-ui/react-core/effects"
 
-import {userColumns, useUserData} from "./use-data"
+import {type User, useUserData} from "./use-data"
 
 export function RowSelectionDemo() {
   const [rowSelection, setRowSelection] = useState({})
   const [globalFilter, setGlobalFilter] = useState("")
 
   const {data = [], isFetching, refetch} = useUserData(100000)
+
+  // always memoize your columns
+  const userColumns: ColumnDef<User>[] = useMemo(
+    () => [
+      {
+        cell: ({row}) => {
+          const indeterminate = row.getIsSomeSelected()
+          const checked = row.getIsSelected() && !indeterminate
+          return (
+            <Checkbox
+              checked={checked}
+              indeterminate={indeterminate}
+              onCheckedChange={(checked) => row.toggleSelected(checked)}
+              size="sm"
+            />
+          )
+        },
+        header: ({table}) => (
+          <Checkbox
+            checked={table.getIsAllRowsSelected()}
+            indeterminate={table.getIsSomeRowsSelected()}
+            onCheckedChange={(checked) => table.toggleAllRowsSelected(checked)}
+            size="sm"
+          />
+        ),
+        id: "select",
+      },
+      {
+        accessorKey: "username",
+        header: "Username",
+        id: "username",
+      },
+      {
+        accessorKey: "role",
+        header: "Role",
+        id: "role",
+        size: 120,
+      },
+      {
+        accessorKey: "accountStatus",
+        header: "Account Status",
+        id: "accountStatus",
+      },
+      {
+        accessorKey: "createdAt",
+        header: "Account Created On",
+        id: "createdAt",
+        minSize: 205,
+        // we override this column's default sorting function for compatibility with
+        // formatted date strings.
+        sortingFn: (rowA, rowB, columnId) => {
+          const valueA: string = rowA.getValue(columnId)
+          const valueB: string = rowB.getValue(columnId)
+          return dayjs(valueA).isAfter(dayjs(valueB)) ? 1 : -1
+        },
+      },
+      {
+        accessorKey: "lastVisitedAt",
+        header: "Last Visited At",
+        id: "lastVisitedAt",
+        minSize: 205,
+        // we override this column's default sorting function for compatibility with
+        // formatted date strings.
+        sortingFn: (rowA, rowB, columnId) => {
+          const valueA: string = rowA.getValue(columnId)
+          const valueB: string = rowB.getValue(columnId)
+          return dayjs(valueA).isAfter(dayjs(valueB)) ? 1 : -1
+        },
+      },
+      {
+        accessorKey: "visitCount",
+        header: "Visit Count",
+        id: "visitCount",
+      },
+    ],
+    [],
+  )
   const refreshData = () => refetch()
 
   // Debounce the global filter for better performance. Registering on every

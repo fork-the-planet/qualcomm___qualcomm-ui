@@ -1,8 +1,9 @@
-import {useState} from "react"
+import {useMemo, useState} from "react"
 
 import {faker} from "@faker-js/faker"
 
 import {
+  type ColumnDef,
   type ColumnOrderState,
   getCoreRowModel,
   type VisibilityState,
@@ -15,7 +16,7 @@ import {CodeHighlight} from "@qualcomm-ui/react-mdx/code-highlight"
 import {clsx} from "@qualcomm-ui/utils/clsx"
 
 import {PinnableHeader} from "./pinnable-header"
-import {userColumns, useUserData} from "./use-data"
+import {type User, useUserData} from "./use-data"
 
 export function ColumnPinningDemo() {
   const {data = [], isFetching, refetch} = useUserData(15)
@@ -26,6 +27,40 @@ export function ColumnPinningDemo() {
 
   const [isSplit, setIsSplit] = useState(false)
   const rerender = () => refetch()
+
+  // always memoize your columns
+  const userColumns: ColumnDef<User>[] = useMemo(
+    () => [
+      {
+        accessorKey: "username",
+        header: "Username",
+        id: "username",
+      },
+      {
+        accessorKey: "role",
+        header: "Role",
+        id: "role",
+        size: 120,
+      },
+      {
+        accessorKey: "accountStatus",
+        header: "Account Status",
+        id: "accountStatus",
+      },
+      {
+        accessorKey: "lastVisitedAt",
+        header: "Last Visited At",
+        id: "lastVisitedAt",
+        minSize: 205,
+      },
+      {
+        accessorKey: "visitCount",
+        header: "Visit Count",
+        id: "visitCount",
+      },
+    ],
+    [],
+  )
 
   const table = useReactTable({
     columns: userColumns,

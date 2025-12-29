@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useRef, useState} from "react"
+import {useCallback, useEffect, useMemo, useRef, useState} from "react"
 
 import {
   type CellContext,
@@ -18,7 +18,7 @@ import {
 } from "@qualcomm-ui/react/table"
 import {TextInput} from "@qualcomm-ui/react/text-input"
 
-import {type User, userColumns, useUserData} from "./use-data"
+import {type User, useUserData} from "./use-data"
 
 // Extend the table row meta to provide a TypeScript type for our custom function.
 declare module "@qualcomm-ui/core/table" {
@@ -81,6 +81,33 @@ function useSkipper() {
 
 export function EditableDataDemo() {
   const {data: userData = [], isFetching, refetch} = useUserData(1000)
+
+  // always memoize your columns
+  const userColumns: ColumnDef<User>[] = useMemo(
+    () => [
+      {
+        accessorKey: "username",
+        header: "Username",
+        id: "username",
+      },
+      {
+        accessorKey: "visitCount",
+        header: "Visit Count",
+        id: "visitCount",
+      },
+      {
+        accessorKey: "role",
+        header: "Role",
+        id: "role",
+      },
+      {
+        accessorKey: "accountStatus",
+        header: "Account Status",
+        id: "accountStatus",
+      },
+    ],
+    [],
+  )
 
   const [mutableData, setMutableData] = useState<User[]>(userData)
 

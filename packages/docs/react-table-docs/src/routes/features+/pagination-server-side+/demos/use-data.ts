@@ -1,8 +1,6 @@
 import {faker} from "@faker-js/faker"
 import dayjs from "dayjs"
 
-import type {ColumnDef} from "@qualcomm-ui/core/table"
-
 export interface User {
   accountStatus: string
   createdAt: string
@@ -11,42 +9,6 @@ export interface User {
   username: string
   visitCount: number
 }
-
-export const userColumns: ColumnDef<User>[] = [
-  {
-    accessorKey: "username",
-    header: "Username",
-    id: "username",
-  },
-  {
-    accessorKey: "role",
-    header: "Role",
-    id: "role",
-    size: 120,
-  },
-  {
-    accessorKey: "accountStatus",
-    header: "Account Status",
-    id: "accountStatus",
-  },
-  {
-    accessorKey: "createdAt",
-    header: "Account Created On",
-    id: "createdAt",
-    minSize: 205,
-  },
-  {
-    accessorKey: "lastVisitedAt",
-    header: "Last Visited At",
-    id: "lastVisitedAt",
-    minSize: 205,
-  },
-  {
-    accessorKey: "visitCount",
-    header: "Visit Count",
-    id: "visitCount",
-  },
-]
 
 const range = (len: number) => {
   const arr = []

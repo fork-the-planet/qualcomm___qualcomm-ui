@@ -1,16 +1,56 @@
-import {useEffect, useState} from "react"
+import {useEffect, useMemo, useState} from "react"
 
-import {getCoreRowModel} from "@qualcomm-ui/core/table"
+import {type ColumnDef, getCoreRowModel} from "@qualcomm-ui/core/table"
 import {Button} from "@qualcomm-ui/react/button"
 import {ProgressRing} from "@qualcomm-ui/react/progress-ring"
 import {RenderHeader, Table, useReactTable} from "@qualcomm-ui/react/table"
 import {arrayMove} from "@qualcomm-ui/utils/array"
 
 import {DraggableRow} from "./draggable-row"
-import {type User, userColumns, useUserData} from "./use-data"
+import {type User, useUserData} from "./use-data"
 
 export function RowDndDemo() {
   const {data = [], isFetching, refetch} = useUserData(10)
+
+  // always memoize your columns
+  const userColumns: ColumnDef<User>[] = useMemo(
+    () => [
+      {
+        accessorKey: "username",
+        header: "Username",
+        id: "username",
+      },
+      {
+        accessorKey: "role",
+        header: "Role",
+        id: "role",
+        size: 120,
+      },
+      {
+        accessorKey: "accountStatus",
+        header: "Account Status",
+        id: "accountStatus",
+      },
+      {
+        accessorKey: "createdAt",
+        header: "Account Created On",
+        id: "createdAt",
+        minSize: 205,
+      },
+      {
+        accessorKey: "lastVisitedAt",
+        header: "Last Visited At",
+        id: "lastVisitedAt",
+        minSize: 205,
+      },
+      {
+        accessorKey: "visitCount",
+        header: "Visit Count",
+        id: "visitCount",
+      },
+    ],
+    [],
+  )
 
   const [mutableData, setMutableData] = useState<User[]>(data)
 

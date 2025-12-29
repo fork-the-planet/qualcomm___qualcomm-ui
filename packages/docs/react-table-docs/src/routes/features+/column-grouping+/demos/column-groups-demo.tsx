@@ -1,3 +1,5 @@
+import {useMemo} from "react"
+
 import {createColumnHelper, getCoreRowModel} from "@qualcomm-ui/core/table"
 import {Button} from "@qualcomm-ui/react/button"
 import {ProgressRing} from "@qualcomm-ui/react/progress-ring"
@@ -7,40 +9,43 @@ import {type User, useUserData} from "./use-data"
 
 const columnHelper = createColumnHelper<User>()
 
-const columns = [
-  columnHelper.group({
-    columns: [
-      columnHelper.accessor("username", {
-        header: "Username",
-      }),
-      columnHelper.accessor("companyName", {
-        header: "Company Name",
-      }),
-    ],
-    header: () => "User Identification",
-    id: "userData",
-  }),
-  columnHelper.group({
-    columns: [
-      columnHelper.accessor("lastVisitedAt", {
-        header: "Last Visited At",
-      }),
-      columnHelper.accessor("role", {
-        header: "Role",
-      }),
-      columnHelper.accessor("visitCount", {
-        header: "Visit Count",
-      }),
-      columnHelper.accessor("accountStatus", {
-        header: "Account Status",
-      }),
-    ],
-    header: "User Info",
-  }),
-]
-
 export function ColumnGroupsDemo() {
   const {data = [], isFetching, refetch} = useUserData(10)
+
+  const columns = useMemo(
+    () => [
+      columnHelper.group({
+        columns: [
+          columnHelper.accessor("username", {
+            header: "Username",
+          }),
+          columnHelper.accessor("companyName", {
+            header: "Company Name",
+          }),
+        ],
+        header: () => "User Identification",
+        id: "userData",
+      }),
+      columnHelper.group({
+        columns: [
+          columnHelper.accessor("lastVisitedAt", {
+            header: "Last Visited At",
+          }),
+          columnHelper.accessor("role", {
+            header: "Role",
+          }),
+          columnHelper.accessor("visitCount", {
+            header: "Visit Count",
+          }),
+          columnHelper.accessor("accountStatus", {
+            header: "Account Status",
+          }),
+        ],
+        header: "User Info",
+      }),
+    ],
+    [],
+  )
 
   const table = useReactTable({
     columns,

@@ -1,7 +1,5 @@
 import {useQuery} from "@tanstack/react-query"
 
-import type {ColumnDef} from "@qualcomm-ui/core/table"
-
 export interface User {
   accountStatus: string
   averageSessionDuration: number
@@ -12,47 +10,6 @@ export interface User {
   username: string
   visitCount: number
 }
-
-export const userColumns: ColumnDef<User>[] = [
-  {
-    accessorKey: "username",
-    header: "Username",
-    id: "username",
-  },
-  {
-    accessorKey: "accountStatus",
-    header: "Account Status",
-    id: "accountStatus",
-  },
-  {
-    accessorKey: "role",
-    header: "Role",
-    id: "role",
-    minSize: 180,
-  },
-  {
-    accessorKey: "averageSessionDuration",
-    header: "Avg Session Duration",
-    id: "averageSessionDuration",
-  },
-  {
-    accessorKey: "companyName",
-    header: "Company Name",
-    id: "companyName",
-    minSize: 220,
-  },
-  {
-    accessorKey: "lastVisitedAt",
-    header: "Last Visited At",
-    id: "lastVisitedAt",
-    minSize: 205,
-  },
-  {
-    accessorKey: "visitCount",
-    header: "Visit Count",
-    id: "visitCount",
-  },
-]
 
 export function useUserData(...dimensions: number[]) {
   return useQuery({
