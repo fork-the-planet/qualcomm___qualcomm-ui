@@ -1,4 +1,4 @@
-import {Fragment} from "react"
+import {Fragment, useMemo} from "react"
 
 import {
   type ColumnDef,
@@ -12,73 +12,6 @@ import {flexRender, Table, useReactTable} from "@qualcomm-ui/react/table"
 import {CodeHighlight} from "@qualcomm-ui/react-mdx/code-highlight"
 
 import {type User, useUserData} from "./use-data"
-
-const columns: ColumnDef<User>[] = [
-  {
-    cell: ({row}) => {
-      return !row.getCanExpand() ? (
-        ""
-      ) : (
-        <div className="inline-flex items-center justify-center">
-          <Table.RowExpandButton row={row} />
-        </div>
-      )
-    },
-    header: () => null,
-    id: "expander",
-    minSize: 52,
-  },
-  {
-    accessorKey: "username",
-    cell: ({getValue, row}) => (
-      <div
-        style={{
-          // Since rows are flattened by default,
-          // we can use the row.depth property
-          // and paddingLeft to visually indicate the depth
-          // of the row
-          paddingLeft: `${row.depth * 2}rem`,
-        }}
-      >
-        {getValue<string>()}
-      </div>
-    ),
-    header: "Username",
-  },
-  {
-    accessorKey: "accountStatus",
-    header: "Account Status",
-    id: "accountStatus",
-  },
-  {
-    accessorKey: "role",
-    header: "Role",
-    id: "role",
-    size: 120,
-  },
-  {
-    accessorKey: "averageSessionDuration",
-    header: "Avg Session Duration",
-    id: "averageSessionDuration",
-  },
-  {
-    accessorKey: "companyName",
-    header: "Company Name",
-    id: "companyName",
-    minSize: 200,
-  },
-  {
-    accessorKey: "lastVisitedAt",
-    header: "Last Visited At",
-    id: "lastVisitedAt",
-    minSize: 205,
-  },
-  {
-    accessorKey: "visitCount",
-    header: "Visit Count",
-    id: "visitCount",
-  },
-]
 
 const renderSubComponent = ({row}: {row: Row<User>}) => {
   return (
@@ -94,6 +27,77 @@ const renderSubComponent = ({row}: {row: Row<User>}) => {
 
 export function SubComponentsDemo() {
   const {data = [], isFetching, refetch} = useUserData(10)
+
+  // always memoize your data and columns
+  const columns: ColumnDef<User>[] = useMemo(
+    () => [
+      {
+        cell: ({row}) => {
+          return !row.getCanExpand() ? (
+            ""
+          ) : (
+            <div className="inline-flex items-center justify-center">
+              <Table.RowExpandButton row={row} />
+            </div>
+          )
+        },
+        header: () => null,
+        id: "expander",
+        minSize: 52,
+      },
+      {
+        accessorKey: "username",
+        cell: ({getValue, row}) => (
+          <div
+            style={{
+              // Since rows are flattened by default,
+              // we can use the row.depth property
+              // and paddingLeft to visually indicate the depth
+              // of the row
+              paddingLeft: `${row.depth * 2}rem`,
+            }}
+          >
+            {getValue<string>()}
+          </div>
+        ),
+        header: "Username",
+      },
+      {
+        accessorKey: "accountStatus",
+        header: "Account Status",
+        id: "accountStatus",
+      },
+      {
+        accessorKey: "role",
+        header: "Role",
+        id: "role",
+        size: 120,
+      },
+      {
+        accessorKey: "averageSessionDuration",
+        header: "Avg Session Duration",
+        id: "averageSessionDuration",
+      },
+      {
+        accessorKey: "companyName",
+        header: "Company Name",
+        id: "companyName",
+        minSize: 200,
+      },
+      {
+        accessorKey: "lastVisitedAt",
+        header: "Last Visited At",
+        id: "lastVisitedAt",
+        minSize: 205,
+      },
+      {
+        accessorKey: "visitCount",
+        header: "Visit Count",
+        id: "visitCount",
+      },
+    ],
+    [],
+  )
 
   const refreshData = () => refetch()
 

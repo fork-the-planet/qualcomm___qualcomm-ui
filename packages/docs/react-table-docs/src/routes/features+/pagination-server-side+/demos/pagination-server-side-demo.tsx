@@ -2,7 +2,11 @@ import {useMemo, useState} from "react"
 
 import {useQuery} from "@tanstack/react-query"
 
-import {getCoreRowModel, type PaginationState} from "@qualcomm-ui/core/table"
+import {
+  type ColumnDef,
+  getCoreRowModel,
+  type PaginationState,
+} from "@qualcomm-ui/core/table"
 import {Pagination} from "@qualcomm-ui/react/pagination"
 import {ProgressRing} from "@qualcomm-ui/react/progress-ring"
 import {
@@ -13,13 +17,53 @@ import {
 } from "@qualcomm-ui/react/table"
 import {CodeHighlight} from "@qualcomm-ui/react-mdx/code-highlight"
 
-import {fetchData, userColumns} from "./use-data"
+import {fetchData, type User} from "./use-data"
 
 export function PaginationServerSideDemo() {
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 10,
   })
+
+  // always memoize your data and columns
+  const userColumns: ColumnDef<User>[] = useMemo(
+    () => [
+      {
+        accessorKey: "username",
+        header: "Username",
+        id: "username",
+      },
+      {
+        accessorKey: "role",
+        header: "Role",
+        id: "role",
+        size: 120,
+      },
+      {
+        accessorKey: "accountStatus",
+        header: "Account Status",
+        id: "accountStatus",
+      },
+      {
+        accessorKey: "createdAt",
+        header: "Account Created On",
+        id: "createdAt",
+        minSize: 205,
+      },
+      {
+        accessorKey: "lastVisitedAt",
+        header: "Last Visited At",
+        id: "lastVisitedAt",
+        minSize: 205,
+      },
+      {
+        accessorKey: "visitCount",
+        header: "Visit Count",
+        id: "visitCount",
+      },
+    ],
+    [],
+  )
 
   const {data, fetchStatus, isFetching} = useQuery({
     placeholderData: (previousData) => previousData,

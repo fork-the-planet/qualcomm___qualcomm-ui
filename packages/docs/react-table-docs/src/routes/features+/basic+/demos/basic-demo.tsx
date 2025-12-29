@@ -46,7 +46,7 @@ export function BasicDemo() {
     [],
   )
 
-  // always memoize your columns
+  // always memoize your data and columns
   const columns = useMemo(
     () => [
       columnHelper.accessor("username", {

@@ -1,5 +1,11 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 2.11.1 (2025/12/29)
+
+### Bug Fixes
+
+- [knowledge-downloader]: update targeted env variables
+
 ## 2.11.0 (2025/12/28)
 
 ### Features

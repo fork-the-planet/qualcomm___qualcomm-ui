@@ -1,36 +1,11 @@
 import {useQuery} from "@tanstack/react-query"
 
-import type {ColumnDef} from "@qualcomm-ui/core/table"
-
 export interface User {
   accountStatus: string
   role: string
   username: string
   visitCount: number
 }
-
-export const userColumns: ColumnDef<User>[] = [
-  {
-    accessorKey: "username",
-    header: "Username",
-    id: "username",
-  },
-  {
-    accessorKey: "visitCount",
-    header: "Visit Count",
-    id: "visitCount",
-  },
-  {
-    accessorKey: "role",
-    header: "Role",
-    id: "role",
-  },
-  {
-    accessorKey: "accountStatus",
-    header: "Account Status",
-    id: "accountStatus",
-  },
-]
 
 export function useUserData(...dimensions: number[]) {
   return useQuery({

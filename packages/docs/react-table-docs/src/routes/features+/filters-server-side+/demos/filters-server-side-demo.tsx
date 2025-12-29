@@ -4,6 +4,7 @@ import {useQuery} from "@tanstack/react-query"
 import {Search} from "lucide-react"
 
 import {
+  type ColumnDef,
   type ColumnFiltersState,
   getCoreRowModel,
   type PaginationState,
@@ -23,13 +24,68 @@ import {useDebounce} from "@qualcomm-ui/react-core/effects"
 import {CodeHighlight} from "@qualcomm-ui/react-mdx/code-highlight"
 
 import {TableColumnFilter} from "./filters"
-import {fetchData, userColumns} from "./use-data"
+import {fetchData, type User, type UserColumnMeta} from "./use-data"
 
 export function FiltersServerSideDemo() {
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 10,
   })
+
+  // always memoize your data and columns
+  const userColumns: ColumnDef<User, any, UserColumnMeta>[] = useMemo(
+    () => [
+      {
+        accessorKey: "username",
+        header: "Username",
+        id: "username",
+        meta: {
+          filterLabel: "Search by username",
+        },
+      },
+      {
+        accessorKey: "role",
+        header: "Role",
+        id: "role",
+        meta: {
+          filterLabel: "Filter by role",
+        },
+        size: 120,
+      },
+      {
+        accessorKey: "accountStatus",
+        header: "Account Status",
+        id: "accountStatus",
+        meta: {
+          filterLabel: "Filter by account status",
+        },
+        minSize: 170,
+      },
+      {
+        accessorKey: "createdAt",
+        enableColumnFilter: false,
+        header: "Account Created On",
+        id: "createdAt",
+        minSize: 205,
+      },
+      {
+        accessorKey: "lastVisitedAt",
+        enableColumnFilter: false,
+        header: "Last Visited At",
+        id: "lastVisitedAt",
+        minSize: 205,
+      },
+      {
+        accessorKey: "visitCount",
+        header: "Visit Count",
+        id: "visitCount",
+        meta: {
+          filterLabel: "Filter by visit count",
+        },
+      },
+    ],
+    [],
+  )
 
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [globalFilter, setGlobalFilter] = useState("")

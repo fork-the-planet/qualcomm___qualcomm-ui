@@ -117,10 +117,14 @@ export default {
     ],
     global: {
       baseUrl: "https://angular-next.qui.qualcomm.com",
-      exclude: ["index.mdx", "**/components+/overview*"],
+      exclude: [
+        "index.mdx",
+        "**/components+/overview*",
+        "**/components+/all-components*",
+      ],
       exports: {
         enabled: true,
-        exclude: ["**/components+/overview*"],
+        exclude: ["**/components+/overview*", "**/components+/all-components*"],
       },
       extraFiles,
       frontmatterFields: ["component"],
