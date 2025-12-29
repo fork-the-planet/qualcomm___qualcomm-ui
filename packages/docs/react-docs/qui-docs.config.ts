@@ -1,7 +1,11 @@
 import {readFileSync} from "node:fs"
 import {resolve} from "node:path"
 
-import type {NavConfig, QuiDocsConfig} from "@qualcomm-ui/mdx-vite"
+import type {
+  KnowledgeExtraFile,
+  NavConfig,
+  QuiDocsConfig,
+} from "@qualcomm-ui/mdx-vite"
 
 const navConfig: NavConfig[] = [
   {sectionTitle: "Getting Started"},
@@ -115,7 +119,7 @@ const navConfig: NavConfig[] = [
   },
 ]
 
-const extraFiles = [
+const extraFiles: KnowledgeExtraFile[] = [
   {
     contents: readFileSync(
       resolve(__dirname, "../../frameworks/react/CHANGELOG.md"),
@@ -146,17 +150,20 @@ const extraFiles = [
 export default {
   appDirectory: "src",
   knowledge: {
-    environments: {
-      "qui-ai": {
+    environments: [
+      {
+        id: "qui-ai",
         outputPath: "./knowledge/qui-ai",
       },
-      "saga-ai": {
+      {
+        id: "saga-ai",
         outputPath: "./knowledge/saga-ai",
       },
-      "saga-ai-test": {
+      {
+        id: "saga-ai-test",
         outputPath: "./knowledge/saga-ai-test",
       },
-    },
+    ],
     global: {
       baseUrl: "https://react-next.qui.qualcomm.com",
       exclude: ["**/installation+/**", "index.mdx", "**/components+/overview*"],
@@ -165,19 +172,10 @@ export default {
         exclude: ["**/components+/overview*"],
       },
       extraFiles,
+      frontmatterFields: ["component"],
     },
     integrations: {
-      openWebUi: {
-        "qui-ai": {
-          environment: "qui-ai",
-        },
-        "saga-ai": {
-          environment: "saga-ai",
-        },
-        "saga-ai-test": {
-          environment: "saga-ai-test",
-        },
-      },
+      openWebUi: [{id: "qui-ai"}, {id: "saga-ai"}, {id: "saga-ai-test"}],
     },
   },
   navConfig,

@@ -131,26 +131,26 @@ export function loadEnvironmentConfigs(
     throw new Error(`Route directory ${routeDir} does not exist`)
   }
 
-  if (!environments || Object.keys(environments).length === 0) {
+  if (!environments || environments.length === 0) {
     const legacyConfig = loadKnowledgeConfigFromEnv(
       (options.cliOptions as CliConfig) ?? {outputMode: "per-page"},
     )
     return [legacyConfig]
   }
 
-  let envEntries = Object.entries(environments)
+  let filteredEnvironments = environments
   if (options.environments?.length) {
     const filterSet = new Set(options.environments)
-    envEntries = envEntries.filter(([name]) => filterSet.has(name))
+    filteredEnvironments = environments.filter((env) => filterSet.has(env.id))
   }
 
-  if (envEntries.length === 0) {
+  if (filteredEnvironments.length === 0) {
     throw new Error(
-      `No matching environments found. Available: ${Object.keys(environments).join(", ")}`,
+      `No matching environments found. Available: ${environments.map((e) => e.id).join(", ")}`,
     )
   }
 
-  return envEntries.map(([envName, envConfig]) => {
+  return filteredEnvironments.map((envConfig) => {
     const merged = mergeEnvironmentConfig(globalConfig, envConfig)
     const cliOpts = options.cliOptions
 
@@ -166,7 +166,7 @@ export function loadEnvironmentConfigs(
       baseUrl:
         cliOpts?.baseUrl ?? merged.baseUrl ?? process.env.DOCS_SITE_BASE_URL,
       docPropsPath: resolvedConfig.typeDocProps,
-      environmentName: envName,
+      environmentName: envConfig.id,
       exclude:
         (cliOpts?.exclude?.length ? cliOpts.exclude : undefined) ??
         merged.exclude ??
@@ -201,38 +201,38 @@ export function loadOpenWebUiIntegrations(
   const environments = knowledgeConfig?.environments
   const integrations = knowledgeConfig?.integrations?.openWebUi
 
-  if (!integrations || Object.keys(integrations).length === 0) {
+  if (!integrations || integrations.length === 0) {
     return []
   }
 
-  let integrationEntries = Object.entries(integrations)
+  let filteredIntegrations = integrations
 
   if (options.integrations?.length) {
     const filterSet = new Set(options.integrations)
-    integrationEntries = integrationEntries.filter(([name]) =>
-      filterSet.has(name),
+    filteredIntegrations = integrations.filter((integration) =>
+      filterSet.has(integration.id),
     )
   }
 
   if (options.environments?.length) {
     const filterSet = new Set(options.environments)
-    integrationEntries = integrationEntries.filter(([, config]) =>
-      filterSet.has(config.environment),
+    filteredIntegrations = filteredIntegrations.filter((integration) =>
+      filterSet.has(integration.id),
     )
   }
 
-  return integrationEntries.map(([name, integration]) => {
-    const envConfig = environments?.[integration.environment]
+  return filteredIntegrations.map((integration) => {
+    const envConfig = environments?.find((e) => e.id === integration.id)
     if (!envConfig) {
       throw new Error(
-        `Integration "${name}" references unknown environment "${integration.environment}". ` +
-          `Available environments: ${Object.keys(environments ?? {}).join(", ") || "none"}`,
+        `Integration "${integration.id}" references unknown environment "${integration.id}". ` +
+          `Available environments: ${environments?.map((e) => e.id).join(", ") || "none"}`,
       )
     }
 
     return {
       integration,
-      name,
+      name: integration.id,
       outputPath: envConfig.outputPath,
     }
   })

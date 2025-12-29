@@ -165,7 +165,7 @@ export interface KnowledgeIntegrationConfig {
   exclude?: string[]
 
   /**
-   * Configuration for per-page markdown exports served from the public directory.
+   * Configuration for per-page Markdown exports served from the public directory.
    */
   exports?: KnowledgeExportsConfig
 
@@ -173,6 +173,12 @@ export interface KnowledgeIntegrationConfig {
    * Extra files to include in knowledge output beyond the generated page content.
    */
   extraFiles?: KnowledgeExtraFile[]
+
+  /**
+   * List of frontmatter fields to include in the generated Markdown output. These
+   * will be copied from each page's frontmatter, if present.
+   */
+  frontmatterFields?: string[]
 
   /**
    * Metadata key-value pairs to include in per-page output.
@@ -279,6 +285,11 @@ export interface KnowledgeExportsConfig {
  */
 export interface KnowledgeEnvironment extends KnowledgeIntegrationConfig {
   /**
+   * Unique identifier for this environment.
+   */
+  id: string
+
+  /**
    * Output directory for this environment's generated knowledge files.
    */
   outputPath: string
@@ -291,15 +302,14 @@ export interface KnowledgeEnvironment extends KnowledgeIntegrationConfig {
 export interface OpenWebUiIntegration {
   /**
    * Path to env file containing `OPEN_WEB_UI_*` variables. Defaults to
-   * `.env.{environment}` by convention.
+   * `.env.{id}` by convention.
    */
   envFile?: string
 
   /**
-   * Which environment's output to upload. Must match a key in
-   * `knowledge.environments`.
+   * Environment identifier. Must match an `id` in `knowledge.environments`.
    */
-  environment: string
+  id: string
 }
 
 /**
@@ -307,19 +317,17 @@ export interface OpenWebUiIntegration {
  */
 export interface KnowledgeIntegrations {
   /**
-   * OpenWebUI integration configurations. Each key is an integration name,
-   * and the value specifies which environment to upload and where to load
-   * credentials from.
+   * OpenWebUI integration configurations.
    */
-  openWebUi?: Record<string, OpenWebUiIntegration>
+  openWebUi?: OpenWebUiIntegration[]
 }
 
 export interface KnowledgeConfig {
   /**
-   * Named generation environments. Each environment can override global
-   * settings and specifies its own output path.
+   * Generation environments. Each environment can override global settings and
+   * specifies its own output path.
    */
-  environments?: Record<string, KnowledgeEnvironment>
+  environments?: KnowledgeEnvironment[]
 
   /**
    * Shared configuration inherited by all environments.

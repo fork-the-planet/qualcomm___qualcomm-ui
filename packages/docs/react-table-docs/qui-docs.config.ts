@@ -75,17 +75,20 @@ const navConfig: NavConfig[] = [
 export default {
   appDirectory: "src",
   knowledge: {
-    environments: {
-      "qui-ai": {
+    environments: [
+      {
+        id: "qui-ai",
         outputPath: "./knowledge/qui-ai",
       },
-      "saga-ai": {
+      {
+        id: "saga-ai",
         outputPath: "./knowledge/saga-ai",
       },
-      "saga-ai-test": {
+      {
+        id: "saga-ai-test",
         outputPath: "./knowledge/saga-ai-test",
       },
-    },
+    ],
     global: {
       baseUrl: "https://react-table-next.qui.qualcomm.com",
       exclude: ["installation.mdx", "index/_index.mdx"],
@@ -94,17 +97,11 @@ export default {
       pageIdPrefix: "table",
     },
     integrations: {
-      openWebUi: {
-        "qui-ai": {
-          environment: "qui-ai",
-        },
-        "saga-ai": {
-          environment: "saga-ai",
-        },
-        "saga-ai-test": {
-          environment: "saga-ai-test",
-        },
-      },
+      openWebUi: [
+        {id: "qui-ai"},
+        {id: "saga-ai"},
+        {id: "saga-ai-test"},
+      ],
     },
   },
   navConfig,

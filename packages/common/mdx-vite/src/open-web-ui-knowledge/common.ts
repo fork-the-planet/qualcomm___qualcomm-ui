@@ -51,9 +51,9 @@ export interface OpenWebUiCredentials {
 /**
  * Loads OpenWebUI credentials for an integration.
  *
- * Convention: `environment: "dev"` loads `.env.dev` unless `envFile` is specified.
- * If the env file doesn't exist (common in CI), dotenv silently skips it and
- * uses env vars already set in the process.
+ * Convention: `id: "dev"` loads `.env.dev` unless `envFile` is specified. If the
+ * env file doesn't exist (common in CI), dotenv silently skips it and uses env
+ * vars already set in the process.
  *
  * Reads from OPEN_WEB_UI_* env vars, with fallback to legacy WEB_UI_* vars.
  */
@@ -61,7 +61,7 @@ export function loadOpenWebUiEnv(
   integration: OpenWebUiIntegration,
   integrationName: string,
 ): OpenWebUiCredentials {
-  const envFilePath = integration.envFile ?? `.env.${integration.environment}`
+  const envFilePath = integration.envFile ?? `.env.${integration.id}`
   config({override: true, path: envFilePath})
 
   const url = process.env.OPEN_WEB_UI_URL ?? process.env.WEB_UI_URL
@@ -103,7 +103,7 @@ export function resolveOpenWebUiIntegration(
 
   return {
     apiKey: credentials.apiKey,
-    environment: integration.environment,
+    environment: integration.id,
     knowledgeId: credentials.knowledgeId,
     name,
     outputPath,

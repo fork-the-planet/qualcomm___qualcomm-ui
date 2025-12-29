@@ -1185,15 +1185,27 @@ class KnowledgeGenerator {
       processedPages.map(async (processedPage, index) => {
         const page = pages[index]
         const lines: string[] = []
-        if (metadata.length || page.url) {
-          lines.push("---")
-          if (page.url) {
-            lines.push(`url: ${page.url}`)
-          }
-          if (metadata.length) {
-            for (const [key, value] of metadata) {
-              lines.push(`${key}: ${value}`)
+
+        const frontmatterEntries: [string, string][] = []
+        if (page.url) {
+          frontmatterEntries.push(["url", page.url])
+        }
+        for (const [key, value] of metadata) {
+          frontmatterEntries.push([key, value])
+        }
+        if (this.config.frontmatterFields?.length) {
+          for (const field of this.config.frontmatterFields) {
+            const value = processedPage.frontmatter[field]
+            if (value !== undefined) {
+              frontmatterEntries.push([field, String(value)])
             }
+          }
+        }
+
+        if (frontmatterEntries.length > 0) {
+          lines.push("---")
+          for (const [key, value] of frontmatterEntries) {
+            lines.push(`${key}: ${value}`)
           }
           lines.push("---")
           lines.push("")

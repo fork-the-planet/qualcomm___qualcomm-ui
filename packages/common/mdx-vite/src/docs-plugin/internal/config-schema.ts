@@ -73,6 +73,7 @@ const knowledgeIntegrationSchema = implement<KnowledgeIntegrationConfig>().with(
     exclude: z.array(z.string()).optional(),
     exports: knowledgeExportsSchema.optional(),
     extraFiles: z.array(knowledgeExtraFileSchema).optional(),
+    frontmatterFields: z.array(z.string()).optional(),
     metadata: z.record(z.string(), z.string()).optional(),
     name: z.string().optional(),
     outputMode: z
@@ -90,6 +91,8 @@ const knowledgeEnvironmentSchema = implement<KnowledgeEnvironment>().with({
   exclude: z.array(z.string()).optional(),
   exports: knowledgeExportsSchema.optional(),
   extraFiles: z.array(knowledgeExtraFileSchema).optional(),
+  frontmatterFields: z.array(z.string()).optional(),
+  id: z.string(),
   metadata: z.record(z.string(), z.string()).optional(),
   name: z.string().optional(),
   outputMode: z
@@ -102,15 +105,15 @@ const knowledgeEnvironmentSchema = implement<KnowledgeEnvironment>().with({
 
 const openWebUiIntegrationSchema = implement<OpenWebUiIntegration>().with({
   envFile: z.string().optional(),
-  environment: z.string(),
+  id: z.string(),
 })
 
 const knowledgeIntegrationsSchema = implement<KnowledgeIntegrations>().with({
-  openWebUi: z.record(z.string(), openWebUiIntegrationSchema).optional(),
+  openWebUi: z.array(openWebUiIntegrationSchema).optional(),
 })
 
 const knowledgeConfigSchema = implement<KnowledgeConfig>().with({
-  environments: z.record(z.string(), knowledgeEnvironmentSchema).optional(),
+  environments: z.array(knowledgeEnvironmentSchema).optional(),
   global: knowledgeIntegrationSchema.optional(),
   integrations: knowledgeIntegrationsSchema.optional(),
 })
