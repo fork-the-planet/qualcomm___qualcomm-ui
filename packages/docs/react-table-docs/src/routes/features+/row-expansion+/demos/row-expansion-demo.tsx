@@ -68,7 +68,9 @@ export function RowExpansionDemo() {
               <div className="flex items-center gap-2">
                 <Table.ColumnHeaderAction
                   aria-label="Expand all table rows"
-                  icon={table.getIsAllRowsExpanded() ? ChevronDown : ChevronRight}
+                  icon={
+                    table.getIsAllRowsExpanded() ? ChevronDown : ChevronRight
+                  }
                   onClick={table.getToggleAllRowsExpandedHandler()}
                 />
                 <span>Username</span>
