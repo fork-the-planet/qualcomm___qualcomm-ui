@@ -13,7 +13,7 @@
 
 ### Bug Fixes
 
-- [owui-knowledge-upload]: add fallback file getter
+- [owui-knowledge-upload]: add fallback knowledge file getter
 
 ### Miscellaneous Chores
 
