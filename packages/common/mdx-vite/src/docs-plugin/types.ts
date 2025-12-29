@@ -1,7 +1,11 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {PageFrontmatter, TocHeading} from "@qualcomm-ui/mdx-common"
+import type {
+  KnowledgePageData,
+  PageFrontmatter,
+  TocHeading,
+} from "@qualcomm-ui/mdx-common"
 import type {QuiPropTypes} from "@qualcomm-ui/typedoc-common"
 
 export type RoutingStrategy =
@@ -165,7 +169,7 @@ export interface KnowledgeIntegrationConfig {
   exclude?: string[]
 
   /**
-   * Configuration for per-page markdown exports served from the public directory.
+   * Configuration for per-page Markdown exports served from the public directory.
    */
   exports?: KnowledgeExportsConfig
 
@@ -173,6 +177,18 @@ export interface KnowledgeIntegrationConfig {
    * Extra files to include in knowledge output beyond the generated page content.
    */
   extraFiles?: KnowledgeExtraFile[]
+
+  /**
+   * List of frontmatter fields to include in the generated Markdown output. These
+   * will be copied from each page's frontmatter, if present. Supply as a function
+   * and return the modified frontmatter object, which will be included instead.
+   */
+  frontmatterFields?:
+    | string[]
+    | ((
+        frontmatter: Record<string, string>,
+        page: KnowledgePageData,
+      ) => Record<string, string | undefined>)
 
   /**
    * Metadata key-value pairs to include in per-page output.
@@ -193,6 +209,11 @@ export interface KnowledgeIntegrationConfig {
    * Output path for generated knowledge files.
    */
   outputPath?: string
+
+  /**
+   * Prefix to prepend to each page ID.
+   */
+  pageIdPrefix?: string
 
   /**
    * Prefix to prepend to each page title.
@@ -268,11 +289,66 @@ export interface KnowledgeExportsConfig {
   staticPath?: string
 }
 
+/**
+ * Environment-specific knowledge generation configuration. Extends the base
+ * integration config with a required output path.
+ */
+export interface KnowledgeEnvironment extends KnowledgeIntegrationConfig {
+  /**
+   * Unique identifier for this environment.
+   */
+  id: string
+
+  /**
+   * Output directory for this environment's generated knowledge files.
+   */
+  outputPath: string
+}
+
+/**
+ * OpenWebUI integration configuration. References a generation environment
+ * and specifies how to load credentials.
+ */
+export interface OpenWebUiIntegration {
+  /**
+   * Path to env file containing `OPEN_WEB_UI_*` variables. Defaults to
+   * `.env.{id}` by convention.
+   */
+  envFile?: string
+
+  /**
+   * Environment identifier. Must match an `id` in `knowledge.environments`.
+   */
+  id: string
+}
+
+/**
+ * Container for platform-specific integration configurations.
+ */
+export interface KnowledgeIntegrations {
+  /**
+   * OpenWebUI integration configurations.
+   */
+  openWebUi?: OpenWebUiIntegration[]
+}
+
 export interface KnowledgeConfig {
   /**
-   * Configuration for all knowledge integrations.
+   * Generation environments. Each environment can override global settings and
+   * specifies its own output path.
+   */
+  environments?: KnowledgeEnvironment[]
+
+  /**
+   * Shared configuration inherited by all environments.
    */
   global?: KnowledgeIntegrationConfig
+
+  /**
+   * Platform-specific integration configurations for uploading generated
+   * knowledge to external services.
+   */
+  integrations?: KnowledgeIntegrations
 }
 
 export interface SearchIndexerOptions {

@@ -1,7 +1,11 @@
 import {readFileSync} from "node:fs"
 import {resolve} from "node:path"
 
-import type {NavConfig, QuiDocsConfig} from "@qualcomm-ui/mdx-vite"
+import type {
+  KnowledgeExtraFile,
+  NavConfig,
+  QuiDocsConfig,
+} from "@qualcomm-ui/mdx-vite"
 
 const navConfig: NavConfig[] = [
   {sectionTitle: "Getting Started"},
@@ -115,9 +119,51 @@ const navConfig: NavConfig[] = [
   },
 ]
 
+const extraFiles: KnowledgeExtraFile[] = [
+  {
+    contents: readFileSync(
+      resolve(__dirname, "../../frameworks/react/CHANGELOG.md"),
+      "utf-8",
+    ),
+    id: "react-changelog",
+  },
+  {
+    contents: readFileSync(
+      resolve(__dirname, "../../common/core/CHANGELOG.md"),
+      "utf-8",
+    ),
+    id: "core-changelog",
+  },
+  {
+    contents: readFileSync(
+      resolve(
+        __dirname,
+        "../../frameworks/react-internal/files/component-list.md",
+      ),
+      "utf-8",
+    ),
+    id: "component-list",
+    processAsMdx: true,
+  },
+]
+
 export default {
   appDirectory: "src",
   knowledge: {
+    environments: [
+      {
+        id: "qui-ai",
+        outputPath: "./knowledge/qui-ai",
+      },
+      {
+        id: "saga-ai",
+        outputPath: "./knowledge/saga-ai",
+      },
+      {
+        id: "saga-ai-test",
+        outputPath: "./knowledge/saga-ai-test",
+      },
+    ],
     global: {
       baseUrl: "https://react-next.qui.qualcomm.com",
       exclude: ["**/installation+/**", "index.mdx", "**/components+/overview*"],
@@ -125,33 +171,11 @@ export default {
         enabled: true,
         exclude: ["**/components+/overview*"],
       },
-      extraFiles: [
-        {
-          contents: readFileSync(
-            resolve(__dirname, "../../frameworks/react/CHANGELOG.md"),
-            "utf-8",
-          ),
-          id: "react-changelog",
-        },
-        {
-          contents: readFileSync(
-            resolve(__dirname, "../../common/core/CHANGELOG.md"),
-            "utf-8",
-          ),
-          id: "core-changelog",
-        },
-        {
-          contents: readFileSync(
-            resolve(
-              __dirname,
-              "../../frameworks/react-internal/files/component-list.md",
-            ),
-            "utf-8",
-          ),
-          id: "component-list",
-          processAsMdx: true,
-        },
-      ],
+      extraFiles,
+      frontmatterFields: ["component"],
+    },
+    integrations: {
+      openWebUi: [{id: "qui-ai"}, {id: "saga-ai"}, {id: "saga-ai-test"}],
     },
   },
   navConfig,

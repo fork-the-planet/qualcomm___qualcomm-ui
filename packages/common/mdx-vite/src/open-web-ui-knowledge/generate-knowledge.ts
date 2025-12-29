@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
 import {program} from "@commander-js/extra-typings"
+import chalk from "chalk"
 import type {Link, Parent} from "mdast"
 import type {MdxJsxAttribute, MdxJsxFlowElement} from "mdast-util-mdx-jsx"
 import {minimatch} from "minimatch"
@@ -38,8 +39,8 @@ import {
 import {extractNamesFromAttribute} from "../docs-plugin/internal/services/mdx-utils"
 
 import {loadEnv} from "./common"
-import {loadKnowledgeConfigFromEnv} from "./load-config-from-env"
-import type {WebUiKnowledgeConfig} from "./types"
+import {loadEnvironmentConfigs} from "./load-config-from-env"
+import type {CliConfig, WebUiKnowledgeConfig} from "./types"
 
 interface ImportedModule {
   content: string
@@ -329,7 +330,6 @@ class KnowledgeGenerator {
         processedPages,
         extractedMetadata,
       )
-      await this.generateExtraFiles(extractedMetadata)
     }
 
     return pages
@@ -398,6 +398,8 @@ class KnowledgeGenerator {
             f.name.endsWith(".mdx") && !shouldExclude(join(dirPath, f.name)),
         ) ?? []
 
+      const pageIdPrefix = this.config.pageIdPrefix ?? ""
+
       for (const mdxFile of mdxFiles) {
         const demosFolder = entries.find((f) => f.name === "demos")
         const demosFolderPath = demosFolder
@@ -413,7 +415,7 @@ class KnowledgeGenerator {
         components.push({
           demosFolder: demosFolderPath,
           filePath: dirPath,
-          id: segments.join("-").trim(),
+          id: `${pageIdPrefix ? `${pageIdPrefix}-` : ""}${segments.join("-").trim()}`,
           mdxFile: join(dirPath, mdxFile.name),
           name: segments.at(-1)!,
           pathname: url,
@@ -1114,10 +1116,11 @@ class KnowledgeGenerator {
 
   private async generateExtraFiles(
     metadata: [string, string][],
-  ): Promise<void> {
+  ): Promise<{count: number; duration: number; totalSize: number}> {
+    const start = performance.now()
     const extraFiles = this.config.extraFiles ?? []
     if (extraFiles.length === 0) {
-      return
+      return {count: 0, duration: 0, totalSize: 0}
     }
 
     let totalSize = 0
@@ -1160,9 +1163,11 @@ class KnowledgeGenerator {
       }),
     )
 
-    console.log(
-      `Generated ${extraFiles.length} extra file(s) (${totalSize.toFixed(1)} KB)`,
-    )
+    return {
+      count: extraFiles.length,
+      duration: performance.now() - start,
+      totalSize,
+    }
   }
 
   private async generatePerPageExports(
@@ -1170,6 +1175,7 @@ class KnowledgeGenerator {
     processedPages: ProcessedPage[],
     metadata: [string, string][],
   ): Promise<void> {
+    const start = performance.now()
     await mkdir(dirname(this.config.outputPath), {recursive: true}).catch(
       () => {},
     )
@@ -1179,15 +1185,39 @@ class KnowledgeGenerator {
       processedPages.map(async (processedPage, index) => {
         const page = pages[index]
         const lines: string[] = []
-        if (metadata.length || page.url) {
-          lines.push("---")
-          if (page.url) {
-            lines.push(`url: ${page.url}`)
-          }
-          if (metadata.length) {
-            for (const [key, value] of metadata) {
-              lines.push(`${key}: ${value}`)
+
+        const frontmatterEntries: [string, string][] = []
+        if (page.url) {
+          frontmatterEntries.push(["url", page.url])
+        }
+        for (const [key, value] of metadata) {
+          frontmatterEntries.push([key, value])
+        }
+        if (this.config.frontmatterFields) {
+          if (typeof this.config.frontmatterFields === "function") {
+            const transformed = this.config.frontmatterFields(
+              processedPage.frontmatter,
+              page,
+            )
+            for (const [key, value] of Object.entries(transformed)) {
+              if (value !== undefined) {
+                frontmatterEntries.push([key, String(value)])
+              }
             }
+          } else {
+            for (const field of this.config.frontmatterFields) {
+              const value = processedPage.frontmatter[field]
+              if (value !== undefined) {
+                frontmatterEntries.push([field, String(value)])
+              }
+            }
+          }
+        }
+
+        if (frontmatterEntries.length > 0) {
+          lines.push("---")
+          for (const [key, value] of frontmatterEntries) {
+            lines.push(`${key}: ${value}`)
           }
           lines.push("---")
           lines.push("")
@@ -1261,8 +1291,12 @@ class KnowledgeGenerator {
         totalSize += stats.size / 1024
       }),
     )
-    console.log(`Generated ${count} files(s) in ${this.config.outputPath}`)
-    console.log(`Folder size: ${totalSize.toFixed(1)} KB`)
+
+    const extraFilesResult = await this.generateExtraFiles(metadata)
+
+    console.log(
+      `Generated ${count + extraFilesResult.count} files(s) in ${chalk.magenta.bold(`${Math.round(performance.now() - start + extraFilesResult.duration)}ms`)} at ${chalk.blue.bold(this.config.outputPath)} - ${(totalSize + extraFilesResult.totalSize).toFixed(1)} KB`,
+    )
   }
 }
 
@@ -1298,13 +1332,41 @@ export function addGenerateKnowledgeCommand() {
     .option("--metadata <pairs...>", "metadata key-value pairs")
     .option("--clean", "Clean the output path before generating")
     .option("--include-imports", "Include relative import source files", true)
+    .option(
+      "-e, --environment <environments>",
+      "Comma-separated list of environments to generate (default: all)",
+    )
     .action(async (options) => {
       loadEnv()
-      const knowledgeConfig = loadKnowledgeConfigFromEnv({
+
+      const cliOptions: CliConfig = {
         ...options,
         outputMode:
           options.outputMode === "per-page" ? "per-page" : "aggregated",
+      }
+
+      const environmentFilter = options.environment
+        ?.split(",")
+        .map((e) => e.trim())
+        .filter(Boolean)
+
+      const configs = loadEnvironmentConfigs({
+        cliOptions,
+        environments: environmentFilter,
       })
-      await generate(knowledgeConfig)
+
+      for (const config of configs) {
+        const envLabel = config.environmentName
+          ? `[${config.environmentName}] `
+          : ""
+        console.log(`${envLabel}Generating knowledge to ${config.outputPath}`)
+        await generate(config)
+      }
+
+      if (configs.length > 1) {
+        console.log(
+          `\nGenerated knowledge for ${configs.length} environment(s)`,
+        )
+      }
     })
 }
