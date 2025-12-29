@@ -1,5 +1,24 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 2.11.0 (2025/12/28)
+
+### Features
+
+- [knowledge]: load openwebui credentials from per-environment env files with legacy env var fallback
+- [knowledge]: add environment/integration filters to generate/upload commands and improve output logging
+- [knowledge]: add page frontmatter field inclusion support
+- [knowledge]: add multi-environment generation and Open WebUI upload integrations
+- [knowledge]: add pageIdPrefix field
+- [knowledge]: extend config schema/types to support named generation environments and platform integrations
+
+### Bug Fixes
+
+- [owui-knowledge-upload]: add fallback file getter
+
+### Miscellaneous Chores
+
+- [knowledge]: ignore generated knowledge outputs in tooling and streamline docs scripts
+
 ## 2.10.1 (2025/12/25)
 
 ### Miscellaneous Chores
