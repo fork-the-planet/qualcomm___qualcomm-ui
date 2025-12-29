@@ -227,7 +227,6 @@ class Uploader {
     const knowledgeFiles = this.knowledgeFilesCache ?? []
     const knowledgeFile = knowledgeFiles.find((f) => f.meta.name === name)
     const contentHash = calculateFileHash(contents)
-    console.debug(knowledgeFile)
 
     if (knowledgeFile && !this.config.force) {
       const existingHash = this.fileHashCache.get(knowledgeFile.id)
