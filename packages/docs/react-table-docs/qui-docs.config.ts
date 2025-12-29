@@ -93,15 +93,10 @@ export default {
       baseUrl: "https://react-table-next.qui.qualcomm.com",
       exclude: ["installation.mdx", "index/_index.mdx"],
       exports: {enabled: true, exclude: []},
-      metadata: {category: "table"},
       pageIdPrefix: "table",
     },
     integrations: {
-      openWebUi: [
-        {id: "qui-ai"},
-        {id: "saga-ai"},
-        {id: "saga-ai-test"},
-      ],
+      openWebUi: [{id: "qui-ai"}, {id: "saga-ai"}, {id: "saga-ai-test"}],
     },
   },
   navConfig,

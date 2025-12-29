@@ -102,6 +102,7 @@ export default {
         enabled: true,
         exclude: [],
       },
+      pageIdPrefix: "table",
     },
     integrations: {
       openWebUi: [{id: "qui-ai"}, {id: "saga-ai"}],
