@@ -1193,11 +1193,23 @@ class KnowledgeGenerator {
         for (const [key, value] of metadata) {
           frontmatterEntries.push([key, value])
         }
-        if (this.config.frontmatterFields?.length) {
-          for (const field of this.config.frontmatterFields) {
-            const value = processedPage.frontmatter[field]
-            if (value !== undefined) {
-              frontmatterEntries.push([field, String(value)])
+        if (this.config.frontmatterFields) {
+          if (typeof this.config.frontmatterFields === "function") {
+            const transformed = this.config.frontmatterFields(
+              processedPage.frontmatter,
+              page,
+            )
+            for (const [key, value] of Object.entries(transformed)) {
+              if (value !== undefined) {
+                frontmatterEntries.push([key, String(value)])
+              }
+            }
+          } else {
+            for (const field of this.config.frontmatterFields) {
+              const value = processedPage.frontmatter[field]
+              if (value !== undefined) {
+                frontmatterEntries.push([field, String(value)])
+              }
             }
           }
         }

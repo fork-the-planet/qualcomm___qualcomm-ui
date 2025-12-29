@@ -73,7 +73,7 @@ const knowledgeIntegrationSchema = implement<KnowledgeIntegrationConfig>().with(
     exclude: z.array(z.string()).optional(),
     exports: knowledgeExportsSchema.optional(),
     extraFiles: z.array(knowledgeExtraFileSchema).optional(),
-    frontmatterFields: z.array(z.string()).optional(),
+    frontmatterFields: z.union([z.array(z.string()), z.any()]).optional(),
     metadata: z.record(z.string(), z.string()).optional(),
     name: z.string().optional(),
     outputMode: z

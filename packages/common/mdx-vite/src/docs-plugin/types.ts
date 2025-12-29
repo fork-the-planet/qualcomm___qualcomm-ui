@@ -1,7 +1,11 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {PageFrontmatter, TocHeading} from "@qualcomm-ui/mdx-common"
+import type {
+  KnowledgePageData,
+  PageFrontmatter,
+  TocHeading,
+} from "@qualcomm-ui/mdx-common"
 import type {QuiPropTypes} from "@qualcomm-ui/typedoc-common"
 
 export type RoutingStrategy =
@@ -176,9 +180,15 @@ export interface KnowledgeIntegrationConfig {
 
   /**
    * List of frontmatter fields to include in the generated Markdown output. These
-   * will be copied from each page's frontmatter, if present.
+   * will be copied from each page's frontmatter, if present. Supply as a function
+   * and return the modified frontmatter object, which will be included instead.
    */
-  frontmatterFields?: string[]
+  frontmatterFields?:
+    | string[]
+    | ((
+        frontmatter: Record<string, string>,
+        page: KnowledgePageData,
+      ) => Record<string, string | undefined>)
 
   /**
    * Metadata key-value pairs to include in per-page output.
