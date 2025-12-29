@@ -29,7 +29,7 @@ export function RowSelectionDemo() {
 
   const {data = [], isFetching, refetch} = useUserData(100000)
 
-  // always memoize your columns
+  // always memoize your data and columns
   const userColumns: ColumnDef<User>[] = useMemo(
     () => [
       {

@@ -10,7 +10,7 @@ import {type User, useUserData} from "./use-data"
 export function ColumnVisibilityDemo() {
   const {data = []} = useUserData(5)
 
-  // always memoize your columns
+  // always memoize your data and columns
   const userColumns: ColumnDef<User>[] = useMemo(
     () => [
       {

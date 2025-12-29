@@ -82,7 +82,7 @@ function useSkipper() {
 export function EditableDataDemo() {
   const {data: userData = [], isFetching, refetch} = useUserData(1000)
 
-  // always memoize your columns
+  // always memoize your data and columns
   const userColumns: ColumnDef<User>[] = useMemo(
     () => [
       {

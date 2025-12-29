@@ -20,7 +20,7 @@ export function SortingDemo() {
 
   const {data = [], isFetching, refetch} = useUserData(20)
 
-  // always memoize your columns
+  // always memoize your data and columns
   const userColumns: ColumnDef<User>[] = useMemo(
     () => [
       {

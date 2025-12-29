@@ -32,7 +32,7 @@ export function FiltersServerSideDemo() {
     pageSize: 10,
   })
 
-  // always memoize your columns
+  // always memoize your data and columns
   const userColumns: ColumnDef<User, any, UserColumnMeta>[] = useMemo(
     () => [
       {

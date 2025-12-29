@@ -11,7 +11,7 @@
     "build:site": "react-router build",
     "build:typedoc": "qui-typedoc build",
     "watch:typedoc": "qui-typedoc watch",
-    "dev": "shx rm -rf .react-router && run-p dev:app typecheck",
+    "dev": "run-p dev:app typecheck",
     "dev:app": "vite -c vite.config.ts",
     "lint": "eslint --quiet",
     "start": "cross-env NODE_ENV=production react-router-serve ./build/server/index.js",

@@ -28,7 +28,7 @@ const renderSubComponent = ({row}: {row: Row<User>}) => {
 export function SubComponentsDemo() {
   const {data = [], isFetching, refetch} = useUserData(10)
 
-  // always memoize your columns
+  // always memoize your data and columns
   const columns: ColumnDef<User>[] = useMemo(
     () => [
       {

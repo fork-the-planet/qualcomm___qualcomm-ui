@@ -12,6 +12,7 @@ const columnHelper = createColumnHelper<User>()
 export function ColumnGroupsDemo() {
   const {data = [], isFetching, refetch} = useUserData(10)
 
+  // always memoize your data and columns
   const columns = useMemo(
     () => [
       columnHelper.group({

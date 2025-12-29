@@ -12,7 +12,7 @@ import {type User, useUserData} from "./use-data"
 export function RowDndDemo() {
   const {data = [], isFetching, refetch} = useUserData(10)
 
-  // always memoize your columns
+  // always memoize your data and columns
   const userColumns: ColumnDef<User>[] = useMemo(
     () => [
       {

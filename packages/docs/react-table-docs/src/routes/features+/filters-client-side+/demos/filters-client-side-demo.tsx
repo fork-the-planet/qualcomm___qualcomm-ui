@@ -27,7 +27,7 @@ import {type User, type UserColumnMeta, useUserData} from "./use-data"
 export function FiltersClientSideDemo() {
   const {data = [], isFetching, refetch} = useUserData(100000)
 
-  // always memoize your columns
+  // always memoize your data and columns
   const userColumns: ColumnDef<User, any, UserColumnMeta>[] = useMemo(
     () => [
       {

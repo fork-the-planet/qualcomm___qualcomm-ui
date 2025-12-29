@@ -26,7 +26,7 @@ import {type User, useUserData} from "./use-data"
 export function RowExpansionDemo() {
   const {data = [], isFetching, refetch} = useUserData(100, 5, 3)
 
-  // always memoize your columns
+  // always memoize your data and columns
   const columns: ColumnDef<User>[] = useMemo(
     () => [
       {

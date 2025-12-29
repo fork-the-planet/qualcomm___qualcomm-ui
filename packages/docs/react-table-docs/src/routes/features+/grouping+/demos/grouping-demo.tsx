@@ -27,7 +27,7 @@ import {type User, useUserData} from "./use-data"
 export function GroupingDemo() {
   const {data = [], isFetching, refetch} = useUserData(10000)
 
-  // always memoize your columns
+  // always memoize your data and columns
   const columns: ColumnDef<User>[] = useMemo(
     () => [
       {
