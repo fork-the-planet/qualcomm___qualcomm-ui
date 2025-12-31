@@ -1,19 +1,16 @@
 /* eslint-disable perfectionist/sort-objects */
 import {
   Bell,
-  CircleUser,
   CreditCard,
   LayoutDashboard,
-  Network,
   ShieldCheck,
   User,
 } from "lucide-react"
 
 import {createTreeCollection} from "@qualcomm-ui/core/tree"
 import {SideNav} from "@qualcomm-ui/react/side-nav"
+import {Tooltip} from "@qualcomm-ui/react/tooltip"
 import type {LucideIconOrElement} from "@qualcomm-ui/react-core/lucide"
-
-import {QLogo} from "./q-logo"
 
 interface SideNavItem {
   disabled?: boolean
@@ -22,6 +19,7 @@ interface SideNavItem {
   id: string
   nodes?: SideNavItem[]
   text: string
+  tooltip?: string
 }
 
 const collection = createTreeCollection<SideNavItem>({
@@ -42,49 +40,31 @@ const collection = createTreeCollection<SideNavItem>({
         id: "dashboard",
         text: "Dashboard",
         disabled: true,
+        tooltip: "The dashboard is planned for a future update",
       },
       {
-        icon: Network,
-        id: "ai-studio",
-        text: "AI Studio",
+        icon: User,
+        id: "profile",
+        text: "Profile",
       },
       {
-        icon: CircleUser,
-        id: "account",
-        text: "Account",
-        nodes: [
-          {
-            icon: User,
-            id: "profile",
-            text: "Profile",
-          },
-          {
-            icon: ShieldCheck,
-            id: "security",
-            text: "Security",
-          },
-          {
-            icon: CreditCard,
-            id: "billing",
-            text: "Billing",
-          },
-        ],
+        icon: ShieldCheck,
+        id: "security",
+        text: "Security",
+      },
+      {
+        icon: CreditCard,
+        id: "billing",
+        text: "Billing",
       },
     ],
   },
 })
 
-export function SideNavDisabledNodeDemo() {
+export function SideNavTooltipDemo() {
   return (
     <div className="flex justify-center">
-      <SideNav.Root collection={collection} defaultExpandedValue={["account"]}>
-        <SideNav.Header>
-          <SideNav.HeaderLogo>
-            <QLogo />
-          </SideNav.HeaderLogo>
-          <SideNav.HeaderTitle>Qualcomm</SideNav.HeaderTitle>
-        </SideNav.Header>
-
+      <SideNav.Root collection={collection} open={false}>
         {collection.rootNode.nodes?.map((parentNode, index) => (
           <SideNav.Nodes
             key={collection.getNodeValue(parentNode)}
@@ -97,13 +77,27 @@ export function SideNavDisabledNodeDemo() {
                 <SideNav.BranchTrigger />
               </SideNav.BranchNode>
             )}
-            renderLeaf={({node}) => (
-              <SideNav.LeafNode>
-                <SideNav.NodeIndicator />
-                {node.icon ? <SideNav.NodeIcon icon={node.icon} /> : null}
-                <SideNav.NodeText>{node.text}</SideNav.NodeText>
-              </SideNav.LeafNode>
-            )}
+            renderLeaf={({node}) => {
+              return (
+                // preview
+                <Tooltip
+                  trigger={
+                    <span>
+                      <SideNav.LeafNode>
+                        <SideNav.NodeIndicator />
+                        {node.icon ? (
+                          <SideNav.NodeIcon icon={node.icon} />
+                        ) : null}
+                        <SideNav.NodeText>{node.text}</SideNav.NodeText>
+                      </SideNav.LeafNode>
+                    </span>
+                  }
+                >
+                  {node.tooltip || node.text}
+                </Tooltip>
+                // preview
+              )
+            }}
           />
         ))}
       </SideNav.Root>
