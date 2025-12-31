@@ -1,4 +1,3 @@
-export * from "./q-logo"
 export * from "./side-nav-collapsed-demo"
 export * from "./side-nav-default-expanded-demo"
 export * from "./side-nav-disabled-node-demo"
