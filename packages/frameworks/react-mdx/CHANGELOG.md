@@ -1,5 +1,11 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 1.9.0 (2026/01/01)
+
+### Features
+
+- [shiki]: add markdown language support to CodeHighlight component
+
 ## 1.8.1 (2025/12/24)
 
 ### Bug Fixes
