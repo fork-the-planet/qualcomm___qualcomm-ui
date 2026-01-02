@@ -4,6 +4,7 @@
 import angularHtml from "@shikijs/langs/angular-html"
 import angularTs from "@shikijs/langs/angular-ts"
 import json from "@shikijs/langs/json"
+import markdown from "@shikijs/langs/markdown"
 import shell from "@shikijs/langs/shell"
 import tsx from "@shikijs/langs/tsx"
 import typescript from "@shikijs/langs/typescript"
@@ -16,7 +17,7 @@ import {quiCustomDarkTheme} from "@qualcomm-ui/mdx-common"
 
 const jsEngine = createJavaScriptRegexEngine({forgiving: true})
 
-const langs = [tsx, typescript, json, shell, angularTs, angularHtml]
+const langs = [tsx, typescript, json, shell, angularTs, angularHtml, markdown]
 export const supportedLangs: Set<string> = new Set([
   "tsx",
   "typescript",
@@ -24,6 +25,8 @@ export const supportedLangs: Set<string> = new Set([
   "shell",
   "angular-ts",
   "angular-html",
+  "markdown",
+  "md",
 ])
 
 // Create custom highlighter with dynamic imports to optimize client-side bundle size
