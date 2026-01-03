@@ -1,5 +1,11 @@
 # @qualcomm-ui/typedoc Changelog
 
+## 1.0.4 (2026/01/02)
+
+### Bug Fixes
+
+- typedoc-common peerDependency
+
 ## 1.0.3 (2025/11/13)
 
 ### Bug Fixes
