@@ -503,9 +503,14 @@ pre.qui-docs-code {
     border: solid 1px var(--color-border-neutral-01);
     border-radius: var(--border-radius-sm);
     color: var(--color-text-neutral-primary);
-    font: var(--font-static-code-lg-default);
-    margin-right: 5px;
-    padding: 3px 4px;
+    font: var(--font-static-code-sm-default);
+    margin-right: 1px;
+    padding: 1px 2px;
+  }
+
+  .doc-props__function-arg-colon {
+    display: inline-block;
+    margin-right: 4px;
   }
 }
 

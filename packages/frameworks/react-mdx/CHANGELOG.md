@@ -1,5 +1,11 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 1.9.1 (2026/01/02)
+
+### Bug Fixes
+
+- [typedoc]: improve method arg styling
+
 ## 1.9.0 (2026/01/01)
 
 ### Features
