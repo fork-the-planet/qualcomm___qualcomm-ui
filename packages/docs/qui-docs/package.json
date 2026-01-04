@@ -15,10 +15,10 @@
     "build:typedoc": "qui-typedoc build",
     "watch:typedoc": "qui-typedoc watch",
     "dev": "run-p dev:app typecheck",
-    "dev:app": "vite -c vite.config.ts",
+    "dev:app": "react-router typegen && vite -c vite.config.ts",
     "lint": "eslint --quiet",
     "start": "cross-env NODE_ENV=production react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc -b tsconfig.lib.json -w --preserveWatchOutput",
+    "typecheck": "tsc -b tsconfig.lib.json -w --preserveWatchOutput",
     "update-lazy-demo-map": "qui-mdx-vite generate-lazy-demo-map -r src/routes -o src/components/demo/lazy-demo-loader.ts"
   },
   "dependencies": {

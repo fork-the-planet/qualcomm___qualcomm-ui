@@ -2,8 +2,6 @@ export type WeightUnit = "kg" | "lb"
 
 /**
  * Represents a dog with its properties.
- *
- * @public
  */
 export interface Dog {
   /**
@@ -35,9 +33,6 @@ export interface Dog {
   weightUnit?: WeightUnit
 }
 
-/**
- * @public
- */
 export interface OptionTagExample {
   /**
    * The unit type of the weight field.
@@ -48,9 +43,6 @@ export interface OptionTagExample {
   weightUnit: WeightUnit
 }
 
-/**
- * @public
- */
 export interface Option {
   /**
    * Unique identifier for the option.
@@ -70,9 +62,6 @@ export interface Option {
   value: string
 }
 
-/**
- * @public
- */
 export interface DefaultTagExample {
   /**
    * Example property.
@@ -82,9 +71,6 @@ export interface DefaultTagExample {
   age?: number
 }
 
-/**
- * @public
- */
 export interface LinkExample {
   /**
    * Visit {@link https://google.com this external link} to learn more.
@@ -97,9 +83,6 @@ export interface LinkExample {
   internalLink?: string
 }
 
-/**
- * @public
- */
 export interface SeeTagExample {
   /**
    * @see {@link someOtherPropExample}
@@ -112,9 +95,6 @@ export interface SeeTagExample {
   someOtherPropExample?: string
 }
 
-/**
- * @public
- */
 export interface SinceExample {
   /**
    * Foo.
@@ -126,9 +106,6 @@ export interface SinceExample {
 
 export type DocsEnvironment = "test" | "stage" | "prod"
 
-/**
- * @public
- */
 export interface ZipFileOptions {
   /**
    * name to use for the local zip file.
@@ -143,9 +120,6 @@ export interface ZipFileOptions {
   directory: string
 }
 
-/**
- * @public
- */
 export interface UploadFileOptions {
   /**
    * Relative path to the local zip file that will be generated.
@@ -164,9 +138,6 @@ export interface UploadFileOptions {
   service: string
 }
 
-/**
- * @public
- */
 export interface GetFilesOptions {
   /**
    * Deploy environment.
@@ -214,4 +185,51 @@ export class CloudDocsSdk {
   async getServiceFiles(_opts: GetFilesOptions) {
     return {} as any
   }
+}
+
+export interface TokenDetail {
+  /**
+   * Access token to be used for making API calls
+   */
+  accessToken: string
+  /**
+   * name of the company the user is associated with
+   */
+  companyName?: string
+  /**
+   * Expiration time represented as unix time (in milliseconds)
+   */
+  expiresAt: number
+  /**
+   * Time in Utc when the access token was created
+   */
+  hostTimeUtc: string
+  /**
+   * Id of the company the user is associated with
+   */
+  partyId?: number
+  /**
+   * Token for getting a new token if the access token has expired
+   */
+  refreshToken: string
+  /**
+   * Name of the user to whom the access token belongs to
+   */
+  userName: string
+}
+
+export interface TokenManager {
+  /**
+   * Get token
+   *
+   * @returns should link to property {@link refreshToken}
+   */
+  getToken(): string
+  /**
+   * Save token
+   *
+   * @param tokenString - should link to header {@link TokenDetail}
+   * @returns true if able to save token successfully and false on failure
+   */
+  saveToken(tokenString: string): boolean
 }

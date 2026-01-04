@@ -1,5 +1,15 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 1.10.0 (2026/01/03)
+
+### Features
+
+- [typedoc]: render @returns tag in prop descriptions
+
+### Bug Fixes
+
+- [typedoc]: resolve jsdoc @link anchors via toc ids
+
 ## 1.9.1 (2026/01/02)
 
 ### Bug Fixes

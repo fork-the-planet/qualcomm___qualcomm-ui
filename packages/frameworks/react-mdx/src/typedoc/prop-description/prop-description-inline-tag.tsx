@@ -3,45 +3,19 @@
 
 import type {ReactNode} from "react"
 
-import {ExternalLink} from "lucide-react"
-
-import {Link} from "@qualcomm-ui/react/link"
-import {useMdxDocsContext} from "@qualcomm-ui/react-mdx/context"
 import type {QuiInlineTagDisplayPart} from "@qualcomm-ui/typedoc-common"
+
+import {PropDescriptionLink} from "./prop-description-link"
 
 interface Props {
   inlineTag: QuiInlineTagDisplayPart
 }
 
-export function PropDescriptionInlineTag({
-  inlineTag: {tag, target, text},
-}: Props): ReactNode {
-  const {renderLink: RenderLink} = useMdxDocsContext()
-  const tags: Record<string, () => ReactNode> = {
-    "@link": () =>
-      text.startsWith("http") ||
-      (typeof target === "string" && target.startsWith("http")) ? (
-        <Link
-          endIcon={ExternalLink}
-          href={target as string}
-          size="sm"
-          target="_blank"
-        >
-          {text}
-        </Link>
-      ) : text.startsWith("/") ? (
-        <Link render={<RenderLink href={text} />} size="sm">
-          {text}
-        </Link>
-      ) : (
-        <Link render={<RenderLink href={`#${text}`} />} size="sm">
-          {text}
-        </Link>
-      ),
-  }
+export function PropDescriptionInlineTag({inlineTag}: Props): ReactNode {
+  const {tag} = inlineTag
 
-  if (tag && tags[tag]) {
-    return tags[tag]()
+  if (tag === "@link") {
+    return <PropDescriptionLink inlineTag={inlineTag} />
   }
 
   return <></>
