@@ -9,10 +9,10 @@
   "scripts": {
     "build": "react-router build",
     "dev": "run-p dev:app typecheck",
-    "dev:app": "tsx ./server.js",
+    "dev:app": "react-router typegen && tsx ./server.js",
     "lint": "eslint --quiet",
     "start": "cross-env NODE_ENV=production react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc -w --preserveWatchOutput"
+    "typecheck": "tsc -w --preserveWatchOutput"
   },
   "dependencies": {
     "@faker-js/faker": "~9.6.0",
