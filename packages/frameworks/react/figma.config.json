@@ -1,0 +1,13 @@
+{
+  "codeConnect": {
+    "include": ["src/**/*"],
+    "exclude": ["src/**/*.spec.tsx"],
+    "parser": "react",
+    "importPaths": {
+
+    },
+    "paths": {
+      "@qualcomm-ui/react/*": ["./src/*/index.ts"]
+    }
+  }
+}
