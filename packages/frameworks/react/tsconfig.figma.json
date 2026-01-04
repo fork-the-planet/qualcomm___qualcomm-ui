@@ -4,14 +4,14 @@
     "composite": true,
     "baseUrl": "./",
     "incremental": true,
-    "outDir": "./dist",
     "rootDir": "./src",
-    "tsBuildInfoFile": "dist/tsbuildinfo",
+    "outDir": "./node_modules/.tmp/figma",
+    "tsBuildInfoFile": "node_modules/.tmp/tsbuildinfo.figma",
     "paths": {
       "@qualcomm-ui/react/*": ["./src/*/index.ts"],
     }
   },
-  "include": ["./src/**/*.figma.tsx"],
+  "include": ["./src/**/*.figma.tsx", "figma-utils"],
   "references": [
     {
       "path": "./tsconfig.lib.json"

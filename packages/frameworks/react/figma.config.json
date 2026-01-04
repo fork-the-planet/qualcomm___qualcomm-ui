@@ -8,6 +8,9 @@
     },
     "paths": {
       "@qualcomm-ui/react/*": ["./src/*/index.ts"]
+    },
+    "documentUrlSubstitutions": {
+      "<FIGMA_FILE_URL>": "https://www.figma.com/design/ETvFgN3bbNvr6sbpoZyNuA"
     }
   }
 }
