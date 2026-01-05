@@ -55,7 +55,7 @@ program
   .command("generate-icons")
   .description("Generate Code Connect files for icon components")
   .argument("<url>", "Figma file or page URL containing icons")
-  .option("-o, --out <dir>", "Output directory", "figma/generated/icons")
+  .option("-o, --out <dir>", "Output directory", "generated/figma/icons")
   .option("-v, --verbose", "Enable verbose logging", false)
   .action(async (url, options) => {
     if (options.verbose) {
