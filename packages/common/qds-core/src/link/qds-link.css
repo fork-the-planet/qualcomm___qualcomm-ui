@@ -54,20 +54,60 @@
       color: var(--color-interactive-text-link-neutral-pressed);
     }
 
-    &:visited:not(:hover) {
-      border-bottom-color: var(--color-interactive-text-link-neutral-visited);
-    }
-
     &:focus-visible {
       border: solid 1px var(--color-utility-focus-border);
-      border-radius: var(--border-radius-md);
       color: var(--color-interactive-text-link-neutral-idle);
       outline: solid 1px var(--color-utility-focus-border);
-      outline-offset: 0;
     }
 
     &:visited:not(:hover) {
       color: var(--color-interactive-text-link-neutral-visited);
+    }
+  }
+
+  &[data-emphasis="brand"] {
+    color: var(--color-interactive-text-link-brand-idle);
+
+    &:hover {
+      border-bottom-color: var(--color-interactive-text-link-brand-hover);
+      color: var(--color-interactive-text-link-brand-hover);
+    }
+
+    &:active {
+      color: var(--color-interactive-text-link-brand-pressed);
+    }
+
+    &:focus-visible {
+      border: solid 1px var(--color-utility-focus-border);
+      color: var(--color-interactive-text-link-brand-idle);
+      outline: solid 1px var(--color-utility-focus-border);
+    }
+
+    &:visited:not(:hover) {
+      color: var(--color-interactive-text-link-brand-visited);
+    }
+  }
+
+  &[data-emphasis="white-persistent"] {
+    color: var(--color-utility-persistent-white);
+
+    &:hover {
+      border-bottom-color: var(--color-utility-persistent-white);
+      color: var(--color-utility-persistent-white);
+    }
+
+    &:active {
+      color: var(--color-utility-persistent-transparent-white);
+    }
+
+    &:focus-visible {
+      border: solid 1px var(--color-utility-focus-border);
+      color: var(--color-interactive-text-link-brand-idle);
+      outline: solid 1px var(--color-utility-focus-border);
+    }
+
+    &:visited:not(:hover) {
+      color: var(--color-interactive-text-link-brand-visited);
     }
   }
 
