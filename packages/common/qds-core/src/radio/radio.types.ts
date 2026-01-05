@@ -52,6 +52,15 @@ export interface QdsRadioGroupLabelBindings {
 
 export interface QdsRadioGroupItemsBindings {
   className: RadioClasses["items"]
+  "data-indented"?: boolean
+}
+
+export interface QdsRadioGroupItemsProps {
+  /**
+   * Indents the radio items.
+   * @default false
+   */
+  indented?: boolean
 }
 
 export interface QdsRadioApi {
@@ -60,7 +69,9 @@ export interface QdsRadioApi {
   // group: bindings
   getErrorTextBindings(): QdsRadioErrorTextBindings
   getGroupBindings(): QdsRadioGroupBindings
-  getGroupItemsBindings(): QdsRadioGroupItemsBindings
+  getGroupItemsBindings(
+    props: QdsRadioGroupItemsProps,
+  ): QdsRadioGroupItemsBindings
   getGroupLabelBindings(): QdsRadioGroupLabelBindings
   getItemBindings(): QdsRadioItemBindings
   getItemControlBindings(): QdsRadioItemControlBindings

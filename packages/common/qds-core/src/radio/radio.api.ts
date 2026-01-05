@@ -12,6 +12,7 @@ import type {
   QdsRadioErrorTextBindings,
   QdsRadioGroupBindings,
   QdsRadioGroupItemsBindings,
+  QdsRadioGroupItemsProps,
   QdsRadioGroupLabelBindings,
   QdsRadioItemBindings,
   QdsRadioItemControlBindings,
@@ -38,9 +39,12 @@ export function createQdsRadioApi(
         className: radioClasses.group,
       })
     },
-    getGroupItemsBindings(): QdsRadioGroupItemsBindings {
+    getGroupItemsBindings({
+      indented,
+    }: QdsRadioGroupItemsProps): QdsRadioGroupItemsBindings {
       return normalize.element({
         className: radioClasses.items,
+        "data-indented": indented || undefined,
       })
     },
     getGroupLabelBindings(): QdsRadioGroupLabelBindings {
