@@ -1,0 +1,14 @@
+{
+  "codeConnect": {
+    "include": ["src/**/*"],
+    "exclude": ["src/**/*.spec.tsx"],
+    "parser": "react",
+    "paths": {
+      "@qualcomm-ui/react/*": ["./src/*/index.ts"]
+    },
+    "documentUrlSubstitutions": {
+      "<FIGMA_COMPONENTS_BASE>": "https://www.figma.com/design/ETvFgN3bbNvr6sbpoZyNuA",
+      "<FIGMA_ICONS_BASE>": "https://www.figma.com/design/4xDg5Mrv4mxjsK3xC3L5up"
+    }
+  }
+}

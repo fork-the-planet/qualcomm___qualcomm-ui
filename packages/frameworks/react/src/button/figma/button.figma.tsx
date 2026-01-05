@@ -29,7 +29,7 @@ const sizeProp = {
 }
 
 // TODO: solve these issues: https://qualcomm-confluence.atlassian.net/wiki/spaces/SAGAUX/pages/2869087007/QDS+Figma+Code+Connect+discussion
-figma.connect(Button, "<FIGMA_FILE_URL>?node-id=3571%3A1400", {
+figma.connect(Button, "<FIGMA_COMPONENTS_BASE>?node-id=3571%3A1400", {
   example: (props) => {
     return (
       <Button
@@ -52,10 +52,10 @@ figma.connect(Button, "<FIGMA_FILE_URL>?node-id=3571%3A1400", {
         only: "only",
         start: "start",
       }),
-      iconLg: figma.string("iconLg"),
-      iconMd: figma.string("iconMd"),
-      iconSm: figma.string("iconSm"),
-      label: figma.string("label"),
+      iconLg: figma.instance("iconLg"),
+      iconMd: figma.instance("iconMd"),
+      iconSm: figma.instance("iconSm"),
+      label: figma.instance("label"),
     }),
   },
 })

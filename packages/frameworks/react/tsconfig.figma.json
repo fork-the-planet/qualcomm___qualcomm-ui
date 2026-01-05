@@ -11,7 +11,7 @@
       "@qualcomm-ui/react/*": ["./src/*/index.ts"],
     }
   },
-  "include": ["./src/**/*.figma.tsx", "figma-utils"],
+  "include": ["./src/**/*.figma.tsx", "./generated/figma/**/*.tsx"],
   "references": [
     {
       "path": "./tsconfig.lib.json"

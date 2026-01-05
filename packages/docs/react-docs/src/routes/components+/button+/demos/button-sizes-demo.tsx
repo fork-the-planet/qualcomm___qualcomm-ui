@@ -19,7 +19,7 @@ export function ButtonSizesDemo(): ReactElement {
       <Button
         emphasis="primary"
         size="md"
-        startIcon={ExternalLink}
+        startIcon={<ExternalLink />}
         variant="fill"
       >
         Action
@@ -27,7 +27,7 @@ export function ButtonSizesDemo(): ReactElement {
       <Button
         emphasis="primary"
         size="lg"
-        startIcon={ExternalLink}
+        startIcon={<ExternalLink />}
         variant="fill"
       >
         Action

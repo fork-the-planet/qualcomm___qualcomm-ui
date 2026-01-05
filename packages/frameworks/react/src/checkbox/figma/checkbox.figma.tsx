@@ -28,7 +28,7 @@ const sharedProps = {
 }
 
 // no label
-figma.connect(Checkbox, "<FIGMA_FILE_URL>?node-id=12550-185694", {
+figma.connect(Checkbox, "<FIGMA_COMPONENTS_BASE>?node-id=12550-185694", {
   example: (props) => {
     return <Checkbox {...props} />
   },
@@ -38,7 +38,7 @@ figma.connect(Checkbox, "<FIGMA_FILE_URL>?node-id=12550-185694", {
 })
 
 // label
-figma.connect(Checkbox, "<FIGMA_FILE_URL>?node-id=67-706", {
+figma.connect(Checkbox, "<FIGMA_COMPONENTS_BASE>?node-id=67-706", {
   example: ({labelText, ...props}) => {
     return <Checkbox label={labelText} {...props} />
   },
