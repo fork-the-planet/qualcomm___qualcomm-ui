@@ -1,7 +1,13 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {computed, Directive, inject, input} from "@angular/core"
+import {
+  booleanAttribute,
+  computed,
+  Directive,
+  inject,
+  input,
+} from "@angular/core"
 
 import {normalizeProps} from "@qualcomm-ui/angular-core/machine"
 import {
@@ -14,6 +20,7 @@ import {
   type QdsRadioApiProps,
   type QdsRadioSize,
 } from "@qualcomm-ui/qds-core/radio"
+import type {Booleanish} from "@qualcomm-ui/utils/coercion"
 
 import {
   provideQdsRadioContext,
@@ -30,6 +37,14 @@ export class RadioGroupDirective
   implements SignalifyInput<QdsRadioApiProps>
 {
   /**
+   * Indents the radio items.
+   * @default false
+   */
+  readonly indented = input<boolean | undefined, Booleanish>(undefined, {
+    transform: booleanAttribute,
+  })
+
+  /**
    * The size of the radio and its elements. Governs properties like label font
    * size, control size, and indicator size.
    * @default 'md'
@@ -42,7 +57,12 @@ export class RadioGroupDirective
     super.ngOnInit()
 
     this.qdsRadioService.init(
-      computed(() => createQdsRadioApi({size: this.size()}, normalizeProps)),
+      computed(() =>
+        createQdsRadioApi(
+          {indented: this.indented(), size: this.size()},
+          normalizeProps,
+        ),
+      ),
     )
 
     this.trackBindings.extendWith(

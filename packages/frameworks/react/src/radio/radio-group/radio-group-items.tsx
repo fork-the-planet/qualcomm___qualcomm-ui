@@ -17,17 +17,10 @@ export interface RadioGroupItemsProps extends ElementRenderProp<"div"> {
    * React {@link https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children children} prop.
    */
   children?: ReactNode
-
-  /**
-   * Indents the radio items.
-   * @default false
-   */
-  indented?: boolean
 }
 
 export function RadioGroupItems({
   children,
-  indented,
   ...props
 }: RadioGroupItemsProps): ReactElement {
   const contextProps = useRadioGroupItems()
@@ -35,7 +28,7 @@ export function RadioGroupItems({
 
   const mergedProps = mergeProps(
     contextProps,
-    qdsContext.getGroupItemsBindings({indented}),
+    qdsContext.getGroupItemsBindings(),
     props,
   )
   return (

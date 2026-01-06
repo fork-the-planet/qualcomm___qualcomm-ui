@@ -26,11 +26,7 @@ export class RadioGroupItemsDirective extends CoreRadioGroupItemsDirective {
   constructor() {
     super()
     this.trackBindings.extendWith(
-      computed(() =>
-        this.qdsRadioContext().getGroupItemsBindings({
-          indented: this.indented(),
-        }),
-      ),
+      computed(() => this.qdsRadioContext().getGroupItemsBindings()),
     )
   }
 }

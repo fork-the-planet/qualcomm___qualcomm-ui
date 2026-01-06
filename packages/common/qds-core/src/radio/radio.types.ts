@@ -9,6 +9,11 @@ export type QdsRadioSize = "sm" | "md" | "lg"
 
 export interface QdsRadioApiProps {
   /**
+   * Indents the radio items. Only used at radio group level.
+   * @default false
+   */
+  indented?: boolean
+  /**
    * The size of the radio and its elements. Governs properties like label font
    * size, control size, and indicator size.
    * @default 'md'
@@ -55,23 +60,13 @@ export interface QdsRadioGroupItemsBindings {
   "data-indented"?: boolean
 }
 
-export interface QdsRadioGroupItemsProps {
-  /**
-   * Indents the radio items.
-   * @default false
-   */
-  indented?: boolean
-}
-
 export interface QdsRadioApi {
   size: QdsRadioSize
 
   // group: bindings
   getErrorTextBindings(): QdsRadioErrorTextBindings
   getGroupBindings(): QdsRadioGroupBindings
-  getGroupItemsBindings(
-    props: QdsRadioGroupItemsProps,
-  ): QdsRadioGroupItemsBindings
+  getGroupItemsBindings(): QdsRadioGroupItemsBindings
   getGroupLabelBindings(): QdsRadioGroupLabelBindings
   getItemBindings(): QdsRadioItemBindings
   getItemControlBindings(): QdsRadioItemControlBindings

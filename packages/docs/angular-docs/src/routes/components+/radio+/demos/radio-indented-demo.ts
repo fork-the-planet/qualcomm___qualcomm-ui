@@ -8,9 +8,9 @@ import {RadioModule} from "@qualcomm-ui/angular/radio"
   template: `
     <form>
       <!-- preview -->
-      <fieldset defaultValue="html" name="language" q-radio-group>
+      <fieldset defaultValue="html" indented name="language" q-radio-group>
         <div q-radio-group-label>Language</div>
-        <div indented q-radio-group-items>
+        <div q-radio-group-items>
           <label label="HTML" q-radio value="html"></label>
           <label label="CSS" q-radio value="css"></label>
           <label label="TypeScript" q-radio value="ts"></label>
