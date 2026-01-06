@@ -6,7 +6,7 @@ export function RadioIndentedDemo(): ReactElement {
   return (
     <form>
       {/* preview */}
-      <RadioGroup.Root defaultValue="html" indented>
+      <RadioGroup.Root defaultValue="html" indented name="language">
         <RadioGroup.Label>Language</RadioGroup.Label>
         <RadioGroup.Items>
           <Radio label="HTML" value="html" />

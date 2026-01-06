@@ -25,7 +25,6 @@ export function RadioGroupItems({
 }: RadioGroupItemsProps): ReactElement {
   const contextProps = useRadioGroupItems()
   const qdsContext = useQdsRadioContext()
-
   const mergedProps = mergeProps(
     contextProps,
     qdsContext.getGroupItemsBindings(),
