@@ -1,10 +1,11 @@
 {
   "codeConnect": {
     "include": ["figma/generated/icons/**"],
-    "exclude": ["src/**/*.spec.tsx"],
-    "parser": "react",
+    "exclude": ["src/**/*.spec.ts"],
+    "parser": "html",
+    "label": "Angular",
     "paths": {
-      "@qualcomm-ui/react/*": ["./src/*/index.ts"]
+      "@qualcomm-ui/angular/*": ["./src/*/index.ts"]
     },
     "documentUrlSubstitutions": {
       "<FIGMA_ICONS_BASE>": "https://www.figma.com/design/fJC9KDk1b8v5KxHRttSbqS"

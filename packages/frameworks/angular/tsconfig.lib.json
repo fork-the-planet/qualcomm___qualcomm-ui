@@ -23,7 +23,7 @@
     }
   ],
   "include": ["./src"],
-  "exclude": ["**/*.spec.ts"],
+  "exclude": ["**/*.spec.ts", "**/*.figma.ts"],
   "angularCompilerOptions": {
     "flatModuleId": "qui-angular",
     "flatModuleOutFile": "qui-angular.js"
