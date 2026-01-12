@@ -1,5 +1,11 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 2.11.2 (2026/01/11)
+
+### Documentation
+
+- [qui-docs-config]: update jsdoc comments
+
 ## 2.11.1 (2025/12/29)
 
 ### Bug Fixes
