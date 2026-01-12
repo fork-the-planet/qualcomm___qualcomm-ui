@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
 import type {inputClasses} from "@qualcomm-ui/qds-core/input"
+import type {BooleanDataAttr} from "@qualcomm-ui/utils/attributes"
 
 import type {radioClasses} from "./radio.classes"
 
@@ -57,7 +58,7 @@ export interface QdsRadioGroupLabelBindings {
 
 export interface QdsRadioGroupItemsBindings {
   className: RadioClasses["items"]
-  "data-indented"?: boolean
+  "data-indented"?: BooleanDataAttr
 }
 
 export interface QdsRadioApi {
