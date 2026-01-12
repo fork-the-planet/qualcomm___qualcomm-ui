@@ -170,6 +170,8 @@ export interface KnowledgeIntegrationConfig {
 
   /**
    * Configuration for per-page Markdown exports served from the public directory.
+   *
+   * @inheritDoc
    */
   exports?: KnowledgeExportsConfig
 
@@ -334,13 +336,17 @@ export interface KnowledgeIntegrations {
 
 export interface KnowledgeConfig {
   /**
-   * Generation environments. Each environment can override global settings and
-   * specifies its own output path.
+   * Generation environments. Each environment inherits global settings but can
+   * override them.
+   *
+   * @inheritDoc
    */
   environments?: KnowledgeEnvironment[]
 
   /**
    * Shared configuration inherited by all environments.
+   *
+   * @inheritDoc
    */
   global?: KnowledgeIntegrationConfig
 
@@ -417,8 +423,6 @@ export interface QuiDocsConfig
   /**
    * Root app directory. NOT the full path to the directory.
    *
-   * @example 'src'
-   *
    * @default 'app'
    */
   appDirectory?: string
@@ -430,6 +434,8 @@ export interface QuiDocsConfig
 
   /**
    * Knowledge generation configuration for LLM integrations.
+   *
+   * @inheritDoc
    */
   knowledge?: KnowledgeConfig
 
