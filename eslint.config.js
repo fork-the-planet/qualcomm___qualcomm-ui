@@ -39,6 +39,7 @@ export default defineConfig(
       "**/public/exports/md/**",
       "**/frameworks/react-internal/files/component-list.md",
       "packages/docs/*/knowledge/**",
+      "**/generated/**",
     ],
   },
   {

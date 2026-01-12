@@ -29,7 +29,9 @@
     "build:bundle-size": "ng build test-bundle-size-app",
     "analyze-bundle": "source-map-explorer bundle-size-dist/main.js",
     "explore-bundle": "run-s build:bundle-size analyze-bundle",
-    "publish-angular-package": "tsx apply-package && qui-cli publish-angular qui-angular"
+    "publish-angular-package": "tsx apply-package && qui-cli publish-angular qui-angular",
+    "figma:publish-components": "figma connect publish -c figma/components.config.json",
+    "figma:publish-icons": "figma connect publish -c figma/icons.config.json --batch-size 500"
   },
   "devDependencies": {
     "@analogjs/platform": "catalog:",
@@ -55,11 +57,13 @@
     "@angular/ssr": "catalog:",
     "@faker-js/faker": "~9.6.0",
     "@floating-ui/dom": "^1.7.0",
+    "@figma/code-connect": "^1.3.12",
     "@jsdevtools/coverage-istanbul-loader": "~3.0.5",
     "@module-federation/enhanced": "0.21.2",
     "@qualcomm-ui/angular-core": "workspace:^1.4.1",
     "@qualcomm-ui/cli": "workspace:^1",
     "@qualcomm-ui/core": "workspace:^1.2.0",
+    "@qualcomm-ui/dom": "workspace:^1.0.7",
     "@qualcomm-ui/qds-core": "workspace:^1.10.4",
     "@qualcomm-ui/tailwind-plugin": "workspace:^1.4.0",
     "@qualcomm-ui/tsconfig": "workspace:^1.0.4",
