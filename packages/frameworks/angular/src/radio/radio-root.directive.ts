@@ -31,6 +31,11 @@ export class RadioRootDirective
   implements SignalifyInput<QdsRadioApiProps>
 {
   /**
+   * @internal
+   */
+  readonly indented = input<boolean | undefined>()
+
+  /**
    * The size of the radio and its elements. Governs properties like label font
    * size, control size, and indicator size.
    * @default 'md'
