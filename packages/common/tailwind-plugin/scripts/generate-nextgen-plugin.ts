@@ -98,7 +98,7 @@ const TOKEN_MAPPINGS: TokenMapping[] = [
     themeKey: "sizing",
   },
   {
-    ignore: true,
+    nameTransform: (name) => name.replace("spacing", "qds"),
     pattern: "spacing-*",
     themeKey: "spacing",
   },
