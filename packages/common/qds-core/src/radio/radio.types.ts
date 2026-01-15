@@ -2,12 +2,18 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
 import type {inputClasses} from "@qualcomm-ui/qds-core/input"
+import type {BooleanDataAttr} from "@qualcomm-ui/utils/attributes"
 
 import type {radioClasses} from "./radio.classes"
 
 export type QdsRadioSize = "sm" | "md" | "lg"
 
 export interface QdsRadioApiProps {
+  /**
+   * Indents the radio items. Only used at radio group level.
+   * @default false
+   */
+  indented?: boolean
   /**
    * The size of the radio and its elements. Governs properties like label font
    * size, control size, and indicator size.
@@ -52,6 +58,7 @@ export interface QdsRadioGroupLabelBindings {
 
 export interface QdsRadioGroupItemsBindings {
   className: RadioClasses["items"]
+  "data-indented"?: BooleanDataAttr
 }
 
 export interface QdsRadioApi {
