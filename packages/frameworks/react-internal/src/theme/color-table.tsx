@@ -3,8 +3,11 @@
 
 import {useEffect, useState} from "react"
 
+import {Table} from "@qualcomm-ui/react/table"
 import {useTheme} from "@qualcomm-ui/react-router-utils/client"
 import type {ColorData} from "@qualcomm-ui/tailwind-plugin/theme"
+
+import {TableWrapper} from "./table-wrapper"
 
 interface ColorTableProps {
   data: ColorData[]
@@ -40,20 +43,20 @@ export function ColorTable({data = []}: ColorTableProps) {
               <div className="doc-props-columns">
                 <div className="doc-props__content">
                   <div className="doc-props__title">CSS Variable</div>
-                  <code className="fit !bg-transparent font-mono">
+                  <code className="fit bg-transparent! font-mono">
                     {variable}
                   </code>
                 </div>
                 <div className="doc-props__content">
                   <div className="doc-props__title">Tailwind Class</div>
-                  <code className="fit !bg-transparent font-mono">
+                  <code className="fit bg-transparent! font-mono">
                     {tailwind}
                   </code>
                 </div>
                 <div className="doc-props__content">
                   <div className="doc-props__title">Value</div>
                   <code
-                    className="fit !bg-transparent font-mono"
+                    className="fit bg-transparent! font-mono"
                     suppressHydrationWarning
                   >
                     {getPropertyValue(variable)}
@@ -71,41 +74,33 @@ export function ColorTable({data = []}: ColorTableProps) {
           )
         })}
       </div>
-      <div className="typedoc-props__table-wrapper hidden w-full sm:block">
-        <table className="table-fixed">
-          <thead>
-            <tr>
-              <th>CSS Variable</th>
-              <th>Tailwind Class</th>
-              <th className="box-border w-32">Color</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map(({tailwind, variable}) => {
-              return (
-                <tr key={variable}>
-                  <td>
-                    <code className="fit !bg-transparent font-mono">
-                      {variable}
-                    </code>
-                  </td>
-                  <td>
-                    <code className="fit !bg-transparent font-mono">
-                      {tailwind}
-                    </code>
-                  </td>
-                  <td
-                    className="h-8"
-                    style={{
-                      backgroundColor: `var(${variable})`,
-                    }}
-                  />
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      </div>
+      <TableWrapper>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>CSS Variable</Table.HeaderCell>
+            <Table.HeaderCell>Tailwind Class</Table.HeaderCell>
+            <Table.HeaderCell className="box-border w-32">
+              Color
+            </Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {data.map(({tailwind, variable}) => {
+            return (
+              <Table.Row key={variable}>
+                <Table.Cell>{variable}</Table.Cell>
+                <Table.Cell>{tailwind}</Table.Cell>
+                <Table.Cell
+                  className="h-8"
+                  style={{
+                    backgroundColor: `var(${variable})`,
+                  }}
+                />
+              </Table.Row>
+            )
+          })}
+        </Table.Body>
+      </TableWrapper>
     </div>
   )
 }

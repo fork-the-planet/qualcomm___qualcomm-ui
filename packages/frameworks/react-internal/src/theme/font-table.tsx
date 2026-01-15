@@ -3,7 +3,10 @@
 
 import {useEffect, useState} from "react"
 
+import {Table} from "@qualcomm-ui/react/table"
 import type {FontData} from "@qualcomm-ui/tailwind-plugin/theme"
+
+import {TableWrapper} from "./table-wrapper"
 
 interface FontTableProps {
   data: FontData[]
@@ -37,20 +40,20 @@ export function FontTable({data = []}: FontTableProps) {
               <div className="doc-props-columns">
                 <div className="doc-props__content">
                   <div className="doc-props__title">Tailwind Class</div>
-                  <code className="fit !bg-transparent font-mono text-sm">
+                  <code className="fit bg-transparent! font-mono text-sm">
                     {tailwind}
                   </code>
                 </div>
                 <div className="doc-props__content">
                   <div className="doc-props__title">CSS Variable</div>
-                  <code className="fit !bg-transparent font-mono text-sm">
+                  <code className="fit bg-transparent! font-mono text-sm">
                     {variable}
                   </code>
                 </div>
                 <div className="doc-props__content">
                   <div className="doc-props__title">Computed Value</div>
                   <code
-                    className="flex flex-col gap-1 !bg-transparent font-mono text-sm"
+                    className="flex flex-col gap-1 bg-transparent! font-mono text-sm"
                     suppressHydrationWarning
                   >
                     <span suppressHydrationWarning>
@@ -67,47 +70,35 @@ export function FontTable({data = []}: FontTableProps) {
           )
         })}
       </div>
-      <div className="typedoc-props__table-wrapper hidden w-full md:block">
-        <table>
-          <thead>
-            <tr>
-              <th>Tailwind Class</th>
-              <th>CSS Variable</th>
-              <th>Computed Value</th>
-              <th>Example</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map(({tailwind, variable}) => {
-              return (
-                <tr key={variable}>
-                  <td>
-                    <code className="fit !bg-transparent font-mono">
-                      {tailwind}
-                    </code>
-                  </td>
-                  <td>
-                    <code className="fit !bg-transparent font-mono">
-                      {variable}
-                    </code>
-                  </td>
-                  <td>
-                    <code
-                      className="flex flex-col gap-1 !bg-transparent font-mono"
-                      suppressHydrationWarning
-                    >
-                      <span suppressHydrationWarning>
-                        {getPropertyValue(variable)}
-                      </span>
-                    </code>
-                  </td>
-                  <td style={{font: `var(${variable})`}}>Aa</td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      </div>
+      <TableWrapper>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>Tailwind Class</Table.HeaderCell>
+            <Table.HeaderCell>CSS Variable</Table.HeaderCell>
+            <Table.HeaderCell>Computed Value</Table.HeaderCell>
+            <Table.HeaderCell>Example</Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {data.map(({tailwind, variable}) => {
+            return (
+              <Table.Row key={variable}>
+                <Table.Cell>{tailwind}</Table.Cell>
+                <Table.Cell>{variable}</Table.Cell>
+                <Table.Cell>
+                  <span
+                    className="flex flex-col gap-1"
+                    suppressHydrationWarning
+                  >
+                    {getPropertyValue(variable)}
+                  </span>
+                </Table.Cell>
+                <Table.Cell style={{font: `var(${variable})`}}>Aa</Table.Cell>
+              </Table.Row>
+            )
+          })}
+        </Table.Body>
+      </TableWrapper>
     </div>
   )
 }
