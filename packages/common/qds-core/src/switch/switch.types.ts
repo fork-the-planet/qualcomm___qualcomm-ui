@@ -5,7 +5,7 @@ import type {inputClasses} from "@qualcomm-ui/qds-core/input"
 
 import type {switchClasses} from "./switch.classes"
 
-export type QdsSwitchSize = "sm" | "md"
+export type QdsSwitchSize = "sm" | "md" | "lg"
 
 export interface QdsSwitchApiProps {
   /**
@@ -36,6 +36,7 @@ export interface QdsSwitchThumbBindings {
 
 export interface QdsSwitchLabelBindings {
   className: SwitchClasses["label"]
+  "data-size": QdsSwitchSize
 }
 
 export interface QdsSwitchErrorTextBindings {
