@@ -41,7 +41,7 @@ export function createQdsTagApi(
       return normalize.button({
         className: tagClasses.root,
         "data-disabled": booleanDataAttr(props.disabled),
-        "data-emphasis": props.emphasis || "brand",
+        "data-emphasis": props.emphasis || "outline-brand",
         "data-part": "root",
         "data-radius": props.radius || "square",
         "data-scope": "tag",

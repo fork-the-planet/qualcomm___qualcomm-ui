@@ -5,7 +5,20 @@ import type {BooleanDataAttr} from "@qualcomm-ui/utils/attributes"
 
 import type {tagClasses} from "./tag.classes"
 
-export type QdsTagEmphasis = "brand" | "outline-neutral" | "neutral"
+export type QdsTagEmphasis =
+  | "outline-brand"
+  | "outline-neutral"
+  | "neutral"
+  | "blue"
+  | "cyan"
+  | "teal"
+  | "green"
+  | "kiwi"
+  | "yellow"
+  | "orange"
+  | "red"
+  | "magenta"
+  | "purple"
 
 export type QdsTagRadius = "square" | "rounded"
 
@@ -22,7 +35,7 @@ export interface QdsTagApiProps {
 
   /**
    * Governs the color of the tag.
-   * @default 'brand'
+   * @default 'outline-brand'
    */
   emphasis?: QdsTagEmphasis
 
