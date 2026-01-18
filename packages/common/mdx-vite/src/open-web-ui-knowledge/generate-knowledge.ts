@@ -1,11 +1,13 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
+import AdmZip from "adm-zip"
 import {program} from "@commander-js/extra-typings"
 import chalk from "chalk"
 import type {Link, Parent} from "mdast"
 import type {MdxJsxAttribute, MdxJsxFlowElement} from "mdast-util-mdx-jsx"
 import {minimatch} from "minimatch"
+import {createHash} from "node:crypto"
 import {
   access,
   mkdir,
@@ -24,7 +26,11 @@ import remarkStringify from "remark-stringify"
 import {type Plugin, unified} from "unified"
 import {visit} from "unist-util-visit"
 
-import type {KnowledgePageData} from "@qualcomm-ui/mdx-common"
+import type {
+  ExportManifest,
+  KnowledgePageData,
+  ManifestEntry,
+} from "@qualcomm-ui/mdx-common"
 import type {
   QuiComment,
   QuiCommentDisplayPart,
@@ -100,6 +106,10 @@ async function exists(dirPath: string): Promise<boolean> {
   return access(dirPath)
     .then(() => true)
     .catch(() => false)
+}
+
+function computeMd5(content: string): string {
+  return createHash("md5").update(content).digest("hex")
 }
 
 function extractBestType(propInfo: PropInfo): string {
@@ -1114,16 +1124,21 @@ class KnowledgeGenerator {
     console.log(`File size: ${outputSizeKb} KB`)
   }
 
-  private async generateExtraFiles(
-    metadata: [string, string][],
-  ): Promise<{count: number; duration: number; totalSize: number}> {
+  private async generateExtraFiles(metadata: [string, string][]): Promise<{
+    count: number
+    duration: number
+    entries: ManifestEntry[]
+    totalSize: number
+  }> {
     const start = performance.now()
     const extraFiles = this.config.extraFiles ?? []
     if (extraFiles.length === 0) {
-      return {count: 0, duration: 0, totalSize: 0}
+      return {count: 0, duration: 0, entries: [], totalSize: 0}
     }
 
     let totalSize = 0
+    const entries: ManifestEntry[] = []
+
     await Promise.all(
       extraFiles.map(async (extraFile) => {
         let contents = extraFile.contents
@@ -1156,16 +1171,27 @@ class KnowledgeGenerator {
         lines.push(contents)
         lines.push("")
 
-        const outfile = `${resolve(this.config.outputPath)}/${kebabCase(extraFile.id)}.md`
-        await writeFile(outfile, lines.join("\n"), "utf-8")
+        const fileContent = lines.join("\n")
+        const fileName = `${kebabCase(extraFile.id)}.md`
+        const outfile = `${resolve(this.config.outputPath)}/${fileName}`
+        await writeFile(outfile, fileContent, "utf-8")
         const stats = await stat(outfile)
         totalSize += stats.size / 1024
+
+        entries.push({
+          id: extraFile.id,
+          md5: computeMd5(fileContent),
+          path: fileName,
+          size: stats.size,
+          title: extraFile.title || extraFile.id,
+        })
       }),
     )
 
     return {
       count: extraFiles.length,
       duration: performance.now() - start,
+      entries,
       totalSize,
     }
   }
@@ -1181,6 +1207,8 @@ class KnowledgeGenerator {
     )
     const count = processedPages.length
     let totalSize = 0
+    const manifestEntries: ManifestEntry[] = []
+
     await Promise.all(
       processedPages.map(async (processedPage, index) => {
         const page = pages[index]
@@ -1285,18 +1313,98 @@ class KnowledgeGenerator {
           }
         }
 
-        const outfile = `${resolve(this.config.outputPath)}/${kebabCase(page.id || page.name)}.md`
-        await writeFile(outfile, lines.join("\n"), "utf-8")
+        const fileContent = lines.join("\n")
+        const fileName = `${kebabCase(page.id || page.name)}.md`
+        const outfile = `${resolve(this.config.outputPath)}/${fileName}`
+        await writeFile(outfile, fileContent, "utf-8")
         const stats = await stat(outfile)
         totalSize += stats.size / 1024
+
+        manifestEntries.push({
+          id: page.id || kebabCase(page.name),
+          md5: computeMd5(fileContent),
+          path: fileName,
+          size: stats.size,
+          title: processedPage.title,
+          url: page.url,
+        })
       }),
     )
 
     const extraFilesResult = await this.generateExtraFiles(metadata)
+    manifestEntries.push(...extraFilesResult.entries)
+
+    if (this.config.manifestOutputPath) {
+      if (this.config.generateManifest !== false) {
+        await this.generateManifest(
+          this.config.manifestOutputPath,
+          manifestEntries,
+        )
+      }
+
+      if (this.config.generateBulkZip !== false) {
+        await this.generateBulkZip(
+          this.config.manifestOutputPath,
+          manifestEntries,
+        )
+      }
+    }
 
     console.log(
       `Generated ${count + extraFilesResult.count} files(s) in ${chalk.magenta.bold(`${Math.round(performance.now() - start + extraFilesResult.duration)}ms`)} at ${chalk.blue.bold(this.config.outputPath)} - ${(totalSize + extraFilesResult.totalSize).toFixed(1)} KB`,
     )
+  }
+
+  private computeAggregateHash(entries: ManifestEntry[]): string {
+    const sortedHashes = entries
+      .map((e) => e.md5)
+      .sort()
+      .join("")
+    return computeMd5(sortedHashes)
+  }
+
+  private async generateManifest(
+    outputPath: string,
+    entries: ManifestEntry[],
+  ): Promise<ExportManifest> {
+    const aggregateHash = this.computeAggregateHash(entries)
+    const totalSize = entries.reduce((sum, e) => sum + e.size, 0)
+
+    const manifest: ExportManifest = {
+      aggregateHash,
+      baseUrl: this.config.baseUrl,
+      files: entries,
+      generatedAt: new Date().toISOString(),
+      totalFiles: entries.length,
+      totalSize,
+      version: 1,
+    }
+
+    await mkdir(outputPath, {recursive: true}).catch(() => {})
+    await writeFile(
+      join(outputPath, "manifest.json"),
+      JSON.stringify(manifest, null, 2),
+      "utf-8",
+    )
+
+    return manifest
+  }
+
+  private async generateBulkZip(
+    outputPath: string,
+    entries: ManifestEntry[],
+  ): Promise<void> {
+    await mkdir(outputPath, {recursive: true}).catch(() => {})
+    const zipPath = join(outputPath, "bulk.zip")
+    const zip = new AdmZip()
+
+    for (const entry of entries) {
+      const filePath = join(this.config.outputPath, entry.path)
+      const content = await readFile(filePath)
+      zip.addFile(entry.path, content)
+    }
+
+    zip.writeZip(zipPath)
   }
 }
 

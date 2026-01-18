@@ -53,6 +53,7 @@
     "test:unit:ci": "cross-env NODE_OPTIONS='' vitest -c vitest.config.ts --run --pool=threads"
   },
   "dependencies": {
+    "adm-zip": "^0.5.16",
     "@shikijs/rehype": "^3.13.0",
     "@shikijs/transformers": "^3.13.0",
     "chalk": "^5.6.2",
@@ -88,6 +89,7 @@
     "uuid": "^10.0.0"
   },
   "devDependencies": {
+    "@types/adm-zip": "^0.5.7",
     "@qualcomm-ui/cli": "workspace:^1.0.5",
     "@qualcomm-ui/esbuild": "workspace:^1.0.4",
     "@qualcomm-ui/mdx-common": "workspace:^1.8.0",

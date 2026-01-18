@@ -401,3 +401,80 @@ export interface SiteData {
    */
   searchIndex: PageSection[]
 }
+
+/**
+ * Individual file entry in the export manifest.
+ */
+export interface ManifestEntry {
+  /**
+   * Unique identifier for this page.
+   */
+  id: string
+
+  /**
+   * MD5 hash of the file contents.
+   */
+  md5: string
+
+  /**
+   * Relative path to the markdown file.
+   */
+  path: string
+
+  /**
+   * File size in bytes.
+   */
+  size: number
+
+  /**
+   * Page title from frontmatter.
+   */
+  title: string
+
+  /**
+   * Full URL to the documentation page.
+   */
+  url?: string
+}
+
+/**
+ * Export manifest containing all exported files and metadata.
+ */
+export interface ExportManifest {
+  /**
+   * Aggregate MD5 hash of all content for change detection.
+   */
+  aggregateHash: string
+
+  /**
+   * Base URL for documentation links.
+   */
+  baseUrl?: string
+
+  /**
+   * List of all exported files.
+   *
+   * @inheritDoc
+   */
+  files: ManifestEntry[]
+
+  /**
+   * ISO 8601 timestamp of when the manifest was generated.
+   */
+  generatedAt: string
+
+  /**
+   * Total number of exported files.
+   */
+  totalFiles: number
+
+  /**
+   * Total size of all files in bytes.
+   */
+  totalSize: number
+
+  /**
+   * Schema version for future compatibility.
+   */
+  version: 1
+}
