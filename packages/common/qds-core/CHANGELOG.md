@@ -1,5 +1,11 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.12.0 (2026/01/17)
+
+### Features
+
+- add lg switch size
+
 ## 1.11.0 (2026/01/15)
 
 ### Features
