@@ -1,3 +1,4 @@
+// @ts-nocheck
 import figma from "@figma/code-connect"
 
 import type {QdsInputSize} from "@qualcomm-ui/qds-core/input"
@@ -18,6 +19,7 @@ const sharedProps = {
     "invalid-focus": "Error message",
   }),
   hint: figma.boolean("hint", {
+    false: undefined,
     true: figma.string("hintText"),
   }),
   invalid: figma.enum("state", {
@@ -25,6 +27,7 @@ const sharedProps = {
     "invalid-focus": true,
   }),
   label: figma.boolean("label", {
+    false: undefined,
     true: figma.string("labelText"),
   }),
   readOnly: figma.enum("state", {
