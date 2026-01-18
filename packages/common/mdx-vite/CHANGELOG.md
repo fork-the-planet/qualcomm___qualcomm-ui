@@ -1,5 +1,20 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 2.12.0 (2026/01/18)
+
+### Features
+
+- [exports]: generate bulk.zip archive of all exported markdown files
+- [exports]: generate export manifest with MD5 hashes for change detection
+
+### Documentation
+
+- [qui-docs]: document manifest schema and MCP client usage
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common]
+
 ## 2.11.2 (2026/01/11)
 
 ### Documentation
