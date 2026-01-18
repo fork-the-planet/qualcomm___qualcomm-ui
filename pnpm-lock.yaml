@@ -748,7 +748,7 @@ importers:
         specifier: workspace:^1.0.4
         version: link:../esbuild
       '@qualcomm-ui/mdx-common':
-        specifier: workspace:^1.8.0
+        specifier: workspace:^1.9.0
         version: link:../mdx-common
       '@qualcomm-ui/tsconfig':
         specifier: workspace:^1.0.4
@@ -4169,7 +4169,7 @@ importers:
         specifier: workspace:^1.0.4
         version: link:../../common/esbuild
       '@qualcomm-ui/mdx-common':
-        specifier: workspace:^1.8.0
+        specifier: workspace:^1.9.0
         version: link:../../common/mdx-common
       '@qualcomm-ui/react':
         specifier: workspace:^1.8.0
@@ -4354,7 +4354,7 @@ importers:
         specifier: workspace:^1.1.1
         version: link:../react-core
       '@qualcomm-ui/react-mdx':
-        specifier: workspace:^1.10.2
+        specifier: workspace:^1.10.3
         version: link:../react-mdx
       '@qualcomm-ui/react-test-utils':
         specifier: workspace:^1.0.0
