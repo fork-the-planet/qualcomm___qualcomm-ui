@@ -51,6 +51,12 @@ export interface ComponentExplorerBaseProps
    * Array of parts.
    */
   parts: ComponentPart[]
+
+  /**
+   * Custom scope name for enhanced element targeting, optional.  Matches the
+   * `data-scope` attribute value.
+   */
+  scope?: string
 }
 
 function generatePartLink(
@@ -78,6 +84,7 @@ export function ComponentExplorerBase({
   children,
   linkPrefix,
   parts,
+  scope,
   ...props
 }: ComponentExplorerBaseProps): ReactElement {
   const {renderLink: Link} = useMdxDocsContext()
@@ -94,10 +101,13 @@ export function ComponentExplorerBase({
       return
     }
 
+    let partSelector = `[data-part="${hoveredPart}"]`
+    if (scope) {
+      partSelector += `[data-scope="${scope}"]`
+    }
+
     const targetElements = Array.from(
-      previewElement.querySelectorAll<HTMLElement>(
-        `[data-part="${hoveredPart}"]`,
-      ),
+      previewElement.querySelectorAll<HTMLElement>(partSelector),
     )
 
     if (targetElements.length === 0) {
@@ -118,7 +128,7 @@ export function ComponentExplorerBase({
     })
 
     setHighlightRects(rects)
-  }, [hoveredPart])
+  }, [hoveredPart, scope])
 
   return (
     <div {...props} className="qui-component-explorer__root">
