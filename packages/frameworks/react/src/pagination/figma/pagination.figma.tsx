@@ -16,6 +16,7 @@ const sharedProps = {
 const tableBarProps = {
   ...sharedProps,
   pageMetadata: figma.boolean("range", {
+    false: undefined,
     true: (
       <Pagination.PageMetadata>
         {({count, pageEnd, pageStart}) =>
@@ -25,6 +26,7 @@ const tableBarProps = {
     ),
   }),
   pageSize: figma.boolean("items", {
+    false: undefined,
     true: (
       <Pagination.PageSize options={[10, 25, 50, 100]}>
         <Pagination.PageSizeLabel>Items per page</Pagination.PageSizeLabel>
