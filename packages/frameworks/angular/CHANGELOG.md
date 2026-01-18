@@ -1,5 +1,25 @@
 # @qualcomm-ui/angular Changelog
 
+## 1.13.0 (2026/01/17)
+
+### Features
+
+- add lg switch size
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
+## 1.12.0 (2026/01/15)
+
+### Features
+
+- add indented radio group variant
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core, @qualcomm-ui/angular-core]
+
 ## 1.11.4 (2025/12/24)
 
 ### Miscellaneous Chores

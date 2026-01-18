@@ -1,5 +1,25 @@
 # @qualcomm-ui/react Changelog
 
+## 1.8.0 (2026/01/17)
+
+### Features
+
+- add lg switch size
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
+## 1.7.0 (2026/01/15)
+
+### Features
+
+- add indented radio group variant
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
 ## 1.6.4 (2025/12/24)
 
 ### Miscellaneous Chores

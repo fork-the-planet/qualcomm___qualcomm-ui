@@ -8,15 +8,11 @@ import type {BasicThemeData} from "@qualcomm-ui/tailwind-plugin/theme"
 
 import {TableWrapper} from "./table-wrapper"
 
-interface ThemePropertyTableProps {
-  cssProperty?: string
-  data: BasicThemeData[]
+interface SpacingTableProps {
+  data: Required<BasicThemeData>[]
 }
 
-export function ThemePropertyTable({
-  cssProperty,
-  data = [],
-}: ThemePropertyTableProps) {
+export function SpacingTable({data = []}: SpacingTableProps) {
   // we need to force a re-render after mount to reflect the computed property
   // values.
   const [key, setKey] = useState<number>(0)
@@ -65,7 +61,6 @@ export function ThemePropertyTable({
                     suppressHydrationWarning
                   >
                     <div>
-                      {cssProperty ? `${cssProperty}: ` : ""}
                       <span suppressHydrationWarning>
                         {getPropertyValue(variable)}
                       </span>
@@ -84,7 +79,8 @@ export function ThemePropertyTable({
               <Table.HeaderCell>Tailwind Class</Table.HeaderCell>
             ) : null}
             <Table.HeaderCell>CSS Variable</Table.HeaderCell>
-            <Table.HeaderCell>{cssProperty ? "CSS" : "Value"}</Table.HeaderCell>
+            <Table.HeaderCell>Value</Table.HeaderCell>
+            <Table.HeaderCell>Space</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -95,12 +91,14 @@ export function ThemePropertyTable({
                   <Table.Cell>{tailwind}</Table.Cell>
                 ) : null}
                 <Table.Cell>{variable}</Table.Cell>
+                <Table.Cell>{getPropertyValue(variable)}</Table.Cell>
                 <Table.Cell>
-                  <div>
-                    {cssProperty ? `${cssProperty}: ` : ""}
-                    <span suppressHydrationWarning>
-                      {getPropertyValue(variable)}
-                    </span>
+                  <div
+                    className="flex h-full"
+                    style={{gap: `var(${variable})`}}
+                  >
+                    <div className="bg-brand-primary h-full w-1.5 rounded-sm"></div>
+                    <div className="bg-brand-primary h-full w-1.5 rounded-sm"></div>
                   </div>
                 </Table.Cell>
               </Table.Row>
