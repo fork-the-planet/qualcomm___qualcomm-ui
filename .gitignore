@@ -31,6 +31,7 @@ packages/docs/*/public/*.js
 packages/docs/*/public/*.js.map
 packages/docs/*/public/llms-full.txt
 packages/docs/*/knowledge/
+packages/docs/*/public/exports
 .wireit
 .lint-cache
 
