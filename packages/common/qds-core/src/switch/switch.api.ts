@@ -42,6 +42,7 @@ export function createQdsSwitchApi(
     getLabelBindings(): QdsSwitchLabelBindings {
       return normalize.element({
         className: switchClasses.label,
+        "data-size": size,
       })
     },
     getRootBindings(): QdsSwitchRootBindings {

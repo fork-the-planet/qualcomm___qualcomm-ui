@@ -7,7 +7,8 @@ export function SwitchSizesDemo(): ReactElement {
     <div className="grid justify-center gap-4">
       {/* preview */}
       <Switch label="Small (sm)" size="sm" />
-      <Switch label="Medium (md)" size="md" /> {/* default */}
+      <Switch label="Medium (md)" size="md" />
+      <Switch label="Large (lg)" size="lg" />
       {/* preview */}
     </div>
   )
