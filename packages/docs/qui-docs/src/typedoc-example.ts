@@ -2,8 +2,6 @@ export type WeightUnit = "kg" | "lb"
 
 /**
  * Represents a dog with its properties.
- *
- * @public
  */
 export interface Dog {
   /**
@@ -35,9 +33,6 @@ export interface Dog {
   weightUnit?: WeightUnit
 }
 
-/**
- * @public
- */
 export interface OptionTagExample {
   /**
    * The unit type of the weight field.
@@ -48,9 +43,6 @@ export interface OptionTagExample {
   weightUnit: WeightUnit
 }
 
-/**
- * @public
- */
 export interface Option {
   /**
    * Unique identifier for the option.
@@ -70,9 +62,6 @@ export interface Option {
   value: string
 }
 
-/**
- * @public
- */
 export interface DefaultTagExample {
   /**
    * Example property.
@@ -82,9 +71,6 @@ export interface DefaultTagExample {
   age?: number
 }
 
-/**
- * @public
- */
 export interface LinkExample {
   /**
    * Visit {@link https://google.com this external link} to learn more.
@@ -97,9 +83,6 @@ export interface LinkExample {
   internalLink?: string
 }
 
-/**
- * @public
- */
 export interface SeeTagExample {
   /**
    * @see {@link someOtherPropExample}
@@ -112,9 +95,6 @@ export interface SeeTagExample {
   someOtherPropExample?: string
 }
 
-/**
- * @public
- */
 export interface SinceExample {
   /**
    * Foo.
@@ -122,4 +102,134 @@ export interface SinceExample {
    * @since 3.10.0
    */
   foo: string
+}
+
+export type DocsEnvironment = "test" | "stage" | "prod"
+
+export interface ZipFileOptions {
+  /**
+   * name to use for the local zip file.
+   *
+   * @default `site-data.zip`
+   */
+  archiveName?: string
+
+  /**
+   * the file directory to zip up.
+   */
+  directory: string
+}
+
+export interface UploadFileOptions {
+  /**
+   * Relative path to the local zip file that will be generated.
+   */
+  archivePath: string
+
+  /**
+   * Deploy environment.
+   */
+  environment: DocsEnvironment
+
+  /**
+   * Name of the service. Must match one of the predefined service names in the
+   * deployed handler.
+   */
+  service: string
+}
+
+export interface GetFilesOptions {
+  /**
+   * Deploy environment.
+   */
+  environment: DocsEnvironment
+
+  /**
+   * Name of the service. Must match one of the predefined service names in the
+   * deployed handler.
+   */
+  service: string
+}
+
+export interface CloudDocsSdkOptions {
+  /**
+   * The file handler API url.
+   */
+  baseUrl: string
+}
+
+export class CloudDocsSdk {
+  constructor(public readonly opts: CloudDocsSdkOptions) {}
+
+  /**
+   * Zip files.
+   */
+  async zipFiles(_opts: ZipFileOptions): Promise<boolean> {
+    return false
+  }
+
+  /**
+   * Upload files
+   *
+   * @param archivePath test1
+   * @param environment test2
+   * @param service test3
+   */
+  async uploadFiles(_opts: UploadFileOptions): Promise<boolean> {
+    return true
+  }
+
+  /**
+   * Download files
+   */
+  async getServiceFiles(_opts: GetFilesOptions) {
+    return {} as any
+  }
+}
+
+export interface TokenDetail {
+  /**
+   * Access token to be used for making API calls
+   */
+  accessToken: string
+  /**
+   * name of the company the user is associated with
+   */
+  companyName?: string
+  /**
+   * Expiration time represented as unix time (in milliseconds)
+   */
+  expiresAt: number
+  /**
+   * Time in Utc when the access token was created
+   */
+  hostTimeUtc: string
+  /**
+   * Id of the company the user is associated with
+   */
+  partyId?: number
+  /**
+   * Token for getting a new token if the access token has expired
+   */
+  refreshToken: string
+  /**
+   * Name of the user to whom the access token belongs to
+   */
+  userName: string
+}
+
+export interface TokenManager {
+  /**
+   * Get token
+   *
+   * @returns should link to property {@link refreshToken}
+   */
+  getToken(): string
+  /**
+   * Save token
+   *
+   * @param tokenString - should link to header {@link TokenDetail}
+   * @returns true if able to save token successfully and false on failure
+   */
+  saveToken(tokenString: string): boolean
 }

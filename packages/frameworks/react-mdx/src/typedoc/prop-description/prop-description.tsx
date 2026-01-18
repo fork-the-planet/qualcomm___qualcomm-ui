@@ -12,6 +12,7 @@ import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {PropDescriptionFunctionArgs} from "./prop-description-function-args"
 import {PropDescriptionOptionTags} from "./prop-description-option-tags"
+import {PropDescriptionReturnsTag} from "./prop-description-returns-tag"
 import {PropDescriptionSeeTags} from "./prop-description-see-tags"
 import {PropDescriptionSummary} from "./prop-description-summary"
 
@@ -46,6 +47,8 @@ export function PropDescription({
   const optionTags =
     comment.blockTags?.filter((tag) => tag.tag === "@option") ?? []
   const seeTags = comment?.blockTags?.filter((tag) => tag.tag === "@see") ?? []
+
+  const returnsTag = comment?.blockTags?.find((tag) => tag.tag === "@returns")
 
   if (
     !comment.summary.length &&
@@ -107,6 +110,8 @@ export function PropDescription({
       {seeTags.length ? <PropDescriptionSeeTags seeTags={seeTags} /> : null}
 
       {children}
+
+      {returnsTag ? <PropDescriptionReturnsTag tag={returnsTag} /> : null}
     </div>
   )
 }

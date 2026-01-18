@@ -45,6 +45,11 @@ export interface PageFrontmatter {
   categories?: string[]
 
   /**
+   * Page description
+   */
+  description?: string
+
+  /**
    * Used for grouping pages at the same level under a common section heading.
    */
   group?: string
@@ -232,8 +237,6 @@ export interface PageSection extends PageFrontmatter {
 /**
  * The PageMap is a record of the available routes in the application. Each key is
  * the route's pathname.
- *
- * @public
  */
 export type PageMap = Record<string, PageSection>
 
@@ -315,7 +318,60 @@ export type PagePropTypes = QuiPropTypes & {
 
 export type PageDocProps = Record<string, PagePropTypes>
 
+export interface KnowledgePageData {
+  demosFolder?: string
+
+  /**
+   * Absolute path to the file on disk
+   */
+  filePath: string
+
+  /**
+   * Unique identifier for this page, generated from the file's path relative to the
+   * docs site's routes folder.
+   */
+  id: string
+
+  mdxFile: string
+
+  name: string
+
+  /**
+   * Relative path to the page from the root of the site
+   *
+   * @example `/components/button`
+   */
+  pathname: string
+
+  /**
+   * Full link to the page
+   */
+  url: string | undefined
+}
+
+export interface SiteDataExports {
+  /**
+   * Base URL path for exported Markdown files.
+   */
+  basePath: string
+
+  /**
+   * Whether markdown exports are enabled.
+   */
+  enabled: boolean
+
+  /**
+   * List of page IDs that have Markdown exports available.
+   */
+  pages: KnowledgePageData[]
+}
+
 export interface SiteData {
+  /**
+   * Markdown export configuration and available pages.
+   */
+  exports?: SiteDataExports
+
   /**
    * Nav items, typically used for the site's side navigation.
    *

@@ -1,11 +1,13 @@
-import CompositeDemo from "@qualcomm-ui/react-docs/components+/number-input+/demos/number-input-composite-demo"
-import ControlledDemo from "@qualcomm-ui/react-docs/components+/number-input+/demos/number-input-controlled-demo"
-import ErrorTextDemo from "@qualcomm-ui/react-docs/components+/number-input+/demos/number-input-error-text-demo"
-import MinMaxDemo from "@qualcomm-ui/react-docs/components+/number-input+/demos/number-input-min-max-demo"
-import SimpleDemo from "@qualcomm-ui/react-docs/components+/number-input+/demos/number-input-simple-demo"
-import SizesDemo from "@qualcomm-ui/react-docs/components+/number-input+/demos/number-input-sizes-demo"
-import StatesDemo from "@qualcomm-ui/react-docs/components+/number-input+/demos/number-input-states-demo"
-import StepDemo from "@qualcomm-ui/react-docs/components+/number-input+/demos/number-input-step-demo"
+import {NumberInputCompositeDemo as CompositeDemo} from "@qualcomm-ui/react-docs/components+/number-input+/demos/number-input-composite-demo"
+import {NumberInputControlledDemo as ControlledDemo} from "@qualcomm-ui/react-docs/components+/number-input+/demos/number-input-controlled-demo"
+import {NumberInputErrorTextDemo as ErrorTextDemo} from "@qualcomm-ui/react-docs/components+/number-input+/demos/number-input-error-text-demo"
+import {NumberInputMinMaxDemo as MinMaxDemo} from "@qualcomm-ui/react-docs/components+/number-input+/demos/number-input-min-max-demo"
+import {NumberInputSimpleDemo as SimpleDemo} from "@qualcomm-ui/react-docs/components+/number-input+/demos/number-input-simple-demo"
+import {NumberInputSizesDemo as SizesDemo} from "@qualcomm-ui/react-docs/components+/number-input+/demos/number-input-sizes-demo"
+import {NumberInputStatesDemo as StatesDemo} from "@qualcomm-ui/react-docs/components+/number-input+/demos/number-input-states-demo"
+import {NumberInputStepDemo as StepDemo} from "@qualcomm-ui/react-docs/components+/number-input+/demos/number-input-step-demo"
+
+import {DemoPageLayout} from "~/components/demo-page-layout"
 
 const demos = [
   {component: CompositeDemo, title: "Composite"},
@@ -19,16 +21,5 @@ const demos = [
 ]
 
 export default function NumberInputDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="number-input" demos={demos} />
 }

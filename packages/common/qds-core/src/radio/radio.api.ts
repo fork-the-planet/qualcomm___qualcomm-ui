@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
 import {inputClasses} from "@qualcomm-ui/qds-core/input"
-import type {Explicit} from "@qualcomm-ui/utils/guard"
+import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 import type {PropNormalizer} from "@qualcomm-ui/utils/machine"
 
 import {radioClasses} from "./radio.classes"
@@ -20,10 +20,9 @@ import type {
 } from "./radio.types"
 
 export function createQdsRadioApi(
-  props: Explicit<QdsRadioApiProps>,
+  {indented = false, size = "md"}: QdsRadioApiProps,
   normalize: PropNormalizer,
 ): QdsRadioApi {
-  const size = props.size || "md"
   return {
     size,
 
@@ -41,6 +40,7 @@ export function createQdsRadioApi(
     getGroupItemsBindings(): QdsRadioGroupItemsBindings {
       return normalize.element({
         className: radioClasses.items,
+        "data-indented": booleanDataAttr(indented),
       })
     },
     getGroupLabelBindings(): QdsRadioGroupLabelBindings {

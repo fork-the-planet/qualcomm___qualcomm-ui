@@ -1,4 +1,72 @@
-# @qualcomm-ui/react-mdx
+# @qualcomm-ui/react-mdx Changelog
+
+## 1.10.1 (2026/01/15)
+
+### Styles
+
+- [shiki]: full width code line display to fix highlighting
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react]
+
+## 1.10.0 (2026/01/03)
+
+### Features
+
+- [typedoc]: render @returns tag in prop descriptions
+
+### Bug Fixes
+
+- [typedoc]: resolve jsdoc @link anchors via toc ids
+
+## 1.9.1 (2026/01/02)
+
+### Bug Fixes
+
+- [typedoc]: improve method arg styling
+
+## 1.9.0 (2026/01/01)
+
+### Features
+
+- [shiki]: add markdown language support to CodeHighlight component
+
+## 1.8.1 (2025/12/24)
+
+### Bug Fixes
+
+- [page-titles]: check for duplicate title using text content
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/mdx-common, @qualcomm-ui/react, @qualcomm-ui/react-core]
+
+## 1.8.0 (2025/12/22)
+
+### Features
+
+- [copy-to-clipboard]: allow async copy value provider
+- [docs-layout]: add copy and download export actions to eligible pages
+- [docs-layout]: add page header with export actions
+
+### Styles
+
+- [typedoc]: improve prop example rendering with collapsible
+
+### Bug Fixes
+
+- [file-tree]: branch trigger placement
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common, @qualcomm-ui/react]
+
+## 1.7.4 (2025/12/18)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common, @qualcomm-ui/react]
 
 ## 1.7.3 (2025/12/15)
 

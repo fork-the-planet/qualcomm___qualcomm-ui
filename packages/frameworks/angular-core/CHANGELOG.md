@@ -1,4 +1,10 @@
-# @qualcomm-ui/angular-core
+# @qualcomm-ui/angular-core Changelog
+
+## 1.4.1 (2025/12/24)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core]
 
 ## 1.4.0 (2025/12/11)
 

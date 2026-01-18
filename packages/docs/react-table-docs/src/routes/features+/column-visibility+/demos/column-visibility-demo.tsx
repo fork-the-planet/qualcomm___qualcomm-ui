@@ -1,14 +1,59 @@
 import {useMemo, useState} from "react"
 
-import {getCoreRowModel} from "@qualcomm-ui/core/table"
+import {type ColumnDef, getCoreRowModel} from "@qualcomm-ui/core/table"
 import {Checkbox} from "@qualcomm-ui/react/checkbox"
 import {flexRender, Table, useReactTable} from "@qualcomm-ui/react/table"
 import {CodeHighlight} from "@qualcomm-ui/react-mdx/code-highlight"
 
-import {userColumns, useUserData} from "./use-data"
+import {type User, useUserData} from "./use-data"
 
 export function ColumnVisibilityDemo() {
   const {data = []} = useUserData(5)
+
+  // always memoize your data and columns
+  const userColumns: ColumnDef<User>[] = useMemo(
+    () => [
+      {
+        accessorKey: "username",
+        header: "Username",
+        id: "username",
+      },
+      {
+        accessorKey: "accountStatus",
+        header: "Account Status",
+        id: "accountStatus",
+      },
+      {
+        accessorKey: "role",
+        header: "Role",
+        id: "role",
+        minSize: 180,
+      },
+      {
+        accessorKey: "averageSessionDuration",
+        header: "Avg Session Duration",
+        id: "averageSessionDuration",
+      },
+      {
+        accessorKey: "companyName",
+        header: "Company Name",
+        id: "companyName",
+        minSize: 200,
+      },
+      {
+        accessorKey: "lastVisitedAt",
+        header: "Last Visited At",
+        id: "lastVisitedAt",
+        minSize: 205,
+      },
+      {
+        accessorKey: "visitCount",
+        header: "Visit Count",
+        id: "visitCount",
+      },
+    ],
+    [],
+  )
 
   const [columnVisibility, setColumnVisibility] = useState({})
 

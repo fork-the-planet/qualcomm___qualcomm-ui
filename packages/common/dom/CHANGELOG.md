@@ -1,4 +1,4 @@
-# @qualcomm-ui/dom
+# @qualcomm-ui/dom Changelog
 
 ## 1.0.7 (2025/12/10)
 

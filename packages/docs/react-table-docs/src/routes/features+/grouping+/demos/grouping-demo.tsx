@@ -1,4 +1,4 @@
-import {useState} from "react"
+import {useMemo, useState} from "react"
 
 import {Combine, Ungroup} from "lucide-react"
 
@@ -24,36 +24,40 @@ import {CodeHighlight} from "@qualcomm-ui/react-mdx/code-highlight"
 
 import {type User, useUserData} from "./use-data"
 
-const columns: ColumnDef<User>[] = [
-  {
-    accessorKey: "firstName",
-    cell: (info) => info.getValue(),
-    header: "First Name",
-  },
-  {
-    accessorFn: (row) => row.lastName,
-    cell: (info) => info.getValue(),
-    header: "Last Name",
-    id: "lastName",
-  },
-  {
-    accessorKey: "visitCount",
-    aggregationFn: "sum",
-    header: "Visits",
-  },
-  {
-    accessorKey: "accountStatus",
-    header: "Account Status",
-  },
-  {
-    accessorKey: "role",
-    header: "Role",
-    id: "role",
-  },
-]
-
 export function GroupingDemo() {
   const {data = [], isFetching, refetch} = useUserData(10000)
+
+  // always memoize your data and columns
+  const columns: ColumnDef<User>[] = useMemo(
+    () => [
+      {
+        accessorKey: "firstName",
+        cell: (info) => info.getValue(),
+        header: "First Name",
+      },
+      {
+        accessorFn: (row) => row.lastName,
+        cell: (info) => info.getValue(),
+        header: "Last Name",
+        id: "lastName",
+      },
+      {
+        accessorKey: "visitCount",
+        aggregationFn: "sum",
+        header: "Visits",
+      },
+      {
+        accessorKey: "accountStatus",
+        header: "Account Status",
+      },
+      {
+        accessorKey: "role",
+        header: "Role",
+        id: "role",
+      },
+    ],
+    [],
+  )
   const refreshData = () => refetch()
 
   const [grouping, setGrouping] = useState<GroupingState>([])

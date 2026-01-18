@@ -28,11 +28,11 @@
   "ignore": [
     "@qualcomm-ui/angular-docs",
     "@qualcomm-ui/angular-table-docs",
+    "@qualcomm-ui/qui-docs",
+    "@qualcomm-ui/qui-site",
     "@qualcomm-ui/react-docs",
     "@qualcomm-ui/react-internal",
-    "@qualcomm-ui/qui-docs",
     "@qualcomm-ui/react-table-docs",
-    "@qualcomm-ui/qui-site",
     "angular-csr",
     "angular-ssr",
     "react-ssr"

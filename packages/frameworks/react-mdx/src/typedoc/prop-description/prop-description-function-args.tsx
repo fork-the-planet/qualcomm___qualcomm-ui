@@ -25,6 +25,7 @@ export function PropDescriptionFunctionArgs({functionArgs}: Props): ReactNode {
           <li key={arg.name} className="doc-props__function-args-list-item">
             <span>
               <span className="doc-props__function-arg-name">{arg.name}</span>
+              <span className="doc-props__function-arg-colon">:</span>
 
               <span>
                 <PropDescriptionSummary summary={arg.summary} />

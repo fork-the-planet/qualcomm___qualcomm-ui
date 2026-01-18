@@ -1,4 +1,28 @@
-# @qualcomm-ui/qds-core
+# @qualcomm-ui/qds-core Changelog
+
+## 1.11.0 (2026/01/15)
+
+### Features
+
+- add indented radio group variant
+
+## 1.10.4 (2025/12/24)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core]
+
+## 1.10.3 (2025/12/22)
+
+### Bug Fixes
+
+- [menu-icon-button]: rotate icon when open
+
+## 1.10.2 (2025/12/18)
+
+### Bug Fixes
+
+- missing invalid checked checkbox style
 
 ## 1.10.1 (2025/12/15)
 

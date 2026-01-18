@@ -15,7 +15,7 @@ import type {LucideIconOrElement} from "@qualcomm-ui/react-core/lucide"
 
 import {QLogo} from "./q-logo"
 
-export interface SideNavItem {
+interface SideNavItem {
   disabled?: boolean
   group?: string
   icon?: LucideIconOrElement
@@ -24,7 +24,7 @@ export interface SideNavItem {
   text: string
 }
 
-export const collection = createTreeCollection<SideNavItem>({
+const collection = createTreeCollection<SideNavItem>({
   nodeChildren: "nodes",
   nodeText: (node) => node.text,
   nodeValue: (node) => node.id,

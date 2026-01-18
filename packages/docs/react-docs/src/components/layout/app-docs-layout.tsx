@@ -85,12 +85,9 @@ export function AppDocsLayout({
 
             <HeaderBar.Nav className="hidden @min-[600px]:flex">
               <HeaderBar.NavItem
-                active={location.pathname === "/components/all-components"}
+                active={location.pathname === "/components/overview"}
                 render={
-                  <ReactRouterLink
-                    to="/components/all-components"
-                    viewTransition
-                  />
+                  <ReactRouterLink to="/components/overview" viewTransition />
                 }
                 startIcon={Blocks}
               >

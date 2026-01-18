@@ -1,9 +1,11 @@
-import ContrastDemo from "@qualcomm-ui/react-docs/components+/icon-button+/demos/icon-button-contrast-demo"
-import DensityDemo from "@qualcomm-ui/react-docs/components+/icon-button+/demos/icon-button-density-demo"
-import EmphasisDemo from "@qualcomm-ui/react-docs/components+/icon-button+/demos/icon-button-emphasis-demo"
-import SizesDemo from "@qualcomm-ui/react-docs/components+/icon-button+/demos/icon-button-sizes-demo"
-import VariantCombinationsDemo from "@qualcomm-ui/react-docs/components+/icon-button+/demos/icon-button-variant-combinations-demo"
-import VariantsDemo from "@qualcomm-ui/react-docs/components+/icon-button+/demos/icon-button-variants-demo"
+import {IconButtonContrastDemo as ContrastDemo} from "@qualcomm-ui/react-docs/components+/icon-button+/demos/icon-button-contrast-demo"
+import {IconButtonDensityDemo as DensityDemo} from "@qualcomm-ui/react-docs/components+/icon-button+/demos/icon-button-density-demo"
+import {IconButtonEmphasisDemo as EmphasisDemo} from "@qualcomm-ui/react-docs/components+/icon-button+/demos/icon-button-emphasis-demo"
+import {IconButtonSizesDemo as SizesDemo} from "@qualcomm-ui/react-docs/components+/icon-button+/demos/icon-button-sizes-demo"
+import {IconButtonVariantCombinationsDemo as VariantCombinationsDemo} from "@qualcomm-ui/react-docs/components+/icon-button+/demos/icon-button-variant-combinations-demo"
+import {IconButtonVariantsDemo as VariantsDemo} from "@qualcomm-ui/react-docs/components+/icon-button+/demos/icon-button-variants-demo"
+
+import {DemoPageLayout} from "~/components/demo-page-layout"
 
 const demos = [
   {component: ContrastDemo, title: "Contrast"},
@@ -15,16 +17,5 @@ const demos = [
 ]
 
 export default function IconButtonDemos() {
-  return (
-    <div className="page">
-      {demos.map(({component: Demo, title}) => (
-        <div className="section" key={title}>
-          <h2 className="section-title">{title}</h2>
-          <div className="demo-container">
-            <Demo />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <DemoPageLayout componentName="icon-button" demos={demos} />
 }

@@ -1,4 +1,4 @@
-# @qualcomm-ui/eslint-plugin-react
+# @qualcomm-ui/eslint-plugin-react Changelog
 
 ## 1.0.0
 

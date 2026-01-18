@@ -8,7 +8,6 @@ import {
   isRouteErrorResponse,
   Links,
   type LoaderFunction,
-  Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
@@ -90,8 +89,10 @@ function App() {
   const {brand} = useQdsThemeContext()
 
   const location = useLocation()
-  const title = siteData.pageMap[location.pathname]?.title || ""
-  const appTitle = title ? `QUI | ${title}` : "QUI React"
+  const pageData = siteData.pageMap[location.pathname]
+  const title = pageData?.title || ""
+  const description = pageData?.description || ""
+  const appTitle = title ? `${title} | QUI` : "QUI React"
   const [hideDemoBrandSwitcher, setHideDemoBrandSwitcher] = useState<boolean>(
     data.hideDemoBrandSwitcher,
   )
@@ -118,7 +119,12 @@ function App() {
       <head>
         <meta charSet="utf-8" />
         <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <Meta />
+        <title>{appTitle}</title>
+        {description ? <meta content={description} name="description" /> : null}
+        <meta
+          content="QUI Angular Documentation"
+          name="application-name"
+        ></meta>
         <Links />
         <link
           href="/favicon/favicon-96x96.png"

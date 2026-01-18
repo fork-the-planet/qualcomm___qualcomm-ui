@@ -1,6 +1,9 @@
-import {useState} from "react"
+import {useMemo, useState} from "react"
+
+import dayjs from "dayjs"
 
 import {
+  type ColumnDef,
   getCoreRowModel,
   getSortedRowModel,
   type SortingState,
@@ -10,12 +13,53 @@ import {ProgressRing} from "@qualcomm-ui/react/progress-ring"
 import {flexRender, Table, useReactTable} from "@qualcomm-ui/react/table"
 import {CodeHighlight} from "@qualcomm-ui/react-mdx/code-highlight"
 
-import {userColumns, useUserData} from "./use-data"
+import {type User, useUserData} from "./use-data"
 
 export function SortingDemo() {
   const [sorting, setSorting] = useState<SortingState>([])
 
   const {data = [], isFetching, refetch} = useUserData(20)
+
+  // always memoize your data and columns
+  const userColumns: ColumnDef<User>[] = useMemo(
+    () => [
+      {
+        accessorKey: "username",
+        header: "Username",
+        id: "username",
+      },
+      {
+        accessorKey: "role",
+        header: "Role",
+        id: "role",
+        size: 120,
+      },
+      {
+        accessorKey: "accountStatus",
+        header: "Account Status",
+        id: "accountStatus",
+      },
+      {
+        accessorKey: "lastVisitedAt",
+        header: "Last Visited At",
+        id: "lastVisitedAt",
+        minSize: 205,
+        // we override this column's default sorting function for compatibility with
+        // formatted date strings.
+        sortingFn: (rowA, rowB, columnId) => {
+          const valueA: string = rowA.getValue(columnId)
+          const valueB: string = rowB.getValue(columnId)
+          return dayjs(valueA).isAfter(dayjs(valueB)) ? 1 : -1
+        },
+      },
+      {
+        accessorKey: "visitCount",
+        header: "Visit Count",
+        id: "visitCount",
+      },
+    ],
+    [],
+  )
   const refreshData = () => refetch()
 
   const table = useReactTable({

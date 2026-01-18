@@ -1,6 +1,3 @@
-import {readFileSync} from "node:fs"
-import {resolve} from "node:path"
-
 import type {NavConfig, QuiDocsConfig} from "@qualcomm-ui/mdx-vite"
 
 const navConfig: NavConfig[] = [
@@ -78,23 +75,28 @@ const navConfig: NavConfig[] = [
 export default {
   appDirectory: "src",
   knowledge: {
+    environments: [
+      {
+        id: "qui-ai",
+        outputPath: "./knowledge/qui-ai",
+      },
+      {
+        id: "saga-ai",
+        outputPath: "./knowledge/saga-ai",
+      },
+      {
+        id: "saga-ai-test",
+        outputPath: "./knowledge/saga-ai-test",
+      },
+    ],
     global: {
       baseUrl: "https://react-table-next.qui.qualcomm.com",
       exclude: ["installation.mdx", "index/_index.mdx"],
-      extraFiles: [
-        {
-          contents: readFileSync(
-            resolve(__dirname, "../../frameworks/react/CHANGELOG.md"),
-            "utf-8",
-          )
-            .split("\n")
-            .slice(2)
-            .join("\n"),
-          id: "react-changelog",
-          title: "Changelog",
-        },
-      ],
-      metadata: {category: "table", framework: "react"},
+      exports: {enabled: true, exclude: []},
+      pageIdPrefix: "table",
+    },
+    integrations: {
+      openWebUi: [{id: "qui-ai"}, {id: "saga-ai"}, {id: "saga-ai-test"}],
     },
   },
   navConfig,

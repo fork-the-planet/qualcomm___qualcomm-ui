@@ -1,6 +1,3 @@
-import {readFileSync} from "node:fs"
-import {resolve} from "node:path"
-
 import type {NavConfig, QuiDocsConfig} from "@qualcomm-ui/mdx-vite"
 
 const navConfig: NavConfig[] = [
@@ -88,26 +85,27 @@ export default {
    */
   hotUpdateIgnore: /angular-demo-module|public/,
   knowledge: {
+    environments: [
+      {
+        id: "qui-ai",
+        outputPath: "./knowledge/qui-ai",
+      },
+      {
+        id: "saga-ai",
+        outputPath: "./knowledge/saga-ai",
+      },
+    ],
     global: {
       baseUrl: "https://angular-table-next.qui.qualcomm.com",
       exclude: ["installation.mdx", "index/_index.mdx"],
-      extraFiles: [
-        {
-          contents: readFileSync(
-            resolve(__dirname, "../../frameworks/angular/CHANGELOG.md"),
-            "utf-8",
-          )
-            .split("\n")
-            .slice(2)
-            .join("\n"),
-          id: "angular-changelog",
-          title: "Changelog",
-        },
-      ],
-      metadata: {
-        category: "core-components",
-        framework: "angular",
+      exports: {
+        enabled: true,
+        exclude: [],
       },
+      pageIdPrefix: "table",
+    },
+    integrations: {
+      openWebUi: [{id: "qui-ai"}, {id: "saga-ai"}],
     },
   },
   navConfig,

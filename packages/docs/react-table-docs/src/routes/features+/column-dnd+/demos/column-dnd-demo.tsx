@@ -1,16 +1,65 @@
-import {useState} from "react"
+import {useMemo, useState} from "react"
 
-import {type ColumnOrderState, getCoreRowModel} from "@qualcomm-ui/core/table"
+import {
+  type ColumnDef,
+  type ColumnOrderState,
+  getCoreRowModel,
+} from "@qualcomm-ui/core/table"
 import {Button} from "@qualcomm-ui/react/button"
 import {ProgressRing} from "@qualcomm-ui/react/progress-ring"
 import {flexRender, Table, useReactTable} from "@qualcomm-ui/react/table"
 import {CodeHighlight} from "@qualcomm-ui/react-mdx/code-highlight"
 
 import {DraggableColumnHeader} from "./draggable-column-header"
-import {userColumns, useUserData} from "./use-data"
+import {type User, useUserData} from "./use-data"
 
 export function ColumnDndDemo() {
   const {data = [], isFetching, refetch} = useUserData(10)
+
+  // always memoize your data and columns
+  const userColumns: ColumnDef<User>[] = useMemo(
+    () => [
+      {
+        accessorKey: "username",
+        header: "Username",
+        id: "username",
+      },
+      {
+        accessorKey: "accountStatus",
+        header: "Account Status",
+        id: "accountStatus",
+      },
+      {
+        accessorKey: "role",
+        header: "Role",
+        id: "role",
+        minSize: 180,
+      },
+      {
+        accessorKey: "averageSessionDuration",
+        header: "Avg Session Duration",
+        id: "averageSessionDuration",
+      },
+      {
+        accessorKey: "companyName",
+        header: "Company Name",
+        id: "companyName",
+        minSize: 220,
+      },
+      {
+        accessorKey: "lastVisitedAt",
+        header: "Last Visited At",
+        id: "lastVisitedAt",
+        minSize: 205,
+      },
+      {
+        accessorKey: "visitCount",
+        header: "Visit Count",
+        id: "visitCount",
+      },
+    ],
+    [],
+  )
 
   const [columnOrder, setColumnOrder] = useState<ColumnOrderState>(
     userColumns.map((column) => column.id as string), // must start out with populated columnOrder so we can splice

@@ -3,11 +3,13 @@
   "compilerOptions": {
     "baseUrl": "./",
     "composite": true,
+    "outDir": "node_modules/.tmp/out",
     "moduleResolution": "bundler",
     "tsBuildInfoFile": "node_modules/.tmp/tsbuildinfo",
     "module": "esnext",
     "target": "esnext",
     "types": [
+      "node",
       "vite/client",
       "@qualcomm-ui/mdx-vite/docs-plugin",
       "@qualcomm-ui/mdx-vite/angular-demo-plugin"

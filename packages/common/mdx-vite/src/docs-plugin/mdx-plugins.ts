@@ -26,7 +26,13 @@ import {
 
 import {ConfigLoader, type ConfigLoaderOptions} from "./internal"
 import {rehypeSectionize, rehypeSlug, type RehypeSlugOptions} from "./rehype"
-import {remarkAlerts, remarkCodeTabs, remarkSpoilers} from "./remark"
+import {
+  remarkAlerts,
+  remarkCodeTabs,
+  remarkFrontmatterDescription,
+  remarkFrontmatterTitle,
+  remarkSpoilers,
+} from "./remark"
 import {transformerCodeAttribute, transformerNotationHidden} from "./shiki"
 
 /**
@@ -112,6 +118,8 @@ export function getRemarkPlugins(): PluggableList {
     remarkGfm,
     remarkAlerts,
     remarkCodeTabs,
+    remarkFrontmatterTitle,
+    remarkFrontmatterDescription,
     remarkSpoilers,
   ]
 }

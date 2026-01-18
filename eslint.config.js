@@ -36,6 +36,9 @@ export default defineConfig(
       "./packages/docs/angular*/public/*.js",
       "./packages/common/codemod/src/**/__tests__/mocks/**/*.tsx",
       "**/temp/",
+      "**/public/exports/md/**",
+      "**/frameworks/react-internal/files/component-list.md",
+      "packages/docs/*/knowledge/**",
     ],
   },
   {
@@ -175,7 +178,7 @@ export default defineConfig(
       quiEslintTs.configs.strictExports,
     ],
     files: [
-      "packages/*/{dom,qds-core,mdx-common,utils,react-test-utils}/**/*.ts",
+      "packages/*/{dom,qds-core,mdx-common,node-utils,utils,react-test-utils}/**/*.ts",
     ],
     languageOptions,
   },

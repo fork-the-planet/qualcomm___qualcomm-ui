@@ -53,17 +53,17 @@ export function FileTree({
 
             return (
               <Tree.BranchNode>
+                <Tree.BranchTrigger />
                 <Tree.NodeIcon icon={isExpanded ? FolderOpen : Folder} />
                 <Tree.NodeIndicator />
-                <Tree.BranchTrigger />
                 <Tree.NodeText>{node.name}</Tree.NodeText>
               </Tree.BranchNode>
             )
           }}
           renderLeaf={({node}) => (
             <Tree.LeafNode>
-              <Tree.NodeIcon icon={FileTextIcon} />
               <Tree.NodeIndicator />
+              <Tree.NodeIcon icon={FileTextIcon} />
               <Tree.NodeText>{node.name}</Tree.NodeText>
             </Tree.LeafNode>
           )}

@@ -247,7 +247,7 @@ pre.qui-docs-code {
   &.doc-props-table__description {
     display: inline-flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
     margin-left: 8px;
     max-width: 400px;
   }
@@ -349,7 +349,8 @@ pre.qui-docs-code {
   font: var(--font-static-body-sm-bold);
 }
 
-.doc-props-description__remarks-tag {
+.doc-props-description__remarks-tag,
+.doc-props-description__example-tag {
   font: var(--font-static-body-sm-default);
   pre.shiki-code {
     border: solid 1px var(--color-border-neutral-01);
@@ -361,7 +362,6 @@ pre.qui-docs-code {
     margin-top: 0;
   }
   .mdx-spoiler__trigger {
-    font: var(--font-static-body-xs-bold);
     height: 32px;
     padding: 0;
   }
@@ -503,12 +503,31 @@ pre.qui-docs-code {
     border: solid 1px var(--color-border-neutral-01);
     border-radius: var(--border-radius-sm);
     color: var(--color-text-neutral-primary);
-    font: var(--font-static-code-lg-default);
-    margin-right: 5px;
-    padding: 3px 4px;
+    font: var(--font-static-code-sm-default);
+    margin-right: 1px;
+    padding: 1px 2px;
+  }
+
+  .doc-props__function-arg-colon {
+    display: inline-block;
+    margin-right: 4px;
   }
 }
 
 .doc-props__show-attributes-button {
   margin-top: var(--qui-mdx-margin-default);
+}
+
+.doc-props-description__returns-tag-root {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.doc-props-description__returns-tag-label {
+  font: var(--font-static-body-sm-bold);
+}
+
+.doc-props-description__returns-tag-content {
+  padding-left: 16px;
 }

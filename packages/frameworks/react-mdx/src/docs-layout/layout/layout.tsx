@@ -6,6 +6,7 @@ import {DocsBreadcrumbs} from "./breadcrumbs"
 import {ContentWrapper} from "./content-wrapper"
 import {DocsFooter} from "./docs-footer"
 import {MainContent} from "./main-content"
+import {PageHeader} from "./page-header"
 import {PageLinks} from "./page-links"
 import {Root} from "./root"
 import {Sidebar} from "./sidebar"
@@ -17,6 +18,7 @@ export const Layout: {
   ContentWrapper: typeof ContentWrapper
   Footer: typeof DocsFooter
   MainContent: typeof MainContent
+  PageHeader: typeof PageHeader
   PageLinks: typeof PageLinks
   Root: typeof Root
   Sidebar: typeof Sidebar
@@ -27,6 +29,7 @@ export const Layout: {
   ContentWrapper,
   Footer: DocsFooter,
   MainContent,
+  PageHeader,
   PageLinks,
   Root,
   Sidebar,

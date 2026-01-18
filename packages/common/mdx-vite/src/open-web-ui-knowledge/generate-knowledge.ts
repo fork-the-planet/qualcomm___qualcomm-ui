@@ -2,7 +2,8 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
 import {program} from "@commander-js/extra-typings"
-import type {Parent} from "mdast"
+import chalk from "chalk"
+import type {Link, Parent} from "mdast"
 import type {MdxJsxAttribute, MdxJsxFlowElement} from "mdast-util-mdx-jsx"
 import {minimatch} from "minimatch"
 import {
@@ -23,13 +24,13 @@ import remarkStringify from "remark-stringify"
 import {type Plugin, unified} from "unified"
 import {visit} from "unist-util-visit"
 
+import type {KnowledgePageData} from "@qualcomm-ui/mdx-common"
 import type {
   QuiComment,
   QuiCommentDisplayPart,
 } from "@qualcomm-ui/typedoc-common"
 import {kebabCase} from "@qualcomm-ui/utils/change-case"
 
-import {remarkSelfLinkHeadings} from "../docs-plugin"
 import {
   getPathnameFromPathSegments,
   getPathSegmentsFromFileName,
@@ -38,17 +39,8 @@ import {
 import {extractNamesFromAttribute} from "../docs-plugin/internal/services/mdx-utils"
 
 import {loadEnv} from "./common"
-import {loadKnowledgeConfigFromEnv} from "./load-config-from-env"
-import type {WebUiKnowledgeConfig} from "./types"
-
-interface PageInfo {
-  demosFolder?: string
-  id: string
-  mdxFile: string
-  name: string
-  path: string
-  url: string | undefined
-}
+import {loadEnvironmentConfigs} from "./load-config-from-env"
+import type {CliConfig, WebUiKnowledgeConfig} from "./types"
 
 interface ImportedModule {
   content: string
@@ -95,6 +87,11 @@ interface ProcessedPage {
   frontmatter: Record<string, string>
   title: string
   url: string | undefined
+}
+
+interface MdxFlowExpression {
+  type: "mdxFlowExpression"
+  value: string
 }
 
 // Pure utility functions (no config dependency)
@@ -226,6 +223,49 @@ function getPath(obj: Record<string, unknown>, path: string): unknown {
     )
 }
 
+function escapeText(value: string): string {
+  return value.replace(/\n/g, " ")
+}
+
+function propsToDefinitionList(props: SimplifiedProp[]): string {
+  if (props.length === 0) {
+    return ""
+  }
+
+  return props
+    .map((prop) => {
+      const parts = [`- **${prop.name}** (\`${escapeText(prop.type)}\``]
+
+      if (prop.defaultValue) {
+        parts.push(`, default: \`${escapeText(prop.defaultValue)}\``)
+      }
+      if (prop.required) {
+        parts.push(", required")
+      }
+
+      parts.push(")")
+
+      if (prop.description) {
+        parts.push(` - ${escapeText(prop.description)}`)
+      }
+
+      return parts.join("")
+    })
+    .join("\n")
+}
+
+function themeDataToJson(data: unknown, cssPropertyName?: string): string {
+  if (!data || typeof data !== "object") {
+    return ""
+  }
+
+  if (cssPropertyName) {
+    return JSON.stringify({cssProperty: cssPropertyName, data}, null, 2)
+  }
+
+  return JSON.stringify(data, null, 2)
+}
+
 /**
  * Generator class that encapsulates all knowledge generation logic with shared
  * config.
@@ -238,7 +278,7 @@ class KnowledgeGenerator {
     this.config = config
   }
 
-  async run(): Promise<void> {
+  async run(): Promise<KnowledgePageData[]> {
     const extractedMetadata = extractMetadata(this.config.metadata)
 
     if (this.config.verbose) {
@@ -257,7 +297,7 @@ class KnowledgeGenerator {
 
     if (pages.length === 0) {
       console.log("No pages found.")
-      return
+      return []
     }
 
     if (this.config.verbose) {
@@ -267,7 +307,7 @@ class KnowledgeGenerator {
     const processedPages: ProcessedPage[] = []
     for (const page of pages) {
       try {
-        const processed = await this.processComponent(page)
+        const processed = await this.processMdxPage(page)
         processedPages.push(processed)
       } catch (error) {
         console.error(`Failed to process page: ${page.name}`)
@@ -290,8 +330,9 @@ class KnowledgeGenerator {
         processedPages,
         extractedMetadata,
       )
-      await this.generateExtraFiles(extractedMetadata)
     }
+
+    return pages
   }
 
   private async loadDocProps(): Promise<DocProps | null> {
@@ -326,8 +367,8 @@ class KnowledgeGenerator {
     }
   }
 
-  private async scanPages(): Promise<PageInfo[]> {
-    const components: PageInfo[] = []
+  private async scanPages(): Promise<KnowledgePageData[]> {
+    const components: KnowledgePageData[] = []
     const excludePatterns = this.config.exclude ?? []
 
     const shouldExclude = (absolutePath: string): boolean => {
@@ -357,6 +398,8 @@ class KnowledgeGenerator {
             f.name.endsWith(".mdx") && !shouldExclude(join(dirPath, f.name)),
         ) ?? []
 
+      const pageIdPrefix = this.config.pageIdPrefix ?? ""
+
       for (const mdxFile of mdxFiles) {
         const demosFolder = entries.find((f) => f.name === "demos")
         const demosFolderPath = demosFolder
@@ -371,10 +414,11 @@ class KnowledgeGenerator {
 
         components.push({
           demosFolder: demosFolderPath,
-          id: segments.join("-").trim(),
+          filePath: dirPath,
+          id: `${pageIdPrefix ? `${pageIdPrefix}-` : ""}${segments.join("-").trim()}`,
           mdxFile: join(dirPath, mdxFile.name),
           name: segments.at(-1)!,
-          path: dirPath,
+          pathname: url,
           url: this.config.baseUrl
             ? new URL(url, this.config.baseUrl).toString()
             : undefined,
@@ -524,13 +568,16 @@ class KnowledgeGenerator {
               return codeText
             }
           default:
+            // render link text only, but remove certain text altogether
             if (
               this.config.outputMode === "per-page" &&
               "tag" in part &&
               part.tag === "@link" &&
               typeof part.target === "string"
             ) {
-              return `[${part.text}](${part.target})`
+              if (part.text === "Learn more") {
+                return ""
+              }
             }
             return part.text
         }
@@ -559,8 +606,8 @@ class KnowledgeGenerator {
   }
 
   /**
-   * Creates a remark plugin that replaces TypeDocProps JSX elements with JSON
-   * code blocks containing component prop documentation.
+   * Creates a remark plugin that replaces theme JSX elements with
+   * markdown tables containing theme data.
    */
   private async replaceThemeNodes(): Promise<Plugin> {
     let themes: any | null = null
@@ -601,11 +648,31 @@ class KnowledgeGenerator {
           return
         }
 
+        let markdownTable: string
+        if (
+          typeof data === "object" &&
+          data !== null &&
+          "cssPropertyName" in data &&
+          "data" in data
+        ) {
+          const {cssPropertyName, data: themeData} = data as {
+            cssPropertyName: string
+            data: unknown
+          }
+          markdownTable = themeDataToJson(themeData, cssPropertyName)
+        } else {
+          markdownTable = themeDataToJson(data)
+        }
+
+        if (!markdownTable) {
+          return
+        }
+
         Object.assign(node, {
           lang: "json",
           meta: null,
           type: "code",
-          value: JSON.stringify(data, null, 2),
+          value: markdownTable,
         })
       })
       done()
@@ -632,8 +699,27 @@ class KnowledgeGenerator {
   }
 
   /**
-   * Creates a remark plugin that replaces TypeDocProps JSX elements with JSON
-   * code blocks containing component prop documentation.
+   * Creates a remark plugin that transforms relative URLs to absolute URLs.
+   */
+  private transformRelativeUrls(pageUrl?: string): Plugin {
+    const baseUrl = this.config.baseUrl
+    return () => (tree) => {
+      if (!baseUrl || this.config.outputMode !== "per-page") {
+        return
+      }
+      visit(tree, "link", (node: Link) => {
+        if (node.url.startsWith("/")) {
+          node.url = `${baseUrl}${node.url}`
+        } else if (node.url.startsWith("./#") && pageUrl) {
+          node.url = `${pageUrl}${node.url.slice(2)}`
+        }
+      })
+    }
+  }
+
+  /**
+   * Creates a remark plugin that replaces TypeDocProps JSX elements with
+   * markdown tables containing component prop documentation.
    */
   private replaceTypeDocProps(): Plugin {
     return () => (tree, _file, done) => {
@@ -686,11 +772,39 @@ class KnowledgeGenerator {
               `  Replaced TypeDocProps ${propsName} with API documentation`,
             )
           }
+
+          const regularProps = propsDoc.filter((p) => p.propType === undefined)
+          const inputs = propsDoc.filter((p) => p.propType === "input")
+          const outputs = propsDoc.filter((p) => p.propType === "output")
+
+          const sections: string[] = []
+
+          if (regularProps.length > 0) {
+            sections.push(propsToDefinitionList(regularProps))
+          }
+
+          if (inputs.length > 0) {
+            sections.push(`**Inputs**\n\n${propsToDefinitionList(inputs)}`)
+          }
+
+          if (outputs.length > 0) {
+            sections.push(`**Outputs**\n\n${propsToDefinitionList(outputs)}`)
+          }
+
+          const markdownContent = sections.join("\n\n")
+
+          if (!markdownContent) {
+            if (parent && index !== undefined) {
+              parent.children.splice(index, 1)
+            }
+            return
+          }
+
           Object.assign(node, {
-            lang: "json",
+            lang: null,
             meta: null,
             type: "code",
-            value: JSON.stringify(propsDoc, null, 2),
+            value: markdownContent,
           })
         },
       )
@@ -826,6 +940,54 @@ class KnowledgeGenerator {
     }
   }
 
+  private replaceFrontmatterExpressions(
+    frontmatter: Record<string, any>,
+  ): Plugin {
+    return () => (tree) => {
+      visit(
+        tree,
+        "mdxFlowExpression",
+        (
+          node: MdxFlowExpression,
+          index: number | undefined,
+          parent: Parent | undefined,
+        ) => {
+          if (
+            node.value.trim() !== "frontmatter.description" ||
+            index === undefined ||
+            !parent
+          ) {
+            return
+          }
+
+          if (frontmatter.description) {
+            parent.children.splice(index, 1, {
+              children: [{type: "text", value: frontmatter.description}],
+              type: "paragraph",
+            })
+          } else {
+            parent.children.splice(index, 1)
+          }
+        },
+      )
+
+      const root = tree as Parent
+      const h1Index = root.children.findIndex((node: any) => {
+        if (node.type !== "heading" || node.depth !== 1) {
+          return false
+        }
+        return node.children?.some(
+          (child: any) =>
+            child.type === "mdxTextExpression" &&
+            child.value?.includes("frontmatter"),
+        )
+      })
+      if (h1Index >= 0) {
+        root.children.splice(h1Index, 1)
+      }
+    }
+  }
+
   /**
    * Processes MDX content by transforming JSX elements (TypeDocProps, demos)
    * into markdown, resolving relative links, and cleaning up formatting.
@@ -834,44 +996,34 @@ class KnowledgeGenerator {
     mdxContent: string,
     pageUrl: string | undefined,
     demosFolder: string | undefined,
+    frontmatter: Record<string, any>,
   ): Promise<{content: string; demoFiles: string[]}> {
     const demoFiles: string[] = []
-    let processedContent = mdxContent
-
-    const lines = processedContent.split("\n")
-    const titleLine = lines.findIndex((line) => line.startsWith("# "))
-    processedContent =
-      titleLine >= 0 ? lines.slice(titleLine + 1).join("\n") : processedContent
-
-    processedContent = processedContent.replace(
-      /\[([^\]]+)\]\(\.\/#([^)]+)\)/g,
-      (_, text, anchor) =>
-        pageUrl && this.config.outputMode === "per-page"
-          ? `[${text}](${pageUrl}#${anchor})`
-          : text,
-    )
 
     const processor = unified()
       .use(remarkParse)
       .use(remarkMdx)
+      .use(remarkFrontmatter, ["yaml"])
       .use(this.replaceTypeDocProps())
+      .use(this.replaceFrontmatterExpressions(frontmatter))
       .use(await this.replaceThemeNodes())
       .use(this.replaceDemos(demosFolder, demoFiles))
+      .use(this.transformRelativeUrls(pageUrl))
       .use(remarkStringify)
 
-    const processed = await processor.process(processedContent)
-    processedContent = String(processed)
-
-    processedContent = processedContent.replace(/\n\s*\n\s*\n/g, "\n\n")
+    const processed = await processor.process(mdxContent)
+    const processedContent = String(processed).replace(/\n\s*\n\s*\n/g, "\n\n")
 
     return {content: processedContent, demoFiles}
   }
 
-  private async processComponent(component: PageInfo): Promise<ProcessedPage> {
+  private async processMdxPage(
+    pageInfo: KnowledgePageData,
+  ): Promise<ProcessedPage> {
     try {
-      const mdxContent = await readFile(component.mdxFile, "utf-8")
+      const mdxContent = await readFile(pageInfo.mdxFile, "utf-8")
       if (this.config.verbose) {
-        console.log(`Processing page: ${component.name}`)
+        console.log(`Processing page: ${pageInfo.name}`)
       }
       const processor = unified()
         .use(remarkParse)
@@ -879,43 +1031,39 @@ class KnowledgeGenerator {
         .use(replaceNpmInstallTabs)
         .use(remarkFrontmatter, ["yaml"])
         .use(remarkParseFrontmatter)
-
-      if (this.config.outputMode === "per-page") {
-        processor.use(remarkSelfLinkHeadings(component.url))
-      }
-
-      processor.use(remarkStringify)
+        .use(remarkStringify)
       const parsed = await processor.process(mdxContent)
       const frontmatter = (parsed.data as any)?.frontmatter || {}
       const {content: processedContent, demoFiles} =
         await this.processMdxContent(
           String(parsed),
-          component.url,
-          component.demosFolder,
+          pageInfo.url,
+          pageInfo.demosFolder,
+          frontmatter,
         )
       const removeJsxProcessor = unified()
         .use(remarkParse)
         .use(remarkMdx)
+        .use(remarkFrontmatter, ["yaml"])
         .use(remarkRemoveJsx)
         .use(remarkStringify)
       const removedJsx = String(
         await removeJsxProcessor.process(processedContent),
       )
-      const contentWithoutFrontmatter = removedJsx.replace(
-        /^---[\s\S]*?---\n/,
-        "",
-      )
-      const title = frontmatter.title || component.name
+      const contentWithoutFrontmatter = removedJsx
+        .replace(/^---[\s\S]*?---\n/, "")
+        .replace(/(^#{1,6} .*\\<[^>]+)>/gm, "$1\\>")
+      const title = frontmatter.title || pageInfo.name
 
       return {
         content: contentWithoutFrontmatter.trim(),
         demoFiles,
         frontmatter,
         title,
-        url: component.url,
+        url: pageInfo.url,
       }
     } catch (error) {
-      console.error(`Error processing component ${component.name}:`, error)
+      console.error(`Error processing component ${pageInfo.name}:`, error)
       throw error
     }
   }
@@ -951,7 +1099,7 @@ class KnowledgeGenerator {
 
   private async generateAggregatedOutput(
     processedPages: ProcessedPage[],
-    pages: PageInfo[],
+    pages: KnowledgePageData[],
   ): Promise<void> {
     const llmsTxtContent = await this.generateLlmsTxt(processedPages)
     await mkdir(dirname(this.config.outputPath), {recursive: true}).catch(
@@ -968,15 +1116,29 @@ class KnowledgeGenerator {
 
   private async generateExtraFiles(
     metadata: [string, string][],
-  ): Promise<void> {
+  ): Promise<{count: number; duration: number; totalSize: number}> {
+    const start = performance.now()
     const extraFiles = this.config.extraFiles ?? []
     if (extraFiles.length === 0) {
-      return
+      return {count: 0, duration: 0, totalSize: 0}
     }
 
     let totalSize = 0
     await Promise.all(
       extraFiles.map(async (extraFile) => {
+        let contents = extraFile.contents
+        if (extraFile.processAsMdx) {
+          const removeJsxProcessor = unified()
+            .use(remarkParse)
+            .use(remarkMdx)
+            .use(remarkFrontmatter, ["yaml"])
+            .use(remarkRemoveJsx)
+            .use(this.transformRelativeUrls())
+            .use(remarkStringify)
+
+          contents = String(await removeJsxProcessor.process(contents))
+        }
+
         const lines: string[] = []
         if (metadata.length) {
           lines.push("---")
@@ -987,9 +1149,11 @@ class KnowledgeGenerator {
           lines.push("")
         }
 
-        lines.push(`# ${extraFile.title}`)
-        lines.push("")
-        lines.push(extraFile.contents)
+        if (extraFile.title) {
+          lines.push(`# ${extraFile.title}`)
+          lines.push("")
+        }
+        lines.push(contents)
         lines.push("")
 
         const outfile = `${resolve(this.config.outputPath)}/${kebabCase(extraFile.id)}.md`
@@ -999,16 +1163,19 @@ class KnowledgeGenerator {
       }),
     )
 
-    console.log(
-      `Generated ${extraFiles.length} extra file(s) (${totalSize.toFixed(1)} KB)`,
-    )
+    return {
+      count: extraFiles.length,
+      duration: performance.now() - start,
+      totalSize,
+    }
   }
 
   private async generatePerPageExports(
-    pages: PageInfo[],
+    pages: KnowledgePageData[],
     processedPages: ProcessedPage[],
     metadata: [string, string][],
   ): Promise<void> {
+    const start = performance.now()
     await mkdir(dirname(this.config.outputPath), {recursive: true}).catch(
       () => {},
     )
@@ -1018,15 +1185,39 @@ class KnowledgeGenerator {
       processedPages.map(async (processedPage, index) => {
         const page = pages[index]
         const lines: string[] = []
-        if (metadata.length || page.url) {
-          lines.push("---")
-          if (page.url) {
-            lines.push(`url: ${page.url}`)
-          }
-          if (metadata.length) {
-            for (const [key, value] of metadata) {
-              lines.push(`${key}: ${value}`)
+
+        const frontmatterEntries: [string, string][] = []
+        if (page.url) {
+          frontmatterEntries.push(["url", page.url])
+        }
+        for (const [key, value] of metadata) {
+          frontmatterEntries.push([key, value])
+        }
+        if (this.config.frontmatterFields) {
+          if (typeof this.config.frontmatterFields === "function") {
+            const transformed = this.config.frontmatterFields(
+              processedPage.frontmatter,
+              page,
+            )
+            for (const [key, value] of Object.entries(transformed)) {
+              if (value !== undefined) {
+                frontmatterEntries.push([key, String(value)])
+              }
             }
+          } else {
+            for (const field of this.config.frontmatterFields) {
+              const value = processedPage.frontmatter[field]
+              if (value !== undefined) {
+                frontmatterEntries.push([field, String(value)])
+              }
+            }
+          }
+        }
+
+        if (frontmatterEntries.length > 0) {
+          lines.push("---")
+          for (const [key, value] of frontmatterEntries) {
+            lines.push(`${key}: ${value}`)
           }
           lines.push("---")
           lines.push("")
@@ -1038,6 +1229,11 @@ class KnowledgeGenerator {
           page.name = processedPage.frontmatter.title
         }
         let content = processedPage.content
+        // Remove duplicate h1 if content starts with the same title
+        content = content.replace(
+          new RegExp(`^# ${processedPage.title}\\n+`, ""),
+          "",
+        )
         if (this.config.pageTitlePrefix) {
           content = content.replace(
             `# ${page.name}`,
@@ -1095,18 +1291,24 @@ class KnowledgeGenerator {
         totalSize += stats.size / 1024
       }),
     )
-    console.log(`Generated ${count} files(s) in ${this.config.outputPath}`)
-    console.log(`Folder size: ${totalSize.toFixed(1)} KB`)
+
+    const extraFilesResult = await this.generateExtraFiles(metadata)
+
+    console.log(
+      `Generated ${count + extraFilesResult.count} files(s) in ${chalk.magenta.bold(`${Math.round(performance.now() - start + extraFilesResult.duration)}ms`)} at ${chalk.blue.bold(this.config.outputPath)} - ${(totalSize + extraFilesResult.totalSize).toFixed(1)} KB`,
+    )
   }
 }
 
 /**
  * Generates knowledge documentation from MDX files.
- * This is the main entry point that maintains backwards compatibility.
+ * Returns an array of pages that were generated.
  */
-export async function generate(config: WebUiKnowledgeConfig): Promise<void> {
+export async function generate(
+  config: WebUiKnowledgeConfig,
+): Promise<KnowledgePageData[]> {
   const generator = new KnowledgeGenerator(config)
-  await generator.run()
+  return generator.run()
 }
 
 export function addGenerateKnowledgeCommand() {
@@ -1130,13 +1332,41 @@ export function addGenerateKnowledgeCommand() {
     .option("--metadata <pairs...>", "metadata key-value pairs")
     .option("--clean", "Clean the output path before generating")
     .option("--include-imports", "Include relative import source files", true)
+    .option(
+      "-e, --environment <environments>",
+      "Comma-separated list of environments to generate (default: all)",
+    )
     .action(async (options) => {
       loadEnv()
-      const knowledgeConfig = loadKnowledgeConfigFromEnv({
+
+      const cliOptions: CliConfig = {
         ...options,
         outputMode:
           options.outputMode === "per-page" ? "per-page" : "aggregated",
+      }
+
+      const environmentFilter = options.environment
+        ?.split(",")
+        .map((e) => e.trim())
+        .filter(Boolean)
+
+      const configs = loadEnvironmentConfigs({
+        cliOptions,
+        environments: environmentFilter,
       })
-      await generate(knowledgeConfig)
+
+      for (const config of configs) {
+        const envLabel = config.environmentName
+          ? `[${config.environmentName}] `
+          : ""
+        console.log(`${envLabel}Generating knowledge to ${config.outputPath}`)
+        await generate(config)
+      }
+
+      if (configs.length > 1) {
+        console.log(
+          `\nGenerated knowledge for ${configs.length} environment(s)`,
+        )
+      }
     })
 }

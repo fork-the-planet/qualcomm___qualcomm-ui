@@ -1,11 +1,7 @@
 import {faker} from "@faker-js/faker"
 import dayjs from "dayjs"
 
-import type {
-  ColumnDef,
-  ColumnFiltersState,
-  SortingState,
-} from "@qualcomm-ui/core/table"
+import type {ColumnFiltersState, SortingState} from "@qualcomm-ui/core/table"
 
 export interface User {
   accountStatus: string
@@ -19,57 +15,6 @@ export interface User {
 export interface UserColumnMeta {
   filterLabel?: string
 }
-
-export const userColumns: ColumnDef<User, any, UserColumnMeta>[] = [
-  {
-    accessorKey: "username",
-    header: "Username",
-    id: "username",
-    meta: {
-      filterLabel: "Search by username",
-    },
-  },
-  {
-    accessorKey: "role",
-    header: "Role",
-    id: "role",
-    meta: {
-      filterLabel: "Filter by role",
-    },
-    size: 120,
-  },
-  {
-    accessorKey: "accountStatus",
-    header: "Account Status",
-    id: "accountStatus",
-    meta: {
-      filterLabel: "Filter by account status",
-    },
-    minSize: 170,
-  },
-  {
-    accessorKey: "createdAt",
-    enableColumnFilter: false,
-    header: "Account Created On",
-    id: "createdAt",
-    minSize: 205,
-  },
-  {
-    accessorKey: "lastVisitedAt",
-    enableColumnFilter: false,
-    header: "Last Visited At",
-    id: "lastVisitedAt",
-    minSize: 205,
-  },
-  {
-    accessorKey: "visitCount",
-    header: "Visit Count",
-    id: "visitCount",
-    meta: {
-      filterLabel: "Filter by visit count",
-    },
-  },
-]
 
 const range = (len: number) => {
   const arr = []

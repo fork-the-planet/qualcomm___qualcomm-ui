@@ -1,4 +1,10 @@
-# @qualcomm-ui/tailwind-plugin
+# @qualcomm-ui/tailwind-plugin Changelog
+
+## 1.5.0 (2026/01/15)
+
+### Features
+
+- [tailwind]: add qds spacing tokens to theme
 
 ## 1.4.0 (2025/12/11)
 

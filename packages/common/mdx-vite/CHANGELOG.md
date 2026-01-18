@@ -1,4 +1,83 @@
-# @qualcomm-ui/mdx-vite
+# @qualcomm-ui/mdx-vite Changelog
+
+## 2.11.2 (2026/01/11)
+
+### Documentation
+
+- [qui-docs-config]: update jsdoc comments
+
+## 2.11.1 (2025/12/29)
+
+### Bug Fixes
+
+- [knowledge-downloader]: update targeted env variables
+
+## 2.11.0 (2025/12/28)
+
+### Features
+
+- [knowledge]: load openwebui credentials from per-environment env files with legacy env var fallback
+- [knowledge]: add environment/integration filters to generate/upload commands and improve output logging
+- [knowledge]: add page frontmatter field inclusion support
+- [knowledge]: add multi-environment generation and Open WebUI upload integrations
+- [knowledge]: add pageIdPrefix field
+- [knowledge]: extend config schema/types to support named generation environments and platform integrations
+
+### Bug Fixes
+
+- [owui-knowledge-upload]: add fallback knowledge file getter
+
+### Miscellaneous Chores
+
+- [knowledge]: ignore generated knowledge outputs in tooling and streamline docs scripts
+
+## 2.10.1 (2025/12/25)
+
+### Miscellaneous Chores
+
+- remove config debug log
+
+## 2.10.0 (2025/12/24)
+
+### Features
+
+- [knowledge-files]: optionally process extra files as mdx
+- [knowledge]: consolidate generated markdown
+- [knowledge]: add relative link transformer
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common]
+
+## 2.9.0 (2025/12/22)
+
+### Features
+
+- [docs-plugin]: add knowledge build to docs-plugin
+- [mdx]: add AST-based frontmatter interpolation
+- [knowledge]: add live knowledge exports configuration
+
+### Code Refactoring
+
+- [mdx]: tag frontmatter.description paragraphs with qui-docs\_\_page-description class
+
+### Tests
+
+- [mdx]: add coverage for frontmatter interpolation behavior
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common]
+
+## 2.8.0 (2025/12/18)
+
+### Features
+
+- [remark-plugins]: add support for frontmatter descriptions
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common]
 
 ## 2.7.0 (2025/12/15)
 

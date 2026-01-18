@@ -1,9 +1,10 @@
 ---
-title: All Components
+title: all-components
+hidden: true
 ---
 
-import {ComponentGrid} from "@qualcomm-ui/react-internal/component-list"
+import {redirect} from "react-router"
 
-# {frontmatter.title}
-
-<ComponentGrid />
+export function loader() {
+  return redirect("/components/overview", 301)
+}

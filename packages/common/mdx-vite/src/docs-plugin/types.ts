@@ -1,7 +1,11 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {PageFrontmatter, TocHeading} from "@qualcomm-ui/mdx-common"
+import type {
+  KnowledgePageData,
+  PageFrontmatter,
+  TocHeading,
+} from "@qualcomm-ui/mdx-common"
 import type {QuiPropTypes} from "@qualcomm-ui/typedoc-common"
 
 export type RoutingStrategy =
@@ -165,9 +169,28 @@ export interface KnowledgeIntegrationConfig {
   exclude?: string[]
 
   /**
+   * Configuration for per-page Markdown exports served from the public directory.
+   *
+   * @inheritDoc
+   */
+  exports?: KnowledgeExportsConfig
+
+  /**
    * Extra files to include in knowledge output beyond the generated page content.
    */
   extraFiles?: KnowledgeExtraFile[]
+
+  /**
+   * List of frontmatter fields to include in the generated Markdown output. These
+   * will be copied from each page's frontmatter, if present. Supply as a function
+   * and return the modified frontmatter object, which will be included instead.
+   */
+  frontmatterFields?:
+    | string[]
+    | ((
+        frontmatter: Record<string, string>,
+        page: KnowledgePageData,
+      ) => Record<string, string | undefined>)
 
   /**
    * Metadata key-value pairs to include in per-page output.
@@ -190,17 +213,22 @@ export interface KnowledgeIntegrationConfig {
   outputPath?: string
 
   /**
+   * Prefix to prepend to each page ID.
+   */
+  pageIdPrefix?: string
+
+  /**
    * Prefix to prepend to each page title.
    */
   pageTitlePrefix?: string
 }
 
 /**
- * Extra content to include in knowledge output.
+ * Extra content to include in knowledge output. Assumed to be Markdown.
  */
 export interface KnowledgeExtraFile {
   /**
-   * The markdown content for this file.
+   * The Markdown content for this file.
    */
   contents: string
 
@@ -210,16 +238,123 @@ export interface KnowledgeExtraFile {
   id: string
 
   /**
-   * Display name/title for this content.
+   * Whether to process this file as MDX content, replacing relative URLs and
+   * applying other transformations as if the file were authored as mdx
+   * documentation.
    */
-  title: string
+  processAsMdx?: boolean
+
+  /**
+   * Display title for this content.
+   */
+  title?: string
+}
+
+/**
+ * Configuration for per-page Markdown exports. Inherits from parent
+ * KnowledgeIntegrationConfig unless overridden.
+ */
+export interface KnowledgeExportsConfig {
+  /**
+   * Enable per-page markdown exports. When true, generates downloadable
+   * markdown files during build and exposes export metadata in siteData.
+   *
+   * @default false
+   */
+  enabled?: boolean
+
+  /**
+   * Glob patterns to exclude from exports. Overrides the parent exclude config.
+   */
+  exclude?: string[]
+
+  /**
+   * Extra files to include in exports. Overrides the parent extraFiles config.
+   */
+  extraFiles?: KnowledgeExtraFile[]
+
+  /**
+   * Metadata key-value pairs for exports. Overrides the parent metadata config.
+   */
+  metadata?: Record<string, string>
+
+  /**
+   * Prefix to prepend to each page title. Overrides the parent pageTitlePrefix.
+   */
+  pageTitlePrefix?: string
+
+  /**
+   * Output directory for exported markdown files, relative to public dir.
+   *
+   * @default 'exports/md'
+   */
+  staticPath?: string
+}
+
+/**
+ * Environment-specific knowledge generation configuration. Extends the base
+ * integration config with a required output path.
+ */
+export interface KnowledgeEnvironment extends KnowledgeIntegrationConfig {
+  /**
+   * Unique identifier for this environment.
+   */
+  id: string
+
+  /**
+   * Output directory for this environment's generated knowledge files.
+   */
+  outputPath: string
+}
+
+/**
+ * OpenWebUI integration configuration. References a generation environment
+ * and specifies how to load credentials.
+ */
+export interface OpenWebUiIntegration {
+  /**
+   * Path to env file containing `OPEN_WEB_UI_*` variables. Defaults to
+   * `.env.{id}` by convention.
+   */
+  envFile?: string
+
+  /**
+   * Environment identifier. Must match an `id` in `knowledge.environments`.
+   */
+  id: string
+}
+
+/**
+ * Container for platform-specific integration configurations.
+ */
+export interface KnowledgeIntegrations {
+  /**
+   * OpenWebUI integration configurations.
+   */
+  openWebUi?: OpenWebUiIntegration[]
 }
 
 export interface KnowledgeConfig {
   /**
-   * Configuration for all knowledge integrations.
+   * Generation environments. Each environment inherits global settings but can
+   * override them.
+   *
+   * @inheritDoc
+   */
+  environments?: KnowledgeEnvironment[]
+
+  /**
+   * Shared configuration inherited by all environments.
+   *
+   * @inheritDoc
    */
   global?: KnowledgeIntegrationConfig
+
+  /**
+   * Platform-specific integration configurations for uploading generated
+   * knowledge to external services.
+   */
+  integrations?: KnowledgeIntegrations
 }
 
 export interface SearchIndexerOptions {
@@ -288,8 +423,6 @@ export interface QuiDocsConfig
   /**
    * Root app directory. NOT the full path to the directory.
    *
-   * @example 'src'
-   *
    * @default 'app'
    */
   appDirectory?: string
@@ -301,6 +434,8 @@ export interface QuiDocsConfig
 
   /**
    * Knowledge generation configuration for LLM integrations.
+   *
+   * @inheritDoc
    */
   knowledge?: KnowledgeConfig
 

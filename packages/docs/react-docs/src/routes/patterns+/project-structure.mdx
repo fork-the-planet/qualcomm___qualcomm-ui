@@ -84,11 +84,11 @@ Widgets are independent and full-featured blocks of pages with specific actions.
 
 So, while Entities and Features define individual models and operations, Widgets bring them all together to form cohesive, reusable modules. This layer provides a way to avoid duplicating implementation of parts that often tend to re-occur on different pages of the same application.
 
-However, it’s important to note that the Widgets layer is a compositional layer and **does not typically contain business logic**.
+However, it's important to note that the Widgets layer is a compositional layer and **does not typically contain business logic**.
 
 ### Features
 
-Features are parts of the application’s functionality. This layer acts upon the entities and is responsible for tasks such as creating, reading, updating, and deleting them (commonly known as CRUD operations). The distinction between Features and Entities might seem ambiguous, but it can be clarified as follows:
+Features are parts of the application's functionality. This layer acts upon the entities and is responsible for tasks such as creating, reading, updating, and deleting them (commonly known as CRUD operations). The distinction between Features and Entities might seem ambiguous, but it can be clarified as follows:
 
 - an `entity` is a real-life concept, such as a **Product** or **User**.
 - A `feature` is functionality that provides business value, like **CreateProduct** or **FindUser**.
@@ -168,7 +168,7 @@ The majority of your application's API calls should live at this layer.
 
 ### Shared
 
-When creating a slice, you have to assess whether business entities are going to be used in the module. If not, the module should be named in the most abstract way possible and placed in Shared. Otherwise, be specific in the module’s name, indicating the business entity or feature it implements, and place it into the Entities or Features layer. Smart, sensible naming plays an important role in this methodology.
+When creating a slice, you have to assess whether business entities are going to be used in the module. If not, the module should be named in the most abstract way possible and placed in Shared. Otherwise, be specific in the module's name, indicating the business entity or feature it implements, and place it into the Entities or Features layer. Smart, sensible naming plays an important role in this methodology.
 
 The Shared layer is a great spot for base API services. Since this layer should remain free of specific business logic, its services are meant to provide a connection to the API endpoints that can be consumed by other layers.
 

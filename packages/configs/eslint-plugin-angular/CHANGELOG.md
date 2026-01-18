@@ -1,4 +1,4 @@
-# @qualcomm-ui/eslint-plugin-angular
+# @qualcomm-ui/eslint-plugin-angular Changelog
 
 ## 1.0.0
 

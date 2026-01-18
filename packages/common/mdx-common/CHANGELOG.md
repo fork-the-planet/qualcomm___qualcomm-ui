@@ -1,4 +1,23 @@
-# @qualcomm-ui/mdx-common
+# @qualcomm-ui/mdx-common Changelog
+
+## 1.8.0 (2025/12/24)
+
+### Features
+
+- [types]: add KnowledgePageData type
+
+## 1.7.0 (2025/12/22)
+
+### Features
+
+- [docs-plugin]: add knowledge build to docs-plugin
+- [knowledge]: add live knowledge exports configuration
+
+## 1.6.0 (2025/12/18)
+
+### Features
+
+- [remark-plugins]: add support for frontmatter descriptions ([c482297](https://github.com/qualcomm/qualcomm-ui/commit/c4822975506ebce79e39fe31b1c1ed3f793649c7))
 
 ## 1.5.0 (2025/12/08)
 

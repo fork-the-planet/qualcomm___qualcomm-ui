@@ -32,14 +32,15 @@ export interface RadioGroupRootProps
 export function RadioGroupRoot({
   children,
   id,
+  indented,
   size,
   ...props
 }: RadioGroupRootProps): ReactElement {
   const [radioProps, localProps] = splitRadioProps(props)
   const context = useRadio(radioProps)
   const qdsContext = useMemo(
-    () => createQdsRadioApi({size}, normalizeProps),
-    [size],
+    () => createQdsRadioApi({indented, size}, normalizeProps),
+    [indented, size],
   )
 
   const mergedProps = mergeProps(

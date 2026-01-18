@@ -110,7 +110,6 @@ const defaultOptions: FlatRoutesOptions = {
   routeRegex:
     /(([+][\/\\][^\/\\:?*]+)|[\/\\]((index|route|layout|page)|(_[^\/\\:?*]+)|([^\/\\:?*]+\.route)))\.(ts|tsx|js|jsx|md|mdx)$$/,
 }
-const defaultDefineRoutes = undefined
 
 export function hybridRoutes(
   routeDir: string | string[],
@@ -165,7 +164,7 @@ function _flatRoutes(
   const routeDirs = Array.isArray(options.routeDir)
     ? options.routeDir
     : [options.routeDir ?? "routes"]
-  const defineRoutes = options.defineRoutes ?? defaultDefineRoutes
+  const defineRoutes = options.defineRoutes
   if (!defineRoutes) {
     throw new Error("You must provide a defineRoutes function")
   }

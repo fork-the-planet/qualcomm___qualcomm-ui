@@ -1,4 +1,32 @@
-# @qualcomm-ui/react
+# @qualcomm-ui/react Changelog
+
+## 1.7.0 (2026/01/15)
+
+### Features
+
+- add indented radio group variant
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
+## 1.6.4 (2025/12/24)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/qds-core, @qualcomm-ui/react-core]
+
+## 1.6.3 (2025/12/22)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
+## 1.6.2 (2025/12/18)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
 
 ## 1.6.1 (2025/12/15)
 

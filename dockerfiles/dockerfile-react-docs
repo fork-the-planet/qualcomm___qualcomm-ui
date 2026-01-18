@@ -1,4 +1,5 @@
-FROM public.ecr.aws/docker/library/node:22-slim
+# TODO: replace when migrating to GitHub Actions
+FROM docker-registry.qualcomm.com/library/node:lts-slim
 
 WORKDIR /app
 

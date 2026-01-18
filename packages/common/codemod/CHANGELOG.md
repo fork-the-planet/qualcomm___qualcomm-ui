@@ -1,4 +1,4 @@
-# @qualcomm-ui/codemod
+# @qualcomm-ui/codemod Changelog
 
 ## 0.2.0 (2025/12/11)
 

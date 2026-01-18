@@ -1,6 +1,8 @@
 ---
 title: Radio
 group: Form Controls
+description: Radio buttons are essential form controls that present users with a clear set of options where only one selection is possible at a time.
+component: Radio
 ---
 
 import {QdsDemo} from "~components/demo"
@@ -8,7 +10,7 @@ import {TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
 
 # {frontmatter.title}
 
-A control element that allows the user to choose only one of a predefined set of mutually exclusive options. The singular property of a radio button makes it distinct from checkboxes, where the user can select and unselect any number of items.
+{frontmatter.description}
 
 ```tsx
 import {RadioModule} from "@qualcomm-ui/angular/radio"
@@ -57,6 +59,12 @@ Controls the layout direction of radio buttons within the group.
 The radio supports three [sizes](./#size): `sm`, `md` (default), and `lg`.
 
 <QdsDemo name="RadioSizesDemo" />
+
+### Indented
+
+Use [indented](./#indented-1) to indent the radio items.
+
+<QdsDemo name="RadioIndentedDemo" />
 
 ## Forms
 

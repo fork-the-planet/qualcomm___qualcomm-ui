@@ -1,6 +1,8 @@
 ---
 title: Side Nav
 group: Disclosure
+description: The side navigation provides a consistent, easy-to-scan way for users to move through major sections of an application. It stays visible as users browse, giving them a clear understanding of where they are and what options are available.
+component: SideNav
 ---
 
 import {Demo} from "~components/demo"
@@ -8,6 +10,8 @@ import * as demos from "./demos"
 import {TypeDocAttributes, TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
 
 # {frontmatter.title}
+
+{frontmatter.description}
 
 ```tsx
 import {SideNav} from "@qualcomm-ui/react/side-nav"
@@ -88,6 +92,12 @@ Side Nav can be collapsed to render only the top-level icons.
 The open state of the panel can be controlled using the [open](./#open), [onOpenChange](./#onOpenChange) and [defaultOpen](./#defaultOpen) props. These props follow our [controlled state](/patterns/controlled-state) pattern.
 
 <Demo name="SideNavCollapsedDemo" component={demos.SideNavCollapsedDemo} />
+
+### Tooltips
+
+Consider wrapping collapsed nodes with the [Tooltip](/components/tooltip) component to provide context about each item. This is also useful for describing disabled nodes.
+
+<Demo name="SideNavTooltipDemo" component={demos.SideNavTooltipDemo} />
 
 ## API
 

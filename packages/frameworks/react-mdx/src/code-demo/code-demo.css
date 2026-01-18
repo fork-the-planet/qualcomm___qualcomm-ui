@@ -144,7 +144,9 @@ pre.shiki {
 
   .line {
     box-sizing: border-box;
+    display: inline-block;
     padding: 0 16px;
+    width: 100%;
   }
 
   &:focus-visible {

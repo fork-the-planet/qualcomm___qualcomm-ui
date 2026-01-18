@@ -3,10 +3,13 @@
 
 import {useEffect, useState} from "react"
 
+import {Table} from "@qualcomm-ui/react/table"
 import type {BasicThemeData} from "@qualcomm-ui/tailwind-plugin/theme"
 
+import {TableWrapper} from "./table-wrapper"
+
 interface ThemePropertyTableProps {
-  cssProperty: string
+  cssProperty?: string
   data: BasicThemeData[]
 }
 
@@ -44,25 +47,25 @@ export function ThemePropertyTable({
                 {tailwind ? (
                   <div className="doc-props__content">
                     <div className="doc-props__title">Tailwind Class</div>
-                    <code className="fit !bg-transparent font-mono">
+                    <code className="fit bg-transparent! font-mono">
                       {tailwind}
                     </code>
                   </div>
                 ) : null}
                 <div className="doc-props__content">
                   <div className="doc-props__title">CSS Variable</div>
-                  <code className="fit !bg-transparent font-mono">
+                  <code className="fit bg-transparent! font-mono">
                     {variable}
                   </code>
                 </div>
                 <div className="doc-props__content">
                   <div className="doc-props__title">Equivalent CSS</div>
                   <code
-                    className="flex flex-col gap-1 !bg-transparent font-mono"
+                    className="flex flex-col gap-1 bg-transparent! font-mono"
                     suppressHydrationWarning
                   >
                     <div>
-                      {cssProperty}:{" "}
+                      {cssProperty ? `${cssProperty}: ` : ""}
                       <span suppressHydrationWarning>
                         {getPropertyValue(variable)}
                       </span>
@@ -74,50 +77,37 @@ export function ThemePropertyTable({
           )
         })}
       </div>
-      <div className="typedoc-props__table-wrapper hidden w-full sm:block">
-        <table>
-          <thead>
-            <tr>
-              {showTailwindColumn ? <th>Tailwind Class</th> : null}
-              <th>CSS Variable</th>
-              <th>Equivalent CSS</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map(({tailwind, variable}) => {
-              return (
-                <tr key={variable}>
-                  {showTailwindColumn ? (
-                    <td>
-                      <code className="fit !bg-transparent font-mono">
-                        {tailwind}
-                      </code>
-                    </td>
-                  ) : null}
-                  <td>
-                    <code className="fit !bg-transparent font-mono">
-                      {variable}
-                    </code>
-                  </td>
-                  <td>
-                    <code
-                      className="flex flex-col gap-1 !bg-transparent font-mono"
-                      suppressHydrationWarning
-                    >
-                      <div>
-                        {cssProperty}:{" "}
-                        <span suppressHydrationWarning>
-                          {getPropertyValue(variable)}
-                        </span>
-                      </div>
-                    </code>
-                  </td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      </div>
+      <TableWrapper>
+        <Table.Header>
+          <Table.Row>
+            {showTailwindColumn ? (
+              <Table.HeaderCell>Tailwind Class</Table.HeaderCell>
+            ) : null}
+            <Table.HeaderCell>CSS Variable</Table.HeaderCell>
+            <Table.HeaderCell>{cssProperty ? "CSS" : "Value"}</Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {data.map(({tailwind, variable}) => {
+            return (
+              <Table.Row key={variable}>
+                {showTailwindColumn ? (
+                  <Table.Cell>{tailwind}</Table.Cell>
+                ) : null}
+                <Table.Cell>{variable}</Table.Cell>
+                <Table.Cell>
+                  <div>
+                    {cssProperty ? `${cssProperty}: ` : ""}
+                    <span suppressHydrationWarning>
+                      {getPropertyValue(variable)}
+                    </span>
+                  </div>
+                </Table.Cell>
+              </Table.Row>
+            )
+          })}
+        </Table.Body>
+      </TableWrapper>
     </div>
   )
 }
