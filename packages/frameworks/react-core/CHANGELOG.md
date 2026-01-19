@@ -1,5 +1,11 @@
 # @qualcomm-ui/react-core Changelog
 
+## 1.1.2 (2026/01/19)
+
+### Bug Fixes
+
+- [dependencies]: bump peer of lucide-react to fix filter/funnel import
+
 ## 1.1.1 (2025/12/24)
 
 ### Miscellaneous Chores
