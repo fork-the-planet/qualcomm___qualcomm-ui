@@ -42,7 +42,11 @@ const defaultCommitTypes = [
  * @returns Normalized commit message
  */
 function normalizeConventionalCommit(commit: string): string {
-  return commit.replace(/^(\w+)\s+(\(.*?\))/, "$1$2")
+  const normalized = commit.replace(/^(\w+)\s+(\(.*?\))/, "$1$2")
+  if (normalized.startsWith("- ")) {
+    return normalized.substring(2)
+  }
+  return normalized
 }
 
 /**
@@ -53,7 +57,9 @@ function normalizeConventionalCommit(commit: string): string {
 export function isConventionalCommit(commit: string) {
   const normalized = normalizeConventionalCommit(commit)
   return defaultCommitTypes.some((commitType) =>
-    normalized.match(new RegExp(`^${commitType.type}\\s*(?:\(.*\))?!?:`)),
+    normalized.match(
+      new RegExp(`^(?:-\\s)?${commitType.type}\\s*(?:\(.*\))?!?:`),
+    ),
   )
 }
 

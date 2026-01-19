@@ -274,6 +274,27 @@ export interface KnowledgeExportsConfig {
   extraFiles?: KnowledgeExtraFile[]
 
   /**
+   * Generate bulk.zip containing all markdown files.
+   *
+   * @default true
+   */
+  generateBulkZip?: boolean
+
+  /**
+   * Generate manifest.json with file metadata and MD5 hashes.
+   *
+   * @default true
+   */
+  generateManifest?: boolean
+
+  /**
+   * Output directory for manifest.json and bulk.zip, relative to public dir.
+   *
+   * @default 'exports'
+   */
+  manifestPath?: string
+
+  /**
    * Metadata key-value pairs for exports. Overrides the parent metadata config.
    */
   metadata?: Record<string, string>

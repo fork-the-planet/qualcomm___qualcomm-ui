@@ -243,6 +243,8 @@ class PluginState {
     const exportsConfig = globalConfig.exports ?? {}
     const exportsPath = exportsConfig.staticPath ?? "exports/md"
     const outputPath = join(publicDir, exportsPath)
+    const manifestPath = exportsConfig.manifestPath ?? "exports"
+    const manifestOutputPath = join(publicDir, manifestPath)
 
     const startTime = Date.now()
 
@@ -252,6 +254,9 @@ class PluginState {
       docPropsPath: this.docPropsFilePath || undefined,
       exclude: exportsConfig.exclude ?? globalConfig.exclude,
       extraFiles: exportsConfig.extraFiles ?? globalConfig.extraFiles,
+      generateBulkZip: exportsConfig.generateBulkZip ?? true,
+      generateManifest: exportsConfig.generateManifest ?? true,
+      manifestOutputPath,
       metadata: exportsConfig.metadata ?? globalConfig.metadata,
       outputMode: "per-page",
       outputPath,
