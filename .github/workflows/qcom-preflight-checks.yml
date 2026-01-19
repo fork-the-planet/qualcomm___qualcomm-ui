@@ -20,6 +20,7 @@ jobs:
         copyright-license-detector: false  # default: true
         pr-check-emails: true              # default: true
         dependency-review: true            # default: true
+        semgrep-cli-options: '--config auto --exclude packages/common/mdx-vite --exclude packages/common/typedoc --exclude packages/common/codemod --exclude packages/configs --exclude packages/debug-apps --exclude scripts'
     secrets:
       SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
     concurrency:
