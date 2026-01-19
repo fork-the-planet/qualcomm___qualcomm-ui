@@ -6,6 +6,7 @@ import {
   type SwitchApi,
   type SwitchApiProps,
   type SwitchErrorTextBindings,
+  type SwitchHintBindings,
   switchMachine,
   type SwitchThumbBindings,
 } from "@qualcomm-ui/core/switch"
@@ -51,6 +52,14 @@ export function useSwitchThumb(): SwitchThumbBindings {
 export function useSwitchErrorText({id}: IdProp): SwitchErrorTextBindings {
   const context = useSwitchContext()
   return context.getErrorTextBindings({
+    id: useControlledId(id),
+    onDestroy: useOnDestroy(),
+  })
+}
+
+export function useSwitchHint({id}: IdProp): SwitchHintBindings {
+  const context = useSwitchContext()
+  return context.getHintBindings({
     id: useControlledId(id),
     onDestroy: useOnDestroy(),
   })
