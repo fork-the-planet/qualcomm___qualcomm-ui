@@ -72,6 +72,12 @@ Set the initial value using the [defaultChecked](./#defaultChecked) prop, or use
 
 <Demo expanded name="CheckboxSizesDemo" component={demos.CheckboxSizesDemo} />
 
+### Hint
+
+Add a hint to provide additional context below the checkbox.
+
+<Demo name="CheckboxHintDemo" component={demos.CheckboxHintDemo} />
+
 ## Forms
 
 Choose the form library that fits your needs—we've built examples with React Hook Form and Tanstack Form to get you started.
@@ -119,7 +125,7 @@ The composite elements are only intended to be used as direct descendants of the
 <ComponentExplorer
   component={demos.CheckboxExplorerDemo}
   linkPrefix="checkbox"
-  parts={["root", "label", "control", "indicator", "error-text"]}
+  parts={["root", "label", "control", "indicator", "hint"]}
 />
 
 ## API
@@ -161,6 +167,12 @@ The `Checkbox` extends the [Checkbox.Root](./#checkbox-root) with the following 
 <TypeDocAttributes
   name={["QdsCheckboxErrorTextBindings", "CheckboxErrorTextBindings"]}
 />
+
+### \<Checkbox.Hint\>
+
+<TypeDocProps name="CheckboxHintProps" />
+
+<TypeDocAttributes name={["QdsCheckboxHintBindings", "CheckboxHintBindings"]} />
 
 ### \<Checkbox.HiddenInput\>
 

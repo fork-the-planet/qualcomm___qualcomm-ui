@@ -42,6 +42,10 @@ export interface QdsCheckboxErrorTextBindings {
   className: InputClasses["errorText"]
 }
 
+export interface QdsCheckboxHintBindings {
+  className: InputClasses["hint"]
+}
+
 export interface QdsCheckboxHiddenInputBindings {
   className: CheckboxClasses["hiddenInput"]
 }
@@ -53,6 +57,7 @@ export interface QdsCheckboxApi {
   getControlBindings(): QdsCheckboxControlBindings
   getErrorTextBindings(): QdsCheckboxErrorTextBindings
   getHiddenInputBindings(): QdsCheckboxHiddenInputBindings
+  getHintBindings(): QdsCheckboxHintBindings
   getIndicatorBindings(): QdsCheckboxIndicatorBindings
   getLabelBindings(): QdsCheckboxLabelBindings
   getRootBindings(): QdsCheckboxRootBindings

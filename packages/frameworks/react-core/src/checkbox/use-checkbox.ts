@@ -5,6 +5,7 @@ import {
   type CheckboxApi,
   type CheckboxApiProps,
   type CheckboxErrorTextBindings,
+  type CheckboxHintBindings,
   type CheckboxIndicatorBindings,
   checkboxMachine,
   createCheckboxApi,
@@ -62,6 +63,14 @@ export function useCheckboxIndicator(): UseCheckboxIndicator {
 export function useCheckboxErrorText({id}: IdProp): CheckboxErrorTextBindings {
   const context = useCheckboxContext()
   return context.getErrorTextBindings({
+    id: useControlledId(id),
+    onDestroy: useOnDestroy(),
+  })
+}
+
+export function useCheckboxHint({id}: IdProp): CheckboxHintBindings {
+  const context = useCheckboxContext()
+  return context.getHintBindings({
     id: useControlledId(id),
     onDestroy: useOnDestroy(),
   })

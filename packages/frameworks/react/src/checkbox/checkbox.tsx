@@ -16,6 +16,7 @@ import {
   CheckboxHiddenInput,
   type CheckboxHiddenInputProps,
 } from "./checkbox-hidden-input"
+import {CheckboxHint, type CheckboxHintProps} from "./checkbox-hint"
 import {
   CheckboxIndicator,
   type CheckboxIndicatorProps,
@@ -66,6 +67,17 @@ export interface CheckboxProps extends CheckboxRootProps {
   hiddenInputProps?: CheckboxHiddenInputProps
 
   /**
+   * Optional hint text that describes the element.
+   */
+  hint?: ReactNode
+
+  /**
+   * Props applied to the hint element.
+   * @inheritDoc
+   */
+  hintProps?: CheckboxHintProps
+
+  /**
    * Props applied to the indicator element.
    * @inheritDoc
    */
@@ -92,6 +104,8 @@ export function Checkbox({
   errorText,
   errorTextProps,
   hiddenInputProps: hiddenInputPropsProp,
+  hint,
+  hintProps,
   indicatorProps,
   label,
   labelProps,
@@ -99,6 +113,7 @@ export function Checkbox({
 }: CheckboxProps): ReactElement {
   const labelContent = label || labelProps?.children
   const errorTextContent = errorText || errorTextProps?.children
+  const hintContent = hint || hintProps?.children
 
   const hiddenInputProps = {
     ...hiddenInputPropsProp,
@@ -114,6 +129,7 @@ export function Checkbox({
   const ids: Partial<CheckboxElementIds> = {
     errorText: useOptionalContentId(errorTextContent, errorTextProps),
     hiddenInput: useControlledId(hiddenInputProps?.id),
+    hint: useOptionalContentId(hintContent, hintProps),
     label: useOptionalContentId(labelContent, labelProps),
     root: useControlledId(props.id),
     ...props.ids,
@@ -129,6 +145,11 @@ export function Checkbox({
         <CheckboxLabel {...labelProps} id={ids.label}>
           {labelContent}
         </CheckboxLabel>
+      ) : null}
+      {hintContent ? (
+        <CheckboxHint {...hintProps} id={ids.hint}>
+          {hintContent}
+        </CheckboxHint>
       ) : null}
       {errorTextContent ? (
         <CheckboxErrorText {...errorTextProps} id={ids.errorText}>

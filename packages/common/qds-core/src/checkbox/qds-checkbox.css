@@ -18,8 +18,14 @@
     user-select: none;
   }
 
-  &:has([data-part="error-text"][data-invalid]) {
-    row-gap: var(--spacing-70);
+  &:has([data-part="error-text"][data-invalid]),
+  &:has([data-part="hint"]:not([hidden])) {
+    row-gap: var(--spacing-50);
+  }
+
+  [data-part="hint"],
+  [data-part="error-text"] {
+    flex-basis: 100%;
   }
 }
 
