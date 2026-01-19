@@ -1,0 +1,6 @@
+packages/common/mdx-vite
+packages/common/typedoc
+packages/common/codemod
+packages/configs
+packages/debug-apps
+scripts
