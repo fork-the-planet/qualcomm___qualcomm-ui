@@ -1,8 +1,8 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import AdmZip from "adm-zip"
 import {program} from "@commander-js/extra-typings"
+import AdmZip from "adm-zip"
 import chalk from "chalk"
 import type {Link, Parent} from "mdast"
 import type {MdxJsxAttribute, MdxJsxFlowElement} from "mdast-util-mdx-jsx"
