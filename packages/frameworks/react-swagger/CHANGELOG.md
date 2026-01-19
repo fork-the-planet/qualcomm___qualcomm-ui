@@ -1,5 +1,15 @@
 # @qualcomm-ui/react-swagger Changelog
 
+## 1.0.9 (2026/01/19)
+
+### Bug Fixes
+
+- [dependencies]: bump peer of lucide-react to fix filter/funnel import
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react-core, @qualcomm-ui/qds-core]
+
 ## 1.0.8 (2026/01/17)
 
 ### Miscellaneous Chores

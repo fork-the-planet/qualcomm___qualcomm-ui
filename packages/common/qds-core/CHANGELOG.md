@@ -1,5 +1,11 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.13.0 (2026/01/19)
+
+### Features
+
+- update design tokens to latest revision
+
 ## 1.12.0 (2026/01/17)
 
 ### Features

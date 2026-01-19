@@ -1,5 +1,15 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 1.10.4 (2026/01/19)
+
+### Bug Fixes
+
+- [dependencies]: bump peer of lucide-react to fix filter/funnel import
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react, @qualcomm-ui/react-core]
+
 ## 1.10.3 (2026/01/18)
 
 ### Miscellaneous Chores
