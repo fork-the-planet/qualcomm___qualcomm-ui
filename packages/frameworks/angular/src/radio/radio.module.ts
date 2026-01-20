@@ -7,6 +7,7 @@ import {IconDirective} from "@qualcomm-ui/angular/icon"
 import {QBindDirective} from "@qualcomm-ui/angular-core/machine"
 
 import {RadioControlDirective} from "./radio-control.directive"
+import {RadioErrorTextComponent} from "./radio-error-text.component"
 import {
   RadioGroupDirective,
   RadioGroupErrorTextComponent,
@@ -15,6 +16,7 @@ import {
   RadioGroupLabelDirective,
 } from "./radio-group"
 import {RadioHiddenInputDirective} from "./radio-hidden-input.directive"
+import {RadioHintDirective} from "./radio-hint.directive"
 import {RadioLabelDirective} from "./radio-label.directive"
 import {RadioRootDirective} from "./radio-root.directive"
 import {RadioComponent} from "./radio.component"
@@ -22,26 +24,30 @@ import {RadioComponent} from "./radio.component"
 @NgModule({
   declarations: [
     RadioComponent,
+    RadioControlDirective,
+    RadioErrorTextComponent,
+    RadioGroupDirective,
     RadioGroupErrorTextComponent,
     RadioGroupHintDirective,
-    RadioGroupDirective,
-    RadioGroupLabelDirective,
     RadioGroupItemsDirective,
+    RadioGroupLabelDirective,
     RadioHiddenInputDirective,
+    RadioHintDirective,
     RadioLabelDirective,
-    RadioControlDirective,
     RadioRootDirective,
   ],
   exports: [
     RadioComponent,
+    RadioControlDirective,
+    RadioErrorTextComponent,
+    RadioGroupDirective,
     RadioGroupErrorTextComponent,
     RadioGroupHintDirective,
-    RadioGroupDirective,
-    RadioGroupLabelDirective,
     RadioGroupItemsDirective,
+    RadioGroupLabelDirective,
     RadioHiddenInputDirective,
+    RadioHintDirective,
     RadioLabelDirective,
-    RadioControlDirective,
     RadioRootDirective,
   ],
   imports: [QBindDirective, IconDirective],
