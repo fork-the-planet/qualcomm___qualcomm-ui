@@ -9,28 +9,41 @@ import {
   InputErrorText,
   type InputErrorTextProps,
 } from "@qualcomm-ui/react/input"
-import {useRadioGroupErrorText} from "@qualcomm-ui/react-core/radio"
+import type {LucideIconOrElement} from "@qualcomm-ui/react-core/lucide"
+import {useRadioItemErrorText} from "@qualcomm-ui/react-core/radio"
+import type {IdProp} from "@qualcomm-ui/react-core/system"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useQdsRadioContext} from "../qds-radio-context"
+import {useQdsRadioContext} from "./qds-radio-context"
 
-export interface RadioGroupErrorTextProps extends InputErrorTextProps {
+export interface RadioErrorTextProps extends IdProp, InputErrorTextProps {
   /**
    * React {@link https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children children} prop.
    */
   children?: ReactNode
+
+  /**
+   * An icon to display next to the error text.
+   *
+   * @default `<AlertCircle />`
+   */
+  icon?: LucideIconOrElement
 }
 
-export function RadioGroupErrorText({
+/**
+ * Error message displayed when the radio is invalid. Renders a `<div>` element
+ * by default.
+ */
+export function RadioErrorText({
   children,
   id,
   ...props
-}: RadioGroupErrorTextProps): ReactElement {
-  const contextProps = useRadioGroupErrorText({id})
+}: RadioErrorTextProps): ReactElement {
+  const contextProps = useRadioItemErrorText({id})
   const qdsContext = useQdsRadioContext()
   const mergedProps = mergeProps(
     contextProps,
-    qdsContext.getGroupErrorTextBindings(),
+    qdsContext.getItemErrorTextBindings(),
     props,
   )
 

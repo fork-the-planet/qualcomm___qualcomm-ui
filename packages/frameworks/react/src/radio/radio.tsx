@@ -4,10 +4,12 @@
 import type {ReactElement, ReactNode} from "react"
 
 import {RadioControl, type RadioControlProps} from "./radio-control"
+import {RadioErrorText, type RadioErrorTextProps} from "./radio-error-text"
 import {
   RadioHiddenInput,
   type RadioHiddenInputProps,
 } from "./radio-hidden-input"
+import {RadioHint, type RadioHintProps} from "./radio-hint"
 import {RadioLabel, type RadioLabelProps} from "./radio-label"
 import {RadioRoot, type RadioRootProps} from "./radio-root"
 
@@ -37,10 +39,32 @@ export interface RadioProps extends RadioRootProps {
   controlProps?: RadioControlProps
 
   /**
+   * Optional error that describes the element when invalid.
+   */
+  errorText?: string
+
+  /**
+   * Props applied to the error text element.
+   * @inheritDoc
+   */
+  errorTextProps?: RadioErrorTextProps
+
+  /**
    * Props applied to the hidden input element.
    * @inheritDoc
    */
   hiddenInputProps?: RadioHiddenInputProps
+
+  /**
+   * Optional hint text that describes the element.
+   */
+  hint?: ReactNode
+
+  /**
+   * Props applied to the hint element.
+   * @inheritDoc
+   */
+  hintProps?: RadioHintProps
 
   /**
    * Optional label describing the element. Recommended. This element is
@@ -60,12 +84,18 @@ export function Radio({
   "aria-label": ariaLabel,
   "aria-labelledby": ariaLabelledBy,
   controlProps,
+  errorText,
+  errorTextProps,
   hiddenInputProps: hiddenInputPropsProp,
+  hint,
+  hintProps,
   label,
   labelProps,
   ...props
 }: RadioProps): ReactElement {
   const labelContent = label || labelProps?.children
+  const errorTextContent = errorText || errorTextProps?.children
+  const hintContent = hint || hintProps?.children
 
   const hiddenInputProps = {
     ...hiddenInputPropsProp,
@@ -84,6 +114,10 @@ export function Radio({
       <RadioControl {...controlProps} />
       {labelContent ? (
         <RadioLabel {...labelProps}>{labelContent}</RadioLabel>
+      ) : null}
+      {hintContent ? <RadioHint {...hintProps}>{hintContent}</RadioHint> : null}
+      {errorTextContent ? (
+        <RadioErrorText {...errorTextProps}>{errorTextContent}</RadioErrorText>
       ) : null}
     </RadioRoot>
   )

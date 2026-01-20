@@ -12,7 +12,9 @@ import {
   type RadioItemBindings,
   type RadioItemContext,
   type RadioItemControlBindings,
+  type RadioItemErrorTextBindings,
   type RadioItemHiddenInputBindings,
+  type RadioItemHintBindings,
   type RadioItemLabelBindings,
   radioMachine,
 } from "@qualcomm-ui/core/radio"
@@ -109,4 +111,26 @@ export function useRadioItemControl(): RadioItemControlBindings {
   const context = useRadioContext()
   const itemContext = useRadioItemContext()
   return context.getRadioControlBindings({...itemContext})
+}
+
+export function useRadioItemHint({id}: IdProp): RadioItemHintBindings {
+  const context = useRadioContext()
+  const itemContext = useRadioItemContext()
+  return context.getRadioHintBindings({
+    ...itemContext,
+    id: useControlledId(id),
+    onDestroy: useOnDestroy(),
+  })
+}
+
+export function useRadioItemErrorText({
+  id,
+}: IdProp): RadioItemErrorTextBindings {
+  const context = useRadioContext()
+  const itemContext = useRadioItemContext()
+  return context.getRadioErrorTextBindings({
+    ...itemContext,
+    id: useControlledId(id),
+    onDestroy: useOnDestroy(),
+  })
 }

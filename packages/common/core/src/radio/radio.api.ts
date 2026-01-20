@@ -27,7 +27,9 @@ import type {
   RadioItemContext,
   RadioItemControlBindings,
   RadioItemDataBindings,
+  RadioItemErrorTextBindings,
   RadioItemHiddenInputBindings,
+  RadioItemHintBindings,
   RadioItemLabelBindings,
   RadioSchema,
 } from "./radio.types"
@@ -219,6 +221,20 @@ export function createRadioApi(
       })
     },
 
+    getRadioErrorTextBindings(itemProps): RadioItemErrorTextBindings {
+      scope.ids
+        .collection("itemErrorText")
+        .register(itemProps.value, itemProps.id, itemProps.onDestroy)
+      return normalize.element({
+        ...commonBindings,
+        ...getItemDataAttrs(itemProps),
+        "aria-live": "polite",
+        "data-part": "item-error-text",
+        hidden: !invalid,
+        id: itemProps.id,
+      })
+    },
+
     getRadioHiddenInputBindings(itemProps): RadioItemHiddenInputBindings {
       const itemState = getItemState(itemProps)
       scope.ids
@@ -272,6 +288,19 @@ export function createRadioApi(
         style: visuallyHiddenStyle,
         type: "radio",
         value: itemProps.value,
+      })
+    },
+
+    getRadioHintBindings(itemProps): RadioItemHintBindings {
+      scope.ids
+        .collection("itemHint")
+        .register(itemProps.value, itemProps.id, itemProps.onDestroy)
+      return normalize.element({
+        ...commonBindings,
+        ...getItemDataAttrs(itemProps),
+        "data-part": "item-hint",
+        hidden: !!invalid,
+        id: itemProps.id,
       })
     },
 

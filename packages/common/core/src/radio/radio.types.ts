@@ -68,7 +68,9 @@ export interface RadioElementIds {
   errorText: string
   hint: string
   item: string[]
+  itemErrorText: string[]
   itemHiddenInput: string[]
+  itemHint: string[]
   itemLabel: string[]
   label: string
   root: string
@@ -283,6 +285,23 @@ export interface RadioGroupHintBindings
   extends RadioCommonBindings,
     InputHintBindings {}
 
+export interface RadioItemHintBindings
+  extends RadioItemDataBindings,
+    RadioCommonBindings {
+  "data-part": "item-hint"
+  hidden: boolean
+  id: string
+}
+
+export interface RadioItemErrorTextBindings
+  extends RadioItemDataBindings,
+    RadioCommonBindings {
+  "aria-live": "polite"
+  "data-part": "item-error-text"
+  hidden: boolean
+  id: string
+}
+
 export interface RadioApi {
   /**
    * Function to clear the value of the radio group
@@ -321,9 +340,15 @@ export interface RadioApi {
     props: RadioItemContext & IdRegistrationProps,
   ) => RadioItemBindings
   getRadioControlBindings: (props: RadioItemContext) => RadioItemControlBindings
+  getRadioErrorTextBindings: (
+    props: RadioItemContext & IdRegistrationProps,
+  ) => RadioItemErrorTextBindings
   getRadioHiddenInputBindings: (
     props: RadioItemContext & IdRegistrationProps,
   ) => RadioItemHiddenInputBindings
+  getRadioHintBindings: (
+    props: RadioItemContext & IdRegistrationProps,
+  ) => RadioItemHintBindings
   getRadioLabelBindings: (
     props: RadioItemContext & IdRegistrationProps,
   ) => RadioItemLabelBindings
