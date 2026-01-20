@@ -17,6 +17,7 @@ type Scope = ScopeWithIds<RadioSchema>
 
 export const domIds: ScopeDomIds<RadioElementIds, Scope> = {
   errorText: (scope) => scope.ids.get("errorText"),
+  hint: (scope) => scope.ids.get("hint"),
   item: (scope, itemKey) => scope.ids.collection("item").get(itemKey),
   itemHiddenInput: (scope, itemKey) =>
     scope.ids.collection("itemHiddenInput").get(itemKey),
@@ -27,6 +28,7 @@ export const domIds: ScopeDomIds<RadioElementIds, Scope> = {
 
 export const domEls: ScopeDomElements<RadioElementIds, Scope> = {
   errorText: (scope) => scope.getById(domIds.errorText(scope)),
+  hint: (scope) => scope.getById(domIds.hint(scope)),
   item: (scope, itemKey) => scope.getById(domIds.item(scope, itemKey)!),
   itemHiddenInput: (scope, itemKey) =>
     scope.getById(domIds.itemHiddenInput(scope, itemKey)!),

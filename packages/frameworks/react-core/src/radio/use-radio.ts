@@ -6,6 +6,7 @@ import {
   type RadioApi,
   type RadioApiProps,
   type RadioGroupErrorTextBindings,
+  type RadioGroupHintBindings,
   type RadioGroupItemsBindings,
   type RadioGroupLabelBindings,
   type RadioItemBindings,
@@ -61,6 +62,14 @@ export function useRadioGroupErrorText({
 }: IdProp): RadioGroupErrorTextBindings {
   const context = useRadioContext()
   return context.getGroupErrorTextBindings({
+    id: useControlledId(id),
+    onDestroy: useOnDestroy(),
+  })
+}
+
+export function useRadioGroupHint({id}: IdProp): RadioGroupHintBindings {
+  const context = useRadioContext()
+  return context.getGroupHintBindings({
     id: useControlledId(id),
     onDestroy: useOnDestroy(),
   })

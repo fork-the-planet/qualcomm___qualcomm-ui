@@ -11,6 +11,7 @@ import type {
   QdsRadioApiProps,
   QdsRadioErrorTextBindings,
   QdsRadioGroupBindings,
+  QdsRadioGroupHintBindings,
   QdsRadioGroupItemsBindings,
   QdsRadioGroupLabelBindings,
   QdsRadioItemBindings,
@@ -35,6 +36,11 @@ export function createQdsRadioApi(
     getGroupBindings(): QdsRadioGroupBindings {
       return normalize.element({
         className: radioClasses.group,
+      })
+    },
+    getGroupHintBindings(): QdsRadioGroupHintBindings {
+      return normalize.element({
+        className: inputClasses.hint,
       })
     },
     getGroupItemsBindings(): QdsRadioGroupItemsBindings {

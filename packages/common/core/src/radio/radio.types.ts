@@ -5,7 +5,10 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
 import type {FieldApiProps} from "@qualcomm-ui/core/field"
-import type {InputErrorTextBindings} from "@qualcomm-ui/core/input"
+import type {
+  InputErrorTextBindings,
+  InputHintBindings,
+} from "@qualcomm-ui/core/input"
 import type {
   BooleanAriaAttr,
   BooleanDataAttr,
@@ -63,6 +66,7 @@ type PropsWithDefault = keyof Pick<RadioApiProps, "dir" | "orientation">
 
 export interface RadioElementIds {
   errorText: string
+  hint: string
   item: string[]
   itemHiddenInput: string[]
   itemLabel: string[]
@@ -196,6 +200,7 @@ export interface RadioItemDataBindings {
   "data-focus": BooleanDataAttr
   "data-focus-visible": BooleanDataAttr
   "data-hover": BooleanDataAttr
+  "data-invalid": BooleanDataAttr
   "data-readonly": BooleanDataAttr
   "data-state": "checked" | "unchecked"
 }
@@ -274,6 +279,10 @@ export interface RadioGroupErrorTextBindings
   extends RadioCommonBindings,
     InputErrorTextBindings {}
 
+export interface RadioGroupHintBindings
+  extends RadioCommonBindings,
+    InputHintBindings {}
+
 export interface RadioApi {
   /**
    * Function to clear the value of the radio group
@@ -305,6 +314,7 @@ export interface RadioApi {
   getGroupErrorTextBindings: (
     props: IdRegistrationProps,
   ) => RadioGroupErrorTextBindings
+  getGroupHintBindings: (props: IdRegistrationProps) => RadioGroupHintBindings
   getGroupItemsBindings: () => RadioGroupItemsBindings
   getLabelBindings: (props: IdRegistrationProps) => RadioGroupLabelBindings
   getRadioBindings: (
