@@ -6,14 +6,14 @@ export function RadioGroupHintDemo(): ReactElement {
   return (
     <form>
       {/* preview */}
-      <RadioGroup.Root defaultValue="weekly">
-        <RadioGroup.Label>Email frequency</RadioGroup.Label>
+      <RadioGroup.Root defaultValue="html">
+        <RadioGroup.Label>Language</RadioGroup.Label>
         <RadioGroup.Items>
-          <Radio label="Daily" value="daily" />
-          <Radio label="Weekly" value="weekly" />
-          <Radio label="Monthly" value="monthly" />
+          <Radio label="HTML" value="html" />
+          <Radio label="CSS" value="css" />
+          <Radio label="TypeScript" value="ts" />
         </RadioGroup.Items>
-        <RadioGroup.Hint>You can change this in settings later</RadioGroup.Hint>
+        <RadioGroup.Hint>You can change this later</RadioGroup.Hint>
       </RadioGroup.Root>
       {/* preview */}
     </form>

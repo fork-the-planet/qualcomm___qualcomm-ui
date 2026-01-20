@@ -8,14 +8,14 @@ import {RadioModule} from "@qualcomm-ui/angular/radio"
   template: `
     <form>
       <!-- preview -->
-      <fieldset defaultValue="weekly" name="frequency" q-radio-group>
-        <div q-radio-group-label>Email frequency</div>
+      <fieldset defaultValue="html" name="language" q-radio-group>
+        <div q-radio-group-label>Language</div>
         <div q-radio-group-items>
-          <label label="Daily" q-radio value="daily"></label>
-          <label label="Weekly" q-radio value="weekly"></label>
-          <label label="Monthly" q-radio value="monthly"></label>
+          <label label="HTML" q-radio value="html"></label>
+          <label label="CSS" q-radio value="css"></label>
+          <label label="TypeScript" q-radio value="ts"></label>
         </div>
-        <div q-radio-group-hint>You can change this in settings later</div>
+        <div q-radio-group-hint>You can change this later</div>
       </fieldset>
       <!-- preview -->
     </form>
