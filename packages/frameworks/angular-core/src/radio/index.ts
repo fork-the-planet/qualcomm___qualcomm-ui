@@ -1,5 +1,6 @@
 export * from "./abstract-radio-form-control.directive"
 export * from "./core-radio-group-error-text.directive"
+export * from "./core-radio-group-hint.directive"
 export * from "./core-radio-group-items.directive"
 export * from "./core-radio-group-label.directive"
 export * from "./core-radio-group.directive"

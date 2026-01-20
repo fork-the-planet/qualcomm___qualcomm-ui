@@ -10,6 +10,7 @@ import {RadioControlDirective} from "./radio-control.directive"
 import {
   RadioGroupDirective,
   RadioGroupErrorTextComponent,
+  RadioGroupHintDirective,
   RadioGroupItemsDirective,
   RadioGroupLabelDirective,
 } from "./radio-group"
@@ -22,6 +23,7 @@ import {RadioComponent} from "./radio.component"
   declarations: [
     RadioComponent,
     RadioGroupErrorTextComponent,
+    RadioGroupHintDirective,
     RadioGroupDirective,
     RadioGroupLabelDirective,
     RadioGroupItemsDirective,
@@ -33,6 +35,7 @@ import {RadioComponent} from "./radio.component"
   exports: [
     RadioComponent,
     RadioGroupErrorTextComponent,
+    RadioGroupHintDirective,
     RadioGroupDirective,
     RadioGroupLabelDirective,
     RadioGroupItemsDirective,
