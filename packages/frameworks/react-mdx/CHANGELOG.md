@@ -1,5 +1,17 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 1.10.5 (2026/01/19)
+
+### Styles
+
+- [h2]: increase top margin
+- [docs-layout]: make toc column width flexible at large breakpoint
+- darken code background color
+
+### Bug Fixes
+
+- [docs-layout]: use surface-primary color for backgrounds
+
 ## 1.10.4 (2026/01/19)
 
 ### Bug Fixes
