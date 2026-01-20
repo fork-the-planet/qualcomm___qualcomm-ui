@@ -2,15 +2,14 @@
   --qui-header-height: 48px;
   --qui-side-nav-width: 312px;
   --background-primary: var(--color-surface-primary);
+  --qui-docs-code-background: var(--color-background-neutral-01);
 }
 
 [data-theme="dark"] {
-  --qui-docs-code-background: var(--color-background-neutral-02);
   --qui-docs-code-color: #8cb9f0;
 }
 
 [data-theme="light"] {
-  --qui-docs-code-background: var(--color-background-neutral-01);
   --qui-docs-code-color: var(--color-text-brand-primary);
 }
 
