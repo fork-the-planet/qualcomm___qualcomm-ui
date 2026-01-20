@@ -40,7 +40,7 @@ h2.mdx {
   border-bottom: solid 1px var(--color-border-neutral-02);
   color: var(--color-text-neutral-primary);
   font: var(--font-static-heading-md-default);
-  margin: 32px 0 0 0;
+  margin: 36px 0 0 0;
   padding-bottom: 8px;
   width: 100%;
 }
