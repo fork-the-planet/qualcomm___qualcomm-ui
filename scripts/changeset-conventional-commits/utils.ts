@@ -28,6 +28,7 @@ const defaultCommitTypes = [
   {section: "Reverts", type: "revert"},
   {section: "Documentation", type: "docs"},
   {section: "Styles", type: "style"},
+  {section: "Styles", type: "styles"},
   {section: "Miscellaneous Chores", type: "chore"},
   {section: "Code Refactoring", type: "refactor"},
   {section: "Tests", type: "test"},

@@ -34,7 +34,7 @@ const changelogFunctions = {
     const prNumber = prMatch?.[1]
 
     const typeMatch = cleanedSummary.match(
-      /^(feat|fix|refactor|chore|perf|test|docs|style|ci|build)\s*(\(.+?\))?!?:\s*/i,
+      /^(feat|fix|refactor|chore|perf|test|docs|styles?|ci|build)\s*(\(.+?\))?!?:\s*/i,
     )
     const conventionalType = typeMatch?.[1]?.toLowerCase()
     const scope = typeMatch?.[2]?.replace("(", "").replace(")", "") // Capture scope like "(avatar)"
@@ -43,7 +43,7 @@ const changelogFunctions = {
       cleanedSummary.toLowerCase().includes("breaking")
     const summary = cleanedSummary
       .replace(
-        /^(feat|fix|refactor|chore|perf|test|docs|style|ci|build)\s*(\(.+?\))?!?:\s*/i,
+        /^(feat|fix|refactor|chore|perf|test|docs|styles?|ci|build)\s*(\(.+?\))?!?:\s*/i,
         "",
       )
       .replace(/\s*\(#\d+\)\s*$/, "")
@@ -59,6 +59,7 @@ const changelogFunctions = {
       perf: "Performance Improvements",
       refactor: "Code Refactoring",
       style: "Styles",
+      styles: "Styles",
       test: "Tests",
     }
 
