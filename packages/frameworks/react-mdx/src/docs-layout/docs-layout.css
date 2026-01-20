@@ -163,7 +163,7 @@
   width: 100%;
   --content-padding-left: 28px;
 
-  @media (min-width: 950px) {
+  @media screen and (min-width: 950px) {
     grid-template-columns:
       var(--qui-side-nav-width) calc(100vw - var(--qui-side-nav-width) - 17px)
       0;
@@ -185,7 +185,7 @@
     }
   }
 
-  @media (min-width: 1280px) {
+  @media screen and (min-width: 1280px) {
     grid-template-columns: var(--qui-side-nav-width) minmax(600px, 950px) 240px;
 
     .qui-docs__main-content {
@@ -232,14 +232,16 @@
     }
   }
 
-  @media (min-width: 1510px) {
-    grid-template-columns: var(--qui-side-nav-width) minmax(900px, 950px) 280px;
+  @media screen and (min-width: 1510px) {
+    grid-template-columns:
+      var(--qui-side-nav-width) minmax(900px, 950px)
+      minmax(280px, 360px);
     max-width: 1600px;
 
     &[data-hide-side-nav] {
       grid-template-columns:
         minmax(900px, calc(1060px + var(--qui-side-nav-width)))
-        280px;
+        minmax(280px, 360px);
     }
 
     &[data-hide-toc] {
