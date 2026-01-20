@@ -40,7 +40,12 @@ export default defineConfig({
     "@typescript-eslint/no-unused-expressions": "error",
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/no-wrapper-object-types": "error",
-    "@typescript-eslint/only-throw-error": "error",
+    "@typescript-eslint/only-throw-error": [
+      "error",
+      {
+        allow: [{from: "lib", name: "Response"}],
+      },
+    ],
     "@typescript-eslint/prefer-as-const": "error",
     "@typescript-eslint/prefer-namespace-keyword": "error",
     "@typescript-eslint/prefer-promise-reject-errors": "warn",
