@@ -35,6 +35,13 @@ import {SwitchRootDirective} from "./switch-root.directive"
         </div>
       }
     </ng-content>
+    <ng-content select="[q-switch-hint]">
+      @if (hint()) {
+        <div q-switch-hint>
+          {{ hint() }}
+        </div>
+      }
+    </ng-content>
   `,
 })
 export class SwitchComponent extends SwitchRootDirective {
@@ -52,6 +59,21 @@ export class SwitchComponent extends SwitchRootDirective {
    * ```
    */
   readonly errorText = input<string>()
+
+  /**
+   * Optional hint text displayed below the switch. Hints are hidden when the
+   * switch is invalid.
+   *
+   * @remarks
+   * To customize the element, provide it using the directive instead:
+   *
+   * ```angular-html
+   * <label q-switch>
+   *   <div q-switch-hint>...</div>
+   * </label>
+   * ```
+   */
+  readonly hint = input<string>()
 
   /**
    * Optional label describing the element. Recommended. This element is
