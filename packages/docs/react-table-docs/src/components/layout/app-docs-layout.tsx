@@ -143,7 +143,7 @@ export function AppDocsLayout({
                 <SiteSearch />
                 <HeaderRepositoryLink />
                 <GlobalConfig />
-                <HeaderAiLink modelId="qui-react-nextgen-sonnet-4-5" />
+                <HeaderAiLink />
                 <ThemeToggle />
               </HeaderBar.ActionBar>
             </HeaderBar.Root>
