@@ -1,329 +1,195 @@
 .qui-tag__root {
   align-items: center;
   background-color: transparent;
-  border-radius: var(--border-radius-md);
+  border-radius: var(--tag-radius);
   box-sizing: border-box;
-  cursor: pointer;
+  cursor: default;
   display: inline-flex;
   font: var(--font-static-body-xs-default);
-  gap: var(--spacing-50);
   max-height: var(--tag-size);
   min-height: var(--tag-size);
   outline: none;
-  padding: 0 var(--spacing-70);
+  padding: var(--spacing-30) var(--spacing-70);
+  background: var(--tag-bg-base);
+  border: solid 1px var(--tag-border-base);
+  user-select: none;
 
   --tag-size: var(--sizing-90);
-
-  &[data-radius="rounded"] {
-    border-radius: var(--border-radius-rounded);
-  }
+  --tag-radius: var(--border-radius-md);
+  --tag-bg-base: transparent;
+  --tag-bg-selected: transparent;
+  --tag-border-base: var(--color-interactive-border-neutral-idle);
+  --tag-border-selected: var(--tag-border-base);
+  --icon-color: inherit;
 
   &[data-size="sm"] {
     --tag-size: var(--sizing-80);
+    padding: 0 var(--spacing-70);
   }
   &[data-size="lg"] {
     --tag-size: var(--sizing-100);
     font: var(--font-static-body-sm-default);
-    padding: 0 var(--spacing-80);
+    padding: 5px var(--spacing-80);
   }
-}
 
-/* Colors and variants */
-.qui-tag__root {
-  border: solid 1px var(--color-interactive-border-neutral-idle);
-  --icon-color: inherit;
-
-  &[data-variant="link"] {
-    &:hover {
-      text-decoration: underline;
-    }
+  &[data-radius="rounded"] {
+    --tag-radius: var(--border-radius-rounded);
   }
 
   &[data-emphasis="outline-brand"] {
-    background: var(--color-interactive-background-ghost-idle);
+    --tag-bg-base: var(--color-interactive-background-ghost-idle);
+    --tag-bg-selected: var(--color-background-brand-primary);
+    --tag-border-selected: var(--color-background-brand-primary);
     color: var(--color-interactive-text-primary-idle);
 
-    &:hover {
-      background: var(--color-interactive-background-ghost-hover);
+    &[data-variant="link"]:hover,
+    &[data-variant="selectable"]:not([data-selected]):hover {
       color: var(--color-interactive-text-primary-hover);
     }
 
-    &:active {
-      background: var(--color-interactive-background-ghost-pressed);
+    &[data-variant="link"]:active {
       color: var(--color-interactive-text-primary-pressed);
-    }
-
-    &[data-selected] {
-      background: var(--color-background-brand-primary);
-      border-color: var(--color-background-brand-primary);
-      color: var(--color-utility-persistent-white);
     }
   }
 
   &[data-emphasis="outline-neutral"] {
-    background: var(--color-interactive-background-ghost-idle);
+    --tag-bg-base: var(--color-interactive-background-ghost-idle);
+    --tag-bg-selected: var(--color-background-support-neutral);
     color: var(--color-text-neutral-primary);
-
-    &:hover {
-      background: var(--color-interactive-background-ghost-hover);
-    }
-
-    &:active {
-      background: var(--color-interactive-background-ghost-pressed);
-    }
-
-    &[data-selected] {
-      background: var(--color-background-support-neutral);
-    }
   }
 
   &[data-emphasis="neutral"] {
-    background: var(--color-background-support-neutral-subtle);
-
-    &:hover {
-      background: var(--color-interactive-background-ghost-hover);
-    }
-
-    &:active {
-      background: var(--color-interactive-background-ghost-pressed);
-    }
-
-    &[data-selected] {
-      background: var(--color-interactive-background-neutral-idle);
-    }
+    --tag-bg-base: var(--color-background-support-neutral-subtle);
+    --tag-bg-selected: var(--color-interactive-background-neutral-idle);
   }
 
   &[data-emphasis="blue"] {
-    background: var(--color-category-blue-subtle);
-    border-color: var(--color-category-blue-medium);
-
-    &:hover {
-      background:
-        linear-gradient(var(--color-interactive-background-ghost-hover) 0 0),
-        var(--color-category-blue-subtle);
-    }
-
-    &:active {
-      background:
-        linear-gradient(var(--color-interactive-background-ghost-pressed) 0 0),
-        var(--color-category-blue-subtle);
-    }
-
-    &[data-selected] {
-      background: var(--color-category-blue-strong);
-      border-color: var(--color-category-blue-strong);
-    }
+    --tag-bg-base: var(--color-category-blue-subtle);
+    --tag-bg-selected: var(--color-category-blue-strong);
+    --tag-border-base: var(--color-category-blue-medium);
+    --tag-border-selected: var(--color-category-blue-strong);
   }
 
   &[data-emphasis="cyan"] {
-    background: var(--color-category-cyan-subtle);
-    border-color: var(--color-category-cyan-medium);
-
-    &:hover {
-      background:
-        linear-gradient(var(--color-interactive-background-ghost-hover) 0 0),
-        var(--color-category-cyan-subtle);
-    }
-
-    &:active {
-      background:
-        linear-gradient(var(--color-interactive-background-ghost-pressed) 0 0),
-        var(--color-category-cyan-subtle);
-    }
-
-    &[data-selected] {
-      background: var(--color-category-cyan-strong);
-      border-color: var(--color-category-cyan-strong);
-    }
+    --tag-bg-base: var(--color-category-cyan-subtle);
+    --tag-bg-selected: var(--color-category-cyan-strong);
+    --tag-border-base: var(--color-category-cyan-medium);
+    --tag-border-selected: var(--color-category-cyan-strong);
   }
 
   &[data-emphasis="teal"] {
-    background: var(--color-category-teal-subtle);
-    border-color: var(--color-category-teal-medium);
-
-    &:hover {
-      background:
-        linear-gradient(var(--color-interactive-background-ghost-hover) 0 0),
-        var(--color-category-teal-subtle);
-    }
-
-    &:active {
-      background:
-        linear-gradient(var(--color-interactive-background-ghost-pressed) 0 0),
-        var(--color-category-teal-subtle);
-    }
-
-    &[data-selected] {
-      background: var(--color-category-teal-strong);
-      border-color: var(--color-category-teal-strong);
-    }
+    --tag-bg-base: var(--color-category-teal-subtle);
+    --tag-bg-selected: var(--color-category-teal-strong);
+    --tag-border-base: var(--color-category-teal-medium);
+    --tag-border-selected: var(--color-category-teal-strong);
   }
 
   &[data-emphasis="green"] {
-    background: var(--color-category-green-subtle);
-    border-color: var(--color-category-green-medium);
-
-    &:hover {
-      background:
-        linear-gradient(var(--color-interactive-background-ghost-hover) 0 0),
-        var(--color-category-green-subtle);
-    }
-
-    &:active {
-      background:
-        linear-gradient(var(--color-interactive-background-ghost-pressed) 0 0),
-        var(--color-category-green-subtle);
-    }
-
-    &[data-selected] {
-      background: var(--color-category-green-strong);
-      border-color: var(--color-category-green-strong);
-    }
+    --tag-bg-base: var(--color-category-green-subtle);
+    --tag-bg-selected: var(--color-category-green-strong);
+    --tag-border-base: var(--color-category-green-medium);
+    --tag-border-selected: var(--color-category-green-strong);
   }
 
   &[data-emphasis="kiwi"] {
-    background: var(--color-category-kiwi-subtle);
-    border-color: var(--color-category-kiwi-medium);
-
-    &:hover {
-      background:
-        linear-gradient(var(--color-interactive-background-ghost-hover) 0 0),
-        var(--color-category-kiwi-subtle);
-    }
-
-    &:active {
-      background:
-        linear-gradient(var(--color-interactive-background-ghost-pressed) 0 0),
-        var(--color-category-kiwi-subtle);
-    }
-
-    &[data-selected] {
-      background: var(--color-category-kiwi-strong);
-      border-color: var(--color-category-kiwi-strong);
-    }
+    --tag-bg-base: var(--color-category-kiwi-subtle);
+    --tag-bg-selected: var(--color-category-kiwi-strong);
+    --tag-border-base: var(--color-category-kiwi-medium);
+    --tag-border-selected: var(--color-category-kiwi-strong);
   }
 
   &[data-emphasis="yellow"] {
-    background: var(--color-category-yellow-subtle);
-    border-color: var(--color-category-yellow-medium);
-
-    &:hover {
-      background:
-        linear-gradient(var(--color-interactive-background-ghost-hover) 0 0),
-        var(--color-category-yellow-subtle);
-    }
-
-    &:active {
-      background:
-        linear-gradient(var(--color-interactive-background-ghost-pressed) 0 0),
-        var(--color-category-yellow-subtle);
-    }
-
-    &[data-selected] {
-      background: var(--color-category-yellow-strong);
-      border-color: var(--color-category-yellow-strong);
-      color: var(--color-utility-persistent-black);
-    }
+    --tag-bg-base: var(--color-category-yellow-subtle);
+    --tag-bg-selected: var(--color-category-yellow-strong);
+    --tag-border-base: var(--color-category-yellow-medium);
+    --tag-border-selected: var(--color-category-yellow-strong);
   }
 
   &[data-emphasis="orange"] {
-    background: var(--color-category-orange-subtle);
-    border-color: var(--color-category-orange-medium);
-
-    &:hover {
-      background:
-        linear-gradient(var(--color-interactive-background-ghost-hover) 0 0),
-        var(--color-category-orange-subtle);
-    }
-
-    &:active {
-      background:
-        linear-gradient(var(--color-interactive-background-ghost-pressed) 0 0),
-        var(--color-category-orange-subtle);
-    }
-
-    &[data-selected] {
-      background: var(--color-category-orange-strong);
-      border-color: var(--color-category-orange-strong);
-    }
+    --tag-bg-base: var(--color-category-orange-subtle);
+    --tag-bg-selected: var(--color-category-orange-strong);
+    --tag-border-base: var(--color-category-orange-medium);
+    --tag-border-selected: var(--color-category-orange-strong);
   }
 
   &[data-emphasis="red"] {
-    background: var(--color-category-red-subtle);
-    border-color: var(--color-category-red-medium);
-
-    &:hover {
-      background:
-        linear-gradient(var(--color-interactive-background-ghost-hover) 0 0),
-        var(--color-category-red-subtle);
-    }
-
-    &:active {
-      background:
-        linear-gradient(var(--color-interactive-background-ghost-pressed) 0 0),
-        var(--color-category-red-subtle);
-    }
-
-    &[data-selected] {
-      background: var(--color-category-red-strong);
-      border-color: var(--color-category-red-strong);
-    }
+    --tag-bg-base: var(--color-category-red-subtle);
+    --tag-bg-selected: var(--color-category-red-strong);
+    --tag-border-base: var(--color-category-red-medium);
+    --tag-border-selected: var(--color-category-red-strong);
   }
 
   &[data-emphasis="magenta"] {
-    background: var(--color-category-magenta-subtle);
-    border-color: var(--color-category-magenta-medium);
-
-    &:hover {
-      background:
-        linear-gradient(var(--color-interactive-background-ghost-hover) 0 0),
-        var(--color-category-magenta-subtle);
-    }
-
-    &:active {
-      background:
-        linear-gradient(var(--color-interactive-background-ghost-pressed) 0 0),
-        var(--color-category-magenta-subtle);
-    }
-
-    &[data-selected] {
-      background: var(--color-category-magenta-strong);
-      border-color: var(--color-category-magenta-strong);
-    }
+    --tag-bg-base: var(--color-category-magenta-subtle);
+    --tag-bg-selected: var(--color-category-magenta-strong);
+    --tag-border-base: var(--color-category-magenta-medium);
+    --tag-border-selected: var(--color-category-magenta-strong);
   }
 
   &[data-emphasis="purple"] {
-    background: var(--color-category-purple-subtle);
-    border-color: var(--color-category-purple-medium);
-
-    &:hover {
-      background:
-        linear-gradient(var(--color-interactive-background-ghost-hover) 0 0),
-        var(--color-category-purple-subtle);
-    }
-
-    &:active {
-      background:
-        linear-gradient(var(--color-interactive-background-ghost-pressed) 0 0),
-        var(--color-category-purple-subtle);
-    }
-
-    &[data-selected] {
-      background: var(--color-category-purple-strong);
-      border-color: var(--color-category-purple-strong);
-    }
+    --tag-bg-base: var(--color-category-purple-subtle);
+    --tag-bg-selected: var(--color-category-purple-strong);
+    --tag-border-base: var(--color-category-purple-medium);
+    --tag-border-selected: var(--color-category-purple-strong);
   }
 
+  &[data-variant="link"],
+  &[data-variant="selectable"] {
+    cursor: pointer;
+  }
+
+  &[data-variant="dismissable"] {
+    padding-inline-end: 0;
+  }
+
+  /* interactive variants: hover */
+  &[data-variant="link"]:hover,
+  &[data-variant="selectable"]:hover {
+    background:
+      linear-gradient(var(--color-interactive-background-ghost-hover) 0 0),
+      var(--tag-bg-base);
+  }
+
+  /* link variant: underline */
+  &[data-variant="link"]:hover {
+    text-decoration: underline;
+  }
+
+  /* link variant: pressed state */
+  &[data-variant="link"]:active {
+    background:
+      linear-gradient(var(--color-interactive-background-ghost-pressed) 0 0),
+      var(--tag-bg-base);
+  }
+
+  /* selected */
   &[data-selected] {
+    background: var(--tag-bg-selected);
+    border-color: var(--tag-border-selected);
     color: var(--color-utility-persistent-white);
   }
 
-  &:focus-visible {
+  /* yellow selected needs black text */
+  &[data-emphasis="yellow"][data-selected] {
+    color: var(--color-utility-persistent-black);
+  }
+
+  /* selectable variant: selected + hover  */
+  &[data-variant="selectable"][data-selected]:hover {
+    background:
+      linear-gradient(var(--color-interactive-background-ghost-hover) 0 0),
+      var(--tag-bg-selected);
+  }
+
+  /* focus */
+  &[data-variant="link"]:focus-visible,
+  &[data-variant="selectable"]:focus-visible {
     border-color: var(--color-utility-focus-border);
     outline: solid 2px var(--color-utility-focus-border);
     outline-offset: -1px;
   }
 
+  /* disabled */
   &[data-scope][data-disabled] {
     &:not([data-emphasis^="outline-"]) {
       background: var(--color-utility-disabled-background);
@@ -342,5 +208,46 @@
   }
   &[data-scope="tag"][data-size="lg"] {
     --icon-size: var(--sizing-70);
+  }
+  &[data-part="start-icon"] {
+    margin-inline-end: var(--spacing-50);
+  }
+  &[data-part="end-icon"] {
+    margin-inline-start: var(--spacing-50);
+  }
+  .qui-tag__dismiss-button > &[data-part="end-icon"] {
+    margin-inline-start: 0;
+  }
+}
+
+.qui-tag__dismiss-button {
+  align-items: center;
+  background: transparent;
+  border: none;
+  border-radius: 0 var(--tag-radius) var(--tag-radius) 0;
+  color: var(--color-interactive-icon-neutral-idle);
+  padding: 0;
+  margin-inline-start: var(--spacing-20);
+  --icon-color: var(--color-interactive-icon-neutral-idle);
+  width: var(--tag-size);
+  height: var(--tag-size);
+  display: inline-flex;
+  justify-content: center;
+
+  &:hover {
+    background: var(--color-interactive-background-ghost-hover);
+  }
+  &:active {
+    background: var(--color-interactive-background-ghost-pressed);
+  }
+  &:focus-visible {
+    outline: solid 2px var(--color-utility-focus-border);
+    outline-offset: -1px;
+  }
+  &[data-disabled] {
+    color: var(--color-utility-disabled-icon);
+    cursor: default;
+    pointer-events: none;
+    --icon-color: var(--color-utility-disabled-icon);
   }
 }
