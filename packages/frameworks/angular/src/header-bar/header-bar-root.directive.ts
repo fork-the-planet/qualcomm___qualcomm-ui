@@ -10,6 +10,7 @@ import {
 import type {SignalifyInput} from "@qualcomm-ui/angular-core/signals"
 import {
   createQdsHeaderBarApi,
+  type QdsHeaderBarPadding,
   type QdsHeaderBarRootProps,
   type QdsHeaderBarSize,
   type QdsHeaderSurface,
@@ -29,6 +30,13 @@ export class HeaderBarRootDirective
   implements OnInit, SignalifyInput<QdsHeaderBarRootProps>
 {
   /**
+   * The horizontal padding of the component.
+   *
+   * @default 'default'
+   */
+  readonly padding = input<QdsHeaderBarPadding>()
+
+  /**
    * The size of the component and its elements. Governs padding, element spacing,
    * and height.
    *
@@ -47,6 +55,7 @@ export class HeaderBarRootDirective
 
   protected readonly trackBindings = useTrackBindings(() =>
     this.api().getRootBindings({
+      padding: this.padding(),
       size: this.size(),
       surface: this.surface(),
     }),

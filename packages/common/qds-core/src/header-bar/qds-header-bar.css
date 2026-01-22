@@ -5,8 +5,12 @@
   display: flex;
   height: var(--sizing-160);
   min-width: fit-content;
-  padding: 0 var(--spacing-100);
+  padding: 0 var(--spacing-90);
   width: 100%;
+
+  &[data-padding="large"] {
+    padding-inline: var(--spacing-330);
+  }
 
   &[data-size="lg"] {
     height: 72px;

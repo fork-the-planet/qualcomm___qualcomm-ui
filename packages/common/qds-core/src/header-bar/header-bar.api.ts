@@ -60,6 +60,7 @@ export function createQdsHeaderBarApi(
     getRootBindings(props: QdsHeaderBarRootProps): QdsHeaderBarRootBindings {
       return normalize.element({
         className: headerBarClasses.root,
+        "data-padding": props.padding || "default",
         "data-size": props.size || "sm",
         "data-surface": props.surface || "primary",
       })
