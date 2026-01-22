@@ -72,7 +72,7 @@ export function SelectHookFormDemo(): ReactElement {
       <form
         className="w-48"
         noValidate
-        onSubmit={handleSubmit(handleFormSubmit)}
+        onSubmit={(event) => void handleSubmit(handleFormSubmit)(event)}
       >
         <Controller
           control={control}

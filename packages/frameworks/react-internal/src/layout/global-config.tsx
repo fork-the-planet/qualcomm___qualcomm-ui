@@ -5,7 +5,6 @@ import type {ReactElement} from "react"
 
 import {AlertCircle, Settings} from "lucide-react"
 
-import {Divider} from "@qualcomm-ui/react/divider"
 import {HeaderBar} from "@qualcomm-ui/react/header-bar"
 import {Icon} from "@qualcomm-ui/react/icon"
 import {Popover} from "@qualcomm-ui/react/popover"
@@ -44,87 +43,76 @@ export function GlobalConfig(): ReactElement {
         />
       }
     >
-      <Divider />
+      <div className="flex flex-col gap-2">
+        <Switch
+          checked={!hideDemoBrandSwitcher}
+          label={
+            <div className="text-neutral-secondary flex items-center gap-1">
+              <span>Show Brand Switcher</span>{" "}
+              <Tooltip
+                portalProps={{disabled: true}}
+                trigger={<Icon icon={AlertCircle} size="xs" />}
+              >
+                Toggle whether the brand switcher shows above every demo
+              </Tooltip>
+            </div>
+          }
+          onCheckedChange={() =>
+            setHideDemoBrandSwitcher(!hideDemoBrandSwitcher)
+          }
+          size="sm"
+        />
 
-      <div className="flex flex-col gap-3">
-        <div className="font-body-xs-bold text-neutral-secondary">
-          Demo Settings
-        </div>
-        <div className="flex flex-col gap-2">
-          <Switch
-            checked={!hideDemoBrandSwitcher}
-            label={
-              <div className="text-neutral-secondary flex items-center gap-1">
-                <span>Show Brand Switcher</span>{" "}
-                <Tooltip
-                  portalProps={{disabled: true}}
-                  trigger={<Icon icon={AlertCircle} size="xs" />}
-                >
-                  Toggle whether the brand switcher shows above every demo
-                </Tooltip>
-              </div>
-            }
-            onCheckedChange={() =>
-              setHideDemoBrandSwitcher(!hideDemoBrandSwitcher)
-            }
-            size="sm"
-          />
+        <Switch
+          checked={!!demoSettings?.transformTailwindClasses}
+          label={
+            <div className="text-neutral-secondary flex items-center gap-1">
+              <span>Use inline styles</span>{" "}
+              <Tooltip
+                portalProps={{disabled: true}}
+                trigger={<Icon icon={AlertCircle} size="xs" />}
+              >
+                Render demo code snippets with inline styles instead of Tailwind
+                classes
+              </Tooltip>
+            </div>
+          }
+          onCheckedChange={() =>
+            setDemoSettings?.((prev) => ({
+              ...prev,
+              transformTailwindClasses: !prev.transformTailwindClasses,
+            }))
+          }
+          size="sm"
+        />
 
-          <Switch
-            checked={!!demoSettings?.transformTailwindClasses}
-            label={
-              <div className="text-neutral-secondary flex items-center gap-1">
-                <span>Use inline styles</span>{" "}
-                <Tooltip
-                  portalProps={{disabled: true}}
-                  trigger={<Icon icon={AlertCircle} size="xs" />}
-                >
-                  Render demo code snippets with inline styles instead of
-                  Tailwind classes
-                </Tooltip>
-              </div>
-            }
-            onCheckedChange={() =>
-              setDemoSettings?.((prev) => ({
-                ...prev,
-                transformTailwindClasses: !prev.transformTailwindClasses,
-              }))
-            }
-            size="sm"
-          />
+        <Select
+          clearable={false}
+          collection={themeOptCollection}
+          contentProps={{style: {width: 124}}}
+          label={
+            <span className="flex items-center gap-1">
+              <span>QDS Brand</span>
 
-          <Select
-            clearable={false}
-            collection={themeOptCollection}
-            contentProps={{style: {width: 124}}}
-            label={
-              <span className="flex items-center gap-1">
-                <span>QDS Brand</span>
-
-                <Tooltip
-                  portalProps={{disabled: true}}
-                  trigger={
-                    <Icon
-                      className="inline-block"
-                      icon={AlertCircle}
-                      size="xs"
-                    />
-                  }
-                >
-                  Change the brand applied to each demo component
-                </Tooltip>
-              </span>
-            }
-            onValueChange={(valueStrings, details) =>
-              setBrand(details.items[0].id)
-            }
-            placeholder="Brand"
-            portalProps={{disabled: true}}
-            size="sm"
-            style={{marginTop: 2}}
-            value={[brand || "qualcomm"]}
-          />
-        </div>
+              <Tooltip
+                portalProps={{disabled: true}}
+                trigger={
+                  <Icon className="inline-block" icon={AlertCircle} size="xs" />
+                }
+              >
+                Change the brand applied to each demo component
+              </Tooltip>
+            </span>
+          }
+          onValueChange={(valueStrings, details) =>
+            setBrand(details.items[0].id)
+          }
+          placeholder="Brand"
+          portalProps={{disabled: true}}
+          size="sm"
+          style={{marginTop: 2}}
+          value={[brand || "qualcomm"]}
+        />
       </div>
     </Popover>
   )
