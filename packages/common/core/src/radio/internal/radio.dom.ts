@@ -19,8 +19,6 @@ export const domIds: ScopeDomIds<RadioElementIds, Scope> = {
   errorText: (scope) => scope.ids.get("errorText"),
   hint: (scope) => scope.ids.get("hint"),
   item: (scope, itemKey) => scope.ids.collection("item").get(itemKey),
-  itemErrorText: (scope, itemKey) =>
-    scope.ids.collection("itemErrorText").get(itemKey),
   itemHiddenInput: (scope, itemKey) =>
     scope.ids.collection("itemHiddenInput").get(itemKey),
   itemHint: (scope, itemKey) => scope.ids.collection("itemHint").get(itemKey),
@@ -33,8 +31,6 @@ export const domEls: ScopeDomElements<RadioElementIds, Scope> = {
   errorText: (scope) => scope.getById(domIds.errorText(scope)),
   hint: (scope) => scope.getById(domIds.hint(scope)),
   item: (scope, itemKey) => scope.getById(domIds.item(scope, itemKey)!),
-  itemErrorText: (scope, itemKey) =>
-    scope.getById(domIds.itemErrorText(scope, itemKey)!),
   itemHiddenInput: (scope, itemKey) =>
     scope.getById(domIds.itemHiddenInput(scope, itemKey)!),
   itemHint: (scope, itemKey) => scope.getById(domIds.itemHint(scope, itemKey)!),

@@ -26,13 +26,6 @@ import {RadioRootDirective} from "./radio-root.directive"
         </span>
       }
     </ng-content>
-    <ng-content select="[q-radio-error-text]">
-      @if (errorText()) {
-        <div q-radio-error-text>
-          {{ errorText() }}
-        </div>
-      }
-    </ng-content>
     <ng-content select="[q-radio-hint]">
       @if (hint()) {
         <div q-radio-hint>
@@ -43,21 +36,6 @@ import {RadioRootDirective} from "./radio-root.directive"
   `,
 })
 export class RadioComponent extends RadioRootDirective {
-  /**
-   * Optional error that describes the radio when the field is invalid. This
-   * element is automatically associated with the radio for accessibility.
-   *
-   * @remarks
-   * To customize the element, provide it using the directive instead:
-   *
-   * ```angular-html
-   * <label q-radio>
-   *   <div q-radio-error-text>...</div>
-   * </label>
-   * ```
-   */
-  readonly errorText = input<string>()
-
   /**
    * Optional hint text displayed below the radio. Hints are hidden when the
    * radio is invalid.

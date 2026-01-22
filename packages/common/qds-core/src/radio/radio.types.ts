@@ -55,10 +55,6 @@ export interface QdsRadioItemHintBindings {
   className: InputClasses["hint"]
 }
 
-export interface QdsRadioItemErrorTextBindings {
-  className: InputClasses["errorText"]
-}
-
 export interface QdsRadioGroupBindings {
   className: RadioClasses["group"]
 }
@@ -84,7 +80,6 @@ export interface QdsRadioApi {
   getGroupLabelBindings(): QdsRadioGroupLabelBindings
   getItemBindings(): QdsRadioItemBindings
   getItemControlBindings(): QdsRadioItemControlBindings
-  getItemErrorTextBindings(): QdsRadioItemErrorTextBindings
   getItemHiddenInputBindings(): QdsRadioItemHiddenInputBindings
   getItemHintBindings(): QdsRadioItemHintBindings
   getItemLabelBindings(): QdsRadioItemLabelBindings

@@ -7,7 +7,6 @@ import {IconDirective} from "@qualcomm-ui/angular/icon"
 import {QBindDirective} from "@qualcomm-ui/angular-core/machine"
 
 import {RadioControlDirective} from "./radio-control.directive"
-import {RadioErrorTextComponent} from "./radio-error-text.component"
 import {
   RadioGroupDirective,
   RadioGroupErrorTextComponent,
@@ -25,7 +24,6 @@ import {RadioComponent} from "./radio.component"
   declarations: [
     RadioComponent,
     RadioControlDirective,
-    RadioErrorTextComponent,
     RadioGroupDirective,
     RadioGroupErrorTextComponent,
     RadioGroupHintDirective,
@@ -39,7 +37,6 @@ import {RadioComponent} from "./radio.component"
   exports: [
     RadioComponent,
     RadioControlDirective,
-    RadioErrorTextComponent,
     RadioGroupDirective,
     RadioGroupErrorTextComponent,
     RadioGroupHintDirective,

@@ -1,6 +1,5 @@
 import {Radio as SimpleRadio} from "./radio"
 import {RadioControl, type RadioControlProps} from "./radio-control"
-import {RadioErrorText, type RadioErrorTextProps} from "./radio-error-text"
 import {
   RadioHiddenInput,
   type RadioHiddenInputProps,
@@ -13,7 +12,6 @@ export * from "./radio-group"
 
 export type {
   RadioControlProps,
-  RadioErrorTextProps,
   RadioHiddenInputProps,
   RadioHintProps,
   RadioLabelProps,
@@ -22,7 +20,6 @@ export type {
 
 type RadioComponent = typeof SimpleRadio & {
   Control: typeof RadioControl
-  ErrorText: typeof RadioErrorText
   HiddenInput: typeof RadioHiddenInput
   Hint: typeof RadioHint
   Label: typeof RadioLabel
@@ -32,7 +29,6 @@ type RadioComponent = typeof SimpleRadio & {
 export const Radio: RadioComponent = SimpleRadio as RadioComponent
 
 Radio.Control = RadioControl
-Radio.ErrorText = RadioErrorText
 Radio.HiddenInput = RadioHiddenInput
 Radio.Hint = RadioHint
 Radio.Label = RadioLabel

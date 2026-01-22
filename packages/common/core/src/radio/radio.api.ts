@@ -27,7 +27,6 @@ import type {
   RadioItemContext,
   RadioItemControlBindings,
   RadioItemDataBindings,
-  RadioItemErrorTextBindings,
   RadioItemHiddenInputBindings,
   RadioItemHintBindings,
   RadioItemLabelBindings,
@@ -218,20 +217,6 @@ export function createRadioApi(
         "aria-hidden": true,
         "data-active": booleanDataAttr(itemState.active),
         "data-part": "item-control",
-      })
-    },
-
-    getRadioErrorTextBindings(itemProps): RadioItemErrorTextBindings {
-      scope.ids
-        .collection("itemErrorText")
-        .register(itemProps.value, itemProps.id, itemProps.onDestroy)
-      return normalize.element({
-        ...commonBindings,
-        ...getItemDataAttrs(itemProps),
-        "aria-live": "polite",
-        "data-part": "item-error-text",
-        hidden: !invalid,
-        id: itemProps.id,
       })
     },
 

@@ -4,7 +4,6 @@
 import type {ReactElement, ReactNode} from "react"
 
 import {RadioControl, type RadioControlProps} from "./radio-control"
-import {RadioErrorText, type RadioErrorTextProps} from "./radio-error-text"
 import {
   RadioHiddenInput,
   type RadioHiddenInputProps,
@@ -37,17 +36,6 @@ export interface RadioProps extends RadioRootProps {
    * @inheritDoc
    */
   controlProps?: RadioControlProps
-
-  /**
-   * Optional error that describes the element when invalid.
-   */
-  errorText?: string
-
-  /**
-   * Props applied to the error text element.
-   * @inheritDoc
-   */
-  errorTextProps?: RadioErrorTextProps
 
   /**
    * Props applied to the hidden input element.
@@ -84,8 +72,6 @@ export function Radio({
   "aria-label": ariaLabel,
   "aria-labelledby": ariaLabelledBy,
   controlProps,
-  errorText,
-  errorTextProps,
   hiddenInputProps: hiddenInputPropsProp,
   hint,
   hintProps,
@@ -94,7 +80,6 @@ export function Radio({
   ...props
 }: RadioProps): ReactElement {
   const labelContent = label || labelProps?.children
-  const errorTextContent = errorText || errorTextProps?.children
   const hintContent = hint || hintProps?.children
 
   const hiddenInputProps = {
@@ -116,9 +101,6 @@ export function Radio({
         <RadioLabel {...labelProps}>{labelContent}</RadioLabel>
       ) : null}
       {hintContent ? <RadioHint {...hintProps}>{hintContent}</RadioHint> : null}
-      {errorTextContent ? (
-        <RadioErrorText {...errorTextProps}>{errorTextContent}</RadioErrorText>
-      ) : null}
     </RadioRoot>
   )
 }

@@ -16,7 +16,6 @@ import type {
   QdsRadioGroupLabelBindings,
   QdsRadioItemBindings,
   QdsRadioItemControlBindings,
-  QdsRadioItemErrorTextBindings,
   QdsRadioItemHiddenInputBindings,
   QdsRadioItemHintBindings,
   QdsRadioItemLabelBindings,
@@ -66,11 +65,6 @@ export function createQdsRadioApi(
       return normalize.element({
         className: radioClasses.itemControl,
         "data-size": size,
-      })
-    },
-    getItemErrorTextBindings(): QdsRadioItemErrorTextBindings {
-      return normalize.element({
-        className: inputClasses.errorText,
       })
     },
     getItemHiddenInputBindings(): QdsRadioItemHiddenInputBindings {

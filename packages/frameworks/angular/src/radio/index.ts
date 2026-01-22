@@ -1,6 +1,5 @@
 export * from "./qds-radio-context.service"
 export * from "./radio-control.directive"
-export * from "./radio-error-text.component"
 export * from "./radio-group"
 export * from "./radio-hidden-input.directive"
 export * from "./radio-hint.directive"
