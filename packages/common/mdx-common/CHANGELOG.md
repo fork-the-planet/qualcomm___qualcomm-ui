@@ -1,5 +1,11 @@
 # @qualcomm-ui/mdx-common Changelog
 
+## 1.9.1 (2026/01/22)
+
+### Styles
+
+- [shiki]: darken shiki theme background colors
+
 ## 1.9.0 (2026/01/18)
 
 ### Features
