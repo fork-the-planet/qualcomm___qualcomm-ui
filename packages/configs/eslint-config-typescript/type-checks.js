@@ -7,20 +7,27 @@ export default defineConfig({
   name: "qui-typechecked-recommended",
   rules: {
     "@typescript-eslint/await-thenable": "error",
-    "@typescript-eslint/ban-ts-comment": "warn",
+    "@typescript-eslint/ban-ts-comment": "warn", // Allow use of @ts-ignore, but warn
     "@typescript-eslint/no-array-constructor": "error",
     "@typescript-eslint/no-array-delete": "error",
     "@typescript-eslint/no-base-to-string": "error",
     "@typescript-eslint/no-duplicate-enum-values": "error",
     "@typescript-eslint/no-duplicate-type-constituents": "error",
+    /**
+     * Empty interfaces may be provided for module augmentation.
+     * Empty object types may also be used as defaults in generics.
+     */
     "@typescript-eslint/no-empty-object-type": "off",
+    /**
+     * The TypeScript compiler already covers this use case when set to strict.
+     */
     "@typescript-eslint/no-explicit-any": "warn",
     "@typescript-eslint/no-extra-non-null-assertion": "error",
     "@typescript-eslint/no-floating-promises": "warn",
     "@typescript-eslint/no-for-in-array": "error",
     "@typescript-eslint/no-implied-eval": "error",
     "@typescript-eslint/no-misused-new": "error",
-    "@typescript-eslint/no-misused-promises": "warn",
+    "@typescript-eslint/no-misused-promises": "error",
     "@typescript-eslint/no-namespace": "warn",
     "@typescript-eslint/no-non-null-asserted-optional-chain": "error",
     "@typescript-eslint/no-redundant-type-constituents": "off",

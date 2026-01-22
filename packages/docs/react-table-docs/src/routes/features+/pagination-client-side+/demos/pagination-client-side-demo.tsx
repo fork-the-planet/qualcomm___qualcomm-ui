@@ -97,7 +97,11 @@ export function PaginationClientSideDemo() {
             startIcon={Search}
             value={globalFilter}
           />
-          <Button onClick={regenerateData} size="sm" variant="outline">
+          <Button
+            onClick={() => void regenerateData()}
+            size="sm"
+            variant="outline"
+          >
             Regenerate
           </Button>
           {isFetching ? <ProgressRing size="xs" /> : null}

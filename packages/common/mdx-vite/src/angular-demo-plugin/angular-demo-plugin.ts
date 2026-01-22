@@ -3,8 +3,8 @@
 import chalk from "chalk"
 import {type FSWatcher, watch} from "chokidar"
 import {glob} from "glob"
-import {existsSync} from "node:fs"
-import {readFile, stat} from "node:fs/promises"
+import {existsSync, statSync} from "node:fs"
+import {readFile} from "node:fs/promises"
 import {basename, dirname, join, relative, resolve} from "node:path"
 import {
   createHighlighter,
@@ -1041,19 +1041,24 @@ export function getAngularDemoInfo(demoId) {
       )
     })
 
-    watcher.on("add", async (filePath: string) => {
-      const fileStats = await stat(filePath).catch(() => undefined)
-      if (!fileStats || fileStats.size === 0) {
-        console.debug("Failed to read file stats", filePath)
-        return
-      }
+    watcher.on("add", (filePath: string) => {
+      try {
+        const fileStats = statSync(filePath)
+        if (!fileStats || fileStats.size === 0) {
+          console.debug("Failed to read file stats", filePath)
+          return
+        }
 
-      if (isAngularDemoFile(filePath)) {
-        logDev(
-          `${chalk.blue.bold(LOG_PREFIX)} New Angular demo: ${chalk.green(filePath)}`,
-        )
-        await handleAngularDemoUpdate(filePath)
-        triggerRegistryUpdate()
+        if (isAngularDemoFile(filePath)) {
+          logDev(
+            `${chalk.blue.bold(LOG_PREFIX)} New Angular demo: ${chalk.green(filePath)}`,
+          )
+          void handleAngularDemoUpdate(filePath).then(() => {
+            triggerRegistryUpdate()
+          })
+        }
+      } catch {
+        console.debug("Failed to update registry file stats")
       }
     })
 
