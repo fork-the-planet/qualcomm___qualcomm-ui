@@ -637,6 +637,10 @@ class KnowledgeGenerator {
         const path = this.getAttrExpression(node, "data")
         return path && getPath(themes, path)
       },
+      SpacingTable: (node) => {
+        const path = this.getAttrExpression(node, "data")
+        return path && getPath(themes, path)
+      },
       ThemePropertyTable: (node) => {
         const path = this.getAttrExpression(node, "data")
         const property = this.getAttrExpression(node, "cssProperty")
