@@ -23,6 +23,28 @@ Once installed, import the plugin where you've configured your tailwind theme:
 @import "@qualcomm-ui/tailwind-plugin/qui-strict.css";
 ```
 
+## Strict vs. Non-Strict Mode
+
+The plugin provides two CSS files:
+
+### qui-strict.css (Recommended)
+
+Resets Tailwind's default color, font, radius, and shadow namespaces, forcing you to use only QDS semantic tokens. Arbitrary Tailwind utilities like `bg-red-500` or `shadow-lg` will not work. For QDS-compliant alternatives, refer to our [Theme Colors](/theming/colors) guide.
+
+```css
+@import "@qualcomm-ui/tailwind-plugin/qui-strict.css";
+```
+
+We recommended strict mode because it enforces design system compliance. This prevents developers from using arbitrary values that may result in poor contrast or conflicting styles.
+
+### qui.css
+
+Use non-strict mode when you need access to Tailwind's full utility set, such as during migration or for prototyping.
+
+```css
+@import "@qualcomm-ui/tailwind-plugin/qui.css";
+```
+
 ## Theme
 
 Refer to the [Theme](/theming/colors) section for documentation on the classes that this plugin provides.
