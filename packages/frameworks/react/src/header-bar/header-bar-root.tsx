@@ -17,12 +17,13 @@ export interface HeaderBarRootProps
     QdsHeaderBarRootProps {}
 
 export function HeaderBarRoot({
+  padding,
   size,
   surface,
   ...props
 }: HeaderBarRootProps): ReactElement {
   const mergedProps = mergeProps(
-    qdsHeaderBarApi.getRootBindings({size, surface}),
+    qdsHeaderBarApi.getRootBindings({padding, size, surface}),
     props,
   )
 
