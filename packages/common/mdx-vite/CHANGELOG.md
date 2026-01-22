@@ -1,5 +1,21 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 2.14.0 (2026/01/22)
+
+### Features
+
+- add support for tailwind spacing documentation in knowledge generation
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common]
+
+## 2.13.0 (2026/01/21)
+
+### Features
+
+- add support for tailwind spacing documentation in knowledge generation
+
 ## 2.12.0 (2026/01/18)
 
 ### Features

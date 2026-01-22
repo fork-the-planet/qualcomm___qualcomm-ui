@@ -1,5 +1,26 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 1.11.0 (2026/01/22)
+
+### Features
+
+- [demos]: redesign code demo UI with new controls
+
+### Styles
+
+- [demos]: update border colors and add custom scrollbar styles
+
+### Code Refactoring
+
+- [demos]: convert style toggle from icon button to dropdown menu
+- [demos]: replace CopyToClipboardIconButton with CopyToClipboardButton in demo
+- [demos]: move brand selector into action bar as menu
+- [demos]: replace expand button with collapse toggle at bottom
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common]
+
 ## 1.10.5 (2026/01/19)
 
 ### Styles

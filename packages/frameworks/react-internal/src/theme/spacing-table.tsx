@@ -80,7 +80,7 @@ export function SpacingTable({data = []}: SpacingTableProps) {
             ) : null}
             <Table.HeaderCell>CSS Variable</Table.HeaderCell>
             <Table.HeaderCell>Value</Table.HeaderCell>
-            <Table.HeaderCell>Space</Table.HeaderCell>
+            <Table.HeaderCell>Visualization</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
