@@ -1,12 +1,14 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {ReactNode, RefObject} from "react"
+import {type ReactNode, type RefObject, useRef} from "react"
 
-import {ChevronsLeftRight} from "lucide-react"
+import {ChevronDown, ChevronUp} from "lucide-react"
+import {flushSync} from "react-dom"
 
-import {Button} from "@qualcomm-ui/react/button"
+import {Icon} from "@qualcomm-ui/react/icon"
 import {Tab, Tabs} from "@qualcomm-ui/react/tabs"
+import {useMdxDocsContext} from "@qualcomm-ui/react-mdx/context"
 import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 
 import {DemoStyleToggle} from "./demo-style-toggle"
@@ -15,7 +17,7 @@ export interface DemoCodePanelProps {
   /**
    * Additional actions to render before the expand/collapse button.
    */
-  actionsStart?: ReactNode
+  actions?: ReactNode
   activeTab: string
   /**
    * Copy button element - allows different copy button implementations.
@@ -44,7 +46,7 @@ export interface DemoCodePanelProps {
 }
 
 export function DemoCodePanel({
-  actionsStart,
+  actions,
   activeTab,
   copyButton,
   expanded,
@@ -58,7 +60,73 @@ export function DemoCodePanel({
   suppressHydrationWarning,
   tabsValue,
 }: DemoCodePanelProps): ReactNode {
+  const {setDemoSettings} = useMdxDocsContext()
+
   const effectiveTabsValue = tabsValue !== undefined ? tabsValue : activeTab
+
+  const collapseButtonIcon = expanded ? (
+    <Icon icon={ChevronUp} size="xs" />
+  ) : (
+    <Icon icon={ChevronDown} size="xs" />
+  )
+
+  const collapsibleTriggerRef = useRef<HTMLButtonElement>(null)
+
+  const handleExpandedChange = (newExpanded: boolean) => {
+    if (!newExpanded && collapsibleTriggerRef.current != null) {
+      const triggerEl = collapsibleTriggerRef.current
+      const rectTopBeforeClose = triggerEl.getBoundingClientRect().top
+
+      flushSync(() => onExpandedChange(newExpanded))
+
+      const rectTopAfterClose = triggerEl.getBoundingClientRect().top
+      const delta = rectTopAfterClose - rectTopBeforeClose
+      // don't scroll if the trigger is still in the viewport after closing
+      if (rectTopAfterClose < 0) {
+        window.scrollBy({
+          behavior: "instant",
+          top: delta,
+        })
+      }
+      return
+    }
+
+    onExpandedChange(newExpanded)
+  }
+
+  /**
+   * Handles toggling between inline CSS and Tailwind CSS display modes.
+   *
+   * When the style mode changes, the highlighted code is re-rendered, which
+   * causes the `<pre>` element to be replaced. This would normally reset the
+   * scroll position to the top, losing the user's place in the code. We preserve
+   * and restore it here.
+   */
+  const handleStyleToggle = (value: "inline" | "tailwind") => {
+    if (highlighterRef?.current != null) {
+      const preEl = highlighterRef.current.querySelector("pre.shiki")
+
+      if (preEl) {
+        const scrollTopBeforeChange = preEl.scrollTop
+        const mutationObserver = new MutationObserver(() => {
+          mutationObserver.disconnect()
+          highlighterRef.current
+            ?.querySelector("pre.shiki")
+            ?.scrollTo(0, scrollTopBeforeChange)
+        })
+        mutationObserver.observe(highlighterRef.current, {childList: true})
+      }
+      setDemoSettings?.((prevState) => ({
+        ...prevState,
+        transformTailwindClasses: value === "inline",
+      }))
+    }
+
+    setDemoSettings?.((prevState) => ({
+      ...prevState,
+      transformTailwindClasses: value === "inline",
+    }))
+  }
 
   return (
     <div className="qui-demo-runner__tabs">
@@ -99,24 +167,10 @@ export function DemoCodePanel({
           <div />
         )}
         <div className="qui-demo-runner__actions">
-          {actionsStart}
-          <Button
-            data-brand="qualcomm"
-            emphasis="primary"
-            endIcon={ChevronsLeftRight}
-            onClick={() => onExpandedChange(!expanded)}
-            size="sm"
-            variant="ghost"
-          >
-            {hasPreview
-              ? expanded
-                ? "Collapse Code"
-                : "Expand Code"
-              : expanded
-                ? "Hide Code"
-                : "Show Code"}
-          </Button>
-          {hasInlineStyles ? <DemoStyleToggle /> : null}
+          {actions}
+          {hasInlineStyles ? (
+            <DemoStyleToggle onValueChange={handleStyleToggle} />
+          ) : null}
           {copyButton}
         </div>
       </div>
@@ -128,6 +182,25 @@ export function DemoCodePanel({
         data-hidden={booleanDataAttr(!expanded && !hasPreview)}
         suppressHydrationWarning={suppressHydrationWarning}
       />
+      <button
+        ref={collapsibleTriggerRef}
+        className="qui-demo__collapse-button"
+        data-expanded={booleanDataAttr(expanded)}
+        data-has-preview={booleanDataAttr(hasPreview)}
+        data-sticky={booleanDataAttr(expanded)}
+        onClick={() => handleExpandedChange(!expanded)}
+      >
+        <span>
+          {hasPreview
+            ? expanded
+              ? "Show Less"
+              : "Show More"
+            : expanded
+              ? "Hide Code"
+              : "Show Code"}
+        </span>
+        <span>{collapseButtonIcon}</span>
+      </button>
     </div>
   )
 }

@@ -3,33 +3,53 @@
 
 import type {ReactElement} from "react"
 
-import {Select} from "@qualcomm-ui/react/select"
+import {Menu} from "@qualcomm-ui/react/menu"
+import type {QdsBrand} from "@qualcomm-ui/react/qds-theme"
+import {Portal} from "@qualcomm-ui/react-core/portal"
 
-import {
-  themeOptCollection,
-  useQdsDemoTheme,
-  type UseQdsDemoThemeProps,
-} from "./use-qds-demo-theme"
+import {themeOptCollection} from "./use-qds-demo-theme"
 
-export interface QdsDemoThemeSelectorProps extends UseQdsDemoThemeProps {}
+export interface QdsDemoThemeSelectorProps {
+  qdsBrand: QdsBrand
+  setQdsBrand: (brand: QdsBrand) => void
+}
 
 export function QdsDemoThemeSelector({
   qdsBrand,
   setQdsBrand,
 }: QdsDemoThemeSelectorProps): ReactElement {
-  const {onChange, value} = useQdsDemoTheme({qdsBrand, setQdsBrand})
+  const currentLabel =
+    themeOptCollection.find(qdsBrand)?.label ?? themeOptCollection.at(0)!.label
 
   return (
     <div className="qui-demo-runner__brand-selection-wrapper">
-      <Select
-        clearable={false}
-        collection={themeOptCollection}
-        label="Brand"
-        onValueChange={onChange}
-        placeholder="Brand"
-        size="sm"
-        value={[value]}
-      />
+      <Menu.Root size="sm">
+        <Menu.Trigger>
+          <Menu.Button emphasis="neutral" size="sm" variant="ghost">
+            {currentLabel}
+          </Menu.Button>
+        </Menu.Trigger>
+        <Portal>
+          <Menu.Positioner>
+            <Menu.Content>
+              <Menu.ItemGroup>
+                <Menu.ItemGroupLabel>Brand</Menu.ItemGroupLabel>
+                {themeOptCollection.items.map((item) => (
+                  <Menu.CheckboxItem
+                    key={item.id}
+                    checked={qdsBrand === item.id}
+                    onCheckedChange={() => setQdsBrand(item.id)}
+                    value={item.id}
+                  >
+                    <Menu.ItemLabel>{item.label}</Menu.ItemLabel>
+                    <Menu.ItemIndicator />
+                  </Menu.CheckboxItem>
+                ))}
+              </Menu.ItemGroup>
+            </Menu.Content>
+          </Menu.Positioner>
+        </Portal>
+      </Menu.Root>
     </div>
   )
 }

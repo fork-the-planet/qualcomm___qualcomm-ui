@@ -13,13 +13,18 @@ import type {ReactDemoData} from "@qualcomm-ui/mdx-common"
 import type {ColorScheme} from "@qualcomm-ui/react/qds-theme"
 import {useSafeLayoutEffect} from "@qualcomm-ui/react-core/effects"
 import {useMdxDocsContext} from "@qualcomm-ui/react-mdx/context"
-import {CopyToClipboardIconButton} from "@qualcomm-ui/react-mdx/copy-to-clipboard"
+import {CopyToClipboardButton} from "@qualcomm-ui/react-mdx/copy-to-clipboard"
 import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {DemoCodePanel, useDemoSourceCode} from "./internal"
 
 export interface ReactDemoProps extends ComponentPropsWithRef<"div"> {
+  /**
+   * Optional actions, rendered to the left of the copy button.
+   */
+  actions?: ReactNode
+
   /**
    * Optional child element, rendered above the component demo.
    */
@@ -75,6 +80,7 @@ export interface ReactDemoProps extends ComponentPropsWithRef<"div"> {
 }
 
 export function ReactDemo({
+  actions,
   children,
   colorScheme,
   component: Component,
@@ -181,12 +187,12 @@ export function ReactDemo({
             <Component />
           </div>
           <DemoCodePanel
+            actions={actions}
             activeTab={activeTab}
             copyButton={
-              <CopyToClipboardIconButton
-                density="default"
-                size="sm"
-                valueOrFn={getCopyableCode}
+              <CopyToClipboardButton
+                code={getCopyableCode}
+                emphasis="neutral"
               />
             }
             expanded={expanded}

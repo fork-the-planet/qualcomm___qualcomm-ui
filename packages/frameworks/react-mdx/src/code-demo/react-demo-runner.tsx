@@ -25,11 +25,12 @@ export function ReactDemoRunner({
   return (
     <ReactDemo
       {...props}
+      actions={
+        hideBrandSwitcher ? null : (
+          <QdsDemoThemeSelector qdsBrand={qdsBrand} setQdsBrand={setQdsBrand} />
+        )
+      }
       wrapperProps={{"data-brand": qdsBrand} as ComponentPropsWithRef<"div">}
-    >
-      {hideBrandSwitcher ? null : (
-        <QdsDemoThemeSelector qdsBrand={qdsBrand} setQdsBrand={setQdsBrand} />
-      )}
-    </ReactDemo>
+    />
   )
 }

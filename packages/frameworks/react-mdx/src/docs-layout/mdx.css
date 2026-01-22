@@ -331,7 +331,7 @@ hr.mdx {
 
 .mdx-spoiler__trigger {
   align-items: center;
-  background: var(--color-background-neutral-01);
+  background: var(--background-primary);
   display: flex;
   gap: 8px;
   height: 40px;
