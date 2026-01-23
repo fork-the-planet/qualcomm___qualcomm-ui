@@ -20,7 +20,7 @@ const errorMessage = "Please accept the Terms of Service to continue"
 export function SwitchTanstackFormDemo(): ReactElement {
   const form = useForm({
     defaultValues: defaultFormData,
-    onSubmit: async ({value}) => {
+    onSubmit: ({value}) => {
       // Do something with form data
       console.log(value)
     },

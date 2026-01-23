@@ -20,7 +20,7 @@ const requiredMessage = "Please select an option"
 export function RadioTanstackFormDemo(): ReactElement {
   const form = useForm({
     defaultValues: defaultFormData,
-    onSubmit: async ({value}) => {
+    onSubmit: ({value}) => {
       console.log(value)
     },
   })

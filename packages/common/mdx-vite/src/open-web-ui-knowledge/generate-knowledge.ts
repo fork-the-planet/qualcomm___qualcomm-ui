@@ -1082,7 +1082,7 @@ class KnowledgeGenerator {
     }
   }
 
-  private async generateLlmsTxt(pages: Array<ProcessedPage>): Promise<string> {
+  private generateLlmsTxt(pages: Array<ProcessedPage>): string {
     const lines: string[] = [
       getIntroLines(this.config.name, this.config.description),
     ]
@@ -1115,7 +1115,7 @@ class KnowledgeGenerator {
     processedPages: ProcessedPage[],
     pages: KnowledgePageData[],
   ): Promise<void> {
-    const llmsTxtContent = await this.generateLlmsTxt(processedPages)
+    const llmsTxtContent = this.generateLlmsTxt(processedPages)
     await mkdir(dirname(this.config.outputPath), {recursive: true}).catch(
       () => {},
     )

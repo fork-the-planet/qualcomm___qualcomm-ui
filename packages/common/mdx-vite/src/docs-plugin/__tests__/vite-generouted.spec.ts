@@ -30,8 +30,8 @@ const filePaths = {
   ),
 }
 
-describe("MDX Docs Plugin", async () => {
-  test("Vite Search Indexer", async () => {
+describe("MDX Docs Plugin", () => {
+  test("Vite Search Indexer", () => {
     const mdxFiles = sync(`${filePaths.routesDir}/**/*.mdx`)
     const indexer = new SearchIndexer({
       navConfig: [

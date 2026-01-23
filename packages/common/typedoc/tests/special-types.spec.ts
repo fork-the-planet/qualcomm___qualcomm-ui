@@ -39,11 +39,11 @@ describe("Special Types", async () => {
     expect.fail("No build found")
   }
 
-  test("export exists", async () => {
+  test("export exists", () => {
     expect(readFileSync(config.outputFile), "utf-8").length.gt(0)
   })
 
-  test("known interfaces", async () => {
+  test("known interfaces", () => {
     expect(result.knownInterfaces.CloudDocsSdk).toBeTruthy()
   })
 
@@ -58,7 +58,7 @@ describe("Special Types", async () => {
     )
   })
 
-  test("special union", async () => {
+  test("special union", () => {
     if (!result?.types?.SpecialTypes?.props) {
       expect.fail("No types found")
     }
@@ -67,7 +67,7 @@ describe("Special Types", async () => {
     )
   })
 
-  test("const enum", async () => {
+  test("const enum", () => {
     if (!result?.types?.SpecialTypes?.props) {
       expect.fail("No types found")
     }

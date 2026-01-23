@@ -48,7 +48,7 @@ export function ComboboxHookFormDemo(): ReactElement {
     },
   })
 
-  const handleFormSubmit: SubmitHandler<ValueSchema> = async (data) => {
+  const handleFormSubmit: SubmitHandler<ValueSchema> = (data) => {
     const validation = valueSchema(data)
 
     if (validation instanceof type.errors) {

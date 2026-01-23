@@ -11,9 +11,7 @@ interface PublishAngularOpts {
   flatModuleId: string
 }
 
-export async function publishAngular({
-  flatModuleId,
-}: PublishAngularOpts): Promise<any> {
+export function publishAngular({flatModuleId}: PublishAngularOpts): void {
   let notYetPublished = false
   const outDir = resolve("./dist")
   if (!existsSync(outDir)) {
@@ -121,12 +119,12 @@ export function addPublishAngularCommands() {
     .command(Commands.PUBLISH_ANGULAR)
     .argument("<flatModuleId>")
     .summary("Prepare a built Angular library for publishing to npm.")
-    .action(async (flatModuleId): Promise<any> => {
+    .action((flatModuleId) => {
       if (!flatModuleId) {
         // can't use requiredOption because it applies to every command.
         console.log("flatModuleId is required")
         return
       }
-      return publishAngular({flatModuleId})
+      publishAngular({flatModuleId})
     })
 }

@@ -148,7 +148,7 @@ export function angularDemoPlugin({
       if (process.env.NODE_ENV === "development") {
         if (!hasWatcherInitialized) {
           hasWatcherInitialized = true
-          await setupAngularWatcher()
+          setupAngularWatcher()
         } else {
           logDev(
             `${chalk.blue.bold(LOG_PREFIX)} Watcher already initialized by another instance`,
@@ -268,7 +268,7 @@ export function angularDemoPlugin({
 
       return []
     },
-    async load(id) {
+    load(id) {
       if (id === VIRTUAL_MODULE_ID) {
         return generateRegistryModule()
       }
@@ -1029,7 +1029,7 @@ export function getAngularDemoInfo(demoId) {
     return pathAliases
   }
 
-  async function setupAngularWatcher() {
+  function setupAngularWatcher() {
     watcher = watch(routesDir, {
       ignoreInitial: true,
       persistent: true,
