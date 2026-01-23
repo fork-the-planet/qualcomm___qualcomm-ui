@@ -26,7 +26,7 @@ export function proxifyTable<T>(
        * they do not retain any reactive value
        */
       if (property.startsWith("get") && !property.endsWith("Handler")) {
-        const maybeFn = table[property] as Function | never
+        const maybeFn = table[property] as () => void
         if (typeof maybeFn === "function") {
           Object.defineProperty(target, property, {
             configurable: true,

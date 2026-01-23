@@ -137,7 +137,7 @@ export function RowSelectionDemo() {
             placeholder="Search every column..."
             value={globalFilter}
           />
-          <Button onClick={refreshData} variant="outline">
+          <Button onClick={() => void refreshData()} variant="outline">
             Refresh Data
           </Button>
           {isFetching ? <ProgressRing size="xs" /> : null}

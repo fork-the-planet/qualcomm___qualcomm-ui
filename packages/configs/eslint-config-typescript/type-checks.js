@@ -19,7 +19,12 @@ export default defineConfig({
      */
     "@typescript-eslint/no-empty-object-type": "off",
     /**
-     * The TypeScript compiler already covers this use case when set to strict.
+     * Some arguments against this:
+     *
+     * - Interop with untyped JS is a real pain point where `any` is pragmatic.
+     * - Type gymnastics that satisfy the compiler but obscure intent are worse than
+     * `any`
+     * - The ceremony of unknown + guards can be disproportionate to the actual risk
      */
     "@typescript-eslint/no-explicit-any": "warn",
     "@typescript-eslint/no-extra-non-null-assertion": "error",
@@ -28,8 +33,13 @@ export default defineConfig({
     "@typescript-eslint/no-implied-eval": "error",
     "@typescript-eslint/no-misused-new": "error",
     "@typescript-eslint/no-misused-promises": "error",
-    "@typescript-eslint/no-namespace": "warn",
+    "@typescript-eslint/no-namespace": "error",
     "@typescript-eslint/no-non-null-asserted-optional-chain": "error",
+    /**
+     * Some projects choose to occasionally intentionally include a redundant type
+     * constituent for documentation purposes. Like our icon, which is a union of:
+     * `"xs" | "sm" | "md" | "lg" | "xl" | string | number`
+     */
     "@typescript-eslint/no-redundant-type-constituents": "off",
     "@typescript-eslint/no-require-imports": "off",
     "@typescript-eslint/no-this-alias": "error",

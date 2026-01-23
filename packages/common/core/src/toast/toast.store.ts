@@ -190,13 +190,13 @@ export function createToastStore<V = string>(
       })
 
     const unwrap = () =>
-      new Promise<T>((resolve, reject) =>
-        prom
+      new Promise<T>((resolve, reject) => {
+        void prom
           .then(() =>
             result[0] === "reject" ? reject(result[1]) : resolve(result[1]),
           )
-          .catch(reject),
-      )
+          .catch(reject)
+      })
 
     return {id, unwrap}
   }
