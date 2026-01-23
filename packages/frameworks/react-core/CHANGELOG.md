@@ -1,5 +1,16 @@
 # @qualcomm-ui/react-core Changelog
 
+## 1.1.3 (2026/01/23)
+
+### Code Refactoring
+
+- improve logging and error handling
+- remove async from sync functions
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/dom, @qualcomm-ui/utils]
+
 ## 1.1.2 (2026/01/19)
 
 ### Bug Fixes

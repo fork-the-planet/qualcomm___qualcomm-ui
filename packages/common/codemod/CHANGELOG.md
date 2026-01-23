@@ -1,5 +1,16 @@
 # @qualcomm-ui/codemod Changelog
 
+## 0.2.1 (2026/01/23)
+
+### Code Refactoring
+
+- improve logging and error handling
+- remove async from sync functions
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils]
+
 ## 0.2.0 (2025/12/11)
 
 ### Features

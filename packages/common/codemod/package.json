@@ -1,6 +1,6 @@
 {
   "name": "@qualcomm-ui/codemod",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Codemod utilities for automatic QUI package migrations",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
@@ -37,7 +37,7 @@
   "devDependencies": {
     "@commander-js/extra-typings": "^14.0.0",
     "@qualcomm-ui/cli": "workspace:*",
-    "@qualcomm-ui/esbuild": "workspace:^1.0.4",
+    "@qualcomm-ui/esbuild": "workspace:^1.0.5",
     "@qualcomm-ui/tsconfig": "workspace:^1.0.4",
     "@types/mdast": "^4.0.4",
     "@types/node": "~24.9.2",

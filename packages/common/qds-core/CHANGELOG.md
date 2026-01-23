@@ -1,5 +1,19 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.14.0 (2026/01/23)
+
+### Features
+
+- [header-bar]: add padding prop ([e7169c8](https://github.com/qualcomm/qualcomm-ui/commit/e7169c8b9e38f59f9fca08cb65ca7e0514aadf14))
+
+### Code Refactoring
+
+- remove async from sync functions
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/utils]
+
 ## 1.13.0 (2026/01/19)
 
 ### Features

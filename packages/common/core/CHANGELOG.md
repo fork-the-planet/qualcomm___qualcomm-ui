@@ -1,5 +1,16 @@
 # @qualcomm-ui/core Changelog
 
+## 1.2.1 (2026/01/23)
+
+### Code Refactoring
+
+- improve logging and error handling
+- remove async from sync functions
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/dom, @qualcomm-ui/utils]
+
 ## 1.2.0 (2025/12/24)
 
 ### Features

@@ -1,5 +1,16 @@
 # @qualcomm-ui/typedoc Changelog
 
+## 1.0.5 (2026/01/23)
+
+### Code Refactoring
+
+- [dedent]: refined TypeScript types
+- remove async from sync functions
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/typedoc-common]
+
 ## 1.0.4 (2026/01/02)
 
 ### Bug Fixes

@@ -1,6 +1,6 @@
 {
   "name": "@qualcomm-ui/tailwind-plugin",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Qualcomm UI Tailwind Plugin",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
@@ -50,9 +50,9 @@
     "generate-tailwind-knowledge": "pnpm tsx scripts/variables-to-text.ts src/qui.css ./generated/tailwind-qui-next-gen.txt"
   },
   "devDependencies": {
-    "@qualcomm-ui/cli": "workspace:^1.0.5",
-    "@qualcomm-ui/css-utils": "workspace:^1.0.4",
-    "@qualcomm-ui/esbuild": "workspace:^1.0.4",
+    "@qualcomm-ui/cli": "workspace:^1.0.6",
+    "@qualcomm-ui/css-utils": "workspace:^1.0.5",
+    "@qualcomm-ui/esbuild": "workspace:^1.0.5",
     "@qualcomm-ui/tsconfig": "workspace:^1.0.4",
     "esbuild": "^0.25.8",
     "shx": "^0.4.0",

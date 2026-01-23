@@ -1,5 +1,16 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 2.14.1 (2026/01/23)
+
+### Code Refactoring
+
+- improve logging and error handling
+- remove async from sync functions
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common, @qualcomm-ui/typedoc-common, @qualcomm-ui/utils]
+
 ## 2.14.0 (2026/01/22)
 
 ### Features

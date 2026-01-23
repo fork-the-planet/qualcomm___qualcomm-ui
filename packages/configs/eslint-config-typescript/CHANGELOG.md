@@ -1,5 +1,11 @@
 # @qualcomm-ui/eslint-config-typescript Changelog
 
+## 2.0.0 (2026/01/23)
+
+### BREAKING CHANGES
+
+- migrate several rules to strict to conform with official recommended config
+
 ## 1.1.1 (2026/01/19)
 
 ### Miscellaneous Chores
