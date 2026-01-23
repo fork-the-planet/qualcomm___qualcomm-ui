@@ -10,7 +10,7 @@ export function SegmentedControlControlledDemo() {
     <SegmentedControl.Root
       multiple
       onValueChange={(values) => {
-        console.log(`Selected values: ${values?.length ? values : "<none>"}`)
+        console.log("Selected values:", values?.length ? values : "<none>")
         setValue(values)
       }}
       value={value}

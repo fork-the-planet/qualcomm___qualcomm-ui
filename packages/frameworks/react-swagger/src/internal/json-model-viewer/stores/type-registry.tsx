@@ -125,7 +125,7 @@ function matchTypeComponents<Value>(
     if (typeof value === "object") {
       return objectType as unknown as DataType<Value>
     }
-    throw new Error(`No type matched for value: ${value}`)
+    throw new Error(`No type matched for value`, {cause: value})
   }
   return potential
 }

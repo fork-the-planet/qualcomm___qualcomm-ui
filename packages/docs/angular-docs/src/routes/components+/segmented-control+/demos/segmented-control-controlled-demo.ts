@@ -25,7 +25,7 @@ export class SegmentedControlControlledDemo {
   readonly value = signal<string[] | null | undefined>([])
 
   valueChanged(newValue: string[] | null | undefined) {
-    console.log(`Selected values: ${newValue?.length ? newValue : "<none>"}`)
+    console.log("Selected values", newValue?.length ? newValue : "<none>")
     this.value.set(newValue)
   }
 }
