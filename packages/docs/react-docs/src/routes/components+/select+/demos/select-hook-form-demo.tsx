@@ -45,7 +45,7 @@ export function SelectHookFormDemo(): ReactElement {
     },
   })
 
-  const handleFormSubmit: SubmitHandler<ValueSchema> = async (data) => {
+  const handleFormSubmit: SubmitHandler<ValueSchema> = (data) => {
     const validation = valueSchema(data)
 
     if (validation instanceof type.errors) {
@@ -72,7 +72,7 @@ export function SelectHookFormDemo(): ReactElement {
       <form
         className="w-48"
         noValidate
-        onSubmit={handleSubmit(handleFormSubmit)}
+        onSubmit={(event) => void handleSubmit(handleFormSubmit)(event)}
       >
         <Controller
           control={control}

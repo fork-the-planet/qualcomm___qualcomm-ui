@@ -91,7 +91,8 @@ async function main() {
     await writeFile(outFile, documentation, "utf-8")
   } catch (error) {
     console.error(
-      `Error reading file: ${error instanceof Error ? error.message : error}`,
+      "Error reading file",
+      error instanceof Error ? error.message : error,
     )
     exit(1)
   }

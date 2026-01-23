@@ -350,7 +350,7 @@ export function quiDocsPlugin(opts?: QuiDocsPluginOptions): PluginOption {
       })
       state.servers.push(server)
     },
-    handleHotUpdate: async ({file: updateFile, modules, server}) => {
+    handleHotUpdate: ({file: updateFile, modules, server}) => {
       if (updateFile.endsWith(".css")) {
         return modules
       }

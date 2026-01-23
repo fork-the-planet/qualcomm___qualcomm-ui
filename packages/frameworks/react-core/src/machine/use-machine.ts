@@ -349,7 +349,7 @@ export function useMachine<T extends MachineSchema>(
         "transition",
         event.type,
         transition.target || currentState,
-        `(${transition.actions})`,
+        `(${transition.actions as any})`,
       )
 
       if (changed) {

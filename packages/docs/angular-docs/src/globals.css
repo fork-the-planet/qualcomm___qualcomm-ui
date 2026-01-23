@@ -42,7 +42,7 @@ body {
 svg.fsd {
   > * tspan {
     fill: var(--color-icon-neutral-primary);
-    font: var(--q-font-metadata-xl-mono);
+    font: var(--font-static-code-md-default);
   }
 }
 

@@ -84,7 +84,7 @@ export function ColumnDndDemo() {
     <div className="flex w-full flex-col gap-4 p-2">
       <Table.Root>
         <Table.ActionBar>
-          <Button onClick={regenerateData} variant="outline">
+          <Button onClick={() => void regenerateData()} variant="outline">
             Regenerate
           </Button>
           <Button onClick={resetOrder} variant="outline">

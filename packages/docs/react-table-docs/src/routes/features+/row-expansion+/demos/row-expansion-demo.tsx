@@ -138,7 +138,7 @@ export function RowExpansionDemo() {
     <div className="flex w-full flex-col gap-4 p-2">
       <Table.Root>
         <Table.ActionBar>
-          <Button onClick={refreshData} variant="outline">
+          <Button onClick={() => void refreshData()} variant="outline">
             Refresh Data
           </Button>
           {isFetching ? <ProgressRing size="xs" /> : null}

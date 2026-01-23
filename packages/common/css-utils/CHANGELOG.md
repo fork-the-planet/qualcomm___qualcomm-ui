@@ -1,5 +1,11 @@
 # @qualcomm-ui/css-utils Changelog
 
+## 1.0.5 (2026/01/23)
+
+### Code Refactoring
+
+- improve logging and error handling
+
 ## 1.0.4 (2025/12/03)
 
 ### Build System

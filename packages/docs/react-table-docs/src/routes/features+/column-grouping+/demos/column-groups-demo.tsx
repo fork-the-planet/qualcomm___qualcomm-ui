@@ -58,7 +58,7 @@ export function ColumnGroupsDemo() {
     <div className="w-full p-2">
       <Table.Root>
         <Table.ActionBar>
-          <Button onClick={() => refetch()} variant="outline">
+          <Button onClick={() => void refetch()} variant="outline">
             Regenerate
           </Button>
           {isFetching ? <ProgressRing size="xs" /> : null}

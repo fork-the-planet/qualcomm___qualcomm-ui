@@ -41,7 +41,7 @@ async function renderMachine<T extends MachineSchema>(
     }
   }
 
-  const advanceTime = async (ms: number) => {
+  const advanceTime = (ms: number) => {
     vi.advanceTimersByTime(ms)
   }
 
@@ -610,7 +610,7 @@ describe("Machine", () => {
     send({type: "START"})
     await expect.poll(() => state.get()).toEqual("test")
 
-    await advanceTime(1000)
+    advanceTime(1000)
     await expect.poll(() => state.get()).toEqual("success")
     expect(cleanup).toHaveBeenCalledOnce()
 

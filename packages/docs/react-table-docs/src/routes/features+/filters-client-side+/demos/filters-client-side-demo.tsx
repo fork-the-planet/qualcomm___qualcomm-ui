@@ -104,7 +104,11 @@ export function FiltersClientSideDemo() {
             startIcon={Search}
             value={globalFilter}
           />
-          <Button onClick={refreshData} size="sm" variant="outline">
+          <Button
+            onClick={() => void refreshData()}
+            size="sm"
+            variant="outline"
+          >
             Refresh Data
           </Button>
           {isFetching ? <ProgressRing size="xs" /> : null}

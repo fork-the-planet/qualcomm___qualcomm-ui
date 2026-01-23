@@ -74,7 +74,7 @@ export function ColumnSizingDemo() {
     <div className="flex w-full flex-col gap-4 p-2">
       <Table.Root showColumnDivider>
         <Table.ActionBar className="gap-8">
-          <Button onClick={() => refetch()} variant="outline">
+          <Button onClick={() => void refetch()} variant="outline">
             Regenerate
           </Button>
 

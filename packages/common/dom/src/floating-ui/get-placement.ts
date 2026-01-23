@@ -264,8 +264,10 @@ function getPlacementImpl(
 
   const update = async () => {
     if (opts.updatePosition) {
-      await opts.updatePosition({updatePosition})
-      onPositioned?.({placed: true})
+      try {
+        await opts.updatePosition({updatePosition})
+        onPositioned?.({placed: true})
+      } catch {}
     } else {
       await updatePosition()
     }
@@ -273,7 +275,7 @@ function getPlacementImpl(
 
   const autoUpdateOptions = getAutoUpdateOptions(options.listeners)
   const cancelAutoUpdate = options.listeners
-    ? autoUpdate(reference, floating, update, autoUpdateOptions)
+    ? autoUpdate(reference, floating, () => void update(), autoUpdateOptions)
     : noop
 
   void update()

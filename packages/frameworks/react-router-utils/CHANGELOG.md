@@ -1,5 +1,11 @@
 # @qualcomm-ui/react-router-utils Changelog
 
+## 1.0.8 (2026/01/23)
+
+### Code Refactoring
+
+- replace Function type usage
+
 ## 1.0.7 (2025/12/12)
 
 ### Bug Fixes

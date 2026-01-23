@@ -1,5 +1,19 @@
 # @qualcomm-ui/angular Changelog
 
+## 1.14.0 (2026/01/23)
+
+### Features
+
+- [header-bar]: add padding prop
+
+### Code Refactoring
+
+- [types]: use accurate function types
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/angular-core, @qualcomm-ui/qds-core, @qualcomm-ui/utils]
+
 ## 1.13.1 (2026/01/19)
 
 ### Miscellaneous Chores

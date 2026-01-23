@@ -1,5 +1,15 @@
 # @qualcomm-ui/react Changelog
 
+## 1.9.0 (2026/01/23)
+
+### Features
+
+- [header-bar]: add padding prop
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/react-core, @qualcomm-ui/qds-core, @qualcomm-ui/utils]
+
 ## 1.8.1 (2026/01/19)
 
 ### Bug Fixes

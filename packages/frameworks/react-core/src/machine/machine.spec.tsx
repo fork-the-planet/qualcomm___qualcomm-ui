@@ -26,13 +26,13 @@ async function renderMachine<T extends MachineSchema>(
   const {act, result} = await renderHook(() => useMachine<T>(machine))
 
   const send = async (event: EventType<NonNullable<any>>): Promise<void> => {
-    await act(async () => {
+    await act(() => {
       result.current.send(event)
     })
   }
 
   const advanceTime = async (ms: number) => {
-    await act(async () => {
+    await act(() => {
       vi.advanceTimersByTime(ms)
     })
   }

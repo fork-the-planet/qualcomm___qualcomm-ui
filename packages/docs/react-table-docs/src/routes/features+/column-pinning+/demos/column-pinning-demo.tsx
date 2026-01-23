@@ -85,7 +85,7 @@ export function ColumnPinningDemo() {
   return (
     <div className="flex w-full flex-col gap-4 p-2">
       <div className="mt-4 flex flex-wrap items-center gap-2">
-        <Button onClick={rerender} variant="outline">
+        <Button onClick={() => void rerender()} variant="outline">
           Regenerate
         </Button>
         <Button onClick={randomizeColumns} variant="outline">

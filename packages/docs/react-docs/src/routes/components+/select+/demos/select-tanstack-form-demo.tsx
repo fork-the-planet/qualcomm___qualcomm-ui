@@ -29,7 +29,7 @@ export function SelectTanstackFormDemo(): ReactElement {
     defaultValues: {
       city: [] as string[],
     },
-    onSubmit: async () => {
+    onSubmit: () => {
       toaster.create({
         label: "Form submitted",
         type: "success",

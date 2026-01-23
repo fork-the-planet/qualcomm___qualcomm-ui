@@ -64,7 +64,7 @@ export class ExportAnalyzer {
         }
       }
     } catch (error) {
-      console.warn(`⚠️  Could not scan directory ${dirPath}: ${error}`)
+      console.warn(`Could not scan directory ${dirPath}`, error)
     }
   }
 
@@ -79,7 +79,7 @@ export class ExportAnalyzer {
       this.exports.push(...exports)
       this.processedFiles++
     } catch (error) {
-      console.warn(`⚠️  Could not analyze file ${filePath}: ${error}`)
+      console.warn(`Could not analyze file ${filePath}`, error)
     }
   }
 
