@@ -115,7 +115,7 @@ export function hostBinding<T, S extends Signal<T> | WritableSignal<T>>(
           renderer.setStyle(
             element,
             property,
-            `${value}${unit ?? ""}`,
+            `${value as string}${unit ?? ""}`,
             property.startsWith("--")
               ? RendererStyleFlags2.DashCase
               : undefined,
