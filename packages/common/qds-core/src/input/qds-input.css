@@ -213,11 +213,14 @@
 }
 
 .qui-input__error-text {
-  align-items: flex-start;
   color: var(--color-text-support-danger);
+  font: var(--font-static-body-xs-default);
+}
+
+.qui-input__root[data-invalid] .qui-input__error-text {
+  align-items: flex-start;
   display: inline-flex;
   flex-wrap: nowrap;
-  font: var(--font-static-body-xs-default);
   gap: var(--spacing-40);
 }
 

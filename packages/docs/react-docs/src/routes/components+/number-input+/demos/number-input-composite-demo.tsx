@@ -12,7 +12,7 @@ export function NumberInputCompositeDemo(): ReactElement {
         <NumberInput.Control />
         <NumberInput.ErrorIndicator />
       </NumberInput.InputGroup>
-      <NumberInput.ErrorText>Error</NumberInput.ErrorText>
+      <NumberInput.Hint>Optional hint</NumberInput.Hint>
     </NumberInput.Root>
     // preview
   )
