@@ -37,7 +37,7 @@ import {
  * ```
  */
 export function assertInjector<Runner extends () => any>(
-  fn: Function,
+  fn: (...args: unknown[]) => any,
   injector: Injector | undefined | null,
   runner: Runner,
 ): ReturnType<Runner>
@@ -53,11 +53,11 @@ export function assertInjector<Runner extends () => any>(
  * @returns Injector
  */
 export function assertInjector(
-  fn: Function,
+  fn: (...args: any[]) => unknown,
   injector: Injector | undefined | null,
 ): Injector
 export function assertInjector(
-  fn: Function,
+  fn: (...args: unknown[]) => unknown,
   injector: Injector | undefined | null,
   runner?: () => any,
 ) {
