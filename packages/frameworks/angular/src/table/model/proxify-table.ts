@@ -65,7 +65,10 @@ export function proxifyTable<T>(
  * into a cached function wrapping a computed that return its value based on the
  * given parameters.
  */
-function toComputed<T>(signal: Signal<TableInstance<T>>, fn: Function) {
+function toComputed<T>(
+  signal: Signal<TableInstance<T>>,
+  fn: (...args: any[]) => any,
+) {
   const hasArgs = fn.length > 0
   if (!hasArgs) {
     return computed(() => {
