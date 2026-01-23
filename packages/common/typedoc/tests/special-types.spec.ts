@@ -54,7 +54,7 @@ describe("Special Types", async () => {
     }
     expect(cloudDocsSdk.props[1].name).toEqual("uploadFiles")
     expect(cloudDocsSdk.props[1].resolvedType.prettyType).toEqual(
-      "(\n  {\n    archivePath: string\n    environment:\n      | 'test'\n      | 'stage'\n      | 'prod'\n    service: string\n  },\n  {\n    environment:\n      | 'test'\n      | 'stage'\n      | 'prod'\n    service: string\n  },\n) => Promise<boolean>",
+      "(\n  {\n    archivePath: string\n    environment:\n      | 'test'\n      | 'stage'\n      | 'prod'\n    service: string\n  },\n  {\n    environment:\n      | 'test'\n      | 'stage'\n      | 'prod'\n    service: string\n  },\n) => boolean",
     )
   })
 
