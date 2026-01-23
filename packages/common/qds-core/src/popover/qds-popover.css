@@ -1,11 +1,8 @@
 .qui-popover__content {
-  --arrow-background: var(--color-surface-overlay);
   --arrow-size: 10px;
-  background: var(--color-surface-overlay);
   border-radius: 4px;
   box-shadow: var(--shadow-high);
   display: flex;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
   flex-direction: column;
   font: var(--font-static-body-xs-default);
   gap: var(--spacing-70);
@@ -13,16 +10,26 @@
   position: relative;
   transform-origin: var(--transform-origin);
   z-index: calc(var(--z-index-popover) + var(--layer-index));
+
+  --arrow-background: var(--color-surface-overlay);
+  background: var(--color-surface-overlay);
+  color: var(--color-text-neutral-primary);
+
+  &[data-emphasis="brand"] {
+    --arrow-background: var(--color-background-brand-primary);
+    background: var(--color-background-brand-primary);
+    color: var(--color-utility-persistent-white);
+  }
 }
 
 .qui-popover__label {
-  color: var(--color-text-neutral-primary);
+  color: inherit;
   font: var(--font-static-heading-xxs-bold);
 }
 
 .qui-popover__description {
   align-items: flex-start;
-  color: var(--color-text-neutral-primary);
+  color: inherit;
   font: var(--font-static-body-xs-default);
   position: relative;
 }
@@ -31,11 +38,6 @@
   position: absolute;
   right: 0;
   top: -20px;
-}
-
-.qui-popover__arrow {
-  --arrow-background: var(--color-surface-overlay);
-  --arrow-shadow-color: #ebebeb;
 }
 
 .qui-popover__indicator {
