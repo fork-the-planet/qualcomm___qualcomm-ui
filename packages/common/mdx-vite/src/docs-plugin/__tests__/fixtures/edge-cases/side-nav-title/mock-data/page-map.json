@@ -1,0 +1,102 @@
+{
+  "/snapdragon-guardian/try-it-out": {
+    "categories": [
+      "Snapdragon Guardian",
+      "Snapdragon Guardian APIs"
+    ],
+    "id": "/routes/snapdragon-guardian+/try-it-out.mdx",
+    "pathname": "/snapdragon-guardian/try-it-out",
+    "pathSegments": [
+      "snapdragon-guardian",
+      "try-it-out"
+    ],
+    "title": "Snapdragon Guardian APIs"
+  },
+  "/snapdragon-guardian/documentation": {
+    "categories": [
+      "Snapdragon Guardian",
+      "Snapdragon Guardian API Guide"
+    ],
+    "id": "/routes/snapdragon-guardian+/documentation.mdx",
+    "pathname": "/snapdragon-guardian/documentation",
+    "pathSegments": [
+      "snapdragon-guardian",
+      "documentation"
+    ],
+    "title": "Snapdragon Guardian API Guide",
+    "toc": [
+      {
+        "headingLevel": 2,
+        "id": "overview",
+        "tagName": "h2",
+        "textContent": "Overview"
+      },
+      {
+        "headingLevel": 2,
+        "id": "quick-start-common-api-requests",
+        "tagName": "h2",
+        "textContent": "Quick Start: Common API requests"
+      },
+      {
+        "headingLevel": 2,
+        "id": "endpoints",
+        "tagName": "h2",
+        "textContent": "Endpoints"
+      },
+      {
+        "headingLevel": 3,
+        "id": "1-list-devices",
+        "tagName": "h3",
+        "textContent": "1. List Devices"
+      },
+      {
+        "headingLevel": 3,
+        "id": "2-get-details-of-a-device",
+        "tagName": "h3",
+        "textContent": "2. Get details of a device"
+      },
+      {
+        "headingLevel": 3,
+        "id": "3-send-a-command-to-the-device",
+        "tagName": "h3",
+        "textContent": "3. Send a command to the device"
+      },
+      {
+        "headingLevel": 3,
+        "id": "4-get-the-status-of-a-command",
+        "tagName": "h3",
+        "textContent": "4. Get the status of a command"
+      },
+      {
+        "headingLevel": 3,
+        "id": "5-get-command-history",
+        "tagName": "h3",
+        "textContent": "5. Get command history"
+      },
+      {
+        "headingLevel": 3,
+        "id": "6-get-event-history",
+        "tagName": "h3",
+        "textContent": "6. Get event history"
+      },
+      {
+        "headingLevel": 3,
+        "id": "7-get-details-of-an-event",
+        "tagName": "h3",
+        "textContent": "7. Get details of an event"
+      },
+      {
+        "headingLevel": 2,
+        "id": "error-handling",
+        "tagName": "h2",
+        "textContent": "Error Handling"
+      },
+      {
+        "headingLevel": 3,
+        "id": "http-status-codes",
+        "tagName": "h3",
+        "textContent": "HTTP Status Codes"
+      }
+    ]
+  }
+}
