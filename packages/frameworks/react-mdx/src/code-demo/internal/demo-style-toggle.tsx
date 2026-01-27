@@ -1,29 +1,26 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {ComponentPropsWithRef, CSSProperties, ReactElement} from "react"
+import type {ComponentPropsWithRef, ReactElement} from "react"
 
-import {IconButton} from "@qualcomm-ui/react/button"
-import {Tooltip} from "@qualcomm-ui/react/tooltip"
+import {Menu} from "@qualcomm-ui/react/menu"
+import {Portal} from "@qualcomm-ui/react-core/portal"
 import {useMdxDocsContext} from "@qualcomm-ui/react-mdx/context"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {CssLogo} from "./css-logo"
-import {TailwindLogo} from "./tailwind-logo"
+export interface DemoStyleToggleProps extends ComponentPropsWithRef<"div"> {
+  onValueChange: (value: "inline" | "tailwind") => void
+}
 
-export interface DemoStyleToggleProps extends ComponentPropsWithRef<"div"> {}
+export function DemoStyleToggle({
+  onValueChange,
+  ...props
+}: DemoStyleToggleProps): ReactElement {
+  const {demoSettings} = useMdxDocsContext()
 
-export function DemoStyleToggle(props: DemoStyleToggleProps): ReactElement {
-  const {demoSettings, setDemoSettings} = useMdxDocsContext()
-
-  const toggleStyleMode = () => {
-    setDemoSettings?.((prevState) => ({
-      ...prevState,
-      transformTailwindClasses: !prevState.transformTailwindClasses,
-    }))
-  }
-
-  const transformTailwindClasses = demoSettings?.transformTailwindClasses
+  const currentValue = demoSettings?.transformTailwindClasses
+    ? "inline"
+    : "tailwind"
 
   const mergedProps = mergeProps(
     {className: "qui-demo-runner__style-toggle"},
@@ -32,30 +29,38 @@ export function DemoStyleToggle(props: DemoStyleToggleProps): ReactElement {
 
   return (
     <div {...mergedProps}>
-      <Tooltip
-        trigger={
-          <IconButton
-            aria-label="Toggle demo style mode"
-            emphasis="primary"
-            icon={
-              transformTailwindClasses ? (
-                <CssLogo style={{"--icon-size": "16px"} as CSSProperties} />
-              ) : (
-                <TailwindLogo
-                  style={{"--icon-size": "16px"} as CSSProperties}
-                />
-              )
-            }
-            onClick={toggleStyleMode}
-            size="sm"
-            variant="ghost"
-          />
-        }
-      >
-        {transformTailwindClasses
-          ? "Switch to tailwind styles"
-          : "Switch to inline styles"}
-      </Tooltip>
+      <Menu.Root size="sm">
+        <Menu.Trigger>
+          <Menu.Button emphasis="neutral" size="sm" variant="ghost">
+            {currentValue === "inline" ? "Inline Styles" : "Tailwind CSS"}
+          </Menu.Button>
+        </Menu.Trigger>
+        <Portal>
+          <Menu.Positioner>
+            <Menu.Content>
+              <Menu.ItemGroup>
+                <Menu.ItemGroupLabel>Style Syntax</Menu.ItemGroupLabel>
+                <Menu.CheckboxItem
+                  checked={currentValue === "tailwind"}
+                  onCheckedChange={() => onValueChange("tailwind")}
+                  value="tailwind"
+                >
+                  <Menu.ItemLabel>Tailwind CSS</Menu.ItemLabel>
+                  <Menu.ItemIndicator />
+                </Menu.CheckboxItem>
+                <Menu.CheckboxItem
+                  checked={currentValue === "inline"}
+                  onCheckedChange={() => onValueChange("inline")}
+                  value="inline"
+                >
+                  <Menu.ItemLabel>Inline Styles</Menu.ItemLabel>
+                  <Menu.ItemIndicator />
+                </Menu.CheckboxItem>
+              </Menu.ItemGroup>
+            </Menu.Content>
+          </Menu.Positioner>
+        </Portal>
+      </Menu.Root>
     </div>
   )
 }

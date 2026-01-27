@@ -1,5 +1,35 @@
 # @qualcomm-ui/react Changelog
 
+## 1.9.0 (2026/01/23)
+
+### Features
+
+- [header-bar]: add padding prop
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/react-core, @qualcomm-ui/qds-core, @qualcomm-ui/utils]
+
+## 1.8.1 (2026/01/19)
+
+### Bug Fixes
+
+- [dependencies]: bump peer of lucide-react to fix filter/funnel import
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react-core, @qualcomm-ui/qds-core]
+
+## 1.8.0 (2026/01/17)
+
+### Features
+
+- add lg switch size
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
 ## 1.7.0 (2026/01/15)
 
 ### Features

@@ -1,5 +1,31 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.14.0 (2026/01/23)
+
+### Features
+
+- [header-bar]: add padding prop
+
+### Code Refactoring
+
+- remove async from sync functions
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/utils]
+
+## 1.13.0 (2026/01/19)
+
+### Features
+
+- update design tokens to latest revision
+
+## 1.12.0 (2026/01/17)
+
+### Features
+
+- add lg switch size
+
 ## 1.11.0 (2026/01/15)
 
 ### Features

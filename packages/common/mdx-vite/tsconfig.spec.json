@@ -5,7 +5,7 @@
     "baseUrl": "./",
     "outDir": "./dist"
   },
-  "include": ["./src/tests"],
+  "include": ["./src/**/__tests__"],
   "references": [
     {
       "path": "./tsconfig.lib.json"

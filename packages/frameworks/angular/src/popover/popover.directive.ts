@@ -7,9 +7,10 @@ import {providePopoverContext} from "@qualcomm-ui/angular-core/popover"
 import type {Booleanish} from "@qualcomm-ui/utils/coercion"
 
 import {PopoverRootDirective} from "./popover-root.directive"
+import {provideQdsPopoverContext} from "./qds-popover-context.service"
 
 @Component({
-  providers: [providePopoverContext()],
+  providers: [providePopoverContext(), provideQdsPopoverContext()],
   selector: "[q-popover]",
   standalone: false,
   template: `

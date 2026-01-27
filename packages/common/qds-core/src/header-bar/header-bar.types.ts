@@ -9,7 +9,16 @@ export type QdsHeaderBarSize = "sm" | "lg"
 
 export type QdsHeaderSurface = "primary" | "secondary"
 
+export type QdsHeaderBarPadding = "default" | "large"
+
 export interface QdsHeaderBarRootProps {
+  /**
+   * The horizontal padding of the component.
+   *
+   * @default 'default'
+   */
+  padding?: QdsHeaderBarPadding
+
   /**
    * The size of the component and its elements. Governs padding, element spacing,
    * and height.
@@ -28,6 +37,7 @@ type HeaderBarClasses = typeof headerBarClasses
 
 export interface QdsHeaderBarRootBindings {
   className: HeaderBarClasses["root"]
+  "data-padding": QdsHeaderBarPadding
   "data-size": QdsHeaderBarSize
   "data-surface": QdsHeaderSurface
 }

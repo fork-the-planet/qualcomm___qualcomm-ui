@@ -74,7 +74,7 @@ export function RowDndDemo() {
   return (
     <Table.Root>
       <Table.ActionBar>
-        <Button onClick={regenerateData} variant="outline">
+        <Button onClick={() => void regenerateData()} variant="outline">
           Regenerate
         </Button>
         {isFetching ? <ProgressRing size="xs" /> : null}

@@ -24,7 +24,7 @@ export function proxyVirtualizer<
       return virtualizerSignal()
     },
     get(target, property) {
-      const untypedTarget = target as any
+      const untypedTarget: any = target as NonNullable<unknown>
       if (untypedTarget[property]) {
         return untypedTarget[property]
       }
@@ -57,7 +57,13 @@ export function proxyVirtualizer<
           configurable: true,
           enumerable: true,
           value: isFunction
-            ? computed(() => (target()[property as keyof V] as Function)())
+            ? computed(() =>
+                (
+                  target()[property as keyof V] as (
+                    ...args: unknown[]
+                  ) => unknown
+                )(),
+              )
             : computed(() => target()[property as keyof V]),
         })
       }
@@ -73,7 +79,9 @@ export function proxyVirtualizer<
           "indexFromElement",
         ].includes(property)
       ) {
-        const fn = virtualizer[property as keyof V] as Function
+        const fn = virtualizer[property as keyof V] as (
+          ...args: unknown[]
+        ) => unknown
         Object.defineProperty(untypedTarget, property, {
           configurable: true,
           enumerable: true,
@@ -100,7 +108,7 @@ export function proxyVirtualizer<
 
 function toComputed<V extends Virtualizer<any, any>>(
   signal: Signal<V>,
-  fn: Function,
+  fn: (...args: unknown[]) => unknown,
 ) {
   const computedCache: Record<string, Signal<unknown>> = {}
 

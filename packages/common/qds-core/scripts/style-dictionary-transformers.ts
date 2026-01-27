@@ -295,7 +295,7 @@ export function registerCustomTransformsForDtcg({
 
       if ($value.includes("[object Object]")) {
         const op = $value.split("[object Object] ")
-        return `${flattenWidth}${op.join(" ")}`
+        return `${flattenWidth as string}${op.join(" ")}`
       }
 
       return $value

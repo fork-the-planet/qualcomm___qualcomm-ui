@@ -36,7 +36,7 @@ export default defineConfig(
       "./packages/docs/angular*/public/*.js",
       "./packages/common/codemod/src/**/__tests__/mocks/**/*.tsx",
       "**/temp/",
-      "**/public/exports/md/**",
+      "**/public/exports/**",
       "**/frameworks/react-internal/files/component-list.md",
       "packages/docs/*/knowledge/**",
     ],
@@ -202,6 +202,7 @@ export default defineConfig(
     files: ["packages/*/react-swagger/**/*.{ts,tsx}"],
     languageOptions,
     rules: {
+      "@typescript-eslint/no-unsafe-function-type": "off",
       "react/prop-types": "off",
     },
   },

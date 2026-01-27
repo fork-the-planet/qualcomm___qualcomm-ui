@@ -95,6 +95,49 @@ When exports are enabled, the page header displays:
 
 These actions only appear on pages that have been successfully exported.
 
+## Manifest and Bulk Download
+
+When page exports are enabled, the system generates a manifest file and bulk download archive for programmatic access to all documentation.
+
+### Endpoints
+
+| Endpoint                 | Description                                     |
+| ------------------------ | ----------------------------------------------- |
+| `/exports/manifest.json` | JSON manifest with file metadata and MD5 hashes |
+| `/exports/bulk.zip`      | Archive containing all exported markdown files  |
+
+### Manifest Schema
+
+The manifest provides metadata for each exported file and an aggregate hash for change detection:
+
+#### ManifestEntry
+
+<TypeDocProps name="ManifestEntry" partial />
+
+#### ExportManifest
+
+<TypeDocProps name="ExportManifest" partial />
+
+### Configuration
+
+Configure manifest and bulk download generation in your exports config:
+
+```typescript
+export default {
+  knowledge: {
+    global: {
+      baseUrl: "https://docs.example.com",
+      exports: {
+        enabled: true,
+        generateManifest: true, // default: true
+        generateBulkZip: true, // default: true
+        manifestPath: "exports", // default: 'exports', relative to `/public`
+      },
+    },
+  },
+} satisfies QuiDocsConfig
+```
+
 ## Knowledge Generation CLI
 
 The `generate-llms-txt` command creates knowledge bases from your documentation for use with OpenWebUI or other LLM platforms.

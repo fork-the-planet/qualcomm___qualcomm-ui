@@ -160,7 +160,7 @@ function App() {
                 })
               }}
               onPackageManagerChange={(nextValue) =>
-                updateSiteState("/action/set-site-state", {
+                void updateSiteState("/action/set-site-state", {
                   packageManager: nextValue,
                 })
               }

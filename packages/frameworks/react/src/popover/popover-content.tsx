@@ -3,7 +3,6 @@
 
 import type {ReactNode} from "react"
 
-import {popoverClasses} from "@qualcomm-ui/qds-core/popover"
 import {useOnDestroyWhen} from "@qualcomm-ui/react-core/effects"
 import {usePopoverContext} from "@qualcomm-ui/react-core/popover"
 import {usePresenceContext} from "@qualcomm-ui/react-core/presence"
@@ -14,6 +13,8 @@ import {
   PolymorphicElement,
 } from "@qualcomm-ui/react-core/system"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
+
+import {useQdsPopoverContext} from "./qds-popover-context"
 
 export interface PopoverContentProps extends ElementRenderProp<"section"> {
   /**
@@ -37,12 +38,13 @@ export function PopoverContent({
 }: PopoverContentProps): ReactNode {
   const popover = usePopoverContext()
   const presence = usePresenceContext()
+  const qdsPopover = useQdsPopoverContext()
   const mergedProps = mergeProps(
     popover.getContentBindings({
       id: useControlledId(id),
       onDestroy: useOnDestroyWhen(presence.unmounted),
     }),
-    {className: popoverClasses.content},
+    qdsPopover.getContentBindings(),
     props,
   )
 

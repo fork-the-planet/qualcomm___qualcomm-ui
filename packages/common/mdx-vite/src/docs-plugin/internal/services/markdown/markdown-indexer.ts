@@ -83,7 +83,7 @@ export class MarkdownIndexer {
    * Parses a heading Element node into the indexed heading data structure.
    */
   private parseHeading(headingElement: Element): PageHeading {
-    const id = headingElement.properties.id
+    const id = headingElement.properties.id as string
     const text = toText(headingElement)
 
     return {

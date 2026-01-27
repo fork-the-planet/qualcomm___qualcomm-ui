@@ -212,7 +212,7 @@ export function DataKeyPair(props: DataKeyPairProps) {
       {Component ? (
         <Component {...downstreamProps} />
       ) : (
-        <span className="data-value-fallback">{`fallback: ${value}`}</span>
+        <span className="data-value-fallback">{`fallback: ${value as string}`}</span>
       )}
 
       {PostComponent && <PostComponent {...downstreamProps} />}

@@ -12,7 +12,7 @@ import type {SourceCodeData} from "@qualcomm-ui/mdx-common"
 import {InlineNotification} from "@qualcomm-ui/react/inline-notification"
 import {ProgressRing} from "@qualcomm-ui/react/progress-ring"
 import type {ColorScheme, QdsBrand} from "@qualcomm-ui/react/qds-theme"
-import {CopyToClipboardIconButton} from "@qualcomm-ui/react-mdx/copy-to-clipboard"
+import {CopyToClipboardButton} from "@qualcomm-ui/react-mdx/copy-to-clipboard"
 import {
   booleanDataAttr,
   type WithDataAttributes,
@@ -104,9 +104,6 @@ export function AngularDemoRunner({
       data-updating={booleanDataAttr(updating)}
       {...mergedProps}
     >
-      {hideDemoBrandSwitcher ? null : (
-        <QdsDemoThemeSelector qdsBrand={qdsBrand} setQdsBrand={setQdsBrand} />
-      )}
       <div
         data-brand={qdsBrand}
         data-theme={scheme}
@@ -128,14 +125,20 @@ export function AngularDemoRunner({
       </div>
       {notFound ? null : (
         <DemoCodePanel
-          actionsStart={updating ? <ProgressRing size="xs" /> : null}
+          actions={
+            <>
+              {updating ? <ProgressRing size="xs" /> : null}
+              {hideDemoBrandSwitcher ? null : (
+                <QdsDemoThemeSelector
+                  qdsBrand={qdsBrand}
+                  setQdsBrand={setQdsBrand}
+                />
+              )}
+            </>
+          }
           activeTab={activeTab}
           copyButton={
-            <CopyToClipboardIconButton
-              density="default"
-              size="sm"
-              valueOrFn={getCopyableCode}
-            />
+            <CopyToClipboardButton code={getCopyableCode} emphasis="neutral" />
           }
           expanded={!!expanded}
           fileNames={fileNames}

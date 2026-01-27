@@ -30,7 +30,7 @@
     "postpublish": "qui-cli post-publish"
   },
   "devDependencies": {
-    "@qualcomm-ui/cli": "workspace:^1.0.3",
+    "@qualcomm-ui/cli": "workspace:^1.0.6",
     "@qualcomm-ui/tsconfig": "workspace:*",
     "@typescript-eslint/rule-tester": "8.48.1",
     "cross-env": "^10.1.0",

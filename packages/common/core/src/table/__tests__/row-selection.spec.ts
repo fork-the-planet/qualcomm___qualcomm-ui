@@ -4,7 +4,7 @@ import {createTable, getCoreRowModel, selectRowsFn, type TableState} from "../"
 
 import {generateColumns, makeData, type Person} from "./make-test-data"
 
-describe("Row Selection", async () => {
+describe("Row Selection", () => {
   test("The row selection state reflects the selected rows", () => {
     const data = makeData(5)
     const columns = generateColumns(data)

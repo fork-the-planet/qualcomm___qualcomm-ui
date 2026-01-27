@@ -5,7 +5,7 @@ description: Checkboxes provide a straightforward way for users to make multiple
 component: Checkbox
 ---
 
-import {Demo} from "~components/demo"
+import {ComponentExplorer, Demo} from "~components/demo"
 import * as demos from "./demos"
 import {TypeDocAttributes, TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
 import {Checkbox} from "@qualcomm-ui/react/checkbox"
@@ -113,6 +113,14 @@ The composite elements are only intended to be used as direct descendants of the
   <Checkbox.Control />
 </Checkbox.Root>
 ```
+
+## Explorer
+
+<ComponentExplorer
+  component={demos.CheckboxExplorerDemo}
+  linkPrefix="checkbox"
+  parts={["root", "label", "control", "indicator", "error-text"]}
+/>
 
 ## API
 

@@ -1,5 +1,11 @@
 # @qualcomm-ui/cli Changelog
 
+## 1.0.6 (2026/01/23)
+
+### Code Refactoring
+
+- remove async from sync functions
+
 ## 1.0.5 (2025/11/13)
 
 ### Bug Fixes

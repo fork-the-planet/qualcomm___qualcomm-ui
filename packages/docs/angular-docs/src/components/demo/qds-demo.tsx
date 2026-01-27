@@ -27,6 +27,7 @@ export interface QdsDemoProps
   extends Pick<QdsAngularDemoRunnerProps, "expanded" | "wrapperProps"> {
   className?: string
   hideDemoBrandSwitcher?: boolean
+  hideDemoControls?: boolean
   name: string
 }
 
@@ -72,6 +73,7 @@ export function QdsDemo({name, ...props}: QdsDemoProps) {
 
 interface QdsDemoImplProps extends QdsDemoProps {
   demoInfo: AngularDemoInfo | null
+  hideDemoControls?: boolean
   uniqueId: string
   updating?: boolean
 }
@@ -80,6 +82,7 @@ function QdsDemoImpl({
   className,
   demoInfo,
   hideDemoBrandSwitcher: hideDemoBrandSwitcherProp,
+  hideDemoControls,
   name,
   uniqueId,
   updating,
@@ -128,7 +131,7 @@ function QdsDemoImpl({
   }, [])
 
   useEffect(() => {
-    if (!mountedRef.current) {
+    if (!mountedRef.current || hideDemoControls) {
       return
     }
     const demo = demoRef.current!
@@ -165,7 +168,7 @@ function QdsDemoImpl({
     return () => {
       observer.disconnect()
     }
-  }, [demoInfo?.dimensions?.height, name])
+  }, [demoInfo?.dimensions?.height, name, hideDemoControls])
 
   useEffect(() => {
     let mounted = true
@@ -185,8 +188,32 @@ function QdsDemoImpl({
     }
   }, [])
 
+  const demoContent = (
+    <>
+      {demoInfo?.initialHtml &&
+      !demoContentRendered &&
+      !import.meta.env?.DEV ? (
+        <div
+          className="qds-demo-runner__ssr-placeholder"
+          dangerouslySetInnerHTML={{__html: demoInfo.initialHtml}}
+        ></div>
+      ) : null}
+      {/* @ts-expect-error jsx type not accounted for */}
+      <angular-demo
+        ref={codeDemoRef}
+        componentName={demoInfo?.componentClass}
+        data-demo-rendered={booleanDataAttr(demoContentRendered)}
+        filePath={demoInfo?.filePath}
+      />
+    </>
+  )
+
+  if (hideDemoControls) {
+    return <div ref={demoRef}>{demoContent}</div>
+  }
+
   return (
-    <Fragment>
+    <>
       <QdsAngularDemoRunner
         ref={demoRef}
         className={className}
@@ -211,24 +238,8 @@ function QdsDemoImpl({
         )}
         {...props}
       >
-        <>
-          {demoInfo?.initialHtml &&
-          !demoContentRendered &&
-          !import.meta.env?.DEV ? (
-            <div
-              className="qds-demo-runner__ssr-placeholder"
-              dangerouslySetInnerHTML={{__html: demoInfo.initialHtml}}
-            ></div>
-          ) : null}
-          {/* @ts-expect-error jsx type not accounted for */}
-          <angular-demo
-            ref={codeDemoRef}
-            componentName={demoInfo?.componentClass}
-            data-demo-rendered={booleanDataAttr(demoContentRendered)}
-            filePath={demoInfo?.filePath}
-          />
-        </>
+        {demoContent}
       </QdsAngularDemoRunner>
-    </Fragment>
+    </>
   )
 }
