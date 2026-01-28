@@ -12,12 +12,12 @@ permissions:
 
 jobs:
   qcom-preflight-checks:
-    uses: qualcomm/qcom-reusable-workflows/.github/workflows/qcom-preflight-checks-reusable-workflow.yml@v1.1.4
+    uses: qualcomm/qcom-reusable-workflows/.github/workflows/qcom-preflight-checks-reusable-workflow.yml@v2
     with:
         # ✅ Preflight Checkers
         repolinter: true                   # default: true
-        # moved to cron on a regular schedule
-        semgrep: false                      # default: true
+        semgrep: true                      # default: true
+        semgrep-cli-options: '--config auto --exclude pnpm-lockfile.yaml --product code'
         copyright-license-detector: false  # default: true
         pr-check-emails: true              # default: true
         dependency-review: true            # default: true
