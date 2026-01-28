@@ -18,6 +18,7 @@ jobs:
         repolinter: true                   # default: true
         # Handled in separate workflow
         semgrep: false                      # default: true
+        # Handled in separate workflow
         copyright-license-detector: false  # default: true
         pr-check-emails: true              # default: true
         dependency-review: true            # default: true
