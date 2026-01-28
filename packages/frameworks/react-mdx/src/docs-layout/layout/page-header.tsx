@@ -47,12 +47,9 @@ export function PageHeader(): ReactNode {
     return null
   }
 
-  const {title} = page
-
   return (
     <header className="qui-docs__page-header">
       <div className="qui-docs__page-header-title-row">
-        <h1 className="mdx qui-docs__page-title">{title}</h1>
         {exportUrl && (
           <div className="qui-docs__page-header-actions">
             <Button

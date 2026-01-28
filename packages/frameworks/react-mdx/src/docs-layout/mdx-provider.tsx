@@ -14,8 +14,9 @@ import {
   SpoilerSummary,
 } from "@qualcomm-ui/react-mdx/spoiler"
 import {clsx} from "@qualcomm-ui/utils/clsx"
+import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {AnchorHeader, CodeTabs, MdxH1, ShikiPre} from "./internal"
+import {AnchorHeader, CodeTabs, ShikiPre} from "./internal"
 
 interface Props {
   /**
@@ -96,7 +97,16 @@ export function MdxProvider({children, components}: Props): ReactNode {
           },
           CodeTabs,
           em: (props) => <em className="mdx" {...props} />,
-          h1: MdxH1,
+          h1: ({children, id, ...props}) => {
+            return (
+              <h1
+                id={id || undefined}
+                {...mergeProps({className: "mdx"}, props)}
+              >
+                {children}
+              </h1>
+            )
+          },
           h2: ({children, id}) => {
             return (
               <AnchorHeader
