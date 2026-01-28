@@ -4,8 +4,10 @@ hidden: true
 ---
 
 import {Demo} from "~components/demo"
+import {DocSwagger} from "~components/layout"
 import * as demos from "./demos"
 import {TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
+import petStore from "./pet-store.json"
 
 # {frontmatter.title}
 
@@ -60,3 +62,7 @@ Combination of inlineable classes and variant classes.
 ### TokenManager
 
 <TypeDocProps partial name="TokenManager" />
+
+### Swagger Debug
+
+<DocSwagger spec={petStore} />
