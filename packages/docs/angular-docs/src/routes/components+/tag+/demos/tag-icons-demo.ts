@@ -11,8 +11,8 @@ import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
   template: `
     <div class="flex flex-col items-center gap-2">
       <!-- preview -->
-      <button emphasis="neutral" q-tag startIcon="Plus">Label</button>
-      <button emphasis="neutral" endIcon="Plus" q-tag>Label</button>
+      <span emphasis="neutral" q-tag startIcon="Plus">Label</span>
+      <span emphasis="neutral" endIcon="Plus" q-tag>Label</span>
       <!-- preview -->
     </div>
   `,

@@ -1,13 +1,18 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {ReactElement, ReactNode} from "react"
+import {type ReactElement, type ReactNode, useMemo} from "react"
 
 import type {PopoverApiProps} from "@qualcomm-ui/core/popover"
 import {
   type PresenceApiProps,
   splitPresenceProps,
 } from "@qualcomm-ui/core/presence"
+import {
+  createQdsPopoverApi,
+  type QdsPopoverApiProps,
+} from "@qualcomm-ui/qds-core/popover"
+import {normalizeProps} from "@qualcomm-ui/react-core/machine"
 import {
   PopoverContextProvider,
   usePopover,
@@ -18,7 +23,12 @@ import {
 } from "@qualcomm-ui/react-core/presence"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-export interface PopoverRootProps extends PopoverApiProps, PresenceApiProps {
+import {QdsPopoverContextProvider} from "./qds-popover-context"
+
+export interface PopoverRootProps
+  extends PopoverApiProps,
+    PresenceApiProps,
+    QdsPopoverApiProps {
   /**
    * React {@link https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children children} prop.
    */
@@ -26,17 +36,24 @@ export interface PopoverRootProps extends PopoverApiProps, PresenceApiProps {
 }
 
 export function PopoverRoot(props: PopoverRootProps): ReactElement {
-  const [presenceProps, {children, ...localProps}] = splitPresenceProps(props)
+  const [presenceProps, {children, emphasis, ...localProps}] =
+    splitPresenceProps(props)
   const popover = usePopover(localProps)
   const presence = usePresence(
     mergeProps({present: popover.open}, presenceProps),
   )
+  const qdsPopoverApi = useMemo(
+    () => createQdsPopoverApi({emphasis}, normalizeProps),
+    [emphasis],
+  )
 
   return (
-    <PopoverContextProvider value={popover}>
-      <PresenceContextProvider value={presence}>
-        {children}
-      </PresenceContextProvider>
-    </PopoverContextProvider>
+    <QdsPopoverContextProvider value={qdsPopoverApi}>
+      <PopoverContextProvider value={popover}>
+        <PresenceContextProvider value={presence}>
+          {children}
+        </PresenceContextProvider>
+      </PopoverContextProvider>
+    </QdsPopoverContextProvider>
   )
 }

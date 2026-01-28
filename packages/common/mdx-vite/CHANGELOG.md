@@ -1,5 +1,11 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 2.14.2 (2026/01/23)
+
+### Bug Fixes
+
+- [nav-builder]: pass empty object for non-page frontmatter
+
 ## 2.14.1 (2026/01/23)
 
 ### Code Refactoring

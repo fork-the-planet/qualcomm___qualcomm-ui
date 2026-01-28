@@ -1,5 +1,12 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.15.0 (2026/01/27)
+
+### Features
+
+- [popover]: add brand emphasis
+- [tag]: add color emphasis and update CSS
+
 ## 1.14.0 (2026/01/23)
 
 ### Features

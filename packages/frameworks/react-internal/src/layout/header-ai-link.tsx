@@ -18,7 +18,7 @@ export function HeaderAiLink(): ReactElement {
           icon={Bot}
           render={
             <a
-              href="https://qui-ai.qualcomm.com"
+              href="https://qui-ai.qualcomm.com/docs/"
               rel="noreferrer"
               target="_blank"
             />

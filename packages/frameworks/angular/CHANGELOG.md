@@ -1,5 +1,15 @@
 # @qualcomm-ui/angular Changelog
 
+## 1.15.0 (2026/01/27)
+
+### Features
+
+- [tag]: add color emphasis and update CSS
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
 ## 1.14.0 (2026/01/23)
 
 ### Features
