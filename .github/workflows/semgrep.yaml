@@ -9,17 +9,34 @@ permissions:
   security-events: write
 
 jobs:
-  qcom-preflight-checks:
-    uses: qualcomm/qcom-reusable-workflows/.github/workflows/qcom-preflight-checks-reusable-workflow.yml@v1.1.4
-    with:
-      # ✅ Preflight Checkers
-      repolinter: false
-      semgrep: true
-      copyright-license-detector: false
-      pr-check-emails: false
-      dependency-review: false
-    secrets:
-      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
-    concurrency:
-      group: semgrep-supply-chain - ${{github.head_ref}}
-      cancel-in-progress: true
+  run-semgrep-scan:
+    name: Run Semgrep Scan
+    runs-on: ubuntu-latest
+
+    env:
+      SEMGREP_REPO_NAME: ${{ github.repository }}
+      SEMGREP_COMMIT: ${{ github.sha }}
+
+    container:
+      image: semgrep/semgrep:1.125.0
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        ref: ${{ github.head_ref }}
+
+    - name: Configure git
+      run: git config --global --add safe.directory "$(pwd)"
+
+    - name: Run Semgrep Scan
+      run: |
+        semgrep scan --sarif --output semgrep.sarif --config auto
+
+    - name: Upload to Security Tab
+      uses: github/codeql-action/upload-sarif@v4
+      if: ${{ always() && github.event.repository.visibility == 'public' }}
+      with:
+        sarif_file: semgrep.sarif
+        category: semgrep
