@@ -1,0 +1,25 @@
+name: Semgrep Supply Chain
+on:
+  schedule:
+  - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  qcom-preflight-checks:
+    uses: qualcomm/qcom-reusable-workflows/.github/workflows/qcom-preflight-checks-reusable-workflow.yml@v1.1.4
+    with:
+      # ✅ Preflight Checkers
+      repolinter: false
+      semgrep: true
+      copyright-license-detector: false
+      pr-check-emails: false
+      dependency-review: false
+    secrets:
+      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+    concurrency:
+      group: semgrep-supply-chain - ${{github.head_ref}}
+      cancel-in-progress: true
