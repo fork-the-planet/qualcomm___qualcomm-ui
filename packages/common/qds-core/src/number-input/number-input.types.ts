@@ -5,6 +5,24 @@ import type {QdsInputSize} from "@qualcomm-ui/qds-core/input"
 
 import type {numberInputClasses} from "./number-input.classes"
 
+export interface UnitOption {
+  /**
+   * Full display text shown in the dropdown menu (e.g., "$ (USD)").
+   * Defaults to `label` if not provided.
+   */
+  displayText?: string
+
+  /**
+   * Short label shown in the trigger button (e.g., "$").
+   */
+  label: string
+
+  /**
+   * The value identifier used internally (e.g., "USD").
+   */
+  value: string
+}
+
 export interface QdsNumberInputApiProps {
   /**
    * The size of the input field and its elements. Governs properties like font
@@ -34,7 +52,6 @@ export interface QdsNumberInputControlBindings {
 
 export interface QdsNumberInputInputGroupBindings {
   className: NumberInputClasses["inputGroup"]
-  "data-part": "input-group"
   "data-size": QdsInputSize
 }
 
@@ -48,6 +65,11 @@ export interface QdsNumberInputErrorIndicatorBindings {
   "data-size": QdsInputSize
 }
 
+export interface QdsNumberInputUnitSelectBindings {
+  className: NumberInputClasses["unitSelect"]
+  "data-size": QdsInputSize
+}
+
 export interface QdsNumberInputApi {
   size: QdsInputSize
 
@@ -58,4 +80,5 @@ export interface QdsNumberInputApi {
   getIncrementTriggerBindings(): QdsNumberInputIncrementTriggerBindings
   getInputBindings(): QdsNumberInputInputBindings
   getInputGroupBindings(): QdsNumberInputInputGroupBindings
+  getUnitSelectBindings(): QdsNumberInputUnitSelectBindings
 }

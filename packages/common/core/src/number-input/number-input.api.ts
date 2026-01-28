@@ -33,6 +33,7 @@ import type {
   NumberInputRootBindings,
   NumberInputSchema,
   NumberInputScopeAttribute,
+  NumberInputUnitSelectBindings,
   NumberInputValueTextBindings,
 } from "./number-input.types"
 
@@ -351,7 +352,6 @@ export function createNumberInputApi(
         },
       })
     },
-
     getLabelBindings(props): NumberInputLabelBindings {
       scope.ids.register("label", props)
       return normalize.label({
@@ -375,7 +375,17 @@ export function createNumberInputApi(
         dir: prop("dir"),
       })
     },
-
+    getUnitSelectBindings(): NumberInputUnitSelectBindings {
+      return normalize.button({
+        ...commonBindings,
+        "data-disabled": booleanDataAttr(disabled),
+        "data-part": "unit-select",
+        "data-readonly": booleanDataAttr(readOnly),
+        dir: prop("dir"),
+        disabled: disabled || readOnly,
+        type: "button",
+      })
+    },
     getValueTextBindings(): NumberInputValueTextBindings {
       return normalize.element({
         ...commonBindings,

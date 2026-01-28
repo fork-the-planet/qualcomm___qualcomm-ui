@@ -489,6 +489,14 @@ export interface NumberInputRootBindings extends CommonBindings {
   "data-part": "root"
 }
 
+export interface NumberInputUnitSelectBindings extends CommonBindings {
+  "data-disabled": BooleanDataAttr
+  "data-part": "unit-select"
+  "data-readonly": BooleanDataAttr
+  disabled: boolean | undefined
+  type: "button"
+}
+
 export interface NumberInputApi {
   /**
    * Function to clear the value of the input.
@@ -570,5 +578,6 @@ export interface NumberInputApi {
   getInputGroupBindings(): NumberInputInputGroupBindings
   getLabelBindings(props: IdRegistrationProps): NumberInputLabelBindings
   getRootBindings(): NumberInputRootBindings
+  getUnitSelectBindings(): NumberInputUnitSelectBindings
   getValueTextBindings(): NumberInputValueTextBindings
 }

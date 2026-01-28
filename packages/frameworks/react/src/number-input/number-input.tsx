@@ -37,6 +37,11 @@ import {
   type NumberInputLabelProps,
 } from "./number-input-label"
 import {NumberInputRoot, type NumberInputRootProps} from "./number-input-root"
+import {
+  NumberInputUnitSelect,
+  type NumberInputUnitSelectProps,
+  type UnitOption,
+} from "./number-input-unit-select"
 
 export interface NumberInputProps extends NumberInputRootProps {
   /**
@@ -53,6 +58,11 @@ export interface NumberInputProps extends NumberInputRootProps {
    * Props applied to the decrement trigger button.
    */
   decrementTriggerProps?: NumberInputDecrementTriggerProps
+
+  /**
+   * The default unit value.
+   */
+  defaultUnit?: string
 
   /**
    * Optional error that describes the element when {@link invalid} is true.
@@ -103,15 +113,35 @@ export interface NumberInputProps extends NumberInputRootProps {
   labelProps?: NumberInputLabelProps
 
   /**
+   * Callback fired when the selected unit changes.
+   */
+  onUnitChange?: (value: string) => void
+
+  /**
    * HTML {@link https://www.w3schools.com/tags/att_input_placeholder.asp placeholder} attribute,
    * passed to the underlying input element.
    */
   placeholder?: string
+
+  /**
+   * Array of unit options to display in the unit select dropdown.
+   * When provided, a unit selector will be shown at the start of the input.
+   */
+  unitOptions?: UnitOption[]
+
+  /**
+   * Props applied to the unit select element.
+   */
+  unitSelectProps?: Omit<
+    NumberInputUnitSelectProps,
+    "options" | "defaultUnit" | "onUnitChange"
+  >
 }
 
 export function NumberInput({
   controlProps,
   decrementTriggerProps,
+  defaultUnit,
   errorText,
   errorTextProps,
   hint,
@@ -121,7 +151,10 @@ export function NumberInput({
   inputProps,
   label,
   labelProps,
+  onUnitChange,
   placeholder,
+  unitOptions,
+  unitSelectProps,
   ...props
 }: NumberInputProps): ReactElement {
   const labelContent = label || labelProps?.children
@@ -135,6 +168,7 @@ export function NumberInput({
     incrementTrigger: useControlledId(incrementTriggerProps?.id),
     input: useControlledId(inputProps?.id),
     label: useOptionalContentId(labelContent, labelProps),
+    unitSelect: useControlledId(unitSelectProps?.id),
     ...props.ids,
   }
 
@@ -147,6 +181,15 @@ export function NumberInput({
       ) : null}
 
       <NumberInputInputGroup {...inputGroupProps}>
+        {unitOptions ? (
+          <NumberInputUnitSelect
+            defaultUnit={defaultUnit}
+            onUnitChange={onUnitChange}
+            options={unitOptions}
+            {...unitSelectProps}
+            id={ids.unitSelect}
+          />
+        ) : null}
         <NumberInputInput
           placeholder={placeholder}
           {...inputProps}
