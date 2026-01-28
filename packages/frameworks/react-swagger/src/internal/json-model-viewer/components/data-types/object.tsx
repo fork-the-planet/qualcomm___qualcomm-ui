@@ -192,6 +192,7 @@ export function ObjectType(props: DataItemProps<any>): ReactNode {
         <DataKeyPair
           path={[]}
           prevValue={props.prevValue}
+          requiredProperties={props.requiredProperties}
           value={value.properties}
         />
       )
@@ -208,9 +209,11 @@ export function ObjectType(props: DataItemProps<any>): ReactNode {
     }
     const elements = entries.slice(0, displayLength).map(([key, value]) => {
       const path = [...props.path, key]
+      const isRequired = props.requiredProperties?.includes(key)
       return (
         <DataKeyPair
           key={key}
+          isRequired={isRequired}
           path={path}
           prevValue={props.prevValue?.[key]}
           value={value}
@@ -232,6 +235,7 @@ export function ObjectType(props: DataItemProps<any>): ReactNode {
     }
     return elements
   }, [props, objectSortKeys, displayLength, groupArraysAfterLength, keyColor])
+
   const marginLeft = props.inspect ? 0.8 : 0
   const width = useJsonViewerStore((store) => store.indentWidth)
   const indentWidth = props.inspect ? width - marginLeft : width

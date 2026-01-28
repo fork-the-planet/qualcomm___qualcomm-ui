@@ -84,6 +84,7 @@ export function Models(props: ModelsProps): ReactNode {
 
   const ModelWrapper = getComponent("ModelWrapper")
   const ModelCollapse = getComponent("ModelCollapse")
+  const Markdown = getComponent("Markdown")
 
   return (
     <section
@@ -124,6 +125,8 @@ export function Models(props: ModelsProps): ReactNode {
               const displayName =
                 schema.get("title") || rawSchema.get("title") || name
               const isShown = layoutSelectors.isShown(fullPath, false)
+              const description =
+                schema.get("description") || rawSchema.get("description")
 
               if (isShown && schema.size === 0 && rawSchema.size > 0) {
                 // Firing an action in a container render is not great,
@@ -186,6 +189,7 @@ export function Models(props: ModelsProps): ReactNode {
                   >
                     {content}
                   </ModelCollapse>
+                  {description ? <Markdown source={description} /> : null}
                 </div>
               )
             })
