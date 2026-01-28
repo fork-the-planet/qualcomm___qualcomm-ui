@@ -6,6 +6,7 @@
   flex-wrap: wrap;
   justify-content: start;
   position: relative;
+  row-gap: var(--spacing-50);
   vertical-align: top;
   width: fit-content;
 
@@ -16,11 +17,6 @@
   &[data-disabled] {
     cursor: unset;
     user-select: none;
-  }
-
-  &:has([data-part="error-text"][data-invalid]),
-  &:has([data-part="hint"]:not([hidden])) {
-    row-gap: var(--spacing-50);
   }
 
   [data-part="hint"],

@@ -56,16 +56,6 @@
     cursor: unset;
     user-select: none;
   }
-
-  &:has([data-part="item-error-text"][data-invalid]),
-  &:has([data-part="item-hint"]:not([hidden])) {
-    row-gap: var(--spacing-50);
-  }
-
-  [data-part="item-hint"],
-  [data-part="item-error-text"] {
-    flex-basis: 100%;
-  }
 }
 
 .qui-radio__control {
