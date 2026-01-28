@@ -1,5 +1,17 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 1.11.3 (2026/01/28)
+
+### Code Refactoring
+
+- [react-mdx]: remove h1 from page header and inline in mdx provider
+- [react-mdx]: remove unused activeTocClassName prop
+- [react-mdx]: move page header to table of contents
+
+### Styles
+
+- [react-mdx]: use data-active attribute instead of class for toc links
+
 ## 1.11.2 (2026/01/27)
 
 ### Miscellaneous Chores

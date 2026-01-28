@@ -108,6 +108,7 @@ tsconfig.*.tsbuildinfo
 .fleet/
 .idea/
 .webstorm/backup
+.ai
 
 ###############################################################################
 # Keep-tracked placeholder

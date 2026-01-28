@@ -24,9 +24,11 @@ import {getRefName, isReferenceArray, isReferenceObject} from "./internal"
 
 export type DataKeyPairProps = {
   className?: string
+  isRequired?: boolean
   nestedIndex?: number
   path: (string | number)[]
   prevValue?: unknown
+  requiredProperties?: string[] | null
   style?: CSSProperties
   value: unknown
 }
@@ -91,6 +93,7 @@ export function DataKeyPair(props: DataKeyPairProps) {
 
     return false
   }, [highlightUpdates, prevValue, value])
+
   const highlightContainer = useRef<HTMLSpanElement>(null)
 
   useEffect(() => {
@@ -112,13 +115,19 @@ export function DataKeyPair(props: DataKeyPairProps) {
   const isEmptyValue = useMemo(() => getValueSize(value) === 0, [value])
   const expandable = !isEmptyValue && !!(PreComponent && PostComponent)
   const KeyRenderer = useJsonViewerStore((store) => store.keyRenderer)
+
   const downstreamProps: DataItemProps = useMemo(() => {
     return {
       inspect,
+      isRequired: props.isRequired,
       nestedIndex,
       path: [...path, "properties"],
       prevValue,
       refName: getRefName(value),
+      requiredProperties:
+        typeof value === "object" && value && "required" in value
+          ? (value.required as string[])
+          : null,
       setInspect,
       value: isReferenceObject(value)
         ? value.properties
@@ -128,7 +137,15 @@ export function DataKeyPair(props: DataKeyPairProps) {
             : value.items
           : value,
     }
-  }, [inspect, path, setInspect, value, prevValue, nestedIndex])
+  }, [
+    inspect,
+    nestedIndex,
+    path,
+    prevValue,
+    value,
+    props.isRequired,
+    setInspect,
+  ])
 
   const onKeyClick = useCallback(
     (event: MouseEvent<HTMLSpanElement>) => {
@@ -149,6 +166,15 @@ export function DataKeyPair(props: DataKeyPairProps) {
 
   const color = useJsonViewerStore((store) => store.colorspace.base05)
   const showIndicator = useJsonViewerStore((store) => store.displayKeyIndicator)
+
+  const keyWithRequiredIndicator = (
+    <span>
+      {key}
+      {props.isRequired ? (
+        <span className="key-required-indicator">*</span>
+      ) : null}
+    </span>
+  )
 
   return (
     <div
@@ -195,9 +221,9 @@ export function DataKeyPair(props: DataKeyPairProps) {
                 ) : null}
               </>
             ) : quotesOnKeys ? (
-              <>&quot;{key}&quot;</>
+              <>&quot;{keyWithRequiredIndicator}&quot;</>
             ) : (
-              <>{key}</>
+              <>{keyWithRequiredIndicator}</>
             ))
           )}
         </span>
@@ -210,7 +236,9 @@ export function DataKeyPair(props: DataKeyPairProps) {
       </span>
 
       {Component ? (
-        <Component {...downstreamProps} />
+        <>
+          <Component {...downstreamProps} />
+        </>
       ) : (
         <span className="data-value-fallback">{`fallback: ${value as string}`}</span>
       )}

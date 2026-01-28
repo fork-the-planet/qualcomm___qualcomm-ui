@@ -4,12 +4,16 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {type ReactNode, useCallback, useEffect, useRef, useState} from "react"
+import {
+  type ReactNode,
+  useCallback,
+  useEffect,
+  useEffectEvent,
+  useRef,
+  useState,
+} from "react"
 
-import {ChevronUpIcon} from "lucide-react"
-
-import {Button} from "@qualcomm-ui/react/button"
-import {Icon} from "@qualcomm-ui/react/icon"
+import {Accordion} from "@qualcomm-ui/react/accordion"
 
 ModelCollapse.displayName = "ModelCollapse"
 
@@ -53,6 +57,10 @@ export function ModelCollapse({
     setExpanded((prevState) => !prevState)
   }, [expanded, modelName, onToggle])
 
+  const toggle = useEffectEvent(() => {
+    toggleCollapsed()
+  })
+
   useEffect(() => {
     if (
       !mounted.current &&
@@ -63,12 +71,31 @@ export function ModelCollapse({
       const anchor = document.getElementById(modelId)
       if (anchor) {
         anchor.scrollIntoView()
+        if (!expanded) {
+          toggle()
+        }
       }
     }
     // Only scroll after first mounting the component.
     // We do this because the swagger component is mounted after the page loads.
     mounted.current = true
-  }, [modelId, modelName, onToggle, expanded])
+  }, [modelId, modelName, onToggle, expanded, toggleCollapsed])
+
+  const ensureExpanded = useEffectEvent(() => {
+    if (modelId && window.location.hash === `#${modelId}` && !expanded) {
+      toggleCollapsed()
+    }
+  })
+
+  useEffect(() => {
+    function onStateChange() {
+      ensureExpanded()
+    }
+    window.navigation?.addEventListener("navigatesuccess", onStateChange)
+    return () => {
+      window.navigation?.removeEventListener("navigatesuccess", onStateChange)
+    }
+  }, [])
 
   if (expanded && hideSelfOnExpand) {
     return <span className={classes || ""}>{children}</span>
@@ -76,19 +103,14 @@ export function ModelCollapse({
 
   return (
     <span>
-      <Button
-        aria-expanded={expanded}
-        endIcon={<Icon className="collapse-icon" icon={ChevronUpIcon} />}
-        id={modelId}
-        onClick={toggleCollapsed}
-        variant="ghost"
+      <Accordion.Root
+        onValueChange={toggleCollapsed}
+        value={expanded ? ["item"] : []}
       >
-        {title && <span>{title}</span>}
-      </Button>
-
-      {!expanded && <span>{collapsedContent}</span>}
-
-      {expanded && children}
+        <Accordion.Item text={title} value="item">
+          {expanded ? children : <span>{collapsedContent}</span>}
+        </Accordion.Item>
+      </Accordion.Root>
     </span>
   )
 }

@@ -32,6 +32,14 @@
     &.expandable {
       cursor: pointer;
     }
+
+    .key-required-indicator {
+      color: var(--color-text-support-danger);
+      display: inline-block;
+      margin-top: -2px;
+      user-select: none;
+      vertical-align: top;
+    }
   }
 
   .data-type-label {

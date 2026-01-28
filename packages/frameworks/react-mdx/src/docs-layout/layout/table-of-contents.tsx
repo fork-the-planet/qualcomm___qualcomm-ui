@@ -19,11 +19,8 @@ import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 
 import {TocLink} from "../internal"
 
+import {PageHeader} from "./page-header"
 import {useMdxDocsLayoutContext} from "./use-mdx-docs-layout"
-
-interface Props {
-  activeTocClassName?: string
-}
 
 const HEADING_LEVELS: TocHeading[] = ["h2", "h3", "h4"]
 const SCROLL_DEBOUNCE_MS = 0
@@ -249,9 +246,7 @@ function useActiveHeading() {
   return activeId
 }
 
-export function TableOfContents({
-  activeTocClassName = "q-active",
-}: Props): ReactNode {
+export function TableOfContents(): ReactNode {
   const containerRef = useRef<HTMLDivElement>(null)
   const {renderLink: Link} = useMdxDocsContext()
   const {toc: headings} = useMdxDocsLayoutContext()
@@ -266,6 +261,7 @@ export function TableOfContents({
   return (
     <div className="qui-toc">
       <div ref={containerRef} className="qui-toc__container">
+        <PageHeader />
         <div className="qui-toc__links">
           <div className="qui-toc-bar" />
           {headings.map(({headingLevel, id, textContent}) => {
@@ -280,7 +276,8 @@ export function TableOfContents({
                     linkRefs.current.delete(id)
                   }
                 }}
-                className={`qui-toc__link${isActive ? ` ${activeTocClassName}` : ""}`}
+                className="qui-toc__link"
+                data-active={booleanDataAttr(isActive)}
                 style={{
                   paddingLeft: INDENT_PER_LEVEL * (headingLevel - 1),
                 }}

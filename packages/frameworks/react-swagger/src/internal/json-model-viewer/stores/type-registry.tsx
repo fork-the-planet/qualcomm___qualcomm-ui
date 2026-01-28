@@ -96,9 +96,9 @@ export const createTypeRegistryStore = () => {
   }))
 }
 
-export const TypeRegistryStoreContext =
-  // @ts-expect-error
-  createContext<StoreApi<TypeRegistryState>>(undefined)
+export const TypeRegistryStoreContext = createContext<
+  StoreApi<TypeRegistryState>
+>(null!)
 
 export const TypeRegistryProvider = TypeRegistryStoreContext.Provider
 
