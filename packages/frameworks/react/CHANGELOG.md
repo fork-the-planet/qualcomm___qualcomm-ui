@@ -1,5 +1,16 @@
 # @qualcomm-ui/react Changelog
 
+## 1.10.0 (2026/01/27)
+
+### Features
+
+- [popover]: add brand emphasis
+- [tag]: add color emphasis and update CSS
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
 ## 1.9.0 (2026/01/23)
 
 ### Features

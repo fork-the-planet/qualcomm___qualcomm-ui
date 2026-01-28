@@ -37,7 +37,7 @@
 
 ### Bug Fixes
 
-- auto-hide form elements `hint` when invalid ([90bbc26](https://github.com/qualcomm/qualcomm-ui/commit/90bbc26e2d3d71066d29af3c122ff18c4b68b3ed))
+- auto-hide form elements `hint` when invalid
 
 ## 1.0.10 (2025/12/01)
 
