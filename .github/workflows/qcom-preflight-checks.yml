@@ -16,8 +16,9 @@ jobs:
     with:
         # ✅ Preflight Checkers
         repolinter: true                   # default: true
-        # moved to cron on a regular schedule
+        # Handled in separate workflow
         semgrep: false                      # default: true
+        # Handled in separate workflow
         copyright-license-detector: false  # default: true
         pr-check-emails: true              # default: true
         dependency-review: true            # default: true

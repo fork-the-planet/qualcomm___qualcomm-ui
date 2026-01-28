@@ -114,6 +114,7 @@
   },
   "resolutions": {
     "eslint": "catalog:",
+    "lodash": "4.17.23",
     "playwright": "1.56.1",
     "typescript": "5.9.3"
   },
