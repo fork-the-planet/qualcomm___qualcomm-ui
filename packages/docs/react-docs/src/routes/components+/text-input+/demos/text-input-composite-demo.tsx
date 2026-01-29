@@ -14,7 +14,6 @@ export function TextInputCompositeDemo(): ReactElement {
         <TextInput.ErrorIndicator />
       </TextInput.InputGroup>
       <TextInput.Hint>Optional hint</TextInput.Hint>
-      <TextInput.ErrorText>Optional error text</TextInput.ErrorText>
     </TextInput.Root>
     // preview
   )

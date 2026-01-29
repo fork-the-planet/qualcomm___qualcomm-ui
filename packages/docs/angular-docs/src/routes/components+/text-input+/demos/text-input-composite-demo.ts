@@ -15,7 +15,6 @@ import {TextInputModule} from "@qualcomm-ui/angular/text-input"
         <span q-text-input-error-indicator></span>
       </div>
       <div q-text-input-hint>Optional hint</div>
-      <div q-text-input-error-text>Error text</div>
     </div>
     <!-- preview -->
   `,
