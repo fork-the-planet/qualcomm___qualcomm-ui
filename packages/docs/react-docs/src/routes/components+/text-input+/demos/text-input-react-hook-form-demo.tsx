@@ -28,7 +28,7 @@ export function TextInputReactHookFormDemo() {
     },
   })
 
-  const handleFormSubmit: SubmitHandler<AddressFormData> = async (data) => {
+  const handleFormSubmit: SubmitHandler<AddressFormData> = (data) => {
     const validation = addressSchema(data)
 
     if (validation instanceof type.errors) {

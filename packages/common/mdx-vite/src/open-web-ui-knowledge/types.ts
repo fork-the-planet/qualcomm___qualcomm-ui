@@ -14,6 +14,24 @@ export interface WebUiKnowledgeConfig extends KnowledgeIntegrationConfig {
    */
   environmentName?: string
   extraFiles?: KnowledgeExtraFile[]
+  /**
+   * Generate bulk.zip containing all markdown files.
+   *
+   * @default true
+   */
+  generateBulkZip?: boolean
+  /**
+   * Generate manifest.json with file metadata and MD5 hashes.
+   *
+   * @default true
+   */
+  generateManifest?: boolean
+  /**
+   * Output directory for manifest.json and bulk.zip.
+   *
+   * @default "exports"
+   */
+  manifestOutputPath?: string
   outputMode: "per-page" | "aggregated"
   outputPath: string
   routeDir: string

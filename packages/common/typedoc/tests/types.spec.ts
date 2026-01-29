@@ -237,7 +237,7 @@ describe("@qualcomm-ui/typedoc", async () => {
     JSON.stringify(result.knownInterfaces, null, 2),
   )
 
-  test("export exists", async () => {
+  test("export exists", () => {
     expect(readFileSync(config.outputFile!), "utf-8").length.gt(0)
   })
 

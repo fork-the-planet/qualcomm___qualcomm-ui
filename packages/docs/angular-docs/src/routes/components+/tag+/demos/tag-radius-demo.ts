@@ -9,8 +9,8 @@ import {TagDirective} from "@qualcomm-ui/angular/tag"
   template: `
     <div class="flex flex-col gap-2">
       <!-- preview -->
-      <button q-tag radius="square">Label</button>
-      <button q-tag radius="rounded">Label</button>
+      <span q-tag radius="square">Label</span>
+      <span q-tag radius="rounded">Label</span>
       <!-- preview -->
     </div>
   `,

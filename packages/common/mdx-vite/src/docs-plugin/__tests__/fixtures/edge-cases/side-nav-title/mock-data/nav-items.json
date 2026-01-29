@@ -1,0 +1,37 @@
+[
+  {
+    "depth": 1,
+    "expanded": false,
+    "id": "/snapdragon-guardian",
+    "items": [
+      {
+        "depth": 2,
+        "expanded": false,
+        "id": "/snapdragon-guardian/documentation",
+        "items": [],
+        "pathname": "/snapdragon-guardian/documentation",
+        "pathSegments": [
+          "snapdragon-guardian",
+          "documentation"
+        ],
+        "title": "Getting Started"
+      },
+      {
+        "depth": 2,
+        "expanded": false,
+        "id": "/snapdragon-guardian/try-it-out",
+        "items": [],
+        "pathname": "/snapdragon-guardian/try-it-out",
+        "pathSegments": [
+          "snapdragon-guardian",
+          "try-it-out"
+        ],
+        "title": "Reference"
+      }
+    ],
+    "pathSegments": [
+      "snapdragon-guardian"
+    ],
+    "title": "Snapdragon Guardian"
+  }
+]

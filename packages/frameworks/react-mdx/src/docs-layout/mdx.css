@@ -40,7 +40,7 @@ h2.mdx {
   border-bottom: solid 1px var(--color-border-neutral-02);
   color: var(--color-text-neutral-primary);
   font: var(--font-static-heading-md-default);
-  margin: 32px 0 0 0;
+  margin: 36px 0 0 0;
   padding-bottom: 8px;
   width: 100%;
 }
@@ -331,7 +331,7 @@ hr.mdx {
 
 .mdx-spoiler__trigger {
   align-items: center;
-  background: var(--color-background-neutral-01);
+  background: var(--background-primary);
   display: flex;
   gap: 8px;
   height: 40px;
@@ -394,6 +394,7 @@ hr.mdx {
 
 .qui-docs__page-header {
   margin-bottom: 16px;
+  padding-left: 10px;
   & + section.heading {
     > *:first-child {
       margin-top: 24px;
@@ -402,17 +403,6 @@ hr.mdx {
       font: var(--font-static-body-md-default);
       margin-top: 0;
     }
-  }
-}
-
-.qui-docs__page-header-title-row {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-
-  h1.mdx {
-    flex: 1;
   }
 }
 

@@ -162,9 +162,7 @@ function resolveVariables(
   return resolveVariables(resolved, definitions, depth + 1)
 }
 
-export async function parseCssRelationships(
-  css: string,
-): Promise<PartAnalysis[]> {
+export function parseCssRelationships(css: string): PartAnalysis[] {
   const result = postcss().process(css, {from: undefined})
   const partsMap = new Map<string, PartAnalysis>()
 
@@ -245,6 +243,6 @@ const buttonCss = readFileSync(
 )
 writeFileSync(
   resolve(__dirname, "./temp/button-css.json"),
-  JSON.stringify(await parseCssRelationships(buttonCss), null, 2),
+  JSON.stringify(parseCssRelationships(buttonCss), null, 2),
   "utf-8",
 )

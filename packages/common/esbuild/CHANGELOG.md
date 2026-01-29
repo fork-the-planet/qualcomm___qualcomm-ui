@@ -1,5 +1,11 @@
 # @qualcomm-ui/esbuild Changelog
 
+## 1.0.5 (2026/01/23)
+
+### Code Refactoring
+
+- remove async from sync functions
+
 ## 1.0.4 (2025/12/03)
 
 ### Build System

@@ -13,7 +13,7 @@ describe("Markdown Indexer", () => {
   const indexer = new MarkdownIndexer(headingLevels)
   const fileReader = new MarkdownFileReader(false)
 
-  test("replaces frontmatter content", async () => {
+  test("replaces frontmatter content", () => {
     const {fileContents, frontmatter} = fileReader.readFile(
       resolve(__dirname, "./fixtures/indexer/markdown.mdx"),
     )

@@ -399,7 +399,7 @@ export const selectMachine: MachineConfig<SelectSchema> =
         fieldsetDisabled: bindable<boolean>(() => ({
           defaultValue: false,
         })),
-        highlightedItem: bindable<CollectionItem | null>(() => ({
+        highlightedItem: bindable<CollectionItem>(() => ({
           defaultValue: null,
         })),
         highlightedValue: bindable(() => ({

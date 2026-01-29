@@ -126,7 +126,7 @@ export function AppDocsLayout({
         footer={<Footer />}
         header={
           <div className="qui-docs__header">
-            <HeaderBar.Root surface="secondary">
+            <HeaderBar.Root>
               <HeaderLogo
                 appTitle="QUI React Table"
                 changelogHref="https://github.com/qualcomm/qualcomm-ui/tree/main/packages/frameworks/react/CHANGELOG.md"
@@ -143,7 +143,7 @@ export function AppDocsLayout({
                 <SiteSearch />
                 <HeaderRepositoryLink />
                 <GlobalConfig />
-                <HeaderAiLink modelId="qui-react-nextgen-sonnet-4-5" />
+                <HeaderAiLink />
                 <ThemeToggle />
               </HeaderBar.ActionBar>
             </HeaderBar.Root>

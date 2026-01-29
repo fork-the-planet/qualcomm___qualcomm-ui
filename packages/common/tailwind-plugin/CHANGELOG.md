@@ -1,5 +1,15 @@
 # @qualcomm-ui/tailwind-plugin Changelog
 
+## 1.5.1 (2026/01/23)
+
+### Documentation
+
+- update tailwind docs for clarity
+
+### Code Refactoring
+
+- improve logging and error handling
+
 ## 1.5.0 (2026/01/15)
 
 ### Features

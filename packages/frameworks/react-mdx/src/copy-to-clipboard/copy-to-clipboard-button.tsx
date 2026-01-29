@@ -5,15 +5,19 @@ import type {ReactElement} from "react"
 
 import {Check, Copy} from "lucide-react"
 
-import {Button} from "@qualcomm-ui/react/button"
+import {Button, type ButtonProps} from "@qualcomm-ui/react/button"
 import {useCopyToClipboard} from "@qualcomm-ui/react-mdx/copy-to-clipboard"
 import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 
-export interface CopyButtonProps {
+export interface CopyButtonProps
+  extends Pick<ButtonProps, "size" | "variant" | "emphasis"> {
   code: string | (() => string) | (() => Promise<string>)
 }
 
-export function CopyToClipboardButton({code}: CopyButtonProps): ReactElement {
+export function CopyToClipboardButton({
+  code,
+  ...props
+}: CopyButtonProps): ReactElement {
   const {copyToClipboard, isCopied} = useCopyToClipboard({
     valueOrFn: code,
   })
@@ -33,6 +37,7 @@ export function CopyToClipboardButton({code}: CopyButtonProps): ReactElement {
       size="sm"
       type="button"
       variant="ghost"
+      {...props}
     >
       Copy
     </Button>

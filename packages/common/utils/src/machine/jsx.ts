@@ -40,6 +40,8 @@ export type EventKeyMap<T extends HTMLElement = HTMLElement> = {
   [key in EventKey]?: (event: JSX.KeyboardEvent<T>) => void
 }
 
+// need to mirror the common JSX namespace.
+// eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace JSX {
   export interface BaseSyntheticEvent<E = object, C = any, T = any> {
     bubbles: boolean

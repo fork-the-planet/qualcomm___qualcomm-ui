@@ -58,10 +58,10 @@ export class CloudDocsSdk {
    *
    * @param archivePath
    */
-  async uploadFiles(
+  uploadFiles(
     {archivePath, environment, service}: UploadFileOptions,
     getFilesOptions: GetFilesOptions,
-  ): Promise<boolean> {
+  ): boolean {
     return !!(archivePath && environment && service && getFilesOptions)
   }
 
@@ -71,10 +71,7 @@ export class CloudDocsSdk {
    * @param directory the file directory to zip up.
    * @param archiveName name of the zip file to upload.
    */
-  async zipFiles(
-    directory: string,
-    archiveName: string = "site-data.zip",
-  ): Promise<boolean> {
+  zipFiles(directory: string, archiveName: string = "site-data.zip"): boolean {
     return !!(directory && archiveName)
   }
 }

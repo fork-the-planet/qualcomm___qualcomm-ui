@@ -1115,6 +1115,7 @@
       },
       "ApiResponse": {
         "type": "object",
+        "description": "API Response Object",
         "properties": {
           "code": {
             "type": "integer",

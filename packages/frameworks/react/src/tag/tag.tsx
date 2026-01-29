@@ -30,6 +30,12 @@ export interface TagProps extends QdsTagApiProps, ElementRenderProp<"button"> {
   endIcon?: LucideIconOrElement
 
   /**
+   * Callback fired when the dismiss button is clicked. Only applicable when
+   * {@link variant} is `dismissable`.
+   */
+  onDismiss?: () => void
+
+  /**
    * {@link https://lucide.dev lucide-react} icon, positioned before
    * the button text. Can be supplied as a `ReactElement` for additional
    * customization.
@@ -42,6 +48,7 @@ export function Tag({
   disabled,
   emphasis,
   endIcon,
+  onDismiss,
   radius,
   size,
   startIcon,
@@ -55,6 +62,7 @@ export function Tag({
     normalizeProps,
   )
 
+  const rootElement = qdsApi.isInteractiveVariant() ? "button" : "span"
   const rootProps = mergeProps(
     qdsApi.getRootBindings(),
     {
@@ -68,13 +76,15 @@ export function Tag({
   )
 
   return (
-    <PolymorphicElement as="button" {...rootProps}>
+    <PolymorphicElement as={rootElement} {...rootProps}>
       {startIcon ? (
         <IconOrNode icon={startIcon} {...qdsApi.getStartIconBindings()} />
       ) : null}
       {children}
       {variant === "dismissable" ? (
-        <IconOrNode icon={X} {...qdsApi.getEndIconBindings()} />
+        <button {...qdsApi.getDismissButtonBindings()} onClick={onDismiss}>
+          <IconOrNode icon={X} {...qdsApi.getEndIconBindings()} />
+        </button>
       ) : endIcon ? (
         <IconOrNode icon={endIcon} {...qdsApi.getEndIconBindings()} />
       ) : null}

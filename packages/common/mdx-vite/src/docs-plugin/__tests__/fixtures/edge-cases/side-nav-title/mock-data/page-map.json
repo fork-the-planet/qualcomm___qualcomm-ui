@@ -1,0 +1,36 @@
+{
+  "/snapdragon-guardian/try-it-out": {
+    "categories": [
+      "Snapdragon Guardian",
+      "Snapdragon Guardian APIs"
+    ],
+    "id": "/routes/snapdragon-guardian+/try-it-out.mdx",
+    "pathname": "/snapdragon-guardian/try-it-out",
+    "pathSegments": [
+      "snapdragon-guardian",
+      "try-it-out"
+    ],
+    "title": "Snapdragon Guardian APIs"
+  },
+  "/snapdragon-guardian/documentation": {
+    "categories": [
+      "Snapdragon Guardian",
+      "Snapdragon Guardian API Guide"
+    ],
+    "id": "/routes/snapdragon-guardian+/documentation.mdx",
+    "pathname": "/snapdragon-guardian/documentation",
+    "pathSegments": [
+      "snapdragon-guardian",
+      "documentation"
+    ],
+    "title": "Snapdragon Guardian API Guide",
+    "toc": [
+      {
+        "headingLevel": 2,
+        "id": "overview",
+        "tagName": "h2",
+        "textContent": "Overview"
+      }
+    ]
+  }
+}

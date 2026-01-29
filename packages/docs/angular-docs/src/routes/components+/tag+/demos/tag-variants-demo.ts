@@ -14,7 +14,7 @@ import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
       <!-- preview -->
       <button endIcon="Link2" q-tag variant="link">link</button>
       <button q-tag variant="selectable">selectable</button>
-      <button q-tag variant="dismissable">dismissable</button>
+      <span q-tag variant="dismissable">dismissable</span>
       <!-- preview -->
     </div>
   `,

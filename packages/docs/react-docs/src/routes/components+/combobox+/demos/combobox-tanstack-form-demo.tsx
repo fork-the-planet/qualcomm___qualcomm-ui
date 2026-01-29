@@ -32,7 +32,7 @@ export function ComboboxTanstackFormDemo(): ReactElement {
     defaultValues: {
       country: [] as string[],
     },
-    onSubmit: async () => {
+    onSubmit: () => {
       toaster.create({
         label: "Form submitted",
         type: "success",

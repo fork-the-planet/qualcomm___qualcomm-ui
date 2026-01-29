@@ -1,5 +1,21 @@
 # @qualcomm-ui/mdx-common Changelog
 
+## 1.9.1 (2026/01/22)
+
+### Styles
+
+- [shiki]: darken shiki theme background colors
+
+## 1.9.0 (2026/01/18)
+
+### Features
+
+- [mdx-knowledge]: add ManifestEntry and ExportManifest type definitions
+
+### Documentation
+
+- [qui-docs]: document manifest schema and MCP client usage
+
 ## 1.8.0 (2025/12/24)
 
 ### Features
@@ -17,7 +33,7 @@
 
 ### Features
 
-- [remark-plugins]: add support for frontmatter descriptions ([c482297](https://github.com/qualcomm/qualcomm-ui/commit/c4822975506ebce79e39fe31b1c1ed3f793649c7))
+- [remark-plugins]: add support for frontmatter descriptions
 
 ## 1.5.0 (2025/12/08)
 

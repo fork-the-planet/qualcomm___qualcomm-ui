@@ -24,8 +24,8 @@ const filePaths = {
   ),
 }
 
-describe("MDX Docs Plugin", async () => {
-  test("Remix Search Indexer", async () => {
+describe("MDX Docs Plugin", () => {
+  test("Remix Search Indexer", () => {
     const mdxFiles = sync(`${filePaths.routesDir}/**/*.mdx`)
     const indexer = new SearchIndexer({
       navConfig: [
