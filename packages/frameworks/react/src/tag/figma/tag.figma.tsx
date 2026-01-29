@@ -92,7 +92,7 @@ figma.connect(Tag, "<FIGMA_COMPONENTS_BASE>?node-id=6975-21606", {
 })
 
 // Read Only Tag (no variant - static/non-interactive)
-figma.connect(Tag, "<FIGMA_COMPONENTS_BASE>?node-id=6975-9552", {
+figma.connect(Tag, "<FIGMA_COMPONENTS_BASE>?node-id=16762-2131", {
   example: ({disabled, emphasis, nested}) => (
     <Tag
       disabled={disabled}
