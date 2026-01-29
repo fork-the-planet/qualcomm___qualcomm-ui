@@ -156,7 +156,6 @@ export function ObjectType(props: DataItemProps<any>): ReactNode {
               key="last"
               className="rest-spread"
               onClick={() => setDisplayLength((length: number) => length * 2)}
-              style={{color: keyColor}}
             >
               hidden {rest} items…
             </div>,
@@ -227,7 +226,6 @@ export function ObjectType(props: DataItemProps<any>): ReactNode {
           key="last"
           className="rest-spread no-select"
           onClick={() => setDisplayLength((length: number) => length * 2)}
-          style={{color: keyColor}}
         >
           hidden {rest} items…
         </div>,

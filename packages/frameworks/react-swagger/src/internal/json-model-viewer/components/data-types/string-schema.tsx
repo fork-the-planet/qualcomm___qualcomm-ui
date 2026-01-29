@@ -3,7 +3,7 @@
 
 import {defineEasyType} from "./define-easy-type"
 
-export const stringSchemaType = defineEasyType<string>({
+export const stringSchemaType = defineEasyType<string | NonNullable<unknown>>({
   colorKey: "base09",
   is: (value: unknown) =>
     !!(
