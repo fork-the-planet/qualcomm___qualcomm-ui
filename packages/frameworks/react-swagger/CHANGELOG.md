@@ -1,5 +1,20 @@
 # @qualcomm-ui/react-swagger Changelog
 
+## 1.2.0 (2026/01/28)
+
+### Features
+
+- [json-viewer]: add expandable descriptions for schema properties
+- [json-viewer]: add toggle button to show/hide property descriptions
+
+### Code Refactoring
+
+- [json-viewer]: restructure data-key-pair layout with data attributes
+
+### Styles
+
+- [json-viewer]: update rest-spread and description styling
+
 ## 1.1.0 (2026/01/28)
 
 ### Features
