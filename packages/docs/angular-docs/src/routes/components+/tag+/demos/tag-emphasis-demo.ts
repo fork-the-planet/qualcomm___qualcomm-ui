@@ -1,16 +1,65 @@
 import {Component} from "@angular/core"
+import {Smile} from "lucide-angular"
 
 import {TagDirective} from "@qualcomm-ui/angular/tag"
+import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 
 @Component({
   imports: [TagDirective],
+  providers: [provideIcons({Smile})],
   selector: "tag-emphasis-demo",
   template: `
-    <div class="flex items-center gap-2">
+    <div class="flex flex-wrap items-center gap-2">
       <!-- preview -->
-      <button emphasis="brand" q-tag>Label</button>
-      <button emphasis="outline-neutral" q-tag>Label</button>
-      <button emphasis="neutral" q-tag>Label</button>
+      <button
+        emphasis="outline-brand"
+        q-tag
+        startIcon="Smile"
+        variant="selectable"
+      >
+        outline-brand
+      </button>
+      <button
+        emphasis="outline-neutral"
+        q-tag
+        startIcon="Smile"
+        variant="selectable"
+      >
+        outline-neutral
+      </button>
+      <button emphasis="neutral" q-tag startIcon="Smile" variant="selectable">
+        neutral
+      </button>
+      <button emphasis="blue" q-tag startIcon="Smile" variant="selectable">
+        blue
+      </button>
+      <button emphasis="cyan" q-tag startIcon="Smile" variant="selectable">
+        cyan
+      </button>
+      <button emphasis="teal" q-tag startIcon="Smile" variant="selectable">
+        teal
+      </button>
+      <button emphasis="green" q-tag startIcon="Smile" variant="selectable">
+        green
+      </button>
+      <button emphasis="kiwi" q-tag startIcon="Smile" variant="selectable">
+        kiwi
+      </button>
+      <button emphasis="yellow" q-tag startIcon="Smile" variant="selectable">
+        yellow
+      </button>
+      <button emphasis="orange" q-tag startIcon="Smile" variant="selectable">
+        orange
+      </button>
+      <button emphasis="red" q-tag startIcon="Smile" variant="selectable">
+        red
+      </button>
+      <button emphasis="magenta" q-tag startIcon="Smile" variant="selectable">
+        magenta
+      </button>
+      <button emphasis="purple" q-tag startIcon="Smile" variant="selectable">
+        purple
+      </button>
       <!-- preview -->
     </div>
   `,

@@ -87,6 +87,9 @@ catalogs:
     '@react-router/serve':
       specifier: 7.12.0
       version: 7.12.0
+    '@types/lodash-es':
+      specifier: 4.17.12
+      version: 4.17.12
     '@types/react':
       specifier: 19.2.7
       version: 19.2.7
@@ -102,6 +105,9 @@ catalogs:
     '@typescript-eslint/utils':
       specifier: 8.48.1
       version: 8.48.1
+    lodash-es:
+      specifier: 4.17.23
+      version: 4.17.23
     react:
       specifier: 19.2.3
       version: 19.2.3
@@ -117,6 +123,7 @@ catalogs:
 
 overrides:
   eslint: 9.39.1
+  lodash: 4.17.23
   playwright: 1.56.1
   typescript: 5.9.3
 
@@ -271,8 +278,8 @@ importers:
         specifier: ^4.20.6
         version: 4.20.6
       turbo:
-        specifier: 2.6.3
-        version: 2.6.3
+        specifier: ^2.7.6
+        version: 2.7.6
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -767,7 +774,7 @@ importers:
         specifier: ^3.0.4
         version: 3.0.4
       '@types/lodash-es':
-        specifier: ^4.17.12
+        specifier: 'catalog:'
         version: 4.17.12
       '@types/mdast':
         specifier: ^4.0.4
@@ -794,8 +801,8 @@ importers:
         specifier: ^9.0.0
         version: 9.0.1
       lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
+        specifier: 'catalog:'
+        version: 4.17.23
       minimatch:
         specifier: ^10.1.1
         version: 10.1.1
@@ -915,7 +922,7 @@ importers:
         specifier: ^4.0.0
         version: 4.0.1
       '@types/lodash-es':
-        specifier: ^4.17.12
+        specifier: 'catalog:'
         version: 4.17.12
       '@types/node':
         specifier: ~24.9.2
@@ -936,8 +943,8 @@ importers:
         specifier: ^2.2.3
         version: 2.2.3
       lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
+        specifier: 'catalog:'
+        version: 4.17.23
       postcss:
         specifier: ^8.5.6
         version: 8.5.6
@@ -1024,7 +1031,7 @@ importers:
         specifier: workspace:^1.0.3
         version: link:../typedoc-common
       '@types/lodash-es':
-        specifier: ^4.17.12
+        specifier: 'catalog:'
         version: 4.17.12
       '@vitest/coverage-v8':
         specifier: ^4.0.8
@@ -1048,8 +1055,8 @@ importers:
         specifier: ^12.1.0
         version: 12.11.1(@types/node@24.10.1)
       lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
+        specifier: 'catalog:'
+        version: 4.17.23
       npm-run-all2:
         specifier: ^8.0.4
         version: 8.0.4
@@ -1740,8 +1747,8 @@ importers:
         specifier: ^2.7.1
         version: 2.15.1(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.7)(react@19.2.3)
       lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
+        specifier: 'catalog:'
+        version: 4.17.23
       lucide-react:
         specifier: 0.525.0
         version: 0.525.0(react@19.2.3)
@@ -1807,7 +1814,7 @@ importers:
         specifier: ^4.1.11
         version: 4.1.17(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))
       '@types/lodash-es':
-        specifier: ^4.17.12
+        specifier: 'catalog:'
         version: 4.17.12
       '@types/react':
         specifier: 'catalog:'
@@ -1976,7 +1983,7 @@ importers:
         version: 7.12.0(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)
       '@react-router/remix-routes-option-adapter':
         specifier: 'catalog:'
-        version: 7.12.0(@react-router/dev@7.12.0(patch_hash=c9be68a57125af13e2f488a883a3b00a0db6daa30ce0c714657c7dfa74745478)(@react-router/serve@7.12.0(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.2))(typescript@5.9.3)
+        version: 7.12.0(@react-router/dev@7.12.0(patch_hash=c9be68a57125af13e2f488a883a3b00a0db6daa30ce0c714657c7dfa74745478)(@react-router/serve@7.12.0(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.0)(lightningcss@1.30.2)(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.2))(typescript@5.9.3)
       '@react-router/serve':
         specifier: 'catalog:'
         version: 7.12.0(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)
@@ -2023,8 +2030,8 @@ importers:
         specifier: ^2.7.1
         version: 2.15.1(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.7)(react@19.2.3)
       lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
+        specifier: 'catalog:'
+        version: 4.17.23
       lucide-angular:
         specifier: 0.525.0
         version: 0.525.0(@angular/common@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))
@@ -2106,15 +2113,15 @@ importers:
         version: link:../../configs/tsconfig
       '@react-router/dev':
         specifier: 'catalog:'
-        version: 7.12.0(patch_hash=c9be68a57125af13e2f488a883a3b00a0db6daa30ce0c714657c7dfa74745478)(@react-router/serve@7.12.0(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.2)
+        version: 7.12.0(patch_hash=c9be68a57125af13e2f488a883a3b00a0db6daa30ce0c714657c7dfa74745478)(@react-router/serve@7.12.0(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.0)(lightningcss@1.30.2)(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.2)
       '@shikijs/rehype':
         specifier: ^3.13.0
         version: 3.15.0
       '@tailwindcss/vite':
         specifier: ^4.1.11
-        version: 4.1.17(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))
+        version: 4.1.17(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))
       '@types/lodash-es':
-        specifier: ^4.17.12
+        specifier: 'catalog:'
         version: 4.17.12
       '@types/react':
         specifier: 'catalog:'
@@ -2199,10 +2206,10 @@ importers:
         version: 11.0.5
       vite:
         specifier: npm:rolldown-vite@7.2.10
-        version: rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2)
+        version: rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2)
       vite-tsconfig-paths:
         specifier: ^5.1.4
-        version: 5.1.4(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))(typescript@5.9.3)
+        version: 5.1.4(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))(typescript@5.9.3)
 
   packages/docs/angular-table-docs:
     dependencies:
@@ -2310,7 +2317,7 @@ importers:
         version: 7.12.0(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)
       '@react-router/remix-routes-option-adapter':
         specifier: 'catalog:'
-        version: 7.12.0(@react-router/dev@7.12.0(patch_hash=c9be68a57125af13e2f488a883a3b00a0db6daa30ce0c714657c7dfa74745478)(@react-router/serve@7.12.0(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.0)(lightningcss@1.30.2)(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.2))(typescript@5.9.3)
+        version: 7.12.0(@react-router/dev@7.12.0(patch_hash=c9be68a57125af13e2f488a883a3b00a0db6daa30ce0c714657c7dfa74745478)(@react-router/serve@7.12.0(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.2))(typescript@5.9.3)
       '@react-router/serve':
         specifier: 'catalog:'
         version: 7.12.0(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)
@@ -2357,8 +2364,8 @@ importers:
         specifier: ^2.7.1
         version: 2.15.1(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.7)(react@19.2.3)
       lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
+        specifier: 'catalog:'
+        version: 4.17.23
       lucide-angular:
         specifier: 0.525.0
         version: 0.525.0(@angular/common@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))
@@ -2440,15 +2447,15 @@ importers:
         version: link:../../configs/tsconfig
       '@react-router/dev':
         specifier: 'catalog:'
-        version: 7.12.0(patch_hash=c9be68a57125af13e2f488a883a3b00a0db6daa30ce0c714657c7dfa74745478)(@react-router/serve@7.12.0(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.0)(lightningcss@1.30.2)(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.2)
+        version: 7.12.0(patch_hash=c9be68a57125af13e2f488a883a3b00a0db6daa30ce0c714657c7dfa74745478)(@react-router/serve@7.12.0(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.2)
       '@shikijs/rehype':
         specifier: ^3.13.0
         version: 3.15.0
       '@tailwindcss/vite':
         specifier: ^4.1.11
-        version: 4.1.17(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))
+        version: 4.1.17(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))
       '@types/lodash-es':
-        specifier: ^4.17.12
+        specifier: 'catalog:'
         version: 4.17.12
       '@types/react':
         specifier: 'catalog:'
@@ -2533,10 +2540,10 @@ importers:
         version: 11.0.5
       vite:
         specifier: npm:rolldown-vite@7.2.10
-        version: rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2)
+        version: rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2)
       vite-tsconfig-paths:
         specifier: ^5.1.4
-        version: 5.1.4(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))(typescript@5.9.3)
+        version: 5.1.4(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))(typescript@5.9.3)
 
   packages/docs/qui-docs:
     dependencies:
@@ -2631,8 +2638,8 @@ importers:
         specifier: ^2.7.1
         version: 2.15.1(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.7)(react@19.2.3)
       lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
+        specifier: 'catalog:'
+        version: 4.17.23
       lucide-react:
         specifier: 0.525.0
         version: 0.525.0(react@19.2.3)
@@ -2680,7 +2687,7 @@ importers:
         specifier: ^4.1.11
         version: 4.1.17(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))
       '@types/lodash-es':
-        specifier: ^4.17.12
+        specifier: 'catalog:'
         version: 4.17.12
       '@types/react':
         specifier: 'catalog:'
@@ -2842,8 +2849,8 @@ importers:
         specifier: ^2.7.1
         version: 2.15.1(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.7)(react@19.2.3)
       lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
+        specifier: 'catalog:'
+        version: 4.17.23
       lucide-react:
         specifier: 0.525.0
         version: 0.525.0(react@19.2.3)
@@ -2888,7 +2895,7 @@ importers:
         specifier: ^4.1.11
         version: 4.1.17(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))
       '@types/lodash-es':
-        specifier: ^4.17.12
+        specifier: 'catalog:'
         version: 4.17.12
       '@types/react':
         specifier: 'catalog:'
@@ -3068,8 +3075,8 @@ importers:
         specifier: ^2.7.1
         version: 2.15.1(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.7)(react@19.2.3)
       lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
+        specifier: 'catalog:'
+        version: 4.17.23
       lucide-react:
         specifier: 0.525.0
         version: 0.525.0(react@19.2.3)
@@ -3138,7 +3145,7 @@ importers:
         specifier: ^4.1.11
         version: 4.1.17(rolldown-vite@7.2.10(@types/node@24.9.2)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))
       '@types/lodash-es':
-        specifier: ^4.17.12
+        specifier: 'catalog:'
         version: 4.17.12
       '@types/node':
         specifier: ~24.9.2
@@ -3327,8 +3334,8 @@ importers:
         specifier: ^2.7.1
         version: 2.15.1(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.7)(react@19.2.3)
       lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
+        specifier: 'catalog:'
+        version: 4.17.23
       lucide-react:
         specifier: 0.525.0
         version: 0.525.0(react@19.2.3)
@@ -3382,7 +3389,7 @@ importers:
         specifier: ^4.1.11
         version: 4.1.17(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))
       '@types/lodash-es':
-        specifier: ^4.17.12
+        specifier: 'catalog:'
         version: 4.17.12
       '@types/mdx':
         specifier: ^2.0.13
@@ -3542,7 +3549,7 @@ importers:
         specifier: workspace:^1.2.1
         version: link:../../common/core
       '@qualcomm-ui/qds-core':
-        specifier: workspace:^1.14.0
+        specifier: workspace:^1.15.0
         version: link:../../common/qds-core
       '@qualcomm-ui/tailwind-plugin':
         specifier: workspace:^1.5.1
@@ -3821,7 +3828,7 @@ importers:
         specifier: workspace:^1.0.5
         version: link:../../common/esbuild
       '@qualcomm-ui/qds-core':
-        specifier: workspace:^1.14.0
+        specifier: workspace:^1.15.0
         version: link:../../common/qds-core
       '@qualcomm-ui/react-core':
         specifier: workspace:^1.1.3
@@ -4176,7 +4183,7 @@ importers:
         specifier: workspace:^1.9.1
         version: link:../../common/mdx-common
       '@qualcomm-ui/react':
-        specifier: workspace:^1.9.0
+        specifier: workspace:^1.10.0
         version: link:../react
       '@qualcomm-ui/react-core':
         specifier: workspace:^1.1.3
@@ -4203,7 +4210,7 @@ importers:
         specifier: ^7.20.5
         version: 7.20.5
       '@types/lodash-es':
-        specifier: ^4.17.12
+        specifier: 'catalog:'
         version: 4.17.12
       '@types/react':
         specifier: 'catalog:'
@@ -4236,8 +4243,8 @@ importers:
         specifier: ^3.0.1
         version: 3.1.0
       lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
+        specifier: 'catalog:'
+        version: 4.17.23
       lucide-react:
         specifier: 0.525.0
         version: 0.525.0(react@19.2.3)
@@ -4349,16 +4356,16 @@ importers:
         specifier: workspace:^1.0.5
         version: link:../../common/esbuild
       '@qualcomm-ui/qds-core':
-        specifier: workspace:^1.14.0
+        specifier: workspace:^1.15.0
         version: link:../../common/qds-core
       '@qualcomm-ui/react':
-        specifier: workspace:^1.9.0
+        specifier: workspace:^1.10.0
         version: link:../react
       '@qualcomm-ui/react-core':
         specifier: workspace:^1.1.3
         version: link:../react-core
       '@qualcomm-ui/react-mdx':
-        specifier: workspace:^1.11.1
+        specifier: workspace:^1.11.3
         version: link:../react-mdx
       '@qualcomm-ui/react-test-utils':
         specifier: workspace:^1.0.0
@@ -4381,11 +4388,14 @@ importers:
       '@types/css.escape':
         specifier: ^1.5.2
         version: 1.5.2
+      '@types/dom-navigation':
+        specifier: ^1.0.6
+        version: 1.0.6
       '@types/immutable':
         specifier: ^3
         version: 3.8.7
       '@types/lodash-es':
-        specifier: ^4.17.12
+        specifier: 'catalog:'
         version: 4.17.12
       '@types/randombytes':
         specifier: ^2.0.3
@@ -4445,8 +4455,8 @@ importers:
         specifier: ^3.8.2
         version: 3.8.2
       lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
+        specifier: 'catalog:'
+        version: 4.17.23
       lucide-react:
         specifier: 0.525.0
         version: 0.525.0(react@19.2.3)
@@ -4529,7 +4539,7 @@ importers:
         specifier: ^4.1.11
         version: 4.1.17(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.21.0)(yaml@2.8.2))
       '@types/lodash-es':
-        specifier: ^4.17.12
+        specifier: 'catalog:'
         version: 4.17.12
       '@types/react':
         specifier: 'catalog:'
@@ -4556,8 +4566,8 @@ importers:
         specifier: ^0.25.8
         version: 0.25.12
       lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
+        specifier: 'catalog:'
+        version: 4.17.23
       playwright:
         specifier: 1.56.1
         version: 1.56.1
@@ -9157,6 +9167,9 @@ packages:
   '@types/deep-eql@4.0.2':
     resolution: {integrity: sha512-c9h9dVVMigMPc4bwTvC5dxqtqJZwQPePsWjPlpSOnojbor6pGqdk541lfA7AqFQr5pB1BRdq0juY9db81BwyFw==}
 
+  '@types/dom-navigation@1.0.6':
+    resolution: {integrity: sha512-4srBpebg8rFDm0LafYuWhZMgLoSr5J4gx4q1uaTqOXwVk00y+CkTdJ4SC57sR1cMhP0ZRjApMRdHVcFYOvPGTw==}
+
   '@types/eslint-scope@3.7.7':
     resolution: {integrity: sha512-MzMFlSLBqNF2gcHWO0G1vP/YQyfvrxZ0bF+u7mzUdZ1/xK4A4sru+nraZz5i3iEIk1l1uyicaDVTB4QbbEkAYg==}
 
@@ -13017,8 +13030,8 @@ packages:
     resolution: {integrity: sha512-gvVijfZvn7R+2qyPX8mAuKcFGDf6Nc61GdvGafQsHL0sBIxfKzA+usWn4GFC/bk+QdwPUD4kWFJLhElipq+0VA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
-  lodash-es@4.17.21:
-    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+  lodash-es@4.17.23:
+    resolution: {integrity: sha512-kVI48u3PZr38HdYz98UmfPnXl2DXrpdctLrFLCd3kOx1xUkOmpFPx7gCWWM5MPkL/fD8zb+Ph0QzjGFs4+hHWg==}
 
   lodash.camelcase@4.3.0:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
@@ -13053,8 +13066,8 @@ packages:
   lodash.uniq@4.5.0:
     resolution: {integrity: sha512-xfBaXQd9ryd9dlSDvnvI0lvxfLJlYAZzXomUYzLKtUeOQvOP5piqAWuGtrhWeqaXK9hhoM/iyJc5AV+XfsX3HQ==}
 
-  lodash@4.17.21:
-    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+  lodash@4.17.23:
+    resolution: {integrity: sha512-LgVTMpQtIopCi79SJeDiP0TfWi5CNEc/L/aRdTh3yIvmZXTnheWpKjSZhnvMl8iXbC1tFg9gdHHDMLoV7CnG+w==}
 
   log-symbols@4.1.0:
     resolution: {integrity: sha512-8XPvpAA8uyhfteu8pIvQxpJZ7SYYdpUivZpGy6sFsBuKRY/7rQGavedeB8aK+Zkyq6upMFVL/9AW6vOYzfRyLg==}
@@ -16422,38 +16435,38 @@ packages:
     resolution: {integrity: sha512-1h/Lnq9yajKY2PEbBadPXj3VxsDDu844OnaAo52UVmIzIvwwtBPIuNvkjuzBlTWpfJyUbG3ez0KSBibQkj4ojg==}
     engines: {node: '>=0.6.11 <=0.7.0 || >=0.7.3'}
 
-  turbo-darwin-64@2.6.3:
-    resolution: {integrity: sha512-BlJJDc1CQ7SK5Y5qnl7AzpkvKSnpkfPmnA+HeU/sgny3oHZckPV2776ebO2M33CYDSor7+8HQwaodY++IINhYg==}
+  turbo-darwin-64@2.7.6:
+    resolution: {integrity: sha512-bYu0qnWju2Ha3EbIkPCk1SMLT3sltKh1P/Jy5FER6BmH++H5z+T5MHh3W1Xoers9rk4N1VdKvog9FO1pxQyjhw==}
     cpu: [x64]
     os: [darwin]
 
-  turbo-darwin-arm64@2.6.3:
-    resolution: {integrity: sha512-MwVt7rBKiOK7zdYerenfCRTypefw4kZCue35IJga9CH1+S50+KTiCkT6LBqo0hHeoH2iKuI0ldTF2a0aB72z3w==}
+  turbo-darwin-arm64@2.7.6:
+    resolution: {integrity: sha512-KCxTf3Y1hgNLYIWRLw8bwH8Zie9RyCGoxAlXYsCBI/YNqBSR+ZZK9KYzFxAqDaVaNvTwLFv3rJRGsXOFWg4+Uw==}
     cpu: [arm64]
     os: [darwin]
 
-  turbo-linux-64@2.6.3:
-    resolution: {integrity: sha512-cqpcw+dXxbnPtNnzeeSyWprjmuFVpHJqKcs7Jym5oXlu/ZcovEASUIUZVN3OGEM6Y/OTyyw0z09tOHNt5yBAVg==}
+  turbo-linux-64@2.7.6:
+    resolution: {integrity: sha512-vjoU8zIfNgvJR3cMitgw7inEoi6bmuVuFawDl5yKtxjAEhDktFdRBpGS3WojD4l3BklBbIK689ssXcGf21LxRA==}
     cpu: [x64]
     os: [linux]
 
-  turbo-linux-arm64@2.6.3:
-    resolution: {integrity: sha512-MterpZQmjXyr4uM7zOgFSFL3oRdNKeflY7nsjxJb2TklsYqiu3Z9pQ4zRVFFH8n0mLGna7MbQMZuKoWqqHb45w==}
+  turbo-linux-arm64@2.7.6:
+    resolution: {integrity: sha512-TcMpBvTqZf+1DptrVYLbZls7WY1UVNDTGaf0bo7/GCgWYv5eZHCVo4Td7kCJeDU4glbXg67REX0md0S0V6ghMg==}
     cpu: [arm64]
     os: [linux]
 
-  turbo-windows-64@2.6.3:
-    resolution: {integrity: sha512-biDU70v9dLwnBdLf+daoDlNJVvqOOP8YEjqNipBHzgclbQlXbsi6Gqqelp5er81Qo3BiRgmTNx79oaZQTPb07Q==}
+  turbo-windows-64@2.7.6:
+    resolution: {integrity: sha512-1/MhkYldiihjneY8QnnDMbAkHXn/udTWSVYS94EMlkE9AShozsLTTOT1gDOpX06EfEW5njP09suhMvxbvwuwpQ==}
     cpu: [x64]
     os: [win32]
 
-  turbo-windows-arm64@2.6.3:
-    resolution: {integrity: sha512-dDHVKpSeukah3VsI/xMEKeTnV9V9cjlpFSUs4bmsUiLu3Yv2ENlgVEZv65wxbeE0bh0jjpmElDT+P1KaCxArQQ==}
+  turbo-windows-arm64@2.7.6:
+    resolution: {integrity: sha512-0wDVnUJLFAWm4ZzOQFDkbyyUqaszorTGf3Rdc22IRIyJTTLd6ajqdb+cWD89UZ1RKr953+PZR1gqgWQY4PDuhA==}
     cpu: [arm64]
     os: [win32]
 
-  turbo@2.6.3:
-    resolution: {integrity: sha512-bf6YKUv11l5Xfcmg76PyWoy/e2vbkkxFNBGJSnfdSXQC33ZiUfutYh6IXidc5MhsnrFkWfdNNLyaRk+kHMLlwA==}
+  turbo@2.7.6:
+    resolution: {integrity: sha512-PO9AvJLEsNLO+EYhF4zB+v10hOjsJe5kJW+S6tTbRv+TW7gf1Qer4mfjP9h3/y9h8ZiPvOrenxnEgDtFgaM5zw==}
     hasBin: true
 
   type-check@0.4.0:
@@ -21627,7 +21640,7 @@ snapshots:
     dependencies:
       '@swc/helpers': 0.5.17
       caniuse-lite: 1.0.30001754
-      lodash: 4.17.21
+      lodash: 4.17.23
       rslog: 1.3.0
 
   '@module-federation/bridge-react-webpack-plugin@0.21.2':
@@ -22855,7 +22868,7 @@ snapshots:
       exit-hook: 2.2.1
       isbot: 5.1.32
       jsesc: 3.0.2
-      lodash: 4.17.21
+      lodash: 4.17.23
       p-map: 7.0.4
       pathe: 1.1.2
       picocolors: 1.1.1
@@ -22905,7 +22918,7 @@ snapshots:
       exit-hook: 2.2.1
       isbot: 5.1.32
       jsesc: 3.0.2
-      lodash: 4.17.21
+      lodash: 4.17.23
       p-map: 7.0.4
       pathe: 1.1.2
       picocolors: 1.1.1
@@ -22955,7 +22968,7 @@ snapshots:
       exit-hook: 2.2.1
       isbot: 5.1.32
       jsesc: 3.0.2
-      lodash: 4.17.21
+      lodash: 4.17.23
       p-map: 7.0.4
       pathe: 1.1.2
       picocolors: 1.1.1
@@ -24497,6 +24510,8 @@ snapshots:
 
   '@types/deep-eql@4.0.2': {}
 
+  '@types/dom-navigation@1.0.6': {}
+
   '@types/eslint-scope@3.7.7':
     dependencies:
       '@types/eslint': 9.6.1
@@ -25436,7 +25451,7 @@ snapshots:
       sirv: 3.0.2
       tinyglobby: 0.2.15
       tinyrainbow: 3.0.3
-      vitest: 4.0.9(@types/debug@4.1.12)(@types/node@24.9.2)(@vitest/browser-playwright@4.0.9)(@vitest/ui@4.0.9)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2)
+      vitest: 4.0.9(@types/debug@4.1.12)(@types/node@24.10.1)(@vitest/browser-playwright@4.0.9)(@vitest/ui@4.0.9)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.21.0)(yaml@2.8.2)
 
   '@vitest/utils@4.0.9':
     dependencies:
@@ -25714,7 +25729,7 @@ snapshots:
       graceful-fs: 4.2.11
       is-stream: 2.0.1
       lazystream: 1.0.1
-      lodash: 4.17.21
+      lodash: 4.17.23
       normalize-path: 3.0.0
       readable-stream: 4.7.0
 
@@ -29442,7 +29457,7 @@ snapshots:
       p-locate: 6.0.0
     optional: true
 
-  lodash-es@4.17.21: {}
+  lodash-es@4.17.23: {}
 
   lodash.camelcase@4.3.0: {}
 
@@ -29466,7 +29481,7 @@ snapshots:
 
   lodash.uniq@4.5.0: {}
 
-  lodash@4.17.21: {}
+  lodash@4.17.23: {}
 
   log-symbols@4.1.0:
     dependencies:
@@ -30152,7 +30167,7 @@ snapshots:
 
   minim@0.23.8:
     dependencies:
-      lodash: 4.17.21
+      lodash: 4.17.23
 
   minimalistic-assert@1.0.1: {}
 
@@ -33237,7 +33252,7 @@ snapshots:
       immutable: 3.8.2
       js-file-download: 0.4.12
       js-yaml: 4.1.1
-      lodash: 4.17.21
+      lodash: 4.17.23
       prop-types: 15.8.1
       randexp: 0.5.3
       randombytes: 2.1.0
@@ -33279,7 +33294,7 @@ snapshots:
       immutable: 3.8.2
       js-file-download: 0.4.12
       js-yaml: 4.1.1
-      lodash: 4.17.21
+      lodash: 4.17.23
       prop-types: 15.8.1
       randexp: 0.5.3
       randombytes: 2.1.0
@@ -33700,32 +33715,32 @@ snapshots:
 
   tunnel@0.0.6: {}
 
-  turbo-darwin-64@2.6.3:
+  turbo-darwin-64@2.7.6:
     optional: true
 
-  turbo-darwin-arm64@2.6.3:
+  turbo-darwin-arm64@2.7.6:
     optional: true
 
-  turbo-linux-64@2.6.3:
+  turbo-linux-64@2.7.6:
     optional: true
 
-  turbo-linux-arm64@2.6.3:
+  turbo-linux-arm64@2.7.6:
     optional: true
 
-  turbo-windows-64@2.6.3:
+  turbo-windows-64@2.7.6:
     optional: true
 
-  turbo-windows-arm64@2.6.3:
+  turbo-windows-arm64@2.7.6:
     optional: true
 
-  turbo@2.6.3:
+  turbo@2.7.6:
     optionalDependencies:
-      turbo-darwin-64: 2.6.3
-      turbo-darwin-arm64: 2.6.3
-      turbo-linux-64: 2.6.3
-      turbo-linux-arm64: 2.6.3
-      turbo-windows-64: 2.6.3
-      turbo-windows-arm64: 2.6.3
+      turbo-darwin-64: 2.7.6
+      turbo-darwin-arm64: 2.7.6
+      turbo-linux-64: 2.7.6
+      turbo-linux-arm64: 2.7.6
+      turbo-windows-64: 2.7.6
+      turbo-windows-arm64: 2.7.6
 
   type-check@0.4.0:
     dependencies:

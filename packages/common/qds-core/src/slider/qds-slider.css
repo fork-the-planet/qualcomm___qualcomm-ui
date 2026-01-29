@@ -64,7 +64,7 @@
   &[data-orientation="horizontal"] {
     grid-template-columns: auto 1fr 1fr auto;
     grid-template-rows: [label] auto [control] auto [markers] auto [hint error] auto;
-    --row-gap: 6px;
+    --row-gap: var(--spacing-70);
   }
   &[data-orientation="vertical"] {
     grid-template-columns: [label control] 1fr [value markers] 1fr;
@@ -105,7 +105,7 @@
   color: var(--slider-marker-color);
   font: var(--font-static-body-xs-default);
   grid-row: control;
-  margin-block-start: var(--row-gap);
+  margin-block-start: var(--spacing-50);
   user-select: none;
 }
 
@@ -238,7 +238,7 @@
 .qui-slider__marker-group {
   &[data-orientation="horizontal"] {
     height: 20px;
-    margin-block-start: var(--row-gap);
+    margin-block-start: var(--spacing-50);
     width: 100%;
   }
   &[data-orientation="vertical"] {
@@ -263,12 +263,15 @@
 
 .qui-slider__error-text {
   color: var(--color-text-support-danger);
-  display: flex;
   font: var(--font-static-body-xs-default);
-  gap: 6px;
   grid-column: 1 / -1;
   grid-row: error;
   margin-block-start: var(--row-gap);
+}
+
+.qui-slider__root[data-invalid] .qui-slider__error-text {
+  display: flex;
+  gap: var(--spacing-40);
 }
 
 .qui-slider__thumb-indicator {

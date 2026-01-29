@@ -47,10 +47,12 @@ export type JsonViewerOnSelect = <U = unknown>(path: Path, value: U) => void
 export interface DataItemProps<ValueType = unknown> {
   arrayOverride?: boolean
   inspect: boolean
+  isRequired?: boolean
   nestedIndex?: number
   path: Path
   prevValue: ValueType | undefined
   refName?: string
+  requiredProperties?: string[] | null
   setInspect: Dispatch<SetStateAction<boolean>>
   value: ValueType
 }
@@ -225,7 +227,7 @@ export type JsonViewerProps<T = unknown> = {
   /**
    * Whether add quotes on keys.
    *
-   * @default true
+   * @default false
    */
   quotesOnKeys?: boolean
 

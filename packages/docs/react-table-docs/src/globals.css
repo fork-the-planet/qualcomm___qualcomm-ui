@@ -27,10 +27,6 @@
   font-family: "Source Code Pro", "Roboto Mono", monospace;
 }
 
-.q-header--content {
-  padding: 6px 12px;
-}
-
 body {
   background: var(--color-background-neutral-00);
   display: flex;

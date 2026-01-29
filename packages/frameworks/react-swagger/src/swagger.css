@@ -1001,6 +1001,10 @@
       display: flex;
       justify-content: space-between;
       padding: 10px 20px 10px 20px;
+
+      &:hover {
+        background: var(--color-interactive-background-ghost-hover);
+      }
     }
   }
   section.models {
@@ -1027,9 +1031,17 @@
   section.models .model-container {
     border-bottom: solid 1px var(--color-border-neutral-01);
     border-radius: 4px;
+    container-type: inline-size;
     padding: 16px;
     position: relative;
     transition: all 0.5s;
+
+    .renderedMarkdown {
+      padding: 0 16px;
+      p {
+        font: var(--font-static-body-sm-default);
+      }
+    }
   }
   section.models .model-container:last-of-type {
     border-bottom: 0;
@@ -1839,8 +1851,15 @@
     }
   }
 
-  .object-model-expand-button {
+  .object-model-accordion {
     margin-bottom: 8px;
+    width: 100cqw;
+    .qui-accordion__item-content-body {
+      padding: 0;
+    }
+    + .json-model-viewer {
+      margin-left: 16px;
+    }
   }
 }
 

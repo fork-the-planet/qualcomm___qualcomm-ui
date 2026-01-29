@@ -22,7 +22,7 @@ export class CorePopoverArrowDirective implements OnInit {
 
   private readonly onDestroy = useOnDestroy()
 
-  private readonly trackBindings = useTrackBindings(() =>
+  protected readonly trackBindings = useTrackBindings(() =>
     this.popoverContext().getArrowBindings({
       id: this.hostId(),
       onDestroy: this.onDestroy,

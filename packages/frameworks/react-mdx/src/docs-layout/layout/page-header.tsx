@@ -47,58 +47,53 @@ export function PageHeader(): ReactNode {
     return null
   }
 
-  const {title} = page
-
   return (
-    <header className="qui-docs__page-header">
-      <div className="qui-docs__page-header-title-row">
-        <h1 className="mdx qui-docs__page-title">{title}</h1>
-        {exportUrl && (
-          <div className="qui-docs__page-header-actions">
-            <Button
-              className="qui-docs__page-header-copy-button"
-              endIcon={isCopied ? Check : Copy}
-              onClick={copyToClipboard}
-              size="sm"
-              variant="outline"
-            >
-              Copy Page
-            </Button>
-            <Menu.Root size="sm">
-              <Menu.Trigger>
-                <Menu.IconButton
-                  className="qui-docs__page-header-menu-button"
-                  size="sm"
-                  variant="outline"
-                />
-              </Menu.Trigger>
-              <Portal>
-                <Menu.Positioner>
-                  <Menu.Content>
-                    <Menu.Item onClick={copyToClipboard} value="copy-page">
-                      <Menu.ItemStartIcon icon={Copy} />
-                      <Menu.ItemLabel>Copy Page</Menu.ItemLabel>
-                      <Menu.ItemDescription>
-                        Copy page as markdown for LLMs
-                      </Menu.ItemDescription>
-                    </Menu.Item>
-                    <Menu.Item
-                      render={<a download href={exportUrl} />}
-                      value="download-page"
-                    >
-                      <Menu.ItemStartIcon icon={Download} />
-                      <Menu.ItemLabel>Download Page</Menu.ItemLabel>
-                      <Menu.ItemDescription>
-                        Download page as markdown
-                      </Menu.ItemDescription>
-                    </Menu.Item>
-                  </Menu.Content>
-                </Menu.Positioner>
-              </Portal>
-            </Menu.Root>
-          </div>
-        )}
-      </div>
-    </header>
+    <div className="qui-docs__page-header">
+      {exportUrl && (
+        <div className="qui-docs__page-header-actions">
+          <Button
+            className="qui-docs__page-header-copy-button"
+            endIcon={isCopied ? Check : Copy}
+            onClick={copyToClipboard}
+            size="sm"
+            variant="outline"
+          >
+            Copy Page
+          </Button>
+          <Menu.Root size="sm">
+            <Menu.Trigger>
+              <Menu.IconButton
+                className="qui-docs__page-header-menu-button"
+                size="sm"
+                variant="outline"
+              />
+            </Menu.Trigger>
+            <Portal>
+              <Menu.Positioner>
+                <Menu.Content>
+                  <Menu.Item onClick={copyToClipboard} value="copy-page">
+                    <Menu.ItemStartIcon icon={Copy} />
+                    <Menu.ItemLabel>Copy Page</Menu.ItemLabel>
+                    <Menu.ItemDescription>
+                      Copy page as markdown for LLMs
+                    </Menu.ItemDescription>
+                  </Menu.Item>
+                  <Menu.Item
+                    render={<a download href={exportUrl} />}
+                    value="download-page"
+                  >
+                    <Menu.ItemStartIcon icon={Download} />
+                    <Menu.ItemLabel>Download Page</Menu.ItemLabel>
+                    <Menu.ItemDescription>
+                      Download page as markdown
+                    </Menu.ItemDescription>
+                  </Menu.Item>
+                </Menu.Content>
+              </Menu.Positioner>
+            </Portal>
+          </Menu.Root>
+        </div>
+      )}
+    </div>
   )
 }
