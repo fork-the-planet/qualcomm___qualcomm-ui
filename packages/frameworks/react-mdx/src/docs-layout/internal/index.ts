@@ -1,5 +1,4 @@
 export * from "./anchor-header"
 export * from "./code-tabs"
-export * from "./h1"
 export * from "./shiki-pre"
 export * from "./toc-link"

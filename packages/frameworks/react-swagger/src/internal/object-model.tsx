@@ -6,9 +6,7 @@
 
 import {type ReactNode, useEffect, useRef} from "react"
 
-import {ChevronUpIcon} from "lucide-react"
-
-import {Button} from "@qualcomm-ui/react/button"
+import {Accordion} from "@qualcomm-ui/react/accordion"
 
 import {JsonModelViewer} from "./json-model-viewer"
 import type {GetComponent, Schema} from "./types"
@@ -62,17 +60,25 @@ export function ObjectModel(props: ObjectModelProps): ReactNode {
   const title = (schema.get("title") as string) || displayName || name
 
   const titleEl = title ? (
-    <Button
-      className="object-model-expand-button"
-      endIcon={ChevronUpIcon}
-      onClick={() => props.onToggle?.(props.name!, !props.expanded)}
-      variant="ghost"
+    <Accordion.Root
+      className="object-model-accordion"
+      value={props.expanded ? ["item"] : []}
     >
-      {isRef && schema.get("$$ref") && (
-        <span className="model-hint">{schema.get("$$ref") as string}</span>
-      )}
-      <span className="model-title__text">{title}</span>
-    </Button>
+      <Accordion.Item
+        onClick={() => props.onToggle?.(props.name!, !props.expanded)}
+        text={
+          <>
+            {isRef && schema.get("$$ref") && (
+              <span className="model-hint">
+                {schema.get("$$ref") as string}
+              </span>
+            )}
+            <span>{title}</span>
+          </>
+        }
+        value="item"
+      />
+    </Accordion.Root>
   ) : null
 
   const renderLink = props.getComponent("RenderLink")

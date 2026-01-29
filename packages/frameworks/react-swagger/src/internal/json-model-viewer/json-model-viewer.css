@@ -29,8 +29,16 @@
   user-select: text;
 
   .data-key {
-    &.expandable {
+    &[data-expandable] {
       cursor: pointer;
+    }
+
+    .key-required-indicator {
+      color: var(--color-text-support-danger);
+      display: inline-block;
+      margin-top: -2px;
+      user-select: none;
+      vertical-align: top;
     }
   }
 
@@ -41,12 +49,34 @@
     user-select: none;
   }
 
+  .data-key-description {
+    color: var(--color-text-neutral-secondary);
+    font: var(--font-static-code-xs-default);
+    padding-left: 16px;
+  }
+
+  .data-key-description-expand-icon {
+    color: var(--color-icon-neutral-secondary);
+  }
+
+  .data-key-description-expand-button {
+    &:hover {
+      background: var(--color-interactive-background-ghost-hover);
+    }
+    align-items: center;
+    border-radius: var(--border-radius-xs);
+    display: inline-flex;
+    gap: 4px;
+    justify-content: flex-start;
+  }
+
   .indicator {
     display: inline-block;
     margin-right: 2px;
   }
 
   .rest-spread {
+    color: var(--color-text-neutral-secondary);
     cursor: pointer;
     display: inline-block;
     opacity: 0.8;

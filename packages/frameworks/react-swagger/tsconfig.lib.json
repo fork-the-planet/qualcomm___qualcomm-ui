@@ -6,6 +6,7 @@
     "incremental": true,
     "outDir": "./dist",
     "rootDir": "./src",
+    "types": ["dom-navigation"],
     "tsBuildInfoFile": "node_modules/.tmp/tsbuildinfo",
   },
   "include": ["./src"],

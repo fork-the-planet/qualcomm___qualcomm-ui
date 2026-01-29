@@ -1,5 +1,44 @@
 # @qualcomm-ui/react-swagger Changelog
 
+## 1.2.0 (2026/01/28)
+
+### Features
+
+- [json-viewer]: add expandable descriptions for schema properties
+- [json-viewer]: add toggle button to show/hide property descriptions
+
+### Code Refactoring
+
+- [json-viewer]: restructure data-key-pair layout with data attributes
+
+### Styles
+
+- [json-viewer]: update rest-spread and description styling
+
+## 1.1.0 (2026/01/28)
+
+### Features
+
+- add required field indicators and accordion UI
+- show model descriptions using Markdown component
+- display asterisk indicator for required properties in JSON model viewer
+
+### Styles
+
+- update default quotesOnKeys to false
+
+### Code Refactoring
+
+- replace custom expand buttons with Accordion component
+
+### Miscellaneous Chores
+
+- add @types/dom-navigation dependency
+
+### Bug Fixes
+
+- handle navigation events to auto-expand models when navigating to anchors
+
 ## 1.0.11 (2026/01/27)
 
 ### Miscellaneous Chores
