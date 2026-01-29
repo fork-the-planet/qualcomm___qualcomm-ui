@@ -278,8 +278,8 @@ importers:
         specifier: ^4.20.6
         version: 4.20.6
       turbo:
-        specifier: 2.6.3
-        version: 2.6.3
+        specifier: ^2.7.6
+        version: 2.7.6
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -1983,340 +1983,6 @@ importers:
         version: 7.12.0(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)
       '@react-router/remix-routes-option-adapter':
         specifier: 'catalog:'
-        version: 7.12.0(@react-router/dev@7.12.0(patch_hash=c9be68a57125af13e2f488a883a3b00a0db6daa30ce0c714657c7dfa74745478)(@react-router/serve@7.12.0(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.2))(typescript@5.9.3)
-      '@react-router/serve':
-        specifier: 'catalog:'
-        version: 7.12.0(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)
-      '@shikijs/langs':
-        specifier: ^3.13.0
-        version: 3.15.0
-      '@shikijs/themes':
-        specifier: ^3.13.0
-        version: 3.15.0
-      '@tanstack/angular-query-experimental':
-        specifier: ^5.90.7
-        version: 5.90.11(@angular/common@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))
-      '@tanstack/react-form':
-        specifier: ^1.12.3
-        version: 1.25.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@tanstack/react-query':
-        specifier: ^5.59.16
-        version: 5.90.9(react@19.2.3)
-      '@tanstack/react-virtual':
-        specifier: ^3.13.12
-        version: 3.13.12(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      arktype:
-        specifier: ^2.1.26
-        version: 2.1.26
-      compression:
-        specifier: ^1.7.4
-        version: 1.8.1
-      dayjs:
-        specifier: ^1.11.19
-        version: 1.11.19
-      escape-string-regexp:
-        specifier: ^5.0.0
-        version: 5.0.0
-      express:
-        specifier: ^5.1.0
-        version: 5.1.0
-      fuzzysort:
-        specifier: ^3.0.1
-        version: 3.1.0
-      isbot:
-        specifier: ^4.1.0
-        version: 4.4.0
-      jotai:
-        specifier: ^2.7.1
-        version: 2.15.1(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.7)(react@19.2.3)
-      lodash-es:
-        specifier: 'catalog:'
-        version: 4.17.23
-      lucide-angular:
-        specifier: 0.525.0
-        version: 0.525.0(@angular/common@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))
-      lucide-react:
-        specifier: 0.525.0
-        version: 0.525.0(react@19.2.3)
-      morgan:
-        specifier: ^1.10.0
-        version: 1.10.1
-      playwright:
-        specifier: 1.56.1
-        version: 1.56.1
-      react:
-        specifier: 'catalog:'
-        version: 19.2.3
-      react-device-detect:
-        specifier: ^2.2.3
-        version: 2.2.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      react-dom:
-        specifier: 'catalog:'
-        version: 19.2.3(react@19.2.3)
-      react-hook-form:
-        specifier: ^7.66.0
-        version: 7.66.0(react@19.2.3)
-      react-router:
-        specifier: 'catalog:'
-        version: 7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      react-shiki:
-        specifier: ^0.8.0
-        version: 0.8.0(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      react-simple-code-editor:
-        specifier: ^0.14.1
-        version: 0.14.1(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      react-transition-group:
-        specifier: ^4.4.5
-        version: 4.4.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      rxjs:
-        specifier: ~7.8.0
-        version: 7.8.2
-      shiki:
-        specifier: ^3.13.0
-        version: 3.15.0
-      sucrase:
-        specifier: ^3.35.0
-        version: 3.35.0
-      tslib:
-        specifier: ~2.5.3
-        version: 2.5.3
-      unist-util-visit:
-        specifier: ^5.0.0
-        version: 5.0.0
-      zod:
-        specifier: ^4.1.13
-        version: 4.1.13
-      zustand:
-        specifier: ^4.5.2
-        version: 4.5.7(@types/react@19.2.7)(react@19.2.3)
-    devDependencies:
-      '@angular-devkit/build-angular':
-        specifier: 'catalog:'
-        version: 20.3.13(a76b5dcb4d9a8a59a9ae5924ccfff32f)
-      '@angular/compiler-cli':
-        specifier: 'catalog:'
-        version: 20.3.16(@angular/compiler@20.3.16)(typescript@5.9.3)
-      '@commander-js/extra-typings':
-        specifier: ^14.0.0
-        version: 14.0.0(commander@14.0.2)
-      '@mdx-js/react':
-        specifier: ^3.1.0
-        version: 3.1.1(@types/react@19.2.7)(react@19.2.3)
-      '@mdx-js/rollup':
-        specifier: ^3.1.0
-        version: 3.1.1(rollup@4.53.2)
-      '@qualcomm-ui/mdx-vite':
-        specifier: workspace:*
-        version: link:../../common/mdx-vite
-      '@qualcomm-ui/tsconfig':
-        specifier: workspace:^1.0.4
-        version: link:../../configs/tsconfig
-      '@react-router/dev':
-        specifier: 'catalog:'
-        version: 7.12.0(patch_hash=c9be68a57125af13e2f488a883a3b00a0db6daa30ce0c714657c7dfa74745478)(@react-router/serve@7.12.0(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.2)
-      '@shikijs/rehype':
-        specifier: ^3.13.0
-        version: 3.15.0
-      '@tailwindcss/vite':
-        specifier: ^4.1.11
-        version: 4.1.17(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))
-      '@types/lodash-es':
-        specifier: 'catalog:'
-        version: 4.17.12
-      '@types/react':
-        specifier: 'catalog:'
-        version: 19.2.7
-      '@types/react-dom':
-        specifier: 'catalog:'
-        version: 19.2.3(@types/react@19.2.7)
-      autoprefixer:
-        specifier: ^10.4.21
-        version: 10.4.22(postcss@8.5.6)
-      chalk:
-        specifier: ^5.6.2
-        version: 5.6.2
-      chokidar:
-        specifier: ^4.0.3
-        version: 4.0.3
-      esbuild:
-        specifier: ^0.25.8
-        version: 0.25.12
-      execa:
-        specifier: ^9.6.0
-        version: 9.6.0
-      glob:
-        specifier: ^11.1.0
-        version: 11.1.0
-      hast-util-to-text:
-        specifier: ^4.0.2
-        version: 4.0.2
-      npm-run-all2:
-        specifier: ^8.0.4
-        version: 8.0.4
-      postcss:
-        specifier: ^8.5.6
-        version: 8.5.6
-      postcss-import:
-        specifier: ^16.1.0
-        version: 16.1.1(postcss@8.5.6)
-      postcss-modules:
-        specifier: ^6.0.0
-        version: 6.0.1(postcss@8.5.6)
-      postcss-nested:
-        specifier: ^7.0.2
-        version: 7.0.2(postcss@8.5.6)
-      rehype-mdx-code-props:
-        specifier: ^3.0.0
-        version: 3.0.1
-      rehype-parse:
-        specifier: ^9.0.1
-        version: 9.0.1
-      rehype-remark:
-        specifier: ^10.0.1
-        version: 10.0.1
-      remark-frontmatter:
-        specifier: ^5.0.0
-        version: 5.0.0
-      remark-gfm:
-        specifier: ^4.0.0
-        version: 4.0.1
-      remark-mdx-frontmatter:
-        specifier: ^4.0.0
-        version: 4.0.0
-      remark-parse-frontmatter:
-        specifier: ^1.0.3
-        version: 1.0.3
-      rollup-plugin-visualizer:
-        specifier: ^5.12.0
-        version: 5.14.0(rollup@4.53.2)
-      shx:
-        specifier: ^0.4.0
-        version: 0.4.0
-      tailwindcss:
-        specifier: ^4.1.17
-        version: 4.1.17
-      tsx:
-        specifier: ^4.20.6
-        version: 4.20.6
-      typescript:
-        specifier: 5.9.3
-        version: 5.9.3
-      unified:
-        specifier: ^11.0.5
-        version: 11.0.5
-      vite:
-        specifier: npm:rolldown-vite@7.2.10
-        version: rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2)
-      vite-tsconfig-paths:
-        specifier: ^5.1.4
-        version: 5.1.4(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))(typescript@5.9.3)
-
-  packages/docs/angular-table-docs:
-    dependencies:
-      '@angular/animations':
-        specifier: 'catalog:'
-        version: 20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))
-      '@angular/cdk':
-        specifier: 'catalog:'
-        version: 20.2.14(@angular/common@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(rxjs@7.8.2)
-      '@angular/cli':
-        specifier: 'catalog:'
-        version: 20.3.13(@types/node@24.10.1)(chokidar@4.0.3)
-      '@angular/common':
-        specifier: 'catalog:'
-        version: 20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(rxjs@7.8.2)
-      '@angular/compiler':
-        specifier: 'catalog:'
-        version: 20.3.16
-      '@angular/core':
-        specifier: 'catalog:'
-        version: 20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2)
-      '@angular/forms':
-        specifier: 'catalog:'
-        version: 20.3.16(@angular/common@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(@angular/platform-browser@20.3.16(@angular/animations@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2)))(@angular/common@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2)))(rxjs@7.8.2)
-      '@angular/platform-browser':
-        specifier: 'catalog:'
-        version: 20.3.16(@angular/animations@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2)))(@angular/common@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))
-      '@angular/platform-browser-dynamic':
-        specifier: 'catalog:'
-        version: 20.3.16(@angular/common@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/compiler@20.3.16)(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(@angular/platform-browser@20.3.16(@angular/animations@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2)))(@angular/common@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2)))
-      '@angular/router':
-        specifier: 'catalog:'
-        version: 20.3.16(@angular/common@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(@angular/platform-browser@20.3.16(@angular/animations@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2)))(@angular/common@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2)))(rxjs@7.8.2)
-      '@atlaskit/pragmatic-drag-and-drop':
-        specifier: ^1.7.7
-        version: 1.7.7
-      '@atlaskit/pragmatic-drag-and-drop-hitbox':
-        specifier: ^1.1.0
-        version: 1.1.0
-      '@faker-js/faker':
-        specifier: ~9.6.0
-        version: 9.6.0
-      '@floating-ui/dom':
-        specifier: ^1.7.0
-        version: 1.7.4
-      '@floating-ui/react':
-        specifier: ^0.27.3
-        version: 0.27.16(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@hookform/resolvers':
-        specifier: ^5.2.2
-        version: 5.2.2(react-hook-form@7.66.0(react@19.2.3))
-      '@qualcomm-ui/angular':
-        specifier: workspace:*
-        version: link:../../frameworks/angular
-      '@qualcomm-ui/angular-core':
-        specifier: workspace:*
-        version: link:../../frameworks/angular-core
-      '@qualcomm-ui/core':
-        specifier: workspace:*
-        version: link:../../common/core
-      '@qualcomm-ui/dom':
-        specifier: workspace:*
-        version: link:../../common/dom
-      '@qualcomm-ui/mdx-common':
-        specifier: workspace:*
-        version: link:../../common/mdx-common
-      '@qualcomm-ui/node-utils':
-        specifier: workspace:*
-        version: link:../../common/node-utils
-      '@qualcomm-ui/qds-core':
-        specifier: workspace:*
-        version: link:../../common/qds-core
-      '@qualcomm-ui/react':
-        specifier: workspace:*
-        version: link:../../frameworks/react
-      '@qualcomm-ui/react-core':
-        specifier: workspace:*
-        version: link:../../frameworks/react-core
-      '@qualcomm-ui/react-internal':
-        specifier: workspace:*
-        version: link:../../frameworks/react-internal
-      '@qualcomm-ui/react-mdx':
-        specifier: workspace:*
-        version: link:../../frameworks/react-mdx
-      '@qualcomm-ui/react-router-utils':
-        specifier: workspace:*
-        version: link:../../frameworks/react-router-utils
-      '@qualcomm-ui/tailwind-plugin':
-        specifier: workspace:*
-        version: link:../../common/tailwind-plugin
-      '@qualcomm-ui/typedoc':
-        specifier: workspace:*
-        version: link:../../common/typedoc
-      '@qualcomm-ui/typedoc-common':
-        specifier: workspace:*
-        version: link:../../common/typedoc-common
-      '@qualcomm-ui/utils':
-        specifier: workspace:^*
-        version: link:../../common/utils
-      '@react-router/express':
-        specifier: 'catalog:'
-        version: 7.12.0(express@5.1.0)(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)
-      '@react-router/node':
-        specifier: 'catalog:'
-        version: 7.12.0(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)
-      '@react-router/remix-routes-option-adapter':
-        specifier: 'catalog:'
         version: 7.12.0(@react-router/dev@7.12.0(patch_hash=c9be68a57125af13e2f488a883a3b00a0db6daa30ce0c714657c7dfa74745478)(@react-router/serve@7.12.0(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.0)(lightningcss@1.30.2)(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.2))(typescript@5.9.3)
       '@react-router/serve':
         specifier: 'catalog:'
@@ -2544,6 +2210,340 @@ importers:
       vite-tsconfig-paths:
         specifier: ^5.1.4
         version: 5.1.4(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.93.3)(sass@1.90.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))(typescript@5.9.3)
+
+  packages/docs/angular-table-docs:
+    dependencies:
+      '@angular/animations':
+        specifier: 'catalog:'
+        version: 20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))
+      '@angular/cdk':
+        specifier: 'catalog:'
+        version: 20.2.14(@angular/common@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(rxjs@7.8.2)
+      '@angular/cli':
+        specifier: 'catalog:'
+        version: 20.3.13(@types/node@24.10.1)(chokidar@4.0.3)
+      '@angular/common':
+        specifier: 'catalog:'
+        version: 20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(rxjs@7.8.2)
+      '@angular/compiler':
+        specifier: 'catalog:'
+        version: 20.3.16
+      '@angular/core':
+        specifier: 'catalog:'
+        version: 20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2)
+      '@angular/forms':
+        specifier: 'catalog:'
+        version: 20.3.16(@angular/common@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(@angular/platform-browser@20.3.16(@angular/animations@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2)))(@angular/common@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2)))(rxjs@7.8.2)
+      '@angular/platform-browser':
+        specifier: 'catalog:'
+        version: 20.3.16(@angular/animations@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2)))(@angular/common@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))
+      '@angular/platform-browser-dynamic':
+        specifier: 'catalog:'
+        version: 20.3.16(@angular/common@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/compiler@20.3.16)(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(@angular/platform-browser@20.3.16(@angular/animations@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2)))(@angular/common@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2)))
+      '@angular/router':
+        specifier: 'catalog:'
+        version: 20.3.16(@angular/common@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(@angular/platform-browser@20.3.16(@angular/animations@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2)))(@angular/common@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2)))(rxjs@7.8.2)
+      '@atlaskit/pragmatic-drag-and-drop':
+        specifier: ^1.7.7
+        version: 1.7.7
+      '@atlaskit/pragmatic-drag-and-drop-hitbox':
+        specifier: ^1.1.0
+        version: 1.1.0
+      '@faker-js/faker':
+        specifier: ~9.6.0
+        version: 9.6.0
+      '@floating-ui/dom':
+        specifier: ^1.7.0
+        version: 1.7.4
+      '@floating-ui/react':
+        specifier: ^0.27.3
+        version: 0.27.16(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@hookform/resolvers':
+        specifier: ^5.2.2
+        version: 5.2.2(react-hook-form@7.66.0(react@19.2.3))
+      '@qualcomm-ui/angular':
+        specifier: workspace:*
+        version: link:../../frameworks/angular
+      '@qualcomm-ui/angular-core':
+        specifier: workspace:*
+        version: link:../../frameworks/angular-core
+      '@qualcomm-ui/core':
+        specifier: workspace:*
+        version: link:../../common/core
+      '@qualcomm-ui/dom':
+        specifier: workspace:*
+        version: link:../../common/dom
+      '@qualcomm-ui/mdx-common':
+        specifier: workspace:*
+        version: link:../../common/mdx-common
+      '@qualcomm-ui/node-utils':
+        specifier: workspace:*
+        version: link:../../common/node-utils
+      '@qualcomm-ui/qds-core':
+        specifier: workspace:*
+        version: link:../../common/qds-core
+      '@qualcomm-ui/react':
+        specifier: workspace:*
+        version: link:../../frameworks/react
+      '@qualcomm-ui/react-core':
+        specifier: workspace:*
+        version: link:../../frameworks/react-core
+      '@qualcomm-ui/react-internal':
+        specifier: workspace:*
+        version: link:../../frameworks/react-internal
+      '@qualcomm-ui/react-mdx':
+        specifier: workspace:*
+        version: link:../../frameworks/react-mdx
+      '@qualcomm-ui/react-router-utils':
+        specifier: workspace:*
+        version: link:../../frameworks/react-router-utils
+      '@qualcomm-ui/tailwind-plugin':
+        specifier: workspace:*
+        version: link:../../common/tailwind-plugin
+      '@qualcomm-ui/typedoc':
+        specifier: workspace:*
+        version: link:../../common/typedoc
+      '@qualcomm-ui/typedoc-common':
+        specifier: workspace:*
+        version: link:../../common/typedoc-common
+      '@qualcomm-ui/utils':
+        specifier: workspace:^*
+        version: link:../../common/utils
+      '@react-router/express':
+        specifier: 'catalog:'
+        version: 7.12.0(express@5.1.0)(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)
+      '@react-router/node':
+        specifier: 'catalog:'
+        version: 7.12.0(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)
+      '@react-router/remix-routes-option-adapter':
+        specifier: 'catalog:'
+        version: 7.12.0(@react-router/dev@7.12.0(patch_hash=c9be68a57125af13e2f488a883a3b00a0db6daa30ce0c714657c7dfa74745478)(@react-router/serve@7.12.0(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.2))(typescript@5.9.3)
+      '@react-router/serve':
+        specifier: 'catalog:'
+        version: 7.12.0(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)
+      '@shikijs/langs':
+        specifier: ^3.13.0
+        version: 3.15.0
+      '@shikijs/themes':
+        specifier: ^3.13.0
+        version: 3.15.0
+      '@tanstack/angular-query-experimental':
+        specifier: ^5.90.7
+        version: 5.90.11(@angular/common@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))
+      '@tanstack/react-form':
+        specifier: ^1.12.3
+        version: 1.25.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@tanstack/react-query':
+        specifier: ^5.59.16
+        version: 5.90.9(react@19.2.3)
+      '@tanstack/react-virtual':
+        specifier: ^3.13.12
+        version: 3.13.12(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      arktype:
+        specifier: ^2.1.26
+        version: 2.1.26
+      compression:
+        specifier: ^1.7.4
+        version: 1.8.1
+      dayjs:
+        specifier: ^1.11.19
+        version: 1.11.19
+      escape-string-regexp:
+        specifier: ^5.0.0
+        version: 5.0.0
+      express:
+        specifier: ^5.1.0
+        version: 5.1.0
+      fuzzysort:
+        specifier: ^3.0.1
+        version: 3.1.0
+      isbot:
+        specifier: ^4.1.0
+        version: 4.4.0
+      jotai:
+        specifier: ^2.7.1
+        version: 2.15.1(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.7)(react@19.2.3)
+      lodash-es:
+        specifier: 'catalog:'
+        version: 4.17.23
+      lucide-angular:
+        specifier: 0.525.0
+        version: 0.525.0(@angular/common@20.3.16(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@20.3.16(@angular/compiler@20.3.16)(rxjs@7.8.2))
+      lucide-react:
+        specifier: 0.525.0
+        version: 0.525.0(react@19.2.3)
+      morgan:
+        specifier: ^1.10.0
+        version: 1.10.1
+      playwright:
+        specifier: 1.56.1
+        version: 1.56.1
+      react:
+        specifier: 'catalog:'
+        version: 19.2.3
+      react-device-detect:
+        specifier: ^2.2.3
+        version: 2.2.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.2.3(react@19.2.3)
+      react-hook-form:
+        specifier: ^7.66.0
+        version: 7.66.0(react@19.2.3)
+      react-router:
+        specifier: 'catalog:'
+        version: 7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      react-shiki:
+        specifier: ^0.8.0
+        version: 0.8.0(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      react-simple-code-editor:
+        specifier: ^0.14.1
+        version: 0.14.1(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      react-transition-group:
+        specifier: ^4.4.5
+        version: 4.4.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      rxjs:
+        specifier: ~7.8.0
+        version: 7.8.2
+      shiki:
+        specifier: ^3.13.0
+        version: 3.15.0
+      sucrase:
+        specifier: ^3.35.0
+        version: 3.35.0
+      tslib:
+        specifier: ~2.5.3
+        version: 2.5.3
+      unist-util-visit:
+        specifier: ^5.0.0
+        version: 5.0.0
+      zod:
+        specifier: ^4.1.13
+        version: 4.1.13
+      zustand:
+        specifier: ^4.5.2
+        version: 4.5.7(@types/react@19.2.7)(react@19.2.3)
+    devDependencies:
+      '@angular-devkit/build-angular':
+        specifier: 'catalog:'
+        version: 20.3.13(a76b5dcb4d9a8a59a9ae5924ccfff32f)
+      '@angular/compiler-cli':
+        specifier: 'catalog:'
+        version: 20.3.16(@angular/compiler@20.3.16)(typescript@5.9.3)
+      '@commander-js/extra-typings':
+        specifier: ^14.0.0
+        version: 14.0.0(commander@14.0.2)
+      '@mdx-js/react':
+        specifier: ^3.1.0
+        version: 3.1.1(@types/react@19.2.7)(react@19.2.3)
+      '@mdx-js/rollup':
+        specifier: ^3.1.0
+        version: 3.1.1(rollup@4.53.2)
+      '@qualcomm-ui/mdx-vite':
+        specifier: workspace:*
+        version: link:../../common/mdx-vite
+      '@qualcomm-ui/tsconfig':
+        specifier: workspace:^1.0.4
+        version: link:../../configs/tsconfig
+      '@react-router/dev':
+        specifier: 'catalog:'
+        version: 7.12.0(patch_hash=c9be68a57125af13e2f488a883a3b00a0db6daa30ce0c714657c7dfa74745478)(@react-router/serve@7.12.0(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3))(@types/node@24.10.1)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.2)
+      '@shikijs/rehype':
+        specifier: ^3.13.0
+        version: 3.15.0
+      '@tailwindcss/vite':
+        specifier: ^4.1.11
+        version: 4.1.17(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))
+      '@types/lodash-es':
+        specifier: 'catalog:'
+        version: 4.17.12
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.7
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.2.3(@types/react@19.2.7)
+      autoprefixer:
+        specifier: ^10.4.21
+        version: 10.4.22(postcss@8.5.6)
+      chalk:
+        specifier: ^5.6.2
+        version: 5.6.2
+      chokidar:
+        specifier: ^4.0.3
+        version: 4.0.3
+      esbuild:
+        specifier: ^0.25.8
+        version: 0.25.12
+      execa:
+        specifier: ^9.6.0
+        version: 9.6.0
+      glob:
+        specifier: ^11.1.0
+        version: 11.1.0
+      hast-util-to-text:
+        specifier: ^4.0.2
+        version: 4.0.2
+      npm-run-all2:
+        specifier: ^8.0.4
+        version: 8.0.4
+      postcss:
+        specifier: ^8.5.6
+        version: 8.5.6
+      postcss-import:
+        specifier: ^16.1.0
+        version: 16.1.1(postcss@8.5.6)
+      postcss-modules:
+        specifier: ^6.0.0
+        version: 6.0.1(postcss@8.5.6)
+      postcss-nested:
+        specifier: ^7.0.2
+        version: 7.0.2(postcss@8.5.6)
+      rehype-mdx-code-props:
+        specifier: ^3.0.0
+        version: 3.0.1
+      rehype-parse:
+        specifier: ^9.0.1
+        version: 9.0.1
+      rehype-remark:
+        specifier: ^10.0.1
+        version: 10.0.1
+      remark-frontmatter:
+        specifier: ^5.0.0
+        version: 5.0.0
+      remark-gfm:
+        specifier: ^4.0.0
+        version: 4.0.1
+      remark-mdx-frontmatter:
+        specifier: ^4.0.0
+        version: 4.0.0
+      remark-parse-frontmatter:
+        specifier: ^1.0.3
+        version: 1.0.3
+      rollup-plugin-visualizer:
+        specifier: ^5.12.0
+        version: 5.14.0(rollup@4.53.2)
+      shx:
+        specifier: ^0.4.0
+        version: 0.4.0
+      tailwindcss:
+        specifier: ^4.1.17
+        version: 4.1.17
+      tsx:
+        specifier: ^4.20.6
+        version: 4.20.6
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+      unified:
+        specifier: ^11.0.5
+        version: 11.0.5
+      vite:
+        specifier: npm:rolldown-vite@7.2.10
+        version: rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2)
+      vite-tsconfig-paths:
+        specifier: ^5.1.4
+        version: 5.1.4(rolldown-vite@7.2.10(@types/node@24.10.1)(esbuild@0.25.12)(jiti@2.6.1)(less@4.4.2)(sass-embedded@1.93.3)(sass@1.94.0)(stylus@0.62.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))(typescript@5.9.3)
 
   packages/docs/qui-docs:
     dependencies:
@@ -16435,38 +16435,38 @@ packages:
     resolution: {integrity: sha512-1h/Lnq9yajKY2PEbBadPXj3VxsDDu844OnaAo52UVmIzIvwwtBPIuNvkjuzBlTWpfJyUbG3ez0KSBibQkj4ojg==}
     engines: {node: '>=0.6.11 <=0.7.0 || >=0.7.3'}
 
-  turbo-darwin-64@2.6.3:
-    resolution: {integrity: sha512-BlJJDc1CQ7SK5Y5qnl7AzpkvKSnpkfPmnA+HeU/sgny3oHZckPV2776ebO2M33CYDSor7+8HQwaodY++IINhYg==}
+  turbo-darwin-64@2.7.6:
+    resolution: {integrity: sha512-bYu0qnWju2Ha3EbIkPCk1SMLT3sltKh1P/Jy5FER6BmH++H5z+T5MHh3W1Xoers9rk4N1VdKvog9FO1pxQyjhw==}
     cpu: [x64]
     os: [darwin]
 
-  turbo-darwin-arm64@2.6.3:
-    resolution: {integrity: sha512-MwVt7rBKiOK7zdYerenfCRTypefw4kZCue35IJga9CH1+S50+KTiCkT6LBqo0hHeoH2iKuI0ldTF2a0aB72z3w==}
+  turbo-darwin-arm64@2.7.6:
+    resolution: {integrity: sha512-KCxTf3Y1hgNLYIWRLw8bwH8Zie9RyCGoxAlXYsCBI/YNqBSR+ZZK9KYzFxAqDaVaNvTwLFv3rJRGsXOFWg4+Uw==}
     cpu: [arm64]
     os: [darwin]
 
-  turbo-linux-64@2.6.3:
-    resolution: {integrity: sha512-cqpcw+dXxbnPtNnzeeSyWprjmuFVpHJqKcs7Jym5oXlu/ZcovEASUIUZVN3OGEM6Y/OTyyw0z09tOHNt5yBAVg==}
+  turbo-linux-64@2.7.6:
+    resolution: {integrity: sha512-vjoU8zIfNgvJR3cMitgw7inEoi6bmuVuFawDl5yKtxjAEhDktFdRBpGS3WojD4l3BklBbIK689ssXcGf21LxRA==}
     cpu: [x64]
     os: [linux]
 
-  turbo-linux-arm64@2.6.3:
-    resolution: {integrity: sha512-MterpZQmjXyr4uM7zOgFSFL3oRdNKeflY7nsjxJb2TklsYqiu3Z9pQ4zRVFFH8n0mLGna7MbQMZuKoWqqHb45w==}
+  turbo-linux-arm64@2.7.6:
+    resolution: {integrity: sha512-TcMpBvTqZf+1DptrVYLbZls7WY1UVNDTGaf0bo7/GCgWYv5eZHCVo4Td7kCJeDU4glbXg67REX0md0S0V6ghMg==}
     cpu: [arm64]
     os: [linux]
 
-  turbo-windows-64@2.6.3:
-    resolution: {integrity: sha512-biDU70v9dLwnBdLf+daoDlNJVvqOOP8YEjqNipBHzgclbQlXbsi6Gqqelp5er81Qo3BiRgmTNx79oaZQTPb07Q==}
+  turbo-windows-64@2.7.6:
+    resolution: {integrity: sha512-1/MhkYldiihjneY8QnnDMbAkHXn/udTWSVYS94EMlkE9AShozsLTTOT1gDOpX06EfEW5njP09suhMvxbvwuwpQ==}
     cpu: [x64]
     os: [win32]
 
-  turbo-windows-arm64@2.6.3:
-    resolution: {integrity: sha512-dDHVKpSeukah3VsI/xMEKeTnV9V9cjlpFSUs4bmsUiLu3Yv2ENlgVEZv65wxbeE0bh0jjpmElDT+P1KaCxArQQ==}
+  turbo-windows-arm64@2.7.6:
+    resolution: {integrity: sha512-0wDVnUJLFAWm4ZzOQFDkbyyUqaszorTGf3Rdc22IRIyJTTLd6ajqdb+cWD89UZ1RKr953+PZR1gqgWQY4PDuhA==}
     cpu: [arm64]
     os: [win32]
 
-  turbo@2.6.3:
-    resolution: {integrity: sha512-bf6YKUv11l5Xfcmg76PyWoy/e2vbkkxFNBGJSnfdSXQC33ZiUfutYh6IXidc5MhsnrFkWfdNNLyaRk+kHMLlwA==}
+  turbo@2.7.6:
+    resolution: {integrity: sha512-PO9AvJLEsNLO+EYhF4zB+v10hOjsJe5kJW+S6tTbRv+TW7gf1Qer4mfjP9h3/y9h8ZiPvOrenxnEgDtFgaM5zw==}
     hasBin: true
 
   type-check@0.4.0:
@@ -33715,32 +33715,32 @@ snapshots:
 
   tunnel@0.0.6: {}
 
-  turbo-darwin-64@2.6.3:
+  turbo-darwin-64@2.7.6:
     optional: true
 
-  turbo-darwin-arm64@2.6.3:
+  turbo-darwin-arm64@2.7.6:
     optional: true
 
-  turbo-linux-64@2.6.3:
+  turbo-linux-64@2.7.6:
     optional: true
 
-  turbo-linux-arm64@2.6.3:
+  turbo-linux-arm64@2.7.6:
     optional: true
 
-  turbo-windows-64@2.6.3:
+  turbo-windows-64@2.7.6:
     optional: true
 
-  turbo-windows-arm64@2.6.3:
+  turbo-windows-arm64@2.7.6:
     optional: true
 
-  turbo@2.6.3:
+  turbo@2.7.6:
     optionalDependencies:
-      turbo-darwin-64: 2.6.3
-      turbo-darwin-arm64: 2.6.3
-      turbo-linux-64: 2.6.3
-      turbo-linux-arm64: 2.6.3
-      turbo-windows-64: 2.6.3
-      turbo-windows-arm64: 2.6.3
+      turbo-darwin-64: 2.7.6
+      turbo-darwin-arm64: 2.7.6
+      turbo-linux-64: 2.7.6
+      turbo-linux-arm64: 2.7.6
+      turbo-windows-64: 2.7.6
+      turbo-windows-arm64: 2.7.6
 
   type-check@0.4.0:
     dependencies:

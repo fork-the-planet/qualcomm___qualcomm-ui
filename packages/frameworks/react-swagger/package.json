@@ -1,6 +1,6 @@
 {
   "name": "@qualcomm-ui/react-swagger",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Swagger component replacements using QUI React",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",

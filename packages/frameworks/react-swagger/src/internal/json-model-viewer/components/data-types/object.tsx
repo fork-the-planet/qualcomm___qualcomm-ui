@@ -156,7 +156,6 @@ export function ObjectType(props: DataItemProps<any>): ReactNode {
               key="last"
               className="rest-spread"
               onClick={() => setDisplayLength((length: number) => length * 2)}
-              style={{color: keyColor}}
             >
               hidden {rest} items…
             </div>,
@@ -227,14 +226,13 @@ export function ObjectType(props: DataItemProps<any>): ReactNode {
           key="last"
           className="rest-spread no-select"
           onClick={() => setDisplayLength((length: number) => length * 2)}
-          style={{color: keyColor}}
         >
           hidden {rest} items…
         </div>,
       )
     }
     return elements
-  }, [props, objectSortKeys, displayLength, groupArraysAfterLength, keyColor])
+  }, [props, objectSortKeys, displayLength, groupArraysAfterLength])
 
   const marginLeft = props.inspect ? 0.8 : 0
   const width = useJsonViewerStore((store) => store.indentWidth)

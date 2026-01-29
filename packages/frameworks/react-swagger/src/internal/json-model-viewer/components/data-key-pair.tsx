@@ -8,11 +8,13 @@ import {
   useEffect,
   useMemo,
   useRef,
+  useState,
 } from "react"
 
-import {ChevronRightIcon} from "lucide-react"
+import {ChevronDown, ChevronRightIcon, ChevronUp} from "lucide-react"
 
 import {Icon} from "@qualcomm-ui/react/icon"
+import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 import {clsx} from "@qualcomm-ui/utils/clsx"
 
 import {useInspect, useTextColor} from "../hooks"
@@ -115,6 +117,7 @@ export function DataKeyPair(props: DataKeyPairProps) {
   const isEmptyValue = useMemo(() => getValueSize(value) === 0, [value])
   const expandable = !isEmptyValue && !!(PreComponent && PostComponent)
   const KeyRenderer = useJsonViewerStore((store) => store.keyRenderer)
+  const [showDescription, setShowDescription] = useState<boolean>(false)
 
   const downstreamProps: DataItemProps = useMemo(() => {
     return {
@@ -166,6 +169,12 @@ export function DataKeyPair(props: DataKeyPairProps) {
 
   const color = useJsonViewerStore((store) => store.colorspace.base05)
   const showIndicator = useJsonViewerStore((store) => store.displayKeyIndicator)
+  const description =
+    typeof props.value === "object" &&
+    props.value &&
+    "description" in props.value
+      ? (props.value.description as string)
+      : undefined
 
   const keyWithRequiredIndicator = (
     <span>
@@ -178,72 +187,93 @@ export function DataKeyPair(props: DataKeyPairProps) {
 
   return (
     <div
-      className={clsx("data-key-pair", {expandable}, props.className)}
-      data-testid={`data-key-pair${path.join(".")}`}
+      className={clsx("data-key-pair", props.className)}
+      data-expandable={booleanDataAttr(expandable)}
+      data-has-description={booleanDataAttr(!!description)}
+      data-testid={`data-key-pair-${path.join(".")}`}
       onMouseEnter={onMouseEnter}
       style={props.style}
     >
-      <span
-        className={clsx("data-key", {expandable})}
-        onClick={onKeyClick}
-        style={{color: keyColor}}
-      >
-        {expandable ? (
-          <span className="inline-icon expand-icon">
-            <Icon
-              className="inline-icon"
-              icon={ChevronRightIcon}
-              style={{
-                color,
-                transform: inspect ? "rotate(90deg)" : "unset",
-                transition: "transform 161ms ease",
-              }}
-            />
-          </span>
-        ) : null}
-        <span ref={highlightContainer}>
-          {isRoot && depth === 0 ? (
-            rootName !== false ? (
-              quotesOnKeys ? (
-                <>&quot;{rootName}&quot;</>
-              ) : (
-                <>{rootName}</>
-              )
-            ) : null
-          ) : KeyRenderer.when(downstreamProps) ? (
-            <KeyRenderer {...downstreamProps} />
-          ) : (
-            nestedIndex === undefined &&
-            (isNumberKey ? (
-              <>
-                {displayNumberKeys ? (
-                  <span style={{color: numberKeyColor}}>{key}</span>
-                ) : null}
-              </>
-            ) : quotesOnKeys ? (
-              <>&quot;{keyWithRequiredIndicator}&quot;</>
+      <div>
+        <span
+          className="data-key"
+          data-expandable={booleanDataAttr(expandable)}
+          onClick={onKeyClick}
+          style={{color: keyColor}}
+        >
+          {expandable ? (
+            <span className="inline-icon expand-icon">
+              <Icon
+                className="inline-icon"
+                icon={ChevronRightIcon}
+                style={{
+                  color,
+                  transform: inspect ? "rotate(90deg)" : "unset",
+                  transition: "transform 161ms ease",
+                }}
+              />
+            </span>
+          ) : null}
+          <span ref={highlightContainer}>
+            {isRoot && depth === 0 ? (
+              rootName !== false ? (
+                quotesOnKeys ? (
+                  <>&quot;{rootName}&quot;</>
+                ) : (
+                  <>{rootName}</>
+                )
+              ) : null
+            ) : KeyRenderer.when(downstreamProps) ? (
+              <KeyRenderer {...downstreamProps} />
             ) : (
-              <>{keyWithRequiredIndicator}</>
-            ))
-          )}
+              nestedIndex === undefined &&
+              (isNumberKey ? (
+                <>
+                  {displayNumberKeys ? (
+                    <span style={{color: numberKeyColor}}>{key}</span>
+                  ) : null}
+                </>
+              ) : quotesOnKeys ? (
+                <>&quot;{keyWithRequiredIndicator}&quot;</>
+              ) : (
+                <>{keyWithRequiredIndicator}</>
+              ))
+            )}
+          </span>
+          {showIndicator
+            ? isRoot
+              ? rootName !== false && <div className="indicator">:</div>
+              : nestedIndex === undefined && <div className="indicator">:</div>
+            : null}
+          {PreComponent && <PreComponent {...downstreamProps} />}
         </span>
-        {showIndicator
-          ? isRoot
-            ? rootName !== false && <div className="indicator">:</div>
-            : nestedIndex === undefined && <div className="indicator">:</div>
-          : null}
-        {PreComponent && <PreComponent {...downstreamProps} />}
-      </span>
 
-      {Component ? (
-        <>
-          <Component {...downstreamProps} />
-        </>
-      ) : (
-        <span className="data-value-fallback">{`fallback: ${value as string}`}</span>
-      )}
+        {Component ? (
+          description ? (
+            <button
+              className="data-key-description-expand-button"
+              onClick={() => setShowDescription(!showDescription)}
+            >
+              <Component {...downstreamProps} />
+              <Icon
+                className="data-key-description-expand-icon"
+                icon={showDescription ? ChevronUp : ChevronDown}
+                size="sm"
+              />
+            </button>
+          ) : (
+            <Component {...downstreamProps} />
+          )
+        ) : (
+          <span className="data-value-fallback">{`fallback: ${value as string}`}</span>
+        )}
 
-      {PostComponent && <PostComponent {...downstreamProps} />}
+        {description && showDescription ? (
+          <div className="data-key-description">{description}</div>
+        ) : null}
+
+        {PostComponent && <PostComponent {...downstreamProps} />}
+      </div>
     </div>
   )
 }
