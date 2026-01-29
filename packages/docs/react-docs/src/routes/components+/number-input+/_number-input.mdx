@@ -71,7 +71,9 @@ Customize size using the [size](./#size) prop. The default size is `md`.
 
 ### Unit Selector
 
-Add a unit selector to the number input by passing an array of [options](./#unit-option) to the [unitOptions](./#unitOptions) prop. Optionally, use [defaultUnit](./#defaultUnit) and [onUnitChange](./#onUnitChange) to control the selected unit.
+Add a unit selector to the number input by passing an array of [options](./#unit-option) to the [unitOptions](./#unitOptions) prop.
+
+The selected unit follows our [controlled state](/patterns/controlled-state) pattern: use [defaultUnit](./#defaultUnit) for uncontrolled state, or [unit](./#unit) with [onUnitChange](./#onUnitChange) for controlled state.
 
 <Demo
   name="NumberInputUnitSelectDemo"
@@ -103,10 +105,6 @@ The error text and indicator will only render when [invalid](./#invalid) is true
 The `NumberInput` component supports all props from [NumberInput.Root](./#numberinputroot), plus the additional props listed below.
 
 <TypeDocProps name="NumberInputProps" omitFrom="NumberInputRootProps" />
-
-### \<NumberInput.UnitSelect\>
-
-<TypeDocProps name="NumberInputUnitSelectProps" />
 
 ## Data Structures
 

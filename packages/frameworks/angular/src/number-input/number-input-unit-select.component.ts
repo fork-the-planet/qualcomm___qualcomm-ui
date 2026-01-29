@@ -1,18 +1,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {
-  Component,
-  computed,
-  effect,
-  inject,
-  input,
-  type OnInit,
-  output,
-  signal,
-  type Signal,
-  untracked,
-} from "@angular/core"
+import {Component, computed, inject, type OnInit} from "@angular/core"
 import {ChevronDown, ChevronUp} from "lucide-angular"
 
 import {
@@ -31,11 +20,8 @@ import {
 import {useNumberInputContext} from "@qualcomm-ui/angular-core/number-input"
 import {providePresenceContext} from "@qualcomm-ui/angular-core/presence"
 import {createQdsMenuApi} from "@qualcomm-ui/qds-core/menu"
-import type {UnitOption} from "@qualcomm-ui/qds-core/number-input"
 
 import {useQdsNumberInputContext} from "./qds-number-input-context.service"
-
-export type {UnitOption}
 
 @Component({
   providers: [
@@ -69,10 +55,13 @@ export type {UnitOption}
         <div q-menu-content>
           <div
             q-menu-radio-item-group
-            [value]="selectedValue()"
+            [value]="numberInputContext().unit"
             (valueChange)="onUnitChange($event)"
           >
-            @for (option of options(); track option.value) {
+            @for (
+              option of numberInputContext().unitOptions ?? [];
+              track option.value
+            ) {
               <button q-menu-radio-item [value]="option.value">
                 <span q-menu-item-label>
                   {{ option.displayText ?? option.label }}
@@ -90,26 +79,6 @@ export class NumberInputUnitSelectComponent
   extends CoreMenuRootDirective
   implements OnInit
 {
-  /**
-   * The initial selected unit. Defaults to the first option if not provided.
-   */
-  readonly defaultUnit = input<string>()
-
-  /**
-   * Array of unit options to display in the dropdown.
-   */
-  readonly options = input.required<UnitOption[]>()
-
-  /**
-   * Emits when the selected unit changes.
-   */
-  readonly unitChange = output<string>()
-
-  /**
-   * The currently selected value (internal state).
-   */
-  protected readonly selectedValue = signal<string>("")
-
   protected readonly numberInputContext = useNumberInputContext()
   protected readonly qdsNumberInputContext = useQdsNumberInputContext()
   protected readonly qdsMenuService = inject(QdsMenuContextService)
@@ -120,44 +89,16 @@ export class NumberInputUnitSelectComponent
     ...this.qdsNumberInputContext().getUnitSelectBindings(),
   }))
 
-  constructor() {
-    super()
-
-    effect(() => {
-      const opts = this.options()
-      const defaultVal = this.defaultUnit()
-
-      untracked(() => {
-        const currentValue = this.selectedValue()
-        const isValidSelection =
-          currentValue !== "" && opts.some((opt) => opt.value === currentValue)
-
-        if (isValidSelection) {
-          return
-        }
-
-        const nextValue = opts.some((opt) => opt.value === defaultVal)
-          ? defaultVal
-          : (opts[0]?.value ?? "")
-
-        if (nextValue !== currentValue) {
-          this.selectedValue.set(nextValue ?? "")
-        }
-      })
-    })
-  }
-
-  protected readonly selectedLabel: Signal<string> = computed(() => {
-    const currentValue = this.selectedValue()
-    const opts = this.options()
-    const selected = opts.find((opt) => opt.value === currentValue)
+  protected readonly selectedLabel = computed(() => {
+    const currentValue = this.numberInputContext().unit
+    const opts = this.numberInputContext().unitOptions
+    const selected = opts?.find((opt) => opt.value === currentValue)
     return selected?.label ?? ""
   })
 
   protected onUnitChange(value: string | undefined): void {
     if (value) {
-      this.selectedValue.set(value)
-      this.unitChange.emit(value)
+      this.numberInputContext().setUnit(value)
     }
   }
 

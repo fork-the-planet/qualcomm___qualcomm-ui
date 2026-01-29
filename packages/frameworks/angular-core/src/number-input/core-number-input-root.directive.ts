@@ -28,6 +28,7 @@ import {
   type NumberInputMode,
   type NumberInputValueChangeDetails,
   type NumberInputValueInvalidDetails,
+  type UnitOption,
 } from "@qualcomm-ui/core/number-input"
 import type {Booleanish, NumberInput} from "@qualcomm-ui/utils/coercion"
 import type {Direction} from "@qualcomm-ui/utils/direction"
@@ -164,6 +165,26 @@ export class CoreNumberInputRootDirective
   readonly translations = input<NumberInputIntlTranslations | undefined>()
 
   /**
+   * The controlled unit value.
+   */
+  readonly unit = input<string | undefined>()
+
+  /**
+   * The initial unit when uncontrolled. Defaults to first option if not provided.
+   */
+  readonly defaultUnit = input<string | undefined>()
+
+  /**
+   * Array of unit options to display in the unit selector.
+   */
+  readonly unitOptions = input<UnitOption[] | undefined>()
+
+  /**
+   * Event emitted when the selected unit changes.
+   */
+  readonly unitChanged = output<string>()
+
+  /**
    * Event emitted when the checkbox is checked or unchecked. This is only emitted
    * on interaction. It doesn't emit in response to programmatic form control
    * changes.
@@ -195,6 +216,7 @@ export class CoreNumberInputRootDirective
           allowMouseWheel: this.allowMouseWheel(),
           allowOverflow: this.allowOverflow(),
           clampValueOnBlur: this.clampValueOnBlur(),
+          defaultUnit: this.defaultUnit(),
           defaultValue: this.defaultValue()
             ? `${this.defaultValue() ?? ""}`
             : "",
@@ -216,6 +238,11 @@ export class CoreNumberInputRootDirective
             if (!details.focused) {
               // only trigger onTouched on blur.
               this.onTouched()
+            }
+          },
+          onUnitChange: (unit) => {
+            if (this.isMounted()) {
+              this.unitChanged.emit(unit)
             }
           },
           onValueChange: (details) => {
@@ -247,6 +274,8 @@ export class CoreNumberInputRootDirective
           spinOnPress: this.spinOnPress(),
           step: this.step(),
           translations: this.translations(),
+          unit: this.unit(),
+          unitOptions: this.unitOptions(),
           value: this.stringValue(),
         }
       }),

@@ -1,13 +1,12 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {Component, input, output} from "@angular/core"
+import {Component, input} from "@angular/core"
 
 import {provideQdsInputContext} from "@qualcomm-ui/angular/input"
 import {provideNumberInputContext} from "@qualcomm-ui/angular-core/number-input"
 
 import {NumberInputRootDirective} from "./number-input-root.directive"
-import type {UnitOption} from "./number-input-unit-select.component"
 import {provideQdsNumberInputContext} from "./qds-number-input-context.service"
 
 @Component({
@@ -26,11 +25,7 @@ import {provideQdsNumberInputContext} from "./qds-number-input-context.service"
     </ng-content>
     <div q-number-input-input-group>
       @if (unitOptions()) {
-        <q-number-input-unit-select
-          [defaultUnit]="defaultUnit()"
-          [options]="unitOptions()!"
-          (unitChange)="unitChange.emit($event)"
-        />
+        <q-number-input-unit-select />
       }
       <input q-number-input-input [placeholder]="placeholder()" />
 
@@ -60,11 +55,6 @@ import {provideQdsNumberInputContext} from "./qds-number-input-context.service"
   `,
 })
 export class NumberInputComponent extends NumberInputRootDirective {
-  /**
-   * The default unit value when uncontrolled.
-   */
-  readonly defaultUnit = input<string>()
-
   /**
    * Optional error that describes the element when {@link invalid} is true.
    *
@@ -112,15 +102,4 @@ export class NumberInputComponent extends NumberInputRootDirective {
    * passed to the internal input element.
    */
   readonly placeholder = input<string>("")
-
-  /**
-   * Emits when the selected unit changes.
-   */
-  readonly unitChange = output<string>()
-
-  /**
-   * Array of unit options to display in the unit select dropdown.
-   * When provided, a unit selector will be shown at the start of the input.
-   */
-  readonly unitOptions = input<UnitOption[]>()
 }

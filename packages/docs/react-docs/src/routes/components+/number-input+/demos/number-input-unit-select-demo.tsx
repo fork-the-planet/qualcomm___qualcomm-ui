@@ -1,8 +1,8 @@
 import type {ReactElement} from "react"
 
-import {NumberInput} from "@qualcomm-ui/react/number-input"
+import {NumberInput, type UnitOption} from "@qualcomm-ui/react/number-input"
 
-const currencyOptions = [
+const currencyOptions: UnitOption[] = [
   {displayText: "$ (USD)", label: "$", value: "USD"},
   {displayText: "£ (GBP)", label: "£", value: "GBP"},
   {displayText: "€ (EUR)", label: "€", value: "EUR"},

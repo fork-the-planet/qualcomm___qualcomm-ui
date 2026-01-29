@@ -1,3 +1,4 @@
+export type {UnitOption} from "@qualcomm-ui/core/number-input"
 export * from "./number-input-control.directive"
 export * from "./number-input-decrement-trigger.directive"
 export * from "./number-input-error-indicator.directive"

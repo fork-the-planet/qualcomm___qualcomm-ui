@@ -74,7 +74,9 @@ Customize size using the [size](./#size) prop. The default size is `md`.
 
 ### Unit Selector
 
-Add a unit selector to the number input by passing an array of [options](./#unit-option) to the [unitOptions](./#unitOptions) prop. Optionally, use [defaultUnit](./#defaultUnit) and [onUnitChange](./#onUnitChange) to control the selected unit.
+Add a unit selector to the number input by passing an array of [options](./#unit-option) to the [unitOptions](./#unitOptions) prop.
+
+The selected unit follows our [controlled state](/patterns/controlled-state) pattern: use [defaultUnit](./#defaultUnit) for uncontrolled state, or [unit](./#unit) with [(unitChanged)](./#unitChanged) for controlled state.
 
 <QdsDemo name="NumberInputUnitSelectDemo" />
 
@@ -221,6 +223,10 @@ The `<q-number-input>` component extends the [q-number-input-root](./#q-number-i
 ### q-number-input-unit-select
 
 <TypeDocProps name="NumberInputUnitSelectComponent" />
+
+<TypeDocAngularAttributes
+  name={["NumberInputUnitSelectBindings", "QdsNumberInputUnitSelectBindings"]}
+/>
 
 ## Data Structures
 

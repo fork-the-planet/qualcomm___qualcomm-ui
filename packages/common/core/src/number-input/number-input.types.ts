@@ -51,6 +51,23 @@ export interface NumberInputValueInvalidDetails
   reason: NumberInputValidityState
 }
 
+export interface UnitOption {
+  /**
+   * Full text shown in dropdown menu. Defaults to label if not provided.
+   */
+  displayText?: string
+
+  /**
+   * Short label shown on trigger button.
+   */
+  label: string
+
+  /**
+   * Internal value identifier.
+   */
+  value: string
+}
+
 export interface NumberInputIntlTranslations {
   /**
    * The label for the decrement button
@@ -58,7 +75,7 @@ export interface NumberInputIntlTranslations {
   decrementLabel?: string | undefined
 
   /**
-   * The label foe the increment button
+   * The label for the increment button
    */
   incrementLabel?: string | undefined
 
@@ -92,6 +109,12 @@ export interface NumberInputApiProps
    * @default true
    */
   clampValueOnBlur?: boolean | undefined
+
+  /**
+   * The initial unit when rendered.
+   * Use when you don't need to control the unit.
+   */
+  defaultUnit?: string | undefined
 
   /**
    * The initial value of the input when rendered.
@@ -152,6 +175,11 @@ export interface NumberInputApiProps
   onFocusChange?: ((details: NumberInputFocusChangeDetails) => void) | undefined
 
   /**
+   * Function invoked when the selected unit changes
+   */
+  onUnitChange?: ((unit: string) => void) | undefined
+
+  /**
    * Function invoked when the value changes
    * @inheritDoc
    */
@@ -189,6 +217,16 @@ export interface NumberInputApiProps
    * their states
    */
   translations?: NumberInputIntlTranslations | undefined
+
+  /**
+   * The controlled unit value
+   */
+  unit?: string | undefined
+
+  /**
+   * Array of unit options to display in the unit selector
+   */
+  unitOptions?: UnitOption[] | undefined
 
   /**
    * The controlled value of the input
@@ -300,6 +338,11 @@ interface PrivateContext {
   hint: HintValue | null
 
   /**
+   * The currently selected unit
+   */
+  unit: string
+
+  /**
    * The value of the input
    */
   value: string
@@ -323,6 +366,7 @@ export interface NumberInputSchema extends MachineSchema {
     | "setFormattedValue"
     | "setHint"
     | "setRawValue"
+    | "setUnit"
     | "setValue"
     | "syncInputElement"
   >
@@ -340,6 +384,10 @@ export interface NumberInputSchema extends MachineSchema {
         focused: boolean
         focusVisible: boolean
         type: "FOCUSED.SET"
+      }
+    | {
+        type: "UNIT.SET"
+        unit: string
       }
     | {
         type: "VALUE.SET"
@@ -549,9 +597,24 @@ export interface NumberInputApi {
   setToMin(): void
 
   /**
+   * Function to set the selected unit.
+   */
+  setUnit(unit: string): void
+
+  /**
    * Function to set the value of the input.
    */
   setValue(value: number): void
+
+  /**
+   * The currently selected unit.
+   */
+  unit: string
+
+  /**
+   * The available unit options.
+   */
+  unitOptions: UnitOption[] | undefined
 
   /**
    * The formatted value of the input.

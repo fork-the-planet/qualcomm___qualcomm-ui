@@ -45,7 +45,7 @@ export function createNumberInputApi(
   machine: Machine<NumberInputSchema>,
   normalize: PropNormalizer,
 ): NumberInputApi {
-  const {computed, prop, scope, send, state} = machine
+  const {computed, context, prop, scope, send, state} = machine
 
   const focused = state.hasTag("focus")
   const disabled = computed("isDisabled")
@@ -88,9 +88,17 @@ export function createNumberInputApi(
       send({type: "VALUE.SET", value: prop("min")})
     },
 
+    setUnit(unit) {
+      send({type: "UNIT.SET", unit})
+    },
+
     setValue(value) {
       send({type: "VALUE.SET", value})
     },
+
+    unit: context.get("unit"),
+
+    unitOptions: prop("unitOptions"),
 
     value: computed("formattedValue"),
 

@@ -1,6 +1,9 @@
 import {Component} from "@angular/core"
 
-import {NumberInputModule} from "@qualcomm-ui/angular/number-input"
+import {
+  NumberInputModule,
+  type UnitOption,
+} from "@qualcomm-ui/angular/number-input"
 
 @Component({
   imports: [NumberInputModule],
@@ -18,7 +21,7 @@ import {NumberInputModule} from "@qualcomm-ui/angular/number-input"
   `,
 })
 export class NumberInputUnitSelectDemo {
-  unitOptions = [
+  unitOptions: UnitOption[] = [
     {displayText: "$ (USD)", label: "$", value: "USD"},
     {displayText: "£ (GBP)", label: "£", value: "GBP"},
     {displayText: "€ (EUR)", label: "€", value: "EUR"},
