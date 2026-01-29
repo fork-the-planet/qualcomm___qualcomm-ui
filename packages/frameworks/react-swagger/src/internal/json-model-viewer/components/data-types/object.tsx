@@ -232,7 +232,7 @@ export function ObjectType(props: DataItemProps<any>): ReactNode {
       )
     }
     return elements
-  }, [props, objectSortKeys, displayLength, groupArraysAfterLength, keyColor])
+  }, [props, objectSortKeys, displayLength, groupArraysAfterLength])
 
   const marginLeft = props.inspect ? 0.8 : 0
   const width = useJsonViewerStore((store) => store.indentWidth)
