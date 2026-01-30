@@ -1,5 +1,11 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 1.11.4 (2026/01/29)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react]
+
 ## 1.11.3 (2026/01/28)
 
 ### Code Refactoring
