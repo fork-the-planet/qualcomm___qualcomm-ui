@@ -53,7 +53,7 @@ export function ShikiHighlighter({
     const resolvedConfig: CodeToHastOptions = {
       ...shikiConfig,
       defaultColor: "light-dark()",
-      lang: language && supportedLangs.has(language) ? language : "text",
+      lang: language && supportedLangs.has(language) ? language : "tsx",
       structure: "inline",
       themes: {
         dark: "dark",
