@@ -37,6 +37,10 @@ import {
   type NumberInputLabelProps,
 } from "./number-input-label"
 import {NumberInputRoot, type NumberInputRootProps} from "./number-input-root"
+import {
+  NumberInputUnitSelect,
+  type NumberInputUnitSelectProps,
+} from "./number-input-unit-select"
 
 export interface NumberInputProps extends NumberInputRootProps {
   /**
@@ -107,6 +111,11 @@ export interface NumberInputProps extends NumberInputRootProps {
    * passed to the underlying input element.
    */
   placeholder?: string
+
+  /**
+   * Props applied to the unit select element.
+   */
+  unitSelectProps?: NumberInputUnitSelectProps
 }
 
 export function NumberInput({
@@ -122,6 +131,7 @@ export function NumberInput({
   label,
   labelProps,
   placeholder,
+  unitSelectProps,
   ...props
 }: NumberInputProps): ReactElement {
   const labelContent = label || labelProps?.children
@@ -135,6 +145,7 @@ export function NumberInput({
     incrementTrigger: useControlledId(incrementTriggerProps?.id),
     input: useControlledId(inputProps?.id),
     label: useOptionalContentId(labelContent, labelProps),
+    unitSelect: useControlledId(unitSelectProps?.id),
     ...props.ids,
   }
 
@@ -147,6 +158,9 @@ export function NumberInput({
       ) : null}
 
       <NumberInputInputGroup {...inputGroupProps}>
+        {props.unitOptions?.length ? (
+          <NumberInputUnitSelect {...unitSelectProps} id={ids.unitSelect} />
+        ) : null}
         <NumberInputInput
           placeholder={placeholder}
           {...inputProps}

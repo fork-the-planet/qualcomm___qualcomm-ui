@@ -12,6 +12,7 @@ import {useQdsNumberInputContext} from "./qds-number-input-context.service"
   selector: "[q-number-input-input-group]",
   standalone: false,
   template: `
+    <ng-content select="q-number-input-unit-select" />
     <ng-content select="[q-input-start-icon]">
       @if (inputGroupContext().startIcon) {
         <div q-input-start-icon [icon]="inputGroupContext().startIcon"></div>
