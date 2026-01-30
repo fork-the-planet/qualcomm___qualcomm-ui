@@ -14,6 +14,7 @@ import type {
   QdsNumberInputIncrementTriggerBindings,
   QdsNumberInputInputBindings,
   QdsNumberInputInputGroupBindings,
+  QdsNumberInputUnitSelectBindings,
 } from "./number-input.types"
 
 export function createQdsNumberInputApi(
@@ -58,7 +59,12 @@ export function createQdsNumberInputApi(
     getInputGroupBindings(): QdsNumberInputInputGroupBindings {
       return normalize.element({
         className: numberInputClasses.inputGroup,
-        "data-part": "input-group",
+        "data-size": size,
+      })
+    },
+    getUnitSelectBindings(): QdsNumberInputUnitSelectBindings {
+      return normalize.button({
+        className: numberInputClasses.unitSelect,
         "data-size": size,
       })
     },

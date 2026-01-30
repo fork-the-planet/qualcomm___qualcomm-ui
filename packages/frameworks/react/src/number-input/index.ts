@@ -33,6 +33,12 @@ import {
   type NumberInputLabelProps,
 } from "./number-input-label"
 import {NumberInputRoot, type NumberInputRootProps} from "./number-input-root"
+import {
+  NumberInputUnitSelect,
+  type NumberInputUnitSelectProps,
+} from "./number-input-unit-select"
+
+export type {UnitOption} from "@qualcomm-ui/core/number-input"
 
 export * from "./qds-number-input-context"
 
@@ -47,6 +53,7 @@ export type {
   NumberInputInputProps,
   NumberInputLabelProps,
   NumberInputRootProps,
+  NumberInputUnitSelectProps,
 }
 
 type NumberInputComponent = typeof SimpleNumberInput & {
@@ -60,6 +67,7 @@ type NumberInputComponent = typeof SimpleNumberInput & {
   InputGroup: typeof NumberInputInputGroup
   Label: typeof NumberInputLabel
   Root: typeof NumberInputRoot
+  UnitSelect: typeof NumberInputUnitSelect
 }
 
 export const NumberInput: NumberInputComponent =
@@ -75,3 +83,4 @@ NumberInput.InputGroup = NumberInputInputGroup
 NumberInput.Input = NumberInputInput
 NumberInput.Label = NumberInputLabel
 NumberInput.Root = NumberInputRoot
+NumberInput.UnitSelect = NumberInputUnitSelect

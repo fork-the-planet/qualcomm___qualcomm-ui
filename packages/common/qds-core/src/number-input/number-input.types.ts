@@ -34,7 +34,6 @@ export interface QdsNumberInputControlBindings {
 
 export interface QdsNumberInputInputGroupBindings {
   className: NumberInputClasses["inputGroup"]
-  "data-part": "input-group"
   "data-size": QdsInputSize
 }
 
@@ -48,6 +47,11 @@ export interface QdsNumberInputErrorIndicatorBindings {
   "data-size": QdsInputSize
 }
 
+export interface QdsNumberInputUnitSelectBindings {
+  className: NumberInputClasses["unitSelect"]
+  "data-size": QdsInputSize
+}
+
 export interface QdsNumberInputApi {
   size: QdsInputSize
 
@@ -58,4 +62,5 @@ export interface QdsNumberInputApi {
   getIncrementTriggerBindings(): QdsNumberInputIncrementTriggerBindings
   getInputBindings(): QdsNumberInputInputBindings
   getInputGroupBindings(): QdsNumberInputInputGroupBindings
+  getUnitSelectBindings(): QdsNumberInputUnitSelectBindings
 }
