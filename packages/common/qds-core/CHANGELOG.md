@@ -1,5 +1,11 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.15.1 (2026/01/29)
+
+### Miscellaneous Chores
+
+- consistent hint/errortext display across form components
+
 ## 1.15.0 (2026/01/27)
 
 ### Features
