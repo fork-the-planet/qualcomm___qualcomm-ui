@@ -14,7 +14,7 @@ export function NumberInputUnitSelectDemo(): ReactElement {
     <NumberInput
       className="w-72"
       defaultUnit="USD"
-      label="idle"
+      label="Price"
       placeholder="0.00"
       unitOptions={currencyOptions}
       value="0"
