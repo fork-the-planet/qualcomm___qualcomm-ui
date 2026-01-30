@@ -32,11 +32,26 @@ const sharedProps = {
     lg: "lg",
     sm: "sm",
   }),
+  unitOptions: figma.boolean("unitSelector", {
+    true: [
+      {value: "usd", label: "$"},
+      {value: "eur", label: "€"},
+    ],
+  }),
+  unitSelect: figma.nestedProps("_Unit select", {
+    unitText: figma.string("unitText"),
+  }),
 }
 
 figma.connect(NumberInput, "<FIGMA_COMPONENTS_BASE>?node-id=4771-2328", {
-  example: ({hint, label, ...props}) => (
-    <NumberInput hint={hint} label={label} {...props} />
+  example: ({hint, label, unitSelect, unitOptions, ...props}) => (
+    <NumberInput
+      hint={hint}
+      label={label}
+      unitOptions={unitOptions}
+      defaultUnit={unitSelect.unitText}
+      {...props}
+    />
   ),
   props: sharedProps,
 })
