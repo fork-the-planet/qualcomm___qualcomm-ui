@@ -1,11 +1,5 @@
 # @qualcomm-ui/react-mdx Changelog
 
-## 1.11.5 (2026/01/29)
-
-### Bug Fixes
-
-- [shiki]: use text as fallback language for unsupported langs
-
 ## 1.11.4 (2026/01/29)
 
 ### Miscellaneous Chores
