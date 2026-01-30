@@ -131,6 +131,7 @@ export function NumberInput({
   label,
   labelProps,
   placeholder,
+  unitOptions,
   unitSelectProps,
   ...props
 }: NumberInputProps): ReactElement {
@@ -158,7 +159,7 @@ export function NumberInput({
       ) : null}
 
       <NumberInputInputGroup {...inputGroupProps}>
-        {props.unitOptions ? (
+        {unitOptions?.length ? (
           <NumberInputUnitSelect {...unitSelectProps} id={ids.unitSelect} />
         ) : null}
         <NumberInputInput

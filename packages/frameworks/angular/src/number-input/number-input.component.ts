@@ -24,7 +24,7 @@ import {provideQdsNumberInputContext} from "./qds-number-input-context.service"
       }
     </ng-content>
     <div q-number-input-input-group>
-      @if (unitOptions()) {
+      @if (unitOptions()?.length) {
         <q-number-input-unit-select />
       }
       <input q-number-input-input [placeholder]="placeholder()" />
