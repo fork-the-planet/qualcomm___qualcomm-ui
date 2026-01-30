@@ -51,7 +51,7 @@ export function signalifyObject<T extends Record<string, any>>(
  * all accessors in a cached function. This function will wrap a computed value that
  * returns its result based on the given parameters.
  */
-function toComputed(signal: Signal<any>, fn: Function) {
+function toComputed(signal: Signal<any>, fn: (...args: unknown[]) => unknown) {
   const hasArgs = fn.length > 0
   if (!hasArgs) {
     return computed(() => {

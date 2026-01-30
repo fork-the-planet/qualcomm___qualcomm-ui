@@ -9,7 +9,7 @@ function getDocument(): Document | undefined {
   return typeof document === "undefined" ? undefined : document
 }
 
-function withoutTransition(callback: Function) {
+function withoutTransition(callback: VoidFunction) {
   const document = getDocument()
   if (!document) {
     return
@@ -42,7 +42,7 @@ export function useCorrectCssTransition({
   disableTransitions = false,
 }: {disableTransitions?: boolean} = {}) {
   return useCallback(
-    (callback: Function, event?: MouseEvent) => {
+    (callback: VoidFunction, event?: MouseEvent) => {
       if (disableTransitions) {
         withoutTransition(() => {
           callback()

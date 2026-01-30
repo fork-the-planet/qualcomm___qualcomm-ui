@@ -3,7 +3,6 @@
 
 import type {ReactElement, ReactNode} from "react"
 
-import {popoverClasses} from "@qualcomm-ui/qds-core/popover"
 import {usePopoverArrow} from "@qualcomm-ui/react-core/popover"
 import {
   type ElementRenderProp,
@@ -13,6 +12,7 @@ import {
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {PopoverArrowTip} from "./popover-arrow-tip"
+import {useQdsPopoverContext} from "./qds-popover-context"
 
 export interface PopoverArrowProps extends IdProp, ElementRenderProp<"div"> {
   /**
@@ -27,9 +27,10 @@ export function PopoverArrow({
   ...props
 }: PopoverArrowProps): ReactElement {
   const contextProps = usePopoverArrow({id})
+  const qdsPopover = useQdsPopoverContext()
   const mergedProps = mergeProps(
     contextProps,
-    {className: popoverClasses.arrow},
+    qdsPopover.getArrowBindings(),
     props,
   )
 

@@ -166,7 +166,7 @@ export interface ToastApiProps<T = any>
    * @internal
    * The event to be dispatched
    */
-  message?: any | undefined
+  message?: any
 
   /**
    * @internal

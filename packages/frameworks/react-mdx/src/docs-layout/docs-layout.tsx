@@ -42,8 +42,6 @@ export function DocsLayout({
               <Layout.MainContent>
                 <Layout.Breadcrumbs rootBreadcrumb={rootBreadcrumb} />
 
-                <Layout.PageHeader />
-
                 {children}
 
                 <UpdatedOn />

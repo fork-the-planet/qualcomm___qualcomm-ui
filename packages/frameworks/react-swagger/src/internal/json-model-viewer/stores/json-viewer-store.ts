@@ -83,7 +83,7 @@ export const createJsonViewerStore = <T = unknown>(
     objectSortKeys: props.objectSortKeys ?? false,
     onChange: props.onChange ?? (() => {}),
     prevValue: undefined,
-    quotesOnKeys: props.quotesOnKeys ?? true,
+    quotesOnKeys: props.quotesOnKeys ?? false,
     renderLink: props.renderLink,
     rootName: props.rootName ?? "root",
     setHover: (path, nestedIndex) => {

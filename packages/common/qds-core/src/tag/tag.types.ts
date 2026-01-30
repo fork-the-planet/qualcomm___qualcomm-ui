@@ -5,7 +5,20 @@ import type {BooleanDataAttr} from "@qualcomm-ui/utils/attributes"
 
 import type {tagClasses} from "./tag.classes"
 
-export type QdsTagEmphasis = "brand" | "outline-neutral" | "neutral"
+export type QdsTagEmphasis =
+  | "outline-brand"
+  | "outline-neutral"
+  | "neutral"
+  | "blue"
+  | "cyan"
+  | "teal"
+  | "green"
+  | "kiwi"
+  | "yellow"
+  | "orange"
+  | "red"
+  | "magenta"
+  | "purple"
 
 export type QdsTagRadius = "square" | "rounded"
 
@@ -22,7 +35,7 @@ export interface QdsTagApiProps {
 
   /**
    * Governs the color of the tag.
-   * @default 'brand'
+   * @default 'outline-brand'
    */
   emphasis?: QdsTagEmphasis
 
@@ -47,7 +60,18 @@ export interface QdsTagApiProps {
 
 type TagClasses = typeof tagClasses
 
-export interface QdsTagRootBindings {
+export interface QdsTagSpanRootBindings {
+  className: TagClasses["root"]
+  "data-disabled": BooleanDataAttr
+  "data-emphasis": QdsTagEmphasis
+  "data-part": "root"
+  "data-radius": QdsTagRadius
+  "data-scope": "tag"
+  "data-size": QdsTagSize
+  "data-variant"?: QdsTagVariant
+}
+
+export interface QdsTagButtonRootBindings {
   className: TagClasses["root"]
   "data-disabled": BooleanDataAttr
   "data-emphasis": QdsTagEmphasis
@@ -58,6 +82,10 @@ export interface QdsTagRootBindings {
   "data-variant"?: QdsTagVariant
   disabled: boolean | undefined
 }
+
+export type QdsTagRootBindings =
+  | QdsTagSpanRootBindings
+  | QdsTagButtonRootBindings
 
 export interface QdsTagStartIconBindings {
   className: TagClasses["icon"]
@@ -74,10 +102,14 @@ export interface QdsTagEndIconBindings {
 }
 
 export interface QdsTagDismissButtonBindings {
+  "aria-label": string
   className: TagClasses["dismissButton"]
   "data-disabled": BooleanDataAttr
+  "data-part": "dismiss-button"
+  "data-scope": "tag"
   "data-size": QdsTagSize
   disabled: boolean | undefined
+  type: "button"
 }
 
 export interface QdsTagApi {
@@ -85,4 +117,5 @@ export interface QdsTagApi {
   getEndIconBindings(): QdsTagEndIconBindings
   getRootBindings(): QdsTagRootBindings
   getStartIconBindings(): QdsTagStartIconBindings
+  isInteractiveVariant(): boolean
 }

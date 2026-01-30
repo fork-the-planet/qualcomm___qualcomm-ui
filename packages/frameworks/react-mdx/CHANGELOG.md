@@ -1,5 +1,84 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 1.11.5 (2026/01/29)
+
+### Bug Fixes
+
+- [docs-layout]: adjust sidebar height for proper scrolling on mobile
+
+## 1.11.4 (2026/01/29)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react]
+
+## 1.11.3 (2026/01/28)
+
+### Code Refactoring
+
+- [react-mdx]: remove h1 from page header and inline in mdx provider
+- [react-mdx]: remove unused activeTocClassName prop
+- [react-mdx]: move page header to table of contents
+
+### Styles
+
+- [react-mdx]: use data-active attribute instead of class for toc links
+
+## 1.11.2 (2026/01/27)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react]
+
+## 1.11.1 (2026/01/23)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/react-core, @qualcomm-ui/react, @qualcomm-ui/mdx-common, @qualcomm-ui/utils]
+
+## 1.11.0 (2026/01/22)
+
+### Features
+
+- [demos]: redesign code demo UI with new controls
+
+### Styles
+
+- [demos]: update border colors and add custom scrollbar styles
+
+### Code Refactoring
+
+- [demos]: convert style toggle from icon button to dropdown menu
+- [demos]: replace CopyToClipboardIconButton with CopyToClipboardButton in demo
+- [demos]: move brand selector into action bar as menu
+- [demos]: replace expand button with collapse toggle at bottom
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common]
+
+## 1.10.5 (2026/01/19)
+
+### Styles
+
+- [h2]: increase top margin
+- [docs-layout]: make toc column width flexible at large breakpoint
+- darken code background color
+
+### Bug Fixes
+
+- [docs-layout]: use surface-primary color for backgrounds
+
+## 1.10.4 (2026/01/19)
+
+### Bug Fixes
+
+- [dependencies]: bump peer of lucide-react to fix filter/funnel import
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react, @qualcomm-ui/react-core]
+
 ## 1.10.3 (2026/01/18)
 
 ### Miscellaneous Chores

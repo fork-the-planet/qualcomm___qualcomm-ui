@@ -1,5 +1,17 @@
 # @qualcomm-ui/angular-core Changelog
 
+## 1.4.2 (2026/01/23)
+
+### Code Refactoring
+
+- replace Function type usage
+- remove async from sync functions
+- [types]: use accurate function types
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/dom, @qualcomm-ui/utils]
+
 ## 1.4.1 (2025/12/24)
 
 ### Miscellaneous Chores

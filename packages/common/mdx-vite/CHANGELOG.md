@@ -1,5 +1,44 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 2.14.3 (2026/01/29)
+
+### Bug Fixes
+
+- [docs-plugin-mdx]: add fallback language for syntax highlighting
+
+## 2.14.2 (2026/01/23)
+
+### Bug Fixes
+
+- [nav-builder]: pass empty object for non-page frontmatter
+
+## 2.14.1 (2026/01/23)
+
+### Code Refactoring
+
+- improve logging and error handling
+- remove async from sync functions
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common, @qualcomm-ui/typedoc-common, @qualcomm-ui/utils]
+
+## 2.14.0 (2026/01/22)
+
+### Features
+
+- add support for tailwind spacing documentation in knowledge generation
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common]
+
+## 2.13.0 (2026/01/21)
+
+### Features
+
+- add support for tailwind spacing documentation in knowledge generation
+
 ## 2.12.0 (2026/01/18)
 
 ### Features

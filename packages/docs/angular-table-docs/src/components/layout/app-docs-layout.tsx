@@ -76,7 +76,7 @@ export function AppDocsLayout({children, ...props}: Props): ReactNode {
               <SiteSearch />
               <HeaderRepositoryLink />
               <GlobalConfig />
-              <HeaderAiLink modelId="qui-angular-nextgen-sonnet-4-5" />
+              <HeaderAiLink />
               <ThemeToggle />
             </HeaderBar.ActionBar>
           </HeaderBar.Root>

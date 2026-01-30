@@ -191,7 +191,7 @@ export class NavBuilder {
           pathname: isPage ? pathname : undefined,
           pathSegments: adjustedSegments,
           title: this.resolveSideNavTitle(
-            pageFrontmatter,
+            isPage ? pageFrontmatter : {},
             routeMeta,
             routeMeta?.title
               ? routeMeta.title

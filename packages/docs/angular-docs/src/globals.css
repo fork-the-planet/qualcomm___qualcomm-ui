@@ -24,10 +24,6 @@
   --q-font-family: "Roboto Flex", sans-serif;
 }
 
-[data-theme="dark"] .shiki.mdx {
-  --shiki-dark-bg: #0f1013 !important;
-}
-
 .font-mono {
   font-family: "Roboto Mono", monospace;
 }
@@ -46,7 +42,7 @@ body {
 svg.fsd {
   > * tspan {
     fill: var(--color-icon-neutral-primary);
-    font: var(--q-font-metadata-xl-mono);
+    font: var(--font-static-code-md-default);
   }
 }
 

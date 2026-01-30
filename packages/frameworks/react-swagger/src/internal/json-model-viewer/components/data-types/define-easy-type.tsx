@@ -52,6 +52,7 @@ export function defineEasyType<Value>({
         <div className={`${type}-value simple-value`}>
           <Render
             inspect={props.inspect}
+            isRequired={props.isRequired}
             path={props.path}
             prevValue={props.prevValue}
             setInspect={props.setInspect}

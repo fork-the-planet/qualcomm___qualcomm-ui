@@ -62,15 +62,15 @@ export function useDemoSourceCode({
     [activeTab, filteredSourceCode],
   )
 
-  const hasInline =
+  const hasInlineStyles =
     !!activeTabSourceCode?.highlightedInline ||
     activeTabSourceCode?.type === "residual-css"
   const activeHighlightedCode = useMemo(
     () =>
-      isInlineMode && hasInline
+      isInlineMode && hasInlineStyles
         ? activeTabSourceCode?.highlightedInline
         : activeTabSourceCode?.highlighted,
-    [isInlineMode, hasInline, activeTabSourceCode],
+    [isInlineMode, hasInlineStyles, activeTabSourceCode],
   )
 
   const hasPreview = useMemo(
@@ -125,7 +125,7 @@ export function useDemoSourceCode({
     filteredSourceCode,
     getCopyableCode,
     getHighlightedCode,
-    hasInlineStyles: hasInline,
+    hasInlineStyles,
     hasPreview,
     highlighterRef,
     isInlineMode,

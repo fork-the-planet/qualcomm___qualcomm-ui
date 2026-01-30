@@ -1,5 +1,38 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.15.1 (2026/01/29)
+
+### Miscellaneous Chores
+
+- consistent hint/errortext display across form components
+
+## 1.15.0 (2026/01/27)
+
+### Features
+
+- [popover]: add brand emphasis
+- [tag]: add color emphasis and update CSS
+
+## 1.14.0 (2026/01/23)
+
+### Features
+
+- [header-bar]: add padding prop
+
+### Code Refactoring
+
+- remove async from sync functions
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/utils]
+
+## 1.13.0 (2026/01/19)
+
+### Features
+
+- update design tokens to latest revision
+
 ## 1.12.0 (2026/01/17)
 
 ### Features

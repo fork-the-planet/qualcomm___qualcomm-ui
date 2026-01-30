@@ -27,10 +27,7 @@ export async function transformMdx(
     let hasAnyChanges = false
 
     for (const options of optionsArray) {
-      const {hasChanges, newContent} = await transformMdxImports(
-        content,
-        options,
-      )
+      const {hasChanges, newContent} = transformMdxImports(content, options)
       if (hasChanges) {
         content = newContent
         hasAnyChanges = true
@@ -48,10 +45,10 @@ export async function transformMdx(
   }
 }
 
-export async function transformMdxImports(
+export function transformMdxImports(
   content: string,
   options: ImportTransformEntry,
-): Promise<{hasChanges: boolean; newContent: string}> {
+): {hasChanges: boolean; newContent: string} {
   const {sourcePackage, variableTransformers} = options
 
   const processor = unified()

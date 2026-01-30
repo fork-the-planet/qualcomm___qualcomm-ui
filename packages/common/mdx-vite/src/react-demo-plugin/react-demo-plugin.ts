@@ -149,7 +149,7 @@ export function reactDemoPlugin({
       return []
     },
 
-    async load(id) {
+    load(id) {
       if (id === VIRTUAL_MODULE_IDS.AUTO) {
         return generateAutoScopeModule()
       }

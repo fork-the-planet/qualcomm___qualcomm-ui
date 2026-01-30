@@ -22,7 +22,7 @@ export class CorePopoverContentDirective implements OnInit {
 
   private readonly onDestroy = useOnDestroy()
 
-  private readonly trackBindings = useTrackBindings(() =>
+  protected readonly trackBindings = useTrackBindings(() =>
     this.popoverContext().getContentBindings({
       id: this.hostId(),
       onDestroy: this.onDestroy,

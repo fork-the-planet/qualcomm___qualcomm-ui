@@ -202,6 +202,7 @@ export default defineConfig(
     files: ["packages/*/react-swagger/**/*.{ts,tsx}"],
     languageOptions,
     rules: {
+      "@typescript-eslint/no-unsafe-function-type": "off",
       "react/prop-types": "off",
     },
   },

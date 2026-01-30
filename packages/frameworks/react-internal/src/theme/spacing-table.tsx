@@ -30,21 +30,21 @@ export function SpacingTable({data = []}: SpacingTableProps) {
     return getComputedStyle(document.documentElement).getPropertyValue(variable)
   }
 
-  const showTailwindColumn = data.some(({tailwind}) => tailwind)
+  const showTailwindColumn = data.some(({tailwindClass}) => tailwindClass)
 
   return (
     <div key={key} className="w-full">
       <div className="doc-props-list__root bottom-border block sm:hidden">
-        {data.map(({tailwind, variable}) => {
+        {data.map(({tailwindClass, variable}) => {
           return (
             <div key={variable} className="doc-props-list-item__root">
               <div className="doc-props-list-item__name-wrapper"></div>
               <div className="doc-props-columns">
-                {tailwind ? (
+                {tailwindClass ? (
                   <div className="doc-props__content">
                     <div className="doc-props__title">Tailwind Class</div>
                     <code className="fit bg-transparent! font-mono">
-                      {tailwind}
+                      {tailwindClass}
                     </code>
                   </div>
                 ) : null}
@@ -80,15 +80,15 @@ export function SpacingTable({data = []}: SpacingTableProps) {
             ) : null}
             <Table.HeaderCell>CSS Variable</Table.HeaderCell>
             <Table.HeaderCell>Value</Table.HeaderCell>
-            <Table.HeaderCell>Space</Table.HeaderCell>
+            <Table.HeaderCell>Visualization</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {data.map(({tailwind, variable}) => {
+          {data.map(({tailwindClass, variable}) => {
             return (
               <Table.Row key={variable}>
                 {showTailwindColumn ? (
-                  <Table.Cell>{tailwind}</Table.Cell>
+                  <Table.Cell>{tailwindClass}</Table.Cell>
                 ) : null}
                 <Table.Cell>{variable}</Table.Cell>
                 <Table.Cell>{getPropertyValue(variable)}</Table.Cell>

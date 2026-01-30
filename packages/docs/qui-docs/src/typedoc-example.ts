@@ -164,7 +164,7 @@ export class CloudDocsSdk {
   /**
    * Zip files.
    */
-  async zipFiles(_opts: ZipFileOptions): Promise<boolean> {
+  zipFiles(_opts: ZipFileOptions): boolean {
     return false
   }
 
@@ -175,14 +175,14 @@ export class CloudDocsSdk {
    * @param environment test2
    * @param service test3
    */
-  async uploadFiles(_opts: UploadFileOptions): Promise<boolean> {
+  uploadFiles(_opts: UploadFileOptions): boolean {
     return true
   }
 
   /**
    * Download files
    */
-  async getServiceFiles(_opts: GetFilesOptions) {
+  getServiceFiles(_opts: GetFilesOptions) {
     return {} as any
   }
 }

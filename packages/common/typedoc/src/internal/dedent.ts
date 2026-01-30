@@ -1,8 +1,13 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-export function dedent(templ: any, ...values: any[]): string {
-  let strings: any[] = Array.from(typeof templ === "string" ? [templ] : templ)
+export function dedent(
+  templ: TemplateStringsArray | string,
+  ...values: unknown[]
+): string {
+  let strings: string[] = Array.from(
+    typeof templ === "string" ? [templ] : templ,
+  )
 
   // 1. Remove trailing whitespace.
   strings[strings.length - 1] = strings[strings.length - 1].replace(
@@ -11,11 +16,11 @@ export function dedent(templ: any, ...values: any[]): string {
   )
 
   // 2. Find all line breaks to determine the highest common indentation level.
-  const indentLengths = strings.reduce((arr, str) => {
+  const indentLengths = strings.reduce((arr: number[], str) => {
     const matches = str.match(/\n([\t ]+|(?!\s).)/g)
     if (matches) {
       return arr.concat(
-        matches.map((match: any) => match.match(/[\t ]/g)?.length ?? 0),
+        matches.map((match) => match.match(/[\t ]/g)?.length ?? 0),
       )
     }
     return arr
@@ -35,7 +40,7 @@ export function dedent(templ: any, ...values: any[]): string {
   let string = strings[0]
 
   values.forEach((value, i) => {
-    string += value + strings[i + 1]
+    string += (value as string) + strings[i + 1]
   })
 
   return string

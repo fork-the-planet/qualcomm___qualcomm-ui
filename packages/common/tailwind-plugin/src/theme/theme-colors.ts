@@ -2,212 +2,230 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
 export interface ColorData {
-  tailwind: string
+  tailwindClass: string
   variable: string
 }
 
 const text: ColorData[] = [
-  {tailwind: "text-brand-accent-01", variable: "--color-text-brand-accent-01"},
-  {tailwind: "text-brand-accent-02", variable: "--color-text-brand-accent-02"},
-  {tailwind: "text-brand-primary", variable: "--color-text-brand-primary"},
   {
-    tailwind: "text-neutral-inverse",
+    tailwindClass: "text-brand-accent-01",
+    variable: "--color-text-brand-accent-01",
+  },
+  {
+    tailwindClass: "text-brand-accent-02",
+    variable: "--color-text-brand-accent-02",
+  },
+  {tailwindClass: "text-brand-primary", variable: "--color-text-brand-primary"},
+  {
+    tailwindClass: "text-neutral-inverse",
     variable: "--color-text-neutral-inverse",
   },
   {
-    tailwind: "text-neutral-primary",
+    tailwindClass: "text-neutral-primary",
     variable: "--color-text-neutral-primary",
   },
   {
-    tailwind: "text-neutral-secondary",
+    tailwindClass: "text-neutral-secondary",
     variable: "--color-text-neutral-secondary",
   },
-  {tailwind: "text-support-danger", variable: "--color-text-support-danger"},
+  {
+    tailwindClass: "text-support-danger",
+    variable: "--color-text-support-danger",
+  },
 ]
 
 const icon: ColorData[] = [
   {
-    tailwind: "text-icon-brand-accent-01",
+    tailwindClass: "text-icon-brand-accent-01",
     variable: "--color-icon-brand-accent-01",
   },
   {
-    tailwind: "text-icon-brand-accent-02",
+    tailwindClass: "text-icon-brand-accent-02",
     variable: "--color-icon-brand-accent-02",
   },
   {
-    tailwind: "text-icon-brand-primary",
+    tailwindClass: "text-icon-brand-primary",
     variable: "--color-icon-brand-primary",
   },
   {
-    tailwind: "text-icon-neutral-inverse",
+    tailwindClass: "text-icon-neutral-inverse",
     variable: "--color-icon-neutral-inverse",
   },
   {
-    tailwind: "text-icon-neutral-primary",
+    tailwindClass: "text-icon-neutral-primary",
     variable: "--color-icon-neutral-primary",
   },
   {
-    tailwind: "text-icon-neutral-secondary",
+    tailwindClass: "text-icon-neutral-secondary",
     variable: "--color-icon-neutral-secondary",
   },
   {
-    tailwind: "text-icon-support-danger",
+    tailwindClass: "text-icon-support-danger",
     variable: "--color-icon-support-danger",
   },
-  {tailwind: "text-icon-support-info", variable: "--color-icon-support-info"},
   {
-    tailwind: "text-icon-support-neutral",
+    tailwindClass: "text-icon-support-info",
+    variable: "--color-icon-support-info",
+  },
+  {
+    tailwindClass: "text-icon-support-neutral",
     variable: "--color-icon-support-neutral",
   },
   {
-    tailwind: "text-icon-support-success",
+    tailwindClass: "text-icon-support-success",
     variable: "--color-icon-support-success",
   },
   {
-    tailwind: "text-icon-support-warning",
+    tailwindClass: "text-icon-support-warning",
     variable: "--color-icon-support-warning",
   },
 ]
 
 const background: ColorData[] = [
   {
-    tailwind: "bg-brand-accent-01",
+    tailwindClass: "bg-brand-accent-01",
     variable: "--color-background-brand-accent-01",
   },
   {
-    tailwind: "bg-brand-accent-02",
+    tailwindClass: "bg-brand-accent-02",
     variable: "--color-background-brand-accent-02",
   },
   {
-    tailwind: "bg-brand-primary-strong",
+    tailwindClass: "bg-brand-primary-strong",
     variable: "--color-background-brand-primary-strong",
   },
   {
-    tailwind: "bg-brand-primary-subtle",
+    tailwindClass: "bg-brand-primary-subtle",
     variable: "--color-background-brand-primary-subtle",
   },
   {
-    tailwind: "bg-brand-primary",
+    tailwindClass: "bg-brand-primary",
     variable: "--color-background-brand-primary",
   },
-  {tailwind: "bg-neutral-00", variable: "--color-background-neutral-00"},
-  {tailwind: "bg-neutral-01", variable: "--color-background-neutral-01"},
-  {tailwind: "bg-neutral-02", variable: "--color-background-neutral-02"},
-  {tailwind: "bg-neutral-03", variable: "--color-background-neutral-03"},
-  {tailwind: "bg-neutral-04", variable: "--color-background-neutral-04"},
-  {tailwind: "bg-neutral-05", variable: "--color-background-neutral-05"},
-  {tailwind: "bg-neutral-06", variable: "--color-background-neutral-06"},
-  {tailwind: "bg-neutral-07", variable: "--color-background-neutral-07"},
-  {tailwind: "bg-neutral-08", variable: "--color-background-neutral-08"},
-  {tailwind: "bg-neutral-09", variable: "--color-background-neutral-09"},
-  {tailwind: "bg-neutral-10", variable: "--color-background-neutral-10"},
+  {tailwindClass: "bg-neutral-00", variable: "--color-background-neutral-00"},
+  {tailwindClass: "bg-neutral-01", variable: "--color-background-neutral-01"},
+  {tailwindClass: "bg-neutral-02", variable: "--color-background-neutral-02"},
+  {tailwindClass: "bg-neutral-03", variable: "--color-background-neutral-03"},
+  {tailwindClass: "bg-neutral-04", variable: "--color-background-neutral-04"},
+  {tailwindClass: "bg-neutral-05", variable: "--color-background-neutral-05"},
+  {tailwindClass: "bg-neutral-06", variable: "--color-background-neutral-06"},
+  {tailwindClass: "bg-neutral-07", variable: "--color-background-neutral-07"},
+  {tailwindClass: "bg-neutral-08", variable: "--color-background-neutral-08"},
+  {tailwindClass: "bg-neutral-09", variable: "--color-background-neutral-09"},
+  {tailwindClass: "bg-neutral-10", variable: "--color-background-neutral-10"},
   {
-    tailwind: "bg-support-danger-medium",
+    tailwindClass: "bg-support-danger-medium",
     variable: "--color-background-support-danger-medium",
   },
   {
-    tailwind: "bg-support-danger-subtle",
+    tailwindClass: "bg-support-danger-subtle",
     variable: "--color-background-support-danger-subtle",
   },
   {
-    tailwind: "bg-support-danger",
+    tailwindClass: "bg-support-danger",
     variable: "--color-background-support-danger",
   },
   {
-    tailwind: "bg-support-info-medium",
+    tailwindClass: "bg-support-info-medium",
     variable: "--color-background-support-info-medium",
   },
   {
-    tailwind: "bg-support-info-subtle",
+    tailwindClass: "bg-support-info-subtle",
     variable: "--color-background-support-info-subtle",
   },
-  {tailwind: "bg-support-info", variable: "--color-background-support-info"},
   {
-    tailwind: "bg-support-neutral-medium",
+    tailwindClass: "bg-support-info",
+    variable: "--color-background-support-info",
+  },
+  {
+    tailwindClass: "bg-support-neutral-medium",
     variable: "--color-background-support-neutral-medium",
   },
   {
-    tailwind: "bg-support-neutral-subtle",
+    tailwindClass: "bg-support-neutral-subtle",
     variable: "--color-background-support-neutral-subtle",
   },
   {
-    tailwind: "bg-support-neutral",
+    tailwindClass: "bg-support-neutral",
     variable: "--color-background-support-neutral",
   },
   {
-    tailwind: "bg-support-success-medium",
+    tailwindClass: "bg-support-success-medium",
     variable: "--color-background-support-success-medium",
   },
   {
-    tailwind: "bg-support-success-subtle",
+    tailwindClass: "bg-support-success-subtle",
     variable: "--color-background-support-success-subtle",
   },
   {
-    tailwind: "bg-support-success",
+    tailwindClass: "bg-support-success",
     variable: "--color-background-support-success",
   },
   {
-    tailwind: "bg-support-warning-medium",
+    tailwindClass: "bg-support-warning-medium",
     variable: "--color-background-support-warning-medium",
   },
   {
-    tailwind: "bg-support-warning-subtle",
+    tailwindClass: "bg-support-warning-subtle",
     variable: "--color-background-support-warning-subtle",
   },
   {
-    tailwind: "bg-support-warning",
+    tailwindClass: "bg-support-warning",
     variable: "--color-background-support-warning",
   },
 ]
 
 const surface: ColorData[] = [
-  {tailwind: "bg-overlay", variable: "--color-surface-overlay"},
-  {tailwind: "bg-primary", variable: "--color-surface-primary"},
-  {tailwind: "bg-raised", variable: "--color-surface-raised"},
-  {tailwind: "bg-secondary", variable: "--color-surface-secondary"},
+  {tailwindClass: "bg-overlay", variable: "--color-surface-overlay"},
+  {tailwindClass: "bg-primary", variable: "--color-surface-primary"},
+  {tailwindClass: "bg-raised", variable: "--color-surface-raised"},
+  {tailwindClass: "bg-secondary", variable: "--color-surface-secondary"},
 ]
 
 const border: ColorData[] = [
   {
-    tailwind: "border-brand-accent-01",
+    tailwindClass: "border-brand-accent-01",
     variable: "--color-border-brand-accent-01",
   },
   {
-    tailwind: "border-brand-accent-02",
+    tailwindClass: "border-brand-accent-02",
     variable: "--color-border-brand-accent-02",
   },
   {
-    tailwind: "border-brand-primary-subtle",
+    tailwindClass: "border-brand-primary-subtle",
     variable: "--color-border-brand-primary-subtle",
   },
   {
-    tailwind: "border-brand-primary",
+    tailwindClass: "border-brand-primary",
     variable: "--color-border-brand-primary",
   },
-  {tailwind: "border-neutral-00", variable: "--color-border-neutral-00"},
-  {tailwind: "border-neutral-01", variable: "--color-border-neutral-01"},
-  {tailwind: "border-neutral-02", variable: "--color-border-neutral-02"},
-  {tailwind: "border-neutral-03", variable: "--color-border-neutral-03"},
-  {tailwind: "border-neutral-10", variable: "--color-border-neutral-10"},
+  {tailwindClass: "border-neutral-00", variable: "--color-border-neutral-00"},
+  {tailwindClass: "border-neutral-01", variable: "--color-border-neutral-01"},
+  {tailwindClass: "border-neutral-02", variable: "--color-border-neutral-02"},
+  {tailwindClass: "border-neutral-03", variable: "--color-border-neutral-03"},
+  {tailwindClass: "border-neutral-10", variable: "--color-border-neutral-10"},
   {
-    tailwind: "border-support-danger",
+    tailwindClass: "border-support-danger",
     variable: "--color-border-support-danger",
   },
-  {tailwind: "border-support-info", variable: "--color-border-support-info"},
   {
-    tailwind: "border-support-neutral",
+    tailwindClass: "border-support-info",
+    variable: "--color-border-support-info",
+  },
+  {
+    tailwindClass: "border-support-neutral",
     variable: "--color-border-support-neutral",
   },
   {
-    tailwind: "border-support-success",
+    tailwindClass: "border-support-success",
     variable: "--color-border-support-success",
   },
   {
-    tailwind: "border-support-warning",
+    tailwindClass: "border-support-warning",
     variable: "--color-border-support-warning",
   },
   {
-    tailwind: "border-focus-border",
+    tailwindClass: "border-focus-border",
     variable: "--color-utility-focus-border",
   },
 ]
@@ -228,15 +246,15 @@ const categories: string[] = [
 const category: ColorData[] = categories
   .map((category) => [
     {
-      tailwind: `*-category-${category}-medium`,
+      tailwindClass: `*-category-${category}-medium`,
       variable: `--color-category-${category}-medium`,
     },
     {
-      tailwind: `*-category-${category}-strong`,
+      tailwindClass: `*-category-${category}-strong`,
       variable: `--color-category-${category}-strong`,
     },
     {
-      tailwind: `*-category-${category}-subtle`,
+      tailwindClass: `*-category-${category}-subtle`,
       variable: `--color-category-${category}-subtle`,
     },
   ])

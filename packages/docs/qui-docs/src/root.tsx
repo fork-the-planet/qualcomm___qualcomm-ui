@@ -98,7 +98,7 @@ function App() {
 
   const location = useLocation()
   const title = siteData.pageMap[location.pathname]?.title || ""
-  const appTitle = title ? `QUI | ${title}` : "QUI React"
+  const appTitle = title ? `${title} | QUI Docs` : "QUI Docs"
   const portalContainerRef = useRef<HTMLDivElement>(null)
   const [hideDemoBrandSwitcher, setHideDemoBrandSwitcher] = useState<boolean>(
     data.hideDemoBrandSwitcher,

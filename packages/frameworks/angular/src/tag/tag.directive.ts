@@ -8,6 +8,7 @@ import {
   inject,
   input,
   type OnInit,
+  output,
   signal,
 } from "@angular/core"
 import {X} from "lucide-angular"
@@ -77,7 +78,7 @@ import {QdsTagContextService} from "./qds-tag-context.service"
       },
     },
   ],
-  selector: "[q-tag]",
+  selector: "span[q-tag], button[q-tag]",
   template: `
     <ng-content select="[q-start-icon]">
       @if (startIcon()) {
@@ -88,10 +89,13 @@ import {QdsTagContextService} from "./qds-tag-context.service"
     <ng-content />
 
     @if (variant() === "dismissable") {
-      <svg
-        qIcon="X"
+      <button
+        type="button"
         [q-bind]="qdsTagApi.context().getDismissButtonBindings()"
-      />
+        (click)="dismiss.emit()"
+      >
+        <svg qIcon="X" [q-bind]="qdsTagApi.context().getEndIconBindings()" />
+      </button>
     } @else {
       <ng-content select="[q-end-icon]">
         @if (endIcon()) {
@@ -102,6 +106,12 @@ import {QdsTagContextService} from "./qds-tag-context.service"
   `,
 })
 export class TagDirective implements SignalifyInput<QdsTagApiProps>, OnInit {
+  /**
+   * Emits when the dismiss button is clicked. Only applicable when
+   * {@link variant} is `dismissable`.
+   */
+  readonly dismiss = output<void>()
+
   /**
    * Controls the component's interactivity. If `true`, the component becomes
    * unresponsive to input and is visually dimmed to indicate its disabled state.

@@ -1,5 +1,42 @@
 # @qualcomm-ui/react Changelog
 
+## 1.10.1 (2026/01/29)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
+## 1.10.0 (2026/01/27)
+
+### Features
+
+- [popover]: add brand emphasis
+- [tag]: add color emphasis and update CSS
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
+## 1.9.0 (2026/01/23)
+
+### Features
+
+- [header-bar]: add padding prop
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/react-core, @qualcomm-ui/qds-core, @qualcomm-ui/utils]
+
+## 1.8.1 (2026/01/19)
+
+### Bug Fixes
+
+- [dependencies]: bump peer of lucide-react to fix filter/funnel import
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react-core, @qualcomm-ui/qds-core]
+
 ## 1.8.0 (2026/01/17)
 
 ### Features
