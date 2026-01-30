@@ -1,5 +1,11 @@
 # @qualcomm-ui/react-swagger Changelog
 
+## 1.2.2 (2026/01/29)
+
+### Bug Fixes
+
+- [json-model-viewer]: hide description button for all object types
+
 ## 1.2.1 (2026/01/29)
 
 ### Bug Fixes
