@@ -12,6 +12,20 @@ export interface ReferenceArray {
   type: "array"
 }
 
+export interface SchemaObject {
+  description?: string
+  type: "object"
+}
+
+export function isObject(value: unknown): value is SchemaObject {
+  return !!(
+    value &&
+    typeof value === "object" &&
+    "type" in value &&
+    value.type === "object"
+  )
+}
+
 export function isReferenceObject(value: unknown): value is ReferenceObject {
   return !!(
     value &&

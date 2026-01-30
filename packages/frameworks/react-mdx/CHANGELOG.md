@@ -1,5 +1,11 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 1.11.5 (2026/01/29)
+
+### Bug Fixes
+
+- [docs-layout]: adjust sidebar height for proper scrolling on mobile
+
 ## 1.11.4 (2026/01/29)
 
 ### Miscellaneous Chores
