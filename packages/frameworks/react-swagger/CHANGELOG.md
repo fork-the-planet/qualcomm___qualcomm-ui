@@ -1,5 +1,19 @@
 # @qualcomm-ui/react-swagger Changelog
 
+## 1.2.1 (2026/01/29)
+
+### Bug Fixes
+
+- [swagger-ui]: hide description button for reference objects
+
+### Styles
+
+- [swagger-ui]: add visual connector line to description elements
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
 ## 1.2.0 (2026/01/28)
 
 ### Features
