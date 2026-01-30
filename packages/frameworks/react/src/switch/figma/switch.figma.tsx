@@ -18,6 +18,7 @@ const sharedProps = {
     "invalid-unchecked": true,
   }),
   size: figma.enum("size", {
+    lg: "lg",
     sm: "sm",
   }),
 }
@@ -30,10 +31,15 @@ figma.connect(Switch, "<FIGMA_COMPONENTS_BASE>?node-id=12609-520", {
 
 // Switch with label
 figma.connect(Switch, "<FIGMA_COMPONENTS_BASE>?node-id=2270-5170", {
-  example: ({label, ...props}) => <Switch label={label} {...props} />,
+  example: ({hint, label, ...props}) => (
+    <Switch hint={hint} label={label} {...props} />
+  ),
   props: {
     ...sharedProps,
     errorText: figma.string("errorText"),
+    hint: figma.boolean("hint", {
+      true: figma.string("hintText"),
+    }),
     label: figma.boolean("label", {
       true: figma.string("labelText"),
     }),

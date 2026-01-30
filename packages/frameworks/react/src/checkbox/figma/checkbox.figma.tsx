@@ -25,7 +25,6 @@ const sharedProps = {
   }),
   size: figma.enum<QdsCheckboxSize>("size", {
     lg: "lg",
-    md: "md",
     sm: "sm",
   }),
 }
@@ -42,12 +41,19 @@ figma.connect(Checkbox, "<FIGMA_COMPONENTS_BASE>?node-id=12550-185694", {
 
 // label
 figma.connect(Checkbox, "<FIGMA_COMPONENTS_BASE>?node-id=67-706", {
-  example: ({labelText, ...props}) => {
-    return <Checkbox label={labelText} {...props} />
+  example: ({label, hint, ...props}) => {
+    return <Checkbox label={label} hint={hint} {...props} />
   },
   props: {
     ...sharedProps,
     errorText: figma.string("errorText"),
-    labelText: figma.string("labelText"),
+    hint: figma.boolean("hint", {
+      true: figma.string("hintText"),
+      false: undefined,
+    }),
+    label: figma.boolean("label", {
+      true: figma.string("labelText"),
+      false: undefined,
+    }),
   },
 })
