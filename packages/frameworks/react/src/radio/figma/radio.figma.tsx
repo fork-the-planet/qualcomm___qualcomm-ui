@@ -14,19 +14,19 @@ const sharedRadioProps = {
   disabled: figma.enum("state", {
     disabled: true,
   }),
-  invalid: figma.enum("variant", {
-    "invalid-checked": true,
-    "invalid-unchecked": true,
-  }),
 }
 
 // radio with label
 figma.connect(Radio, "<FIGMA_COMPONENTS_BASE>?node-id=2270-3948", {
-  example: ({labelText, ...props}) => {
-    return <Radio label={labelText} {...props} />
+  example: ({labelText, hint, ...props}) => {
+    return <Radio label={labelText} hint={hint} {...props} />
   },
   props: {
     ...sharedRadioProps,
+    hint: figma.boolean("hint", {
+      true: figma.string("hintText"),
+      false: undefined,
+    }),
     labelText: figma.string("labelText"),
   },
 })
