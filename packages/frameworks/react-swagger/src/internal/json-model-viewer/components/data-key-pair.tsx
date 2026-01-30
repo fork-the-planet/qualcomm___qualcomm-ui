@@ -249,7 +249,9 @@ export function DataKeyPair(props: DataKeyPairProps) {
         </span>
 
         {Component ? (
-          description ? (
+          description &&
+          !isReferenceObject(value) &&
+          !isReferenceArray(value) ? (
             <button
               className="data-key-description-expand-button"
               onClick={() => setShowDescription(!showDescription)}
