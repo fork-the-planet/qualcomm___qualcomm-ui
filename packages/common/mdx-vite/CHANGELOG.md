@@ -1,5 +1,11 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 2.14.3 (2026/01/29)
+
+### Bug Fixes
+
+- [docs-plugin-mdx]: add fallback language for syntax highlighting
+
 ## 2.14.2 (2026/01/23)
 
 ### Bug Fixes
