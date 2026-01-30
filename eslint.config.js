@@ -40,6 +40,8 @@ export default defineConfig(
       "**/frameworks/react-internal/files/component-list.md",
       "packages/docs/*/knowledge/**",
       "**/generated/**",
+      // Figma Code Connect files use JSX-like syntax that isn't valid TSX
+      "**/*.figma.tsx",
     ],
   },
   {

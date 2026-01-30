@@ -45,7 +45,7 @@ program
       }
     } catch (error) {
       logger.error(
-        `Failed to fetch components: ${error instanceof Error ? error.message : error}`,
+        `Failed to fetch components: ${error instanceof Error ? error.message : String(error)}`,
       )
       process.exit(1)
     }
@@ -131,7 +131,7 @@ program
       )
     } catch (error) {
       logger.error(
-        `Failed to generate icons: ${error instanceof Error ? error.message : error}`,
+        `Failed to generate icons: ${error instanceof Error ? error.message : String(error)}`,
       )
       process.exit(1)
     }
