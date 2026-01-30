@@ -1,3 +1,6 @@
+// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+// SPDX-License-Identifier: BSD-3-Clause-Clear
+
 import figma from "@figma/code-connect"
 
 import type {QdsNotificationEmphasis} from "@qualcomm-ui/qds-core/inline-notification"

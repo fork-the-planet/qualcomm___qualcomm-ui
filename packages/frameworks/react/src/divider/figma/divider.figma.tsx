@@ -1,6 +1,9 @@
+// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+// SPDX-License-Identifier: BSD-3-Clause-Clear
+
 import figma from "@figma/code-connect"
 
-import type {QdsDividerVariant} from "@qualcomm-ui/qds-core/divider"
+import type {QdsDividerOrientation} from "@qualcomm-ui/qds-core/divider"
 import {Divider} from "@qualcomm-ui/react/divider"
 
 const variantProp = {
