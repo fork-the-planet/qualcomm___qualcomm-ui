@@ -1,5 +1,6 @@
 export * from "./checkbox-control.component"
 export * from "./checkbox-error-text.component"
+export * from "./checkbox-hint.directive"
 export * from "./checkbox-hidden-input.directive"
 export * from "./checkbox-indicator.component"
 export * from "./checkbox-label.directive"

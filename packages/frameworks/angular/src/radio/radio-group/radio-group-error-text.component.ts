@@ -30,7 +30,7 @@ export class RadioGroupErrorTextComponent extends CoreRadioGroupErrorTextDirecti
   constructor() {
     super()
     this.trackBindings.extendWith(
-      computed(() => this.qdsRadioContext().getErrorTextBindings()),
+      computed(() => this.qdsRadioContext().getGroupErrorTextBindings()),
     )
   }
 }

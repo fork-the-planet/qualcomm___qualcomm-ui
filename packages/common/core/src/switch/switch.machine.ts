@@ -132,6 +132,7 @@ export const switchMachine: MachineConfig<SwitchSchema> =
         control: bindableId<string>(),
         errorText: bindableId<string>(),
         hiddenInput: bindableId<string>(),
+        hint: bindableId<string>(),
         label: bindableId<string>(),
         root: bindableId<string>(),
       }

@@ -9,6 +9,7 @@ import {
   CheckboxHiddenInput,
   type CheckboxHiddenInputProps,
 } from "./checkbox-hidden-input"
+import {CheckboxHint, type CheckboxHintProps} from "./checkbox-hint"
 import {
   CheckboxIndicator,
   type CheckboxIndicatorProps,
@@ -21,6 +22,7 @@ export type {
   CheckboxControlProps,
   CheckboxErrorTextProps,
   CheckboxHiddenInputProps,
+  CheckboxHintProps,
   CheckboxIndicatorProps,
   CheckboxLabelProps,
   CheckboxRootProps,
@@ -31,6 +33,7 @@ type CheckboxComponent = typeof SimpleCheckbox & {
   Control: typeof CheckboxControl
   ErrorText: typeof CheckboxErrorText
   HiddenInput: typeof CheckboxHiddenInput
+  Hint: typeof CheckboxHint
   Indicator: typeof CheckboxIndicator
   Label: typeof CheckboxLabel
   Root: typeof CheckboxRoot
@@ -42,6 +45,7 @@ Checkbox.Context = CheckboxContext
 Checkbox.Control = CheckboxControl
 Checkbox.ErrorText = CheckboxErrorText
 Checkbox.HiddenInput = CheckboxHiddenInput
+Checkbox.Hint = CheckboxHint
 Checkbox.Indicator = CheckboxIndicator
 Checkbox.Label = CheckboxLabel
 Checkbox.Root = CheckboxRoot

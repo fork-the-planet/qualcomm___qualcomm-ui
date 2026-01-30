@@ -1,6 +1,7 @@
 export * from "./switch-composite-layout-demo"
 export * from "./switch-controlled-demo"
 export * from "./switch-disabled-demo"
+export * from "./switch-hint-demo"
 export * from "./switch-react-hook-form-demo"
 export * from "./switch-simple-demo"
 export * from "./switch-sizes-demo"

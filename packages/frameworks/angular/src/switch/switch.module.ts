@@ -9,6 +9,7 @@ import {QBindDirective} from "@qualcomm-ui/angular-core/machine"
 import {SwitchControlComponent} from "./switch-control.component"
 import {SwitchErrorTextComponent} from "./switch-error-text.component"
 import {SwitchHiddenInputDirective} from "./switch-hidden-input.directive"
+import {SwitchHintDirective} from "./switch-hint.directive"
 import {SwitchLabelDirective} from "./switch-label.directive"
 import {SwitchRootDirective} from "./switch-root.directive"
 import {SwitchThumbDirective} from "./switch-thumb.directive"
@@ -21,6 +22,7 @@ import {SwitchComponent} from "./switch.component"
     SwitchControlComponent,
     SwitchLabelDirective,
     SwitchHiddenInputDirective,
+    SwitchHintDirective,
     SwitchThumbDirective,
     SwitchErrorTextComponent,
   ],
@@ -30,6 +32,7 @@ import {SwitchComponent} from "./switch.component"
     SwitchControlComponent,
     SwitchLabelDirective,
     SwitchHiddenInputDirective,
+    SwitchHintDirective,
     SwitchThumbDirective,
     SwitchErrorTextComponent,
   ],

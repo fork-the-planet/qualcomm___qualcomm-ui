@@ -9,13 +9,15 @@ import {radioClasses} from "./radio.classes"
 import type {
   QdsRadioApi,
   QdsRadioApiProps,
-  QdsRadioErrorTextBindings,
   QdsRadioGroupBindings,
+  QdsRadioGroupErrorTextBindings,
+  QdsRadioGroupHintBindings,
   QdsRadioGroupItemsBindings,
   QdsRadioGroupLabelBindings,
   QdsRadioItemBindings,
   QdsRadioItemControlBindings,
   QdsRadioItemHiddenInputBindings,
+  QdsRadioItemHintBindings,
   QdsRadioItemLabelBindings,
 } from "./radio.types"
 
@@ -27,14 +29,19 @@ export function createQdsRadioApi(
     size,
 
     // group: bindings
-    getErrorTextBindings(): QdsRadioErrorTextBindings {
+    getGroupBindings(): QdsRadioGroupBindings {
+      return normalize.element({
+        className: radioClasses.group,
+      })
+    },
+    getGroupErrorTextBindings(): QdsRadioGroupErrorTextBindings {
       return normalize.element({
         className: inputClasses.errorText,
       })
     },
-    getGroupBindings(): QdsRadioGroupBindings {
+    getGroupHintBindings(): QdsRadioGroupHintBindings {
       return normalize.element({
-        className: radioClasses.group,
+        className: inputClasses.hint,
       })
     },
     getGroupItemsBindings(): QdsRadioGroupItemsBindings {
@@ -63,6 +70,11 @@ export function createQdsRadioApi(
     getItemHiddenInputBindings(): QdsRadioItemHiddenInputBindings {
       return normalize.input({
         className: radioClasses.itemHiddenInput,
+      })
+    },
+    getItemHintBindings(): QdsRadioItemHintBindings {
+      return normalize.element({
+        className: inputClasses.hint,
       })
     },
     getItemLabelBindings(): QdsRadioItemLabelBindings {

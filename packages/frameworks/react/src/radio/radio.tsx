@@ -8,6 +8,7 @@ import {
   RadioHiddenInput,
   type RadioHiddenInputProps,
 } from "./radio-hidden-input"
+import {RadioHint, type RadioHintProps} from "./radio-hint"
 import {RadioLabel, type RadioLabelProps} from "./radio-label"
 import {RadioRoot, type RadioRootProps} from "./radio-root"
 
@@ -43,6 +44,17 @@ export interface RadioProps extends RadioRootProps {
   hiddenInputProps?: RadioHiddenInputProps
 
   /**
+   * Optional hint text that describes the element.
+   */
+  hint?: ReactNode
+
+  /**
+   * Props applied to the hint element.
+   * @inheritDoc
+   */
+  hintProps?: RadioHintProps
+
+  /**
    * Optional label describing the element. Recommended. This element is
    * automatically associated with the component's input element for
    * accessibility.
@@ -61,11 +73,14 @@ export function Radio({
   "aria-labelledby": ariaLabelledBy,
   controlProps,
   hiddenInputProps: hiddenInputPropsProp,
+  hint,
+  hintProps,
   label,
   labelProps,
   ...props
 }: RadioProps): ReactElement {
   const labelContent = label || labelProps?.children
+  const hintContent = hint || hintProps?.children
 
   const hiddenInputProps = {
     ...hiddenInputPropsProp,
@@ -85,6 +100,7 @@ export function Radio({
       {labelContent ? (
         <RadioLabel {...labelProps}>{labelContent}</RadioLabel>
       ) : null}
+      {hintContent ? <RadioHint {...hintProps}>{hintContent}</RadioHint> : null}
     </RadioRoot>
   )
 }
