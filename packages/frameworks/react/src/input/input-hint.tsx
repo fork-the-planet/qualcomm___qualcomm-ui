@@ -22,8 +22,8 @@ export interface InputHintProps extends ElementRenderProp<"div"> {
  * A help message displayed below the input. Renders a `<div>` element by default.
  */
 export function InputHint({children, ...props}: InputHintProps): ReactElement {
-  const qdsContext = useQdsInputContext()
-  const mergedProps = mergeProps(qdsContext.getHintBindings(), props)
+  const qdsContext = useQdsInputContext(false)
+  const mergedProps = mergeProps(qdsContext?.getHintBindings(), props)
 
   return (
     <PolymorphicElement as="div" {...mergedProps}>

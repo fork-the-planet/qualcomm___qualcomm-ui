@@ -1,6 +1,7 @@
 export * from "./qds-switch-context.service"
 export * from "./switch-control.component"
 export * from "./switch-error-text.component"
+export * from "./switch-hint.directive"
 export * from "./switch-hidden-input.directive"
 export * from "./switch-label.directive"
 export * from "./switch-thumb.directive"

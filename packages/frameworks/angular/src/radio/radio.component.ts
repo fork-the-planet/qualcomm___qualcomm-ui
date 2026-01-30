@@ -26,12 +26,43 @@ import {RadioRootDirective} from "./radio-root.directive"
         </span>
       }
     </ng-content>
+    <ng-content select="[q-radio-hint]">
+      @if (hint()) {
+        <div q-radio-hint>
+          {{ hint() }}
+        </div>
+      }
+    </ng-content>
   `,
 })
 export class RadioComponent extends RadioRootDirective {
   /**
+   * Optional hint text displayed below the radio. Hints are hidden when the
+   * radio is invalid.
+   *
+   * @remarks
+   * To customize the element, provide it using the directive instead:
+   *
+   * ```angular-html
+   * <label q-radio>
+   *   <div q-radio-hint>...</div>
+   * </label>
+   * ```
+   */
+  readonly hint = input<string>()
+
+  /**
    * Optional label describing the element. Recommended. This element is
    * automatically associated with the component's input element for accessibility.
+   *
+   * @remarks
+   * To customize the element, provide it using the directive instead:
+   *
+   * ```angular-html
+   * <label q-radio>
+   *   <div q-radio-label>...</div>
+   * </label>
+   * ```
    */
   readonly label = input<string | undefined>()
 }

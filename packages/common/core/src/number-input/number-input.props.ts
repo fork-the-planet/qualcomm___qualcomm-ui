@@ -13,6 +13,7 @@ export const numberInputProps: (keyof NumberInputApiProps)[] =
     "allowMouseWheel",
     "allowOverflow",
     "clampValueOnBlur",
+    "defaultUnit",
     "defaultValue",
     "dir",
     "disabled",
@@ -28,6 +29,7 @@ export const numberInputProps: (keyof NumberInputApiProps)[] =
     "min",
     "name",
     "onFocusChange",
+    "onUnitChange",
     "onValueChange",
     "onValueInvalid",
     "pattern",
@@ -36,6 +38,8 @@ export const numberInputProps: (keyof NumberInputApiProps)[] =
     "spinOnPress",
     "step",
     "translations",
+    "unit",
+    "unitOptions",
     "value",
   )
 

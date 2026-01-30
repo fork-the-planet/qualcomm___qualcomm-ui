@@ -36,6 +36,13 @@ import {provideQdsCheckboxContext} from "./qds-checkbox-context.service"
         </div>
       }
     </ng-content>
+    <ng-content select="[q-checkbox-hint]">
+      @if (hint()) {
+        <div q-checkbox-hint>
+          {{ hint() }}
+        </div>
+      }
+    </ng-content>
   `,
 })
 export class CheckboxComponent extends CheckboxRootDirective {
@@ -53,6 +60,21 @@ export class CheckboxComponent extends CheckboxRootDirective {
    * ```
    */
   readonly errorText = input<string>()
+
+  /**
+   * Optional hint text displayed below the checkbox. Hints are hidden when the
+   * checkbox is invalid.
+   *
+   * @remarks
+   * To customize the element, provide it using the directive instead:
+   *
+   * ```angular-html
+   * <label q-checkbox>
+   *   <div q-checkbox-hint>...</div>
+   * </label>
+   * ```
+   */
+  readonly hint = input<string>()
 
   /**
    * Optional label describing the checkbox. This element is automatically

@@ -24,6 +24,7 @@ import type {
   SwitchDataBindings,
   SwitchErrorTextBindings,
   SwitchHiddenInputBindings,
+  SwitchHintBindings,
   SwitchLabelBindings,
   SwitchRootBindings,
   SwitchSchema,
@@ -134,6 +135,16 @@ export function createSwitchApi(
         style: visuallyHiddenStyle,
         type: "checkbox",
         value: prop("value"),
+      })
+    },
+    getHintBindings(props: IdRegistrationProps): SwitchHintBindings {
+      scope.ids.register("hint", props)
+      return normalize.element({
+        ...commonAttrs,
+        "data-part": "hint",
+        dir: prop("dir"),
+        hidden: !!invalid,
+        id: domIds.hint(scope),
       })
     },
     getLabelBindings(props: IdRegistrationProps): SwitchLabelBindings {

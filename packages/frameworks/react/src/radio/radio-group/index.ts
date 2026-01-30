@@ -4,6 +4,7 @@ import {
   RadioGroupErrorText,
   type RadioGroupErrorTextProps,
 } from "./radio-group-error-text"
+import {RadioGroupHint, type RadioGroupHintProps} from "./radio-group-hint"
 import {RadioGroupItems, type RadioGroupItemsProps} from "./radio-group-items"
 import {RadioGroupLabel, type RadioGroupLabelProps} from "./radio-group-label"
 import {RadioGroupRoot, type RadioGroupRootProps} from "./radio-group-root"
@@ -11,6 +12,7 @@ import {RadioGroupRoot, type RadioGroupRootProps} from "./radio-group-root"
 export type {
   RadioContextProps,
   RadioGroupErrorTextProps,
+  RadioGroupHintProps,
   RadioGroupItemsProps,
   RadioGroupLabelProps,
   RadioGroupRootProps,
@@ -18,6 +20,7 @@ export type {
 
 type RadioGroupComponent = typeof SimpleRadioGroup & {
   ErrorText: typeof RadioGroupErrorText
+  Hint: typeof RadioGroupHint
   Items: typeof RadioGroupItems
   Label: typeof RadioGroupLabel
   RadioContext: typeof RadioContext
@@ -29,6 +32,7 @@ export const RadioGroup: RadioGroupComponent =
 
 RadioGroup.RadioContext = RadioContext
 RadioGroup.ErrorText = RadioGroupErrorText
+RadioGroup.Hint = RadioGroupHint
 RadioGroup.Items = RadioGroupItems
 RadioGroup.Label = RadioGroupLabel
 RadioGroup.Root = RadioGroupRoot

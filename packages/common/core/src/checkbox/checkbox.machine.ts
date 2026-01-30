@@ -136,6 +136,7 @@ export const checkboxMachine: MachineConfig<CheckboxSchema> =
         control: bindableId<string>(),
         errorText: bindableId<string>(ids?.errorText),
         hiddenInput: bindableId<string>(ids?.hiddenInput),
+        hint: bindableId<string>(ids?.hint),
         label: bindableId<string>(ids?.label),
         root: bindableId<string>(ids?.root),
       }

@@ -111,8 +111,11 @@ export const radioMachine: MachineConfig<RadioSchema> =
     ids({bindableId, bindableIdCollection}) {
       return {
         errorText: bindableId(),
+        hint: bindableId(),
         item: bindableIdCollection(),
+        itemErrorText: bindableIdCollection(),
         itemHiddenInput: bindableIdCollection(),
+        itemHint: bindableIdCollection(),
         itemLabel: bindableIdCollection(),
         label: bindableId(),
         root: bindableId(),

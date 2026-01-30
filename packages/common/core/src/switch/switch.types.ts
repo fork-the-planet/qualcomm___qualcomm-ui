@@ -74,6 +74,7 @@ export interface SwitchApiProps
 export interface SwitchElementIds {
   errorText: string
   hiddenInput: string
+  hint: string
   label: string
   root: string
 }
@@ -177,6 +178,12 @@ export interface SwitchErrorTextBindings extends CommonBindings {
   id: string
 }
 
+export interface SwitchHintBindings extends CommonBindings {
+  "data-part": "hint"
+  hidden: boolean
+  id: string
+}
+
 export interface SwitchHiddenInputBindings extends CommonBindings {
   "aria-invalid": BooleanAriaAttr
   "aria-labelledby": string | undefined
@@ -207,6 +214,7 @@ export interface SwitchApi {
   getControlBindings(): SwitchControlBindings
   getErrorTextBindings(props: IdRegistrationProps): SwitchErrorTextBindings
   getHiddenInputBindings(props: IdRegistrationProps): SwitchHiddenInputBindings
+  getHintBindings(props: IdRegistrationProps): SwitchHintBindings
   getLabelBindings(props: IdRegistrationProps): SwitchLabelBindings
   getRootBindings(props: IdRegistrationProps): SwitchRootBindings
   getThumbBindings(): SwitchThumbBindings

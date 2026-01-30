@@ -12,6 +12,7 @@ import type {
   QdsCheckboxControlBindings,
   QdsCheckboxErrorTextBindings,
   QdsCheckboxHiddenInputBindings,
+  QdsCheckboxHintBindings,
   QdsCheckboxIndicatorBindings,
   QdsCheckboxLabelBindings,
   QdsCheckboxRootBindings,
@@ -40,6 +41,11 @@ export function createQdsCheckboxApi(
     getHiddenInputBindings(): QdsCheckboxHiddenInputBindings {
       return normalize.input({
         className: checkboxClasses.hiddenInput,
+      })
+    },
+    getHintBindings(): QdsCheckboxHintBindings {
+      return normalize.element({
+        className: inputClasses.hint,
       })
     },
     getIndicatorBindings(): QdsCheckboxIndicatorBindings {

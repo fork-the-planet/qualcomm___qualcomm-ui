@@ -33,6 +33,7 @@ import type {
   NumberInputRootBindings,
   NumberInputSchema,
   NumberInputScopeAttribute,
+  NumberInputUnitSelectBindings,
   NumberInputValueTextBindings,
 } from "./number-input.types"
 
@@ -44,7 +45,7 @@ export function createNumberInputApi(
   machine: Machine<NumberInputSchema>,
   normalize: PropNormalizer,
 ): NumberInputApi {
-  const {computed, prop, scope, send, state} = machine
+  const {computed, context, prop, scope, send, state} = machine
 
   const focused = state.hasTag("focus")
   const disabled = computed("isDisabled")
@@ -87,9 +88,17 @@ export function createNumberInputApi(
       send({type: "VALUE.SET", value: prop("min")})
     },
 
+    setUnit(unit) {
+      send({type: "UNIT.SET", unit})
+    },
+
     setValue(value) {
       send({type: "VALUE.SET", value})
     },
+
+    unit: context.get("unit"),
+
+    unitOptions: prop("unitOptions"),
 
     value: computed("formattedValue"),
 
@@ -351,7 +360,6 @@ export function createNumberInputApi(
         },
       })
     },
-
     getLabelBindings(props): NumberInputLabelBindings {
       scope.ids.register("label", props)
       return normalize.label({
@@ -375,7 +383,17 @@ export function createNumberInputApi(
         dir: prop("dir"),
       })
     },
-
+    getUnitSelectBindings(): NumberInputUnitSelectBindings {
+      return normalize.button({
+        ...commonBindings,
+        "data-disabled": booleanDataAttr(disabled),
+        "data-part": "unit-select",
+        "data-readonly": booleanDataAttr(readOnly),
+        dir: prop("dir"),
+        disabled: disabled || readOnly,
+        type: "button",
+      })
+    },
     getValueTextBindings(): NumberInputValueTextBindings {
       return normalize.element({
         ...commonBindings,

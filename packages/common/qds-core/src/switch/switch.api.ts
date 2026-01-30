@@ -11,6 +11,7 @@ import type {
   QdsSwitchControlBindings,
   QdsSwitchErrorTextBindings,
   QdsSwitchHiddenInputBindings,
+  QdsSwitchHintBindings,
   QdsSwitchLabelBindings,
   QdsSwitchRootBindings,
   QdsSwitchThumbBindings,
@@ -37,6 +38,11 @@ export function createQdsSwitchApi(
     getHiddenInputBindings(): QdsSwitchHiddenInputBindings {
       return normalize.input({
         className: switchClasses.hiddenInput,
+      })
+    },
+    getHintBindings(): QdsSwitchHintBindings {
+      return normalize.element({
+        className: inputClasses.hint,
       })
     },
     getLabelBindings(): QdsSwitchLabelBindings {

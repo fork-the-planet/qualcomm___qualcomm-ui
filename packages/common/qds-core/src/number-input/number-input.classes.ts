@@ -7,4 +7,5 @@ export const numberInputClasses = {
   input: "qui-number-input__input",
   inputGroup: "qui-number-input__input-group",
   stepTrigger: "qui-number-input__step-trigger",
+  unitSelect: "qui-number-input__unit-select",
 } as const

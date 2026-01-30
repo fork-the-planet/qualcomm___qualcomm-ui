@@ -20,6 +20,7 @@ import type {
   RadioCommonBindings,
   RadioGroupBindings,
   RadioGroupErrorTextBindings,
+  RadioGroupHintBindings,
   RadioGroupItemsBindings,
   RadioGroupLabelBindings,
   RadioItemBindings,
@@ -27,6 +28,7 @@ import type {
   RadioItemControlBindings,
   RadioItemDataBindings,
   RadioItemHiddenInputBindings,
+  RadioItemHintBindings,
   RadioItemLabelBindings,
   RadioSchema,
 } from "./radio.types"
@@ -43,6 +45,7 @@ export function createRadioApi(
   }
 
   const groupDisabled = computed("disabled")
+  const invalid = prop("invalid")
   const readOnly = prop("readOnly")
 
   function getItemState(props: RadioItemContext): ItemState {
@@ -68,6 +71,7 @@ export function createRadioApi(
       "data-focus": booleanDataAttr(itemState.focused),
       "data-focus-visible": booleanDataAttr(itemState.focusVisible),
       "data-hover": booleanDataAttr(itemState.hovered),
+      "data-invalid": booleanDataAttr(invalid),
       "data-readonly": booleanDataAttr(readOnly),
       "data-state": itemState.checked ? "checked" : "unchecked",
     }
@@ -116,6 +120,17 @@ export function createRadioApi(
         "data-part": "error-text",
         hidden: !prop("invalid"),
         id: domIds.errorText(scope),
+      })
+    },
+
+    getGroupHintBindings(props): RadioGroupHintBindings {
+      scope.ids.register("hint", props)
+      return normalize.element({
+        ...commonBindings,
+        "data-disabled": booleanDataAttr(groupDisabled),
+        "data-part": "hint",
+        hidden: !!prop("invalid"),
+        id: domIds.hint(scope),
       })
     },
 
@@ -258,6 +273,19 @@ export function createRadioApi(
         style: visuallyHiddenStyle,
         type: "radio",
         value: itemProps.value,
+      })
+    },
+
+    getRadioHintBindings(itemProps): RadioItemHintBindings {
+      scope.ids
+        .collection("itemHint")
+        .register(itemProps.value, itemProps.id, itemProps.onDestroy)
+      return normalize.element({
+        ...commonBindings,
+        ...getItemDataAttrs(itemProps),
+        "data-part": "item-hint",
+        hidden: !!invalid,
+        id: itemProps.id,
       })
     },
 

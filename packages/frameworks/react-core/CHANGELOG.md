@@ -1,5 +1,21 @@
 # @qualcomm-ui/react-core Changelog
 
+## 1.2.0 (2026/01/30)
+
+### Features
+
+- [radio]: hint at item level
+
+### Bug Fixes
+
+- [radio]: group hint + CSS fixes
+- [switch]: hint text
+- [checkbox]: hint text
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core]
+
 ## 1.1.3 (2026/01/23)
 
 ### Code Refactoring
