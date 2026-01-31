@@ -8,15 +8,7 @@ import type {Link, Parent} from "mdast"
 import type {MdxJsxAttribute, MdxJsxFlowElement} from "mdast-util-mdx-jsx"
 import {minimatch} from "minimatch"
 import {createHash} from "node:crypto"
-import {
-  access,
-  mkdir,
-  readdir,
-  readFile,
-  rm,
-  stat,
-  writeFile,
-} from "node:fs/promises"
+import {mkdir, readdir, readFile, rm, stat, writeFile} from "node:fs/promises"
 import {basename, dirname, extname, join, relative, resolve} from "node:path"
 import remarkFrontmatter from "remark-frontmatter"
 import remarkMdx from "remark-mdx"
@@ -31,103 +23,33 @@ import type {
   KnowledgePageData,
   ManifestEntry,
 } from "@qualcomm-ui/mdx-common"
-import type {
-  QuiComment,
-  QuiCommentDisplayPart,
-} from "@qualcomm-ui/typedoc-common"
 import {kebabCase} from "@qualcomm-ui/utils/change-case"
 
 import {
   getPathnameFromPathSegments,
   getPathSegmentsFromFileName,
   remarkRemoveJsx,
-} from "../docs-plugin/internal"
-import {extractNamesFromAttribute} from "../docs-plugin/internal/services/mdx-utils"
+} from "../../docs-plugin/internal"
+import {extractNamesFromAttribute} from "../../docs-plugin/internal/services/mdx-utils"
+import {loadEnv} from "../common"
+import {loadEnvironmentConfigs} from "../load-config-from-env"
+import type {CliConfig, WebUiKnowledgeConfig} from "../types"
 
-import {loadEnv} from "./common"
-import {loadEnvironmentConfigs} from "./load-config-from-env"
-import type {CliConfig, WebUiKnowledgeConfig} from "./types"
-
-interface ImportedModule {
-  content: string
-  path: string
-}
-
-interface ComponentProps {
-  input?: PropInfo[]
-  name: string
-  output?: PropInfo[]
-  props?: PropInfo[]
-}
-
-interface DocProps {
-  props: Record<string, ComponentProps>
-}
-
-interface PropInfo {
-  comment?: QuiComment
-  defaultValue?: string
-  name: string
-  resolvedType?: {
-    baseType?: string
-    name?: string
-    prettyType?: string
-    required?: boolean
-    type?: string
-  }
-  type: string
-}
-
-interface SimplifiedProp {
-  defaultValue?: string
-  description: string
-  name: string
-  propType?: "input" | "output" | undefined
-  required: boolean | undefined
-  type: string
-}
-
-interface ProcessedPage {
-  content: string
-  demoFiles: string[]
-  frontmatter: Record<string, string>
-  title: string
-  url: string | undefined
-}
-
-interface MdxFlowExpression {
-  type: "mdxFlowExpression"
-  value: string
-}
+import type {
+  DocProps,
+  ImportedModule,
+  MdxFlowExpression,
+  ProcessedPage,
+  SimplifiedProp,
+} from "./generator.types"
+import {PropFormatter} from "./props"
+import {replaceThemeNodes} from "./theme-utils"
+import {exists} from "./utils"
 
 // Pure utility functions (no config dependency)
 
-async function exists(dirPath: string): Promise<boolean> {
-  return access(dirPath)
-    .then(() => true)
-    .catch(() => false)
-}
-
 function computeMd5(content: string): string {
   return createHash("md5").update(content).digest("hex")
-}
-
-function extractBestType(propInfo: PropInfo): string {
-  const type = propInfo.resolvedType?.prettyType || propInfo.type
-
-  return cleanType(type.startsWith("| ") ? type.substring(2) : type)
-}
-
-function extractRequired(propInfo: PropInfo, isPartial: boolean): boolean {
-  return Boolean(propInfo.resolvedType?.required && !isPartial)
-}
-
-function cleanType(type: string): string {
-  return type.replace(/\n/g, " ").replace(/\s+/g, " ").trim()
-}
-
-function cleanDefaultValue(defaultValue: string): string {
-  return defaultValue.replace(/^\n+/, "").replace(/\n+$/, "").trim()
 }
 
 function isPreviewLine(trimmedLine: string): boolean {
@@ -221,18 +143,6 @@ const replaceNpmInstallTabs: Plugin = () => {
   }
 }
 
-function getPath(obj: Record<string, unknown>, path: string): unknown {
-  return path
-    .split(".")
-    .reduce<unknown>(
-      (acc, key) =>
-        acc && typeof acc === "object"
-          ? (acc as Record<string, unknown>)[key]
-          : undefined,
-      obj,
-    )
-}
-
 function escapeText(value: string): string {
   return value.replace(/\n/g, " ")
 }
@@ -264,18 +174,6 @@ function propsToDefinitionList(props: SimplifiedProp[]): string {
     .join("\n")
 }
 
-function themeDataToJson(data: unknown, cssPropertyName?: string): string {
-  if (!data || typeof data !== "object") {
-    return ""
-  }
-
-  if (cssPropertyName) {
-    return JSON.stringify({cssProperty: cssPropertyName, data}, null, 2)
-  }
-
-  return JSON.stringify(data, null, 2)
-}
-
 /**
  * Generator class that encapsulates all knowledge generation logic with shared
  * config.
@@ -283,9 +181,11 @@ function themeDataToJson(data: unknown, cssPropertyName?: string): string {
 class KnowledgeGenerator {
   private readonly config: WebUiKnowledgeConfig
   private docProps: DocProps | null = null
+  private propFormatter: PropFormatter
 
   constructor(config: WebUiKnowledgeConfig) {
     this.config = config
+    this.propFormatter = new PropFormatter(config)
   }
 
   async run(): Promise<KnowledgePageData[]> {
@@ -299,7 +199,7 @@ class KnowledgeGenerator {
     }
 
     const [docProps, pages] = await Promise.all([
-      this.loadDocProps(),
+      this.propFormatter.loadDocProps(),
       this.scanPages(),
     ])
 
@@ -343,38 +243,6 @@ class KnowledgeGenerator {
     }
 
     return pages
-  }
-
-  private async loadDocProps(): Promise<DocProps | null> {
-    const resolvedDocPropsPath = this.config.docPropsPath
-      ? (await exists(this.config.docPropsPath))
-        ? this.config.docPropsPath
-        : resolve(process.cwd(), this.config.docPropsPath)
-      : join(dirname(this.config.routeDir), "doc-props.json")
-
-    if (!(await exists(resolvedDocPropsPath))) {
-      if (this.config.verbose) {
-        console.log(`Doc props file not found at: ${resolvedDocPropsPath}`)
-      }
-      return null
-    }
-
-    try {
-      const content = await readFile(resolvedDocPropsPath, "utf-8")
-      const docProps = JSON.parse(content) as DocProps
-      if (this.config.verbose) {
-        console.log(`Loaded doc props from: ${resolvedDocPropsPath}`)
-        console.log(
-          `Found ${Object.keys(docProps.props).length} component types`,
-        )
-      }
-      return docProps
-    } catch (error) {
-      if (this.config.verbose) {
-        console.log("Error loading doc props", error)
-      }
-      return null
-    }
   }
 
   private async scanPages(): Promise<KnowledgePageData[]> {
@@ -495,242 +363,6 @@ class KnowledgeGenerator {
     return modules
   }
 
-  private extractProps(
-    props: ComponentProps,
-    isPartial: boolean,
-  ): SimplifiedProp[] {
-    const propsInfo: SimplifiedProp[] = []
-
-    if (props.props?.length) {
-      propsInfo.push(
-        ...props.props.map((prop) => this.convertPropInfo(prop, isPartial)),
-      )
-    }
-    if (props.input?.length) {
-      propsInfo.push(
-        ...props.input.map((prop) =>
-          this.convertPropInfo(prop, isPartial, "input"),
-        ),
-      )
-    }
-    if (props.output?.length) {
-      propsInfo.push(
-        ...props.output.map((prop) =>
-          this.convertPropInfo(prop, isPartial, "output"),
-        ),
-      )
-    }
-
-    return propsInfo
-  }
-
-  private formatComment(comment: QuiComment | null): string {
-    if (!comment) {
-      return ""
-    }
-
-    const parts: string[] = []
-
-    if (comment.summary && comment.summary.length > 0) {
-      const summaryText = this.formatCommentParts(comment.summary)
-      if (summaryText.trim()) {
-        parts.push(summaryText.trim())
-      }
-    }
-
-    if (comment.blockTags && comment.blockTags.length > 0) {
-      for (const blockTag of comment.blockTags) {
-        const tagContent = this.formatCommentParts(blockTag.content)
-        if (tagContent.trim()) {
-          const tagName = blockTag.tag.replace("@", "")
-
-          if (tagName === "default" || tagName === "defaultValue") {
-            continue
-          }
-
-          if (tagName === "example") {
-            parts.push(`**Example:**\n\`\`\`\n${tagContent.trim()}\n\`\`\``)
-          } else {
-            parts.push(`**${tagName}:** ${tagContent.trim()}`)
-          }
-        }
-      }
-    }
-
-    return parts.join("\n\n")
-  }
-
-  private formatCommentParts(parts: QuiCommentDisplayPart[]): string {
-    return parts
-      .map((part) => {
-        switch (part.kind) {
-          case "text":
-            return part.text
-          case "code":
-            const codeText = part.text
-              .replace(/```\w*\n?/g, "") // Remove opening code blocks with optional language
-              .replace(/\n?```/g, "") // Remove closing code blocks
-              .trim()
-
-            if (codeText.includes("\n")) {
-              return `\`\`\`\n${codeText}\n\`\`\``
-            } else {
-              return codeText
-            }
-          default:
-            // render link text only, but remove certain text altogether
-            if (
-              this.config.outputMode === "per-page" &&
-              "tag" in part &&
-              part.tag === "@link" &&
-              typeof part.target === "string"
-            ) {
-              if (part.text === "Learn more") {
-                return ""
-              }
-            }
-            return part.text
-        }
-      })
-      .join("")
-      .replace(/\n/g, " ")
-      .replace(/\s+/g, " ")
-      .trim()
-  }
-
-  private convertPropInfo(
-    propInfo: PropInfo,
-    isPartial: boolean,
-    propType: "input" | "output" | undefined = undefined,
-  ): SimplifiedProp {
-    return {
-      name: propInfo.name,
-      type: extractBestType(propInfo),
-      ...(propInfo.defaultValue && {
-        defaultValue: cleanDefaultValue(propInfo.defaultValue),
-      }),
-      description: this.formatComment(propInfo.comment || null),
-      propType,
-      required: extractRequired(propInfo, isPartial) || undefined,
-    }
-  }
-
-  /**
-   * Creates a remark plugin that replaces theme JSX elements with
-   * markdown tables containing theme data.
-   */
-  private async replaceThemeNodes(): Promise<Plugin> {
-    let themes: any | null = null
-    try {
-      // may not be available since this is an optional dependency
-      themes = await import("@qualcomm-ui/tailwind-plugin/theme")
-    } catch {
-      return () => {}
-    }
-
-    const handlers: Record<string, (node: MdxJsxFlowElement) => unknown> = {
-      ColorTable: (node) => {
-        const path = this.getAttrExpression(node, "data")
-        return path && getPath(themes, path)
-      },
-      FontTable: (node) => {
-        const path = this.getAttrExpression(node, "data")
-        return path && getPath(themes, path)
-      },
-      SpacingTable: (node) => {
-        const path = this.getAttrExpression(node, "data")
-        return path && getPath(themes, path)
-      },
-      ThemePropertyTable: (node) => {
-        const path = this.getAttrExpression(node, "data")
-        const property = this.getAttrExpression(node, "cssProperty")
-        const data = path && getPath(themes, path)
-        return path && property ? {cssPropertyName: property, data} : undefined
-      },
-    }
-
-    return () => (tree, _file, done) => {
-      visit(tree, "mdxJsxFlowElement", (node: MdxJsxFlowElement) => {
-        const handler = node.name && handlers[node.name]
-        if (!handler) {
-          return
-        }
-
-        const data = handler(node)
-        if (!data) {
-          console.warn(`No theme data for ${node.name}`)
-          return
-        }
-
-        let markdownTable: string
-        if (
-          typeof data === "object" &&
-          data !== null &&
-          "cssPropertyName" in data &&
-          "data" in data
-        ) {
-          const {cssPropertyName, data: themeData} = data as {
-            cssPropertyName: string
-            data: unknown
-          }
-          markdownTable = themeDataToJson(themeData, cssPropertyName)
-        } else {
-          markdownTable = themeDataToJson(data)
-        }
-
-        if (!markdownTable) {
-          return
-        }
-
-        Object.assign(node, {
-          lang: "json",
-          meta: null,
-          type: "code",
-          value: markdownTable,
-        })
-      })
-      done()
-    }
-  }
-
-  private getAttrExpression(
-    node: MdxJsxFlowElement,
-    name: string,
-  ): string | null {
-    const attr = node.attributes?.find(
-      (a): a is MdxJsxAttribute =>
-        a.type === "mdxJsxAttribute" && a.name === name,
-    )
-    if (!attr?.value) {
-      return null
-    }
-    if (typeof attr.value === "string") {
-      return attr.value
-    } else if (typeof attr.value === "object" && "value" in attr.value) {
-      return attr.value.value
-    }
-    return null
-  }
-
-  /**
-   * Creates a remark plugin that transforms relative URLs to absolute URLs.
-   */
-  private transformRelativeUrls(pageUrl?: string): Plugin {
-    const baseUrl = this.config.baseUrl
-    return () => (tree) => {
-      if (!baseUrl || this.config.outputMode !== "per-page") {
-        return
-      }
-      visit(tree, "link", (node: Link) => {
-        if (node.url.startsWith("/")) {
-          node.url = `${baseUrl}${node.url}`
-        } else if (node.url.startsWith("./#") && pageUrl) {
-          node.url = `${pageUrl}${node.url.slice(2)}`
-        }
-      })
-    }
-  }
-
   /**
    * Creates a remark plugin that replaces TypeDocProps JSX elements with
    * markdown tables containing component prop documentation.
@@ -780,7 +412,10 @@ class KnowledgeGenerator {
             }
             return
           }
-          const propsDoc = this.extractProps(componentProps, Boolean(isPartial))
+          const propsDoc = this.propFormatter.extractProps(
+            componentProps,
+            Boolean(isPartial),
+          )
           if (this.config.verbose) {
             console.log(
               `  Replaced TypeDocProps ${propsName} with API documentation`,
@@ -1003,6 +638,25 @@ class KnowledgeGenerator {
   }
 
   /**
+   * Creates a remark plugin that transforms relative URLs to absolute URLs.
+   */
+  private transformRelativeUrls(pageUrl?: string): Plugin {
+    const baseUrl = this.config.baseUrl
+    return () => (tree) => {
+      if (!baseUrl || this.config.outputMode !== "per-page") {
+        return
+      }
+      visit(tree, "link", (node: Link) => {
+        if (node.url.startsWith("/")) {
+          node.url = `${baseUrl}${node.url}`
+        } else if (node.url.startsWith("./#") && pageUrl) {
+          node.url = `${pageUrl}${node.url.slice(2)}`
+        }
+      })
+    }
+  }
+
+  /**
    * Processes MDX content by transforming JSX elements (TypeDocProps, demos)
    * into markdown, resolving relative links, and cleaning up formatting.
    */
@@ -1020,7 +674,7 @@ class KnowledgeGenerator {
       .use(remarkFrontmatter, ["yaml"])
       .use(this.replaceTypeDocProps())
       .use(this.replaceFrontmatterExpressions(frontmatter))
-      .use(await this.replaceThemeNodes())
+      .use(await replaceThemeNodes())
       .use(this.replaceDemos(demosFolder, demoFiles))
       .use(this.transformRelativeUrls(pageUrl))
       .use(remarkStringify)

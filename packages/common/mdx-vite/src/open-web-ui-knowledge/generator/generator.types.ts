@@ -1,0 +1,53 @@
+import type {QuiComment} from "@qualcomm-ui/typedoc-common"
+
+export interface ImportedModule {
+  content: string
+  path: string
+}
+
+export interface ComponentProps {
+  input?: PropInfo[]
+  name: string
+  output?: PropInfo[]
+  props?: PropInfo[]
+}
+
+export interface DocProps {
+  props: Record<string, ComponentProps>
+}
+
+export interface PropInfo {
+  comment?: QuiComment
+  defaultValue?: string
+  name: string
+  resolvedType?: {
+    baseType?: string
+    name?: string
+    prettyType?: string
+    required?: boolean
+    type?: string
+  }
+  type: string
+}
+
+export interface SimplifiedProp {
+  defaultValue?: string
+  description: string
+  name: string
+  propType?: "input" | "output" | undefined
+  required: boolean | undefined
+  type: string
+}
+
+export interface ProcessedPage {
+  content: string
+  demoFiles: string[]
+  frontmatter: Record<string, string>
+  title: string
+  url: string | undefined
+}
+
+export interface MdxFlowExpression {
+  type: "mdxFlowExpression"
+  value: string
+}
