@@ -36,11 +36,9 @@ import {loadEnvironmentConfigs} from "../load-config-from-env"
 import type {CliConfig, WebUiKnowledgeConfig} from "../types"
 
 import type {
-  DocProps,
   ImportedModule,
   MdxFlowExpression,
   ProcessedPage,
-  SimplifiedProp,
 } from "./generator.types"
 import {PropFormatter} from "./props"
 import {replaceThemeNodes} from "./theme-utils"
@@ -143,44 +141,12 @@ const replaceNpmInstallTabs: Plugin = () => {
   }
 }
 
-function escapeText(value: string): string {
-  return value.replace(/\n/g, " ")
-}
-
-function propsToDefinitionList(props: SimplifiedProp[]): string {
-  if (props.length === 0) {
-    return ""
-  }
-
-  return props
-    .map((prop) => {
-      const parts = [`- **${prop.name}** (\`${escapeText(prop.type)}\``]
-
-      if (prop.defaultValue) {
-        parts.push(`, default: \`${escapeText(prop.defaultValue)}\``)
-      }
-      if (prop.required) {
-        parts.push(", required")
-      }
-
-      parts.push(")")
-
-      if (prop.description) {
-        parts.push(` - ${escapeText(prop.description)}`)
-      }
-
-      return parts.join("")
-    })
-    .join("\n")
-}
-
 /**
  * Generator class that encapsulates all knowledge generation logic with shared
  * config.
  */
 class KnowledgeGenerator {
   private readonly config: WebUiKnowledgeConfig
-  private docProps: DocProps | null = null
   private propFormatter: PropFormatter
 
   constructor(config: WebUiKnowledgeConfig) {
@@ -198,12 +164,10 @@ class KnowledgeGenerator {
       }
     }
 
-    const [docProps, pages] = await Promise.all([
-      this.propFormatter.loadDocProps(),
+    const [pages] = await Promise.all([
       this.scanPages(),
+      this.propFormatter.loadDocProps(),
     ])
-
-    this.docProps = docProps
 
     if (pages.length === 0) {
       console.log("No pages found.")
@@ -361,104 +325,6 @@ class KnowledgeGenerator {
       }
     }
     return modules
-  }
-
-  /**
-   * Creates a remark plugin that replaces TypeDocProps JSX elements with
-   * markdown tables containing component prop documentation.
-   */
-  private replaceTypeDocProps(): Plugin {
-    return () => (tree, _file, done) => {
-      visit(
-        tree,
-        "mdxJsxFlowElement",
-        (
-          node: MdxJsxFlowElement,
-          index: number | undefined,
-          parent: Parent | undefined,
-        ) => {
-          if (node?.name !== "TypeDocProps") {
-            return
-          }
-          const nameAttr = node.attributes?.find(
-            (attr): attr is MdxJsxAttribute =>
-              attr.type === "mdxJsxAttribute" && attr.name === "name",
-          )
-          const isPartial = node.attributes?.some(
-            (attr): attr is MdxJsxAttribute =>
-              attr.type === "mdxJsxAttribute" && attr.name === "partial",
-          )
-          if (!this.docProps || !nameAttr) {
-            if (parent && index !== undefined) {
-              parent.children.splice(index, 1)
-            }
-            return
-          }
-          const propsNames = extractNamesFromAttribute(nameAttr)
-          if (propsNames.length === 0) {
-            if (parent && index !== undefined) {
-              parent.children.splice(index, 1)
-            }
-            return
-          }
-          const propsName = propsNames[0]
-          const componentProps = this.docProps.props[propsName]
-          if (!componentProps) {
-            if (this.config.verbose) {
-              console.log(`  TypeDocProps not found: ${propsName}`)
-            }
-            if (parent && index !== undefined) {
-              parent.children.splice(index, 1)
-            }
-            return
-          }
-          const propsDoc = this.propFormatter.extractProps(
-            componentProps,
-            Boolean(isPartial),
-          )
-          if (this.config.verbose) {
-            console.log(
-              `  Replaced TypeDocProps ${propsName} with API documentation`,
-            )
-          }
-
-          const regularProps = propsDoc.filter((p) => p.propType === undefined)
-          const inputs = propsDoc.filter((p) => p.propType === "input")
-          const outputs = propsDoc.filter((p) => p.propType === "output")
-
-          const sections: string[] = []
-
-          if (regularProps.length > 0) {
-            sections.push(propsToDefinitionList(regularProps))
-          }
-
-          if (inputs.length > 0) {
-            sections.push(`**Inputs**\n\n${propsToDefinitionList(inputs)}`)
-          }
-
-          if (outputs.length > 0) {
-            sections.push(`**Outputs**\n\n${propsToDefinitionList(outputs)}`)
-          }
-
-          const markdownContent = sections.join("\n\n")
-
-          if (!markdownContent) {
-            if (parent && index !== undefined) {
-              parent.children.splice(index, 1)
-            }
-            return
-          }
-
-          Object.assign(node, {
-            lang: null,
-            meta: null,
-            type: "code",
-            value: markdownContent,
-          })
-        },
-      )
-      done()
-    }
   }
 
   /**
@@ -672,7 +538,7 @@ class KnowledgeGenerator {
       .use(remarkParse)
       .use(remarkMdx)
       .use(remarkFrontmatter, ["yaml"])
-      .use(this.replaceTypeDocProps())
+      .use(this.propFormatter.replaceTypeDocProps())
       .use(this.replaceFrontmatterExpressions(frontmatter))
       .use(await replaceThemeNodes())
       .use(this.replaceDemos(demosFolder, demoFiles))

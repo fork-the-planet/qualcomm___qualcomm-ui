@@ -1,11 +1,16 @@
+import type {Parent} from "mdast"
+import type {MdxJsxAttribute, MdxJsxFlowElement} from "mdast-util-mdx-jsx"
 import {readFile} from "node:fs/promises"
 import {dirname, join, resolve} from "node:path"
+import type {Plugin} from "unified"
+import {visit} from "unist-util-visit"
 
 import type {
   QuiComment,
   QuiCommentDisplayPart,
 } from "@qualcomm-ui/typedoc-common"
 
+import {extractNamesFromAttribute} from "../../docs-plugin/internal/services/mdx-utils"
 import type {WebUiKnowledgeConfig} from "../types"
 
 import type {
@@ -34,13 +39,49 @@ function cleanDefaultValue(defaultValue: string): string {
   return defaultValue.replace(/^\n+/, "").replace(/\n+$/, "").trim()
 }
 
+function escapeText(value: string): string {
+  return value.replace(/\n/g, " ")
+}
+
+function propsToDefinitionList(props: SimplifiedProp[]): string {
+  if (props.length === 0) {
+    return ""
+  }
+
+  return props
+    .map((prop) => {
+      const parts = [`- **${prop.name}** (\`${escapeText(prop.type)}\``]
+
+      if (prop.defaultValue) {
+        parts.push(`, default: \`${escapeText(prop.defaultValue)}\``)
+      }
+      if (prop.required) {
+        parts.push(", required")
+      }
+
+      parts.push(")")
+
+      if (prop.description) {
+        parts.push(` - ${escapeText(prop.description)}`)
+      }
+
+      return parts.join("")
+    })
+    .join("\n")
+}
+
 export class PropFormatter {
   private readonly config: WebUiKnowledgeConfig
+  private docProps: DocProps | null = null
+
   constructor(config: WebUiKnowledgeConfig) {
     this.config = config
   }
 
   async loadDocProps(): Promise<DocProps | null> {
+    if (this.docProps) {
+      return this.docProps
+    }
     const resolvedDocPropsPath = this.config.docPropsPath
       ? (await exists(this.config.docPropsPath))
         ? this.config.docPropsPath
@@ -186,6 +227,101 @@ export class PropFormatter {
       description: this.formatComment(propInfo.comment || null),
       propType,
       required: extractRequired(propInfo, isPartial) || undefined,
+    }
+  }
+
+  /**
+   * Creates a remark plugin that replaces TypeDocProps JSX elements with
+   * Markdown tables containing component prop documentation.
+   */
+  replaceTypeDocProps(): Plugin {
+    return () => (tree, _file, done) => {
+      visit(
+        tree,
+        "mdxJsxFlowElement",
+        (
+          node: MdxJsxFlowElement,
+          index: number | undefined,
+          parent: Parent | undefined,
+        ) => {
+          if (node?.name !== "TypeDocProps") {
+            return
+          }
+          const nameAttr = node.attributes?.find(
+            (attr): attr is MdxJsxAttribute =>
+              attr.type === "mdxJsxAttribute" && attr.name === "name",
+          )
+          const isPartial = node.attributes?.some(
+            (attr): attr is MdxJsxAttribute =>
+              attr.type === "mdxJsxAttribute" && attr.name === "partial",
+          )
+          if (!this.docProps || !nameAttr) {
+            if (parent && index !== undefined) {
+              parent.children.splice(index, 1)
+            }
+            return
+          }
+          const propsNames = extractNamesFromAttribute(nameAttr)
+          if (propsNames.length === 0) {
+            if (parent && index !== undefined) {
+              parent.children.splice(index, 1)
+            }
+            return
+          }
+          const propsName = propsNames[0]
+          const componentProps = this.docProps.props[propsName]
+          if (!componentProps) {
+            if (this.config.verbose) {
+              console.log(`  TypeDocProps not found: ${propsName}`)
+            }
+            if (parent && index !== undefined) {
+              parent.children.splice(index, 1)
+            }
+            return
+          }
+          const propsDoc = this.extractProps(componentProps, Boolean(isPartial))
+          if (this.config.verbose) {
+            console.log(
+              `  Replaced TypeDocProps ${propsName} with API documentation`,
+            )
+          }
+
+          const regularProps = propsDoc.filter((p) => p.propType === undefined)
+          const inputs = propsDoc.filter((p) => p.propType === "input")
+          const outputs = propsDoc.filter((p) => p.propType === "output")
+
+          const sections: string[] = []
+
+          if (regularProps.length > 0) {
+            sections.push(propsToDefinitionList(regularProps))
+          }
+
+          if (inputs.length > 0) {
+            sections.push(`**Inputs**\n\n${propsToDefinitionList(inputs)}`)
+          }
+
+          if (outputs.length > 0) {
+            sections.push(`**Outputs**\n\n${propsToDefinitionList(outputs)}`)
+          }
+
+          const markdownContent = sections.join("\n\n")
+
+          if (!markdownContent) {
+            if (parent && index !== undefined) {
+              parent.children.splice(index, 1)
+            }
+            return
+          }
+
+          Object.assign(node, {
+            lang: null,
+            meta: null,
+            type: "code",
+            value: markdownContent,
+          })
+        },
+      )
+      done()
     }
   }
 }
