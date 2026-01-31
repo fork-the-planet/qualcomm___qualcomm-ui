@@ -151,7 +151,7 @@ export class PropFormatter {
       .trim()
   }
 
-  formatComment(comment: QuiComment | null): string {
+  private formatComment(comment: QuiComment | null): string {
     if (!comment) {
       return ""
     }

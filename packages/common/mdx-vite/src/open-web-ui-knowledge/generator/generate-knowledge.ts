@@ -30,7 +30,6 @@ import {
   getPathSegmentsFromFileName,
   remarkRemoveJsx,
 } from "../../docs-plugin/internal"
-import {extractNamesFromAttribute} from "../../docs-plugin/internal/services/mdx-utils"
 import {loadEnv} from "../common"
 import {loadEnvironmentConfigs} from "../load-config-from-env"
 import type {CliConfig, WebUiKnowledgeConfig} from "../types"
@@ -40,8 +39,9 @@ import type {
   MdxFlowExpression,
   ProcessedPage,
 } from "./generator.types"
-import {PropFormatter} from "./props"
-import {replaceThemeNodes} from "./theme-utils"
+import {replaceNpmInstallTabs} from "./npm-install-tabs-plugin"
+import {PropFormatter} from "./props-plugin"
+import {replaceThemeNodes} from "./qds-theme-plugin"
 import {exists} from "./utils"
 
 // Pure utility functions (no config dependency)
@@ -117,28 +117,6 @@ function extractMetadata(
   metadata: Record<string, string> | undefined,
 ): [string, string][] {
   return Object.entries(metadata ?? {})
-}
-
-const replaceNpmInstallTabs: Plugin = () => {
-  return (tree, _file, done) => {
-    visit(tree, "mdxJsxFlowElement", (node: MdxJsxFlowElement) => {
-      if (node?.name === "NpmInstallTabs") {
-        const packages = node.attributes?.find(
-          (attr): attr is MdxJsxAttribute =>
-            attr.type === "mdxJsxAttribute" && attr.name === "packages",
-        )
-        const packageNames = packages ? extractNamesFromAttribute(packages) : []
-
-        Object.assign(node, {
-          lang: "shell",
-          meta: null,
-          type: "code",
-          value: `npm install ${packageNames.join(" ")}`,
-        })
-      }
-    })
-    done()
-  }
 }
 
 /**
