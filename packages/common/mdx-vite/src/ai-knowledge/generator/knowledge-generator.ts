@@ -36,7 +36,7 @@ import type {
   MdxFlowExpression,
   ProcessedPage,
 } from "./generator.types"
-import {replaceNpmInstallTabs} from "./npm-install-tabs-plugin"
+import {formatNpmInstallTabs} from "./npm-install-tabs-plugin"
 import {PropFormatter} from "./props-plugin"
 import {formatThemeNodes} from "./qds-theme-plugin"
 import {exists} from "./utils"
@@ -497,10 +497,10 @@ export class KnowledgeGenerator {
     }
   }
 
-  private applyPlugins(processor: any) {
-    if (this.config.plugins) {
-      this.config.plugins.forEach((plugin) => {
-        processor.use(plugin)
+  private applyPlugins(opts: KnowledgePageData, processor: any) {
+    if (this.config.mdxPlugins) {
+      this.config.mdxPlugins.forEach((plugin) => {
+        processor.use(plugin(opts))
       })
     }
   }
@@ -511,8 +511,7 @@ export class KnowledgeGenerator {
    */
   private async processMdxContent(
     mdxContent: string,
-    pageUrl: string | undefined,
-    demosFolder: string | undefined,
+    pageInfo: KnowledgePageData,
     frontmatter: Record<string, any>,
   ): Promise<{content: string; demoFiles: string[]}> {
     const demoFiles: string[] = []
@@ -524,10 +523,10 @@ export class KnowledgeGenerator {
       .use(this.propFormatter.formatTypeDocProps())
       .use(this.formatFrontmatterExpressions(frontmatter))
       .use(await formatThemeNodes())
-      .use(this.formatDemos(demosFolder, demoFiles))
-      .use(this.transformRelativeUrls(pageUrl))
+      .use(this.formatDemos(pageInfo.demosFolder, demoFiles))
+      .use(this.transformRelativeUrls(pageInfo.url))
 
-    this.applyPlugins(processor)
+    this.applyPlugins(pageInfo, processor)
 
     processor.use(remarkStringify)
 
@@ -548,19 +547,14 @@ export class KnowledgeGenerator {
       const processor = unified()
         .use(remarkParse)
         .use(remarkMdx)
-        .use(replaceNpmInstallTabs)
+        .use(formatNpmInstallTabs)
         .use(remarkFrontmatter, ["yaml"])
         .use(remarkParseFrontmatter)
         .use(remarkStringify)
       const parsed = await processor.process(mdxContent)
       const frontmatter = (parsed.data as any)?.frontmatter || {}
       const {content: processedContent, demoFiles} =
-        await this.processMdxContent(
-          String(parsed),
-          pageInfo.url,
-          pageInfo.demosFolder,
-          frontmatter,
-        )
+        await this.processMdxContent(String(parsed), pageInfo, frontmatter)
       const removeJsxProcessor = unified()
         .use(remarkParse)
         .use(remarkMdx)

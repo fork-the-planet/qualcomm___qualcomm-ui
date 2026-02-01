@@ -4,7 +4,7 @@ import {visit} from "unist-util-visit"
 
 import {extractNamesFromAttribute} from "../../docs-plugin/internal/services/mdx-utils"
 
-export const replaceNpmInstallTabs: Plugin = () => {
+export const formatNpmInstallTabs: Plugin = () => {
   return (tree, _file, done) => {
     visit(tree, "mdxJsxFlowElement", (node: MdxJsxFlowElement) => {
       if (node?.name === "NpmInstallTabs") {
