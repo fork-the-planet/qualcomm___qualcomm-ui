@@ -1,16 +1,29 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {
-  KnowledgePageData,
-  PageFrontmatter,
-  TocHeading,
-} from "@qualcomm-ui/mdx-common"
+import type {PageFrontmatter, TocHeading} from "@qualcomm-ui/mdx-common"
 import type {QuiPropTypes} from "@qualcomm-ui/typedoc-common"
 
 export type RoutingStrategy =
   | "vite-generouted"
   | ((filePath: string) => string[])
+
+export interface KnowledgeFrontmatterConfig {
+  /**
+   * Extra key-value pairs to add to the output frontmatter.
+   * Applied after include/exclude filtering.
+   */
+  extraFields?: Record<string, string | string[]>
+  /**
+   * Glob patterns for frontmatter fields to exclude (applied after include).
+   */
+  exclude?: string[]
+  /**
+   * Glob patterns for frontmatter fields to include in output.
+   * Use ["*"] to include all fields.
+   */
+  include?: string[]
+}
 
 /**
  * Controls how page timestamp metadata is populated from git history.
@@ -181,16 +194,10 @@ export interface KnowledgeIntegrationConfig {
   extraFiles?: KnowledgeExtraFile[]
 
   /**
-   * List of frontmatter fields to include in the generated Markdown output. These
-   * will be copied from each page's frontmatter, if present. Supply as a function
-   * and return the modified frontmatter object, which will be included instead.
+   * Configuration for which frontmatter fields to include in the generated
+   * Markdown output. Uses glob patterns for flexible field selection.
    */
-  frontmatterFields?:
-    | string[]
-    | ((
-        frontmatter: Record<string, string>,
-        page: KnowledgePageData,
-      ) => Record<string, string | undefined>)
+  frontmatter?: KnowledgeFrontmatterConfig
 
   /**
    * Metadata key-value pairs to include in per-page output.
@@ -272,6 +279,12 @@ export interface KnowledgeExportsConfig {
    * Extra files to include in exports. Overrides the parent extraFiles config.
    */
   extraFiles?: KnowledgeExtraFile[]
+
+  /**
+   * Configuration for which frontmatter fields to include in the generated
+   * Markdown output. Overrides the parent frontmatter config.
+   */
+  frontmatter?: KnowledgeFrontmatterConfig
 
   /**
    * Generate bulk.zip containing all markdown files.

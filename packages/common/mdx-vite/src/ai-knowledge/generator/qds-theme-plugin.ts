@@ -49,7 +49,7 @@ function getAttrExpression(
  * Creates a remark plugin that replaces theme JSX elements with
  * markdown tables containing theme data from.
  */
-export async function replaceThemeNodes(): Promise<Plugin> {
+export async function formatThemeNodes(): Promise<Plugin> {
   let themes: any | null = null
   try {
     // may not be available since this is an optional dependency

@@ -254,6 +254,7 @@ class PluginState {
       docPropsPath: this.docPropsFilePath || undefined,
       exclude: exportsConfig.exclude ?? globalConfig.exclude,
       extraFiles: exportsConfig.extraFiles ?? globalConfig.extraFiles,
+      frontmatter: exportsConfig.frontmatter ?? globalConfig.frontmatter,
       generateBulkZip: exportsConfig.generateBulkZip ?? true,
       generateManifest: exportsConfig.generateManifest ?? true,
       manifestOutputPath,

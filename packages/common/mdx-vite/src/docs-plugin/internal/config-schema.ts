@@ -57,10 +57,21 @@ const knowledgeExtraFileSchema = implement<KnowledgeExtraFile>().with({
   title: z.string().optional(),
 })
 
+const frontmatterConfigSchema = z
+  .object({
+    extraFields: z
+      .record(z.string(), z.union([z.string(), z.array(z.string())]))
+      .optional(),
+    exclude: z.array(z.string()).optional(),
+    include: z.array(z.string()).optional(),
+  })
+  .optional()
+
 const knowledgeExportsSchema = implement<KnowledgeExportsConfig>().with({
   enabled: z.boolean().optional(),
   exclude: z.array(z.string()).optional(),
   extraFiles: z.array(knowledgeExtraFileSchema).optional(),
+  frontmatter: frontmatterConfigSchema,
   generateBulkZip: z.boolean().optional(),
   generateManifest: z.boolean().optional(),
   manifestPath: z.string().optional(),
@@ -76,7 +87,7 @@ const knowledgeIntegrationSchema = implement<KnowledgeIntegrationConfig>().with(
     exclude: z.array(z.string()).optional(),
     exports: knowledgeExportsSchema.optional(),
     extraFiles: z.array(knowledgeExtraFileSchema).optional(),
-    frontmatterFields: z.union([z.array(z.string()), z.any()]).optional(),
+    frontmatter: frontmatterConfigSchema,
     metadata: z.record(z.string(), z.string()).optional(),
     name: z.string().optional(),
     outputMode: z
@@ -94,7 +105,7 @@ const knowledgeEnvironmentSchema = implement<KnowledgeEnvironment>().with({
   exclude: z.array(z.string()).optional(),
   exports: knowledgeExportsSchema.optional(),
   extraFiles: z.array(knowledgeExtraFileSchema).optional(),
-  frontmatterFields: z.array(z.string()).optional(),
+  frontmatter: frontmatterConfigSchema,
   id: z.string(),
   metadata: z.record(z.string(), z.string()).optional(),
   name: z.string().optional(),

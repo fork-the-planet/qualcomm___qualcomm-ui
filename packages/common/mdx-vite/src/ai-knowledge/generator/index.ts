@@ -1,1 +1,1 @@
-export * from "./generate-knowledge"
+export * from "./command"

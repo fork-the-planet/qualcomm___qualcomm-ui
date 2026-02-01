@@ -4,12 +4,12 @@
 import {existsSync} from "node:fs"
 import {join, resolve} from "node:path"
 
-import {ConfigLoader} from "../docs-plugin/internal"
 import type {
   KnowledgeEnvironment,
   KnowledgeIntegrationConfig,
   OpenWebUiIntegration,
-} from "../docs-plugin/types"
+} from "../docs-plugin"
+import {ConfigLoader} from "../docs-plugin/internal"
 
 import type {CliConfig, WebUiKnowledgeConfig} from "./types"
 
@@ -131,7 +131,13 @@ export function loadEnvironmentConfigs(
     throw new Error(`Route directory ${routeDir} does not exist`)
   }
 
-  if (!environments || environments.length === 0) {
+  // Use legacy single-config mode if no environments defined OR if CLI provides
+  // an explicit output path (e.g., aggregated mode to a single file)
+  if (
+    !environments ||
+    environments.length === 0 ||
+    options.cliOptions?.outputPath
+  ) {
     const legacyConfig = loadKnowledgeConfigFromEnv(
       (options.cliOptions as CliConfig) ?? {outputMode: "per-page"},
     )

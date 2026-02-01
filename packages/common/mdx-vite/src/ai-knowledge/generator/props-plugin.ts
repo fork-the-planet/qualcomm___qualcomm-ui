@@ -104,6 +104,7 @@ export class PropFormatter {
           `Found ${Object.keys(docProps.props).length} component types`,
         )
       }
+      this.docProps = docProps
       return docProps
     } catch (error) {
       if (this.config.verbose) {
@@ -234,7 +235,7 @@ export class PropFormatter {
    * Creates a remark plugin that replaces TypeDocProps JSX elements with
    * Markdown tables containing component prop documentation.
    */
-  replaceTypeDocProps(): Plugin {
+  formatTypeDocProps(): Plugin {
     return () => (tree, _file, done) => {
       visit(
         tree,

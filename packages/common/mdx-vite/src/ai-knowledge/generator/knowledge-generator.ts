@@ -1,7 +1,6 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {program} from "@commander-js/extra-typings"
 import AdmZip from "adm-zip"
 import chalk from "chalk"
 import type {Link, Parent} from "mdast"
@@ -30,9 +29,7 @@ import {
   getPathSegmentsFromFileName,
   remarkRemoveJsx,
 } from "../../docs-plugin/internal"
-import {loadEnv} from "../common"
-import {loadEnvironmentConfigs} from "../load-config-from-env"
-import type {CliConfig, WebUiKnowledgeConfig} from "../types"
+import type {WebUiKnowledgeConfig} from "../types"
 
 import type {
   ImportedModule,
@@ -41,7 +38,7 @@ import type {
 } from "./generator.types"
 import {replaceNpmInstallTabs} from "./npm-install-tabs-plugin"
 import {PropFormatter} from "./props-plugin"
-import {replaceThemeNodes} from "./qds-theme-plugin"
+import {formatThemeNodes} from "./qds-theme-plugin"
 import {exists} from "./utils"
 
 // Pure utility functions (no config dependency)
@@ -123,7 +120,7 @@ function extractMetadata(
  * Generator class that encapsulates all knowledge generation logic with shared
  * config.
  */
-class KnowledgeGenerator {
+export class KnowledgeGenerator {
   private readonly config: WebUiKnowledgeConfig
   private propFormatter: PropFormatter
 
@@ -309,7 +306,7 @@ class KnowledgeGenerator {
    * Creates a remark plugin that replaces demo JSX elements (QdsDemo, CodeDemo,
    * Demo) with code blocks containing the demo source code from the demos folder.
    */
-  private replaceDemos(
+  private formatDemos(
     demosFolder: string | undefined,
     demoFiles: string[],
   ): Plugin {
@@ -433,7 +430,7 @@ class KnowledgeGenerator {
     }
   }
 
-  private replaceFrontmatterExpressions(
+  private formatFrontmatterExpressions(
     frontmatter: Record<string, any>,
   ): Plugin {
     return () => (tree) => {
@@ -500,9 +497,17 @@ class KnowledgeGenerator {
     }
   }
 
+  private applyPlugins(processor: any) {
+    if (this.config.plugins) {
+      this.config.plugins.forEach((plugin) => {
+        processor.use(plugin)
+      })
+    }
+  }
+
   /**
    * Processes MDX content by transforming JSX elements (TypeDocProps, demos)
-   * into markdown, resolving relative links, and cleaning up formatting.
+   * into Markdown, resolving relative links, and cleaning up formatting.
    */
   private async processMdxContent(
     mdxContent: string,
@@ -516,12 +521,15 @@ class KnowledgeGenerator {
       .use(remarkParse)
       .use(remarkMdx)
       .use(remarkFrontmatter, ["yaml"])
-      .use(this.propFormatter.replaceTypeDocProps())
-      .use(this.replaceFrontmatterExpressions(frontmatter))
-      .use(await replaceThemeNodes())
-      .use(this.replaceDemos(demosFolder, demoFiles))
+      .use(this.propFormatter.formatTypeDocProps())
+      .use(this.formatFrontmatterExpressions(frontmatter))
+      .use(await formatThemeNodes())
+      .use(this.formatDemos(demosFolder, demoFiles))
       .use(this.transformRelativeUrls(pageUrl))
-      .use(remarkStringify)
+
+    this.applyPlugins(processor)
+
+    processor.use(remarkStringify)
 
     const processed = await processor.process(mdxContent)
     const processedContent = String(processed).replace(/\n\s*\n\s*\n/g, "\n\n")
@@ -563,7 +571,7 @@ class KnowledgeGenerator {
         await removeJsxProcessor.process(processedContent),
       )
       const contentWithoutFrontmatter = removedJsx
-        .replace(/^---[\s\S]*?---\n/, "")
+        .replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, "")
         .replace(/(^#{1,6} .*\\<[^>]+)>/gm, "$1\\>")
       const title = frontmatter.title || pageInfo.name
 
@@ -716,38 +724,51 @@ class KnowledgeGenerator {
         const page = pages[index]
         const lines: string[] = []
 
-        const frontmatterEntries: [string, string][] = []
+        const frontmatterEntries: [string, string | string[]][] = []
         if (page.url) {
           frontmatterEntries.push(["url", page.url])
         }
         for (const [key, value] of metadata) {
           frontmatterEntries.push([key, value])
         }
-        if (this.config.frontmatterFields) {
-          if (typeof this.config.frontmatterFields === "function") {
-            const transformed = this.config.frontmatterFields(
-              processedPage.frontmatter,
-              page,
+        if (this.config.frontmatter?.include?.length) {
+          const includePatterns = this.config.frontmatter.include
+          const excludePatterns = this.config.frontmatter.exclude ?? []
+
+          for (const [field, value] of Object.entries(
+            processedPage.frontmatter,
+          )) {
+            if (value === undefined) {
+              continue
+            }
+            const isIncluded = includePatterns.some((pattern) =>
+              minimatch(field, pattern),
             )
-            for (const [key, value] of Object.entries(transformed)) {
-              if (value !== undefined) {
-                frontmatterEntries.push([key, String(value)])
-              }
+            const isExcluded = excludePatterns.some((pattern) =>
+              minimatch(field, pattern),
+            )
+            if (isIncluded && !isExcluded) {
+              frontmatterEntries.push([field, String(value)])
             }
-          } else {
-            for (const field of this.config.frontmatterFields) {
-              const value = processedPage.frontmatter[field]
-              if (value !== undefined) {
-                frontmatterEntries.push([field, String(value)])
-              }
-            }
+          }
+        }
+
+        if (this.config.frontmatter?.extraFields) {
+          for (const [key, value] of Object.entries(
+            this.config.frontmatter.extraFields,
+          )) {
+            frontmatterEntries.push([key, value])
           }
         }
 
         if (frontmatterEntries.length > 0) {
           lines.push("---")
           for (const [key, value] of frontmatterEntries) {
-            lines.push(`${key}: ${value}`)
+            if (Array.isArray(value)) {
+              lines.push(`${key}: [${value.join(", ")}]`)
+            } else {
+              lines.push(`${key}: ${value}`)
+            }
           }
           lines.push("---")
           lines.push("")
@@ -908,75 +929,4 @@ class KnowledgeGenerator {
 
     zip.writeZip(zipPath)
   }
-}
-
-/**
- * Generates knowledge documentation from MDX files.
- * Returns an array of pages that were generated.
- */
-export async function generate(
-  config: WebUiKnowledgeConfig,
-): Promise<KnowledgePageData[]> {
-  const generator = new KnowledgeGenerator(config)
-  return generator.run()
-}
-
-export function addGenerateKnowledgeCommand() {
-  program
-    .description("Generate llms.txt from QUI Docs documentation")
-    .command("generate-llms-txt")
-    .option("-n, --name <name>", "Project name for llms.txt header")
-    .requiredOption("-m, --output-mode <outputMode>")
-    .option("-o, --outputPath <outputPath>", "Output file or directory.")
-    .option(
-      "-d, --description <description>",
-      "Project description for llms.txt",
-    )
-    .option("-v, --verbose", "Enable verbose logging", false)
-    .option(
-      "--exclude <patterns...>",
-      "Glob patterns to exclude (e.g., **/internal/**, guide/drafts/*)",
-      [],
-    )
-    .option("--base-url <url>", "Base URL for component documentation links")
-    .option("--metadata <pairs...>", "metadata key-value pairs")
-    .option("--clean", "Clean the output path before generating")
-    .option("--include-imports", "Include relative import source files", true)
-    .option(
-      "-e, --environment <environments>",
-      "Comma-separated list of environments to generate (default: all)",
-    )
-    .action(async (options) => {
-      loadEnv()
-
-      const cliOptions: CliConfig = {
-        ...options,
-        outputMode:
-          options.outputMode === "per-page" ? "per-page" : "aggregated",
-      }
-
-      const environmentFilter = options.environment
-        ?.split(",")
-        .map((e) => e.trim())
-        .filter(Boolean)
-
-      const configs = loadEnvironmentConfigs({
-        cliOptions,
-        environments: environmentFilter,
-      })
-
-      for (const config of configs) {
-        const envLabel = config.environmentName
-          ? `[${config.environmentName}] `
-          : ""
-        console.log(`${envLabel}Generating knowledge to ${config.outputPath}`)
-        await generate(config)
-      }
-
-      if (configs.length > 1) {
-        console.log(
-          `\nGenerated knowledge for ${configs.length} environment(s)`,
-        )
-      }
-    })
 }

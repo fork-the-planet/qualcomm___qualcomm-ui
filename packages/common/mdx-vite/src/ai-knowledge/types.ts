@@ -1,10 +1,12 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
+import type {Plugin} from "unified"
+
 import type {
   KnowledgeExtraFile,
   KnowledgeIntegrationConfig,
-} from "../docs-plugin/types"
+} from "../docs-plugin"
 
 export interface WebUiKnowledgeConfig extends KnowledgeIntegrationConfig {
   clean?: boolean
@@ -15,7 +17,7 @@ export interface WebUiKnowledgeConfig extends KnowledgeIntegrationConfig {
   environmentName?: string
   extraFiles?: KnowledgeExtraFile[]
   /**
-   * Generate bulk.zip containing all markdown files.
+   * Generate bulk.zip containing all Markdown files.
    *
    * @default true
    */
@@ -34,6 +36,11 @@ export interface WebUiKnowledgeConfig extends KnowledgeIntegrationConfig {
   manifestOutputPath?: string
   outputMode: "per-page" | "aggregated"
   outputPath: string
+  /**
+   * Array of plugins to apply to MDX files during processing. Can be used to
+   * replace JSX components with markdown-friendly data, add metadata, and more.
+   */
+  plugins?: Plugin[]
   routeDir: string
   verbose?: boolean
 }
