@@ -1,7 +1,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {mkdir, rm, writeFile} from "node:fs/promises"
+import {mkdir, rm} from "node:fs/promises"
 import {tmpdir} from "node:os"
 import {join} from "node:path"
 import {afterEach, beforeEach, describe, expect, test, vi} from "vitest"
@@ -333,7 +333,7 @@ describe("loadEnvironmentConfigs behavior", () => {
   })
 
   afterEach(async () => {
-    await rm(tempDir, {recursive: true, force: true})
+    await rm(tempDir, {force: true, recursive: true})
     vi.unstubAllEnvs()
   })
 
@@ -345,9 +345,7 @@ describe("loadEnvironmentConfigs behavior", () => {
     const cliOutputPath = "/cli/output.txt"
 
     const shouldUseLegacy =
-      !environments ||
-      environments.length === 0 ||
-      cliOutputPath !== undefined
+      !environments || environments.length === 0 || cliOutputPath !== undefined
 
     expect(shouldUseLegacy).toBe(true)
   })
@@ -357,9 +355,7 @@ describe("loadEnvironmentConfigs behavior", () => {
     const cliOutputPath = undefined
 
     const shouldUseLegacy =
-      !environments ||
-      environments.length === 0 ||
-      cliOutputPath !== undefined
+      !environments || environments.length === 0 || cliOutputPath !== undefined
 
     expect(shouldUseLegacy).toBe(true)
   })
@@ -371,9 +367,7 @@ describe("loadEnvironmentConfigs behavior", () => {
     const cliOutputPath = undefined
 
     const shouldUseLegacy =
-      !environments ||
-      environments.length === 0 ||
-      cliOutputPath !== undefined
+      !environments || environments.length === 0 || cliOutputPath !== undefined
 
     expect(shouldUseLegacy).toBe(false)
   })
