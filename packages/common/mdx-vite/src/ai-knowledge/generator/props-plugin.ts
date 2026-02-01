@@ -11,7 +11,7 @@ import type {
 } from "@qualcomm-ui/typedoc-common"
 
 import {extractNamesFromAttribute} from "../../docs-plugin/internal/services/mdx-utils"
-import type {WebUiKnowledgeConfig} from "../types"
+import type {AiKnowledgeConfig} from "../types"
 
 import type {
   ComponentProps,
@@ -71,10 +71,10 @@ function propsToDefinitionList(props: SimplifiedProp[]): string {
 }
 
 export class PropFormatter {
-  private readonly config: WebUiKnowledgeConfig
+  private readonly config: AiKnowledgeConfig
   private docProps: DocProps | null = null
 
-  constructor(config: WebUiKnowledgeConfig) {
+  constructor(config: AiKnowledgeConfig) {
     this.config = config
   }
 

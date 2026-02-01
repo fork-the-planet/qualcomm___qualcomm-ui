@@ -9,6 +9,9 @@ import {resolve} from "node:path"
 import {setTimeout} from "node:timers/promises"
 import ora from "ora"
 
+import {getConfigFromEnv, loadEnv, type SharedConfig} from "../common"
+import {loadOpenWebUiIntegrations} from "../load-config-from-env"
+
 import {
   type ApiConfig,
   type FileMetadataResponse,
@@ -17,14 +20,8 @@ import {
   KnowledgeApi,
   type KnowledgeFilesResponse,
 } from "./api"
-import {
-  getConfigFromEnv,
-  loadEnv,
-  resolveOpenWebUiIntegration,
-  type SharedConfig,
-} from "./common"
+import {resolveOpenWebUiIntegration} from "./common"
 import {KnowledgeCleaner} from "./knowledge-cleaner"
-import {loadOpenWebUiIntegrations} from "./load-config-from-env"
 
 interface Config extends SharedConfig {
   force?: boolean

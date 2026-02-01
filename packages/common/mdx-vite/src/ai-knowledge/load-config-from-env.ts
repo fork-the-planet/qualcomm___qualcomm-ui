@@ -11,7 +11,7 @@ import type {
 } from "../docs-plugin"
 import {ConfigLoader} from "../docs-plugin/internal"
 
-import type {CliConfig, WebUiKnowledgeConfig} from "./types"
+import type {AiKnowledgeConfig, CliConfig} from "./types"
 
 interface LoadEnvironmentConfigsOptions {
   /** CLI options that override config */
@@ -38,7 +38,7 @@ function parseCliMetadata(
 
 export function loadKnowledgeConfigFromEnv(
   options: CliConfig,
-): WebUiKnowledgeConfig {
+): AiKnowledgeConfig {
   const configLoader = new ConfigLoader({})
   const resolvedConfig = configLoader.loadConfig()
   const fileConfig = resolvedConfig.knowledge?.global
@@ -115,7 +115,7 @@ function mergeEnvironmentConfig(
  */
 export function loadEnvironmentConfigs(
   options: LoadEnvironmentConfigsOptions = {},
-): WebUiKnowledgeConfig[] {
+): AiKnowledgeConfig[] {
   const configLoader = new ConfigLoader({})
   const resolvedConfig = configLoader.loadConfig()
   const knowledgeConfig = resolvedConfig.knowledge

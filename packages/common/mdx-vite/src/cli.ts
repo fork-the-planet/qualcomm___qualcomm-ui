@@ -3,9 +3,9 @@
 
 import {program} from "@commander-js/extra-typings"
 
-import {addDownloadKnowledgeCommand} from "./ai-knowledge/download-knowledge"
 import {addGenerateKnowledgeCommand} from "./ai-knowledge/generator"
-import {addUploadKnowledgeCommand} from "./ai-knowledge/upload-knowledge"
+import {addDownloadKnowledgeCommand} from "./ai-knowledge/open-web-ui/download-knowledge"
+import {addUploadKnowledgeCommand} from "./ai-knowledge/open-web-ui/upload-knowledge"
 import {addGeneratePageMapCommand} from "./docs-plugin/generate-page-map"
 import {addGenerateLazyDemoMapCommand} from "./react-demo-plugin/generate-lazy-demo-map"
 

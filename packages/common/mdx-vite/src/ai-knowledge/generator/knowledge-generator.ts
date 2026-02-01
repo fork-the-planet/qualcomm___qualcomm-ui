@@ -29,7 +29,7 @@ import {
   getPathSegmentsFromFileName,
   remarkRemoveJsx,
 } from "../../docs-plugin/internal"
-import type {WebUiKnowledgeConfig} from "../types"
+import type {AiKnowledgeConfig} from "../types"
 
 import type {
   ImportedModule,
@@ -121,10 +121,10 @@ function extractMetadata(
  * config.
  */
 export class KnowledgeGenerator {
-  private readonly config: WebUiKnowledgeConfig
+  private readonly config: AiKnowledgeConfig
   private propFormatter: PropFormatter
 
-  constructor(config: WebUiKnowledgeConfig) {
+  constructor(config: AiKnowledgeConfig) {
     this.config = config
     this.propFormatter = new PropFormatter(config)
   }

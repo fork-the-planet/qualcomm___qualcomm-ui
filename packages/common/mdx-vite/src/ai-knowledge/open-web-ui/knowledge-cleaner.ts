@@ -1,8 +1,9 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
+import type {SharedConfig} from "../common"
+
 import {type ApiConfig, FilesApi, KnowledgeApi} from "./api"
-import type {SharedConfig} from "./common"
 
 export interface KnowledgeCleanerConfig extends SharedConfig {}
 

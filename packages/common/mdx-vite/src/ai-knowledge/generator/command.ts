@@ -4,7 +4,7 @@ import type {KnowledgePageData} from "@qualcomm-ui/mdx-common"
 
 import {loadEnv} from "../common"
 import {loadEnvironmentConfigs} from "../load-config-from-env"
-import type {CliConfig, WebUiKnowledgeConfig} from "../types"
+import type {AiKnowledgeConfig, CliConfig} from "../types"
 
 import {KnowledgeGenerator} from "./knowledge-generator"
 
@@ -13,7 +13,7 @@ import {KnowledgeGenerator} from "./knowledge-generator"
  * Returns an array of pages that were generated.
  */
 export async function generate(
-  config: WebUiKnowledgeConfig,
+  config: AiKnowledgeConfig,
 ): Promise<KnowledgePageData[]> {
   const generator = new KnowledgeGenerator(config)
   return generator.run()

@@ -10,14 +10,14 @@ export type RoutingStrategy =
 
 export interface KnowledgeFrontmatterConfig {
   /**
+   * Glob patterns for frontmatter fields to exclude (applied after include).
+   */
+  exclude?: string[]
+  /**
    * Extra key-value pairs to add to the output frontmatter.
    * Applied after include/exclude filtering.
    */
   extraFields?: Record<string, string | string[]>
-  /**
-   * Glob patterns for frontmatter fields to exclude (applied after include).
-   */
-  exclude?: string[]
   /**
    * Glob patterns for frontmatter fields to include in output.
    * Use ["*"] to include all fields.
@@ -245,7 +245,7 @@ export interface KnowledgeExtraFile {
   id: string
 
   /**
-   * Whether to process this file as MDX content, replacing relative URLs and
+   * Whether to process this file as MDX content, replacing relative URLs, and
    * applying other transformations as if the file were authored as mdx
    * documentation.
    */

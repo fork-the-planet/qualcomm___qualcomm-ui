@@ -1,14 +1,12 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {Plugin} from "unified"
-
 import type {
   KnowledgeExtraFile,
   KnowledgeIntegrationConfig,
 } from "../docs-plugin"
 
-export interface WebUiKnowledgeConfig extends KnowledgeIntegrationConfig {
+export interface AiKnowledgeConfig extends KnowledgeIntegrationConfig {
   clean?: boolean
   docPropsPath?: string
   /**
@@ -45,40 +43,9 @@ export interface WebUiKnowledgeConfig extends KnowledgeIntegrationConfig {
   verbose?: boolean
 }
 
-/**
- * Resolved OpenWebUI integration config ready for upload operations.
- * Contains all credentials loaded from the env file.
- */
-export interface ResolvedOpenWebUiIntegration {
-  /**
-   * API key for authentication.
-   */
-  apiKey: string
-  /**
-   * Environment name this integration references.
-   */
-  environment: string
-  /**
-   * Knowledge base ID.
-   */
-  knowledgeId: string
-  /**
-   * Integration name (key from integrations.openWebUi).
-   */
-  name: string
-  /**
-   * Output path from the referenced environment.
-   */
-  outputPath: string
-  /**
-   * OpenWebUI instance URL.
-   */
-  url: string
-}
-
 export interface CliConfig
   extends Omit<
-    WebUiKnowledgeConfig,
+    AiKnowledgeConfig,
     "docPropsPath" | "metadata" | "outputPath" | "routeDir"
   > {
   envFilePath?: string
