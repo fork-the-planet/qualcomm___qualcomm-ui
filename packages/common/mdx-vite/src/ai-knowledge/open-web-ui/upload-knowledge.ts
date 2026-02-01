@@ -9,8 +9,7 @@ import {resolve} from "node:path"
 import {setTimeout} from "node:timers/promises"
 import ora from "ora"
 
-import {getConfigFromEnv, loadEnv, type SharedConfig} from "../common"
-import {loadOpenWebUiIntegrations} from "../load-config-from-env"
+import {getConfigFromEnv, loadEnv, type SharedConfig} from "../env"
 
 import {
   type ApiConfig,
@@ -20,7 +19,7 @@ import {
   KnowledgeApi,
   type KnowledgeFilesResponse,
 } from "./api"
-import {resolveOpenWebUiIntegration} from "./common"
+import {loadOpenWebUiIntegrations, resolveOpenWebUiIntegration} from "./common"
 import {KnowledgeCleaner} from "./knowledge-cleaner"
 
 interface Config extends SharedConfig {

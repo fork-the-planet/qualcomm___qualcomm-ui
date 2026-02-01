@@ -2,8 +2,7 @@ import {program} from "@commander-js/extra-typings"
 
 import type {KnowledgePageData} from "@qualcomm-ui/mdx-common"
 
-import {loadEnv} from "../common"
-import {loadEnvironmentConfigs} from "../load-config-from-env"
+import {loadEnv, loadEnvironmentConfigs} from "../env"
 import type {AiKnowledgeConfig, CliConfig} from "../types"
 
 import {KnowledgeGenerator} from "./knowledge-generator"

@@ -1,6 +1,7 @@
 import {config} from "dotenv"
 
 import type {OpenWebUiIntegration} from "../../docs-plugin"
+import {ConfigLoader} from "../../docs-plugin/internal"
 
 export interface OpenWebUiCredentials {
   apiKey: string
@@ -100,4 +101,65 @@ export function resolveOpenWebUiIntegration(
     outputPath,
     url: credentials.url,
   }
+}
+
+interface LoadOpenWebUiIntegrationsOptions {
+  /** Filter to integrations referencing specific environments */
+  environments?: string[]
+  /** Filter to specific integration names */
+  integrations?: string[]
+}
+
+/**
+ * Loads OpenWebUI integration configurations for upload operations.
+ * Returns resolved integrations with environment output paths.
+ */
+export function loadOpenWebUiIntegrations(
+  options: LoadOpenWebUiIntegrationsOptions = {},
+): Array<{
+  integration: OpenWebUiIntegration
+  name: string
+  outputPath: string
+}> {
+  const configLoader = new ConfigLoader({})
+  const resolvedConfig = configLoader.loadConfig()
+  const knowledgeConfig = resolvedConfig.knowledge
+  const environments = knowledgeConfig?.environments
+  const integrations = knowledgeConfig?.integrations?.openWebUi
+
+  if (!integrations || integrations.length === 0) {
+    return []
+  }
+
+  let filteredIntegrations = integrations
+
+  if (options.integrations?.length) {
+    const filterSet = new Set(options.integrations)
+    filteredIntegrations = integrations.filter((integration) =>
+      filterSet.has(integration.id),
+    )
+  }
+
+  if (options.environments?.length) {
+    const filterSet = new Set(options.environments)
+    filteredIntegrations = filteredIntegrations.filter((integration) =>
+      filterSet.has(integration.id),
+    )
+  }
+
+  return filteredIntegrations.map((integration) => {
+    const envConfig = environments?.find((e) => e.id === integration.id)
+    if (!envConfig) {
+      throw new Error(
+        `Integration "${integration.id}" references unknown environment "${integration.id}". ` +
+          `Available environments: ${environments?.map((e) => e.id).join(", ") || "none"}`,
+      )
+    }
+
+    return {
+      integration,
+      name: integration.id,
+      outputPath: envConfig.outputPath,
+    }
+  })
 }

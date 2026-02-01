@@ -1,17 +1,18 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
+import {program} from "@commander-js/extra-typings"
+import {config} from "dotenv"
 import {existsSync} from "node:fs"
 import {join, resolve} from "node:path"
 
 import type {
   KnowledgeEnvironment,
   KnowledgeIntegrationConfig,
-  OpenWebUiIntegration,
 } from "../docs-plugin"
 import {ConfigLoader} from "../docs-plugin/internal"
 
-import type {AiKnowledgeConfig, CliConfig} from "./types"
+import type {AiKnowledgeConfig, CliConfig, GlobalCliOpts} from "./types"
 
 interface LoadEnvironmentConfigsOptions {
   /** CLI options that override config */
@@ -20,11 +21,39 @@ interface LoadEnvironmentConfigsOptions {
   environments?: string[]
 }
 
-interface LoadOpenWebUiIntegrationsOptions {
-  /** Filter to integrations referencing specific environments */
-  environments?: string[]
-  /** Filter to specific integration names */
-  integrations?: string[]
+export function loadEnv() {
+  const options: GlobalCliOpts = program.optsWithGlobals()
+  if (options.env) {
+    config({path: options.env, quiet: true})
+  } else {
+    config({quiet: true})
+  }
+}
+
+export interface SharedConfig {
+  knowledgeId: string
+  webUiKey: string
+  webUiUrl: string
+}
+
+/**
+ * Gets OpenWebUI credentials from environment variables.
+ * Used for legacy single-environment setups.
+ */
+export function getConfigFromEnv(): SharedConfig {
+  const openWebUiUrl = process.env.WEB_UI_URL || process.env.OPEN_WEB_UI_URL
+  const openWebUiKey = process.env.WEB_UI_KEY || process.env.OPEN_WEB_UI_API_KEY
+  const knowledgeId =
+    process.env.KNOWLEDGE_ID || process.env.OPEN_WEB_UI_KNOWLEDGE_ID
+
+  if (!openWebUiUrl || !openWebUiKey || !knowledgeId) {
+    throw new Error("WEB_UI_URL, WEB_UI_KEY, and KNOWLEDGE_ID must be set")
+  }
+  return {
+    knowledgeId,
+    webUiKey: openWebUiKey,
+    webUiUrl: openWebUiUrl,
+  }
 }
 
 function parseCliMetadata(
@@ -186,60 +215,6 @@ export function loadEnvironmentConfigs(
         merged.pageTitlePrefix ??
         process.env.PAGE_TITLE_PREFIX,
       routeDir,
-    }
-  })
-}
-
-/**
- * Loads OpenWebUI integration configurations for upload operations.
- * Returns resolved integrations with environment output paths.
- */
-export function loadOpenWebUiIntegrations(
-  options: LoadOpenWebUiIntegrationsOptions = {},
-): Array<{
-  integration: OpenWebUiIntegration
-  name: string
-  outputPath: string
-}> {
-  const configLoader = new ConfigLoader({})
-  const resolvedConfig = configLoader.loadConfig()
-  const knowledgeConfig = resolvedConfig.knowledge
-  const environments = knowledgeConfig?.environments
-  const integrations = knowledgeConfig?.integrations?.openWebUi
-
-  if (!integrations || integrations.length === 0) {
-    return []
-  }
-
-  let filteredIntegrations = integrations
-
-  if (options.integrations?.length) {
-    const filterSet = new Set(options.integrations)
-    filteredIntegrations = integrations.filter((integration) =>
-      filterSet.has(integration.id),
-    )
-  }
-
-  if (options.environments?.length) {
-    const filterSet = new Set(options.environments)
-    filteredIntegrations = filteredIntegrations.filter((integration) =>
-      filterSet.has(integration.id),
-    )
-  }
-
-  return filteredIntegrations.map((integration) => {
-    const envConfig = environments?.find((e) => e.id === integration.id)
-    if (!envConfig) {
-      throw new Error(
-        `Integration "${integration.id}" references unknown environment "${integration.id}". ` +
-          `Available environments: ${environments?.map((e) => e.id).join(", ") || "none"}`,
-      )
-    }
-
-    return {
-      integration,
-      name: integration.id,
-      outputPath: envConfig.outputPath,
     }
   })
 }

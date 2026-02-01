@@ -59,10 +59,10 @@ const knowledgeExtraFileSchema = implement<KnowledgeExtraFile>().with({
 
 const frontmatterConfigSchema = z
   .object({
+    exclude: z.array(z.string()).optional(),
     extraFields: z
       .record(z.string(), z.union([z.string(), z.array(z.string())]))
       .optional(),
-    exclude: z.array(z.string()).optional(),
     include: z.array(z.string()).optional(),
   })
   .optional()
