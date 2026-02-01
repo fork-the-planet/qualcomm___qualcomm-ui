@@ -3,10 +3,10 @@
 
 import {program} from "@commander-js/extra-typings"
 
+import {addDownloadKnowledgeCommand} from "./ai-knowledge/download-knowledge"
+import {addGenerateKnowledgeCommand} from "./ai-knowledge/generator"
+import {addUploadKnowledgeCommand} from "./ai-knowledge/upload-knowledge"
 import {addGeneratePageMapCommand} from "./docs-plugin/generate-page-map"
-import {addDownloadKnowledgeCommand} from "./open-web-ui-knowledge/download-knowledge"
-import {addGenerateKnowledgeCommand} from "./open-web-ui-knowledge/generate-knowledge"
-import {addUploadKnowledgeCommand} from "./open-web-ui-knowledge/upload-knowledge"
 import {addGenerateLazyDemoMapCommand} from "./react-demo-plugin/generate-lazy-demo-map"
 
 function setupCli() {

@@ -16,7 +16,7 @@ import type {
 } from "@qualcomm-ui/mdx-common"
 import type {QuiPropTypes} from "@qualcomm-ui/typedoc-common"
 
-import {generate} from "../open-web-ui-knowledge/generate-knowledge"
+import {generate} from "../ai-knowledge/generator"
 
 import {
   type CompiledMdxFile,
