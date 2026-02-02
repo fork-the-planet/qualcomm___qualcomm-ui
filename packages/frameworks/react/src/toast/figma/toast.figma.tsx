@@ -9,7 +9,7 @@ import {createToaster, Toaster} from "@qualcomm-ui/react/toast"
 const toaster = createToaster({placement: "bottom-end"})
 
 figma.connect(Toaster, "<FIGMA_COMPONENTS_BASE>?node-id=3485-375", {
-  example: ({action, description, label, type}) => (
+  example: ({action, closable, description, label, type}) => (
     <>
       {/* 1. Render <Toaster /> once near app root */}
       <Toaster toaster={toaster} />
@@ -17,6 +17,7 @@ figma.connect(Toaster, "<FIGMA_COMPONENTS_BASE>?node-id=3485-375", {
       {/* 2. Trigger toasts from anywhere */}
       {toaster.create({
         action,
+        closable,
         description,
         label,
         type,
@@ -27,10 +28,14 @@ figma.connect(Toaster, "<FIGMA_COMPONENTS_BASE>?node-id=3485-375", {
     action: figma.boolean("button", {
       true: {label: "Action", onClick: () => {}},
     }),
+    closable: figma.boolean("dismiss", {
+      false: false,
+    }),
     description: figma.string("description"),
     label: figma.string("heading"),
     type: figma.enum<ToastType>("emphasis", {
       danger: "danger",
+      info: "info",
       neutral: "neutral",
       success: "success",
       warning: "warning",
