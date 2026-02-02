@@ -3,15 +3,17 @@
 
 import figma from "@figma/code-connect"
 
+import type {QdsPopoverEmphasis} from "@qualcomm-ui/qds-core/popover"
 import {Button} from "@qualcomm-ui/react/button"
 import {Popover} from "@qualcomm-ui/react/popover"
 
 const FIGMA_URL = "<FIGMA_COMPONENTS_BASE>?node-id=5951-1058"
 
 figma.connect(Popover, FIGMA_URL, {
-  example: ({actionItems, content, positioning}) => (
+  example: ({actionItems, content, emphasis, positioning}) => (
     <Popover
       description={content.body}
+      emphasis={emphasis}
       label={content.label}
       positioning={positioning.placement}
       trigger={<Button emphasis="primary">Show Popover</Button>}
@@ -30,6 +32,9 @@ figma.connect(Popover, FIGMA_URL, {
       label: figma.boolean("heading", {
         true: figma.string("headingText"),
       }),
+    }),
+    emphasis: figma.enum<QdsPopoverEmphasis>("emphasis", {
+      brand: "brand",
     }),
     positioning: figma.nestedProps("_Popover pointer placement", {
       placement: figma.enum("position", {
