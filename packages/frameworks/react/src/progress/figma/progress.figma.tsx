@@ -11,9 +11,6 @@ import type {
 import {Progress} from "@qualcomm-ui/react/progress"
 
 const sharedProps = {
-  disabled: figma.enum("state", {
-    disabled: true,
-  }),
   emphasis: figma.enum<QdsProgressEmphasis>("emphasis", {
     neutral: "neutral",
   }),

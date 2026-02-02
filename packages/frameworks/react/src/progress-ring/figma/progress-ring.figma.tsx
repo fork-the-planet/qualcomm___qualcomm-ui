@@ -10,9 +10,6 @@ import type {
 import {ProgressRing} from "@qualcomm-ui/react/progress-ring"
 
 const sharedProps = {
-  disabled: figma.enum("state", {
-    disabled: true,
-  }),
   emphasis: figma.enum<QdsProgressRingEmphasis>("emphasis", {
     neutral: "neutral",
   }),
