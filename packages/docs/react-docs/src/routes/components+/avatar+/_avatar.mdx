@@ -3,6 +3,7 @@ title: Avatar
 group: Data Display
 description: Avatars provide visual representation of users, accounts, or entities. They support multiple content types including icons, initials, and images, with optional status indicators to communicate presence or state information.
 component: Avatar
+keywords: [profile picture, user photo, thumbnail, profile image, user thumbnail]
 ---
 
 import {TypeDocAttributes, TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
@@ -34,11 +35,19 @@ The anatomy of the avatar component is as follows:
 
 ### Showcase
 
+::: meta
+keywords: [avatar with status, complete avatar example]
+:::
+
 Here's a typical usage example:
 
 <Demo name="AvatarShowcaseDemo" component={demos.AvatarShowcaseDemo} />
 
 ### Content
+
+::: meta
+keywords: [placeholder, broken image, image error]
+:::
 
 The `Avatar.Content` component displays alternative content within the avatar. Use it by itself to show initials or an icon, or together with `Avatar.Image` to provide fallback content if the image cannot be loaded.
 
