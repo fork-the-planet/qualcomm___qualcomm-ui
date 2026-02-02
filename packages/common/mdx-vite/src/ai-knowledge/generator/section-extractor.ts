@@ -1,7 +1,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {Heading, Parent, Root, RootContent, Text} from "mdast"
+import type {Code, Heading, Parent, Root, RootContent, Text} from "mdast"
 import remarkParse from "remark-parse"
 import remarkStringify from "remark-stringify"
 import {unified} from "unified"
@@ -14,7 +14,7 @@ import type {CodeExample, SectionEntry, SectionMetadata} from "./section.types"
 export interface SectionExtractorOptions {
   /**
    * Header depths that define section boundaries.
-   * @default [2, 3]
+   * @default [1, 2, 3, 4]
    */
   depths?: number[]
 
@@ -146,12 +146,22 @@ export class SectionExtractor {
 
     for (const node of nodes) {
       if (node.type === "code") {
+        const codeNode = node as Code
+
+        if (codeNode.lang === "typedoc-props" && codeNode.meta) {
+          const propNames = JSON.parse(codeNode.meta) as string[]
+          if (propNames.length > 0) {
+            metadata.props = [...(metadata.props ?? []), ...propNames]
+          }
+          codeNode.lang = null
+        }
+
         const proseBeforeCode = this.nodesToMarkdown(contentNodes).trim()
 
         codeExamples.push({
-          code: node.value,
+          code: codeNode.value,
           insertionOffset: proseBeforeCode.length,
-          language: node.lang ?? "",
+          language: codeNode.lang ?? "",
         })
       } else {
         contentNodes.push(node)
@@ -159,10 +169,6 @@ export class SectionExtractor {
     }
 
     const content = this.nodesToMarkdown(contentNodes)
-
-    if (!content.trim()) {
-      return null
-    }
 
     const sectionId = this.generateSectionId(section.headerPath)
     const wordCount = this.countWords(content)
