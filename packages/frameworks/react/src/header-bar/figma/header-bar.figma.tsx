@@ -5,6 +5,7 @@ import figma from "@figma/code-connect"
 import {Bell, Grid, Search, Settings, User} from "lucide-react"
 
 import type {
+  QdsHeaderBarPadding,
   QdsHeaderBarSize,
   QdsHeaderSurface,
 } from "@qualcomm-ui/qds-core/header-bar"
@@ -13,8 +14,8 @@ import {HeaderBar} from "@qualcomm-ui/react/header-bar"
 import {Menu} from "@qualcomm-ui/react/menu"
 
 figma.connect(HeaderBar, "<FIGMA_COMPONENTS_BASE>?node-id=14622-42103", {
-  example: ({logo, size, surface}) => (
-    <HeaderBar.Root size={size} surface={surface}>
+  example: ({logo, padding, size, surface}) => (
+    <HeaderBar.Root padding={padding} size={size} surface={surface}>
       <HeaderBar.Logo>{/* Logo content */}</HeaderBar.Logo>
       {logo.appTitle}
       {logo.divider}
@@ -58,6 +59,9 @@ figma.connect(HeaderBar, "<FIGMA_COMPONENTS_BASE>?node-id=14622-42103", {
       divider: figma.boolean("divider", {
         true: <HeaderBar.Divider />,
       }),
+    }),
+    padding: figma.enum<QdsHeaderBarPadding>("padding", {
+      large: "large",
     }),
     size: figma.enum<QdsHeaderBarSize>("size", {
       lg: "lg",
