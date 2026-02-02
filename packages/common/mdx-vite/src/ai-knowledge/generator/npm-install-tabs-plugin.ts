@@ -10,13 +10,19 @@ export const formatNpmInstallTabs: Plugin = () => {
     visit(
       tree,
       "mdxJsxFlowElement",
-      (node: MdxJsxFlowElement, index: number | undefined, parent: Parent | undefined) => {
+      (
+        node: MdxJsxFlowElement,
+        index: number | undefined,
+        parent: Parent | undefined,
+      ) => {
         if (node?.name === "NpmInstallTabs") {
           const packages = node.attributes?.find(
             (attr): attr is MdxJsxAttribute =>
               attr.type === "mdxJsxAttribute" && attr.name === "packages",
           )
-          const packageNames = packages ? extractNamesFromAttribute(packages) : []
+          const packageNames = packages
+            ? extractNamesFromAttribute(packages)
+            : []
 
           if (packageNames.length === 0) {
             if (parent && index !== undefined) {

@@ -6,7 +6,6 @@ import chalk from "chalk"
 import type {Link, Parent} from "mdast"
 import type {MdxJsxAttribute, MdxJsxFlowElement} from "mdast-util-mdx-jsx"
 import {minimatch} from "minimatch"
-import {createHash} from "node:crypto"
 import {mkdir, readdir, readFile, rm, stat, writeFile} from "node:fs/promises"
 import {basename, dirname, extname, join, relative, resolve} from "node:path"
 import remarkFrontmatter from "remark-frontmatter"
@@ -31,90 +30,23 @@ import {
 } from "../../docs-plugin/internal"
 import type {AiKnowledgeConfig} from "../types"
 
+import {getConfig, setConfig} from "./config"
+import {PropFormatter} from "./doc-props-plugin"
 import type {
   ImportedModule,
   MdxFlowExpression,
   ProcessedPage,
 } from "./generator.types"
 import {formatNpmInstallTabs} from "./npm-install-tabs-plugin"
-import {PropFormatter} from "./props-plugin"
 import {formatThemeNodes} from "./qds-theme-plugin"
-import {exists} from "./utils"
-
-// Pure utility functions (no config dependency)
-
-function computeMd5(content: string): string {
-  return createHash("md5").update(content).digest("hex")
-}
-
-function isPreviewLine(trimmedLine: string): boolean {
-  return (
-    trimmedLine === "// preview" ||
-    /^\{\s*\/\*\s*preview\s*\*\/\s*\}$/.test(trimmedLine) ||
-    /^<!--\s*preview\s*-->$/.test(trimmedLine)
-  )
-}
-
-function removePreviewLines(code: string): string {
-  return code
-    .split("\n")
-    .filter((line) => !isPreviewLine(line.trim()))
-    .join("\n")
-}
-
-function getIntroLines(projectName?: string, description?: string) {
-  const lines: string[] = []
-
-  if (projectName) {
-    lines.push(`# ${projectName}`)
-  }
-
-  if (description) {
-    lines.push("")
-    lines.push(`> ${description}`)
-  }
-
-  return lines.join("\n")
-}
-
-function extractRelativeImports(content: string): string[] {
-  const imports: string[] = []
-  const importRegex =
-    /^import\s+(?:{[^}]*}|[\w*]+|\*\s+as\s+\w+)?\s*(?:,\s*{[^}]*})?\s*from\s+["'](\.[^"']+)["']/gm
-  let match: RegExpExecArray | null
-  while ((match = importRegex.exec(content)) !== null) {
-    imports.push(match[1])
-  }
-  return imports
-}
-
-async function resolveModulePath(
-  importPath: string,
-  fromFile: string,
-): Promise<string | null> {
-  const fromDir = dirname(fromFile)
-  const baseResolved = resolve(fromDir, importPath)
-  const extensions = [".ts", ".tsx", ".js", ".jsx", ""]
-  for (const ext of extensions) {
-    const fullPath = baseResolved + ext
-    if (await exists(fullPath)) {
-      return fullPath
-    }
-  }
-  if (await exists(baseResolved)) {
-    const indexPath = join(baseResolved, "index.ts")
-    if (await exists(indexPath)) {
-      return indexPath
-    }
-  }
-  return null
-}
-
-function extractMetadata(
-  metadata: Record<string, string> | undefined,
-): [string, string][] {
-  return Object.entries(metadata ?? {})
-}
+import {
+  collectRelativeImports,
+  computeMd5,
+  exists,
+  extractMetadata,
+  getIntroLines,
+  removePreviewLines,
+} from "./utils"
 
 /**
  * Generator class that encapsulates all knowledge generation logic with shared
@@ -125,8 +57,9 @@ export class KnowledgeGenerator {
   private propFormatter: PropFormatter
 
   constructor(config: AiKnowledgeConfig) {
-    this.config = config
-    this.propFormatter = new PropFormatter(config)
+    setConfig(config)
+    this.config = getConfig()
+    this.propFormatter = new PropFormatter()
   }
 
   async run(): Promise<KnowledgePageData[]> {
@@ -258,48 +191,6 @@ export class KnowledgeGenerator {
 
     await scanDirectory(this.config.routeDir)
     return components
-  }
-
-  private async collectRelativeImports(
-    filePath: string,
-    visited: Set<string> = new Set(),
-  ): Promise<ImportedModule[]> {
-    const normalizedPath = resolve(filePath)
-    if (visited.has(normalizedPath)) {
-      return []
-    }
-    visited.add(normalizedPath)
-    const modules: ImportedModule[] = []
-    try {
-      const content = await readFile(normalizedPath, "utf-8")
-      const relativeImports = extractRelativeImports(content)
-      for (const importPath of relativeImports) {
-        const resolvedPath = await resolveModulePath(importPath, normalizedPath)
-        if (!resolvedPath) {
-          if (this.config.verbose) {
-            console.log(
-              `  Could not resolve import: ${importPath} from ${normalizedPath}`,
-            )
-          }
-          continue
-        }
-        const importContent = await readFile(resolvedPath, "utf-8")
-        modules.push({
-          content: importContent,
-          path: resolvedPath,
-        })
-        const nestedModules = await this.collectRelativeImports(
-          resolvedPath,
-          visited,
-        )
-        modules.push(...nestedModules)
-      }
-    } catch (error) {
-      if (this.config.verbose) {
-        console.log(`Error processing ${normalizedPath}`, error)
-      }
-    }
-    return modules
   }
 
   /**
@@ -798,10 +689,7 @@ export class KnowledgeGenerator {
 
           const allImports: ImportedModule[] = []
           for (const demoFile of processedPage.demoFiles) {
-            const imports = await this.collectRelativeImports(
-              demoFile,
-              new Set(),
-            )
+            const imports = await collectRelativeImports(demoFile, new Set())
             allImports.push(...imports)
           }
 

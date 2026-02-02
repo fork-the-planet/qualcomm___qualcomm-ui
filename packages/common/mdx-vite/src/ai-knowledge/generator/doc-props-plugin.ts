@@ -11,8 +11,8 @@ import type {
 } from "@qualcomm-ui/typedoc-common"
 
 import {extractNamesFromAttribute} from "../../docs-plugin/internal/services/mdx-utils"
-import type {AiKnowledgeConfig} from "../types"
 
+import {getConfig} from "./config"
 import type {
   ComponentProps,
   DocProps,
@@ -71,25 +71,21 @@ function propsToDefinitionList(props: SimplifiedProp[]): string {
 }
 
 export class PropFormatter {
-  private readonly config: AiKnowledgeConfig
   private docProps: DocProps | null = null
-
-  constructor(config: AiKnowledgeConfig) {
-    this.config = config
-  }
 
   async loadDocProps(): Promise<DocProps | null> {
     if (this.docProps) {
       return this.docProps
     }
-    const resolvedDocPropsPath = this.config.docPropsPath
-      ? (await exists(this.config.docPropsPath))
-        ? this.config.docPropsPath
-        : resolve(process.cwd(), this.config.docPropsPath)
-      : join(dirname(this.config.routeDir), "doc-props.json")
+    const config = getConfig()
+    const resolvedDocPropsPath = config.docPropsPath
+      ? (await exists(config.docPropsPath))
+        ? config.docPropsPath
+        : resolve(process.cwd(), config.docPropsPath)
+      : join(dirname(config.routeDir), "doc-props.json")
 
     if (!(await exists(resolvedDocPropsPath))) {
-      if (this.config.verbose) {
+      if (config.verbose) {
         console.log(`Doc props file not found at: ${resolvedDocPropsPath}`)
       }
       return null
@@ -98,7 +94,7 @@ export class PropFormatter {
     try {
       const content = await readFile(resolvedDocPropsPath, "utf-8")
       const docProps = JSON.parse(content) as DocProps
-      if (this.config.verbose) {
+      if (config.verbose) {
         console.log(`Loaded doc props from: ${resolvedDocPropsPath}`)
         console.log(
           `Found ${Object.keys(docProps.props).length} component types`,
@@ -107,7 +103,7 @@ export class PropFormatter {
       this.docProps = docProps
       return docProps
     } catch (error) {
-      if (this.config.verbose) {
+      if (config.verbose) {
         console.log("Error loading doc props", error)
       }
       return null
@@ -134,7 +130,7 @@ export class PropFormatter {
           default:
             // render link text only, but remove certain text altogether
             if (
-              this.config.outputMode === "per-page" &&
+              getConfig().outputMode === "per-page" &&
               "tag" in part &&
               part.tag === "@link" &&
               typeof part.target === "string"
@@ -272,7 +268,7 @@ export class PropFormatter {
           const propsName = propsNames[0]
           const componentProps = this.docProps.props[propsName]
           if (!componentProps) {
-            if (this.config.verbose) {
+            if (getConfig().verbose) {
               console.log(`  TypeDocProps not found: ${propsName}`)
             }
             if (parent && index !== undefined) {
@@ -281,7 +277,7 @@ export class PropFormatter {
             return
           }
           const propsDoc = this.extractProps(componentProps, Boolean(isPartial))
-          if (this.config.verbose) {
+          if (getConfig().verbose) {
             console.log(
               `  Replaced TypeDocProps ${propsName} with API documentation`,
             )
