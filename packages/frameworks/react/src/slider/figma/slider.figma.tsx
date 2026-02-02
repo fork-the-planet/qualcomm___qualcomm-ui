@@ -9,6 +9,7 @@ const sharedProps = {
   disabled: figma.enum("state", {
     disabled: true,
   }),
+  errorText: figma.string("errorText"),
   hint: figma.boolean("hint", {
     true: figma.string("hintText"),
   }),
