@@ -1,7 +1,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {Parent, Root, Text} from "mdast"
+import type {Parent, Root} from "mdast"
 import type {Plugin} from "unified"
 import {SKIP, visit} from "unist-util-visit"
 
@@ -71,7 +71,7 @@ export const remarkExtractMetadata: Plugin<[MetadataValue], Root> = (
   metadata,
 ) => {
   return (tree) => {
-    const nodesToRemove: Array<{parent: Parent; index: number}> = []
+    const nodesToRemove: Array<{index: number; parent: Parent}> = []
 
     visit(tree, "paragraph", (node, index, parent) => {
       if (!parent || index === undefined) {
@@ -92,7 +92,10 @@ export const remarkExtractMetadata: Plugin<[MetadataValue], Root> = (
 
       // Check if the entire meta block is in this single paragraph
       // (common when markdown parser keeps it together)
-      if (text.includes(":::") && text.lastIndexOf(":::") > openMatch[0].length) {
+      if (
+        text.includes(":::") &&
+        text.lastIndexOf(":::") > openMatch[0].length
+      ) {
         // Extract content between opening ::: meta and closing :::
         const afterOpen = text.slice(openMatch[0].length)
         const closeIndex = afterOpen.lastIndexOf(":::")
@@ -101,7 +104,7 @@ export const remarkExtractMetadata: Plugin<[MetadataValue], Root> = (
         const parsed = parseMetaContent(content)
         Object.assign(metadata, parsed)
 
-        nodesToRemove.push({parent, index})
+        nodesToRemove.push({index, parent})
         return SKIP
       }
 
@@ -111,7 +114,7 @@ export const remarkExtractMetadata: Plugin<[MetadataValue], Root> = (
       for (let i = 1; i < node.children.length; i++) {
         const child = node.children[i]
         if (child.type === "text") {
-          fullText += (child as Text).value
+          fullText += child.value
         }
       }
 
@@ -124,14 +127,14 @@ export const remarkExtractMetadata: Plugin<[MetadataValue], Root> = (
         const parsed = parseMetaContent(content)
         Object.assign(metadata, parsed)
 
-        nodesToRemove.push({parent, index})
+        nodesToRemove.push({index, parent})
         return SKIP
       }
     })
 
     // Remove meta blocks from AST (in reverse order to preserve indices)
     for (let i = nodesToRemove.length - 1; i >= 0; i--) {
-      const {parent, index} = nodesToRemove[i]
+      const {index, parent} = nodesToRemove[i]
       parent.children.splice(index, 1)
     }
   }

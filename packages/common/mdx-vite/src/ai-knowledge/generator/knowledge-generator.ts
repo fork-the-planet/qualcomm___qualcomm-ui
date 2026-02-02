@@ -27,6 +27,7 @@ import {
   getPathSegmentsFromFileName,
   remarkRemoveJsx,
 } from "../../docs-plugin/internal"
+import {remarkExtractMetadata} from "../../docs-plugin/remark/remark-extract-meta"
 import type {AiKnowledgeConfig} from "../types"
 
 import {getConfig, setConfig} from "./config"
@@ -268,6 +269,35 @@ export class KnowledgeGenerator {
     }
   }
 
+  private filterFrontmatter(
+    frontmatter: Record<string, unknown>,
+  ): Record<string, unknown> {
+    if (!this.config.frontmatter?.include?.length) {
+      return frontmatter
+    }
+
+    const includePatterns = this.config.frontmatter.include
+    const excludePatterns = this.config.frontmatter.exclude ?? []
+    const filtered: Record<string, unknown> = {}
+
+    for (const [field, value] of Object.entries(frontmatter)) {
+      if (value === undefined) {
+        continue
+      }
+      const isIncluded = includePatterns.some((pattern) =>
+        minimatch(field, pattern),
+      )
+      const isExcluded = excludePatterns.some((pattern) =>
+        minimatch(field, pattern),
+      )
+      if (isIncluded && !isExcluded) {
+        filtered[field] = value
+      }
+    }
+
+    return filtered
+  }
+
   /**
    * Processes MDX content by transforming JSX elements (TypeDocProps, demos)
    * into Markdown, resolving relative links, and cleaning up formatting.
@@ -327,15 +357,25 @@ export class KnowledgeGenerator {
       const removedJsx = String(
         await removeJsxProcessor.process(processedContent),
       )
-      const contentWithoutFrontmatter = removedJsx
+      const rawContent = removedJsx
         .replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, "")
         .replace(/(^#{1,6} .*\\<[^>]+)>/gm, "$1\\>")
+
+      const stripMetaProcessor = unified()
+        .use(remarkParse)
+        .use(remarkExtractMetadata, {})
+        .use(remarkStringify)
+      const strippedContent = String(
+        await stripMetaProcessor.process(rawContent),
+      )
+
       const title = frontmatter.title || pageInfo.name
 
       return {
-        content: contentWithoutFrontmatter.trim(),
+        content: strippedContent.trim(),
         demoFiles,
         frontmatter,
+        rawContent: rawContent.trim(),
         title,
         url: pageInfo.url,
       }
@@ -505,7 +545,10 @@ export class KnowledgeGenerator {
               minimatch(field, pattern),
             )
             if (isIncluded && !isExcluded) {
-              frontmatterEntries.push([field, String(value)])
+              frontmatterEntries.push([
+                field,
+                Array.isArray(value) ? value : String(value),
+              ])
             }
           }
         }
@@ -708,7 +751,10 @@ export class KnowledgeGenerator {
       const processed = processedPages[i]
       const page = pages[i]
 
-      const pageSections = extractor.extract(processed.content, {
+      const filteredFrontmatter = this.filterFrontmatter(processed.frontmatter)
+
+      const pageSections = extractor.extract(processed.rawContent, {
+        frontmatter: filteredFrontmatter,
         id: page.id,
         title: processed.title,
         url: processed.url,

@@ -26,6 +26,7 @@ export interface SectionExtractorOptions {
 }
 
 export interface PageInfo {
+  frontmatter: Record<string, unknown>
   id: string
   title: string
   url?: string
@@ -51,7 +52,7 @@ export class SectionExtractor {
   private readonly minContentLength: number
 
   constructor(options?: SectionExtractorOptions) {
-    const defaultDepths = [1, 2, 3]
+    const defaultDepths = [1, 2, 3, 4]
     this.depths = new Set(options?.depths ?? defaultDepths)
     this.minContentLength = options?.minContentLength ?? 0
   }
@@ -136,8 +137,8 @@ export class SectionExtractor {
       return null
     }
 
-    const startOffset = section.nodes[0]?.position?.start.offset ?? 0
-    const lastNode = section.nodes[section.nodes.length - 1]
+    const startOffset = nodes[0]?.position?.start.offset ?? 0
+    const lastNode = nodes[nodes.length - 1]
     const endOffset = lastNode?.position?.end.offset ?? 0
 
     const contentNodes: RootContent[] = []
@@ -145,8 +146,11 @@ export class SectionExtractor {
 
     for (const node of nodes) {
       if (node.type === "code") {
+        const proseBeforeCode = this.nodesToMarkdown(contentNodes).trim()
+
         codeExamples.push({
           code: node.value,
+          insertionOffset: proseBeforeCode.length,
           language: node.lang ?? "",
         })
       } else {
@@ -162,7 +166,7 @@ export class SectionExtractor {
 
     const sectionId = this.generateSectionId(section.headerPath)
     const wordCount = this.countWords(content)
-    const sectionUrl = pageInfo.url
+    const url = pageInfo.url
       ? `${pageInfo.url}#${this.generateAnchorId(section.headerPath.at(-1) ?? "")}`
       : undefined
 
@@ -173,11 +177,11 @@ export class SectionExtractor {
       endOffset,
       headerPath: section.headerPath,
       metadata,
+      pageFrontmatter: pageInfo.frontmatter,
       pageId: pageInfo.id,
-      pageUrl: pageInfo.url,
       sectionId,
-      sectionUrl,
       startOffset,
+      url,
       wordCount,
     }
   }

@@ -11,6 +11,12 @@ export interface CodeExample {
   code: string
 
   /**
+   * Insertion point in `content` where this code block should be spliced
+   * to reconstruct the full section.
+   */
+  insertionOffset: number
+
+  /**
    * Programming language from fence info string.
    */
   language: string
@@ -62,14 +68,14 @@ export interface SectionEntry {
   metadata: SectionMetadata
 
   /**
+   * Frontmatter from the source page.
+   */
+  pageFrontmatter: Record<string, unknown>
+
+  /**
    * Source page identifier.
    */
   pageId: string
-
-  /**
-   * Full URL to documentation page.
-   */
-  pageUrl?: string
 
   /**
    * Generated section ID for anchor links.
@@ -78,14 +84,14 @@ export interface SectionEntry {
   sectionId: string
 
   /**
-   * URL with anchor to this specific section.
-   */
-  sectionUrl?: string
-
-  /**
    * Start character offset in the source markdown.
    */
   startOffset: number
+
+  /**
+   * URL with anchor to this specific section.
+   */
+  url?: string
 
   /**
    * Approximate word count for context window planning.

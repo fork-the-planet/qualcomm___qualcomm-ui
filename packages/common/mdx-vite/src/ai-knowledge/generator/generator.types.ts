@@ -43,6 +43,8 @@ export interface ProcessedPage {
   content: string
   demoFiles: string[]
   frontmatter: Record<string, string>
+  /** Content before meta blocks are stripped, used for section extraction */
+  rawContent: string
   title: string
   url: string | undefined
 }

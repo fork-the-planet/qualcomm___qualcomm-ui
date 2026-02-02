@@ -7,6 +7,7 @@ import {SectionExtractor} from "../section-extractor"
 
 describe("SectionExtractor", () => {
   const pageInfo = {
+    frontmatter: {},
     id: "test-page",
     title: "Test Page",
     url: "https://docs.example.com/test-page",
@@ -91,7 +92,7 @@ Install content.
       const extractor = new SectionExtractor()
       const sections = extractor.extract(markdown, pageInfo)
 
-      expect(sections[0].sectionUrl).toBe(
+      expect(sections[0].url).toBe(
         "https://docs.example.com/test-page#installation",
       )
     })
@@ -247,14 +248,20 @@ Second section content.
       expect(sections).toHaveLength(2)
 
       const section1 = sections[0]
-      const rawContent1 = markdown.slice(section1.startOffset, section1.endOffset)
+      const rawContent1 = markdown.slice(
+        section1.startOffset,
+        section1.endOffset,
+      )
       expect(rawContent1).toContain("First section content.")
       expect(rawContent1).toContain("```ts")
       expect(rawContent1).toContain("const code = true")
       expect(rawContent1).not.toContain("Second section")
 
       const section2 = sections[1]
-      const rawContent2 = markdown.slice(section2.startOffset, section2.endOffset)
+      const rawContent2 = markdown.slice(
+        section2.startOffset,
+        section2.endOffset,
+      )
       expect(rawContent2).toContain("Second section content.")
       expect(rawContent2).not.toContain("First section")
     })
@@ -315,13 +322,61 @@ Just text content.
       const sections = extractor.extract(markdown, pageInfo)
 
       expect(sections[0].codeExamples).toHaveLength(1)
-      expect(sections[0].codeExamples[0]).toEqual({
-        code: "const example = true",
-        language: "ts",
-      })
+      expect(sections[0].codeExamples[0].code).toBe("const example = true")
+      expect(sections[0].codeExamples[0].language).toBe("ts")
       expect(sections[0].content).not.toContain("```")
       expect(sections[0].content).toContain("Some text.")
       expect(sections[1].codeExamples).toHaveLength(0)
+    })
+
+    test("provides insertion offsets for splicing code back into content", () => {
+      const markdown = `
+# Test Page
+
+## Examples
+
+Intro text before code.
+
+\`\`\`tsx
+function Example() {
+  return <div>Hello</div>
+}
+\`\`\`
+
+Text between code blocks.
+
+\`\`\`css
+.example { color: red; }
+\`\`\`
+
+Outro text after code.
+`
+      const extractor = new SectionExtractor()
+      const sections = extractor.extract(markdown, pageInfo)
+
+      const section = sections[0]
+
+      expect(section.codeExamples).toHaveLength(2)
+      expect(section.content).toContain("Intro text before code.")
+      expect(section.content).toContain("Text between code blocks.")
+      expect(section.content).toContain("Outro text after code.")
+      expect(section.content).not.toContain("```")
+
+      const code1 = section.codeExamples[0]
+      const code2 = section.codeExamples[1]
+
+      expect(code1.language).toBe("tsx")
+      expect(code1.insertionOffset).toBeGreaterThanOrEqual(0)
+
+      expect(code2.language).toBe("css")
+      expect(code2.insertionOffset).toBeGreaterThan(code1.insertionOffset)
+
+      const textBeforeCode1 = section.content.slice(0, code1.insertionOffset)
+      expect(textBeforeCode1).toContain("Intro text before code.")
+      expect(textBeforeCode1).not.toContain("Text between")
+
+      const textBeforeCode2 = section.content.slice(0, code2.insertionOffset)
+      expect(textBeforeCode2).toContain("Text between code blocks.")
     })
   })
 

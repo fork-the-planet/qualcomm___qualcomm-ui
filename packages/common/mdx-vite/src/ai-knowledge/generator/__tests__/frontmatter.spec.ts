@@ -31,7 +31,7 @@ function filterFrontmatter(
         minimatch(field, pattern),
       )
       if (isIncluded && !isExcluded) {
-        entries.push([field, String(value)])
+        entries.push([field, String(value as string)])
       }
     }
   }
