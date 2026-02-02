@@ -165,7 +165,11 @@ class Uploader {
   }
 
   private async uploadDirectory() {
-    const fileNames = await readdir(this.config.knowledgeFilePath)
+    const allFileNames = await readdir(this.config.knowledgeFilePath)
+    const allowedExtensions = [".md", ".mdx", ".txt", ".pdf"]
+    const fileNames = allFileNames.filter((name) =>
+      allowedExtensions.some((ext) => name.endsWith(ext)),
+    )
     const files = await Promise.all(
       fileNames.map(async (name) => ({
         contents: await readFile(

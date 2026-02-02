@@ -15,6 +15,7 @@ import type {
   QuiDocsConfig,
   QuiDocsTypeDocOptions,
   RouteMeta,
+  SectionExportConfig,
 } from "../types"
 
 import {implement} from "./zod"
@@ -67,6 +68,12 @@ const frontmatterConfigSchema = z
   })
   .optional()
 
+const sectionsExportsSchema = implement<SectionExportConfig>().with({
+  depths: z.array(z.number()).optional(),
+  minContentLength: z.number().optional(),
+  outputPath: z.string().optional(),
+})
+
 const knowledgeExportsSchema = implement<KnowledgeExportsConfig>().with({
   enabled: z.boolean().optional(),
   exclude: z.array(z.string()).optional(),
@@ -77,6 +84,7 @@ const knowledgeExportsSchema = implement<KnowledgeExportsConfig>().with({
   manifestPath: z.string().optional(),
   metadata: z.record(z.string(), z.string()).optional(),
   pageTitlePrefix: z.string().optional(),
+  sections: sectionsExportsSchema.optional(),
   staticPath: z.string().optional(),
 })
 

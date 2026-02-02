@@ -39,6 +39,8 @@ import type {
 } from "./generator.types"
 import {formatNpmInstallTabs} from "./npm-install-tabs-plugin"
 import {formatThemeNodes} from "./qds-theme-plugin"
+import {SectionExtractor} from "./section-extractor"
+import type {KnowledgeSections, SectionEntry} from "./section.types"
 import {
   collectRelativeImports,
   computeMd5,
@@ -623,6 +625,13 @@ export class KnowledgeGenerator {
           manifestEntries,
         )
       }
+
+      // Generate sections.json (always enabled when exports are enabled)
+      await this.generateSectionsOutput(
+        processedPages,
+        pages,
+        this.config.manifestOutputPath,
+      )
     }
 
     console.log(
@@ -680,5 +689,52 @@ export class KnowledgeGenerator {
     }
 
     zip.writeZip(zipPath)
+  }
+
+  private async generateSectionsOutput(
+    processedPages: ProcessedPage[],
+    pages: KnowledgePageData[],
+    outputPath: string,
+  ): Promise<void> {
+    const sectionsConfig = this.config.sections ?? {}
+    const extractor = new SectionExtractor({
+      depths: sectionsConfig.depths,
+      minContentLength: sectionsConfig.minContentLength,
+    })
+
+    const allSections: SectionEntry[] = []
+
+    for (let i = 0; i < processedPages.length; i++) {
+      const processed = processedPages[i]
+      const page = pages[i]
+
+      const pageSections = extractor.extract(processed.content, {
+        id: page.id,
+        title: processed.title,
+        url: processed.url,
+      })
+
+      allSections.push(...pageSections)
+    }
+
+    const output: KnowledgeSections = {
+      generatedAt: new Date().toISOString(),
+      sections: allSections,
+      totalSections: allSections.length,
+      version: 1,
+    }
+
+    const sectionsPath = join(
+      outputPath,
+      sectionsConfig.outputPath ?? "sections.json",
+    )
+    await mkdir(dirname(sectionsPath), {recursive: true}).catch(() => {})
+    await writeFile(sectionsPath, JSON.stringify(output, null, 2), "utf-8")
+
+    if (this.config.verbose) {
+      console.log(
+        `Generated ${allSections.length} sections at ${chalk.blue.bold(sectionsPath)}`,
+      )
+    }
   }
 }

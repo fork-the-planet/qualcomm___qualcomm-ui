@@ -3,6 +3,8 @@ title: Button
 group: Buttons
 description: Buttons let users perform actions instantly, such as submitting forms, navigating pages, or triggering app functions. Built with comprehensive state management and semantic color coding, they communicate purpose and priority while maintaining consistent behavior across desktop and mobile environments.
 component: Button
+keywords:
+  [button, click, submit, action, form, cta, call to action, interactive]
 ---
 
 import {TypeDocAttributes, TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
@@ -21,11 +23,19 @@ import {Button} from "@qualcomm-ui/react/button"
 
 ### Variants
 
+::: meta
+keywords: [button variants, fill button, outline button, ghost button, button styles]
+:::
+
 Buttons come in three variants: `fill`, `outline`, and `ghost`. Customize these with the [variant](./#variant) property.
 
 <Demo name="ButtonShowcaseDemo" component={demos.ButtonShowcaseDemo} />
 
 ### Emphasis
+
+::: meta
+keywords: [button emphasis, button colors, neutral button, primary button, danger button]
+:::
 
 Control the visual [emphasis](./#emphasis) with different colors: `neutral`, `primary`, and `danger`.
 
@@ -33,11 +43,19 @@ Control the visual [emphasis](./#emphasis) with different colors: `neutral`, `pr
 
 ### Sizes and Icons
 
+::: meta
+keywords: [button size, button icons, startIcon, endIcon, icon button]
+:::
+
 Control dimensions with the [size](./#size) prop. Icons are supplied using the [startIcon](./#startIcon) and [endIcon](./#endIcon) props.
 
 <Demo name="ButtonSizesDemo" component={demos.ButtonSizesDemo} />
 
 ### Compact Density
+
+::: meta
+keywords: [button density, compact button, button padding, button height]
+:::
 
 Use the [density](./#density) prop to reduce the padding and height of the button. The options are `default` and `compact`.
 
@@ -45,9 +63,19 @@ Use the [density](./#density) prop to reduce the padding and height of the butto
 
 ### Variant Combinations
 
+::: meta
+
+keywords: [button variant combinations, button matrix, all button styles]
+
+:::
+
 <Demo name="ButtonVariantsDemo" component={demos.ButtonVariantsDemo} />
 
 ### Contrast Colors
+
+::: meta
+keywords: [button contrast, high contrast button, button accessibility, button on dark background]
+:::
 
 <Demo name="ButtonContrastDemo" component={demos.ButtonContrastDemo} />
 
@@ -55,17 +83,29 @@ Use the [density](./#density) prop to reduce the padding and height of the butto
 
 ### \<Button\>
 
+::: meta
+keywords: [Button component, ButtonProps, button API, button properties]
+:::
+
 <TypeDocProps name="ButtonProps" />
 
 <TypeDocAttributes name={["QdsButtonRootBindings"]} />
 
 ### Start Icon
 
+::: meta
+keywords: [button start icon, leading icon, icon before text, startIcon prop]
+:::
+
 Provided via the [startIcon](./#startIcon) prop.
 
 <TypeDocAttributes name="QdsButtonStartIconBindings" />
 
 ### End Icon
+
+::: meta
+keywords: [button end icon, trailing icon, icon after text, endIcon prop]
+:::
 
 Provided via the [endIcon](./#endIcon) prop.
 

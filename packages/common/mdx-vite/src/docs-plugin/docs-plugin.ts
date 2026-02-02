@@ -264,6 +264,7 @@ class PluginState {
       pageTitlePrefix:
         exportsConfig.pageTitlePrefix ?? globalConfig.pageTitlePrefix,
       routeDir: this.routesDir,
+      sections: exportsConfig.sections,
     })
 
     this.exports.pages = pageIds

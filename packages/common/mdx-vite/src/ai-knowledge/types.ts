@@ -8,6 +8,7 @@ import type {KnowledgePageData} from "@qualcomm-ui/mdx-common"
 import type {
   KnowledgeExtraFile,
   KnowledgeIntegrationConfig,
+  SectionExportConfig,
 } from "../docs-plugin"
 
 export type KnowledgeMdxPlugin = (opts: KnowledgePageData) => Plugin
@@ -46,6 +47,11 @@ export interface AiKnowledgeConfig extends KnowledgeIntegrationConfig {
   outputMode: "per-page" | "aggregated"
   outputPath: string
   routeDir: string
+  /**
+   * Configuration for JSON section exports. Automatically enabled when
+   * outputMode is "per-page".
+   */
+  sections?: SectionExportConfig
   verbose?: boolean
 }
 

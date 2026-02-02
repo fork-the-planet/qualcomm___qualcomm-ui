@@ -318,11 +318,40 @@ export interface KnowledgeExportsConfig {
   pageTitlePrefix?: string
 
   /**
+   * Configuration for JSON section exports. Sections are automatically
+   * generated when exports are enabled.
+   */
+  sections?: SectionExportConfig
+
+  /**
    * Output directory for exported markdown files, relative to public dir.
    *
    * @default 'exports/md'
    */
   staticPath?: string
+}
+
+/**
+ * Configuration for header-scoped section exports.
+ */
+export interface SectionExportConfig {
+  /**
+   * Header depths that define section boundaries.
+   * @default [1, 2, 3]
+   */
+  depths?: number[]
+
+  /**
+   * Minimum content length to create a section entry.
+   * @default 0
+   */
+  minContentLength?: number
+
+  /**
+   * Output path for sections.json, relative to the manifest path.
+   * @default 'sections.json'
+   */
+  outputPath?: string
 }
 
 /**

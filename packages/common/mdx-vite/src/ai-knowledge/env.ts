@@ -109,6 +109,7 @@ export function loadKnowledgeConfigFromEnv(
     docPropsPath: resolvedConfig.typeDocProps,
     exclude,
     extraFiles: fileConfig?.extraFiles,
+    manifestOutputPath: outputPath,
     metadata: mergedMetadata,
     outputPath,
     pageTitlePrefix:
@@ -207,6 +208,7 @@ export function loadEnvironmentConfigs(
         merged.exclude ??
         (process.env.FILE_EXCLUDE_PATTERN ?? "").split(",").filter(Boolean),
       extraFiles: merged.extraFiles,
+      manifestOutputPath: merged.outputPath,
       metadata: mergedMetadata,
       outputMode: cliOpts?.outputMode ?? merged.outputMode ?? "per-page",
       outputPath: merged.outputPath,
