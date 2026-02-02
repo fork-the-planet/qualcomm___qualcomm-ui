@@ -34,7 +34,7 @@ keywords: [term1, term2, ...]
 
 ## Rules
 
-1. **Only add metadata that provides NEW search terms** not already in the visible content
+1. **Only add metadata that provides NEW search terms** not already in the markdown content (not including demos). The demos are not indexed, but the markdown content is.
 2. **Omit metadata** if it merely redescribes what's already written
 3. Place meta blocks immediately after section headings (before content)
 
