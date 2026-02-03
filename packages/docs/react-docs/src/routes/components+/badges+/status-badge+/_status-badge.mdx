@@ -2,7 +2,15 @@
 title: Status Badge
 description: The Status Badge component uses color-coded indicators to show a user's state or system condition. Commonly used in profiles to display availability such as active, away, or offline, it remains clear, accessible, and consistent across all sizes, helping users identify status instantly.
 component: StatusBadge
-keywords: [status indicator, availability badge, presence indicator, online status, user state, dot badge]
+keywords:
+  [
+    status indicator,
+    availability badge,
+    presence indicator,
+    online status,
+    user state,
+    dot badge,
+  ]
 ---
 
 import {TypeDocAttributes, TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
@@ -21,6 +29,10 @@ import {StatusBadge} from "@qualcomm-ui/react/badge"
 
 ### Emphasis
 
+::: meta
+keywords: [neutral, brand, info, success, warning, danger, color-coded status]
+:::
+
 Use the [emphasis](./#emphasis-1) prop to convey semantic meaning with colors.
 
 <Demo
@@ -30,17 +42,29 @@ Use the [emphasis](./#emphasis-1) prop to convey semantic meaning with colors.
 
 ### Variant
 
+::: meta
+keywords: [solid badge, hollow badge, bordered]
+:::
+
 The [variant](./#variant-1) prop controls the aspect of the badge. Two variants are available: `filled` (default) and `outlined`.
 
 <Demo name="StatusBadgeVariantDemo" component={demos.StatusBadgeVariantDemo} />
 
 ### Size
 
+::: meta
+keywords: [small, medium, large, extra small, extra large]
+:::
+
 Control dimensions using the [size](./#size-1) prop. Five sizes are available: `xs`, `sm`, `md` (default), `lg`, and `xl`.
 
 <Demo name="StatusBadgeSizeDemo" component={demos.StatusBadgeSizeDemo} />
 
 ### Disabled
+
+::: meta
+keywords: [inactive badge, grayed out, dimmed status]
+:::
 
 Set the [disabled](./#disabled-1) prop to visually indicate that the badge is inactive.
 
