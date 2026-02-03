@@ -3,7 +3,7 @@
 
 interface UiComponent {
   description: string
-  fileName: string
+  fileName?: string
   name: string
   planned?: boolean
   url: string
@@ -58,6 +58,13 @@ export const componentList: UiComponent[] = [
     fileName: "button.svg",
     name: "Button",
     url: "/components/button",
+  },
+  {
+    description:
+      "Cards present information in a compact and visually appealing way.",
+    name: "Card",
+    planned: true,
+    url: "/components/card",
   },
   {
     description:
