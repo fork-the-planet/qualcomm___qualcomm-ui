@@ -1,9 +1,16 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
+import type {Root} from "mdast"
+import remarkParse from "remark-parse"
+import {unified} from "unified"
 import {describe, expect, test} from "vitest"
 
 import {SectionExtractor} from "../section-extractor"
+
+function parseMarkdown(markdown: string): Root {
+  return unified().use(remarkParse).parse(markdown)
+}
 
 describe("SectionExtractor", () => {
   const pageInfo = {
@@ -29,7 +36,7 @@ Section one content.
 Section two content.
 `
       const extractor = new SectionExtractor({depths: [2, 3]})
-      const sections = extractor.extract(markdown, pageInfo)
+      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections).toHaveLength(2)
       expect(sections[0].headerPath).toEqual(["Test Page", "Section One"])
@@ -55,7 +62,7 @@ Basic example content.
 Advanced example content.
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(markdown, pageInfo)
+      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections).toHaveLength(3)
       expect(sections[0].headerPath).toEqual(["Test Page", "Examples"])
@@ -76,7 +83,7 @@ Advanced example content.
 Content here.
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(markdown, pageInfo)
+      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections[0].sectionId).toBe("test-page-getting-started")
     })
@@ -90,7 +97,7 @@ Content here.
 Install content.
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(markdown, pageInfo)
+      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections[0].url).toBe(
         "https://docs.example.com/test-page#installation",
@@ -116,7 +123,7 @@ Variants content.
 Sizes content.
 `
       const extractor = new SectionExtractor({depths: [2, 3]})
-      const sections = extractor.extract(markdown, {
+      const sections = extractor.extract(parseMarkdown(markdown), {
         ...pageInfo,
         title: "Button",
       })
@@ -148,7 +155,7 @@ Content B.
 Nested B content.
 `
       const extractor = new SectionExtractor({depths: [2, 3]})
-      const sections = extractor.extract(markdown, pageInfo)
+      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections).toHaveLength(4)
       expect(sections[0].headerPath).toEqual(["Test Page", "Section A"])
@@ -182,7 +189,7 @@ category: examples
 Example content here.
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(markdown, pageInfo)
+      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections[0].metadata).toEqual({
         category: "examples",
@@ -204,7 +211,7 @@ component: Button
 Example content only.
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(markdown, pageInfo)
+      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections[0].content).not.toContain("::: meta")
       expect(sections[0].content).not.toContain("component: Button")
@@ -220,7 +227,7 @@ Example content only.
 Just content, no metadata.
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(markdown, pageInfo)
+      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections[0].metadata).toEqual({})
     })
@@ -243,7 +250,7 @@ const code = true
 Second section content.
 `
       const extractor = new SectionExtractor({depths: [2]})
-      const sections = extractor.extract(markdown, pageInfo)
+      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections).toHaveLength(2)
 
@@ -277,7 +284,7 @@ Second section content.
 This section has exactly five words.
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(markdown, pageInfo)
+      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       // Word count includes words in content (5 words in the sentence)
       // The exact count may vary based on markdown serialization
@@ -297,7 +304,7 @@ const code = "not counted"
 \`\`\`
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(markdown, pageInfo)
+      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections[0].wordCount).toBe(3)
     })
@@ -319,7 +326,7 @@ const example = true
 Just text content.
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(markdown, pageInfo)
+      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections[0].codeExamples).toHaveLength(1)
       expect(sections[0].codeExamples[0].code).toBe("const example = true")
@@ -329,13 +336,61 @@ Just text content.
       expect(sections[1].codeExamples).toHaveLength(0)
     })
 
-    test("provides insertion offsets for splicing code back into content", () => {
+    test("rawContent includes code blocks while content excludes them", () => {
       const markdown = `
 # Test Page
 
 ## Examples
 
-Intro text before code.
+Intro text.
+
+\`\`\`tsx
+function Demo() {
+  return <div>Hello</div>
+}
+\`\`\`
+
+Outro text.
+`
+      const extractor = new SectionExtractor()
+      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
+
+      expect(sections[0].rawContent).toContain("```tsx")
+      expect(sections[0].rawContent).toContain("function Demo()")
+      expect(sections[0].rawContent).toContain("Intro text.")
+      expect(sections[0].rawContent).toContain("Outro text.")
+
+      expect(sections[0].content).not.toContain("```")
+      expect(sections[0].content).not.toContain("function Demo()")
+      expect(sections[0].content).toContain("Intro text.")
+      expect(sections[0].content).toContain("Outro text.")
+    })
+
+    test("converts links to inline code in content", () => {
+      const markdown = `
+# Test Page
+
+## Examples
+
+Check out [the docs](https://example.com/docs) for more info.
+`
+      const extractor = new SectionExtractor()
+      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
+
+      expect(sections[0].content).toContain("`the docs`")
+      expect(sections[0].content).not.toContain("https://example.com")
+      expect(sections[0].content).not.toContain("[the docs]")
+
+      expect(sections[0].rawContent).toContain("[the docs](https://example.com/docs)")
+    })
+
+    test("extracts multiple interleaved code blocks", () => {
+      const markdown = `
+# Test Page
+
+## Examples
+
+Intro text.
 
 \`\`\`tsx
 function Example() {
@@ -343,40 +398,28 @@ function Example() {
 }
 \`\`\`
 
-Text between code blocks.
+Middle text.
 
 \`\`\`css
 .example { color: red; }
 \`\`\`
 
-Outro text after code.
+Outro text.
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(markdown, pageInfo)
+      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       const section = sections[0]
 
       expect(section.codeExamples).toHaveLength(2)
-      expect(section.content).toContain("Intro text before code.")
-      expect(section.content).toContain("Text between code blocks.")
-      expect(section.content).toContain("Outro text after code.")
-      expect(section.content).not.toContain("```")
+      expect(section.codeExamples[0].language).toBe("tsx")
+      expect(section.codeExamples[1].language).toBe("css")
 
-      const code1 = section.codeExamples[0]
-      const code2 = section.codeExamples[1]
-
-      expect(code1.language).toBe("tsx")
-      expect(code1.insertionOffset).toBeGreaterThanOrEqual(0)
-
-      expect(code2.language).toBe("css")
-      expect(code2.insertionOffset).toBeGreaterThan(code1.insertionOffset)
-
-      const textBeforeCode1 = section.content.slice(0, code1.insertionOffset)
-      expect(textBeforeCode1).toContain("Intro text before code.")
-      expect(textBeforeCode1).not.toContain("Text between")
-
-      const textBeforeCode2 = section.content.slice(0, code2.insertionOffset)
-      expect(textBeforeCode2).toContain("Text between code blocks.")
+      expect(section.rawContent).toContain("```tsx")
+      expect(section.rawContent).toContain("```css")
+      expect(section.rawContent).toContain("Intro text.")
+      expect(section.rawContent).toContain("Middle text.")
+      expect(section.rawContent).toContain("Outro text.")
     })
   })
 
@@ -392,7 +435,7 @@ Outro text after code.
 #### H4 Section
 `
       const extractor = new SectionExtractor({depths: [2]})
-      const sections = extractor.extract(markdown, pageInfo)
+      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections).toHaveLength(1)
       expect(sections[0].headerPath).toEqual(["Test Page", "H2 Section"])
@@ -407,7 +450,7 @@ Page introduction.
 ## Section
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(markdown, pageInfo)
+      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       // H1 becomes a section with intro content
       expect(sections.length).toBeGreaterThanOrEqual(1)
@@ -424,7 +467,7 @@ Page introduction.
 This section has enough content to pass the minimum length filter.
 `
       const extractor = new SectionExtractor({minContentLength: 20})
-      const sections = extractor.extract(markdown, pageInfo)
+      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections).toHaveLength(1)
       expect(sections[0].headerPath).toEqual(["Test Page", "Content Section"])
@@ -441,7 +484,7 @@ This section has enough content to pass the minimum length filter.
 ## Another Empty
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(markdown, pageInfo)
+      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       // Empty sections should be filtered out
       expect(sections).toHaveLength(0)
@@ -454,7 +497,7 @@ This section has enough content to pass the minimum length filter.
 Just some content without subsections.
 `
       const extractor = new SectionExtractor({depths: [2, 3]})
-      const sections = extractor.extract(markdown, pageInfo)
+      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections).toHaveLength(0)
     })
@@ -474,7 +517,7 @@ This should not be extracted.
 Real content.
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(markdown, pageInfo)
+      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections).toHaveLength(1)
       expect(sections[0].headerPath).toEqual(["Test Page", "Real Section"])
@@ -493,7 +536,7 @@ Content here.
 More content.
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(markdown, pageInfo)
+      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections).toHaveLength(2)
       // kebabCase handles apostrophes and special chars

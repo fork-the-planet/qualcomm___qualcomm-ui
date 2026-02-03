@@ -9,8 +9,6 @@ export const remarkRemoveJsx: Plugin = () => {
     remove(tree, "mdxjsEsm")
     remove(tree, "mdxJsxFlowElement")
     remove(tree, "mdxJsxTextElement")
-    remove(tree, "mdxFlowExpression")
-    remove(tree, "mdxTextExpression")
     done()
   }
 }

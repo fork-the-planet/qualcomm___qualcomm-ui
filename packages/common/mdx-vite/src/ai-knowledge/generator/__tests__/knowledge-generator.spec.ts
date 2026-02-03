@@ -360,7 +360,7 @@ Check [anchor](./#section) link.
       expect(content).not.toContain("// preview")
     })
 
-    test("collects relative imports from demos", async () => {
+    test("includes relative imports as code blocks after demos", async () => {
       const config = createConfig()
       const generator = new KnowledgeGenerator(config)
       await generator.run()
@@ -369,8 +369,8 @@ Check [anchor](./#section) link.
       const mdFile = outputFiles.find((f) => f.includes("page-with-demos"))
       const content = await readFile(join(outputDir, mdFile!), "utf-8")
 
-      expect(content).toContain("## Related Source Files")
-      expect(content).toContain("### card.tsx")
+      expect(content).toContain('title="card.tsx"')
+      expect(content).not.toContain("## Related Source Files")
     })
   })
 

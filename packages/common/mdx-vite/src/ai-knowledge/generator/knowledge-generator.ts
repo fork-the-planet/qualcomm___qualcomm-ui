@@ -27,7 +27,7 @@ import {
   getPathSegmentsFromFileName,
   remarkRemoveJsx,
 } from "../../docs-plugin/internal"
-import {remarkExtractMetadata} from "../../docs-plugin/remark/remark-extract-meta"
+import {remarkExtractMeta} from "../../docs-plugin/remark/remark-extract-meta"
 import type {AiKnowledgeConfig} from "../types"
 
 import {getConfig, setConfig} from "./config"
@@ -351,7 +351,7 @@ export class KnowledgeGenerator {
 
       const stripMetaProcessor = unified()
         .use(remarkParse)
-        .use(remarkExtractMetadata, {})
+        .use(remarkExtractMeta, {})
         .use(remarkStringify)
       const strippedContent = String(
         await stripMetaProcessor.process(rawContent),

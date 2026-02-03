@@ -67,8 +67,8 @@ function parseMetaContent(content: string): MetadataValue {
  * result: {keywords: ["forms", "input", "data entry"], component: "NumberInput"}
  * ```
  */
-export const remarkExtractMetadata: Plugin<[MetadataValue], Root> = (
-  metadata,
+export const remarkExtractMeta: Plugin<[MetadataValue], Root> = (
+  metadata = {},
 ) => {
   return (tree) => {
     const nodesToRemove: Array<{index: number; parent: Parent}> = []

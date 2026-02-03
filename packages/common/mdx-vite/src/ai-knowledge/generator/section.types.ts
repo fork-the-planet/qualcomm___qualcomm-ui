@@ -11,12 +11,6 @@ export interface CodeExample {
   code: string
 
   /**
-   * Insertion point in `content` where this code block should be spliced
-   * to reconstruct the full section.
-   */
-  insertionOffset: number
-
-  /**
    * Programming language from fence info string.
    */
   language: string
@@ -44,9 +38,14 @@ export interface SectionEntry {
   codeExamples: CodeExample[]
 
   /**
-   * Explanatory prose content (code blocks removed).
+   * Prose content with code blocks removed. Used for formatted output.
    */
   content: string
+
+  /**
+   * Raw markdown content from the AST, including code blocks.
+   */
+  rawContent: string
 
   /**
    * Header depth (1-6).

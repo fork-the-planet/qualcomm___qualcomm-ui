@@ -33,6 +33,7 @@ import {
   remarkFrontmatterTitle,
   remarkSpoilers,
 } from "./remark"
+import {remarkExtractMeta} from "./remark/remark-extract-meta"
 import {transformerCodeAttribute, transformerNotationHidden} from "./shiki"
 
 /**
@@ -122,5 +123,6 @@ export function getRemarkPlugins(): PluggableList {
     remarkFrontmatterTitle,
     remarkFrontmatterDescription,
     remarkSpoilers,
+    remarkExtractMeta,
   ]
 }

@@ -1,9 +1,9 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {Code, Heading, Parent, Root, RootContent, Text} from "mdast"
+import type {Code, Heading, Link, Parent, Root, RootContent, Text} from "mdast"
 import remarkStringify from "remark-stringify"
-import {unified} from "unified"
+import {type Plugin, unified} from "unified"
 import {visit} from "unist-util-visit"
 
 import {kebabCase} from "@qualcomm-ui/utils/change-case"
@@ -154,11 +154,8 @@ export class SectionExtractor {
           metadata.type = name
         }
 
-        const proseBeforeCode = this.nodesToMarkdown(contentNodes).trim()
-
         codeExamples.push({
           code: codeNode.value,
-          insertionOffset: proseBeforeCode.length,
           language: codeNode.lang ?? "",
         })
       } else {
@@ -166,7 +163,8 @@ export class SectionExtractor {
       }
     }
 
-    const content = this.nodesToMarkdown(contentNodes)
+    const rawContent = this.nodesToRawContent(nodes)
+    const content = this.nodesToContent(contentNodes)
 
     const sectionId = this.generateSectionId(section.headerPath)
     const wordCount = this.countWords(content)
@@ -183,6 +181,7 @@ export class SectionExtractor {
       metadata,
       pageFrontmatter: pageInfo.frontmatter,
       pageId: pageInfo.id,
+      rawContent: rawContent.trim(),
       sectionId,
       startOffset,
       url,
@@ -262,10 +261,39 @@ export class SectionExtractor {
     return trimmed
   }
 
-  private nodesToMarkdown(nodes: RootContent[]): string {
+  /**
+   * Convert links to inline code. URLs are not relevant for text embeddings
+   * and will muddy the vector storage.
+   */
+  private transformLinks(): Plugin {
+    return () => (tree) => {
+      visit(tree, "link", (node: Link) => {
+        let text = ""
+        visit(node, "text", (textNode: Text) => {
+          text += textNode.value
+        })
+
+        Object.assign(node, {
+          children: undefined,
+          type: "inlineCode",
+          url: undefined,
+          value: text,
+        })
+      })
+    }
+  }
+
+  private nodesToRawContent(nodes: RootContent[]): string {
     const tree: Root = {children: nodes, type: "root"}
     const processor = unified().use(remarkStringify)
     return processor.stringify(tree)
+  }
+
+  private nodesToContent(nodes: RootContent[]): string {
+    const tree: Root = {children: structuredClone(nodes), type: "root"}
+    const processor = unified().use(this.transformLinks()).use(remarkStringify)
+    const transformed = processor.runSync(tree) as Root
+    return processor.stringify(transformed)
   }
 
   private generateSectionId(headerPath: string[]): string {
