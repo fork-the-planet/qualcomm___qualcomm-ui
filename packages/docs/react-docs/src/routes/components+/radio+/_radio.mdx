@@ -3,7 +3,15 @@ title: Radio
 group: Form Controls
 description: Radio buttons are essential form controls that present users with a clear set of options where only one selection is possible at a time.
 component: Radio
-keywords: [option button, choice input, mutually exclusive]
+keywords:
+  [
+    option button,
+    choice input,
+    mutually exclusive,
+    single select,
+    radio button group,
+    exclusive selection,
+  ]
 ---
 
 import {Demo} from "~components/demo"
@@ -43,6 +51,10 @@ Use the composite API when you need to modify the layout of the radio buttons.
 
 ### Disabled
 
+::: meta
+keywords: [inactive radio, read only]
+:::
+
 When [disabled](./#disabled) is true, the radio group becomes non-interactive and is typically rendered with reduced opacity to indicate its unavailable state.
 
 <Demo name="RadioDisabledDemo" component={demos.RadioDisabledDemo} />
@@ -59,6 +71,10 @@ Set the initial value using the [defaultValue](./#defaultValue) prop, or use [va
 
 ### Orientation
 
+::: meta
+keywords: [horizontal radio, vertical radio, radio row, radio column]
+:::
+
 Controls the layout direction of radio buttons within the group.
 
 <Demo name="RadioOrientationDemo" component={demos.RadioOrientationDemo} />
@@ -71,11 +87,19 @@ The radio supports three [sizes](./#size): `sm`, `md` (default), and `lg`.
 
 ### Indented
 
+::: meta
+keywords: [nested radio, radio spacing]
+:::
+
 Use the [indented](./#indented-1) prop to indent the radio items.
 
 <Demo name="RadioIndentedDemo" component={demos.RadioIndentedDemo} />
 
 ### Hint
+
+::: meta
+keywords: [helper text, radio description]
+:::
 
 Add a hint to provide additional context for the radio group.
 
@@ -87,6 +111,10 @@ Choose the form library that fits your needs—we've built examples with React H
 
 ### React Hook Form
 
+::: meta
+keywords: [form validation, Controller, error message, required field]
+:::
+
 Use [React Hook Form](https://react-hook-form.com/) to handle the radio state and validation. [ArkType](https://arktype.io/) works great for schema validation if you need it.
 
 <Demo
@@ -96,6 +124,10 @@ Use [React Hook Form](https://react-hook-form.com/) to handle the radio state an
 />
 
 ### Tanstack Form
+
+::: meta
+keywords: [form validation, validators, error message, required field]
+:::
 
 [Tanstack Form](https://tanstack.com/form/latest/docs/framework/react/guides/basic-concepts) handles radio validation with its built-in validators.
 

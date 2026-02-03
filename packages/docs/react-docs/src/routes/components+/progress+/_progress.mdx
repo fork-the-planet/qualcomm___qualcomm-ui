@@ -3,7 +3,18 @@ title: Progress
 group: Feedback
 description: Progress bars provide clear visual feedback about task completion or loading states, helping users understand system status and perceived remaining time.
 component: Progress
-keywords: [progress bar, loading bar, completion indicator]
+keywords:
+  [
+    progress bar,
+    loading bar,
+    completion indicator,
+    determinate,
+    indeterminate,
+    percent,
+    percentage,
+    task status,
+    upload progress,
+  ]
 ---
 
 import {Demo} from "~components/demo"
@@ -43,6 +54,10 @@ Build with the composite API for granular control. This API requires you to prov
 
 ### Label Orientation
 
+::: meta
+keywords: [horizontal label, side label, inline label]
+:::
+
 Use the [labelOrientation](./#labelOrientation) property to change the positioning of the label and value text relative to the progress bar.
 
 <Demo
@@ -55,6 +70,10 @@ Use the [labelOrientation](./#labelOrientation) property to change the positioni
 <Demo name="ProgressSizeDemo" component={demos.ProgressSizeDemo} />
 
 ### Emphasis (Color)
+
+::: meta
+keywords: [progress color, primary, neutral, color variant]
+:::
 
 <Demo name="ProgressEmphasisDemo" component={demos.ProgressEmphasisDemo} />
 
@@ -88,6 +107,10 @@ is equivalent to
 ```
 
 ## Accessibility
+
+::: meta
+keywords: [screen reader, a11y, aria-valuenow, wcag]
+:::
 
 - When the value is supplied, the component automatically provides the corresponding `aria-value*` attributes to the element.
 - The progress element is automatically marked with `role="progressbar"`.

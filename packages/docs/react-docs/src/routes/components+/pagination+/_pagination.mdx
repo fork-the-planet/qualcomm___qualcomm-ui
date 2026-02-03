@@ -3,7 +3,17 @@ title: Pagination
 group: Disclosure
 description: Pagination provides a control for moving through large, segmented content sets by exposing page numbers, previous and next actions, and optional overflow points when space is limited.
 component: Pagination
-keywords: [pager, page navigation, page numbers, data paging, page controls]
+keywords:
+  [
+    pager,
+    page navigation,
+    page numbers,
+    data paging,
+    page controls,
+    prev next,
+    table pagination,
+    list navigation,
+  ]
 ---
 
 import {TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
@@ -38,11 +48,19 @@ Customize the size of the component and its elements using the [size](./#size) p
 
 ### Page Size
 
+::: meta
+keywords: [items per page, rows per page, results per page, page size selector]
+:::
+
 Render a dropdown via `<Pagination.PageSize>` to adjust the number of data items per page.
 
 <Demo name="PaginationPageSizeDemo" component={demos.PaginationPageSizeDemo} />
 
 ### Page Metadata
+
+::: meta
+keywords: [item range display, pagination info, current page indicator]
+:::
 
 Show metadata about the current and total pages with `<Pagination.PageMetadata>`
 
@@ -52,6 +70,10 @@ To customize the text, supply children as a render prop.
 
 ### Ranges
 
+::: meta
+keywords: [siblingCount, ellipsis, truncated pages, visible page range, page button overflow]
+:::
+
 <Demo
   expanded
   name="PaginationRangesDemo"
@@ -59,6 +81,10 @@ To customize the text, supply children as a render prop.
 />
 
 ### Controlled State
+
+::: meta
+keywords: [useState pagination, onPageChange, onPageSizeChange, external state management]
+:::
 
 The Pagination component follows our [controlled state](/patterns/controlled-state) pattern for its [page](./#page) and [pageSize](./#pageSize) props.
 
