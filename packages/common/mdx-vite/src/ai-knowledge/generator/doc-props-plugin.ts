@@ -313,8 +313,9 @@ export class PropFormatter {
           const propNames = propsDoc.map((p) => p.name)
 
           Object.assign(node, {
-            lang: "typedoc-props",
-            meta: JSON.stringify(propNames),
+            data: {typeDocProps: {name: propsName, props: propNames}},
+            lang: null,
+            meta: null,
             type: "code",
             value: markdownContent,
           })

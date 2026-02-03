@@ -1,3 +1,5 @@
+import type {Root} from "mdast"
+
 import type {QuiComment} from "@qualcomm-ui/typedoc-common"
 
 export interface ImportedModule {
@@ -41,10 +43,11 @@ export interface SimplifiedProp {
 
 export interface ProcessedPage {
   content: string
-  demoFiles: string[]
   frontmatter: Record<string, string>
   /** Content before meta blocks are stripped, used for section extraction */
   rawContent: string
+  /** AST with data nodes preserved, used for section extraction */
+  sectionAst: Root
   title: string
   url: string | undefined
 }

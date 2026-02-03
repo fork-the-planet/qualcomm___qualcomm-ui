@@ -31,6 +31,7 @@ export interface SectionMetadata {
   component?: string
   keywords?: string[]
   props?: string[]
+  type?: string
 }
 
 /**

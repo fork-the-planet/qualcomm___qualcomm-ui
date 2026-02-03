@@ -3,10 +3,10 @@
 
 import AdmZip from "adm-zip"
 import chalk from "chalk"
-import type {Link, Parent} from "mdast"
+import type {Link, Parent, Root} from "mdast"
 import {minimatch} from "minimatch"
 import {mkdir, readdir, readFile, rm, stat, writeFile} from "node:fs/promises"
-import {basename, dirname, extname, join, relative, resolve} from "node:path"
+import {basename, dirname, join, relative, resolve} from "node:path"
 import remarkFrontmatter from "remark-frontmatter"
 import remarkMdx from "remark-mdx"
 import remarkParse from "remark-parse"
@@ -33,21 +33,12 @@ import type {AiKnowledgeConfig} from "../types"
 import {getConfig, setConfig} from "./config"
 import {formatDemos} from "./demo-plugin"
 import {PropFormatter} from "./doc-props-plugin"
-import type {
-  ImportedModule,
-  MdxFlowExpression,
-  ProcessedPage,
-} from "./generator.types"
+import type {MdxFlowExpression, ProcessedPage} from "./generator.types"
 import {formatNpmInstallTabs} from "./npm-install-tabs-plugin"
 import {formatThemeNodes} from "./qds-theme-plugin"
 import {SectionExtractor} from "./section-extractor"
 import type {KnowledgeSections, SectionEntry} from "./section.types"
-import {
-  collectRelativeImports,
-  computeMd5,
-  extractMetadata,
-  getIntroLines,
-} from "./utils"
+import {computeMd5, extractMetadata, getIntroLines} from "./utils"
 
 /**
  * Generator class that encapsulates all knowledge generation logic with shared
@@ -306,9 +297,7 @@ export class KnowledgeGenerator {
     mdxContent: string,
     pageInfo: KnowledgePageData,
     frontmatter: Record<string, any>,
-  ): Promise<{content: string; demoFiles: string[]}> {
-    const demoFiles: string[] = []
-
+  ): Promise<Root> {
     const processor = unified()
       .use(remarkParse)
       .use(remarkMdx)
@@ -316,17 +305,14 @@ export class KnowledgeGenerator {
       .use(this.propFormatter.formatTypeDocProps())
       .use(this.formatFrontmatterExpressions(frontmatter))
       .use(await formatThemeNodes())
-      .use(formatDemos(pageInfo.demosFolder, demoFiles))
+      .use(formatDemos(pageInfo.demosFolder))
       .use(this.transformRelativeUrls(pageInfo.url))
 
     this.applyPlugins(pageInfo, processor)
 
     processor.use(remarkStringify)
 
-    const processed = await processor.process(mdxContent)
-    const processedContent = String(processed).replace(/\n\s*\n\s*\n/g, "\n\n")
-
-    return {content: processedContent, demoFiles}
+    return (await processor.run(processor.parse(mdxContent))) as Root
   }
 
   private async processMdxPage(
@@ -346,17 +332,19 @@ export class KnowledgeGenerator {
         .use(remarkStringify)
       const parsed = await processor.process(mdxContent)
       const frontmatter = (parsed.data as any)?.frontmatter || {}
-      const {content: processedContent, demoFiles} =
-        await this.processMdxContent(String(parsed), pageInfo, frontmatter)
+      const ast = await this.processMdxContent(
+        String(parsed),
+        pageInfo,
+        frontmatter,
+      )
+
       const removeJsxProcessor = unified()
-        .use(remarkParse)
         .use(remarkMdx)
         .use(remarkFrontmatter, ["yaml"])
         .use(remarkRemoveJsx)
         .use(remarkStringify)
-      const removedJsx = String(
-        await removeJsxProcessor.process(processedContent),
-      )
+      const sectionAst = removeJsxProcessor.runSync(ast) as Root
+      const removedJsx = String(removeJsxProcessor.stringify(sectionAst))
       const rawContent = removedJsx
         .replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, "")
         .replace(/(^#{1,6} .*\\<[^>]+)>/gm, "$1\\>")
@@ -373,9 +361,9 @@ export class KnowledgeGenerator {
 
       return {
         content: strippedContent.trim(),
-        demoFiles,
         frontmatter,
         rawContent: rawContent.trim(),
+        sectionAst,
         title,
         url: pageInfo.url,
       }
@@ -595,44 +583,6 @@ export class KnowledgeGenerator {
         lines.push(content)
         lines.push("")
 
-        if (processedPage.demoFiles.length > 0) {
-          if (this.config.verbose) {
-            console.log(
-              `Collecting imports for ${page.name} from ${processedPage.demoFiles.length} demo files`,
-            )
-          }
-
-          const allImports: ImportedModule[] = []
-          for (const demoFile of processedPage.demoFiles) {
-            const imports = await collectRelativeImports(demoFile, new Set())
-            allImports.push(...imports)
-          }
-
-          const uniqueImports = Array.from(
-            new Map(allImports.map((m) => [m.path, m])).values(),
-          )
-
-          if (this.config.verbose) {
-            console.log(
-              `  Collected ${uniqueImports.length} unique import modules`,
-            )
-          }
-
-          if (uniqueImports.length > 0) {
-            lines.push("## Related Source Files")
-            lines.push("")
-            for (const importedModule of uniqueImports) {
-              const ext = extname(importedModule.path).slice(1)
-              lines.push(`### ${basename(importedModule.path)}`)
-              lines.push("")
-              lines.push(`\`\`\`${ext}`)
-              lines.push(importedModule.content)
-              lines.push("```")
-              lines.push("")
-            }
-          }
-        }
-
         const fileContent = lines.join("\n")
         const fileName = `${kebabCase(page.id || page.name)}.md`
         const outfile = `${resolve(this.config.outputPath)}/${fileName}`
@@ -753,7 +703,7 @@ export class KnowledgeGenerator {
 
       const filteredFrontmatter = this.filterFrontmatter(processed.frontmatter)
 
-      const pageSections = extractor.extract(processed.rawContent, {
+      const pageSections = extractor.extract(processed.sectionAst, {
         frontmatter: filteredFrontmatter,
         id: page.id,
         title: processed.title,

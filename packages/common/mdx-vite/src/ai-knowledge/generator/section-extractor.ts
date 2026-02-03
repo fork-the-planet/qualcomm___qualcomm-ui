@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
 import type {Code, Heading, Parent, Root, RootContent, Text} from "mdast"
-import remarkParse from "remark-parse"
 import remarkStringify from "remark-stringify"
 import {unified} from "unified"
 import {visit} from "unist-util-visit"
@@ -58,10 +57,9 @@ export class SectionExtractor {
   }
 
   /**
-   * Extracts sections from processed markdown content.
+   * Extracts sections from a parsed AST.
    */
-  extract(markdown: string, pageInfo: PageInfo): SectionEntry[] {
-    const tree = unified().use(remarkParse).parse(markdown)
+  extract(tree: Root, pageInfo: PageInfo): SectionEntry[] {
     const sections: SectionEntry[] = []
     const headerStack: HeaderInfo[] = [{depth: 1, text: pageInfo.title}]
 
@@ -146,14 +144,14 @@ export class SectionExtractor {
 
     for (const node of nodes) {
       if (node.type === "code") {
-        const codeNode = node as Code
+        const codeNode = node as Code & {
+          data?: {typeDocProps?: {name: string; props: string[]}}
+        }
 
-        if (codeNode.lang === "typedoc-props" && codeNode.meta) {
-          const propNames = JSON.parse(codeNode.meta) as string[]
-          if (propNames.length > 0) {
-            metadata.props = [...(metadata.props ?? []), ...propNames]
-          }
-          codeNode.lang = null
+        if (codeNode.data?.typeDocProps) {
+          const {name, props} = codeNode.data.typeDocProps
+          metadata.props = [...(metadata.props ?? []), ...props]
+          metadata.type = name
         }
 
         const proseBeforeCode = this.nodesToMarkdown(contentNodes).trim()

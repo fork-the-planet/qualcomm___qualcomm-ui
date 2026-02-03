@@ -1,6 +1,7 @@
 import {createHash} from "node:crypto"
 import {access, readFile} from "node:fs/promises"
 import {dirname, join, resolve} from "node:path"
+import ts from "typescript"
 
 import {getConfig} from "./config"
 import type {ImportedModule} from "./generator.types"
@@ -46,13 +47,28 @@ export function getIntroLines(projectName?: string, description?: string) {
 }
 
 export function extractRelativeImports(content: string): string[] {
+  const sourceFile = ts.createSourceFile(
+    "temp.ts",
+    content,
+    ts.ScriptTarget.Latest,
+    false,
+    ts.ScriptKind.TSX,
+  )
+
   const imports: string[] = []
-  const importRegex =
-    /^import\s+(?:{[^}]*}|[\w*]+|\*\s+as\s+\w+)?\s*(?:,\s*{[^}]*})?\s*from\s+["'](\.[^"']+)["']/gm
-  let match: RegExpExecArray | null
-  while ((match = importRegex.exec(content)) !== null) {
-    imports.push(match[1])
+
+  for (const statement of sourceFile.statements) {
+    if (
+      ts.isImportDeclaration(statement) &&
+      ts.isStringLiteral(statement.moduleSpecifier)
+    ) {
+      const path = statement.moduleSpecifier.text
+      if (path.startsWith(".")) {
+        imports.push(path)
+      }
+    }
   }
+
   return imports
 }
 

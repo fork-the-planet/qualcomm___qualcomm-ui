@@ -1,23 +1,64 @@
-import type {Parent} from "mdast"
+import type {Code, Parent} from "mdast"
 import type {MdxJsxAttribute, MdxJsxFlowElement} from "mdast-util-mdx-jsx"
 import {readFile} from "node:fs/promises"
-import {join} from "node:path"
+import {basename, extname, join} from "node:path"
 import type {Plugin} from "unified"
 import {visit} from "unist-util-visit"
 
 import {kebabCase} from "@qualcomm-ui/utils/change-case"
 
 import {getConfig} from "./config"
-import {exists, removePreviewLines} from "./utils"
+import type {ImportedModule} from "./generator.types"
+import {
+  exists,
+  extractRelativeImports,
+  removePreviewLines,
+  resolveModulePath,
+} from "./utils"
+
+async function collectDemoImports(
+  demoCode: string,
+  demoFilePath: string,
+  visited: Set<string> = new Set(),
+): Promise<ImportedModule[]> {
+  const modules: ImportedModule[] = []
+  const relativeImports = extractRelativeImports(demoCode)
+
+  for (const importPath of relativeImports) {
+    const resolvedPath = await resolveModulePath(importPath, demoFilePath)
+    if (!resolvedPath || visited.has(resolvedPath)) {
+      continue
+    }
+    visited.add(resolvedPath)
+
+    try {
+      const importContent = await readFile(resolvedPath, "utf-8")
+      modules.push({
+        content: importContent,
+        path: resolvedPath,
+      })
+      const nestedModules = await collectDemoImports(
+        importContent,
+        resolvedPath,
+        visited,
+      )
+      modules.push(...nestedModules)
+    } catch {
+      if (getConfig().verbose) {
+        console.log(`  Could not read import: ${resolvedPath}`)
+      }
+    }
+  }
+
+  return modules
+}
 
 /**
  * Creates a remark plugin that replaces demo JSX elements (QdsDemo, CodeDemo,
  * Demo) with code blocks containing the demo source code from the demos folder.
+ * Imported files are added as sibling code blocks immediately after the demo.
  */
-export function formatDemos(
-  demosFolder: string | undefined,
-  demoFiles: string[],
-): Plugin {
+export function formatDemos(demosFolder: string | undefined): Plugin {
   return () => async (tree) => {
     const promises: Promise<void>[] = []
 
@@ -113,14 +154,42 @@ export function formatDemos(
                 console.log(`  Replaced demo ${demoName} with source code`)
               }
 
-              demoFiles.push(demoFilePath)
-
-              Object.assign(node, {
+              const demoCodeBlock: Code = {
                 lang: isAngularDemo ? "angular-ts" : "tsx",
                 meta: null,
                 type: "code",
                 value: cleanedCode,
-              })
+              }
+
+              const importedModules = await collectDemoImports(
+                demoCode,
+                demoFilePath,
+              )
+
+              if (importedModules.length === 0 || !parent || index === undefined) {
+                Object.assign(node, demoCodeBlock)
+              } else {
+                const nodesToInsert: Code[] = [demoCodeBlock]
+
+                for (const importedModule of importedModules) {
+                  const ext = extname(importedModule.path).slice(1)
+                  const filename = basename(importedModule.path)
+                  nodesToInsert.push({
+                    lang: ext,
+                    meta: `title="${filename}"`,
+                    type: "code",
+                    value: importedModule.content,
+                  })
+                }
+
+                parent.children.splice(index, 1, ...nodesToInsert)
+
+                if (getConfig().verbose) {
+                  console.log(
+                    `  Added ${importedModules.length} imported file(s) after demo`,
+                  )
+                }
+              }
             } catch (error) {
               if (getConfig().verbose) {
                 console.log(`Error reading demo ${demoName}`, error)
