@@ -3,7 +3,8 @@ title: Header Bar
 group: Data Display
 description: The header bar provides a consistent, high-level control surface for the application. It features a logo that reinforces brand identity, navigation items for accessing primary sections, and an action bar that contains important tools and utilities.
 component: HeaderBar
-keywords: [app bar, top bar, navigation bar, navbar, toolbar, application header]
+keywords:
+  [app bar, top bar, navigation bar, navbar, toolbar, application header]
 ---
 
 import {Demo} from "~components/demo"
@@ -25,6 +26,10 @@ import {HeaderBar} from "@qualcomm-ui/react/header-bar"
 
 ### Basic Usage
 
+::: meta
+keywords: [avatar integration, user profile, icon buttons, responsive header]
+:::
+
 A typical header bar includes a logo, application title, nav items, and an action bar.
 
 <Demo name="HeaderBarShowcaseDemo" component={demos.HeaderBarShowcaseDemo} />
@@ -43,11 +48,19 @@ Use the [surface](./#surface) prop to set the background color. Available option
 
 ### Padding
 
+::: meta
+keywords: [header spacing, wide header]
+:::
+
 Set the [padding](./#padding-1) prop to `large` to increase horizontal padding.
 
 <Demo name="HeaderBarPaddingDemo" component={demos.HeaderBarPaddingDemo} />
 
 ### Menu Items
+
+::: meta
+keywords: [dropdown navigation, nav dropdown, submenu, nested navigation]
+:::
 
 Render a menu nav item with the [HeaderBar.MenuItem](#header-bar-menu-item) component. This component must be wrapped in a Menu.
 
