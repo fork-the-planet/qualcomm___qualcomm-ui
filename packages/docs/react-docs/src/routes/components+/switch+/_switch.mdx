@@ -3,7 +3,17 @@ title: Switch
 group: Form Controls
 description: Switches enable users to instantly activate or deactivate features, settings, or options with immediate visual confirmation. The component features a sliding thumb that moves along a track to communicate the current state.
 component: Switch
-keywords: [toggle switch, on off toggle, boolean toggle]
+keywords:
+  [
+    toggle switch,
+    on off toggle,
+    boolean toggle,
+    ios style toggle,
+    settings toggle,
+    binary input,
+    enable disable toggle,
+    true false control,
+  ]
 ---
 
 import {Demo} from "~components/demo"
@@ -37,6 +47,10 @@ Build with the composite API for granular control. This API requires you to prov
 
 ### States
 
+::: meta
+keywords: [checked state, unchecked state, defaultChecked]
+:::
+
 Based on the inputs, the switch will render as checked or unchecked.
 
 <Demo name="SwitchStatesDemo" component={demos.SwitchStatesDemo} />
@@ -55,11 +69,19 @@ Use the [size](./#size) prop to change the size of the switch. The default size 
 
 ### Hint
 
+::: meta
+keywords: [helper text, switch description, supporting text]
+:::
+
 Add a hint to provide additional context below the switch.
 
 <Demo name="SwitchHintDemo" component={demos.SwitchHintDemo} />
 
 ### Controlled State
+
+::: meta
+keywords: [state management, useState switch, programmatic switch control]
+:::
 
 Set the initial value using the [defaultChecked](./#defaultChecked) prop, or use [checked](./#checked) and [onCheckedChange](./#onCheckedChange) to control the value manually. These props follow our [controlled state](/patterns/controlled-state) pattern.
 
@@ -75,6 +97,10 @@ Choose the form library that fits your needs—we've built examples with React H
 
 ### React Hook Form
 
+::: meta
+keywords: [switch validation, form error handling]
+:::
+
 Use [React Hook Form](https://react-hook-form.com/) to handle the switch state and validation. [ArkType](https://arktype.io/) works great for schema validation if you need it.
 
 <Demo
@@ -84,6 +110,10 @@ Use [React Hook Form](https://react-hook-form.com/) to handle the switch state a
 />
 
 ### Tanstack Form
+
+::: meta
+keywords: [tanstack switch validation, field validators]
+:::
 
 [Tanstack Form](https://tanstack.com/form/latest/docs/framework/react/guides/basic-concepts) handles switch validation with its built-in validators.
 

@@ -3,6 +3,18 @@ title: Tree
 group: Disclosure
 description: Tree components display hierarchical data in a collapsible structure, allowing users to explore nested relationships while keeping the interface organized and navigable.
 component: Tree
+keywords:
+  [
+    treeview,
+    hierarchy,
+    nested data,
+    parent-child,
+    collapsible,
+    expandable,
+    file browser,
+    directory,
+    folder structure,
+  ]
 ---
 
 import {Demo} from "~components/demo"
@@ -38,6 +50,10 @@ These defaults can be overridden in the `TreeCollection` [constructor](./#constr
 
 ### Node Shorthand
 
+::: meta
+keywords: [file explorer, folder tree, directory view, renderBranch, renderLeaf]
+:::
+
 We expose the `<Tree.Nodes>` shorthand for rendering Branch and Leaf nodes. Use its [renderBranch](./#renderBranch) and [renderLeaf](./#renderLeaf) render props to customize the content of each tree item.
 
 Note that `<Tree.Nodes>` automatically renders child nodes for branches, so you only have to customize the content of the node itself.
@@ -45,6 +61,10 @@ Note that `<Tree.Nodes>` automatically renders child nodes for branches, so you 
 <Demo name="TreeNodeShorthandDemo" component={demos.TreeNodeShorthandDemo} />
 
 ### Nodes
+
+::: meta
+keywords: [custom tree nodes, recursive tree, manual rendering, TreeNodeProvider]
+:::
 
 You can bring your own `TreeNodes` to create your own abstraction for the tree.
 
@@ -55,6 +75,10 @@ You can bring your own `TreeNodes` to create your own abstraction for the tree.
 
 ### Default Expanded
 
+::: meta
+keywords: [pre-expanded, initially open, open by default, expand on load]
+:::
+
 Expand nodes by default using the [defaultExpandedValue](./#defaultExpandedValue) prop. Or use [expandedValue](./#expandedValue) and [onExpandedChange](./#onExpandedChange) to control the expansion manually. These props follow our [controlled state](/patterns/controlled-state) pattern.
 
 <Demo
@@ -64,11 +88,19 @@ Expand nodes by default using the [defaultExpandedValue](./#defaultExpandedValue
 
 ### Checkbox Trees
 
+::: meta
+keywords: [selectable tree, multi-select, checkable nodes, tree selection]
+:::
+
 Use the `Tree.NodeCheckbox` to add a checkbox to each node. The checked state of the tree can be controlled using the [checkedValue](./#checkedValue), [onCheckedChange](./#onCheckedChange), and [defaultCheckedValue](./#defaultCheckedValue) props, which follow our [controlled state](/patterns/controlled-state) pattern.
 
 <Demo name="TreeCheckboxDemo" component={demos.TreeCheckboxDemo} />
 
 ### Checkbox selection state
+
+::: meta
+keywords: [cascading selection, parent child checkbox, indeterminate state]
+:::
 
 The Tree handles nested checkbox selection automatically:
 
@@ -141,11 +173,19 @@ You can disable nodes by setting the `disabled` property on the node object.
 
 ### Filtering
 
+::: meta
+keywords: [searchable tree, tree search, find in tree]
+:::
+
 Here's an example that filters the nodes using `matchSorter`.
 
 <Demo name="TreeFilteringDemo" component={demos.TreeFilteringDemo} />
 
 ### Links
+
+::: meta
+keywords: [navigation tree, clickable nodes, tree navigation, router links, anchor tree]
+:::
 
 Tree nodes can be links using [polymorphic composition](/polymorphic-components). Use the `render` prop on the `<Tree.BranchNode>` or `<Tree.LeafNode>` to specify the element type.
 
@@ -153,11 +193,19 @@ Tree nodes can be links using [polymorphic composition](/polymorphic-components)
 
 ### Sizes
 
+::: meta
+keywords: [tree density, compact tree, small tree]
+:::
+
 Tree item sizes are controlled using the [size](./#size) prop on the root of the tree.
 
 <Demo name="TreeSizeDemo" component={demos.TreeSizeDemo} />
 
 ### Add / Remove nodes
+
+::: meta
+keywords: [dynamic tree, editable tree, CRUD, modify nodes, insert node, delete node]
+:::
 
 The `TreeCollection` class exposes methods to handle the addition and removal of nodes. Here's an example of how to use them.
 

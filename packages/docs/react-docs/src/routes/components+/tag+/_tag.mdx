@@ -3,6 +3,19 @@ title: Tag
 group: Data Display
 description: Tags present static metadata or contextual information. They provide a fixed visual treatment, making them ideal for displaying system-defined values, attributes, or informational labels.
 component: Tag
+keywords:
+  [
+    label,
+    chip,
+    badge,
+    token,
+    pill,
+    metadata display,
+    category,
+    removable,
+    closable,
+    filter tag,
+  ]
 ---
 
 import {Demo} from "~components/demo"
@@ -27,6 +40,10 @@ Icons are supplied using the [startIcon](./#startIcon) and [endIcon](./#endIcon)
 
 ### Variants
 
+::: meta
+keywords: [clickable tag, removable tag, closable tag, interactive tag]
+:::
+
 Choose from three [variants](./#variant): `link`, `selectable` and `dismissable`.
 
 <Demo name="TagVariantsDemo" component={demos.TagVariantsDemo} />
@@ -50,6 +67,10 @@ Disable the tag by setting the [disabled](./#disabled) prop.
 <Demo name="TagStatesDemo" component={demos.TagStatesDemo} />
 
 ### Radius
+
+::: meta
+keywords: [pill shape, tag corners, tag shape]
+:::
 
 Control the border radius of the tag with the [radius](./#radius-1) prop. The default radius is `square`.
 

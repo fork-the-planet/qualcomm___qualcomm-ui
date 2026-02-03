@@ -3,6 +3,7 @@ title: Tooltip
 group: Overlays
 description: Tooltips appear on demand to explain UI elements, clarify functionality, or provide helpful context without permanently occupying screen space. They automatically position themselves relative to their trigger element.
 component: Tooltip
+keywords: [info tip, contextual help, title attribute]
 ---
 
 import {TypeDocAttributes, TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
@@ -57,11 +58,19 @@ Change the values in the example below and hover over the select to see the tool
 
 ### Close On Click / Escape
 
+::: meta
+keywords: [dismiss tooltip, keyboard shortcut, persist, keep open]
+:::
+
 By default, the tooltip will close when the `Escape` key is pressed or a click is detected. You can customize this behavior by using the [closeOnClick](./#closeOnClick) and [closeOnEscape](./#closeOnEscape) props.
 
 <Demo name="TooltipCloseEventsDemo" component={demos.TooltipCloseEventsDemo} />
 
 ### Controlled Visibility
+
+::: meta
+keywords: [programmatic, manual control, show hide, toggle visibility]
+:::
 
 Set the initial visibility using the [defaultOpen](./#defaultOpen) prop, or use [open](./#open) and [onOpenChange](./#onOpenChange) to control the visibility manually. These props follow our [controlled state](/patterns/controlled-state) pattern.
 
@@ -72,6 +81,10 @@ Set the initial visibility using the [defaultOpen](./#defaultOpen) prop, or use 
 />
 
 ### Disabled
+
+::: meta
+keywords: [prevent tooltip, suppress, turn off, inactive]
+:::
 
 You can disable the tooltip by using the [disabled](./#disabled-1) prop.
 
@@ -86,6 +99,10 @@ You can disable the tooltip by using the [disabled](./#disabled-1) prop.
 Shortcuts are enabled for common use cases.
 
 ### Arrow
+
+::: meta
+keywords: [pointer, caret, indicator, tail]
+:::
 
 If you don't wish to customize the arrow tip, you can omit it and `Tooltip.Arrow` will render the default one. At that, `<Tooltip.Arrow />` is equivalent to:
 
