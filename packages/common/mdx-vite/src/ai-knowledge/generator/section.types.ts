@@ -43,11 +43,6 @@ export interface SectionEntry {
   content: string
 
   /**
-   * Raw markdown content from the AST, including code blocks.
-   */
-  rawContent: string
-
-  /**
    * Header depth (1-6).
    */
   depth: number
@@ -77,6 +72,11 @@ export interface SectionEntry {
    * Source page identifier.
    */
   pageId: string
+
+  /**
+   * Raw markdown content from the AST, including code blocks.
+   */
+  rawContent: string
 
   /**
    * Generated section ID for anchor links.

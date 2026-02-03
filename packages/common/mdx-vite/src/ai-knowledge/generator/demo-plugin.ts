@@ -166,7 +166,11 @@ export function formatDemos(demosFolder: string | undefined): Plugin {
                 demoFilePath,
               )
 
-              if (importedModules.length === 0 || !parent || index === undefined) {
+              if (
+                importedModules.length === 0 ||
+                !parent ||
+                index === undefined
+              ) {
                 Object.assign(node, demoCodeBlock)
               } else {
                 const nodesToInsert: Code[] = [demoCodeBlock]

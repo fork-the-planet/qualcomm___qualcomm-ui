@@ -381,7 +381,9 @@ Check out [the docs](https://example.com/docs) for more info.
       expect(sections[0].content).not.toContain("https://example.com")
       expect(sections[0].content).not.toContain("[the docs]")
 
-      expect(sections[0].rawContent).toContain("[the docs](https://example.com/docs)")
+      expect(sections[0].rawContent).toContain(
+        "[the docs](https://example.com/docs)",
+      )
     })
 
     test("extracts multiple interleaved code blocks", () => {
