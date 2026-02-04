@@ -35,7 +35,7 @@ export interface SectionEntry {
   /**
    * Code examples extracted from this section.
    */
-  codeExamples: CodeExample[]
+  codeExamples?: CodeExample[]
 
   /**
    * Prose content with code blocks removed. Used for formatted output.
@@ -43,14 +43,10 @@ export interface SectionEntry {
   content: string
 
   /**
-   * Header depth (1-6).
+   * Hash of this section's contents. Includes {@link codeExamples}, {@link
+   * metadata}, {@link headerPath}, and {@link rawContent}.
    */
-  depth: number
-
-  /**
-   * End character offset in the source markdown (exclusive).
-   */
-  endOffset: number
+  hash: string
 
   /**
    * Breadcrumb path of headers leading to this section.
@@ -61,12 +57,12 @@ export interface SectionEntry {
   /**
    * Metadata extracted from ::: meta ::: blocks within this section.
    */
-  metadata: SectionMetadata
+  metadata?: SectionMetadata
 
   /**
    * Frontmatter from the source page.
    */
-  pageFrontmatter: Record<string, unknown>
+  pageFrontmatter?: Record<string, unknown>
 
   /**
    * Source page identifier.
@@ -85,19 +81,9 @@ export interface SectionEntry {
   sectionId: string
 
   /**
-   * Start character offset in the source markdown.
-   */
-  startOffset: number
-
-  /**
    * URL with anchor to this specific section.
    */
   url?: string
-
-  /**
-   * Approximate word count for context window planning.
-   */
-  wordCount: number
 }
 
 /**
@@ -105,6 +91,7 @@ export interface SectionEntry {
  */
 export interface KnowledgeSections {
   generatedAt: string
+  hash: string
   sections: SectionEntry[]
   totalSections: number
   version: 1

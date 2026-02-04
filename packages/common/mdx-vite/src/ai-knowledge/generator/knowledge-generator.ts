@@ -713,8 +713,11 @@ export class KnowledgeGenerator {
       allSections.push(...pageSections)
     }
 
+    const hash = computeMd5(JSON.stringify(allSections))
+
     const output: KnowledgeSections = {
       generatedAt: new Date().toISOString(),
+      hash,
       sections: allSections,
       totalSections: allSections.length,
       version: 1,

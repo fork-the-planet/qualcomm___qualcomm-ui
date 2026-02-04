@@ -37,7 +37,6 @@ interface HeaderInfo {
 }
 
 interface PendingSection {
-  depth: number
   headerPath: string[]
   nodes: RootContent[]
   startIndex: number
@@ -102,7 +101,6 @@ export class SectionExtractor {
         headerStack.push({depth: heading.depth, text: headingText})
 
         pendingSection = {
-          depth: heading.depth,
           headerPath: headerStack.map((h) => h.text),
           nodes: [],
           startIndex: i,
@@ -135,10 +133,6 @@ export class SectionExtractor {
       return null
     }
 
-    const startOffset = nodes[0]?.position?.start.offset ?? 0
-    const lastNode = nodes[nodes.length - 1]
-    const endOffset = lastNode?.position?.end.offset ?? 0
-
     const contentNodes: RootContent[] = []
     const codeExamples: CodeExample[] = []
 
@@ -167,25 +161,28 @@ export class SectionExtractor {
     const content = this.nodesToContent(contentNodes)
 
     const sectionId = this.generateSectionId(section.headerPath)
-    const wordCount = this.countWords(content)
     const url = pageInfo.url
       ? `${pageInfo.url}#${this.generateAnchorId(section.headerPath.at(-1) ?? "")}`
       : undefined
 
-    return {
-      codeExamples,
-      content: content.trim(),
-      depth: section.depth,
-      endOffset,
+    const hashData = {
       headerPath: section.headerPath,
-      metadata,
-      pageFrontmatter: pageInfo.frontmatter,
+      metadata: Object.keys(metadata).length ? metadata : undefined,
+      pageFrontmatter: Object.keys(pageInfo.frontmatter).length
+        ? pageInfo.frontmatter
+        : undefined,
       pageId: pageInfo.id,
       rawContent: rawContent.trim(),
+    }
+    const sectionHash = JSON.stringify(hashData)
+
+    return {
+      ...hashData,
+      codeExamples: codeExamples.length ? codeExamples : undefined,
+      content: content.trim(),
+      hash: sectionHash,
       sectionId,
-      startOffset,
       url,
-      wordCount,
     }
   }
 
@@ -302,10 +299,5 @@ export class SectionExtractor {
 
   private generateAnchorId(headerText: string): string {
     return kebabCase(headerText)
-  }
-
-  private countWords(text: string): number {
-    const words = text.match(/\b\w+\b/g)
-    return words?.length ?? 0
   }
 }
