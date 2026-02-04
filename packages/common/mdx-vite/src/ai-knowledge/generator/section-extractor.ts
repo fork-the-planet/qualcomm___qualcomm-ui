@@ -9,6 +9,7 @@ import {visit} from "unist-util-visit"
 import {kebabCase} from "@qualcomm-ui/utils/change-case"
 
 import type {CodeExample, SectionEntry, SectionMetadata} from "./section.types"
+import {computeMd5} from "./utils"
 
 export interface SectionExtractorOptions {
   /**
@@ -173,8 +174,9 @@ export class SectionExtractor {
         : undefined,
       pageId: pageInfo.id,
       rawContent: rawContent.trim(),
+      url,
     }
-    const sectionHash = JSON.stringify(hashData)
+    const sectionHash = computeMd5(JSON.stringify(hashData))
 
     return {
       ...hashData,
@@ -182,7 +184,6 @@ export class SectionExtractor {
       content: content.trim(),
       hash: sectionHash,
       sectionId,
-      url,
     }
   }
 
