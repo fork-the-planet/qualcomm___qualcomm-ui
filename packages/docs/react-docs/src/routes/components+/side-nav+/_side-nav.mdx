@@ -3,6 +3,7 @@ title: Side Nav
 group: Disclosure
 description: The side navigation provides a consistent, easy-to-scan way for users to move through major sections of an application. It stays visible as users browse, giving them a clear understanding of where they are and what options are available.
 component: SideNav
+keywords: [sidebar navigation, left nav, navigation tree, app sidebar]
 ---
 
 import {Demo} from "~components/demo"
@@ -40,6 +41,10 @@ These keys can be customized via the `TreeCollection` [constructor](./#construct
 
 ### Node Shorthand
 
+::: meta
+keywords: [render props, custom node rendering]
+:::
+
 We expose the `<SideNav.Nodes>` shorthand for rendering nodes. Use its [renderBranch](./#renderBranch) and [renderLeaf](./#renderLeaf) render props to customize the content of each tree node.
 
 Note that `<SideNav.Nodes>` automatically renders child nodes for branches, so you only have to customize the content of the node itself.
@@ -51,11 +56,19 @@ Note that `<SideNav.Nodes>` automatically renders child nodes for branches, so y
 
 ### Grouping
 
+::: meta
+keywords: [nav sections, categorize menu items, dividers]
+:::
+
 Group nodes using the collection's [groupChildren](./#groupChildren) method. This should be called on the top-level node of your SideNav. Nested groups are not supported.
 
 <Demo name="SideNavGroupsDemo" component={demos.SideNavGroupsDemo} />
 
 ### Default Expanded
+
+::: meta
+keywords: [initially open, pre-expanded branches]
+:::
 
 Expand nodes by default using the [defaultExpandedValue](./#defaultExpandedValue) prop. Or use [expandedValue](./#expandedValue) and [onExpandedChange](./#onExpandedChange) to control the expansion manually. These props follow our [controlled state](/patterns/controlled-state) pattern.
 
@@ -66,6 +79,10 @@ Expand nodes by default using the [defaultExpandedValue](./#defaultExpandedValue
 
 ### Disabled Nodes
 
+::: meta
+keywords: [non-interactive, unavailable item]
+:::
+
 You can disable nodes by setting the `disabled` property on the node object.
 
 <Demo
@@ -75,17 +92,29 @@ You can disable nodes by setting the `disabled` property on the node object.
 
 ### Filtering
 
+::: meta
+keywords: [search nav items, fuzzy search, filter input]
+:::
+
 Here's an example that filters the items using `matchSorter`.
 
 <Demo name="SideNavFilteringDemo" component={demos.SideNavFilteringDemo} />
 
 ### Links
 
+::: meta
+keywords: [router integration, clickable nav items, react-router]
+:::
+
 Side Nav nodes can be links using [polymorphic composition](/polymorphic-components). Use the `render` prop on the `<SideNav.LeafNode>` to specify the element type.
 
 <Demo name="SideNavLinksDemo" component={demos.SideNavLinksDemo} />
 
 ### Collapsed
+
+::: meta
+keywords: [minimize sidebar, icon-only mode, compact nav, hamburger menu]
+:::
 
 Side Nav can be collapsed to render only the top-level icons.
 
@@ -94,6 +123,10 @@ The open state of the panel can be controlled using the [open](./#open), [onOpen
 <Demo name="SideNavCollapsedDemo" component={demos.SideNavCollapsedDemo} />
 
 ### Tooltips
+
+::: meta
+keywords: [hover hints, icon labels]
+:::
 
 Consider wrapping collapsed nodes with the [Tooltip](/components/tooltip) component to provide context about each item. This is also useful for describing disabled nodes.
 

@@ -1,12 +1,19 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
+import type {Plugin} from "unified"
+
+import type {KnowledgePageData} from "@qualcomm-ui/mdx-common"
+
 import type {
   KnowledgeExtraFile,
   KnowledgeIntegrationConfig,
-} from "../docs-plugin/types"
+  SectionExportConfig,
+} from "../docs-plugin"
 
-export interface WebUiKnowledgeConfig extends KnowledgeIntegrationConfig {
+export type KnowledgeMdxPlugin = (opts: KnowledgePageData) => Plugin
+
+export interface AiKnowledgeConfig extends KnowledgeIntegrationConfig {
   clean?: boolean
   docPropsPath?: string
   /**
@@ -15,7 +22,7 @@ export interface WebUiKnowledgeConfig extends KnowledgeIntegrationConfig {
   environmentName?: string
   extraFiles?: KnowledgeExtraFile[]
   /**
-   * Generate bulk.zip containing all markdown files.
+   * Generate bulk.zip containing all Markdown files.
    *
    * @default true
    */
@@ -32,46 +39,25 @@ export interface WebUiKnowledgeConfig extends KnowledgeIntegrationConfig {
    * @default "exports"
    */
   manifestOutputPath?: string
+  /**
+   * Array of plugins to apply to MDX files during processing. Can be used to
+   * replace JSX components with markdown-friendly data, add metadata, and more.
+   */
+  mdxPlugins?: KnowledgeMdxPlugin[]
   outputMode: "per-page" | "aggregated"
   outputPath: string
   routeDir: string
+  /**
+   * Configuration for JSON section exports. Automatically enabled when
+   * outputMode is "per-page".
+   */
+  sections?: SectionExportConfig
   verbose?: boolean
-}
-
-/**
- * Resolved OpenWebUI integration config ready for upload operations.
- * Contains all credentials loaded from the env file.
- */
-export interface ResolvedOpenWebUiIntegration {
-  /**
-   * API key for authentication.
-   */
-  apiKey: string
-  /**
-   * Environment name this integration references.
-   */
-  environment: string
-  /**
-   * Knowledge base ID.
-   */
-  knowledgeId: string
-  /**
-   * Integration name (key from integrations.openWebUi).
-   */
-  name: string
-  /**
-   * Output path from the referenced environment.
-   */
-  outputPath: string
-  /**
-   * OpenWebUI instance URL.
-   */
-  url: string
 }
 
 export interface CliConfig
   extends Omit<
-    WebUiKnowledgeConfig,
+    AiKnowledgeConfig,
     "docPropsPath" | "metadata" | "outputPath" | "routeDir"
   > {
   envFilePath?: string

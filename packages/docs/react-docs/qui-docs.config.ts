@@ -172,7 +172,7 @@ export default {
         exclude: ["**/components+/overview*"],
       },
       extraFiles,
-      frontmatterFields: ["component"],
+      frontmatter: {include: ["component", "keywords"]},
     },
     integrations: {
       openWebUi: [{id: "qui-ai"}, {id: "saga-ai"}, {id: "saga-ai-test"}],

@@ -3,6 +3,16 @@ title: Avatar
 group: Data Display
 description: Avatars provide visual representation of users, accounts, or entities. They support multiple content types including icons, initials, and images, with optional status indicators to communicate presence or state information.
 component: Avatar
+keywords:
+  [
+    profile picture,
+    user photo,
+    thumbnail,
+    profile image,
+    user thumbnail,
+    initials,
+    presence indicator,
+  ]
 ---
 
 import {TypeDocAttributes, TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
@@ -34,11 +44,19 @@ The anatomy of the avatar component is as follows:
 
 ### Showcase
 
+::: meta
+keywords: [avatar with status, complete avatar example]
+:::
+
 Here's a typical usage example:
 
 <Demo name="AvatarShowcaseDemo" component={demos.AvatarShowcaseDemo} />
 
 ### Content
+
+::: meta
+keywords: [placeholder, broken image, image error]
+:::
 
 The `Avatar.Content` component displays alternative content within the avatar. Use it by itself to show initials or an icon, or together with `Avatar.Image` to provide fallback content if the image cannot be loaded.
 
@@ -58,11 +76,19 @@ When displaying initials or an icon, use the [variant](./#variant) prop on `Avat
 
 ### Status
 
+::: meta
+keywords: [presence indicator, online status]
+:::
+
 To indicate the status of the user or entity, use the `Avatar.Status` component and set its [status](./#status-1) prop to one of: `active`, `offline` (default), `away`, or `busy`.
 
 <Demo name="AvatarStatusDemo" component={demos.AvatarStatusDemo} />
 
 ### State Callback
+
+::: meta
+keywords: [image load event, error handling, load state, image loading]
+:::
 
 You can listen for changes to the avatar's state by using the [onStateChange](./#onStateChange) prop.
 

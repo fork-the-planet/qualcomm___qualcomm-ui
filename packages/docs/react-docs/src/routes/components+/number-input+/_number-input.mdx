@@ -3,6 +3,18 @@ title: Number Input
 group: Form Controls
 description: The number input component provides a structured way for users to input numerical data with built-in validation and controls. It combines a text input field with stepper buttons and can include unit selection functionality for measurements, currency, or other quantifiable values.
 component: NumberInput
+keywords:
+  [
+    numeric input,
+    increment,
+    decrement,
+    number field,
+    spinner,
+    stepper,
+    quantity,
+    counter,
+    form input,
+  ]
 ---
 
 import {Demo} from "~components/demo"
@@ -27,6 +39,10 @@ The simple API bundles all subcomponents together into a single component.
 
 ### Composite
 
+::: meta
+keywords: [number input subcomponents, custom number input layout]
+:::
+
 The composite pattern provides full control over the component's elements by composing individual subcomponents.
 
 <Demo
@@ -35,6 +51,10 @@ The composite pattern provides full control over the component's elements by com
 />
 
 ### Min and Max values
+
+::: meta
+keywords: [number range, value bounds, constrain value]
+:::
 
 Pass the [min](./#min) and [max](./#max) props to the root component to set the minimum and maximum values of the number input.
 
@@ -50,11 +70,19 @@ Pass the [step](./#step) prop to the root component to set the increment or decr
 
 ### States
 
-The following shows how the TextInput component appears in each interactive state.
+::: meta
+keywords: [disabled number input, readonly, required field]
+:::
+
+The following shows how the NumberInput component appears in each interactive state.
 
 <Demo name="NumberInputStatesDemo" component={demos.NumberInputStatesDemo} />
 
 ### Controlled Value
+
+::: meta
+keywords: [useState number input, two-way binding]
+:::
 
 Use the [value](./#value), [onValueChange](./#onValueChange) and [defaultValue](./#defaultValue) props to control the value of the input field. These props follow our [controlled state](/patterns/controlled-state) pattern.
 
@@ -71,6 +99,10 @@ Customize size using the [size](./#size) prop. The default size is `md`.
 
 ### Unit Selector
 
+::: meta
+keywords: [currency input, measurement units, unit dropdown]
+:::
+
 Add a unit selector to the number input by passing an array of [options](./#unit-option) to the [unitOptions](./#unitOptions) prop.
 
 The selected unit follows our [controlled state](/patterns/controlled-state) pattern: use [defaultUnit](./#defaultUnit) for uncontrolled state, or [unit](./#unit) with [onUnitChange](./#onUnitChange) for controlled state.
@@ -81,6 +113,10 @@ The selected unit follows our [controlled state](/patterns/controlled-state) pat
 />
 
 ### Error Text and Indicator
+
+::: meta
+keywords: [validation message, form validation error]
+:::
 
 Error messages are displayed using two props:
 

@@ -3,6 +3,7 @@ title: Dialog
 group: Overlays
 description: A dialog is a focused, overlay-based container used to present critical information or request user input that requires immediate attention. It appears above the application content, blocks underlying interaction, and guides the user toward a required decision or acknowledgement.
 component: Dialog
+keywords: [modal, popup, lightbox, confirm dialog, alert box, overlay window]
 ---
 
 import {TypeDocProps, TypeDocAttributes} from "@qualcomm-ui/react-mdx/typedoc"
@@ -27,11 +28,19 @@ The dialog component has two sizes: `sm` and `md`. Size governs the width of the
 
 ### Indicator Emphasis
 
+::: meta
+keywords: [dialog status, dialog severity, dialog intent, dialog icon]
+:::
+
 Use the [emphasis](./#emphasis) prop to change the intent of the dialog's indicator icon.
 
 <Demo name="DialogEmphasisDemo" component={demos.DialogEmphasisDemo} />
 
 ### Placement
+
+::: meta
+keywords: [dialog position, dialog alignment, vertical position, top center bottom]
+:::
 
 Use the [placement](./#placement) prop to change the placement of the dialog.
 
@@ -57,11 +66,19 @@ The default [scrollBehavior](./#scrollBehavior) is `outside`, which makes the en
 
 ### Inside Scroll
 
+::: meta
+keywords: [scrollable body, fixed height dialog, contained scroll]
+:::
+
 Set the [scrollBehavior](./#scrollBehavior) prop to `inside` to create an internal scroll area within the modal.
 
 <Demo name="DialogInsideScrollDemo" component={demos.DialogInsideScrollDemo} />
 
 ### Alert Dialog
+
+::: meta
+keywords: [confirmation dialog, delete confirmation, destructive action, warning dialog, dangerous action]
+:::
 
 Set the [role](./#role) prop to `alertdialog` to change the dialog component to an [alert dialog](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/alertdialog_role). This is recommended for situations where the dialog is used to notify users of urgent information that demands their immediate attention.
 
@@ -70,6 +87,10 @@ Set the [role](./#role) prop to `alertdialog` to change the dialog component to 
 ## Shortcuts
 
 ### \<Dialog.FloatingPortal\>
+
+::: meta
+keywords: [compound component, convenience wrapper, shorthand]
+:::
 
 A helper component that combines the portal, positioner, and content
 components. This shortcut is equivalent to:

@@ -65,7 +65,7 @@
   color: var(--color-text-neutral-primary);
   font: var(--font-static-heading-sm-default);
   position: absolute;
-  top: calc(200px / 2 + (16px / 2));
+  top: calc(150px / 2 + (16px / 2));
   z-index: 1;
 }
 

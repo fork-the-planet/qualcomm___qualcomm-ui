@@ -3,6 +3,16 @@ title: Checkbox
 group: Form Controls
 description: Checkboxes provide a straightforward way for users to make multiple selections from a set of options, whether they're choosing preferences, confirming actions, or filtering content.
 component: Checkbox
+keywords:
+  [
+    checkbox,
+    check box,
+    tick box,
+    multi-select,
+    boolean input,
+    form control,
+    indeterminate,
+  ]
 ---
 
 import {ComponentExplorer, Demo} from "~components/demo"
@@ -21,6 +31,10 @@ import {Checkbox} from "@qualcomm-ui/react/checkbox"
 ## Examples
 
 ### Simple
+
+::: meta
+keywords: [basic checkbox, default usage]
+:::
 
 The simple API provides a standalone component with built-in layout.
 
@@ -60,6 +74,10 @@ When [disabled](./#disabled) is true, the checkbox becomes non-interactive and i
 
 ### Controlled State
 
+::: meta
+keywords: [uncontrolled checkbox, useState]
+:::
+
 Set the initial value using the [defaultChecked](./#defaultChecked) prop, or use [checked](./#checked) and [onCheckedChange](./#onCheckedChange) to control the value manually. These props follow our [controlled state](/patterns/controlled-state) pattern.
 
 <Demo
@@ -70,9 +88,17 @@ Set the initial value using the [defaultChecked](./#defaultChecked) prop, or use
 
 ### Sizes
 
+::: meta
+keywords: [small checkbox, medium checkbox, large checkbox, sm md lg]
+:::
+
 <Demo expanded name="CheckboxSizesDemo" component={demos.CheckboxSizesDemo} />
 
 ### Hint
+
+::: meta
+keywords: [helper text, description text, supplementary text]
+:::
 
 Add a hint to provide additional context below the checkbox.
 
@@ -83,6 +109,10 @@ Add a hint to provide additional context below the checkbox.
 Choose the form library that fits your needs—we've built examples with React Hook Form and Tanstack Form to get you started.
 
 ### React Hook Form
+
+::: meta
+keywords: [form validation, error handling]
+:::
 
 Use [React Hook Form](https://react-hook-form.com/) to handle the checkbox state and validation. [ArkType](https://arktype.io/) works great for schema validation if you need it.
 

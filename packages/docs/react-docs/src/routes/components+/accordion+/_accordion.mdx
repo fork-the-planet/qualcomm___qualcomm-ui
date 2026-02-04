@@ -3,6 +3,17 @@ title: Accordion
 group: Disclosure
 description: Accordions organize content into collapsible sections, allowing users to expand and view information progressively without overwhelming the interface.
 component: Accordion
+keywords:
+  [
+    accordion,
+    expand,
+    collapse,
+    expandable,
+    collapsible,
+    disclosure,
+    faq,
+    toggle panel,
+  ]
 ---
 
 import {TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
@@ -19,6 +30,10 @@ import {Accordion} from "@qualcomm-ui/react/accordion"
 
 ## Usage
 
+::: meta
+keywords: [a11y, accessibility, keyboard shortcuts, usage guidelines]
+:::
+
 - The accordion requires each of its items to have a unique `value` input.
 - The accordion is keyboard-navigable once focused. Arrow keys can be used to move to the next or previous item. Home and End keys can be used to jump to the first or last item, respectively.
 
@@ -32,11 +47,19 @@ Here's a typical usage example that uses the shorthand syntax for the item.
 
 ### Composite
 
+::: meta
+keywords: [compound component, compositional API]
+:::
+
 The following example is equivalent to the previous example, but uses the composite approach.
 
 <Demo name="AccordionCompositeDemo" component={demos.AccordionCompositeDemo} />
 
 ### Composite Layout
+
+::: meta
+keywords: [chevron position, arrow position, caret position, indicator placement]
+:::
 
 Use the composite form only when the simple approach can't achieve your desired layout or behavior. The following example demonstrates how to display the expand/collapse indicator at the start of the trigger by changing its DOM position.
 
@@ -47,11 +70,19 @@ Use the composite form only when the simple approach can't achieve your desired 
 
 ### Multiple
 
+::: meta
+keywords: [expand all, multi-expand, open several]
+:::
+
 By default, only a single accordion section can be open at a time. Setting [multiple](./#multiple-1) allows multiple sections to be open or closed simultaneously.
 
 <Demo name="AccordionMultipleDemo" component={demos.AccordionMultipleDemo} />
 
 ### Collapsible
+
+::: meta
+keywords: [toggle closed, re-collapse, close same item]
+:::
 
 When [multiple](./#multiple-1) is not set, enabling [collapsible](./#collapsible-1) lets the user close an open accordion item by clicking it again.
 
@@ -61,6 +92,10 @@ When [multiple](./#multiple-1) is not set, enabling [collapsible](./#collapsible
 />
 
 ### Default Value
+
+::: meta
+keywords: [pre-expanded, initially open, start expanded]
+:::
 
 The [defaultValue](./#defaultValue) prop allows you to set the initial state for the accordion by specifying which accordion item or items (if [multiple](./#multiple-1) is set) should be open by default.
 It expects an array of values that should match those passed to each `Accordion.Item`.
@@ -72,12 +107,20 @@ It expects an array of values that should match those passed to each `Accordion.
 
 ### Disabled
 
+::: meta
+keywords: [inactive, non-interactive, prevent interaction]
+:::
+
 You can disable accordion items by setting their [disabled](./#disabled-2) prop. This prevents the item from being interacted with.
 You can disable the entire accordion by setting the [disabled](./#disabled-1) prop on `Accordion.Root`.
 
 <Demo name="AccordionDisabledDemo" component={demos.AccordionDisabledDemo} />
 
 ### Uncontained
+
+::: meta
+keywords: [borderless, no padding, edge-to-edge, flush alignment]
+:::
 
 Set the [uncontained](./#uncontained-1) prop when the accordion is not placed inside a container and needs to align flush with adjacent layout elements—such as when positioned directly below a paragraph of text.
 This prop removes the default horizontal padding from accordion items, allowing them to sit seamlessly within the surrounding content.
@@ -89,11 +132,19 @@ This prop removes the default horizontal padding from accordion items, allowing 
 
 ### Size
 
+::: meta
+keywords: [small, medium, large]
+:::
+
 Use the [size](./#size-1) prop to control the size of the accordion items. The available sizes are `sm`, `md` (default), and `lg`.
 
 <Demo name="AccordionSizeDemo" component={demos.AccordionSizeDemo} />
 
 ### Secondary Text
+
+::: meta
+keywords: [subtitle, helper text, item description]
+:::
 
 Use the `Accordion.ItemSecondaryText` component to display additional text opposite the trigger title.
 
@@ -104,6 +155,10 @@ Use the `Accordion.ItemSecondaryText` component to display additional text oppos
 
 ### Icon
 
+::: meta
+keywords: [leading icon, prefix icon, trigger icon]
+:::
+
 Pass an icon to the [icon](./#icon-1) prop on the `Accordion.ItemTrigger` element to display it next to the trigger title.
 
 <Demo name="AccordionIconDemo" component={demos.AccordionIconDemo} />
@@ -112,6 +167,10 @@ Pass an icon to the [icon](./#icon-1) prop on the `Accordion.ItemTrigger` elemen
 > In order to prevent visual confusion, only one icon can appear next to the trigger title. If you place the indicator at the start, the [icon prop](#icon) will be ignored.
 
 ### Controlled State
+
+::: meta
+keywords: [useState, React state, programmatic control]
+:::
 
 The Accordion follows our [controlled state](/patterns/controlled-state) pattern with these three props:
 
@@ -125,6 +184,10 @@ The Accordion follows our [controlled state](/patterns/controlled-state) pattern
 />
 
 ### Focus Callback
+
+::: meta
+keywords: [onFocus, focus tracking, focus listener]
+:::
 
 The [onFocusChange](./#onFocusChange) prop allows you to listen for focus events on the accordion's items.
 

@@ -3,6 +3,16 @@ title: Text Input
 group: Form Controls
 description: Text inputs are fundamental form components that provide a versatile foundation for data collection across web and mobile experiences. They support multiple configurations including labels, hint text, placeholder content, and start or end icons to guide users through various input scenarios.
 component: TextInput
+keywords:
+  [
+    text field,
+    text box,
+    form field,
+    input field,
+    type text,
+    user input,
+    editable field,
+  ]
 ---
 
 import {Demo} from "~components/demo"
@@ -42,6 +52,10 @@ Build with the composite API for granular control. This API requires you to prov
 
 ### Composite Layout
 
+::: meta
+keywords: [horizontal layout, inline label]
+:::
+
 The composite API is useful for alternative layouts and styles.
 
 <Demo
@@ -50,6 +64,10 @@ The composite API is useful for alternative layouts and styles.
 />
 
 ### Clear Trigger
+
+::: meta
+keywords: [reset input, clear field, x button, clear text button]
+:::
 
 - When using the simple API, the clear button renders automatically. Change this by setting the [clearable](./#clearable) prop to false.
 - When using the composite API, you render the `InputClearButton` declaratively within the `InputGroup`.
@@ -68,6 +86,10 @@ Customize size using the [size](./#size) prop. The default size is `md`.
 
 ### States
 
+::: meta
+keywords: [disabled input, read-only input, required field, invalid input, input validation states]
+:::
+
 The following shows how the TextInput component appears in each interactive state.
 
 <Demo name="TextInputStatesDemo" component={demos.TextInputStatesDemo} />
@@ -84,6 +106,10 @@ Set the initial value using the [defaultValue](./#defaultValue) prop, or use [va
 
 ### Error Text and Indicator
 
+::: meta
+keywords: [validation message, field error, error state, validation error display]
+:::
+
 Error messages are displayed using two props:
 
 - [invalid](./#invalid)
@@ -99,6 +125,10 @@ Choose the form library that fits your needs—we've built examples with React H
 
 ### React Hook Form
 
+::: meta
+keywords: [form control, field validation, form integration]
+:::
+
 Use [React Hook Form](https://react-hook-form.com/) to handle the input state and validation. [ArkType](https://arktype.io/) works great for schema validation if you need it.
 
 <Demo
@@ -108,6 +138,10 @@ Use [React Hook Form](https://react-hook-form.com/) to handle the input state an
 />
 
 ### Tanstack Form
+
+::: meta
+keywords: [tanstack, useForm hook, form state, field validators]
+:::
 
 [Tanstack Form](https://tanstack.com/form/latest/docs/framework/react/guides/basic-concepts) handles validation with its built-in validators.
 

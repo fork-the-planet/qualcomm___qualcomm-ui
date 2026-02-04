@@ -3,6 +3,17 @@ title: Inline Notification
 group: Feedback
 description: Inline notifications provide contextual feedback without disrupting the user's workflow. They support multiple semantic types ranging from informational updates to critical warnings.
 component: InlineNotification
+keywords:
+  [
+    message box,
+    callout,
+    notice,
+    info box,
+    alert,
+    banner,
+    status message,
+    feedback,
+  ]
 ---
 
 import {Demo} from "~components/demo"
@@ -39,6 +50,10 @@ Use the composite API with individual components for more granular control.
 
 ### Emphasis (color)
 
+::: meta
+keywords: [severity, notification type, error notification, success notification, alert level]
+:::
+
 Control the visual emphasis with different colors: info, success, warning, danger, and neutral. Customize these with the [emphasis](./#emphasis) prop.
 
 <Demo
@@ -47,6 +62,10 @@ Control the visual emphasis with different colors: info, success, warning, dange
 />
 
 ### Dismissable
+
+::: meta
+keywords: [closeable, close notification, remove notification, hide notification]
+:::
 
 Add dismiss functionality to the simple notification using the [dismissable](./#dismissable) prop. Use the `<InlineNotification.CloseButton />` component when using the composite API.
 
@@ -57,6 +76,10 @@ Add dismiss functionality to the simple notification using the [dismissable](./#
 
 ### Action
 
+::: meta
+keywords: [notification cta, notification link, call to action]
+:::
+
 Include action links in notifications using the [action](./#action) property or the `<InlineNotification.Action>` component via the composite API.
 
 <Demo
@@ -65,6 +88,10 @@ Include action links in notifications using the [action](./#action) property or 
 />
 
 ### Layout
+
+::: meta
+keywords: [horizontal notification, vertical notification, orientation, notification orientation]
+:::
 
 Choose between inline and stacked layouts using the [layout](./#layout) property. Stacked layout places the description and action below the content.
 

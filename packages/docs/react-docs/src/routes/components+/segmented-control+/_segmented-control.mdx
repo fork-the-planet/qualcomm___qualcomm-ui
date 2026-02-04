@@ -3,6 +3,16 @@ title: Segmented Control
 group: Data Display
 description: A segmented control presents a linear set of selectable segments, supporting both single- and multi-select interactions. It offers immediate visual feedback and maintains coherence across related options.
 component: SegmentedControl
+keywords:
+  [
+    toggle group,
+    segment picker,
+    option toggle,
+    pill selector,
+    tab bar,
+    button group,
+    switch control,
+  ]
 ---
 
 import {TypeDocAttributes, TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
@@ -44,6 +54,10 @@ Build with the composite API for granular control. This API requires you to prov
 
 ### Multiple
 
+::: meta
+keywords: [multi-select, checkbox mode, toggle multiple]
+:::
+
 By default, a segmented control allows for a single selection. Use the [multiple](./#multiple-1) prop to create a segmented control that allows for multiple selections.
 
 <Demo
@@ -52,6 +66,10 @@ By default, a segmented control allows for a single selection. Use the [multiple
 />
 
 ### Orientation
+
+::: meta
+keywords: [stacked, layout direction, vertical group]
+:::
 
 Use the [orientation](./#orientation-1) prop to control the layout direction of the `SegmentedControl`. Options include:
 
@@ -104,6 +122,10 @@ Use the [variant](./#variant-1) prop to control the visual style of the segmente
 
 ### Disabled
 
+::: meta
+keywords: [inactive state, non-interactive]
+:::
+
 Use the segmented control's [disabled](./#disabled-1) prop to control the disabled state of the entire control. Use the segmented control item's [disabled](./#disabled-2) prop to control the disabled state of individual items.
 
 <Demo
@@ -112,6 +134,10 @@ Use the segmented control's [disabled](./#disabled-1) prop to control the disabl
 />
 
 ### Controlled state
+
+::: meta
+keywords: [react state, useState, onValueChange, form state]
+:::
 
 Use the [value](./#value-1) prop to control the selected value of the segmented control. This allows for more complex interactions and integration with form libraries.
 
@@ -124,12 +150,20 @@ Use the [value](./#value-1) prop to control the selected value of the segmented 
 
 ### Keyboard Navigation
 
+::: meta
+keywords: [a11y keyboard, focus management]
+:::
+
 Users can navigate the segmented control using the keyboard. The following keys are supported:
 
 - `Tab`/`Shift + Tab`: Move focus between items.
 - `Space`/`Enter`: Select the focused item. Unselects an already selected item if [multiple](./#multiple-1) is set.
 
 ### Icon only
+
+::: meta
+keywords: [screen reader, a11y, accessible icons]
+:::
 
 While it is possible to use icon-only items in the segmented control, it is important to ensure that they are easily understood and accessible.
 Pick meaningful icons and use the `aria-label` attribute to describe their purpose.
