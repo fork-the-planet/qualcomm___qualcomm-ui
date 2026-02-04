@@ -1,5 +1,11 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 2.15.1 (2026/02/03)
+
+### Bug Fixes
+
+- [section-extractor]: use md5 for hash
+
 ## 2.15.0 (2026/02/03)
 
 ### Features
