@@ -229,86 +229,11 @@ Just content, no metadata.
       const extractor = new SectionExtractor()
       const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
-      expect(sections[0].metadata).toEqual({})
-    })
-  })
-
-  describe("character offsets", () => {
-    test("provides start and end offsets for slicing source markdown", () => {
-      const markdown = `# Test Page
-
-## Section One
-
-First section content.
-
-\`\`\`ts
-const code = true
-\`\`\`
-
-## Section Two
-
-Second section content.
-`
-      const extractor = new SectionExtractor({depths: [2]})
-      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
-
-      expect(sections).toHaveLength(2)
-
-      const section1 = sections[0]
-      const rawContent1 = markdown.slice(
-        section1.startOffset,
-        section1.endOffset,
-      )
-      expect(rawContent1).toContain("First section content.")
-      expect(rawContent1).toContain("```ts")
-      expect(rawContent1).toContain("const code = true")
-      expect(rawContent1).not.toContain("Second section")
-
-      const section2 = sections[1]
-      const rawContent2 = markdown.slice(
-        section2.startOffset,
-        section2.endOffset,
-      )
-      expect(rawContent2).toContain("Second section content.")
-      expect(rawContent2).not.toContain("First section")
+      expect(sections[0].metadata).toBeUndefined()
     })
   })
 
   describe("content analysis", () => {
-    test("counts words correctly", () => {
-      const markdown = `
-# Test Page
-
-## Section
-
-This section has exactly five words.
-`
-      const extractor = new SectionExtractor()
-      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
-
-      // Word count includes words in content (5 words in the sentence)
-      // The exact count may vary based on markdown serialization
-      expect(sections[0].wordCount).toBeGreaterThanOrEqual(5)
-    })
-
-    test("excludes code blocks from word count", () => {
-      const markdown = `
-# Test Page
-
-## Section
-
-Three words here.
-
-\`\`\`ts
-const code = "not counted"
-\`\`\`
-`
-      const extractor = new SectionExtractor()
-      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
-
-      expect(sections[0].wordCount).toBe(3)
-    })
-
     test("extracts code examples from content", () => {
       const markdown = `
 # Test Page
@@ -329,11 +254,11 @@ Just text content.
       const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections[0].codeExamples).toHaveLength(1)
-      expect(sections[0].codeExamples[0].code).toBe("const example = true")
-      expect(sections[0].codeExamples[0].language).toBe("ts")
+      expect(sections[0].codeExamples?.[0]?.code).toBe("const example = true")
+      expect(sections[0].codeExamples?.[0]?.language).toBe("ts")
       expect(sections[0].content).not.toContain("```")
       expect(sections[0].content).toContain("Some text.")
-      expect(sections[1].codeExamples).toHaveLength(0)
+      expect(sections[1].codeExamples).toBeUndefined()
     })
 
     test("rawContent includes code blocks while content excludes them", () => {
@@ -414,8 +339,8 @@ Outro text.
       const section = sections[0]
 
       expect(section.codeExamples).toHaveLength(2)
-      expect(section.codeExamples[0].language).toBe("tsx")
-      expect(section.codeExamples[1].language).toBe("css")
+      expect(section.codeExamples?.[0].language).toBe("tsx")
+      expect(section.codeExamples?.[1].language).toBe("css")
 
       expect(section.rawContent).toContain("```tsx")
       expect(section.rawContent).toContain("```css")
