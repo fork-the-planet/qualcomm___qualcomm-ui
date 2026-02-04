@@ -1,5 +1,33 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 2.15.0 (2026/02/03)
+
+### Features
+
+- [ai-knowledge]: inline imported modules as sibling code blocks after demos
+- [mdx-plugins]: add remarkExtractMeta to standard remark plugin pipeline
+- [ai-knowledge]: replace experimental frontmatterFields with glob-based frontmatter config, now stable
+- [ai-knowledge]: add markdown section extractor
+- [ai-knowledge]: add plugin system for modular MDX transformations
+
+### Tests
+
+- knowledge generator regression tests
+
+### Bug Fixes
+
+- [ai-knowledge]: handle legacy single-config mode when CLI provides output path
+- [ai-knowledge]: support array values in frontmatter output
+
+### Code Refactoring
+
+- [ai-knowledge]: split generator into sub-modules
+- [ai-knowledge]: rename methods to use 'format' prefix for consistency
+- [ai-knowledge]: restructure generator and improve frontmatter config
+- [ai-knowledge]: parse imports using TypeScript compiler for accuracy
+- [ai-knowledge]: extract CLI command to separate module for cleaner separation
+- [ai-knowledge]: improve demo imports and section extraction
+
 ## 2.14.3 (2026/01/29)
 
 ### Bug Fixes
