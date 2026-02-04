@@ -1,3 +1,6 @@
+// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+// SPDX-License-Identifier: BSD-3-Clause-Clear
+
 import {createHash} from "node:crypto"
 import {access, readFile} from "node:fs/promises"
 import {dirname, join, resolve} from "node:path"
