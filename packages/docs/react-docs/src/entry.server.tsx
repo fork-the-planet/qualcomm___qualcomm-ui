@@ -1,8 +1,9 @@
 import {createReadableStreamFromReadable} from "@react-router/node"
 import {isbot} from "isbot"
 import {readFile} from "node:fs/promises"
-import {resolve} from "node:path"
+import {dirname, resolve} from "node:path"
 import {PassThrough} from "node:stream"
+import {fileURLToPath} from "node:url"
 import {
   renderToPipeableStream,
   type RenderToPipeableStreamOptions,
@@ -15,6 +16,8 @@ import {
 
 import {siteData} from "@qualcomm-ui/mdx-vite-plugin"
 import {exists} from "@qualcomm-ui/node-utils/fs"
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export const streamTimeout = 5_000
 
