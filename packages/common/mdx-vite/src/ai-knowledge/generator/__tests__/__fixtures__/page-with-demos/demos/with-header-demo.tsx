@@ -1,5 +1,5 @@
+// @ts-nocheck
 import {Card} from "./card"
-// preview
 import {CardHeader} from "./card-header"
 
 export function WithHeaderDemo() {
