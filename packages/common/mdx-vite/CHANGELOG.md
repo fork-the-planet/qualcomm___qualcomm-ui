@@ -21,7 +21,7 @@
 
 ### Code Refactoring
 
-- [ai-knowledge]: split generator into sub-modules
+- [ai-knowledge]: split generator into submodules
 - [ai-knowledge]: rename methods to use 'format' prefix for consistency
 - [ai-knowledge]: restructure generator and improve frontmatter config
 - [ai-knowledge]: parse imports using TypeScript compiler for accuracy
