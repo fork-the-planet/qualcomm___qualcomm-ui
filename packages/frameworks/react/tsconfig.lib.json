@@ -8,11 +8,11 @@
     "rootDir": "./src",
     "tsBuildInfoFile": "dist/tsbuildinfo",
     "paths": {
-      "@qualcomm-ui/react/*": ["./src/*/index.ts"],
+      "@qualcomm-ui/react/*": ["./src/*/index.ts"]
     }
   },
   "include": ["./src"],
-  "exclude": ["./src/**/*.spec.tsx"],
+  "exclude": ["./src/**/*.spec.tsx", "./src/**/*.figma.tsx"],
   "references": [
     {
       "path": "../react-core/tsconfig.lib.json"
