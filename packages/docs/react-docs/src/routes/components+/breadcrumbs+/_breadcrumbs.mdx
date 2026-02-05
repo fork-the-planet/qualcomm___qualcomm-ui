@@ -20,8 +20,12 @@ import {Breadcrumbs} from "@qualcomm-ui/react/breadcrumbs"
 
 ## Overview
 
-::: meta
-keywords: [accessibility, a11y, screen reader, WCAG]
+::: terms
+a11y
+WCAG
+site hierarchy
+wayfinding
+location indicator
 :::
 
 - The root component should be labeled with `aria-label="Breadcrumbs"` to indicate that it's a breadcrumb navigation.
@@ -33,8 +37,10 @@ keywords: [accessibility, a11y, screen reader, WCAG]
 
 ### Emphasis (color)
 
-::: meta
-keywords: [breadcrumb color, neutral emphasis, muted, default emphasis]
+::: terms
+neutral
+muted
+subdued
 :::
 
 Use the [emphasis](./#emphasis) prop to change the color of the breadcrumbs.
@@ -46,14 +52,20 @@ Use the [emphasis](./#emphasis) prop to change the color of the breadcrumbs.
 
 ### Sizes
 
+::: terms
+small
+medium
+large
+:::
+
 Three sizes are available via the [size](./#size) prop: `sm`, `md`, and `lg`. The default size is `md`.
 
 <Demo name="BreadcrumbsSizesDemo" component={demos.BreadcrumbsSizesDemo} />
 
 ### Links
 
-::: meta
-keywords: [router integration, custom link element, href, anchor, polymorphic]
+::: terms
+polymorphic
 :::
 
 Use the [render](./#render-1) prop on the `<Breadcrumbs.Item>` component to change the root element to your framework's link component. The following example uses React Router:
@@ -62,8 +74,9 @@ Use the [render](./#render-1) prop on the `<Breadcrumbs.Item>` component to chan
 
 ### Disabled Item
 
-::: meta
-keywords: [inactive breadcrumb, non-clickable, disabled state]
+::: terms
+inactive
+non-clickable
 :::
 
 Use the [disabled](./#disabled) prop to disable a breadcrumb item.
@@ -76,10 +89,6 @@ Use the [disabled](./#disabled) prop to disable a breadcrumb item.
 ## Shortcuts
 
 ### Item
-
-::: meta
-keywords: [compound component, shorthand]
-:::
 
 The `Breadcrumbs.Item` component is a convenient shorthand for rendering each part of the breadcrumb item. It's equivalent to the following:
 

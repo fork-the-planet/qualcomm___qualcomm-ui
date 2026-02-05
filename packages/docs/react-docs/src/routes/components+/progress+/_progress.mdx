@@ -43,10 +43,6 @@ Build with the composite API for granular control. This API requires you to prov
 
 ### Label Orientation
 
-::: meta
-keywords: [horizontal label, side label, inline label]
-:::
-
 Use the [labelOrientation](./#labelOrientation) property to change the positioning of the label and value text relative to the progress bar.
 
 <Demo
@@ -56,13 +52,19 @@ Use the [labelOrientation](./#labelOrientation) property to change the positioni
 
 ### Sizes
 
+::: terms
+small
+medium
+large
+:::
+
+Progress bars support three sizes: `sm`, `md`, and `lg`.
+
 <Demo name="ProgressSizeDemo" component={demos.ProgressSizeDemo} />
 
 ### Emphasis (Color)
 
-::: meta
-keywords: [progress color, primary, neutral, color variant]
-:::
+Set the color of the progress bar using the [emphasis](./#emphasis) property. The available options are `primary` and `neutral`.
 
 <Demo name="ProgressEmphasisDemo" component={demos.ProgressEmphasisDemo} />
 
@@ -97,8 +99,10 @@ is equivalent to
 
 ## Accessibility
 
-::: meta
-keywords: [screen reader, a11y, aria-valuenow, wcag]
+::: terms
+a11y
+screen reader
+wcag
 :::
 
 - When the value is supplied, the component automatically provides the corresponding `aria-value*` attributes to the element.

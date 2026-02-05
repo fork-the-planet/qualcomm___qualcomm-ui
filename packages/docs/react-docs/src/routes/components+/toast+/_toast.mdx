@@ -22,8 +22,8 @@ import {Toast, Toaster, createToaster} from "@qualcomm-ui/react/toast"
 
 ### Global Toaster
 
-::: meta
-keywords: [app-wide toaster, shared toaster instance]
+::: terms
+app-wide
 :::
 
 1. Create a single toaster instance in a shared file and export it for use throughout your app.
@@ -79,8 +79,9 @@ Alternatively, you can provide children to the `Toaster` component to customize 
 
 ### With Action
 
-::: meta
-keywords: [toast button, clickable toast, interactive notification, actionable toast]
+::: terms
+clickable
+interactive
 :::
 
 Use the [action](./#action) property to add an action button to the toast.
@@ -89,8 +90,9 @@ Use the [action](./#action) property to add an action button to the toast.
 
 ### Toast Emphasis
 
-::: meta
-keywords: [toast severity, error toast, warning toast, success toast, info toast, toast status]
+::: terms
+severity
+error
 :::
 
 Here's an example of each toast type.
@@ -99,8 +101,8 @@ Here's an example of each toast type.
 
 ### Overlapping Toasts
 
-::: meta
-keywords: [toast stacking, collapsed toasts, stacked notifications]
+::: terms
+collapsed
 :::
 
 By default, toasts are stacked on top of each other. To conserve space when rendering many toasts, set the [overlap](./#overlap) property to true in the `toaster.create` function.
@@ -109,8 +111,9 @@ By default, toasts are stacked on top of each other. To conserve space when rend
 
 ### Toast Duration
 
-::: meta
-keywords: [toast timeout, auto dismiss, display time, timer]
+::: terms
+timeout
+auto-dismiss
 :::
 
 Use the [duration](./#duration) property to set the duration of the toast.
@@ -119,8 +122,10 @@ Use the [duration](./#duration) property to set the duration of the toast.
 
 ### Persistent Toast
 
-::: meta
-keywords: [indefinite toast, no timeout, sticky toast, manual dismiss]
+::: terms
+indefinite
+sticky
+no-timeout
 :::
 
 Set the [type](./#type) property to `loading` to make the toast stay on screen until dismissed.
@@ -129,8 +134,9 @@ Set the [type](./#type) property to `loading` to make the toast stay on screen u
 
 ### Pause and Resume
 
-::: meta
-keywords: [toast lifecycle, stop timer, freeze toast]
+::: terms
+stop timer
+freeze
 :::
 
 Use the [pause](./#pause) and [resume](./#resume) methods on the toaster instance to pause and play the toast.
@@ -141,8 +147,8 @@ Pausing a toast prevents it from timing out, while resuming it will continue the
 
 ### Max Visible
 
-::: meta
-keywords: [toast limit, toast queue, toast capacity]
+::: terms
+limit
 :::
 
 Set the [max](./#max) prop on the `createToaster` function to define the maximum number of toasts that can be rendered at a time. Extra toasts will be queued and rendered when the number of visible toasts drops below the max.
@@ -150,6 +156,11 @@ Set the [max](./#max) prop on the `createToaster` function to define the maximum
 <Demo name="ToastMaxVisibleDemo" component={demos.ToastMaxVisibleDemo} />
 
 ### Screen Placement
+
+::: terms
+position
+corner
+:::
 
 Toasts can be displayed on all four corners of a page. We recommend picking a single placement for your app, as this creates a consistent experience for your users.
 

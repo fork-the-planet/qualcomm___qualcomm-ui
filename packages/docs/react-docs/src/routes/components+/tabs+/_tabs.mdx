@@ -22,8 +22,8 @@ import {Tab, Tabs} from "@qualcomm-ui/react/tabs"
 
 ### Horizontal
 
-::: meta
-keywords: [keyboard navigation, arrow key navigation]
+::: terms
+keyboard navigation
 :::
 
 The default [orientation](./#orientation) is horizontal. The left and right arrow keys can be used to navigate between tabs.
@@ -32,8 +32,9 @@ The default [orientation](./#orientation) is horizontal. The left and right arro
 
 ### Vertical
 
-::: meta
-keywords: [stacked tabs, sidebar tabs]
+::: terms
+stacked tabs
+sidebar tabs
 :::
 
 In vertical [orientation](./#orientation), the up and down arrow keys are used instead.
@@ -52,10 +53,6 @@ Tabs support start and end icons. Customize the variant with the [iconVariant](.
 
 ### Controlled Value
 
-::: meta
-keywords: [useState, programmatic tab change, external state control]
-:::
-
 The tab's active value can be controlled via the [value](./#value), [onValueChange](./#onValueChange), and [defaultValue](./#defaultValue) properties. These props follow our [controlled state](/patterns/controlled-state) pattern.
 
 <Demo
@@ -67,8 +64,9 @@ The tab's active value can be controlled via the [value](./#value), [onValueChan
 
 #### Line
 
-::: meta
-keywords: [underline tabs, line indicator]
+::: terms
+underline tabs
+small, medium, large, extra large
 :::
 
 The line [variant](./#variant) supports four [sizes](./#size): `sm`, `md`, `lg`, and `xl`
@@ -77,8 +75,10 @@ The line [variant](./#variant) supports four [sizes](./#size): `sm`, `md`, `lg`,
 
 #### Contained
 
-::: meta
-keywords: [pill tabs, button tabs, segmented control]
+::: terms
+pill tabs
+segmented control
+small, medium
 :::
 
 The contained [variant](./#variant) supports only two sizes: `sm` and `md`
@@ -91,8 +91,8 @@ The contained [variant](./#variant) supports only two sizes: `sm` and `md`
 
 ### Lazy Mounted
 
-::: meta
-keywords: [deferred rendering, performance optimization, conditional mount]
+::: terms
+deferred rendering, performance optimization, conditional rendering
 :::
 
 Use the [lazyMount](./#lazyMount) and [unmountOnExit](./#unmountOnExit) props to control render behavior for inactive tabs.
@@ -111,8 +111,10 @@ Disable specific tabs with the [disabled](./#disabled-1) prop on the `<Tab.Root>
 
 ### URL Search Parameters
 
-::: meta
-keywords: [deep linking, shareable URL, query params, browser history]
+::: terms
+deep linking
+shareable URL
+query string
 :::
 
 The following example demonstrates how to render tabs that sync with the URL search parameters using react-router.
@@ -121,15 +123,21 @@ The following example demonstrates how to render tabs that sync with the URL sea
 
 ### Context
 
+::: terms
+programmatic tab selection, imperative API, setValue
+:::
+
 Use the `<Tabs.Context>` component to access the tabs API from JSX.
 
 <Demo name="TabsContextDemo" component={demos.TabsContextDemo} />
 
 ### Add and Remove Tabs
 
-::: meta
-keywords: [dynamic tabs, closable tabs, dismiss button, removable tabs]
+::: terms
+closable tabs, close button, dismissible
 :::
+
+Use `<Tab.DismissButton>` to make tabs removable. Combine this with React state to create a dynamic tab interface where users can add and close tabs.
 
 <Demo name="TabsAddRemoveDemo" component={demos.TabsAddRemoveDemo} />
 

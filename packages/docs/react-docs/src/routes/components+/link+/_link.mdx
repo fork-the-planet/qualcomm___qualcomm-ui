@@ -3,7 +3,7 @@ title: Link
 group: Data Display
 description: Links are foundational navigation elements that connect users to related content, external resources, or different sections within your application.
 component: Link
-aliases: [anchor, hyperlink]
+aliases: [anchor, hyperlink, url, href]
 ---
 
 import {Demo} from "~components/demo"
@@ -22,8 +22,10 @@ import {Link} from "@qualcomm-ui/react/link"
 
 ### Emphasis (color)
 
-::: meta
-keywords: [link color, colored link, neutral emphasis, brand color link]
+::: terms
+default emphasis
+neutral emphasis
+link color
 :::
 
 Links support different emphasis (colors) to match your design needs. Customize these with the [emphasis](./#emphasis) property.
@@ -32,8 +34,10 @@ Links support different emphasis (colors) to match your design needs. Customize 
 
 ### Icons
 
-::: meta
-keywords: [startIcon, endIcon, link with icon, icon position, leading icon, trailing icon]
+::: terms
+leading icon
+trailing icon
+external link
 :::
 
 Links can include icons to provide additional visual context. QUI links support [lucide-react](https://lucide.dev) icons.
@@ -41,6 +45,15 @@ Links can include icons to provide additional visual context. QUI links support 
 <Demo name="LinkIconsDemo" component={demos.LinkIconsDemo} />
 
 ### Sizes
+
+::: terms
+extra small
+small
+medium
+large
+extra large
+font size
+:::
 
 Adjust the font and icon size of the link using the [size](./#size) prop. The default size is `sm`.
 
@@ -54,8 +67,9 @@ When [disabled](./#disabled) is true, the link becomes non-interactive and is re
 
 ### Render Prop
 
-::: meta
-keywords: [custom element, spa navigation, link composition]
+::: terms
+spa
+internal link
 :::
 
 Use the [render](./#render) prop to render the link component as a different element, such as a React Router Link for client-side navigation. Refer to our [Polymorphic Components](/polymorphic-components) guide to learn more.

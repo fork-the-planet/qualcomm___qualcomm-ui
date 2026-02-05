@@ -9,9 +9,13 @@ import * as demos from "./demos"
 
 # {frontmatter.title}
 
-::: meta
-keywords: [virtual scrolling table, windowed rows, large data table performance, useVirtualizer, TanStack Virtual, getVirtualItems, getTotalSize, dynamic row height]
+::: terms
+windowed rows
+large dataset performance
+getTotalSize
 :::
+
+Row virtualization renders only the visible rows to the DOM, improving performance when displaying large datasets. This example uses [TanStack Virtual](https://tanstack.com/virtual/latest) with `useVirtualizer` to display 30,000 rows with dynamic row height measurement and sorting.
 
 Row virtualization is not ideal from a UX standpoint. We recommend using [Pagination](/features/pagination-controlled) combined with [Filtering](/features/filters) instead.
 

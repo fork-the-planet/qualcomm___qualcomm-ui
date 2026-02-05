@@ -45,8 +45,6 @@ Improve documentation searchability by adding prose to empty sections and FTS te
 
 ## Syntax
 
-### Terms block
-
 ```mdx
 ### Section Title
 
@@ -59,43 +57,66 @@ select in modal
 Section content here.
 ```
 
-Flat list, one term per line. No YAML, no `keywords:` key.
-
-### Inline (if parser supports)
-
-```mdx
-:::terms[multiselect, multi-select]
-```
+Flat list, one term per line. No YAML, no keys.
 
 ## What terms are FOR
 
-FTS matches exact tokens (with stemming). Terms should capture:
+FTS matches exact tokens (with stemming). Terms fill gaps where users search words not in prose:
 
+- **Expanded forms**: `small`, `medium`, `large` (when prose has `sm`, `md`, `lg`)
 - **Spelling variants**: `multi-select`, `multiselect`
 - **Abbreviations**: `a11y`, `cta`, `aria`
 - **Jargon/aliases**: `floating ui`, `listbox`
-- **Query patterns not in prose**: `select in modal` (when prose says "within a Dialog")
-- **Prop names users might search**: `sameWidth`, `portalProps`
+- **Query patterns**: `select in modal` (when prose says "within a Dialog")
 
 ## What terms are NOT for
 
-- Synonyms embeddings understand (`dropdown` for Select—unless exact match needed)
-- Abstract concepts (`accessibility`, `user experience`)
-- Category descriptors (`form control`, `input component`)
-- Terms already in prose or headers
+- **Terms already in prose** — FTS will match them; adding is redundant
+- **Synonyms embeddings understand** — `dropdown` for Select (unless exact match needed)
+- **Abstract concepts** — `accessibility`, `user experience`
+- **Category descriptors** — `form control`, `input component`
 
-**Test**: Would a user type this exact string into search? If they'd phrase it differently, skip it.
+**Test**: Is this exact string missing from the prose? If it's already there, don't add it.
 
 ## Decision framework
 
 | Situation | Action |
 |-----------|--------|
 | Demo-only, no prose | Add prose describing what demo shows, then terms if gaps remain |
-| Prose exists, users search different terms | Add terms for the gap |
+| Prose uses shorthand, users search full words | Add full words |
 | Abbreviation exists for term in prose | Add abbreviation only |
 | Prose fully covers searchable terms | No changes needed |
 
 ## Examples
+
+### WRONG: Duplicating prose
+
+```mdx
+::: terms
+sm
+md
+lg
+:::
+
+Three sizes available: `sm`, `md` (default), and `lg`.
+```
+
+`sm`, `md`, `lg` already in prose. FTS matches them. Useless terms.
+
+### RIGHT: Filling the gap
+
+```mdx
+::: terms
+small
+medium
+large
+compact
+:::
+
+Three sizes available: `sm`, `md` (default), and `lg`.
+```
+
+Users search "large button" — prose only has `lg`. Terms bridge the gap.
 
 ### ADD PROSE: Demo-only section
 
@@ -113,7 +134,6 @@ After:
 ::: terms
 multiselect
 multi-select
-checkbox select
 :::
 
 Use the `multiple` prop to allow selecting more than one item. Selected values display as a comma-separated list in the trigger.
@@ -161,7 +181,7 @@ Prose covers the concepts; terms catch abbreviated searches.
 Set the initial value using the `defaultValue` prop, or use `value` and `onValueChange` to control the value manually.
 ```
 
-"controlled", "value", "defaultValue", "onValueChange" all in prose. FTS matches. Embeddings understand. Nothing to add.
+"controlled", "value", "defaultValue", "onValueChange" all in prose. FTS matches. Nothing to add.
 
 ## Page-level keywords
 
@@ -179,4 +199,4 @@ keywords: [dropdown, picker, listbox, combobox]
 ---
 ```
 
-These get merged into the `keywords` column for all sections of this page.
+These merge into the `keywords` column for all sections of this page.

@@ -3,7 +3,7 @@ title: Pagination
 group: Disclosure
 description: Pagination provides a control for moving through large, segmented content sets by exposing page numbers, previous and next actions, and optional overflow points when space is limited.
 component: Pagination
-aliases: [pager]
+aliases: [pager, page selector]
 ---
 
 import {TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
@@ -22,11 +22,20 @@ import {Pagination} from "@qualcomm-ui/react/pagination"
 
 ### Showcase
 
+::: terms
+page navigation, data table pagination, list pagination
+:::
+
 The component renders the number of pages based on the `count` and `pageSize` props.
 
 <Demo name="PaginationShowcaseDemo" component={demos.PaginationShowcaseDemo} />
 
 ### Sizes
+
+::: terms
+small
+medium
+:::
 
 Customize the size of the component and its elements using the [size](./#size) prop.
 
@@ -38,8 +47,9 @@ Customize the size of the component and its elements using the [size](./#size) p
 
 ### Page Size
 
-::: meta
-keywords: [items per page, rows per page, results per page, page size selector]
+::: terms
+rows per page
+results per page
 :::
 
 Render a dropdown via `<Pagination.PageSize>` to adjust the number of data items per page.
@@ -48,8 +58,10 @@ Render a dropdown via `<Pagination.PageSize>` to adjust the number of data items
 
 ### Page Metadata
 
-::: meta
-keywords: [item range display, pagination info, current page indicator]
+::: terms
+pagination summary
+page info
+current page display
 :::
 
 Show metadata about the current and total pages with `<Pagination.PageMetadata>`
@@ -60,9 +72,12 @@ To customize the text, supply children as a render prop.
 
 ### Ranges
 
-::: meta
-keywords: [siblingCount, ellipsis, truncated pages, visible page range, page button overflow]
+::: terms
+truncate
+visible pages
 :::
+
+The `siblingCount` prop controls how many page numbers appear on each side of the current page. When there are too many pages to display, ellipses indicate the hidden range.
 
 <Demo
   expanded
@@ -71,10 +86,6 @@ keywords: [siblingCount, ellipsis, truncated pages, visible page range, page but
 />
 
 ### Controlled State
-
-::: meta
-keywords: [useState pagination, onPageChange, onPageSizeChange, external state management]
-:::
 
 The Pagination component follows our [controlled state](/patterns/controlled-state) pattern for its [page](./#page) and [pageSize](./#pageSize) props.
 

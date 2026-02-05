@@ -21,6 +21,10 @@ import {Slider} from "@qualcomm-ui/react/slider"
 
 ## Usage
 
+::: terms
+input control
+:::
+
 Sliders allow users to select a value or range from a continuous or discrete set by moving an indicator (thumb) along a track. They are best used for settings that reflect a range of values rather than precise input.
 
 ## Examples
@@ -39,6 +43,10 @@ Build with the composite API for granular control. This API requires you to prov
 
 ### Min/Max/Step
 
+::: terms
+scale, interval
+:::
+
 The [min](./#min), [max](./#max), and [step](./#step) props control the slider's value range and increments:
 
 - `min`: The minimum value of the slider (default is 0).
@@ -49,8 +57,8 @@ The [min](./#min), [max](./#max), and [step](./#step) props control the slider's
 
 ### Origin
 
-::: meta
-keywords: [track fill direction, fill origin]
+::: terms
+fill direction
 :::
 
 Use [origin](./#origin) to control where the track is filled from for single-value sliders:
@@ -63,8 +71,9 @@ Use [origin](./#origin) to control where the track is filled from for single-val
 
 ### Tooltip
 
-::: meta
-keywords: [value indicator, thumb label, hover value]
+::: terms
+value indicator
+thumb label
 :::
 
 Use the [tooltip](./#tooltip-1) prop to display the slider's value in a tooltip rather than above the component.
@@ -72,10 +81,6 @@ Use the [tooltip](./#tooltip-1) prop to display the slider's value in a tooltip 
 <Demo name="SliderTooltipDemo" component={demos.SliderTooltipDemo} />
 
 #### Display
-
-::: meta
-keywords: [format tooltip, custom tooltip text]
-:::
 
 You can customize the tooltip's content by using the [composite API](./#thumbs-with-tooltips) and passing a function to [display](./#display-3) on the `SliderThumbIndicator` component.
 
@@ -88,8 +93,8 @@ You can customize the tooltip's content by using the [composite API](./#thumbs-w
 
 #### Track Markers
 
-::: meta
-keywords: [tick marks, scale labels, value labels]
+::: terms
+tick marks
 :::
 
 By default, the component generates 11 marks based on the slider's [min](./#min) and [max](./#max) values.
@@ -99,8 +104,8 @@ provide your own set of marks by passing them in an array to the [marks](./#mark
 
 #### Side Markers
 
-::: meta
-keywords: [endpoint labels, boundary markers, compact markers]
+::: terms
+endpoint labels
 :::
 
 For more compact designs, you can display the `min` and `max` markers at the ends of the track using the [sideMarkers](./#sideMarkers) prop.
@@ -109,8 +114,9 @@ For more compact designs, you can display the `min` and `max` markers at the end
 
 ### Range
 
-::: meta
-keywords: [dual thumb, two handles, min max selection, dual slider]
+::: terms
+dual thumb
+two handles
 :::
 
 Set the [value](./#value) or [defaultValue](./#defaultValue) prop with two values to create a range slider.
@@ -119,8 +125,8 @@ Set the [value](./#value) or [defaultValue](./#defaultValue) prop with two value
 
 #### Minimum Steps Between Thumbs
 
-::: meta
-keywords: [thumb collision, prevent overlap, thumb gap]
+::: terms
+thumb collision
 :::
 
 To prevent overlapping thumbs, you can use the [minStepsBetweenThumbs](./#minStepsBetweenThumbs) prop to set a minimum distance between them.
@@ -128,10 +134,6 @@ To prevent overlapping thumbs, you can use the [minStepsBetweenThumbs](./#minSte
 <Demo name="SliderMinStepsDemo" component={demos.SliderMinStepsDemo} />
 
 #### Display
-
-::: meta
-keywords: [format range value, value text formatting, custom separator]
-:::
 
 By default, range values are displayed separated by a dash (-). You can customize this by passing a separator string or a function to the [display](./#display-1) prop.
 
@@ -157,19 +159,11 @@ Use the [hint](./#hint-1) prop to add additional guidance or context to the user
 
 ### Disabled
 
-::: meta
-keywords: [readonly slider, non-interactive, inactive state]
-:::
-
 Use the [disabled](./#disabled-1) prop to prevent user interaction.
 
 <Demo name="SliderDisabledDemo" component={demos.SliderDisabledDemo} />
 
 ### Focus Callback
-
-::: meta
-keywords: [focus event, keyboard focus, thumb focus tracking]
-:::
 
 The [onFocusChange](./#onFocusChange) prop allows you to listen for focus events on the slider's thumbs.
 
@@ -179,10 +173,6 @@ The [onFocusChange](./#onFocusChange) prop allows you to listen for focus events
 />
 
 ### Controlled State
-
-::: meta
-keywords: [external state, state management]
-:::
 
 Use [value](./#value) and [onValueChange](./#onValueChange) or [onValueChangeEnd](./#onValueChangeEnd) to control the value of the slider. This allows for more complex interactions and integration with form libraries.
 
@@ -197,8 +187,8 @@ Choose the form library that fits your needs—we've built examples with React H
 
 ### React Hook Form
 
-::: meta
-keywords: [form validation, schema validation]
+::: terms
+rhf
 :::
 
 Use [React Hook Form](https://react-hook-form.com/) to handle the slider state and validation. [ArkType](https://arktype.io/) works great for schema validation if you need it.
@@ -210,10 +200,6 @@ Use [React Hook Form](https://react-hook-form.com/) to handle the slider state a
 />
 
 ### Tanstack Form
-
-::: meta
-keywords: [field validation, form state, form integration]
-:::
 
 [Tanstack Form](https://tanstack.com/form/latest/docs/framework/react/guides/basic-concepts) handles slider validation with its built-in validators.
 
@@ -230,6 +216,10 @@ Tanstack form also supports [ArkType](https://tanstack.com/form/latest/docs/fram
 The Slider component provides a composite API should you need more control over the slider's behavior and appearance.
 
 ### Anatomy
+
+::: terms
+drag, handle, thumb
+:::
 
 The composite API is based on the following components:
 

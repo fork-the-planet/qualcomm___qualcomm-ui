@@ -23,10 +23,6 @@ import {Checkbox} from "@qualcomm-ui/react/checkbox"
 
 ### Simple
 
-::: meta
-keywords: [basic checkbox, default usage]
-:::
-
 The simple API provides a standalone component with built-in layout.
 
 <Demo name="CheckboxSimpleDemo" component={demos.CheckboxSimpleDemo} />
@@ -65,8 +61,8 @@ When [disabled](./#disabled) is true, the checkbox becomes non-interactive and i
 
 ### Controlled State
 
-::: meta
-keywords: [uncontrolled checkbox, useState]
+::: terms
+uncontrolled
 :::
 
 Set the initial value using the [defaultChecked](./#defaultChecked) prop, or use [checked](./#checked) and [onCheckedChange](./#onCheckedChange) to control the value manually. These props follow our [controlled state](/patterns/controlled-state) pattern.
@@ -79,16 +75,21 @@ Set the initial value using the [defaultChecked](./#defaultChecked) prop, or use
 
 ### Sizes
 
-::: meta
-keywords: [small checkbox, medium checkbox, large checkbox, sm md lg]
+::: terms
+small
+medium
+large
 :::
+
+Checkboxes come in three sizes: `sm`, `md`, and `lg`. The default size is `md`.
 
 <Demo expanded name="CheckboxSizesDemo" component={demos.CheckboxSizesDemo} />
 
 ### Hint
 
-::: meta
-keywords: [helper text, description text, supplementary text]
+::: terms
+helper text
+description
 :::
 
 Add a hint to provide additional context below the checkbox.
@@ -101,8 +102,8 @@ Choose the form library that fits your needs—we've built examples with React H
 
 ### React Hook Form
 
-::: meta
-keywords: [form validation, error handling]
+::: terms
+rhf
 :::
 
 Use [React Hook Form](https://react-hook-form.com/) to handle the checkbox state and validation. [ArkType](https://arktype.io/) works great for schema validation if you need it.
