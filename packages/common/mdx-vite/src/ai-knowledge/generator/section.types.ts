@@ -17,14 +17,12 @@ export interface CodeExample {
 }
 
 /**
- * Metadata extracted from ::: meta ::: blocks within a section.
+ * Metadata extracted from ::: terms ::: blocks within a section.
  */
 export interface SectionMetadata {
   [key: string]: string | string[] | undefined
   category?: string
   component?: string
-  keywords?: string[]
-  props?: string[]
   type?: string
 }
 
@@ -70,6 +68,11 @@ export interface SectionEntry {
   pageId: string
 
   /**
+   * Props extracted from TypeDoc code blocks within this section.
+   */
+  props?: string[]
+
+  /**
    * Raw markdown content from the AST, including code blocks.
    */
   rawContent: string
@@ -79,6 +82,11 @@ export interface SectionEntry {
    * @example "button-examples-variants"
    */
   sectionId: string
+
+  /**
+   * Search terms extracted from ::: terms ::: blocks within this section.
+   */
+  terms?: string[]
 
   /**
    * URL with anchor to this specific section.

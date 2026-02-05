@@ -128,7 +128,7 @@ export class SectionExtractor {
     section: PendingSection,
     pageInfo: PageInfo,
   ): SectionEntry | null {
-    const {metadata, nodes} = this.extractMetadata(section.nodes)
+    const {metadata, nodes, terms} = this.extractMetadata(section.nodes)
 
     if (nodes.length === 0) {
       return null
@@ -136,6 +136,7 @@ export class SectionExtractor {
 
     const contentNodes: RootContent[] = []
     const codeExamples: CodeExample[] = []
+    const props: string[] = []
 
     for (const node of nodes) {
       if (node.type === "code") {
@@ -144,8 +145,8 @@ export class SectionExtractor {
         }
 
         if (codeNode.data?.typeDocProps) {
-          const {name, props} = codeNode.data.typeDocProps
-          metadata.props = [...(metadata.props ?? []), ...props]
+          const {name, props: typeDocProps} = codeNode.data.typeDocProps
+          props.push(...typeDocProps)
           metadata.type = name
         }
 
@@ -173,7 +174,9 @@ export class SectionExtractor {
         ? pageInfo.frontmatter
         : undefined,
       pageId: pageInfo.id,
+      props: props.length ? props : undefined,
       rawContent: rawContent.trim(),
+      terms: terms.length ? terms : undefined,
       url,
     }
     const sectionHash = computeMd5(JSON.stringify(hashData))
@@ -190,20 +193,34 @@ export class SectionExtractor {
   private extractMetadata(nodes: RootContent[]): {
     metadata: SectionMetadata
     nodes: RootContent[]
+    terms: string[]
   } {
     const metadata: SectionMetadata = {}
     const filteredNodes: RootContent[] = []
+    const terms: string[] = []
 
     for (const node of nodes) {
       if (node.type === "paragraph") {
-        const firstChild = (node as Parent).children?.[0]
+        const children = (node as Parent).children ?? []
+        const firstChild = children[0]
         if (firstChild?.type === "text") {
-          const text = firstChild.value
-          const metaMatch = text.match(/^:::\s*meta\s*/)
+          const firstText = firstChild.value
+          const termsMatch = firstText.match(/^:::\s*terms\s*/)
 
-          if (metaMatch) {
-            const parsed = this.parseMetaBlock(text)
-            Object.assign(metadata, parsed)
+          if (termsMatch) {
+            // Collect text from all children (handles soft breaks in multiline blocks)
+            let fullText = firstText
+            for (let i = 1; i < children.length; i++) {
+              const child = children[i] as {type: string; value?: string}
+              if (child.type === "text") {
+                fullText += child.value
+              } else if (child.type === "softBreak") {
+                fullText += "\n"
+              }
+            }
+
+            const parsedTerms = this.parseTermsBlock(fullText)
+            terms.push(...parsedTerms)
             continue
           }
         }
@@ -211,52 +228,19 @@ export class SectionExtractor {
       filteredNodes.push(node)
     }
 
-    return {metadata, nodes: filteredNodes}
+    return {metadata, nodes: filteredNodes, terms}
   }
 
-  private parseMetaBlock(text: string): SectionMetadata {
-    const metadata: SectionMetadata = {}
-
-    const afterOpen = text.replace(/^:::\s*meta\s*/, "")
+  private parseTermsBlock(text: string): string[] {
+    const afterOpen = text.replace(/^:::\s*terms\s*/, "")
     const closeIndex = afterOpen.lastIndexOf(":::")
     const content =
       closeIndex !== -1 ? afterOpen.slice(0, closeIndex) : afterOpen
 
-    const lines = content.split("\n")
-    for (const line of lines) {
-      const trimmed = line.trim()
-      if (!trimmed) {
-        continue
-      }
-
-      const colonIndex = trimmed.indexOf(":")
-      if (colonIndex === -1) {
-        continue
-      }
-
-      const key = trimmed.slice(0, colonIndex).trim()
-      const value = trimmed.slice(colonIndex + 1).trim()
-
-      if (key && value) {
-        metadata[key] = this.parseValue(value)
-      }
-    }
-
-    return metadata
-  }
-
-  private parseValue(value: string): string | string[] {
-    const trimmed = value.trim()
-
-    if (trimmed.startsWith("[") && trimmed.endsWith("]")) {
-      const inner = trimmed.slice(1, -1)
-      return inner
-        .split(",")
-        .map((item) => item.trim())
-        .filter(Boolean)
-    }
-
-    return trimmed
+    return content
+      .split("\n")
+      .map((line) => line.trim())
+      .filter((line) => line && line !== ":::")
   }
 
   /**
