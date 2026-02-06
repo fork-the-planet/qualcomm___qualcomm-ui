@@ -1,6 +1,8 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
+import type {SimplifiedProp} from "./generator.types"
+
 /**
  * A code example extracted from a section.
  */
@@ -24,6 +26,18 @@ export interface SectionMetadata {
   category?: string
   component?: string
   type?: string
+}
+
+export interface SectionTypes {
+  /**
+   * Props extracted from the TypeDoc code block.
+   */
+  props: SimplifiedProp[]
+
+  /**
+   * Name of the type, interface, or class.
+   */
+  type: string
 }
 
 /**
@@ -53,11 +67,6 @@ export interface SectionEntry {
   headerPath: string[]
 
   /**
-   * Metadata extracted from ::: meta ::: blocks within this section.
-   */
-  metadata?: SectionMetadata
-
-  /**
    * Frontmatter from the source page.
    */
   pageFrontmatter?: Record<string, unknown>
@@ -66,11 +75,6 @@ export interface SectionEntry {
    * Source page identifier.
    */
   pageId: string
-
-  /**
-   * Props extracted from TypeDoc code blocks within this section.
-   */
-  props?: string[]
 
   /**
    * Raw markdown content from the AST, including code blocks.
@@ -87,6 +91,11 @@ export interface SectionEntry {
    * Search terms extracted from ::: terms ::: blocks within this section.
    */
   terms?: string[]
+
+  /**
+   * Name of the types or interfaces described by typeDocProps in this section.
+   */
+  types?: SectionTypes[]
 
   /**
    * URL with anchor to this specific section.

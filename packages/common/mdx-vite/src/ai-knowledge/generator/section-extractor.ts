@@ -8,7 +8,8 @@ import {visit} from "unist-util-visit"
 
 import {kebabCase} from "@qualcomm-ui/utils/change-case"
 
-import type {CodeExample, SectionEntry, SectionMetadata} from "./section.types"
+import type {SimplifiedProp} from "./generator.types"
+import type {CodeExample, SectionEntry, SectionTypes} from "./section.types"
 import {computeMd5} from "./utils"
 
 export interface SectionExtractorOptions {
@@ -128,7 +129,7 @@ export class SectionExtractor {
     section: PendingSection,
     pageInfo: PageInfo,
   ): SectionEntry | null {
-    const {metadata, nodes, terms} = this.extractMetadata(section.nodes)
+    const {nodes, terms} = this.extractTerms(section.nodes)
 
     if (nodes.length === 0) {
       return null
@@ -136,18 +137,17 @@ export class SectionExtractor {
 
     const contentNodes: RootContent[] = []
     const codeExamples: CodeExample[] = []
-    const props: string[] = []
 
+    const sectionTypes: SectionTypes[] = []
     for (const node of nodes) {
       if (node.type === "code") {
         const codeNode = node as Code & {
-          data?: {typeDocProps?: {name: string; props: string[]}}
+          data?: {typeDocProps?: {name: string; props: SimplifiedProp[]}}
         }
 
         if (codeNode.data?.typeDocProps) {
-          const {name, props: typeDocProps} = codeNode.data.typeDocProps
-          props.push(...typeDocProps)
-          metadata.type = name
+          const {name, props} = codeNode.data.typeDocProps
+          sectionTypes.push({props, type: name})
         }
 
         codeExamples.push({
@@ -169,14 +169,13 @@ export class SectionExtractor {
 
     const hashData = {
       headerPath: section.headerPath,
-      metadata: Object.keys(metadata).length ? metadata : undefined,
       pageFrontmatter: Object.keys(pageInfo.frontmatter).length
         ? pageInfo.frontmatter
         : undefined,
       pageId: pageInfo.id,
-      props: props.length ? props : undefined,
       rawContent: rawContent.trim(),
       terms: terms.length ? terms : undefined,
+      types: sectionTypes.length ? sectionTypes : undefined,
       url,
     }
     const sectionHash = computeMd5(JSON.stringify(hashData))
@@ -190,12 +189,10 @@ export class SectionExtractor {
     }
   }
 
-  private extractMetadata(nodes: RootContent[]): {
-    metadata: SectionMetadata
+  private extractTerms(nodes: RootContent[]): {
     nodes: RootContent[]
     terms: string[]
   } {
-    const metadata: SectionMetadata = {}
     const filteredNodes: RootContent[] = []
     const terms: string[] = []
 
@@ -208,7 +205,8 @@ export class SectionExtractor {
           const termsMatch = firstText.match(/^:::\s*terms\s*/)
 
           if (termsMatch) {
-            // Collect text from all children (handles soft breaks in multiline blocks)
+            // Collect text from all children (handles soft breaks in multiline
+            // blocks)
             let fullText = firstText
             for (let i = 1; i < children.length; i++) {
               const child = children[i] as {type: string; value?: string}
@@ -228,7 +226,7 @@ export class SectionExtractor {
       filteredNodes.push(node)
     }
 
-    return {metadata, nodes: filteredNodes, terms}
+    return {nodes: filteredNodes, terms}
   }
 
   private parseTermsBlock(text: string): string[] {

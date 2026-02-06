@@ -302,7 +302,7 @@ export class KnowledgeGenerator {
       .use(remarkParse)
       .use(remarkMdx)
       .use(remarkFrontmatter, ["yaml"])
-      .use(this.propFormatter.formatTypeDocProps())
+      .use(this.propFormatter.propsToMarkdownList())
       .use(this.formatFrontmatterExpressions(frontmatter))
       .use(await formatThemeNodes())
       .use(formatDemos(pageInfo.demosFolder))

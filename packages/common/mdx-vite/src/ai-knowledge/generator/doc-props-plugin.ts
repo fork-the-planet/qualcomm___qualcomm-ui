@@ -234,7 +234,7 @@ export class PropFormatter {
    * Creates a remark plugin that replaces TypeDocProps JSX elements with
    * Markdown tables containing component prop documentation.
    */
-  formatTypeDocProps(): Plugin {
+  propsToMarkdownList(): Plugin {
     return () => (tree, _file, done) => {
       visit(
         tree,
@@ -279,16 +279,19 @@ export class PropFormatter {
             }
             return
           }
-          const propsDoc = this.extractProps(componentProps, Boolean(isPartial))
+          const propTypes = this.extractProps(
+            componentProps,
+            Boolean(isPartial),
+          )
           if (getConfig().verbose) {
             console.log(
               `  Replaced TypeDocProps ${propsName} with API documentation`,
             )
           }
 
-          const regularProps = propsDoc.filter((p) => p.propType === undefined)
-          const inputs = propsDoc.filter((p) => p.propType === "input")
-          const outputs = propsDoc.filter((p) => p.propType === "output")
+          const regularProps = propTypes.filter((p) => p.propType === undefined)
+          const inputs = propTypes.filter((p) => p.propType === "input")
+          const outputs = propTypes.filter((p) => p.propType === "output")
 
           const sections: string[] = []
 
@@ -313,10 +316,8 @@ export class PropFormatter {
             return
           }
 
-          const propNames = propsDoc.map((p) => p.name)
-
           Object.assign(node, {
-            data: {typeDocProps: {name: propsName, props: propNames}},
+            data: {typeDocProps: {name: propsName, props: propTypes}},
             lang: null,
             meta: null,
             type: "code",
