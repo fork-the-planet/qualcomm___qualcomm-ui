@@ -3,6 +3,7 @@ title: Pagination
 group: Disclosure
 description: Pagination provides a control for moving through large, segmented content sets by exposing page numbers, previous and next actions, and optional overflow points when space is limited.
 component: Pagination
+aliases: [pager, page selector]
 ---
 
 import {QdsDemo} from "~components/demo"
@@ -47,17 +48,34 @@ Apart from the root element (`q-pagination`), each directive is optional. This f
 
 ### Showcase
 
+::: terms
+page navigation
+data table pagination
+list pagination
+:::
+
 The component renders the number of pages based on the [count](./#count) and [pageSize](./#pageSize) props.
 
 <QdsDemo name="PaginationShowcaseDemo" />
 
 ### Page Size
 
+::: terms
+rows per page
+results per page
+:::
+
 Render a dropdown via the `q-pagination-page-size` directive to adjust the number of data items per page.
 
 <QdsDemo name="PaginationPageSizeDemo" />
 
 ### Page Metadata
+
+::: terms
+pagination summary
+page info
+current page display
+:::
 
 Show metadata about the current and total pages with the `q-pagination-page-metadata` directive.
 
@@ -66,6 +84,11 @@ Refer to the [PageMetadata](./#pagemetadata) api below for information about eac
 <QdsDemo name="PaginationPageMetadataDemo" />
 
 ### Ranges
+
+::: terms
+truncate
+visible pages
+:::
 
 You can specify how many links to display on either side of the current page with the [siblingCount](/components/pagination/directive#siblingCount) property. Use the [boundaryCount](./#boundaryCount) property to adjust the number of pages that are always visible at the start and end.
 

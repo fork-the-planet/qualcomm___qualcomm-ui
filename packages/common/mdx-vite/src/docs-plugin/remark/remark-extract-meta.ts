@@ -55,16 +55,39 @@ function parseMetaContent(content: string): MetadataValue {
 }
 
 /**
+ * Parses the content of a terms block into a terms array.
+ * Terms are a flat list, one per line.
+ */
+function parseTermsContent(content: string): string[] {
+  return content
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => line && line !== ":::")
+}
+
+/**
  * Extracts metadata from MDX files and removes it from the MDX content.
  *
- * @example
+ * Supports two formats:
+ *
+ * @example `::: meta` - YAML-like key-value pairs
  * ```
  * ::: meta
  * component: NumberInput
- * keywords: [forms, input, data entry]
  * :::
  *
- * result: {keywords: ["forms", "input", "data entry"], component: "NumberInput"}
+ * result: {component: "NumberInput"}
+ * ```
+ *
+ * @example `::: terms` - flat list of terms
+ * ```
+ * ::: terms
+ * forms
+ * input
+ * data entry
+ * :::
+ *
+ * result: {terms: ["forms", "input", "data entry"]}
  * ```
  */
 export const remarkExtractMeta: Plugin<[MetadataValue], Root> = (
@@ -84,32 +107,46 @@ export const remarkExtractMeta: Plugin<[MetadataValue], Root> = (
       }
 
       const text = firstChild.value
-      const openMatch = text.match(/^:::\s*meta\s*/)
+      const metaMatch = text.match(/^:::\s*meta\s*/)
+      const termsMatch = text.match(/^:::\s*terms\s*/)
 
-      if (!openMatch) {
+      if (!metaMatch && !termsMatch) {
         return
       }
 
-      // Check if the entire meta block is in this single paragraph
+      const openMatch = metaMatch || termsMatch
+      const isTermsBlock = !!termsMatch
+
+      // Check if the entire block is in this single paragraph
       // (common when markdown parser keeps it together)
       if (
         text.includes(":::") &&
-        text.lastIndexOf(":::") > openMatch[0].length
+        text.lastIndexOf(":::") > openMatch![0].length
       ) {
-        // Extract content between opening ::: meta and closing :::
-        const afterOpen = text.slice(openMatch[0].length)
+        // Extract content between opening ::: and closing :::
+        const afterOpen = text.slice(openMatch![0].length)
         const closeIndex = afterOpen.lastIndexOf(":::")
         const content = afterOpen.slice(0, closeIndex)
 
-        const parsed = parseMetaContent(content)
-        Object.assign(metadata, parsed)
+        if (isTermsBlock) {
+          const terms = parseTermsContent(content)
+          if (terms.length > 0) {
+            const existing = metadata.terms
+            metadata.terms = Array.isArray(existing)
+              ? [...existing, ...terms]
+              : terms
+          }
+        } else {
+          const parsed = parseMetaContent(content)
+          Object.assign(metadata, parsed)
+        }
 
         nodesToRemove.push({index, parent})
         return SKIP
       }
 
       // Multi-paragraph case: collect text from multiple nodes
-      // The meta block might span multiple text children
+      // The block might span multiple text children
       let fullText = text
       for (let i = 1; i < node.children.length; i++) {
         const child = node.children[i]
@@ -119,20 +156,31 @@ export const remarkExtractMeta: Plugin<[MetadataValue], Root> = (
       }
 
       // Check for closing ::: in the combined text
-      const afterOpenFull = fullText.slice(openMatch[0].length)
+      const afterOpenFull = fullText.slice(openMatch![0].length)
       const closeIndexFull = afterOpenFull.lastIndexOf(":::")
 
       if (closeIndexFull !== -1) {
         const content = afterOpenFull.slice(0, closeIndexFull)
-        const parsed = parseMetaContent(content)
-        Object.assign(metadata, parsed)
+
+        if (isTermsBlock) {
+          const terms = parseTermsContent(content)
+          if (terms.length > 0) {
+            const existing = metadata.terms
+            metadata.terms = Array.isArray(existing)
+              ? [...existing, ...terms]
+              : terms
+          }
+        } else {
+          const parsed = parseMetaContent(content)
+          Object.assign(metadata, parsed)
+        }
 
         nodesToRemove.push({index, parent})
         return SKIP
       }
     })
 
-    // Remove meta blocks from AST (in reverse order to preserve indices)
+    // Remove blocks from AST (in reverse order to preserve indices)
     for (let i = nodesToRemove.length - 1; i >= 0; i--) {
       const {index, parent} = nodesToRemove[i]
       parent.children.splice(index, 1)

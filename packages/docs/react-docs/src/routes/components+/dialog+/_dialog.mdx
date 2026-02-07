@@ -3,7 +3,7 @@ title: Dialog
 group: Overlays
 description: A dialog is a focused, overlay-based container used to present critical information or request user input that requires immediate attention. It appears above the application content, blocks underlying interaction, and guides the user toward a required decision or acknowledgement.
 component: Dialog
-keywords: [modal, popup, lightbox, confirm dialog, alert box, overlay window]
+aliases: [modal, popup, lightbox, overlay]
 ---
 
 import {TypeDocProps, TypeDocAttributes} from "@qualcomm-ui/react-mdx/typedoc"
@@ -18,9 +18,21 @@ import * as demos from "./demos"
 import {Dialog} from "@qualcomm-ui/react/dialog"
 ```
 
+::: terms
+interstitial
+blocking ui
+focus trap
+:::
+
 ## Examples
 
 ### Sizes
+
+::: terms
+small
+medium
+dialog width
+:::
 
 The dialog component has two sizes: `sm` and `md`. Size governs the width of the dialog, as well as the content's spacing, font size, and padding.
 
@@ -28,8 +40,9 @@ The dialog component has two sizes: `sm` and `md`. Size governs the width of the
 
 ### Indicator Emphasis
 
-::: meta
-keywords: [dialog status, dialog severity, dialog intent, dialog icon]
+::: terms
+status
+severity
 :::
 
 Use the [emphasis](./#emphasis) prop to change the intent of the dialog's indicator icon.
@@ -38,8 +51,12 @@ Use the [emphasis](./#emphasis) prop to change the intent of the dialog's indica
 
 ### Placement
 
-::: meta
-keywords: [dialog position, dialog alignment, vertical position, top center bottom]
+::: terms
+position
+alignment
+top
+center
+bottom
 :::
 
 Use the [placement](./#placement) prop to change the placement of the dialog.
@@ -47,6 +64,12 @@ Use the [placement](./#placement) prop to change the placement of the dialog.
 <Demo name="DialogPlacementDemo" component={demos.DialogPlacementDemo} />
 
 ### Controlled State
+
+::: terms
+show
+hide
+programmatic
+:::
 
 Dialog visibility can be controlled using the [open](./#open), [onOpenChange](./#onOpenChange) and [defaultOpen](./#defaultOpen) props. These props follow our [controlled state](/patterns/controlled-state) pattern.
 
@@ -57,6 +80,11 @@ Dialog visibility can be controlled using the [open](./#open), [onOpenChange](./
 
 ### Outside Scroll
 
+::: terms
+overflow
+page scroll
+:::
+
 The default [scrollBehavior](./#scrollBehavior) is `outside`, which makes the entire page scrollable when modal content exceeds viewport height. The modal and backdrop move with the page scroll instead of creating an internal scroll area within the modal.
 
 <Demo
@@ -66,8 +94,8 @@ The default [scrollBehavior](./#scrollBehavior) is `outside`, which makes the en
 
 ### Inside Scroll
 
-::: meta
-keywords: [scrollable body, fixed height dialog, contained scroll]
+::: terms
+fixed height
 :::
 
 Set the [scrollBehavior](./#scrollBehavior) prop to `inside` to create an internal scroll area within the modal.
@@ -76,8 +104,11 @@ Set the [scrollBehavior](./#scrollBehavior) prop to `inside` to create an intern
 
 ### Alert Dialog
 
-::: meta
-keywords: [confirmation dialog, delete confirmation, destructive action, warning dialog, dangerous action]
+::: terms
+confirmation
+confirm prompt
+delete
+destructive
 :::
 
 Set the [role](./#role) prop to `alertdialog` to change the dialog component to an [alert dialog](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/alertdialog_role). This is recommended for situations where the dialog is used to notify users of urgent information that demands their immediate attention.
@@ -87,10 +118,6 @@ Set the [role](./#role) prop to `alertdialog` to change the dialog component to 
 ## Shortcuts
 
 ### \<Dialog.FloatingPortal\>
-
-::: meta
-keywords: [compound component, convenience wrapper, shorthand]
-:::
 
 A helper component that combines the portal, positioner, and content
 components. This shortcut is equivalent to:

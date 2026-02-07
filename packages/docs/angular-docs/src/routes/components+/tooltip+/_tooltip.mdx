@@ -3,6 +3,7 @@ title: Tooltip
 group: Overlays
 description: Tooltips appear on demand to explain UI elements, clarify functionality, or provide helpful context without permanently occupying screen space. They automatically position themselves relative to their trigger element.
 component: Tooltip
+aliases: [info tip, hover text, help text, hint, popover]
 ---
 
 import {
@@ -21,6 +22,10 @@ import {TooltipModule} from "@qualcomm-ui/angular/tooltip"
 
 ## Overview
 
+::: terms
+contextual help
+:::
+
 The tooltip should be used to provide additional non-essential information. It is linked to an interactive element (the trigger) and will be shown when this element is focused or hovered.
 Because the tooltip itself can't be focused or tabbed to, it should not contain interactive elements.
 Only one tooltip can be open at a time.
@@ -36,17 +41,38 @@ In general, tooltips should be used sparingly and only contain succinct informat
 
 ### Simple
 
+::: terms
+basic
+quick start
+:::
+
 The simple API provides a standalone component with built-in layout. The trigger is supplied as a child directive, and the content of the tooltip is the children.
 
 <QdsDemo name="TooltipSimpleDemo" />
 
 ### Composite
 
+::: terms
+compound
+parts
+anatomy
+subcomponents
+:::
+
 Build with the composite API for granular control. This API requires you to provide each subcomponent, but gives you full control over the structure and layout.
 
 <QdsDemo name="TooltipCompositeDemo" />
 
 ### Placement
+
+::: terms
+alignment
+left
+right
+bottom
+start
+end
+:::
 
 The tooltip's position, relative to the trigger element, can be set using the `placement` option of the [positioning](./#positioning) prop. Its default value is `top`.
 Change the values in the example below and hover over the select to see the tooltip position change.
@@ -55,17 +81,37 @@ Change the values in the example below and hover over the select to see the tool
 
 ### Close On Click / Escape
 
+::: terms
+dismiss
+persist
+:::
+
 By default, the tooltip will close when the `Escape` key is pressed or a click is detected. You can customize this behavior using the [closeOnClick](./#closeOnClick) and [closeOnEscape](./#closeOnEscape) props.
 
 <QdsDemo name="TooltipCloseEventsDemo" />
 
 ### Controlled Visibility
 
+::: terms
+programmatic
+show hide
+toggle
+manual
+signal
+two-way binding
+:::
+
 Set the initial visibility using the [defaultOpen](./#defaultOpen) prop, or use [open](./#open) and [openChanged](./#openChanged) to control the visibility manually. These props follow our [controlled state](/patterns/controlled-state) pattern.
 
 <QdsDemo expanded name="TooltipControlledStateDemo" />
 
 ### Disabled
+
+::: terms
+inactive
+prevent
+turn off
+:::
 
 You can disable the tooltip by using the `disabled` prop.
 
@@ -74,6 +120,11 @@ You can disable the tooltip by using the `disabled` prop.
 ## Shortcuts
 
 ### \<q-tooltip-floating-portal\>
+
+::: terms
+wrapper
+shorthand
+:::
 
 A helper component that combines the portal, positioner, content, and arrow
 components. This shortcut is equivalent to:

@@ -3,6 +3,7 @@ title: Icon
 group: Data Display
 description: Icons are small visual elements, like symbols, that represent certain functions, features, or types of content within a user interface.
 component: Icon
+aliases: [svg, symbol, graphic]
 ---
 
 import {TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
@@ -18,6 +19,12 @@ import {Icon} from "@qualcomm-ui/react/icon"
 
 ## Overview
 
+::: terms
+feather
+feather icons
+lucide
+:::
+
 QUI components use icons from [Lucide](https://lucide.dev/), an open-source fork of Feather Icons.
 
 Many components like the [Button](/components/button/button), [Icon Button](/components/button/icon-button), and [Text Input](/components/input/text-input) have built-in support for Lucide Icons.
@@ -26,11 +33,31 @@ Many components like the [Button](/components/button/button), [Icon Button](/com
 
 ### Provider
 
+::: terms
+register icons
+icon registration
+provide icons
+:::
+
 Use the `provideIcons` utility function to register icons. Provided icons are matched by their string name.
 
 <QdsDemo name="IconProviderDemo" expanded />
 
 ### Sizes
+
+::: terms
+dimensions
+resize
+width
+height
+extra small
+small
+medium
+large
+extra large
+custom size
+pixel size
+:::
 
 Size can be customized using the [size](./#size) input. There are five available values: `xs`, `sm`, `md`, `lg`, `xl`. Should you need more control over the rendered size, supply a number instead which will be converted to pixels.
 

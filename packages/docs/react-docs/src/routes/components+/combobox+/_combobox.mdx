@@ -3,15 +3,7 @@ title: Combobox
 group: Form Controls
 description: The Combobox consists of a label, a text-input field, and a chevron icon that indicates the control can expand. The input field contains the current value or placeholder text and is enclosed by a container that provides focus and hover states. Activating the control reveals the dropdown menu, which presents a list of options.
 component: Combobox
-keywords:
-  [
-    autocomplete,
-    typeahead,
-    searchable select,
-    filterable dropdown,
-    combo box,
-    autosuggest,
-  ]
+aliases: [autocomplete, typeahead, autosuggest, combo box]
 ---
 
 import {Demo} from "~components/demo"
@@ -34,18 +26,16 @@ import {Combobox} from "@qualcomm-ui/react/combobox"
 
 ### Simple
 
-::: meta
-keywords: [basic combobox, standalone component]
-:::
-
 The simple API provides a standalone component with bundled subcomponents.
 
 <Demo name="ComboboxSimpleDemo" component={demos.ComboboxSimpleDemo} />
 
 ### Composite
 
-::: meta
-keywords: [compound components, parts API]
+::: terms
+clear trigger
+item indicator
+subcomponents
 :::
 
 Build with the composite API for granular control. This API requires you to provide each subcomponent, but gives you full control over the structure and layout.
@@ -53,6 +43,11 @@ Build with the composite API for granular control. This API requires you to prov
 <Demo name="ComboboxCompositeDemo" component={demos.ComboboxCompositeDemo} />
 
 ### Open on Click
+
+::: terms
+click to expand
+expand on click
+:::
 
 Use the [openOnClick](./#openOnClick) prop to open the combobox when the user clicks on the input.
 
@@ -63,8 +58,8 @@ Use the [openOnClick](./#openOnClick) prop to open the combobox when the user cl
 
 ### Input Behavior
 
-::: meta
-keywords: [autohighlight, autocomplete mode]
+::: terms
+autocomplete
 :::
 
 Adjust the auto-completion behavior of the combobox with the [inputBehavior](./#inputBehavior) prop.
@@ -76,8 +71,9 @@ Adjust the auto-completion behavior of the combobox with the [inputBehavior](./#
 
 ### Multiple Selection
 
-::: meta
-keywords: [multiselect, multi-select, select multiple items, tags]
+::: terms
+multiselect
+multi-select
 :::
 
 Use the [multiple](./#multiple) prop to enable multiple selection. When this is set, the combobox will always clear the input value when the user selects an option.
@@ -86,8 +82,8 @@ Use the [multiple](./#multiple) prop to enable multiple selection. When this is 
 
 ### Highlight Matching Text
 
-::: meta
-keywords: [search highlight, match highlighting, text emphasis]
+::: terms
+search highlight
 :::
 
 Use the [highlightMatchingText](./#highlightMatchingText) prop to highlight the portion of each option that matches the user's input. This provides visual feedback during filtering.
@@ -96,8 +92,9 @@ Use the [highlightMatchingText](./#highlightMatchingText) prop to highlight the 
 
 ### ARIA Label
 
-::: meta
-keywords: [accessible name, screen reader, a11y]
+::: terms
+screen reader
+a11y
 :::
 
 The Combobox's label is automatically associated with the input element for accessibility. If you omit the label, you should provide an aria-label to the input to give your combobox an accessible name.
@@ -106,8 +103,10 @@ The Combobox's label is automatically associated with the input element for acce
 
 ### Content Width
 
-::: meta
-keywords: [dropdown width, popup width, popover width]
+::: terms
+dropdown width
+popup width
+popover width
 :::
 
 The [positioning.sameWidth](./#sameWidth) property controls whether the width of the combobox content matches the width of the input element. The default is `true`.
@@ -116,8 +115,9 @@ The [positioning.sameWidth](./#sameWidth) property controls whether the width of
 
 ### Input Icon
 
-::: meta
-keywords: [prefix icon, leading icon, start icon]
+::: terms
+prefix icon
+leading icon
 :::
 
 Use the [icon](./#icon) prop to add an icon to the start of the input element.
@@ -126,8 +126,8 @@ Use the [icon](./#icon) prop to add an icon to the start of the input element.
 
 ### Icon Customization
 
-::: meta
-keywords: [spinner, loading state, custom icon]
+::: terms
+spinner
 :::
 
 Supply a ReactNode to the [icon](./#icon) prop to customize the icon. This example features a loading indicator:
@@ -139,8 +139,9 @@ Supply a ReactNode to the [icon](./#icon) prop to customize the icon. This examp
 
 ### Items as Objects
 
-::: meta
-keywords: [object items, complex items, item mapping]
+::: terms
+object array
+typed collection
 :::
 
 The `items` prop can be an array of objects. Use the [itemLabel](./#itemLabel) and [itemValue](./#itemValue) properties on the [comboboxCollection](./#ListCollection) to specify the label and value of each item.
@@ -149,8 +150,9 @@ The `items` prop can be an array of objects. Use the [itemLabel](./#itemLabel) a
 
 ### Custom Item Rendering
 
-::: meta
-keywords: [custom option, custom list item, rich item content]
+::: terms
+custom option
+rich item content
 :::
 
 When using the simple API, use the [renderItem](./#renderItem) prop to customize the rendering of each item.
@@ -174,8 +176,11 @@ When using the simple API, use the [renderItem](./#renderItem) prop to customize
 
 ### Sizes
 
-::: meta
-keywords: [small, medium, large, compact, density]
+::: terms
+small
+medium
+large
+compact
 :::
 
 This component supports three [size](./#size) options to accommodate different layout densities and design requirements.
@@ -186,8 +191,9 @@ The available sizes are `sm`, `md`, and `lg`. The default size is `md`.
 
 ### Content Height
 
-::: meta
-keywords: [max height, scrollable list, dropdown height]
+::: terms
+max height
+scrollable list
 :::
 
 Change the height of the item container by adjusting the style of the Content element.
@@ -195,10 +201,6 @@ Change the height of the item container by adjusting the style of the Content el
 <Demo name="ComboboxMaxHeightDemo" component={demos.ComboboxMaxHeightDemo} />
 
 ### Controlled State
-
-::: meta
-keywords: [programmatic control, state management, two-way binding]
-:::
 
 Set the initial value using the [defaultValue](./#defaultValue) prop, or use [value](./#value) and [onValueChange](./#onValueChange) to control the value manually. These props follow our [controlled state](/patterns/controlled-state) pattern.
 
@@ -209,8 +211,10 @@ Set the initial value using the [defaultValue](./#defaultValue) prop, or use [va
 
 ### States
 
-::: meta
-keywords: [disabled state, read only, readonly, inactive]
+::: terms
+disabled combobox
+read only
+readonly
 :::
 
 The following shows how the Combobox component appears in each interactive state.
@@ -219,8 +223,9 @@ The following shows how the Combobox component appears in each interactive state
 
 ### Error Text and Indicator
 
-::: meta
-keywords: [validation, validation message, form error]
+::: terms
+validation
+form error
 :::
 
 Error messages are displayed using two props:
@@ -234,8 +239,9 @@ The error text and indicator will only render when [invalid](./#invalid) is true
 
 ### Hint Text
 
-::: meta
-keywords: [helper text, description text, input hint]
+::: terms
+helper text
+description text
 :::
 
 Use the [hintText](./#hintText) prop to provide additional context or instructions below the combobox.
@@ -244,8 +250,10 @@ Use the [hintText](./#hintText) prop to provide additional context or instructio
 
 ### Within Dialog
 
-::: meta
-keywords: [modal, overlay, nested combobox, portal disabled]
+::: terms
+modal
+nested combobox
+portalProps.disabled
 :::
 
 To use the Combobox within a Dialog, you need to avoid portalling the `Combobox.Positioner` to the document's body. To do this using the simple API, set `portalProps.disabled` to `true`:
@@ -257,8 +265,8 @@ To use the Combobox within a Dialog, you need to avoid portalling the `Combobox.
 
 ### Within Popover
 
-::: meta
-keywords: [nested popover, embedded combobox]
+::: terms
+portal disabled
 :::
 
 Like with the Dialog, you need to avoid portalling the `Combobox.Positioner` to the document's body:
@@ -270,8 +278,11 @@ Like with the Dialog, you need to avoid portalling the `Combobox.Positioner` to 
 
 ### Async Loading
 
-::: meta
-keywords: [remote data, fetch, api data, server-side data]
+::: terms
+remote data
+fetch
+api data
+server-side data
 :::
 
 This example shows how to load items asynchronously and display a loading indicator.
@@ -280,8 +291,9 @@ This example shows how to load items asynchronously and display a loading indica
 
 ### Virtualized
 
-::: meta
-keywords: [windowing, large lists, performance optimization, virtual scrolling]
+::: terms
+windowing
+virtual scrolling
 :::
 
 For large lists, use the [virtual](./#virtual) prop to improve performance. This virtualizes the visible list items for performant scrolling and searching. The following example features a list of 5000 mock usernames.
@@ -294,8 +306,8 @@ Choose the form library that fits your needs—we've built examples with React H
 
 ### React Hook Form
 
-::: meta
-keywords: [form validation, form integration, rhf]
+::: terms
+rhf
 :::
 
 Use [React Hook Form](https://react-hook-form.com/) to handle the input state and validation. [ArkType](https://arktype.io/) works great for schema validation if you need it.
@@ -308,8 +320,8 @@ Use [React Hook Form](https://react-hook-form.com/) to handle the input state an
 
 ### Tanstack Form
 
-::: meta
-keywords: [form validation, tanstack-form]
+::: terms
+tanstack-form
 :::
 
 [Tanstack Form](https://tanstack.com/form/latest/docs/framework/react/guides/basic-concepts) handles validation with its built-in validators.
@@ -433,10 +445,6 @@ This section describes the elements of the Combobox's composite API.
 ## Data Structures
 
 ### ListCollection
-
-::: meta
-keywords: [collection API, item collection, data structure]
-:::
 
 The following describes the member variables and methods of the `ListCollection` class. The Combobox component uses an instance of this class as input:
 

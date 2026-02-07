@@ -1,5 +1,17 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 2.16.0 (2026/02/06)
+
+### Features
+
+- [sections-extractor]: move props and terms to top-level fields
+- [ai-knowledge]: reworked props, terms, and frontmatter extraction
+- [ai-knowledge]: refactor metadata to terms array
+
+### Code Refactoring
+
+- [ai-knowledge]: adjusted internal extraction data types
+
 ## 2.15.1 (2026/02/03)
 
 ### Bug Fixes

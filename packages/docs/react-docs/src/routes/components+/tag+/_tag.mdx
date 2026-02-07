@@ -3,19 +3,7 @@ title: Tag
 group: Data Display
 description: Tags present static metadata or contextual information. They provide a fixed visual treatment, making them ideal for displaying system-defined values, attributes, or informational labels.
 component: Tag
-keywords:
-  [
-    label,
-    chip,
-    badge,
-    token,
-    pill,
-    metadata display,
-    category,
-    removable,
-    closable,
-    filter tag,
-  ]
+aliases: [chip, pill, token, label]
 ---
 
 import {Demo} from "~components/demo"
@@ -34,14 +22,23 @@ import {Tag} from "@qualcomm-ui/react/tag"
 
 ### Icons
 
+::: terms
+leading icon
+trailing icon
+prefix
+suffix
+:::
+
 Icons are supplied using the [startIcon](./#startIcon) and [endIcon](./#endIcon) props.
 
 <Demo name="TagIconsDemo" component={demos.TagIconsDemo} />
 
 ### Variants
 
-::: meta
-keywords: [clickable tag, removable tag, closable tag, interactive tag]
+::: terms
+clickable
+removable
+closable
 :::
 
 Choose from three [variants](./#variant): `link`, `selectable` and `dismissable`.
@@ -50,11 +47,21 @@ Choose from three [variants](./#variant): `link`, `selectable` and `dismissable`
 
 ### Colors
 
+::: terms
+status indicator
+:::
+
 Control the visual emphasis with different colors via the [emphasis](./#emphasis) prop.
 
 <Demo name="TagEmphasisDemo" component={demos.TagEmphasisDemo} />
 
 ### Sizes
+
+::: terms
+small
+medium
+large
+:::
 
 Choose from three [sizes](./#size): `sm`, `md` and `lg`. The default size is `md`.
 
@@ -62,14 +69,18 @@ Choose from three [sizes](./#size): `sm`, `md` and `lg`. The default size is `md
 
 ### States
 
+::: terms
+inactive
+:::
+
 Disable the tag by setting the [disabled](./#disabled) prop.
 
 <Demo name="TagStatesDemo" component={demos.TagStatesDemo} />
 
 ### Radius
 
-::: meta
-keywords: [pill shape, tag corners, tag shape]
+::: terms
+pill
 :::
 
 Control the border radius of the tag with the [radius](./#radius-1) prop. The default radius is `square`.

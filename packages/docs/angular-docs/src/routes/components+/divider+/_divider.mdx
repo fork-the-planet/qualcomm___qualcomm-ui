@@ -3,6 +3,7 @@ title: Divider
 group: Data Display
 description: Dividers provide essential visual structure by creating boundaries between content areas, helping users navigate and process information more effectively.
 component: Divider
+aliases: [separator, hr, horizontal rule, line, border]
 ---
 
 import {QdsDemo} from "~components/demo"
@@ -20,9 +21,17 @@ import {DividerDirective} from "@qualcomm-ui/angular/divider"
 
 ### Showcase
 
+::: terms
+content separator, section break, visual separation
+:::
+
 <QdsDemo name="DividerShowcaseDemo" />
 
 ### Variants
+
+::: terms
+subtle, normal, strong, low contrast, high contrast, visual weight
+:::
 
 Use [variant](./#variant) to change the visual emphasis level of the divider.
 
@@ -30,11 +39,19 @@ Use [variant](./#variant) to change the visual emphasis level of the divider.
 
 ### Orientation
 
+::: terms
+column divider, inline separator, row divider
+:::
+
 By default, a divider has a `horizontal` orientation. You can change this by setting the [orientation](./#orientation) prop to `vertical`.
 
 <QdsDemo name="DividerOrientationDemo" />
 
 ### Focusable
+
+::: terms
+keyboard navigation, tab order, screen reader, a11y
+:::
 
 By default, a divider is not focusable. You can change this by setting a `tabindex` value. Authors can assign `aria-label` to provide accessible names to dividers.
 
@@ -43,6 +60,10 @@ A focusable divider [must expose a value to accessibility tools](https://www.w3.
 <QdsDemo name="DividerFocusableDemo" />
 
 ### Value Text
+
+::: terms
+aria-valuetext, accessible value, assistive technology
+:::
 
 When the value itself is not sufficient to describe the state of the component, authors can provide a more descriptive text using the `valueText` prop.
 

@@ -2,6 +2,7 @@
 title: Number Badge
 description: The Number Badge component displays numerical indicators that help users track quantities, updates, or notifications at a glance.
 component: NumberBadge
+aliases: [count badge, counter, pill]
 ---
 
 import {QdsDemo} from "~components/demo"
@@ -28,11 +29,23 @@ Use the [value](./#value-1) input for auto formatting, or use content projection
 
 ### Max (Auto Formatting)
 
+::: terms
+truncate
+overflow indicator
+threshold
+:::
+
 When using the [value](./#value-1) input with [max](./#max), overflow values are automatically formatted. If value exceeds max, the badge displays "max+" and applies special styling. The default max is 99.
 
 <QdsDemo name="NumberBadgeMaxDemo" />
 
 ### Variant
+
+::: terms
+appearance
+semantic
+emphasis
+:::
 
 Multiple color and style options are available via the [variant](./#variant-1) input: `neutral` (default), `neutral-outline`, `brand`, `brand-outline`, `info`, `success`, `warning`, `danger`, `persistent-black` and `persistent-white`.
 
@@ -40,11 +53,21 @@ Multiple color and style options are available via the [variant](./#variant-1) i
 
 ### Size
 
+::: terms
+small
+medium
+large
+:::
+
 Control dimensions using the [size](./#size-1) input. Three sizes are available: `sm`, `md` (default), and `lg`.
 
 <QdsDemo name="NumberBadgeSizeDemo" />
 
 ### Disabled
+
+::: terms
+grayed out
+:::
 
 Set the [disabled](./#disabled-1) input to visually indicate that the badge is inactive.
 

@@ -173,17 +173,17 @@ Nested B content.
     })
   })
 
-  describe("metadata extraction", () => {
-    test("extracts metadata from ::: meta ::: blocks", () => {
+  describe("terms extraction", () => {
+    test("extracts terms from ::: terms ::: blocks", () => {
       const markdown = `
 # Test Page
 
 ## Examples
 
-::: meta
-component: Button
-keywords: [forms, ui, interactive]
-category: examples
+::: terms
+forms
+ui
+interactive
 :::
 
 Example content here.
@@ -191,21 +191,17 @@ Example content here.
       const extractor = new SectionExtractor()
       const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
-      expect(sections[0].metadata).toEqual({
-        category: "examples",
-        component: "Button",
-        keywords: ["forms", "ui", "interactive"],
-      })
+      expect(sections[0].terms).toEqual(["forms", "ui", "interactive"])
     })
 
-    test("removes meta blocks from content", () => {
+    test("removes terms blocks from content", () => {
       const markdown = `
 # Test Page
 
 ## Examples
 
-::: meta
-component: Button
+::: terms
+forms
 :::
 
 Example content only.
@@ -213,12 +209,12 @@ Example content only.
       const extractor = new SectionExtractor()
       const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
-      expect(sections[0].content).not.toContain("::: meta")
-      expect(sections[0].content).not.toContain("component: Button")
+      expect(sections[0].content).not.toContain("::: terms")
+      expect(sections[0].content).not.toContain("forms")
       expect(sections[0].content).toContain("Example content only.")
     })
 
-    test("returns empty metadata when no meta block present", () => {
+    test("returns undefined terms when no terms block present", () => {
       const markdown = `
 # Test Page
 
@@ -229,7 +225,7 @@ Just content, no metadata.
       const extractor = new SectionExtractor()
       const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
-      expect(sections[0].metadata).toBeUndefined()
+      expect(sections[0].terms).toBeUndefined()
     })
   })
 

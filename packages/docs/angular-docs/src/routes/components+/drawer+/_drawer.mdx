@@ -3,6 +3,7 @@ title: Drawer
 group: Overlays
 description: The drawer component creates a flexible overlay panel that provides focused workspace for forms, detailed views, or supplementary information.
 component: Drawer
+aliases: [side panel, offcanvas, flyout, sheet, slide out panel, sliding panel]
 ---
 
 import {QdsDemo} from "~components/demo"
@@ -21,11 +22,22 @@ import {DrawerModule} from "@qualcomm-ui/angular/drawer"
 
 ## Overview
 
+::: terms
+app drawer
+:::
+
 The drawer's API is similar to the [Dialog](/components/dialog) component.
 
 ## Examples
 
 ### Placement End
+
+::: terms
+right drawer
+right-aligned drawer
+slide-in
+pull-out panel
+:::
 
 The drawer's default [placement](./#placement) is `end`, which maps to the right side of the screen in LTR languages and the left side in RTL languages.
 
@@ -33,17 +45,40 @@ The drawer's default [placement](./#placement) is `end`, which maps to the right
 
 ### Placement Start
 
+::: terms
+left drawer
+nav drawer
+navigation drawer
+sidebar drawer
+slide-in
+pull-out panel
+:::
+
 Use [placement](./#placement) `start` to change the placement to the left side of the screen.
 
 <QdsDemo name="DrawerPlacementStartDemo" />
 
 ### Controlled State
 
+::: terms
+programmatic drawer
+manage drawer state
+external state control
+:::
+
 Set the initial visibility using the [defaultOpen](./#defaultOpen) prop, or use [open](./#open) and [openChanged](./#openChanged) to control the visibility manually. These props follow our [controlled state](/patterns/controlled-state) pattern.
 
 <QdsDemo name="DrawerControlledStateDemo" />
 
 ### Custom Container
+
+::: terms
+embedded drawer
+inline drawer
+nested drawer
+contained drawer
+non-fullscreen drawer
+:::
 
 Use the `container` prop of the `<q-portal>` component to render the drawer in a custom container. You'll need to override the positioner's default styles to position the drawer correctly.
 

@@ -3,7 +3,6 @@ title: Icon Button
 group: Buttons
 description: Icon buttons perform an action when clicked and visually represent the action through an icon, combining button functionality with visual symbolism.
 component: IconButton
-keywords: [icon-only button, clickable icon, toolbar button, action icon]
 ---
 
 import {TypeDocAttributes, TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
@@ -20,8 +19,9 @@ import {IconButton} from "@qualcomm-ui/react/button"
 
 ## Accessibility Guidelines
 
-::: meta
-keywords: [a11y, wcag, screen reader support]
+::: terms
+a11y
+wcag
 :::
 
 Icon-only buttons rely on visual cues that screen readers cannot access. Use [aria-label](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-label) or [aria-labelledby](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-labelledby) to give every icon-only button an accessible name so its purpose is clear to assistive technologies.
@@ -36,18 +36,16 @@ Buttons come in three variants: `fill`, `outline`, and `ghost`. Customize these 
 
 ### Emphasis
 
-::: meta
-keywords: [icon button color, button intent, semantic color]
-:::
-
 Control the visual emphasis with different colors: `neutral`, `primary`, and `danger`. Customize these with the [emphasis](./#emphasis) prop.
 
 <Demo name="IconButtonEmphasisDemo" component={demos.IconButtonEmphasisDemo} />
 
 ### Sizes and Icons
 
-::: meta
-keywords: [small icon button, medium icon button, large icon button, sm, md, lg]
+::: terms
+small
+medium
+large
 :::
 
 Customize size using the [size](./#size) property. QUI buttons come with built-in support for [lucide-react](https://lucide.dev) icons.
@@ -56,8 +54,8 @@ Customize size using the [size](./#size) property. QUI buttons come with built-i
 
 ### Compact Density
 
-::: meta
-keywords: [reduced padding, tight spacing, condensed button, dense]
+::: terms
+dense
 :::
 
 Use the [density](./#density) prop to reduce the padding and height of the button. The options are `default` and `compact`.
@@ -66,9 +64,7 @@ Use the [density](./#density) prop to reduce the padding and height of the butto
 
 ### Variant Combinations
 
-::: meta
-keywords: [icon button style matrix, disabled icon button, all icon button styles]
-:::
+This demo displays all combinations of variants and emphasis options, including the disabled state for each variant.
 
 <Demo
   name="IconButtonVariantCombinationsDemo"
@@ -77,8 +73,13 @@ keywords: [icon button style matrix, disabled icon button, all icon button style
 
 ### Contrast Colors
 
-::: meta
-keywords: [high contrast icon button, white-persistent, black-persistent, theme-independent]
+Use `white-persistent` emphasis on dark backgrounds and `black-persistent` emphasis on light backgrounds. These colors remain constant regardless of the active theme.
+
+::: terms
+dark mode
+light mode
+theme independent
+inverted
 :::
 
 <Demo name="IconButtonContrastDemo" component={demos.IconButtonContrastDemo} />

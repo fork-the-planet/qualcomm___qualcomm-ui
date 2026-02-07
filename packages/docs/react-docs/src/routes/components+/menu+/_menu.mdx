@@ -3,16 +3,7 @@ title: Menu
 group: Overlays
 description: The Menu component presents a structured list of actions, settings, or navigation targets within a transient surface. It supports icons, keyboard shortcuts, hint text, section titles, dividers, and submenu indicators.
 component: Menu
-keywords:
-  [
-    dropdown menu,
-    context menu,
-    popup menu,
-    action menu,
-    right-click menu,
-    navigation menu,
-    select menu,
-  ]
+aliases: [dropdown menu, context menu, popup menu]
 ---
 
 import {Demo} from "~components/demo"
@@ -31,8 +22,11 @@ import {Menu} from "@qualcomm-ui/react/menu"
 
 ### Item Customization
 
-::: meta
-keywords: [menu icons, keyboard shortcuts, hotkeys, menu commands]
+::: terms
+hotkeys
+keyboard shortcuts
+action list
+overflow menu
 :::
 
 Compose the menu to include icons and commands.
@@ -44,8 +38,9 @@ Compose the menu to include icons and commands.
 
 ### Context Menu
 
-::: meta
-keywords: [oncontextmenu, Menu.ContextTrigger, context menu]
+::: terms
+oncontextmenu
+right-click menu
 :::
 
 Demonstrates how to trigger a menu on right-click or other context events.
@@ -54,8 +49,10 @@ Demonstrates how to trigger a menu on right-click or other context events.
 
 ### Nested Menus
 
-::: meta
-keywords: [submenu, cascading menu, multi-level menu, Menu.TriggerItem]
+::: terms
+submenu
+cascading
+hierarchical
 :::
 
 Compose nested menus by nesting `<Menu.Root>` components inside each other.
@@ -64,8 +61,10 @@ Compose nested menus by nesting `<Menu.Root>` components inside each other.
 
 ### Links
 
-::: meta
-keywords: [anchor menu item]
+::: terms
+anchor
+navigation
+navigation menu
 :::
 
 Menu items can be links using [polymorphic composition](/polymorphic-components). Use the [render](./#render) prop on the `<Menu.Item>` to specify the element type.
@@ -86,8 +85,9 @@ There are three item types, each corresponding to one of the three types of aria
 
 #### Checkbox Items
 
-::: meta
-keywords: [multi-select menu, toggle menu item, checkmark]
+::: terms
+multi-select
+toggle
 :::
 
 There are two appearance options:
@@ -99,8 +99,9 @@ There are two appearance options:
 
 #### Checkbox Selection State
 
-::: meta
-keywords: [controlled checkbox, onCheckedChange]
+::: terms
+onCheckedChange
+controlled checkbox
 :::
 
 Illustrates how to manage and reflect the checked state of checkbox menu items.
@@ -112,8 +113,9 @@ Illustrates how to manage and reflect the checked state of checkbox menu items.
 
 #### Radio Group
 
-::: meta
-keywords: [single selection, exclusive selection, mutually exclusive]
+::: terms
+single-select
+exclusive selection
 :::
 
 Demonstrates how to group radio menu items so only one can be selected at a time.
@@ -121,10 +123,6 @@ Demonstrates how to group radio menu items so only one can be selected at a time
 <Demo name="MenuRadioGroupDemo" component={demos.MenuRadioGroupDemo} />
 
 ### Controlled State
-
-::: meta
-keywords: [programmatic menu control, menu visibility]
-:::
 
 The menu's visibility can be controlled via the `open`, `onOpenChange`, and `defaultOpen` props.
 
@@ -141,11 +139,21 @@ In controlled mode, the `open` prop should be updated in response to `onOpenChan
 
 ### Placement
 
+::: terms
+position
+popover placement
+:::
+
 Configure the menu's placement using the [positioning.placement](./#positioning) prop.
 
 <Demo name="MenuPlacementDemo" component={demos.MenuPlacementDemo} />
 
 ### Sizes
+
+::: terms
+small
+medium
+:::
 
 Use the [size](./#size) prop to control the size of the menu. The default size is `md`. The demo features the small (`sm`) size.
 
@@ -153,8 +161,9 @@ Use the [size](./#size) prop to control the size of the menu. The default size i
 
 ### Anchor Point
 
-::: meta
-keywords: [custom anchor, getAnchorRect, menu positioning]
+::: terms
+getAnchorRect
+custom anchor
 :::
 
 Use the [positioning.anchorPoint](./#positioning) prop to control the anchor point of the menu.
@@ -163,8 +172,10 @@ Use the [positioning.anchorPoint](./#positioning) prop to control the anchor poi
 
 ### Avatar
 
-::: meta
-keywords: [user menu, profile menu, account dropdown]
+::: terms
+profile menu
+user menu
+account dropdown
 :::
 
 Here's an example that composes the `Menu` with the [Avatar](/components/avatar) component to display a user account menu.
@@ -173,8 +184,9 @@ Here's an example that composes the `Menu` with the [Avatar](/components/avatar)
 
 ### Within Dialog
 
-::: meta
-keywords: [modal menu, menu in overlay, nested overlay]
+::: terms
+modal
+overlay composition
 :::
 
 When using the `Menu` inside a `Dialog`, don't render the `<Menu.Positioner>` within a `<Portal>` element.
@@ -183,8 +195,10 @@ When using the `Menu` inside a `Dialog`, don't render the `<Menu.Positioner>` wi
 
 ### Hide When Detached
 
-::: meta
-keywords: [scroll behavior, auto-hide menu, overflow handling]
+::: terms
+auto-hide
+scroll behavior
+overflow
 :::
 
 Use the [positioning.hideWhenDetached](./#positioning) prop to hide the menu when it's detached from the trigger.

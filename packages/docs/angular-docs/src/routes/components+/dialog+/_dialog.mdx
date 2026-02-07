@@ -3,6 +3,7 @@ title: Dialog
 group: Overlays
 description: A dialog is a focused, overlay-based container used to present critical information or request user input that requires immediate attention. It appears above the application content, blocks underlying interaction, and guides the user toward a required decision or acknowledgement.
 component: Dialog
+aliases: [modal, popup, lightbox, overlay]
 ---
 
 import {QdsDemo} from "~components/demo"
@@ -19,9 +20,21 @@ import {
 import {DialogModule} from "@qualcomm-ui/angular/dialog"
 ```
 
+::: terms
+interstitial
+blocking ui
+focus trap
+:::
+
 ## Examples
 
 ### Sizes
+
+::: terms
+small
+medium
+dialog width
+:::
 
 The dialog component has two sizes: `sm` and `md`. Size governs the width of the dialog, as well as the content's spacing, font size, and padding.
 
@@ -29,11 +42,21 @@ The dialog component has two sizes: `sm` and `md`. Size governs the width of the
 
 ### Indicator Emphasis
 
+::: terms
+status
+severity
+:::
+
 Use the [emphasis](./#emphasis) prop to change the intent and color of the dialog's indicator icon.
 
 <QdsDemo name="DialogEmphasisDemo" />
 
 ### Custom Indicator
+
+::: terms
+replace icon
+remove icon
+:::
 
 Set a custom indicator icon by providing the `q-dialog-indicator-icon` directive within the `q-dialog-body` directive. Or hide it entirely using the [hideIndicatorIcon](./#hideIndicatorIcon) property on the `q-dialog-body` directive.
 
@@ -41,11 +64,27 @@ Set a custom indicator icon by providing the `q-dialog-indicator-icon` directive
 
 ### Placement
 
+::: terms
+position
+alignment
+top
+center
+bottom
+:::
+
 Use the [placement](./#placement) prop to change the placement of the dialog.
 
 <QdsDemo name="DialogPlacementDemo" />
 
 ### Controlled State
+
+::: terms
+show
+hide
+programmatic
+signal
+two-way binding
+:::
 
 Dialog visibility can be controlled using the [open](./#open), [openChanged](./#onOpenChange) and [defaultOpen](./#defaultOpen) properties. These properties follow our [controlled state](/patterns/controlled-state) pattern.
 
@@ -53,17 +92,32 @@ Dialog visibility can be controlled using the [open](./#open), [openChanged](./#
 
 ### Outside Scroll
 
+::: terms
+overflow
+:::
+
 The default [scrollBehavior](./#scrollBehavior) is `outside`, which makes the entire page scrollable when modal content exceeds viewport height. The modal and backdrop move with the page scroll instead of creating an internal scroll area within the modal.
 
 <QdsDemo name="DialogOutsideScrollDemo" />
 
 ### Inside Scroll
 
+::: terms
+fixed height
+:::
+
 Set the [scrollBehavior](./#scrollBehavior) prop to `inside` to create an internal scroll area within the modal.
 
 <QdsDemo name="DialogInsideScrollDemo" />
 
 ### Alert Dialog
+
+::: terms
+confirmation
+confirm prompt
+delete
+destructive
+:::
 
 Set the [role](./#role) prop to `alertdialog` to change the dialog component to an [alert dialog](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/alertdialog_role). This is recommended for situations where the dialog is used to notify users of urgent information that demands their immediate attention.
 
