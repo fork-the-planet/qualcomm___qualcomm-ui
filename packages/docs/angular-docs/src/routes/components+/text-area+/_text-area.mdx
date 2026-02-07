@@ -3,6 +3,7 @@ title: Text Area
 group: Form Controls
 description: The text area component provides users with a resizable input field for entering longer text content. It includes features like character counting, validation states, and optional helper text to guide users through data entry tasks.
 component: TextArea
+aliases: [textarea, multiline input, multi-line input, paragraph input, long text field, text box]
 ---
 
 import {QdsDemo} from "~components/demo"
@@ -22,6 +23,11 @@ import {TextAreaModule} from "@qualcomm-ui/angular/text-area"
 ## Examples
 
 ### Simple
+
+::: terms
+resizable input
+expandable input
+:::
 
 The simple `<q-text-area>` bundles all subcomponents together into a single component.
 
@@ -48,6 +54,12 @@ Use the `q-text-area-counter` directive with a [display](./#display) function to
 
 ### Sizes
 
+::: terms
+small
+medium
+large
+:::
+
 Customize size using [size](./#size). The default size is `md`.
 
 <QdsDemo name="TextAreaSizesDemo" />
@@ -59,6 +71,12 @@ Listen to changes with the [valueChanged](./#valueChanged) output.
 <QdsDemo expanded name="TextAreaValueChangedDemo" />
 
 ### Error Text and Indicator
+
+::: terms
+validation error
+form validation
+error message display
+:::
 
 Error messages are displayed using two inputs:
 
@@ -75,11 +93,24 @@ Control and validate the input value using Angular form control bindings.
 
 ### Template Forms
 
+::: terms
+FormsModule
+two-way binding
+:::
+
 When using template-driven forms with `ngModel`, perform validation manually in your component and pass the result to [invalid](./#invalid).
 
 <QdsDemo expanded name="TextAreaTemplateFormsDemo" />
 
 #### States
+
+::: terms
+disabled state
+read-only state
+required field
+invalid state
+form states
+:::
 
 When using template forms, [disabled](./#disabled), [readOnly](./#readOnly), and [invalid](./#invalid) govern the interactive state of the control.
 
@@ -93,11 +124,22 @@ When using template forms, pass [required](./#required) to apply the [RequiredVa
 
 ### Reactive Forms
 
+::: terms
+FormControl
+FormGroup
+ReactiveFormsModule
+:::
+
 Use Reactive Forms for better control of form state and validation.
 
 <QdsDemo expanded name="TextAreaReactiveFormsDemo" />
 
 #### State Guidelines
+
+::: terms
+form control state
+Validators
+:::
 
 The [disabled](./#disabled), [invalid](./#invalid), and [required](./#required) inputs have no effect when using Reactive Forms. Use the equivalent Reactive Form bindings instead:
 

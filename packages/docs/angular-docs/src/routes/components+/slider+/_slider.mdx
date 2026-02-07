@@ -3,6 +3,7 @@ title: Slider
 group: Form Controls
 description: A slider is an input control that allows users to adjust a single value or a value range along a defined linear scale. It provides a draggable handle mapped to a continuous or discrete interval.
 component: Slider
+aliases: [range slider, range picker]
 ---
 
 import {
@@ -20,6 +21,10 @@ import {SliderModule} from "@qualcomm-ui/angular/slider"
 ```
 
 ## Usage
+
+::: terms
+input control
+:::
 
 The slider component lets users select a single value or a range of values by moving one or two thumbs along a track. Sliders are ideal for adjusting settings such as volume, brightness, or selecting a numeric range.
 
@@ -39,6 +44,11 @@ Build with the composite API for granular control. This API requires you to prov
 
 ### Min/Max/Step
 
+::: terms
+scale
+interval
+:::
+
 Use [min](./#min), [max](./#max), and [step](./#step) to control the slider's value range and increments:
 
 - `min`: The minimum value of the slider (default is 0).
@@ -49,6 +59,10 @@ Use [min](./#min), [max](./#max), and [step](./#step) to control the slider's va
 
 ### Origin
 
+::: terms
+fill direction
+:::
+
 Use [origin](./#origin) to control where the track is filled from for single-value sliders:
 
 - `start`: Fills from the start of the track to the thumb. Useful when the value represents an absolute value (default).
@@ -58,6 +72,11 @@ Use [origin](./#origin) to control where the track is filled from for single-val
 <QdsDemo name="SliderOriginDemo" />
 
 ### Tooltip
+
+::: terms
+value indicator
+thumb label
+:::
 
 Use [tooltip](./#tooltip-1) to display the slider's value in a tooltip rather than above the component.
 
@@ -73,6 +92,10 @@ You can customize the tooltip's content by using the [composite API](./#thumbs-w
 
 #### Track Markers
 
+::: terms
+tick marks
+:::
+
 By default, the component generates 11 default marks based on the slider's [min](./#min) and [max](./#max) values.
 You can provide your own set using [marks](./#marks).
 
@@ -80,17 +103,30 @@ You can provide your own set using [marks](./#marks).
 
 #### Side Markers
 
+::: terms
+endpoint labels
+:::
+
 For more compact designs, you can display the `min` and `max` markers at the ends of the track using [sideMarkers](./#sideMarkers).
 
 <QdsDemo name="SliderSideMarkersDemo" />
 
 ### Range
 
+::: terms
+dual thumb
+two handles
+:::
+
 Set [value](./#value) or [defaultValue](./#defaultValue) with two values to create a range slider.
 
 <QdsDemo name="SliderRangeDemo" />
 
 #### Minimum Steps Between Thumbs
+
+::: terms
+thumb collision
+:::
 
 To prevent overlapping thumbs, use [minStepsBetweenThumbs](./#minStepsBetweenThumbs) to set a minimum distance between them.
 
@@ -142,7 +178,18 @@ Use [valueChanged](./#valueChanged) or [valueChangedEnd](./#valueChangedEnd) to 
 
 ### Template Forms
 
+::: terms
+ngModel
+template-driven
+FormsModule
+two-way binding
+:::
+
 #### States
+
+::: terms
+form control state
+:::
 
 When using template forms, the [disabled](./#disabled), [readOnly](./#readOnly), and [invalid](./#invalid) properties govern the interactive state of the control.
 
@@ -156,7 +203,18 @@ This example shows a range slider where values must be at least 30 units apart.
 
 ### Reactive Forms
 
+::: terms
+FormControl
+FormGroup
+ReactiveFormsModule
+:::
+
 #### State Guidelines
+
+::: terms
+form control state
+Validators
+:::
 
 The [disabled](./#disabled) and [invalid](./#invalid) properties have no effect when using Reactive Forms. Use the equivalent Reactive Form bindings instead:
 
@@ -167,6 +225,10 @@ The [disabled](./#disabled) and [invalid](./#invalid) properties have no effect 
 The Slider component provides a composite API should you need more control over the slider's behavior and appearance.
 
 ### Anatomy
+
+::: terms
+drag, handle, thumb
+:::
 
 The composite API is based on the following components and directives:
 

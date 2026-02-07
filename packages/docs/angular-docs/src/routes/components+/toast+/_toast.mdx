@@ -3,6 +3,7 @@ title: Toast Notification
 group: Feedback
 description: Toasts display temporary, high-visibility messages that appear briefly in the viewport to communicate system events or status changes without interrupting user interactions.
 component: Toast, Toaster
+aliases: [snackbar, notification]
 ---
 
 import {QdsDemo} from "~components/demo"
@@ -19,6 +20,10 @@ import {ToastModule, createToaster} from "@qualcomm-ui/angular/toast"
 ## Usage Guidelines
 
 ### Global Toaster
+
+::: terms
+app-wide
+:::
 
 1. Use our `provideToaster` function to create a toaster instance near the root of your application.
 2. Inject the `ToasterService`.
@@ -63,11 +68,21 @@ To customize toast rendering, you can provide an `<ng-template>` child element t
 
 ### With Action
 
+::: terms
+clickable
+interactive
+:::
+
 Use the [action](./#action) property to add an action button to the toast.
 
 <QdsDemo name="ToastActionDemo" />
 
 ### Toast Emphasis
+
+::: terms
+severity
+error
+:::
 
 Here's an example of each toast type.
 
@@ -75,11 +90,20 @@ Here's an example of each toast type.
 
 ### Overlapping Toasts
 
+::: terms
+collapsed
+:::
+
 By default, toasts are stacked on top of each other. To conserve space when rendering many toasts, set the [overlap](./#overlap) property to true in the `createToaster` function.
 
 <QdsDemo name="ToastOverlapDemo" />
 
 ### Toast Duration
+
+::: terms
+timeout
+auto-dismiss
+:::
 
 Use the [duration](./#duration) property to set the duration of the toast.
 
@@ -87,11 +111,22 @@ Use the [duration](./#duration) property to set the duration of the toast.
 
 ### Persistent Toast
 
+::: terms
+indefinite
+sticky
+no-timeout
+:::
+
 Set the [type](./#type) property to `loading` to make the toast stay on screen until dismissed.
 
 <QdsDemo name="ToastPersistentDemo" />
 
 ### Pause and Resume
+
+::: terms
+stop timer
+freeze
+:::
 
 Use the [pause](./#pause) and [resume](./#resume) methods on the toaster instance to pause and play the toast.
 
@@ -101,11 +136,20 @@ Pausing a toast prevents it from timing out, while resuming it will continue the
 
 ### Max Visible
 
+::: terms
+limit
+:::
+
 Set the [max](./#max) prop on the `createToaster` function to define the maximum number of toasts that can be rendered at a time. Extra toasts will be queued and rendered when the number of visible toasts drops below the max.
 
 <QdsDemo name="ToastMaxVisibleDemo" />
 
 ### Screen Placement
+
+::: terms
+position
+corner
+:::
 
 Toasts can be displayed on all four corners of a page. We recommend picking a single placement for your app, as this creates a consistent experience for your users.
 
