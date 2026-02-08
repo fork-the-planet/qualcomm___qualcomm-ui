@@ -1,5 +1,15 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 2.16.2 (2026/02/08)
+
+### Tests
+
+- [knowledge]: update expectations for intro content and H1-only pages
+
+### Bug Fixes
+
+- [knowledge]: capture content before first target-depth heading
+
 ## 2.16.1 (2026/02/07)
 
 ### Bug Fixes
