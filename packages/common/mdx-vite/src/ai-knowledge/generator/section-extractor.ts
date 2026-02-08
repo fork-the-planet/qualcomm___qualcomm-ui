@@ -1,7 +1,8 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {Code, Heading, Link, Parent, Root, RootContent, Text} from "mdast"
+import type {Code, Link, Parent, Root, RootContent, Text} from "mdast"
+import {toString} from "mdast-util-to-string"
 import remarkStringify from "remark-stringify"
 import {type Plugin, unified} from "unified"
 import {visit} from "unist-util-visit"
@@ -99,7 +100,7 @@ export class SectionExtractor {
           headerStack.pop()
         }
 
-        const headingText = this.getHeadingText(heading)
+        const headingText = toString(heading)
         headerStack.push({depth: heading.depth, text: headingText})
 
         pendingSection = {
@@ -115,14 +116,6 @@ export class SectionExtractor {
     finalizeSection()
 
     return sections
-  }
-
-  private getHeadingText(heading: Heading): string {
-    let text = ""
-    visit(heading, "text", (node: Text) => {
-      text += node.value
-    })
-    return text.trim()
   }
 
   private buildSectionEntry(
