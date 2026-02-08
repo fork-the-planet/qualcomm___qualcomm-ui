@@ -1,5 +1,12 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 2.16.1 (2026/02/07)
+
+### Bug Fixes
+
+- [mdx-vite]: handle headings containing only inline code
+- [mdx-vite]: use mdast-util-to-string for heading text extraction
+
 ## 2.16.0 (2026/02/06)
 
 ### Features

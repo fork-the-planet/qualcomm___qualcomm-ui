@@ -446,6 +446,36 @@ Real content.
       expect(sections[0].headerPath).toEqual(["Test Page", "Real Section"])
     })
 
+    test("extracts headings that contain only inline code", () => {
+      const markdown = `
+# Test Page
+
+### Rules
+
+#### \`accessible-name\`
+
+Enforces that certain components have an aria-label attribute.
+
+#### \`avatar-image-alt\`
+
+Enforces that Avatar components have alt text.
+`
+      const extractor = new SectionExtractor()
+      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
+
+      expect(sections).toHaveLength(2)
+      expect(sections[0].headerPath).toEqual([
+        "Test Page",
+        "Rules",
+        "accessible-name",
+      ])
+      expect(sections[1].headerPath).toEqual([
+        "Test Page",
+        "Rules",
+        "avatar-image-alt",
+      ])
+    })
+
     test("handles special characters in headers", () => {
       const markdown = `
 # Test Page
