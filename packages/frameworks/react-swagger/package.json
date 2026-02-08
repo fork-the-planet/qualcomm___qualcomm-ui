@@ -48,7 +48,7 @@
     "@qualcomm-ui/qds-core": "workspace:^1.16.0",
     "@qualcomm-ui/react": "workspace:^1.11.0",
     "@qualcomm-ui/react-core": "workspace:^1.2.0",
-    "@qualcomm-ui/react-mdx": "workspace:^1.11.6",
+    "@qualcomm-ui/react-mdx": "workspace:^1.11.7",
     "@qualcomm-ui/react-test-utils": "workspace:^1.0.0",
     "@qualcomm-ui/tsconfig": "workspace:^1.0.4",
     "@qualcomm-ui/utils": "workspace:^1.1.0",
