@@ -38,11 +38,13 @@ Section two content.
       const extractor = new SectionExtractor({depths: [2, 3]})
       const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
-      expect(sections).toHaveLength(2)
-      expect(sections[0].headerPath).toEqual(["Test Page", "Section One"])
-      expect(sections[0].content).toContain("Section one content.")
-      expect(sections[1].headerPath).toEqual(["Test Page", "Section Two"])
-      expect(sections[1].content).toContain("Section two content.")
+      expect(sections).toHaveLength(3)
+      expect(sections[0].headerPath).toEqual(["Test Page"])
+      expect(sections[0].content).toContain("Introduction content.")
+      expect(sections[1].headerPath).toEqual(["Test Page", "Section One"])
+      expect(sections[1].content).toContain("Section one content.")
+      expect(sections[2].headerPath).toEqual(["Test Page", "Section Two"])
+      expect(sections[2].content).toContain("Section two content.")
     })
 
     test("extracts H3 sections nested under H2", () => {
@@ -413,7 +415,7 @@ This section has enough content to pass the minimum length filter.
       expect(sections).toHaveLength(0)
     })
 
-    test("handles markdown without H2/H3 headers", () => {
+    test("captures content from pages with only H1", () => {
       const markdown = `
 # Test Page
 
@@ -422,7 +424,11 @@ Just some content without subsections.
       const extractor = new SectionExtractor({depths: [2, 3]})
       const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
-      expect(sections).toHaveLength(0)
+      expect(sections).toHaveLength(1)
+      expect(sections[0].headerPath).toEqual(["Test Page"])
+      expect(sections[0].content).toContain(
+        "Just some content without subsections.",
+      )
     })
 
     test("handles headers in code blocks (should not extract)", () => {

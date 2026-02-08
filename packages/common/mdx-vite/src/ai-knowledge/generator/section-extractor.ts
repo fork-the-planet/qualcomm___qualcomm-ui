@@ -81,12 +81,22 @@ export class SectionExtractor {
     for (let i = 0; i < tree.children.length; i++) {
       const node = tree.children[i]
 
+      if (node.type === "yaml") {
+        continue
+      }
+
       if (node.type === "heading") {
         const heading = node
 
         if (!this.depths.has(heading.depth)) {
           if (pendingSection) {
             pendingSection.nodes.push(node)
+          } else {
+            pendingSection = {
+              headerPath: headerStack.map((h) => h.text),
+              nodes: [],
+              startIndex: i,
+            }
           }
           continue
         }
@@ -110,6 +120,12 @@ export class SectionExtractor {
         }
       } else if (pendingSection) {
         pendingSection.nodes.push(node)
+      } else {
+        pendingSection = {
+          headerPath: headerStack.map((h) => h.text),
+          nodes: [node],
+          startIndex: i,
+        }
       }
     }
 
