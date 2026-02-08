@@ -13,19 +13,18 @@ import {useCopyToClipboard} from "@qualcomm-ui/react-mdx/copy-to-clipboard"
 
 import {useMdxDocsLayoutContext} from "./use-mdx-docs-layout"
 
-function pathnameToExportId(pathSegments: string[]): string {
+export function pathnameToExportId(pathSegments: string[]): string {
   return pathSegments.join("-")
 }
 
 export function PageHeader(): ReactNode {
   const {exports, pageMap} = useSiteContext()
-  const {pathname} = useMdxDocsLayoutContext()
+  const {pageExport, pathname} = useMdxDocsLayoutContext()
   const page = pageMap[pathname]
   const exportId = pathnameToExportId(page?.pathSegments || [])
-  const hasExport =
-    exports?.enabled && exports.pages.find((page) => page.pathname === pathname)
+
   // example: `/exports/md/guide-markdown.md
-  const exportUrl = hasExport ? `${exports.basePath}/${exportId}.md` : null
+  const exportUrl = pageExport ? `${exports!.basePath}/${exportId}.md` : null
 
   async function getExportAsText(): Promise<string> {
     if (!exportUrl) {
