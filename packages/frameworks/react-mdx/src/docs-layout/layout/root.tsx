@@ -64,7 +64,7 @@ export function Root({
     demoSettingsProp || {transformTailwindClasses: false},
   )
 
-  const {navItems, pageDocProps, pageMap} = useSiteContext()
+  const {exports, navItems, pageDocProps, pageMap} = useSiteContext()
 
   const mdxDocsContextValue: MdxDocsContextValue = useMemo(
     () => ({
@@ -126,6 +126,9 @@ export function Root({
     const showToc = !!toc.length && !pageData?.hideToc && !hideToc
     const hidePageLinks = pageData?.hidePageLinks || false
     const hideSideNav = pageData?.hideSideNav || false
+    const pageExport =
+      exports?.enabled &&
+      exports.pages.find((page) => page.pathname === pathname)
 
     const pageProps = pageDocProps?.[pathname] || {}
 
@@ -134,6 +137,7 @@ export function Root({
       hideSideNav,
       mainContentElement,
       navItems,
+      pageExport,
       pageMap,
       pageProps,
       pathname,
@@ -141,7 +145,15 @@ export function Root({
       showToc,
       toc,
     }
-  }, [hideToc, mainContentElement, navItems, pageDocProps, pageMap, pathname])
+  }, [
+    exports,
+    hideToc,
+    mainContentElement,
+    navItems,
+    pageDocProps,
+    pageMap,
+    pathname,
+  ])
 
   const mergedProps = mergeProps({className: "qui-docs__root"}, props)
 

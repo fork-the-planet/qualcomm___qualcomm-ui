@@ -249,12 +249,12 @@ function useActiveHeading() {
 export function TableOfContents(): ReactNode {
   const containerRef = useRef<HTMLDivElement>(null)
   const {renderLink: Link} = useMdxDocsContext()
-  const {toc: headings} = useMdxDocsLayoutContext()
+  const {pageExport, showToc, toc: headings} = useMdxDocsLayoutContext()
 
   const activeId = useActiveHeading()
   const linkRefs = useTocScrollSync(activeId, containerRef)
 
-  if (!headings.length) {
+  if (!headings.length && !pageExport) {
     return null
   }
 
@@ -262,38 +262,40 @@ export function TableOfContents(): ReactNode {
     <div className="qui-toc">
       <div ref={containerRef} className="qui-toc__container">
         <PageHeader />
-        <div className="qui-toc__links">
-          <div className="qui-toc-bar" />
-          {headings.map(({headingLevel, id, textContent}) => {
-            const isActive = activeId === id
-            return (
-              <TocLink
-                key={id}
-                ref={(element: HTMLDivElement | null) => {
-                  if (element) {
-                    linkRefs.current.set(id, element)
-                  } else {
-                    linkRefs.current.delete(id)
-                  }
-                }}
-                className="qui-toc__link"
-                data-active={booleanDataAttr(isActive)}
-                style={{
-                  paddingLeft: INDENT_PER_LEVEL * (headingLevel - 1),
-                }}
-              >
-                {headingLevel > 2 ? (
-                  <div
-                    aria-hidden
-                    className="qui-toc__link-indent-guide"
-                    data-active={booleanDataAttr(isActive)}
-                  ></div>
-                ) : null}
-                <Link href={`#${id}`}>{textContent}</Link>
-              </TocLink>
-            )
-          })}
-        </div>
+        {showToc ? (
+          <div className="qui-toc__links">
+            <div className="qui-toc-bar" />
+            {headings.map(({headingLevel, id, textContent}) => {
+              const isActive = activeId === id
+              return (
+                <TocLink
+                  key={id}
+                  ref={(element: HTMLDivElement | null) => {
+                    if (element) {
+                      linkRefs.current.set(id, element)
+                    } else {
+                      linkRefs.current.delete(id)
+                    }
+                  }}
+                  className="qui-toc__link"
+                  data-active={booleanDataAttr(isActive)}
+                  style={{
+                    paddingLeft: INDENT_PER_LEVEL * (headingLevel - 1),
+                  }}
+                >
+                  {headingLevel > 2 ? (
+                    <div
+                      aria-hidden
+                      className="qui-toc__link-indent-guide"
+                      data-active={booleanDataAttr(isActive)}
+                    ></div>
+                  ) : null}
+                  <Link href={`#${id}`}>{textContent}</Link>
+                </TocLink>
+              )
+            })}
+          </div>
+        ) : null}
       </div>
     </div>
   )

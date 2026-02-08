@@ -1,5 +1,18 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 1.11.7 (2026/02/07)
+
+### Bug Fixes
+
+- [docs-layout]: always render TableOfContents component, conditionally render toc links inside it
+- [app-content]: account for pageExport when determining hide-toc data attribute
+
+### Code Refactoring
+
+- [page-header]: reuse pageExport from context instead of recomputing export availability
+- [docs-layout]: move pageExport computation to root and add to layout context
+- [docs-layout]: decouple toc visibility from export display
+
 ## 1.11.6 (2026/01/30)
 
 ### Miscellaneous Chores
