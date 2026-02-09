@@ -26,8 +26,10 @@ export function createQdsSelectApi(
   props: QdsSelectApiProps,
   normalize: PropNormalizer,
 ): QdsSelectApi {
+  const selectionIndicator = props.selectionIndicator || "checkmark"
   const size = props.size || "md"
   return {
+    selectionIndicator,
     size,
 
     // group: bindings
@@ -68,6 +70,7 @@ export function createQdsSelectApi(
     getItemBindings(): QdsSelectItemBindings {
       return normalize.element({
         className: selectClasses.item,
+        "data-selection-indicator": selectionIndicator,
         "data-size": size,
       })
     },

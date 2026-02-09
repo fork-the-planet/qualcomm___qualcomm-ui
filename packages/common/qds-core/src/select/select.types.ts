@@ -5,7 +5,17 @@ import type {selectClasses} from "./select.classes"
 
 export type QdsSelectSize = "sm" | "md" | "lg"
 
+export type QdsSelectSelectionIndicator = "checkmark" | "checkbox"
+
 export interface QdsSelectApiProps {
+  /**
+   * Visual indicator style for selected items. Use "checkbox" for multi-select
+   * with always-visible checkboxes on the left, or "checkmark" for a checkmark
+   * icon on the right that only appears when selected.
+   *
+   * @default 'checkmark'
+   */
+  selectionIndicator?: QdsSelectSelectionIndicator
   /**
    * The size of the select and its elements. Governs properties like font size,
    * item padding, and icon sizes.
@@ -38,6 +48,7 @@ export interface QdsSelectIndicatorBindings {
 
 export interface QdsSelectItemBindings {
   className: SelectClasses["item"]
+  "data-selection-indicator": QdsSelectSelectionIndicator
   "data-size": QdsSelectSize
 }
 
@@ -77,6 +88,7 @@ export interface QdsSelectIconBindings {
 }
 
 export interface QdsSelectApi {
+  selectionIndicator: QdsSelectSelectionIndicator
   size: QdsSelectSize
 
   // group: bindings

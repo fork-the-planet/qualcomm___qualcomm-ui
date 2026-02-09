@@ -39,16 +39,17 @@ export interface SelectRootProps
 export function SelectRoot({
   children,
   icon,
+  selectionIndicator,
   size,
   ...props
 }: SelectRootProps): ReactElement {
   const qdsSelectApi = useMemo(
     () =>
       createQdsSelectApi(
-        {size} satisfies Explicit<QdsSelectApiProps>,
+        {selectionIndicator, size} satisfies Explicit<QdsSelectApiProps>,
         normalizeProps,
       ),
-    [size],
+    [selectionIndicator, size],
   )
   const mergedProps = mergeProps(qdsSelectApi.getRootBindings(), props)
   const qdsInputApi: QdsReactInputApi = useMemo(

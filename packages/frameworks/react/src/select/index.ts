@@ -19,6 +19,10 @@ import {SelectIcon, type SelectIconProps} from "./select-icon"
 import {SelectIndicator, type SelectIndicatorProps} from "./select-indicator"
 import {SelectItem, type SelectItemProps} from "./select-item"
 import {
+  SelectItemCheckbox,
+  type SelectItemCheckboxProps,
+} from "./select-item-checkbox"
+import {
   SelectItemIndicator,
   type SelectItemIndicatorProps,
 } from "./select-item-indicator"
@@ -41,6 +45,7 @@ export type {
   SelectHintProps,
   SelectIconProps,
   SelectIndicatorProps,
+  SelectItemCheckboxProps,
   SelectItemIndicatorProps,
   SelectItemTextProps,
   SelectItemProps,
@@ -93,6 +98,12 @@ type SelectComponent = typeof SimpleSelect & {
    */
   Item: typeof SelectItem
   /**
+   * Checkbox-style indicator for select items. Always visible, showing a checkbox
+   * that fills when selected. Use with `selectionIndicator="checkbox"` on the
+   * Select root.
+   */
+  ItemCheckbox: typeof SelectItemCheckbox
+  /**
    * Visual indicator showing the selected state of an item. Renders a `<span>`
    * element by default.
    */
@@ -133,10 +144,11 @@ Select.HiddenSelect = SelectHiddenSelect
 Select.Hint = SelectHint
 Select.Icon = SelectIcon
 Select.Indicator = SelectIndicator
-Select.ItemIndicator = SelectItemIndicator
-Select.ItemText = SelectItemText
 Select.Item = SelectItem
+Select.ItemCheckbox = SelectItemCheckbox
+Select.ItemIndicator = SelectItemIndicator
 Select.Items = SelectItems
+Select.ItemText = SelectItemText
 Select.Label = SelectLabel
 Select.Positioner = SelectPositioner
 Select.Root = SelectRoot
