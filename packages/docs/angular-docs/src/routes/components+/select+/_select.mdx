@@ -131,6 +131,11 @@ multi select
 
 Use the [multiple](./#multiple) prop to allow multiple selections.
 
+The [selectionIndicator](./#selectionIndicator) prop controls how selected items are displayed:
+
+- `"checkmark"` — Uses a checkmark after the selected options only (default)
+- `"checkbox"` — Uses a checkbox before each option
+
 <QdsDemo name="SelectMultipleDemo" />
 
 ### Controlled Dropdown Visibility
@@ -336,6 +341,12 @@ The simple select extends the [q-select-root](./#q-select-root) directive with t
 <TypeDocAngularAttributes
   name={["QdsSelectItemBindings", "SelectItemBindings"]}
 />
+
+### q-select-item-checkbox
+
+Checkbox-style indicator for select items. Use this instead of `q-select-item-indicator` when `selectionIndicator="checkbox"` is set on the root. The checkbox is always visible and fills when the item is selected.
+
+<TypeDocProps name="SelectItemCheckboxComponent" />
 
 ### q-select-item-indicator
 

@@ -12,7 +12,8 @@ import {selectCollection} from "@qualcomm-ui/core/select"
       class="w-72"
       label="City"
       multiple
-      placeholder="Select a city"
+      placeholder="Select cities"
+      selectionIndicator="checkbox"
       [collection]="cityCollection"
     />
     <!-- preview -->

@@ -20,6 +20,7 @@ import {
   createQdsSelectApi,
   type QdsSelectApi,
   type QdsSelectApiProps,
+  type QdsSelectSelectionIndicator,
   type QdsSelectSize,
 } from "@qualcomm-ui/qds-core/select"
 import type {Explicit} from "@qualcomm-ui/utils/guard"
@@ -49,6 +50,15 @@ export class ComboboxRootDirective
   readonly icon = input<LucideIconOrString>()
 
   /**
+   * Visual indicator style for selected items. Use "checkbox" for multi-select
+   * with always-visible checkboxes on the left, or "checkmark" for a checkmark
+   * icon on the right that only appears when selected.
+   *
+   * @default 'checkmark'
+   */
+  readonly selectionIndicator = input<QdsSelectSelectionIndicator>("checkmark")
+
+  /**
    * The size of the combobox and its elements. Governs properties like font size,
    * item padding, and icon sizes.
    *
@@ -68,6 +78,7 @@ export class ComboboxRootDirective
       computed<QdsSelectApi>(() =>
         createQdsSelectApi(
           {
+            selectionIndicator: this.selectionIndicator(),
             size: this.size(),
           } satisfies Explicit<QdsSelectApiProps>,
           normalizeProps,
