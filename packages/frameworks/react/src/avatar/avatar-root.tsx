@@ -37,17 +37,17 @@ export interface AvatarRootProps
  */
 export function AvatarRoot({
   children,
+  emphasis,
   id,
   size,
   status,
-  variant,
   ...props
 }: AvatarRootProps): ReactElement {
   const [avatarProps, localProps] = splitAvatarProps(props)
   const context = useAvatar(avatarProps)
   const qdsContext = useMemo(
-    () => createQdsAvatarApi({size, status, variant}, normalizeProps),
-    [size, status, variant],
+    () => createQdsAvatarApi({emphasis, size, status}, normalizeProps),
+    [emphasis, size, status],
   )
   const mergedProps = mergeProps(
     context.getRootBindings({id: useControlledId(id)}),

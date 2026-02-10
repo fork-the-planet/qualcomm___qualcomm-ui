@@ -1,20 +1,20 @@
 import {Component} from "@angular/core"
 
 import {AvatarContentDemo} from "@qualcomm-ui/angular-docs/components+/avatar+/demos/avatar-content-demo"
+import {AvatarEmphasisDemo} from "@qualcomm-ui/angular-docs/components+/avatar+/demos/avatar-emphasis-demo"
 import {AvatarShowcaseDemo} from "@qualcomm-ui/angular-docs/components+/avatar+/demos/avatar-showcase-demo"
 import {AvatarSizeDemo} from "@qualcomm-ui/angular-docs/components+/avatar+/demos/avatar-size-demo"
 import {AvatarStateCallbackDemo} from "@qualcomm-ui/angular-docs/components+/avatar+/demos/avatar-state-callback-demo"
 import {AvatarStatusDemo} from "@qualcomm-ui/angular-docs/components+/avatar+/demos/avatar-status-demo"
-import {AvatarVariantDemo} from "@qualcomm-ui/angular-docs/components+/avatar+/demos/avatar-variant-demo"
 
 @Component({
   imports: [
     AvatarContentDemo,
+    AvatarEmphasisDemo,
     AvatarShowcaseDemo,
     AvatarSizeDemo,
     AvatarStateCallbackDemo,
     AvatarStatusDemo,
-    AvatarVariantDemo,
   ],
   selector: "app-avatar",
   template: `
@@ -23,6 +23,12 @@ import {AvatarVariantDemo} from "@qualcomm-ui/angular-docs/components+/avatar+/d
         <h2 class="section-title">Content</h2>
         <div class="demo-container">
           <avatar-content />
+        </div>
+      </div>
+      <div class="section">
+        <h2 class="section-title">Emphasis</h2>
+        <div class="demo-container">
+          <avatar-emphasis />
         </div>
       </div>
       <div class="section">
@@ -47,12 +53,6 @@ import {AvatarVariantDemo} from "@qualcomm-ui/angular-docs/components+/avatar+/d
         <h2 class="section-title">Status</h2>
         <div class="demo-container">
           <avatar-status />
-        </div>
-      </div>
-      <div class="section">
-        <h2 class="section-title">Variant</h2>
-        <div class="demo-container">
-          <avatar-variant />
         </div>
       </div>
     </div>

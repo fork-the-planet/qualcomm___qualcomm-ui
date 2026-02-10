@@ -12,9 +12,9 @@ import type {SignalifyInput} from "@qualcomm-ui/angular-core/signals"
 import {
   createQdsAvatarApi,
   type QdsAvatarApiProps,
+  type QdsAvatarEmphasis,
   type QdsAvatarSize,
   type QdsAvatarStatus,
-  type QdsAvatarVariant,
 } from "@qualcomm-ui/qds-core/avatar"
 
 import {
@@ -32,6 +32,11 @@ export class AvatarDirective
   implements SignalifyInput<QdsAvatarApiProps>
 {
   /**
+   * Governs the color of the avatar.
+   */
+  readonly emphasis = input<QdsAvatarEmphasis | undefined>()
+
+  /**
    * Governs the width and height of the avatar as well as the font size of its
    * content.
    */
@@ -41,11 +46,6 @@ export class AvatarDirective
    * Optional status for the avatar, renders a dot indicator next to the avatar.
    */
   readonly status = input<QdsAvatarStatus | undefined>()
-
-  /**
-   * The style variant of the avatar.
-   */
-  readonly variant = input<QdsAvatarVariant | undefined>()
 
   protected readonly qdsAvatarService = inject(QdsAvatarContextService)
 
@@ -62,9 +62,9 @@ export class AvatarDirective
     const qdsAvatarApi = computed(() =>
       createQdsAvatarApi(
         {
+          emphasis: this.emphasis(),
           size: this.size(),
           status: this.status(),
-          variant: this.variant(),
         },
         normalizeProps,
       ),

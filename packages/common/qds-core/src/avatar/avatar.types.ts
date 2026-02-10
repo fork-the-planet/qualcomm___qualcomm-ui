@@ -7,9 +7,14 @@ export type QdsAvatarSize = "xs" | "sm" | "md" | "lg" | "xl"
 
 type AvatarClasses = typeof avatarClasses
 
-export type QdsAvatarVariant = "neutral" | "contrast" | "brand"
+export type QdsAvatarEmphasis = "neutral" | "contrast" | "brand"
 
 export interface QdsAvatarApiProps {
+  /**
+   * The style of the avatar.
+   */
+  emphasis?: QdsAvatarEmphasis
+
   /**
    * Governs the width and height of the avatar as well as the font size of its
    * content.
@@ -20,11 +25,6 @@ export interface QdsAvatarApiProps {
    * Optional status for the avatar, renders a dot indicator next to the avatar.
    */
   status?: QdsAvatarStatus
-
-  /**
-   * The style variant of the avatar.
-   */
-  variant?: QdsAvatarVariant
 }
 
 export type QdsAvatarStatus = "offline" | "active" | "away" | "busy"
@@ -36,7 +36,7 @@ export interface QdsAvatarRootBindings {
 
 export interface QdsAvatarContentBindings {
   className: AvatarClasses["content"]
-  "data-variant": QdsAvatarVariant
+  "data-emphasis": QdsAvatarEmphasis
 }
 
 export interface QdsAvatarStatusBindings {
@@ -49,9 +49,9 @@ export interface QdsAvatarImageBindings {
 }
 
 export interface QdsAvatarApi {
+  emphasis: QdsAvatarEmphasis
   size: QdsAvatarSize
   status?: QdsAvatarStatus
-  variant: QdsAvatarVariant
 
   // group: bindings
   getContentBindings(): QdsAvatarContentBindings

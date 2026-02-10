@@ -73,15 +73,15 @@
 
 .qui-avatar__content {
   /* default */
-  &[data-variant="neutral"] {
+  &[data-emphasis="neutral"] {
     --avatar-foreground-color: var(--color-text-neutral-primary);
     --avatar-background-color: var(--color-background-neutral-03);
   }
-  &[data-variant="contrast"] {
+  &[data-emphasis="contrast"] {
     --avatar-foreground-color: var(--color-text-neutral-inverse);
     --avatar-background-color: var(--color-background-neutral-10);
   }
-  &[data-variant="brand"] {
+  &[data-emphasis="brand"] {
     --avatar-foreground-color: var(--color-utility-persistent-white);
     --avatar-background-color: var(--color-background-brand-primary);
   }
