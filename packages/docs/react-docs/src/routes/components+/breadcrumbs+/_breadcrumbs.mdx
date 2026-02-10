@@ -3,6 +3,7 @@ title: Breadcrumbs
 group: Disclosure
 description: Breadcrumbs help users understand their current location within a website or application hierarchy and provide a quick way to navigate back to parent pages.
 component: Breadcrumbs
+aliases: [breadcrumb trail, navigation path]
 ---
 
 import {Demo} from "~components/demo"
@@ -19,6 +20,14 @@ import {Breadcrumbs} from "@qualcomm-ui/react/breadcrumbs"
 
 ## Overview
 
+::: terms
+a11y
+WCAG
+site hierarchy
+wayfinding
+location indicator
+:::
+
 - The root component should be labeled with `aria-label="Breadcrumbs"` to indicate that it's a breadcrumb navigation.
 - The first breadcrumb item is always the root item, and is typically reserved for the home page or base route of your application.
 - The last breadcrumb item is always the active item.
@@ -27,6 +36,12 @@ import {Breadcrumbs} from "@qualcomm-ui/react/breadcrumbs"
 ## Examples
 
 ### Emphasis (color)
+
+::: terms
+neutral
+muted
+subdued
+:::
 
 Use the [emphasis](./#emphasis) prop to change the color of the breadcrumbs.
 
@@ -37,17 +52,32 @@ Use the [emphasis](./#emphasis) prop to change the color of the breadcrumbs.
 
 ### Sizes
 
+::: terms
+small
+medium
+large
+:::
+
 Three sizes are available via the [size](./#size) prop: `sm`, `md`, and `lg`. The default size is `md`.
 
 <Demo name="BreadcrumbsSizesDemo" component={demos.BreadcrumbsSizesDemo} />
 
 ### Links
 
+::: terms
+polymorphic
+:::
+
 Use the [render](./#render-1) prop on the `<Breadcrumbs.Item>` component to change the root element to your framework's link component. The following example uses React Router:
 
 <Demo name="BreadcrumbsLinksDemo" component={demos.BreadcrumbsLinksDemo} />
 
 ### Disabled Item
+
+::: terms
+inactive
+non-clickable
+:::
 
 Use the [disabled](./#disabled) prop to disable a breadcrumb item.
 

@@ -8,7 +8,9 @@ import {
   InputEndIconComponent,
   InputStartIconComponent,
 } from "@qualcomm-ui/angular/input"
+import {MenuModule} from "@qualcomm-ui/angular/menu"
 import {QBindDirective} from "@qualcomm-ui/angular-core/machine"
+import {PortalDirective} from "@qualcomm-ui/angular-core/portal"
 
 import {NumberInputControlDirective} from "./number-input-control.directive"
 import {NumberInputDecrementTriggerDirective} from "./number-input-decrement-trigger.directive"
@@ -20,6 +22,7 @@ import {NumberInputInputGroupDirective} from "./number-input-input-group.directi
 import {NumberInputInputDirective} from "./number-input-input.directive"
 import {NumberInputLabelDirective} from "./number-input-label.directive"
 import {NumberInputRootDirective} from "./number-input-root.directive"
+import {NumberInputUnitSelectComponent} from "./number-input-unit-select.component"
 import {NumberInputComponent} from "./number-input.component"
 
 @NgModule({
@@ -34,6 +37,7 @@ import {NumberInputComponent} from "./number-input.component"
     NumberInputRootDirective,
     NumberInputDecrementTriggerDirective,
     NumberInputIncrementTriggerDirective,
+    NumberInputUnitSelectComponent,
     NumberInputComponent,
   ],
   exports: [
@@ -47,6 +51,7 @@ import {NumberInputComponent} from "./number-input.component"
     NumberInputRootDirective,
     NumberInputDecrementTriggerDirective,
     NumberInputIncrementTriggerDirective,
+    NumberInputUnitSelectComponent,
     NumberInputComponent,
   ],
   imports: [
@@ -54,6 +59,8 @@ import {NumberInputComponent} from "./number-input.component"
     IconDirective,
     InputStartIconComponent,
     InputEndIconComponent,
+    MenuModule,
+    PortalDirective,
   ],
 })
 export class NumberInputModule {}

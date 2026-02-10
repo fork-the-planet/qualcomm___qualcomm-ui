@@ -6,6 +6,7 @@
   flex-wrap: wrap;
   justify-content: start;
   position: relative;
+  row-gap: var(--spacing-50);
   vertical-align: top;
 
   --switch-color-transition:
@@ -20,8 +21,9 @@
     user-select: none;
   }
 
-  &:has([data-part="error-text"][data-invalid]) {
-    row-gap: var(--spacing-70);
+  [data-part="hint"],
+  [data-part="error-text"] {
+    flex-basis: 100%;
   }
 }
 

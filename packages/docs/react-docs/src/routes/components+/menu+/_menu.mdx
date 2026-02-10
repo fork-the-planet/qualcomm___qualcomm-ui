@@ -3,6 +3,7 @@ title: Menu
 group: Overlays
 description: The Menu component presents a structured list of actions, settings, or navigation targets within a transient surface. It supports icons, keyboard shortcuts, hint text, section titles, dividers, and submenu indicators.
 component: Menu
+aliases: [dropdown menu, context menu, popup menu]
 ---
 
 import {Demo} from "~components/demo"
@@ -21,6 +22,13 @@ import {Menu} from "@qualcomm-ui/react/menu"
 
 ### Item Customization
 
+::: terms
+hotkeys
+keyboard shortcuts
+action list
+overflow menu
+:::
+
 Compose the menu to include icons and commands.
 
 <Demo
@@ -30,17 +38,34 @@ Compose the menu to include icons and commands.
 
 ### Context Menu
 
+::: terms
+oncontextmenu
+right-click menu
+:::
+
 Demonstrates how to trigger a menu on right-click or other context events.
 
 <Demo name="MenuContextMenuDemo" component={demos.MenuContextMenuDemo} />
 
 ### Nested Menus
 
+::: terms
+submenu
+cascading
+hierarchical
+:::
+
 Compose nested menus by nesting `<Menu.Root>` components inside each other.
 
 <Demo name="MenuNestedDemo" component={demos.MenuNestedDemo} />
 
 ### Links
+
+::: terms
+anchor
+navigation
+navigation menu
+:::
 
 Menu items can be links using [polymorphic composition](/polymorphic-components). Use the [render](./#render) prop on the `<Menu.Item>` to specify the element type.
 
@@ -60,6 +85,11 @@ There are three item types, each corresponding to one of the three types of aria
 
 #### Checkbox Items
 
+::: terms
+multi-select
+toggle
+:::
+
 There are two appearance options:
 
 - For a checkbox appearance, render the `<Menu.CheckboxItemControl>` element as a child of the item.
@@ -69,6 +99,11 @@ There are two appearance options:
 
 #### Checkbox Selection State
 
+::: terms
+onCheckedChange
+controlled checkbox
+:::
+
 Illustrates how to manage and reflect the checked state of checkbox menu items.
 
 <Demo
@@ -77,6 +112,11 @@ Illustrates how to manage and reflect the checked state of checkbox menu items.
 />
 
 #### Radio Group
+
+::: terms
+single-select
+exclusive selection
+:::
 
 Demonstrates how to group radio menu items so only one can be selected at a time.
 
@@ -99,11 +139,21 @@ In controlled mode, the `open` prop should be updated in response to `onOpenChan
 
 ### Placement
 
+::: terms
+position
+popover placement
+:::
+
 Configure the menu's placement using the [positioning.placement](./#positioning) prop.
 
 <Demo name="MenuPlacementDemo" component={demos.MenuPlacementDemo} />
 
 ### Sizes
+
+::: terms
+small
+medium
+:::
 
 Use the [size](./#size) prop to control the size of the menu. The default size is `md`. The demo features the small (`sm`) size.
 
@@ -111,11 +161,22 @@ Use the [size](./#size) prop to control the size of the menu. The default size i
 
 ### Anchor Point
 
+::: terms
+getAnchorRect
+custom anchor
+:::
+
 Use the [positioning.anchorPoint](./#positioning) prop to control the anchor point of the menu.
 
 <Demo name="MenuAnchorPointDemo" component={demos.MenuAnchorPointDemo} />
 
 ### Avatar
+
+::: terms
+profile menu
+user menu
+account dropdown
+:::
 
 Here's an example that composes the `Menu` with the [Avatar](/components/avatar) component to display a user account menu.
 
@@ -123,11 +184,22 @@ Here's an example that composes the `Menu` with the [Avatar](/components/avatar)
 
 ### Within Dialog
 
+::: terms
+modal
+overlay composition
+:::
+
 When using the `Menu` inside a `Dialog`, don't render the `<Menu.Positioner>` within a `<Portal>` element.
 
 <Demo name="MenuWithinDialogDemo" component={demos.MenuWithinDialogDemo} />
 
 ### Hide When Detached
+
+::: terms
+auto-hide
+scroll behavior
+overflow
+:::
 
 Use the [positioning.hideWhenDetached](./#positioning) prop to hide the menu when it's detached from the trigger.
 

@@ -3,6 +3,7 @@ title: Tag
 group: Data Display
 description: Tags present static metadata or contextual information. They provide a fixed visual treatment, making them ideal for displaying system-defined values, attributes, or informational labels.
 component: Tag
+aliases: [chip, pill, token, label]
 ---
 
 import {QdsDemo} from "~components/demo"
@@ -23,11 +24,24 @@ import {TagDirective} from "@qualcomm-ui/angular/tag"
 
 ### Icons
 
+::: terms
+leading icon
+trailing icon
+prefix
+suffix
+:::
+
 Icons are supplied using the [startIcon](./#startIcon) and [endIcon](./#endIcon) properties.
 
 <QdsDemo name="TagIconsDemo" />
 
 ### Variants
+
+::: terms
+clickable
+removable
+closable
+:::
 
 Choose from three [variants](./#variant): `link`, `selectable` and `dismissable`.
 
@@ -38,11 +52,21 @@ The `dismissable` variant and tags without a variant are non-interactive and sho
 
 ### Colors
 
+::: terms
+status indicator
+:::
+
 Control the visual emphasis with different colors via the [emphasis](./#emphasis) property.
 
 <QdsDemo name="TagEmphasisDemo" />
 
 ### Sizes
+
+::: terms
+small
+medium
+large
+:::
 
 Choose from three [sizes](./#size): `sm`, `md` and `lg`. The default size is `md`.
 
@@ -50,11 +74,19 @@ Choose from three [sizes](./#size): `sm`, `md` and `lg`. The default size is `md
 
 ### States
 
+::: terms
+inactive
+:::
+
 Disable the tag by setting the [disabled](./#disabled) property.
 
 <QdsDemo name="TagStatesDemo" />
 
 ### Radius
+
+::: terms
+pill
+:::
 
 Control the border radius of the tag with the [radius](./#radius-1) property. The default radius is `square`.
 

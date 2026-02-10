@@ -3,6 +3,7 @@ title: Inline Notification
 group: Feedback
 description: Inline notifications provide contextual feedback without disrupting the user's workflow. They support multiple semantic types ranging from informational updates to critical warnings.
 component: InlineNotification
+aliases: [callout, alert, banner, notice, status message, feedback message]
 ---
 
 import {Demo} from "~components/demo"
@@ -12,6 +13,11 @@ import {TypeDocAttributes, TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
 # {frontmatter.title}
 
 {frontmatter.description}
+
+::: terms
+system notification
+user feedback
+:::
 
 ```tsx
 import {InlineNotification} from "@qualcomm-ui/react/inline-notification"
@@ -30,6 +36,12 @@ Basic inline notification using the simple API with heading and description.
 
 ### Composite
 
+::: terms
+compound component
+slots
+parts
+:::
+
 Use the composite API with individual components for more granular control.
 
 <Demo
@@ -38,6 +50,11 @@ Use the composite API with individual components for more granular control.
 />
 
 ### Emphasis (color)
+
+::: terms
+severity
+alert level
+:::
 
 Control the visual emphasis with different colors: info, success, warning, danger, and neutral. Customize these with the [emphasis](./#emphasis) prop.
 
@@ -48,6 +65,11 @@ Control the visual emphasis with different colors: info, success, warning, dange
 
 ### Dismissable
 
+::: terms
+closeable
+closable
+:::
+
 Add dismiss functionality to the simple notification using the [dismissable](./#dismissable) prop. Use the `<InlineNotification.CloseButton />` component when using the composite API.
 
 <Demo
@@ -57,6 +79,11 @@ Add dismiss functionality to the simple notification using the [dismissable](./#
 
 ### Action
 
+::: terms
+cta
+call to action
+:::
+
 Include action links in notifications using the [action](./#action) property or the `<InlineNotification.Action>` component via the composite API.
 
 <Demo
@@ -65,6 +92,12 @@ Include action links in notifications using the [action](./#action) property or 
 />
 
 ### Layout
+
+::: terms
+horizontal
+vertical
+orientation
+:::
 
 Choose between inline and stacked layouts using the [layout](./#layout) property. Stacked layout places the description and action below the content.
 

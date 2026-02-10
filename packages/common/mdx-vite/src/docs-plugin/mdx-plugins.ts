@@ -33,6 +33,7 @@ import {
   remarkFrontmatterTitle,
   remarkSpoilers,
 } from "./remark"
+import {remarkExtractMeta} from "./remark/remark-extract-meta"
 import {transformerCodeAttribute, transformerNotationHidden} from "./shiki"
 
 /**
@@ -77,6 +78,7 @@ export function getRehypePlugins(
       merge(
         {
           defaultColor: "light-dark()",
+          fallbackLanguage: "text",
           themes: {
             dark: quiCustomDarkTheme,
             light: "github-light-high-contrast",
@@ -121,5 +123,6 @@ export function getRemarkPlugins(): PluggableList {
     remarkFrontmatterTitle,
     remarkFrontmatterDescription,
     remarkSpoilers,
+    remarkExtractMeta,
   ]
 }

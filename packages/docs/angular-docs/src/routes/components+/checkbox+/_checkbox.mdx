@@ -3,6 +3,7 @@ title: Checkbox
 group: Form Controls
 description: Checkboxes provide a straightforward way for users to make multiple selections from a set of options, whether they're choosing preferences, confirming actions, or filtering content.
 component: Checkbox
+aliases: [check box, tick box]
 ---
 
 import {QdsDemo} from "~components/demo"
@@ -53,13 +54,37 @@ When [disabled](./#disabled) is true, the checkbox becomes non-interactive and i
 
 ### Sizes
 
+::: terms
+small
+medium
+large
+:::
+
 The checkbox supports three [sizes](./#size): `sm`, `md` (default), and `lg`.
 
 <QdsDemo expanded name="CheckboxSizesDemo" />
 
+### Hint
+
+::: terms
+helper text
+description
+:::
+
+Add a hint to provide additional context below the checkbox.
+
+<QdsDemo name="CheckboxHintDemo" />
+
 ## Forms
 
 ### Template Forms
+
+::: terms
+ngModel
+template-driven
+FormsModule
+two-way binding
+:::
 
 - When using template forms, add the [required](./#required) attribute to enable validation
 - The [errorText](./#errorText) input (or `q-checkbox-error-text` directive) displays automatically when the field is invalid and the user has interacted with it
@@ -68,11 +93,22 @@ The checkbox supports three [sizes](./#size): `sm`, `md` (default), and `lg`.
 
 ### Reactive Forms
 
+::: terms
+FormControl
+FormGroup
+ReactiveFormsModule
+:::
+
 Use Reactive Forms instead of Template-driven Forms for better control over form state and validation.
 
 <QdsDemo name="CheckboxReactiveFormsDemo" />
 
 ### Multi-Field Validation
+
+::: terms
+cross-field validation
+Validators
+:::
 
 Reactive forms let you validate across multiple fields simultaneously, perfect for complex business rules like date ranges or dependent field relationships.
 

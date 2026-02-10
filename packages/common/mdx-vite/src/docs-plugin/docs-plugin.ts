@@ -16,7 +16,7 @@ import type {
 } from "@qualcomm-ui/mdx-common"
 import type {QuiPropTypes} from "@qualcomm-ui/typedoc-common"
 
-import {generate} from "../open-web-ui-knowledge/generate-knowledge"
+import {generate} from "../ai-knowledge/generator"
 
 import {
   type CompiledMdxFile,
@@ -254,6 +254,7 @@ class PluginState {
       docPropsPath: this.docPropsFilePath || undefined,
       exclude: exportsConfig.exclude ?? globalConfig.exclude,
       extraFiles: exportsConfig.extraFiles ?? globalConfig.extraFiles,
+      frontmatter: exportsConfig.frontmatter ?? globalConfig.frontmatter,
       generateBulkZip: exportsConfig.generateBulkZip ?? true,
       generateManifest: exportsConfig.generateManifest ?? true,
       manifestOutputPath,
@@ -263,6 +264,7 @@ class PluginState {
       pageTitlePrefix:
         exportsConfig.pageTitlePrefix ?? globalConfig.pageTitlePrefix,
       routeDir: this.routesDir,
+      sections: exportsConfig.sections,
     })
 
     this.exports.pages = pageIds

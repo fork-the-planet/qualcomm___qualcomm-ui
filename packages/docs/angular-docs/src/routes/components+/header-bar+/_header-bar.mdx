@@ -3,6 +3,7 @@ title: Header Bar
 group: Data Display
 description: The header bar provides a consistent, high-level control surface for the application. It features a logo that reinforces brand identity, navigation items for accessing primary sections, and an action bar that contains important tools and utilities.
 component: HeaderBar
+aliases: [app bar, navbar, toolbar]
 ---
 
 import {
@@ -26,11 +27,23 @@ import {HeaderBarModule} from "@qualcomm-ui/angular/header-bar"
 
 ### Basic Usage
 
+::: terms
+responsive
+icon button
+user avatar
+:::
+
 A typical header bar includes a logo, application title, nav items, and an action bar.
 
 <QdsDemo name="HeaderBarShowcaseDemo" />
 
 ### Sizes
+
+::: terms
+small
+large
+compact
+:::
 
 The header bar has two sizes: `sm` (default) and `lg`. The [size](./#size) input governs padding, element spacing, and height.
 
@@ -38,17 +51,31 @@ The header bar has two sizes: `sm` (default) and `lg`. The [size](./#size) input
 
 ### Surfaces
 
+::: terms
+theme
+color scheme
+:::
+
 Use the [surface](./#surface) input to set the background color. Available options are `primary` (default) and `secondary`.
 
 <QdsDemo name="HeaderBarSurfacesDemo" />
 
 ### Padding
 
+::: terms
+spacing
+horizontal space
+:::
+
 Set the [padding](./#padding-1) input to `large` to increase horizontal padding.
 
 <QdsDemo name="HeaderBarPaddingDemo" />
 
 ### Menu Items
+
+::: terms
+nav menu
+:::
 
 Render a menu nav item with the [q-header-bar-menu-item](#header-bar-menu-item) and q-menu-trigger directives. This component must be wrapped in a q-menu.
 

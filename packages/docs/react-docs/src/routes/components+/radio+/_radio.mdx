@@ -3,6 +3,7 @@ title: Radio
 group: Form Controls
 description: Radio buttons are essential form controls that present users with a clear set of options where only one selection is possible at a time.
 component: Radio
+aliases: [option button, radio button]
 ---
 
 import {Demo} from "~components/demo"
@@ -27,11 +28,22 @@ Basic radio with label using the simple API.
 
 ### Composite
 
+::: terms
+compound component
+parts
+:::
+
 Build with the composite API for granular control. This API requires you to provide each subcomponent, but gives you full control over the structure and layout.
 
 <Demo name="RadioCompositeDemo" component={demos.RadioCompositeDemo} />
 
 ### Layout
+
+::: terms
+reorder
+label position
+custom layout
+:::
 
 Use the composite API when you need to modify the layout of the radio buttons.
 
@@ -48,6 +60,12 @@ When [disabled](./#disabled) is true, the radio group becomes non-interactive an
 
 ### Controlled State
 
+::: terms
+useState
+programmatic
+two-way binding
+:::
+
 Set the initial value using the [defaultValue](./#defaultValue) prop, or use [value](./#value) and [onValueChange](./#onValueChange) to control the value manually. These props follow our [controlled state](/patterns/controlled-state) pattern.
 
 <Demo
@@ -58,11 +76,24 @@ Set the initial value using the [defaultValue](./#defaultValue) prop, or use [va
 
 ### Orientation
 
+::: terms
+horizontal
+vertical
+row
+column
+:::
+
 Controls the layout direction of radio buttons within the group.
 
 <Demo name="RadioOrientationDemo" component={demos.RadioOrientationDemo} />
 
 ### Sizes
+
+::: terms
+small
+medium
+large
+:::
 
 The radio supports three [sizes](./#size): `sm`, `md` (default), and `lg`.
 
@@ -74,11 +105,26 @@ Use the [indented](./#indented-1) prop to indent the radio items.
 
 <Demo name="RadioIndentedDemo" component={demos.RadioIndentedDemo} />
 
+### Hint
+
+::: terms
+helper text
+description
+:::
+
+Add a hint to provide additional context for the radio group.
+
+<Demo name="RadioGroupHintDemo" component={demos.RadioGroupHintDemo} />
+
 ## Forms
 
 Choose the form library that fits your needs—we've built examples with React Hook Form and Tanstack Form to get you started.
 
 ### React Hook Form
+
+::: terms
+rhf
+:::
 
 Use [React Hook Form](https://react-hook-form.com/) to handle the radio state and validation. [ArkType](https://arktype.io/) works great for schema validation if you need it.
 
@@ -137,6 +183,10 @@ The Radio's composite components are only intended to be used as direct descenda
 ### \<RadioGroup.Root\>
 
 <TypeDocProps name="RadioGroupRootProps" />
+
+### \<RadioGroup.Hint\>
+
+<TypeDocProps name="RadioGroupHintProps" />
 
 ### \<Radio.Root\>
 

@@ -3,6 +3,7 @@ title: Switch
 group: Form Controls
 description: Switches enable users to instantly activate or deactivate features, settings, or options with immediate visual confirmation. The component features a sliding thumb that moves along a track to communicate the current state.
 component: Switch
+aliases: [toggle, toggle switch]
 ---
 
 import {QdsDemo} from "~components/demo"
@@ -32,11 +33,23 @@ Provide child directives to customize specific elements while keeping the simple
 
 ### Composite
 
+::: terms
+composed
+subcomponents
+:::
+
 Build with the composite API for granular control. This API requires you to provide each subcomponent, but gives you full control over the structure and layout.
 
 <QdsDemo name="SwitchCompositeDemo" />
 
 ### States
+
+::: terms
+on
+off
+true
+false
+:::
 
 Based on the inputs, the switch will render as checked or unchecked.
 
@@ -44,19 +57,47 @@ Based on the inputs, the switch will render as checked or unchecked.
 
 ### Disabled
 
+::: terms
+inactive
+read-only
+:::
+
 When [disabled](./#disabled) is true, the switch becomes non-interactive and is typically rendered with reduced opacity to indicate its unavailable state.
 
 <QdsDemo name="SwitchDisabledDemo" />
 
 ### Sizes
 
+::: terms
+small
+medium
+large
+:::
+
 Use the [size](./#size) input to change the size of the switch. The default size is `md`.
 
 <QdsDemo name="SwitchSizesDemo" />
 
+### Hint
+
+::: terms
+helper text
+description
+supporting text
+:::
+
+Add a hint to provide additional context below the switch.
+
+<QdsDemo name="SwitchHintDemo" />
+
 ## Forms
 
 ### Template Forms
+
+::: terms
+ngModel
+template-driven
+:::
 
 - When using template-driven forms, add the [required](./#required) attribute to enable validation
 - The [errorText](./#errorText) input (or `q-switch-error-text` directive) displays automatically when the field is invalid and the user has interacted with it
@@ -65,11 +106,22 @@ Use the [size](./#size) input to change the size of the switch. The default size
 
 ### Reactive Forms
 
+::: terms
+formControl
+formGroup
+model-driven
+:::
+
 Use Reactive Forms for better control over form state and validation.
 
 <QdsDemo name="SwitchReactiveFormsDemo" />
 
 ### Multi-Field Validation
+
+::: terms
+cross-field validation
+dependent fields
+:::
 
 Reactive forms let you validate across multiple fields simultaneously, perfect for complex business rules like date ranges or dependent field relationships.
 

@@ -17,6 +17,7 @@
     "dev:react": "turbo run dev --filter '@qualcomm-ui/react-internal' --filter '@qualcomm-ui/react-swagger*...' --filter '@qualcomm-ui/react-mdx*...' --filter '@qualcomm-ui/mdx-vite*...'",
     "dev:angular": "turbo run dev --filter=@qualcomm-ui/angular-core --filter=@qualcomm-ui/angular",
     "build:typedoc:ci": "turbo run build:typedoc --filter=$PACKAGE_NAME",
+    "generate-knowledge": "pnpm -r generate-knowledge",
     "angular": "pnpm -C packages/frameworks/angular",
     "angular-core": "pnpm -C packages/frameworks/angular-core",
     "react": "pnpm -C packages/frameworks/react",

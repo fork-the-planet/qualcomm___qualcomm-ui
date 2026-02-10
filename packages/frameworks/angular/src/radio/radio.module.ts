@@ -10,10 +10,12 @@ import {RadioControlDirective} from "./radio-control.directive"
 import {
   RadioGroupDirective,
   RadioGroupErrorTextComponent,
+  RadioGroupHintDirective,
   RadioGroupItemsDirective,
   RadioGroupLabelDirective,
 } from "./radio-group"
 import {RadioHiddenInputDirective} from "./radio-hidden-input.directive"
+import {RadioHintDirective} from "./radio-hint.directive"
 import {RadioLabelDirective} from "./radio-label.directive"
 import {RadioRootDirective} from "./radio-root.directive"
 import {RadioComponent} from "./radio.component"
@@ -21,24 +23,28 @@ import {RadioComponent} from "./radio.component"
 @NgModule({
   declarations: [
     RadioComponent,
-    RadioGroupErrorTextComponent,
-    RadioGroupDirective,
-    RadioGroupLabelDirective,
-    RadioGroupItemsDirective,
-    RadioHiddenInputDirective,
-    RadioLabelDirective,
     RadioControlDirective,
+    RadioGroupDirective,
+    RadioGroupErrorTextComponent,
+    RadioGroupHintDirective,
+    RadioGroupItemsDirective,
+    RadioGroupLabelDirective,
+    RadioHiddenInputDirective,
+    RadioHintDirective,
+    RadioLabelDirective,
     RadioRootDirective,
   ],
   exports: [
     RadioComponent,
-    RadioGroupErrorTextComponent,
-    RadioGroupDirective,
-    RadioGroupLabelDirective,
-    RadioGroupItemsDirective,
-    RadioHiddenInputDirective,
-    RadioLabelDirective,
     RadioControlDirective,
+    RadioGroupDirective,
+    RadioGroupErrorTextComponent,
+    RadioGroupHintDirective,
+    RadioGroupItemsDirective,
+    RadioGroupLabelDirective,
+    RadioHiddenInputDirective,
+    RadioHintDirective,
+    RadioLabelDirective,
     RadioRootDirective,
   ],
   imports: [QBindDirective, IconDirective],

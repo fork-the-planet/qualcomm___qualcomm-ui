@@ -3,6 +3,7 @@ title: Switch
 group: Form Controls
 description: Switches enable users to instantly activate or deactivate features, settings, or options with immediate visual confirmation. The component features a sliding thumb that moves along a track to communicate the current state.
 component: Switch
+aliases: [toggle, toggle switch]
 ---
 
 import {Demo} from "~components/demo"
@@ -27,6 +28,12 @@ Basic switch using the simple API with a label.
 
 ### Composite
 
+::: terms
+compound component
+composed
+subcomponents
+:::
+
 Build with the composite API for granular control. This API requires you to provide each subcomponent, but gives you full control over the structure and layout.
 
 <Demo
@@ -36,11 +43,23 @@ Build with the composite API for granular control. This API requires you to prov
 
 ### States
 
+::: terms
+on
+off
+true
+false
+:::
+
 Based on the inputs, the switch will render as checked or unchecked.
 
 <Demo name="SwitchStatesDemo" component={demos.SwitchStatesDemo} />
 
 ### Disabled State
+
+::: terms
+inactive
+read-only
+:::
 
 When [disabled](./#disabled) is true, the switch becomes non-interactive and is rendered with reduced opacity to indicate its unavailable state.
 
@@ -48,11 +67,35 @@ When [disabled](./#disabled) is true, the switch becomes non-interactive and is 
 
 ### Sizes
 
+::: terms
+small
+medium
+large
+:::
+
 Use the [size](./#size) prop to change the size of the switch. The default size is `md`.
 
 <Demo name="SwitchSizesDemo" component={demos.SwitchSizesDemo} />
 
+### Hint
+
+::: terms
+helper text
+description
+supporting text
+:::
+
+Add a hint to provide additional context below the switch.
+
+<Demo name="SwitchHintDemo" component={demos.SwitchHintDemo} />
+
 ### Controlled State
+
+::: terms
+useState
+state management
+two-way binding
+:::
 
 Set the initial value using the [defaultChecked](./#defaultChecked) prop, or use [checked](./#checked) and [onCheckedChange](./#onCheckedChange) to control the value manually. These props follow our [controlled state](/patterns/controlled-state) pattern.
 
@@ -67,6 +110,10 @@ Set the initial value using the [defaultChecked](./#defaultChecked) prop, or use
 Choose the form library that fits your needs—we've built examples with React Hook Form and Tanstack Form to get you started.
 
 ### React Hook Form
+
+::: terms
+rhf
+:::
 
 Use [React Hook Form](https://react-hook-form.com/) to handle the switch state and validation. [ArkType](https://arktype.io/) works great for schema validation if you need it.
 

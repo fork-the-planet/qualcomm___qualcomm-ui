@@ -2,6 +2,7 @@
 title: Number Badge
 description: The Number Badge component displays numerical indicators that help users track quantities, updates, or notifications at a glance.
 component: NumberBadge
+aliases: [count badge, counter, pill]
 ---
 
 import {TypeDocAttributes, TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
@@ -26,11 +27,23 @@ Use the [value](./#value-1) prop for auto formatting, or use [children](./#child
 
 ### Max (Auto Formatting)
 
+::: terms
+truncate
+overflow indicator
+threshold
+:::
+
 When using the [value](./#value-1) prop with [max](./#max), overflow values are automatically formatted. If value exceeds max, the badge displays "max+" and applies special styling. The default max is 99.
 
 <Demo name="NumberBadgeMaxDemo" component={demos.NumberBadgeMaxDemo} />
 
 ### Emphasis
+
+::: terms
+variant
+appearance
+semantic
+:::
 
 Multiple color and style options are available via the [emphasis](./#emphasis-1) prop: `neutral` (default), `neutral-outline`, `brand`, `brand-outline`, `info`, `success`, `warning`, `danger`, `persistent-black` and `persistent-white`.
 
@@ -41,11 +54,21 @@ Multiple color and style options are available via the [emphasis](./#emphasis-1)
 
 ### Size
 
+::: terms
+small
+medium
+large
+:::
+
 Control dimensions using the [size](./#size-1) prop. Three sizes are available: `sm`, `md` (default), and `lg`.
 
 <Demo name="NumberBadgeSizeDemo" component={demos.NumberBadgeSizeDemo} />
 
 ### Disabled
+
+::: terms
+grayed out
+:::
 
 Set the [disabled](./#disabled-1) prop to visually indicate that the badge is inactive.
 

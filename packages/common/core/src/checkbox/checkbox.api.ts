@@ -27,6 +27,7 @@ import type {
   CheckboxDataBindings,
   CheckboxErrorTextBindings,
   CheckboxHiddenInputBindings,
+  CheckboxHintBindings,
   CheckboxIndicatorBindings,
   CheckboxLabelBindings,
   CheckboxRootBindings,
@@ -145,6 +146,16 @@ export function createCheckboxApi(
         style: visuallyHiddenStyle,
         type: "checkbox",
         value: prop("value"),
+      })
+    },
+    getHintBindings(props: IdRegistrationProps): CheckboxHintBindings {
+      scope.ids.register("hint", props)
+      return normalize.element({
+        ...commonAttrs,
+        "data-part": "hint",
+        dir: prop("dir"),
+        hidden: !!invalid,
+        id: domIds.hint(scope),
       })
     },
     getIndicatorBindings(): CheckboxIndicatorBindings {

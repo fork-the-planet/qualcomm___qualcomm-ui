@@ -12,6 +12,7 @@ import {
   SwitchHiddenInput,
   type SwitchHiddenInputProps,
 } from "./switch-hidden-input"
+import {SwitchHint, type SwitchHintProps} from "./switch-hint"
 import {SwitchLabel, type SwitchLabelProps} from "./switch-label"
 import {SwitchRoot, type SwitchRootProps} from "./switch-root"
 import {SwitchThumb, type SwitchThumbProps} from "./switch-thumb"
@@ -56,6 +57,16 @@ export interface SwitchProps extends SwitchRootProps {
   hiddenInputProps?: SwitchHiddenInputProps
 
   /**
+   * Optional hint text that describes the element.
+   */
+  hint?: ReactNode
+
+  /**
+   * Props applied to the hint element.
+   */
+  hintProps?: SwitchHintProps
+
+  /**
    * Optional label describing the element. Recommended. This element is
    * automatically associated with the component's input element for
    * accessibility.
@@ -80,6 +91,8 @@ export function Switch({
   errorText,
   errorTextProps,
   hiddenInputProps: hiddenInputPropsProp,
+  hint,
+  hintProps,
   label,
   labelProps,
   thumbProps,
@@ -87,6 +100,7 @@ export function Switch({
 }: SwitchProps): ReactElement {
   const labelContent = label || labelProps?.children
   const errorTextContent = errorText || errorTextProps?.children
+  const hintContent = hint || hintProps?.children
 
   const hiddenInputProps = {
     ...hiddenInputPropsProp,
@@ -102,6 +116,7 @@ export function Switch({
   const ids = {
     errorText: useOptionalContentId(errorTextContent, errorTextProps),
     hiddenInput: useControlledId(hiddenInputProps?.id),
+    hint: useOptionalContentId(hintContent, hintProps),
     label: useOptionalContentId(labelContent, labelProps),
     root: useControlledId(props.id),
     ...props.ids,
@@ -117,6 +132,11 @@ export function Switch({
         <SwitchLabel {...labelProps} id={ids.label}>
           {labelContent}
         </SwitchLabel>
+      ) : null}
+      {hintContent ? (
+        <SwitchHint {...hintProps} id={ids.hint}>
+          {hintContent}
+        </SwitchHint>
       ) : null}
       {errorTextContent ? (
         <SwitchErrorText {...errorTextProps} id={ids.errorText}>

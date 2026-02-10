@@ -2,6 +2,7 @@
 title: Status Badge
 description: The Status Badge component uses color-coded indicators to show a user's state or system condition. Commonly used in profiles to display availability such as active, away, or offline, it remains clear, accessible, and consistent across all sizes, helping users identify status instantly.
 component: StatusBadge
+aliases: [presence indicator, dot badge, availability badge]
 ---
 
 import {QdsDemo} from "~components/demo"
@@ -22,11 +23,26 @@ import {StatusBadgeDirective} from "@qualcomm-ui/angular/badge"
 
 ### Emphasis
 
+::: terms
+neutral
+brand
+info
+success
+warning
+danger
+:::
+
 Use the [emphasis](./#emphasis-1) input to convey semantic meaning with colors.
 
 <QdsDemo name="StatusBadgeEmphasisDemo" />
 
 ### Variant
+
+::: terms
+solid
+hollow
+bordered
+:::
 
 The [variant](./#variant-1) input controls the aspect of the badge. Two variants are available: `filled` (default) and `outlined`.
 
@@ -34,11 +50,24 @@ The [variant](./#variant-1) input controls the aspect of the badge. Two variants
 
 ### Size
 
+::: terms
+extra small
+small
+medium
+large
+extra large
+:::
+
 Control dimensions using the [size](./#size-1) input. Five sizes are available: `xs`, `sm`, `md` (default), `lg`, and `xl`.
 
 <QdsDemo name="StatusBadgeSizeDemo" />
 
 ### Disabled
+
+::: terms
+grayed out
+dimmed
+:::
 
 Set the [disabled](./#disabled-1) input to visually indicate that the badge is inactive.
 

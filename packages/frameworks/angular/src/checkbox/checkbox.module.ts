@@ -10,6 +10,7 @@ import {QBindDirective} from "@qualcomm-ui/angular-core/machine"
 import {CheckboxControlComponent} from "./checkbox-control.component"
 import {CheckboxErrorTextComponent} from "./checkbox-error-text.component"
 import {CheckboxHiddenInputDirective} from "./checkbox-hidden-input.directive"
+import {CheckboxHintDirective} from "./checkbox-hint.directive"
 import {CheckboxIndicatorComponent} from "./checkbox-indicator.component"
 import {CheckboxLabelDirective} from "./checkbox-label.directive"
 import {CheckboxRootDirective} from "./checkbox-root.directive"
@@ -22,6 +23,7 @@ import {CheckboxComponent} from "./checkbox.component"
     CheckboxControlComponent,
     CheckboxLabelDirective,
     CheckboxHiddenInputDirective,
+    CheckboxHintDirective,
     CheckboxIndicatorComponent,
     CheckboxErrorTextComponent,
   ],
@@ -31,6 +33,7 @@ import {CheckboxComponent} from "./checkbox.component"
     CheckboxControlComponent,
     CheckboxLabelDirective,
     CheckboxHiddenInputDirective,
+    CheckboxHintDirective,
     CheckboxIndicatorComponent,
     CheckboxErrorTextComponent,
   ],

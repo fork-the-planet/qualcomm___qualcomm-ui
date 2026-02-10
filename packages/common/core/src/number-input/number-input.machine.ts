@@ -135,6 +135,9 @@ export const numberInputMachine: MachineConfig<NumberInputSchema> =
         }
         context.set("value", formatValue(nextValue, {computed, prop}))
       },
+      setUnit({context, event}) {
+        context.set("unit", (event as any).unit)
+      },
       setValue({context, event}) {
         const value = (event as any).target?.value ?? (event as any).value
         context.set("value", value)
@@ -188,6 +191,14 @@ export const numberInputMachine: MachineConfig<NumberInputSchema> =
         fieldsetDisabled: bindable<boolean>(() => ({defaultValue: false})),
         hint: bindable<HintValue | null>(() => ({defaultValue: null})),
         ssr: bindable<boolean>(() => ({defaultValue: true})),
+        unit: bindable<string>(() => ({
+          defaultValue:
+            prop("defaultUnit") ?? prop("unitOptions")?.[0]?.value ?? "",
+          onChange(unit) {
+            prop("onUnitChange")?.(unit)
+          },
+          value: prop("unit"),
+        })),
         value: bindable<string>(() => ({
           defaultValue: prop("defaultValue"),
           onChange(value) {
@@ -280,6 +291,9 @@ export const numberInputMachine: MachineConfig<NumberInputSchema> =
       return "idle"
     },
     on: {
+      "UNIT.SET": {
+        actions: ["setUnit"],
+      },
       "VALUE.CLEAR": {
         actions: ["clearValue"],
       },

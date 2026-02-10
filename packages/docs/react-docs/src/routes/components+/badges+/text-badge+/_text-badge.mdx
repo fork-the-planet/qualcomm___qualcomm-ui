@@ -2,6 +2,7 @@
 title: Text Badge
 description: The Text Badge component combines color and text to visually communicate status, category, or action. It helps users quickly identify meaning through text and consistent color cues.
 component: Badge
+aliases: [chip, label badge, tag]
 ---
 
 import {TypeDocAttributes, TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
@@ -20,11 +21,25 @@ import {Badge} from "@qualcomm-ui/react/badge"
 
 ### Emphasis
 
+::: terms
+neutral
+brand
+info
+success
+warning
+danger
+:::
+
 Use the [emphasis](./#emphasis-1) prop to convey semantic meaning or categorize content.
 
 <Demo name="TextBadgeEmphasisDemo" component={demos.TextBadgeEmphasisDemo} />
 
 ### Variant
+
+::: terms
+filled
+soft
+:::
 
 The [variant](./#variant-1) prop controls the aspect of the badge. Two variants are available: `default` (bolder appearance) and `subtle` (muted appearance).
 
@@ -32,11 +47,22 @@ The [variant](./#variant-1) prop controls the aspect of the badge. Two variants 
 
 ### Size
 
+::: terms
+small
+medium
+large
+:::
+
 Control dimensions using the [size](./#size-1) prop. Three sizes are available: `sm`, `md` (default), and `lg`.
 
 <Demo name="TextBadgeSizeDemo" component={demos.TextBadgeSizeDemo} />
 
 ### Disabled
+
+::: terms
+greyed out
+grayed out
+:::
 
 Set the [disabled](./#disabled-1) prop to visually indicate that the badge is inactive.
 

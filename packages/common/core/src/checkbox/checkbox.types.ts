@@ -81,6 +81,7 @@ export interface CheckboxElementIds {
   control: string
   errorText: string
   hiddenInput: string
+  hint: string
   label: string
   root: string
 }
@@ -185,6 +186,12 @@ export interface CheckboxErrorTextBindings extends CommonBindings {
   id: string
 }
 
+export interface CheckboxHintBindings extends CommonBindings {
+  "data-part": "hint"
+  hidden: boolean
+  id: string
+}
+
 export interface CheckboxHiddenInputBindings extends CommonBindings {
   "aria-invalid": BooleanAriaAttr
   "aria-labelledby": string | undefined
@@ -218,6 +225,7 @@ export interface CheckboxApi {
   getHiddenInputBindings(
     props: IdRegistrationProps,
   ): CheckboxHiddenInputBindings
+  getHintBindings(props: IdRegistrationProps): CheckboxHintBindings
   getIndicatorBindings(): CheckboxIndicatorBindings
   getLabelBindings(props: IdRegistrationProps): CheckboxLabelBindings
   getRootBindings(props: IdRegistrationProps): CheckboxRootBindings

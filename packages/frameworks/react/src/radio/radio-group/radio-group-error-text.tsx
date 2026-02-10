@@ -30,7 +30,7 @@ export function RadioGroupErrorText({
   const qdsContext = useQdsRadioContext()
   const mergedProps = mergeProps(
     contextProps,
-    qdsContext.getErrorTextBindings(),
+    qdsContext.getGroupErrorTextBindings(),
     props,
   )
 

@@ -11,6 +11,7 @@ import type {SwitchElementIds, SwitchScope} from "../switch.types"
 export const domIds: ScopeDomIds<SwitchElementIds, SwitchScope> = {
   errorText: (scope) => scope.ids.get("errorText"),
   hiddenInput: (scope) => scope.ids.get("hiddenInput"),
+  hint: (scope) => scope.ids.get("hint"),
   label: (scope) => scope.ids.get("label"),
   root: (scope) => scope.ids.get("root"),
 }
@@ -25,6 +26,7 @@ export const domEls: ScopeDomElements<
   errorText: (scope) => scope.getById(domIds.errorText(scope)),
   hiddenInput: (scope: SwitchScope) =>
     scope.getById<HTMLInputElement>(domIds.hiddenInput(scope)),
+  hint: (scope) => scope.getById(domIds.hint(scope)),
   label: (scope) => scope.getById(domIds.label(scope)),
   root: (scope) => scope.getById(domIds.root(scope)),
 }

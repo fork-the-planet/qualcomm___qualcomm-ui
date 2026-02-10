@@ -131,7 +131,9 @@
   padding: 0;
 
   .qui-docs-sidebar__root {
-    height: 100vh;
+    height: min-content;
+    min-height: 100vh;
+    overflow-y: hidden;
     top: 0;
   }
 }

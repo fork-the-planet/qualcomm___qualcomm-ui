@@ -1,5 +1,18 @@
 # @qualcomm-ui/core Changelog
 
+## 1.3.0 (2026/01/30)
+
+### Features
+
+- [number-input]: add unit selector
+- [radio]: hint at item level
+
+### Bug Fixes
+
+- [radio]: group hint + CSS fixes
+- [switch]: hint text
+- [checkbox]: hint text
+
 ## 1.2.1 (2026/01/23)
 
 ### Code Refactoring

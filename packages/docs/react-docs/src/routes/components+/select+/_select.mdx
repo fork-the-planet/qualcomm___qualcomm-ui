@@ -3,6 +3,7 @@ title: Select
 group: Form Controls
 description: The select component provides a streamlined way for users to pick a single option from a collapsible list of choices. It conserves screen space while offering clear visual feedback and maintaining accessibility standards.
 component: Select
+aliases: [dropdown, picker, listbox, choice]
 ---
 
 import {TypeDocProps, TypeDocAttributes} from "@qualcomm-ui/react-mdx/typedoc"
@@ -25,6 +26,10 @@ import {Select} from "@qualcomm-ui/react/select"
 
 ### Simple
 
+::: terms
+option list
+:::
+
 The simple API provides a standalone component with built-in layout.
 
 <Demo name="SelectSimpleDemo" component={demos.SelectSimpleDemo} />
@@ -37,11 +42,25 @@ Build with the composite API for granular control. This API requires you to prov
 
 ### ARIA Label
 
+::: terms
+a11y
+screen reader
+labelless
+hidden label
+:::
+
 The Select's label is automatically associated with the input element for accessibility. If you omit the label, you should provide an aria-label to the control to give your select an accessible name.
 
 <Demo name="SelectAriaLabelDemo" component={demos.SelectAriaLabelDemo} />
 
 ### Content Width
+
+::: terms
+dropdown width
+popup width
+listbox width
+auto width
+:::
 
 The [positioning.sameWidth](./#sameWidth) property controls whether the width of the select content matches the width of the trigger element. The default is `true`.
 
@@ -49,17 +68,35 @@ The [positioning.sameWidth](./#sameWidth) property controls whether the width of
 
 ### Trigger Icon
 
+::: terms
+leading icon
+prefix icon
+start icon
+:::
+
 Use the [icon](./#icon) prop to add an icon to the start of the trigger element.
 
 <Demo name="SelectIconDemo" component={demos.SelectIconDemo} />
 
 ### Items as Objects
 
+::: terms
+custom items
+typed items
+structured data
+:::
+
 The `items` prop can be an array of objects. Use the [itemLabel](./#itemLabel) and [itemValue](./#itemValue) properties on the [selectCollection](./#ListCollection) to specify the label and value of each item.
 
 <Demo name="SelectItemsDemo" component={demos.SelectItemsDemo} />
 
 ### Sizes
+
+::: terms
+small
+medium
+large
+:::
 
 This component supports three [size](./#size) options to accommodate different layout densities and design requirements.
 
@@ -69,17 +106,35 @@ The available sizes are `sm`, `md`, and `lg`. The default size is `md`.
 
 ### Content Height
 
+::: terms
+maxHeight
+scrollable
+overflow
+:::
+
 Change the height of the item container by adjusting the style of the Content element.
 
 <Demo name="SelectMaxHeightDemo" component={demos.SelectMaxHeightDemo} />
 
 ### Multiple Selection
 
+::: terms
+multiselect
+multi-select
+multi select
+:::
+
 Use the [multiple](./#multiple) prop to allow multiple selections.
 
 <Demo name="SelectMultipleDemo" component={demos.SelectMultipleDemo} />
 
 ### Controlled State
+
+::: terms
+external state
+react state
+useState
+:::
 
 Set the initial value using the [defaultValue](./#defaultValue) prop, or use [value](./#value) and [onValueChange](./#onValueChange) to control the value manually. These props follow our [controlled state](/patterns/controlled-state) pattern.
 
@@ -90,11 +145,26 @@ Set the initial value using the [defaultValue](./#defaultValue) prop, or use [va
 
 ### States
 
+::: terms
+disabled state
+read-only
+readonly
+invalid state
+form states
+:::
+
 The following shows how the Select component appears in each interactive state.
 
 <Demo name="SelectStatesDemo" component={demos.SelectStatesDemo} />
 
 ### Error Text and Indicator
+
+::: terms
+validation error
+form validation
+error message
+invalid field
+:::
 
 Error messages are displayed using two props:
 
@@ -107,11 +177,23 @@ The error text and indicator will only render when [invalid](./#invalid) is true
 
 ### Within Dialog
 
+::: terms
+modal
+portalProps
+disable portal
+:::
+
 To use the Select within a Dialog, you need to avoid portalling the `Select.Positioner` to the document's body. To do this using the simple API, set `portalProps.disabled` to `true`:
 
 <Demo name="SelectWithinDialogDemo" component={demos.SelectWithinDialogDemo} />
 
 ### Within Popover
+
+::: terms
+modal
+portalProps
+disable portal
+:::
 
 Like with the Dialog, you need to avoid portalling the `Select.Positioner` to the document's body:
 
@@ -126,11 +208,20 @@ Choose the form library that fits your needs—we've built examples with React H
 
 ### React Hook Form
 
+::: terms
+rhf
+:::
+
 Use [React Hook Form](https://react-hook-form.com/) to handle the input state and validation. [ArkType](https://arktype.io/) works great for schema validation if you need it.
 
 <Demo expanded name="SelectHookFormDemo" component={demos.SelectHookFormDemo} />
 
 ### Tanstack Form
+
+::: terms
+tanstack
+tsform
+:::
 
 [Tanstack Form](https://tanstack.com/form/latest/docs/framework/react/guides/basic-concepts) handles validation with its built-in validators.
 

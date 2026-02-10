@@ -1,5 +1,28 @@
 # @qualcomm-ui/react Changelog
 
+## 1.11.0 (2026/01/30)
+
+### Features
+
+- [number-input]: add unit selector
+- [radio]: hint at item level
+
+### Bug Fixes
+
+- [radio]: group hint + CSS fixes
+- [switch]: hint text
+- [checkbox]: hint text
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/qds-core, @qualcomm-ui/react-core]
+
+## 1.10.1 (2026/01/29)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
 ## 1.10.0 (2026/01/27)
 
 ### Features

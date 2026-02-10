@@ -22,7 +22,12 @@ import {useJsonViewerStore, useTypeComponents} from "../stores"
 import type {DataItemProps} from "../type"
 import {getValueSize} from "../utils"
 
-import {getRefName, isReferenceArray, isReferenceObject} from "./internal"
+import {
+  getRefName,
+  isObject,
+  isReferenceArray,
+  isReferenceObject,
+} from "./internal"
 
 export type DataKeyPairProps = {
   className?: string
@@ -249,7 +254,7 @@ export function DataKeyPair(props: DataKeyPairProps) {
         </span>
 
         {Component ? (
-          description ? (
+          description && !isObject(value) && !isReferenceArray(value) ? (
             <button
               className="data-key-description-expand-button"
               onClick={() => setShowDescription(!showDescription)}

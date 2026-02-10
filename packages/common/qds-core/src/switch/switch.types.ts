@@ -43,6 +43,10 @@ export interface QdsSwitchErrorTextBindings {
   className: InputClasses["errorText"]
 }
 
+export interface QdsSwitchHintBindings {
+  className: InputClasses["hint"]
+}
+
 export interface QdsSwitchHiddenInputBindings {
   className: SwitchClasses["hiddenInput"]
 }
@@ -51,6 +55,7 @@ export interface QdsSwitchApi {
   getControlBindings(): QdsSwitchControlBindings
   getErrorTextBindings(): QdsSwitchErrorTextBindings
   getHiddenInputBindings(): QdsSwitchHiddenInputBindings
+  getHintBindings(): QdsSwitchHintBindings
   getLabelBindings(): QdsSwitchLabelBindings
   getRootBindings(): QdsSwitchRootBindings
   getThumbBindings(): QdsSwitchThumbBindings

@@ -3,6 +3,17 @@ title: Text Input
 group: Form Controls
 description: Text inputs are fundamental form components that provide a versatile foundation for data collection across web and mobile experiences. They support multiple configurations including labels, hint text, placeholder content, and start or end icons to guide users through various input scenarios.
 component: TextInput
+aliases:
+  [
+    text field,
+    text box,
+    input field,
+    input,
+    form field,
+    entry,
+    user input,
+    single line,
+  ]
 ---
 
 import {Demo} from "~components/demo"
@@ -21,11 +32,22 @@ import {TextInput} from "@qualcomm-ui/react/text-input"
 
 ### Simple
 
+::: terms
+data entry
+:::
+
 The simple `<TextInput>` bundles all subcomponents together into a single component.
 
 <Demo name="TextInputSimpleDemo" component={demos.TextInputSimpleDemo} />
 
 ### Icons
+
+::: terms
+leading icon
+trailing icon
+prefix icon
+suffix icon
+:::
 
 Add icons using props at the root.
 
@@ -36,11 +58,23 @@ Add icons using props at the root.
 
 ### Composite
 
+::: terms
+compound component
+slots
+parts
+:::
+
 Build with the composite API for granular control. This API requires you to provide each subcomponent, but gives you full control over the structure and layout.
 
 <Demo name="TextInputCompositeDemo" component={demos.TextInputCompositeDemo} />
 
 ### Composite Layout
+
+::: terms
+horizontal layout
+inline label
+side by side
+:::
 
 The composite API is useful for alternative layouts and styles.
 
@@ -50,6 +84,11 @@ The composite API is useful for alternative layouts and styles.
 />
 
 ### Clear Trigger
+
+::: terms
+reset
+x button
+:::
 
 - When using the simple API, the clear button renders automatically. Change this by setting the [clearable](./#clearable) prop to false.
 - When using the composite API, you render the `InputClearButton` declaratively within the `InputGroup`.
@@ -62,11 +101,23 @@ The composite API is useful for alternative layouts and styles.
 
 ### Sizes
 
+::: terms
+small
+medium
+large
+:::
+
 Customize size using the [size](./#size) prop. The default size is `md`.
 
 <Demo name="TextInputSizesDemo" component={demos.TextInputSizesDemo} />
 
 ### States
+
+::: terms
+read-only
+form state
+input state
+:::
 
 The following shows how the TextInput component appears in each interactive state.
 
@@ -84,6 +135,11 @@ Set the initial value using the [defaultValue](./#defaultValue) prop, or use [va
 
 ### Error Text and Indicator
 
+::: terms
+validation message
+field error
+:::
+
 Error messages are displayed using two props:
 
 - [invalid](./#invalid)
@@ -99,6 +155,11 @@ Choose the form library that fits your needs—we've built examples with React H
 
 ### React Hook Form
 
+::: terms
+rhf
+useForm hook
+:::
+
 Use [React Hook Form](https://react-hook-form.com/) to handle the input state and validation. [ArkType](https://arktype.io/) works great for schema validation if you need it.
 
 <Demo
@@ -108,6 +169,10 @@ Use [React Hook Form](https://react-hook-form.com/) to handle the input state an
 />
 
 ### Tanstack Form
+
+::: terms
+@tanstack/form
+:::
 
 [Tanstack Form](https://tanstack.com/form/latest/docs/framework/react/guides/basic-concepts) handles validation with its built-in validators.
 

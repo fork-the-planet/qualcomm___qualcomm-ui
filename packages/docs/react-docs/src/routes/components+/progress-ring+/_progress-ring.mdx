@@ -3,6 +3,8 @@ title: Progress Ring
 group: Feedback
 description: Progress rings provide users with visual feedback about the status of ongoing processes through a circular progress indicator. This component displays both determinate progress with specific percentages and indeterminate loading states.
 component: ProgressRing
+aliases:
+  [circular progress, spinner, activity indicator, radial progress, ring loader]
 ---
 
 import {Demo} from "~components/demo"
@@ -18,6 +20,10 @@ import {ProgressRing} from "@qualcomm-ui/react/progress-ring"
 ```
 
 ## Overview
+
+::: terms
+loading indicator, busy, wait
+:::
 
 The progress ring can be in one of two states:
 
@@ -45,6 +51,10 @@ Build with the composite API for granular control. This API requires you to prov
 
 ### Value
 
+::: terms
+completion percentage
+:::
+
 When the [value](./#value-1) prop is set, the filled portion of the circle will represent the total percent relative to [max](./#max) and [min](./#min). This is referred to as the "determinate" state.
 
 <Demo name="ProgressRingValueDemo" component={demos.ProgressRingValueDemo} />
@@ -60,11 +70,25 @@ Display the value text by passing a value to the [valueText](./#valuetext) prop.
 
 ### Sizes
 
+::: terms
+extra small
+extra large
+small
+medium
+large
+:::
+
 Use the [size](./#size) prop to change the size of the circle.
 
 <Demo name="ProgressRingSizesDemo" component={demos.ProgressRingSizesDemo} />
 
 ### Thickness
+
+::: terms
+stroke width
+stroke thickness
+track width
+:::
 
 Use the [thickness](./#thickness) prop to change the pixel width of the track and bar.
 
@@ -82,6 +106,10 @@ The `ProgressRing.Circle` component automatically renders the track and bar comp
 ```
 
 ## Accessibility
+
+::: terms
+a11y
+:::
 
 - When the value is supplied, the component automatically provides the corresponding `aria-value*` attributes to the element.
 - The progress element is automatically marked with `role="progressbar"`.

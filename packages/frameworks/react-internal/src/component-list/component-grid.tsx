@@ -30,12 +30,16 @@ export function ComponentGrid(): ReactElement {
                 Coming soon
               </div>
             ) : null}
-            <img
-              alt={component.name}
-              className="qui-component-grid__image"
-              height={200}
-              src={`/images/components/${component.fileName}`}
-            />
+            {component.fileName ? (
+              <img
+                alt={component.name}
+                className="qui-component-grid__image"
+                height={200}
+                src={`/images/components/${component.fileName}`}
+              />
+            ) : (
+              <div className="qui-component-grid__image"></div>
+            )}
             <div className="qui-component-grid__item-description">
               <h3 className="font-heading-sm text-neutral-primary">
                 {component.name}
