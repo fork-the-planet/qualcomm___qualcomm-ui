@@ -29,22 +29,24 @@ const sharedProps = {
     lg: "lg",
     sm: "sm",
   }),
-  valueText: figma.boolean("percentage", {
-    false: undefined,
-    true: "25%",
-  }),
 }
 
 // Determinate progress (indeterminate=False)
 figma.connect(Progress, "<FIGMA_COMPONENTS_BASE>?node-id=4402-120", {
   example: (props) => <Progress value={25} {...props} />,
-  props: sharedProps,
+  props: {
+    ...sharedProps,
+    valueText: figma.boolean("percentage", {
+      false: undefined,
+      true: "25%",
+    }),
+  },
   variant: {indeterminate: "False"},
 })
 
 // Indeterminate progress (indeterminate=True)
 figma.connect(Progress, "<FIGMA_COMPONENTS_BASE>?node-id=4402-120", {
-  example: ({valueText, ...props}) => <Progress {...props} />,
+  example: (props) => <Progress {...props} />,
   props: sharedProps,
   variant: {indeterminate: "True"},
 })

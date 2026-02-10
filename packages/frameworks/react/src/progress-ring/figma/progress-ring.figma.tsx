@@ -29,22 +29,24 @@ const sharedProps = {
     xs: "xs",
     xxs: "xxs",
   }),
-  valueText: figma.boolean("percentage", {
-    false: undefined,
-    true: "25%",
-  }),
 }
 
 // Determinate progress ring (indeterminate=False)
 figma.connect(ProgressRing, "<FIGMA_COMPONENTS_BASE>?node-id=6622-615", {
   example: (props) => <ProgressRing value={25} {...props} />,
-  props: sharedProps,
+  props: {
+    ...sharedProps,
+    valueText: figma.boolean("percentage", {
+      false: undefined,
+      true: "25%",
+    }),
+  },
   variant: {indeterminate: "false"},
 })
 
 // Indeterminate progress ring (indeterminate=true)
 figma.connect(ProgressRing, "<FIGMA_COMPONENTS_BASE>?node-id=6622-615", {
-  example: ({valueText, ...props}) => <ProgressRing {...props} />,
+  example: (props) => <ProgressRing {...props} />,
   props: sharedProps,
   variant: {indeterminate: "true"},
 })
