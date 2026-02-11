@@ -3,17 +3,8 @@ title: Progress Ring
 group: Feedback
 description: Progress rings provide users with visual feedback about the status of ongoing processes through a circular progress indicator. This component displays both determinate progress with specific percentages and indeterminate loading states.
 component: ProgressRing
-keywords:
-  [
-    circular progress,
-    spinner,
-    loading circle,
-    radial progress,
-    donut progress,
-    percent ring,
-    activity indicator,
-    ring loader,
-  ]
+aliases:
+  [circular progress, spinner, activity indicator, radial progress, ring loader]
 ---
 
 import {Demo} from "~components/demo"
@@ -30,6 +21,10 @@ import {ProgressRing} from "@qualcomm-ui/react/progress-ring"
 
 ## Overview
 
+::: terms
+loading indicator, busy, wait
+:::
+
 The progress ring can be in one of two states:
 
 - indeterminate: the default state.
@@ -40,10 +35,6 @@ Indeterminate progress rings keep users informed that work is happening when tim
 ## Examples
 
 ### Simple
-
-::: meta
-keywords: [basic progress ring, default spinner]
-:::
 
 For most use cases, you can use the simple `ProgressRing` component.
 
@@ -60,8 +51,8 @@ Build with the composite API for granular control. This API requires you to prov
 
 ### Value
 
-::: meta
-keywords: [controlled progress, dynamic progress ring]
+::: terms
+completion percentage
 :::
 
 When the [value](./#value-1) prop is set, the filled portion of the circle will represent the total percent relative to [max](./#max) and [min](./#min). This is referred to as the "determinate" state.
@@ -79,11 +70,25 @@ Display the value text by passing a value to the [valueText](./#valuetext) prop.
 
 ### Sizes
 
+::: terms
+extra small
+extra large
+small
+medium
+large
+:::
+
 Use the [size](./#size) prop to change the size of the circle.
 
 <Demo name="ProgressRingSizesDemo" component={demos.ProgressRingSizesDemo} />
 
 ### Thickness
+
+::: terms
+stroke width
+stroke thickness
+track width
+:::
 
 Use the [thickness](./#thickness) prop to change the pixel width of the track and bar.
 
@@ -102,8 +107,8 @@ The `ProgressRing.Circle` component automatically renders the track and bar comp
 
 ## Accessibility
 
-::: meta
-keywords: [a11y, screen reader support, progress ring accessibility]
+::: terms
+a11y
 :::
 
 - When the value is supplied, the component automatically provides the corresponding `aria-value*` attributes to the element.

@@ -3,6 +3,7 @@ title: Side Nav
 group: Disclosure
 description: The side navigation provides a consistent, easy-to-scan way for users to move through major sections of an application. It stays visible as users browse, giving them a clear understanding of where they are and what options are available.
 component: SideNav
+aliases: [sidebar, left nav, navigation menu, vertical menu]
 ---
 
 import {QdsDemo} from "~components/demo"
@@ -77,11 +78,22 @@ Note that `<q-side-nav-nodes>` automatically renders child nodes for branches, s
 
 ### Grouping
 
+::: terms
+section divider
+categorize items
+navigation sections
+:::
+
 Group nodes using the collection's [groupChildren](./#groupChildren) method. This should be called on the top-level node of your SideNav. Nested groups are not supported.
 
 <QdsDemo name="SideNavGroupsDemo" />
 
 ### Default Expanded
+
+::: terms
+initially open
+pre-expanded
+:::
 
 Expand nodes by default using the [defaultExpandedValue](./#defaultExpandedValue) input. Or use [expandedValue](./#expandedValue) and [expandedValueChange](./#expandedValueChange) to control the expansion manually. These inputs follow our [controlled state](/patterns/controlled-state) pattern.
 
@@ -89,11 +101,24 @@ Expand nodes by default using the [defaultExpandedValue](./#defaultExpandedValue
 
 ### Disabled Nodes
 
+::: terms
+inactive
+unavailable
+:::
+
 You can disable nodes by setting the `disabled` property on the node object.
 
 <QdsDemo name="SideNavDisabledNodeDemo" />
 
 ### Collapsed
+
+::: terms
+minimize
+icon-only
+compact
+hamburger
+drawer menu
+:::
 
 Side Nav can be collapsed to render only the top-level icons.
 
@@ -103,11 +128,21 @@ The open state of the panel can be controlled using the [open](./#open), [openCh
 
 ### Filtering
 
+::: terms
+fuzzy search
+:::
+
 Here's an example that filters the items using `matchSorter`.
 
 <QdsDemo name="SideNavFilteringDemo" />
 
 ### Links
+
+::: terms
+routerLink
+angular router
+router integration
+:::
 
 Side Nav nodes can be links. Apply the `q-side-nav-leaf-node` directive to an anchor element with `routerLink` to create navigable links.
 
@@ -115,11 +150,21 @@ Side Nav nodes can be links. Apply the `q-side-nav-leaf-node` directive to an an
 
 ### Surface
 
+::: terms
+dark background
+light background
+:::
+
 Use the `surface` input to change the background color of the Side Nav.
 
 <QdsDemo name="SideNavSurfaceDemo" />
 
 ### Tooltips
+
+::: terms
+hover hints
+icon labels
+:::
 
 Consider wrapping collapsed nodes with the [Tooltip](/components/tooltip) component to provide context about each item. This is also useful for describing disabled nodes.
 

@@ -31,7 +31,7 @@ export function DocsLayout({
 }: DocsLayoutProps): ReactNode {
   return (
     <Layout.Root {...props}>
-      {({hidePageLinks, hideSideNav, showToc}) => (
+      {({hidePageLinks, hideSideNav}) => (
         <>
           {header}
 
@@ -49,7 +49,7 @@ export function DocsLayout({
                 {!hidePageLinks && <Layout.PageLinks />}
               </Layout.MainContent>
 
-              {showToc ? <Layout.TableOfContents /> : null}
+              <Layout.TableOfContents />
             </Layout.AppContent>
           </Layout.ContentWrapper>
 

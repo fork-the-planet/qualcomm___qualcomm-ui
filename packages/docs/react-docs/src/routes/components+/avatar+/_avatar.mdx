@@ -3,16 +3,7 @@ title: Avatar
 group: Data Display
 description: Avatars provide visual representation of users, accounts, or entities. They support multiple content types including icons, initials, and images, with optional status indicators to communicate presence or state information.
 component: Avatar
-keywords:
-  [
-    profile picture,
-    user photo,
-    thumbnail,
-    profile image,
-    user thumbnail,
-    initials,
-    presence indicator,
-  ]
+aliases: [profile picture, user photo, profile image]
 ---
 
 import {TypeDocAttributes, TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
@@ -44,18 +35,15 @@ The anatomy of the avatar component is as follows:
 
 ### Showcase
 
-::: meta
-keywords: [avatar with status, complete avatar example]
-:::
-
 Here's a typical usage example:
 
 <Demo name="AvatarShowcaseDemo" component={demos.AvatarShowcaseDemo} />
 
 ### Content
 
-::: meta
-keywords: [placeholder, broken image, image error]
+::: terms
+placeholder
+broken image
 :::
 
 The `Avatar.Content` component displays alternative content within the avatar. Use it by itself to show initials or an icon, or together with `Avatar.Image` to provide fallback content if the image cannot be loaded.
@@ -64,11 +52,24 @@ The `Avatar.Content` component displays alternative content within the avatar. U
 
 ### Sizes
 
+::: terms
+extra small
+small
+medium
+large
+extra large
+:::
+
 Use the [size](./#size) prop to set the size of the avatar. The available sizes are `xs`, `sm`, `md` (default), `lg`, and `xl`.
 
 <Demo name="AvatarSizeDemo" component={demos.AvatarSizeDemo} />
 
 ### Variants
+
+::: terms
+high contrast
+color scheme
+:::
 
 When displaying initials or an icon, use the [variant](./#variant) prop on `Avatar.Content` to set the avatar's style. Available variants are `neutral` (default), `contrast`, and `brand`.
 
@@ -76,8 +77,9 @@ When displaying initials or an icon, use the [variant](./#variant) prop on `Avat
 
 ### Status
 
-::: meta
-keywords: [presence indicator, online status]
+::: terms
+presence indicator
+online
 :::
 
 To indicate the status of the user or entity, use the `Avatar.Status` component and set its [status](./#status-1) prop to one of: `active`, `offline` (default), `away`, or `busy`.
@@ -86,8 +88,10 @@ To indicate the status of the user or entity, use the `Avatar.Status` component 
 
 ### State Callback
 
-::: meta
-keywords: [image load event, error handling, load state, image loading]
+::: terms
+loading state
+image loaded
+image error
 :::
 
 You can listen for changes to the avatar's state by using the [onStateChange](./#onStateChange) prop.

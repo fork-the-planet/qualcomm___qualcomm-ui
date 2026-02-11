@@ -3,6 +3,7 @@ title: Progress
 group: Feedback
 description: Progress bars provide clear visual feedback about task completion or loading states, helping users understand system status and perceived remaining time.
 component: Progress
+aliases: [progress bar, loading bar]
 ---
 
 import {QdsDemo} from "~components/demo"
@@ -38,6 +39,10 @@ The simple API bundles all subcomponents together into a single directive.
 
 ### Child Directives
 
+::: terms
+partial override
+:::
+
 Provide child directives to customize specific elements while keeping the simple API's default structure.
 
 <QdsDemo name="ProgressChildDirectivesDemo" />
@@ -55,6 +60,12 @@ Use the [labelOrientation](./#labelOrientation) property to change the positioni
 <QdsDemo name="ProgressLabelOrientationDemo" />
 
 ### Sizes
+
+::: terms
+small
+medium
+large
+:::
 
 <QdsDemo name="ProgressSizeDemo" />
 
@@ -86,6 +97,12 @@ The `q-progress-track` automatically renders a `q-progress-bar` when no children
 ```
 
 ## Accessibility
+
+::: terms
+a11y
+screen reader
+wcag
+:::
 
 - When the value is supplied, the component automatically provides the corresponding `aria-value*` attributes to the element.
 - The progress element is automatically marked with `role="progressbar"`.

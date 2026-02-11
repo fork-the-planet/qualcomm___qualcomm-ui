@@ -9,7 +9,12 @@ import {
   useContext,
 } from "react"
 
-import type {NavItem, PageHeading, PageMap} from "@qualcomm-ui/mdx-common"
+import type {
+  KnowledgePageData,
+  NavItem,
+  PageHeading,
+  PageMap,
+} from "@qualcomm-ui/mdx-common"
 import type {PropsContextValue} from "@qualcomm-ui/react-mdx/typedoc"
 
 export interface MdxDocsLayoutContextState {
@@ -17,6 +22,7 @@ export interface MdxDocsLayoutContextState {
   hideSideNav: boolean
   mainContentElement: HTMLElement | null
   navItems: NavItem[]
+  pageExport: false | KnowledgePageData | undefined
   pageMap: PageMap
   pageProps: PropsContextValue | null
   pathname: string

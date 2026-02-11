@@ -1,5 +1,34 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 2.16.2 (2026/02/08)
+
+### Tests
+
+- [knowledge]: update expectations for intro content and H1-only pages
+
+### Bug Fixes
+
+- [knowledge]: capture content before first target-depth heading
+
+## 2.16.1 (2026/02/07)
+
+### Bug Fixes
+
+- [mdx-vite]: handle headings containing only inline code
+- [mdx-vite]: use mdast-util-to-string for heading text extraction
+
+## 2.16.0 (2026/02/06)
+
+### Features
+
+- [sections-extractor]: move props and terms to top-level fields
+- [ai-knowledge]: reworked props, terms, and frontmatter extraction
+- [ai-knowledge]: refactor metadata to terms array
+
+### Code Refactoring
+
+- [ai-knowledge]: adjusted internal extraction data types
+
 ## 2.15.1 (2026/02/03)
 
 ### Bug Fixes

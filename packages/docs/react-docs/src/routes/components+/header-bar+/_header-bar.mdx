@@ -3,8 +3,7 @@ title: Header Bar
 group: Data Display
 description: The header bar provides a consistent, high-level control surface for the application. It features a logo that reinforces brand identity, navigation items for accessing primary sections, and an action bar that contains important tools and utilities.
 component: HeaderBar
-keywords:
-  [app bar, top bar, navigation bar, navbar, toolbar, application header]
+aliases: [app bar, navbar, toolbar]
 ---
 
 import {Demo} from "~components/demo"
@@ -26,8 +25,8 @@ import {HeaderBar} from "@qualcomm-ui/react/header-bar"
 
 ### Basic Usage
 
-::: meta
-keywords: [avatar integration, user profile, icon buttons, responsive header]
+::: terms
+responsive, icon button, user avatar
 :::
 
 A typical header bar includes a logo, application title, nav items, and an action bar.
@@ -36,11 +35,19 @@ A typical header bar includes a logo, application title, nav items, and an actio
 
 ### Sizes
 
+::: terms
+small, large, compact
+:::
+
 The header bar has two sizes: `sm` (default) and `lg`. The [size](./#size) prop governs padding, element spacing, and height.
 
 <Demo name="HeaderBarSizesDemo" component={demos.HeaderBarSizesDemo} />
 
 ### Surfaces
+
+::: terms
+theme, color scheme
+:::
 
 Use the [surface](./#surface) prop to set the background color. Available options are `primary` (default) and `secondary`.
 
@@ -48,8 +55,8 @@ Use the [surface](./#surface) prop to set the background color. Available option
 
 ### Padding
 
-::: meta
-keywords: [header spacing, wide header]
+::: terms
+spacing, horizontal space
 :::
 
 Set the [padding](./#padding-1) prop to `large` to increase horizontal padding.
@@ -58,8 +65,8 @@ Set the [padding](./#padding-1) prop to `large` to increase horizontal padding.
 
 ### Menu Items
 
-::: meta
-keywords: [dropdown navigation, nav dropdown, submenu, nested navigation]
+::: terms
+nav menu
 :::
 
 Render a menu nav item with the [HeaderBar.MenuItem](#header-bar-menu-item) component. This component must be wrapped in a Menu.

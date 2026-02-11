@@ -38,11 +38,13 @@ Section two content.
       const extractor = new SectionExtractor({depths: [2, 3]})
       const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
-      expect(sections).toHaveLength(2)
-      expect(sections[0].headerPath).toEqual(["Test Page", "Section One"])
-      expect(sections[0].content).toContain("Section one content.")
-      expect(sections[1].headerPath).toEqual(["Test Page", "Section Two"])
-      expect(sections[1].content).toContain("Section two content.")
+      expect(sections).toHaveLength(3)
+      expect(sections[0].headerPath).toEqual(["Test Page"])
+      expect(sections[0].content).toContain("Introduction content.")
+      expect(sections[1].headerPath).toEqual(["Test Page", "Section One"])
+      expect(sections[1].content).toContain("Section one content.")
+      expect(sections[2].headerPath).toEqual(["Test Page", "Section Two"])
+      expect(sections[2].content).toContain("Section two content.")
     })
 
     test("extracts H3 sections nested under H2", () => {
@@ -173,17 +175,17 @@ Nested B content.
     })
   })
 
-  describe("metadata extraction", () => {
-    test("extracts metadata from ::: meta ::: blocks", () => {
+  describe("terms extraction", () => {
+    test("extracts terms from ::: terms ::: blocks", () => {
       const markdown = `
 # Test Page
 
 ## Examples
 
-::: meta
-component: Button
-keywords: [forms, ui, interactive]
-category: examples
+::: terms
+forms
+ui
+interactive
 :::
 
 Example content here.
@@ -191,21 +193,17 @@ Example content here.
       const extractor = new SectionExtractor()
       const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
-      expect(sections[0].metadata).toEqual({
-        category: "examples",
-        component: "Button",
-        keywords: ["forms", "ui", "interactive"],
-      })
+      expect(sections[0].terms).toEqual(["forms", "ui", "interactive"])
     })
 
-    test("removes meta blocks from content", () => {
+    test("removes terms blocks from content", () => {
       const markdown = `
 # Test Page
 
 ## Examples
 
-::: meta
-component: Button
+::: terms
+forms
 :::
 
 Example content only.
@@ -213,12 +211,12 @@ Example content only.
       const extractor = new SectionExtractor()
       const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
-      expect(sections[0].content).not.toContain("::: meta")
-      expect(sections[0].content).not.toContain("component: Button")
+      expect(sections[0].content).not.toContain("::: terms")
+      expect(sections[0].content).not.toContain("forms")
       expect(sections[0].content).toContain("Example content only.")
     })
 
-    test("returns empty metadata when no meta block present", () => {
+    test("returns undefined terms when no terms block present", () => {
       const markdown = `
 # Test Page
 
@@ -229,7 +227,7 @@ Just content, no metadata.
       const extractor = new SectionExtractor()
       const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
-      expect(sections[0].metadata).toBeUndefined()
+      expect(sections[0].terms).toBeUndefined()
     })
   })
 
@@ -417,7 +415,7 @@ This section has enough content to pass the minimum length filter.
       expect(sections).toHaveLength(0)
     })
 
-    test("handles markdown without H2/H3 headers", () => {
+    test("captures content from pages with only H1", () => {
       const markdown = `
 # Test Page
 
@@ -426,7 +424,11 @@ Just some content without subsections.
       const extractor = new SectionExtractor({depths: [2, 3]})
       const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
 
-      expect(sections).toHaveLength(0)
+      expect(sections).toHaveLength(1)
+      expect(sections[0].headerPath).toEqual(["Test Page"])
+      expect(sections[0].content).toContain(
+        "Just some content without subsections.",
+      )
     })
 
     test("handles headers in code blocks (should not extract)", () => {
@@ -448,6 +450,36 @@ Real content.
 
       expect(sections).toHaveLength(1)
       expect(sections[0].headerPath).toEqual(["Test Page", "Real Section"])
+    })
+
+    test("extracts headings that contain only inline code", () => {
+      const markdown = `
+# Test Page
+
+### Rules
+
+#### \`accessible-name\`
+
+Enforces that certain components have an aria-label attribute.
+
+#### \`avatar-image-alt\`
+
+Enforces that Avatar components have alt text.
+`
+      const extractor = new SectionExtractor()
+      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
+
+      expect(sections).toHaveLength(2)
+      expect(sections[0].headerPath).toEqual([
+        "Test Page",
+        "Rules",
+        "accessible-name",
+      ])
+      expect(sections[1].headerPath).toEqual([
+        "Test Page",
+        "Rules",
+        "avatar-image-alt",
+      ])
     })
 
     test("handles special characters in headers", () => {

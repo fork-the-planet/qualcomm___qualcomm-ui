@@ -1,14 +1,16 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {Code, Heading, Link, Parent, Root, RootContent, Text} from "mdast"
+import type {Code, Link, Parent, Root, RootContent, Text} from "mdast"
+import {toString} from "mdast-util-to-string"
 import remarkStringify from "remark-stringify"
 import {type Plugin, unified} from "unified"
 import {visit} from "unist-util-visit"
 
 import {kebabCase} from "@qualcomm-ui/utils/change-case"
 
-import type {CodeExample, SectionEntry, SectionMetadata} from "./section.types"
+import type {SimplifiedProp} from "./generator.types"
+import type {CodeExample, SectionEntry, SectionTypes} from "./section.types"
 import {computeMd5} from "./utils"
 
 export interface SectionExtractorOptions {
@@ -79,12 +81,22 @@ export class SectionExtractor {
     for (let i = 0; i < tree.children.length; i++) {
       const node = tree.children[i]
 
+      if (node.type === "yaml") {
+        continue
+      }
+
       if (node.type === "heading") {
         const heading = node
 
         if (!this.depths.has(heading.depth)) {
           if (pendingSection) {
             pendingSection.nodes.push(node)
+          } else {
+            pendingSection = {
+              headerPath: headerStack.map((h) => h.text),
+              nodes: [],
+              startIndex: i,
+            }
           }
           continue
         }
@@ -98,7 +110,7 @@ export class SectionExtractor {
           headerStack.pop()
         }
 
-        const headingText = this.getHeadingText(heading)
+        const headingText = toString(heading)
         headerStack.push({depth: heading.depth, text: headingText})
 
         pendingSection = {
@@ -108,6 +120,12 @@ export class SectionExtractor {
         }
       } else if (pendingSection) {
         pendingSection.nodes.push(node)
+      } else {
+        pendingSection = {
+          headerPath: headerStack.map((h) => h.text),
+          nodes: [node],
+          startIndex: i,
+        }
       }
     }
 
@@ -116,19 +134,11 @@ export class SectionExtractor {
     return sections
   }
 
-  private getHeadingText(heading: Heading): string {
-    let text = ""
-    visit(heading, "text", (node: Text) => {
-      text += node.value
-    })
-    return text.trim()
-  }
-
   private buildSectionEntry(
     section: PendingSection,
     pageInfo: PageInfo,
   ): SectionEntry | null {
-    const {metadata, nodes} = this.extractMetadata(section.nodes)
+    const {nodes, terms} = this.extractTerms(section.nodes)
 
     if (nodes.length === 0) {
       return null
@@ -137,16 +147,16 @@ export class SectionExtractor {
     const contentNodes: RootContent[] = []
     const codeExamples: CodeExample[] = []
 
+    const sectionTypes: SectionTypes[] = []
     for (const node of nodes) {
       if (node.type === "code") {
         const codeNode = node as Code & {
-          data?: {typeDocProps?: {name: string; props: string[]}}
+          data?: {typeDocProps?: {name: string; props: SimplifiedProp[]}}
         }
 
         if (codeNode.data?.typeDocProps) {
           const {name, props} = codeNode.data.typeDocProps
-          metadata.props = [...(metadata.props ?? []), ...props]
-          metadata.type = name
+          sectionTypes.push({props, type: name})
         }
 
         codeExamples.push({
@@ -168,12 +178,13 @@ export class SectionExtractor {
 
     const hashData = {
       headerPath: section.headerPath,
-      metadata: Object.keys(metadata).length ? metadata : undefined,
       pageFrontmatter: Object.keys(pageInfo.frontmatter).length
         ? pageInfo.frontmatter
         : undefined,
       pageId: pageInfo.id,
       rawContent: rawContent.trim(),
+      terms: terms.length ? terms : undefined,
+      types: sectionTypes.length ? sectionTypes : undefined,
       url,
     }
     const sectionHash = computeMd5(JSON.stringify(hashData))
@@ -187,23 +198,36 @@ export class SectionExtractor {
     }
   }
 
-  private extractMetadata(nodes: RootContent[]): {
-    metadata: SectionMetadata
+  private extractTerms(nodes: RootContent[]): {
     nodes: RootContent[]
+    terms: string[]
   } {
-    const metadata: SectionMetadata = {}
     const filteredNodes: RootContent[] = []
+    const terms: string[] = []
 
     for (const node of nodes) {
       if (node.type === "paragraph") {
-        const firstChild = (node as Parent).children?.[0]
+        const children = (node as Parent).children ?? []
+        const firstChild = children[0]
         if (firstChild?.type === "text") {
-          const text = firstChild.value
-          const metaMatch = text.match(/^:::\s*meta\s*/)
+          const firstText = firstChild.value
+          const termsMatch = firstText.match(/^:::\s*terms\s*/)
 
-          if (metaMatch) {
-            const parsed = this.parseMetaBlock(text)
-            Object.assign(metadata, parsed)
+          if (termsMatch) {
+            // Collect text from all children (handles soft breaks in multiline
+            // blocks)
+            let fullText = firstText
+            for (let i = 1; i < children.length; i++) {
+              const child = children[i] as {type: string; value?: string}
+              if (child.type === "text") {
+                fullText += child.value
+              } else if (child.type === "softBreak") {
+                fullText += "\n"
+              }
+            }
+
+            const parsedTerms = this.parseTermsBlock(fullText)
+            terms.push(...parsedTerms)
             continue
           }
         }
@@ -211,52 +235,19 @@ export class SectionExtractor {
       filteredNodes.push(node)
     }
 
-    return {metadata, nodes: filteredNodes}
+    return {nodes: filteredNodes, terms}
   }
 
-  private parseMetaBlock(text: string): SectionMetadata {
-    const metadata: SectionMetadata = {}
-
-    const afterOpen = text.replace(/^:::\s*meta\s*/, "")
+  private parseTermsBlock(text: string): string[] {
+    const afterOpen = text.replace(/^:::\s*terms\s*/, "")
     const closeIndex = afterOpen.lastIndexOf(":::")
     const content =
       closeIndex !== -1 ? afterOpen.slice(0, closeIndex) : afterOpen
 
-    const lines = content.split("\n")
-    for (const line of lines) {
-      const trimmed = line.trim()
-      if (!trimmed) {
-        continue
-      }
-
-      const colonIndex = trimmed.indexOf(":")
-      if (colonIndex === -1) {
-        continue
-      }
-
-      const key = trimmed.slice(0, colonIndex).trim()
-      const value = trimmed.slice(colonIndex + 1).trim()
-
-      if (key && value) {
-        metadata[key] = this.parseValue(value)
-      }
-    }
-
-    return metadata
-  }
-
-  private parseValue(value: string): string | string[] {
-    const trimmed = value.trim()
-
-    if (trimmed.startsWith("[") && trimmed.endsWith("]")) {
-      const inner = trimmed.slice(1, -1)
-      return inner
-        .split(",")
-        .map((item) => item.trim())
-        .filter(Boolean)
-    }
-
-    return trimmed
+    return content
+      .split("\n")
+      .map((line) => line.trim())
+      .filter((line) => line && line !== ":::")
   }
 
   /**
