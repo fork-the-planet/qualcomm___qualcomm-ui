@@ -45,7 +45,7 @@ jobs:
         key: lint-timings-v1
 
     - name: lint
-      run: pnpm tsx scripts/lint/lint-shard.ts --shard=${{matrix.shardIndex}}/${{matrix.shardTotal}}
+      run: node --import=tsx scripts/lint/lint-shard.ts --shard=${{matrix.shardIndex}}/${{matrix.shardTotal}}
 
 
   build:
@@ -69,7 +69,10 @@ jobs:
         turborepo-remote-cache-secret-key: ${{ secrets.TURBOREPO_REMOTE_CACHE_SECRET_KEY }}
 
     - name: build
-      run: pnpm run build
+      run: pnpm build
+
+    - name: typedoc
+      run: pnpm doc-gen
 
   unit-test:
     runs-on: ubuntu-latest
@@ -238,4 +241,4 @@ jobs:
     - uses: ./.github/actions/init-node-and-install
 
     - name: Run copyright/license checker
-      run: pnpm tsx scripts/license-checker lint
+      run: node --import=tsx scripts/license-checker lint
