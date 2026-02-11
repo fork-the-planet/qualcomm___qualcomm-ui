@@ -7,6 +7,7 @@ import {type AvatarApiProps, splitAvatarProps} from "@qualcomm-ui/core/avatar"
 import {
   createQdsAvatarApi,
   type QdsAvatarApiProps,
+  type QdsAvatarVariant,
 } from "@qualcomm-ui/qds-core/avatar"
 import {AvatarContextProvider, useAvatar} from "@qualcomm-ui/react-core/avatar"
 import {normalizeProps} from "@qualcomm-ui/react-core/machine"
@@ -22,13 +23,18 @@ import {QdsAvatarContextProvider} from "./qds-avatar-context"
 
 export interface AvatarRootProps
   extends AvatarApiProps,
-    QdsAvatarApiProps,
+    Omit<QdsAvatarApiProps, "variant">,
     IdProp,
     Omit<ElementRenderProp<"div">, "dir"> {
   /**
    * React {@link https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children children} prop.
    */
   children?: ReactNode
+
+  /**
+   * @deprecated use {@link emphasis} instead
+   */
+  variant?: QdsAvatarVariant
 }
 
 /**
@@ -37,6 +43,7 @@ export interface AvatarRootProps
  */
 export function AvatarRoot({
   children,
+  emphasis,
   id,
   size,
   status,
@@ -46,8 +53,8 @@ export function AvatarRoot({
   const [avatarProps, localProps] = splitAvatarProps(props)
   const context = useAvatar(avatarProps)
   const qdsContext = useMemo(
-    () => createQdsAvatarApi({size, status, variant}, normalizeProps),
-    [size, status, variant],
+    () => createQdsAvatarApi({emphasis, size, status, variant}, normalizeProps),
+    [emphasis, size, status, variant],
   )
   const mergedProps = mergeProps(
     context.getRootBindings({id: useControlledId(id)}),
