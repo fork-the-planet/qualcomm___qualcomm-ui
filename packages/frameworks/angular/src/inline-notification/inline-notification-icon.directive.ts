@@ -1,8 +1,14 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {Component, computed} from "@angular/core"
-import {BellRing, CircleAlert, CircleCheck, TriangleAlert} from "lucide-angular"
+import {Component, computed, input} from "@angular/core"
+import {
+  BellRing,
+  CircleAlert,
+  CircleCheck,
+  Info,
+  TriangleAlert,
+} from "lucide-angular"
 
 import {CoreInlineNotificationIconDirective} from "@qualcomm-ui/angular-core/inline-notification"
 import type {LucideIcon} from "@qualcomm-ui/angular-core/lucide"
@@ -12,7 +18,7 @@ import {useQdsInlineNotificationContext} from "./qds-inline-notification-context
 
 const icons: Partial<Record<QdsNotificationEmphasis, LucideIcon>> = {
   danger: CircleAlert,
-  info: CircleAlert,
+  info: Info,
   neutral: BellRing,
   success: CircleCheck,
   warning: TriangleAlert,
@@ -32,10 +38,16 @@ const icons: Partial<Record<QdsNotificationEmphasis, LucideIcon>> = {
   `,
 })
 export class InlineNotificationIconDirective extends CoreInlineNotificationIconDirective {
+  /**
+   * Override the icon displayed in the notification. When this input is omitted,
+   * the icon is determined by the emphasis prop.
+   */
+  readonly icon = input<LucideIcon>()
+
   protected readonly qdsContext = useQdsInlineNotificationContext()
 
   protected readonly resolvedIcon = computed(() => {
-    return icons[this.qdsContext().emphasis]
+    return this.icon() || icons[this.qdsContext().emphasis]
   })
 
   constructor() {
