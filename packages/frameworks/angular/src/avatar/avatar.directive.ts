@@ -15,6 +15,7 @@ import {
   type QdsAvatarEmphasis,
   type QdsAvatarSize,
   type QdsAvatarStatus,
+  type QdsAvatarVariant,
 } from "@qualcomm-ui/qds-core/avatar"
 
 import {
@@ -47,6 +48,11 @@ export class AvatarDirective
    */
   readonly status = input<QdsAvatarStatus | undefined>()
 
+  /**
+   * @deprecated use {@link emphasis} instead
+   */
+  readonly variant = input<QdsAvatarVariant | undefined>()
+
   protected readonly qdsAvatarService = inject(QdsAvatarContextService)
 
   constructor() {
@@ -65,6 +71,7 @@ export class AvatarDirective
           emphasis: this.emphasis(),
           size: this.size(),
           status: this.status(),
+          variant: this.variant(),
         },
         normalizeProps,
       ),

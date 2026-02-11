@@ -9,6 +9,11 @@ type AvatarClasses = typeof avatarClasses
 
 export type QdsAvatarEmphasis = "neutral" | "contrast" | "brand"
 
+/**
+ * @deprecated use {@link QdsAvatarEmphasis} instead
+ */
+export type QdsAvatarVariant = QdsAvatarEmphasis
+
 export interface QdsAvatarApiProps {
   /**
    * The style of the avatar.
@@ -25,6 +30,11 @@ export interface QdsAvatarApiProps {
    * Optional status for the avatar, renders a dot indicator next to the avatar.
    */
   status?: QdsAvatarStatus
+
+  /**
+   * @deprecated use {@link emphasis} instead
+   */
+  variant?: QdsAvatarVariant
 }
 
 export type QdsAvatarStatus = "offline" | "active" | "away" | "busy"

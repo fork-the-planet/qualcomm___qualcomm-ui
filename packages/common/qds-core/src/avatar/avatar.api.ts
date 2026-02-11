@@ -18,7 +18,7 @@ export function createQdsAvatarApi(
   normalize: PropNormalizer,
 ): QdsAvatarApi {
   const size = props.size || "md"
-  const emphasis = props.emphasis || "neutral"
+  const emphasis = props.emphasis || props.variant || "neutral"
 
   return {
     emphasis,
