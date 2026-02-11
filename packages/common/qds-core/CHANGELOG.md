@@ -1,5 +1,16 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.17.0 (2026/02/11)
+
+### Features
+
+- alert banner
+- [select]: add checkbox option
+
+### Bug Fixes
+
+- [avatar]: `variant` should be `emphasis`
+
 ## 1.16.0 (2026/01/30)
 
 ### Features
