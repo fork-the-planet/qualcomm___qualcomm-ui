@@ -54,9 +54,9 @@
     "publish:all": "run-s changeset-publish publish-angular",
     "publish-angular": "pnpm -r run publish-angular-package",
     "changeset-publish": "pnpm changeset publish",
-    "changeset-generate": "tsx scripts/changeset-conventional-commits/main.ts",
+    "changeset-generate": "node --import=tsx scripts/changeset-conventional-commits/main.ts",
     "bump": "pnpm changeset version",
-    "consolidate-changelogs": "tsx scripts/changeset-conventional-commits/consolidate-changelogs.ts",
+    "consolidate-changelogs": "node --import=tsx scripts/changeset-conventional-commits/consolidate-changelogs.ts",
     "prep-release": "run-s changeset-generate bump consolidate-changelogs",
     "prep-release-from-tags": "pnpm changeset-generate --from-release-tags && pnpm bump && pnpm consolidate-changelogs"
   },
