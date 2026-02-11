@@ -3,6 +3,7 @@
 
 import {NgModule} from "@angular/core"
 
+import {CheckmarkIconComponent} from "@qualcomm-ui/angular/checkmark"
 import {IconDirective} from "@qualcomm-ui/angular/icon"
 import {TagDirective} from "@qualcomm-ui/angular/tag"
 import {QBindDirective} from "@qualcomm-ui/angular-core/machine"
@@ -17,6 +18,7 @@ import {SelectErrorTextDirective} from "./select-error-text.directive"
 import {SelectHiddenSelectDirective} from "./select-hidden-select.directive"
 import {SelectHintDirective} from "./select-hint.directive"
 import {SelectIndicatorDirective} from "./select-indicator.directive"
+import {SelectItemCheckboxComponent} from "./select-item-checkbox.component"
 import {SelectItemIndicatorDirective} from "./select-item-indicator.directive"
 import {SelectItemTextDirective} from "./select-item-text.directive"
 import {SelectItemDirective} from "./select-item.directive"
@@ -37,6 +39,7 @@ import {SelectComponent} from "./select.component"
     SelectHiddenSelectDirective,
     SelectItemDirective,
     SelectItemTextDirective,
+    SelectItemCheckboxComponent,
     SelectItemIndicatorDirective,
     SelectLabelDirective,
     SelectPositionerDirective,
@@ -57,6 +60,7 @@ import {SelectComponent} from "./select.component"
     SelectHiddenSelectDirective,
     SelectItemDirective,
     SelectItemTextDirective,
+    SelectItemCheckboxComponent,
     SelectItemIndicatorDirective,
     SelectLabelDirective,
     SelectPositionerDirective,
@@ -68,6 +72,12 @@ import {SelectComponent} from "./select.component"
     SelectIndicatorDirective,
     SelectItemsComponent,
   ],
-  imports: [IconDirective, QBindDirective, TagDirective, PortalDirective],
+  imports: [
+    CheckmarkIconComponent,
+    IconDirective,
+    QBindDirective,
+    TagDirective,
+    PortalDirective,
+  ],
 })
 export class SelectModule {}

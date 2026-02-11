@@ -12,7 +12,10 @@ import {provideQdsInputContext} from "@qualcomm-ui/angular/input"
 import {provideSelectContext} from "@qualcomm-ui/angular-core/select"
 import type {Booleanish} from "@qualcomm-ui/utils/coercion"
 
-import {provideQdsSelectContext} from "./qds-select-context.service"
+import {
+  provideQdsSelectContext,
+  useQdsSelectContext,
+} from "./qds-select-context.service"
 import {SelectRootDirective} from "./select-root.directive"
 
 @Component({
@@ -75,10 +78,21 @@ import {SelectRootDirective} from "./select-root.directive"
               track collection().getItemValue(item)
             ) {
               <div q-select-item [item]="item">
+                @if (
+                  selectContext.context().multiple &&
+                  qdsSelectContext().selectionIndicator === "checkbox"
+                ) {
+                  <span q-select-item-checkbox></span>
+                }
                 <span q-select-item-text>
                   {{ collection().stringifyItem(item) }}
                 </span>
-                <span q-select-item-indicator></span>
+                @if (
+                  !selectContext.context().multiple ||
+                  qdsSelectContext().selectionIndicator !== "checkbox"
+                ) {
+                  <span q-select-item-indicator></span>
+                }
               </div>
             }
           </div>
@@ -88,6 +102,8 @@ import {SelectRootDirective} from "./select-root.directive"
   `,
 })
 export class SelectComponent extends SelectRootDirective {
+  protected readonly qdsSelectContext = useQdsSelectContext()
+
   /**
    * ARIA label applied to the control element. Use this if you omit the {@link
    * label}

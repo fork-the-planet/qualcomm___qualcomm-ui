@@ -126,6 +126,11 @@ multi select
 
 Use the [multiple](./#multiple) prop to allow multiple selections.
 
+The [selectionIndicator](./#selectionIndicator) prop controls how selected items are displayed:
+
+- `"checkmark"` — Uses a checkmark after the selected options only (default)
+- `"checkbox"` — Uses a checkbox before each option
+
 <Demo name="SelectMultipleDemo" component={demos.SelectMultipleDemo} />
 
 ### Controlled State
@@ -308,6 +313,12 @@ This section describes the elements of the Select's composite API.
 <TypeDocProps name="SelectItemProps" />
 
 <TypeDocAttributes name={["QdsSelectItemBindings", "SelectItemBindings"]} />
+
+### \<Select.ItemCheckbox\>
+
+Checkbox-style indicator for select items. Use this instead of `Select.ItemIndicator` when `selectionIndicator="checkbox"` is set on the root. The checkbox is always visible and fills when the item is selected.
+
+<TypeDocProps name="SelectItemCheckboxProps" />
 
 ### \<Select.ItemIndicator\>
 

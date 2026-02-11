@@ -23,7 +23,8 @@ export function SelectMultipleDemo(): ReactElement {
       collection={cityCollection}
       controlProps={{"aria-label": "City"}}
       multiple
-      placeholder="Select a city"
+      placeholder="Select cities"
+      selectionIndicator="checkbox"
     />
     // preview
   )
