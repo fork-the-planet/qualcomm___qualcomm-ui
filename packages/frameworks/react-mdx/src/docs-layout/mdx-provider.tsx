@@ -8,6 +8,7 @@ import {MDXProvider, type useMDXComponents} from "@mdx-js/react"
 import {Link} from "@qualcomm-ui/react/link"
 import {Table} from "@qualcomm-ui/react/table"
 import {useMdxDocsContext} from "@qualcomm-ui/react-mdx/context"
+import {HeadingSteps} from "@qualcomm-ui/react-mdx/heading-steps"
 import {
   SpoilerContent,
   SpoilerRoot,
@@ -149,6 +150,7 @@ export function MdxProvider({children, components}: Props): ReactNode {
           h6: ({id, ...props}) => (
             <h6 className="mdx" id={id || undefined} {...props} />
           ),
+          HeadingSteps,
           hr: (props) => <hr className="mdx" {...props} />,
           img: (props) => <img className="mdx" {...props} />,
           li: (props) => <li className="mdx" {...props} />,

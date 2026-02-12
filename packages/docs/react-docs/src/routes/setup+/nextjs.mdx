@@ -17,7 +17,9 @@ There are four steps to installation:
 
 This guide assumes you're using Next.js with the app router.
 
-## 1. Install the npm packages
+:::steps
+
+## Install the npm packages
 
 <NpmInstallTabs
   packages={[
@@ -32,7 +34,7 @@ This guide assumes you're using Next.js with the app router.
   ]}
 />
 
-## 2. Import the CSS
+## Import the CSS
 
 In your `app/globals.css` file, import the QUI styles.
 
@@ -66,7 +68,7 @@ In your `app/globals.css` file, import the QUI styles.
 
 Learn more about the available brands in the [theme documentation](/theming/overview).
 
-## 3. Configure fonts
+## Configure fonts
 
 QUI components are designed with the Roboto Flex and Roboto Mono font families.
 
@@ -109,7 +111,7 @@ export default function RootLayout({
 }
 ```
 
-## 4. Configure the theme provider
+## Configure the theme provider
 
 QUI styles support both light and dark modes. This step configures theme storage using cookies so the user's preferred theme is remembered and rendered without flash on page load.
 
@@ -208,6 +210,8 @@ export default async function RootLayout({
   )
 }
 ```
+
+:::
 
 Key configuration details:
 
