@@ -3,6 +3,7 @@ title: Slider
 group: Form Controls
 description: A slider is an input control that allows users to adjust a single value or a value range along a defined linear scale. It provides a draggable handle mapped to a continuous or discrete interval.
 component: Slider
+aliases: [range slider, range picker]
 ---
 
 import {TypeDocAttributes, TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
@@ -19,6 +20,10 @@ import {Slider} from "@qualcomm-ui/react/slider"
 ```
 
 ## Usage
+
+::: terms
+input control
+:::
 
 Sliders allow users to select a value or range from a continuous or discrete set by moving an indicator (thumb) along a track. They are best used for settings that reflect a range of values rather than precise input.
 
@@ -38,6 +43,10 @@ Build with the composite API for granular control. This API requires you to prov
 
 ### Min/Max/Step
 
+::: terms
+scale, interval
+:::
+
 The [min](./#min), [max](./#max), and [step](./#step) props control the slider's value range and increments:
 
 - `min`: The minimum value of the slider (default is 0).
@@ -48,6 +57,10 @@ The [min](./#min), [max](./#max), and [step](./#step) props control the slider's
 
 ### Origin
 
+::: terms
+fill direction
+:::
+
 Use [origin](./#origin) to control where the track is filled from for single-value sliders:
 
 - `start`: Fills from the start of the track to the thumb. Useful when the value represents an absolute value (default).
@@ -57,6 +70,11 @@ Use [origin](./#origin) to control where the track is filled from for single-val
 <Demo name="SliderOriginDemo" component={demos.SliderOriginDemo} />
 
 ### Tooltip
+
+::: terms
+value indicator
+thumb label
+:::
 
 Use the [tooltip](./#tooltip-1) prop to display the slider's value in a tooltip rather than above the component.
 
@@ -75,6 +93,10 @@ You can customize the tooltip's content by using the [composite API](./#thumbs-w
 
 #### Track Markers
 
+::: terms
+tick marks
+:::
+
 By default, the component generates 11 marks based on the slider's [min](./#min) and [max](./#max) values.
 provide your own set of marks by passing them in an array to the [marks](./#marks) prop.
 
@@ -82,17 +104,30 @@ provide your own set of marks by passing them in an array to the [marks](./#mark
 
 #### Side Markers
 
+::: terms
+endpoint labels
+:::
+
 For more compact designs, you can display the `min` and `max` markers at the ends of the track using the [sideMarkers](./#sideMarkers) prop.
 
 <Demo name="SliderSideMarkersDemo" component={demos.SliderSideMarkersDemo} />
 
 ### Range
 
+::: terms
+dual thumb
+two handles
+:::
+
 Set the [value](./#value) or [defaultValue](./#defaultValue) prop with two values to create a range slider.
 
 <Demo name="SliderRangeDemo" component={demos.SliderRangeDemo} />
 
 #### Minimum Steps Between Thumbs
+
+::: terms
+thumb collision
+:::
 
 To prevent overlapping thumbs, you can use the [minStepsBetweenThumbs](./#minStepsBetweenThumbs) prop to set a minimum distance between them.
 
@@ -152,6 +187,10 @@ Choose the form library that fits your needs—we've built examples with React H
 
 ### React Hook Form
 
+::: terms
+rhf
+:::
+
 Use [React Hook Form](https://react-hook-form.com/) to handle the slider state and validation. [ArkType](https://arktype.io/) works great for schema validation if you need it.
 
 <Demo
@@ -177,6 +216,10 @@ Tanstack form also supports [ArkType](https://tanstack.com/form/latest/docs/fram
 The Slider component provides a composite API should you need more control over the slider's behavior and appearance.
 
 ### Anatomy
+
+::: terms
+drag, handle, thumb
+:::
 
 The composite API is based on the following components:
 

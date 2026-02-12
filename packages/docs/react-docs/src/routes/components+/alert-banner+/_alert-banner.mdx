@@ -1,0 +1,135 @@
+---
+title: Alert Banner
+group: Feedback
+description: A prominent notification component for displaying important information or system status messages. Alert banners span the full width of their container and use distinctive colors to indicate message severity.
+component: AlertBanner
+keywords:
+  [
+    page banner,
+    system message,
+    global alert,
+    site notification,
+    top banner,
+    status banner,
+    announcement,
+  ]
+---
+
+import {Demo} from "~components/demo"
+import * as demos from "./demos"
+import {TypeDocAttributes, TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
+
+# {frontmatter.title}
+
+{frontmatter.description}
+
+```tsx
+import {AlertBanner} from "@qualcomm-ui/react/alert-banner"
+```
+
+## Examples
+
+### Simple
+
+Use the simple API to create a banner using minimal markup.
+
+<Demo name="AlertBannerSimpleDemo" component={demos.AlertBannerSimpleDemo} />
+
+### Composite
+
+The composite API provides individual sub-components for custom layouts or when you need to render custom content within each slot.
+
+<Demo
+  name="AlertBannerCompositeDemo"
+  component={demos.AlertBannerCompositeDemo}
+/>
+
+### Emphasis
+
+::: meta
+keywords: [severity, notification type, error banner, success banner, alert level]
+:::
+
+The [emphasis](./#emphasis-1) prop controls the banner's color scheme. The default is `info`. Each emphasis also determines the default icon.
+
+<Demo
+  name="AlertBannerEmphasisDemo"
+  component={demos.AlertBannerEmphasisDemo}
+/>
+
+### Variant
+
+::: meta
+keywords: [strong banner, subtle banner, banner style, visual weight]
+:::
+
+The [variant](./#variant-1) prop controls visual prominence. The default `strong` variant uses solid backgrounds for high visibility. The `subtle` variant uses muted backgrounds with borders.
+
+<Demo name="AlertBannerVariantDemo" component={demos.AlertBannerVariantDemo} />
+
+### Dismissable
+
+::: meta
+keywords: [closeable, close banner, remove banner, hide banner]
+:::
+
+The banner is a controlled component. Set [dismissable](./#dismissable-1) to render a close button, then handle visibility state via the [onClose](./#onClose) callback. With the composite API, use [`<AlertBanner.CloseButton />`](./#alert-banner-close-button).
+
+<Demo
+  name="AlertBannerDismissableDemo"
+  component={demos.AlertBannerDismissableDemo}
+/>
+
+### Action
+
+::: meta
+keywords: [banner button, banner cta, call to action]
+:::
+
+Pass a button to the [action](./#action-1) prop. Use `size="sm"` with `emphasis="white-persistent"` for strong banners, or `emphasis="neutral"` for subtle banners.
+
+<Demo name="AlertBannerActionDemo" component={demos.AlertBannerActionDemo} />
+
+## API
+
+### \<AlertBanner\>
+
+The `AlertBanner` component supports every property from the [AlertBanner.Root](./#alert-banner-root) component, plus the props listed below.
+
+<TypeDocProps name="AlertBannerProps" omitFrom="AlertBannerRootProps" />
+
+## Composite API
+
+### \<AlertBanner.Root\>
+
+<TypeDocProps name="AlertBannerRootProps" />
+
+### \<AlertBanner.Icon\>
+
+<TypeDocProps name="AlertBannerIconProps" />
+
+<TypeDocAttributes name="QdsAlertBannerIconBindings" />
+
+### \<AlertBanner.Heading\>
+
+<TypeDocProps name="AlertBannerHeadingProps" />
+
+<TypeDocAttributes name="QdsAlertBannerHeadingBindings" />
+
+### \<AlertBanner.Description\>
+
+<TypeDocProps name="AlertBannerDescriptionProps" />
+
+<TypeDocAttributes name="QdsAlertBannerDescriptionBindings" />
+
+### \<AlertBanner.CloseButton\>
+
+<TypeDocProps name="AlertBannerCloseButtonProps" />
+
+<TypeDocAttributes name="QdsAlertBannerCloseButtonBindings" />
+
+### \<AlertBanner.ActionContainer\>
+
+<TypeDocProps name="AlertBannerActionContainerProps" />
+
+<TypeDocAttributes name="QdsAlertBannerActionBindings" />

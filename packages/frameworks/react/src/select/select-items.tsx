@@ -5,7 +5,9 @@ import type {ReactElement} from "react"
 
 import {useSelectContext} from "@qualcomm-ui/react-core/select"
 
+import {useQdsSelectContext} from "./qds-select-context"
 import {SelectItem} from "./select-item"
+import {SelectItemCheckbox} from "./select-item-checkbox"
 import {SelectItemIndicator} from "./select-item-indicator"
 import {SelectItemText} from "./select-item-text"
 
@@ -15,6 +17,9 @@ import {SelectItemText} from "./select-item-text"
  */
 export function SelectItems(): ReactElement {
   const context = useSelectContext()
+  const qdsContext = useQdsSelectContext()
+  const useCheckbox =
+    qdsContext.selectionIndicator === "checkbox" && context.multiple
 
   return (
     <>
@@ -23,8 +28,9 @@ export function SelectItems(): ReactElement {
         const value = context.collection.getItemValue(item)
         return (
           <SelectItem key={value} item={item}>
+            {useCheckbox ? <SelectItemCheckbox /> : null}
             <SelectItemText>{label}</SelectItemText>
-            <SelectItemIndicator />
+            {useCheckbox ? null : <SelectItemIndicator />}
           </SelectItem>
         )
       })}

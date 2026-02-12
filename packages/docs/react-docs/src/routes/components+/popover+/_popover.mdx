@@ -3,6 +3,7 @@ title: Popover
 group: Overlays
 description: Popover displays contextual information or actions in a floating container that appears relative to a trigger element. Unlike dialogs, popovers are non-modal and allow users to continue interacting with the background content.
 component: Popover
+aliases: [popup, floating panel, flyout, callout, bubble]
 ---
 
 import {TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
@@ -27,6 +28,10 @@ Basic popover using the simple API with a label and child content.
 
 ### Composite
 
+::: terms
+arrow, portal, anchor, positioner
+:::
+
 Build with the composite API for granular control. This API requires you to provide each subcomponent, but gives you full control over the structure and layout.
 
 <Demo name="PopoverCompositeDemo" component={demos.PopoverCompositeDemo} />
@@ -38,6 +43,10 @@ Use [emphasis](./#emphasis-1) to control the visual style of the popover. Two em
 <Demo name="PopoverEmphasisDemo" component={demos.PopoverEmphasisDemo} />
 
 ## Accessibility
+
+::: terms
+a11y
+:::
 
 - The anchor element is automatically associated with the popover:
 - When the popover is visible, the anchor element receives the `aria-controls` and `aria-expanded` attributes.

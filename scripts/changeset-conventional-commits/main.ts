@@ -36,6 +36,10 @@ function getCommitsWithMessages(commitHashes: string[]) {
 }
 
 interface CliOptions {
+  /**
+   * @default main
+   */
+  baseBranch?: string
   fromReleaseTags?: boolean | undefined
 }
 
@@ -53,7 +57,7 @@ async function conventionalCommitChangeset(
       !ignored.includes(pkg.packageJson.name),
   )
 
-  const {baseBranch = "main"} = changesetConfig
+  const {baseBranch = "main"} = options ?? changesetConfig
   const {fromReleaseTags} = options
 
   let changesets
@@ -127,6 +131,7 @@ const program = new Command()
     "Diff each package from its most recent release tag instead of the base branch",
     false,
   )
+  .option("--base-branch <baseBranch>", "Base branch to diff against", "main")
   .action((options) => conventionalCommitChangeset(options))
 
 program.parse()

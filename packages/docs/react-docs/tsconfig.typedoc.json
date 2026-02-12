@@ -9,7 +9,7 @@
     "../../frameworks/react-core/src"
   ],
   "exclude": [
-    "../../frameworks/react/src/legacy",
+    "../../frameworks/react/src/**/*.figma.*",
     "../../frameworks/react-core/src/components",
     "../../common/core/src/table",
     "../../**/*.spec.ts",

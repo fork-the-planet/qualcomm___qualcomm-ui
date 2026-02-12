@@ -1,0 +1,129 @@
+---
+title: Alert Banner
+group: Feedback
+description: A prominent notification component for displaying important information or system status messages. Alert banners span the full width of their container and use distinctive colors to indicate message severity.
+component: AlertBanner
+keywords:
+  [
+    page banner,
+    system message,
+    global alert,
+    site notification,
+    top banner,
+    status banner,
+    announcement,
+  ]
+---
+
+import {QdsDemo} from "~components/demo"
+import {
+  TypeDocProps,
+  TypeDocAttributes,
+  TypeDocAngularAttributes,
+} from "@qualcomm-ui/react-mdx/typedoc"
+
+# {frontmatter.title}
+
+{frontmatter.description}
+
+```ts
+import {AlertBannerModule} from "@qualcomm-ui/angular/alert-banner"
+```
+
+## Examples
+
+### Simple
+
+Use the simple API to create a banner using minimal markup.
+
+<QdsDemo name="AlertBannerSimpleDemo" />
+
+### Composite
+
+The composite API provides individual sub-components for custom layouts or when you need to render custom content within each slot.
+
+<QdsDemo name="AlertBannerCompositeDemo" />
+
+### Emphasis
+
+::: meta
+keywords: [severity, notification type, error banner, success banner, alert level]
+:::
+
+The [emphasis](./#emphasis) prop controls the banner's color scheme. The default is `info`. Each emphasis also determines the default icon.
+
+<QdsDemo name="AlertBannerEmphasisDemo" />
+
+### Variant
+
+::: meta
+keywords: [strong banner, subtle banner, banner style, visual weight]
+:::
+
+The [variant](./#variant) prop controls visual prominence. The default `strong` variant uses solid backgrounds for high visibility. The `subtle` variant uses muted backgrounds with borders.
+
+<QdsDemo name="AlertBannerVariantDemo" />
+
+### Dismissable
+
+::: meta
+keywords: [closeable, close banner, remove banner, hide banner]
+:::
+
+The banner is a controlled component. Set [dismissable](./#dismissable) to render a close button, then handle visibility state via the [closed](./#closed) output. With the composite API, use `q-alert-banner-close-button`.
+
+<QdsDemo name="AlertBannerDismissableDemo" />
+
+### Action
+
+::: meta
+keywords: [banner button, banner cta, call to action]
+:::
+
+Pass a button using the `q-alert-banner-action` directive. Use `size="sm"` with `emphasis="white-persistent"` for strong banners, or `emphasis="neutral"` for subtle banners.
+
+<QdsDemo name="AlertBannerActionDemo" />
+
+## API
+
+### q-alert-banner
+
+The `q-alert-banner` directive extends the [q-alert-banner-root](./#q-alert-banner-root) directive with the following properties:
+
+<TypeDocProps name="AlertBannerDirective" omitFrom="AlertBannerRootDirective" />
+
+## Composite API
+
+### q-alert-banner-root
+
+<TypeDocProps name="AlertBannerRootDirective" />
+
+### q-alert-banner-icon
+
+<TypeDocProps name="AlertBannerIconDirective" />
+
+<TypeDocAngularAttributes name="QdsAlertBannerIconBindings" />
+
+### q-alert-banner-heading
+
+<TypeDocProps name="AlertBannerHeadingDirective" />
+
+<TypeDocAngularAttributes name="QdsAlertBannerHeadingBindings" />
+
+### q-alert-banner-description
+
+<TypeDocProps name="AlertBannerDescriptionDirective" />
+
+<TypeDocAngularAttributes name="QdsAlertBannerDescriptionBindings" />
+
+### q-alert-banner-close-button
+
+<TypeDocProps name="AlertBannerCloseButtonDirective" />
+
+<TypeDocAngularAttributes name="QdsAlertBannerCloseButtonBindings" />
+
+### q-alert-banner-action
+
+<TypeDocProps name="AlertBannerActionDirective" />
+
+<TypeDocAngularAttributes name="QdsAlertBannerActionBindings" />

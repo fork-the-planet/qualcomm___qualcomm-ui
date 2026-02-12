@@ -2,6 +2,7 @@
 title: Icon Badge
 description: The Icon Badge component combines color and iconography to visually communicate status, category, or action. It helps users quickly identify meaning through familiar symbols and consistent color cues.
 component: IconBadge
+aliases: [symbol badge, indicator, status icon]
 ---
 
 import {TypeDocAttributes, TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
@@ -26,6 +27,15 @@ Use the [icon](./#icon-1) prop to provide a Lucide icon, or use [children](./#ch
 
 ### Emphasis
 
+::: terms
+neutral
+brand
+info
+success
+warning
+danger
+:::
+
 Use the [emphasis](./#emphasis-1) prop to convey semantic meaning or categorize content.
 
 <Demo name="IconBadgeEmphasisDemo" component={demos.IconBadgeEmphasisDemo} />
@@ -38,11 +48,24 @@ The [variant](./#variant-1) prop controls the aspect of the badge. Two variants 
 
 ### Size
 
+::: terms
+extra extra small
+extra small
+small
+medium
+large
+extra large
+:::
+
 Control dimensions using the [size](./#size-1) prop. Six sizes are available: `xxs`, `xs`, `sm`, `md` (default), `lg`, and `xl`.
 
 <Demo name="IconBadgeSizeDemo" component={demos.IconBadgeSizeDemo} />
 
 ### Disabled
+
+::: terms
+grayed out
+:::
 
 Set the [disabled](./#disabled-1) prop to visually indicate that the badge is inactive.
 

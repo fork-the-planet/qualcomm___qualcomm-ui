@@ -40,14 +40,15 @@ export default async function handleRequest(
   const url = new URL(request.url)
   const pages = siteData.exports?.pages ?? []
 
+  const exportsPath = import.meta.env.DEV
+    ? resolve(__dirname, "../public/exports")
+    : resolve(__dirname, "../client/exports")
+
   if (url.pathname.endsWith(".md") && pages.length) {
-    const exportsPath = import.meta.env.DEV
-      ? resolve(__dirname, "../public/exports/md")
-      : resolve(__dirname, "../client/exports/md")
     try {
       const exportId = url.pathname.split("/").join("-").substring(1)
 
-      const filePath = resolve(exportsPath, exportId)
+      const filePath = resolve(`${exportsPath}/md`, exportId)
       if (await exists(filePath)) {
         const contents = await readFile(filePath, "utf-8")
         responseHeaders.set("Content-Type", "text/plain")
@@ -56,6 +57,17 @@ export default async function handleRequest(
           status: 200,
         })
       }
+    } catch {
+      // file doesn't exist, continue as normal
+    }
+  } else if (url.pathname.endsWith("exports/sections.json")) {
+    try {
+      const contents = await readFile(`${exportsPath}/sections.json`, "utf-8")
+      responseHeaders.set("Content-Type", "application/json")
+      return new Response(contents, {
+        headers: responseHeaders,
+        status: 200,
+      })
     } catch {
       // file doesn't exist, continue as normal
     }

@@ -4,24 +4,24 @@ import {AvatarModule} from "@qualcomm-ui/angular/avatar"
 
 @Component({
   imports: [AvatarModule],
-  selector: "avatar-variant",
+  selector: "avatar-emphasis",
   template: `
     <div class="flex items-center gap-4">
       <!-- preview -->
       Neutral
-      <div q-avatar>
-        <div q-avatar-content variant="neutral">OK</div>
+      <div emphasis="neutral" q-avatar>
+        <div q-avatar-content>OK</div>
       </div>
       High Contrast
-      <div q-avatar>
-        <div q-avatar-content variant="contrast">OK</div>
+      <div emphasis="contrast" q-avatar>
+        <div q-avatar-content>OK</div>
       </div>
       Brand
-      <div q-avatar>
-        <div q-avatar-content variant="brand">OK</div>
+      <div emphasis="brand" q-avatar>
+        <div q-avatar-content>OK</div>
       </div>
       <!-- preview -->
     </div>
   `,
 })
-export class AvatarVariantDemo {}
+export class AvatarEmphasisDemo {}

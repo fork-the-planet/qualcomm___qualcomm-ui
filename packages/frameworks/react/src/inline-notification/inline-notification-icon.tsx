@@ -3,7 +3,13 @@
 
 import type {ReactElement} from "react"
 
-import {BellRing, CircleAlert, CircleCheck, TriangleAlert} from "lucide-react"
+import {
+  BellRing,
+  CircleAlert,
+  CircleCheck,
+  Info,
+  TriangleAlert,
+} from "lucide-react"
 
 import type {QdsNotificationEmphasis} from "@qualcomm-ui/qds-core/inline-notification"
 import {IconOrNode} from "@qualcomm-ui/react/icon"
@@ -51,7 +57,7 @@ export function InlineNotificationIcon({
 
 const icons: Record<QdsNotificationEmphasis, LucideIconOrNode> = {
   danger: CircleAlert,
-  info: CircleAlert,
+  info: Info,
   loading: <ProgressRing />,
   neutral: BellRing,
   success: CircleCheck,

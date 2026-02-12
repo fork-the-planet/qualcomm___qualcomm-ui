@@ -2,20 +2,20 @@ import type {ReactElement} from "react"
 
 import {Avatar} from "@qualcomm-ui/react/avatar"
 
-export function AvatarVariantDemo(): ReactElement {
+export function AvatarEmphasisDemo(): ReactElement {
   return (
     <div className="flex items-center gap-4">
       {/* preview */}
       Neutral
-      <Avatar.Root variant="neutral">
+      <Avatar.Root emphasis="neutral">
         <Avatar.Content>OK</Avatar.Content>
       </Avatar.Root>
       High Contrast
-      <Avatar.Root variant="contrast">
+      <Avatar.Root emphasis="contrast">
         <Avatar.Content>OK</Avatar.Content>
       </Avatar.Root>
       Brand
-      <Avatar.Root variant="brand">
+      <Avatar.Root emphasis="brand">
         <Avatar.Content>OK</Avatar.Content>
       </Avatar.Root>
       {/* preview */}

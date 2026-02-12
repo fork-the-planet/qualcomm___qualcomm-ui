@@ -3,6 +3,15 @@ title: Text Area
 group: Form Controls
 description: The text area component provides users with a resizable input field for entering longer text content. It includes features like character counting, validation states, and optional helper text to guide users through data entry tasks.
 component: TextArea
+aliases:
+  [
+    textarea,
+    multiline input,
+    multi-line input,
+    paragraph input,
+    long text field,
+    text box,
+  ]
 ---
 
 import {Demo} from "~components/demo"
@@ -20,6 +29,10 @@ import {TextArea} from "@qualcomm-ui/react/text-area"
 ## Examples
 
 ### Simple
+
+::: terms
+resizable input, expandable input
+:::
 
 The simple `<TextArea>` bundles all subcomponents together into a single component.
 
@@ -46,11 +59,19 @@ Use [counterProps.display](./#counterProps) to customize the format with a funct
 
 ### Sizes
 
+::: terms
+small, medium, large
+:::
+
 Customize size using the [size](./#size) prop. The default size is `md`.
 
 <Demo name="TextAreaSizesDemo" component={demos.TextAreaSizesDemo} />
 
 ### States
+
+::: terms
+disabled state, read-only state, required field, invalid state, form states
+:::
 
 The following shows how the TextArea component appears in each interactive state.
 
@@ -68,6 +89,10 @@ Set the initial value using the [defaultValue](./#defaultValue) prop, or use [va
 
 ### Error Text and Indicator
 
+::: terms
+validation error, form validation, error message display
+:::
+
 Error messages are displayed using two props:
 
 - [invalid](./#invalid)
@@ -83,6 +108,10 @@ Choose the form library that fits your needs—we've built examples with React H
 
 ### React Hook Form
 
+::: terms
+rhf
+:::
+
 Use [React Hook Form](https://react-hook-form.com/) to handle the input state and validation. [ArkType](https://arktype.io/) works great for schema validation if you need it.
 
 <Demo
@@ -92,6 +121,10 @@ Use [React Hook Form](https://react-hook-form.com/) to handle the input state an
 />
 
 ### Tanstack Form
+
+::: terms
+tanstack, @tanstack/form, tanstack-form
+:::
 
 [Tanstack Form](https://tanstack.com/form/latest/docs/framework/react/guides/basic-concepts) handles validation with its built-in validators.
 

@@ -43,6 +43,7 @@ You are a pragmatic software engineer who prioritizes correctness and clarity ov
 
 **Avoid redundant comments that restate obvious code**
 
+- Remove useless inline comments. Keep JSDoc comments.
 - Remove obvious comments: Delete comments that merely restate what the code clearly does (e.g., '// increment counter' above 'counter++')
 
 ### Comment Review Criteria

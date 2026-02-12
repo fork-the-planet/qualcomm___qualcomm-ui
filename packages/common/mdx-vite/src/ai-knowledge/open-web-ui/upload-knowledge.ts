@@ -9,6 +9,8 @@ import {resolve} from "node:path"
 import {setTimeout} from "node:timers/promises"
 import ora from "ora"
 
+import {getConfigFromEnv, loadEnv, type SharedConfig} from "../env"
+
 import {
   type ApiConfig,
   type FileMetadataResponse,
@@ -17,14 +19,8 @@ import {
   KnowledgeApi,
   type KnowledgeFilesResponse,
 } from "./api"
-import {
-  getConfigFromEnv,
-  loadEnv,
-  resolveOpenWebUiIntegration,
-  type SharedConfig,
-} from "./common"
+import {loadOpenWebUiIntegrations, resolveOpenWebUiIntegration} from "./common"
 import {KnowledgeCleaner} from "./knowledge-cleaner"
-import {loadOpenWebUiIntegrations} from "./load-config-from-env"
 
 interface Config extends SharedConfig {
   force?: boolean
@@ -169,7 +165,11 @@ class Uploader {
   }
 
   private async uploadDirectory() {
-    const fileNames = await readdir(this.config.knowledgeFilePath)
+    const allFileNames = await readdir(this.config.knowledgeFilePath)
+    const allowedExtensions = [".md", ".mdx", ".txt", ".pdf"]
+    const fileNames = allFileNames.filter((name) =>
+      allowedExtensions.some((ext) => name.endsWith(ext)),
+    )
     const files = await Promise.all(
       fileNames.map(async (name) => ({
         contents: await readFile(

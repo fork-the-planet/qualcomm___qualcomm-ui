@@ -3,6 +3,7 @@ title: Select
 group: Form Controls
 description: The select component provides a streamlined way for users to pick a single option from a collapsible list of choices. It conserves screen space while offering clear visual feedback and maintaining accessibility standards.
 component: Select
+aliases: [dropdown, picker, listbox, choice]
 ---
 
 import {QdsDemo} from "~components/demo"
@@ -27,6 +28,10 @@ import {Select} from "@qualcomm-ui/react/select"
 
 ### Simple
 
+::: terms
+option list
+:::
+
 The simple API provides a standalone component with built-in layout.
 
 <QdsDemo name="SelectSimpleDemo" />
@@ -39,6 +44,13 @@ Build with the composite API for granular control. This API requires you to prov
 
 ### ARIA Label
 
+::: terms
+a11y
+screen reader
+labelless
+hidden label
+:::
+
 The Select's label is automatically associated with the input element for accessibility. If you omit the label, you should provide the [aria-label](./#aria-label) prop to give your select an accessible name.
 
 <QdsDemo name="SelectAriaLabelDemo" />
@@ -48,11 +60,24 @@ The Select's label is automatically associated with the input element for access
 
 ### Content Width
 
+::: terms
+dropdown width
+popup width
+listbox width
+auto width
+:::
+
 The [positioning.sameWidth](./#sameWidth) property controls whether the width of the select content matches the width of the trigger element. The default is `true`.
 
 <QdsDemo name="SelectSameWidthDemo" />
 
 ### Trigger Icon
+
+::: terms
+leading icon
+prefix icon
+start icon
+:::
 
 Use the [icon](./#icon) prop to add an icon to the start of the trigger element. View our [Icon](/components/icon) documentation to learn more about using icons in QUI.
 
@@ -60,11 +85,23 @@ Use the [icon](./#icon) prop to add an icon to the start of the trigger element.
 
 ### Items as Objects
 
+::: terms
+custom items
+typed items
+structured data
+:::
+
 The `items` prop can be an array of objects. Use the [itemLabel](./#itemLabel) and [itemValue](./#itemValue) properties on the [selectCollection](./#ListCollection) to specify the label and value of each item.
 
 <QdsDemo name="SelectItemsDemo" />
 
 ### Sizes
+
+::: terms
+small
+medium
+large
+:::
 
 This component supports three [size](./#size) options to accommodate different layout densities and design requirements.
 
@@ -74,23 +111,54 @@ The available sizes are `sm`, `md`, and `lg`. The default size is `md`.
 
 ### Content Height
 
+::: terms
+maxHeight
+scrollable
+overflow
+:::
+
 Change the height of the item container by adjusting the style of the Content element.
 
 <QdsDemo name="SelectMaxHeightDemo" />
 
 ### Multiple Selection
 
+::: terms
+multiselect
+multi-select
+multi select
+:::
+
 Use the [multiple](./#multiple) prop to allow multiple selections.
+
+The [selectionIndicator](./#selectionIndicator) prop controls how selected items are displayed:
+
+- `"checkmark"` — Uses a checkmark after the selected options only (default)
+- `"checkbox"` — Uses a checkbox before each option
 
 <QdsDemo name="SelectMultipleDemo" />
 
 ### Controlled Dropdown Visibility
+
+::: terms
+open state
+signal
+toggle dropdown
+programmatic open
+:::
 
 Set the initial visibility using the [defaultOpen](./#defaultOpen) prop, or use [open](./#open) and [openChanged](./#openChanged) to control the dropdown visibility manually. These props follow our [controlled state](/patterns/controlled-state) pattern.
 
 <QdsDemo name="SelectControlledOpenDemo" />
 
 ### Error Text and Indicator
+
+::: terms
+validation error
+form validation
+error message
+invalid field
+:::
 
 Error messages are displayed using two props:
 
@@ -103,17 +171,33 @@ The error text and indicator will only render when [invalid](./#invalid) is true
 
 ### Item Customization
 
+::: terms
+custom option
+item template
+custom renderer
+:::
+
 When using the simple API, provide the `q-select-content` directive as a child of the `<q-select>` component to override the default item renderer. The following example demonstrates how to add a custom icon to each item:
 
 <QdsDemo name="SelectItemCustomizationDemo" />
 
 ### Within Dialog
 
+::: terms
+modal
+disable portal
+:::
+
 To use the Select within a Dialog, you need to avoid portalling the item dropdown. To do this using the simple API, set [disablePortal](./#disablePortal) property to `true`:
 
 <QdsDemo name="SelectWithinDialogDemo" />
 
 ### Within Popover
+
+::: terms
+modal
+disable portal
+:::
 
 Like with the Dialog, you need to avoid portalling the `q-select-positioner`:
 
@@ -125,6 +209,13 @@ Like with the Dialog, you need to avoid portalling the `q-select-positioner`:
 - The value of the form control is an array of type `T`, where `T` is the type of the items in your select collection.
 
 ### Template Forms
+
+::: terms
+ngModel
+template-driven
+FormsModule
+two-way binding
+:::
 
 #### Strings
 
@@ -148,6 +239,12 @@ When using template forms, pass the [required](./#required) property to the form
 
 ### Reactive Forms
 
+::: terms
+FormControl
+FormGroup
+ReactiveFormsModule
+:::
+
 #### Strings
 
 <QdsDemo name="SelectStringsReactiveFormsDemo" />
@@ -157,6 +254,11 @@ When using template forms, pass the [required](./#required) property to the form
 <QdsDemo name="SelectObjectReactiveFormsDemo" />
 
 #### State Guidelines
+
+::: terms
+form control state
+Validators
+:::
 
 The [disabled](./#disabled), [invalid](./#invalid), and [required](./#required) properties have no effect when using Reactive Forms. Use the equivalent Reactive Form bindings instead:
 
@@ -239,6 +341,12 @@ The simple select extends the [q-select-root](./#q-select-root) directive with t
 <TypeDocAngularAttributes
   name={["QdsSelectItemBindings", "SelectItemBindings"]}
 />
+
+### q-select-item-checkbox
+
+Checkbox-style indicator for select items. Use this instead of `q-select-item-indicator` when `selectionIndicator="checkbox"` is set on the root. The checkbox is always visible and fills when the item is selected.
+
+<TypeDocProps name="SelectItemCheckboxComponent" />
 
 ### q-select-item-indicator
 

@@ -3,6 +3,7 @@ title: Button
 group: Buttons
 description: Buttons let users perform actions instantly, such as submitting forms, navigating pages, or triggering app functions. Built with comprehensive state management and semantic color coding, they communicate purpose and priority while maintaining consistent behavior across desktop and mobile environments.
 component: Button
+aliases: [cta, call to action]
 ---
 
 import {TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
@@ -20,11 +21,22 @@ import {ButtonModule} from "@qualcomm-ui/angular/button"
 
 ### Variants
 
+::: terms
+solid button
+bordered button
+transparent button
+:::
+
 Buttons come in three variants: fill, outline, and ghost. Customize these with the [variant](./#variant) property.
 
 <QdsDemo name="ButtonStylesDemo" />
 
 ### Emphasis
+
+::: terms
+destructive button
+delete button
+:::
 
 Buttons can have different [emphasis](./#emphasis) which affects the color of the button.
 
@@ -32,11 +44,25 @@ Buttons can have different [emphasis](./#emphasis) which affects the color of th
 
 ### Sizes and Icons
 
+::: terms
+small
+medium
+large
+:::
+
 Customize size using the [size](./#size) property. QUI buttons come with built-in support for [lucide-react](https://lucide.dev) icons.
 
 <QdsDemo name="ButtonSizesDemo" />
 
 ### All Styles
+
+::: terms
+button grid
+button matrix
+all button styles
+:::
+
+This grid shows all button combinations across variants and emphasis levels. The bottom row demonstrates the disabled state, which grays out the button regardless of variant or emphasis.
 
 <QdsDemo name="ButtonVariantsDemo" />
 

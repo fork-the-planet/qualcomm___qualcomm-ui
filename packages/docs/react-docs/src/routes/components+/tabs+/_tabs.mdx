@@ -3,6 +3,7 @@ title: Tabs
 group: Disclosure
 description: Tabs provide top-level navigation for switching between related views or sections within the same context. They use a minimal, low-chrome visual treatment defined primarily by a selection indicator beneath the active tab.
 component: Tabs
+aliases: [tabbed interface, tab panel]
 ---
 
 import {Demo} from "~components/demo"
@@ -21,11 +22,20 @@ import {Tab, Tabs} from "@qualcomm-ui/react/tabs"
 
 ### Horizontal
 
+::: terms
+keyboard navigation
+:::
+
 The default [orientation](./#orientation) is horizontal. The left and right arrow keys can be used to navigate between tabs.
 
 <Demo name="TabsHorizontalDemo" component={demos.TabsHorizontalDemo} />
 
 ### Vertical
+
+::: terms
+stacked tabs
+sidebar tabs
+:::
 
 In vertical [orientation](./#orientation), the up and down arrow keys are used instead.
 
@@ -54,11 +64,22 @@ The tab's active value can be controlled via the [value](./#value), [onValueChan
 
 #### Line
 
+::: terms
+underline tabs
+small, medium, large, extra large
+:::
+
 The line [variant](./#variant) supports four [sizes](./#size): `sm`, `md`, `lg`, and `xl`
 
 <Demo name="TabsLineSizesDemo" component={demos.TabsLineSizesDemo} />
 
 #### Contained
+
+::: terms
+pill tabs
+segmented control
+small, medium
+:::
 
 The contained [variant](./#variant) supports only two sizes: `sm` and `md`
 
@@ -69,6 +90,10 @@ The contained [variant](./#variant) supports only two sizes: `sm` and `md`
 />
 
 ### Lazy Mounted
+
+::: terms
+deferred rendering, performance optimization, conditional rendering
+:::
 
 Use the [lazyMount](./#lazyMount) and [unmountOnExit](./#unmountOnExit) props to control render behavior for inactive tabs.
 
@@ -86,17 +111,33 @@ Disable specific tabs with the [disabled](./#disabled-1) prop on the `<Tab.Root>
 
 ### URL Search Parameters
 
+::: terms
+deep linking
+shareable URL
+query string
+:::
+
 The following example demonstrates how to render tabs that sync with the URL search parameters using react-router.
 
 <Demo name="TabsLinksDemo" component={demos.TabsLinksDemo} />
 
 ### Context
 
+::: terms
+programmatic tab selection, imperative API, setValue
+:::
+
 Use the `<Tabs.Context>` component to access the tabs API from JSX.
 
 <Demo name="TabsContextDemo" component={demos.TabsContextDemo} />
 
 ### Add and Remove Tabs
+
+::: terms
+closable tabs, close button, dismissible
+:::
+
+Use `<Tab.DismissButton>` to make tabs removable. Combine this with React state to create a dynamic tab interface where users can add and close tabs.
 
 <Demo name="TabsAddRemoveDemo" component={demos.TabsAddRemoveDemo} />
 

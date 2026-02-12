@@ -3,6 +3,7 @@ title: Progress
 group: Feedback
 description: Progress bars provide clear visual feedback about task completion or loading states, helping users understand system status and perceived remaining time.
 component: Progress
+aliases: [progress bar, loading bar]
 ---
 
 import {Demo} from "~components/demo"
@@ -51,9 +52,19 @@ Use the [labelOrientation](./#labelOrientation) property to change the positioni
 
 ### Sizes
 
+::: terms
+small
+medium
+large
+:::
+
+Progress bars support three sizes: `sm`, `md`, and `lg`.
+
 <Demo name="ProgressSizeDemo" component={demos.ProgressSizeDemo} />
 
 ### Emphasis (Color)
+
+Set the color of the progress bar using the [emphasis](./#emphasis) property. The available options are `primary` and `neutral`.
 
 <Demo name="ProgressEmphasisDemo" component={demos.ProgressEmphasisDemo} />
 
@@ -87,6 +98,12 @@ is equivalent to
 ```
 
 ## Accessibility
+
+::: terms
+a11y
+screen reader
+wcag
+:::
 
 - When the value is supplied, the component automatically provides the corresponding `aria-value*` attributes to the element.
 - The progress element is automatically marked with `role="progressbar"`.

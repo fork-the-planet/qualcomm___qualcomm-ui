@@ -1,5 +1,6 @@
 ---
 title: Pagination (Server-side)
+component: Table
 ---
 
 import {TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
@@ -7,6 +8,17 @@ import {Demo} from "~components/demo"
 import * as demos from "./demos"
 
 # {frontmatter.title}
+
+::: terms
+remote paging
+paging
+PaginationState
+manualPagination
+onPaginationChange
+pageCount
+totalCount
+TanStack Query
+:::
 
 Server-side pagination demo with a simulated backend API. Pagination state is managed explicitly in the component and sent to the backend on each change. This is the standard approach for backend integrations where the server handles the pagination logic. See the [Pagination Guide](/feature-guides/pagination) for implementation details.
 

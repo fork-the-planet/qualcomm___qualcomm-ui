@@ -19,6 +19,11 @@ import {IconButton} from "@qualcomm-ui/react/button"
 
 ## Accessibility Guidelines
 
+::: terms
+a11y
+wcag
+:::
+
 Icon-only buttons rely on visual cues that screen readers cannot access. Use [aria-label](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-label) or [aria-labelledby](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-labelledby) to give every icon-only button an accessible name so its purpose is clear to assistive technologies.
 
 ## Examples
@@ -37,11 +42,21 @@ Control the visual emphasis with different colors: `neutral`, `primary`, and `da
 
 ### Sizes and Icons
 
+::: terms
+small
+medium
+large
+:::
+
 Customize size using the [size](./#size) property. QUI buttons come with built-in support for [lucide-react](https://lucide.dev) icons.
 
 <Demo name="IconButtonSizesDemo" component={demos.IconButtonSizesDemo} />
 
 ### Compact Density
+
+::: terms
+dense
+:::
 
 Use the [density](./#density) prop to reduce the padding and height of the button. The options are `default` and `compact`.
 
@@ -49,12 +64,23 @@ Use the [density](./#density) prop to reduce the padding and height of the butto
 
 ### Variant Combinations
 
+This demo displays all combinations of variants and emphasis options, including the disabled state for each variant.
+
 <Demo
   name="IconButtonVariantCombinationsDemo"
   component={demos.IconButtonVariantCombinationsDemo}
 />
 
 ### Contrast Colors
+
+Use `white-persistent` emphasis on dark backgrounds and `black-persistent` emphasis on light backgrounds. These colors remain constant regardless of the active theme.
+
+::: terms
+dark mode
+light mode
+theme independent
+inverted
+:::
 
 <Demo name="IconButtonContrastDemo" component={demos.IconButtonContrastDemo} />
 

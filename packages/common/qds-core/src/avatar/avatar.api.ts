@@ -18,18 +18,18 @@ export function createQdsAvatarApi(
   normalize: PropNormalizer,
 ): QdsAvatarApi {
   const size = props.size || "md"
-  const variant = props.variant || "neutral"
+  const emphasis = props.emphasis || props.variant || "neutral"
 
   return {
+    emphasis,
     size,
     status: props.status,
-    variant,
 
     // group: bindings
     getContentBindings(): QdsAvatarContentBindings {
       return normalize.element({
         className: avatarClasses.content,
-        "data-variant": variant,
+        "data-emphasis": emphasis,
       })
     },
     getImageBindings(): QdsAvatarImageBindings {

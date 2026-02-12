@@ -3,6 +3,7 @@ title: Checkbox
 group: Form Controls
 description: Checkboxes provide a straightforward way for users to make multiple selections from a set of options, whether they're choosing preferences, confirming actions, or filtering content.
 component: Checkbox
+aliases: [check box, tick box]
 ---
 
 import {ComponentExplorer, Demo} from "~components/demo"
@@ -60,6 +61,10 @@ When [disabled](./#disabled) is true, the checkbox becomes non-interactive and i
 
 ### Controlled State
 
+::: terms
+uncontrolled
+:::
+
 Set the initial value using the [defaultChecked](./#defaultChecked) prop, or use [checked](./#checked) and [onCheckedChange](./#onCheckedChange) to control the value manually. These props follow our [controlled state](/patterns/controlled-state) pattern.
 
 <Demo
@@ -70,9 +75,22 @@ Set the initial value using the [defaultChecked](./#defaultChecked) prop, or use
 
 ### Sizes
 
+::: terms
+small
+medium
+large
+:::
+
+Checkboxes come in three sizes: `sm`, `md`, and `lg`. The default size is `md`.
+
 <Demo expanded name="CheckboxSizesDemo" component={demos.CheckboxSizesDemo} />
 
 ### Hint
+
+::: terms
+helper text
+description
+:::
 
 Add a hint to provide additional context below the checkbox.
 
@@ -83,6 +101,10 @@ Add a hint to provide additional context below the checkbox.
 Choose the form library that fits your needs—we've built examples with React Hook Form and Tanstack Form to get you started.
 
 ### React Hook Form
+
+::: terms
+rhf
+:::
 
 Use [React Hook Form](https://react-hook-form.com/) to handle the checkbox state and validation. [ArkType](https://arktype.io/) works great for schema validation if you need it.
 
