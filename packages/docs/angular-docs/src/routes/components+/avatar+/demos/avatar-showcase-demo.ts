@@ -7,10 +7,10 @@ import {AvatarModule} from "@qualcomm-ui/angular/avatar"
   selector: "avatar-showcase",
   template: `
     <!-- preview -->
-    <div q-avatar>
+    <div q-avatar status="active">
       <img alt="John Doe" q-avatar-image src="/images/avatar-man.png" />
       <div q-avatar-content>JD</div>
-      <div q-avatar-status status="active"></div>
+      <div q-avatar-status></div>
     </div>
     <!-- preview -->
   `,

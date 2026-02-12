@@ -285,6 +285,10 @@
   width: 100%;
 }
 
+.qui-select__item[data-selection-indicator="checkbox"] {
+  justify-content: flex-start;
+}
+
 .qui-select__value-text {
   color: var(--color-text-neutral-primary);
   overflow: hidden;
