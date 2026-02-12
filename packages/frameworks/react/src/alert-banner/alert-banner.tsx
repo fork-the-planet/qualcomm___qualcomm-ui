@@ -24,33 +24,8 @@ import {
 import {AlertBannerIcon, type AlertBannerIconProps} from "./alert-banner-icon"
 import {AlertBannerRoot, type AlertBannerRootProps} from "./alert-banner-root"
 
-interface DismissableAlertBannerProps {
-  /**
-   * When `true`, renders a close button that calls `onClose` when clicked.
-   */
-  dismissable: true
-
-  /**
-   * Callback fired when the close button is clicked.
-   */
-  onClose: NonNullable<AlertBannerRootProps["onClose"]>
-}
-
-interface NonDismissableAlertBannerProps {
-  /**
-   * When `true`, renders a close button that calls `onClose` when clicked.
-   *
-   * @default false
-   */
-  dismissable?: false
-
-  /**
-   * Callback fired when the close button is clicked.
-   */
-  onClose?: AlertBannerRootProps["onClose"]
-}
-
-interface AlertBannerSharedProps {
+export interface AlertBannerProps
+  extends Omit<AlertBannerRootProps, "children"> {
   /**
    * The component used for the content of the action element.
    */
@@ -85,6 +60,11 @@ interface AlertBannerSharedProps {
   descriptionProps?: AlertBannerDescriptionProps
 
   /**
+   * When `true`, renders a close button that calls `onClose` when clicked.
+   */
+  dismissable?: boolean
+
+  /**
    * Optional heading text for the banner.
    */
   heading?: ReactNode
@@ -107,13 +87,6 @@ interface AlertBannerSharedProps {
    */
   iconProps?: AlertBannerIconProps
 }
-
-export type AlertBannerProps = Omit<
-  AlertBannerRootProps,
-  "children" | "onClose"
-> &
-  AlertBannerSharedProps &
-  (DismissableAlertBannerProps | NonDismissableAlertBannerProps)
 
 export function AlertBanner({
   action,
