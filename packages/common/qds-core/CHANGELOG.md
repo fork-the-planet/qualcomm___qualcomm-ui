@@ -1,5 +1,11 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.18.0 (2026/02/13)
+
+### Features
+
+- feat(link): add `brand` and `white-persistent` emphasis
+
 ## 1.17.0 (2026/02/11)
 
 ### Features
