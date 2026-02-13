@@ -32,15 +32,14 @@ figma.connect(Toaster, "<FIGMA_COMPONENTS_BASE>?node-id=3485-375", {
   imports: [
     'import {createToaster, Toaster} from "@qualcomm-ui/react/toast"',
     "''",
+    "// Create a single toaster instance in a shared file and export it for use throughout your app",
     "export const toaster = createToaster({placement: 'bottom-end'})",
   ],
   props: {
     action: figma.boolean("button", {
-      true: {label: "Action", onClick: () => {}},
+      true: {label: "Button", onClick: () => {}},
     }),
-    closable: figma.boolean("dismiss", {
-      false: false,
-    }),
+    closable: figma.boolean("dismiss"),
     description: figma.string("description"),
     label: figma.string("heading"),
     type: figma.enum<ToastType>("emphasis", {
