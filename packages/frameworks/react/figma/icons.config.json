@@ -7,7 +7,7 @@
       "@qualcomm-ui/react/*": ["./src/*/index.ts"]
     },
     "documentUrlSubstitutions": {
-      "<FIGMA_ICONS_BASE>": "https://www.figma.com/design/fJC9KDk1b8v5KxHRttSbqS"
+      "<FIGMA_ICONS_BASE>": "https://www.figma.com/design/4xDg5Mrv4mxjsK3xC3L5up"
     }
   }
 }
