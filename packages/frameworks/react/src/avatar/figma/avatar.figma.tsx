@@ -7,8 +7,8 @@ import figma from "@figma/code-connect"
 import {User} from "lucide-react"
 
 import type {
+  QdsAvatarEmphasis,
   QdsAvatarSize,
-  QdsAvatarVariant,
 } from "@qualcomm-ui/qds-core/avatar"
 import {Avatar} from "@qualcomm-ui/react/avatar"
 
@@ -23,23 +23,22 @@ const statusProps = {
 
 const sharedProps = {
   ...statusProps,
+  emphasis: figma.enum<QdsAvatarEmphasis>("emphasis", {
+    brand: "brand",
+    "high-contrast": "contrast",
+  }),
   size: figma.enum<QdsAvatarSize>("size", {
     lg: "lg",
     sm: "sm",
     xl: "xl",
     xs: "xs",
   }),
-  variant: figma.enum<QdsAvatarVariant>("emphasis", {
-    brand: "brand",
-    "high-contrast": "contrast",
-    neutral: "neutral",
-  }),
 }
 
 // Icon variant
 figma.connect(Avatar, "<FIGMA_COMPONENTS_BASE>?node-id=17804-5308", {
-  example: ({size, status, statusIndicator, variant}) => (
-    <Avatar.Root size={size} status={status} variant={variant}>
+  example: ({emphasis, size, status, statusIndicator}) => (
+    <Avatar.Root emphasis={emphasis} size={size} status={status}>
       <Avatar.Content icon={User} />
       {statusIndicator}
     </Avatar.Root>
@@ -49,8 +48,8 @@ figma.connect(Avatar, "<FIGMA_COMPONENTS_BASE>?node-id=17804-5308", {
 
 // Initial variant
 figma.connect(Avatar, "<FIGMA_COMPONENTS_BASE>?node-id=17804-5517", {
-  example: ({initialText, size, status, statusIndicator, variant}) => (
-    <Avatar.Root size={size} status={status} variant={variant}>
+  example: ({emphasis, initialText, size, status, statusIndicator}) => (
+    <Avatar.Root emphasis={emphasis} size={size} status={status}>
       <Avatar.Content>{initialText}</Avatar.Content>
       {statusIndicator}
     </Avatar.Root>
@@ -84,9 +83,9 @@ figma.connect(Avatar, "<FIGMA_COMPONENTS_BASE>?node-id=17804-5726", {
 figma.connect(Avatar, "<FIGMA_COMPONENTS_BASE>?node-id=17809-2448", {
   example: ({nested}) => (
     <Avatar.Root
+      emphasis={nested.emphasis}
       size={nested.size}
       status={nested.status}
-      variant={nested.variant}
     >
       <Avatar.Content icon={User} />
       {nested.statusIndicator}
@@ -104,9 +103,9 @@ figma.connect(Avatar, "<FIGMA_COMPONENTS_BASE>?node-id=17809-2448", {
 figma.connect(Avatar, "<FIGMA_COMPONENTS_BASE>?node-id=17809-2448", {
   example: ({nested}) => (
     <Avatar.Root
+      emphasis={nested.emphasis}
       size={nested.size}
       status={nested.status}
-      variant={nested.variant}
     >
       <Avatar.Content>{nested.initialText}</Avatar.Content>
       {nested.statusIndicator}
