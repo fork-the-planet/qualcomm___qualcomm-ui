@@ -30,6 +30,6 @@ jobs:
         turborepo-remote-cache-access-key: ${{ secrets.TURBOREPO_REMOTE_CACHE_ACCESS_KEY }}
         turborepo-remote-cache-secret-key: ${{ secrets.TURBOREPO_REMOTE_CACHE_SECRET_KEY }}
 
-    - run: pnpm build --filter @qui/react
+    - run: pnpm build --filter @qualcomm-ui/react
 
     - run: pnpm react figma:publish-components
