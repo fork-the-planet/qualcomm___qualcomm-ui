@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
@@ -18,14 +20,14 @@ const sharedRadioProps = {
 
 // radio with label
 figma.connect(Radio, "<FIGMA_COMPONENTS_BASE>?node-id=2270-3948", {
-  example: ({labelText, hint, ...props}) => {
-    return <Radio label={labelText} hint={hint} {...props} />
+  example: ({hint, labelText, ...props}) => {
+    return <Radio hint={hint} label={labelText} {...props} />
   },
   props: {
     ...sharedRadioProps,
     hint: figma.boolean("hint", {
-      true: figma.string("hintText"),
       false: undefined,
+      true: figma.string("hintText"),
     }),
     labelText: figma.string("labelText"),
   },

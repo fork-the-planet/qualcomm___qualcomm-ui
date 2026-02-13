@@ -14,6 +14,7 @@ figma.connect(ButtonGroup, "<FIGMA_COMPONENTS_BASE>?node-id=7191%3A1090", {
     )
   },
   props: {
+    children: figma.children("*"),
     layout: figma.enum("buttonWidth", {
       fill: "fill",
     }),
@@ -21,6 +22,5 @@ figma.connect(ButtonGroup, "<FIGMA_COMPONENTS_BASE>?node-id=7191%3A1090", {
       lg: "lg",
       sm: "sm",
     }),
-    children: figma.children("*"),
   },
 })

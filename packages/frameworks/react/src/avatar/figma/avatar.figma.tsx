@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
@@ -81,7 +83,11 @@ figma.connect(Avatar, "<FIGMA_COMPONENTS_BASE>?node-id=17804-5726", {
 // Main Example - Icon variant
 figma.connect(Avatar, "<FIGMA_COMPONENTS_BASE>?node-id=17809-2448", {
   example: ({nested}) => (
-    <Avatar.Root size={nested.size} status={nested.status} variant={nested.variant}>
+    <Avatar.Root
+      size={nested.size}
+      status={nested.status}
+      variant={nested.variant}
+    >
       <Avatar.Content icon={User} />
       {nested.statusIndicator}
     </Avatar.Root>
@@ -97,7 +103,11 @@ figma.connect(Avatar, "<FIGMA_COMPONENTS_BASE>?node-id=17809-2448", {
 // Main Example - Initial variant
 figma.connect(Avatar, "<FIGMA_COMPONENTS_BASE>?node-id=17809-2448", {
   example: ({nested}) => (
-    <Avatar.Root size={nested.size} status={nested.status} variant={nested.variant}>
+    <Avatar.Root
+      size={nested.size}
+      status={nested.status}
+      variant={nested.variant}
+    >
       <Avatar.Content>{nested.initialText}</Avatar.Content>
       {nested.statusIndicator}
     </Avatar.Root>

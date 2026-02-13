@@ -41,19 +41,19 @@ figma.connect(Checkbox, "<FIGMA_COMPONENTS_BASE>?node-id=12550-185694", {
 
 // label
 figma.connect(Checkbox, "<FIGMA_COMPONENTS_BASE>?node-id=67-706", {
-  example: ({label, hint, ...props}) => {
-    return <Checkbox label={label} hint={hint} {...props} />
+  example: ({hint, label, ...props}) => {
+    return <Checkbox hint={hint} label={label} {...props} />
   },
   props: {
     ...sharedProps,
     errorText: figma.string("errorText"),
     hint: figma.boolean("hint", {
-      true: figma.string("hintText"),
       false: undefined,
+      true: figma.string("hintText"),
     }),
     label: figma.boolean("label", {
-      true: figma.string("labelText"),
       false: undefined,
+      true: figma.string("labelText"),
     }),
   },
 })

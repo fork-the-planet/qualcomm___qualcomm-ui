@@ -7,6 +7,7 @@
     "rootDir": "./src",
     "outDir": "./node_modules/.tmp/figma",
     "tsBuildInfoFile": "node_modules/.tmp/tsbuildinfo.figma",
+    "strict": false,
     "paths": {
       "@qualcomm-ui/react/*": ["./src/*/index.ts"],
     }

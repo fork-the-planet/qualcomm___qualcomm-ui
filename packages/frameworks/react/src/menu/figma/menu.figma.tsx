@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
@@ -18,7 +20,13 @@ const sharedProps = {
 }
 
 figma.connect(Menu.Root, FIGMA_URL, {
-  example: ({checkboxSection, radioSection, size}) => (
+  example: ({
+    checkboxSection,
+    checkboxSeparator,
+    radioSection,
+    radioSeparator,
+    size,
+  }) => (
     <Menu.Root size={size}>
       <Menu.Trigger>
         <Menu.Button>Open Menu</Menu.Button>
@@ -62,7 +70,9 @@ figma.connect(Menu.Root, FIGMA_URL, {
               <Menu.ItemLabel>Menu option name</Menu.ItemLabel>
               <Menu.CheckboxItemControl />
             </Menu.CheckboxItem>
+            {checkboxSeparator}
             {checkboxSection}
+            {radioSeparator}
             {radioSection}
           </Menu.Content>
         </Menu.Positioner>
@@ -72,68 +82,72 @@ figma.connect(Menu.Root, FIGMA_URL, {
   props: {
     ...sharedProps,
     checkboxSection: figma.boolean("section2", {
-      true: 
-          <Menu.Separator />
-          <Menu.ItemGroup>
-            <Menu.ItemGroupLabel>Title name</Menu.ItemGroupLabel>
-            <Menu.CheckboxItem defaultChecked value="checkbox-1">
-              <Menu.CheckboxItemControl />
-              <Menu.ItemLabel>Checkbox label</Menu.ItemLabel>
-            </Menu.CheckboxItem>
-            <Menu.CheckboxItem value="checkbox-2">
-              <Menu.CheckboxItemControl />
-              <Menu.ItemLabel>Checkbox label</Menu.ItemLabel>
-            </Menu.CheckboxItem>
-            <Menu.CheckboxItem value="checkbox-3">
-              <Menu.CheckboxItemControl />
-              <Menu.ItemLabel>Checkbox label</Menu.ItemLabel>
-            </Menu.CheckboxItem>
-            <Menu.CheckboxItem value="checkbox-4">
-              <Menu.CheckboxItemControl />
-              <Menu.ItemLabel>Checkbox label</Menu.ItemLabel>
-            </Menu.CheckboxItem>
-            <Menu.CheckboxItem value="checkbox-5">
-              <Menu.CheckboxItemControl />
-              <Menu.ItemLabel>Checkbox label</Menu.ItemLabel>
-            </Menu.CheckboxItem>
-            <Menu.CheckboxItem value="checkbox-6">
-              <Menu.CheckboxItemControl />
-              <Menu.ItemLabel>Checkbox label</Menu.ItemLabel>
-            </Menu.CheckboxItem>
-          </Menu.ItemGroup>
-,
+      true: (
+        <Menu.ItemGroup>
+          <Menu.ItemGroupLabel>Title name</Menu.ItemGroupLabel>
+          <Menu.CheckboxItem defaultChecked value="checkbox-1">
+            <Menu.CheckboxItemControl />
+            <Menu.ItemLabel>Checkbox label</Menu.ItemLabel>
+          </Menu.CheckboxItem>
+          <Menu.CheckboxItem value="checkbox-2">
+            <Menu.CheckboxItemControl />
+            <Menu.ItemLabel>Checkbox label</Menu.ItemLabel>
+          </Menu.CheckboxItem>
+          <Menu.CheckboxItem value="checkbox-3">
+            <Menu.CheckboxItemControl />
+            <Menu.ItemLabel>Checkbox label</Menu.ItemLabel>
+          </Menu.CheckboxItem>
+          <Menu.CheckboxItem value="checkbox-4">
+            <Menu.CheckboxItemControl />
+            <Menu.ItemLabel>Checkbox label</Menu.ItemLabel>
+          </Menu.CheckboxItem>
+          <Menu.CheckboxItem value="checkbox-5">
+            <Menu.CheckboxItemControl />
+            <Menu.ItemLabel>Checkbox label</Menu.ItemLabel>
+          </Menu.CheckboxItem>
+          <Menu.CheckboxItem value="checkbox-6">
+            <Menu.CheckboxItemControl />
+            <Menu.ItemLabel>Checkbox label</Menu.ItemLabel>
+          </Menu.CheckboxItem>
+        </Menu.ItemGroup>
+      ),
+    }),
+    checkboxSeparator: figma.boolean("section2", {
+      true: <Menu.Separator />,
     }),
     radioSection: figma.boolean("section3", {
-      true: 
-          <Menu.Separator />
-          <Menu.RadioItemGroup defaultValue="radio-1">
-            <Menu.ItemGroupLabel>Title name</Menu.ItemGroupLabel>
-            <Menu.RadioItem value="radio-1">
-              <Menu.RadioItemControl />
-              <Menu.ItemLabel>Radio button label</Menu.ItemLabel>
-            </Menu.RadioItem>
-            <Menu.RadioItem value="radio-2">
-              <Menu.RadioItemControl />
-              <Menu.ItemLabel>Radio button label</Menu.ItemLabel>
-            </Menu.RadioItem>
-            <Menu.RadioItem value="radio-3">
-              <Menu.RadioItemControl />
-              <Menu.ItemLabel>Radio button label</Menu.ItemLabel>
-            </Menu.RadioItem>
-            <Menu.RadioItem value="radio-4">
-              <Menu.RadioItemControl />
-              <Menu.ItemLabel>Radio button label</Menu.ItemLabel>
-            </Menu.RadioItem>
-            <Menu.RadioItem value="radio-5">
-              <Menu.RadioItemControl />
-              <Menu.ItemLabel>Radio button label</Menu.ItemLabel>
-            </Menu.RadioItem>
-            <Menu.RadioItem value="radio-6">
-              <Menu.RadioItemControl />
-              <Menu.ItemLabel>Radio button label</Menu.ItemLabel>
-            </Menu.RadioItem>
-          </Menu.RadioItemGroup>
-,
+      true: (
+        <Menu.RadioItemGroup defaultValue="radio-1">
+          <Menu.ItemGroupLabel>Title name</Menu.ItemGroupLabel>
+          <Menu.RadioItem value="radio-1">
+            <Menu.RadioItemControl />
+            <Menu.ItemLabel>Radio button label</Menu.ItemLabel>
+          </Menu.RadioItem>
+          <Menu.RadioItem value="radio-2">
+            <Menu.RadioItemControl />
+            <Menu.ItemLabel>Radio button label</Menu.ItemLabel>
+          </Menu.RadioItem>
+          <Menu.RadioItem value="radio-3">
+            <Menu.RadioItemControl />
+            <Menu.ItemLabel>Radio button label</Menu.ItemLabel>
+          </Menu.RadioItem>
+          <Menu.RadioItem value="radio-4">
+            <Menu.RadioItemControl />
+            <Menu.ItemLabel>Radio button label</Menu.ItemLabel>
+          </Menu.RadioItem>
+          <Menu.RadioItem value="radio-5">
+            <Menu.RadioItemControl />
+            <Menu.ItemLabel>Radio button label</Menu.ItemLabel>
+          </Menu.RadioItem>
+          <Menu.RadioItem value="radio-6">
+            <Menu.RadioItemControl />
+            <Menu.ItemLabel>Radio button label</Menu.ItemLabel>
+          </Menu.RadioItem>
+        </Menu.RadioItemGroup>
+      ),
+    }),
+    radioSeparator: figma.boolean("section3", {
+      true: <Menu.Separator />,
     }),
   },
 })

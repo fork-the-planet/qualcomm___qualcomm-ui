@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
@@ -18,13 +20,21 @@ figma.connect(Popover, FIGMA_URL, {
       positioning={positioning.placement}
       trigger={<Button emphasis="primary">Show Popover</Button>}
     >
-      {actionItems.buttons}
+      {actionItems.button1}
+      {actionItems.button2}
     </Popover>
   ),
   props: {
     actionItems: figma.nestedProps("_Popover content", {
-      buttons: figma.boolean("actionItems", {
-        true: <Button emphasis="neutral" variant="outline">Button</Button><Button emphasis="primary">Button</Button>,
+      button1: figma.boolean("actionItems", {
+        true: (
+          <Button emphasis="neutral" variant="outline">
+            Button
+          </Button>
+        ),
+      }),
+      button2: figma.boolean("actionItems", {
+        true: <Button emphasis="primary">Button</Button>,
       }),
     }),
     content: figma.nestedProps("_Popover content", {

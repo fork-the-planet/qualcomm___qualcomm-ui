@@ -3,7 +3,7 @@
 
 import figma from "@figma/code-connect"
 
-import type {QdsDividerOrientation} from "@qualcomm-ui/qds-core/divider"
+import type {QdsDividerVariant} from "@qualcomm-ui/qds-core/divider"
 import {Divider} from "@qualcomm-ui/react/divider"
 
 const variantProp = {

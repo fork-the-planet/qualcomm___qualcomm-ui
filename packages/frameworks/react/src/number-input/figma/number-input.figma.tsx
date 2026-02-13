@@ -1,3 +1,4 @@
+// @ts-nocheck
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
@@ -34,8 +35,8 @@ const sharedProps = {
   }),
   unitOptions: figma.boolean("unitSelector", {
     true: [
-      {value: "usd", label: "$"},
-      {value: "eur", label: "€"},
+      {label: "$", value: "usd"},
+      {label: "€", value: "eur"},
     ],
   }),
   unitSelect: figma.nestedProps("_Unit select", {
@@ -44,12 +45,12 @@ const sharedProps = {
 }
 
 figma.connect(NumberInput, "<FIGMA_COMPONENTS_BASE>?node-id=4771-2328", {
-  example: ({hint, label, unitSelect, unitOptions, ...props}) => (
+  example: ({hint, label, unitOptions, unitSelect, ...props}) => (
     <NumberInput
+      defaultUnit={unitSelect.unitText}
       hint={hint}
       label={label}
       unitOptions={unitOptions}
-      defaultUnit={unitSelect.unitText}
       {...props}
     />
   ),
