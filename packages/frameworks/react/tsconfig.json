@@ -11,7 +11,11 @@
     }
   },
   "include": ["./src"],
+  "exclude": ["./src/**/*.figma.tsx"],
   "references": [
+    {
+      "path": "./tsconfig.figma.json"
+    },
     {
       "path": "./tsconfig.lib.json"
     },

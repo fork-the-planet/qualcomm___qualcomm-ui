@@ -1,5 +1,15 @@
 # @qualcomm-ui/angular Changelog
 
+## 1.18.0 (2026/02/13)
+
+### Features
+
+- feat(link): add `brand` and `white-persistent` emphasis
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
 ## 1.17.0 (2026/02/11)
 
 ### Features

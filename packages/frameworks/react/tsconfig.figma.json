@@ -1,0 +1,33 @@
+{
+  "extends": "@qualcomm-ui/tsconfig/tsconfig.strict.json",
+  "compilerOptions": {
+    "composite": true,
+    "baseUrl": "./",
+    "incremental": true,
+    "rootDir": "./src",
+    "outDir": "./node_modules/.tmp/figma",
+    "tsBuildInfoFile": "node_modules/.tmp/tsbuildinfo.figma",
+    "strict": false,
+    "paths": {
+      "@qualcomm-ui/react/*": ["./src/*/index.ts"],
+    }
+  },
+  "include": ["./src/**/*.figma.tsx", "./generated/figma/**/*.tsx"],
+  "references": [
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "../react-core/tsconfig.lib.json"
+    },
+    {
+      "path": "../../common/core/tsconfig.lib.json"
+    },
+    {
+      "path": "../../common/qds-core/tsconfig.lib.json"
+    },
+    {
+      "path": "../../common/utils/tsconfig.lib.json"
+    }
+  ]
+}

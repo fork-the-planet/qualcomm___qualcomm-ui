@@ -1,5 +1,20 @@
 # @qualcomm-ui/react Changelog
 
+## 1.13.0 (2026/02/13)
+
+### Features
+
+- support Figma code connect
+- feat(link): add `brand` and `white-persistent` emphasis
+
+### Code Refactoring
+
+- cleaned up alert banner types
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
 ## 1.12.0 (2026/02/11)
 
 ### Features
