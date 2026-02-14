@@ -27,6 +27,9 @@
       "path": "./tsconfig.angular-lib.json"
     },
     {
+      "path": "./tsconfig.figma.json"
+    },
+    {
       "path": "./tsconfig.lib.json"
     },
     {

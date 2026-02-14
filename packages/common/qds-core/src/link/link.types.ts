@@ -6,7 +6,11 @@ import type {DirectionProperty} from "@qualcomm-ui/utils/direction"
 
 import type {linkClasses} from "./link.classes"
 
-export type QdsLinkEmphasis = "default" | "neutral"
+export type QdsLinkEmphasis =
+  | "default"
+  | "neutral"
+  | "brand"
+  | "white-persistent"
 
 export type QdsLinkSize = "xs" | "sm" | "md" | "lg" | "xl" | "xxl"
 

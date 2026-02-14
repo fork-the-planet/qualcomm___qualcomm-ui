@@ -1,0 +1,37 @@
+name: "Publish Figma"
+env:
+  TURBO_API: "http://127.0.0.1:8585"
+  TURBO_TEAM: "qualcomm-ui"
+  TURBO_TOKEN: "turbo-cache-token"
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'packages/frameworks/react/**/*.figma.tsx'
+      - 'packages/frameworks/angular/**/*.figma.ts'
+  workflow_dispatch:
+
+jobs:
+  publish-figma:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: PR Publish Figma - ${{github.head_ref}}
+      cancel-in-progress: true
+    timeout-minutes: 10
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: ./.github/actions/init-node-and-install
+
+    - uses: ./.github/actions/init-remote-cache
+      with:
+        turborepo-remote-cache-bucket-name: ${{ secrets.TURBOREPO_REMOTE_CACHE_BUCKET_NAME }}
+        turborepo-remote-cache-access-key: ${{ secrets.TURBOREPO_REMOTE_CACHE_ACCESS_KEY }}
+        turborepo-remote-cache-secret-key: ${{ secrets.TURBOREPO_REMOTE_CACHE_SECRET_KEY }}
+
+    - run: pnpm build --filter @qualcomm-ui/react
+
+    - run: pnpm react figma:publish-components
+      env:
+        FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_REST_TOKEN }}

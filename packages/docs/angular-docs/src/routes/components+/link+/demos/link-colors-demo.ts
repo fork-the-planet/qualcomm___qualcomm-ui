@@ -8,8 +8,12 @@ import {LinkDirective} from "@qualcomm-ui/angular/link"
   template: `
     <div class="flex flex-col gap-4">
       <!-- preview -->
-      <a q-link>Default</a>
-      <a emphasis="neutral" q-link>Neutral</a>
+      <a q-link>default</a>
+      <a emphasis="neutral" q-link>neutral</a>
+      <a emphasis="brand" q-link>brand</a>
+      <div class="bg-persistent-black p-4">
+        <a emphasis="white-persistent" q-link>white-persistent</a>
+      </div>
       <!-- preview -->
     </div>
   `,

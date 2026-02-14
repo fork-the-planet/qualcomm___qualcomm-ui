@@ -7,7 +7,6 @@ import {type AvatarApiProps, splitAvatarProps} from "@qualcomm-ui/core/avatar"
 import {
   createQdsAvatarApi,
   type QdsAvatarApiProps,
-  type QdsAvatarVariant,
 } from "@qualcomm-ui/qds-core/avatar"
 import {AvatarContextProvider, useAvatar} from "@qualcomm-ui/react-core/avatar"
 import {normalizeProps} from "@qualcomm-ui/react-core/machine"
@@ -23,18 +22,13 @@ import {QdsAvatarContextProvider} from "./qds-avatar-context"
 
 export interface AvatarRootProps
   extends AvatarApiProps,
-    Omit<QdsAvatarApiProps, "variant">,
+    QdsAvatarApiProps,
     IdProp,
     Omit<ElementRenderProp<"div">, "dir"> {
   /**
    * React {@link https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children children} prop.
    */
   children?: ReactNode
-
-  /**
-   * @deprecated use {@link emphasis} instead
-   */
-  variant?: QdsAvatarVariant
 }
 
 /**

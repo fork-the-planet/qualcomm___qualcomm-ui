@@ -12,6 +12,14 @@
   vertical-align: middle;
   width: var(--icon-width, var(--icon-size));
 
+  svg.lucide {
+    height: var(--icon-height, var(--icon-size));
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    width: var(--icon-width, var(--icon-size));
+  }
+
   &[hidden] {
     display: none;
   }
