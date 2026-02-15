@@ -28,26 +28,18 @@
   font-family: "Source Code Pro", "Roboto Mono", monospace;
 }
 
-.q-header--content {
-  padding: 6px 12px;
-}
-
 body {
   background: var(--color-background-neutral-00);
   display: flex;
   margin: 0;
 }
 
-.dark .feature-card-1 {
+[data-theme="dark"][data-brand="qualcomm"] .feature-card-1 {
   background: url("./assets/images/dark-bg-1.png") center center;
   background-size: cover;
 }
 
-.light .feature-card-1 {
-  background: var(--q-background-3);
-}
-
-.dark .feature-card-2 {
-  background: url("./assets/images/dark-bg-2.png") center center;
-  background-size: cover;
+hr.mdx {
+  margin-bottom: 12px;
+  margin-top: 28px;
 }
