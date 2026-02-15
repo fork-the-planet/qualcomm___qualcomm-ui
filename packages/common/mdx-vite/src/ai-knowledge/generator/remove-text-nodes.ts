@@ -2,12 +2,13 @@ import type {Text} from "mdast"
 import type {Plugin} from "unified"
 import {visit} from "unist-util-visit"
 
-import {isStepBlock} from "../../docs-plugin"
+import {isSpoilerBlock, isStepBlock} from "../../docs-plugin"
 
-export const removeStepNodes: Plugin = () => {
+export const removeTextNodes: Plugin = () => {
   return (tree, _file, done) => {
     visit(tree, "text", (node: Text) => {
-      if (node.value && isStepBlock(node.value.trim())) {
+      const value = node.value?.trim?.()
+      if (value && (isStepBlock(value) || isSpoilerBlock(value))) {
         Object.assign(node, {
           value: ``,
         })

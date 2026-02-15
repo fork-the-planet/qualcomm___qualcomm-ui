@@ -11,6 +11,18 @@ interface SpoilerOptions {
   summaryClassName?: string[]
 }
 
+function getSpoilerStartMatch(text: string) {
+  return text.match(/^:::\s*spoiler\s*(.*)$/)
+}
+
+function getSpoilerEndMatch(text: string) {
+  return text.trim() === ":::"
+}
+
+export function isSpoilerBlock(text: string) {
+  return !!getSpoilerStartMatch(text) || getSpoilerEndMatch(text)
+}
+
 /**
  * Transforms spoiler blocks into MDX components.
  *
@@ -52,7 +64,7 @@ export const remarkSpoilers: Plugin<[SpoilerOptions?], Root> = (
         return
       }
 
-      const match = firstChild.value.match(/^:::\s*spoiler\s*(.*)$/)
+      const match = getSpoilerStartMatch(firstChild.value)
       if (!match) {
         return
       }
@@ -66,7 +78,10 @@ export const remarkSpoilers: Plugin<[SpoilerOptions?], Root> = (
 
         if (child.type === "paragraph") {
           const firstText = child.children[0]
-          if (firstText?.type === "text" && firstText.value.trim() === ":::") {
+          if (
+            firstText?.type === "text" &&
+            getSpoilerEndMatch(firstText.value.trim())
+          ) {
             break
           }
         }

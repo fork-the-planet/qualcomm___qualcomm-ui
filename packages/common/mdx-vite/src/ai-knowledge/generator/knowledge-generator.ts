@@ -36,7 +36,7 @@ import {PropFormatter} from "./doc-props-plugin"
 import type {MdxFlowExpression, ProcessedPage} from "./generator.types"
 import {formatNpmInstallTabs} from "./npm-install-tabs-plugin"
 import {formatThemeNodes} from "./qds-theme-plugin"
-import {removeStepNodes} from "./remove-step-nodes"
+import {removeTextNodes} from "./remove-text-nodes"
 import {SectionExtractor} from "./section-extractor"
 import type {KnowledgeSections, SectionEntry} from "./section.types"
 import {computeMd5, extractMetadata, getIntroLines} from "./utils"
@@ -307,7 +307,7 @@ export class KnowledgeGenerator {
       .use(this.formatFrontmatterExpressions(frontmatter))
       .use(await formatThemeNodes())
       .use(formatDemos(pageInfo.demosFolder))
-      .use(removeStepNodes)
+      .use(removeTextNodes)
       .use(this.transformRelativeUrls(pageInfo.url))
 
     this.applyPlugins(pageInfo, processor)

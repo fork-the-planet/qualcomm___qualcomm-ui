@@ -9,7 +9,7 @@ import {visit} from "unist-util-visit"
 
 import {kebabCase} from "@qualcomm-ui/utils/change-case"
 
-import {isStepBlock} from "../../docs-plugin"
+import {isSpoilerBlock, isStepBlock} from "../../docs-plugin"
 
 import type {SimplifiedProp} from "./generator.types"
 import type {CodeExample, SectionEntry, SectionTypes} from "./section.types"
@@ -165,7 +165,10 @@ export class SectionExtractor {
           code: codeNode.value,
           language: codeNode.lang ?? "",
         })
-      } else if (node.type === "text" && isStepBlock(node.value.trim())) {
+      } else if (
+        node.type === "text" &&
+        (isStepBlock(node.value.trim()) || isSpoilerBlock(node.value.trim()))
+      ) {
         // continue
       } else {
         contentNodes.push(node)
