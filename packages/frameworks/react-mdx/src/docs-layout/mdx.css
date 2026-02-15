@@ -391,7 +391,11 @@ hr.mdx {
   padding-inline-start: 24px;
 
   h2[data-step]::before {
-    margin-top: 2px;
+    height: 28px;
+    margin-inline-end: 12px;
+    margin-inline-start: -39px;
+    min-width: 28px;
+    width: 28px;
   }
 
   [data-step] {

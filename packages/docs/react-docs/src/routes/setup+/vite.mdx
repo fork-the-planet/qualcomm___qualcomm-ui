@@ -21,7 +21,9 @@ This guide assumes you've already installed React. If not, run this command and 
 npx create-vite@latest
 ```
 
-## 1. Install the npm packages
+::: steps h2
+
+## Install the npm packages
 
 <NpmInstallTabs
   packages={[
@@ -36,7 +38,7 @@ npx create-vite@latest
   ]}
 />
 
-## 2. Import the CSS
+## Import the CSS
 
 In your global CSS file (default `app/app.css`), import the QUI styles.
 
@@ -61,7 +63,7 @@ In your global CSS file (default `app/app.css`), import the QUI styles.
 > [!note/Multi Theme]
 > If you only intend to support a single theme, you may omit the other import.
 
-## 3. Configure fonts
+## Configure fonts
 
 QUI components are designed with the Roboto Flex and Roboto Mono font families.
 
@@ -80,12 +82,14 @@ Add the links to your application's `<head>` element:
 />
 ```
 
-## 4. Configure the theme provider
+## Configure the theme provider
 
 QUI components support both light and dark modes. Choose one of the following approaches for your site:
 
 - [Single theme (static)](./#single-theme-static): lock to one theme
 - [Theme switching (dynamic)](./#theme-switching-dynamic): support both light and dark modes and persist the user's choice to browser storage
+
+::: /steps
 
 ### Single theme (static)
 
@@ -222,8 +226,8 @@ createRoot(document.getElementById("root")!).render(
 
 If `@qualcomm-ui/react` components are appearing without styles, check the following:
 
-- Ensure that you've [imported the CSS](./#2-import-the-css) from step 2.
-- Verify that you've [configured the html attributes](./#4-configure-the-theme-provider) from step 4.
+- Ensure that you've [imported the CSS](./#import-the-css) from step 2.
+- Verify that you've [configured the html attributes](./#configure-the-theme-provider) from step 4.
 
 If styles still aren't appearing, inspect the DOM of your application in your browser's dev tools. Your application's `<html>` element should have at least two attributes:
 

@@ -121,7 +121,8 @@ export const remarkSteps: Plugin<[], Root> = () => {
           const firstText = child.children[0]
           if (
             firstText?.type === "text" &&
-            firstText.value.trim() === ":::/steps"
+            (firstText.value.trim() === ":::/steps" ||
+              firstText.value.trim() === "::: /steps")
           ) {
             break
           }
