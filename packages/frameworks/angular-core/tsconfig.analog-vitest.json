@@ -1,7 +1,7 @@
 // analog vitest does not seem to work with composite: true.
 // we provide this file as an alternative for its loader.
 {
-  "extends": "@qualcomm-ui/tsconfig/tsconfig.esnext.json",
+  "extends": "@qualcomm-ui/tsconfig/tsconfig.strict.json",
   "compilerOptions": {
     "baseUrl": "./",
     "emitDeclarationOnly": false,

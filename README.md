@@ -50,7 +50,7 @@ pnpm i
 
 ## Development
 
-TODO: insert link to contribution documentation
+TODO: add contribution guidelines
 
 ## Getting in Contact
 

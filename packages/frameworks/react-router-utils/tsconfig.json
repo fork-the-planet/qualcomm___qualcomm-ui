@@ -1,6 +1,5 @@
 {
   "files": [],
-  "extends": "@qualcomm-ui/tsconfig/tsconfig.esnext.json",
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist"

@@ -1,5 +1,5 @@
 {
-  "extends": "@qualcomm-ui/tsconfig/tsconfig.esnext.json",
+  "extends": "@qualcomm-ui/tsconfig/tsconfig.strict.json",
   "compilerOptions": {
     "tsBuildInfoFile": "dist/tsbuildinfo",
     "composite": true,
