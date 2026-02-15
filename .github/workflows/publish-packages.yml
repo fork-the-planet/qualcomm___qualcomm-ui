@@ -31,7 +31,7 @@ jobs:
     if: needs.check.outputs.should-publish == 'true'
     runs-on: ubuntu-latest
     concurrency:
-      group: PR Check Versions - ${{github.head_ref}}
+      group: Publish Packages - ${{github.head_ref}}
       cancel-in-progress: true
     timeout-minutes: 10
     steps:
