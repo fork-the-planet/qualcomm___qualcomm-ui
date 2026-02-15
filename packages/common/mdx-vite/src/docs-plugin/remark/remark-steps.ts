@@ -81,9 +81,9 @@ function isHeading(node: {type: string}): node is Heading {
  *
  * ```jsx
  * <div className="qui-docs__steps">
- *   <h2>Step 1</h2>
+ *   <h2 data-step>Step 1</h2>
  *   <p>Content for step 1.</p>
- *   <h2>Step 2</h2>
+ *   <h2 data-step>Step 2</h2>
  *   <p>Content for step 2.</p>
  * </div>
  * ```
