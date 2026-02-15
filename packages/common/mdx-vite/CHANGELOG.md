@@ -1,5 +1,11 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 2.17.0 (2026/02/14)
+
+### Features
+
+- add remark-steps plugin
+
 ## 2.16.2 (2026/02/08)
 
 ### Tests
