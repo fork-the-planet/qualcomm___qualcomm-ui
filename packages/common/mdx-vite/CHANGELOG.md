@@ -1,5 +1,15 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 2.17.0 (2026/02/14)
+
+### Features
+
+- [docs-plugin]: add remark-steps plugin
+
+### Bug Fixes
+
+- [knowledge]: remove mdx spoiler directives from knowledge output
+
 ## 2.16.2 (2026/02/08)
 
 ### Tests

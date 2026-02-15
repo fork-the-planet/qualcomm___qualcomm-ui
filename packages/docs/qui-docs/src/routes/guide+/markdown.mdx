@@ -53,6 +53,8 @@ In addition to standard markdown, QUI Docs also supports GitHub Flavored Markdow
 
 Heading elements `h2`, `h3`, and `h4` create anchor links and comprise the page's Table of Contents.
 
+---
+
 ### Font Styles
 
 | Syntax              | Result            |
@@ -61,6 +63,8 @@ Heading elements `h2`, `h3`, and `h4` create anchor links and comprise the page'
 | `_italic_`          | _italic_          |
 | `~~strikethrough~~` | ~~strikethrough~~ |
 | \`code\`            | `code`            |
+
+---
 
 ### Lists
 
@@ -106,6 +110,8 @@ Lists denote nesting with alternating list styles based on the nesting level.
 - Parent
 - Parent
 
+---
+
 ### Tables
 
 ```markdown
@@ -119,6 +125,8 @@ Lists denote nesting with alternating list styles based on the nesting level.
 | :-------- | :---------: | ----------: |
 | Header    |    Title    | Here's this |
 | Paragraph |    Text     |    And more |
+
+---
 
 ### Links
 
@@ -149,6 +157,8 @@ Check out the [official documentation](https://react.dev) to learn more.
 ```markdown
 Check out the <a href="https://react.dev" target="_blank">here</a> to learn more.
 ```
+
+---
 
 ### Alerts
 
@@ -190,6 +200,8 @@ Customize the status color using `[!tip]`, `[!success]`, `[!warning]`, or `[!cau
 > [!caution]
 > We recommend that you use [folders](https://remix.run/docs/en/main/file-conventions/routes#folders-for-organization) for organizing your routes.
 
+---
+
 ### Spoilers
 
 Surround your content with a spoiler to hide it until the user clicks on the button:
@@ -207,6 +219,60 @@ I'm a spoiler!
 I'm a spoiler!
 
 :::
+
+---
+
+### Steps
+
+Added in:
+
+- [@qualcomm-ui/mdx-vite@2.17.0](https://github.com/qualcomm/qualcomm-ui/blob/main/packages/common/mdx-vite/CHANGELOG.md#2170-20260214)
+- [@qualcomm-ui/react-mdx@1.12.0](https://github.com/qualcomm/qualcomm-ui/blob/main/packages/frameworks/react-mdx/CHANGELOG.md#1120-20260214)
+
+Add a step indicator to headings using the `::: steps` directive. By default, heading levels h2-h4 are given step indicators. You can change this by supplying the heading level range on the directive:
+
+- `::: steps h2`: only h2 headings will show the step indicator
+- `::: steps h2-h3`: only h2 and h3 headings will show the step indicator
+
+#### Example
+
+````markdown
+::: steps
+
+#### Step 1
+
+Prerequisites:
+
+- Node.js >= 22.19.0
+
+#### Step 2
+
+```shell
+pnpm install -D @qualcomm-ui/esbuild
+```
+
+::: /steps
+````
+
+Result:
+
+::: steps
+
+#### Step 1
+
+Prerequisites:
+
+- Node.js >= 22.19.0
+
+#### Step 2
+
+```shell
+pnpm install -D @qualcomm-ui/esbuild
+```
+
+::: /steps
+
+---
 
 ### Code Blocks
 
@@ -229,6 +295,8 @@ console.log("hewwo") // [!code --]
 console.log("hello") // [!code ++]
 console.log("goodbye")
 ```
+
+---
 
 #### Line Highlighting
 
@@ -266,6 +334,8 @@ console.log("Highlighted")
 console.log("Not highlighted")
 ```
 
+---
+
 #### Word Highlighting
 
 Use `[!code word:Hello]` to highlight the word Hello in any subsequent code.
@@ -283,6 +353,8 @@ console.log(message) // prints Hello World
 const message = "Hello World"
 console.log(message) // prints Hello World
 ```
+
+---
 
 #### Line Focus
 
@@ -320,6 +392,8 @@ console.log("Focused")
 console.log("Not focused")
 ```
 
+---
+
 #### Error Levels
 
 Use `[!code error]` and `[!code warning]` to mark a line with error and warning levels.
@@ -337,6 +411,8 @@ console.log("No errors or warnings")
 console.error("Error") // [!code error]
 console.warn("Warning") // [!code warning]
 ```
+
+---
 
 #### Hide lines
 

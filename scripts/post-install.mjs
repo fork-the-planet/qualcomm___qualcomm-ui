@@ -32,22 +32,3 @@ await Promise.all(
     }
   }),
 )
-
-const packages = [
-  "frameworks/react-test-utils",
-  "common/tailwind-plugin",
-  "common/typedoc",
-  "common/typedoc-common",
-]
-
-// only run if at least one package needs to be built
-Promise.all(
-  packages.map((pkg) => exists(resolve(__dirname, `../packages/${pkg}/dist`))),
-).then((results) => {
-  if (results.some((distExists) => !distExists)) {
-    // TODO: enable once packages are migrated
-    // execaCommand(
-    // `pnpm turbo run build ${packages.map((pkg) => `--filter
-    // ./packages/${pkg}`).join(" ")}`, {cwd: resolve(__dirname, "../")}, )
-  }
-})

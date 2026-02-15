@@ -8,6 +8,7 @@ import {MDXProvider, type useMDXComponents} from "@mdx-js/react"
 import {Link} from "@qualcomm-ui/react/link"
 import {Table} from "@qualcomm-ui/react/table"
 import {useMdxDocsContext} from "@qualcomm-ui/react-mdx/context"
+import {HeadingSteps} from "@qualcomm-ui/react-mdx/heading-steps"
 import {
   SpoilerContent,
   SpoilerRoot,
@@ -107,48 +108,55 @@ export function MdxProvider({children, components}: Props): ReactNode {
               </h1>
             )
           },
-          h2: ({children, id}) => {
+          h2: ({children, id, ...props}) => {
             return (
               <AnchorHeader
-                className="mdx"
                 id={id || undefined}
                 render={<h2 />}
                 renderLink={RenderLink}
+                {...mergeProps({className: "mdx"}, props)}
               >
                 {children}
               </AnchorHeader>
             )
           },
-          h3: ({children, id}) => {
+          h3: ({children, id, ...props}) => {
             return (
               <AnchorHeader
-                className="mdx"
                 id={id || undefined}
                 render={<h3 />}
                 renderLink={RenderLink}
+                {...mergeProps({className: "mdx"}, props)}
               >
                 {children}
               </AnchorHeader>
             )
           },
-          h4: ({children, id}) => {
+          h4: ({children, id, ...props}) => {
             return (
               <AnchorHeader
-                className="mdx"
                 id={id || undefined}
                 render={<h4 />}
                 renderLink={RenderLink}
+                {...mergeProps({className: "mdx"}, props)}
               >
                 {children}
               </AnchorHeader>
             )
           },
           h5: ({id, ...props}) => (
-            <h5 className="mdx" id={id || undefined} {...props} />
+            <h5
+              id={id || undefined}
+              {...mergeProps({className: "mdx"}, props)}
+            />
           ),
           h6: ({id, ...props}) => (
-            <h6 className="mdx" id={id || undefined} {...props} />
+            <h6
+              id={id || undefined}
+              {...mergeProps({className: "mdx"}, props)}
+            />
           ),
+          HeadingSteps,
           hr: (props) => <hr className="mdx" {...props} />,
           img: (props) => <img className="mdx" {...props} />,
           li: (props) => <li className="mdx" {...props} />,

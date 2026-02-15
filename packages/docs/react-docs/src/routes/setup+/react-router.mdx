@@ -21,7 +21,9 @@ This guide assumes you've already installed React and React Router in framework 
 npm create react-router@latest
 ```
 
-## 1. Install the npm packages
+::: steps h2
+
+## Install the npm packages
 
 <NpmInstallTabs
   packages={[
@@ -37,7 +39,7 @@ npm create react-router@latest
   ]}
 />
 
-## 2. Import the CSS
+## Import the CSS
 
 In your global CSS file (default `app/app.css`), import the QUI styles.
 
@@ -64,7 +66,7 @@ In your global CSS file (default `app/app.css`), import the QUI styles.
 
 Learn more about the available brands in the [theme documentation](/theming/overview).
 
-## 3. Configure fonts
+## Configure fonts
 
 QUI components are designed with the Roboto Flex and Roboto Mono font families.
 
@@ -90,7 +92,7 @@ Add the links to your application's `<head>` element:
 </html>
 ```
 
-## 4. Configure theme provider
+## Configure theme provider
 
 QUI components support both light and dark modes. Choose one of the following approaches for your site:
 
@@ -109,6 +111,8 @@ If you only intend to support one theme, apply the theme attribute to your app's
 ```
 
 Continue to [next steps](./#next-steps)
+
+::: /steps
 
 ### Theme switching (dynamic)
 
@@ -262,8 +266,8 @@ Your application is now ready to import and use our components.
 
 If `@qualcomm-ui/react` components are appearing without styles, check the following:
 
-- Ensure that you've [imported the CSS](./#2-import-the-css) from step 2.
-- Verify that you've [configured the theme provider](./#4-configure-the-theme-provider) from step 4.
+- Ensure that you've [imported the CSS](./#import-the-css) from step 2.
+- Verify that you've [configured the theme provider](./#configure-the-theme-provider) from step 4.
 
 If styles still aren't appearing, inspect the DOM of your application in your browser's dev tools. Your application's `<html>` element should have at least two attributes:
 

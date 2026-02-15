@@ -1,5 +1,4 @@
 {
-  "customSyntax": "postcss-scss",
   "ignoreFiles": [
     "packages/*/coverage/**",
     "packages/utilities/qds-core/src/styles/*.css",

@@ -6,19 +6,10 @@ h1,
 h2,
 h3,
 h4 {
-  &.mdx::before {
-    content: "";
-    display: block;
-    height: calc(var(--qui-header-height) + var(--qui-mdx-margin-default));
-    margin-top: calc(
-      0px - var(--qui-header-height) - var(--qui-mdx-margin-default)
+  &.mdx {
+    scroll-margin-top: calc(
+      var(--qui-header-height) + var(--qui-mdx-margin-default)
     );
-    max-width: 1px;
-    position: relative;
-    visibility: hidden;
-    /* Fix for anchor scrolling with fixed header */
-    width: 1px;
-    z-index: -1;
   }
 }
 
@@ -388,6 +379,47 @@ hr.mdx {
 
     .shiki-wrapper.mdx {
       margin-top: 0;
+    }
+  }
+}
+
+.qui-docs__steps {
+  border-inline-start: 1px solid var(--color-border-neutral-02);
+  box-sizing: border-box;
+  margin-inline-start: 16px;
+  margin-bottom: 36px;
+  padding-inline-start: 24px;
+
+  h2[data-step]::before {
+    height: 28px;
+    margin-inline-end: 12px;
+    margin-inline-start: -39px;
+    min-width: 28px;
+    width: 28px;
+  }
+
+  [data-step] {
+    counter-increment: var(--counter-id);
+    position: relative;
+
+    &::before {
+      align-items: center;
+      background-color: var(--color-background-neutral-04);
+      border-radius: 9999px;
+      box-sizing: border-box;
+      color: var(--color-text-neutral-secondary);
+      content: counter(var(--counter-id));
+      display: inline-flex;
+      font: var(--font-static-body-md-default);
+      height: 24px;
+      justify-content: center;
+      margin-inline-end: 12px;
+      margin-inline-start: -36px;
+      min-width: 24px;
+      text-align: center;
+      vertical-align: text-top;
+      visibility: visible;
+      width: 24px;
     }
   }
 }

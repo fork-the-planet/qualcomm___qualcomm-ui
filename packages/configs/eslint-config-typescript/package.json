@@ -27,7 +27,8 @@
   "types": "index.d.ts",
   "devDependencies": {
     "@eslint/core": "^1.0.0",
-    "@qualcomm-ui/cli": "workspace:^1.0.6",
+    "@qualcomm-ui/cli": "catalog:",
+    "@qualcomm-ui/tsconfig": "catalog:",
     "@stylistic/eslint-plugin": "5.2.0",
     "@typescript-eslint/eslint-plugin": "catalog:",
     "@typescript-eslint/parser": "catalog:",

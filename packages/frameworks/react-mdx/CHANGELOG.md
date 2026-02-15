@@ -1,5 +1,15 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 1.12.0 (2026/02/14)
+
+### Features
+
+- [mdx-provider]: add `HeadingSteps` component to support new remark-steps plugin
+
+### Bug Fixes
+
+- [mdx-provider]: spread props onto header elements
+
 ## 1.11.9 (2026/02/13)
 
 ### Miscellaneous Chores

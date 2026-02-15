@@ -17,7 +17,9 @@ There are four steps to installation:
 
 This guide assumes you're using Next.js with the app router.
 
-## 1. Install the npm packages
+::: steps h2
+
+## Install the npm packages
 
 <NpmInstallTabs
   packages={[
@@ -32,7 +34,7 @@ This guide assumes you're using Next.js with the app router.
   ]}
 />
 
-## 2. Import the CSS
+## Import the CSS
 
 In your `app/globals.css` file, import the QUI styles.
 
@@ -66,7 +68,7 @@ In your `app/globals.css` file, import the QUI styles.
 
 Learn more about the available brands in the [theme documentation](/theming/overview).
 
-## 3. Configure fonts
+## Configure fonts
 
 QUI components are designed with the Roboto Flex and Roboto Mono font families.
 
@@ -109,7 +111,7 @@ export default function RootLayout({
 }
 ```
 
-## 4. Configure the theme provider
+## Configure the theme provider
 
 QUI styles support both light and dark modes. This step configures theme storage using cookies so the user's preferred theme is remembered and rendered without flash on page load.
 
@@ -209,6 +211,8 @@ export default async function RootLayout({
 }
 ```
 
+::: /steps
+
 Key configuration details:
 
 - `cookies()` reads the theme preference server-side to prevent flash of wrong theme
@@ -307,8 +311,8 @@ To set a different brand, change the `data-brand` attribute on the `<html>` elem
 
 If `@qualcomm-ui/react` components are appearing without styles, check the following:
 
-- Ensure that you've [imported the CSS](./#2-import-the-css) from step 2.
-- Verify that you've [configured the theme provider](./#4-configure-the-theme-provider) from step 4.
+- Ensure that you've [imported the CSS](./#import-the-css) from step 2.
+- Verify that you've [configured the theme provider](./#configure-the-theme-provider) from step 4.
 
 If styles still aren't appearing, inspect the DOM of your application in your browser's dev tools. Your application's `<html>` element should have at least two attributes:
 
