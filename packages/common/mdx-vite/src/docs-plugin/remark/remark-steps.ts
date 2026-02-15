@@ -35,6 +35,18 @@ function isHeading(node: {type: string}): node is Heading {
   return node.type === "heading"
 }
 
+function getStepStartMatch(text: string) {
+  return text.match(/^:::\s*steps(?:\s+(h[1-6](?:-h[1-6])?))?\s*$/)
+}
+
+function getStepEndMatch(text: string) {
+  return text.match(/^:::\s*\/steps\s*$/)
+}
+
+export function isStepBlock(text: string) {
+  return !!(getStepStartMatch(text) || getStepEndMatch(text))
+}
+
 /**
  * Transforms `:::steps` blocks into a styled `<div>` wrapper.
  *
@@ -100,9 +112,7 @@ export const remarkSteps: Plugin<[], Root> = () => {
         return
       }
 
-      const match = firstChild.value.match(
-        /^:::\s*steps(?:\s+(h[1-6](?:-h[1-6])?))?\s*$/,
-      )
+      const match = getStepStartMatch(firstChild.value)
       if (!match) {
         return
       }
@@ -119,11 +129,7 @@ export const remarkSteps: Plugin<[], Root> = () => {
 
         if (child.type === "paragraph") {
           const firstText = child.children[0]
-          if (
-            firstText?.type === "text" &&
-            (firstText.value.trim() === ":::/steps" ||
-              firstText.value.trim() === "::: /steps")
-          ) {
+          if (firstText?.type === "text" && getStepEndMatch(firstText.value)) {
             break
           }
         }
