@@ -4,7 +4,11 @@
 
 ### Features
 
-- add remark-steps plugin
+- [docs-plugin]: add remark-steps plugin
+
+### Bug Fixes
+
+- [knowledge]: remove mdx spoiler directives from knowledge output
 
 ## 2.16.2 (2026/02/08)
 
