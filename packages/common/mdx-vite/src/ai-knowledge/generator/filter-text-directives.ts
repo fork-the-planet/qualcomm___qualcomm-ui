@@ -4,7 +4,7 @@ import {visit} from "unist-util-visit"
 
 import {isSpoilerBlock, isStepBlock} from "../../docs-plugin"
 
-export const removeTextNodes: Plugin = () => {
+export const filterTextDirectives: Plugin = () => {
   return (tree, _file, done) => {
     visit(tree, "text", (node: Text) => {
       const value = node.value?.trim?.()

@@ -33,10 +33,10 @@ import type {AiKnowledgeConfig} from "../types"
 import {getConfig, setConfig} from "./config"
 import {formatDemos} from "./demo-plugin"
 import {PropFormatter} from "./doc-props-plugin"
+import {filterTextDirectives} from "./filter-text-directives"
 import type {MdxFlowExpression, ProcessedPage} from "./generator.types"
 import {formatNpmInstallTabs} from "./npm-install-tabs-plugin"
 import {formatThemeNodes} from "./qds-theme-plugin"
-import {removeTextNodes} from "./remove-text-nodes"
 import {SectionExtractor} from "./section-extractor"
 import type {KnowledgeSections, SectionEntry} from "./section.types"
 import {computeMd5, extractMetadata, getIntroLines} from "./utils"
@@ -307,7 +307,7 @@ export class KnowledgeGenerator {
       .use(this.formatFrontmatterExpressions(frontmatter))
       .use(await formatThemeNodes())
       .use(formatDemos(pageInfo.demosFolder))
-      .use(removeTextNodes)
+      .use(filterTextDirectives)
       .use(this.transformRelativeUrls(pageInfo.url))
 
     this.applyPlugins(pageInfo, processor)
