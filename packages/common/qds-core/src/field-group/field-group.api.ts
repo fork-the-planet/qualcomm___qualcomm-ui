@@ -51,6 +51,7 @@ export function createQdsFieldGroupApi(
         "data-indented": booleanDataAttr(indented),
         "data-orientation": orientation,
         "data-part": "items",
+        "data-size": size,
       })
     },
     getLabelBindings(): QdsFieldGroupLabelBindings {

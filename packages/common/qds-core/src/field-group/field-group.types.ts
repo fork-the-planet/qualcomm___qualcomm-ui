@@ -55,6 +55,7 @@ export interface QdsFieldGroupItemsBindings extends CommonBindings {
   "data-indented": BooleanDataAttr
   "data-orientation": FieldGroupOrientation
   "data-part": "items"
+  "data-size": FieldGroupSize
 }
 
 export interface QdsFieldGroupHintBindings extends CommonBindings {

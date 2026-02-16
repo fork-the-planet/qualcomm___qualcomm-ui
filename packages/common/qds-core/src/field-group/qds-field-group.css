@@ -15,10 +15,13 @@
   flex-direction: column;
   gap: var(--spacing-90);
 
+  &[data-size="sm"] {
+    gap: var(--spacing-80);
+  }
+
   &[data-orientation="horizontal"] {
     flex-direction: row;
     flex-wrap: wrap;
-    gap: var(--spacing-100);
   }
 
   &[data-indented] {
