@@ -5,8 +5,8 @@ import {type ReactElement, type ReactNode, useMemo} from "react"
 
 import {
   createQdsFieldGroupApi,
-  type FieldGroupOrientation,
-  type FieldGroupSize,
+  type QdsFieldGroupOrientation,
+  type QdsFieldGroupSize,
 } from "@qualcomm-ui/qds-core/field-group"
 import {normalizeProps} from "@qualcomm-ui/react-core/machine"
 import {
@@ -37,13 +37,13 @@ export interface FieldGroupRootProps extends ElementRenderProp<"fieldset"> {
    * Layout direction for items.
    * @default 'vertical'
    */
-  orientation?: FieldGroupOrientation
+  orientation?: QdsFieldGroupOrientation
 
   /**
    * The size of the group items.
    * @default 'md'
    */
-  size?: FieldGroupSize
+  size?: QdsFieldGroupSize
 }
 
 /**

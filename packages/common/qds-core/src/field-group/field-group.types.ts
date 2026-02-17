@@ -5,9 +5,9 @@ import type {BooleanDataAttr} from "@qualcomm-ui/utils/attributes"
 
 import type {fieldGroupClasses} from "./field-group.classes"
 
-export type FieldGroupSize = "sm" | "md" | "lg"
+export type QdsFieldGroupSize = "sm" | "md" | "lg"
 
-export type FieldGroupOrientation = "vertical" | "horizontal"
+export type QdsFieldGroupOrientation = "vertical" | "horizontal"
 
 export interface QdsFieldGroupApiProps {
   /**
@@ -24,13 +24,13 @@ export interface QdsFieldGroupApiProps {
    * Layout direction for items.
    * @default 'vertical'
    */
-  orientation?: FieldGroupOrientation
+  orientation?: QdsFieldGroupOrientation
 
   /**
    * The size of the group items.
    * @default 'md'
    */
-  size?: FieldGroupSize
+  size?: QdsFieldGroupSize
 }
 
 type FieldGroupClasses = typeof fieldGroupClasses
@@ -53,9 +53,9 @@ export interface QdsFieldGroupLabelBindings extends CommonBindings {
 export interface QdsFieldGroupItemsBindings extends CommonBindings {
   className: FieldGroupClasses["items"]
   "data-indented": BooleanDataAttr
-  "data-orientation": FieldGroupOrientation
+  "data-orientation": QdsFieldGroupOrientation
   "data-part": "items"
-  "data-size": FieldGroupSize
+  "data-size": QdsFieldGroupSize
 }
 
 export interface QdsFieldGroupHintBindings extends CommonBindings {
@@ -77,6 +77,6 @@ export interface QdsFieldGroupApi {
 
   indented: boolean
   invalid: boolean
-  orientation: FieldGroupOrientation
-  size: FieldGroupSize
+  orientation: QdsFieldGroupOrientation
+  size: QdsFieldGroupSize
 }

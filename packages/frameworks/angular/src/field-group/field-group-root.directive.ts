@@ -16,8 +16,8 @@ import {
 } from "@qualcomm-ui/angular-core/machine"
 import {
   createQdsFieldGroupApi,
-  type FieldGroupOrientation,
-  type FieldGroupSize,
+  type QdsFieldGroupOrientation,
+  type QdsFieldGroupSize,
 } from "@qualcomm-ui/qds-core/field-group"
 import type {Booleanish} from "@qualcomm-ui/utils/coercion"
 
@@ -55,13 +55,13 @@ export class FieldGroupRootDirective implements OnInit {
    * Layout direction for items.
    * @default 'vertical'
    */
-  readonly orientation = input<FieldGroupOrientation | undefined>()
+  readonly orientation = input<QdsFieldGroupOrientation | undefined>()
 
   /**
    * The size of the group items.
    * @default 'md'
    */
-  readonly size = input<FieldGroupSize | undefined>()
+  readonly size = input<QdsFieldGroupSize | undefined>()
 
   private readonly qdsFieldGroupService = inject(QdsFieldGroupContextService)
 
