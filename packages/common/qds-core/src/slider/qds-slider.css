@@ -2,7 +2,7 @@
   --slider-track-thickness: var(--sizing-30);
 
   &[data-size="sm"] {
-    --slider-thumb-size: var(--sizing-50);
+    --slider-thumb-size: var(--sizing-60);
   }
   &[data-size="md"] {
     --slider-thumb-size: var(--sizing-70);
@@ -163,34 +163,25 @@
 .qui-slider__thumb {
   aspect-ratio: 1;
   width: var(--slider-thumb-size);
+  position: relative;
+  background-color: var(--slider-thumb-color);
+  border-radius: var(--border-radius-rounded);
 
-  &[data-focus],
-  &[data-dragging] {
-    z-index: 1;
-  }
-
-  /* the actual thumb (to avoid scaling children) */
-  &::before {
-    background-color: var(--slider-thumb-color);
-    border-radius: var(--border-radius-rounded);
-    content: "";
-    inset: 0;
-    outline: var(--sizing-20) solid var(--color-border-neutral-00);
-    position: absolute;
-    transition:
-      scale 130ms ease-in-out,
-      background-color 130ms ease-in-out;
+  &:focus-visible {
+    outline: none;
   }
   &:focus-visible::before {
-    box-shadow: 0 0 0 4px var(--color-utility-focus-border);
+    border: 2px solid var(--color-utility-focus-border);
+    border-radius: inherit;
+    content: "";
+    inset: -3px;
+    pointer-events: none;
+    position: absolute;
   }
-  &:not([data-disabled]):is(:hover, :active)::before {
-    scale: 1.15;
-  }
-  &:not([data-disabled]):hover::before {
+  &:not([data-disabled]):hover {
     background-color: var(--slider-thumb-color-hover);
   }
-  &:not([data-disabled]):active::before {
+  &:not([data-disabled]):active {
     background-color: var(--slider-thumb-color-active);
   }
 
