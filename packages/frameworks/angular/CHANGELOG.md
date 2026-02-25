@@ -1,5 +1,15 @@
 # @qualcomm-ui/angular Changelog
 
+## 1.19.0 (2026/02/24)
+
+### Features
+
+- progress[-bar] disabled
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core, @qualcomm-ui/core, @qualcomm-ui/angular-core]
+
 ## 1.18.0 (2026/02/13)
 
 ### Features
