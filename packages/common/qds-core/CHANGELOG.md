@@ -1,5 +1,20 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.19.0 (2026/02/24)
+
+### Features
+
+- progress[-bar] disabled
+- checkbox/switch group
+
+### Styles
+
+- slider update
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core]
+
 ## 1.18.0 (2026/02/13)
 
 ### Features

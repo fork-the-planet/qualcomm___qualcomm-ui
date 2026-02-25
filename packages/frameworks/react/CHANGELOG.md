@@ -1,5 +1,15 @@
 # @qualcomm-ui/react Changelog
 
+## 1.14.0 (2026/02/24)
+
+### Features
+
+- checkbox/switch group
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core, @qualcomm-ui/core, @qualcomm-ui/react-core]
+
 ## 1.13.0 (2026/02/13)
 
 ### Features
