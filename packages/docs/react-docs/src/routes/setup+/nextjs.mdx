@@ -43,7 +43,7 @@ In your `app/globals.css` file, import the QUI styles.
 @import "@qualcomm-ui/qds-core/themes/qualcomm-dark.css";
 @import "@qualcomm-ui/qds-core/themes/qualcomm-light.css";
 
-:root {
+body {
   --type-font-family-secondary: var(--font-roboto-flex), sans-serif;
   --type-font-family-tertiary: var(--font-roboto-mono), monospace;
 }
@@ -60,7 +60,7 @@ In your `app/globals.css` file, import the QUI styles.
 @import "@qualcomm-ui/qds-core/themes/qualcomm-light.css" layer(components);
 @import "@qualcomm-ui/qds-core/themes/qualcomm-dark.css" layer(components);
 
-:root {
+body {
   --type-font-family-secondary: var(--font-roboto-flex);
   --type-font-family-tertiary: var(--font-roboto-mono);
 }
@@ -103,6 +103,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="stylesheet" href="https://use.typekit.net/nhs4wvu.css" />
+      </head>
       <body className={`${sansFont.variable} ${monoFont.variable}`}>
         {children}
       </body>
@@ -148,7 +151,7 @@ export function useTheme(): ThemeContextValue {
   return context
 }
 
-type ThemeProviderProps = {
+interface ThemeProviderProps {
   children: ReactNode
   defaultTheme: QdsTheme
 }
@@ -166,7 +169,7 @@ export function ThemeProvider({
   }, [])
 
   const toggleTheme = useCallback(() => {
-    setTheme(theme === "dark" ? "light" : "dark")
+    setTheme(theme === QdsTheme.DARK ? QdsTheme.LIGHT : QdsTheme.DARK)
   }, [theme, setTheme])
 
   return (
@@ -194,7 +197,8 @@ export default async function RootLayout({
 }>) {
   const cookieStore = await cookies()
   const themeCookie = cookieStore.get("theme")
-  const theme: QdsTheme = themeCookie?.value === "light" ? "light" : "dark"
+  const theme: QdsTheme =
+    themeCookie?.value === QdsTheme.LIGHT ? QdsTheme.LIGHT : QdsTheme.DARK
 
   return (
     <html
@@ -203,6 +207,9 @@ export default async function RootLayout({
       data-theme={theme}
       style={{colorScheme: theme}}
     >
+      <head>
+        <link rel="stylesheet" href="https://use.typekit.net/nhs4wvu.css" />
+      </head>
       <body className={`${sansFont.variable} ${monoFont.variable}`}>
         <ThemeProvider defaultTheme={theme}>{children}</ThemeProvider>
       </body>
@@ -260,6 +267,9 @@ export default async function RootLayout({
 
   return (
     <html lang="en" data-brand="qualcomm" data-theme={theme}>
+      <head>
+        <link rel="stylesheet" href="https://use.typekit.net/nhs4wvu.css" />
+      </head>
       <body className={`${sansFont.variable} ${monoFont.variable} antialiased`}>
         <ThemeProvider defaultTheme={theme}>{children}</ThemeProvider>
       </body>
