@@ -11,8 +11,6 @@ import {
   quiDocsPlugin,
 } from "@qualcomm-ui/mdx-vite"
 
-const ReactCompilerConfig = {}
-
 export default defineConfig({
   plugins: [
     tailwindcss(),
@@ -24,7 +22,7 @@ export default defineConfig({
     reactRouter(),
     babel({
       babelConfig: {
-        plugins: [["babel-plugin-react-compiler", ReactCompilerConfig]],
+        plugins: ["babel-plugin-react-compiler"],
         presets: ["@babel/preset-typescript"], // if you use TypeScript
       },
       filter: /\.[jt]sx?$/,
