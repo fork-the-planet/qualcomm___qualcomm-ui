@@ -2,9 +2,7 @@ import {RowSelectionDemo} from "@qualcomm-ui/react-table-docs/features+/row-sele
 
 import {DemoPageLayout} from "../../../components/demo-page-layout"
 
-const demos = [
-  {component: RowSelectionDemo, title: "Row Selection"},
-]
+const demos = [{component: RowSelectionDemo, title: "Row Selection"}]
 
 export default function RowSelection() {
   return (

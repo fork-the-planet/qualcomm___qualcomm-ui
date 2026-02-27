@@ -2,9 +2,7 @@ import {FiltersClientSideDemo} from "@qualcomm-ui/react-table-docs/features+/fil
 
 import {DemoPageLayout} from "../../../components/demo-page-layout"
 
-const demos = [
-  {component: FiltersClientSideDemo, title: "Filters Client Side"},
-]
+const demos = [{component: FiltersClientSideDemo, title: "Filters Client Side"}]
 
 export default function FiltersClientSide() {
   return (

@@ -2,9 +2,7 @@ import {VirtualizedRowsDemo} from "@qualcomm-ui/react-table-docs/features+/virtu
 
 import {DemoPageLayout} from "../../../components/demo-page-layout"
 
-const demos = [
-  {component: VirtualizedRowsDemo, title: "Virtualized Rows"},
-]
+const demos = [{component: VirtualizedRowsDemo, title: "Virtualized Rows"}]
 
 export default function VirtualizedRows() {
   return (

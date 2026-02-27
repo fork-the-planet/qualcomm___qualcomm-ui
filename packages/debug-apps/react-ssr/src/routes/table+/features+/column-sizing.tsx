@@ -2,9 +2,7 @@ import {ColumnSizingDemo} from "@qualcomm-ui/react-table-docs/features+/column-s
 
 import {DemoPageLayout} from "../../../components/demo-page-layout"
 
-const demos = [
-  {component: ColumnSizingDemo, title: "Column Sizing"},
-]
+const demos = [{component: ColumnSizingDemo, title: "Column Sizing"}]
 
 export default function ColumnSizing() {
   return (

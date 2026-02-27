@@ -2,16 +2,10 @@ import {GroupingDemo} from "@qualcomm-ui/react-table-docs/features+/grouping+/de
 
 import {DemoPageLayout} from "../../../components/demo-page-layout"
 
-const demos = [
-  {component: GroupingDemo, title: "Grouping"},
-]
+const demos = [{component: GroupingDemo, title: "Grouping"}]
 
 export default function Grouping() {
   return (
-    <DemoPageLayout
-      componentName="grouping"
-      demos={demos}
-      className="w-full"
-    />
+    <DemoPageLayout componentName="grouping" demos={demos} className="w-full" />
   )
 }

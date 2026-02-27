@@ -2,9 +2,7 @@ import {ColumnVisibilityDemo} from "@qualcomm-ui/react-table-docs/features+/colu
 
 import {DemoPageLayout} from "../../../components/demo-page-layout"
 
-const demos = [
-  {component: ColumnVisibilityDemo, title: "Column Visibility"},
-]
+const demos = [{component: ColumnVisibilityDemo, title: "Column Visibility"}]
 
 export default function ColumnVisibility() {
   return (

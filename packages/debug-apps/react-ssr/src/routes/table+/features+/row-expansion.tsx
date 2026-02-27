@@ -2,9 +2,7 @@ import {RowExpansionDemo} from "@qualcomm-ui/react-table-docs/features+/row-expa
 
 import {DemoPageLayout} from "../../../components/demo-page-layout"
 
-const demos = [
-  {component: RowExpansionDemo, title: "Row Expansion"},
-]
+const demos = [{component: RowExpansionDemo, title: "Row Expansion"}]
 
 export default function RowExpansion() {
   return (

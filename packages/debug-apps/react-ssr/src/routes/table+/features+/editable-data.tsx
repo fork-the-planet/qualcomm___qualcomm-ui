@@ -2,9 +2,7 @@ import {EditableDataDemo} from "@qualcomm-ui/react-table-docs/features+/editable
 
 import {DemoPageLayout} from "../../../components/demo-page-layout"
 
-const demos = [
-  {component: EditableDataDemo, title: "Editable Data"},
-]
+const demos = [{component: EditableDataDemo, title: "Editable Data"}]
 
 export default function EditableData() {
   return (

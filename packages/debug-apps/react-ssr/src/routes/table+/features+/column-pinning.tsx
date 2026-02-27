@@ -2,9 +2,7 @@ import {ColumnPinningDemo} from "@qualcomm-ui/react-table-docs/features+/column-
 
 import {DemoPageLayout} from "../../../components/demo-page-layout"
 
-const demos = [
-  {component: ColumnPinningDemo, title: "Column Pinning"},
-]
+const demos = [{component: ColumnPinningDemo, title: "Column Pinning"}]
 
 export default function ColumnPinning() {
   return (

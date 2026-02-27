@@ -3,7 +3,10 @@ import {RowExpansionCustomization as RowExpansionCustomizationDemo} from "@qualc
 import {DemoPageLayout} from "../../../components/demo-page-layout"
 
 const demos = [
-  {component: RowExpansionCustomizationDemo, title: "Row Expansion Customization"},
+  {
+    component: RowExpansionCustomizationDemo,
+    title: "Row Expansion Customization",
+  },
 ]
 
 export default function RowExpansionCustomization() {

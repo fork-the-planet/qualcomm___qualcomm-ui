@@ -2,9 +2,7 @@ import {ColumnGroupingDemo} from "@qualcomm-ui/react-table-docs/features+/column
 
 import {DemoPageLayout} from "../../../components/demo-page-layout"
 
-const demos = [
-  {component: ColumnGroupingDemo, title: "Column Grouping"},
-]
+const demos = [{component: ColumnGroupingDemo, title: "Column Grouping"}]
 
 export default function ColumnGrouping() {
   return (
