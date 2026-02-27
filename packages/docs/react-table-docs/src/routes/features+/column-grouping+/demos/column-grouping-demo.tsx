@@ -9,7 +9,7 @@ import {type User, useUserData} from "./use-data"
 
 const columnHelper = createColumnHelper<User>()
 
-export function ColumnGroupsDemo() {
+export function ColumnGroupingDemo() {
   const {data = [], isFetching, refetch} = useUserData(10)
 
   // always memoize your data and columns

@@ -25,7 +25,10 @@ const renderSubComponent = ({row}: {row: Row<User>}) => {
   )
 }
 
-export function SubComponentsDemo() {
+/**
+ * AKA sub-rows
+ */
+export function RowExpansionCustomization() {
   const {data = [], isFetching, refetch} = useUserData(10)
 
   // always memoize your data and columns
