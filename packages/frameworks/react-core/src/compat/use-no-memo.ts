@@ -1,3 +1,6 @@
+// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+// SPDX-License-Identifier: BSD-3-Clause-Clear
+
 /**
  * Calls the provided factory function and returns its result without memoization.
  * Uses the `"use no memo"` directive to opt out of React's automatic memoization
