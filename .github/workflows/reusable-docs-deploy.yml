@@ -60,7 +60,10 @@ jobs:
           -t ${{ secrets.ECR_REGISTRY_URL }}/${{ inputs.ecr-repository-name }}:${{ github.sha }} \
           -t ${{ secrets.ECR_REGISTRY_URL }}/${{ inputs.ecr-repository-name }}:latest \
           -f ${{ inputs.dockerfile }} .
-        docker push ${{ secrets.ECR_REGISTRY_URL }}/${{ inputs.ecr-repository-name }} --all-tags
+        docker push \
+          ${{ secrets.ECR_REGISTRY_URL }}/${{ inputs.ecr-repository-name }} \
+          --all-tags \
+          --progress=plain
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ECR_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ECR_SECRET_ACCESS_KEY }}
@@ -71,8 +74,6 @@ jobs:
     environment: prod
     steps:
     - uses: actions/checkout@v4
-
-    - uses: ./.github/actions/setup-aws-k8s
 
     - name: Deploy to EKS
       run: |
