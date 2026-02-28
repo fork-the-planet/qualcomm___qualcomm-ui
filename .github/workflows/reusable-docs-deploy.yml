@@ -62,8 +62,7 @@ jobs:
           -f ${{ inputs.dockerfile }} .
         docker push \
           ${{ secrets.ECR_REGISTRY_URL }}/${{ inputs.ecr-repository-name }} \
-          --all-tags \
-          --progress=plain
+          --all-tags
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ECR_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ECR_SECRET_ACCESS_KEY }}
