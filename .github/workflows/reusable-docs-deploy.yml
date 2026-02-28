@@ -74,7 +74,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Deploy to EKS
+    - name: Update EKS deployment
       run: |
         aws eks update-kubeconfig \
           --name ${{ secrets.EKS_CLUSTER_NAME }} \
