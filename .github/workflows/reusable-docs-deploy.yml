@@ -1,4 +1,4 @@
-name: Build and Deploy to EKS
+name: Reusable Docs Deploy
 
 on:
   workflow_call:
@@ -7,9 +7,6 @@ on:
         required: true
         type: string
       ecr-repository-name:
-        required: true
-        type: string
-      eks-deployment-name:
         required: true
         type: string
       container-name:
@@ -26,13 +23,7 @@ on:
         required: true
       AWS_ECR_SECRET_ACCESS_KEY:
         required: true
-      AWS_EKS_ACCESS_KEY_ID:
-        required: true
-      AWS_EKS_SECRET_ACCESS_KEY:
-        required: true
       ECR_REGISTRY_URL:
-        required: true
-      EKS_CLUSTER_NAME:
         required: true
 
 jobs:
