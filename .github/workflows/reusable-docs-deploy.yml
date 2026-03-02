@@ -9,21 +9,15 @@ on:
       ecr-repository-name:
         required: true
         type: string
-      container-name:
-        required: true
-        type: string
-      namespace:
-        required: true
-        type: string
       aws-region:
-        required: true
         type: string
+        default: us-west-2
     secrets:
-      AWS_ECR_ACCESS_KEY_ID:
+      QUI_DOCS_AWS_ECR_ACCESS_KEY:
         required: true
-      AWS_ECR_SECRET_ACCESS_KEY:
+      QUI_DOCS_AWS_ECR_SECRET_ACCESS_KEY:
         required: true
-      ECR_REGISTRY_URL:
+      QUI_DOCS_ECR_REGISTRY_URL:
         required: true
 
 jobs:
@@ -36,10 +30,10 @@ jobs:
     - name: Log in to ECR
       run: |
         aws ecr get-login-password --region ${{ inputs.aws-region }} | \
-          docker login --username AWS --password-stdin ${{ secrets.ECR_REGISTRY_URL }}
+          docker login --username AWS --password-stdin ${{ secrets.QUI_DOCS_ECR_REGISTRY_URL }}
       env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ECR_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ECR_SECRET_ACCESS_KEY }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.QUI_DOCS_AWS_ECR_ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.QUI_DOCS_AWS_ECR_SECRET_ACCESS_KEY }}
 
     - name: Build and push
       run: |
@@ -48,12 +42,11 @@ jobs:
           --platform=linux/amd64 \
           --progress=plain \
           --no-cache \
-          -t ${{ secrets.ECR_REGISTRY_URL }}/${{ inputs.ecr-repository-name }}:${{ github.sha }} \
-          -t ${{ secrets.ECR_REGISTRY_URL }}/${{ inputs.ecr-repository-name }}:latest \
+          -t ${{ secrets.QUI_DOCS_ECR_REGISTRY_URL }}/${{ inputs.ecr-repository-name }}:${{ github.sha }} \
           -f ${{ inputs.dockerfile }} .
         docker push \
-          ${{ secrets.ECR_REGISTRY_URL }}/${{ inputs.ecr-repository-name }} \
+          ${{ secrets.QUI_DOCS_ECR_REGISTRY_URL }}/${{ inputs.ecr-repository-name }} \
           --all-tags
       env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ECR_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ECR_SECRET_ACCESS_KEY }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.QUI_DOCS_AWS_ECR_ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.QUI_DOCS_AWS_ECR_SECRET_ACCESS_KEY }}
