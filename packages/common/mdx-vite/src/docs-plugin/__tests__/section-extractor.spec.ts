@@ -6,7 +6,7 @@ import remarkParse from "remark-parse"
 import {unified} from "unified"
 import {describe, expect, test} from "vitest"
 
-import {SectionExtractor} from "../section-extractor"
+import {SectionExtractor} from "../markdown/knowledge/section-extractor"
 
 function parseMarkdown(markdown: string): Root {
   return unified().use(remarkParse).parse(markdown)
@@ -16,6 +16,7 @@ describe("SectionExtractor", () => {
   const pageInfo = {
     frontmatter: {},
     id: "test-page",
+    pathname: "/test-page",
     title: "Test Page",
     url: "https://docs.example.com/test-page",
   }
@@ -36,7 +37,7 @@ Section one content.
 Section two content.
 `
       const extractor = new SectionExtractor({depths: [2, 3]})
-      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
+      const {sections} = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections).toHaveLength(3)
       expect(sections[0].headerPath).toEqual(["Test Page"])
@@ -64,7 +65,7 @@ Basic example content.
 Advanced example content.
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
+      const {sections} = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections).toHaveLength(3)
       expect(sections[0].headerPath).toEqual(["Test Page", "Examples"])
@@ -85,7 +86,7 @@ Advanced example content.
 Content here.
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
+      const {sections} = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections[0].sectionId).toBe("test-page-getting-started")
     })
@@ -99,7 +100,7 @@ Content here.
 Install content.
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
+      const {sections} = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections[0].url).toBe(
         "https://docs.example.com/test-page#installation",
@@ -125,7 +126,7 @@ Variants content.
 Sizes content.
 `
       const extractor = new SectionExtractor({depths: [2, 3]})
-      const sections = extractor.extract(parseMarkdown(markdown), {
+      const {sections} = extractor.extract(parseMarkdown(markdown), {
         ...pageInfo,
         title: "Button",
       })
@@ -157,7 +158,7 @@ Content B.
 Nested B content.
 `
       const extractor = new SectionExtractor({depths: [2, 3]})
-      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
+      const {sections} = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections).toHaveLength(4)
       expect(sections[0].headerPath).toEqual(["Test Page", "Section A"])
@@ -191,7 +192,7 @@ interactive
 Example content here.
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
+      const {sections} = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections[0].terms).toEqual(["forms", "ui", "interactive"])
     })
@@ -209,7 +210,7 @@ forms
 Example content only.
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
+      const {sections} = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections[0].content).not.toContain("::: terms")
       expect(sections[0].content).not.toContain("forms")
@@ -225,7 +226,7 @@ Example content only.
 Just content, no metadata.
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
+      const {sections} = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections[0].terms).toBeUndefined()
     })
@@ -249,7 +250,7 @@ const example = true
 Just text content.
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
+      const {sections} = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections[0].codeExamples).toHaveLength(1)
       expect(sections[0].codeExamples?.[0]?.code).toBe("const example = true")
@@ -276,7 +277,7 @@ function Demo() {
 Outro text.
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
+      const {sections} = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections[0].rawContent).toContain("```tsx")
       expect(sections[0].rawContent).toContain("function Demo()")
@@ -298,7 +299,7 @@ Outro text.
 Check out [the docs](https://example.com/docs) for more info.
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
+      const {sections} = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections[0].content).toContain("`the docs`")
       expect(sections[0].content).not.toContain("https://example.com")
@@ -332,7 +333,7 @@ Middle text.
 Outro text.
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
+      const {sections} = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       const section = sections[0]
 
@@ -360,7 +361,7 @@ Outro text.
 #### H4 Section
 `
       const extractor = new SectionExtractor({depths: [2]})
-      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
+      const {sections} = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections).toHaveLength(1)
       expect(sections[0].headerPath).toEqual(["Test Page", "H2 Section"])
@@ -375,7 +376,7 @@ Page introduction.
 ## Section
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
+      const {sections} = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       // H1 becomes a section with intro content
       expect(sections.length).toBeGreaterThanOrEqual(1)
@@ -392,7 +393,7 @@ Page introduction.
 This section has enough content to pass the minimum length filter.
 `
       const extractor = new SectionExtractor({minContentLength: 20})
-      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
+      const {sections} = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections).toHaveLength(1)
       expect(sections[0].headerPath).toEqual(["Test Page", "Content Section"])
@@ -409,7 +410,7 @@ This section has enough content to pass the minimum length filter.
 ## Another Empty
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
+      const {sections} = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       // Empty sections should be filtered out
       expect(sections).toHaveLength(0)
@@ -422,7 +423,7 @@ This section has enough content to pass the minimum length filter.
 Just some content without subsections.
 `
       const extractor = new SectionExtractor({depths: [2, 3]})
-      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
+      const {sections} = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections).toHaveLength(1)
       expect(sections[0].headerPath).toEqual(["Test Page"])
@@ -446,7 +447,7 @@ This should not be extracted.
 Real content.
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
+      const {sections} = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections).toHaveLength(1)
       expect(sections[0].headerPath).toEqual(["Test Page", "Real Section"])
@@ -467,7 +468,7 @@ Enforces that certain components have an aria-label attribute.
 Enforces that Avatar components have alt text.
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
+      const {sections} = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections).toHaveLength(2)
       expect(sections[0].headerPath).toEqual([
@@ -495,12 +496,116 @@ Content here.
 More content.
 `
       const extractor = new SectionExtractor()
-      const sections = extractor.extract(parseMarkdown(markdown), pageInfo)
+      const {sections} = extractor.extract(parseMarkdown(markdown), pageInfo)
 
       expect(sections).toHaveLength(2)
-      // kebabCase handles apostrophes and special chars
-      expect(sections[0].sectionId).toBe("test-page-what-s-new")
-      expect(sections[1].sectionId).toBe("test-page-api-reference-v2-0")
+      expect(sections[0].sectionId).toBe("test-page-whats-new")
+      expect(sections[1].sectionId).toBe("test-page-api-reference-v20")
+    })
+  })
+
+  describe("extractPage", () => {
+    test("returns full raw markdown content", () => {
+      const markdown = `
+# Test Page
+
+Introduction content.
+
+## Section One
+
+Section one content.
+
+\`\`\`ts
+const example = true
+\`\`\`
+
+## Section Two
+
+Section two content.
+`
+      const extractor = new SectionExtractor()
+      const page = extractor.extractPage(parseMarkdown(markdown), pageInfo)
+
+      expect(page).not.toBeNull()
+      expect(page!.content).toContain("# Test Page")
+      expect(page!.content).toContain("Introduction content.")
+      expect(page!.content).toContain("## Section One")
+      expect(page!.content).toContain("Section one content.")
+      expect(page!.content).toContain("```ts")
+      expect(page!.content).toContain("const example = true")
+      expect(page!.content).toContain("## Section Two")
+      expect(page!.content).toContain("Section two content.")
+    })
+
+    test("excludes YAML frontmatter", () => {
+      const tree: Root = {
+        children: [
+          {type: "yaml", value: "title: Test Page\ndescription: A test page"},
+          {
+            children: [{type: "text", value: "Test Page"}],
+            depth: 1,
+            type: "heading",
+          },
+          {
+            children: [{type: "text", value: "Page content here."}],
+            type: "paragraph",
+          },
+        ],
+        type: "root",
+      }
+      const extractor = new SectionExtractor()
+      const page = extractor.extractPage(tree, pageInfo)
+
+      expect(page).not.toBeNull()
+      expect(page!.content).not.toContain("title: Test Page")
+      expect(page!.content).toContain("# Test Page")
+      expect(page!.content).toContain("Page content here.")
+    })
+
+    test("returns correct pageId, pathname, and title", () => {
+      const markdown = `
+# Test Page
+
+Some content.
+`
+      const extractor = new SectionExtractor()
+      const page = extractor.extractPage(parseMarkdown(markdown), pageInfo)
+
+      expect(page!.pageId).toBe("test-page")
+      expect(page!.pathname).toBe("/test-page")
+      expect(page!.title).toBe("Test Page")
+    })
+
+    test("generates a hash", () => {
+      const markdown = `
+# Test Page
+
+Some content.
+`
+      const extractor = new SectionExtractor()
+      const page = extractor.extractPage(parseMarkdown(markdown), pageInfo)
+
+      expect(page!.hash).toBeDefined()
+      expect(page!.hash).toMatch(/^[a-f0-9]{32}$/)
+    })
+
+    test("returns null for empty AST", () => {
+      const tree: Root = {children: [], type: "root"}
+      const extractor = new SectionExtractor()
+      const page = extractor.extractPage(tree, pageInfo)
+
+      expect(page).toBeNull()
+    })
+
+    test("returns null for AST with only frontmatter", () => {
+      const tree: Root = {
+        children: [{type: "yaml", value: "title: Test"}],
+        type: "root",
+      }
+      const extractor = new SectionExtractor()
+      const page = extractor.extractPage(tree, pageInfo)
+
+      expect(page).toBeNull()
     })
   })
 })

@@ -7,7 +7,7 @@ import remarkStringify from "remark-stringify"
 import {unified} from "unified"
 import {describe, expect, test} from "vitest"
 
-import {formatNpmInstallTabs} from "../npm-install-tabs-plugin"
+import {formatNpmInstallTabs} from "../markdown/knowledge/plugins"
 
 async function processContent(content: string): Promise<string> {
   const processor = unified()
