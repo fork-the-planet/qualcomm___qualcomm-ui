@@ -16,10 +16,10 @@ interface ExportsLoaderArgs {
 }
 
 /**
- * Serves knowledge export files. Pages are served dynamically from pages.json
- * rather than individual .md files on disk.
+ * Serves knowledge export files. Pages are served dynamically from pages.json.
+ * Falls back to a /404 redirect if the path is not found.
  */
-export function createExportsLoader({
+export function createFallbackRouteLoader({
   exports,
   getPages,
   getSections,
