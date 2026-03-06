@@ -5,9 +5,10 @@ import {join} from "node:path"
 
 import {capitalCase} from "@qualcomm-ui/utils/change-case"
 
-import type {RouteMetaInternal, RoutingStrategy} from "../types"
+import type {RoutingStrategy} from "../config"
 
 import {getRouteMeta} from "./get-route-meta"
+import type {RouteMetaInternal} from "./types"
 
 export function getPathnameFromPathSegments(segments: string[]) {
   return `/${segments.join("/")}`

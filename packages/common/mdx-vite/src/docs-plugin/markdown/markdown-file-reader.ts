@@ -15,7 +15,7 @@ import {unified} from "unified"
 import type {PageFrontmatter} from "@qualcomm-ui/mdx-common"
 import type {QuiPropTypes} from "@qualcomm-ui/typedoc-common"
 
-import type {PageTimestampMetadataMode} from "../types"
+import type {PageTimestampMetadataMode} from "../config"
 
 import {frontmatterSchema} from "./frontmatter-schema"
 import type {IndexedPage, IndexedSection} from "./markdown.types"

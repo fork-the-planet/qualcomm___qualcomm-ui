@@ -14,6 +14,7 @@ import type {
 import type {QuiPropTypes} from "@qualcomm-ui/typedoc-common"
 import {defined} from "@qualcomm-ui/utils/guard"
 
+import type {SearchIndexerOptions} from "./config"
 import {DocPropsIndexer} from "./doc-props"
 import {
   buildGitMetadataMap,
@@ -37,12 +38,8 @@ import {
   NavBuilder,
   transformRouteMetaArray,
 } from "./nav-builder"
+import type {RouteMetaInternal, RouteMetaNavInternal} from "./nav-builder/types"
 import {fixPath} from "./path-utils"
-import type {
-  RouteMetaInternal,
-  RouteMetaNavInternal,
-  SearchIndexerOptions,
-} from "./types"
 
 export class SearchIndexer {
   private readonly docPropsIndexer: DocPropsIndexer

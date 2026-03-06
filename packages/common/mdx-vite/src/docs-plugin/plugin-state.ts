@@ -18,12 +18,12 @@ import type {
 } from "@qualcomm-ui/mdx-common"
 import type {QuiPropTypes} from "@qualcomm-ui/typedoc-common"
 
+import type {ResolvedQuiDocsConfig} from "./config"
 import {ConfigLoader} from "./config/config-loader"
 import {type CompiledMdxFile, MdxFileReader} from "./markdown"
 import {KnowledgeExporter} from "./markdown/knowledge"
 import {fixPath} from "./path-utils"
 import {SearchIndexer} from "./search-indexer"
-import type {ResolvedQuiDocsConfig} from "./types"
 
 const isDev = process.env.NODE_ENV === "development"
 

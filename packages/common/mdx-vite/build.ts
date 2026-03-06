@@ -8,7 +8,7 @@ import {buildOrWatch, hasArg, logPlugin} from "@qualcomm-ui/esbuild"
 
 import pkgJson from "./package.json"
 
-async function copyVirtualModules() {
+async function copyVirtualModules(watch: boolean) {
   await mkdir(resolve("./dist/angular-demo-plugin"), {recursive: true}).catch()
   await mkdir(resolve("./dist/docs-plugin"), {recursive: true}).catch()
   await mkdir(resolve("./dist/react-demo-plugin"), {recursive: true}).catch()
@@ -28,9 +28,11 @@ async function copyVirtualModules() {
     ).catch()
   }
 
-  chokidar.watch(glob.sync("./src/*/virtual.d.ts")).on("change", () => {
-    void copyAll()
-  })
+  if (watch) {
+    chokidar.watch(glob.sync("./src/*/virtual.d.ts")).on("change", () => {
+      void copyAll()
+    })
+  }
 
   await copyAll()
 }
@@ -53,7 +55,7 @@ async function main(argv: string[]) {
     tsconfig: "tsconfig.lib.json",
   }
 
-  await copyVirtualModules()
+  await copyVirtualModules(IS_WATCH)
 
   await Promise.all([
     buildOrWatch(

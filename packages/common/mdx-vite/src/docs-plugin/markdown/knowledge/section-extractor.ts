@@ -34,6 +34,11 @@ export interface SectionExtractorOptions {
    * @default 0
    */
   minContentLength?: number
+
+  /**
+   * Prefix to use for page IDs.
+   */
+  pageIdPrefix?: string
 }
 
 export interface PageInfo {
@@ -68,11 +73,13 @@ export interface ExtractionResult {
 export class SectionExtractor {
   private readonly depths: Set<number>
   private readonly minContentLength: number
+  private readonly pageIdPrefix: string
 
   constructor(options?: SectionExtractorOptions) {
     const defaultDepths = [1, 2, 3, 4]
     this.depths = new Set(options?.depths ?? defaultDepths)
     this.minContentLength = options?.minContentLength ?? 0
+    this.pageIdPrefix = options?.pageIdPrefix ?? ""
   }
 
   /**
@@ -191,7 +198,7 @@ export class SectionExtractor {
     return {
       content,
       hash,
-      pageId: pageInfo.id,
+      pageId: `${this.pageIdPrefix}${pageInfo.id}`,
       pathname: pageInfo.pathname,
       title: pageInfo.title,
     }
@@ -246,7 +253,7 @@ export class SectionExtractor {
       pageFrontmatter: Object.keys(pageInfo.frontmatter).length
         ? pageInfo.frontmatter
         : undefined,
-      pageId: pageInfo.id,
+      pageId: `${this.pageIdPrefix}${pageInfo.id}`,
       rawContent: rawContent.trim(),
       terms: terms.length ? terms : undefined,
       types: sectionTypes.length ? sectionTypes : undefined,

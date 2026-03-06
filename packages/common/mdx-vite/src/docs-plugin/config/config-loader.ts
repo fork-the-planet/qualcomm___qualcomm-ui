@@ -4,9 +4,9 @@
 import {type Config, type CosmiconfigResult, cosmiconfigSync} from "cosmiconfig"
 
 import {removeTrailingSlash} from "../path-utils"
-import type {ResolvedQuiDocsConfig} from "../types"
 
 import {configSchema} from "./config-schema"
+import type {ResolvedQuiDocsConfig} from "./types"
 
 interface LoadedCosmicConfig {
   config: Config

@@ -3,18 +3,17 @@
 
 import {z, type ZodObject, type ZodSchema} from "zod"
 
+import type {NavMeta, RouteMeta} from "../nav-builder/types"
+
 import type {
   KnowledgeConfig,
   KnowledgeExtraFile,
-  NavMeta,
   OpenWebUiIntegration,
   PagesExportConfig,
   QuiDocsConfig,
   QuiDocsTypeDocOptions,
-  RouteMeta,
   SectionExportConfig,
-} from "../types"
-
+} from "./types"
 import {implement} from "./zod"
 
 export const navMetaSchema: ZodObject<{}> = implement<NavMeta>().with({
@@ -88,6 +87,7 @@ const knowledgeConfigSchema = implement<KnowledgeConfig>().with({
     })
     .optional(),
   outputPath: z.string().optional(),
+  pageIdPrefix: z.string().optional(),
   pages: pagesExportsSchema.optional(),
   sections: sectionsExportsSchema.optional(),
 })

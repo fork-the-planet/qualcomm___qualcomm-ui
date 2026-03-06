@@ -473,6 +473,7 @@ export interface SectionEntry {
 export interface KnowledgeSections {
   generatedAt: string
   hash: string
+  /** @inheritDoc */
   sections: SectionEntry[]
   totalSections: number
   version: 1
@@ -515,6 +516,7 @@ export interface PageEntry {
 export interface KnowledgePages {
   generatedAt: string
   hash: string
+  /** @inheritDoc */
   pages: PageEntry[]
   totalPages: number
   version: 1

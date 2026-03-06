@@ -15,16 +15,16 @@ import type {
   SectionEntry,
 } from "@qualcomm-ui/mdx-common"
 
-import {
-  getPathnameFromPathSegments,
-  getPathSegmentsFromFileName,
-} from "../../nav-builder"
 import type {
   KnowledgeExtraFile,
   KnowledgeFrontmatterConfig,
   PagesExportConfig,
   SectionExportConfig,
-} from "../../types"
+} from "../../config"
+import {
+  getPathnameFromPathSegments,
+  getPathSegmentsFromFileName,
+} from "../../nav-builder"
 import type {MdxFileReader} from "../markdown-file-reader"
 import {createRemarkProcessor} from "../remark-pipeline"
 

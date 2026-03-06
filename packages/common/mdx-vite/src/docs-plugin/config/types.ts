@@ -108,12 +108,16 @@ export interface KnowledgeConfig {
 
   /**
    * Extra files to include in knowledge output beyond the generated page content.
+   *
+   * @inheritDoc
    */
   extraFiles?: KnowledgeExtraFile[]
 
   /**
    * Configuration for which frontmatter fields to include in the generated
    * Markdown output. Uses glob patterns for flexible field selection.
+   *
+   * @inheritDoc
    */
   frontmatter?: KnowledgeFrontmatterConfig
 
@@ -122,6 +126,9 @@ export interface KnowledgeConfig {
    * knowledge to external services.
    */
   integrations?: {
+    /**
+     * @inheritDoc
+     */
     openWebUi?: OpenWebUiIntegration[]
   }
 
@@ -133,12 +140,21 @@ export interface KnowledgeConfig {
   outputPath?: string
 
   /**
+   * Prefix to use for page IDs.
+   */
+  pageIdPrefix?: string
+
+  /**
    * Configuration for whole-page JSON exports.
+   *
+   * @inheritDoc
    */
   pages?: PagesExportConfig
 
   /**
    * Configuration for header-scoped section exports.
+   *
+   * @inheritDoc
    */
   sections?: SectionExportConfig
 }
@@ -148,7 +164,7 @@ export interface KnowledgeConfig {
  */
 export interface PagesExportConfig {
   /**
-   * Output path for pages.json, relative to the manifest path.
+   * Output path for pages.json, relative to the public directory.
    * @default 'pages.json'
    */
   outputPath?: string
@@ -171,7 +187,7 @@ export interface SectionExportConfig {
   minContentLength?: number
 
   /**
-   * Output path for sections.json, relative to the manifest path.
+   * Output path for sections.json, relative to the public directory.
    * @default 'sections.json'
    */
   outputPath?: string
