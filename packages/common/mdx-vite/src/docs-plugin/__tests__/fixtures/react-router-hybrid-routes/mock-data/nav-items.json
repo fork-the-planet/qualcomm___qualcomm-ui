@@ -99,6 +99,53 @@
   {
     "depth": 1,
     "expanded": false,
+    "id": "/guide",
+    "items": [
+      {
+        "depth": 2,
+        "expanded": false,
+        "id": "/guide/ai-knowledge",
+        "items": [],
+        "pathname": "/guide/ai-knowledge",
+        "pathSegments": [
+          "guide",
+          "ai-knowledge"
+        ],
+        "title": "AI Knowledge"
+      },
+      {
+        "depth": 2,
+        "expanded": false,
+        "id": "/guide/markdown",
+        "items": [],
+        "pathname": "/guide/markdown",
+        "pathSegments": [
+          "guide",
+          "markdown"
+        ],
+        "title": "Markdown"
+      },
+      {
+        "depth": 2,
+        "expanded": false,
+        "id": "/guide/page-setup",
+        "items": [],
+        "pathname": "/guide/page-setup",
+        "pathSegments": [
+          "guide",
+          "page-setup"
+        ],
+        "title": "Page Setup"
+      }
+    ],
+    "pathSegments": [
+      "guide"
+    ],
+    "title": "Guide"
+  },
+  {
+    "depth": 1,
+    "expanded": false,
     "id": "/test",
     "items": [
       {

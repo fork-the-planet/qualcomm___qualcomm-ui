@@ -1,67 +1,44 @@
 [
   {
     "categories": [
-      "Introduction"
-    ],
-    "hideBreadcrumbs": true,
-    "id": "/pages/index.mdx-0",
-    "pathname": "/",
-    "pathSegments": [],
-    "title": "Introduction",
-    "content": "* `Log In`\n* `Home`\n\ntest\n\ntest\n\ntest",
-    "heading": "General",
-    "headingLevel": 1,
-    "href": "/"
-  },
-  {
-    "categories": [
       "Test",
+      "B",
       "B Test"
     ],
-    "id": "/pages/test/b/index.mdx",
-    "pathname": "/test/b",
+    "id": "/routes/test.b.test._index.mdx-0",
+    "pathname": "/test/b/test",
     "pathSegments": [
       "test",
-      "b"
+      "b",
+      "test"
     ],
-    "title": "B Test"
+    "title": "B Test",
+    "content": "Content for B test",
+    "heading": "B Test",
+    "headingLevel": 1,
+    "href": "/test/b/test"
   },
   {
     "categories": [
       "Test",
+      "a",
       "A Test"
     ],
-    "id": "/pages/test/a/index.mdx",
-    "pathname": "/test/a",
+    "id": "/routes/test.a.test._index.mdx",
+    "pathname": "/test/a/test",
     "pathSegments": [
       "test",
-      "a"
+      "a",
+      "test"
     ],
     "title": "A Test"
   },
   {
     "categories": [
       "Getting Started",
-      "Sign Up"
-    ],
-    "id": "/pages/getting-started/sign-up.mdx-0",
-    "pathname": "/getting-started/sign-up",
-    "pathSegments": [
-      "getting-started",
-      "sign-up"
-    ],
-    "title": "Sign Up",
-    "content": "Sign Up Test",
-    "heading": "Sign Up",
-    "headingLevel": 1,
-    "href": "/getting-started/sign-up"
-  },
-  {
-    "categories": [
-      "Getting Started",
       "Log In"
     ],
-    "id": "/pages/getting-started/log-in.mdx",
+    "id": "/routes/getting-started.log-in._index.mdx",
     "pathname": "/getting-started/log-in",
     "pathSegments": [
       "getting-started",
@@ -71,25 +48,10 @@
   },
   {
     "categories": [
-      "Getting Started"
-    ],
-    "id": "/pages/getting-started/index.mdx-0",
-    "pathname": "/getting-started",
-    "pathSegments": [
-      "getting-started"
-    ],
-    "title": "Getting Started",
-    "content": "Body\n\n`test code`",
-    "heading": "Getting Started",
-    "headingLevel": 1,
-    "href": "/getting-started"
-  },
-  {
-    "categories": [
       "Getting Started",
       "Home"
     ],
-    "id": "/pages/getting-started/home.mdx-0",
+    "id": "/routes/getting-started.home._index.mdx-0",
     "pathname": "/getting-started/home",
     "pathSegments": [
       "getting-started",
@@ -106,7 +68,7 @@
       "Getting Started",
       "Dedicated Devices"
     ],
-    "id": "/pages/getting-started/dedicated-devices.mdx",
+    "id": "/routes/getting-started.dedicated-devices._index.mdx",
     "pathname": "/getting-started/dedicated-devices",
     "pathSegments": [
       "getting-started",
@@ -116,10 +78,25 @@
   },
   {
     "categories": [
+      "Getting Started"
+    ],
+    "id": "/routes/getting-started._index.mdx-0",
+    "pathname": "/getting-started",
+    "pathSegments": [
+      "getting-started"
+    ],
+    "title": "Getting Started",
+    "content": "Body\n\n`test code`",
+    "heading": "Getting Started",
+    "headingLevel": 1,
+    "href": "/getting-started"
+  },
+  {
+    "categories": [
       "Best Practices",
       "Choosing Dependencies"
     ],
-    "id": "/pages/best-practices/choosing-dependencies.mdx-0",
+    "id": "/routes/best-practices.choosing-dependencies._index.mdx-0",
     "pathname": "/best-practices/choosing-dependencies",
     "pathSegments": [
       "best-practices",
@@ -136,7 +113,7 @@
       "Best Practices",
       "Choosing Dependencies"
     ],
-    "id": "/pages/best-practices/choosing-dependencies.mdx-1",
+    "id": "/routes/best-practices.choosing-dependencies._index.mdx-1",
     "pathname": "/best-practices/choosing-dependencies",
     "pathSegments": [
       "best-practices",
@@ -153,7 +130,7 @@
       "Best Practices",
       "Choosing Dependencies"
     ],
-    "id": "/pages/best-practices/choosing-dependencies.mdx-2",
+    "id": "/routes/best-practices.choosing-dependencies._index.mdx-2",
     "pathname": "/best-practices/choosing-dependencies",
     "pathSegments": [
       "best-practices",
@@ -170,7 +147,7 @@
       "Best Practices",
       "Choosing Dependencies"
     ],
-    "id": "/pages/best-practices/choosing-dependencies.mdx-3",
+    "id": "/routes/best-practices.choosing-dependencies._index.mdx-3",
     "pathname": "/best-practices/choosing-dependencies",
     "pathSegments": [
       "best-practices",
@@ -187,7 +164,7 @@
       "Best Practices",
       "Choosing Dependencies"
     ],
-    "id": "/pages/best-practices/choosing-dependencies.mdx-4",
+    "id": "/routes/best-practices.choosing-dependencies._index.mdx-4",
     "pathname": "/best-practices/choosing-dependencies",
     "pathSegments": [
       "best-practices",
@@ -198,5 +175,36 @@
     "heading": "Consider Alternatives",
     "headingLevel": 3,
     "href": "/best-practices/choosing-dependencies#consider-alternatives"
+  },
+  {
+    "categories": [
+      "Introduction"
+    ],
+    "hideBreadcrumbs": true,
+    "id": "/routes/_index.mdx-0",
+    "pathname": "/",
+    "pathSegments": [],
+    "title": "Introduction",
+    "content": "* `Log In`\n* `Home`\n\ntest\n\ntest\n\ntest",
+    "heading": "General",
+    "headingLevel": 1,
+    "href": "/"
+  },
+  {
+    "categories": [
+      "Getting Started",
+      "Sign Up"
+    ],
+    "id": "/routes/getting-started.sign-up._index/route.mdx-0",
+    "pathname": "/getting-started/sign-up",
+    "pathSegments": [
+      "getting-started",
+      "sign-up"
+    ],
+    "title": "Sign Up",
+    "content": "Sign Up Test",
+    "heading": "Sign Up",
+    "headingLevel": 1,
+    "href": "/getting-started/sign-up"
   }
 ]

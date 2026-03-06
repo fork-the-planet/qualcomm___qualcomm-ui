@@ -7,7 +7,7 @@ vi.mock("node:child_process", () => ({
   execSync: () => "",
 }))
 
-import {SearchIndexer} from "../internal"
+import {SearchIndexer} from "../search-indexer"
 
 import {readJsonSync, writeJsonSync} from "./utils"
 
@@ -15,17 +15,23 @@ const __filename = fileURLToPath(import.meta.url) // get the resolved path to th
 const __dirname = dirname(__filename) // get the name of the directory
 
 const filePaths = {
-  navItems: resolve(__dirname, "./fixtures/remix/mock-data/nav-items.json"),
-  pageMap: resolve(__dirname, "./fixtures/remix/mock-data/page-map.json"),
-  routesDir: resolve(__dirname, "./fixtures/remix/routes"),
+  navItems: resolve(
+    __dirname,
+    "./fixtures/react-router-hybrid-routes/mock-data/nav-items.json",
+  ),
+  pageMap: resolve(
+    __dirname,
+    "./fixtures/react-router-hybrid-routes/mock-data/page-map.json",
+  ),
+  routesDir: resolve(__dirname, "./fixtures/react-router-hybrid-routes/routes"),
   searchIndex: resolve(
     __dirname,
-    "./fixtures/remix/mock-data/search-index.json",
+    "./fixtures/react-router-hybrid-routes/mock-data/search-index.json",
   ),
 }
 
-describe("MDX Docs Plugin", () => {
-  test("Remix Search Indexer", () => {
+describe("QUI Docs Plugin", () => {
+  test("React Hybrid Routes Routes Search Indexer", () => {
     const mdxFiles = sync(`${filePaths.routesDir}/**/*.mdx`)
     const indexer = new SearchIndexer({
       navConfig: [
@@ -44,6 +50,9 @@ describe("MDX Docs Plugin", () => {
             {
               id: "home",
             },
+            {
+              id: "guide",
+            },
           ],
           expanded: true,
           id: "getting-started",
@@ -55,7 +64,8 @@ describe("MDX Docs Plugin", () => {
         },
       ],
       pageDirectory: "routes",
-      srcDir: resolve(__dirname, "./fixtures/remix"),
+      srcDir: resolve(__dirname, "./fixtures/react-router-hybrid-routes"),
+      throwOnError: true,
     })
 
     indexer.buildIndex(mdxFiles)
