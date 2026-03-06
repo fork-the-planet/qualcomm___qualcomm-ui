@@ -3,8 +3,8 @@
 
 import {config} from "dotenv"
 
-import type {OpenWebUiIntegration} from "../../docs-plugin"
-import {ConfigLoader} from "../../docs-plugin/internal"
+import type {OpenWebUiIntegration} from "../docs-plugin"
+import {ConfigLoader} from "../docs-plugin/config"
 
 export interface OpenWebUiCredentials {
   apiKey: string
@@ -22,19 +22,15 @@ export interface ResolvedOpenWebUiIntegration {
    */
   apiKey: string
   /**
-   * Environment name this integration references.
-   */
-  environment: string
-  /**
    * Knowledge base ID.
    */
   knowledgeId: string
   /**
-   * Integration name (key from integrations.openWebUi).
+   * Integration name.
    */
   name: string
   /**
-   * Output path from the referenced environment.
+   * Output path from the knowledge config.
    */
   outputPath: string
   /**
@@ -49,8 +45,6 @@ export interface ResolvedOpenWebUiIntegration {
  * Convention: `id: "dev"` loads `.env.dev` unless `envFile` is specified. If the
  * env file doesn't exist (common in CI), dotenv silently skips it and uses env
  * vars already set in the process.
- *
- * Reads from OPEN_WEB_UI_* env vars, with fallback to legacy WEB_UI_* vars.
  */
 export function loadOpenWebUiEnv(
   integration: OpenWebUiIntegration,
@@ -98,7 +92,6 @@ export function resolveOpenWebUiIntegration(
 
   return {
     apiKey: credentials.apiKey,
-    environment: integration.id,
     knowledgeId: credentials.knowledgeId,
     name,
     outputPath,
@@ -107,15 +100,13 @@ export function resolveOpenWebUiIntegration(
 }
 
 interface LoadOpenWebUiIntegrationsOptions {
-  /** Filter to integrations referencing specific environments */
-  environments?: string[]
   /** Filter to specific integration names */
   integrations?: string[]
 }
 
 /**
  * Loads OpenWebUI integration configurations for upload operations.
- * Returns resolved integrations with environment output paths.
+ * Returns resolved integrations with the shared output path.
  */
 export function loadOpenWebUiIntegrations(
   options: LoadOpenWebUiIntegrationsOptions = {},
@@ -127,12 +118,13 @@ export function loadOpenWebUiIntegrations(
   const configLoader = new ConfigLoader({})
   const resolvedConfig = configLoader.loadConfig()
   const knowledgeConfig = resolvedConfig.knowledge
-  const environments = knowledgeConfig?.environments
   const integrations = knowledgeConfig?.integrations?.openWebUi
 
   if (!integrations || integrations.length === 0) {
     return []
   }
+
+  const outputPath = knowledgeConfig?.outputPath ?? "public/exports"
 
   let filteredIntegrations = integrations
 
@@ -143,26 +135,9 @@ export function loadOpenWebUiIntegrations(
     )
   }
 
-  if (options.environments?.length) {
-    const filterSet = new Set(options.environments)
-    filteredIntegrations = filteredIntegrations.filter((integration) =>
-      filterSet.has(integration.id),
-    )
-  }
-
-  return filteredIntegrations.map((integration) => {
-    const envConfig = environments?.find((e) => e.id === integration.id)
-    if (!envConfig) {
-      throw new Error(
-        `Integration "${integration.id}" references unknown environment "${integration.id}". ` +
-          `Available environments: ${environments?.map((e) => e.id).join(", ") || "none"}`,
-      )
-    }
-
-    return {
-      integration,
-      name: integration.id,
-      outputPath: envConfig.outputPath,
-    }
-  })
+  return filteredIntegrations.map((integration) => ({
+    integration,
+    name: integration.id,
+    outputPath,
+  }))
 }

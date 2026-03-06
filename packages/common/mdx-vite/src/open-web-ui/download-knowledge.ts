@@ -6,9 +6,8 @@ import dotenv from "dotenv"
 import {mkdir, writeFile} from "node:fs/promises"
 import {resolve} from "node:path"
 
-import {getConfigFromEnv, loadEnv} from "../env"
-
 import {FilesApi, KnowledgeApi} from "./api"
+import {getConfigFromEnv, loadEnv} from "./env"
 
 export function addDownloadKnowledgeCommand() {
   program

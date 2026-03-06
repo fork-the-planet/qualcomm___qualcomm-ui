@@ -4,12 +4,12 @@
 import {program} from "@commander-js/extra-typings"
 import {createHash} from "node:crypto"
 import {writeFileSync} from "node:fs"
-import {access, readdir, readFile, stat} from "node:fs/promises"
+import {access, readFile} from "node:fs/promises"
 import {resolve} from "node:path"
 import {setTimeout} from "node:timers/promises"
 import ora from "ora"
 
-import {getConfigFromEnv, loadEnv, type SharedConfig} from "../env"
+import type {KnowledgePages} from "@qualcomm-ui/mdx-common"
 
 import {
   type ApiConfig,
@@ -20,6 +20,7 @@ import {
   type KnowledgeFilesResponse,
 } from "./api"
 import {loadOpenWebUiIntegrations, resolveOpenWebUiIntegration} from "./common"
+import {getConfigFromEnv, loadEnv, type SharedConfig} from "./env"
 import {KnowledgeCleaner} from "./knowledge-cleaner"
 
 interface Config extends SharedConfig {
@@ -164,22 +165,9 @@ class Uploader {
     return {success: false}
   }
 
-  private async uploadDirectory() {
-    const allFileNames = await readdir(this.config.knowledgeFilePath)
-    const allowedExtensions = [".md", ".mdx", ".txt", ".pdf"]
-    const fileNames = allFileNames.filter((name) =>
-      allowedExtensions.some((ext) => name.endsWith(ext)),
-    )
-    const files = await Promise.all(
-      fileNames.map(async (name) => ({
-        contents: await readFile(
-          resolve(this.config.knowledgeFilePath, name),
-          "utf-8",
-        ),
-        name,
-      })),
-    )
-
+  private async uploadFiles(
+    files: Array<{contents: string; name: string}>,
+  ): Promise<void> {
     const knowledge = await this.knowledgeApi.getById(this.config.knowledgeId)
     const receivedFiles = knowledge.files?.length
       ? knowledge.files.map(toKnowledgeFile)
@@ -206,14 +194,35 @@ class Uploader {
       }
     }
 
+    // Remove stale files that are no longer in the source
+    const expectedNames = new Set(files.map((f) => f.name))
+    const staleFiles = receivedFiles.filter(
+      (f) => f.meta.name && !expectedNames.has(f.meta.name),
+    )
+    for (const stale of staleFiles) {
+      try {
+        const spinner = ora(`Removing stale file: ${stale.meta.name}`).start()
+        await this.knowledgeApi.removeFile(
+          this.config.knowledgeId,
+          stale.id,
+          true,
+        )
+        spinner.succeed(`Removed stale file: ${stale.meta.name}`)
+      } catch (e) {
+        console.warn(`Failed to remove stale file ${stale.meta.name}:`, e)
+      }
+    }
+
     if (skippedCount > 0) {
       console.debug(
         `Skipped uploading ${skippedCount} files because their contents did not change`,
       )
     }
-    const uploadCount = Math.abs(successCount)
-    if (uploadCount) {
-      console.debug(`Successfully uploaded ${uploadCount} files`)
+    if (successCount > 0) {
+      console.debug(`Successfully uploaded ${successCount} files`)
+    }
+    if (staleFiles.length > 0) {
+      console.debug(`Removed ${staleFiles.length} stale file(s)`)
     }
     if (failureCount > 0) {
       console.debug(`Failed to upload ${failureCount} files`)
@@ -238,12 +247,8 @@ class Uploader {
     if (knowledgeFile) {
       try {
         const fileId = knowledgeFile.id
-        const fileString = await readFile(
-          resolve(this.config.knowledgeFilePath, name),
-          "utf-8",
-        )
         const spinner = ora(`Updating ${name}`).start()
-        await this.filesApi.updateDataContent(fileId, fileString)
+        await this.filesApi.updateDataContent(fileId, contents)
         await this.knowledgeApi.updateFile(this.config.knowledgeId, fileId)
         spinner.succeed(`Updated ${name}`)
         return {success: true}
@@ -254,9 +259,7 @@ class Uploader {
     }
 
     const spinner = ora(`Uploading ${name}`).start()
-    const fileBuffer = await readFile(
-      resolve(this.config.knowledgeFilePath, name),
-    )
+    const fileBuffer = Buffer.from(contents, "utf-8")
 
     let uploadedFileId: string | undefined = undefined
     try {
@@ -299,21 +302,35 @@ class Uploader {
     }
   }
 
+  private async uploadFromPagesJson(pagesJsonPath: string): Promise<void> {
+    const pagesContent = await readFile(pagesJsonPath, "utf-8")
+    const pagesData: KnowledgePages = JSON.parse(pagesContent)
+
+    const files = pagesData.pages.map((page) => ({
+      contents: page.content,
+      name: `${page.pageId}.md`,
+    }))
+
+    return this.uploadFiles(files)
+  }
+
   async uploadKnowledge() {
-    const resolvedPath = resolve(this.config.knowledgeFilePath)
-    if (
-      !(await access(resolvedPath)
-        .then(() => true)
-        .catch(() => false))
-    ) {
-      throw new Error(`File or folder not found at ${resolvedPath}`)
+    await this.cleaner.cleanUpOrphanedFiles()
+
+    const inputPath = resolve(this.config.knowledgeFilePath)
+    const pagesJsonPath = inputPath.endsWith("pages.json")
+      ? inputPath
+      : resolve(inputPath, "pages.json")
+
+    const exists = await access(pagesJsonPath)
+      .then(() => true)
+      .catch(() => false)
+
+    if (!exists) {
+      throw new Error(`pages.json not found at ${pagesJsonPath}`)
     }
-    const stats = await stat(resolvedPath)
-    if (stats.isDirectory()) {
-      return this.uploadDirectory()
-    } else {
-      console.error("Not a directory, can't upload.")
-    }
+
+    return this.uploadFromPagesJson(pagesJsonPath)
   }
 }
 
@@ -324,7 +341,8 @@ export function addUploadKnowledgeCommand() {
   ) {
     const sharedConfig = getConfigFromEnv()
 
-    const knowledgeFilePath = knowledgePath || process.env.KNOWLEDGE_OUTPUT_PATH
+    const knowledgeFilePath =
+      knowledgePath || process.env.KNOWLEDGE_OUTPUT_PATH || "public/exports"
 
     if (!knowledgeFilePath) {
       throw new Error(
@@ -352,10 +370,6 @@ export function addUploadKnowledgeCommand() {
       "-i, --integration <integrations>",
       "Comma-separated list of integrations to upload to (default: all)",
     )
-    .option(
-      "-e, --environment <environments>",
-      "Comma-separated list of environments to filter integrations by (default: all)",
-    )
     .action(async (options) => {
       loadEnv()
 
@@ -363,13 +377,8 @@ export function addUploadKnowledgeCommand() {
         ?.split(",")
         .map((e) => e.trim())
         .filter(Boolean)
-      const environmentFilter = options.environment
-        ?.split(",")
-        .map((e) => e.trim())
-        .filter(Boolean)
 
       const integrations = loadOpenWebUiIntegrations({
-        environments: environmentFilter,
         integrations: integrationFilter,
       })
 

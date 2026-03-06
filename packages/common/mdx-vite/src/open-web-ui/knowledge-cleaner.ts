@@ -1,9 +1,8 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {SharedConfig} from "../env"
-
 import {type ApiConfig, FilesApi, KnowledgeApi} from "./api"
+import type {SharedConfig} from "./env"
 
 export interface KnowledgeCleanerConfig extends SharedConfig {}
 
@@ -20,17 +19,9 @@ export class KnowledgeCleaner {
     this.knowledgeApi = new KnowledgeApi(apiConfig)
   }
 
-  async cleanUpOrphanedFiles() {
-    const files = await this.filesApi.list()
-    const knowledgeBases = await this.knowledgeApi.list()
-    const knowledgeIds = knowledgeBases.map((k) => k.id)
-    for (const file of files) {
-      const collectionName = file.meta?.collection_name
-      if (collectionName && !knowledgeIds.includes(collectionName)) {
-        await this.filesApi.delete(file.id)
-      } else if (file.data?.status === "failed") {
-        await this.filesApi.delete(file.id)
-      }
-    }
-  }
+  /**
+   * TODO: fix. A recent OWUI update changed the KnowledgeApi.list command. We used
+   *  that to determine which files belonged to which Knowledge Base.
+   */
+  async cleanUpOrphanedFiles() {}
 }
