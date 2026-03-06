@@ -626,10 +626,7 @@ Some content.
 | true    | false         | check  |
 `
       const extractor = new SectionExtractor()
-      const {sections} = extractor.extract(
-        parseGfmMarkdown(markdown),
-        pageInfo,
-      )
+      const {sections} = extractor.extract(parseGfmMarkdown(markdown), pageInfo)
 
       expect(sections[0].rawContent).toContain("| checked |")
       expect(sections[0].rawContent).not.toContain("\\|")
