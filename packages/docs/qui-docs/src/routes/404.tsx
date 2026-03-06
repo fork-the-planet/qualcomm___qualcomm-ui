@@ -1,3 +1,8 @@
-import {NotFoundPage} from "@qualcomm-ui/react-router-utils/client"
+import {useSearchParams} from "react-router"
 
-export default NotFoundPage
+import {NotFound} from "@qualcomm-ui/react-mdx/not-found"
+
+export default function NotFoundPage() {
+  const [params] = useSearchParams()
+  return <NotFound url={params.get("url")} />
+}
