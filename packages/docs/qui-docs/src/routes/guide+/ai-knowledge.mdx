@@ -41,7 +41,10 @@ export default {
     exclude: ["**/internal/**", "*guide+/swagger*"],
     extraFiles: [
       {
-        contents: readFileSync(resolve(__dirname, "../some-package/CHANGELOG.md"), "utf-8"),
+        contents: readFileSync(
+          resolve(__dirname, "../some-package/CHANGELOG.md"),
+          "utf-8",
+        ),
         id: "changelog",
       },
     ],
@@ -82,10 +85,7 @@ Generated files are written to `{publicDir}/{outputPath}/`. The default output p
       items: [
         {
           name: "exports",
-          items: [
-            {name: "pages.json"},
-            {name: "sections.json"},
-          ],
+          items: [{name: "pages.json"}, {name: "sections.json"}],
         },
       ],
     },
@@ -142,10 +142,7 @@ export default {
   knowledge: {
     baseUrl: "https://docs.example.com",
     integrations: {
-      openWebUi: [
-        {id: "production"},
-        {id: "staging", envFile: ".env.staging"},
-      ],
+      openWebUi: [{id: "production"}, {id: "staging", envFile: ".env.staging"}],
     },
   },
 } satisfies QuiDocsConfig
@@ -185,10 +182,10 @@ qui-mdx-vite upload-knowledge --force
 
 #### CLI Options
 
-| Option                      | Description                                       |
-| :-------------------------- | :------------------------------------------------ |
-| `-p, --path <path>`         | Override knowledge file path                      |
-| `-i, --integration <names>` | Comma-separated integrations to upload to         |
-| `--force`                   | Force upload even if content unchanged            |
+| Option                      | Description                               |
+| :-------------------------- | :---------------------------------------- |
+| `-p, --path <path>`         | Override knowledge file path              |
+| `-i, --integration <names>` | Comma-separated integrations to upload to |
+| `--force`                   | Force upload even if content unchanged    |
 
 When no integrations are configured, the upload command falls back to credentials from `OPEN_WEB_UI_*` environment variables.
