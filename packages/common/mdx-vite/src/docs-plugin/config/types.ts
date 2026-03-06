@@ -159,40 +159,6 @@ export interface KnowledgeConfig {
   sections?: SectionExportConfig
 }
 
-/**
- * Configuration for whole-page exports.
- */
-export interface PagesExportConfig {
-  /**
-   * Output path for pages.json, relative to the public directory.
-   * @default 'pages.json'
-   */
-  outputPath?: string
-}
-
-/**
- * Configuration for header-scoped section exports.
- */
-export interface SectionExportConfig {
-  /**
-   * Header depths that define section boundaries.
-   * @default [1, 2, 3]
-   */
-  depths?: number[]
-
-  /**
-   * Minimum content length to create a section entry.
-   * @default 0
-   */
-  minContentLength?: number
-
-  /**
-   * Output path for sections.json, relative to the public directory.
-   * @default 'sections.json'
-   */
-  outputPath?: string
-}
-
 export interface SearchIndexerOptions {
   /**
    * Disable the file cache. This cache stores the result of parsed MDX files based
@@ -312,4 +278,38 @@ export interface ResolvedQuiDocsConfig extends QuiDocsConfig {
    */
   filePath: string
   pageDirectory: string
+}
+
+/**
+ * Configuration for whole-page exports.
+ */
+export interface PagesExportConfig {
+  /**
+   * Output path for pages.json, relative to the public directory.
+   * @default 'pages.json'
+   */
+  outputPath?: string
+}
+
+/**
+ * Configuration for header-scoped section exports.
+ */
+export interface SectionExportConfig {
+  /**
+   * Header depths that define section boundaries.
+   * @default [1, 2, 3]
+   */
+  depths?: number[]
+
+  /**
+   * Minimum content length to create a section entry.
+   * @default 0
+   */
+  minContentLength?: number
+
+  /**
+   * Output path for sections.json, relative to the public directory.
+   * @default 'sections.json'
+   */
+  outputPath?: string
 }
