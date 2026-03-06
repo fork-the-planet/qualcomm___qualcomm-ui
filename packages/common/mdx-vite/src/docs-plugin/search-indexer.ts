@@ -344,9 +344,7 @@ export class SearchIndexer {
       const heading = section.headerPath.at(-1) ?? defaultSection.title
       return {
         ...defaultSection,
-        content: section.content?.length
-          ? section.content.split("\n").join(" — ")
-          : undefined,
+        content: section.content || undefined,
         heading,
         headingLevel: section.headingLevel,
         href: section.url ?? defaultSection.pathname,
