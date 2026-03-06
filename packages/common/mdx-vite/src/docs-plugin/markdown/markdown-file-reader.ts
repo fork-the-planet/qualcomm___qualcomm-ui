@@ -15,9 +15,9 @@ import {unified} from "unified"
 import type {PageFrontmatter} from "@qualcomm-ui/mdx-common"
 import type {QuiPropTypes} from "@qualcomm-ui/typedoc-common"
 
-import type {PageTimestampMetadataMode} from "../../../types"
-import {frontmatterSchema} from "../../utils"
+import type {PageTimestampMetadataMode} from "../types"
 
+import {frontmatterSchema} from "./frontmatter-schema"
 import type {IndexedPage, IndexedSection} from "./markdown.types"
 
 export interface GitMetadata {
@@ -79,7 +79,7 @@ interface PageCache {
   pageDocPropSections: IndexedSection[]
 }
 
-export class MarkdownFileReader {
+export class MdxFileReader {
   cachedFileCount = 0
   logWarnings = true
   private mdxCache: Record<string, PageCache> = {}
@@ -126,23 +126,18 @@ export class MarkdownFileReader {
     }
   }
 
-  readFile(filepath: string): {
-    cached: Omit<PageCache, "md5"> | undefined
-    fileContents: string
-    frontmatter: PageFrontmatter
-  } {
-    const fileContents = readFileSync(filepath, "utf-8")
-
-    const cached = this.checkCache(filepath, fileContents)
-
+  private parseFrontmatter(
+    filepath: string,
+    fileContents: string,
+    cachedFrontmatter?: PageFrontmatter,
+  ): PageFrontmatter {
     let file:
       | {data: {frontmatter: PageFrontmatter}}
       | ReturnType<typeof unified.processSync>
-    if (cached?.frontmatter) {
-      file = {data: {frontmatter: cached.frontmatter}}
+    if (cachedFrontmatter) {
+      file = {data: {frontmatter: cachedFrontmatter}}
     } else {
-      // only parse the yaml section because we just need the frontmatter at this
-      // stage.
+      // Only parse the YAML section — we just need the frontmatter at this stage.
       const yamlSection = fileContents.substring(
         0,
         fileContents.indexOf("\n---") + 4,
@@ -182,6 +177,14 @@ export class MarkdownFileReader {
       })
     }
 
+    return frontmatter
+  }
+
+  private enrichWithGitMetadata(
+    filepath: string,
+    frontmatter: PageFrontmatter,
+    cached: Omit<PageCache, "md5"> | undefined,
+  ): void {
     // In dev mode, only fetch git metadata for new files (not in cache).
     // For file updates, reuse cached git metadata to avoid repeated git calls.
     // In production mode, always fetch fresh git metadata.
@@ -197,7 +200,6 @@ export class MarkdownFileReader {
         frontmatter.updatedBy = gitMetadata.updatedBy
       }
     } else if (!cached && existingCache) {
-      // Dev mode cache miss (file updated) - reuse git metadata from previous cache
       if (!frontmatter.updatedOn && existingCache.frontmatter.updatedOn) {
         frontmatter.updatedOn = existingCache.frontmatter.updatedOn
       }
@@ -205,7 +207,25 @@ export class MarkdownFileReader {
         frontmatter.updatedBy = existingCache.frontmatter.updatedBy
       }
     }
+  }
 
+  /**
+   * Synchronous file read with MD5 caching and git metadata enrichment.
+   * Used by the search indexer on every HMR update.
+   */
+  readFileSync(filepath: string): {
+    cached: Omit<PageCache, "md5"> | undefined
+    fileContents: string
+    frontmatter: PageFrontmatter
+  } {
+    const fileContents = readFileSync(filepath, "utf-8")
+    const cached = this.checkCache(filepath, fileContents)
+    const frontmatter = this.parseFrontmatter(
+      filepath,
+      fileContents,
+      cached?.frontmatter,
+    )
+    this.enrichWithGitMetadata(filepath, frontmatter, cached)
     return {cached, fileContents, frontmatter}
   }
 

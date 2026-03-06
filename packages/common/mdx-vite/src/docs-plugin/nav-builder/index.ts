@@ -1,3 +1,4 @@
 export * from "./get-route-meta"
 export * from "./nav-builder"
 export * from "./page-map"
+export * from "./transform-route-meta-array"

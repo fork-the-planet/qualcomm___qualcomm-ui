@@ -3,24 +3,15 @@
 
 import {type Config, type CosmiconfigResult, cosmiconfigSync} from "cosmiconfig"
 
-import type {QuiDocsConfig} from "../types"
+import {removeTrailingSlash} from "../path-utils"
+import type {ResolvedQuiDocsConfig} from "../types"
 
 import {configSchema} from "./config-schema"
-import {removeTrailingSlash} from "./utils"
 
 interface LoadedCosmicConfig {
   config: Config
   filepath: string
   isEmpty?: boolean
-}
-
-export interface ResolvedQuiDocsConfig extends QuiDocsConfig {
-  appDirectory: string
-  /**
-   * full path to the cosmiconfig file.
-   */
-  filePath: string
-  pageDirectory: string
 }
 
 export interface ConfigLoaderOptions {

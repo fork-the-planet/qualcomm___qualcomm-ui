@@ -19,8 +19,7 @@ import type {
   QuiPropTypes,
 } from "@qualcomm-ui/typedoc-common"
 
-import type {IndexedSection} from "../markdown"
-import {extractNamesFromAttribute} from "../mdx-utils"
+import {extractNamesFromAttribute, type IndexedSection} from "../markdown"
 
 function extractPickPropsRecord(
   node: MdxJsxAttribute,
@@ -251,7 +250,7 @@ export class DocPropsIndexer {
 
     const comment = prop.comment
     if (!comment) {
-      return {content: [], heading, richContent: []}
+      return {content: [], heading}
     }
 
     const content = {
@@ -262,6 +261,6 @@ export class DocPropsIndexer {
           .join(""),
       ],
     }
-    return {content: [content], heading, richContent: []}
+    return {content: [content], heading}
   }
 }

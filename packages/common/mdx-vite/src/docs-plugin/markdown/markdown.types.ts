@@ -5,17 +5,19 @@ import type {
   PageHeading,
   PageSection,
   PageSectionContent,
-  RichContentNode,
+  SectionEntry,
 } from "@qualcomm-ui/mdx-common"
 
+/**
+ * Used by DocPropsIndexer for TypeDoc prop search sections.
+ */
 export interface IndexedSection {
   content: PageSectionContent[]
   heading: PageHeading | null
-  richContent: RichContentNode[]
 }
 
 export interface IndexedPage {
-  sections: IndexedSection[]
+  sections: SectionEntry[]
   toc: PageHeading[]
 }
 

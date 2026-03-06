@@ -5,15 +5,7 @@ import {z, type ZodObject} from "zod"
 
 import type {PageFrontmatter} from "@qualcomm-ui/mdx-common"
 
-import {implement} from "./zod"
-
-export const isDefined = (
-  value: string | boolean | object | null | undefined | number,
-): boolean => typeof value !== "undefined" && value !== null
-
-export function defined<T>(value: T | null | undefined): value is T {
-  return typeof value !== "undefined" && value !== null
-}
+import {implement} from "../config/zod"
 
 /**
  * Used to validate the MDX frontmatter and emit warnings for pages that violate the
@@ -37,17 +29,3 @@ export const frontmatterSchema: ZodObject<{}> =
     updatedBy: z.string().optional(),
     updatedOn: z.string().optional(),
   })
-
-/**
- * Winblows fix
- */
-export function fixPath(str: string): string {
-  return str.replaceAll("\\", "/")
-}
-
-/**
- * Removes the trailing slash from a string.
- */
-export function removeTrailingSlash(str: string): string {
-  return str.endsWith("/") ? str.substring(0, str.length - 1) : str
-}

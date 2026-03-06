@@ -10,13 +10,9 @@ import type {
   PageSection,
 } from "@qualcomm-ui/mdx-common"
 import {capitalCase} from "@qualcomm-ui/utils/change-case"
+import {defined} from "@qualcomm-ui/utils/guard"
 
-import type {
-  NavMeta,
-  RouteMetaEntryInternal,
-  RouteMetaInternal,
-} from "../../../types"
-import {defined} from "../../utils"
+import type {NavMeta, RouteMetaEntryInternal, RouteMetaInternal} from "../types"
 
 import {getRouteMeta} from "./get-route-meta"
 

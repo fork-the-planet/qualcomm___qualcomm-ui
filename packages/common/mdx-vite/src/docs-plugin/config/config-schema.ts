@@ -5,13 +5,10 @@ import {z, type ZodObject, type ZodSchema} from "zod"
 
 import type {
   KnowledgeConfig,
-  KnowledgeEnvironment,
-  KnowledgeExportsConfig,
   KnowledgeExtraFile,
-  KnowledgeIntegrationConfig,
-  KnowledgeIntegrations,
   NavMeta,
   OpenWebUiIntegration,
+  PagesExportConfig,
   QuiDocsConfig,
   QuiDocsTypeDocOptions,
   RouteMeta,
@@ -61,12 +58,13 @@ const knowledgeExtraFileSchema = implement<KnowledgeExtraFile>().with({
 const frontmatterConfigSchema = z
   .object({
     exclude: z.array(z.string()).optional(),
-    extraFields: z
-      .record(z.string(), z.union([z.string(), z.array(z.string())]))
-      .optional(),
     include: z.array(z.string()).optional(),
   })
   .optional()
+
+const pagesExportsSchema = implement<PagesExportConfig>().with({
+  outputPath: z.string().optional(),
+})
 
 const sectionsExportsSchema = implement<SectionExportConfig>().with({
   depths: z.array(z.number()).optional(),
@@ -74,70 +72,24 @@ const sectionsExportsSchema = implement<SectionExportConfig>().with({
   outputPath: z.string().optional(),
 })
 
-const knowledgeExportsSchema = implement<KnowledgeExportsConfig>().with({
-  enabled: z.boolean().optional(),
-  exclude: z.array(z.string()).optional(),
-  extraFiles: z.array(knowledgeExtraFileSchema).optional(),
-  frontmatter: frontmatterConfigSchema,
-  generateBulkZip: z.boolean().optional(),
-  generateManifest: z.boolean().optional(),
-  manifestPath: z.string().optional(),
-  metadata: z.record(z.string(), z.string()).optional(),
-  pageTitlePrefix: z.string().optional(),
-  sections: sectionsExportsSchema.optional(),
-  staticPath: z.string().optional(),
-})
-
-const knowledgeIntegrationSchema = implement<KnowledgeIntegrationConfig>().with(
-  {
-    baseUrl: z.string().optional(),
-    description: z.string().optional(),
-    exclude: z.array(z.string()).optional(),
-    exports: knowledgeExportsSchema.optional(),
-    extraFiles: z.array(knowledgeExtraFileSchema).optional(),
-    frontmatter: frontmatterConfigSchema,
-    metadata: z.record(z.string(), z.string()).optional(),
-    name: z.string().optional(),
-    outputMode: z
-      .union([z.literal("per-page"), z.literal("aggregated")])
-      .optional(),
-    outputPath: z.string().optional(),
-    pageIdPrefix: z.string().optional(),
-    pageTitlePrefix: z.string().optional(),
-  },
-)
-
-const knowledgeEnvironmentSchema = implement<KnowledgeEnvironment>().with({
-  baseUrl: z.string().optional(),
-  description: z.string().optional(),
-  exclude: z.array(z.string()).optional(),
-  exports: knowledgeExportsSchema.optional(),
-  extraFiles: z.array(knowledgeExtraFileSchema).optional(),
-  frontmatter: frontmatterConfigSchema,
-  id: z.string(),
-  metadata: z.record(z.string(), z.string()).optional(),
-  name: z.string().optional(),
-  outputMode: z
-    .union([z.literal("per-page"), z.literal("aggregated")])
-    .optional(),
-  outputPath: z.string(),
-  pageIdPrefix: z.string().optional(),
-  pageTitlePrefix: z.string().optional(),
-})
-
 const openWebUiIntegrationSchema = implement<OpenWebUiIntegration>().with({
   envFile: z.string().optional(),
   id: z.string(),
 })
 
-const knowledgeIntegrationsSchema = implement<KnowledgeIntegrations>().with({
-  openWebUi: z.array(openWebUiIntegrationSchema).optional(),
-})
-
 const knowledgeConfigSchema = implement<KnowledgeConfig>().with({
-  environments: z.array(knowledgeEnvironmentSchema).optional(),
-  global: knowledgeIntegrationSchema.optional(),
-  integrations: knowledgeIntegrationsSchema.optional(),
+  baseUrl: z.string().optional(),
+  exclude: z.array(z.string()).optional(),
+  extraFiles: z.array(knowledgeExtraFileSchema).optional(),
+  frontmatter: frontmatterConfigSchema,
+  integrations: z
+    .object({
+      openWebUi: z.array(openWebUiIntegrationSchema).optional(),
+    })
+    .optional(),
+  outputPath: z.string().optional(),
+  pages: pagesExportsSchema.optional(),
+  sections: sectionsExportsSchema.optional(),
 })
 
 export const configSchema = implement<QuiDocsConfig>().with({
@@ -167,6 +119,7 @@ export const configSchema = implement<QuiDocsConfig>().with({
     ])
     .optional(),
   routingStrategy: z.union([z.literal("vite-generouted"), z.any()]).optional(),
+  throwOnError: z.boolean().optional(),
   typeDocProps: z.string().optional(),
   typeDocPropsOptions: typeDocPropsSchema.optional(),
 })
