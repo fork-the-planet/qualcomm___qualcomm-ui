@@ -1,6 +1,6 @@
 ---
 title: AI Knowledge
-description: Export documentation as LLM-ready Markdown files.
+description: Generate structured JSON exports from documentation for LLM consumption and RAG pipelines.
 ---
 
 import {FileTree} from "@qualcomm-ui/react-mdx/file-tree"
@@ -12,427 +12,183 @@ import {TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
 
 ## Overview
 
-QUI Docs provides two mechanisms for generating LLM-compatible documentation:
+The knowledge system transforms MDX documentation into two JSON exports:
 
-- **Page Exports**: Generate downloadable markdown files for each documentation page, served from the public directory
-- **Knowledge Generation**: CLI tool for creating aggregated or per-page knowledge bases for OpenWebUI and other LLM platforms
+- **`sections.json`** — Header-scoped sections for RAG pipelines and semantic search
+- **`pages.json`** — Full page content for LLM context windows and OpenWebUI upload
 
-Both features transform MDX content into clean markdown by:
+Content processing includes:
 
 - Replacing `<TypeDocProps />` components with JSON property documentation
 - Inlining demo source code from referenced demo files
 - Converting theme tables to JSON data
 - Resolving relative imports and links
 
-## Page Exports
+Generation runs automatically during `buildStart` (production builds) and `configureServer` (dev server initialization). The `knowledge` field on `QuiDocsConfig` enables generation — no `enabled` flag is required.
 
-The page exports feature generates downloadable markdown files during build and dev server initialization. When enabled, each documentation page displays a "Copy Page" button and download menu in the page header.
+## Configuration
 
-### Configuration
-
-Enable page exports in your `qui-docs.config.ts`:
+Define the `knowledge` field in your `qui-docs.config.ts`:
 
 ```typescript
-import type {QuiDocsConfig} from "@qualcomm-ui/mdx-vite"
-
-export default {
-  // ... existing config
-  knowledge: {
-    global: {
-      baseUrl: "https://docs.example.com",
-      exports: {
-        enabled: true,
-        staticPath: "exports/md",
-      },
-    },
-  },
-} satisfies QuiDocsConfig
-```
-
-### Options
-
-#### KnowledgeExportsConfig
-
-<TypeDocProps name="KnowledgeExportsConfig" partial />
-
-### Output Format
-
-Each exported Markdown file includes:
-
-- YAML frontmatter with the page URL and any configured metadata
-- Page title as an `h1` heading
-- Processed content with demos and TypeDoc props expanded
-- Related source files from demo imports (when applicable)
-
-Example output:
-
-````markdown
----
-url: https://docs.example.com/components/button
----
-
-# Button
-
-A button triggers an action or event when activated.
-
-## Usage
-
-```tsx
-import {Button} from "@qualcomm-ui/react/button"
-
-export function BasicButton() {
-  return <Button>Click me</Button>
-}
-```
-````
-
-### UI Integration
-
-When exports are enabled, the page header displays:
-
-- **Copy Page button**: Copies the page content as Markdown to the clipboard
-- **Context menu**: Provides options to copy or download the page as a `.md` file
-
-These actions only appear on pages that have been successfully exported.
-
-## Manifest and Bulk Download
-
-When page exports are enabled, the system generates a manifest file and bulk download archive for programmatic access to all documentation.
-
-### Endpoints
-
-| Endpoint                 | Description                                     |
-| ------------------------ | ----------------------------------------------- |
-| `/exports/manifest.json` | JSON manifest with file metadata and MD5 hashes |
-| `/exports/bulk.zip`      | Archive containing all exported markdown files  |
-
-### Manifest Schema
-
-The manifest provides metadata for each exported file and an aggregate hash for change detection:
-
-#### ManifestEntry
-
-<TypeDocProps name="ManifestEntry" partial />
-
-#### ExportManifest
-
-<TypeDocProps name="ExportManifest" partial />
-
-### Configuration
-
-Configure manifest and bulk download generation in your exports config:
-
-```typescript
-export default {
-  knowledge: {
-    global: {
-      baseUrl: "https://docs.example.com",
-      exports: {
-        enabled: true,
-        generateManifest: true, // default: true
-        generateBulkZip: true, // default: true
-        manifestPath: "exports", // default: 'exports', relative to `/public`
-      },
-    },
-  },
-} satisfies QuiDocsConfig
-```
-
-## Knowledge Generation CLI
-
-The `generate-llms-txt` command creates knowledge bases from your documentation for use with OpenWebUI or other LLM platforms.
-
-### Basic Usage
-
-```shell
-qui-mdx-vite generate-llms-txt --output-mode per-page -o ./knowledge
-```
-
-### Configuration Priority
-
-Configuration is resolved in the following order (highest to lowest):
-
-1. CLI options
-2. Config file (`qui-docs.config.ts`) - see [Configuration Reference](./#configuration-reference)
-3. Environment variables
-
-### CLI Options
-
-| Option                     | Description                                       |
-| :------------------------- | :------------------------------------------------ |
-| `-m, --output-mode <mode>` | Required. Output mode: `per-page` or `aggregated` |
-| `-o, --outputPath <path>`  | Output file or directory                          |
-| `-e, --environment <envs>` | Comma-separated list of environments to generate  |
-| `-n, --name <name>`        | Project name for the output header                |
-| `-d, --description <desc>` | Project description                               |
-| `--base-url <url>`         | Base URL for documentation links                  |
-| `--exclude <patterns...>`  | Glob patterns to exclude                          |
-| `--metadata <pairs...>`    | Metadata key-value pairs (format: `key=value`)    |
-| `--clean`                  | Clean output path before generating               |
-| `-v, --verbose`            | Enable verbose logging                            |
-| `--env <path>`             | Load environment variables from a specific file   |
-
-#### Output Modes
-
-| Mode         | Description                                             |
-| :----------- | :------------------------------------------------------ |
-| `per-page`   | Generates individual Markdown files for each page       |
-| `aggregated` | Generates a single `llms.txt` file containing all pages |
-
-### Environment Variables
-
-Environment variables serve as fallbacks when values are not specified via CLI or config file:
-
-| Variable                | Description                              |
-| :---------------------- | :--------------------------------------- |
-| `DOCS_SITE_BASE_URL`    | Base URL for documentation links         |
-| `KNOWLEDGE_OUTPUT_PATH` | Output path for generated files          |
-| `FILE_EXCLUDE_PATTERN`  | Comma-separated glob patterns to exclude |
-| `PAGE_TITLE_PREFIX`     | Prefix to prepend to page titles         |
-
-### Examples
-
-Generate an aggregated llms.txt file:
-
-```shell
-qui-mdx-vite generate-llms-txt \
-  --output-mode aggregated \
-  -o public/llms-full.txt \
-  --name "My Component Library" \
-  --clean
-```
-
-Generate per-page exports with exclusions:
-
-```shell
-qui-mdx-vite generate-llms-txt \
-  --output-mode per-page \
-  -o knowledge-base \
-  --exclude "**/internal/**" "**/drafts/**" \
-  --base-url "https://docs.example.com" \
-  --metadata "version=1.0.0" "framework=react"
-```
-
-Load environment from a specific file:
-
-```shell
-qui-mdx-vite generate-llms-txt --output-mode per-page --env .env.production
-```
-
-## Configuration Reference
-
-Knowledge generation supports two configuration patterns:
-
-1. **Single environment** - Use `knowledge.global` for simple setups
-2. **Multi-environment** - Use `knowledge.environments` to generate to multiple outputs with different configurations
-
-### Single Environment Configuration
-
-```typescript
-// qui-docs.config.ts
-import type {QuiDocsConfig} from "@qualcomm-ui/mdx-vite"
-
-export default {
-  // ...
-  knowledge: {
-    global: {
-      baseUrl: "https://docs.example.com",
-      outputPath: "./knowledge",
-      // KnowledgeIntegrationConfig options...
-    },
-  },
-} satisfies QuiDocsConfig
-```
-
-### Multi-Environment Configuration
-
-Define multiple environments to generate knowledge to different outputs. Each environment inherits from `global` and can override any property.
-
-```typescript
-// qui-docs.config.ts
 import type {QuiDocsConfig} from "@qualcomm-ui/mdx-vite"
 import {readFileSync} from "node:fs"
-
-const changelogContents = readFileSync("../some-package/CHANGELOG.md")
+import {resolve} from "node:path"
 
 export default {
   knowledge: {
-    // Shared configuration inherited by all environments
-    global: {
-      baseUrl: "https://docs.example.com",
-      exclude: ["**/internal/**"],
-      extraFiles: [{contents: changelogContents, id: "changelog"}],
-    },
-    // Named environments with specific output paths
-    environments: {
-      production: {
-        outputPath: "./knowledge/prod",
+    baseUrl: "https://docs.example.com",
+    exclude: ["**/internal/**", "*guide+/swagger*"],
+    extraFiles: [
+      {
+        contents: readFileSync(resolve(__dirname, "../some-package/CHANGELOG.md"), "utf-8"),
+        id: "changelog",
       },
-      staging: {
-        outputPath: "./knowledge/staging",
-        // Override global settings for this environment
-        baseUrl: "https://staging.docs.example.com",
-      },
-    },
+    ],
   },
 } satisfies QuiDocsConfig
 ```
 
-Generate knowledge for specific environments using the `-e` flag:
+### KnowledgeConfig
 
-```shell
-# Generate for all environments
-qui-mdx-vite generate-llms-txt --output-mode per-page
+<TypeDocProps name="KnowledgeConfig" partial />
 
-# Generate for specific environments
-qui-mdx-vite generate-llms-txt --output-mode per-page -e production,staging
-```
+### KnowledgeExtraFile
 
-### KnowledgeIntegrationConfig
+<TypeDocProps name="KnowledgeExtraFile" partial />
 
-<TypeDocProps name="KnowledgeIntegrationConfig" partial />
+### KnowledgeFrontmatterConfig
 
-### KnowledgeEnvironment
+<TypeDocProps name="KnowledgeFrontmatterConfig" partial />
 
-Extends `KnowledgeIntegrationConfig` with a required output path:
+### SectionExportConfig
 
-<TypeDocProps name="KnowledgeEnvironment" partial />
+<TypeDocProps name="SectionExportConfig" partial />
 
-### Configuration Inheritance
+### PagesExportConfig
 
-The `exports` configuration inherits from the parent `global` configuration:
-
-- `exclude`, `metadata`, `pageTitlePrefix`, and `extraFiles` in `exports` override the parent values
-- When not specified in `exports`, values fall back to `global`
-
-Environment configurations also inherit from `global`, with environment-specific values taking precedence.
+<TypeDocProps name="PagesExportConfig" partial />
 
 ## Output Structure
 
-### Per-Page Mode
-
-Per-page output creates a directory with individual markdown files:
+Generated files are written to `{publicDir}/{outputPath}/`. The default output path is `exports`.
 
 <FileTree
   className="mt-4"
-  expandedValue={["exports/md"]}
+  expandedValue={["public", "public/exports"]}
   items={[
     {
-      name: "exports/md",
+      name: "public",
       items: [
-        {name: "components-button.md"},
-        {name: "components-input.md"},
-        {name: "guide-getting-started.md"},
-        {name: "guide-theming.md"},
+        {
+          name: "exports",
+          items: [
+            {name: "pages.json"},
+            {name: "sections.json"},
+          ],
+        },
       ],
     },
   ]}
 />
 
-File names derive from the page's URL path with slashes replaced by hyphens.
+### sections.json
 
-### Aggregated Mode
+Contains header-scoped section entries extracted from each documentation page. Each section includes a breadcrumb header path, prose content, code examples, and an MD5 hash for change detection.
 
-Aggregated output creates a single file with all pages concatenated:
+Intended for RAG pipelines and semantic search. Sections are scoped by heading depth (default: h1, h2, h3), producing granular chunks suitable for embedding and retrieval.
 
-```markdown
-# My Component Library
+#### KnowledgeSections
 
-> Documentation for the component library
+<TypeDocProps name="KnowledgeSections" partial />
 
-## Button
+#### SectionEntry
 
-A button triggers an action or event...
+<TypeDocProps name="SectionEntry" partial />
 
-## Input
+### pages.json
 
-A text input field...
-```
+Contains the full rendered markdown content of each documentation page. Each entry includes the page title, route pathname, and an MD5 hash.
 
-Headings in individual pages are demoted by one level to maintain hierarchy.
+Used by the page header UI for copy/download actions and by the `upload-knowledge` CLI for OpenWebUI uploads.
+
+#### KnowledgePages
+
+<TypeDocProps name="KnowledgePages" partial />
+
+#### PageEntry
+
+<TypeDocProps name="PageEntry" partial />
+
+## Page Header UI
+
+When `knowledge` is configured, each documentation page displays two actions in the page header:
+
+- **Copy Page** — Copies the page content as Markdown to the clipboard
+- **Download Page** — Downloads the page as a `.md` file
+
+Both actions fetch content from `pages.json` at runtime. They only appear on pages that have a corresponding entry in the generated output.
 
 ## OpenWebUI Integration
 
-Upload generated knowledge directly to OpenWebUI instances. Integrations connect environments to OpenWebUI knowledge bases and manage credentials through environment files.
+Upload generated knowledge to OpenWebUI instances. The upload command auto-detects `pages.json` in the output directory and uploads each page as an individual file.
 
 ### Configuration
 
-Define integrations that reference your environments:
+Define integrations in the `knowledge.integrations.openWebUi` array:
 
 ```typescript
-// qui-docs.config.ts
 export default {
   knowledge: {
-    environments: {
-      production: {
-        outputPath: "./knowledge/prod",
-      },
-      staging: {
-        outputPath: "./knowledge/staging",
-      },
-    },
+    baseUrl: "https://docs.example.com",
     integrations: {
-      openWebUi: {
-        // Integration name references an environment
-        "prod-webui": {
-          environment: "production",
-        },
-        "staging-webui": {
-          environment: "staging",
-          envFile: ".env.staging", // Optional: custom env file path
-        },
-      },
+      openWebUi: [
+        {id: "production"},
+        {id: "staging", envFile: ".env.staging"},
+      ],
     },
   },
 } satisfies QuiDocsConfig
 ```
 
+Each integration loads credentials from an env file. By convention, an integration with `id: "production"` loads `.env.production`. Override this with the `envFile` property.
+
 ### OpenWebUiIntegration
 
 <TypeDocProps name="OpenWebUiIntegration" partial />
 
-### Credential Management
+### Credential Environment Variables
 
-Each integration loads credentials from environment files by convention:
+Required variables in each env file:
 
-- Integration with `environment: "production"` loads `.env.production`
-- Override with `envFile: ".env.custom"` for non-standard paths
-
-Required environment variables in each env file:
-
-| Variable                   | Description                |
-| :------------------------- | :------------------------- |
-| `OPEN_WEB_UI_URL`          | OpenWebUI instance URL     |
-| `OPEN_WEB_UI_API_KEY`      | API key for authentication |
-| `OPEN_WEB_UI_KNOWLEDGE_ID` | Target knowledge base ID   |
-
-Legacy variable names (`WEB_UI_URL`, `WEB_UI_KEY`, `KNOWLEDGE_ID`) are supported as fallbacks.
+| Variable                   | Fallback       | Description                |
+| :------------------------- | :------------- | :------------------------- |
+| `OPEN_WEB_UI_URL`          | `WEB_UI_URL`   | OpenWebUI instance URL     |
+| `OPEN_WEB_UI_API_KEY`      | `WEB_UI_KEY`   | API key for authentication |
+| `OPEN_WEB_UI_KNOWLEDGE_ID` | `KNOWLEDGE_ID` | Target knowledge base ID   |
 
 ### Upload Command
 
-Upload knowledge to configured OpenWebUI integrations:
-
 ```shell
-# Upload to all integrations
+# Upload to all configured integrations
 qui-mdx-vite upload-knowledge
 
 # Upload to specific integrations
-qui-mdx-vite upload-knowledge -i prod-webui,staging-webui
+qui-mdx-vite upload-knowledge -i production,staging
 
-# Filter by environment
-qui-mdx-vite upload-knowledge -e production
+# Override the knowledge file path
+qui-mdx-vite upload-knowledge -p ./custom/exports
 
 # Force upload even if content unchanged
 qui-mdx-vite upload-knowledge --force
 ```
 
-#### Upload CLI Options
+#### CLI Options
 
-| Option                      | Description                                         |
-| :-------------------------- | :-------------------------------------------------- |
-| `-p, --path <path>`         | Override knowledge file path                        |
-| `-i, --integration <names>` | Comma-separated list of integrations to upload to   |
-| `-e, --environment <envs>`  | Filter integrations by environment                  |
-| `--force`                   | Force upload files even if contents haven't changed |
+| Option                      | Description                                       |
+| :-------------------------- | :------------------------------------------------ |
+| `-p, --path <path>`         | Override knowledge file path                      |
+| `-i, --integration <names>` | Comma-separated integrations to upload to         |
+| `--force`                   | Force upload even if content unchanged            |
 
-When no integrations are configured, the upload command falls back to legacy single-environment behavior using `WEB_UI_*` environment variables.
+When no integrations are configured, the upload command falls back to credentials from `OPEN_WEB_UI_*` environment variables.
