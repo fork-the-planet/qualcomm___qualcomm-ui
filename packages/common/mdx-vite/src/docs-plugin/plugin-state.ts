@@ -235,6 +235,7 @@ export class PluginState {
         exclude: this.knowledgeConfig.exclude,
         extraFiles: this.knowledgeConfig.extraFiles,
         frontmatter: this.knowledgeConfig.frontmatter,
+        pageIdPrefix: this.knowledgeConfig.pageIdPrefix,
         pages: this.knowledgeConfig.pages,
         routeDir: this.routesDir,
         sections: this.knowledgeConfig.sections,

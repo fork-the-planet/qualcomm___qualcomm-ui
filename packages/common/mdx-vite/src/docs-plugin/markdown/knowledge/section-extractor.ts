@@ -192,7 +192,11 @@ export class SectionExtractor {
       return null
     }
 
-    const hashData = {content, pageId: pageInfo.id, pathname: pageInfo.pathname}
+    const hashData = {
+      content,
+      pageId: `${this.pageIdPrefix}${pageInfo.id}`,
+      pathname: pageInfo.pathname,
+    }
     const hash = computeMd5(JSON.stringify(hashData))
 
     return {

@@ -140,7 +140,10 @@ export interface KnowledgeConfig {
   outputPath?: string
 
   /**
-   * Prefix to use for page IDs.
+   * Prefix to use for page IDs. Used to generate unique page IDs for knowledgebases
+   * that span multiple QUI Docs sites with potentially overlapping routes.
+   *
+   * @example `table-`
    */
   pageIdPrefix?: string
 

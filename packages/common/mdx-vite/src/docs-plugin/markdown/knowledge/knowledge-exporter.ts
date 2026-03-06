@@ -46,6 +46,7 @@ export interface KnowledgeExporterConfig {
   exclude?: string[]
   extraFiles?: KnowledgeExtraFile[]
   frontmatter?: KnowledgeFrontmatterConfig
+  pageIdPrefix?: string
   pages?: PagesExportConfig
   routeDir: string
   sections?: SectionExportConfig
@@ -111,6 +112,7 @@ export class KnowledgeExporter {
     const extractor = new SectionExtractor({
       depths: sectionsConfig.depths,
       minContentLength: sectionsConfig.minContentLength,
+      pageIdPrefix: this.config.pageIdPrefix,
     })
 
     const allSections: SectionEntry[] = []
