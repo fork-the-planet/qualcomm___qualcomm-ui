@@ -42,7 +42,7 @@ export function createExportsLoader({
 
           if (pageEntry) {
             return new Response(pageEntry.content || "", {
-              headers: {"Content-Type": "text/plain"},
+              headers: {"Content-Type": "text/markdown; charset=utf-8"},
               status: 200,
             })
           } else {

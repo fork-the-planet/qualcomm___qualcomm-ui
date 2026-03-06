@@ -191,11 +191,11 @@ export class FilesApi {
     if (file instanceof Blob) {
       blob = file
     } else if (file instanceof ArrayBuffer) {
-      blob = new Blob([file])
+      blob = new Blob([file], {type: "text/markdown; charset=utf-8"})
     } else {
       // Create a copy of the data to ensure we have a proper ArrayBuffer
       const copy = new Uint8Array(file).buffer
-      blob = new Blob([copy])
+      blob = new Blob([copy], {type: "text/markdown; charset=utf-8"})
     }
     formData.append("file", blob, filename)
 

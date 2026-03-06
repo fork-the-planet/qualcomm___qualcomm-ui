@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
 import type {Root} from "mdast"
+import remarkGfm from "remark-gfm"
 import remarkParse from "remark-parse"
 import {unified} from "unified"
 import {describe, expect, test} from "vitest"
@@ -10,6 +11,10 @@ import {SectionExtractor} from "../markdown/knowledge/section-extractor"
 
 function parseMarkdown(markdown: string): Root {
   return unified().use(remarkParse).parse(markdown)
+}
+
+function parseGfmMarkdown(markdown: string): Root {
+  return unified().use(remarkParse).use(remarkGfm).parse(markdown)
 }
 
 describe("SectionExtractor", () => {
@@ -606,6 +611,81 @@ Some content.
       const page = extractor.extractPage(tree, pageInfo)
 
       expect(page).toBeNull()
+    })
+  })
+
+  describe("GFM table handling", () => {
+    test("preserves table pipes when parsed with remarkGfm", () => {
+      const markdown = `
+# Test Page
+
+## States
+
+| checked | indeterminate | Result |
+| ------- | ------------- | ------ |
+| true    | false         | check  |
+`
+      const extractor = new SectionExtractor()
+      const {sections} = extractor.extract(
+        parseGfmMarkdown(markdown),
+        pageInfo,
+      )
+
+      expect(sections[0].rawContent).toContain("| checked |")
+      expect(sections[0].rawContent).not.toContain("\\|")
+    })
+
+    test("escapes table pipes when parsed without remarkGfm", () => {
+      const markdown = `
+# Test Page
+
+## States
+
+| checked | indeterminate | Result |
+| ------- | ------------- | ------ |
+| true    | false         | check  |
+`
+      const extractor = new SectionExtractor()
+      const {sections} = extractor.extract(parseMarkdown(markdown), pageInfo)
+
+      expect(sections[0].rawContent).toContain("\\|")
+    })
+  })
+
+  describe("unicode preservation", () => {
+    test("preserves em dash in content", () => {
+      const markdown = `
+# Test Page
+
+## Forms
+
+Choose the library that fits your needs\u2014we've built examples.
+`
+      const extractor = new SectionExtractor()
+      const {sections} = extractor.extract(parseMarkdown(markdown), pageInfo)
+
+      expect(sections[0].content).toContain("\u2014")
+      expect(sections[0].rawContent).toContain("\u2014")
+    })
+
+    test("preserves emojis in code blocks", () => {
+      const markdown = `
+# Test Page
+
+## Guidelines
+
+\`\`\`tsx
+/* Won't work alone \u274C */
+/* Works as expected \u2705 */
+\`\`\`
+`
+      const extractor = new SectionExtractor()
+      const {sections} = extractor.extract(parseMarkdown(markdown), pageInfo)
+
+      expect(sections[0].rawContent).toContain("\u274C")
+      expect(sections[0].rawContent).toContain("\u2705")
+      expect(sections[0].codeExamples?.[0]?.code).toContain("\u274C")
+      expect(sections[0].codeExamples?.[0]?.code).toContain("\u2705")
     })
   })
 })

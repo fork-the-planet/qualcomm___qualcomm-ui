@@ -318,6 +318,7 @@ export class KnowledgeExporter {
   ): Promise<Root> {
     const processor = createRemarkProcessor({
       frontmatter: true,
+      gfm: true,
       mdx: true,
       plugins: [
         formatNpmInstallTabs,
@@ -348,6 +349,7 @@ export class KnowledgeExporter {
     const jsxAndMetaProcessor = createRemarkProcessor({
       extractMeta: {},
       frontmatter: true,
+      gfm: true,
       mdx: true,
       output: "md",
       removeJsx: true,
@@ -389,6 +391,7 @@ export class KnowledgeExporter {
         if (extraFile.processAsMdx) {
           const removeJsxProcessor = createRemarkProcessor({
             frontmatter: true,
+            gfm: true,
             mdx: true,
             output: "md",
             plugins: [this.transformRelativeUrls()],
@@ -406,7 +409,7 @@ export class KnowledgeExporter {
         lines.push(contents)
         const content = lines.join("\n")
 
-        const processor = createRemarkProcessor({output: "md"})
+        const processor = createRemarkProcessor({gfm: true, output: "md"})
         const tree = processor.parse(content)
 
         const pageInfo = {
