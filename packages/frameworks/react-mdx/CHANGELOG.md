@@ -1,5 +1,15 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 1.13.2 (2026/03/02)
+
+### Styles
+
+- [react-mdx]: update updated-on typography to use heading font with italic ([d534f3c](https://github.com/qualcomm/qualcomm-ui/commit/d534f3c))
+
+### Code Refactoring
+
+- [react-mdx]: extract UpdatedOnDate into its own component ([7d4f5e4](https://github.com/qualcomm/qualcomm-ui/commit/7d4f5e4))
+
 ## 1.13.1 (2026/02/27)
 
 ### Miscellaneous Chores
