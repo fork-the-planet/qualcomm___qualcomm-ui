@@ -115,30 +115,14 @@ export default {
    */
   hotUpdateIgnore: /angular-demo-module|public/,
   knowledge: {
-    environments: [
-      {
-        id: "qui-ai",
-        outputPath: "./knowledge/qui-ai",
-      },
-      {
-        id: "saga-ai",
-        outputPath: "./knowledge/saga-ai",
-      },
+    baseUrl: "https://angular-next.qui.qualcomm.com",
+    exclude: [
+      "index.mdx",
+      "**/components+/overview*",
+      "**/components+/all-components*",
     ],
-    global: {
-      baseUrl: "https://angular-next.qui.qualcomm.com",
-      exclude: [
-        "index.mdx",
-        "**/components+/overview*",
-        "**/components+/all-components*",
-      ],
-      exports: {
-        enabled: true,
-        exclude: ["**/components+/overview*", "**/components+/all-components*"],
-      },
-      extraFiles,
-      frontmatter: {exclude: ["title", "description", "group"], include: ["*"]},
-    },
+    extraFiles,
+    frontmatter: {exclude: ["title", "description", "group"], include: ["*"]},
     integrations: {
       openWebUi: [{id: "qui-ai"}, {id: "saga-ai"}],
     },
