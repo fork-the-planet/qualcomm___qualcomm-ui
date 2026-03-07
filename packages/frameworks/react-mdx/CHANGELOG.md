@@ -1,5 +1,19 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 2.0.0 (2026/03/06)
+
+### BREAKING CHANGES
+
+- [react-mdx]: rework page fetcher to support new virtual module ([4d4c33d](https://github.com/qualcomm/qualcomm-ui/commit/4d4c33d))
+
+### Features
+
+- add url prop to 404 page ([d9cda5e](https://github.com/qualcomm/qualcomm-ui/commit/d9cda5e))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common]
+
 ## 1.13.2 (2026/03/02)
 
 ### Styles
