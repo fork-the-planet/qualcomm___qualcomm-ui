@@ -28,10 +28,18 @@ const orientationAttr = orientation ? `\n  orientation="${orientation}"` : ""
 const sizeAttr = size ? `\n  size="${size}"` : ""
 
 const childInvalidAttr = invalid ? " invalid" : ""
-const sw3 = switch3 ? `\n  <label${childInvalidAttr} label="Switch value" q-switch></label>` : ""
-const sw4 = switch4 ? `\n  <label${childInvalidAttr} label="Switch value" q-switch></label>` : ""
-const sw5 = switch5 ? `\n  <label${childInvalidAttr} label="Switch value" q-switch></label>` : ""
-const sw6 = switch6 ? `\n  <label${childInvalidAttr} label="Switch value" q-switch></label>` : ""
+const sw3 = switch3
+  ? `\n  <label${childInvalidAttr} label="Switch value" q-switch></label>`
+  : ""
+const sw4 = switch4
+  ? `\n  <label${childInvalidAttr} label="Switch value" q-switch></label>`
+  : ""
+const sw5 = switch5
+  ? `\n  <label${childInvalidAttr} label="Switch value" q-switch></label>`
+  : ""
+const sw6 = switch6
+  ? `\n  <label${childInvalidAttr} label="Switch value" q-switch></label>`
+  : ""
 
 export default {
   example: figma.code`<fieldset${errorTextAttr}${indentedAttr}${invalidAttr}${labelAttr}${orientationAttr}
