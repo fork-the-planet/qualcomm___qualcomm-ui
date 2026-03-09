@@ -57,7 +57,7 @@
     "@angular/ssr": "catalog:",
     "@faker-js/faker": "~9.6.0",
     "@floating-ui/dom": "^1.7.0",
-    "@figma/code-connect": "^1.3.13",
+    "@figma/code-connect": "^1.4.1",
     "@jsdevtools/coverage-istanbul-loader": "~3.0.5",
     "@module-federation/enhanced": "0.21.2",
     "@qualcomm-ui/angular-core": "workspace:^1.6.0",
