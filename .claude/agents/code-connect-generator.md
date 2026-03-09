@@ -19,6 +19,7 @@ The parserless format uses plain JavaScript `.figma.js` files instead of parser-
 // component=ComponentName
 
 const figma = require("figma")
+
 const instance = figma.selectedInstance
 
 // Read Figma properties
@@ -28,9 +29,9 @@ const label = instance.getString("label")
 
 // Build example with actual logic
 export default {
+  example: figma.code`<ComponentName size="${size}" disabled={${disabled}}>${label}</ComponentName>`,
   id: "ComponentName",
   imports: ['import { ComponentName } from "@qualcomm-ui/react/component-name"'],
-  example: figma.code`<ComponentName size="${size}" disabled={${disabled}}>${label}</ComponentName>`,
   metadata: { nestable: true },
 }
 ```
@@ -45,11 +46,13 @@ export default {
 
 ### Export Default Object
 
+Properties must be in **alphabetical order** (linter-enforced):
+
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
+| `example` | `figma.code` | Yes | The code snippet wrapped in `figma.code` tagged template literal. |
 | `id` | `string` | Yes | Unique identifier for the template. Used for cross-referencing in nested instances. |
 | `imports` | `string[]` | Yes | Import statements. Deduplicated when nested. |
-| `example` | `figma.code` | Yes | The code snippet wrapped in `figma.code` tagged template literal. |
 | `metadata` | `object` | No | `{ nestable: boolean, props: Record<string, any> }` |
 
 `nestable: true` means the snippet renders inline when used as a child. `nestable: false` (or omitted) renders as a clickable link.
@@ -92,6 +95,9 @@ const childSnippet = child?.executeTemplate()
 
 // Get an instance swap (component property, not layer)
 const swapped = instance.getInstanceSwap()
+
+// NOTE: findConnectedInstance(id) is documented but errors at runtime.
+// Only use findInstance(layerName) to navigate to child instances.
 ```
 
 ### The `figma.code` Tagged Template Literal
@@ -114,6 +120,14 @@ figma.code`<Button${iconProp}>${label}</Button>`
 const snippet = figma.code`<Foo />` + figma.code`<Bar />`
 // ✓ CORRECT
 figma.code`<Foo />\n<Bar />`
+
+// When delegating to a child template, ALWAYS wrap in figma.code.
+// ❌ WRONG - crashes the CC tab in Figma
+const rendered = child.executeTemplate().example
+export default { example: rendered, ... }
+// ✓ CORRECT
+const rendered = child.executeTemplate().example
+export default { example: figma.code`${rendered}`, ... }
 ```
 
 ### Using Conditionals to Replace Variants
@@ -147,9 +161,9 @@ if (icon === "only") {
 }
 
 export default {
+  example: figma.code`<Button${startIcon}${endIcon}>${children}</Button>`,
   id: "Button",
   imports: ['import { Button } from "@qualcomm-ui/react/button"'],
-  example: figma.code`<Button${startIcon}${endIcon}>${children}</Button>`,
 }
 ```
 
@@ -240,6 +254,8 @@ When a component set has sub-components with their own Figma node IDs (e.g., Acc
 - Files: `packages/frameworks/react/src/[component]/figma/[component].figma.js`
 - Config: `packages/frameworks/react/figma/components.config.json`
 
+> **Note:** React is currently still using the parser-based format (`.figma.tsx` files). The config below is for when React is migrated to parserless. Until then, coexistence of both formats in the same config is not supported — new parserless `.figma.js` files cannot be added until the full migration is done.
+
 ```json
 {
   "codeConnect": {
@@ -247,7 +263,8 @@ When a component set has sub-components with their own Figma node IDs (e.g., Acc
     "label": "React",
     "language": "jsx",
     "documentUrlSubstitutions": {
-      "<FIGMA_COMPONENTS_BASE>": "https://www.figma.com/design/ETvFgN3bbNvr6sbpoZyNuA"
+      "<FIGMA_COMPONENTS_BASE>": "https://www.figma.com/design/ETvFgN3bbNvr6sbpoZyNuA",
+      "<FIGMA_ICONS_BASE>": "https://www.figma.com/design/4xDg5Mrv4mxjsK3xC3L5up"
     }
   }
 }
@@ -265,7 +282,8 @@ When a component set has sub-components with their own Figma node IDs (e.g., Acc
     "label": "Angular",
     "language": "html",
     "documentUrlSubstitutions": {
-      "<FIGMA_COMPONENTS_BASE>": "https://www.figma.com/design/G6YKSbQ5Jn83xQBRvlqe6M"
+      "<FIGMA_COMPONENTS_BASE>": "https://www.figma.com/design/G6YKSbQ5Jn83xQBRvlqe6M",
+      "<FIGMA_ICONS_BASE>": "https://www.figma.com/design/fJC9KDk1b8v5KxHRttSbqS"
     }
   }
 }
@@ -280,6 +298,7 @@ Angular templates use the same parserless API but output Angular HTML instead of
 // component=TextInput
 
 const figma = require("figma")
+
 const instance = figma.selectedInstance
 
 const size = instance.getEnum("size", { lg: "lg", sm: "sm" })
@@ -288,17 +307,17 @@ const label = instance.getBoolean("label", {
   true: instance.getString("labelText"),
 })
 
-const disabledAttr = disabled ? "\n  [disabled]=\"true\"" : ""
+const disabledAttr = disabled ? "\n  disabled" : ""
 const labelAttr = label ? `\n  label="${label}"` : ""
 const sizeAttr = size ? `\n  size="${size}"` : ""
 
 export default {
-  id: "TextInput",
-  imports: ['import { TextInputModule } from "@qualcomm-ui/angular/text-input"'],
   example: figma.code`<q-text-input${disabledAttr}${labelAttr}${sizeAttr}
   placeholder="Enter text"
 />`,
-  metadata: { nestable: true },
+  id: "TextInput",
+  imports: ['import { TextInputModule } from "@qualcomm-ui/angular/text-input"'],
+  metadata: {nestable: true},
 }
 ```
 
@@ -306,8 +325,8 @@ Key differences from React templates:
 - `language` in config is `"html"` instead of `"jsx"`
 - Output uses Angular template syntax (`<q-component>`, `[prop]="value"`, `(event)="handler()"`)
 - Component names use kebab-case with `q-` prefix
-- Import statements reference Angular modules (`TextInputModule`) not components
-- The Figma file URL differs (Angular has its own Figma branch)
+- **Boolean attributes use bare attribute syntax** (`disabled`, not `[disabled]="true"`), since Angular components use `booleanAttribute` transforms
+- React CC publishes to the prod Figma file, Angular CC publishes to a dev branch of the same file. Since branches share node IDs, Figma merges `imports` from all CC entries for a node into one `<script>` block regardless of label. This is a platform limitation -- use the `imports` array correctly anyway.
 
 ## Migration from Parser-Based Files
 
@@ -373,8 +392,10 @@ If the old `.figma.tsx` had multiple `figma.connect()` calls targeting **differe
    - [ ] No default values in enum mappings
    - [ ] Variants collapsed with conditionals (no redundant files for the same node)
    - [ ] `figma.code` used for all code output (no string concatenation on snippets)
+   - [ ] `export default` properties in alphabetical order: `example`, `id`, `imports`, `metadata`
    - [ ] `id` field matches component name
    - [ ] `imports` array has correct package paths
+   - [ ] Blank line after `const instance = figma.selectedInstance`
    - [ ] Uncontrolled props used for form/state values
    - [ ] Documentation guidelines reflected in examples
 7. **If dry-run fails** - read the error, attempt to fix it. If stuck, report the error to the user.
