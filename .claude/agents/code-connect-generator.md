@@ -15,6 +15,9 @@ The parserless format uses plain JavaScript `.figma.js` files instead of parser-
 ### File Structure
 
 ```js
+// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+// SPDX-License-Identifier: BSD-3-Clause-Clear
+
 // url=<FIGMA_COMPONENTS_BASE>?node-id=XXXX-YYYY
 // component=ComponentName
 
@@ -56,6 +59,17 @@ Properties must be in **alphabetical order** (linter-enforced):
 | `metadata` | `object` | No | `{ nestable: boolean, props: Record<string, any> }` |
 
 `nestable: true` means the snippet renders inline when used as a child. `nestable: false` (or omitted) renders as a clickable link.
+
+The `imports` array supports conditionals using spread to include imports only for specific variants:
+
+```js
+imports: [
+  `import { AvatarModule } from "@qualcomm-ui/angular/avatar"`,
+  ...(variant === "icon"
+    ? [`import { IconDirective } from "@qualcomm-ui/angular/icon"`]
+    : []),
+],
+```
 
 ## API Reference
 
