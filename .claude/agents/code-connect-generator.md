@@ -99,13 +99,25 @@ instance.getEnum("propertyName", {
 ### Instance Navigation
 
 ```js
-// Find a nested component instance by layer name
+// Find a nested component instance by layer name (immediate children only)
 const child = instance.findInstance("LayerName")
+
+// Search deeper into nested instances with traverseInstances
+// Verified working — can read props from instances buried in the design tree
+const deepChild = instance.findInstance("LayerName", {traverseInstances: true})
 
 // Execute the child's own template (if it has a .figma.js file)
 const childSnippet = child?.executeTemplate()
 // childSnippet.example  - the rendered code snippet
 // childSnippet.metadata.props  - props exposed by the child template
+
+// Find ALL matching child instances (returns array)
+// Filter with a selector function — check for a known property to identify the right type
+const items = instance.findConnectedInstances(
+  (node) => typeof node.getString("header") === "string",
+  {traverseInstances: true},
+)
+items.map((item) => item.getString("header")) // read props from each
 
 // Get an instance swap (component property, not layer)
 const swapped = instance.getInstanceSwap()
