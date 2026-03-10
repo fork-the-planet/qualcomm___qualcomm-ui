@@ -79,7 +79,7 @@
     "shx": "^0.4.0",
     "style-dictionary": "^5.1.1",
     "style-dictionary-utils": "~4.1.1",
-    "tsx": "^4.20.6",
+    "tsx": "^4.21.0",
     "typescript": "catalog:"
   },
   "peerDependencies": {
