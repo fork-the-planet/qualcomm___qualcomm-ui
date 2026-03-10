@@ -1,3 +1,6 @@
+// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+// SPDX-License-Identifier: BSD-3-Clause-Clear
+
 // url=<FIGMA_COMPONENTS_BASE>?node-id=17804-5308
 // component=Avatar
 
@@ -29,4 +32,5 @@ export default {
     `import { AvatarModule } from "@qualcomm-ui/angular/avatar"`,
     `import { IconDirective } from "@qualcomm-ui/angular/icon"`,
   ],
+  metadata: {nestable: true},
 }

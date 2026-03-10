@@ -96,8 +96,16 @@ const childSnippet = child?.executeTemplate()
 // Get an instance swap (component property, not layer)
 const swapped = instance.getInstanceSwap()
 
-// NOTE: findConnectedInstance(id) is documented but errors at runtime.
+// NOTE: findConnectedInstance(id) is documented but errors at runtime
+// with "No layer with id X found in selected component/variant".
+// Tested with CC id, layer name, and node id — none work.
 // Only use findInstance(layerName) to navigate to child instances.
+
+// NOTE: executeTemplate() takes no parameters and is not label-aware.
+// When both React and Angular CC target the same nodes, it may pick
+// the wrong label's template. Do NOT use executeTemplate() to delegate
+// from a parent to child templates when multiple labels exist for
+// those nodes. Instead, read child properties inline with findInstance().
 ```
 
 ### The `figma.code` Tagged Template Literal
