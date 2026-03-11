@@ -12,7 +12,7 @@
   "type": "module",
   "exports": {
     "./*": {
-      "types": "./dist/*/index.d.ts",
+      "types": "./dist/types/qualcomm-ui-angular-*.d.ts",
       "import": "./dist/fesm2022/qualcomm-ui-angular-*.mjs",
       "default": "./dist/fesm2022/qualcomm-ui-angular-*.mjs"
     }

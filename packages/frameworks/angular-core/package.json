@@ -13,7 +13,7 @@
   "sideEffects": false,
   "exports": {
     "./*": {
-      "types": "./dist/*/index.d.ts",
+      "types": "./dist/types/qualcomm-ui-angular-core-*.d.ts",
       "import": "./dist/fesm2022/qualcomm-ui-angular-core-*.mjs",
       "default": "./dist/fesm2022/qualcomm-ui-angular-core-*.mjs"
     }

@@ -1358,6 +1358,9 @@ importers:
       '@angular/ssr':
         specifier: 'catalog:'
         version: 21.2.1(8878b786dc5442aa2e32941c752a3d78)
+      '@faker-js/faker':
+        specifier: ~9.6.0
+        version: 9.6.0
       '@qualcomm-ui/angular':
         specifier: workspace:*
         version: link:../../frameworks/angular

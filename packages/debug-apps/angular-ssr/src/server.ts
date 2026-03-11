@@ -7,10 +7,20 @@ import {
 import express from "express"
 import {join} from "node:path"
 
+import {makeUserData} from "./make-user-data"
+
 const browserDistFolder = join(import.meta.dirname, "../browser")
 
 const app = express()
 const angularApp = new AngularNodeAppEngine()
+
+app.use(express.json())
+
+app.post("/get-mock-user-data", (req, res) => {
+  console.debug(req.headers["content-type"])
+  const {count} = req.body
+  return res.json(makeUserData(count))
+})
 
 /**
  * Example Express Rest API endpoints can be defined here.
