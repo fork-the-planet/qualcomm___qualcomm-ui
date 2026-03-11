@@ -48,7 +48,7 @@
     "tsx": "^4.21.0",
     "typescript": "catalog:",
     "typescript-eslint": "catalog:",
-    "vitest": "^4.0.8"
+    "vitest": "catalog:"
   },
   "peerDependencies": {
     "eslint": "^9.0.0"

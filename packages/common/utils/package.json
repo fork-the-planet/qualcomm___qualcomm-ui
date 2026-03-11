@@ -49,6 +49,6 @@
     "shx": "^0.4.0",
     "tsx": "^4.21.0",
     "typescript": "catalog:",
-    "vitest": "^4.0.8"
+    "vitest": "catalog:"
   }
 }

@@ -99,8 +99,8 @@
     "@types/lodash-es": "catalog:",
     "@types/mdast": "^4.0.4",
     "@types/uuid": "^10.0.0",
-    "@vitest/coverage-v8": "^4.0.8",
-    "@vitest/ui": "^4.0.8",
+    "@vitest/coverage-v8": "catalog:",
+    "@vitest/ui": "catalog:",
     "cross-env": "^10.1.0",
     "dotenv": "^17.2.3",
     "esbuild": "^0.27.3",
@@ -121,7 +121,7 @@
     "tsx": "^4.21.0",
     "typescript": "catalog:",
     "vite": "npm:rolldown-vite@7.3.1",
-    "vitest": "^4.0.8",
+    "vitest": "catalog:",
     "zod": "^4.1.13"
   },
   "peerDependencies": {
