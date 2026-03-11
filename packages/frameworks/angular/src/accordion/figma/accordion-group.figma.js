@@ -28,27 +28,29 @@ const children = items
     const value = String.fromCharCode(97 + i)
 
     if (leftChevron) {
-      return `  <div q-accordion-item-root value="${value}">
-    <button q-accordion-item-trigger>
-      <q-accordion-item-indicator />
-      <span q-accordion-item-text>${header}</span>
-    </button>
-    <div q-accordion-item-content>Panel contents</div>
-  </div>`
+      return `
+      <div q-accordion-item-root value="${value}">
+        <button q-accordion-item-trigger>
+          <q-accordion-item-indicator />
+          <span q-accordion-item-text>${header}</span>
+        </button>
+        <div q-accordion-item-content>Panel contents</div>
+      </div>`
     }
-    return `  <div${iconAttr} q-accordion-item text="${header}" value="${value}">Panel contents</div>`
+    return `<div${iconAttr} q-accordion-item text="${header}" value="${value}">Panel contents</div>`
   })
   .join("\n")
 
 export default {
-  example: figma.code`<div q-accordion${sizeAttr}${uncontainedAttr} [defaultValue]="['a']">
-  ${children}
-</div>`,
+  example: figma.code`
+    <div q-accordion${sizeAttr}${uncontainedAttr} [defaultValue]="['a']">
+      ${children}
+    </div>`,
   id: "AccordionGroup",
   imports: [
-    `import { AccordionModule } from "@qualcomm-ui/angular/accordion"`,
+    `import {AccordionModule} from "@qualcomm-ui/angular/accordion"`,
     ...(icon && !leftChevron
-      ? [`import { IconDirective } from "@qualcomm-ui/angular/icon"`]
+      ? [`import {IconDirective} from "@qualcomm-ui/angular/icon"`]
       : []),
   ],
   metadata: {nestable: true},

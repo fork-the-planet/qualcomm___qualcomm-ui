@@ -34,8 +34,6 @@ const example = figma.code`<span${disabledAttr}${emphasisAttr} q-status-badge${s
 export default {
   example,
   id: "StatusBadge",
-  imports: [
-    `import { StatusBadgeDirective } from "@qualcomm-ui/angular/badge"`,
-  ],
+  imports: [`import {StatusBadgeDirective} from "@qualcomm-ui/angular/badge"`],
   metadata: {nestable: true},
 }

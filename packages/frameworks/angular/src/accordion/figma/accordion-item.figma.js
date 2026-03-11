@@ -25,34 +25,36 @@ let example
 if (leftChevron) {
   const secondaryTextEl =
     subHeader && subHeaderText
-      ? `      <span q-accordion-item-secondary-text>${subHeaderText}</span>`
+      ? `<span q-accordion-item-secondary-text>${subHeaderText}</span>`
       : ""
   const iconEl = icon
-    ? `      <svg q-accordion-item-icon qIcon="FileChartColumn"></svg>`
+    ? `<svg q-accordion-item-icon qIcon="FileChartColumn"></svg>`
     : ""
 
-  example = figma.code`<div${disabledAttr} q-accordion-item-root value="a">
-  <button q-accordion-item-trigger>
-      ${iconEl}
-      <q-accordion-item-indicator />
-      <span q-accordion-item-text>${header}</span>
-      ${secondaryTextEl}
-  </button>
-  <div q-accordion-item-content>Panel contents</div>
-</div>`
+  example = figma.code`
+    <div${disabledAttr} q-accordion-item-root value="a">
+      <button q-accordion-item-trigger>
+        ${iconEl}
+        <q-accordion-item-indicator />
+        <span q-accordion-item-text>${header}</span>
+        ${secondaryTextEl}
+      </button>
+      <div q-accordion-item-content>Panel contents</div>
+    </div>`
 } else {
-  example = figma.code`<div${disabledAttr}${iconAttr} q-accordion-item${secondaryTextAttr}${textAttr} value="a">
-  Panel contents
-</div>`
+  example = figma.code`
+    <div${disabledAttr}${iconAttr} q-accordion-item${secondaryTextAttr}${textAttr} value="a">
+      Panel contents
+    </div>`
 }
 
 export default {
   example,
   id: "AccordionItem",
   imports: [
-    `import { AccordionModule } from "@qualcomm-ui/angular/accordion"`,
+    `import {AccordionModule} from "@qualcomm-ui/angular/accordion"`,
     ...(icon && !leftChevron
-      ? [`import { IconDirective } from "@qualcomm-ui/angular/icon"`]
+      ? [`import {IconDirective} from "@qualcomm-ui/angular/icon"`]
       : []),
   ],
   metadata: {nestable: true},

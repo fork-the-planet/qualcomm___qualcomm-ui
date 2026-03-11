@@ -47,18 +47,20 @@ if (icon === "only") {
 
 // button with start icon
 if (icon === "start") {
-  example = figma.code`<button${disabledAttr}${emphasisAttr} q-button${sizeAttr}${variantAttr}>
-  <svg q-start-icon qIcon="Star"></svg>
-  ${label}
-</button>`
+  example = figma.code`
+    <button${disabledAttr}${emphasisAttr} q-button${sizeAttr}${variantAttr}>
+      <svg q-start-icon qIcon="Star"></svg>
+      ${label}
+    </button>`
 }
 
 // button with end icon
 if (icon === "end") {
-  example = figma.code`<button${disabledAttr}${emphasisAttr} q-button${sizeAttr}${variantAttr}>
-  ${label}
-  <svg q-end-icon qIcon="Star"></svg>
-</button>`
+  example = figma.code`
+    <button${disabledAttr}${emphasisAttr} q-button${sizeAttr}${variantAttr}>
+      ${label}
+      <svg q-end-icon qIcon="Star"></svg>
+    </button>`
 }
 
 // button without icon
@@ -70,9 +72,9 @@ export default {
   example,
   id: "Button",
   imports: [
-    `import { ButtonModule } from "@qualcomm-ui/angular/button"`,
+    `import {ButtonModule} from "@qualcomm-ui/angular/button"`,
     ...(needsIcon
-      ? [`import { IconDirective } from "@qualcomm-ui/angular/icon"`]
+      ? [`import {IconDirective} from "@qualcomm-ui/angular/icon"`]
       : []),
   ],
   metadata: {nestable: true},

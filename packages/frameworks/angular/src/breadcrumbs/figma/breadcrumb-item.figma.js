@@ -17,21 +17,22 @@ const showIcon = instance.getBoolean("showIcon")
 const disabledAttr = state === "disabled" ? " disabled" : ""
 const ariaCurrentAttr = state === "active" ? ` aria-current="page"` : ""
 const iconEl = showIcon
-  ? `    <svg q-breadcrumb-item-icon qIcon="FolderClosed"></svg>`
+  ? `<svg q-breadcrumb-item-icon qIcon="FolderClosed"></svg>`
   : ""
 
 export default {
-  example: figma.code`<li${disabledAttr} q-breadcrumb-item>
-  <a${ariaCurrentAttr} q-breadcrumb-item-trigger>
-    ${iconEl}
-    Breadcrumb
-  </a>
-</li>`,
+  example: figma.code`
+    <li${disabledAttr} q-breadcrumb-item>
+      <a${ariaCurrentAttr} q-breadcrumb-item-trigger>
+        ${iconEl}
+        Breadcrumb
+      </a>
+    </li>`,
   id: "BreadcrumbItem",
   imports: [
-    `import { BreadcrumbsModule } from "@qualcomm-ui/angular/breadcrumbs"`,
+    `import {BreadcrumbsModule} from "@qualcomm-ui/angular/breadcrumbs"`,
     ...(showIcon
-      ? [`import { IconDirective } from "@qualcomm-ui/angular/icon"`]
+      ? [`import {IconDirective} from "@qualcomm-ui/angular/icon"`]
       : []),
   ],
   metadata: {nestable: true},

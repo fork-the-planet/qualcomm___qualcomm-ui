@@ -32,8 +32,6 @@ const example = figma.code`<span${disabledAttr}${emphasisAttr} q-number-badge${s
 export default {
   example,
   id: "NumberBadge",
-  imports: [
-    `import { NumberBadgeDirective } from "@qualcomm-ui/angular/badge"`,
-  ],
+  imports: [`import {NumberBadgeDirective} from "@qualcomm-ui/angular/badge"`],
   metadata: {nestable: true},
 }

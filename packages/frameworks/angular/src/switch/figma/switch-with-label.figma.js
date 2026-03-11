@@ -31,17 +31,17 @@ const hint = instance.getBoolean("hint", {
 })
 const errorText = instance.getString("errorText")
 
-const checkedAttr = defaultChecked ? "\n  defaultChecked" : ""
-const disabledAttr = disabled ? "\n  disabled" : ""
-const invalidAttr = invalid ? "\n  invalid" : ""
-const sizeAttr = size ? `\n  size="${size}"` : ""
-const labelAttr = label ? `\n  label="${label}"` : ""
-const hintAttr = hint ? `\n  hint="${hint}"` : ""
-const errorAttr = invalid && errorText ? `\n  errorText="${errorText}"` : ""
+const checkedAttr = defaultChecked ? " defaultChecked" : ""
+const disabledAttr = disabled ? " disabled" : ""
+const invalidAttr = invalid ? " invalid" : ""
+const sizeAttr = size ? ` size="${size}"` : ""
+const labelAttr = label ? ` label="${label}"` : ""
+const hintAttr = hint ? ` hint="${hint}"` : ""
+const errorAttr = invalid && errorText ? ` errorText="${errorText}"` : ""
 
 export default {
   example: figma.code`<label q-switch${checkedAttr}${disabledAttr}${errorAttr}${hintAttr}${invalidAttr}${labelAttr}${sizeAttr}></label>`,
   id: "SwitchWithLabel",
-  imports: ['import { SwitchModule } from "@qualcomm-ui/angular/switch"'],
+  imports: ['import {SwitchModule} from "@qualcomm-ui/angular/switch"'],
   metadata: {nestable: true},
 }

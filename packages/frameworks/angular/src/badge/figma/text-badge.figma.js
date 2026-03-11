@@ -40,6 +40,6 @@ const example = figma.code`<span${disabledAttr}${emphasisAttr} q-badge${sizeAttr
 export default {
   example,
   id: "TextBadge",
-  imports: [`import { BadgeDirective } from "@qualcomm-ui/angular/badge"`],
+  imports: [`import {BadgeDirective} from "@qualcomm-ui/angular/badge"`],
   metadata: {nestable: true},
 }

@@ -19,14 +19,15 @@ const status = instance.getBoolean("status")
 const emphasisAttr = emphasis ? ` emphasis="${emphasis}"` : ""
 const sizeAttr = size ? ` size="${size}"` : ""
 const statusAttr = status ? ` status="active"` : ""
-const statusEl = status ? `  <div q-avatar-status></div>` : ""
+const statusEl = status ? `<div q-avatar-status></div>` : ""
 
 export default {
-  example: figma.code`<div q-avatar${emphasisAttr}${sizeAttr}${statusAttr}>
-  <div q-avatar-content>${initialText}</div>
-  ${statusEl}
-</div>`,
+  example: figma.code`
+    <div q-avatar${emphasisAttr}${sizeAttr}${statusAttr}>
+      <div q-avatar-content>${initialText}</div>
+      ${statusEl}
+    </div>`,
   id: "AvatarInitial",
-  imports: [`import { AvatarModule } from "@qualcomm-ui/angular/avatar"`],
+  imports: [`import {AvatarModule} from "@qualcomm-ui/angular/avatar"`],
   metadata: {nestable: true},
 }

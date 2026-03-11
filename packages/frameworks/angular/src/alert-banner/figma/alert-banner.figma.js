@@ -31,15 +31,16 @@ const buttonEmphasis = variant
     ? "black-persistent"
     : "white-persistent"
 const buttonEl = hasButton
-  ? `  <button
-    emphasis="${buttonEmphasis}"
-    q-alert-banner-action
-    q-button
-    size="sm"
-    variant="outline"
-  >
-    Button
-  </button>`
+  ? `
+    <button
+      emphasis="${buttonEmphasis}"
+      q-alert-banner-action
+      q-button
+      size="sm"
+      variant="outline"
+    >
+      Button
+    </button>`
   : ""
 
 let example
@@ -49,41 +50,43 @@ if (showIcon) {
     : ""
   const dismissableAttr = dismissable ? " dismissable" : ""
 
-  example = figma.code`<div${dismissableAttr}${emphasisAttr}
-  heading="${heading}"
-  q-alert-banner${variantAttr}${descriptionAttr}
->
-  ${buttonEl}
-</div>`
+  example = figma.code`
+    <div${dismissableAttr}${emphasisAttr}
+      heading="${heading}"
+      q-alert-banner${variantAttr}${descriptionAttr}
+    >
+      ${buttonEl}
+    </div>`
 } else {
   const descriptionEl = hasDescription
-    ? `  <div q-alert-banner-description>${descriptionText}</div>`
+    ? `<div q-alert-banner-description>${descriptionText}</div>`
     : ""
   const closeButtonEl = dismissable
-    ? `  <button q-alert-banner-close-button></button>`
+    ? `<button q-alert-banner-close-button></button>`
+    : ""
+  const buttonActionEl = hasButton
+    ? `
+      <div q-alert-banner-action>
+        ${buttonEl}
+      </div>`
     : ""
 
-  example = figma.code`<div${emphasisAttr} q-alert-banner-root${variantAttr}>
-  <div q-alert-banner-heading>${heading}</div>
-  ${descriptionEl}
-  ${
-    hasButton
-      ? `  <div q-alert-banner-action>
-    ${buttonEl}
-  </div>`
-      : ""
-  }
-  ${closeButtonEl}
-</div>`
+  example = figma.code`
+    <div${emphasisAttr} q-alert-banner-root${variantAttr}>
+      <div q-alert-banner-heading>${heading}</div>
+      ${descriptionEl}
+      ${buttonActionEl}
+      ${closeButtonEl}
+    </div>`
 }
 
 export default {
   example,
   id: "AlertBanner",
   imports: [
-    `import { AlertBannerModule } from "@qualcomm-ui/angular/alert-banner"`,
+    `import {AlertBannerModule} from "@qualcomm-ui/angular/alert-banner"`,
     ...(hasButton
-      ? [`import { ButtonModule } from "@qualcomm-ui/angular/button"`]
+      ? [`import {ButtonModule} from "@qualcomm-ui/angular/button"`]
       : []),
   ],
   metadata: {nestable: true},

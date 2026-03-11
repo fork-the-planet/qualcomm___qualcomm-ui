@@ -51,39 +51,42 @@ const children = buttons
 
     // icon-only child button
     if (btnIcon === "only") {
-      return `  <button${dAttr}${eAttr} icon="Star" q-icon-button${vAttr}></button>`
+      return `<button${dAttr}${eAttr} icon="Star" q-icon-button${vAttr}></button>`
     }
 
     // child button with start icon
     if (btnIcon === "start") {
-      return `  <button${dAttr}${eAttr} q-button${vAttr}>
-    <svg q-start-icon qIcon="Star"></svg>
-    ${btnLabel}
-  </button>`
+      return `
+      <button${dAttr}${eAttr} q-button${vAttr}>
+        <svg q-start-icon qIcon="Star"></svg>
+        ${btnLabel}
+      </button>`
     }
 
     // child button with end icon
     if (btnIcon === "end") {
-      return `  <button${dAttr}${eAttr} q-button${vAttr}>
-    ${btnLabel}
-    <svg q-end-icon qIcon="Star"></svg>
-  </button>`
+      return `
+      <button${dAttr}${eAttr} q-button${vAttr}>
+        ${btnLabel}
+        <svg q-end-icon qIcon="Star"></svg>
+      </button>`
     }
 
     // child button without icon
-    return `  <button${dAttr}${eAttr} q-button${vAttr}>${btnLabel}</button>`
+    return `<button${dAttr}${eAttr} q-button${vAttr}>${btnLabel}</button>`
   })
   .join("\n")
 
 export default {
-  example: figma.code`<div${layoutAttr} q-button-group${sizeAttr}>
-${children}
-</div>`,
+  example: figma.code`
+    <div${layoutAttr} q-button-group${sizeAttr}>
+      ${children}
+    </div>`,
   id: "ButtonGroup",
   imports: [
-    `import { ButtonModule } from "@qualcomm-ui/angular/button"`,
+    `import {ButtonModule} from "@qualcomm-ui/angular/button"`,
     ...(hasIcon
-      ? [`import { IconDirective } from "@qualcomm-ui/angular/icon"`]
+      ? [`import {IconDirective} from "@qualcomm-ui/angular/icon"`]
       : []),
   ],
   metadata: {nestable: true},

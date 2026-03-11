@@ -29,15 +29,15 @@ const size = instance.getEnum("size", {
   sm: "sm",
 })
 
-const checkedAttr = defaultChecked ? "\n  defaultChecked" : ""
-const disabledAttr = disabled ? "\n  disabled" : ""
-const indeterminateAttr = indeterminate ? "\n  indeterminate" : ""
-const invalidAttr = invalid ? "\n  invalid" : ""
-const sizeAttr = size ? `\n  size="${size}"` : ""
+const checkedAttr = defaultChecked ? " defaultChecked" : ""
+const disabledAttr = disabled ? " disabled" : ""
+const indeterminateAttr = indeterminate ? " indeterminate" : ""
+const invalidAttr = invalid ? " invalid" : ""
+const sizeAttr = size ? ` size="${size}"` : ""
 
 export default {
   example: figma.code`<label q-checkbox${checkedAttr}${disabledAttr}${indeterminateAttr}${invalidAttr}${sizeAttr}></label>`,
   id: "Checkbox",
-  imports: ['import { CheckboxModule } from "@qualcomm-ui/angular/checkbox"'],
+  imports: ['import {CheckboxModule} from "@qualcomm-ui/angular/checkbox"'],
   metadata: {nestable: true},
 }

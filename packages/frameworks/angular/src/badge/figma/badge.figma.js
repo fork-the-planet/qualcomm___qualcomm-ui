@@ -137,6 +137,6 @@ if (variant === "text") {
 export default {
   example,
   id: "Badge",
-  imports: [`import { BadgeModule } from "@qualcomm-ui/angular/badge"`],
+  imports: [`import {BadgeModule} from "@qualcomm-ui/angular/badge"`],
   metadata: {nestable: true},
 }

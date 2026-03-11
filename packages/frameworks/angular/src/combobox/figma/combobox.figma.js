@@ -32,26 +32,23 @@ const size = instance.getEnum("size", {
   sm: "sm",
 })
 
-const disabledAttr = disabled ? "\n  disabled" : ""
-const errorTextAttr = invalid ? `\n  errorText="Error message"` : ""
-const hintAttr = hint ? `\n  hint="${hint}"` : ""
-const iconAttr = startIcon ? `\n  icon="Layers"` : ""
-const invalidAttr = invalid ? "\n  invalid" : ""
-const labelAttr = label
-  ? `\n  label="${label}"`
-  : `\n  aria-label="Select an option"`
-const readOnlyAttr = readOnly ? "\n  readOnly" : ""
-const requiredAttr = required ? "\n  required" : ""
-const sizeAttr = size ? `\n  size="${size}"` : ""
-
-const example = figma.code`<q-combobox
-  [collection]="collection"${disabledAttr}${errorTextAttr}${hintAttr}${iconAttr}${invalidAttr}${labelAttr}
-  placeholder="Select an option"${readOnlyAttr}${requiredAttr}${sizeAttr}>
-</q-combobox>`
+const disabledAttr = disabled ? " disabled" : ""
+const errorTextAttr = invalid ? ` errorText="Error message"` : ""
+const hintAttr = hint ? ` hint="${hint}"` : ""
+const iconAttr = startIcon ? ` icon="Layers"` : ""
+const invalidAttr = invalid ? " invalid" : ""
+const labelAttr = label ? ` label="${label}"` : ` aria-label="Select an option"`
+const readOnlyAttr = readOnly ? " readOnly" : ""
+const requiredAttr = required ? " required" : ""
+const sizeAttr = size ? ` size="${size}"` : ""
 
 export default {
-  example,
+  example: figma.code`
+    <q-combobox
+      [collection]="collection"${disabledAttr}${errorTextAttr}${hintAttr}${iconAttr}${invalidAttr}${labelAttr}
+      placeholder="Select an option"${readOnlyAttr}${requiredAttr}${sizeAttr}>
+    </q-combobox>`,
   id: "Combobox",
-  imports: [`import { ComboboxModule } from "@qualcomm-ui/angular/combobox"`],
+  imports: [`import {ComboboxModule} from "@qualcomm-ui/angular/combobox"`],
   metadata: {nestable: true},
 }

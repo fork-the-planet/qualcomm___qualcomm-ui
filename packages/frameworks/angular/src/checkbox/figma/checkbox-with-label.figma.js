@@ -36,18 +36,18 @@ const hint = instance.getBoolean("hint", {
 })
 const errorText = instance.getString("errorText")
 
-const checkedAttr = defaultChecked ? "\n  defaultChecked" : ""
-const disabledAttr = disabled ? "\n  disabled" : ""
-const errorAttr = invalid && errorText ? `\n  errorText="${errorText}"` : ""
-const hintAttr = hint ? `\n  hint="${hint}"` : ""
-const indeterminateAttr = indeterminate ? "\n  indeterminate" : ""
-const invalidAttr = invalid ? "\n  invalid" : ""
-const labelAttr = label ? `\n  label="${label}"` : ""
-const sizeAttr = size ? `\n  size="${size}"` : ""
+const checkedAttr = defaultChecked ? " defaultChecked" : ""
+const disabledAttr = disabled ? " disabled" : ""
+const errorAttr = invalid && errorText ? ` errorText="${errorText}"` : ""
+const hintAttr = hint ? ` hint="${hint}"` : ""
+const indeterminateAttr = indeterminate ? " indeterminate" : ""
+const invalidAttr = invalid ? " invalid" : ""
+const labelAttr = label ? ` label="${label}"` : ""
+const sizeAttr = size ? ` size="${size}"` : ""
 
 export default {
   example: figma.code`<label q-checkbox${checkedAttr}${disabledAttr}${errorAttr}${hintAttr}${indeterminateAttr}${invalidAttr}${labelAttr}${sizeAttr}></label>`,
   id: "CheckboxWithLabel",
-  imports: ['import { CheckboxModule } from "@qualcomm-ui/angular/checkbox"'],
+  imports: ['import {CheckboxModule} from "@qualcomm-ui/angular/checkbox"'],
   metadata: {nestable: true},
 }

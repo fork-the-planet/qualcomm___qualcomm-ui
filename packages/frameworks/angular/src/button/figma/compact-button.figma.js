@@ -48,18 +48,20 @@ if (icon === "only") {
 
 // compact button with start icon
 if (icon === "start") {
-  example = figma.code`<button${densityAttr}${disabledAttr}${emphasisAttr} q-button${sizeAttr}${variantAttr}>
-  <svg q-start-icon qIcon="Star"></svg>
-  ${label}
-</button>`
+  example = figma.code`
+    <button${densityAttr}${disabledAttr}${emphasisAttr} q-button${sizeAttr}${variantAttr}>
+      <svg q-start-icon qIcon="Star"></svg>
+      ${label}
+    </button>`
 }
 
 // compact button with end icon
 if (icon === "end") {
-  example = figma.code`<button${densityAttr}${disabledAttr}${emphasisAttr} q-button${sizeAttr}${variantAttr}>
-  ${label}
-  <svg q-end-icon qIcon="Star"></svg>
-</button>`
+  example = figma.code`
+    <button${densityAttr}${disabledAttr}${emphasisAttr} q-button${sizeAttr}${variantAttr}>
+      ${label}
+      <svg q-end-icon qIcon="Star"></svg>
+    </button>`
 }
 
 // compact button without icon
@@ -71,9 +73,9 @@ export default {
   example,
   id: "CompactButton",
   imports: [
-    `import { ButtonModule } from "@qualcomm-ui/angular/button"`,
+    `import {ButtonModule} from "@qualcomm-ui/angular/button"`,
     ...(needsIcon
-      ? [`import { IconDirective } from "@qualcomm-ui/angular/icon"`]
+      ? [`import {IconDirective} from "@qualcomm-ui/angular/icon"`]
       : []),
   ],
   metadata: {nestable: true},

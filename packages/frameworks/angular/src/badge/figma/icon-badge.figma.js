@@ -45,6 +45,6 @@ const example = figma.code`<span${disabledAttr}${emphasisAttr} icon="Star" q-ico
 export default {
   example,
   id: "IconBadge",
-  imports: [`import { IconBadgeDirective } from "@qualcomm-ui/angular/badge"`],
+  imports: [`import {IconBadgeDirective} from "@qualcomm-ui/angular/badge"`],
   metadata: {nestable: true},
 }
