@@ -47,7 +47,7 @@
     "@qualcomm-ui/tsconfig": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "esbuild": "^0.25.8",
+    "esbuild": "^0.27.3",
     "minimatch": "^10.2.4",
     "react": "catalog:",
     "react-dom": "catalog:",
