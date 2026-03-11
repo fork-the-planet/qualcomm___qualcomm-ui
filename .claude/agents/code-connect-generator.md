@@ -34,7 +34,7 @@ const label = instance.getString("label")
 export default {
   example: figma.code`<ComponentName size="${size}" disabled={${disabled}}>${label}</ComponentName>`,
   id: "ComponentName",
-  imports: ['import { ComponentName } from "@qualcomm-ui/react/component-name"'],
+  imports: ['import {ComponentName} from "@qualcomm-ui/react/component-name"'],
   metadata: { nestable: true },
 }
 ```
@@ -64,9 +64,9 @@ The `imports` array supports conditionals using spread to include imports only f
 
 ```js
 imports: [
-  `import { AvatarModule } from "@qualcomm-ui/angular/avatar"`,
+  `import {AvatarModule} from "@qualcomm-ui/angular/avatar"`,
   ...(variant === "icon"
-    ? [`import { IconDirective } from "@qualcomm-ui/angular/icon"`]
+    ? [`import {IconDirective} from "@qualcomm-ui/angular/icon"`]
     : []),
 ],
 ```
@@ -121,6 +121,10 @@ items.map((item) => item.getString("header")) // read props from each
 
 // Get an instance swap (component property, not layer)
 const swapped = instance.getInstanceSwap()
+
+// NOTE: require() only works with "figma". Local require("./helper") errors
+// at runtime: "require called with a module other than 'figma'".
+// Each .figma.js file must be fully self-contained — no shared helpers.
 
 // NOTE: findConnectedInstance(id) is documented but errors at runtime
 // with "No layer with id X found in selected component/variant".
@@ -197,7 +201,7 @@ if (icon === "only") {
 export default {
   example: figma.code`<Button${startIcon}${endIcon}>${children}</Button>`,
   id: "Button",
-  imports: ['import { Button } from "@qualcomm-ui/react/button"'],
+  imports: ['import {Button} from "@qualcomm-ui/react/button"'],
 }
 ```
 
@@ -341,16 +345,17 @@ const label = instance.getBoolean("label", {
   true: instance.getString("labelText"),
 })
 
-const disabledAttr = disabled ? "\n  disabled" : ""
-const labelAttr = label ? `\n  label="${label}"` : ""
-const sizeAttr = size ? `\n  size="${size}"` : ""
+const disabledAttr = disabled ? " disabled" : ""
+const labelAttr = label ? ` label="${label}"` : ""
+const sizeAttr = size ? ` size="${size}"` : ""
 
 export default {
-  example: figma.code`<q-text-input${disabledAttr}${labelAttr}${sizeAttr}
-  placeholder="Enter text"
-/>`,
+  example: figma.code`
+    <q-text-input${disabledAttr}${labelAttr}
+      placeholder="Enter text"${sizeAttr}>
+    </q-text-input>`,
   id: "TextInput",
-  imports: ['import { TextInputModule } from "@qualcomm-ui/angular/text-input"'],
+  imports: ['import {TextInputModule} from "@qualcomm-ui/angular/text-input"'],
   metadata: {nestable: true},
 }
 ```
@@ -361,6 +366,41 @@ Key differences from React templates:
 - Component names use kebab-case with `q-` prefix
 - **Boolean attributes use bare attribute syntax** (`disabled`, not `[disabled]="true"`), since Angular components use `booleanAttribute` transforms
 - React CC publishes to the prod Figma file, Angular CC publishes to a dev branch of the same file. Since branches share node IDs, Figma merges `imports` from all CC entries for a node into one `<script>` block regardless of label. This is a platform limitation -- use the `imports` array correctly anyway.
+
+### Formatting Guidelines
+
+Figma discards empty lines and formats indentation on its own. Prioritize **source file readability** over output formatting:
+
+- **Attribute variables**: Use a leading space prefix (` disabled`, ` size="${size}"`), never `\n  `. Figma handles line wrapping.
+- **Element variables**: Store raw content without leading `\n` or indentation spaces (`<button q-close></button>`, not `\n    <button q-close></button>`). Place `${var}` on its own indented line in the `figma.code` template — Figma strips empty lines when the variable is empty.
+- **Child string fragments** (in `.map()` for container components): Start at column 0 inside the backtick — no leading spaces. Figma handles indentation when rendering.
+- **Multi-line element variables**: Same rule — newline after backtick, indented content:
+  ```js
+  const footerEl = buttonGroup
+    ? `
+      <div q-footer>
+        <button q-button>OK</button>
+      </div>`
+    : ""
+  ```
+- **Template indentation**: Start `figma.code` content on a **new line** after the backtick, indented naturally from the JS context. This makes the HTML structure scannable:
+  ```js
+  // In export default (4-space indent from property)
+  export default {
+    example: figma.code`
+      <div q-component${sizeAttr}>
+        <div q-child>Content</div>
+        ${optionalEl}
+      </div>`,
+  }
+
+  // In variable assignment (4-space indent from assignment)
+  example = figma.code`
+    <div q-component${sizeAttr}>
+      <div q-child>Content</div>
+    </div>`
+  ```
+  Single-line templates can stay inline: `` figma.code`<button q-button>${label}</button>` ``
 
 ## Migration from Parser-Based Files
 
