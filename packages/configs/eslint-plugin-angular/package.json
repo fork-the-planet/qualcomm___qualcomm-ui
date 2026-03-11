@@ -43,10 +43,10 @@
     "@typescript-eslint/rule-tester": "8.48.1",
     "@typescript-eslint/utils": "catalog:",
     "angular-eslint": "^21.3.0",
-    "esbuild": "^0.27.3",
+    "esbuild": "catalog:",
     "npm-run-all2": "^8.0.4",
     "shx": "^0.4.0",
-    "tsx": "^4.21.0",
+    "tsx": "catalog:",
     "typescript": "catalog:",
     "typescript-eslint": "catalog:",
     "vitest": "catalog:"

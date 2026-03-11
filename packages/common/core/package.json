@@ -50,9 +50,9 @@
     "@types/node": "~24.9.2",
     "@vitest/coverage-v8": "catalog:",
     "@vitest/ui": "catalog:",
-    "esbuild": "^0.27.3",
+    "esbuild": "catalog:",
     "shx": "^0.4.0",
-    "tsx": "^4.21.0",
+    "tsx": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"
   },

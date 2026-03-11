@@ -37,7 +37,7 @@
     "@vitest/coverage-v8": "catalog:",
     "@vitest/ui": "catalog:",
     "tailwindcss": "^4.1.17",
-    "esbuild": "^0.27.3",
+    "esbuild": "catalog:",
     "lodash-es": "catalog:",
     "playwright": "1.56.1",
     "react": "catalog:",
