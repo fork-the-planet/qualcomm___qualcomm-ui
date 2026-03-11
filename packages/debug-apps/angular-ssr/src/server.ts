@@ -17,7 +17,6 @@ const angularApp = new AngularNodeAppEngine()
 app.use(express.json())
 
 app.post("/get-mock-user-data", (req, res) => {
-  console.debug(req.headers["content-type"])
   const {count} = req.body
   return res.json(makeUserData(count))
 })
