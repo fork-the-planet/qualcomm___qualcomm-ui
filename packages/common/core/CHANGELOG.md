@@ -1,5 +1,24 @@
 # @qualcomm-ui/core Changelog
 
+## 1.5.0 (2026/03/12)
+
+### Features
+
+- [combobox]: add typed event definitions to ComboboxSchema ([623bdb8](https://github.com/qualcomm/qualcomm-ui/commit/623bdb8))
+
+### Code Refactoring
+
+- [toggle]: migrate toggle machine to use createNarrowedMachine ([ad0d6f7](https://github.com/qualcomm/qualcomm-ui/commit/ad0d6f7))
+- [combobox]: use narrowed machine with inferred type guards for actions ([1d44b3f](https://github.com/qualcomm/qualcomm-ui/commit/1d44b3f))
+
+### Bug Fixes
+
+- [combobox]: rename input focus event src from 'trigger' to 'input-focus' ([cf2a258](https://github.com/qualcomm/qualcomm-ui/commit/cf2a258))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils, @qualcomm-ui/dom]
+
 ## 1.4.1 (2026/03/10)
 
 ### Bug Fixes

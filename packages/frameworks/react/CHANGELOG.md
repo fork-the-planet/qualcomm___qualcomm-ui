@@ -1,5 +1,15 @@
 # @qualcomm-ui/react Changelog
 
+## 1.15.2 (2026/03/12)
+
+### Tests
+
+- [combobox]: add regression tests ([c60ba2f](https://github.com/qualcomm/qualcomm-ui/commit/c60ba2f))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/utils, @qualcomm-ui/qds-core, @qualcomm-ui/react-core]
+
 ## 1.15.1 (2026/03/10)
 
 ### Miscellaneous Chores
