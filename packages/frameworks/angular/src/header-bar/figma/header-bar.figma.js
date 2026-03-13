@@ -109,6 +109,11 @@ export default {
     ...(showLogo || actionBar
       ? [`import {IconDirective} from "@qualcomm-ui/angular/icon"`]
       : []),
+    ...(actionBar
+      ? [
+          `import {LayoutGrid, Moon, Search, Settings, User} from "lucide-angular"`,
+        ]
+      : []),
   ],
   metadata: {nestable: true},
 }

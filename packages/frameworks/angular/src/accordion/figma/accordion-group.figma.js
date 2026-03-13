@@ -50,7 +50,10 @@ export default {
   imports: [
     `import {AccordionModule} from "@qualcomm-ui/angular/accordion"`,
     ...(icon && !leftChevron
-      ? [`import {IconDirective} from "@qualcomm-ui/angular/icon"`]
+      ? [
+          `import {IconDirective} from "@qualcomm-ui/angular/icon"`,
+          `import {FileChartColumn} from "lucide-angular"`,
+        ]
       : []),
   ],
   metadata: {nestable: true},

@@ -60,7 +60,10 @@ export default {
   imports: [
     `import {AvatarModule} from "@qualcomm-ui/angular/avatar"`,
     ...(variant === "icon"
-      ? [`import {IconDirective} from "@qualcomm-ui/angular/icon"`]
+      ? [
+          `import {IconDirective} from "@qualcomm-ui/angular/icon"`,
+          `import {User} from "lucide-angular"`,
+        ]
       : []),
   ],
   metadata: {nestable: true},

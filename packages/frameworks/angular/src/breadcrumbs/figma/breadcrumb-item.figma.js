@@ -32,7 +32,10 @@ export default {
   imports: [
     `import {BreadcrumbsModule} from "@qualcomm-ui/angular/breadcrumbs"`,
     ...(showIcon
-      ? [`import {IconDirective} from "@qualcomm-ui/angular/icon"`]
+      ? [
+          `import {IconDirective} from "@qualcomm-ui/angular/icon"`,
+          `import {FolderClosed} from "lucide-angular"`,
+        ]
       : []),
   ],
   metadata: {nestable: true},

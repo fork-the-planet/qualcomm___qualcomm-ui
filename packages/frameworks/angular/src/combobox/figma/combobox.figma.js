@@ -49,6 +49,9 @@ export default {
       placeholder="Select an option"${readOnlyAttr}${requiredAttr}${sizeAttr}>
     </q-combobox>`,
   id: "Combobox",
-  imports: [`import {ComboboxModule} from "@qualcomm-ui/angular/combobox"`],
+  imports: [
+    `import {ComboboxModule} from "@qualcomm-ui/angular/combobox"`,
+    ...(startIcon ? [`import {Layers} from "lucide-angular"`] : []),
+  ],
   metadata: {nestable: true},
 }

@@ -86,7 +86,10 @@ export default {
   imports: [
     `import {ButtonModule} from "@qualcomm-ui/angular/button"`,
     ...(hasIcon
-      ? [`import {IconDirective} from "@qualcomm-ui/angular/icon"`]
+      ? [
+          `import {IconDirective} from "@qualcomm-ui/angular/icon"`,
+          `import {Star} from "lucide-angular"`,
+        ]
       : []),
   ],
   metadata: {nestable: true},
