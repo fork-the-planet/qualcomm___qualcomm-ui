@@ -1,5 +1,15 @@
 # @qualcomm-ui/angular Changelog
 
+## 2.0.1 (2026/03/12)
+
+### Tests
+
+- [combobox]: add regression tests ([c60ba2f](https://github.com/qualcomm/qualcomm-ui/commit/c60ba2f))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/utils, @qualcomm-ui/qds-core, @qualcomm-ui/angular-core]
+
 ## 2.0.0 (2026/03/10)
 
 ### BREAKING CHANGES

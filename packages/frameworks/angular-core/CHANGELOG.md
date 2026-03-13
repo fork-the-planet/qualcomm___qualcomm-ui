@@ -1,5 +1,11 @@
 # @qualcomm-ui/angular-core Changelog
 
+## 2.0.1 (2026/03/12)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/utils, @qualcomm-ui/dom]
+
 ## 2.0.0 (2026/03/10)
 
 ### BREAKING CHANGES
