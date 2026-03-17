@@ -18,10 +18,6 @@ const size = instance.getEnum("size", {
   lg: "lg",
   sm: "sm",
 })
-const switch3 = instance.getBoolean("switch3")
-const switch4 = instance.getBoolean("switch4")
-const switch5 = instance.getBoolean("switch5")
-const switch6 = instance.getBoolean("switch6")
 
 const errorTextAttr = invalid ? ` errorText="Error message"` : ""
 const indentedAttr = indented ? " indented" : ""
@@ -30,31 +26,21 @@ const labelAttr = label ? ` label="${label}"` : ""
 const orientationAttr = orientation ? ` orientation="${orientation}"` : ""
 const sizeAttr = size ? ` size="${size}"` : ""
 
-const childInvalidAttr = invalid ? " invalid" : ""
-const sw3 = switch3
-  ? `<label${childInvalidAttr} label="Switch value" q-switch></label>`
-  : ""
-const sw4 = switch4
-  ? `<label${childInvalidAttr} label="Switch value" q-switch></label>`
-  : ""
-const sw5 = switch5
-  ? `<label${childInvalidAttr} label="Switch value" q-switch></label>`
-  : ""
-const sw6 = switch6
-  ? `<label${childInvalidAttr} label="Switch value" q-switch></label>`
-  : ""
+const switches = instance.findConnectedInstances(
+  (node) => typeof node.getString("labelText") === "string",
+)
+
+const children = switches.reduce(
+  (acc, sw) => figma.code`${acc}${sw.executeTemplate()?.example}`,
+  figma.code``,
+)
 
 export default {
   example: figma.code`
     <fieldset${errorTextAttr}${indentedAttr}${invalidAttr}${labelAttr}${orientationAttr}
       q-switch-group${sizeAttr}
     >
-      <label defaultChecked${childInvalidAttr} label="Switch value" q-switch></label>
-      <label${childInvalidAttr} label="Switch value" q-switch></label>
-      ${sw3}
-      ${sw4}
-      ${sw5}
-      ${sw6}
+      ${children}
     </fieldset>`,
   id: "SwitchGroup",
   imports: [

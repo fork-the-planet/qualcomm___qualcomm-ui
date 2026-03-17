@@ -8,9 +8,6 @@ const figma = require("figma")
 
 const instance = figma.selectedInstance
 
-const checkbox4 = instance.getBoolean("checkbox4")
-const checkbox5 = instance.getBoolean("checkbox5")
-const checkbox6 = instance.getBoolean("checkbox6")
 const indented = instance.getBoolean("indented")
 const invalid = instance.getBoolean("destructive")
 const label = instance.getBoolean("label", {
@@ -31,28 +28,21 @@ const labelAttr = label ? ` label="${label}"` : ""
 const orientationAttr = orientation ? ` orientation="${orientation}"` : ""
 const sizeAttr = size ? ` size="${size}"` : ""
 
-const childInvalidAttr = invalid ? " invalid" : ""
-const cb4 = checkbox4
-  ? `<label${childInvalidAttr} label="Checkbox label" q-checkbox></label>`
-  : ""
-const cb5 = checkbox5
-  ? `<label${childInvalidAttr} label="Checkbox label" q-checkbox></label>`
-  : ""
-const cb6 = checkbox6
-  ? `<label${childInvalidAttr} label="Checkbox label" q-checkbox></label>`
-  : ""
+const checkboxes = instance.findConnectedInstances(
+  (node) => typeof node.getString("labelText") === "string",
+)
+
+const children = checkboxes.reduce(
+  (acc, cb) => figma.code`${acc}${cb.executeTemplate()?.example}`,
+  figma.code``,
+)
 
 export default {
   example: figma.code`
     <fieldset${errorTextAttr}${indentedAttr}${invalidAttr}${labelAttr}${orientationAttr}
       q-checkbox-group${sizeAttr}
     >
-      <label defaultChecked${childInvalidAttr} label="Checkbox label" q-checkbox></label>
-      <label${childInvalidAttr} label="Checkbox label" q-checkbox></label>
-      <label${childInvalidAttr} label="Checkbox label" q-checkbox></label>
-      ${cb4}
-      ${cb5}
-      ${cb6}
+      ${children}
     </fieldset>`,
   id: "CheckboxGroup",
   imports: [

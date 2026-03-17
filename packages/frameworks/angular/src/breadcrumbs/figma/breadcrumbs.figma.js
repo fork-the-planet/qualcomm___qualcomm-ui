@@ -10,50 +10,26 @@ const instance = figma.selectedInstance
 
 const emphasis = instance.getEnum("emphasis", {neutral: "neutral"})
 const size = instance.getEnum("size", {lg: "lg", sm: "sm"})
-const icons = instance.getBoolean("icons")
 
 const emphasisAttr = emphasis ? ` emphasis="${emphasis}"` : ""
 const sizeAttr = size ? ` size="${size}"` : ""
 
-const items = instance
-  .findConnectedInstances(
-    (node) => {
-      const s = node.getEnum("state", {
-        active: "a",
-        disabled: "d",
-        focus: "f",
-        hover: "h",
-        idle: "i",
-        pressed: "p",
-      })
-      return typeof s === "string"
-    },
-    {traverseInstances: true},
-  )
-  .reverse() // findConnectedInstances seems to return items in reverse visual order?
-
-const children = items
-  .map((item) => {
-    const state = item.getEnum("state", {
-      active: "active",
-      disabled: "disabled",
-    })
-
-    const disabledAttr = state === "disabled" ? " disabled" : ""
-    const ariaCurrentAttr = state === "active" ? ` aria-current="page"` : ""
-    const iconEl = icons
-      ? `<svg q-breadcrumb-item-icon qIcon="FolderClosed"></svg>`
-      : ""
-
-    return `
-    <li${disabledAttr} q-breadcrumb-item>
-      <a${ariaCurrentAttr} q-breadcrumb-item-trigger>
-        ${iconEl}
-        Breadcrumb
-      </a>
-    </li>`
+const items = instance.findConnectedInstances((node) => {
+  const s = node.getEnum("state", {
+    active: "a",
+    disabled: "d",
+    focus: "f",
+    hover: "h",
+    idle: "i",
+    pressed: "p",
   })
-  .join("\n")
+  return typeof s === "string"
+})
+
+const children = items.reduce(
+  (acc, item) => figma.code`${acc}${item.executeTemplate()?.example}`,
+  figma.code``,
+)
 
 export default {
   example: figma.code`
@@ -65,12 +41,6 @@ export default {
   id: "Breadcrumbs",
   imports: [
     `import {BreadcrumbsModule} from "@qualcomm-ui/angular/breadcrumbs"`,
-    ...(icons
-      ? [
-          `import {IconDirective} from "@qualcomm-ui/angular/icon"`,
-          `import {FolderClosed} from "lucide-angular"`,
-        ]
-      : []),
   ],
   metadata: {nestable: true},
 }

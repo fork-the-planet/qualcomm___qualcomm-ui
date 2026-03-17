@@ -10,7 +10,7 @@ const instance = figma.selectedInstance
 
 const leftChevron = instance.getEnum("chevron", {left: "left"})
 const disabled = instance.getEnum("state", {disabled: true})
-const header = instance.getString("header") || "Title of accordion"
+const header = instance.getString("headerText") || "Title of accordion"
 const icon = instance.getBoolean("icon")
 const subHeader = instance.getBoolean("subHeader")
 const subHeaderText = instance.getString("subHeaderText")
@@ -27,14 +27,9 @@ if (leftChevron) {
     subHeader && subHeaderText
       ? `<span q-accordion-item-secondary-text>${subHeaderText}</span>`
       : ""
-  const iconEl = icon
-    ? `<svg q-accordion-item-icon qIcon="FileChartColumn"></svg>`
-    : ""
-
   example = figma.code`
     <div${disabledAttr} q-accordion-item-root value="a">
       <button q-accordion-item-trigger>
-        ${iconEl}
         <q-accordion-item-indicator />
         <span q-accordion-item-text>${header}</span>
         ${secondaryTextEl}
