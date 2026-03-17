@@ -94,6 +94,13 @@ instance.getEnum("propertyName", {
   "Figma Value": "code-value",
   "Another": "another",
 })
+
+// Undocumented: getString works on enum properties too (passthrough)
+// Use this for large enums where mapping every value is impractical
+instance.getString("enumPropertyName") // returns the raw Figma enum value as a string
+
+// NOTE: getEnum with a function callback does NOT work:
+// instance.getEnum("prop", (val) => val) // returns undefined
 ```
 
 ### Instance Navigation
@@ -131,11 +138,12 @@ const swapped = instance.getInstanceSwap()
 // Tested with CC id, layer name, and node id — none work.
 // Only use findInstance(layerName) to navigate to child instances.
 
-// NOTE: executeTemplate() takes no parameters and is not label-aware.
-// When both React and Angular CC target the same nodes, it may pick
-// the wrong label's template. Do NOT use executeTemplate() to delegate
-// from a parent to child templates when multiple labels exist for
-// those nodes. Instead, read child properties inline with findInstance().
+// NOTE: executeTemplate() is now label-aware (fixed in figma/code-connect#369).
+// It returns the template matching the calling file's label. Safe to use
+// for delegating from parent to child templates across labels.
+// IMPORTANT: executeTemplate().example returns a figma.code object, NOT a string.
+// Never use string operations (.join, template literal coercion) on it.
+// Interpolate directly into figma.code: figma.code`${child.executeTemplate().example}`
 ```
 
 ### The `figma.code` Tagged Template Literal
@@ -213,6 +221,7 @@ export default {
 
 - Property names vary between similar components (e.g., `inputText` vs `passwordText`)
 - If a property doesn't exist but is needed, hardcode it
+- If a corresponding React CC file exists, read it but do not trust it is up-to-date: always check Figma for the complete list of properties
 
 ### 2. Never Include Default Values in Enum Mappings
 
