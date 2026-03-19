@@ -30,7 +30,7 @@
     "analyze-bundle": "source-map-explorer bundle-size-dist/main.js",
     "explore-bundle": "run-s build:bundle-size analyze-bundle",
     "publish-angular-package": "tsx apply-package && qui-cli publish-angular qui-angular",
-    "figma:publish-components": "figma connect publish -c figma/components.config.json",
+    "figma:publish-components": "figma connect publish -c figma/components.config.json && figma connect publish -c figma/components-ts.config.json",
     "figma:publish-icons": "figma connect publish -c figma/icons.config.json --batch-size 500"
   },
   "devDependencies": {
