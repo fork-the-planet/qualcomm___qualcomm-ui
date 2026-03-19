@@ -14,14 +14,12 @@ updates:
     schedule:
       interval: "daily"
     versioning-strategy: increase
+    ignore:
+      - dependency-name: "*"
+        dependency-type: development
     groups:
       production:
         dependency-type: production
-        update-types:
-        - patch
-        - minor
-      development:
-        dependency-type: development
         update-types:
         - patch
         - minor
