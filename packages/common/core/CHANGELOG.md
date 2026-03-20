@@ -1,5 +1,22 @@
 # @qualcomm-ui/core Changelog
 
+## 1.6.0 (2026/03/20)
+
+### Features
+
+- [side-nav]: add filter-input bindings to core api ([6a6beff](https://github.com/qualcomm/qualcomm-ui/commit/6a6beff))
+
+### Bug Fixes
+
+- [tree]: pass null to booleanAriaAttr for omitted false value ([baf3117](https://github.com/qualcomm/qualcomm-ui/commit/baf3117))
+- [accordion]: pass null to booleanAriaAttr for omitted false value ([9ecdc20](https://github.com/qualcomm/qualcomm-ui/commit/9ecdc20))
+- [tree]: add aria-label to branch-trigger for expand/collapse state ([f3d9f92](https://github.com/qualcomm/qualcomm-ui/commit/f3d9f92))
+- [side-nav]: change trigger bindings from button type to treeitem role ([6f82109](https://github.com/qualcomm/qualcomm-ui/commit/6f82109))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils, @qualcomm-ui/dom]
+
 ## 1.5.0 (2026/03/12)
 
 ### Features
