@@ -41,7 +41,7 @@ import {QLogoComponent} from "./q-logo.component"
               q-side-nav-branch-template
               [rootNode]="collection.rootNode"
             >
-              <div q-side-nav-branch-node>
+              <div q-side-nav-branch-node [attr.aria-label]="branch.node.text">
                 <div q-side-nav-node-indicator></div>
                 @if (branch.node.icon) {
                   <svg q-side-nav-node-icon [qIcon]="branch.node.icon"></svg>
@@ -56,7 +56,7 @@ import {QLogoComponent} from "./q-logo.component"
               q-side-nav-leaf-template
               [rootNode]="collection.rootNode"
             >
-              <div q-side-nav-leaf-node>
+              <div q-side-nav-leaf-node [attr.aria-label]="leaf.node.text">
                 <div q-side-nav-node-indicator></div>
                 @if (leaf.node.icon) {
                   <svg q-side-nav-node-icon [qIcon]="leaf.node.icon"></svg>
