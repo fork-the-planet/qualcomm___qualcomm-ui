@@ -16,19 +16,19 @@ import {QLogoComponent} from "./q-logo.component"
   template: `
     <div class="flex w-full justify-start">
       <!-- preview -->
-      <nav
+      <div
         q-side-nav-root
         [collection]="collection"
         [open]="open()"
         (openChanged)="open.set($event)"
       >
-        <header q-side-nav-header>
+        <div q-side-nav-header>
           <div q-side-nav-header-logo>
             <q-logo />
           </div>
           <div q-side-nav-header-title>Qualcomm</div>
           <button q-side-nav-collapse-trigger></button>
-        </header>
+        </div>
 
         @for (
           node of collection.rootNode.nodes;
@@ -66,7 +66,7 @@ import {QLogoComponent} from "./q-logo.component"
             </ng-template>
           </q-side-nav-nodes>
         }
-      </nav>
+      </div>
       <!-- preview -->
     </div>
   `,
