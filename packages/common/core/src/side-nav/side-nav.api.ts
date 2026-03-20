@@ -115,7 +115,7 @@ export function createSideNavApi(
           }
           send({type: open ? "close" : "open"})
         },
-        type: "button",
+        role: "treeitem",
       })
     },
   }
