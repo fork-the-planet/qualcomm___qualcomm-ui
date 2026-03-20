@@ -14,9 +14,8 @@ updates:
     schedule:
       interval: "daily"
     versioning-strategy: increase
-    ignore:
-      - dependency-name: "*"
-        dependency-type: development
+    allow:
+      - dependency-type: production
     groups:
       production:
         dependency-type: production

@@ -1,5 +1,11 @@
 # @qualcomm-ui/react-core Changelog
 
+## 1.3.3 (2026/03/20)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/utils, @qualcomm-ui/dom]
+
 ## 1.3.2 (2026/03/12)
 
 ### Miscellaneous Chores

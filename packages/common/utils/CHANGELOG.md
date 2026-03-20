@@ -1,5 +1,11 @@
 # @qualcomm-ui/utils Changelog
 
+## 1.2.1 (2026/03/20)
+
+### Bug Fixes
+
+- [utils]: change booleanAriaAttr falseValue to use null instead of undefined ([23834ab](https://github.com/qualcomm/qualcomm-ui/commit/23834ab))
+
 ## 1.2.0 (2026/03/12)
 
 ### Features

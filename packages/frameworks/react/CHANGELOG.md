@@ -1,5 +1,16 @@
 # @qualcomm-ui/react Changelog
 
+## 1.15.3 (2026/03/20)
+
+### Bug Fixes
+
+- [side-nav]: set filter input wrapper element role to treeitem ([e1dc160](https://github.com/qualcomm/qualcomm-ui/commit/e1dc160))
+- [side-nav]: set divider role to presentation and remove aria-orientation ([2e234a8](https://github.com/qualcomm/qualcomm-ui/commit/2e234a8))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/utils, @qualcomm-ui/qds-core, @qualcomm-ui/react-core]
+
 ## 1.15.2 (2026/03/12)
 
 ### Tests
