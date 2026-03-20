@@ -1,5 +1,15 @@
 # @qualcomm-ui/angular-core Changelog
 
+## 2.0.2 (2026/03/20)
+
+### Bug Fixes
+
+- [side-nav]: add missing tree bindings for accessibility ([1039fef](https://github.com/qualcomm/qualcomm-ui/commit/1039fef))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/utils, @qualcomm-ui/dom]
+
 ## 2.0.1 (2026/03/12)
 
 ### Miscellaneous Chores

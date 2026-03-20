@@ -28,9 +28,9 @@ export function booleanDataAttr(
 
 export function booleanAriaAttr(
   guard: boolean | undefined,
-  falseValue: "false" | undefined = "false",
+  falseValue: "false" | null = "false",
 ): BooleanAriaAttr {
-  return guard ? "true" : falseValue
+  return guard ? "true" : falseValue === null ? undefined : falseValue
 }
 
 /**

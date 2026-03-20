@@ -73,6 +73,7 @@ export class Home {
     {name: "Radio", path: "/radio"},
     {name: "Select", path: "/select"},
     {name: "Segmented Control", path: "/segmented-control"},
+    {name: "Side Nav", path: "/side-nav"},
     {name: "Slider", path: "/slider"},
     {name: "Switch", path: "/switch"},
     {name: "Tabs", path: "/tabs"},

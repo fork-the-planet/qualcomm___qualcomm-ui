@@ -1,5 +1,16 @@
 # @qualcomm-ui/angular Changelog
 
+## 2.0.2 (2026/03/20)
+
+### Bug Fixes
+
+- [side-nav]: set filter input wrapper element role to treeitem ([68efb90](https://github.com/qualcomm/qualcomm-ui/commit/68efb90))
+- [side-nav]: set divider role to presentation and remove aria-orientation ([2d8d54e](https://github.com/qualcomm/qualcomm-ui/commit/2d8d54e))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/angular-core, @qualcomm-ui/utils, @qualcomm-ui/qds-core]
+
 ## 2.0.1 (2026/03/12)
 
 ### Tests
