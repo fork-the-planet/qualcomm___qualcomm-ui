@@ -287,6 +287,7 @@ export function createTreeApi<V extends TreeNode = TreeNode>(
       const nodeState = getNodeState(props)
       return normalize.element({
         ...commonBindings,
+        "aria-label": nodeState.expanded ? "Collapse" : "Expand",
         "data-disabled": booleanDataAttr(nodeState.disabled),
         "data-loading": booleanDataAttr(nodeState.loading),
         "data-part": "branch-trigger",
