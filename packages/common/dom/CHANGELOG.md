@@ -1,5 +1,11 @@
 # @qualcomm-ui/dom Changelog
 
+## 1.0.10 (2026/03/25)
+
+### Bug Fixes
+
+- [focus-visible]: support focusVisible option in programmatic focus ([d605803](https://github.com/qualcomm/qualcomm-ui/commit/d605803))
+
 ## 1.0.9 (2026/03/20)
 
 ### Miscellaneous Chores

@@ -1,5 +1,15 @@
 # @qualcomm-ui/react Changelog
 
+## 1.16.1 (2026/03/25)
+
+### Bug Fixes
+
+- [select]: make disclosure indicator inert ([012754b](https://github.com/qualcomm/qualcomm-ui/commit/012754b))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/qds-core, @qualcomm-ui/react-core]
+
 ## 1.16.0 (2026/03/24)
 
 ### Features
