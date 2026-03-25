@@ -1,5 +1,17 @@
 # @qualcomm-ui/react Changelog
 
+## 1.16.0 (2026/03/24)
+
+### Features
+
+- [tag]: deprecate radius prop in favor of shape and add new colors ([b6aa6ae](https://github.com/qualcomm/qualcomm-ui/commit/b6aa6ae))
+- [theme]: add arduino to theme selectors across apps ([9fa4fef](https://github.com/qualcomm/qualcomm-ui/commit/9fa4fef))
+- [badge]: add amber and violet colors, rename kiwi to lime ([58c2133](https://github.com/qualcomm/qualcomm-ui/commit/58c2133))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
 ## 1.15.3 (2026/03/20)
 
 ### Bug Fixes

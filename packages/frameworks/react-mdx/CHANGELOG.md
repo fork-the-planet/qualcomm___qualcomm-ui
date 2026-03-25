@@ -1,5 +1,20 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 2.1.0 (2026/03/24)
+
+### Features
+
+- [prop-name]: improve `since` version display with badge and link support ([f26d230](https://github.com/qualcomm/qualcomm-ui/commit/f26d230))
+- [theme]: add arduino to theme selectors across apps ([9fa4fef](https://github.com/qualcomm/qualcomm-ui/commit/9fa4fef))
+
+### Bug Fixes
+
+- [styles]: replaced neutral-04 token and rename kiwi to lime ([9c9b50f](https://github.com/qualcomm/qualcomm-ui/commit/9c9b50f))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react]
+
 ## 2.0.3 (2026/03/20)
 
 ### Miscellaneous Chores

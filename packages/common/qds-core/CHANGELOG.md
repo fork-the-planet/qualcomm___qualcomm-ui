@@ -1,5 +1,24 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.21.0 (2026/03/24)
+
+### Features
+
+- [tag]: deprecate radius prop in favor of shape and add new colors ([b6aa6ae](https://github.com/qualcomm/qualcomm-ui/commit/b6aa6ae))
+- [tokens]: add arduino brand support ([a8f5a1b](https://github.com/qualcomm/qualcomm-ui/commit/a8f5a1b))
+- [button]: add inverse emphasis variant and adopt component tokens ([91049f8](https://github.com/qualcomm/qualcomm-ui/commit/91049f8))
+- [tokens]: update design tokens with new colors and hex format ([20b6d92](https://github.com/qualcomm/qualcomm-ui/commit/20b6d92))
+- [badge]: add amber and violet colors, rename kiwi to lime ([58c2133](https://github.com/qualcomm/qualcomm-ui/commit/58c2133))
+
+### Code Refactoring
+
+- [tokens]: convert color output from oklch to hex ([95301bc](https://github.com/qualcomm/qualcomm-ui/commit/95301bc))
+
+### Bug Fixes
+
+- [progress]: replaced neutral-04 token with track-default ([626b3c2](https://github.com/qualcomm/qualcomm-ui/commit/626b3c2))
+- [components]: use -medium border support tokens ([c6417f4](https://github.com/qualcomm/qualcomm-ui/commit/c6417f4))
+
 ## 1.20.3 (2026/03/20)
 
 ### Miscellaneous Chores
