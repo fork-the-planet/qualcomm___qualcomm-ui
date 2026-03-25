@@ -1,5 +1,15 @@
 # @qualcomm-ui/angular Changelog
 
+## 2.1.0 (2026/03/24)
+
+### Features
+
+- [tag]: deprecate radius prop in favor of shape and add new colors ([b6aa6ae](https://github.com/qualcomm/qualcomm-ui/commit/b6aa6ae))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core, @qualcomm-ui/angular-core]
+
 ## 2.0.2 (2026/03/20)
 
 ### Bug Fixes

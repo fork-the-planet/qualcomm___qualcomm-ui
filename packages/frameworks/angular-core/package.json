@@ -61,7 +61,7 @@
     "@qualcomm-ui/core": "workspace:^1.6.0",
     "@qualcomm-ui/cli": "catalog:",
     "@qualcomm-ui/dom": "workspace:^1.0.9",
-    "@qualcomm-ui/tailwind-plugin": "workspace:^1.6.0",
+    "@qualcomm-ui/tailwind-plugin": "workspace:^1.7.0",
     "@qualcomm-ui/tsconfig": "catalog:",
     "@qualcomm-ui/utils": "workspace:^1.2.1",
     "@tailwindcss/vite": "^4.1.11",
