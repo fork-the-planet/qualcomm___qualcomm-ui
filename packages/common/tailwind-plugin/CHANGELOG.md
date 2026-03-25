@@ -1,5 +1,11 @@
 # @qualcomm-ui/tailwind-plugin Changelog
 
+## 1.7.0 (2026/03/24)
+
+### Features
+
+- [tailwind-plugin]: update utilities for new token structure ([b8da430](https://github.com/qualcomm/qualcomm-ui/commit/b8da430))
+
 ## 1.6.0 (2026/02/26)
 
 ### Features

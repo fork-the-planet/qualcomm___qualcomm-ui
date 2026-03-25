@@ -1,5 +1,15 @@
 # @qualcomm-ui/react-swagger Changelog
 
+## 1.2.13 (2026/03/24)
+
+### Bug Fixes
+
+- [styles]: replaced neutral-04 token and rename kiwi to lime ([9c9b50f](https://github.com/qualcomm/qualcomm-ui/commit/9c9b50f))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
 ## 1.2.12 (2026/03/20)
 
 ### Miscellaneous Chores
