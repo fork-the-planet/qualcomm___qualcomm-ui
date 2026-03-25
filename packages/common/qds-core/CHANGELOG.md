@@ -1,5 +1,16 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.21.1 (2026/03/25)
+
+### Bug Fixes
+
+- [select]: make disclosure indicator inert ([012754b](https://github.com/qualcomm/qualcomm-ui/commit/012754b))
+- [avatar]: show background through status indicator border ([e624e92](https://github.com/qualcomm/qualcomm-ui/commit/e624e92))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core]
+
 ## 1.21.0 (2026/03/24)
 
 ### Features

@@ -1,5 +1,17 @@
 # @qualcomm-ui/core Changelog
 
+## 1.6.1 (2026/03/25)
+
+### Bug Fixes
+
+- [focus-visible]: support focusVisible option in programmatic focus ([d605803](https://github.com/qualcomm/qualcomm-ui/commit/d605803))
+- [select]: make disclosure indicator inert ([012754b](https://github.com/qualcomm/qualcomm-ui/commit/012754b))
+- [select]: allow keyboard interaction on clear button ([c238b9a](https://github.com/qualcomm/qualcomm-ui/commit/c238b9a))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/dom]
+
 ## 1.6.0 (2026/03/20)
 
 ### Features
