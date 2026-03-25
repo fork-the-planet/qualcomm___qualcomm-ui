@@ -38,6 +38,7 @@ Format: `<type>(<scope>): <description>`
 - Scope optional, lowercase
 - Max 72 chars for subject line
 - Breaking changes: append `!` before colon (e.g. `feat(api)!: change response format`)
+- Describe the intent or user-facing effect, not the code change. Prefer "allow keyboard interaction on clear button" over "ignore keyboard events from child elements". Fall back to describing the mechanism only when the change is purely internal with no observable behavior change (e.g. a refactor).
 - Reserve the body for changes that are not described in the message. Never use prose or paragraphs that repeat the commit message.
 
 ## Procedure
