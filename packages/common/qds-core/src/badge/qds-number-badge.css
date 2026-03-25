@@ -28,19 +28,22 @@
 
   &[data-emphasis="neutral"] {
     --badge-background: var(--color-background-support-neutral);
+  }
+
+  &[data-emphasis="brand"] {
     --badge-text: var(--color-utility-persistent-white);
   }
 
   &[data-emphasis="neutral-outline"] {
     --badge-background: transparent;
-    --badge-border: var(--color-border-support-neutral);
+    --badge-border: var(--color-border-support-neutral-medium);
     --badge-text: var(--color-text-neutral-primary);
     --border-size: 1px;
   }
 
   &[data-emphasis="brand-outline"] {
     --badge-background: transparent;
-    --badge-border: var(--color-border-support-neutral);
+    --badge-border: var(--color-border-support-neutral-medium);
     --badge-text: var(--color-text-brand-primary);
     --border-size: 1px;
   }
