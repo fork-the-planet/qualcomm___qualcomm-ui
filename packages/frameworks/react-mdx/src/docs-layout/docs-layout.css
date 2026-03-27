@@ -46,6 +46,9 @@
 }
 
 .qui-docs__breadcrumbs {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 16px;
 
   > ul.q-breadcrumb--root {
