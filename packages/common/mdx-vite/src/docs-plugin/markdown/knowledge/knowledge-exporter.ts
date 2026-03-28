@@ -331,7 +331,7 @@ export class KnowledgeExporter {
         formatNpmInstallTabs,
         this.propFormatter.propsToMarkdownList(),
         this.formatFrontmatterExpressions(frontmatter),
-        await formatThemeNodes(),
+        themePlugin,
         formatDemos(pageInfo.demosFolder, this.config.verbose),
         filterTextDirectives,
         this.transformRelativeUrls(),
