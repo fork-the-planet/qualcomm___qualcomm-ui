@@ -12,6 +12,7 @@ import type {
   KnowledgePages,
   KnowledgeSections,
   PageEntry,
+  PageFrontmatter,
   SectionEntry,
 } from "@qualcomm-ui/mdx-common"
 
@@ -251,7 +252,9 @@ export class KnowledgeExporter {
     return components
   }
 
-  private formatFrontmatterExpressions(frontmatter: Record<string, any>) {
+  private formatFrontmatterExpressions(
+    frontmatter: Record<string, unknown> | PageFrontmatter,
+  ) {
     return () => (tree: Root) => {
       visit(
         tree,
@@ -271,7 +274,9 @@ export class KnowledgeExporter {
 
           if (frontmatter.description) {
             parent.children.splice(index, 1, {
-              children: [{type: "text", value: frontmatter.description}],
+              children: [
+                {type: "text", value: frontmatter.description as string},
+              ],
               type: "paragraph",
             })
           } else {
@@ -281,12 +286,12 @@ export class KnowledgeExporter {
       )
 
       const root = tree as Parent
-      const h1Index = root.children.findIndex((node: any) => {
+      const h1Index = root.children.findIndex((node) => {
         if (node.type !== "heading" || node.depth !== 1) {
           return false
         }
         return node.children?.some(
-          (child: any) =>
+          (child) =>
             child.type === "mdxTextExpression" &&
             child.value?.includes("frontmatter"),
         )
@@ -314,8 +319,10 @@ export class KnowledgeExporter {
   private async processMdxContent(
     mdxContent: string,
     pageInfo: KnowledgePageData,
-    frontmatter: Record<string, any>,
+    frontmatter: Record<string, unknown> | PageFrontmatter,
   ): Promise<Root> {
+    const themePlugin = await formatThemeNodes()
+
     const processor = createRemarkProcessor({
       frontmatter: true,
       gfm: true,
@@ -367,7 +374,7 @@ export class KnowledgeExporter {
     })
     const strippedContent = String(await stripMetaProcessor.process(rawContent))
 
-    const title = frontmatter.title || pageInfo.name
+    const title = (frontmatter.title as string) || pageInfo.name
 
     return {
       content: strippedContent.trim(),
