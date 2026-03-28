@@ -38,7 +38,11 @@ import {
   PropFormatter,
 } from "./plugins"
 import {SectionExtractor} from "./section-extractor"
-import type {MdxFlowExpression, ProcessedPage} from "./types"
+import type {
+  KnowledgePageCache,
+  MdxFlowExpression,
+  ProcessedPage,
+} from "./types"
 import {computeMd5} from "./utils"
 
 export interface KnowledgeExporterConfig {
@@ -59,11 +63,17 @@ export interface KnowledgeExporterConfig {
  * Does not write files — the caller handles persistence.
  */
 export class KnowledgeExporter {
+  private readonly cache: KnowledgePageCache
   private readonly config: KnowledgeExporterConfig
   private readonly fileReader: MdxFileReader
   private readonly propFormatter: PropFormatter
 
-  constructor(config: KnowledgeExporterConfig, fileReader: MdxFileReader) {
+  constructor(
+    config: KnowledgeExporterConfig,
+    fileReader: MdxFileReader,
+    cache?: KnowledgePageCache,
+  ) {
+    this.cache = cache ?? new Map()
     this.config = config
     this.fileReader = fileReader
     this.propFormatter = new PropFormatter({
@@ -74,8 +84,10 @@ export class KnowledgeExporter {
   }
 
   async generate(): Promise<{
+    cachedPageCount: number
     pages: KnowledgePages
     sections: KnowledgeSections
+    totalPageCount: number
   }> {
     if (this.config.verbose) {
       console.log(`Scanning pages in: ${this.config.routeDir}`)
@@ -95,19 +107,10 @@ export class KnowledgeExporter {
       console.log(`Found ${pageInfos.length} page(s)`)
     }
 
-    const processedPages: ProcessedPage[] = []
-    for (const page of pageInfos) {
-      try {
-        if (this.config.verbose) {
-          console.log(`Processing page: ${page.name}`)
-        }
-        const processed = await this.processMdxPage(page)
-        processedPages.push(processed)
-      } catch (error) {
-        console.error(`Failed to process page: ${page.name}`)
-        throw error
-      }
-    }
+    let cachedCount = 0
+    const currentFiles = new Set<string>()
+    const allSections: SectionEntry[] = []
+    const allPages: PageEntry[] = []
 
     const sectionsConfig = this.config.sections ?? {}
     const extractor = new SectionExtractor({
@@ -116,36 +119,74 @@ export class KnowledgeExporter {
       pageIdPrefix: this.config.pageIdPrefix,
     })
 
-    const allSections: SectionEntry[] = []
-    const allPages: PageEntry[] = []
+    for (const page of pageInfos) {
+      currentFiles.add(page.mdxFile)
 
-    for (let i = 0; i < processedPages.length; i++) {
-      const processed = processedPages[i]
-      const page = pageInfos[i]
+      try {
+        if (this.config.verbose) {
+          console.log(`Processing page: ${page.name}`)
+        }
 
-      const filteredFrontmatter = filterFrontmatter(
-        processed.frontmatter,
-        this.config.frontmatter,
-      )
+        const {fileContents, frontmatter} = this.fileReader.readFileSync(
+          page.mdxFile,
+        )
+        const contentHash = computeMd5(fileContents)
+        const cached = this.cache.get(page.mdxFile)
 
-      const pageInfo = {
-        frontmatter: filteredFrontmatter,
-        id: page.id,
-        pathname: page.pathname,
-        title: processed.title,
-        url: processed.url,
+        if (cached && cached.contentHash === contentHash) {
+          cachedCount++
+          allSections.push(...cached.sections)
+          if (cached.pageEntry) {
+            allPages.push(cached.pageEntry)
+          }
+          continue
+        }
+
+        const processed = await this.processMdxPage(page, {
+          fileContents,
+          frontmatter,
+        })
+
+        const filteredFrontmatter = filterFrontmatter(
+          processed.frontmatter,
+          this.config.frontmatter,
+        )
+        const pageInfo = {
+          frontmatter: filteredFrontmatter,
+          id: page.id,
+          pathname: page.pathname,
+          title: processed.title,
+          url: processed.url,
+        }
+
+        const {sections: pageSections} = extractor.extract(
+          processed.sectionAst,
+          pageInfo,
+        )
+        allSections.push(...pageSections)
+
+        const pageEntry = extractor.extractPage(processed.sectionAst, pageInfo)
+        if (pageEntry) {
+          pageEntry.content = `# ${processed.title}\n\n${pageEntry.content}`
+          allPages.push(pageEntry)
+        }
+
+        this.cache.set(page.mdxFile, {
+          contentHash,
+          pageEntry: pageEntry ?? null,
+          processedPage: processed,
+          sections: pageSections,
+        })
+      } catch (error) {
+        console.error(`Failed to process page: ${page.name}`)
+        throw error
       }
+    }
 
-      const {sections: pageSections} = extractor.extract(
-        processed.sectionAst,
-        pageInfo,
-      )
-      allSections.push(...pageSections)
-
-      const pageEntry = extractor.extractPage(processed.sectionAst, pageInfo)
-      if (pageEntry) {
-        pageEntry.content = `# ${processed.title}\n\n${pageEntry.content}`
-        allPages.push(pageEntry)
+    // Prune cache entries for deleted files
+    for (const key of this.cache.keys()) {
+      if (!currentFiles.has(key)) {
+        this.cache.delete(key)
       }
     }
 
@@ -163,6 +204,7 @@ export class KnowledgeExporter {
     const pagesHash = computeMd5(JSON.stringify(allPages))
 
     return {
+      cachedPageCount: cachedCount,
       pages: {
         generatedAt: new Date().toISOString(),
         hash: pagesHash,
@@ -177,6 +219,7 @@ export class KnowledgeExporter {
         totalSections: allSections.length,
         version: 1,
       },
+      totalPageCount: pageInfos.length,
     }
   }
 
@@ -343,10 +386,13 @@ export class KnowledgeExporter {
 
   private async processMdxPage(
     pageInfo: KnowledgePageData,
+    preRead?: {
+      fileContents: string
+      frontmatter: Record<string, unknown> | PageFrontmatter
+    },
   ): Promise<ProcessedPage> {
-    const {fileContents, frontmatter} = this.fileReader.readFileSync(
-      pageInfo.mdxFile,
-    )
+    const {fileContents, frontmatter} =
+      preRead ?? this.fileReader.readFileSync(pageInfo.mdxFile)
     const ast = await this.processMdxContent(
       fileContents,
       pageInfo,
