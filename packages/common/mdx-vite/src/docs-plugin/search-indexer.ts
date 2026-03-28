@@ -414,10 +414,15 @@ export class SearchIndexer {
     )
 
     this._mdxFileCount = mdxFileGlob.length
-    this.mdxFileReader.gitMetadataMap = buildGitMetadataMap(
-      this.config.srcDir,
-      this.mdxFileReader.pageTimestampMetadata,
-    )
+    if (
+      !this.mdxFileReader.enabled ||
+      this.mdxFileReader.gitMetadataMap.size === 0
+    ) {
+      this.mdxFileReader.gitMetadataMap = buildGitMetadataMap(
+        this.config.srcDir,
+        this.mdxFileReader.pageTimestampMetadata,
+      )
+    }
 
     const compiledFiles = mdxFileGlob.map((file) => this.compileMdxFile(file))
 
