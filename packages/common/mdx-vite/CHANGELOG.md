@@ -1,5 +1,33 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 3.1.0 (2026/03/28)
+
+### Features
+
+- [search-indexer]: populate frontmatter data field ([c6c9417](https://github.com/qualcomm/qualcomm-ui/commit/c6c9417))
+
+### Code Refactoring
+
+- [docs-layout]: separate page header from page actions ([58fc23e](https://github.com/qualcomm/qualcomm-ui/commit/58fc23e))
+- [remark-pipeline]: remove unused Processor type import ([4193ed0](https://github.com/qualcomm/qualcomm-ui/commit/4193ed0))
+- [knowledge-exporter]: improve type safety ([09f7a0e](https://github.com/qualcomm/qualcomm-ui/commit/09f7a0e))
+
+### Performance Improvements
+
+- [search-indexer]: skip rebuilding git metadata map when already populated ([e90a579](https://github.com/qualcomm/qualcomm-ui/commit/e90a579))
+- [knowledge-exporter]: use dirent.isDirectory() instead of separate stat call ([54a92d9](https://github.com/qualcomm/qualcomm-ui/commit/54a92d9))
+- [section-extractor]: hoist remark processors to module level ([127cfd7](https://github.com/qualcomm/qualcomm-ui/commit/127cfd7))
+- [knowledge-exporter]: add page-level caching ([fddcd20](https://github.com/qualcomm/qualcomm-ui/commit/fddcd20))
+- [knowledge-exporter]: hoist formatThemeNodes await outside processor creation ([ad16586](https://github.com/qualcomm/qualcomm-ui/commit/ad16586))
+
+### Tests
+
+- [search-indexer]: update fixture data for frontmatter data field ([05f8751](https://github.com/qualcomm/qualcomm-ui/commit/05f8751))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common]
+
 ## 3.0.3 (2026/03/24)
 
 - **deps:** update dependencies [@qualcomm-ui/tailwind-plugin]

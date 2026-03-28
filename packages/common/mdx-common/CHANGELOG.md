@@ -1,5 +1,11 @@
 # @qualcomm-ui/mdx-common Changelog
 
+## 2.1.0 (2026/03/28)
+
+### Features
+
+- [docs-plugin]: add raw frontmatter data field to PageSection type ([d4544cc](https://github.com/qualcomm/qualcomm-ui/commit/d4544cc))
+
 ## 2.0.0 (2026/03/06)
 
 ### BREAKING CHANGES
