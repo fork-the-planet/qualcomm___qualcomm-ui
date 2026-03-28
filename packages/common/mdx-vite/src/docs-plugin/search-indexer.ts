@@ -162,6 +162,7 @@ export class SearchIndexer {
           this.metaJson,
           routeMeta?.title || frontmatter.title || "",
         ),
+      data: frontmatter,
       description: frontmatter.description,
       hidden: defined(routeMeta.hidden) ? routeMeta.hidden : frontmatter.hidden,
       hideBreadcrumbs: defined(routeMeta.hideBreadcrumbs)
@@ -417,6 +418,7 @@ export class SearchIndexer {
       this.config.srcDir,
       this.mdxFileReader.pageTimestampMetadata,
     )
+
     const compiledFiles = mdxFileGlob.map((file) => this.compileMdxFile(file))
 
     const mdxIndex = compiledFiles
