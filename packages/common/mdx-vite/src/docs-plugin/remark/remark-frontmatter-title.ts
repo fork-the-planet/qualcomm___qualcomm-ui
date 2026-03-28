@@ -3,7 +3,7 @@
 
 import type {Heading, Parent, Root} from "mdast"
 import type {Plugin} from "unified"
-import {visit, EXIT} from "unist-util-visit"
+import {EXIT, visit} from "unist-util-visit"
 
 /**
  * Replaces the first h1 heading in the document with a `PageHeader`

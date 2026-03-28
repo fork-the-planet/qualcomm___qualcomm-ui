@@ -164,10 +164,10 @@ export function MdxProvider({children, components}: Props): ReactNode {
           p: ({className, ...props}) => (
             <p className={clsx(className, "mdx")} {...props} />
           ),
+          PageHeader,
           pre: ({children, ...props}) => {
             return <ShikiPre {...props}>{children}</ShikiPre>
           },
-          PageHeader,
           SpoilerContent,
           SpoilerRoot,
           SpoilerSummary,
