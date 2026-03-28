@@ -3,7 +3,7 @@
 
 import type {Link, Parent, Root} from "mdast"
 import {minimatch} from "minimatch"
-import {readdir, stat} from "node:fs/promises"
+import {readdir} from "node:fs/promises"
 import {join, relative} from "node:path"
 import {visit} from "unist-util-visit"
 
@@ -241,10 +241,8 @@ export class KnowledgeExporter {
       }
 
       for (const entry of entries) {
-        const fullPath = join(dirPath, entry.name)
-        const stats = await stat(fullPath)
-        if (stats.isDirectory()) {
-          await scanDirectory(fullPath)
+        if (entry.isDirectory()) {
+          await scanDirectory(join(dirPath, entry.name))
         }
       }
     }
