@@ -17,7 +17,7 @@ export function pathnameToExportId(pathSegments: string[]): string {
   return pathSegments.join("-")
 }
 
-export function PageHeader(): ReactNode {
+export function PageActions(): ReactNode {
   const {exports, getPages, pageMap} = useSiteContext()
   const {pageExport, pathname} = useMdxDocsLayoutContext()
   const page = pageMap[pathname]
@@ -59,10 +59,10 @@ export function PageHeader(): ReactNode {
   }
 
   return (
-    <div className="qui-docs__page-header">
-      <div className="qui-docs__page-header-actions">
+    <div className="qui-docs__page-actions">
+      <div className="qui-docs__page-actions-buttons">
         <Button
-          className="qui-docs__page-header-copy-button"
+          className="qui-docs__page-actions-copy-button"
           endIcon={isCopied ? Check : Copy}
           onClick={copyToClipboard}
           size="sm"
@@ -73,7 +73,7 @@ export function PageHeader(): ReactNode {
         <Menu.Root size="sm">
           <Menu.Trigger>
             <Menu.IconButton
-              className="qui-docs__page-header-menu-button"
+              className="qui-docs__page-actions-menu-button"
               size="sm"
               variant="outline"
             />

@@ -1,5 +1,20 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 2.2.0 (2026/03/28)
+
+### Features
+
+- [docs-layout]: expose pageFrontmatter in layout context ([fde228d](https://github.com/qualcomm/qualcomm-ui/commit/fde228d))
+- [page-header]: display "since" version badge ([a97c9d6](https://github.com/qualcomm/qualcomm-ui/commit/a97c9d6))
+
+### Code Refactoring
+
+- [docs-layout]: separate page header from page actions ([58fc23e](https://github.com/qualcomm/qualcomm-ui/commit/58fc23e))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common]
+
 ## 2.1.1 (2026/03/25)
 
 ### Miscellaneous Chores

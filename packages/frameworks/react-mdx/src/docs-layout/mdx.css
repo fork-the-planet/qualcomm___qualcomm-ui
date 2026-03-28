@@ -424,32 +424,23 @@ hr.mdx {
   }
 }
 
-.qui-docs__page-header {
+.qui-toc .qui-docs__page-actions {
   margin-bottom: 16px;
   padding-left: 10px;
-  & + section.heading {
-    > *:first-child {
-      margin-top: 24px;
-    }
-    > p.mdx:first-child {
-      font: var(--font-static-body-md-default);
-      margin-top: 0;
-    }
-  }
 }
 
-.qui-docs__page-header-actions {
+.qui-docs__page-actions-buttons {
   align-items: center;
   display: flex;
   gap: 1px;
 }
 
-.qui-docs__page-header-copy-button[data-size] {
+.qui-docs__page-actions-copy-button[data-size] {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
 }
 
-.qui-docs__page-header-menu-button[data-size] {
+.qui-docs__page-actions-menu-button[data-size] {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
 }
