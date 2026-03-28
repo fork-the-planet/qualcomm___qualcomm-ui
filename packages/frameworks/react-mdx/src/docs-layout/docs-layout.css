@@ -394,3 +394,16 @@ pre.qui-docs-code {
   font: var(--font-static-heading-xxs-bold);
   font-style: italic;
 }
+
+.qui-docs__page-header {
+  display: flex;
+  gap: 12px;
+
+  h1 {
+    white-space: nowrap;
+  }
+
+  .qui-docs__page-header-since-badge {
+    height: 20px;
+  }
+}
