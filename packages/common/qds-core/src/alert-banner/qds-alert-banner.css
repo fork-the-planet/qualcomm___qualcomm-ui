@@ -100,7 +100,7 @@
   margin-inline-start: var(--spacing-120);
 }
 
-.qui-alert-banner__close-button {
+.qui-alert-banner__root .qui-alert-banner__close-button {
   flex-shrink: 0;
   margin-inline-start: var(--spacing-120);
 }
