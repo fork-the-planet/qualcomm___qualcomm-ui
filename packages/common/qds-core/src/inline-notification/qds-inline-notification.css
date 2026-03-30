@@ -12,11 +12,10 @@
   --border-left-color: var(--color-background-support-info);
 
   background: var(--background-color);
-  border-bottom-left-radius: var(--border-radius-md);
   border-color: var(--border-color);
   border-left: solid var(--sizing-40) var(--border-left-color);
+  border-radius: var(--border-radius-md);
   border-style: solid;
-  border-top-left-radius: var(--border-radius-md);
   border-width: var(--border-width-sm) var(--border-width-sm)
     var(--border-width-sm) var(--sizing-40);
   box-sizing: border-box;
