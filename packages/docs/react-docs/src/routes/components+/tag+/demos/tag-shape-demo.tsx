@@ -2,12 +2,12 @@ import type {ReactElement} from "react"
 
 import {Tag} from "@qualcomm-ui/react/tag"
 
-export function TagRadiusDemo(): ReactElement {
+export function TagShapeDemo(): ReactElement {
   return (
     <div className="flex flex-col gap-2">
       {/* preview */}
-      <Tag radius="square">Label</Tag>
-      <Tag radius="rounded">Label</Tag>
+      <Tag shape="square">Label</Tag>
+      <Tag shape="rounded">Label</Tag>
       {/* preview */}
     </div>
   )

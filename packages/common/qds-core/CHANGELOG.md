@@ -1,5 +1,21 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.22.0 (2026/03/30)
+
+### Features
+
+- [icon-button]: add shape prop ([9c93d49](https://github.com/qualcomm/qualcomm-ui/commit/9c93d49))
+
+### Bug Fixes
+
+- [badge]: update tokens and apply text-box cap-to-baseline ([9804845](https://github.com/qualcomm/qualcomm-ui/commit/9804845))
+- [progress]: update disabled state tokens ([2e10e52](https://github.com/qualcomm/qualcomm-ui/commit/2e10e52))
+- [alert-banner]: use compact icon button for close action ([74d1316](https://github.com/qualcomm/qualcomm-ui/commit/74d1316))
+- [tag]: update tokens and apply text-box cap-to-baseline ([3f94cdf](https://github.com/qualcomm/qualcomm-ui/commit/3f94cdf))
+- [button]: update variant tokens and icon color system ([bfff8f1](https://github.com/qualcomm/qualcomm-ui/commit/bfff8f1))
+- [number-input]: disabled & readonly background ([949b174](https://github.com/qualcomm/qualcomm-ui/commit/949b174))
+- [inline-notification]: update border-radius ([cfc3745](https://github.com/qualcomm/qualcomm-ui/commit/cfc3745))
+
 ## 1.21.1 (2026/03/25)
 
 ### Bug Fixes

@@ -1,5 +1,11 @@
 # @qualcomm-ui/react-swagger Changelog
 
+## 1.2.15 (2026/03/30)
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
 ## 1.2.14 (2026/03/25)
 
 ### Miscellaneous Chores
