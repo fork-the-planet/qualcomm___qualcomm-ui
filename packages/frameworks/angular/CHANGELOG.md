@@ -1,5 +1,21 @@
 # @qualcomm-ui/angular Changelog
 
+## 2.2.0 (2026/03/30)
+
+### Features
+
+- [icon-button]: add shape prop ([9c93d49](https://github.com/qualcomm/qualcomm-ui/commit/9c93d49))
+
+### Bug Fixes
+
+- [badge]: update tokens and apply text-box cap-to-baseline ([9804845](https://github.com/qualcomm/qualcomm-ui/commit/9804845))
+- [alert-banner]: use compact icon button for close action ([74d1316](https://github.com/qualcomm/qualcomm-ui/commit/74d1316))
+- [tag]: update tokens and apply text-box cap-to-baseline ([3f94cdf](https://github.com/qualcomm/qualcomm-ui/commit/3f94cdf))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
 ## 2.1.1 (2026/03/25)
 
 ### Bug Fixes
