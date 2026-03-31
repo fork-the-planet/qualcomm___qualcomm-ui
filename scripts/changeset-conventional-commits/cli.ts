@@ -6,6 +6,7 @@ import {stdin, stdout} from "node:process"
 import {createInterface} from "node:readline/promises"
 
 import {consolidateChangelogs} from "./consolidate-changelogs"
+import {generateReleaseNotes} from "./generate-release-notes"
 import {conventionalCommitChangeset} from "./main"
 
 interface Step {
@@ -42,6 +43,11 @@ function buildSteps(options: {
       description: "Consolidate changelog formatting",
       name: "consolidate-changelogs",
       run: () => consolidateChangelogs(),
+    },
+    {
+      description: "Generate combined release notes",
+      name: "generate-release-notes",
+      run: () => generateReleaseNotes(),
     },
   ]
 }
