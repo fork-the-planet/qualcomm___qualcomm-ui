@@ -21,13 +21,13 @@ export type BooleanAriaAttr = "true" | "false" | undefined
 export type BooleanDataAttr = "" | undefined
 
 export function booleanDataAttr(
-  condition: boolean | undefined,
+  condition: boolean | null | undefined,
 ): BooleanDataAttr {
   return condition ? "" : undefined
 }
 
 export function booleanAriaAttr(
-  guard: boolean | undefined,
+  guard: boolean | null | undefined,
   falseValue: "false" | null = "false",
 ): BooleanAriaAttr {
   return guard ? "true" : falseValue === null ? undefined : falseValue

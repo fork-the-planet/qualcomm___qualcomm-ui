@@ -1,5 +1,12 @@
 # @qualcomm-ui/angular-core Changelog
 
+## 2.0.4 (2026/04/02)
+
+### Miscellaneous Chores
+
+- upgrade to vite v8 and bump dependencies ([18596c5](https://github.com/qualcomm/qualcomm-ui/commit/18596c5))
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/utils, @qualcomm-ui/dom]
+
 ## 2.0.3 (2026/03/25)
 
 ### Miscellaneous Chores

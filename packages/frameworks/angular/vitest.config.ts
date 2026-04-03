@@ -18,7 +18,7 @@ export default defineConfig(({mode}) => ({
   plugins: [
     tailwindcss(),
     angular({tsconfig: resolve(__dirname, "./tsconfig.analog-vitest.json")}),
-    tsconfigPaths(),
+    tsconfigPaths({projects: ["./tsconfig.vitest.json"]}),
   ],
   test: {
     browser: {

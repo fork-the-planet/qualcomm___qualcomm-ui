@@ -1,5 +1,20 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 2.2.2 (2026/04/02)
+
+### Bug Fixes
+
+- [type-doc-props]: log missing prop types in dev mode ([e83d1f7](https://github.com/qualcomm/qualcomm-ui/commit/e83d1f7))
+
+### Styles
+
+- [docs-layout]: bump heading font sizes and improve table of contents ([b67fd27](https://github.com/qualcomm/qualcomm-ui/commit/b67fd27))
+
+### Miscellaneous Chores
+
+- upgrade to vite v8 and bump dependencies ([18596c5](https://github.com/qualcomm/qualcomm-ui/commit/18596c5))
+- **deps:** update dependencies [@qualcomm-ui/mdx-common, @qualcomm-ui/react, @qualcomm-ui/react-core, @qualcomm-ui/core, @qualcomm-ui/utils]
+
 ## 2.2.1 (2026/03/30)
 
 ### Miscellaneous Chores

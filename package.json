@@ -103,10 +103,10 @@
     "syncpack": "14.0.0-alpha.32",
     "tailwindcss": "^4.1.17",
     "tsx": "catalog:",
-    "turbo": "^2.7.6",
+    "turbo": "^2.9.3",
     "typescript": "catalog:",
     "typescript-eslint": "catalog:",
-    "yaml": "^2.8.2"
+    "yaml": "^2.8.3"
   },
   "resolutions": {
     "eslint": "catalog:",
