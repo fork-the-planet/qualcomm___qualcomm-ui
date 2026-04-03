@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
 import {
+  type CSSProperties,
   type ReactNode,
   type RefObject,
   useCallback,
@@ -263,9 +264,10 @@ export function TableOfContents(): ReactNode {
       <div ref={containerRef} className="qui-toc__container">
         <PageActions />
         <div className="qui-toc__links">
-          <div className="qui-toc-bar" />
           {headings.map(({headingLevel, id, textContent}) => {
             const isActive = activeId === id
+            const indentDepth = headingLevel - 2
+
             return (
               <TocLink
                 key={id}
@@ -278,17 +280,40 @@ export function TableOfContents(): ReactNode {
                 }}
                 className="qui-toc__link"
                 data-active={booleanDataAttr(isActive)}
-                style={{
-                  paddingLeft: INDENT_PER_LEVEL * (headingLevel - 1),
-                }}
+                data-heading-level={headingLevel}
+                style={
+                  {
+                    "--indent-depth": indentDepth,
+                    paddingLeft:
+                      INDENT_PER_LEVEL * (headingLevel - 1) +
+                      (headingLevel === 4 ? 1 : 0),
+                  } as CSSProperties
+                }
               >
                 {headingLevel > 2 ? (
-                  <div
-                    aria-hidden
-                    className="qui-toc__link-indent-guide"
-                    data-active={booleanDataAttr(isActive)}
-                  ></div>
+                  <>
+                    <div
+                      aria-hidden
+                      className="qui-toc__link-indent-guide"
+                      data-active={booleanDataAttr(
+                        isActive && headingLevel !== 4,
+                      )}
+                    />
+                    {headingLevel === 4 ? (
+                      <div
+                        aria-hidden
+                        className="qui-toc__link-indent-guide"
+                        data-active={booleanDataAttr(isActive)}
+                        style={
+                          {
+                            "--indent-depth": 1,
+                          } as CSSProperties
+                        }
+                      />
+                    ) : null}
+                  </>
                 ) : null}
+
                 <Link href={`#${id}`}>{textContent}</Link>
               </TocLink>
             )
