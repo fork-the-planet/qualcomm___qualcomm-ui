@@ -1,5 +1,11 @@
 # @qualcomm-ui/typedoc Changelog
 
+## 1.0.6 (2026/04/02)
+
+### Miscellaneous Chores
+
+- upgrade to vite v8 and bump dependencies ([18596c5](https://github.com/qualcomm/qualcomm-ui/commit/18596c5))
+
 ## 1.0.5 (2026/01/23)
 
 ### Code Refactoring

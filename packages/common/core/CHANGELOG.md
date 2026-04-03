@@ -1,5 +1,15 @@
 # @qualcomm-ui/core Changelog
 
+## 1.6.2 (2026/04/02)
+
+### Code Refactoring
+
+- [machine]: support narrowed guards in createNarrowedMachine ([cf79dbf](https://github.com/qualcomm/qualcomm-ui/commit/cf79dbf))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils, @qualcomm-ui/dom]
+
 ## 1.6.1 (2026/03/25)
 
 ### Bug Fixes

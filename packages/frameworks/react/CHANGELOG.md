@@ -1,5 +1,12 @@
 # @qualcomm-ui/react Changelog
 
+## 1.17.1 (2026/04/02)
+
+### Miscellaneous Chores
+
+- upgrade to vite v8 and bump dependencies ([18596c5](https://github.com/qualcomm/qualcomm-ui/commit/18596c5))
+- **deps:** update dependencies [@qualcomm-ui/react-core, @qualcomm-ui/core, @qualcomm-ui/utils, @qualcomm-ui/qds-core]
+
 ## 1.17.0 (2026/03/30)
 
 ### Features

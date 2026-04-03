@@ -1,5 +1,13 @@
 # @qualcomm-ui/angular Changelog
 
+## 2.2.1 (2026/04/02)
+
+### Miscellaneous Chores
+
+- [angular]: configure tsconfigPaths project in vitest ([77da531](https://github.com/qualcomm/qualcomm-ui/commit/77da531))
+- upgrade to vite v8 and bump dependencies ([18596c5](https://github.com/qualcomm/qualcomm-ui/commit/18596c5))
+- **deps:** update dependencies [@qualcomm-ui/angular-core, @qualcomm-ui/core, @qualcomm-ui/utils, @qualcomm-ui/qds-core]
+
 ## 2.2.0 (2026/03/30)
 
 ### Features

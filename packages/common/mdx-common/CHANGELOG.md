@@ -1,5 +1,11 @@
 # @qualcomm-ui/mdx-common Changelog
 
+## 2.1.1 (2026/04/02)
+
+### Miscellaneous Chores
+
+- upgrade to vite v8 and bump dependencies ([18596c5](https://github.com/qualcomm/qualcomm-ui/commit/18596c5))
+
 ## 2.1.0 (2026/03/28)
 
 ### Features

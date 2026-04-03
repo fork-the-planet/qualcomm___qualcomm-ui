@@ -1,5 +1,13 @@
 # @qualcomm-ui/utils Changelog
 
+## 1.2.2 (2026/04/02)
+
+### Code Refactoring
+
+- [machine]: support narrowed guards in createNarrowedMachine ([cf79dbf](https://github.com/qualcomm/qualcomm-ui/commit/cf79dbf))
+- [attributes]: accept null in booleanDataAttr and booleanAriaAttr ([8c702bb](https://github.com/qualcomm/qualcomm-ui/commit/8c702bb))
+- [object]: add maybeAccess and deprecate getIn ([f4cea5a](https://github.com/qualcomm/qualcomm-ui/commit/f4cea5a))
+
 ## 1.2.1 (2026/03/20)
 
 ### Bug Fixes

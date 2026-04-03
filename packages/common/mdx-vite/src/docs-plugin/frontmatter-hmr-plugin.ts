@@ -25,6 +25,8 @@ export interface FrontmatterHmrPluginOptions {
  * Fast Refresh's {@link https://github.com/facebook/react/blob/f5af92d2c47d1e1f455faf912b1d3221d1038c37/packages/react-refresh/src/ReactFreshRuntime.js#L717-L723 isLikelyComponentType}
  * check into treating the module as a component module eligible for HMR.
  *
+ * @since 3.2.0
+ *
  * @returns A Vite plugin option that transforms modules containing frontmatter exports.
  */
 export function frontmatterHmrPlugin(
