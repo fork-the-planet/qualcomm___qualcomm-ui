@@ -8,9 +8,9 @@ packages:
 autoInstallPeers: true
 
 catalog:
-  '@analogjs/platform': 2.0.5
-  '@analogjs/vite-plugin-angular': 2.0.5
-  '@analogjs/vitest-angular': 2.0.5
+  '@analogjs/platform': 2.4.0
+  '@analogjs/vite-plugin-angular': 2.4.0
+  '@analogjs/vitest-angular': 2.4.0
   '@angular-devkit/architect': 0.2102.1
   '@angular-devkit/build-angular': ~21.2.2
   '@angular-devkit/core': ~21.2.2
@@ -34,21 +34,21 @@ catalog:
   '@qualcomm-ui/css-utils': 1.0.5
   '@qualcomm-ui/esbuild': 1.0.5
   '@qualcomm-ui/tsconfig': 2.0.0
-  '@react-router/dev': 7.12.0
-  '@react-router/express': 7.12.0
-  '@react-router/node': 7.12.0
-  '@react-router/remix-routes-option-adapter': 7.12.0
-  '@react-router/serve': 7.12.0
+  '@react-router/dev': 7.14.0
+  '@react-router/express': 7.14.0
+  '@react-router/node': 7.14.0
+  '@react-router/remix-routes-option-adapter': 7.14.0
+  '@react-router/serve': 7.14.0
   '@types/lodash-es': 4.17.12
   '@types/react': 19.2.7
   '@types/react-dom': 19.2.3
   '@typescript-eslint/eslint-plugin': 8.48.1
   '@typescript-eslint/parser': 8.48.1
   '@typescript-eslint/utils': 8.48.1
-  '@vitest/browser': 4.0.18
-  '@vitest/browser-playwright': 4.0.18
-  '@vitest/coverage-v8': 4.0.18
-  '@vitest/ui': 4.0.18
+  '@vitest/browser': 4.1.2
+  '@vitest/browser-playwright': 4.1.2
+  '@vitest/coverage-v8': 4.1.2
+  '@vitest/ui': 4.1.2
   esbuild: 0.27.3
   eslint: 9.39.1
   glob: 13.0.3
@@ -56,15 +56,19 @@ catalog:
   ng-packagr: 21.2.0
   react: 19.2.4
   react-dom: 19.2.4
-  react-router: 7.12.0
+  react-router: 7.14.0
   tsx: 4.21.0
   typescript-eslint: 8.48.1
-  vitest: 4.0.18
+  vitest: 4.1.2
 
 minimumReleaseAge: 1440
 
 minimumReleaseAgeExclude:
   - '@qualcomm-ui/*'
+  - 'turbo'
+  - '@turbo/*'
+  - '@react-router/*'
+  - 'react-router'
 
 onlyBuiltDependencies:
   - '@bundled-es-modules/glob'
@@ -83,6 +87,3 @@ onlyBuiltDependencies:
   - tree-sitter
   - tree-sitter-json
   - unrs-resolver
-
-patchedDependencies:
-  '@react-router/dev@7.12.0': patches/@react-router__dev@7.12.0.patch

@@ -67,7 +67,7 @@
     "@types/lodash-es": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "@vitejs/plugin-react": "^5.1.0",
+    "@vitejs/plugin-react": "^6.0.1",
     "@vitest/browser": "catalog:",
     "@vitest/browser-playwright": "catalog:",
     "@vitest/coverage-v8": "catalog:",
@@ -88,7 +88,7 @@
     "shx": "^0.4.0",
     "tsx": "catalog:",
     "typescript": "catalog:",
-    "vite": "npm:rolldown-vite@7.3.1",
+    "vite": "^8.0.3",
     "vitest": "catalog:",
     "vitest-browser-react": "^2.0.2"
   },

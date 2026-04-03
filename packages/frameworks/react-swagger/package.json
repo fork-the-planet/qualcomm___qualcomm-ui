@@ -52,7 +52,7 @@
     "@qualcomm-ui/react-test-utils": "workspace:^1.0.0",
     "@qualcomm-ui/tsconfig": "catalog:",
     "@qualcomm-ui/utils": "workspace:^1.2.1",
-    "@tailwindcss/vite": "^4.1.11",
+    "@tailwindcss/vite": "^4.2.2",
     "@tanstack/react-virtual": "^3.13.12",
     "@types/babel__core": "^7.20.5",
     "@types/css.escape": "^1.5.2",
@@ -94,8 +94,8 @@
     "tsx": "catalog:",
     "typescript-plugin-css-modules": "^5.0.1",
     "url-parse": "^1.5.10",
-    "vite": "npm:rolldown-vite@7.3.1",
-    "vite-tsconfig-paths": "^5.1.4",
+    "vite": "^8.0.3",
+    "vite-tsconfig-paths": "^6.1.1",
     "zustand": "^4.5.2"
   },
   "peerDependencies": {
