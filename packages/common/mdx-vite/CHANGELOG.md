@@ -1,6 +1,16 @@
 # @qualcomm-ui/mdx-vite Changelog
 
-## 3.2.0 (2026/04/02)
+## 3.2.1
+
+Apr 6th, 2026
+
+### Bug Fixes
+
+- update changelog links ([78aca35](https://github.com/qualcomm/qualcomm-ui/commit/78aca35))
+
+## 3.2.0
+
+Apr 2nd, 2026
 
 ### Features
 
@@ -11,7 +21,9 @@
 - upgrade to vite v8 and bump dependencies ([18596c5](https://github.com/qualcomm/qualcomm-ui/commit/18596c5))
 - **deps:** update dependencies [@qualcomm-ui/mdx-common, @qualcomm-ui/utils]
 
-## 3.1.0 (2026/03/28)
+## 3.1.0
+
+Mar 28th, 2026
 
 ### Features
 
@@ -39,23 +51,31 @@
 
 - **deps:** update dependencies [@qualcomm-ui/mdx-common]
 
-## 3.0.3 (2026/03/24)
+## 3.0.3
+
+Mar 24th, 2026
 
 - **deps:** update dependencies [@qualcomm-ui/tailwind-plugin]
 
-## 3.0.2 (2026/03/20)
+## 3.0.2
+
+Mar 20th, 2026
 
 ### Miscellaneous Chores
 
 - **deps:** update dependencies [@qualcomm-ui/utils]
 
-## 3.0.1 (2026/03/12)
+## 3.0.1
+
+Mar 12th, 2026
 
 ### Miscellaneous Chores
 
 - **deps:** update dependencies [@qualcomm-ui/utils]
 
-## 3.0.0 (2026/03/06)
+## 3.0.0
+
+Mar 6th, 2026
 
 ### BREAKING CHANGES
 
@@ -92,13 +112,17 @@
 
 - forward pageIdPrefix down to knowledge consumers ([9f0b18c](https://github.com/qualcomm/qualcomm-ui/commit/9f0b18c))
 
-## 2.17.2 (2026/03/02)
+## 2.17.2
+
+Mar 2nd, 2026
 
 ### Performance Improvements
 
 - [mdx-vite]: batch git metadata lookups into a single command ([dbb2b9b](https://github.com/qualcomm/qualcomm-ui/commit/dbb2b9b))
 
-## 2.17.1 (2026/02/26)
+## 2.17.1
+
+Feb 26th, 2026
 
 ### Bug Fixes
 
@@ -108,7 +132,9 @@
 
 - **deps:** update dependencies [@qualcomm-ui/mdx-common]
 
-## 2.17.0 (2026/02/14)
+## 2.17.0
+
+Feb 14th, 2026
 
 ### Features
 
@@ -118,7 +144,9 @@
 
 - [knowledge]: remove mdx spoiler directives from knowledge output
 
-## 2.16.2 (2026/02/08)
+## 2.16.2
+
+Feb 8th, 2026
 
 ### Tests
 
@@ -128,14 +156,18 @@
 
 - [knowledge]: capture content before first target-depth heading
 
-## 2.16.1 (2026/02/07)
+## 2.16.1
+
+Feb 7th, 2026
 
 ### Bug Fixes
 
 - [mdx-vite]: handle headings containing only inline code
 - [mdx-vite]: use mdast-util-to-string for heading text extraction
 
-## 2.16.0 (2026/02/06)
+## 2.16.0
+
+Feb 6th, 2026
 
 ### Features
 
@@ -147,13 +179,17 @@
 
 - [ai-knowledge]: adjusted internal extraction data types
 
-## 2.15.1 (2026/02/03)
+## 2.15.1
+
+Feb 3rd, 2026
 
 ### Bug Fixes
 
 - [section-extractor]: use md5 for hash
 
-## 2.15.0 (2026/02/03)
+## 2.15.0
+
+Feb 3rd, 2026
 
 ### Features
 
@@ -181,19 +217,25 @@
 - [ai-knowledge]: extract CLI command to separate module for cleaner separation
 - [ai-knowledge]: improve demo imports and section extraction
 
-## 2.14.3 (2026/01/29)
+## 2.14.3
+
+Jan 29th, 2026
 
 ### Bug Fixes
 
 - [docs-plugin-mdx]: add fallback language for syntax highlighting
 
-## 2.14.2 (2026/01/23)
+## 2.14.2
+
+Jan 23rd, 2026
 
 ### Bug Fixes
 
 - [nav-builder]: pass empty object for non-page frontmatter
 
-## 2.14.1 (2026/01/23)
+## 2.14.1
+
+Jan 23rd, 2026
 
 ### Code Refactoring
 
@@ -204,7 +246,9 @@
 
 - **deps:** update dependencies [@qualcomm-ui/mdx-common, @qualcomm-ui/typedoc-common, @qualcomm-ui/utils]
 
-## 2.14.0 (2026/01/22)
+## 2.14.0
+
+Jan 22nd, 2026
 
 ### Features
 
@@ -214,13 +258,17 @@
 
 - **deps:** update dependencies [@qualcomm-ui/mdx-common]
 
-## 2.13.0 (2026/01/21)
+## 2.13.0
+
+Jan 21st, 2026
 
 ### Features
 
 - add support for tailwind spacing documentation in knowledge generation
 
-## 2.12.0 (2026/01/18)
+## 2.12.0
+
+Jan 18th, 2026
 
 ### Features
 
@@ -235,19 +283,25 @@
 
 - **deps:** update dependencies [@qualcomm-ui/mdx-common]
 
-## 2.11.2 (2026/01/11)
+## 2.11.2
+
+Jan 11th, 2026
 
 ### Documentation
 
 - [qui-docs-config]: update jsdoc comments
 
-## 2.11.1 (2025/12/29)
+## 2.11.1
+
+Dec 29th, 2025
 
 ### Bug Fixes
 
 - [knowledge-downloader]: update targeted env variables
 
-## 2.11.0 (2025/12/28)
+## 2.11.0
+
+Dec 28th, 2025
 
 ### Features
 
@@ -266,13 +320,17 @@
 
 - [knowledge]: ignore generated knowledge outputs in tooling and streamline docs scripts
 
-## 2.10.1 (2025/12/25)
+## 2.10.1
+
+Dec 25th, 2025
 
 ### Miscellaneous Chores
 
 - remove config debug log
 
-## 2.10.0 (2025/12/24)
+## 2.10.0
+
+Dec 24th, 2025
 
 ### Features
 
@@ -284,7 +342,9 @@
 
 - **deps:** update dependencies [@qualcomm-ui/mdx-common]
 
-## 2.9.0 (2025/12/22)
+## 2.9.0
+
+Dec 22nd, 2025
 
 ### Features
 
@@ -304,7 +364,9 @@
 
 - **deps:** update dependencies [@qualcomm-ui/mdx-common]
 
-## 2.8.0 (2025/12/18)
+## 2.8.0
+
+Dec 18th, 2025
 
 ### Features
 
@@ -314,7 +376,9 @@
 
 - **deps:** update dependencies [@qualcomm-ui/mdx-common]
 
-## 2.7.0 (2025/12/15)
+## 2.7.0
+
+Dec 15th, 2025
 
 ### Features
 
@@ -326,7 +390,9 @@
 
 - [deps]: update zod to v4
 
-## 2.6.4 (2025/12/12)
+## 2.6.4
+
+Dec 12th, 2025
 
 ### Tests
 
@@ -342,7 +408,9 @@
 
 - [docs-plugin]: annotations do not hide lines from copy data
 
-## 2.6.3 (2025/12/11)
+## 2.6.3
+
+Dec 11th, 2025
 
 ### Bug Fixes
 
@@ -353,19 +421,25 @@
 
 - **deps:** update dependencies [@qualcomm-ui/tailwind-plugin]
 
-## 2.6.2 (2025/12/10)
+## 2.6.2
+
+Dec 10th, 2025
 
 ### Miscellaneous Chores
 
 - **deps:** update dependencies [@qualcomm-ui/utils]
 
-## 2.6.1 (2025/12/08)
+## 2.6.1
+
+Dec 8th, 2025
 
 ### Bug Fixes
 
 - [mdx-vite]: resolve git metadata repo root
 
-## 2.6.0 (2025/12/08)
+## 2.6.0
+
+Dec 8th, 2025
 
 ### Features
 
@@ -380,13 +454,17 @@
 
 - **deps:** update dependencies [@qualcomm-ui/mdx-common]
 
-## 2.5.4 (2025/12/05)
+## 2.5.4
+
+Dec 5th, 2025
 
 ### Bug Fixes
 
 - [knowledge]: ensure updated files are re-indexed
 
-## 2.5.3 (2025/12/04)
+## 2.5.3
+
+Dec 4th, 2025
 
 ### Bug Fixes
 
@@ -408,7 +486,9 @@
 
 - [knowledge]: add cleaner for orphaned and failed files
 
-## 2.5.2 (2025/12/04)
+## 2.5.2
+
+Dec 4th, 2025
 
 ### Code Refactoring
 
@@ -421,13 +501,17 @@
 - [generate-knowledge]: remove links in aggregate output mode
 - [knowledge-upload]: do not retry upload after specific errors
 
-## 2.5.1 (2025/12/03)
+## 2.5.1
+
+Dec 3rd, 2025
 
 ### Bug Fixes
 
 - [llms-txt-generator]: use correct urls for intro page overview
 
-## 2.5.0 (2025/12/03)
+## 2.5.0
+
+Dec 3rd, 2025
 
 ### Features
 
@@ -437,7 +521,9 @@
 
 - [docs-plugin]: add back site data invalidation on mdx file change
 
-## 2.4.0 (2025/12/03)
+## 2.4.0
+
+Dec 3rd, 2025
 
 ### Features
 
@@ -453,7 +539,9 @@
 
 - **deps:** update dependencies [@qualcomm-ui/mdx-common, @qualcomm-ui/typedoc-common, @qualcomm-ui/utils]
 
-## 2.3.0 (2025/12/01)
+## 2.3.0
+
+Dec 1st, 2025
 
 ### Features
 
@@ -463,13 +551,17 @@
 
 - **deps:** update dependencies [@qualcomm-ui/utils]
 
-## 2.2.1 (2025/11/25)
+## 2.2.1
+
+Nov 25th, 2025
 
 ### Bug Fixes
 
 - [rag-knowledge-generator]: apply exclude CLI option to filenames
 
-## 2.2.0 (2025/11/25)
+## 2.2.0
+
+Nov 25th, 2025
 
 ### Features
 
@@ -499,7 +591,9 @@
 
 - **deps:** update dependencies [@qualcomm-ui/mdx-common]
 
-## 2.1.3 (2025/11/23)
+## 2.1.3
+
+Nov 23rd, 2025
 
 ### Performance Improvements
 
@@ -509,19 +603,25 @@
 
 - [angular-demo-plugin]: relative file changes trigger demo update
 
-## 2.1.2 (2025/11/21)
+## 2.1.2
+
+Nov 21st, 2025
 
 ### Bug Fixes
 
 - [docs-plugin]: add css HMR
 
-## 2.1.1 (2025/11/21)
+## 2.1.1
+
+Nov 21st, 2025
 
 ### Bug Fixes
 
 - [owui-knowledge]: remove unused jsx from parsed mdx
 
-## 2.1.0 (2025/11/21)
+## 2.1.0
+
+Nov 21st, 2025
 
 ### Features
 
@@ -544,7 +644,9 @@
 - remove legacy object key in test config
 - **deps:** update dependencies [@qualcomm-ui/mdx-common, @qualcomm-ui/typedoc-common, @qualcomm-ui/utils]
 
-## 2.0.0 (2025/11/19)
+## 2.0.0
+
+Nov 19th, 2025
 
 ### BREAKING CHANGES
 
@@ -554,7 +656,9 @@
 
 - **deps:** update dependencies [@qualcomm-ui/mdx-common]
 
-## 1.1.0 (2025/11/17)
+## 1.1.0
+
+Nov 17th, 2025
 
 ### Features
 
@@ -564,7 +668,9 @@
 
 - **deps:** update dependencies [@qualcomm-ui/mdx-common]
 
-## 1.0.3 (2025/11/13)
+## 1.0.3
+
+Nov 13th, 2025
 
 ### Bug Fixes
 
@@ -574,7 +680,9 @@
 
 - **deps:** update dependencies [@qualcomm-ui/mdx-common, @qualcomm-ui/typedoc-common, @qualcomm-ui/utils]
 
-## 1.0.2 (2025/11/12)
+## 1.0.2
+
+Nov 12th, 2025
 
 ### Bug Fixes
 
@@ -584,7 +692,9 @@
 
 - **deps:** update dependencies [@qualcomm-ui/mdx-common, @qualcomm-ui/typedoc-common, @qualcomm-ui/utils]
 
-## 1.0.1 (2025/11/12)
+## 1.0.1
+
+Nov 12th, 2025
 
 ### Miscellaneous Chores
 

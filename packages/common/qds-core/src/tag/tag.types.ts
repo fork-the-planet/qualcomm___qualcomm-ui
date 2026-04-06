@@ -28,7 +28,7 @@ export type QdsTagEmphasis =
   | QdsTagEmphasis__deprecated
 
 /**
- * @deprecated in {@link https://github.com/qualcomm/qualcomm-ui/blob/main/packages/frameworks/react/CHANGELOG.md#1160-20260324 v1.16.0}, migrate to {@link QdsTagShape}
+ * @deprecated in {@link https://github.com/qualcomm/qualcomm-ui/blob/main/packages/frameworks/react/CHANGELOG.md#1160 v1.16.0}, migrate to {@link QdsTagShape}
  */
 export type QdsTagRadius = QdsTagShape
 
@@ -52,7 +52,7 @@ export interface QdsTagApiProps {
   emphasis?: QdsTagEmphasis
 
   /**
-   * @deprecated in {@link https://github.com/qualcomm/qualcomm-ui/blob/main/packages/frameworks/react/CHANGELOG.md#1160-20260324 v1.16.0}, migrate to {@link shape}
+   * @deprecated in {@link https://github.com/qualcomm/qualcomm-ui/blob/main/packages/frameworks/react/CHANGELOG.md#1160 v1.16.0}, migrate to {@link shape}
    *
    * Governs the shape of the tag.
    *
