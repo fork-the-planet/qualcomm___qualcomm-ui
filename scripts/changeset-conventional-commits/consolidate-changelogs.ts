@@ -1,7 +1,12 @@
 import dayjs from "dayjs"
+import advancedFormat from "dayjs/plugin/advancedFormat"
 import {execSync} from "node:child_process"
 import {readFile, writeFile} from "node:fs/promises"
 import {fileURLToPath} from "node:url"
+
+dayjs.extend(advancedFormat)
+
+const DATE_FORMAT = "MMM Do, YYYY"
 
 export function getChangedChangelogs(): string[] {
   try {
@@ -40,14 +45,18 @@ export async function consolidateChangelog(
 
   const sections = new Map<string, string[]>()
   let versionLine = ""
+  let dateLine = ""
   let currentSection = ""
 
   for (const line of releaseLines) {
     if (line.startsWith("## ")) {
-      versionLine = line
-      if (!line.match(/\(\d{4}\/\d{2}\/\d{2}\)/)) {
-        const date = dayjs().format("YYYY/MM/DD")
-        versionLine = `${line} (${date})`
+      const dateMatch = line.match(/\((\d{4}\/\d{2}\/\d{2})\)/)
+      if (dateMatch) {
+        versionLine = line.replace(` (${dateMatch[1]})`, "")
+        dateLine = dayjs(dateMatch[1]).format(DATE_FORMAT)
+      } else {
+        versionLine = line
+        dateLine = dayjs().format(DATE_FORMAT)
       }
       continue
     }
@@ -75,6 +84,8 @@ export async function consolidateChangelog(
 
   const output: string[] = []
   output.push(versionLine)
+  output.push("")
+  output.push(dateLine)
   output.push("")
 
   for (const [section, items] of sections) {

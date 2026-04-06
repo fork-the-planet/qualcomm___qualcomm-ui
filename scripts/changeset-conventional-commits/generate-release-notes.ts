@@ -27,21 +27,27 @@ function extractLatestEntry(
     return null
   }
 
-  const headerMatch = lines[firstVersionIndex].match(
-    /^## ([\d.]+) \((\d{4}\/\d{2}\/\d{2})\)/,
-  )
-  if (!headerMatch) {
+  const versionMatch = lines[firstVersionIndex].match(/^## ([\d.]+)/)
+  if (!versionMatch) {
     return null
   }
 
-  const [, version, date] = headerMatch
+  const version = versionMatch[1]
 
   const endIndex = lines.findIndex(
     (l, i) => i > firstVersionIndex && l.startsWith("## "),
   )
 
-  const sections = lines
-    .slice(firstVersionIndex + 1, endIndex === -1 ? undefined : endIndex)
+  const bodyLines = lines.slice(
+    firstVersionIndex + 1,
+    endIndex === -1 ? undefined : endIndex,
+  )
+
+  const dateLine = bodyLines.find((l) => /^[A-Z][a-z]{2} \d/.test(l.trim()))
+  const date = dateLine?.trim() ?? ""
+
+  const sections = bodyLines
+    .filter((l) => l.trim() !== date)
     .join("\n")
     .trim()
 
