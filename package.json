@@ -49,7 +49,8 @@
     "test:unit:ci": "turbo run test:unit:ci --concurrency 2",
     "check-updates": "ncu -c 2 -w",
     "doc-gen": "turbo run build:typedoc",
-    "publish:all": "pnpm changeset publish && pnpm -r run publish-angular-package"
+    "publish:all": "pnpm changeset publish && pnpm -r run publish-angular-package",
+    "bump": "pnpm qui-changesets prep-release --include-commit-links"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.7",
