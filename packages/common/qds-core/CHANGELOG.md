@@ -1,5 +1,13 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.22.2
+
+Apr 6th, 2026
+
+### Bug Fixes
+
+- update changelog links ([78aca35](https://github.com/qualcomm/qualcomm-ui/commit/78aca35))
+
 ## 1.22.1
 
 Apr 2nd, 2026

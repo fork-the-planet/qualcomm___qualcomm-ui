@@ -186,8 +186,8 @@ importers:
         specifier: ^3.1.0
         version: 3.1.0
       '@qualcomm-ui/changesets-cli':
-        specifier: ^1.0.0
-        version: 1.0.0
+        specifier: 1.0.1
+        version: 1.0.1
       '@qualcomm-ui/eslint-config-angular':
         specifier: workspace:*
         version: link:packages/configs/eslint-config-angular
@@ -3313,7 +3313,7 @@ importers:
         specifier: workspace:^1.0.11
         version: link:../../common/dom
       '@qualcomm-ui/qds-core':
-        specifier: workspace:^1.22.1
+        specifier: workspace:^1.22.2
         version: link:../../common/qds-core
       '@qualcomm-ui/tailwind-plugin':
         specifier: workspace:^1.7.0
@@ -3589,7 +3589,7 @@ importers:
         specifier: 'catalog:'
         version: 1.0.5
       '@qualcomm-ui/qds-core':
-        specifier: workspace:^1.22.1
+        specifier: workspace:^1.22.2
         version: link:../../common/qds-core
       '@qualcomm-ui/react-core':
         specifier: workspace:^1.3.5
@@ -3953,7 +3953,7 @@ importers:
         specifier: workspace:^2.1.1
         version: link:../../common/mdx-common
       '@qualcomm-ui/react':
-        specifier: workspace:^1.17.1
+        specifier: workspace:^1.17.2
         version: link:../react
       '@qualcomm-ui/react-core':
         specifier: workspace:^1.3.5
@@ -4078,7 +4078,7 @@ importers:
         specifier: workspace:^2.1.1
         version: link:../../common/mdx-common
       '@qualcomm-ui/mdx-vite':
-        specifier: workspace:^3.2.0
+        specifier: workspace:^3.2.1
         version: link:../../common/mdx-vite
       '@qualcomm-ui/tsconfig':
         specifier: 'catalog:'
@@ -4132,16 +4132,16 @@ importers:
         specifier: 'catalog:'
         version: 1.0.5
       '@qualcomm-ui/qds-core':
-        specifier: workspace:^1.22.1
+        specifier: workspace:^1.22.2
         version: link:../../common/qds-core
       '@qualcomm-ui/react':
-        specifier: workspace:^1.17.1
+        specifier: workspace:^1.17.2
         version: link:../react
       '@qualcomm-ui/react-core':
         specifier: workspace:^1.3.5
         version: link:../react-core
       '@qualcomm-ui/react-mdx':
-        specifier: workspace:^2.2.2
+        specifier: workspace:^2.2.3
         version: link:../react-mdx
       '@qualcomm-ui/react-test-utils':
         specifier: workspace:^1.0.1
@@ -5485,17 +5485,11 @@ packages:
   '@changesets/parse@0.4.1':
     resolution: {integrity: sha512-iwksMs5Bf/wUItfcg+OXrEpravm5rEd9Bf4oyIPL4kVTmJQ7PNDSd6MDYkpSJR1pn7tz/k8Zf2DhTCqX08Ou+Q==}
 
-  '@changesets/parse@0.4.3':
-    resolution: {integrity: sha512-ZDmNc53+dXdWEv7fqIUSgRQOLYoUom5Z40gmLgmATmYR9NbL6FJJHwakcCpzaeCy+1D0m0n7mT4jj2B/MQPl7A==}
-
   '@changesets/pre@2.0.2':
     resolution: {integrity: sha512-HaL/gEyFVvkf9KFg6484wR9s0qjAXlZ8qWPDkTyKF6+zqjBe/I2mygg3MbpZ++hdi0ToqNUF8cjj7fBy0dg8Ug==}
 
   '@changesets/read@0.6.5':
     resolution: {integrity: sha512-UPzNGhsSjHD3Veb0xO/MwvasGe8eMyNrR/sT9gR8Q3DhOQZirgKhhXv/8hVsI0QpPjR004Z9iFxoJU6in3uGMg==}
-
-  '@changesets/read@0.6.7':
-    resolution: {integrity: sha512-D1G4AUYGrBEk8vj8MGwf75k9GpN6XL3wg8i42P2jZZwFLXnlr2Pn7r9yuQNbaMCarP7ZQWNJbV6XLeysAIMhTA==}
 
   '@changesets/should-skip-package@0.1.2':
     resolution: {integrity: sha512-qAK/WrqWLNCP22UDdBTMPH5f41elVDlsNyat180A33dWxuUDyNpg6fPi/FyTZwRriVjg0L8gnjJn2F9XAoF0qw==}
@@ -7073,8 +7067,8 @@ packages:
   '@poppinss/exception@1.2.3':
     resolution: {integrity: sha512-dCED+QRChTVatE9ibtoaxc+WkdzOSjYTKi/+uacHWIsfodVfpsueo3+DKpgU5Px8qXjgmXkSvhXvSCz3fnP9lw==}
 
-  '@qualcomm-ui/changesets-cli@1.0.0':
-    resolution: {integrity: sha512-/naq/X4VXGqkl60mofMFn0KhruXVBMJA4beZhQ0GHfte0HwyNQtTvgkUl4UVcX0NeV5NhutUS/reNa6IT3em5g==}
+  '@qualcomm-ui/changesets-cli@1.0.1':
+    resolution: {integrity: sha512-cFdtsofhIhG0MAHn+ng34nZTV43OhNvd2cQ2kOGYb5UG5EiPNdtJbJOMw5Cko+rkSpi6QHxXxoaO4KVhg6F4wg==}
     hasBin: true
 
   '@qualcomm-ui/cli@1.0.6':
@@ -17841,11 +17835,6 @@ snapshots:
       '@changesets/types': 6.1.0
       js-yaml: 3.14.2
 
-  '@changesets/parse@0.4.3':
-    dependencies:
-      '@changesets/types': 6.1.0
-      js-yaml: 4.1.1
-
   '@changesets/pre@2.0.2':
     dependencies:
       '@changesets/errors': 0.2.0
@@ -17858,16 +17847,6 @@ snapshots:
       '@changesets/git': 3.0.4
       '@changesets/logger': 0.1.1
       '@changesets/parse': 0.4.1
-      '@changesets/types': 6.1.0
-      fs-extra: 7.0.1
-      p-filter: 2.1.0
-      picocolors: 1.1.1
-
-  '@changesets/read@0.6.7':
-    dependencies:
-      '@changesets/git': 3.0.4
-      '@changesets/logger': 0.1.1
-      '@changesets/parse': 0.4.3
       '@changesets/types': 6.1.0
       fs-extra: 7.0.1
       p-filter: 2.1.0
@@ -19865,11 +19844,9 @@ snapshots:
 
   '@poppinss/exception@1.2.3': {}
 
-  '@qualcomm-ui/changesets-cli@1.0.0':
+  '@qualcomm-ui/changesets-cli@1.0.1':
     dependencies:
       '@actions/core': 1.11.1
-      '@changesets/read': 0.6.7
-      '@changesets/write': 0.4.0
       '@manypkg/get-packages': 3.1.0
       '@octokit/rest': 22.0.1
 
