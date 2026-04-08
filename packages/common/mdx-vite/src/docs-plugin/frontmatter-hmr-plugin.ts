@@ -43,10 +43,12 @@ export function frontmatterHmrPlugin(
         // cheat `isLikelyComponentType`
         // https://github.com/facebook/react/blob/f5af92d2c47d1e1f455faf912b1d3221d1038c37/packages/react-refresh/src/ReactFreshRuntime.js#L717-L723
         code += `
-            ;Object.defineProperty(${exportName}, "$$typeof", {
-              enumerable: false,
-              value: Symbol.for('react.memo')
-            });
+            if (typeof ${exportName} === 'object') {
+              Object.defineProperty(${exportName}, "$$typeof", {
+                enumerable: false,
+                value: Symbol.for('react.memo')
+              });
+            }
           `
         return code
       }
