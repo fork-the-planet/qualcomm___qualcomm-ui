@@ -2,13 +2,6 @@ name: Deploy React Docs
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - packages/common/**
-      - packages/frameworks/react*/**
-      - packages/docs/react-docs/**
 
 jobs:
   deploy:

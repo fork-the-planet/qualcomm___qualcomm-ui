@@ -2,13 +2,6 @@ name: Deploy React Table Docs
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - packages/common/**
-      - packages/frameworks/react*/**
-      - packages/docs/react-table-docs/**
 
 jobs:
   deploy:
