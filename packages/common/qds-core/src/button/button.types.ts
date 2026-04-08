@@ -39,7 +39,7 @@ export interface QdsButtonApiProps {
    *
    * @default false
    */
-  disabled?: boolean
+  disabled?: boolean | undefined
 
   /**
    * The style variant of the button. Governs colors.
