@@ -12,8 +12,8 @@ on:
 
 jobs:
   deploy:
-    uses: ./.github/workflows/reusable-docs-deploy-test.yml
+    uses: ./.github/workflows/reusable-docs-deploy-prod.yml
     with:
       dockerfile: dockerfiles/dockerfile-react-table-docs
-      ecr-repository-name: react-table-next
+      ecr-repository-name: react-table-docs
     secrets: inherit

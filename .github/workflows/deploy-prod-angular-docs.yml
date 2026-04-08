@@ -12,9 +12,9 @@ on:
       - packages/docs/angular-docs/**
 
 jobs:
-  deploy:
-    uses: ./.github/workflows/reusable-docs-deploy-test.yml
+  deploy-test:
+    uses: ./.github/workflows/reusable-docs-deploy-prod.yml
     with:
       dockerfile: dockerfiles/dockerfile-angular-docs
-      ecr-repository-name: angular-next
+      ecr-repository-name: angular-docs
     secrets: inherit

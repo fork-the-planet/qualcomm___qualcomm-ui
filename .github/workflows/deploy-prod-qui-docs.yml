@@ -12,8 +12,8 @@ on:
 
 jobs:
   deploy:
-    uses: ./.github/workflows/reusable-docs-deploy-test.yml
+    uses: ./.github/workflows/reusable-docs-deploy-prod.yml
     with:
       dockerfile: dockerfiles/dockerfile-qui-docs
-      ecr-repository-name: docs-next
+      ecr-repository-name: qui-docs
     secrets: inherit

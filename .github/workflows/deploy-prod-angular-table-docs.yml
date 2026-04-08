@@ -13,8 +13,8 @@ on:
 
 jobs:
   deploy:
-    uses: ./.github/workflows/reusable-docs-deploy-test.yml
+    uses: ./.github/workflows/reusable-docs-deploy-prod.yml
     with:
       dockerfile: dockerfiles/dockerfile-angular-table-docs
-      ecr-repository-name: angular-table-next
+      ecr-repository-name: angular-table-docs
     secrets: inherit
