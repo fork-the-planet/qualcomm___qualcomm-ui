@@ -403,7 +403,12 @@ pre.qui-docs-code {
     white-space: nowrap;
   }
 
-  .qui-docs__page-header-since-badge {
+  .qui-docs__page-header-badge {
     height: 20px;
+  }
+
+  a.qui-docs__page-header-badge {
+    cursor: pointer;
+    text-decoration: none;
   }
 }
