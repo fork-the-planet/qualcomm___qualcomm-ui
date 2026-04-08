@@ -72,7 +72,7 @@
     "tailwindcss": "^4.1.17",
     "tsx": "catalog:",
     "typescript-plugin-css-modules": "^5.0.1",
-    "vite": "^8.0.3",
+    "vite": "catalog:",
     "vite-tsconfig-paths": "^6.1.1",
     "vitest": "catalog:",
     "vitest-browser-react": "^2.0.2"

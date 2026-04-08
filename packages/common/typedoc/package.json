@@ -60,7 +60,7 @@
     "terminate": "^2.6.1",
     "tsx": "catalog:",
     "typedoc": "~0.28.13",
-    "vite": "^8.0.3",
+    "vite": "catalog:",
     "vitest": "catalog:"
   },
   "peerDependencies": {

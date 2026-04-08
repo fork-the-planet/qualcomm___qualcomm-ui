@@ -31,11 +31,13 @@ jobs:
 
     - name: Log in to ECR
       run: |
-        aws ecr get-login-password --region ${{ inputs.aws-region }} | \
-          docker login --username AWS --password-stdin ${{ secrets.QUI_DOCS_ECR_REGISTRY_URL }}
+        aws ecr get-login-password --region "$AWS_REGION" | \
+          docker login --username AWS --password-stdin "$ECR_REGISTRY_URL"
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.QUI_DOCS_AWS_ECR_ACCESS_KEY }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.QUI_DOCS_AWS_ECR_SECRET_ACCESS_KEY }}
+        AWS_REGION: ${{ inputs.aws-region }}
+        ECR_REGISTRY_URL: ${{ secrets.QUI_DOCS_ECR_REGISTRY_URL }}
 
     - name: Build and push
       run: |
@@ -44,11 +46,15 @@ jobs:
           --platform=linux/amd64 \
           --progress=plain \
           --no-cache \
-          -t ${{ secrets.QUI_DOCS_ECR_REGISTRY_URL }}/${{ inputs.ecr-repository-name }}:${{ github.sha }} \
-          -f ${{ inputs.dockerfile }} .
+          -t "$ECR_REGISTRY_URL/$ECR_REPOSITORY_NAME:$COMMIT_SHA" \
+          -f "$DOCKERFILE" .
         docker push \
-          ${{ secrets.QUI_DOCS_ECR_REGISTRY_URL }}/${{ inputs.ecr-repository-name }} \
+          "$ECR_REGISTRY_URL/$ECR_REPOSITORY_NAME" \
           --all-tags
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.QUI_DOCS_AWS_ECR_ACCESS_KEY }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.QUI_DOCS_AWS_ECR_SECRET_ACCESS_KEY }}
+        ECR_REGISTRY_URL: ${{ secrets.QUI_DOCS_ECR_REGISTRY_URL }}
+        ECR_REPOSITORY_NAME: ${{ inputs.ecr-repository-name }}
+        COMMIT_SHA: ${{ github.sha }}
+        DOCKERFILE: ${{ inputs.dockerfile }}
