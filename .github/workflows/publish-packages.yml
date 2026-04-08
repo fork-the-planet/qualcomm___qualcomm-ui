@@ -26,7 +26,7 @@ jobs:
     - uses: ./.github/actions/init-node-and-install
 
     - id: check
-      run: pnpm tsx scripts/release/check-versions.ts
+      run: pnpm qui-changesets check-versions
 
   publish:
     needs: check
@@ -60,6 +60,6 @@ jobs:
       run: pnpm publish:all
 
     - name: create releases
-      run: pnpm tsx scripts/release/create-github-releases.ts
+      run: pnpm qui-changesets create-github-releases --token $TOKEN
       env:
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
