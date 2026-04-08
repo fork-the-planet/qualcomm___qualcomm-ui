@@ -75,6 +75,7 @@ export class Home {
     {name: "Segmented Control", path: "/segmented-control"},
     {name: "Side Nav", path: "/side-nav"},
     {name: "Slider", path: "/slider"},
+    {name: "Stepper", path: "/stepper"},
     {name: "Switch", path: "/switch"},
     {name: "Tabs", path: "/tabs"},
     {name: "Tag", path: "/tag"},
