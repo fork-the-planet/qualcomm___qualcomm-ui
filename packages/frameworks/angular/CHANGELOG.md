@@ -1,5 +1,22 @@
 # @qualcomm-ui/angular Changelog
 
+## 2.3.0
+
+Apr 7th, 2026
+
+### Features
+
+- [stepper]: add angular stepper component ([16856bf](https://github.com/qualcomm/qualcomm-ui/commit/16856bf))
+
+### Tests
+
+- [stepper]: add stepper tests ([bc6da98](https://github.com/qualcomm/qualcomm-ui/commit/bc6da98))
+
+### Miscellaneous Chores
+
+- simplify angular test configuration ([50dd356](https://github.com/qualcomm/qualcomm-ui/commit/50dd356))
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/qds-core, @qualcomm-ui/angular-core]
+
 ## 2.2.2
 
 Apr 6th, 2026

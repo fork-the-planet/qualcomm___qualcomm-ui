@@ -1,5 +1,21 @@
 # @qualcomm-ui/react-core Changelog
 
+## 1.4.0
+
+Apr 7th, 2026
+
+### Features
+
+- [stepper]: add react stepper component ([6a686b3](https://github.com/qualcomm/qualcomm-ui/commit/6a686b3))
+
+### Bug Fixes
+
+- [system]: allow child props to override parent in bindingRenderProp ([5884324](https://github.com/qualcomm/qualcomm-ui/commit/5884324))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core]
+
 ## 1.3.5
 
 Apr 2nd, 2026

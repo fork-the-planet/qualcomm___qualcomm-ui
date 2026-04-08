@@ -1,5 +1,13 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 3.2.2
+
+Apr 7th, 2026
+
+### Bug Fixes
+
+- [mdx-vite]: add type check before defining $typeof property ([0cb35b2](https://github.com/qualcomm/qualcomm-ui/commit/0cb35b2))
+
 ## 3.2.1
 
 Apr 6th, 2026

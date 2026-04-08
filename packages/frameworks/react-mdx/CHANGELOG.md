@@ -1,5 +1,21 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 2.3.0
+
+Apr 7th, 2026
+
+### Features
+
+- [react-mdx]: add frontmatter badge support ([2c36e23](https://github.com/qualcomm/qualcomm-ui/commit/2c36e23))
+
+### Documentation
+
+- [stepper]: add stepper documentation and demos ([14a58bf](https://github.com/qualcomm/qualcomm-ui/commit/14a58bf))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react-core, @qualcomm-ui/core, @qualcomm-ui/react]
+
 ## 2.2.3
 
 Apr 6th, 2026

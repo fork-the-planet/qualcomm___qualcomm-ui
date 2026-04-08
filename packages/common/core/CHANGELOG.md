@@ -1,5 +1,17 @@
 # @qualcomm-ui/core Changelog
 
+## 1.7.0
+
+Apr 7th, 2026
+
+### Features
+
+- [stepper]: add core stepper API ([83307f8](https://github.com/qualcomm/qualcomm-ui/commit/83307f8))
+
+### Bug Fixes
+
+- [input]: use type button on clear-trigger for form compatibility ([ebd0e9f](https://github.com/qualcomm/qualcomm-ui/commit/ebd0e9f))
+
 ## 1.6.2
 
 Apr 2nd, 2026
