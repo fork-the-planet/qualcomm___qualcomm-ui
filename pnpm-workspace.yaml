@@ -59,16 +59,14 @@ catalog:
   react-router: 7.14.0
   tsx: 4.21.0
   typescript-eslint: 8.48.1
+  vite: 8.0.7
   vitest: 4.1.2
 
 minimumReleaseAge: 1440
 
 minimumReleaseAgeExclude:
   - '@qualcomm-ui/*'
-  - 'turbo'
-  - '@turbo/*'
-  - '@react-router/*'
-  - 'react-router'
+  - 'vite'
 
 onlyBuiltDependencies:
   - '@bundled-es-modules/glob'

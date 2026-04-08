@@ -89,7 +89,7 @@
     "shx": "^0.4.0",
     "tsx": "catalog:",
     "typescript": "catalog:",
-    "vite": "^8.0.3",
+    "vite": "catalog:",
     "vitest": "catalog:",
     "vitest-browser-react": "^2.0.2"
   },
