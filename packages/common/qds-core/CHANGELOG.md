@@ -1,5 +1,21 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.23.0
+
+Apr 7th, 2026
+
+### Features
+
+- [stepper]: add QDS stepper styles and types ([a439534](https://github.com/qualcomm/qualcomm-ui/commit/a439534))
+
+### Bug Fixes
+
+- [button]: add native disabled pseudo-class to CSS selectors ([8fa5338](https://github.com/qualcomm/qualcomm-ui/commit/8fa5338))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core]
+
 ## 1.22.2
 
 Apr 6th, 2026

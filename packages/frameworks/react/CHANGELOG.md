@@ -1,5 +1,21 @@
 # @qualcomm-ui/react Changelog
 
+## 1.18.0
+
+Apr 7th, 2026
+
+### Features
+
+- [stepper]: add react stepper component ([6a686b3](https://github.com/qualcomm/qualcomm-ui/commit/6a686b3))
+
+### Tests
+
+- [stepper]: add stepper tests ([bc6da98](https://github.com/qualcomm/qualcomm-ui/commit/bc6da98))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react-core, @qualcomm-ui/core, @qualcomm-ui/qds-core]
+
 ## 1.17.2
 
 Apr 6th, 2026

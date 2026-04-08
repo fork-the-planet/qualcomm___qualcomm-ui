@@ -19,6 +19,7 @@
     }
   },
   "include": ["./src"],
+  "exclude": ["**/*.spec.ts"],
   "references": [
     {
       "path": "../angular-core/tsconfig.angular-lib.json"

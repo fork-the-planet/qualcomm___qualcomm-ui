@@ -1,5 +1,17 @@
 # @qualcomm-ui/angular-core Changelog
 
+## 2.1.0
+
+Apr 7th, 2026
+
+### Features
+
+- [stepper]: add angular stepper component ([16856bf](https://github.com/qualcomm/qualcomm-ui/commit/16856bf))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core]
+
 ## 2.0.4
 
 Apr 2nd, 2026
