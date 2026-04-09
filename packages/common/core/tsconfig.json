@@ -1,15 +1,10 @@
 {
-  "extends": "@qualcomm-ui/tsconfig/tsconfig.super-strict.json",
   "compilerOptions": {
     "baseUrl": "./",
-    "outDir": "./dist",
     "paths": {
       "@qualcomm-ui/core/*": ["./src/*/index.ts"],
-      // fixes WebStorm usage detection, not used otherwise. TODO: remove when symlinks are fixed
-      "@qualcomm-ui/utils/*": ["../utils/src/*"]
     }
   },
-  "include": ["./src"],
   "references": [
     {
       "path": "./tsconfig.lib.json"
@@ -21,8 +16,10 @@
       "path": "./tsconfig.spec.json"
     },
     {
+      "path": "../dom/tsconfig.lib.json"
+    },
+    {
       "path": "../utils/tsconfig.lib.json"
     },
   ]
 }
-
