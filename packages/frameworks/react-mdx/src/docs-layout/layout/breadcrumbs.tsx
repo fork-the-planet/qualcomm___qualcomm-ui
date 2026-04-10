@@ -56,11 +56,11 @@ export function DocsBreadcrumbs({
         acc.push({
           children: pageTitle,
           id: route?.pathname ?? route?.id ?? pageTitle,
-          render: route?.pathname ? (
-            <Link href={route.pathname} />
-          ) : (
-            <button style={{pointerEvents: "none"}} />
-          ),
+          ...(route?.pathname
+            ? {
+                render: <Link href={route.pathname} />,
+              }
+            : {}),
         })
 
         return acc

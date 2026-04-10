@@ -15,18 +15,20 @@ const state = instance.getEnum("state", {
 const showIcon = instance.getBoolean("showIcon")
 
 const disabledAttr = state === "disabled" ? " disabled" : ""
-const ariaCurrentAttr = state === "active" ? ` aria-current="page"` : ""
+const currentPageAttr = state === "active" ? ` aria-current="page"` : ""
+const triggerTag = state === "active" ? "span" : "a"
+const hrefAttr = state === "active" ? "" : ` href="/components"`
 const iconEl = showIcon
   ? `<svg q-breadcrumb-item-icon qIcon="FolderClosed"></svg>`
   : ""
 
 export default {
   example: figma.code`
-    <li${disabledAttr} q-breadcrumb-item>
-      <a${ariaCurrentAttr} q-breadcrumb-item-trigger>
+    <li${disabledAttr}${currentPageAttr} q-breadcrumb-item>
+      <${triggerTag}${hrefAttr} q-breadcrumb-item-trigger>
         ${iconEl}
         Breadcrumb
-      </a>
+      </${triggerTag}>
     </li>`,
   id: "BreadcrumbItem",
   imports: [

@@ -19,9 +19,9 @@ import {useQdsBreadcrumbsContext} from "./qds-breadcrumbs-context.service"
   standalone: false,
   template: `
     <ng-content select="[q-breadcrumb-item-trigger], [q-tooltip]">
-      <button q-breadcrumb-item-trigger>
+      <span q-breadcrumb-item-trigger>
         <ng-content />
-      </button>
+      </span>
     </ng-content>
 
     <ng-content select="[q-breadcrumb-item-separator]">

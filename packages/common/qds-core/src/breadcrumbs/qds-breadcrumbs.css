@@ -26,6 +26,10 @@
         color: var(--color-text-neutral-primary);
         --icon-color: var(--color-icon-neutral-primary);
       }
+      &:not(a) {
+        cursor: default;
+        pointer-events: none;
+      }
     }
   }
 
@@ -61,6 +65,8 @@
   &[data-size="lg"] {
     font: var(--font-static-body-md-default);
   }
+
+  cursor: pointer;
 
   &:hover {
     text-decoration: underline;
