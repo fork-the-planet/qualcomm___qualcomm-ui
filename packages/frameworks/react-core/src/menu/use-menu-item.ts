@@ -69,6 +69,7 @@ export function useMenuTriggerItem(
   const menuTriggerContext = useMenuTriggerContext()
   return {
     bindings: menuTriggerContext({
+      ...props,
       id: useControlledId(props.id),
       onDestroy: useOnDestroy(),
     }),

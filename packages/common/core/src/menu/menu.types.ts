@@ -156,7 +156,7 @@ interface ItemApi {
 }
 
 export type MenuTriggerContextValue = (
-  props: IdRegistrationProps,
+  props: ItemProps & IdRegistrationProps,
 ) => MenuTriggerItemBindings | undefined
 
 export interface MenuApiProps
@@ -635,6 +635,6 @@ export interface MenuApi {
   getTriggerBindings: (props: IdRegistrationProps) => MenuTriggerBindings
   getTriggerItemBindings: <Api extends ItemApi>(
     childApi: Api,
-    props: IdRegistrationProps,
+    props: ItemProps & IdRegistrationProps,
   ) => MenuTriggerItemBindings
 }
