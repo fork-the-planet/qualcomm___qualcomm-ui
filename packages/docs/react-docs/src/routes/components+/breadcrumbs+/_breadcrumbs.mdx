@@ -21,26 +21,31 @@ import {Breadcrumbs} from "@qualcomm-ui/react/breadcrumbs"
 ## Overview
 
 ::: terms
-a11y
-WCAG
-site hierarchy
-wayfinding
-location indicator
+a11y, WCAG, site hierarchy, wayfinding, location indicator
 :::
 
 - The root component should be labeled with `aria-label="Breadcrumbs"` to indicate that it's a breadcrumb navigation.
 - The first breadcrumb item is always the root item, and is typically reserved for the home page or base route of your application.
-- The last breadcrumb item is always the active item.
-- The last breadcrumb item should always be annotated with the `aria-current="page"` attribute.
+- The last breadcrumb item represents the current page.
+- Mark the current `Breadcrumbs.Item` with [`aria-current`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current)`="page"`.
+- Only provide `href` or `render` when a `Breadcrumbs.Item` should navigate.
 
 ## Examples
+
+### Links
+
+::: terms
+polymorphic
+:::
+
+Provide either the [href](./#href) prop or the [render](./#render-2) prop when a breadcrumb item should navigate. If neither is provided, [`Breadcrumbs.Item`](./#breadcrumbs-item) renders non-link content, which is appropriate for the current page item. The following example uses React Router:
+
+<Demo name="BreadcrumbsLinksDemo" component={demos.BreadcrumbsLinksDemo} />
 
 ### Emphasis (color)
 
 ::: terms
-neutral
-muted
-subdued
+neutral, muted, subdued
 :::
 
 Use the [emphasis](./#emphasis) prop to change the color of the breadcrumbs.
@@ -53,30 +58,17 @@ Use the [emphasis](./#emphasis) prop to change the color of the breadcrumbs.
 ### Sizes
 
 ::: terms
-small
-medium
-large
+small, medium, large
 :::
 
 Three sizes are available via the [size](./#size) prop: `sm`, `md`, and `lg`. The default size is `md`.
 
 <Demo name="BreadcrumbsSizesDemo" component={demos.BreadcrumbsSizesDemo} />
 
-### Links
-
-::: terms
-polymorphic
-:::
-
-Use the [render](./#render-1) prop on the `<Breadcrumbs.Item>` component to change the root element to your framework's link component. The following example uses React Router:
-
-<Demo name="BreadcrumbsLinksDemo" component={demos.BreadcrumbsLinksDemo} />
-
 ### Disabled Item
 
 ::: terms
-inactive
-non-clickable
+inactive, non-clickable
 :::
 
 Use the [disabled](./#disabled) prop to disable a breadcrumb item.
@@ -86,24 +78,74 @@ Use the [disabled](./#disabled) prop to disable a breadcrumb item.
   component={demos.BreadcrumbsDisabledDemo}
 />
 
+### Overflow
+
+::: terms
+overflow, collapsed, ellipsis, truncated
+:::
+
+Use the [`Breadcrumbs.OverflowItem`](./#breadcrumbs-overflow-item) component to collapse intermediate breadcrumb items into a [menu](/components/menu). The overflow trigger displays an ellipsis by default. Use the [icon](./#icon-3) prop to add an icon, or provide your own trigger via [`Breadcrumbs.OverflowTrigger`](./#breadcrumbs-overflow-trigger).
+
+<Demo
+  name="BreadcrumbsOverflowDemo"
+  component={demos.BreadcrumbsOverflowDemo}
+/>
+
+### Tooltip
+
+::: terms
+tooltip, hover hint, title, description
+:::
+
+To provide additional context on hover, make [`Breadcrumbs.ItemTrigger`](./#breadcrumbs-item-trigger) a [Tooltip](/components/tooltip) trigger using the composite API.
+
+<Demo name="BreadcrumbsTooltipDemo" component={demos.BreadcrumbsTooltipDemo} />
+
 ## Shortcuts
 
 ### Item
 
-The `Breadcrumbs.Item` component is a convenient shorthand for rendering each part of the breadcrumb item. It's equivalent to the following:
+The [`Breadcrumbs.Item`](./#breadcrumbs-item) component is a convenient shorthand for rendering each part of the breadcrumb item. When `href` or `render` is provided, it renders a link trigger. Otherwise, it renders non-link content for the current page item.
 
 ```tsx
-<Breadcrumbs.ItemRoot {...props}>
-  <Breadcrumbs.ItemTrigger
-    aria-current={ariaCurrent}
-    render={render}
-    {...itemTriggerProps}
-  >
-    {icon ? <Breadcrumbs.ItemIcon icon={icon} {...itemIconProps} /> : null}
+/* Link item */
+<Breadcrumbs.ItemRoot>
+  <Breadcrumbs.ItemTrigger aria-current={ariaCurrent} href={href}>
+    <Breadcrumbs.ItemIcon icon={icon} />
     {children}
   </Breadcrumbs.ItemTrigger>
-  <Breadcrumbs.ItemSeparator icon={separator} {...separatorProps} />
+  <Breadcrumbs.ItemSeparator />
 </Breadcrumbs.ItemRoot>
+
+/* Non-link item (e.g. current page) */
+<Breadcrumbs.ItemRoot>
+  <span aria-current={ariaCurrent}>{children}</span>
+  <Breadcrumbs.ItemSeparator />
+</Breadcrumbs.ItemRoot>
+```
+
+### OverflowItem
+
+The `Breadcrumbs.OverflowItem` component is a convenient shorthand that composes a menu trigger with the overflow ellipsis. It's equivalent to the following:
+
+```tsx
+<Breadcrumbs.OverflowItemRoot {...props}>
+  <Menu.Root size={menuSize}>
+    <Menu.Trigger>
+      <Breadcrumbs.OverflowTrigger
+        aria-label={ariaLabel}
+        icon={icon}
+        {...overflowTriggerProps}
+      />
+    </Menu.Trigger>
+    <Portal>
+      <Menu.Positioner>
+        <Menu.Content>{children}</Menu.Content>
+      </Menu.Positioner>
+    </Portal>
+  </Menu.Root>
+  <Breadcrumbs.ItemSeparator icon={separator} {...separatorProps} />
+</Breadcrumbs.OverflowItemRoot>
 ```
 
 ## API
@@ -143,3 +185,13 @@ The `Breadcrumbs.Item` component is a convenient shorthand for rendering each pa
 <TypeDocProps name="BreadcrumbsItemSeparatorProps" />
 
 <TypeDocAttributes name="QdsBreadcrumbsItemSeparatorBindings" />
+
+### \<Breadcrumbs.OverflowItem\>
+
+<TypeDocProps name="BreadcrumbsOverflowItemProps" />
+
+### \<Breadcrumbs.OverflowTrigger\>
+
+<TypeDocProps name="BreadcrumbsOverflowTriggerProps" />
+
+<TypeDocAttributes name="QdsBreadcrumbsOverflowTriggerBindings" />
