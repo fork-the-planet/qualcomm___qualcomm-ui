@@ -12,7 +12,7 @@ on:
     - packages/docs/angular-docs/**
 
 jobs:
-  deploy-test:
+  deploy:
     uses: ./.github/workflows/reusable-docs-deploy-prod.yml
     with:
       dockerfile: dockerfiles/dockerfile-angular-docs
