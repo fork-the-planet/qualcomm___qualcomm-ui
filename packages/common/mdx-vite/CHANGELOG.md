@@ -1,5 +1,13 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 3.3.0
+
+Apr 13th, 2026
+
+### Features
+
+- [mdx-vite]: add link-validator module for mdx link validation ([c316691](https://github.com/qualcomm/qualcomm-ui/commit/c316691))
+
 ## 3.2.2
 
 Apr 7th, 2026
