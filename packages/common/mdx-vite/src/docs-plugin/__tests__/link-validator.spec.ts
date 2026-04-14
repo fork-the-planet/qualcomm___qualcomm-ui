@@ -90,9 +90,7 @@ describe("resolveLink", () => {
   })
 
   test("resolves relative sibling path with fragment", () => {
-    expect(
-      resolveLink("../tooltip#placement", "/components/button"),
-    ).toEqual({
+    expect(resolveLink("../tooltip#placement", "/components/button")).toEqual({
       fragment: "placement",
       pathname: "/tooltip",
     })
