@@ -61,6 +61,7 @@ export class ConfigLoader {
       pageDirectory: conf.pageDirectory
         ? removeTrailingSlash(conf.pageDirectory)
         : "routes",
+      validatePageLinks: conf.validatePageLinks ?? true,
     }
   }
 

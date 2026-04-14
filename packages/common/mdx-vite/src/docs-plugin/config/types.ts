@@ -225,6 +225,15 @@ export interface SearchIndexerOptions {
    * Options for TypeDoc property documentation.
    */
   typeDocPropsOptions?: QuiDocsTypeDocOptions
+
+  /**
+   * Validate internal links in MDX pages after the page map and table of contents
+   * have been assembled. Reports broken page links and fragment references to the
+   * build console.
+   *
+   * @default true
+   */
+  validatePageLinks?: boolean
 }
 
 export interface QuiDocsConfig
