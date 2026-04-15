@@ -92,6 +92,10 @@ export interface QdsMenuButtonBindings {
   className: MenuClasses["button"]
 }
 
+export interface QdsMenuIndicatorBindings {
+  className: MenuClasses["indicator"]
+}
+
 export interface QdsMenuApi {
   size: QdsMenuSize
 
@@ -99,6 +103,7 @@ export interface QdsMenuApi {
   getButtonBindings(): QdsMenuButtonBindings
   getCheckboxItemControlBindings(): QdsMenuCheckboxItemControlBindings
   getContentBindings(): QdsMenuContentBindings
+  getIndicatorBindings(): QdsMenuIndicatorBindings
   getItemBindings(): QdsMenuItemBindings
   getItemCommandBindings(): QdsMenuItemCommandBindings
   getItemGroupBindings(): QdsMenuItemGroupBindings

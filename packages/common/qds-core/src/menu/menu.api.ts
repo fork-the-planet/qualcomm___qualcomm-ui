@@ -14,6 +14,7 @@ import type {
   QdsMenuCheckboxItemControlBindings,
   QdsMenuContentBindings,
   QdsMenuDescriptionBindings,
+  QdsMenuIndicatorBindings,
   QdsMenuItemAccessoryBindings,
   QdsMenuItemBindings,
   QdsMenuItemCommandBindings,
@@ -51,6 +52,11 @@ export function createQdsMenuApi(
       return normalize.element({
         className: menuClasses.content,
         "data-size": size,
+      })
+    },
+    getIndicatorBindings(): QdsMenuIndicatorBindings {
+      return normalize.element({
+        className: menuClasses.indicator,
       })
     },
     getItemBindings(): QdsMenuItemBindings {

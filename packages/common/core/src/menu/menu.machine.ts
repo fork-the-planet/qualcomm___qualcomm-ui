@@ -610,7 +610,6 @@ export const menuMachine: MachineConfig<MenuSchema> = createMachine<MenuSchema>(
           placement: "bottom-start",
           ...props.positioning,
         },
-        ...props,
       }
     },
     refs() {
