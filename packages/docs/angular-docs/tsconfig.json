@@ -9,12 +9,6 @@
     "paths": {
       "@qualcomm-ui/angular/*": ["../../frameworks/angular/src/*/index.ts"],
       "@qualcomm-ui/angular-core/*": ["../../frameworks/angular-core/src/*/index.ts"],
-      // TODO: remove when WebStorm fixes symlinks
-      "@qualcomm-ui/mdx-vite/*": ["../../frameworks/mdx-vite/src/*"],
-      "@qualcomm-ui/core/*": ["../../common/core/src/*"],
-      "@qualcomm-ui/dom/*": ["../../common/core/src/*"],
-      "@qualcomm-ui/qds-core/*": ["../../common/qds-core/src/*"],
-      "@qualcomm-ui/utils/*": ["../../common/utils/src/*"]
     }
   },
   "include": ["./src"],
