@@ -78,8 +78,7 @@ export const componentList: UiComponent[] = [
     url: "/components/checkbox-group",
   },
   {
-    description:
-      "Toggles the visibility of content sections on demand.",
+    description: "Toggles the visibility of content sections on demand.",
     name: "Collapsible",
     url: "/components/collapsible",
   },
@@ -90,8 +89,7 @@ export const componentList: UiComponent[] = [
     url: "/components/combobox",
   },
   {
-    description:
-      "Displays device information in a structured card format.",
+    description: "Displays device information in a structured card format.",
     name: "Device Card",
     planned: true,
     url: "/components/device-card",

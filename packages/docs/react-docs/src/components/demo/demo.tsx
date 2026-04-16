@@ -1,8 +1,4 @@
-import {
-  type ReactNode,
-  useEffect,
-  useState,
-} from "react"
+import {type ReactNode, useEffect, useState} from "react"
 
 import {getDemo} from "virtual:qui-demo-scope/auto"
 
