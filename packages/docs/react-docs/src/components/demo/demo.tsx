@@ -1,7 +1,12 @@
-import type {ReactNode} from "react"
+import {
+  type ReactNode,
+  useEffect,
+  useState,
+} from "react"
 
 import {getDemo} from "virtual:qui-demo-scope/auto"
 
+import type {ReactDemoData} from "@qualcomm-ui/mdx-common"
 import {useQdsThemeContext} from "@qualcomm-ui/react/qds-theme"
 import {useGlobalConfigContext} from "@qualcomm-ui/react-internal/layout"
 import {
@@ -21,12 +26,28 @@ export function Demo({
   const [theme] = useTheme()
   const {brand, setBrand} = useQdsThemeContext()
   const {hideDemoBrandSwitcher} = useGlobalConfigContext()
+  const [demo, setDemo] = useState<ReactDemoData>(getDemo(props.name))
+
+  useEffect(() => {
+    if (!import.meta.hot) {
+      return
+    }
+    const handler = (data: ReactDemoData) => {
+      if (data.demoName === props.name) {
+        setDemo(data)
+      }
+    }
+    import.meta.hot.on("qui-demo:update", handler)
+    return () => {
+      import.meta.hot!.off("qui-demo:update", handler)
+    }
+  }, [props.name])
 
   return (
     <ReactDemoRunner
       colorScheme={theme === Theme.LIGHT ? "light" : "dark"}
       component={component}
-      demo={getDemo(props.name)}
+      demo={demo}
       hideBrandSwitcher={hideDemoBrandSwitcher || hideBrandSwitcherProp}
       qdsBrand={brand || "qualcomm"}
       setQdsBrand={setBrand}
