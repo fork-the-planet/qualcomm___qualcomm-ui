@@ -23,22 +23,34 @@
       "default": "./dist/*/index.js"
     },
     "./themes/*-dark-full.css": {
-      "style": "./dist/*-dark-full.min.css"
+      "style": "./dist/*-dark-full.min.css",
+      "import": "./dist/*-dark-full.min.css",
+      "default": "./dist/*-dark-full.min.css"
     },
     "./themes/*-light-full.css": {
-      "style": "./dist/*-light-full.min.css"
+      "style": "./dist/*-light-full.min.css",
+      "import": "./dist/*-light-full.min.css",
+      "default": "./dist/*-light-full.min.css"
     },
     "./themes/*-dark.css": {
-      "style": "./dist/*-dark.min.css"
+      "style": "./dist/*-dark.min.css",
+      "import": "./dist/*-dark.min.css",
+      "default": "./dist/*-dark.min.css"
     },
     "./themes/*-light.css": {
-      "style": "./dist/*-light.min.css"
+      "style": "./dist/*-light.min.css",
+      "import": "./dist/*-light.min.css",
+      "default": "./dist/*-light.min.css"
     },
     "./themes/*-typography.css": {
-      "style": "./dist/*-typography.min.css"
+      "style": "./dist/*-typography.min.css",
+      "import": "./dist/*-typography.min.css",
+      "default": "./dist/*-typography.min.css"
     },
     "./styles/components.css": {
-      "style": "./dist/components.min.css"
+      "style": "./dist/components.min.css",
+      "import": "./dist/components.min.css",
+      "default": "./dist/components.min.css"
     }
   },
   "scripts": {
