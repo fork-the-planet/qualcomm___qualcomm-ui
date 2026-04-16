@@ -163,6 +163,7 @@
 }
 
 .qui-number-input__unit-select {
+  --gutter: 3;
   align-items: center;
   background: var(--color-background-neutral-01);
   border: none;
