@@ -1,5 +1,17 @@
 # @qualcomm-ui/react Changelog
 
+## 1.19.0
+
+Apr 16th, 2026
+
+### Features
+
+- [card]: add react card component ([766a934](https://github.com/qualcomm/qualcomm-ui/commit/766a934))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
 ## 1.18.0
 
 Apr 7th, 2026

@@ -1,5 +1,17 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.24.0
+
+Apr 16th, 2026
+
+### Features
+
+- [card]: add qds-core card API, types, and styles ([a978a71](https://github.com/qualcomm/qualcomm-ui/commit/a978a71))
+
+### Bug Fixes
+
+- [qds-core]: support older webpack versions with more lenient exports ([85cece6](https://github.com/qualcomm/qualcomm-ui/commit/85cece6))
+
 ## 1.23.0
 
 Apr 7th, 2026

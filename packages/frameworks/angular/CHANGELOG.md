@@ -1,5 +1,25 @@
 # @qualcomm-ui/angular Changelog
 
+## 2.4.0
+
+Apr 16th, 2026
+
+### Features
+
+- [card]: add angular card component ([e5dac7c](https://github.com/qualcomm/qualcomm-ui/commit/e5dac7c))
+
+### Bug Fixes
+
+- [avatar]: sort exports and expose context service ([279bf5e](https://github.com/qualcomm/qualcomm-ui/commit/279bf5e))
+
+### Code Refactoring
+
+- [button]: use accessSignal utility ([97dccd4](https://github.com/qualcomm/qualcomm-ui/commit/97dccd4))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
 ## 2.3.0
 
 Apr 7th, 2026
