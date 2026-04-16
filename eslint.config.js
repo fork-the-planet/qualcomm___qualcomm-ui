@@ -149,7 +149,7 @@ export default defineConfig(
       quiEslintPluginReact.config,
     ],
     files: [
-      "packages/*/{qui-site,react-docs,qui-docs,react-vscode-docs}/**/*.{ts,tsx}",
+      "packages/*/{qui-site,react-docs,qui-docs,react-table-docs,react-vscode-docs}/**/*.{ts,tsx}",
     ],
     languageOptions,
   },
