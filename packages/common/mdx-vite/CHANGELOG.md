@@ -1,5 +1,13 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 3.3.1
+
+Apr 16th, 2026
+
+### Performance Improvements
+
+- [react-demo-plugin]: optimize HMR with targeted custom events ([fe243ec](https://github.com/qualcomm/qualcomm-ui/commit/fe243ec))
+
 ## 3.3.0
 
 Apr 13th, 2026
