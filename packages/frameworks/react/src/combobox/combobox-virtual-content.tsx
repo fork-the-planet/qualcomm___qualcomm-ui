@@ -74,7 +74,7 @@ export function ComboboxVirtualContent<
   useEffect(() => {
     requestAnimationFrame(() => {
       const positioner: HTMLDivElement | null = localRef.current.closest(
-        `[data-part="positioner"]`,
+        `[data-combobox-part="positioner"]`,
       )
       if (!positioner) {
         return
@@ -91,7 +91,7 @@ export function ComboboxVirtualContent<
     enabled: open,
     estimateSize: () => (qdsContext.size === "sm" ? 32 : 40),
     getScrollElement: () =>
-      localRef.current.closest(`[data-part="positioner"]`) || localRef.current,
+      localRef.current.closest(`[data-combobox-part="positioner"]`) || localRef.current,
     overscan: 5,
     // account for 2px border
     paddingEnd: 2,
