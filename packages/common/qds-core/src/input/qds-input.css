@@ -240,6 +240,6 @@
   }
 }
 
-.qui-password-input__visibility-trigger[data-part="visibility-trigger"] {
+.qui-password-input__visibility-trigger[data-password-input-part="visibility-trigger"] {
   color: var(--icon-color);
 }
