@@ -54,7 +54,7 @@
 
 /* Layout */
 .qui-toast__root {
-  &:has([data-part="status-icon"]) {
+  &:has(.qui-toast__icon) {
     --icon-col: 1;
   }
 
