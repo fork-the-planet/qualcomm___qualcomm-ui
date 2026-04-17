@@ -12,6 +12,7 @@ import type {
   BooleanAriaAttr,
   BooleanDataAttr,
 } from "@qualcomm-ui/utils/attributes"
+import type {AnatomyPart, AnatomyPartName} from "@qualcomm-ui/utils/anatomy"
 import type {DirectionProperty} from "@qualcomm-ui/utils/direction"
 import type {RequiredBy} from "@qualcomm-ui/utils/guard"
 import type {
@@ -25,6 +26,11 @@ import type {
   MachineSchema,
   ScopeWithIds,
 } from "@qualcomm-ui/utils/machine"
+
+import type {menuAnatomy} from "./menu.anatomy"
+
+type PartName = AnatomyPartName<typeof menuAnatomy>
+interface Part<P extends PartName> extends AnatomyPart<"menu", P> {}
 
 export interface ItemProps {
   /**
@@ -425,13 +431,8 @@ export interface MenuSchema extends MachineSchema {
   tag: "open" | "closed"
 }
 
-export interface MenuCommonBindings {
-  "data-scope": "menu"
+export interface MenuContextTriggerBindings extends Part<"contextTrigger"> {
   dir: "ltr" | "rtl"
-}
-
-export interface MenuContextTriggerBindings extends MenuCommonBindings {
-  "data-part": "context-trigger"
   id: string
   onContextMenu: JSX.MouseEventHandler
   onPointerCancel: JSX.PointerEventHandler
@@ -442,18 +443,17 @@ export interface MenuContextTriggerBindings extends MenuCommonBindings {
 }
 
 export interface MenuTriggerItemBindings
-  extends MenuCommonBindings,
-    Omit<MenuItemBindings, "data-part">,
+  extends Omit<MenuItemBindings, "data-menu-part">,
     MenuTriggerBindings {}
 
-export interface MenuTriggerBindings extends MenuCommonBindings {
+export interface MenuTriggerBindings extends Part<"trigger"> {
   "aria-controls": string | undefined
   "aria-expanded": BooleanAriaAttr
   "aria-haspopup": "menu" | "dialog"
-  "data-part": "trigger" | "trigger-item"
   "data-placement": Placement | undefined
   "data-state": "open" | "closed"
   "data-uid": string
+  dir: "ltr" | "rtl"
   id: string
   onBlur: JSX.FocusEventHandler
   onClick: JSX.MouseEventHandler
@@ -465,29 +465,29 @@ export interface MenuTriggerBindings extends MenuCommonBindings {
   type: "button"
 }
 
-export interface MenuPositionerBindings extends MenuCommonBindings {
-  "data-part": "positioner"
+export interface MenuPositionerBindings extends Part<"positioner"> {
+  dir: "ltr" | "rtl"
   id: string
   style: JSX.CSSProperties
 }
 
-export interface MenuArrowBindings extends MenuCommonBindings {
-  "data-part": "arrow"
+export interface MenuArrowBindings extends Part<"arrow"> {
+  dir: "ltr" | "rtl"
   style: JSX.CSSProperties
 }
 
-export interface MenuArrowTipBindings extends MenuCommonBindings {
-  "data-part": "arrow-tip"
+export interface MenuArrowTipBindings extends Part<"arrowTip"> {
+  dir: "ltr" | "rtl"
   style: JSX.CSSProperties
 }
 
-export interface MenuContentBindings extends MenuCommonBindings {
+export interface MenuContentBindings extends Part<"content"> {
   "aria-activedescendant": string | undefined
   "aria-labelledby": string | undefined
   "data-from": "context-trigger" | "trigger"
-  "data-part": "content"
   "data-placement": Placement | undefined
   "data-state": "open" | "closed"
+  dir: "ltr" | "rtl"
   hidden: boolean
   id: string
   onKeyDown: JSX.KeyboardEventHandler
@@ -496,21 +496,21 @@ export interface MenuContentBindings extends MenuCommonBindings {
   tabIndex: 0
 }
 
-export interface MenuSeparatorBindings extends MenuCommonBindings {
+export interface MenuSeparatorBindings extends Part<"separator"> {
   "aria-orientation": "horizontal"
-  "data-part": "separator"
+  dir: "ltr" | "rtl"
   role: "separator"
 }
 
-export interface MenuItemBindings extends MenuCommonBindings {
+export interface MenuItemBindings extends Part<"item"> {
   "aria-disabled": BooleanAriaAttr
   "data-disabled": BooleanDataAttr
   "data-focus-visible": BooleanDataAttr
   "data-highlighted": BooleanDataAttr
   "data-ownedby": string
-  "data-part": "item"
   "data-value": string
   "data-valuetext": string | undefined
+  dir: "ltr" | "rtl"
   id: string
   onClick: JSX.MouseEventHandler
   onDragStart: JSX.DragEventHandler
@@ -528,35 +528,34 @@ export interface MenuOptionItemBindings extends Omit<MenuItemBindings, "role"> {
   role: string
 }
 
-export interface MenuOptionItemControlBindings {
+export interface MenuOptionItemControlBindings extends Part<"itemControl"> {
   "data-disabled": BooleanDataAttr
-  "data-part": "item-control"
   "data-state": "checked" | "unchecked"
 }
 
-export interface MenuItemIndicatorBindings extends MenuCommonBindings {
+export interface MenuItemIndicatorBindings extends Part<"itemIndicator"> {
   "data-disabled": BooleanDataAttr
   "data-highlighted": BooleanDataAttr
-  "data-part": "item-indicator"
   "data-state": "checked" | "unchecked" | undefined
+  dir: "ltr" | "rtl"
   hidden: boolean | undefined
 }
 
-export interface MenuItemLabelBindings extends MenuCommonBindings {
+export interface MenuItemLabelBindings extends Part<"itemText"> {
   "data-disabled": BooleanDataAttr
   "data-highlighted": BooleanDataAttr
-  "data-part": "item-text"
   "data-state": "checked" | "unchecked" | undefined
+  dir: "ltr" | "rtl"
 }
 
-export interface MenuItemGroupLabelBindings extends MenuCommonBindings {
-  "data-part": "item-group-label"
+export interface MenuItemGroupLabelBindings extends Part<"itemGroupLabel"> {
+  dir: "ltr" | "rtl"
   id: string | undefined
 }
 
-export interface MenuItemGroupBindings extends MenuCommonBindings {
+export interface MenuItemGroupBindings extends Part<"itemGroup"> {
   "aria-labelledby": string | undefined
-  "data-part": "item-group"
+  dir: "ltr" | "rtl"
   id: string
   role: "group"
 }
