@@ -119,7 +119,7 @@
     display: none;
   }
 
-  [data-part="indicator-icon"] {
+  [data-checkmark-part="indicator-icon"] {
     vertical-align: middle;
   }
 }

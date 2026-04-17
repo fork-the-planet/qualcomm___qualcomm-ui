@@ -126,7 +126,7 @@
   }
 
   [data-state="unchecked"] {
-    [data-part="indicator-icon"] {
+    [data-checkmark-part="indicator-icon"] {
       display: none;
     }
   }
