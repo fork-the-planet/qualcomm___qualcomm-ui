@@ -4,6 +4,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
+import type {AnatomyPart, AnatomyPartName} from "@qualcomm-ui/utils/anatomy"
 import type {
   BooleanAriaAttr,
   BooleanDataAttr,
@@ -11,6 +12,8 @@ import type {
 import type {DirectionProperty} from "@qualcomm-ui/utils/direction"
 import type {RequiredBy} from "@qualcomm-ui/utils/guard"
 import type {ActionSchema, JSX, MachineSchema} from "@qualcomm-ui/utils/machine"
+
+import type {toggleAnatomy} from "./toggle.anatomy"
 
 export interface ToggleApiProps extends DirectionProperty {
   /**
@@ -46,23 +49,21 @@ export interface ToggleSchema extends MachineSchema {
   state: "idle"
 }
 
-export interface ToggleCommonBindings extends Required<DirectionProperty> {
-  "data-scope": "toggle"
-}
+type PartName = AnatomyPartName<typeof toggleAnatomy>
+interface Part<P extends PartName> extends AnatomyPart<"toggle", P> {}
 
-export interface ToggleIndicatorBindings extends ToggleCommonBindings {
+export interface ToggleIndicatorBindings extends Part<"indicator"> {
   "data-disabled": BooleanDataAttr
-  "data-part": "indicator"
   "data-pressed": BooleanDataAttr
   "data-state": "on" | "off"
 }
 
-export interface ToggleRootBindings extends ToggleCommonBindings {
+export interface ToggleRootBindings extends Part<"root"> {
   "aria-pressed": BooleanAriaAttr
   "data-disabled": BooleanDataAttr
-  "data-part": "root"
   "data-pressed": BooleanDataAttr
   "data-state": "on" | "off"
+  dir: "ltr" | "rtl"
   disabled: boolean | undefined
   onClick: JSX.MouseEventHandler
   type: "button"
