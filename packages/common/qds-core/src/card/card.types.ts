@@ -3,9 +3,11 @@
 
 import type {QdsButtonSize} from "@qualcomm-ui/qds-core/button"
 import type {QdsLinkSize} from "@qualcomm-ui/qds-core/link"
+import type {AnatomyPart, AnatomyPartName} from "@qualcomm-ui/utils/anatomy"
 import type {BooleanDataAttr} from "@qualcomm-ui/utils/attributes"
 import type {DirectionProperty} from "@qualcomm-ui/utils/direction"
 
+import type {cardAnatomy} from "./card.anatomy"
 import type {cardClasses} from "./card.classes"
 
 export type QdsCardVariant = "outline" | "outline-elevated" | "elevated"
@@ -85,92 +87,84 @@ export interface QdsCardLinkApiProps {
 
 type CardClasses = typeof cardClasses
 
-interface CommonBindings extends Required<DirectionProperty> {
-  "data-scope": "card"
-}
+type PartName = AnatomyPartName<typeof cardAnatomy>
+interface Part<P extends PartName> extends AnatomyPart<"card", P> {}
 
-export interface QdsCardRootBindings extends CommonBindings {
+export interface QdsCardRootBindings
+  extends Part<"root">,
+    Required<DirectionProperty> {
   className: CardClasses["root"]
   "data-alignment": QdsCardAlignment
   "data-interactive": BooleanDataAttr
-  "data-part": "root"
   "data-size": QdsCardSize
   "data-variant": QdsCardVariant
 }
 
-export interface QdsCardMediaBindings extends CommonBindings {
+export interface QdsCardMediaBindings extends Part<"media"> {
   className: CardClasses["media"]
   "data-padding": QdsCardMediaPadding
-  "data-part": "media"
   "data-size": QdsCardSize
 }
 
-export interface QdsCardAvatarBindings extends CommonBindings {
+export interface QdsCardAvatarBindings extends Part<"avatar"> {
   className: CardClasses["avatar"]
-  "data-part": "avatar"
   "data-size": "xl"
 }
 
-export interface QdsCardContentBindings extends CommonBindings {
+export interface QdsCardContentBindings extends Part<"content"> {
   className: CardClasses["content"]
   "data-alignment": QdsCardAlignment
-  "data-part": "content"
   "data-size": QdsCardSize
 }
 
-export interface QdsCardHeadingBindings extends CommonBindings {
+export interface QdsCardHeadingBindings extends Part<"heading"> {
   className: CardClasses["heading"]
-  "data-part": "heading"
+  "data-alignment": QdsCardAlignment
   "data-size": QdsCardSize
 }
 
-export interface QdsCardHeadingTextBindings extends CommonBindings {
+export interface QdsCardHeadingTextBindings extends Part<"headingText"> {
   className: CardClasses["headingText"]
-  "data-part": "heading-text"
   "data-size": QdsCardSize
 }
 
-export interface QdsCardParagraphTextBindings extends CommonBindings {
+export interface QdsCardParagraphTextBindings extends Part<"paragraphText"> {
   className: CardClasses["paragraphText"]
-  "data-part": "paragraph-text"
   "data-size": QdsCardSize
 }
 
-export interface QdsCardSubheadingTextBindings extends CommonBindings {
+export interface QdsCardSubheadingTextBindings extends Part<"subheadingText"> {
   className: CardClasses["subheadingText"]
-  "data-part": "subheading-text"
   "data-size": QdsCardSize
 }
 
-export interface QdsCardEyebrowTextBindings extends CommonBindings {
+export interface QdsCardEyebrowTextBindings extends Part<"eyebrowText"> {
   className: CardClasses["eyebrowText"]
-  "data-part": "eyebrow-text"
   "data-size": QdsCardSize
 }
 
-export interface QdsCardMenuTriggerBindings {
+export interface QdsCardMenuTriggerBindings extends Part<"menuTrigger"> {
   className: CardClasses["menuTrigger"]
   "data-size": QdsCardSize
 }
 
-export interface QdsCardFooterBindings {
+export interface QdsCardFooterBindings extends Part<"footer"> {
   className: CardClasses["footer"]
   "data-alignment": QdsCardAlignment
-  "data-part": "footer"
   "data-size": QdsCardSize
 }
 
-export interface QdsCardButtonBindings {
+export interface QdsCardButtonBindings extends Part<"button"> {
   className: CardClasses["button"]
   "data-size": QdsButtonSize
 }
 
-export interface QdsCardLinkBindings {
+export interface QdsCardLinkBindings extends Part<"link"> {
   className: CardClasses["link"]
   "data-size": QdsLinkSize
 }
 
-export interface QdsCardBadgeBindings extends CommonBindings {
+export interface QdsCardBadgeBindings extends Part<"badge"> {
   className: CardClasses["badge"]
 }
 
