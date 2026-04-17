@@ -1,6 +1,8 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
+import type {AnatomyPart} from "@qualcomm-ui/utils/anatomy"
+
 import type {dialogClasses} from "./dialog.classes"
 
 export type QdsDialogSize = "sm" | "md"
@@ -57,7 +59,8 @@ export interface QdsDialogApiProps {
 
 type DialogClasses = typeof dialogClasses
 
-export interface QdsDialogContentBindings {
+export interface QdsDialogContentBindings
+  extends AnatomyPart<"dialog", "content"> {
   className: DialogClasses["content"]
   "data-scroll-behavior": QdsDialogScrollBehavior
   "data-size": QdsDialogSize
@@ -69,33 +72,38 @@ export interface QdsDialogIndicatorIconBindings {
   "data-size": QdsDialogSize
 }
 
-export interface QdsDialogHeadingBindings {
+export interface QdsDialogHeadingBindings
+  extends AnatomyPart<"dialog", "heading"> {
   className: DialogClasses["heading"]
   "data-size": QdsDialogSize
 }
 
-export interface QdsDialogBodyBindings {
+export interface QdsDialogBodyBindings extends AnatomyPart<"dialog", "body"> {
   className: DialogClasses["body"]
   "data-size": QdsDialogSize
 }
 
-export interface QdsDialogFooterBindings {
+export interface QdsDialogFooterBindings
+  extends AnatomyPart<"dialog", "footer"> {
   className: DialogClasses["footer"]
   "data-size": QdsDialogSize
 }
 
-export interface QdsDialogCloseButtonBindings {
+export interface QdsDialogCloseButtonBindings
+  extends AnatomyPart<"dialog", "closeTrigger"> {
   className: DialogClasses["closeButton"]
 }
 
-export interface QdsDialogPositionerBindings {
+export interface QdsDialogPositionerBindings
+  extends AnatomyPart<"dialog", "positioner"> {
   className: DialogClasses["positioner"]
   "data-placement": QdsDialogPlacement
   "data-scroll-behavior": QdsDialogScrollBehavior
   "data-size": QdsDialogSize
 }
 
-export interface QdsDialogBackdropBindings {
+export interface QdsDialogBackdropBindings
+  extends AnatomyPart<"dialog", "backdrop"> {
   className: DialogClasses["backdrop"]
 }
 
