@@ -2,17 +2,11 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
 import type {FieldApiProps} from "@qualcomm-ui/core/field"
+import type {AnatomyPart, AnatomyPartName} from "@qualcomm-ui/utils/anatomy"
 import type {
-  InputClearTriggerBindings,
-  InputErrorIndicatorBindings,
-  InputErrorTextBindings,
-  InputHintBindings,
-  InputInputBindings,
-  InputInputGroupBindings,
-  InputLabelBindings,
-  InputRootBindings,
-} from "@qualcomm-ui/core/input"
-import type {BooleanDataAttr} from "@qualcomm-ui/utils/attributes"
+  BooleanAriaAttr,
+  BooleanDataAttr,
+} from "@qualcomm-ui/utils/attributes"
 import type {DirectionProperty} from "@qualcomm-ui/utils/direction"
 import type {RequiredBy} from "@qualcomm-ui/utils/guard"
 import type {
@@ -20,9 +14,12 @@ import type {
   CommonProperties,
   EffectSchema,
   IdRegistrationProps,
+  JSX,
   MachineSchema,
   ScopeWithIds,
 } from "@qualcomm-ui/utils/machine"
+
+import type {textInputAnatomy} from "./text-input.anatomy"
 
 export interface TextInputElementIds {
   errorText: string
@@ -107,49 +104,78 @@ export interface TextInputSchema extends MachineSchema {
   state: "idle"
 }
 
-export interface TextInputScopeAttribute {
-  "data-scope": "text-input"
+type PartName = AnatomyPartName<typeof textInputAnatomy>
+interface Part<P extends PartName> extends AnatomyPart<"textInput", P> {}
+
+export interface TextInputRootBindings extends Part<"root"> {
+  "data-disabled": BooleanDataAttr
+  "data-focus": BooleanDataAttr
+  "data-invalid": BooleanDataAttr
+  dir: "ltr" | "rtl"
 }
 
-interface CommonBindings
-  extends Required<DirectionProperty>,
-    TextInputScopeAttribute {}
+export interface TextInputLabelBindings extends Part<"label"> {
+  "data-disabled": BooleanDataAttr
+  "data-focus": BooleanDataAttr
+  "data-invalid": BooleanDataAttr
+  htmlFor: string
+  id: string
+}
 
-export interface TextInputRootBindings
-  extends CommonBindings,
-    InputRootBindings {}
+export interface TextInputErrorTextBindings extends Part<"errorText"> {
+  "aria-live": "polite"
+  hidden: boolean
+  id: string
+}
 
-export interface TextInputLabelBindings
-  extends CommonBindings,
-    InputLabelBindings {}
+export interface TextInputHintBindings extends Part<"hint"> {
+  "data-disabled": BooleanDataAttr
+  hidden: boolean
+  id: string
+}
 
-export interface TextInputErrorTextBindings
-  extends CommonBindings,
-    InputErrorTextBindings {}
+export interface TextInputClearTriggerBindings extends Part<"clearTrigger"> {
+  "aria-label": "Clear input"
+  "data-disabled": BooleanDataAttr
+  disabled: boolean | undefined
+  onClick: JSX.MouseEventHandler
+  type: "button"
+}
 
-export interface TextInputHintBindings
-  extends CommonBindings,
-    InputHintBindings {}
-
-export interface TextInputClearTriggerBindings
-  extends CommonBindings,
-    InputClearTriggerBindings {}
-
-export interface TextInputInputGroupBindings
-  extends CommonBindings,
-    InputInputGroupBindings {}
+export interface TextInputInputGroupBindings extends Part<"inputGroup"> {
+  "data-disabled": BooleanDataAttr
+  "data-focus": BooleanDataAttr
+  "data-invalid": BooleanDataAttr
+  "data-readonly": BooleanDataAttr
+  onClick: JSX.MouseEventHandler<HTMLElement>
+}
 
 export interface TextInputErrorIndicatorBindings
-  extends CommonBindings,
-    InputErrorIndicatorBindings {}
+  extends Part<"errorIndicator"> {
+  "aria-label": "Error"
+  hidden: boolean
+}
 
-export interface TextInputInputBindings
-  extends CommonBindings,
-    InputInputBindings {
+export interface TextInputInputBindings extends Part<"input"> {
+  "aria-describedby": string | undefined
+  "aria-invalid": BooleanAriaAttr
+  "aria-labelledby": string | undefined
   autoComplete: "off"
   autoCorrect: "off"
+  "data-empty": BooleanDataAttr
+  "data-focus": BooleanDataAttr
+  "data-invalid": BooleanDataAttr
   "data-readonly": BooleanDataAttr
+  defaultValue: string
+  disabled: boolean | undefined
+  form?: string
+  id: string
+  name?: string
+  onBlur: JSX.FocusEventHandler
+  onChange: JSX.ChangeEventHandler<HTMLInputElement>
+  onFocus: JSX.FocusEventHandler
   readOnly: boolean | undefined
+  required?: boolean
   spellCheck: "false"
   type: "text"
 }
