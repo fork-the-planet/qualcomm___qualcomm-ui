@@ -2,7 +2,7 @@
   background: transparent;
   .qui-button__icon {
     &[data-placement="end"],
-    &[data-scope="icon-button"] {
+    &[data-icon-button-part="root"] {
       transition: transform var(--animation-duration-faster) ease-out;
     }
   }
@@ -10,7 +10,7 @@
   &[data-state="open"][aria-haspopup="menu"] {
     .qui-button__icon {
       &[data-placement="end"],
-      &[data-scope="icon-button"] {
+      &[data-icon-button-part="root"] {
         transform: rotate(180deg);
       }
     }
