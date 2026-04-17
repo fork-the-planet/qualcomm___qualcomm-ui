@@ -65,7 +65,7 @@
     }
   }
 
-  &:has([data-scope="toast"][data-part="close-button"]) {
+  &:has([data-toast-part="close-trigger"]) {
     padding-right: calc(var(--spacing-70) * 2 + var(--sizing-80));
   }
 
