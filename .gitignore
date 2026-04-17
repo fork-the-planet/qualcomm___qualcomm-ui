@@ -100,7 +100,7 @@ tsconfig.*.tsbuildinfo
 .react-router/
 **/*\wsl.*
 **/coverage
-packages/frameworks/react/.vitest-attachments
+packages/**/.vitest-attachments
 
 ###############################################################################
 # OS / editor / IDE files
