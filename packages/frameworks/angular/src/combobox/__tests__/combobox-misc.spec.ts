@@ -128,7 +128,7 @@ const testCases: MultiComponentTest[] = [
             page
               .getByRole("combobox")
               .element()
-              .closest("[data-field-part='control']")
+              .closest("[data-combobox-part='control']")
               ?.querySelector(".qui-icon__root"),
           )
           .toBeInTheDocument()
