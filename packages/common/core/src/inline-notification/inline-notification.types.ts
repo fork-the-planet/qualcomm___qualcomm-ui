@@ -1,6 +1,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
+import type {AnatomyPart, AnatomyPartName} from "@qualcomm-ui/utils/anatomy"
 import type {DirectionProperty} from "@qualcomm-ui/utils/direction"
 import type {RequiredBy} from "@qualcomm-ui/utils/guard"
 import type {
@@ -12,6 +13,8 @@ import type {
   MachineSchema,
   Scope,
 } from "@qualcomm-ui/utils/machine"
+
+import type {inlineNotificationAnatomy} from "./inline-notification.anatomy"
 
 export interface InlineNotificationApiProps
   extends CommonProperties,
@@ -52,45 +55,35 @@ export interface InlineNotificationSchema extends MachineSchema {
   state: "visible" | "dismissed"
 }
 
-export interface InlineNotificationCommonBindings extends DirectionProperty {
-  "data-scope": "inline-notification"
-}
+type PartName = AnatomyPartName<typeof inlineNotificationAnatomy>
+interface Part<P extends PartName> extends AnatomyPart<"inlineNotification", P> {}
 
-export interface InlineNotificationRootBindings
-  extends InlineNotificationCommonBindings {
+export interface InlineNotificationRootBindings extends Part<"root"> {
+  "aria-describedby": string | undefined
+  "aria-labelledby": string | undefined
   "aria-live": "polite" | "assertive"
-  "data-part": "root"
   "data-state": "visible" | "dismissed"
+  dir: "ltr" | "rtl"
   hidden: boolean | undefined
   role: "alert" | "status"
 }
 
-export interface InlineNotificationIconBindings
-  extends InlineNotificationCommonBindings {
-  "data-part": "status-icon"
-}
+export interface InlineNotificationIconBindings extends Part<"statusIcon"> {}
 
-export interface InlineNotificationLabelBindings
-  extends InlineNotificationCommonBindings {
-  "data-part": "heading"
+export interface InlineNotificationLabelBindings extends Part<"heading"> {
   id: string
 }
 
 export interface InlineNotificationDescriptionBindings
-  extends InlineNotificationCommonBindings {
-  "data-part": "description"
+  extends Part<"description"> {
   id: string
 }
 
-export interface InlineNotificationActionBindings
-  extends InlineNotificationCommonBindings {
-  "data-part": "action"
-}
+export interface InlineNotificationActionBindings extends Part<"action"> {}
 
 export interface InlineNotificationCloseTriggerBindings
-  extends InlineNotificationCommonBindings {
+  extends Part<"closeTrigger"> {
   "aria-label": string
-  "data-part": "close-trigger"
   id: string
   onClick: JSX.MouseEventHandler
   type: "button"
