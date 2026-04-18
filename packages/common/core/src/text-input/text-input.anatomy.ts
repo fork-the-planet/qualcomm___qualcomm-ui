@@ -3,7 +3,7 @@
 
 import {type Anatomy, createAnatomy} from "@qualcomm-ui/utils/anatomy"
 
-const parts = [
+export const textInputParts = [
   "root",
   "label",
   "input",
@@ -14,5 +14,7 @@ const parts = [
   "hint",
 ] as const
 
-export const textInputAnatomy: Anatomy<"textInput", (typeof parts)[number]> =
-  createAnatomy("textInput").parts(...parts)
+export const textInputAnatomy: Anatomy<
+  "textInput",
+  (typeof textInputParts)[number]
+> = createAnatomy("textInput").parts(...textInputParts)

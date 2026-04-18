@@ -3,7 +3,7 @@
 
 import {type Anatomy, createAnatomy} from "@qualcomm-ui/utils/anatomy"
 
-const parts = [
+export const inlineNotificationParts = [
   "root",
   "statusIcon",
   "heading",
@@ -14,5 +14,5 @@ const parts = [
 
 export const inlineNotificationAnatomy: Anatomy<
   "inlineNotification",
-  (typeof parts)[number]
-> = createAnatomy("inlineNotification").parts(...parts)
+  (typeof inlineNotificationParts)[number]
+> = createAnatomy("inlineNotification").parts(...inlineNotificationParts)

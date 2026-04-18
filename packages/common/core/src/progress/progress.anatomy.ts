@@ -3,7 +3,7 @@
 
 import {type Anatomy, createAnatomy} from "@qualcomm-ui/utils/anatomy"
 
-const parts = [
+export const progressParts = [
   "root",
   "label",
   "track",
@@ -17,5 +17,7 @@ const parts = [
   "circleBar",
 ] as const
 
-export const progressAnatomy: Anatomy<"progress", (typeof parts)[number]> =
-  createAnatomy("progress").parts(...parts)
+export const progressAnatomy: Anatomy<
+  "progress",
+  (typeof progressParts)[number]
+> = createAnatomy("progress").parts(...progressParts)

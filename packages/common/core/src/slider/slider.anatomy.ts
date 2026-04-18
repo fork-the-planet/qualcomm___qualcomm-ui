@@ -3,7 +3,7 @@
 
 import {type Anatomy, createAnatomy} from "@qualcomm-ui/utils/anatomy"
 
-const parts = [
+export const sliderParts = [
   "root",
   "control",
   "track",
@@ -20,5 +20,5 @@ const parts = [
   "max",
 ] as const
 
-export const sliderAnatomy: Anatomy<"slider", (typeof parts)[number]> =
-  createAnatomy("slider").parts(...parts)
+export const sliderAnatomy: Anatomy<"slider", (typeof sliderParts)[number]> =
+  createAnatomy("slider").parts(...sliderParts)

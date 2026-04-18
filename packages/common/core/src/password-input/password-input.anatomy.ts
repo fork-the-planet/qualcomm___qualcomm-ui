@@ -3,7 +3,7 @@
 
 import {type Anatomy, createAnatomy} from "@qualcomm-ui/utils/anatomy"
 
-const parts = [
+export const passwordInputParts = [
   "root",
   "label",
   "input",
@@ -17,5 +17,5 @@ const parts = [
 
 export const passwordInputAnatomy: Anatomy<
   "passwordInput",
-  (typeof parts)[number]
-> = createAnatomy("passwordInput").parts(...parts)
+  (typeof passwordInputParts)[number]
+> = createAnatomy("passwordInput").parts(...passwordInputParts)

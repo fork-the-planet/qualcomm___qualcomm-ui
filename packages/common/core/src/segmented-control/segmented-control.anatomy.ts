@@ -3,9 +3,9 @@
 
 import {type Anatomy, createAnatomy} from "@qualcomm-ui/utils/anatomy"
 
-const parts = ["group"] as const
+export const segmentedControlParts = ["group"] as const
 
 export const segmentedControlAnatomy: Anatomy<
   "segmentedControl",
-  (typeof parts)[number]
-> = createAnatomy("segmentedControl").parts(...parts)
+  (typeof segmentedControlParts)[number]
+> = createAnatomy("segmentedControl").parts(...segmentedControlParts)

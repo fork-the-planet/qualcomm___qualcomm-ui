@@ -3,7 +3,7 @@
 
 import {type Anatomy, createAnatomy} from "@qualcomm-ui/utils/anatomy"
 
-const parts = [
+export const popoverParts = [
   "root",
   "trigger",
   "indicator",
@@ -17,5 +17,5 @@ const parts = [
   "arrowTip",
 ] as const
 
-export const popoverAnatomy: Anatomy<"popover", (typeof parts)[number]> =
-  createAnatomy("popover").parts(...parts)
+export const popoverAnatomy: Anatomy<"popover", (typeof popoverParts)[number]> =
+  createAnatomy("popover").parts(...popoverParts)

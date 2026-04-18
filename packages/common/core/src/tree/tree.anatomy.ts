@@ -3,7 +3,7 @@
 
 import {type Anatomy, createAnatomy} from "@qualcomm-ui/utils/anatomy"
 
-const parts = [
+export const treeParts = [
   "root",
   "label",
   "branch",
@@ -20,5 +20,5 @@ const parts = [
   "nodeText",
 ] as const
 
-export const treeAnatomy: Anatomy<"tree", (typeof parts)[number]> =
-  createAnatomy("tree").parts(...parts)
+export const treeAnatomy: Anatomy<"tree", (typeof treeParts)[number]> =
+  createAnatomy("tree").parts(...treeParts)

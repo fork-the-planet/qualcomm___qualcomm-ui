@@ -3,7 +3,7 @@
 
 import {type Anatomy, createAnatomy} from "@qualcomm-ui/utils/anatomy"
 
-const parts = [
+export const switchParts = [
   "root",
   "label",
   "control",
@@ -13,5 +13,5 @@ const parts = [
   "errorText",
 ] as const
 
-export const switchAnatomy: Anatomy<"switch", (typeof parts)[number]> =
-  createAnatomy("switch").parts(...parts)
+export const switchAnatomy: Anatomy<"switch", (typeof switchParts)[number]> =
+  createAnatomy("switch").parts(...switchParts)

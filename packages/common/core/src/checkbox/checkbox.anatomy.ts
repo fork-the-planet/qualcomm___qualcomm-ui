@@ -3,7 +3,7 @@
 
 import {type Anatomy, createAnatomy} from "@qualcomm-ui/utils/anatomy"
 
-const parts = [
+export const checkboxParts = [
   "root",
   "label",
   "control",
@@ -13,5 +13,7 @@ const parts = [
   "errorText",
 ] as const
 
-export const checkboxAnatomy: Anatomy<"checkbox", (typeof parts)[number]> =
-  createAnatomy("checkbox").parts(...parts)
+export const checkboxAnatomy: Anatomy<
+  "checkbox",
+  (typeof checkboxParts)[number]
+> = createAnatomy("checkbox").parts(...checkboxParts)

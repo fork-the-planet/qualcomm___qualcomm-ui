@@ -3,7 +3,7 @@
 
 import {type Anatomy, createAnatomy} from "@qualcomm-ui/utils/anatomy"
 
-const parts = [
+export const radioParts = [
   "group",
   "label",
   "items",
@@ -16,5 +16,5 @@ const parts = [
   "errorText",
 ] as const
 
-export const radioAnatomy: Anatomy<"radio", (typeof parts)[number]> =
-  createAnatomy("radio").parts(...parts)
+export const radioAnatomy: Anatomy<"radio", (typeof radioParts)[number]> =
+  createAnatomy("radio").parts(...radioParts)

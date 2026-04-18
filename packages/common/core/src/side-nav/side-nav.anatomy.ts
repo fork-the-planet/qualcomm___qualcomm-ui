@@ -3,7 +3,7 @@
 
 import {type Anatomy, createAnatomy} from "@qualcomm-ui/utils/anatomy"
 
-const parts = [
+export const sideNavParts = [
   "filterInput",
   "header",
   "headerAction",
@@ -13,5 +13,5 @@ const parts = [
   "trigger",
 ] as const
 
-export const sideNavAnatomy: Anatomy<"sideNav", (typeof parts)[number]> =
-  createAnatomy("sideNav").parts(...parts)
+export const sideNavAnatomy: Anatomy<"sideNav", (typeof sideNavParts)[number]> =
+  createAnatomy("sideNav").parts(...sideNavParts)

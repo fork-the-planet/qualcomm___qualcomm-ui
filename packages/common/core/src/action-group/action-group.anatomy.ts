@@ -3,9 +3,9 @@
 
 import {type Anatomy, createAnatomy} from "@qualcomm-ui/utils/anatomy"
 
-const parts = ["root"] as const
+export const actionGroupParts = ["root"] as const
 
 export const actionGroupAnatomy: Anatomy<
   "actionGroup",
-  (typeof parts)[number]
-> = createAnatomy("actionGroup").parts(...parts)
+  (typeof actionGroupParts)[number]
+> = createAnatomy("actionGroup").parts(...actionGroupParts)

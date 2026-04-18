@@ -3,7 +3,7 @@
 
 import {type Anatomy, createAnatomy} from "@qualcomm-ui/utils/anatomy"
 
-const parts = [
+export const paginationParts = [
   "root",
   "nextTrigger",
   "pageItem",
@@ -14,5 +14,7 @@ const parts = [
   "prevTrigger",
 ] as const
 
-export const paginationAnatomy: Anatomy<"pagination", (typeof parts)[number]> =
-  createAnatomy("pagination").parts(...parts)
+export const paginationAnatomy: Anatomy<
+  "pagination",
+  (typeof paginationParts)[number]
+> = createAnatomy("pagination").parts(...paginationParts)

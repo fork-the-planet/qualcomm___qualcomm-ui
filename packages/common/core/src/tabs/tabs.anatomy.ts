@@ -3,7 +3,7 @@
 
 import {type Anatomy, createAnatomy} from "@qualcomm-ui/utils/anatomy"
 
-const parts = [
+export const tabsParts = [
   "root",
   "list",
   "tab",
@@ -14,5 +14,5 @@ const parts = [
   "indicator",
 ] as const
 
-export const tabsAnatomy: Anatomy<"tabs", (typeof parts)[number]> =
-  createAnatomy("tabs").parts(...parts)
+export const tabsAnatomy: Anatomy<"tabs", (typeof tabsParts)[number]> =
+  createAnatomy("tabs").parts(...tabsParts)

@@ -3,7 +3,7 @@
 
 import {type Anatomy, createAnatomy} from "@qualcomm-ui/utils/anatomy"
 
-const parts = [
+export const accordionParts = [
   "root",
   "item",
   "itemTrigger",
@@ -13,5 +13,7 @@ const parts = [
   "itemContent",
 ] as const
 
-export const accordionAnatomy: Anatomy<"accordion", (typeof parts)[number]> =
-  createAnatomy("accordion").parts(...parts)
+export const accordionAnatomy: Anatomy<
+  "accordion",
+  (typeof accordionParts)[number]
+> = createAnatomy("accordion").parts(...accordionParts)

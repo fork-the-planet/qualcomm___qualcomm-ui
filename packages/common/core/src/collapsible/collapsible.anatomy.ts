@@ -3,9 +3,9 @@
 
 import {type Anatomy, createAnatomy} from "@qualcomm-ui/utils/anatomy"
 
-const parts = ["root", "trigger", "content"] as const
+export const collapsibleParts = ["root", "trigger", "content"] as const
 
 export const collapsibleAnatomy: Anatomy<
   "collapsible",
-  (typeof parts)[number]
-> = createAnatomy("collapsible").parts(...parts)
+  (typeof collapsibleParts)[number]
+> = createAnatomy("collapsible").parts(...collapsibleParts)

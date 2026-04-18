@@ -3,7 +3,7 @@
 
 import {type Anatomy, createAnatomy} from "@qualcomm-ui/utils/anatomy"
 
-const parts = [
+export const tooltipParts = [
   "root",
   "trigger",
   "positioner",
@@ -12,5 +12,5 @@ const parts = [
   "arrowTip",
 ] as const
 
-export const tooltipAnatomy: Anatomy<"tooltip", (typeof parts)[number]> =
-  createAnatomy("tooltip").parts(...parts)
+export const tooltipAnatomy: Anatomy<"tooltip", (typeof tooltipParts)[number]> =
+  createAnatomy("tooltip").parts(...tooltipParts)

@@ -3,7 +3,7 @@
 
 import {type Anatomy, createAnatomy} from "@qualcomm-ui/utils/anatomy"
 
-const parts = [
+export const stepperParts = [
   "root",
   "list",
   "item",
@@ -18,5 +18,5 @@ const parts = [
   "prevTrigger",
 ] as const
 
-export const stepperAnatomy: Anatomy<"stepper", (typeof parts)[number]> =
-  createAnatomy("stepper").parts(...parts)
+export const stepperAnatomy: Anatomy<"stepper", (typeof stepperParts)[number]> =
+  createAnatomy("stepper").parts(...stepperParts)

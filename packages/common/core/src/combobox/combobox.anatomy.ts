@@ -3,7 +3,7 @@
 
 import {type Anatomy, createAnatomy} from "@qualcomm-ui/utils/anatomy"
 
-const parts = [
+export const comboboxParts = [
   "root",
   "clearTrigger",
   "content",
@@ -23,5 +23,7 @@ const parts = [
   "trigger",
 ] as const
 
-export const comboboxAnatomy: Anatomy<"combobox", (typeof parts)[number]> =
-  createAnatomy("combobox").parts(...parts)
+export const comboboxAnatomy: Anatomy<
+  "combobox",
+  (typeof comboboxParts)[number]
+> = createAnatomy("combobox").parts(...comboboxParts)

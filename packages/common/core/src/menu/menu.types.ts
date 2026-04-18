@@ -13,7 +13,7 @@ import type {
   BooleanAriaAttr,
   BooleanDataAttr,
 } from "@qualcomm-ui/utils/attributes"
-import type {DirectionProperty} from "@qualcomm-ui/utils/direction"
+import type {Direction, DirectionProperty} from "@qualcomm-ui/utils/direction"
 import type {RequiredBy} from "@qualcomm-ui/utils/guard"
 import type {
   ActionSchema,
@@ -432,7 +432,7 @@ export interface MenuSchema extends MachineSchema {
 }
 
 export interface MenuContextTriggerBindings extends Part<"contextTrigger"> {
-  dir: "ltr" | "rtl"
+  dir: Direction
   id: string
   onContextMenu: JSX.MouseEventHandler
   onPointerCancel: JSX.PointerEventHandler
@@ -452,7 +452,7 @@ export interface MenuTriggerBindings extends Part<"trigger"> {
   "data-placement": Placement | undefined
   "data-state": "open" | "closed"
   "data-uid": string
-  dir: "ltr" | "rtl"
+  dir: Direction
   id: string
   onBlur: JSX.FocusEventHandler
   onClick: JSX.MouseEventHandler
@@ -465,18 +465,18 @@ export interface MenuTriggerBindings extends Part<"trigger"> {
 }
 
 export interface MenuPositionerBindings extends Part<"positioner"> {
-  dir: "ltr" | "rtl"
+  dir: Direction
   id: string
   style: JSX.CSSProperties
 }
 
 export interface MenuArrowBindings extends Part<"arrow"> {
-  dir: "ltr" | "rtl"
+  dir: Direction
   style: JSX.CSSProperties
 }
 
 export interface MenuArrowTipBindings extends Part<"arrowTip"> {
-  dir: "ltr" | "rtl"
+  dir: Direction
   style: JSX.CSSProperties
 }
 
@@ -486,7 +486,7 @@ export interface MenuContentBindings extends Part<"content"> {
   "data-from": "context-trigger" | "trigger"
   "data-placement": Placement | undefined
   "data-state": "open" | "closed"
-  dir: "ltr" | "rtl"
+  dir: Direction
   hidden: boolean
   id: string
   onKeyDown: JSX.KeyboardEventHandler
@@ -497,7 +497,7 @@ export interface MenuContentBindings extends Part<"content"> {
 
 export interface MenuSeparatorBindings extends Part<"separator"> {
   "aria-orientation": "horizontal"
-  dir: "ltr" | "rtl"
+  dir: Direction
   role: "separator"
 }
 
@@ -509,7 +509,7 @@ export interface MenuItemBindings extends Part<"item"> {
   "data-ownedby": string
   "data-value": string
   "data-valuetext": string | undefined
-  dir: "ltr" | "rtl"
+  dir: Direction
   id: string
   onClick: JSX.MouseEventHandler
   onDragStart: JSX.DragEventHandler
@@ -536,7 +536,7 @@ export interface MenuItemIndicatorBindings extends Part<"itemIndicator"> {
   "data-disabled": BooleanDataAttr
   "data-highlighted": BooleanDataAttr
   "data-state": "checked" | "unchecked" | undefined
-  dir: "ltr" | "rtl"
+  dir: Direction
   hidden: boolean | undefined
 }
 
@@ -544,17 +544,17 @@ export interface MenuItemLabelBindings extends Part<"itemText"> {
   "data-disabled": BooleanDataAttr
   "data-highlighted": BooleanDataAttr
   "data-state": "checked" | "unchecked" | undefined
-  dir: "ltr" | "rtl"
+  dir: Direction
 }
 
 export interface MenuItemGroupLabelBindings extends Part<"itemGroupLabel"> {
-  dir: "ltr" | "rtl"
+  dir: Direction
   id: string | undefined
 }
 
 export interface MenuItemGroupBindings extends Part<"itemGroup"> {
   "aria-labelledby": string | undefined
-  dir: "ltr" | "rtl"
+  dir: Direction
   id: string
   role: "group"
 }

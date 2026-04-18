@@ -3,7 +3,7 @@
 
 import {type Anatomy, createAnatomy} from "@qualcomm-ui/utils/anatomy"
 
-const parts = [
+export const dialogParts = [
   "trigger",
   "backdrop",
   "positioner",
@@ -15,5 +15,5 @@ const parts = [
   "footer",
 ] as const
 
-export const dialogAnatomy: Anatomy<"dialog", (typeof parts)[number]> =
-  createAnatomy("dialog").parts(...parts)
+export const dialogAnatomy: Anatomy<"dialog", (typeof dialogParts)[number]> =
+  createAnatomy("dialog").parts(...dialogParts)
