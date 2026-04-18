@@ -1,8 +1,9 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
+import type {checkboxAnatomy} from "@qualcomm-ui/core/checkbox"
 import type {inputClasses} from "@qualcomm-ui/qds-core/input"
-import type {AnatomyPart} from "@qualcomm-ui/utils/anatomy"
+import type {AnatomyPart, AnatomyPartName} from "@qualcomm-ui/utils/anatomy"
 
 import type {checkboxClasses} from "./checkbox.classes"
 
@@ -20,55 +21,37 @@ export interface QdsCheckboxApiProps {
 type CheckboxClasses = typeof checkboxClasses
 type InputClasses = typeof inputClasses
 
-export interface QdsCheckboxRootBindings extends AnatomyPart<
-  "checkbox",
-  "root"
-> {
+type PartName = AnatomyPartName<typeof checkboxAnatomy>
+interface Part<P extends PartName> extends AnatomyPart<"checkbox", P> {}
+
+export interface QdsCheckboxRootBindings extends Part<"root"> {
   className: CheckboxClasses["root"]
 }
 
-export interface QdsCheckboxLabelBindings extends AnatomyPart<
-  "checkbox",
-  "label"
-> {
+export interface QdsCheckboxLabelBindings extends Part<"label"> {
   className: CheckboxClasses["label"]
   "data-size": QdsCheckboxSize
 }
 
-export interface QdsCheckboxControlBindings extends AnatomyPart<
-  "checkbox",
-  "control"
-> {
+export interface QdsCheckboxControlBindings extends Part<"control"> {
   className: CheckboxClasses["control"]
   "data-size": QdsCheckboxSize
 }
 
-export interface QdsCheckboxIndicatorBindings extends AnatomyPart<
-  "checkbox",
-  "indicator"
-> {
+export interface QdsCheckboxIndicatorBindings extends Part<"indicator"> {
   className: CheckboxClasses["indicator"]
   "data-size": QdsCheckboxSize
 }
 
-export interface QdsCheckboxErrorTextBindings extends AnatomyPart<
-  "checkbox",
-  "errorText"
-> {
+export interface QdsCheckboxErrorTextBindings extends Part<"errorText"> {
   className: InputClasses["errorText"]
 }
 
-export interface QdsCheckboxHintBindings extends AnatomyPart<
-  "checkbox",
-  "hint"
-> {
+export interface QdsCheckboxHintBindings extends Part<"hint"> {
   className: InputClasses["hint"]
 }
 
-export interface QdsCheckboxHiddenInputBindings extends AnatomyPart<
-  "checkbox",
-  "hiddenInput"
-> {
+export interface QdsCheckboxHiddenInputBindings extends Part<"hiddenInput"> {
   className: CheckboxClasses["hiddenInput"]
 }
 

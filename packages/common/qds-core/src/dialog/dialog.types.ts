@@ -1,7 +1,8 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {AnatomyPart} from "@qualcomm-ui/utils/anatomy"
+import type {dialogAnatomy} from "@qualcomm-ui/core/dialog"
+import type {AnatomyPart, AnatomyPartName} from "@qualcomm-ui/utils/anatomy"
 
 import type {dialogClasses} from "./dialog.classes"
 
@@ -59,10 +60,10 @@ export interface QdsDialogApiProps {
 
 type DialogClasses = typeof dialogClasses
 
-export interface QdsDialogContentBindings extends AnatomyPart<
-  "dialog",
-  "content"
-> {
+type PartName = AnatomyPartName<typeof dialogAnatomy>
+interface Part<P extends PartName> extends AnatomyPart<"dialog", P> {}
+
+export interface QdsDialogContentBindings extends Part<"content"> {
   className: DialogClasses["content"]
   "data-scroll-behavior": QdsDialogScrollBehavior
   "data-size": QdsDialogSize
@@ -74,48 +75,33 @@ export interface QdsDialogIndicatorIconBindings {
   "data-size": QdsDialogSize
 }
 
-export interface QdsDialogHeadingBindings extends AnatomyPart<
-  "dialog",
-  "heading"
-> {
+export interface QdsDialogHeadingBindings extends Part<"heading"> {
   className: DialogClasses["heading"]
   "data-size": QdsDialogSize
 }
 
-export interface QdsDialogBodyBindings extends AnatomyPart<"dialog", "body"> {
+export interface QdsDialogBodyBindings extends Part<"body"> {
   className: DialogClasses["body"]
   "data-size": QdsDialogSize
 }
 
-export interface QdsDialogFooterBindings extends AnatomyPart<
-  "dialog",
-  "footer"
-> {
+export interface QdsDialogFooterBindings extends Part<"footer"> {
   className: DialogClasses["footer"]
   "data-size": QdsDialogSize
 }
 
-export interface QdsDialogCloseButtonBindings extends AnatomyPart<
-  "dialog",
-  "closeTrigger"
-> {
+export interface QdsDialogCloseButtonBindings extends Part<"closeTrigger"> {
   className: DialogClasses["closeButton"]
 }
 
-export interface QdsDialogPositionerBindings extends AnatomyPart<
-  "dialog",
-  "positioner"
-> {
+export interface QdsDialogPositionerBindings extends Part<"positioner"> {
   className: DialogClasses["positioner"]
   "data-placement": QdsDialogPlacement
   "data-scroll-behavior": QdsDialogScrollBehavior
   "data-size": QdsDialogSize
 }
 
-export interface QdsDialogBackdropBindings extends AnatomyPart<
-  "dialog",
-  "backdrop"
-> {
+export interface QdsDialogBackdropBindings extends Part<"backdrop"> {
   className: DialogClasses["backdrop"]
 }
 
