@@ -31,7 +31,8 @@ import type {
 import type {popoverAnatomy} from "./popover.anatomy"
 
 export interface PopoverApiProps
-  extends CommonProperties,
+  extends
+    CommonProperties,
     DirectionProperty,
     DismissableElementHandlers,
     PersistentElementOptions {

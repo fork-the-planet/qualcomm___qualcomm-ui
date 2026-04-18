@@ -8,8 +8,10 @@ import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {useQdsStepperContext} from "./qds-stepper-context"
 
-export interface StepperIndicatorIconProps
-  extends Omit<IconOrNodeProps, "size"> {}
+export interface StepperIndicatorIconProps extends Omit<
+  IconOrNodeProps,
+  "size"
+> {}
 
 export function StepperIndicatorIcon(
   props: StepperIndicatorIconProps,

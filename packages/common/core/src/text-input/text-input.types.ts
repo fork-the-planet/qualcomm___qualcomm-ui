@@ -29,9 +29,7 @@ export interface TextInputElementIds {
 }
 
 export interface TextInputApiProps
-  extends FieldApiProps,
-    CommonProperties,
-    DirectionProperty {
+  extends FieldApiProps, CommonProperties, DirectionProperty {
   /**
    * The initial value of the input when rendered.
    * Use when you don't need to control the value of the input.
@@ -150,8 +148,7 @@ export interface TextInputInputGroupBindings extends Part<"inputGroup"> {
   onClick: JSX.MouseEventHandler<HTMLElement>
 }
 
-export interface TextInputErrorIndicatorBindings
-  extends Part<"errorIndicator"> {
+export interface TextInputErrorIndicatorBindings extends Part<"errorIndicator"> {
   "aria-label": "Error"
   hidden: boolean
 }

@@ -1,12 +1,12 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {AnatomyPart, AnatomyPartName} from "@qualcomm-ui/utils/anatomy"
 import type {checkboxClasses} from "@qualcomm-ui/qds-core/checkbox"
 import type {radioClasses} from "@qualcomm-ui/qds-core/radio"
+import type {AnatomyPart, AnatomyPartName} from "@qualcomm-ui/utils/anatomy"
 
-import type {qdsMenuAnatomy} from "./menu.anatomy"
 import type {menuItemClasses} from "./menu-item.classes"
+import type {qdsMenuAnatomy} from "./menu.anatomy"
 import type {menuClasses} from "./menu.classes"
 
 type PartName = AnatomyPartName<typeof qdsMenuAnatomy>

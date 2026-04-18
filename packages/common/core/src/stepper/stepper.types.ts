@@ -7,8 +7,6 @@ import type {
   BooleanDataAttr,
 } from "@qualcomm-ui/utils/attributes"
 import type {DirectionProperty} from "@qualcomm-ui/utils/direction"
-
-import type {stepperAnatomy} from "./stepper.anatomy"
 import type {RequiredBy} from "@qualcomm-ui/utils/guard"
 import type {
   ActionSchema,
@@ -20,6 +18,8 @@ import type {
   MachineSchema,
   Scope,
 } from "@qualcomm-ui/utils/machine"
+
+import type {stepperAnatomy} from "./stepper.anatomy"
 
 export type StepperOrientation =
   | "horizontal"
@@ -247,8 +247,7 @@ export interface StepperItemState extends StepperItemProps {
 
 type PartName = AnatomyPartName<typeof stepperAnatomy>
 interface Part<P extends PartName>
-  extends AnatomyPart<"stepper", P>,
-    Required<DirectionProperty> {}
+  extends AnatomyPart<"stepper", P>, Required<DirectionProperty> {}
 
 export interface StepperRootBindings extends Part<"root"> {
   "data-orientation": StepperOrientation

@@ -35,15 +35,13 @@ export interface NumberInputValueChangeDetails {
   valueAsNumber: number
 }
 
-export interface NumberInputFocusChangeDetails
-  extends NumberInputValueChangeDetails {
+export interface NumberInputFocusChangeDetails extends NumberInputValueChangeDetails {
   focused: boolean
 }
 
 export type NumberInputValidityState = "rangeUnderflow" | "rangeOverflow"
 
-export interface NumberInputValueInvalidDetails
-  extends NumberInputValueChangeDetails {
+export interface NumberInputValueInvalidDetails extends NumberInputValueChangeDetails {
   reason: NumberInputValidityState
 }
 
@@ -85,10 +83,7 @@ export interface NumberInputIntlTranslations {
 export type NumberInputMode = "text" | "tel" | "numeric" | "decimal"
 
 export interface NumberInputApiProps
-  extends FieldApiProps,
-    CommonProperties,
-    DirectionProperty,
-    LocaleProperty {
+  extends FieldApiProps, CommonProperties, DirectionProperty, LocaleProperty {
   /**
    * Whether to allow mouse wheel to change the value
    */
@@ -463,8 +458,7 @@ export interface NumberInputErrorTextBindings extends Part<"errorText"> {
   id: string
 }
 
-export interface NumberInputErrorIndicatorBindings
-  extends Part<"errorIndicator"> {
+export interface NumberInputErrorIndicatorBindings extends Part<"errorIndicator"> {
   "aria-label": "Error"
   dir: "ltr" | "rtl"
   hidden: boolean
@@ -489,8 +483,7 @@ export interface NumberInputControlBindings extends Part<"control"> {
   role: "group"
 }
 
-export interface NumberInputDecrementTriggerBindings
-  extends Part<"decrementTrigger"> {
+export interface NumberInputDecrementTriggerBindings extends Part<"decrementTrigger"> {
   "aria-controls": string
   "aria-label": string | undefined
   "data-disabled": BooleanDataAttr | undefined
@@ -504,8 +497,7 @@ export interface NumberInputDecrementTriggerBindings
   type: "button"
 }
 
-export interface NumberInputIncrementTriggerBindings
-  extends Part<"incrementTrigger"> {
+export interface NumberInputIncrementTriggerBindings extends Part<"incrementTrigger"> {
   "aria-controls": string
   "aria-label": string | undefined
   "data-disabled": BooleanDataAttr | undefined

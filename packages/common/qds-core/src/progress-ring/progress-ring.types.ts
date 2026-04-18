@@ -79,8 +79,10 @@ export interface QdsProgressRingErrorTextBindings {
   className: ProgressClasses["errorText"]
 }
 
-export interface QdsProgressRingCircleContainerBindings
-  extends AnatomyPart<"progress", "circleContainer"> {
+export interface QdsProgressRingCircleContainerBindings extends AnatomyPart<
+  "progress",
+  "circleContainer"
+> {
   className: ProgressClasses["circleContainer"]
 }
 

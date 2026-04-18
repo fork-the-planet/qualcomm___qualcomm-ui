@@ -30,9 +30,7 @@ export interface TextAreaElementIds {
 }
 
 export interface TextAreaApiProps
-  extends FieldApiProps,
-    CommonProperties,
-    DirectionProperty {
+  extends FieldApiProps, CommonProperties, DirectionProperty {
   /**
    * The initial value of the input when rendered.
    * Use when you don't need to control the value of the input.

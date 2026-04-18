@@ -8,11 +8,11 @@ import type {DismissableElementHandlers} from "@qualcomm-ui/dom/dismissable"
 import type {Placement, PositioningOptions} from "@qualcomm-ui/dom/floating-ui"
 import type {TypeaheadState} from "@qualcomm-ui/dom/query"
 import type {Point} from "@qualcomm-ui/dom/rect-utils"
+import type {AnatomyPart, AnatomyPartName} from "@qualcomm-ui/utils/anatomy"
 import type {
   BooleanAriaAttr,
   BooleanDataAttr,
 } from "@qualcomm-ui/utils/attributes"
-import type {AnatomyPart, AnatomyPartName} from "@qualcomm-ui/utils/anatomy"
 import type {DirectionProperty} from "@qualcomm-ui/utils/direction"
 import type {RequiredBy} from "@qualcomm-ui/utils/guard"
 import type {
@@ -94,8 +94,10 @@ export interface OptionItemProps extends Partial<ItemProps> {
   value: string
 }
 
-export interface CheckboxOptionItemProps
-  extends Omit<OptionItemProps, "type"> {}
+export interface CheckboxOptionItemProps extends Omit<
+  OptionItemProps,
+  "type"
+> {}
 
 export interface GetOptionItemPropsReturn extends OptionItemProps {
   id: string
@@ -166,9 +168,7 @@ export type MenuTriggerContextValue = (
 ) => MenuTriggerItemBindings | undefined
 
 export interface MenuApiProps
-  extends DirectionProperty,
-    CommonProperties,
-    DismissableElementHandlers {
+  extends DirectionProperty, CommonProperties, DismissableElementHandlers {
   /**
    * The positioning point for the menu. Can be set by the context menu trigger or
    * the button trigger.
@@ -443,8 +443,7 @@ export interface MenuContextTriggerBindings extends Part<"contextTrigger"> {
 }
 
 export interface MenuTriggerItemBindings
-  extends Omit<MenuItemBindings, "data-menu-part">,
-    MenuTriggerBindings {}
+  extends Omit<MenuItemBindings, "data-menu-part">, MenuTriggerBindings {}
 
 export interface MenuTriggerBindings extends Part<"trigger"> {
   "aria-controls": string | undefined

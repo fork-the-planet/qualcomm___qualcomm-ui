@@ -17,8 +17,7 @@ import type {
 import type {inlineNotificationAnatomy} from "./inline-notification.anatomy"
 
 export interface InlineNotificationApiProps
-  extends CommonProperties,
-    DirectionProperty {
+  extends CommonProperties, DirectionProperty {
   /**
    * Function invoked when the notification is dismissed
    */
@@ -56,7 +55,10 @@ export interface InlineNotificationSchema extends MachineSchema {
 }
 
 type PartName = AnatomyPartName<typeof inlineNotificationAnatomy>
-interface Part<P extends PartName> extends AnatomyPart<"inlineNotification", P> {}
+interface Part<P extends PartName> extends AnatomyPart<
+  "inlineNotification",
+  P
+> {}
 
 export interface InlineNotificationRootBindings extends Part<"root"> {
   "aria-describedby": string | undefined
@@ -74,15 +76,13 @@ export interface InlineNotificationLabelBindings extends Part<"heading"> {
   id: string
 }
 
-export interface InlineNotificationDescriptionBindings
-  extends Part<"description"> {
+export interface InlineNotificationDescriptionBindings extends Part<"description"> {
   id: string
 }
 
 export interface InlineNotificationActionBindings extends Part<"action"> {}
 
-export interface InlineNotificationCloseTriggerBindings
-  extends Part<"closeTrigger"> {
+export interface InlineNotificationCloseTriggerBindings extends Part<"closeTrigger"> {
   "aria-label": string
   id: string
   onClick: JSX.MouseEventHandler

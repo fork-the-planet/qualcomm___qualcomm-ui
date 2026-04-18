@@ -5,7 +5,9 @@ import type {AnatomyPart} from "@qualcomm-ui/utils/anatomy"
 
 import type {actionGroupClasses} from "./action-group.classes"
 
-export interface QdsActionGroupRootBindings
-  extends AnatomyPart<"actionGroup", "root"> {
+export interface QdsActionGroupRootBindings extends AnatomyPart<
+  "actionGroup",
+  "root"
+> {
   className: (typeof actionGroupClasses)["root"]
 }

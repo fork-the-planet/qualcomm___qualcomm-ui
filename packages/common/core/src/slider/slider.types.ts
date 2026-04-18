@@ -296,7 +296,8 @@ type Orientation = "vertical" | "horizontal"
 type PartName = AnatomyPartName<typeof sliderAnatomy>
 interface Part<P extends PartName> extends AnatomyPart<"slider", P> {}
 
-export interface SliderControlBindings extends Part<"control">, DirectionProperty {
+export interface SliderControlBindings
+  extends Part<"control">, DirectionProperty {
   "data-disabled": BooleanDataAttr
   "data-dragging": BooleanDataAttr
   "data-focus": BooleanDataAttr
@@ -310,13 +311,15 @@ export interface SliderControlBindings extends Part<"control">, DirectionPropert
   style: JSX.CSSProperties
 }
 
-export interface SliderThumbIndicatorBindings extends Part<"thumbIndicator">, DirectionProperty {
+export interface SliderThumbIndicatorBindings
+  extends Part<"thumbIndicator">, DirectionProperty {
   "data-orientation": Orientation | undefined
   role: "presentation"
   style: JSX.CSSProperties
 }
 
-export interface SliderErrorTextBindings extends Part<"errorText">, DirectionProperty {
+export interface SliderErrorTextBindings
+  extends Part<"errorText">, DirectionProperty {
   "data-disabled": BooleanDataAttr
   "data-dragging": BooleanDataAttr
   "data-invalid": BooleanDataAttr
@@ -357,7 +360,8 @@ export interface SliderLabelBindings extends Part<"label">, DirectionProperty {
   style: JSX.CSSProperties
 }
 
-export interface SliderMarkerBindings extends Part<"marker">, DirectionProperty {
+export interface SliderMarkerBindings
+  extends Part<"marker">, DirectionProperty {
   "data-disabled": BooleanDataAttr
   "data-orientation": Orientation | undefined
   "data-readonly": BooleanDataAttr
@@ -368,7 +372,8 @@ export interface SliderMarkerBindings extends Part<"marker">, DirectionProperty 
   style: JSX.CSSProperties
 }
 
-export interface SliderMarkerGroupBindings extends Part<"markerGroup">, DirectionProperty {
+export interface SliderMarkerGroupBindings
+  extends Part<"markerGroup">, DirectionProperty {
   "aria-hidden": true
   "data-orientation": Orientation | undefined
   role: "presentation"
@@ -436,7 +441,8 @@ export interface SliderTrackBindings extends Part<"track">, DirectionProperty {
   style: JSX.CSSProperties
 }
 
-export interface SliderValueTextBindings extends Part<"valueText">, DirectionProperty {
+export interface SliderValueTextBindings
+  extends Part<"valueText">, DirectionProperty {
   "data-disabled": BooleanDataAttr
   "data-focus": BooleanDataAttr
   "data-invalid": BooleanDataAttr
@@ -446,7 +452,8 @@ export interface SliderValueTextBindings extends Part<"valueText">, DirectionPro
   value: number[]
 }
 
-export interface SliderMinMarkerBindings extends Part<"min">, DirectionProperty {
+export interface SliderMinMarkerBindings
+  extends Part<"min">, DirectionProperty {
   "data-disabled": BooleanDataAttr
   "data-orientation": Orientation | undefined
   "data-readonly": BooleanDataAttr
@@ -455,7 +462,8 @@ export interface SliderMinMarkerBindings extends Part<"min">, DirectionProperty 
   role: "presentation"
 }
 
-export interface SliderMaxMarkerBindings extends Part<"max">, DirectionProperty {
+export interface SliderMaxMarkerBindings
+  extends Part<"max">, DirectionProperty {
   "data-disabled": BooleanDataAttr
   "data-orientation": Orientation | undefined
   "data-readonly": BooleanDataAttr

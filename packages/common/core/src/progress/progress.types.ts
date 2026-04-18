@@ -169,8 +169,7 @@ export interface ProgressRingBarBindings extends Part<"circleBar"> {
 }
 
 export interface ProgressRingCircleBindings
-  extends Omit<ProgressTrackBindings, "data-progress-part">,
-    Part<"circle"> {
+  extends Omit<ProgressTrackBindings, "data-progress-part">, Part<"circle"> {
   id: string
 }
 

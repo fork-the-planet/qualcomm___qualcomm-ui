@@ -282,8 +282,9 @@ export interface TreeScope extends Scope {
   ids: BindableIds<TreeSchema>
 }
 
-export interface TreeSchema<T extends TreeNode = TreeNode>
-  extends MachineSchema {
+export interface TreeSchema<
+  T extends TreeNode = TreeNode,
+> extends MachineSchema {
   actions: ActionSchema<
     | "clearChecked"
     | "clearExpanded"
@@ -431,8 +432,7 @@ export interface TreeBranchContentBindings extends Part<"branchContent"> {
   role: "group"
 }
 
-export interface TreeBranchIndentGuideBindings
-  extends Part<"branchIndentGuide"> {
+export interface TreeBranchIndentGuideBindings extends Part<"branchIndentGuide"> {
   "data-depth": number
   style: JSX.CSSProperties
 }

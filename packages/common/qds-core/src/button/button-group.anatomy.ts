@@ -5,5 +5,7 @@ import {type Anatomy, createAnatomy} from "@qualcomm-ui/utils/anatomy"
 
 const parts = ["root"] as const
 
-export const buttonGroupAnatomy: Anatomy<"buttonGroup", (typeof parts)[number]> =
-  createAnatomy("buttonGroup").parts(...parts)
+export const buttonGroupAnatomy: Anatomy<
+  "buttonGroup",
+  (typeof parts)[number]
+> = createAnatomy("buttonGroup").parts(...parts)

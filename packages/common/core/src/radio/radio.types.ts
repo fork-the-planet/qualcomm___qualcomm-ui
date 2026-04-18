@@ -227,9 +227,7 @@ export interface RadioGroupLabelBindings extends Part<"label"> {
   onClick: JSX.MouseEventHandler
 }
 
-export interface RadioItemBindings
-  extends Part<"item">,
-    RadioItemDataBindings {
+export interface RadioItemBindings extends Part<"item">, RadioItemDataBindings {
   dir: "ltr" | "rtl"
   htmlFor: string
   onClick: JSX.MouseEventHandler
@@ -240,23 +238,20 @@ export interface RadioItemBindings
 }
 
 export interface RadioItemLabelBindings
-  extends Part<"itemLabel">,
-    RadioItemDataBindings {
+  extends Part<"itemLabel">, RadioItemDataBindings {
   dir: "ltr" | "rtl"
   id: string
 }
 
 export interface RadioItemControlBindings
-  extends Part<"itemControl">,
-    RadioItemDataBindings {
+  extends Part<"itemControl">, RadioItemDataBindings {
   "aria-hidden": true
   "data-active": BooleanDataAttr
   dir: "ltr" | "rtl"
 }
 
 export interface RadioItemHiddenInputBindings
-  extends Part<"itemHiddenInput">,
-    RadioItemDataBindings {
+  extends Part<"itemHiddenInput">, RadioItemDataBindings {
   "aria-labelledby": string | undefined
   "data-ownedby": string
   defaultChecked: boolean
@@ -288,8 +283,7 @@ export interface RadioGroupHintBindings extends Part<"hint"> {
 }
 
 export interface RadioItemHintBindings
-  extends Part<"itemHint">,
-    RadioItemDataBindings {
+  extends Part<"itemHint">, RadioItemDataBindings {
   dir: "ltr" | "rtl"
   hidden: boolean
   id: string

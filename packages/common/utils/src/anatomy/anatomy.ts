@@ -10,15 +10,14 @@ import {kebabCase} from "@qualcomm-ui/utils/change-case"
  * Type-level camelCase → kebab-case. Assumes simple camelCase input
  * (lowercase-leading, capital letters separate words, no acronyms or digits).
  */
-type KebabCase<S extends string, Acc extends string = ""> =
-  S extends `${infer Head}${infer Rest}`
-    ? Head extends Lowercase<Head>
-      ? KebabCase<Rest, `${Acc}${Head}`>
-      : KebabCase<
-          Rest,
-          `${Acc}${Acc extends "" ? "" : "-"}${Lowercase<Head>}`
-        >
-    : Acc
+type KebabCase<
+  S extends string,
+  Acc extends string = "",
+> = S extends `${infer Head}${infer Rest}`
+  ? Head extends Lowercase<Head>
+    ? KebabCase<Rest, `${Acc}${Head}`>
+    : KebabCase<Rest, `${Acc}${Acc extends "" ? "" : "-"}${Lowercase<Head>}`>
+  : Acc
 
 /**
  * The data attribute emitted for a single component part.

@@ -91,8 +91,7 @@ type PartName = AnatomyPartName<typeof cardAnatomy>
 interface Part<P extends PartName> extends AnatomyPart<"card", P> {}
 
 export interface QdsCardRootBindings
-  extends Part<"root">,
-    Required<DirectionProperty> {
+  extends Part<"root">, Required<DirectionProperty> {
   className: CardClasses["root"]
   "data-alignment": QdsCardAlignment
   "data-interactive": BooleanDataAttr

@@ -5,8 +5,8 @@ import {checkboxClasses} from "@qualcomm-ui/qds-core/checkbox"
 import {radioClasses} from "@qualcomm-ui/qds-core/radio"
 import type {PropNormalizer} from "@qualcomm-ui/utils/machine"
 
-import {qdsMenuAnatomy} from "./menu.anatomy"
 import {menuItemClasses} from "./menu-item.classes"
+import {qdsMenuAnatomy} from "./menu.anatomy"
 import {menuClasses} from "./menu.classes"
 import type {
   QdsMenuApi,

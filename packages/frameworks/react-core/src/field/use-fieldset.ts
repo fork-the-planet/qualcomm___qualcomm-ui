@@ -4,12 +4,12 @@
 import {useCallback, useMemo, useState} from "react"
 
 import {
+  fieldsetAnatomy,
   type FieldsetApiProps,
   type FieldsetErrorTextBindings,
   type FieldsetHintBindings,
   type FieldsetLegendBindings,
   type FieldsetRootBindings,
-  fieldsetAnatomy,
 } from "@qualcomm-ui/core/fieldset"
 import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 

@@ -789,7 +789,9 @@ const testCases: MultiComponentTest[] = [
         })
 
         if (component === SimpleSliderComponent) {
-          const markers = container.querySelectorAll('[data-slider-part="marker"]')
+          const markers = container.querySelectorAll(
+            '[data-slider-part="marker"]',
+          )
           expect(markers.length).toBe(5)
           const markerValues = Array.from(markers).map((m) => m.textContent)
           expect(markerValues).toEqual(["0", "25", "50", "75", "100"])
@@ -1247,7 +1249,9 @@ const testCases: MultiComponentTest[] = [
         }
 
         if (component === SimpleSliderComponent) {
-          const thumbs = container.querySelectorAll('[data-slider-part="thumb"]')
+          const thumbs = container.querySelectorAll(
+            '[data-slider-part="thumb"]',
+          )
           const firstValue = Number(thumbs[0]?.getAttribute("aria-valuenow"))
           expect(firstValue).toBeLessThanOrEqual(55)
         } else {

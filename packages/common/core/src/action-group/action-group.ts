@@ -8,8 +8,10 @@ import {actionGroupAnatomy} from "./action-group.anatomy"
 /**
  * @deprecated
  */
-export interface ActionGroupRootBindings
-  extends AnatomyPart<"actionGroup", "root"> {}
+export interface ActionGroupRootBindings extends AnatomyPart<
+  "actionGroup",
+  "root"
+> {}
 
 /**
  * @deprecated

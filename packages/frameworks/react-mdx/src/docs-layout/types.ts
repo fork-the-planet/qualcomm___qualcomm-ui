@@ -41,11 +41,10 @@ export interface DocPropsSettings {
 /**
  * @public
  */
-export interface DocsLayoutSettings
-  extends Pick<
-    MdxDocsContextValue,
-    "demoSettings" | "packageManager" | "ssrUserAgent"
-  > {
+export interface DocsLayoutSettings extends Pick<
+  MdxDocsContextValue,
+  "demoSettings" | "packageManager" | "ssrUserAgent"
+> {
   /**
    * Demo state for each route, typically persisted via localStorage or a session
    * cookie (SSR). This preserves the expand/collapse state of each demo on reload.

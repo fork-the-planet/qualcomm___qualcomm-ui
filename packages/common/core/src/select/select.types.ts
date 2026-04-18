@@ -142,9 +142,7 @@ export interface SelectPositioningOptions extends PositioningOptions {
 }
 
 export interface SelectApiProps<T extends CollectionItem = CollectionItem>
-  extends DirectionProperty,
-    CommonProperties,
-    InteractOutsideHandlers {
+  extends DirectionProperty, CommonProperties, InteractOutsideHandlers {
   /**
    * Whether the select should close after an item is selected
    *

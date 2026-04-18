@@ -141,8 +141,7 @@ export interface ToastOptions<T = any> {
 }
 
 export interface ToastApiProps<T = any>
-  extends Omit<CommonProperties, "id">,
-    ToastOptions<T> {
+  extends Omit<CommonProperties, "id">, ToastOptions<T> {
   /**
    * The direction of the toast
    */

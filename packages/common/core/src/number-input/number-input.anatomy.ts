@@ -19,5 +19,7 @@ const parts = [
   "chevron",
 ] as const
 
-export const numberInputAnatomy: Anatomy<"numberInput", (typeof parts)[number]> =
-  createAnatomy("numberInput").parts(...parts)
+export const numberInputAnatomy: Anatomy<
+  "numberInput",
+  (typeof parts)[number]
+> = createAnatomy("numberInput").parts(...parts)

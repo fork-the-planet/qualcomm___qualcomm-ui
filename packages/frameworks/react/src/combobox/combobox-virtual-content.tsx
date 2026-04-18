@@ -30,8 +30,9 @@ import {ComboboxItemText} from "./combobox-item-text"
 import type {ComboboxItemRenderProp} from "./combobox-items"
 import {useQdsComboboxContext} from "./qds-combobox-context"
 
-export interface ComboboxVirtualContentProps<T extends CollectionItem>
-  extends ComboboxContentProps {
+export interface ComboboxVirtualContentProps<
+  T extends CollectionItem,
+> extends ComboboxContentProps {
   /**
    * Set to `true` to highlight option text matches during filtering.
    */
@@ -91,7 +92,8 @@ export function ComboboxVirtualContent<
     enabled: open,
     estimateSize: () => (qdsContext.size === "sm" ? 32 : 40),
     getScrollElement: () =>
-      localRef.current.closest(`[data-combobox-part="positioner"]`) || localRef.current,
+      localRef.current.closest(`[data-combobox-part="positioner"]`) ||
+      localRef.current,
     overscan: 5,
     // account for 2px border
     paddingEnd: 2,

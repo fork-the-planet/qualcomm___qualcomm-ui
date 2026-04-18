@@ -26,9 +26,7 @@ import type {
 import type {checkboxAnatomy} from "./checkbox.anatomy"
 
 export interface CheckboxApiProps
-  extends FieldApiProps,
-    CommonProperties,
-    DirectionProperty {
+  extends FieldApiProps, CommonProperties, DirectionProperty {
   /**
    * The controlled checked state of the checkbox
    */
@@ -152,8 +150,7 @@ type PartName = AnatomyPartName<typeof checkboxAnatomy>
 interface Part<P extends PartName> extends AnatomyPart<"checkbox", P> {}
 
 export interface CheckboxRootBindings
-  extends Part<"root">,
-    CheckboxDataBindings {
+  extends Part<"root">, CheckboxDataBindings {
   dir: "ltr" | "rtl"
   htmlFor: string | undefined
   id: string
@@ -163,42 +160,36 @@ export interface CheckboxRootBindings
 }
 
 export interface CheckboxLabelBindings
-  extends Part<"label">,
-    CheckboxDataBindings {
+  extends Part<"label">, CheckboxDataBindings {
   id: string
 }
 
 export interface CheckboxControlBindings
-  extends Part<"control">,
-    CheckboxDataBindings {
+  extends Part<"control">, CheckboxDataBindings {
   "aria-hidden": BooleanAriaAttr
   id: string
 }
 
 export interface CheckboxIndicatorBindings
-  extends Part<"indicator">,
-    CheckboxDataBindings {
+  extends Part<"indicator">, CheckboxDataBindings {
   hidden: boolean
 }
 
 export interface CheckboxErrorTextBindings
-  extends Part<"errorText">,
-    CheckboxDataBindings {
+  extends Part<"errorText">, CheckboxDataBindings {
   "aria-live": "polite"
   hidden: boolean
   id: string
 }
 
 export interface CheckboxHintBindings
-  extends Part<"hint">,
-    CheckboxDataBindings {
+  extends Part<"hint">, CheckboxDataBindings {
   hidden: boolean
   id: string
 }
 
 export interface CheckboxHiddenInputBindings
-  extends Part<"hiddenInput">,
-    CheckboxDataBindings {
+  extends Part<"hiddenInput">, CheckboxDataBindings {
   "aria-invalid": BooleanAriaAttr
   "aria-labelledby": string | undefined
   defaultChecked: boolean

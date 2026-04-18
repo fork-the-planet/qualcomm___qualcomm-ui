@@ -7,8 +7,10 @@ import {Link} from "@qualcomm-ui/react/link"
 import {useMdxDocsContext} from "@qualcomm-ui/react-mdx/context"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-export interface NotFoundProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {
+export interface NotFoundProps extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  "children"
+> {
   url?: string | null
 }
 

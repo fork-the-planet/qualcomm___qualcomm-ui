@@ -32,8 +32,7 @@ export type ComponentPart =
       name: string
     }
 
-export interface ComponentExplorerBaseProps
-  extends ComponentPropsWithRef<"div"> {
+export interface ComponentExplorerBaseProps extends ComponentPropsWithRef<"div"> {
   /**
    * The component demo to explore.
    */
@@ -110,15 +109,14 @@ export function ComponentExplorerBase({
             `[data-${scope}-part="${hoveredPart}"]`,
           ),
         )
-      : Array.from(
-          previewElement.querySelectorAll<HTMLElement>("*"),
-        ).filter((el) =>
-          Array.from(el.attributes).some(
-            (attr) =>
-              attr.name.startsWith("data-") &&
-              attr.name.endsWith("-part") &&
-              attr.value === hoveredPart,
-          ),
+      : Array.from(previewElement.querySelectorAll<HTMLElement>("*")).filter(
+          (el) =>
+            Array.from(el.attributes).some(
+              (attr) =>
+                attr.name.startsWith("data-") &&
+                attr.name.endsWith("-part") &&
+                attr.value === hoveredPart,
+            ),
         )
 
     if (targetElements.length === 0) {

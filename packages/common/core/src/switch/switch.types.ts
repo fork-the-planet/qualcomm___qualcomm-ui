@@ -26,9 +26,7 @@ import type {
 import type {switchAnatomy} from "./switch.anatomy"
 
 export interface SwitchApiProps
-  extends FieldApiProps,
-    CommonProperties,
-    DirectionProperty {
+  extends FieldApiProps, CommonProperties, DirectionProperty {
   /**
    * The controlled checked state of the switch
    */
@@ -158,8 +156,7 @@ export interface SwitchLabelBindings extends Part<"label">, SwitchDataBindings {
 }
 
 export interface SwitchControlBindings
-  extends Part<"control">,
-    SwitchDataBindings {
+  extends Part<"control">, SwitchDataBindings {
   "aria-hidden": BooleanAriaAttr
 }
 
@@ -168,8 +165,7 @@ export interface SwitchThumbBindings extends Part<"thumb">, SwitchDataBindings {
 }
 
 export interface SwitchErrorTextBindings
-  extends Part<"errorText">,
-    SwitchDataBindings {
+  extends Part<"errorText">, SwitchDataBindings {
   "aria-live": "polite"
   hidden: boolean
   id: string
@@ -181,8 +177,7 @@ export interface SwitchHintBindings extends Part<"hint">, SwitchDataBindings {
 }
 
 export interface SwitchHiddenInputBindings
-  extends Part<"hiddenInput">,
-    SwitchDataBindings {
+  extends Part<"hiddenInput">, SwitchDataBindings {
   "aria-invalid": BooleanAriaAttr
   "aria-labelledby": string | undefined
   defaultChecked: boolean

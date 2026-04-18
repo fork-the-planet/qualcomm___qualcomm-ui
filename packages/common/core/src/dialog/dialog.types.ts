@@ -28,7 +28,8 @@ import type {
 import type {dialogAnatomy} from "./dialog.anatomy"
 
 export interface DialogApiProps
-  extends DirectionProperty,
+  extends
+    DirectionProperty,
     CommonProperties,
     DismissableElementHandlers,
     PersistentElementOptions {

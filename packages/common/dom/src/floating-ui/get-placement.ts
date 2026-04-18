@@ -58,22 +58,21 @@ type RequiredBy<T, K extends keyof T> = Omit<T, K> & {
   [P in K]-?: NonNullable<T[P]>
 }
 
-interface Options
-  extends RequiredBy<
-    PositioningOptions,
-    | "strategy"
-    | "placement"
-    | "listeners"
-    | "gutter"
-    | "flip"
-    | "slide"
-    | "overlap"
-    | "sameWidth"
-    | "fitViewport"
-    | "overflowPadding"
-    | "arrowPadding"
-    | "arrowSelector"
-  > {}
+interface Options extends RequiredBy<
+  PositioningOptions,
+  | "strategy"
+  | "placement"
+  | "listeners"
+  | "gutter"
+  | "flip"
+  | "slide"
+  | "overlap"
+  | "sameWidth"
+  | "fitViewport"
+  | "overflowPadding"
+  | "arrowPadding"
+  | "arrowSelector"
+> {}
 
 function roundByDpr(win: Window, value: number) {
   const dpr = win.devicePixelRatio || 1

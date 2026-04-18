@@ -34,9 +34,7 @@ export interface PasswordInputElementIds {
 }
 
 export interface PasswordInputApiProps
-  extends FieldApiProps,
-    CommonProperties,
-    DirectionProperty {
+  extends FieldApiProps, CommonProperties, DirectionProperty {
   /**
    * The {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/autocomplete autocomplete}
    * attribute for the password input.
@@ -183,8 +181,7 @@ export interface PasswordInputHintBindings extends Part<"hint"> {
   id: string
 }
 
-export interface PasswordInputErrorIndicatorBindings
-  extends Part<"errorIndicator"> {
+export interface PasswordInputErrorIndicatorBindings extends Part<"errorIndicator"> {
   "aria-label": "Error"
   hidden: boolean
 }
@@ -222,8 +219,7 @@ export interface PasswordInputInputBindings extends Part<"input"> {
   type: "text" | "password"
 }
 
-export interface PasswordInputClearTriggerBindings
-  extends Part<"clearTrigger"> {
+export interface PasswordInputClearTriggerBindings extends Part<"clearTrigger"> {
   "aria-label": "Clear input"
   "data-disabled": BooleanDataAttr
   disabled: boolean | undefined
@@ -231,8 +227,7 @@ export interface PasswordInputClearTriggerBindings
   type: "button"
 }
 
-export interface PasswordInputVisibilityTriggerBindings
-  extends Part<"visibilityTrigger"> {
+export interface PasswordInputVisibilityTriggerBindings extends Part<"visibilityTrigger"> {
   "aria-controls": string
   "aria-expanded": BooleanAriaAttr
   "aria-label": string

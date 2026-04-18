@@ -52,8 +52,7 @@ export interface QdsCheckmarkIconBindings extends Part<"icon"> {
   hidden: boolean
 }
 
-export interface QdsCheckmarkIndicatorIconBindings
-  extends Part<"indicatorIcon"> {}
+export interface QdsCheckmarkIndicatorIconBindings extends Part<"indicatorIcon"> {}
 
 export interface QdsCheckmarkApi {
   getIconBindings(): QdsCheckmarkIconBindings

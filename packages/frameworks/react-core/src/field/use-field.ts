@@ -4,6 +4,7 @@
 import {useCallback, useMemo, useState} from "react"
 
 import {
+  fieldAnatomy,
   type FieldApiProps,
   type FieldControlBindings,
   type FieldErrorTextBindings,
@@ -11,7 +12,6 @@ import {
   type FieldLabelBindings,
   type FieldRequiredIndicatorBindings,
   type FieldRootBindings,
-  fieldAnatomy,
 } from "@qualcomm-ui/core/field"
 import {useOnDestroy} from "@qualcomm-ui/react-core/effects"
 import {useControlledId} from "@qualcomm-ui/react-core/state"

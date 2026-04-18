@@ -245,8 +245,8 @@ export function createMenuApi(
         "aria-labelledby": domIds.trigger(scope),
         "data-from": context.get("anchorPoint") ? "context-trigger" : "trigger",
         "data-placement": currentPlacement,
-        dir: prop("dir"),
         "data-state": open ? "open" : "closed",
+        dir: prop("dir"),
         hidden: !open,
         id: domIds.content(scope),
         onKeyDown(event) {

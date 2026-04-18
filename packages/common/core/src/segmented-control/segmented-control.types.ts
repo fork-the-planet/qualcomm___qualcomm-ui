@@ -17,8 +17,7 @@ import type {segmentedControlAnatomy} from "./segmented-control.anatomy"
 
 type PartName = AnatomyPartName<typeof segmentedControlAnatomy>
 
-interface Part<P extends PartName>
-  extends AnatomyPart<"segmentedControl", P> {}
+interface Part<P extends PartName> extends AnatomyPart<"segmentedControl", P> {}
 
 export type SegmentedControlOrientation = "horizontal" | "vertical"
 
@@ -115,8 +114,7 @@ export interface SegmentedControlSchema extends MachineSchema {
 }
 
 export interface SegmentedControlGroupBindings
-  extends DirectionProperty,
-    Part<"group"> {
+  extends DirectionProperty, Part<"group"> {
   "aria-orientation": SegmentedControlOrientation
   "data-disabled": BooleanDataAttr
   "data-orientation": SegmentedControlOrientation

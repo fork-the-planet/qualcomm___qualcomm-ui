@@ -20,41 +20,55 @@ export interface QdsCheckboxApiProps {
 type CheckboxClasses = typeof checkboxClasses
 type InputClasses = typeof inputClasses
 
-export interface QdsCheckboxRootBindings
-  extends AnatomyPart<"checkbox", "root"> {
+export interface QdsCheckboxRootBindings extends AnatomyPart<
+  "checkbox",
+  "root"
+> {
   className: CheckboxClasses["root"]
 }
 
-export interface QdsCheckboxLabelBindings
-  extends AnatomyPart<"checkbox", "label"> {
+export interface QdsCheckboxLabelBindings extends AnatomyPart<
+  "checkbox",
+  "label"
+> {
   className: CheckboxClasses["label"]
   "data-size": QdsCheckboxSize
 }
 
-export interface QdsCheckboxControlBindings
-  extends AnatomyPart<"checkbox", "control"> {
+export interface QdsCheckboxControlBindings extends AnatomyPart<
+  "checkbox",
+  "control"
+> {
   className: CheckboxClasses["control"]
   "data-size": QdsCheckboxSize
 }
 
-export interface QdsCheckboxIndicatorBindings
-  extends AnatomyPart<"checkbox", "indicator"> {
+export interface QdsCheckboxIndicatorBindings extends AnatomyPart<
+  "checkbox",
+  "indicator"
+> {
   className: CheckboxClasses["indicator"]
   "data-size": QdsCheckboxSize
 }
 
-export interface QdsCheckboxErrorTextBindings
-  extends AnatomyPart<"checkbox", "errorText"> {
+export interface QdsCheckboxErrorTextBindings extends AnatomyPart<
+  "checkbox",
+  "errorText"
+> {
   className: InputClasses["errorText"]
 }
 
-export interface QdsCheckboxHintBindings
-  extends AnatomyPart<"checkbox", "hint"> {
+export interface QdsCheckboxHintBindings extends AnatomyPart<
+  "checkbox",
+  "hint"
+> {
   className: InputClasses["hint"]
 }
 
-export interface QdsCheckboxHiddenInputBindings
-  extends AnatomyPart<"checkbox", "hiddenInput"> {
+export interface QdsCheckboxHiddenInputBindings extends AnatomyPart<
+  "checkbox",
+  "hiddenInput"
+> {
   className: CheckboxClasses["hiddenInput"]
 }
 

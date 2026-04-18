@@ -5,5 +5,6 @@ import {type Anatomy, createAnatomy} from "@qualcomm-ui/utils/anatomy"
 
 const parts = ["root", "startIcon", "endIcon", "dismissButton"] as const
 
-export const tagAnatomy: Anatomy<"tag", (typeof parts)[number]> =
-  createAnatomy("tag").parts(...parts)
+export const tagAnatomy: Anatomy<"tag", (typeof parts)[number]> = createAnatomy(
+  "tag",
+).parts(...parts)

@@ -45,8 +45,7 @@ type PartName = AnatomyPartName<typeof alertBannerAnatomy>
 interface Part<P extends PartName> extends AnatomyPart<"alertBanner", P> {}
 
 export interface QdsAlertBannerRootBindings
-  extends Part<"root">,
-    Required<DirectionProperty> {
+  extends Part<"root">, Required<DirectionProperty> {
   className: AlertBannerClasses["root"]
   "data-emphasis": QdsAlertBannerEmphasis
   "data-variant": QdsAlertBannerVariant

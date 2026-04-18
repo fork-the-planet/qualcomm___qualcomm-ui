@@ -26,8 +26,7 @@ import type {
 import type {collapsibleAnatomy} from "./collapsible.anatomy"
 
 export interface CollapsibleApiProps
-  extends CommonProperties,
-    DirectionProperty {
+  extends CommonProperties, DirectionProperty {
   /**
    * The initial open state of the collapsible when rendered.
    * Use when you don't need to control the open state of the collapsible.

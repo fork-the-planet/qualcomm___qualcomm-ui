@@ -152,15 +152,13 @@ export interface AccordionItemCommonBindings {
 }
 
 export interface AccordionItemBindings
-  extends Part<"item">,
-    AccordionItemCommonBindings {
+  extends Part<"item">, AccordionItemCommonBindings {
   disabled?: boolean
   id: string
 }
 
 export interface AccordionItemTriggerBindings
-  extends Part<"itemTrigger">,
-    AccordionItemCommonBindings {
+  extends Part<"itemTrigger">, AccordionItemCommonBindings {
   "aria-controls": string
   "aria-disabled": BooleanAriaAttr
   "aria-expanded": BooleanAriaAttr
@@ -175,22 +173,18 @@ export interface AccordionItemTriggerBindings
 }
 
 export interface AccordionItemTextBindings
-  extends Part<"itemText">,
-    AccordionItemCommonBindings {}
+  extends Part<"itemText">, AccordionItemCommonBindings {}
 
 export interface AccordionItemSecondaryTextBindings
-  extends Part<"itemSecondaryText">,
-    AccordionItemCommonBindings {}
+  extends Part<"itemSecondaryText">, AccordionItemCommonBindings {}
 
 export interface AccordionItemIndicatorBindings
-  extends Part<"itemIndicator">,
-    AccordionItemCommonBindings {
+  extends Part<"itemIndicator">, AccordionItemCommonBindings {
   "aria-hidden": true
 }
 
 export interface AccordionItemContentBindings
-  extends Part<"itemContent">,
-    AccordionItemCommonBindings {
+  extends Part<"itemContent">, AccordionItemCommonBindings {
   "aria-hidden": BooleanAriaAttr
   "aria-labelledby": string
   "data-expanded": BooleanDataAttr

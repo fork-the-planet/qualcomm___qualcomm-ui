@@ -7,8 +7,7 @@ import type {QdsCheckboxSize} from "@qualcomm-ui/qds-core/checkbox"
 import {checkmarkAnatomy} from "@qualcomm-ui/qds-core/checkmark"
 import type {DataAttributes} from "@qualcomm-ui/utils/attributes"
 
-export interface CheckmarkCheckedIconProps
-  extends ComponentPropsWithRef<"svg"> {
+export interface CheckmarkCheckedIconProps extends ComponentPropsWithRef<"svg"> {
   size?: QdsCheckboxSize
 }
 

@@ -109,9 +109,7 @@ export interface IntlTranslations {
 }
 
 export interface ComboboxApiProps<T extends CollectionItem = CollectionItem>
-  extends DirectionProperty,
-    CommonProperties,
-    InteractOutsideHandlers {
+  extends DirectionProperty, CommonProperties, InteractOutsideHandlers {
   /**
    * Whether to allow typing custom values in the input
    */
@@ -584,8 +582,7 @@ export interface ComboboxItemState {
 }
 
 export interface ComboboxItemContext
-  extends ComboboxApiItemProps<CollectionItem>,
-    ComboboxItemState {}
+  extends ComboboxApiItemProps<CollectionItem>, ComboboxItemState {}
 
 export interface ComboboxApiItemGroupProps {
   id: string
