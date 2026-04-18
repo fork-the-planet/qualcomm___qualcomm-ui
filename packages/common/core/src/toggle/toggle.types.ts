@@ -9,7 +9,7 @@ import type {
   BooleanAriaAttr,
   BooleanDataAttr,
 } from "@qualcomm-ui/utils/attributes"
-import type {DirectionProperty} from "@qualcomm-ui/utils/direction"
+import type {Direction, DirectionProperty} from "@qualcomm-ui/utils/direction"
 import type {RequiredBy} from "@qualcomm-ui/utils/guard"
 import type {ActionSchema, JSX, MachineSchema} from "@qualcomm-ui/utils/machine"
 
@@ -63,7 +63,7 @@ export interface ToggleRootBindings extends Part<"root"> {
   "data-disabled": BooleanDataAttr
   "data-pressed": BooleanDataAttr
   "data-state": "on" | "off"
-  dir: "ltr" | "rtl"
+  dir: Direction
   disabled: boolean | undefined
   onClick: JSX.MouseEventHandler
   type: "button"

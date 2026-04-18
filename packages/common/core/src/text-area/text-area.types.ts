@@ -7,7 +7,7 @@ import type {
   BooleanAriaAttr,
   BooleanDataAttr,
 } from "@qualcomm-ui/utils/attributes"
-import type {DirectionProperty} from "@qualcomm-ui/utils/direction"
+import type {Direction, DirectionProperty} from "@qualcomm-ui/utils/direction"
 import type {RequiredBy} from "@qualcomm-ui/utils/guard"
 import type {
   ActionSchema,
@@ -115,14 +115,14 @@ export interface TextAreaRootBindings extends Part<"root"> {
   "data-disabled": BooleanDataAttr
   "data-focus": BooleanDataAttr
   "data-invalid": BooleanDataAttr
-  dir: "ltr" | "rtl"
+  dir: Direction
 }
 
 export interface TextAreaLabelBindings extends Part<"label"> {
   "data-disabled": BooleanDataAttr
   "data-focus": BooleanDataAttr
   "data-invalid": BooleanDataAttr
-  dir: "ltr" | "rtl"
+  dir: Direction
   htmlFor: string
   id: string
 }
@@ -132,20 +132,20 @@ export interface TextAreaCounterBindings extends Part<"counter"> {
   "data-focus": BooleanDataAttr
   "data-invalid": BooleanDataAttr
   "data-max": number | undefined
-  dir: "ltr" | "rtl"
+  dir: Direction
   id: string
 }
 
 export interface TextAreaErrorTextBindings extends Part<"errorText"> {
   "aria-live": "polite"
-  dir: "ltr" | "rtl"
+  dir: Direction
   hidden: boolean
   id: string
 }
 
 export interface TextAreaHintBindings extends Part<"hint"> {
   "data-disabled": BooleanDataAttr
-  dir: "ltr" | "rtl"
+  dir: Direction
   hidden: boolean
   id: string
 }
@@ -162,7 +162,7 @@ export interface TextAreaInputBindings extends Part<"input"> {
   "data-invalid": BooleanDataAttr
   "data-readonly": BooleanDataAttr
   defaultValue: string
-  dir: "ltr" | "rtl"
+  dir: Direction
   disabled: boolean | undefined
   form?: string
   id: string

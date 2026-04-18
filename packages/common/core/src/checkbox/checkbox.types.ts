@@ -10,7 +10,7 @@ import type {
   BooleanAriaAttr,
   BooleanDataAttr,
 } from "@qualcomm-ui/utils/attributes"
-import type {DirectionProperty} from "@qualcomm-ui/utils/direction"
+import type {Direction, DirectionProperty} from "@qualcomm-ui/utils/direction"
 import type {RequiredBy} from "@qualcomm-ui/utils/guard"
 import type {
   ActionSchema,
@@ -151,7 +151,7 @@ interface Part<P extends PartName> extends AnatomyPart<"checkbox", P> {}
 
 export interface CheckboxRootBindings
   extends Part<"root">, CheckboxDataBindings {
-  dir: "ltr" | "rtl"
+  dir: Direction
   htmlFor: string | undefined
   id: string
   onClick: JSX.MouseEventHandler

@@ -9,7 +9,7 @@ import type {
   BooleanAriaAttr,
   BooleanDataAttr,
 } from "@qualcomm-ui/utils/attributes"
-import type {DirectionProperty} from "@qualcomm-ui/utils/direction"
+import type {Direction, DirectionProperty} from "@qualcomm-ui/utils/direction"
 import type {RequiredBy} from "@qualcomm-ui/utils/guard"
 import type {
   ActionSchema,
@@ -195,7 +195,7 @@ interface Part<P extends PartName> extends AnatomyPart<"tabs", P> {}
 export interface TabsRootBindings extends Part<"root"> {
   "data-focus": BooleanDataAttr
   "data-orientation": TabsOrientation
-  dir: "ltr" | "rtl"
+  dir: Direction
 }
 
 export interface TabsPanelBindings extends Part<"panel"> {

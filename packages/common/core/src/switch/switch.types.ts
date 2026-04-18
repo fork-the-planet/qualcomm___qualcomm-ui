@@ -10,7 +10,7 @@ import type {
   BooleanAriaAttr,
   BooleanDataAttr,
 } from "@qualcomm-ui/utils/attributes"
-import type {DirectionProperty} from "@qualcomm-ui/utils/direction"
+import type {Direction, DirectionProperty} from "@qualcomm-ui/utils/direction"
 import type {RequiredBy} from "@qualcomm-ui/utils/guard"
 import type {
   ActionSchema,
@@ -143,7 +143,7 @@ type PartName = AnatomyPartName<typeof switchAnatomy>
 interface Part<P extends PartName> extends AnatomyPart<"switch", P> {}
 
 export interface SwitchRootBindings extends Part<"root">, SwitchDataBindings {
-  dir: "ltr" | "rtl"
+  dir: Direction
   htmlFor: string
   id: string
   onClick: JSX.MouseEventHandler

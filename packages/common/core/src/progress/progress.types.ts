@@ -6,7 +6,7 @@
 
 import type {AnatomyPart, AnatomyPartName} from "@qualcomm-ui/utils/anatomy"
 import type {BooleanDataAttr} from "@qualcomm-ui/utils/attributes"
-import type {DirectionProperty} from "@qualcomm-ui/utils/direction"
+import type {Direction, DirectionProperty} from "@qualcomm-ui/utils/direction"
 import type {RequiredBy} from "@qualcomm-ui/utils/guard"
 import type {
   ActionSchema,
@@ -108,7 +108,7 @@ export interface ProgressRootBindings extends Part<"root"> {
   "data-max": number
   "data-state": ProgressState
   "data-value": number | undefined
-  dir: "ltr" | "rtl"
+  dir: Direction
   style: JSX.CSSProperties
 }
 

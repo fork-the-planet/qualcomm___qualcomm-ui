@@ -16,7 +16,7 @@ import type {
   CollectionItem,
   ListCollection,
 } from "@qualcomm-ui/utils/collection"
-import type {DirectionProperty} from "@qualcomm-ui/utils/direction"
+import type {Direction, DirectionProperty} from "@qualcomm-ui/utils/direction"
 import type {RequiredBy} from "@qualcomm-ui/utils/guard"
 import type {
   ActionSchema,
@@ -456,27 +456,27 @@ interface Part<P extends PartName> extends AnatomyPart<"select", P> {}
 export interface SelectRootBindings extends Part<"root"> {
   "data-invalid": BooleanDataAttr
   "data-readonly": BooleanDataAttr
-  dir: "ltr" | "rtl"
+  dir: Direction
   id: string
 }
 
 export interface SelectHintBindings extends Part<"hint"> {
   "data-disabled": BooleanDataAttr
-  dir: "ltr" | "rtl"
+  dir: Direction
   hidden: boolean
   id: string
 }
 
 export interface SelectErrorTextBindings extends Part<"errorText"> {
   "aria-live": "polite"
-  dir: "ltr" | "rtl"
+  dir: Direction
   hidden: boolean
   id: string
 }
 
 export interface SelectErrorIndicatorBindings extends Part<"errorIndicator"> {
   "aria-label": "Error"
-  dir: "ltr" | "rtl"
+  dir: Direction
   hidden: boolean
 }
 
@@ -484,7 +484,7 @@ export interface SelectLabelBindings extends Part<"label"> {
   "data-disabled": BooleanDataAttr
   "data-invalid": BooleanDataAttr
   "data-readonly": BooleanDataAttr
-  dir: "ltr" | "rtl"
+  dir: Direction
   htmlFor: string
   id: string
   onClick: JSX.MouseEventHandler<HTMLLabelElement>
@@ -495,7 +495,7 @@ export interface SelectValueTextBindings extends Part<"valueText"> {
   "data-focus": BooleanDataAttr
   "data-invalid": BooleanDataAttr
   "data-multiple": BooleanDataAttr
-  dir: "ltr" | "rtl"
+  dir: Direction
 }
 
 export interface SelectControlBindings extends Part<"control"> {
@@ -510,7 +510,7 @@ export interface SelectControlBindings extends Part<"control"> {
   "data-placement": Placement | undefined
   "data-readonly": BooleanDataAttr
   "data-state": "open" | "closed"
-  dir: "ltr" | "rtl"
+  dir: Direction
   disabled: boolean
   id: string
   onBlur: JSX.FocusEventHandler<HTMLElement>
@@ -530,7 +530,7 @@ export interface SelectIndicatorBindings extends Part<"indicator"> {
   "data-invalid": BooleanDataAttr
   "data-readonly": BooleanDataAttr
   "data-state": "open" | "closed"
-  dir: "ltr" | "rtl"
+  dir: Direction
   inert: true
   tabIndex: -1
 }
@@ -542,7 +542,7 @@ export interface SelectItemBindings extends Part<"item"> {
   "data-highlighted": BooleanDataAttr
   "data-state": "checked" | "unchecked"
   "data-value": string
-  dir: "ltr" | "rtl"
+  dir: Direction
   id: string
   onClick: JSX.MouseEventHandler<HTMLElement>
   onPointerLeave: JSX.PointerEventHandler<HTMLElement>
@@ -554,18 +554,18 @@ export interface SelectItemTextBindings extends Part<"itemText"> {
   "data-disabled": BooleanDataAttr
   "data-highlighted": BooleanDataAttr
   "data-state": "checked" | "unchecked"
-  dir: "ltr" | "rtl"
+  dir: Direction
 }
 
 export interface SelectItemIndicatorBindings extends Part<"itemIndicator"> {
   "aria-hidden": true
   "data-state": "checked" | "unchecked"
-  dir: "ltr" | "rtl"
+  dir: Direction
   hidden: boolean
 }
 
 export interface SelectItemGroupLabelBindings extends Part<"itemGroupLabel"> {
-  dir: "ltr" | "rtl"
+  dir: Direction
   id: string
   role: "presentation"
 }
@@ -573,7 +573,7 @@ export interface SelectItemGroupLabelBindings extends Part<"itemGroupLabel"> {
 export interface SelectItemGroupBindings extends Part<"itemGroup"> {
   "aria-labelledby": string
   "data-disabled": BooleanDataAttr
-  dir: "ltr" | "rtl"
+  dir: Direction
   id: string
   role: "group"
 }
@@ -581,7 +581,7 @@ export interface SelectItemGroupBindings extends Part<"itemGroup"> {
 export interface SelectClearTriggerBindings extends Part<"clearTrigger"> {
   "aria-label": "Clear value"
   "data-invalid": BooleanDataAttr
-  dir: "ltr" | "rtl"
+  dir: Direction
   disabled: boolean
   hidden: boolean
   id: string
@@ -593,7 +593,7 @@ export interface SelectHiddenSelectBindings extends Part<"hiddenSelect"> {
   "aria-hidden": true
   "aria-labelledby": string
   defaultValue: string | string[]
-  dir: "ltr" | "rtl"
+  dir: Direction
   disabled: boolean
   form: string | undefined
   id: string
@@ -606,7 +606,7 @@ export interface SelectHiddenSelectBindings extends Part<"hiddenSelect"> {
 }
 
 export interface SelectPositionerBindings extends Part<"positioner"> {
-  dir: "ltr" | "rtl"
+  dir: Direction
   id: string
   style: JSX.CSSProperties
 }
@@ -619,7 +619,7 @@ export interface SelectContentBindings extends Part<"content"> {
   "data-focus-visible": BooleanDataAttr
   "data-placement": Placement | undefined
   "data-state": "open" | "closed"
-  dir: "ltr" | "rtl"
+  dir: Direction
   hidden: boolean
   id: string
   onKeyDown: JSX.KeyboardEventHandler<HTMLElement>

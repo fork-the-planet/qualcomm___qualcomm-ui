@@ -16,7 +16,7 @@ import type {
   TreeNode,
   ValuePath,
 } from "@qualcomm-ui/utils/collection"
-import type {DirectionProperty} from "@qualcomm-ui/utils/direction"
+import type {Direction, DirectionProperty} from "@qualcomm-ui/utils/direction"
 import type {RequiredBy} from "@qualcomm-ui/utils/guard"
 import type {
   ActionSchema,
@@ -418,7 +418,7 @@ export interface TreeRootBindings extends Part<"root"> {
   "aria-label": string
   "aria-labelledby": string | undefined
   "aria-multiselectable": boolean | undefined
-  dir: "ltr" | "rtl"
+  dir: Direction
   id: string
   onKeyDown: JSX.KeyboardEventHandler<HTMLElement>
   role: "tree"

@@ -6,7 +6,7 @@ import type {
   BooleanAriaAttr,
   BooleanDataAttr,
 } from "@qualcomm-ui/utils/attributes"
-import type {DirectionProperty} from "@qualcomm-ui/utils/direction"
+import type {Direction, DirectionProperty} from "@qualcomm-ui/utils/direction"
 import type {IdRegistrationProps} from "@qualcomm-ui/utils/machine"
 
 import type {fieldAnatomy} from "./field.anatomy"
@@ -47,7 +47,7 @@ export interface FieldRootBindings extends Part<"root"> {
   "data-disabled": BooleanDataAttr
   "data-invalid": BooleanDataAttr
   "data-readonly": BooleanDataAttr
-  dir: "ltr" | "rtl"
+  dir: Direction
   role: "group"
 }
 

@@ -11,7 +11,7 @@ import type {
 import type {MaybeElement} from "@qualcomm-ui/dom/interact-outside"
 import type {AnatomyPart, AnatomyPartName} from "@qualcomm-ui/utils/anatomy"
 import type {BooleanAriaAttr} from "@qualcomm-ui/utils/attributes"
-import type {DirectionProperty} from "@qualcomm-ui/utils/direction"
+import type {Direction, DirectionProperty} from "@qualcomm-ui/utils/direction"
 import type {RequiredBy} from "@qualcomm-ui/utils/guard"
 import type {
   ActionSchema,
@@ -192,7 +192,7 @@ export interface DialogBackdropBindings extends Part<"backdrop"> {
 }
 
 export interface DialogPositionerBindings extends Part<"positioner"> {
-  dir: "ltr" | "rtl"
+  dir: Direction
   id: string
   style: JSX.CSSProperties
 }

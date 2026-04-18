@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
 import type {AnatomyPart, AnatomyPartName} from "@qualcomm-ui/utils/anatomy"
-import type {DirectionProperty} from "@qualcomm-ui/utils/direction"
+import type {Direction, DirectionProperty} from "@qualcomm-ui/utils/direction"
 import type {RequiredBy} from "@qualcomm-ui/utils/guard"
 import type {
   ActionSchema,
@@ -65,7 +65,7 @@ export interface InlineNotificationRootBindings extends Part<"root"> {
   "aria-labelledby": string | undefined
   "aria-live": "polite" | "assertive"
   "data-state": "visible" | "dismissed"
-  dir: "ltr" | "rtl"
+  dir: Direction
   hidden: boolean | undefined
   role: "alert" | "status"
 }

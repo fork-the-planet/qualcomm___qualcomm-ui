@@ -13,6 +13,7 @@ import type {
   BooleanDataAttr,
 } from "@qualcomm-ui/utils/attributes"
 import type {
+  Direction,
   DirectionProperty,
   LocaleProperty,
 } from "@qualcomm-ui/utils/direction"
@@ -432,35 +433,35 @@ export interface NumberInputRootBindings extends Part<"root"> {
   "data-disabled": BooleanDataAttr
   "data-focus": BooleanDataAttr
   "data-invalid": BooleanDataAttr
-  dir: "ltr" | "rtl"
+  dir: Direction
 }
 
 export interface NumberInputLabelBindings extends Part<"label"> {
   "data-disabled": BooleanDataAttr
   "data-focus": BooleanDataAttr
   "data-invalid": BooleanDataAttr
-  dir: "ltr" | "rtl"
+  dir: Direction
   htmlFor: string
   id: string
 }
 
 export interface NumberInputHintBindings extends Part<"hint"> {
   "data-disabled": BooleanDataAttr
-  dir: "ltr" | "rtl"
+  dir: Direction
   hidden: boolean
   id: string
 }
 
 export interface NumberInputErrorTextBindings extends Part<"errorText"> {
   "aria-live": "polite"
-  dir: "ltr" | "rtl"
+  dir: Direction
   hidden: boolean
   id: string
 }
 
 export interface NumberInputErrorIndicatorBindings extends Part<"errorIndicator"> {
   "aria-label": "Error"
-  dir: "ltr" | "rtl"
+  dir: Direction
   hidden: boolean
 }
 
@@ -469,7 +470,7 @@ export interface NumberInputInputGroupBindings extends Part<"inputGroup"> {
   "data-focus": BooleanDataAttr
   "data-invalid": BooleanDataAttr
   "data-readonly": BooleanDataAttr
-  dir: "ltr" | "rtl"
+  dir: Direction
   onClick: JSX.MouseEventHandler<HTMLElement>
 }
 
@@ -479,7 +480,7 @@ export interface NumberInputControlBindings extends Part<"control"> {
   "data-disabled": BooleanDataAttr
   "data-focus": BooleanDataAttr
   "data-invalid": BooleanDataAttr
-  dir: "ltr" | "rtl"
+  dir: Direction
   role: "group"
 }
 
@@ -487,7 +488,7 @@ export interface NumberInputDecrementTriggerBindings extends Part<"decrementTrig
   "aria-controls": string
   "aria-label": string | undefined
   "data-disabled": BooleanDataAttr | undefined
-  dir: "ltr" | "rtl"
+  dir: Direction
   disabled: boolean | undefined
   id: string
   onPointerDown: JSX.PointerEventHandler<HTMLButtonElement>
@@ -501,7 +502,7 @@ export interface NumberInputIncrementTriggerBindings extends Part<"incrementTrig
   "aria-controls": string
   "aria-label": string | undefined
   "data-disabled": BooleanDataAttr | undefined
-  dir: "ltr" | "rtl"
+  dir: Direction
   disabled: boolean | undefined
   id: string
   onPointerDown: JSX.PointerEventHandler<HTMLButtonElement>
@@ -515,7 +516,7 @@ export interface NumberInputValueTextBindings extends Part<"valueText"> {
   "data-disabled": BooleanDataAttr
   "data-focus": BooleanDataAttr
   "data-invalid": BooleanDataAttr
-  dir: "ltr" | "rtl"
+  dir: Direction
 }
 
 export interface NumberInputInputBindings extends Part<"input"> {
@@ -531,7 +532,7 @@ export interface NumberInputInputBindings extends Part<"input"> {
   "data-empty": BooleanDataAttr
   "data-invalid": BooleanDataAttr
   defaultValue: string
-  dir: "ltr" | "rtl"
+  dir: Direction
   disabled: boolean | undefined
   form: string | undefined
   id: string
@@ -553,7 +554,7 @@ export interface NumberInputInputBindings extends Part<"input"> {
 export interface NumberInputUnitSelectBindings extends Part<"unitSelect"> {
   "data-disabled": BooleanDataAttr
   "data-readonly": BooleanDataAttr
-  dir: "ltr" | "rtl"
+  dir: Direction
   disabled: boolean | undefined
   type: "button"
 }

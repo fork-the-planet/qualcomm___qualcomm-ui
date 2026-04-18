@@ -19,7 +19,7 @@ import type {
   CollectionItem,
   ListCollection,
 } from "@qualcomm-ui/utils/collection"
-import type {DirectionProperty} from "@qualcomm-ui/utils/direction"
+import type {Direction, DirectionProperty} from "@qualcomm-ui/utils/direction"
 import type {RequiredBy} from "@qualcomm-ui/utils/guard"
 import type {
   ActionSchema,
@@ -765,7 +765,7 @@ interface Part<P extends PartName> extends AnatomyPart<"combobox", P> {}
 export interface ComboboxRootBindings extends Part<"root"> {
   "data-invalid": BooleanDataAttr
   "data-readonly": BooleanDataAttr
-  dir: "ltr" | "rtl"
+  dir: Direction
   id: string
   onClick: JSX.MouseEventHandler
 }

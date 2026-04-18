@@ -7,7 +7,7 @@
 import type {Placement, PositioningOptions} from "@qualcomm-ui/dom/floating-ui"
 import type {AnatomyPart, AnatomyPartName} from "@qualcomm-ui/utils/anatomy"
 import type {BooleanDataAttr} from "@qualcomm-ui/utils/attributes"
-import type {DirectionProperty} from "@qualcomm-ui/utils/direction"
+import type {Direction, DirectionProperty} from "@qualcomm-ui/utils/direction"
 import type {
   ActionSchema,
   EffectSchema,
@@ -110,7 +110,7 @@ type PartName = AnatomyPartName<typeof tooltipAnatomy>
 interface Part<P extends PartName> extends AnatomyPart<"tooltip", P> {}
 
 export interface TooltipRootBindings extends Part<"root"> {
-  dir: "ltr" | "rtl"
+  dir: Direction
 }
 
 export interface TooltipArrowBindings extends Part<"arrow"> {

@@ -14,7 +14,7 @@ import type {
   BooleanAriaAttr,
   BooleanDataAttr,
 } from "@qualcomm-ui/utils/attributes"
-import type {DirectionProperty} from "@qualcomm-ui/utils/direction"
+import type {Direction, DirectionProperty} from "@qualcomm-ui/utils/direction"
 import type {RequiredBy} from "@qualcomm-ui/utils/guard"
 import type {
   ActionSchema,
@@ -217,7 +217,7 @@ type PartName = AnatomyPartName<typeof popoverAnatomy>
 interface Part<P extends PartName> extends AnatomyPart<"popover", P> {}
 
 export interface PopoverRootBindings extends Part<"root"> {
-  dir: "ltr" | "rtl"
+  dir: Direction
 }
 
 export interface PopoverAnchorBindings extends Part<"anchor"> {
