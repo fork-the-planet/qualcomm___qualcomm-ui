@@ -13,8 +13,7 @@ import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 import {useQdsCardContext} from "./qds-card-context"
 
 export interface CardLinkProps
-  extends Omit<LinkProps, "emphasis" | "size">,
-    QdsCardLinkApiProps {
+  extends Omit<LinkProps, "emphasis" | "size">, QdsCardLinkApiProps {
   /**
    * React {@link https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children children} prop.
    */

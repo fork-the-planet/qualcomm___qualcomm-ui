@@ -184,12 +184,7 @@ Use the QUI `ButtonModule` to render an expand/collapse button:
 
 ```angular-html
 @if (row.getCanExpand()) {
-  <button
-    q-button
-    variant="ghost"
-    size="sm"
-    (click)="row.toggleExpanded()"
-  >
+  <button q-button variant="ghost" size="sm" (click)="row.toggleExpanded()">
     @if (row.getIsExpanded()) {
       <lucide-icon name="ChevronDown" />
     } @else {

@@ -1,5 +1,19 @@
 # @qualcomm-ui/react-core Changelog
 
+## 1.4.1
+
+Apr 19th, 2026
+
+### Code Refactoring
+
+- [fieldset]: update anatomy attributes ([69bfdd5](https://github.com/qualcomm/qualcomm-ui/commit/69bfdd5))
+- [field]: update anatomy attributes ([0d8ebc0](https://github.com/qualcomm/qualcomm-ui/commit/0d8ebc0))
+
+### Miscellaneous Chores
+
+- upgrade prettier and eslint dependenies, fix resulting formatting issues ([332185a](https://github.com/qualcomm/qualcomm-ui/commit/332185a))
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/utils, @qualcomm-ui/dom]
+
 ## 1.4.0
 
 Apr 7th, 2026

@@ -1,5 +1,13 @@
 # @qualcomm-ui/typedoc-common Changelog
 
+## 1.0.4
+
+Apr 19th, 2026
+
+### Miscellaneous Chores
+
+- upgrade prettier and eslint dependenies, fix resulting formatting issues ([332185a](https://github.com/qualcomm/qualcomm-ui/commit/332185a))
+
 ## 1.0.3
 
 Nov 13th, 2025

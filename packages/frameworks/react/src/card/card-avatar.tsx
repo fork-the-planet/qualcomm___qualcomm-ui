@@ -9,7 +9,7 @@ import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {useQdsCardContext} from "./qds-card-context"
 
-export interface CardAvatarProps extends ElementRenderProp<"div"> {
+export interface CardAvatarProps extends Omit<ElementRenderProp<"div">, "dir"> {
   /**
    * React {@link https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children children} prop.
    */

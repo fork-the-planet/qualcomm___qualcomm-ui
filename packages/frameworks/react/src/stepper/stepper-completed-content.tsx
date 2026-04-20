@@ -11,8 +11,7 @@ import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {useQdsStepperContext} from "./qds-stepper-context"
 
-export interface StepperCompletedContentProps
-  extends CoreStepperCompletedContentProps {}
+export interface StepperCompletedContentProps extends CoreStepperCompletedContentProps {}
 
 /**
  * Content area displayed when all steps are completed. Renders a `<div>` element by default.

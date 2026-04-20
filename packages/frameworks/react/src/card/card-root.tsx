@@ -17,8 +17,7 @@ import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 import {QdsCardContextProvider} from "./qds-card-context"
 
 export interface CardRootProps
-  extends QdsCardApiProps,
-    Omit<ElementRenderProp<"div">, "dir"> {
+  extends QdsCardApiProps, Omit<ElementRenderProp<"div">, "dir"> {
   /**
    * React {@link https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children children} prop.
    */

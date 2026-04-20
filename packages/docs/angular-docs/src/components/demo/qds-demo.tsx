@@ -23,8 +23,10 @@ declare global {
   }
 }
 
-export interface QdsDemoProps
-  extends Pick<AngularDemoRunnerProps, "expanded" | "wrapperProps"> {
+export interface QdsDemoProps extends Pick<
+  AngularDemoRunnerProps,
+  "expanded" | "wrapperProps"
+> {
   className?: string
   hideDemoBrandSwitcher?: boolean
   hideDemoControls?: boolean

@@ -236,11 +236,10 @@ export interface SearchIndexerOptions {
   validatePageLinks?: boolean
 }
 
-export interface QuiDocsConfig
-  extends Omit<
-    SearchIndexerOptions,
-    "srcDir" | "pageDirectory" | "typeDocProps"
-  > {
+export interface QuiDocsConfig extends Omit<
+  SearchIndexerOptions,
+  "srcDir" | "pageDirectory" | "typeDocProps"
+> {
   /**
    * Root app directory. NOT the full path to the directory.
    *

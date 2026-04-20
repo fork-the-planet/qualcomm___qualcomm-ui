@@ -38,8 +38,7 @@ import {provideToaster, ToasterService} from "@qualcomm-ui/angular/toast"
   template: `
     <div q-toaster [toaster]="toaster"></div>
     <!-- the rest of your app... -->
-
-  `
+  `,
 })
 export class AppComponent {
   protected readonly toaster = inject(ToasterService).toaster

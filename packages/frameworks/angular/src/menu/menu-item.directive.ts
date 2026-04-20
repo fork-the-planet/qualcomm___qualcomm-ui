@@ -21,9 +21,10 @@ export class MenuItemDirective
 {
   protected readonly qdsMenuContext = useQdsMenuContext()
 
-  override ngOnInit() {
-    this.trackBindings({
-      extraBindings: computed(() => this.qdsMenuContext().getItemBindings()),
-    })
+  constructor() {
+    super()
+    this.trackBindings.extendWith(
+      computed(() => this.qdsMenuContext().getItemBindings()),
+    )
   }
 }

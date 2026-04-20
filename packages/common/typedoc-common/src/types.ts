@@ -142,8 +142,7 @@ export interface AngularInstanceProperties {
 }
 
 export interface QuiPropTypes
-  extends Omit<QuiPropDeclaration, "resolvedType">,
-    AngularInstanceProperties {
+  extends Omit<QuiPropDeclaration, "resolvedType">, AngularInstanceProperties {
   /**
    * Props for all other cases. This may be undefined if the entity is an Angular
    * component, directive, or service.

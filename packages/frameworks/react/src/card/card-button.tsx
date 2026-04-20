@@ -14,8 +14,7 @@ import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 import {useQdsCardContext} from "./qds-card-context"
 
 export interface CardButtonProps
-  extends ElementRenderProp<"button">,
-    QdsCardButtonApiProps {
+  extends ElementRenderProp<"button">, QdsCardButtonApiProps {
   /**
    * React {@link https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children children} prop.
    */

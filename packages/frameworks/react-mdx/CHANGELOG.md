@@ -1,5 +1,18 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 2.3.2
+
+Apr 19th, 2026
+
+### Code Refactoring
+
+- [anatomy]: update anatomy attributes ([b9cda23](https://github.com/qualcomm/qualcomm-ui/commit/b9cda23))
+
+### Miscellaneous Chores
+
+- upgrade prettier and eslint dependenies, fix resulting formatting issues ([332185a](https://github.com/qualcomm/qualcomm-ui/commit/332185a))
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/react-core, @qualcomm-ui/react, @qualcomm-ui/utils, @qualcomm-ui/mdx-common]
+
 ## 2.3.1
 
 Apr 16th, 2026

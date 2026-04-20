@@ -81,8 +81,8 @@
     "npm-check-updates": "^19.6.3",
     "npm-run-all2": "^8.0.4",
     "playwright": "1.56.1",
-    "prettier": "^3.6.2",
-    "prettier-plugin-tailwindcss": "^0.7.1",
+    "prettier": "^3.8.3",
+    "prettier-plugin-tailwindcss": "^0.7.2",
     "pretty-ms": "^9.3.0",
     "shx": "^0.4.0",
     "stylelint": "^16.23.1",
@@ -101,6 +101,7 @@
     "eslint": "catalog:",
     "lodash": "4.17.23",
     "playwright": "1.56.1",
+    "prettier": "3.8.3",
     "typescript": "5.9.3"
   },
   "packageManager": "pnpm@10.32.1+sha512.a706938f0e89ac1456b6563eab4edf1d1faf3368d1191fc5c59790e96dc918e4456ab2e67d613de1043d2e8c81f87303e6b40d4ffeca9df15ef1ad567348f2be"
