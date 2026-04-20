@@ -21,11 +21,11 @@ import {
 
 import {getWindow, raf} from "@qualcomm-ui/dom/query"
 import {noop, runIfFn} from "@qualcomm-ui/utils/functions"
-import {isNull} from "@qualcomm-ui/utils/guard"
 import {compact} from "@qualcomm-ui/utils/object"
 
 import {getAnchorElement} from "./get-anchor"
 import {
+  cssVars,
   rectMiddleware,
   shiftArrowMiddleware,
   transformOriginMiddleware,
@@ -43,7 +43,6 @@ const defaultOptions: PositioningOptions = {
   arrowSelector: "[data-part=arrow]",
   fitViewport: false,
   flip: true,
-  gutter: 8,
   listeners: true,
   overflowPadding: 8,
   overlap: false,
@@ -63,7 +62,6 @@ interface Options extends RequiredBy<
   | "strategy"
   | "placement"
   | "listeners"
-  | "gutter"
   | "flip"
   | "slide"
   | "overlap"
@@ -93,18 +91,25 @@ function getArrowMiddleware(arrowElement: HTMLElement | null, opts: Options) {
   })
 }
 
-function getOffsetMiddleware(arrowElement: HTMLElement | null, opts: Options) {
-  if (isNull(opts.offset ?? opts.gutter)) {
-    return
+function getOffsetMiddleware(
+  arrowElement: HTMLElement | null,
+  opts: Options,
+  contextEl?: Element | null,
+) {
+  let cssGutter: number | undefined
+  if (contextEl) {
+    const parsed = parseFloat(
+      getComputedStyle(contextEl).getPropertyValue(cssVars.gutter.variable),
+    )
+    if (!Number.isNaN(parsed)) {
+      cssGutter = parsed
+    }
   }
+
   return offset(({placement}) => {
     const arrowOffset = (arrowElement?.clientHeight || 0) / 2
-
-    const gutter = opts.offset?.mainAxis ?? opts.gutter
-    const mainAxis =
-      typeof gutter === "number"
-        ? gutter + arrowOffset
-        : (gutter ?? arrowOffset)
+    const gutter = opts.offset?.mainAxis ?? opts.gutter ?? cssGutter ?? 2
+    const mainAxis = gutter + arrowOffset
 
     const {hasAlign} = getPlacementDetails(placement)
     const shift = !hasAlign ? opts.shift : undefined
@@ -206,7 +211,7 @@ function getPlacementImpl(
   const arrowEl = floating.querySelector<HTMLElement>(options.arrowSelector)
 
   const middleware: (Middleware | undefined)[] = [
-    getOffsetMiddleware(arrowEl, options),
+    getOffsetMiddleware(arrowEl, options, reference.contextElement),
     getFlipMiddleware(options),
     getShiftMiddleware(options),
     getArrowMiddleware(arrowEl, options),
