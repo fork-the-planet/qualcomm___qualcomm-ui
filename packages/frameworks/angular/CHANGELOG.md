@@ -1,5 +1,17 @@
 # @qualcomm-ui/angular Changelog
 
+## 2.5.0
+
+Apr 19th, 2026
+
+### Features
+
+- [menu]: menu button & icon menu button ([0508c4d](https://github.com/qualcomm/qualcomm-ui/commit/0508c4d))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core, @qualcomm-ui/core, @qualcomm-ui/angular-core]
+
 ## 2.4.1
 
 Apr 19th, 2026

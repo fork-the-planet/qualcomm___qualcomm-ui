@@ -1,5 +1,22 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.25.0
+
+Apr 19th, 2026
+
+### Features
+
+- [menu]: menu button & icon menu button ([0508c4d](https://github.com/qualcomm/qualcomm-ui/commit/0508c4d))
+- [floating-ui]: read gutter from CSS --gutter custom property ([0db5e35](https://github.com/qualcomm/qualcomm-ui/commit/0db5e35))
+
+### Code Refactoring
+
+- [floating-ui]: replace arrow rotation with clip-path diamond ([7717aa9](https://github.com/qualcomm/qualcomm-ui/commit/7717aa9))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core]
+
 ## 1.24.1
 
 Apr 19th, 2026
