@@ -40,6 +40,7 @@ import type {
 
 const defaultOptions: PositioningOptions = {
   arrowPadding: 4,
+  arrowSelector: "[data-part=arrow]",
   fitViewport: false,
   flip: true,
   gutter: 8,
@@ -57,21 +58,21 @@ type RequiredBy<T, K extends keyof T> = Omit<T, K> & {
   [P in K]-?: NonNullable<T[P]>
 }
 
-interface Options
-  extends RequiredBy<
-    PositioningOptions,
-    | "strategy"
-    | "placement"
-    | "listeners"
-    | "gutter"
-    | "flip"
-    | "slide"
-    | "overlap"
-    | "sameWidth"
-    | "fitViewport"
-    | "overflowPadding"
-    | "arrowPadding"
-  > {}
+interface Options extends RequiredBy<
+  PositioningOptions,
+  | "strategy"
+  | "placement"
+  | "listeners"
+  | "gutter"
+  | "flip"
+  | "slide"
+  | "overlap"
+  | "sameWidth"
+  | "fitViewport"
+  | "overflowPadding"
+  | "arrowPadding"
+  | "arrowSelector"
+> {}
 
 function roundByDpr(win: Window, value: number) {
   const dpr = win.devicePixelRatio || 1
@@ -202,7 +203,7 @@ function getPlacementImpl(
    * The middleware stack
    * ----------------------------------------------------------------------------- */
 
-  const arrowEl = floating.querySelector<HTMLElement>("[data-part=arrow]")
+  const arrowEl = floating.querySelector<HTMLElement>(options.arrowSelector)
 
   const middleware: (Middleware | undefined)[] = [
     getOffsetMiddleware(arrowEl, options),

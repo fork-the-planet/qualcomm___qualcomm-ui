@@ -58,11 +58,7 @@ We expose the `<q-side-nav-nodes>` shorthand for rendering nested nodes. Use the
 ```
 
 ```angular-html tabs="nodes" label="leaf"
-<ng-template
-  let-leaf
-  q-side-nav-leaf-template
-  [rootNode]="collection.rootNode"
->
+<ng-template let-leaf q-side-nav-leaf-template [rootNode]="collection.rootNode">
   <div q-side-nav-leaf-node>
     <!-- ... -->
   </div>

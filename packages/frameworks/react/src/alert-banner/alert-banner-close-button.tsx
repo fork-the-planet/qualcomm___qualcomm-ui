@@ -11,8 +11,7 @@ import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {useAlertBannerContext} from "./qds-alert-banner-context"
 
-export interface AlertBannerCloseButtonProps
-  extends ElementRenderProp<"button"> {
+export interface AlertBannerCloseButtonProps extends ElementRenderProp<"button"> {
   /**
    * React {@link https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children children} prop.
    */

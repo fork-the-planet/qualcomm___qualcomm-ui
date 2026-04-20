@@ -42,9 +42,9 @@ catalog:
   '@types/lodash-es': 4.17.12
   '@types/react': 19.2.7
   '@types/react-dom': 19.2.3
-  '@typescript-eslint/eslint-plugin': 8.48.1
-  '@typescript-eslint/parser': 8.48.1
-  '@typescript-eslint/utils': 8.48.1
+  '@typescript-eslint/eslint-plugin': 8.58.2
+  '@typescript-eslint/parser': 8.58.2
+  '@typescript-eslint/utils': 8.58.2
   '@vitest/browser': 4.1.2
   '@vitest/browser-playwright': 4.1.2
   '@vitest/coverage-v8': 4.1.2
@@ -58,7 +58,7 @@ catalog:
   react-dom: 19.2.4
   react-router: 7.14.0
   tsx: 4.21.0
-  typescript-eslint: 8.48.1
+  typescript-eslint: 8.58.2
   vite: 8.0.7
   vitest: 4.1.2
 

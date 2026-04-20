@@ -137,7 +137,7 @@
   }
 }
 
-.qui-badge__root[data-scope][data-emphasis][data-disabled] {
+.qui-badge__root[data-emphasis][data-disabled] {
   --badge-background: var(--color-utility-disabled-background);
   --badge-border: var(--color-utility-disabled-border);
   --badge-text: var(--color-utility-disabled-text);

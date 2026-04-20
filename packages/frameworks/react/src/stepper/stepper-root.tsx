@@ -17,8 +17,7 @@ import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 import {QdsStepperContextProvider} from "./qds-stepper-context"
 
 export interface StepperRootProps
-  extends CoreStepperRootProps,
-    QdsStepperApiProps {}
+  extends CoreStepperRootProps, QdsStepperApiProps {}
 
 /**
  * Groups all parts of the stepper. Renders a `<div>` element by default.

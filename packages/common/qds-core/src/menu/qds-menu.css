@@ -2,15 +2,15 @@
   background: transparent;
   .qui-button__icon {
     &[data-placement="end"],
-    &[data-scope="icon-button"] {
+    &[data-icon-button-part="root"] {
       transition: transform var(--animation-duration-faster) ease-out;
     }
   }
-  &[data-scope="menu"][data-part="trigger"][data-state="open"],
+  &[data-menu-part="trigger"][data-state="open"],
   &[data-state="open"][aria-haspopup="menu"] {
     .qui-button__icon {
       &[data-placement="end"],
-      &[data-scope="icon-button"] {
+      &[data-icon-button-part="root"] {
         transform: rotate(180deg);
       }
     }
@@ -90,7 +90,7 @@
     --menu-padding-y: var(--spacing-60);
   }
 
-  &:has([data-scope="menu"][data-part="description"]) {
+  &:has([data-menu-part="description"]) {
     .qui-menu-item__indicator,
     .qui-menu-item__command {
       grid-column: 3;
@@ -98,17 +98,17 @@
     }
   }
 
-  [data-scope="menu"][data-part="description"] {
+  [data-menu-part="description"] {
     grid-column: 1 / span 2;
   }
 
-  &:has([data-part="start-icon"]) {
-    [data-scope="menu"][data-part="description"] {
+  &:has([data-menu-part="start-icon"]) {
+    [data-menu-part="description"] {
       grid-column: 2;
     }
   }
 
-  &:has([data-part="start-icon"][data-part="item-control"]) {
+  &:has([data-menu-part="start-icon"]):has([data-menu-part="item-control"]) {
     grid-template-columns: auto auto 1fr repeat(3, auto);
   }
 
@@ -126,7 +126,7 @@
   }
 
   [data-state="unchecked"] {
-    [data-part="indicator-icon"] {
+    [data-checkmark-part="indicator-icon"] {
       display: none;
     }
   }
@@ -207,6 +207,6 @@
   padding-left: var(--spacing-100);
 }
 
-[data-scope="menu"][data-part="item-control"] {
+[data-menu-part="item-control"] {
   margin-right: var(--spacing-50);
 }

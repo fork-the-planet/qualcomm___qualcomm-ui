@@ -219,7 +219,7 @@
   }
 
   /* disabled */
-  &[data-scope][data-disabled] {
+  &[data-disabled] {
     &:not([data-emphasis^="outline-"]) {
       background: var(--color-utility-disabled-background);
     }
@@ -232,25 +232,19 @@
 
 .qui-tag__icon {
   color: var(--icon-color);
-  &[data-scope="tag"][data-size] {
-    --icon-size: var(--sizing-60);
-  }
-  &[data-scope="tag"][data-size="lg"] {
-    --icon-size: var(--sizing-70);
-  }
-  &[data-part="start-icon"] {
+  &[data-tag-part="start-icon"] {
     margin-inline-end: var(--spacing-50);
   }
-  &[data-size="lg"][data-part="start-icon"] {
+  &[data-size="lg"][data-tag-part="start-icon"] {
     margin-inline-end: var(--spacing-70);
   }
-  &[data-part="end-icon"] {
+  &[data-tag-part="end-icon"] {
     margin-inline-start: var(--spacing-50);
   }
-  &[data-size="lg"][data-part="end-icon"] {
+  &[data-size="lg"][data-tag-part="end-icon"] {
     margin-inline-start: var(--spacing-70);
   }
-  .qui-tag__dismiss-button > &[data-part="end-icon"] {
+  .qui-tag__dismiss-button > &[data-tag-part="end-icon"] {
     margin-inline-start: 0;
   }
 }
@@ -284,5 +278,16 @@
     cursor: default;
     pointer-events: none;
     --icon-color: var(--color-utility-disabled-icon);
+  }
+
+  &[data-size] {
+    .qui-tag__icon[data-tag-part$="-icon"] {
+      --icon-size: var(--sizing-60);
+    }
+  }
+  &[data-size="lg"] {
+    .qui-tag__icon[data-tag-part$="-icon"] {
+      --icon-size: var(--sizing-70);
+    }
   }
 }
