@@ -1,8 +1,10 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
+import type {AnatomyPart, AnatomyPartName} from "@qualcomm-ui/utils/anatomy"
 import type {BooleanDataAttr} from "@qualcomm-ui/utils/attributes"
 
+import type {tagAnatomy} from "./tag.anatomy"
 import type {tagClasses} from "./tag.classes"
 
 /** @deprecated use "lime" */
@@ -83,23 +85,22 @@ export interface QdsTagApiProps {
 
 type TagClasses = typeof tagClasses
 
-export interface QdsTagSpanRootBindings {
+type PartName = AnatomyPartName<typeof tagAnatomy>
+interface Part<P extends PartName> extends AnatomyPart<"tag", P> {}
+
+export interface QdsTagSpanRootBindings extends Part<"root"> {
   className: TagClasses["root"]
   "data-disabled": BooleanDataAttr
   "data-emphasis": QdsTagEmphasis
-  "data-part": "root"
-  "data-scope": "tag"
   "data-shape": QdsTagShape
   "data-size": QdsTagSize
   "data-variant"?: QdsTagVariant
 }
 
-export interface QdsTagButtonRootBindings {
+export interface QdsTagButtonRootBindings extends Part<"root"> {
   className: TagClasses["root"]
   "data-disabled": BooleanDataAttr
   "data-emphasis": QdsTagEmphasis
-  "data-part": "root"
-  "data-scope": "tag"
   "data-shape": QdsTagShape
   "data-size": QdsTagSize
   "data-variant"?: QdsTagVariant
@@ -110,26 +111,20 @@ export type QdsTagRootBindings =
   | QdsTagSpanRootBindings
   | QdsTagButtonRootBindings
 
-export interface QdsTagStartIconBindings {
+export interface QdsTagStartIconBindings extends Part<"startIcon"> {
   className: TagClasses["icon"]
-  "data-part": "start-icon"
-  "data-scope": "tag"
   "data-size": QdsTagSize
 }
 
-export interface QdsTagEndIconBindings {
+export interface QdsTagEndIconBindings extends Part<"endIcon"> {
   className: TagClasses["icon"]
-  "data-part": "end-icon"
-  "data-scope": "tag"
   "data-size": QdsTagSize
 }
 
-export interface QdsTagDismissButtonBindings {
+export interface QdsTagDismissButtonBindings extends Part<"dismissButton"> {
   "aria-label": string
   className: TagClasses["dismissButton"]
   "data-disabled": BooleanDataAttr
-  "data-part": "dismiss-button"
-  "data-scope": "tag"
   "data-size": QdsTagSize
   disabled: boolean | undefined
   type: "button"

@@ -507,7 +507,7 @@
     }
   }
 
-  &[data-scope="icon-button"] {
+  &[data-icon-button-part="root"] {
     &[data-size="sm"] {
       --icon-size: 16px;
       &[data-density="compact"] {

@@ -1,5 +1,66 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.24.1
+
+Apr 19th, 2026
+
+### Code Refactoring
+
+- [password-input]: update anatomy attributes ([e75e295](https://github.com/qualcomm/qualcomm-ui/commit/e75e295))
+- [progress]: update anatomy attributes ([18f6dff](https://github.com/qualcomm/qualcomm-ui/commit/18f6dff))
+- [alert-banner]: update anatomy attributes ([9887f06](https://github.com/qualcomm/qualcomm-ui/commit/9887f06))
+- [tag]: update anatomy attributes ([16ee48d](https://github.com/qualcomm/qualcomm-ui/commit/16ee48d))
+- [accordion]: update indicator and title selectors ([c84e0f7](https://github.com/qualcomm/qualcomm-ui/commit/c84e0f7))
+- [dialog]: update anatomy attributes ([8d23993](https://github.com/qualcomm/qualcomm-ui/commit/8d23993))
+- [input]: update anatomy attributes ([c0e5817](https://github.com/qualcomm/qualcomm-ui/commit/c0e5817))
+- [checkmark]: update anatomy attributes ([ad9b1a1](https://github.com/qualcomm/qualcomm-ui/commit/ad9b1a1))
+- [segmented-control]: update anatomy attributes ([a2e96b1](https://github.com/qualcomm/qualcomm-ui/commit/a2e96b1))
+- [inline-notification]: update anatomy attributes ([cd66b21](https://github.com/qualcomm/qualcomm-ui/commit/cd66b21))
+- [menu]: update anatomy attributes ([eef3675](https://github.com/qualcomm/qualcomm-ui/commit/eef3675))
+- [toast]: replace dead status-icon selector with class-based match ([939d305](https://github.com/qualcomm/qualcomm-ui/commit/939d305))
+- [number-input]: update anatomy attributes ([1219ea2](https://github.com/qualcomm/qualcomm-ui/commit/1219ea2))
+- [card]: update anatomy attributes ([4d1b4f8](https://github.com/qualcomm/qualcomm-ui/commit/4d1b4f8))
+- [header-bar]: update anatomy attributes ([f3398c9](https://github.com/qualcomm/qualcomm-ui/commit/f3398c9))
+- [side-nav]: update anatomy attributes ([7fddcb6](https://github.com/qualcomm/qualcomm-ui/commit/7fddcb6))
+- [field-group]: update anatomy attributes ([7e51451](https://github.com/qualcomm/qualcomm-ui/commit/7e51451))
+- [button]: update anatomy attributes ([015e900](https://github.com/qualcomm/qualcomm-ui/commit/015e900))
+- [inline-icon-button]: update anatomy attributes ([fbb58d3](https://github.com/qualcomm/qualcomm-ui/commit/fbb58d3))
+- [link]: update anatomy attributes ([337d493](https://github.com/qualcomm/qualcomm-ui/commit/337d493))
+- [switch]: update anatomy attributes ([44f938e](https://github.com/qualcomm/qualcomm-ui/commit/44f938e))
+- [icon-button]: update anatomy attributes ([eccf78f](https://github.com/qualcomm/qualcomm-ui/commit/eccf78f))
+- [tree]: update anatomy attributes ([7a08d86](https://github.com/qualcomm/qualcomm-ui/commit/7a08d86))
+- [toast]: update anatomy attributes ([c1cfa1e](https://github.com/qualcomm/qualcomm-ui/commit/c1cfa1e))
+- [badge]: update anatomy attributes ([306653d](https://github.com/qualcomm/qualcomm-ui/commit/306653d))
+- [action-group]: update anatomy attributes ([799f080](https://github.com/qualcomm/qualcomm-ui/commit/799f080))
+- [checkbox]: update anatomy attributes ([8a37bbd](https://github.com/qualcomm/qualcomm-ui/commit/8a37bbd))
+- [checkmark]: fix qds-checkmark selector ([d42666a](https://github.com/qualcomm/qualcomm-ui/commit/d42666a))
+
+### Styles
+
+- [tag]: fix small and medium icon sizes ([5c116f0](https://github.com/qualcomm/qualcomm-ui/commit/5c116f0))
+- [toast]: add spacing between description and action ([fa73b20](https://github.com/qualcomm/qualcomm-ui/commit/fa73b20))
+
+### Miscellaneous Chores
+
+- upgrade prettier and eslint dependenies, fix resulting formatting issues ([332185a](https://github.com/qualcomm/qualcomm-ui/commit/332185a))
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/utils]
+
+### Bug Fixes
+
+- [qds-core]: mark @qualcomm-ui/core as external in bundle ([88ed56f](https://github.com/qualcomm/qualcomm-ui/commit/88ed56f))
+
+## 1.24.0
+
+Apr 16th, 2026
+
+### Features
+
+- [card]: add qds-core card API, types, and styles ([a978a71](https://github.com/qualcomm/qualcomm-ui/commit/a978a71))
+
+### Bug Fixes
+
+- [qds-core]: support older webpack versions with more lenient exports ([85cece6](https://github.com/qualcomm/qualcomm-ui/commit/85cece6))
+
 ## 1.23.0
 
 Apr 7th, 2026

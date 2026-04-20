@@ -34,8 +34,8 @@ export class StepperContextDirective extends ApiContextDirective<StepperApi> {
    */
   static ngTemplateContextGuard(
     dir: StepperContextDirective,
-    ctx: unknown,
-  ): ctx is {$implicit: StepperApi} {
+    _ctx: unknown,
+  ): _ctx is {$implicit: StepperApi} {
     return true
   }
 }

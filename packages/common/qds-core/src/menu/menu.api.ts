@@ -6,6 +6,7 @@ import {radioClasses} from "@qualcomm-ui/qds-core/radio"
 import type {PropNormalizer} from "@qualcomm-ui/utils/machine"
 
 import {menuItemClasses} from "./menu-item.classes"
+import {qdsMenuAnatomy} from "./menu.anatomy"
 import {menuClasses} from "./menu.classes"
 import type {
   QdsMenuApi,
@@ -34,6 +35,7 @@ export function createQdsMenuApi(
   normalize: PropNormalizer,
 ): QdsMenuApi {
   const size = props.size || "md"
+  const parts = qdsMenuAnatomy.parts
   return {
     size,
 
@@ -96,8 +98,8 @@ export function createQdsMenuApi(
     },
     getItemStartIconBindings(): QdsMenuItemStartIconBindings {
       return normalize.element({
+        ...parts.startIcon,
         className: menuItemClasses.startIcon,
-        "data-part": "start-icon",
         "data-size": size,
       })
     },
@@ -108,9 +110,8 @@ export function createQdsMenuApi(
     },
     getMenuItemDescriptionBindings(): QdsMenuDescriptionBindings {
       return normalize.element({
+        ...parts.description,
         className: menuItemClasses.itemDescription,
-        "data-part": "description",
-        "data-scope": "menu",
         "data-size": size,
       })
     },

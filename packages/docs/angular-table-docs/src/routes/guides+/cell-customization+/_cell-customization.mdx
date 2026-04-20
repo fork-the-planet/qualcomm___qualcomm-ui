@@ -196,7 +196,10 @@ Next, create a cell component that injects the service:
     />
   `,
 })
-export class EditableStatusCell extends CellComponentContextDirective<User, string> {
+export class EditableStatusCell extends CellComponentContextDirective<
+  User,
+  string
+> {
   private readonly userDataService = inject(UserDataService)
 
   readonly value = computed(() => [this.context().getValue()])
@@ -218,7 +221,9 @@ Finally, provide the service and connect the table to the service's data:
   imports: [TableModule],
   providers: [UserDataService],
   selector: "service-cell-demo",
-  template: `<!-- table template -->`,
+  template: `
+    <!-- table template -->
+  `,
 })
 export class ServiceCellDemo {
   protected readonly data = inject(UserDataService).data

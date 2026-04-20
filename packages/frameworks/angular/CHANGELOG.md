@@ -1,5 +1,48 @@
 # @qualcomm-ui/angular Changelog
 
+## 2.4.1
+
+Apr 19th, 2026
+
+### Code Refactoring
+
+- [checkmark]: update anatomy attributes ([ad9b1a1](https://github.com/qualcomm/qualcomm-ui/commit/ad9b1a1))
+- [number-input]: update anatomy attributes ([1219ea2](https://github.com/qualcomm/qualcomm-ui/commit/1219ea2))
+- [slider]: update anatomy attributes ([8531c67](https://github.com/qualcomm/qualcomm-ui/commit/8531c67))
+- [text-area]: update anatomy attributes ([328cc2e](https://github.com/qualcomm/qualcomm-ui/commit/328cc2e))
+- [combobox]: update angular misc spec control selector ([d4376fb](https://github.com/qualcomm/qualcomm-ui/commit/d4376fb))
+- [header-bar]: update anatomy attributes ([f3398c9](https://github.com/qualcomm/qualcomm-ui/commit/f3398c9))
+- [combobox]: update anatomy attributes ([c429e3a](https://github.com/qualcomm/qualcomm-ui/commit/c429e3a))
+
+### Bug Fixes
+
+- [menu-item]: fix menu-item context initialization ([44d49ec](https://github.com/qualcomm/qualcomm-ui/commit/44d49ec))
+
+### Miscellaneous Chores
+
+- upgrade prettier and eslint dependenies, fix resulting formatting issues ([332185a](https://github.com/qualcomm/qualcomm-ui/commit/332185a))
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/qds-core, @qualcomm-ui/utils, @qualcomm-ui/angular-core]
+
+## 2.4.0
+
+Apr 16th, 2026
+
+### Features
+
+- [card]: add angular card component ([e5dac7c](https://github.com/qualcomm/qualcomm-ui/commit/e5dac7c))
+
+### Bug Fixes
+
+- [avatar]: sort exports and expose context service ([279bf5e](https://github.com/qualcomm/qualcomm-ui/commit/279bf5e))
+
+### Code Refactoring
+
+- [button]: use accessSignal utility ([97dccd4](https://github.com/qualcomm/qualcomm-ui/commit/97dccd4))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
 ## 2.3.0
 
 Apr 7th, 2026

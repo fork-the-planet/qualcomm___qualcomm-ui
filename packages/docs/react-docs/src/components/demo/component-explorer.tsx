@@ -7,8 +7,10 @@ import {
 } from "@qualcomm-ui/react-mdx/component-explorer"
 import {Theme, useTheme} from "@qualcomm-ui/react-router-utils/client"
 
-interface ComponentExplorerProps
-  extends Omit<ComponentExplorerBaseProps, "children"> {
+interface ComponentExplorerProps extends Omit<
+  ComponentExplorerBaseProps,
+  "children"
+> {
   component: () => ReactNode
 }
 

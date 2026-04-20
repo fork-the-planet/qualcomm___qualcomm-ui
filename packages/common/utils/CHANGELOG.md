@@ -1,5 +1,17 @@
 # @qualcomm-ui/utils Changelog
 
+## 1.2.3
+
+Apr 19th, 2026
+
+### Code Refactoring
+
+- [anatomy]: update anatomy attributes ([b9cda23](https://github.com/qualcomm/qualcomm-ui/commit/b9cda23))
+
+### Miscellaneous Chores
+
+- upgrade prettier and eslint dependenies, fix resulting formatting issues ([332185a](https://github.com/qualcomm/qualcomm-ui/commit/332185a))
+
 ## 1.2.2
 
 Apr 2nd, 2026
