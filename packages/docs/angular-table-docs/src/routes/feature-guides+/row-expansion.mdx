@@ -184,12 +184,7 @@ Use the QUI `ButtonModule` to render an expand/collapse button:
 
 ```angular-html
 @if (row.getCanExpand()) {
-  <button
-    q-button
-    variant="ghost"
-    size="sm"
-    (click)="row.toggleExpanded()"
-  >
+  <button q-button variant="ghost" size="sm" (click)="row.toggleExpanded()">
     @if (row.getIsExpanded()) {
       <lucide-icon name="ChevronDown" />
     } @else {
@@ -289,7 +284,7 @@ export class ExampleComponent {
 
 ### Pinning Expanded Rows
 
-Pinning expanded rows works the same way as pinning regular rows. You can pin expanded rows to the top or bottom of the table. Please refer to the [Pinning Guide](../pinning.md) for more information on row pinning.
+Pinning expanded rows works the same way as pinning regular rows. You can pin expanded rows to the top or bottom of the table. Please refer to the [Pinning Guide](/feature-guides/column-pinning) for more information on row pinning.
 
 ### Sorting Expanded Rows
 

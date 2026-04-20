@@ -1,8 +1,11 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@3.1.1/schema.json",
   "changelog": [
-    "../scripts/changeset-conventional-commits/changelog-formatter.cjs",
-    { "repo": "qualcomm/qualcomm-ui" }
+    "../node_modules/@qualcomm-ui/changesets-cli/dist/changelog-formatter.cjs",
+    {
+      "repo": "https://github.com/qualcomm/qualcomm-ui",
+      "includeCommitLinks": true
+    }
   ],
   "commit": false,
   "fixed": [],
