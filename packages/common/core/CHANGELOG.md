@@ -1,5 +1,18 @@
 # @qualcomm-ui/core Changelog
 
+## 1.9.0
+
+Apr 19th, 2026
+
+### Features
+
+- [menu]: menu button & icon menu button ([0508c4d](https://github.com/qualcomm/qualcomm-ui/commit/0508c4d))
+- [floating-ui]: read gutter from CSS --gutter custom property ([0db5e35](https://github.com/qualcomm/qualcomm-ui/commit/0db5e35))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/dom]
+
 ## 1.8.0
 
 Apr 19th, 2026

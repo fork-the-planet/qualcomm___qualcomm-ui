@@ -1,5 +1,17 @@
 # @qualcomm-ui/dom Changelog
 
+## 1.1.0
+
+Apr 19th, 2026
+
+### Features
+
+- [floating-ui]: read gutter from CSS --gutter custom property ([0db5e35](https://github.com/qualcomm/qualcomm-ui/commit/0db5e35))
+
+### Code Refactoring
+
+- [floating-ui]: replace arrow rotation with clip-path diamond ([7717aa9](https://github.com/qualcomm/qualcomm-ui/commit/7717aa9))
+
 ## 1.0.12
 
 Apr 19th, 2026
