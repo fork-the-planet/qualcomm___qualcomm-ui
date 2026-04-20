@@ -5,9 +5,10 @@ import {HeaderBarModule} from "@qualcomm-ui/angular/header-bar"
 import {IconDirective} from "@qualcomm-ui/angular/icon"
 import {MenuModule} from "@qualcomm-ui/angular/menu"
 import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
+import {PortalDirective} from "@qualcomm-ui/angular-core/portal"
 
 @Component({
-  imports: [HeaderBarModule, MenuModule, IconDirective],
+  imports: [HeaderBarModule, MenuModule, IconDirective, PortalDirective],
   providers: [provideIcons({AArrowDown, Layers2})],
   selector: "header-bar-menu-item-demo",
   template: `
@@ -27,7 +28,7 @@ import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 
         <q-menu>
           <button q-header-bar-menu-item q-menu-trigger>Menu Item</button>
-          <ng-container qPortal>
+          <ng-container *qPortal>
             <div q-menu-positioner>
               <div q-menu-content>
                 <button q-menu-item value="menu-item-1">

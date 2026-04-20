@@ -3,19 +3,12 @@ import {X} from "lucide-angular"
 
 import {ButtonModule} from "@qualcomm-ui/angular/button"
 import {DialogModule} from "@qualcomm-ui/angular/dialog"
-import {IconDirective} from "@qualcomm-ui/angular/icon"
 import {MenuModule} from "@qualcomm-ui/angular/menu"
 import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 import {PortalDirective} from "@qualcomm-ui/angular-core/portal"
 
 @Component({
-  imports: [
-    MenuModule,
-    ButtonModule,
-    DialogModule,
-    IconDirective,
-    PortalDirective,
-  ],
+  imports: [MenuModule, ButtonModule, DialogModule, PortalDirective],
   providers: [provideIcons({X})],
   selector: "menu-within-dialog-demo",
   template: `
@@ -52,7 +45,6 @@ import {PortalDirective} from "@qualcomm-ui/angular-core/portal"
                   </div>
                 </div>
               </q-menu>
-              
             </div>
           </section>
         </div>
