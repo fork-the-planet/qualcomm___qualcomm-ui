@@ -232,12 +232,6 @@
 
 .qui-tag__icon {
   color: var(--icon-color);
-  &[data-size] {
-    --icon-size: var(--sizing-60);
-  }
-  &[data-size="lg"] {
-    --icon-size: var(--sizing-70);
-  }
   &[data-tag-part="start-icon"] {
     margin-inline-end: var(--spacing-50);
   }
@@ -284,5 +278,16 @@
     cursor: default;
     pointer-events: none;
     --icon-color: var(--color-utility-disabled-icon);
+  }
+
+  &[data-size] {
+    .qui-tag__icon[data-tag-part$="-icon"] {
+      --icon-size: var(--sizing-60);
+    }
+  }
+  &[data-size="lg"] {
+    .qui-tag__icon[data-tag-part$="-icon"] {
+      --icon-size: var(--sizing-70);
+    }
   }
 }
