@@ -1,5 +1,18 @@
 # @qualcomm-ui/dom Changelog
 
+## 1.0.12
+
+Apr 19th, 2026
+
+### Bug Fixes
+
+- [floating-ui]: parameterize arrow selector for namespaced anatomies ([2176a41](https://github.com/qualcomm/qualcomm-ui/commit/2176a41))
+
+### Miscellaneous Chores
+
+- upgrade prettier and eslint dependenies, fix resulting formatting issues ([332185a](https://github.com/qualcomm/qualcomm-ui/commit/332185a))
+- **deps:** update dependencies [@qualcomm-ui/utils]
+
 ## 1.0.11
 
 Apr 2nd, 2026
