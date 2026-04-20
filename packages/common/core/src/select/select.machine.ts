@@ -626,7 +626,6 @@ export const selectMachine: MachineConfig<SelectSchema> =
         ...props,
         collection: props.collection ?? emptyCollection(),
         positioning: {
-          gutter: 2,
           placement: "bottom-start",
           sameWidth: true,
           ...props.positioning,
