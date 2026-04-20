@@ -1,15 +1,12 @@
 import {Component} from "@angular/core"
-import {X} from "lucide-angular"
 
 import {ButtonModule} from "@qualcomm-ui/angular/button"
 import {DialogModule} from "@qualcomm-ui/angular/dialog"
 import {MenuModule} from "@qualcomm-ui/angular/menu"
-import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 import {PortalDirective} from "@qualcomm-ui/angular-core/portal"
 
 @Component({
   imports: [MenuModule, ButtonModule, DialogModule, PortalDirective],
-  providers: [provideIcons({X})],
   selector: "menu-within-dialog-demo",
   template: `
     <div q-dialog-root>
