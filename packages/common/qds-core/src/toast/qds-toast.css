@@ -92,6 +92,10 @@
   grid-column: var(--content-col);
 }
 
+.qui-toast__description:has(+ .qui-toast__action) {
+  margin-bottom: var(--spacing-110);
+}
+
 .qui-toast__icon {
   color: var(--icon-color);
   grid-column: var(--icon-col);
@@ -100,7 +104,6 @@
 .qui-toast__action {
   grid-column: var(--content-col);
   justify-self: flex-start;
-  margin-top: var(--spacing-110);
 }
 
 .qui-toast__close-button {
