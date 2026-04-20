@@ -1,5 +1,26 @@
 # @qualcomm-ui/react Changelog
 
+## 1.19.1
+
+Apr 19th, 2026
+
+### Code Refactoring
+
+- [checkmark]: update anatomy attributes ([ad9b1a1](https://github.com/qualcomm/qualcomm-ui/commit/ad9b1a1))
+- [number-input]: update anatomy attributes ([1219ea2](https://github.com/qualcomm/qualcomm-ui/commit/1219ea2))
+- [header-bar]: update anatomy attributes ([f3398c9](https://github.com/qualcomm/qualcomm-ui/commit/f3398c9))
+- [combobox]: update anatomy attributes ([c429e3a](https://github.com/qualcomm/qualcomm-ui/commit/c429e3a))
+- [combobox]: update positioner and control selectors ([f313e96](https://github.com/qualcomm/qualcomm-ui/commit/f313e96))
+
+### Bug Fixes
+
+- [card]: omit dir from CardAvatarProps for Avatar compatibility ([16fb057](https://github.com/qualcomm/qualcomm-ui/commit/16fb057))
+
+### Miscellaneous Chores
+
+- upgrade prettier and eslint dependenies, fix resulting formatting issues ([332185a](https://github.com/qualcomm/qualcomm-ui/commit/332185a))
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/qds-core, @qualcomm-ui/react-core, @qualcomm-ui/utils]
+
 ## 1.19.0
 
 Apr 16th, 2026

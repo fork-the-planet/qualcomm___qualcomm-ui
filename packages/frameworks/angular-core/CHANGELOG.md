@@ -1,5 +1,14 @@
 # @qualcomm-ui/angular-core Changelog
 
+## 2.1.1
+
+Apr 19th, 2026
+
+### Miscellaneous Chores
+
+- upgrade prettier and eslint dependenies, fix resulting formatting issues ([332185a](https://github.com/qualcomm/qualcomm-ui/commit/332185a))
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/utils, @qualcomm-ui/dom]
+
 ## 2.1.0
 
 Apr 7th, 2026
