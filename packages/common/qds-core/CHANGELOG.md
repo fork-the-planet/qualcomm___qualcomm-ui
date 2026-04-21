@@ -1,5 +1,14 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.25.1
+
+Apr 21st, 2026
+
+### Bug Fixes
+
+- [qds-core]: use correct select icon styles ([347b3ca](https://github.com/qualcomm/qualcomm-ui/commit/347b3ca))
+- [qds-core]: support additional input part selectors for clear trigger visibility ([03891dd](https://github.com/qualcomm/qualcomm-ui/commit/03891dd))
+
 ## 1.25.0
 
 Apr 19th, 2026

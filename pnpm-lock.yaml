@@ -3320,7 +3320,7 @@ importers:
         specifier: workspace:^1.1.0
         version: link:../../common/dom
       '@qualcomm-ui/qds-core':
-        specifier: workspace:^1.25.0
+        specifier: workspace:^1.25.1
         version: link:../../common/qds-core
       '@qualcomm-ui/tailwind-plugin':
         specifier: workspace:^1.7.0
@@ -3596,7 +3596,7 @@ importers:
         specifier: 'catalog:'
         version: 1.0.5
       '@qualcomm-ui/qds-core':
-        specifier: workspace:^1.25.0
+        specifier: workspace:^1.25.1
         version: link:../../common/qds-core
       '@qualcomm-ui/react-core':
         specifier: workspace:^1.4.2
@@ -3960,10 +3960,10 @@ importers:
         specifier: workspace:^2.1.2
         version: link:../../common/mdx-common
       '@qualcomm-ui/qds-core':
-        specifier: workspace:^1.25.0
+        specifier: workspace:^1.25.1
         version: link:../../common/qds-core
       '@qualcomm-ui/react':
-        specifier: workspace:^1.20.0
+        specifier: workspace:^1.20.1
         version: link:../react
       '@qualcomm-ui/react-core':
         specifier: workspace:^1.4.2
@@ -4088,7 +4088,7 @@ importers:
         specifier: workspace:^2.1.2
         version: link:../../common/mdx-common
       '@qualcomm-ui/mdx-vite':
-        specifier: workspace:^3.3.2
+        specifier: workspace:^3.3.3
         version: link:../../common/mdx-vite
       '@qualcomm-ui/tsconfig':
         specifier: 'catalog:'
@@ -4142,16 +4142,16 @@ importers:
         specifier: 'catalog:'
         version: 1.0.5
       '@qualcomm-ui/qds-core':
-        specifier: workspace:^1.25.0
+        specifier: workspace:^1.25.1
         version: link:../../common/qds-core
       '@qualcomm-ui/react':
-        specifier: workspace:^1.20.0
+        specifier: workspace:^1.20.1
         version: link:../react
       '@qualcomm-ui/react-core':
         specifier: workspace:^1.4.2
         version: link:../react-core
       '@qualcomm-ui/react-mdx':
-        specifier: workspace:^2.3.3
+        specifier: workspace:^2.3.4
         version: link:../react-mdx
       '@qualcomm-ui/react-test-utils':
         specifier: workspace:^1.0.1

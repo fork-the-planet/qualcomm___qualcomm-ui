@@ -1,5 +1,13 @@
 # @qualcomm-ui/typedoc Changelog
 
+## 1.0.8
+
+Apr 21st, 2026
+
+### Miscellaneous Chores
+
+- [typedoc]: upgrade typedoc from ~0.28.13 to ~0.28.19 ([51770ed](https://github.com/qualcomm/qualcomm-ui/commit/51770ed))
+
 ## 1.0.7
 
 Apr 19th, 2026
