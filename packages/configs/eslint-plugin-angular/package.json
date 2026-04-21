@@ -42,7 +42,7 @@
     "@qualcomm-ui/tsconfig": "catalog:",
     "@typescript-eslint/rule-tester": "8.48.1",
     "@typescript-eslint/utils": "catalog:",
-    "angular-eslint": "^21.3.0",
+    "angular-eslint": "^21.3.1",
     "esbuild": "catalog:",
     "npm-run-all2": "^8.0.4",
     "shx": "^0.4.0",
