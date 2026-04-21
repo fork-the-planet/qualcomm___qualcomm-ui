@@ -324,3 +324,17 @@ export interface SectionExportConfig {
    */
   outputPath?: string
 }
+
+export interface QuiDocsPluginOptions {
+  /**
+   * Path to the qui-docs config file. This is automatically detected if omitted.
+   */
+  configFile?: string
+
+  /**
+   * The current working directory.
+   *
+   * @default process.cwd()
+   */
+  cwd?: string
+}

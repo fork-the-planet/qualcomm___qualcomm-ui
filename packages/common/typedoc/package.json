@@ -1,6 +1,6 @@
 {
   "name": "@qualcomm-ui/typedoc",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Documentation generation utilities",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
@@ -59,7 +59,7 @@
     "shx": "^0.4.0",
     "terminate": "^2.6.1",
     "tsx": "catalog:",
-    "typedoc": "~0.28.13",
+    "typedoc": "~0.28.19",
     "vite": "catalog:",
     "vitest": "catalog:"
   },

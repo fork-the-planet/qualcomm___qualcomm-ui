@@ -59,7 +59,12 @@
     outline: 0;
   }
 
-  &:has([data-input-part="input"][data-empty]) {
+  &:has(
+    [data-input-part="input"][data-empty],
+    [data-text-input-part="input"][data-empty],
+    [data-password-input-part="input"][data-empty],
+    [data-number-input-part="input"][data-empty]
+  ) {
     .qui-input__clear-trigger {
       display: none;
     }

@@ -1,5 +1,13 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 3.3.3
+
+Apr 21st, 2026
+
+### Code Refactoring
+
+- [mdx-vite]: move QuiDocsPluginOptions type to config/types module ([a74fc8a](https://github.com/qualcomm/qualcomm-ui/commit/a74fc8a))
+
 ## 3.3.2
 
 Apr 19th, 2026
