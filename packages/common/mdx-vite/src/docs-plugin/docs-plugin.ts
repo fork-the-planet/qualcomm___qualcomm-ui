@@ -6,6 +6,7 @@ import type {PluginOption, ResolvedConfig} from "vite"
 
 import {dedent} from "@qualcomm-ui/utils/dedent"
 
+import type {QuiDocsPluginOptions} from "./config"
 import {ConfigLoader} from "./config/config-loader"
 import {fixPath} from "./path-utils"
 import {
@@ -16,20 +17,6 @@ import {
 } from "./plugin-state"
 
 const isDev = process.env.NODE_ENV === "development"
-
-export interface QuiDocsPluginOptions {
-  /**
-   * Path to the qui-docs config file. This is automatically detected if omitted.
-   */
-  configFile?: string
-
-  /**
-   * The current working directory.
-   *
-   * @default process.cwd()
-   */
-  cwd?: string
-}
 
 const state = new PluginState()
 
