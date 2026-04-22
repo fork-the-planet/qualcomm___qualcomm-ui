@@ -995,6 +995,28 @@ importers:
       eslint:
         specifier: 9.39.1
         version: 9.39.1(jiti@2.6.1)
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+      typescript-eslint:
+        specifier: '>=8.31.1'
+        version: 8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)
+    devDependencies:
+      '@eslint/core':
+        specifier: ^1.0.0
+        version: 1.0.0
+      '@qualcomm-ui/cli':
+        specifier: 'catalog:'
+        version: 1.0.6
+      eslint-mdx:
+        specifier: ^3.7.0
+        version: 3.7.0(eslint@9.39.1(jiti@2.6.1))
+      eslint-plugin-mdx:
+        specifier: ^3.7.0
+        version: 3.7.0(eslint@9.39.1(jiti@2.6.1))
+      eslint-plugin-react:
+        specifier: ^7.37.5
+        version: 7.37.5(eslint@9.39.1(jiti@2.6.1))
       remark-frontmatter:
         specifier: ^5.0.0
         version: 5.0.0
@@ -1028,28 +1050,6 @@ importers:
       remark-lint-unordered-list-marker-style:
         specifier: ^4.0.1
         version: 4.0.1
-      typescript:
-        specifier: 5.9.3
-        version: 5.9.3
-      typescript-eslint:
-        specifier: '>=8.31.1'
-        version: 8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)
-    devDependencies:
-      '@eslint/core':
-        specifier: ^1.0.0
-        version: 1.0.0
-      '@qualcomm-ui/cli':
-        specifier: 'catalog:'
-        version: 1.0.6
-      eslint-mdx:
-        specifier: ^3.7.0
-        version: 3.7.0(eslint@9.39.1(jiti@2.6.1))
-      eslint-plugin-mdx:
-        specifier: ^3.7.0
-        version: 3.7.0(eslint@9.39.1(jiti@2.6.1))
-      eslint-plugin-react:
-        specifier: ^7.37.5
-        version: 7.37.5(eslint@9.39.1(jiti@2.6.1))
       unified:
         specifier: ^11.0.5
         version: 11.0.5
