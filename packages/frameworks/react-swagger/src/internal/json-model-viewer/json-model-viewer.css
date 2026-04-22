@@ -82,6 +82,12 @@
     }
   }
 
+  .data-key-description-container {
+    align-items: center;
+    display: inline-flex;
+    gap: 2px;
+  }
+
   .data-key-description-expand-icon {
     color: var(--color-icon-neutral-secondary);
   }
