@@ -1,4 +1,5 @@
 import {defineConfig} from "eslint/config"
+import {join} from "node:path"
 import tseslint from "typescript-eslint"
 
 import quiEslintAngular from "@qualcomm-ui/eslint-config-angular"
@@ -233,5 +234,14 @@ export default defineConfig(
   {
     extends: [quiEslintMdx.configs.recommended],
     files: ["{packages,scripts}/**/*.{md,mdx}", "*.md"],
+    ignores: ["**/CHANGELOG.md", "**/__tests__/**"],
+    languageOptions: {
+      parserOptions: {
+        remarkConfigPath: join(
+          import.meta.dirname,
+          "node_modules/@qualcomm-ui/eslint-config-mdx/.remarkrc",
+        ),
+      },
+    },
   },
 )
