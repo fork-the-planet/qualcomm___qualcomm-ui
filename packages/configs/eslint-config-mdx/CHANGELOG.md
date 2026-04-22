@@ -1,5 +1,13 @@
 # @qualcomm-ui/eslint-config-mdx Changelog
 
+## 2.0.1
+
+Apr 22nd, 2026
+
+### Bug Fixes
+
+- move dependencies to peerDependencies ([a595b84](https://github.com/qualcomm/qualcomm-ui/commit/a595b84))
+
 ## 2.0.0
 
 Apr 21st, 2026
