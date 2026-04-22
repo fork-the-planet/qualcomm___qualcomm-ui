@@ -1,5 +1,13 @@
 # @qualcomm-ui/eslint-config-mdx Changelog
 
+## 2.0.0
+
+Apr 21st, 2026
+
+### BREAKING CHANGES
+
+- [mdx-remark]: enable mdx/remark lint plugins ([abd4e31](https://github.com/qualcomm/qualcomm-ui/commit/abd4e31))
+
 ## 1.1.1
 
 Apr 19th, 2026

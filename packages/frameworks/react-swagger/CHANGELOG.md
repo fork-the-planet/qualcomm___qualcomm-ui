@@ -1,5 +1,18 @@
 # @qualcomm-ui/react-swagger Changelog
 
+## 1.3.0
+
+Apr 21st, 2026
+
+### Features
+
+- [react-swagger]: add string enum data type for json model viewer ([4204da5](https://github.com/qualcomm/qualcomm-ui/commit/4204da5))
+- [react-swagger]: add enum type layout styling for data key pairs ([d17dfb7](https://github.com/qualcomm/qualcomm-ui/commit/d17dfb7))
+
+### Code Refactoring
+
+- [react-swagger]: replace description expand button with icon button ([2b3ef4c](https://github.com/qualcomm/qualcomm-ui/commit/2b3ef4c))
+
 ## 1.2.22
 
 Apr 21st, 2026
