@@ -28,6 +28,21 @@
 .data-key-pair {
   user-select: text;
 
+  &[data-is-enum-type] {
+    .data-key-pair-content {
+      align-items: flex-start;
+      display: flex;
+
+      .data-key {
+        white-space: nowrap;
+      }
+    }
+
+    .data-key-description-expand-button {
+      display: none;
+    }
+  }
+
   .data-key {
     &[data-expandable] {
       cursor: pointer;
