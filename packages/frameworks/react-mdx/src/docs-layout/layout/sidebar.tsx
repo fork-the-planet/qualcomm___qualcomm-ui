@@ -12,8 +12,6 @@ import {
   useState,
 } from "react"
 
-import {Wrench} from "lucide-react"
-
 import {createTreeCollection} from "@qualcomm-ui/core/tree"
 import type {NavBadge, NavItem} from "@qualcomm-ui/mdx-common"
 import {Badge} from "@qualcomm-ui/react/badge"
