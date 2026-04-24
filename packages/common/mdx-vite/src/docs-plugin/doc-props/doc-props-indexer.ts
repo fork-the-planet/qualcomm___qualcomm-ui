@@ -68,10 +68,11 @@ function extractPickPropsRecord(
   return result
 }
 
-const targetMdxElements: string[] = [
+export const docPropsJsxNodes: string[] = [
   "TypeDocProps",
   "TypeDocAttributes",
   "TypeDocAngularAttributes",
+  "TypeDocFunction",
 ]
 
 interface DocPropEntry {
@@ -102,7 +103,7 @@ export class DocPropsIndexer {
   getTypeDocPropsNodes: Plugin = () => {
     return (tree, _file, done) => {
       visit(tree, "mdxJsxFlowElement", (node: any) => {
-        if (node && "name" in node && targetMdxElements.includes(node.name)) {
+        if (node && "name" in node && docPropsJsxNodes.includes(node.name)) {
           const nameAttr = node.attributes?.find(
             (attr: MdxJsxAttribute) => attr.name === "name",
           )
@@ -214,12 +215,25 @@ export class DocPropsIndexer {
           return props
         }
 
+        const resolvedType = propTypes.resolvedType
+        const functionParameters =
+          resolvedType?.type === "signature" &&
+          resolvedType.functionParameters?.length
+            ? this.assembleFunctionParams(
+                resolvedType.functionParameters,
+                sections,
+              )
+            : undefined
+
         this.pageDocProps[entry.name] = {
           ...this.props[entry.name],
           input: assembleProps(propTypes.input),
           output: assembleProps(propTypes.output),
           props: assembleProps(propTypes.props),
           publicMethods: assembleProps(propTypes.publicMethods),
+          resolvedType: functionParameters
+            ? {...resolvedType!, functionParameters}
+            : resolvedType,
         }
         return sections
       })
@@ -236,6 +250,22 @@ export class DocPropsIndexer {
       }
       return acc
     }, {})
+  }
+
+  private assembleFunctionParams(
+    params: QuiPropDeclaration[],
+    sections: IndexedSection[],
+  ): PagePropType[] {
+    return params.map((param) => {
+      const id = this.idService.add(param.name)
+      sections.push(this.assembleProp(param, id))
+
+      const args = param.args?.length
+        ? this.assembleFunctionParams(param.args, sections)
+        : undefined
+
+      return {...param, args, id}
+    })
   }
 
   private assembleProp(prop: QuiPropDeclaration, id: string): IndexedSection {
