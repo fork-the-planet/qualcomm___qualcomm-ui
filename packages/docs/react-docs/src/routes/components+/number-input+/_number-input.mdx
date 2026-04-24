@@ -6,9 +6,9 @@ component: NumberInput
 aliases: [spinner, stepper, numeric input]
 ---
 
-import {Demo} from "~components/demo"
+import {ComponentExplorer, Demo} from "~components/demo"
 import * as demos from "./demos"
-import {TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
+import {TypeDocProps, TypeDocAttributes} from "@qualcomm-ui/react-mdx/typedoc"
 
 # {frontmatter.title}
 
@@ -29,8 +29,7 @@ The simple API bundles all subcomponents together into a single component.
 ### Composite
 
 ::: terms
-compound
-parts
+compound, parts
 :::
 
 The composite pattern provides full control over the component's elements by composing individual subcomponents.
@@ -43,9 +42,7 @@ The composite pattern provides full control over the component's elements by com
 ### Min and Max values
 
 ::: terms
-range
-limit
-bounds
+range, limit, bounds
 :::
 
 Pass the [min](./#min) and [max](./#max) props to the root component to set the minimum and maximum values of the number input.
@@ -63,9 +60,7 @@ Pass the [step](./#step) prop to the root component to set the increment or decr
 ### States
 
 ::: terms
-disabled
-readonly
-required
+disabled, readonly, required
 :::
 
 The following shows how the NumberInput component appears in each interactive state.
@@ -75,8 +70,7 @@ The following shows how the NumberInput component appears in each interactive st
 ### Controlled Value
 
 ::: terms
-two-way binding
-external state
+two-way binding, external state
 :::
 
 Use the [value](./#value), [onValueChange](./#onValueChange) and [defaultValue](./#defaultValue) props to control the value of the input field. These props follow our [controlled state](/patterns/controlled-state) pattern.
@@ -89,9 +83,7 @@ Use the [value](./#value), [onValueChange](./#onValueChange) and [defaultValue](
 ### Sizes
 
 ::: terms
-small
-medium
-large
+small, medium, large
 :::
 
 Customize size using the [size](./#size) prop. The default size is `md`.
@@ -101,9 +93,7 @@ Customize size using the [size](./#size) prop. The default size is `md`.
 ### Unit Selector
 
 ::: terms
-currency
-price
-measurement
+currency, price, measurement
 :::
 
 Add a unit selector to the number input by passing an array of [options](./#unit-option) to the [unitOptions](./#unitOptions) prop.
@@ -118,8 +108,7 @@ The selected unit follows our [controlled state](/patterns/controlled-state) pat
 ### Error Text and Indicator
 
 ::: terms
-validation
-form error
+validation, form error
 :::
 
 Error messages are displayed using two props:
@@ -134,17 +123,122 @@ The error text and indicator will only render when [invalid](./#invalid) is true
   component={demos.NumberInputErrorTextDemo}
 />
 
+## Explorer
+
+<ComponentExplorer
+  component={demos.NumberInputExplorerDemo}
+  linkPrefix="number-input"
+  parts={[
+    "root",
+    "label",
+    "input-group",
+    "input",
+    "control",
+    "increment-trigger",
+    "decrement-trigger",
+    "hint",
+  ]}
+  scope="number-input"
+/>
+
 ## API
-
-### \<NumberInput.Root\>
-
-<TypeDocProps name="NumberInputRootProps" />
 
 ### \<NumberInput\>
 
 The `NumberInput` component supports all props from [NumberInput.Root](./#number-input-root), plus the additional props listed below.
 
 <TypeDocProps name="NumberInputProps" omitFrom="NumberInputRootProps" />
+
+## Composite API
+
+### \<NumberInput.Root\>
+
+<TypeDocProps name="NumberInputRootProps" />
+
+<TypeDocAttributes name="NumberInputRootBindings" />
+
+### \<NumberInput.Label\>
+
+<TypeDocProps name="NumberInputLabelProps" />
+
+<TypeDocAttributes name="NumberInputLabelBindings" />
+
+### \<NumberInput.InputGroup\>
+
+<TypeDocProps name="NumberInputInputGroupProps" />
+
+<TypeDocAttributes
+  name={["NumberInputInputGroupBindings", "QdsNumberInputInputGroupBindings"]}
+/>
+
+### \<NumberInput.Input\>
+
+<TypeDocProps name="NumberInputInputProps" />
+
+<TypeDocAttributes
+  name={["NumberInputInputBindings", "QdsNumberInputInputBindings"]}
+/>
+
+### \<NumberInput.Control\>
+
+<TypeDocProps name="NumberInputControlProps" />
+
+<TypeDocAttributes
+  name={["NumberInputControlBindings", "QdsNumberInputControlBindings"]}
+/>
+
+### \<NumberInput.IncrementTrigger\>
+
+<TypeDocProps name="NumberInputIncrementTriggerProps" />
+
+<TypeDocAttributes
+  name={[
+    "NumberInputIncrementTriggerBindings",
+    "QdsNumberInputIncrementTriggerBindings",
+  ]}
+/>
+
+### \<NumberInput.DecrementTrigger\>
+
+<TypeDocProps name="NumberInputDecrementTriggerProps" />
+
+<TypeDocAttributes
+  name={[
+    "NumberInputDecrementTriggerBindings",
+    "QdsNumberInputDecrementTriggerBindings",
+  ]}
+/>
+
+### \<NumberInput.Hint\>
+
+<TypeDocProps name="NumberInputHintProps" />
+
+<TypeDocAttributes name="NumberInputHintBindings" />
+
+### \<NumberInput.ErrorText\>
+
+<TypeDocProps name="NumberInputErrorTextProps" />
+
+<TypeDocAttributes name="NumberInputErrorTextBindings" />
+
+### \<NumberInput.ErrorIndicator\>
+
+<TypeDocProps name="NumberInputErrorIndicatorProps" />
+
+<TypeDocAttributes
+  name={[
+    "NumberInputErrorIndicatorBindings",
+    "QdsNumberInputErrorIndicatorBindings",
+  ]}
+/>
+
+### \<NumberInput.UnitSelect\>
+
+<TypeDocProps name="NumberInputUnitSelectProps" />
+
+<TypeDocAttributes
+  name={["NumberInputUnitSelectBindings", "QdsNumberInputUnitSelectBindings"]}
+/>
 
 ## Data Structures
 

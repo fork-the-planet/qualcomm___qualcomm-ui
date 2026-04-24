@@ -6,9 +6,9 @@ component: Menu
 aliases: [dropdown menu, context menu, popup menu]
 ---
 
-import {Demo} from "~components/demo"
+import {ComponentExplorer, Demo} from "~components/demo"
 import * as demos from "./demos"
-import {TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
+import {TypeDocAttributes, TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
 
 # {frontmatter.title}
 
@@ -39,7 +39,7 @@ Compose the menu to include icons and commands.
 menu trigger, dropdown button, icon menu button
 :::
 
-Use [`<Menu.Button>`](./#menu-button-1) for a labeled trigger and [`<Menu.IconButton>`](./#menu-icon-button) for an icon-only trigger. Both automatically render a chevron indicator. Always provide an `aria-label` on `<Menu.IconButton>` to give assistive technologies an accessible name. Control the menu position with [positioning.placement](./#positioning).
+Use [`<Menu.Button>`](./#menu-button-1) for a labeled trigger and [`<Menu.IconButton>`](./#menu-icon-button) for an icon-only trigger. Both automatically render a chevron indicator. Always provide an [`aria-label`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-label) on `<Menu.IconButton>` to give assistive technologies an accessible name. Control the menu position with [positioning.placement](./#positioning).
 
 <Demo name="MenuButtonDemo" component={demos.MenuButtonDemo} />
 
@@ -199,6 +199,28 @@ Use the [positioning.hideWhenDetached](./#positioning) prop to hide the menu whe
   component={demos.MenuHideWhenDetachedDemo}
 />
 
+## Explorer
+
+<ComponentExplorer
+  component={demos.MenuExplorerDemo}
+  linkPrefix="menu"
+  parts={[
+    "trigger",
+    "content",
+    "item-group",
+    "item-group-label",
+    "item",
+    {name: "start-icon", link: "#menu-item-start-icon"},
+    {name: "item-text", link: "#menu-item-label"},
+    {name: "description", link: "#menu-item-description"},
+    {name: "item-control", link: "#menu-checkbox-item-control"},
+    "item-indicator",
+    "separator",
+  ]}
+  previewClassName="items-start mt-6"
+  scope="menu"
+/>
+
 ## API
 
 ### \<Menu.Root\>
@@ -219,6 +241,8 @@ The following describes the individual subcomponents of the `Menu` component.
 
 <TypeDocProps name="MenuButtonProps" />
 
+<TypeDocAttributes name="QdsMenuButtonBindings" />
+
 ### \<Menu.IconButton\>
 
 <TypeDocProps name="MenuIconButtonProps" />
@@ -227,49 +251,75 @@ The following describes the individual subcomponents of the `Menu` component.
 
 <TypeDocProps name="MenuContentProps" />
 
+<TypeDocAttributes name={["MenuContentBindings", "QdsMenuContentBindings"]} />
+
 ### \<Menu.Trigger\>
 
 <TypeDocProps name="MenuTriggerProps" />
+
+<TypeDocAttributes name="MenuTriggerBindings" />
 
 ### \<Menu.Item\>
 
 <TypeDocProps name="MenuItemProps" />
 
+<TypeDocAttributes name={["MenuItemBindings", "QdsMenuItemBindings"]} />
+
 ### \<Menu.ItemAccessory\>
 
 <TypeDocProps name="MenuItemAccessoryProps" />
+
+<TypeDocAttributes name="QdsMenuItemAccessoryBindings" />
 
 ### \<Menu.ItemCommand\>
 
 <TypeDocProps name="MenuItemCommandProps" />
 
+<TypeDocAttributes name="QdsMenuItemCommandBindings" />
+
 ### \<Menu.ItemLabel\>
 
 <TypeDocProps name="MenuItemLabelProps" />
+
+<TypeDocAttributes
+  name={["MenuItemLabelBindings", "QdsMenuItemLabelBindings"]}
+/>
 
 ### \<Menu.ItemDescription\>
 
 <TypeDocProps name="MenuItemDescriptionProps" />
 
-### \<Menu.ItemControl\>
-
-<TypeDocProps name="MenuItemControlProps" />
+<TypeDocAttributes name="QdsMenuDescriptionBindings" />
 
 ### \<Menu.ItemGroup\>
 
 <TypeDocProps name="MenuItemGroupProps" />
 
+<TypeDocAttributes
+  name={["MenuItemGroupBindings", "QdsMenuItemGroupBindings"]}
+/>
+
 ### \<Menu.ItemGroupLabel\>
 
 <TypeDocProps name="MenuItemGroupLabelProps" />
+
+<TypeDocAttributes
+  name={["MenuItemGroupLabelBindings", "QdsMenuItemGroupLabelBindings"]}
+/>
 
 ### \<Menu.ItemStartIcon\>
 
 <TypeDocProps name="MenuItemStartIconProps" />
 
+<TypeDocAttributes name="QdsMenuItemStartIconBindings" />
+
 ### \<Menu.ItemIndicator\>
 
 <TypeDocProps name="MenuItemIndicatorProps" />
+
+<TypeDocAttributes
+  name={["MenuItemIndicatorBindings", "QdsMenuItemIndicatorBindings"]}
+/>
 
 ### \<Menu.CheckboxItem\>
 
@@ -279,13 +329,19 @@ The following describes the individual subcomponents of the `Menu` component.
 
 <TypeDocProps name="MenuCheckboxItemControlProps" />
 
+<TypeDocAttributes name="QdsMenuCheckboxItemControlBindings" />
+
 ### \<Menu.RadioItem\>
 
 <TypeDocProps name="MenuRadioItemProps" />
 
+<TypeDocAttributes name="QdsMenuRadioItemBindings" />
+
 ### \<Menu.RadioItemControl\>
 
 <TypeDocProps name="MenuRadioItemControlProps" />
+
+<TypeDocAttributes name="QdsMenuRadioItemControlBindings" />
 
 ### \<Menu.RadioItemGroup\>
 
@@ -295,6 +351,12 @@ The following describes the individual subcomponents of the `Menu` component.
 
 <TypeDocProps name="MenuSeparatorProps" />
 
+<TypeDocAttributes
+  name={["MenuSeparatorBindings", "QdsMenuSeparatorBindings"]}
+/>
+
 ### \<Menu.TriggerItem\>
 
 <TypeDocProps name="MenuTriggerItemProps" />
+
+<TypeDocAttributes name="MenuTriggerItemBindings" />

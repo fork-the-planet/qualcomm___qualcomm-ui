@@ -6,7 +6,7 @@ component: Tree
 aliases: [treeview, file browser, hierarchical, nested]
 ---
 
-import {Demo} from "~components/demo"
+import {ComponentExplorer, Demo} from "~components/demo"
 import * as demos from "./demos"
 import {TypeDocAttributes, TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
 
@@ -40,11 +40,7 @@ These defaults can be overridden in the `TreeCollection` [constructor](./#constr
 ### Node Shorthand
 
 ::: terms
-file explorer
-folder tree
-directory view
-directory structure
-folder hierarchy
+file explorer, folder tree, directory view, directory structure, folder hierarchy
 :::
 
 We expose the `<Tree.Nodes>` shorthand for rendering Branch and Leaf nodes. Use its [renderBranch](./#renderBranch) and [renderLeaf](./#renderLeaf) render props to customize the content of each tree item.
@@ -56,9 +52,7 @@ Note that `<Tree.Nodes>` automatically renders child nodes for branches, so you 
 ### Nodes
 
 ::: terms
-recursive rendering
-branch node
-leaf node
+recursive rendering, branch node, leaf node
 :::
 
 You can bring your own `TreeNodes` to create your own abstraction for the tree.
@@ -71,10 +65,7 @@ You can bring your own `TreeNodes` to create your own abstraction for the tree.
 ### Default Expanded
 
 ::: terms
-initially open
-open by default
-expandable
-collapsible
+initially open, open by default, expandable, collapsible
 :::
 
 Expand nodes by default using the [defaultExpandedValue](./#defaultExpandedValue) prop. Or use [expandedValue](./#expandedValue) and [onExpandedValueChange](./#onExpandedValueChange) to control the expansion manually. These props follow our [controlled state](/patterns/controlled-state) pattern.
@@ -87,8 +78,7 @@ Expand nodes by default using the [defaultExpandedValue](./#defaultExpandedValue
 ### Checkbox Trees
 
 ::: terms
-multi-select
-selectable
+multi-select, selectable
 :::
 
 Use the `Tree.NodeCheckbox` to add a checkbox to each node. The checked state of the tree can be controlled using the [checkedValue](./#checkedValue), [onCheckedValueChange](./#onCheckedValueChange), and [defaultCheckedValue](./#defaultCheckedValue) props, which follow our [controlled state](/patterns/controlled-state) pattern.
@@ -98,8 +88,7 @@ Use the `Tree.NodeCheckbox` to add a checkbox to each node. The checked state of
 ### Checkbox selection state
 
 ::: terms
-cascading
-parent-child
+cascading, parent-child
 :::
 
 The Tree handles nested checkbox selection automatically:
@@ -168,8 +157,7 @@ The following demo shows checked state below the tree. Interact with it to see s
 ### Disabled Nodes
 
 ::: terms
-inactive
-non-interactive
+inactive, non-interactive
 :::
 
 You can disable nodes by setting the `disabled` property on the node object.
@@ -179,8 +167,7 @@ You can disable nodes by setting the `disabled` property on the node object.
 ### Filtering
 
 ::: terms
-searchable
-find
+searchable, find
 :::
 
 Here's an example that filters the nodes using `matchSorter`.
@@ -190,9 +177,7 @@ Here's an example that filters the nodes using `matchSorter`.
 ### Links
 
 ::: terms
-navigation
-router
-anchor
+navigation, router, anchor
 :::
 
 Tree nodes can be links using [polymorphic composition](/polymorphic-components). Use the `render` prop on the `<Tree.BranchNode>` or `<Tree.LeafNode>` to specify the element type.
@@ -202,10 +187,7 @@ Tree nodes can be links using [polymorphic composition](/polymorphic-components)
 ### Sizes
 
 ::: terms
-compact
-density
-small
-medium
+compact, density, small, medium
 :::
 
 Tree item sizes are controlled using the [size](./#size) prop on the root of the tree.
@@ -215,14 +197,33 @@ Tree item sizes are controlled using the [size](./#size) prop on the root of the
 ### Add / Remove nodes
 
 ::: terms
-dynamic
-editable
-CRUD
+dynamic, editable, CRUD
 :::
 
 The `TreeCollection` class exposes methods to handle the addition and removal of nodes. Here's an example of how to use them.
 
 <Demo name="TreeAddRemoveDemo" component={demos.TreeAddRemoveDemo} />
+
+## Explorer
+
+<ComponentExplorer
+  component={demos.TreeExplorerDemo}
+  linkPrefix="tree"
+  parts={[
+    "root",
+    "branch",
+    "branch-node",
+    "branch-trigger",
+    "branch-content",
+    "branch-indent-guide",
+    "leaf-node",
+    "node-checkbox",
+    "node-icon",
+    "node-indicator",
+    "node-text",
+  ]}
+  scope="tree"
+/>
 
 ## API
 
