@@ -99,6 +99,19 @@
   position: sticky;
   top: var(--qui-header-height);
 
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-border-neutral-02);
+    border-radius: 3px;
+  }
+
   @media screen and (min-width: 950px) {
     appearance: auto;
     display: block;
@@ -110,6 +123,21 @@
 
   .qui-side-nav__root {
     height: 100%;
+  }
+
+  /* TODO: remove when the small side nav size lands */
+  .qui-side-nav__node-root {
+    height: 32px;
+    min-height: 32px;
+
+    &:has(+ .qui-side-nav__node-root),
+    &:has(+ .qui-side-nav__branch-root) {
+      margin-bottom: 1px;
+    }
+  }
+
+  .qui-side-nav__node-indicator {
+    display: none;
   }
 }
 
