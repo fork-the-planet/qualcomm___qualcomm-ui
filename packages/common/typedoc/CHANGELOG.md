@@ -1,5 +1,13 @@
 # @qualcomm-ui/typedoc Changelog
 
+## 1.1.1
+
+Apr 23rd, 2026
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/typedoc-common]
+
 ## 1.1.0
 
 Apr 23rd, 2026

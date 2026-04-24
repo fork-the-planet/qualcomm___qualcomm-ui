@@ -1,5 +1,21 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 2.5.0
+
+Apr 23rd, 2026
+
+### Features
+
+- [sidebar]: render nav badges ([6ddf75a](https://github.com/qualcomm/qualcomm-ui/commit/6ddf75a))
+
+### Code Refactoring
+
+- [react-mdx]: reuse isNavBadge for frontmatter badge validation ([22c958f](https://github.com/qualcomm/qualcomm-ui/commit/22c958f))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common, @qualcomm-ui/react]
+
 ## 2.4.0
 
 Apr 23rd, 2026
