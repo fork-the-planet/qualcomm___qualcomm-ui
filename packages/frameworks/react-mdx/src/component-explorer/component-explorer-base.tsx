@@ -52,6 +52,11 @@ export interface ComponentExplorerBaseProps extends ComponentPropsWithRef<"div">
   parts: ComponentPart[]
 
   /**
+   * Additional CSS class name for the preview container.
+   */
+  previewClassName?: string
+
+  /**
    * Scope name matching the component's namespaced attribute
    * (`data-<scope>-part`). When omitted, the explorer falls back to matching
    * any `data-*-part` attribute with the target part name — useful for demos
@@ -86,6 +91,7 @@ export function ComponentExplorerBase({
   children,
   linkPrefix,
   parts,
+  previewClassName,
   scope,
   ...props
 }: ComponentExplorerBaseProps): ReactElement {
@@ -141,7 +147,14 @@ export function ComponentExplorerBase({
 
   return (
     <div {...props} className="qui-component-explorer__root">
-      <div ref={previewRef} className="qui-component-explorer__preview">
+      <div
+        ref={previewRef}
+        className={
+          previewClassName
+            ? `qui-component-explorer__preview ${previewClassName}`
+            : "qui-component-explorer__preview"
+        }
+      >
         {children}
         {highlightRects.map((rect, index) => (
           <div
