@@ -1,6 +1,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
+import {isNavBadge} from "@qualcomm-ui/mdx-common"
 import type {
   QdsBadgeCategoryEmphasis,
   QdsBadgeSemanticEmphasis,
@@ -18,15 +19,7 @@ export interface ResolvedFrontmatterBadge {
 }
 
 export function isFrontmatterBadge(obj: unknown): obj is FrontmatterBadge {
-  return (
-    typeof obj === "object" &&
-    !!obj &&
-    "label" in obj &&
-    "id" in obj &&
-    typeof obj.label === "string" &&
-    (!("url" in obj) ||
-      ("url" in obj && (typeof obj.url === "string" || !obj.url)))
-  )
+  return isNavBadge(obj)
 }
 
 const knownBadges: Record<

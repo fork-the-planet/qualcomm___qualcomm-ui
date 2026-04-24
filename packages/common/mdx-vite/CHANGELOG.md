@@ -1,5 +1,17 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 3.5.0
+
+Apr 23rd, 2026
+
+### Features
+
+- [mdx-vite]: extract badges from frontmatter in nav builder ([58ecfcd](https://github.com/qualcomm/qualcomm-ui/commit/58ecfcd))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common, @qualcomm-ui/typedoc-common]
+
 ## 3.4.0
 
 Apr 23rd, 2026

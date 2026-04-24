@@ -208,6 +208,13 @@ export type PageMap = Record<string, PageSection>
 
 export interface NavItem {
   /**
+   * Badges rendered in the sideNav
+   *
+   * @since 2.2.0
+   */
+  badges?: NavBadge[] | undefined
+
+  /**
    * The depth of the nav item. The root nav item starts at 1. Each child has n+1
    * depth, where n is the depth of the parent item.
    */
@@ -526,4 +533,43 @@ export interface KnowledgePages {
   pages: PageEntry[]
   totalPages: number
   version: 1
+}
+
+/**
+ * @since 2.2.0
+ */
+export interface NavBadge {
+  /**
+   * If true, this badge won't be displayed in the side nav.
+   */
+  hideFromNav?: boolean
+
+  /**
+   * Unique key for the badge.
+   */
+  id: string
+
+  /**
+   * Text rendered inside the badge.
+   */
+  label: string
+
+  /**
+   * Optional HTML title attribute to show on hover.
+   */
+  title?: string
+
+  /**
+   * Optional URL that the badge links to. To link to a local path, start the pathname with `/`. To link to an external URL, start the url with `https://`
+   *
+   * @example
+   * ```js
+   * // local path
+   * /guides/developer-preview
+   *
+   * // external
+   * https://github.com/qualcomm/qualcomm-ui
+   * ```
+   */
+  url?: string
 }

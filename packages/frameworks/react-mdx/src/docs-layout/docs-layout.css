@@ -121,6 +121,14 @@
     display: block;
   }
 
+  .qui-docs-sidebar__item-badges {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-60);
+    margin-left: 4px;
+  }
+
   .qui-side-nav__root {
     height: 100%;
   }
