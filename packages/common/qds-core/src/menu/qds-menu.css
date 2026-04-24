@@ -210,9 +210,10 @@
 }
 
 .qui-menu__separator {
-  border-color: var(--color-border-neutral-01);
-  margin-top: var(--spacing-40);
-  padding-bottom: var(--spacing-40);
+  border: none;
+  border-top: solid 1px var(--color-border-neutral-01);
+  height: auto;
+  margin-block: var(--spacing-40);
   width: 100%;
 }
 
