@@ -1,5 +1,25 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 3.4.0
+
+Apr 23rd, 2026
+
+### Features
+
+- [mdx-vite]: add TypeDocFunction to docPropsJsxNodes and support function parameters in indexer ([79e46dc](https://github.com/qualcomm/qualcomm-ui/commit/79e46dc))
+
+### Bug Fixes
+
+- [mdx-vite]: check docProps object keys in addition to sections for hasDocProps ([2fb78ed](https://github.com/qualcomm/qualcomm-ui/commit/2fb78ed))
+
+### Code Refactoring
+
+- [mdx-vite]: use shared docPropsJsxNodes in doc-props-plugin ([2f8dfa5](https://github.com/qualcomm/qualcomm-ui/commit/2f8dfa5))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/typedoc-common, @qualcomm-ui/mdx-common]
+
 ## 3.3.3
 
 Apr 21st, 2026

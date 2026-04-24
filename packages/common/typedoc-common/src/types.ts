@@ -87,6 +87,7 @@ export interface SerializedParameters {
    */
   referenceType?: string
   required?: boolean
+  rest?: boolean
   summary?: QuiCommentDisplayPart[]
   type: FormattedType
 }
@@ -99,6 +100,11 @@ export interface SerializedType extends SerializedTypeBase {
    * arguments, including comments.
    */
   functionArgs?: SerializedParameters[]
+  /**
+   * For function signatures, the parameters as full prop declarations with
+   * comments, anchors, and nested args support.
+   */
+  functionParameters?: QuiPropDeclaration[]
   parameters?: SerializedParameters[]
   properties?: SerializedTypeBase[]
   rawType?: string
@@ -113,12 +119,20 @@ export interface SerializedType extends SerializedTypeBase {
 }
 
 export interface QuiPropDeclaration {
+  /**
+   * Nested parameters for function option objects (e.g., destructured params).
+   */
+  args?: QuiPropDeclaration[]
   comment?: QuiComment
   decorators?: string[]
   defaultValue?: string
   docLink?: string
   name: string
   resolvedType: SerializedType
+  /**
+   * Whether this is a rest parameter (...args).
+   */
+  rest?: boolean
   sourceUrls?: string[]
   type?: string | undefined
   typeParameters?: any

@@ -1,5 +1,27 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 2.4.0
+
+Apr 23rd, 2026
+
+### Features
+
+- [react-mdx]: add TypeDocFunctionContent component and supporting modules ([3093aac](https://github.com/qualcomm/qualcomm-ui/commit/3093aac))
+- [react-mdx]: add reflection function params and return components ([b1cac76](https://github.com/qualcomm/qualcomm-ui/commit/b1cac76))
+- [react-mdx]: support rest params and disableReferenceExpansion in PropType and Reference ([c881cd9](https://github.com/qualcomm/qualcomm-ui/commit/c881cd9))
+
+### Styles
+
+- [react-mdx]: add CSS for function documentation and misc layout improvements ([b2d58e3](https://github.com/qualcomm/qualcomm-ui/commit/b2d58e3))
+
+### Code Refactoring
+
+- [react-mdx]: use TypeDocFunctionContent instead of TypeDocReflection for signature types ([eb30ee4](https://github.com/qualcomm/qualcomm-ui/commit/eb30ee4))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react-core, @qualcomm-ui/react, @qualcomm-ui/mdx-common]
+
 ## 2.3.4
 
 Apr 21st, 2026

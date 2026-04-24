@@ -1,5 +1,13 @@
 # @qualcomm-ui/typedoc-common Changelog
 
+## 1.0.5
+
+Apr 23rd, 2026
+
+### Code Refactoring
+
+- [typedoc-common]: add rest, args, and functionParameters fields to type declarations ([6038dd4](https://github.com/qualcomm/qualcomm-ui/commit/6038dd4))
+
 ## 1.0.4
 
 Apr 19th, 2026
