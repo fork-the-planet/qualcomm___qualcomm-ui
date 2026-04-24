@@ -1,5 +1,13 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.26.0
+
+Apr 23rd, 2026
+
+### Features
+
+- add textmate json themes ([9ff374c](https://github.com/qualcomm/qualcomm-ui/commit/9ff374c))
+
 ## 1.25.1
 
 Apr 21st, 2026

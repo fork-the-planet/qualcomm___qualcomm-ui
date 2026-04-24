@@ -1,5 +1,13 @@
 # @qualcomm-ui/react-core Changelog
 
+## 1.4.3
+
+Apr 23rd, 2026
+
+### Code Refactoring
+
+- [react-core]: export UseControlledState interface ([1596b17](https://github.com/qualcomm/qualcomm-ui/commit/1596b17))
+
 ## 1.4.2
 
 Apr 19th, 2026

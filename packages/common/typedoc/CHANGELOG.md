@@ -1,5 +1,17 @@
 # @qualcomm-ui/typedoc Changelog
 
+## 1.1.0
+
+Apr 23rd, 2026
+
+### Features
+
+- [typedoc]: enhance signature parameter serialization with full prop declarations ([f6fd391](https://github.com/qualcomm/qualcomm-ui/commit/f6fd391))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/typedoc-common]
+
 ## 1.0.8
 
 Apr 21st, 2026
