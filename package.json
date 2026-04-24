@@ -36,6 +36,8 @@
     "node-utils": "pnpm -C packages/common/node-utils",
     "qds-core": "pnpm -C packages/common/qds-core",
     "tailwind-plugin": "pnpm -C packages/common/tailwind-plugin",
+    "typedoc": "pnpm -C packages/common/typedoc",
+    "typedoc-common": "pnpm -C packages/common/typedoc-common",
     "utils": "pnpm -C packages/common/utils",
     "angular-ssr": "pnpm -C packages/debug-apps/angular-ssr",
     "angular-csr": "pnpm -C packages/debug-apps/angular-csr",
