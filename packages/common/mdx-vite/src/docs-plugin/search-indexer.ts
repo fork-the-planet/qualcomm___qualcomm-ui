@@ -319,7 +319,9 @@ export class SearchIndexer {
       docProps = cached?.pageDocProps || this.docPropsIndexer.getDocProps()
     }
 
-    if (docPropSections.length) {
+    const hasDocProps = docPropSections.length || Object.keys(docProps).length
+
+    if (hasDocProps) {
       this._pageDocProps[defaultSection.pathname] = docProps
 
       if (this.config.validatePageLinks) {

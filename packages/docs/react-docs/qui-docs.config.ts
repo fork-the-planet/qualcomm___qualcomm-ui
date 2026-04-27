@@ -65,21 +65,8 @@ const navConfig: NavConfig[] = [
       {
         id: "overview",
       },
-      {
-        group: "Data Display",
-        id: "badges",
-        ignoreRouteMetaOrder: true,
-      },
     ],
     expanded: true,
-    groupOrder: [
-      "Buttons",
-      "Form Controls",
-      "Data Display",
-      "Overlays",
-      "Disclosure",
-      "Feedback",
-    ],
     id: "components",
     title: "Components",
   },

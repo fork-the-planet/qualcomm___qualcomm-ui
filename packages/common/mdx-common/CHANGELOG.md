@@ -1,5 +1,25 @@
 # @qualcomm-ui/mdx-common Changelog
 
+## 2.2.0
+
+Apr 23rd, 2026
+
+### Features
+
+- [mdx-common]: add NavBadge type and isNavBadge type guard ([1ef8453](https://github.com/qualcomm/qualcomm-ui/commit/1ef8453))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/typedoc-common]
+
+## 2.1.3
+
+Apr 23rd, 2026
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/typedoc-common]
+
 ## 2.1.2
 
 Apr 19th, 2026

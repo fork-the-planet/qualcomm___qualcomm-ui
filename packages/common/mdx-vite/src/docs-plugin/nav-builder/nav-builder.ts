@@ -4,10 +4,12 @@
 import {sortBy} from "lodash-es"
 import {v4 as uuidv4} from "uuid"
 
-import type {
-  NavItem,
-  PageFrontmatter,
-  PageSection,
+import {
+  isNavBadge,
+  type NavBadge,
+  type NavItem,
+  type PageFrontmatter,
+  type PageSection,
 } from "@qualcomm-ui/mdx-common"
 import {capitalCase} from "@qualcomm-ui/utils/change-case"
 import {defined} from "@qualcomm-ui/utils/guard"
@@ -175,6 +177,7 @@ export class NavBuilder {
           ) ?? {}
 
         this.flatNavItems.push({
+          badges: isPage ? this.extractBadges(pageFrontmatter) : undefined,
           depth,
           expanded: routeMeta?.expanded || false,
           group: isPage
@@ -387,5 +390,17 @@ export class NavBuilder {
     }
 
     return results
+  }
+
+  private extractBadges(
+    pageFrontmatter: Partial<PageFrontmatter>,
+  ): NavBadge[] | undefined {
+    const badges = (
+      pageFrontmatter as Partial<PageFrontmatter> & Record<string, unknown>
+    ).badges
+    if (badges && typeof badges === "object" && Array.isArray(badges)) {
+      return badges.filter((badge) => isNavBadge(badge) && !badge.hideFromNav)
+    }
+    return undefined
   }
 }

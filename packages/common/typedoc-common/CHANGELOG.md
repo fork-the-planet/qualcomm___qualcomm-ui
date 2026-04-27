@@ -1,5 +1,21 @@
 # @qualcomm-ui/typedoc-common Changelog
 
+## 1.0.6
+
+Apr 23rd, 2026
+
+### Documentation
+
+- [typedoc-common]: add @since tags to recently added properties ([0424a21](https://github.com/qualcomm/qualcomm-ui/commit/0424a21))
+
+## 1.0.5
+
+Apr 23rd, 2026
+
+### Code Refactoring
+
+- [typedoc-common]: add rest, args, and functionParameters fields to type declarations ([6038dd4](https://github.com/qualcomm/qualcomm-ui/commit/6038dd4))
+
 ## 1.0.4
 
 Apr 19th, 2026

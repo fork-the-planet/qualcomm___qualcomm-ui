@@ -1,5 +1,21 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.26.1
+
+Apr 23rd, 2026
+
+### Bug Fixes
+
+- [qds-core]: remove hardcoded cursor default from badge component ([f7c0c0e](https://github.com/qualcomm/qualcomm-ui/commit/f7c0c0e))
+
+## 1.26.0
+
+Apr 23rd, 2026
+
+### Features
+
+- add textmate json themes ([9ff374c](https://github.com/qualcomm/qualcomm-ui/commit/9ff374c))
+
 ## 1.25.1
 
 Apr 21st, 2026
