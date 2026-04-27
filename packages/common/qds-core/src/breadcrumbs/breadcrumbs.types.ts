@@ -58,8 +58,7 @@ export interface QdsBreadcrumbsItemTriggerBindings extends QdsBreadcrumbsCommonB
   "data-emphasis": QdsBreadcrumbsEmphasis
 }
 
-export interface QdsBreadcrumbsOverflowTriggerBindings
-  extends QdsBreadcrumbsCommonBindings {
+export interface QdsBreadcrumbsOverflowTriggerBindings extends QdsBreadcrumbsCommonBindings {
   className: `${BreadcrumbsClasses["itemTrigger"]} ${BreadcrumbsClasses["overflowTrigger"]}`
   "data-emphasis": QdsBreadcrumbsEmphasis
 }
