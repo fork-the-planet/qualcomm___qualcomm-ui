@@ -310,7 +310,6 @@ const comboboxMachineBase = {
       selectionBehavior: props.multiple ? "clear" : "replace",
       ...props,
       positioning: {
-        gutter: 2,
         placement: "bottom-start",
         sameWidth: true,
         ...props.positioning,

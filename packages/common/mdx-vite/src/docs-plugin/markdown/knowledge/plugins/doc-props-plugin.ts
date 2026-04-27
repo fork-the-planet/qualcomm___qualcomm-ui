@@ -14,6 +14,7 @@ import type {
   QuiCommentDisplayPart,
 } from "@qualcomm-ui/typedoc-common"
 
+import {docPropsJsxNodes} from "../../../doc-props"
 import {extractNamesFromAttribute} from "../../mdx-utils"
 import type {ComponentProps, DocProps, PropInfo} from "../types"
 import {exists} from "../utils"
@@ -250,7 +251,7 @@ export class PropFormatter {
           index: number | undefined,
           parent: Parent | undefined,
         ) => {
-          if (node?.name !== "TypeDocProps") {
+          if (!node.name || !docPropsJsxNodes.includes(node.name)) {
             return
           }
           const nameAttr = node.attributes?.find(

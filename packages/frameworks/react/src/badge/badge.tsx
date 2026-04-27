@@ -15,8 +15,7 @@ import {
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 export interface BadgeProps
-  extends QdsTextBadgeProps,
-    ElementRenderProp<"span"> {
+  extends QdsTextBadgeProps, ElementRenderProp<"span"> {
   /**
    * React {@link https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children children} prop.
    */

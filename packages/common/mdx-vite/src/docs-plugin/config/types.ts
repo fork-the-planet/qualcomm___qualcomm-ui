@@ -225,13 +225,21 @@ export interface SearchIndexerOptions {
    * Options for TypeDoc property documentation.
    */
   typeDocPropsOptions?: QuiDocsTypeDocOptions
+
+  /**
+   * Validate internal links in MDX pages after the page map and table of contents
+   * have been assembled. Reports broken page links and fragment references to the
+   * build console.
+   *
+   * @default true
+   */
+  validatePageLinks?: boolean
 }
 
-export interface QuiDocsConfig
-  extends Omit<
-    SearchIndexerOptions,
-    "srcDir" | "pageDirectory" | "typeDocProps"
-  > {
+export interface QuiDocsConfig extends Omit<
+  SearchIndexerOptions,
+  "srcDir" | "pageDirectory" | "typeDocProps"
+> {
   /**
    * Root app directory. NOT the full path to the directory.
    *
@@ -315,4 +323,18 @@ export interface SectionExportConfig {
    * @default 'sections.json'
    */
   outputPath?: string
+}
+
+export interface QuiDocsPluginOptions {
+  /**
+   * Path to the qui-docs config file. This is automatically detected if omitted.
+   */
+  configFile?: string
+
+  /**
+   * The current working directory.
+   *
+   * @default process.cwd()
+   */
+  cwd?: string
 }

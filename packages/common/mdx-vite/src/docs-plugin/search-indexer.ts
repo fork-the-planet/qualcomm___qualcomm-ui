@@ -17,6 +17,12 @@ import {defined} from "@qualcomm-ui/utils/guard"
 import type {SearchIndexerOptions} from "./config"
 import {DocPropsIndexer} from "./doc-props"
 import {
+  type CollectedLink,
+  collectLinks,
+  reportInvalidLinks,
+  validateLinks,
+} from "./link-validator"
+import {
   buildGitMetadataMap,
   type CompiledMdxFile,
   type CompiledMdxFileMetadata,
@@ -48,6 +54,8 @@ export class SearchIndexer {
   private readonly mdxFileReader: MdxFileReader
   private readonly allowedHeadings: Set<string>
   private readonly metaJson: RouteMetaInternal
+  private _collectedLinks: CollectedLink[] = []
+  private _docPropIds: Record<string, Set<string>> = {}
   private readonly routeMetaNav: Record<string, RouteMetaNavInternal> = {}
   readonly config: SearchIndexerOptions
   logWarnings: boolean
@@ -82,6 +90,8 @@ export class SearchIndexer {
 
   reset(): void {
     this.mdxFileReader.reset()
+    this._collectedLinks = []
+    this._docPropIds = {}
     this._pageMap = {}
     this._searchIndex = []
   }
@@ -251,6 +261,13 @@ export class SearchIndexer {
           removeMermaidCodeBlocks: true,
         })
         const tree = processor.runSync(processor.parse(fileContents)) as Root
+
+        if (this.config.validatePageLinks) {
+          this._collectedLinks.push(
+            ...collectLinks(tree, filePath, defaultSection.pathname),
+          )
+        }
+
         const pageInfo: PageInfo = {
           frontmatter: frontmatter as unknown as Record<string, unknown>,
           id: defaultSection.id,
@@ -302,8 +319,22 @@ export class SearchIndexer {
       docProps = cached?.pageDocProps || this.docPropsIndexer.getDocProps()
     }
 
-    if (docPropSections.length) {
+    const hasDocProps = docPropSections.length || Object.keys(docProps).length
+
+    if (hasDocProps) {
       this._pageDocProps[defaultSection.pathname] = docProps
+
+      if (this.config.validatePageLinks) {
+        const ids = new Set<string>()
+        for (const section of docPropSections) {
+          if (section.heading?.id) {
+            ids.add(section.heading.id)
+          }
+        }
+        if (ids.size) {
+          this._docPropIds[defaultSection.pathname] = ids
+        }
+      }
     }
 
     if (!cached) {
@@ -440,6 +471,15 @@ export class SearchIndexer {
     this._searchIndex.push(...mdxIndex.filter((entry) => !entry.hideFromSearch))
 
     this.navBuilder.build()
+
+    if (this.config.validatePageLinks) {
+      const invalidLinks = validateLinks(
+        this._collectedLinks,
+        this._pageMap,
+        this._docPropIds,
+      )
+      reportInvalidLinks(invalidLinks)
+    }
 
     return compiledFiles
   }

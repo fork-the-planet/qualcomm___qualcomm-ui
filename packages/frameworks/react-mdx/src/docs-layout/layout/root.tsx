@@ -28,7 +28,8 @@ import {
 } from "./use-mdx-docs-layout"
 
 export interface RootProps
-  extends Omit<ElementRenderProp<"div">, "children">,
+  extends
+    Omit<ElementRenderProp<"div">, "children">,
     Omit<DocsLayoutSettings, "rootBreadcrumb" | "header" | "footer"> {
   /**
    * React {@link https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children children} prop.
