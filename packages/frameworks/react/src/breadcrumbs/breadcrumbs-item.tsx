@@ -53,8 +53,9 @@ export interface BreadcrumbsItemProps extends BreadcrumbsItemRootProps {
   itemTriggerProps?: BreadcrumbsItemTriggerProps
 
   /**
-   * Allows you to replace the component's HTML element with a different tag, or
-   * compose it with another component. {@link https://react-next.qui.qualcomm.com/polymorphic-components Learn more}
+   * Replaces the trigger element with an anchor, a router Link, or any other
+   * component. Omitting it renders a plain `<span>` (e.g. the current page).
+   * {@link https://react-next.qui.qualcomm.com/polymorphic-components Learn more}
    */
   render?: BindingRenderProp<object>
 

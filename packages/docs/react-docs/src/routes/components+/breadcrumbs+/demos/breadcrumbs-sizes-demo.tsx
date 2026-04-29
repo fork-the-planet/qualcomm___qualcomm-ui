@@ -10,24 +10,36 @@ export function BreadcrumbsSizesDemo(): ReactElement {
       {/* preview */}
       <Breadcrumbs.Root aria-label="Breadcrumbs" size="sm">
         <Breadcrumbs.List>
-          <Breadcrumbs.Item icon={Home}>Home</Breadcrumbs.Item>
-          <Breadcrumbs.Item>Components</Breadcrumbs.Item>
+          <Breadcrumbs.Item icon={Home} render={<a href="/" />}>
+            Home
+          </Breadcrumbs.Item>
+          <Breadcrumbs.Item render={<a href="/components/overview" />}>
+            Components
+          </Breadcrumbs.Item>
           <Breadcrumbs.Item aria-current="page">Breadcrumbs</Breadcrumbs.Item>
         </Breadcrumbs.List>
       </Breadcrumbs.Root>
 
       <Breadcrumbs.Root aria-label="Breadcrumbs" size="md">
         <Breadcrumbs.List>
-          <Breadcrumbs.Item icon={Home}>Home</Breadcrumbs.Item>
-          <Breadcrumbs.Item>Components</Breadcrumbs.Item>
+          <Breadcrumbs.Item icon={Home} render={<a href="/" />}>
+            Home
+          </Breadcrumbs.Item>
+          <Breadcrumbs.Item render={<a href="/components/overview" />}>
+            Components
+          </Breadcrumbs.Item>
           <Breadcrumbs.Item aria-current="page">Breadcrumbs</Breadcrumbs.Item>
         </Breadcrumbs.List>
       </Breadcrumbs.Root>
 
       <Breadcrumbs.Root aria-label="Breadcrumbs" size="lg">
         <Breadcrumbs.List>
-          <Breadcrumbs.Item icon={Home}>Home</Breadcrumbs.Item>
-          <Breadcrumbs.Item>Components</Breadcrumbs.Item>
+          <Breadcrumbs.Item icon={Home} render={<a href="/" />}>
+            Home
+          </Breadcrumbs.Item>
+          <Breadcrumbs.Item render={<a href="/components/overview" />}>
+            Components
+          </Breadcrumbs.Item>
           <Breadcrumbs.Item aria-current="page">Breadcrumbs</Breadcrumbs.Item>
         </Breadcrumbs.List>
       </Breadcrumbs.Root>
