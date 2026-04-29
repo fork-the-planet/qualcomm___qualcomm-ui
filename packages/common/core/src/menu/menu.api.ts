@@ -625,7 +625,10 @@ export function createMenuApi(
 
     getTriggerItemBindings(childApi, props): MenuTriggerItemBindings {
       const triggerProps = childApi.getTriggerBindings(props)
-      return mergeProps(getItemBindings({value: triggerProps.id}), triggerProps)
+      return mergeProps(
+        getItemBindings({...props, value: triggerProps.id}),
+        triggerProps,
+      )
     },
   }
 }

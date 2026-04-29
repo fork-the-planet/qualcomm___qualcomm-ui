@@ -4,14 +4,14 @@ import {Home} from "lucide-angular"
 
 import {BreadcrumbsModule} from "@qualcomm-ui/angular/breadcrumbs"
 import {IconDirective} from "@qualcomm-ui/angular/icon"
+import {MenuModule} from "@qualcomm-ui/angular/menu"
 import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 
 @Component({
-  imports: [BreadcrumbsModule, IconDirective, RouterLink],
+  imports: [BreadcrumbsModule, IconDirective, MenuModule, RouterLink],
   providers: [provideIcons({Home})],
-  selector: "breadcrumbs-links-demo",
+  selector: "breadcrumbs-overflow-demo",
   template: `
-    <!-- preview -->
     <nav aria-label="Breadcrumbs" q-breadcrumbs-root>
       <ol q-breadcrumbs-list>
         <li q-breadcrumb-item>
@@ -20,23 +20,22 @@ import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
             Home
           </a>
         </li>
-        <li q-breadcrumb-item>
-          <a q-breadcrumb-item-trigger routerLink="/components/overview">
-            Components
+        <!-- preview -->
+        <li q-breadcrumb-overflow-item>
+          <a q-menu-item routerLink="/settings" value="settings">Settings</a>
+          <a q-menu-item routerLink="/settings/account" value="account">
+            Account
           </a>
         </li>
+        <!-- preview -->
         <li q-breadcrumb-item>
-          <a
-            aria-current="page"
-            q-breadcrumb-item-trigger
-            routerLink="/components/breadcrumbs"
-          >
-            Breadcrumbs
+          <a q-breadcrumb-item-trigger routerLink="/settings/account/security">
+            Security
           </a>
         </li>
+        <li aria-current="page" q-breadcrumb-item>Sessions</li>
       </ol>
     </nav>
-    <!-- preview -->
   `,
 })
-export class BreadcrumbsLinksDemo {}
+export class BreadcrumbsOverflowDemo {}
