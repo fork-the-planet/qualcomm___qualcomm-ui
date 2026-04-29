@@ -62,7 +62,7 @@ export function Sidebar({
   ...props
 }: SidebarProps): ReactElement {
   const ref = useRef<HTMLDivElement | null>(null)
-  const {navItems, pathname} = useMdxDocsLayoutContext()
+  const {navDensity, navItems, pathname} = useMdxDocsLayoutContext()
   const {renderLink: RenderLink} = useMdxDocsContext()
 
   const initialCollection = useMemo(
@@ -213,7 +213,7 @@ export function Sidebar({
   }, [scrollIntoView])
 
   const mergedProps = mergeProps(
-    {className: "qui-docs-sidebar__root", ref},
+    {className: "qui-docs-sidebar__root", "data-nav-density": navDensity, ref},
     props,
   )
 

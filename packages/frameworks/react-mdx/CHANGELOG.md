@@ -1,5 +1,14 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 2.6.0
+
+Apr 28th, 2026
+
+### Features
+
+- [docs-layout]: add NavDensity type and prop, defaults to "compact" ([4cd65b5](https://github.com/qualcomm/qualcomm-ui/commit/4cd65b5))
+- [sidebar]: integrate navDensity from context ([9636533](https://github.com/qualcomm/qualcomm-ui/commit/9636533))
+
 ## 2.5.0
 
 Apr 23rd, 2026

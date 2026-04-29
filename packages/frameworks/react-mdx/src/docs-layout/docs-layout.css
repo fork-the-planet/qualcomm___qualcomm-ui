@@ -133,14 +133,16 @@
     height: 100%;
   }
 
-  /* TODO: remove when the small side nav size lands */
-  .qui-side-nav__node-root {
-    height: 32px;
-    min-height: 32px;
+  &[data-nav-density="compact"] {
+    /* TODO: remove when the small side nav size lands */
+    .qui-side-nav__node-root {
+      height: 32px;
+      min-height: 32px;
 
-    &:has(+ .qui-side-nav__node-root),
-    &:has(+ .qui-side-nav__branch-root) {
-      margin-bottom: 1px;
+      &:has(+ .qui-side-nav__node-root),
+      &:has(+ .qui-side-nav__branch-root) {
+        margin-bottom: 1px;
+      }
     }
   }
 

@@ -44,6 +44,7 @@ export function Root({
   docProps,
   hideToc,
   mdxComponents,
+  navDensity = "compact",
   onDemoSettingsChange,
   onDemoStateChange,
   onPackageManagerChange,
@@ -136,6 +137,7 @@ export function Root({
       hidePageLinks,
       hideSideNav,
       mainContentElement,
+      navDensity,
       navItems,
       pageExport,
       pageFrontmatter: pageData?.data ?? {},
@@ -149,6 +151,7 @@ export function Root({
   }, [
     exports,
     hideToc,
+    navDensity,
     mainContentElement,
     navItems,
     pageDocProps,
@@ -156,7 +159,10 @@ export function Root({
     pathname,
   ])
 
-  const mergedProps = mergeProps({className: "qui-docs__root"}, props)
+  const mergedProps = mergeProps(
+    {className: "qui-docs__root", "data-nav-density": navDensity},
+    props,
+  )
 
   return (
     <MdxDocsProvider value={mdxDocsContextValue}>
