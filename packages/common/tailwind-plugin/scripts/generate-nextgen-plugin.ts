@@ -78,11 +78,6 @@ const TOKEN_MAPPINGS: TokenMapping[] = [
     themeKey: "type",
   },
   {
-    ignore: true,
-    pattern: "icon-stroke-*",
-    themeKey: "icon-stroke",
-  },
-  {
     nameTransform: (name) => name.replace(/^canvas-/, ""),
     pattern: "canvas-width",
     themeKey: "canvas",
@@ -109,8 +104,8 @@ const TOKEN_MAPPINGS: TokenMapping[] = [
   },
   {
     ignore: true,
-    pattern: "track-*",
-    themeKey: "track",
+    pattern: "cross-component-*",
+    themeKey: "cross-component",
   },
   {
     nameTransform: (name) => name.replace("spacing", "qds"),
