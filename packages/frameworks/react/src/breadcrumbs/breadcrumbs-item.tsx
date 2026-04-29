@@ -5,7 +5,6 @@ import type {ReactElement, ReactNode} from "react"
 
 import type {LucideIconOrElement} from "@qualcomm-ui/react-core/lucide"
 import type {BindingRenderProp} from "@qualcomm-ui/react-core/system"
-import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {
   BreadcrumbsItemIcon,
@@ -23,7 +22,6 @@ import {
   BreadcrumbsItemTrigger,
   type BreadcrumbsItemTriggerProps,
 } from "./breadcrumbs-item-trigger"
-import {useQdsBreadcrumbsContext} from "./qds-breadcrumbs-context"
 
 export interface BreadcrumbsItemProps extends BreadcrumbsItemRootProps {
   /**
@@ -36,12 +34,6 @@ export interface BreadcrumbsItemProps extends BreadcrumbsItemRootProps {
    * React {@link https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children children} prop.
    */
   children?: ReactNode
-
-  /**
-   * URL the breadcrumb item links to. If omitted alongside `render`, the item
-   * renders non-link content.
-   */
-  href?: string
 
   /**
    * The icon to display next to the item trigger.
@@ -61,8 +53,8 @@ export interface BreadcrumbsItemProps extends BreadcrumbsItemRootProps {
   itemTriggerProps?: BreadcrumbsItemTriggerProps
 
   /**
-   * Replaces the trigger element (e.g., with a router Link). If omitted
-   * alongside `href`, the item renders non-link content.
+   * Replaces the trigger element with an anchor, a router Link, or any other
+   * component. Omitting it renders a plain `<span>` (e.g. the current page).
    * {@link https://react-next.qui.qualcomm.com/polymorphic-components Learn more}
    */
   render?: BindingRenderProp<object>
@@ -83,7 +75,6 @@ export interface BreadcrumbsItemProps extends BreadcrumbsItemRootProps {
 export function BreadcrumbsItem({
   "aria-current": ariaCurrent,
   children,
-  href,
   icon,
   itemIconProps,
   itemTriggerProps,
@@ -92,44 +83,16 @@ export function BreadcrumbsItem({
   separatorProps,
   ...props
 }: BreadcrumbsItemProps): ReactElement {
-  const qdsContext = useQdsBreadcrumbsContext()
-  const {
-    href: triggerHrefProp,
-    render: triggerRenderProp,
-    ...baseTriggerProps
-  } = itemTriggerProps ?? {}
-  const finalHref = triggerHrefProp ?? href
-  const finalRender = triggerRenderProp ?? render
-  const isLink = finalHref != null || finalRender != null
-  const triggerContent = (
-    <>
-      {icon ? <BreadcrumbsItemIcon icon={icon} {...itemIconProps} /> : null}
-      {children}
-    </>
-  )
-
   return (
     <BreadcrumbsItemRoot {...props}>
-      {isLink ? (
-        <BreadcrumbsItemTrigger
-          aria-current={ariaCurrent}
-          href={finalHref}
-          render={finalRender}
-          {...baseTriggerProps}
-        >
-          {triggerContent}
-        </BreadcrumbsItemTrigger>
-      ) : (
-        <span
-          {...mergeProps(
-            qdsContext.getItemTriggerBindings(),
-            baseTriggerProps,
-            {"aria-current": ariaCurrent},
-          )}
-        >
-          {triggerContent}
-        </span>
-      )}
+      <BreadcrumbsItemTrigger
+        aria-current={ariaCurrent}
+        render={render}
+        {...itemTriggerProps}
+      >
+        {icon ? <BreadcrumbsItemIcon icon={icon} {...itemIconProps} /> : null}
+        {children}
+      </BreadcrumbsItemTrigger>
       <BreadcrumbsItemSeparator icon={separator} {...separatorProps} />
     </BreadcrumbsItemRoot>
   )

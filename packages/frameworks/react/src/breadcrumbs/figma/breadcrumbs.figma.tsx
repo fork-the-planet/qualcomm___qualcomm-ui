@@ -39,7 +39,7 @@ figma.connect(Breadcrumbs.Root, "<FIGMA_COMPONENTS_BASE>?node-id=3728-17610", {
 // Default item (idle/hover/pressed/focus states)
 figma.connect(Breadcrumbs.Item, "<FIGMA_COMPONENTS_BASE>?node-id=3728-13488", {
   example: ({icon}) => (
-    <Breadcrumbs.Item href="/components" icon={icon}>
+    <Breadcrumbs.Item icon={icon} render={<a href="/components" />}>
       Breadcrumb
     </Breadcrumbs.Item>
   ),
@@ -68,7 +68,7 @@ figma.connect(Breadcrumbs.Item, "<FIGMA_COMPONENTS_BASE>?node-id=3728-13488", {
 // Disabled item
 figma.connect(Breadcrumbs.Item, "<FIGMA_COMPONENTS_BASE>?node-id=3728-13488", {
   example: ({icon}) => (
-    <Breadcrumbs.Item disabled href="/components" icon={icon}>
+    <Breadcrumbs.Item disabled icon={icon} render={<a href="/components" />}>
       Breadcrumb
     </Breadcrumbs.Item>
   ),

@@ -25,19 +25,18 @@ a11y, WCAG, site hierarchy, wayfinding, location indicator
 
 - The root component should be labeled with `aria-label="Breadcrumbs"` to indicate that it's a breadcrumb navigation.
 - The first breadcrumb item is always the root item, and is typically reserved for the home page or base route of your application.
-- The last breadcrumb item represents the current page.
-- Mark the current `Breadcrumbs.Item` with [`aria-current`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current)`="page"`.
-- Only provide `href` or `render` when a `Breadcrumbs.Item` should navigate.
+- The last breadcrumb item represents the current page. Mark it with [`aria-current`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current)`="page"`.
+- By default, `Breadcrumbs.Item` renders a `<span>` (non-link content). Pass the `render` prop when an item should navigate.
 
 ## Examples
 
 ### Links
 
 ::: terms
-polymorphic
+polymorphic, router, anchor
 :::
 
-Provide either the [href](./#href) prop or the [render](./#render-2) prop when a breadcrumb item should navigate. If neither is provided, [`Breadcrumbs.Item`](./#breadcrumbs-item) renders non-link content, which is appropriate for the current page item. The following example uses React Router:
+[`Breadcrumbs.Item`](./#breadcrumbs-item) renders a non-link `<span>` by default, which is appropriate for the current page item. Use the [render](./#render-2) prop to make an item navigable. In most cases this will be your router's link component. Fall back to a plain `<a href>` if you don't use a router. The following example uses React Router:
 
 <Demo name="BreadcrumbsLinksDemo" component={demos.BreadcrumbsLinksDemo} />
 
@@ -104,21 +103,14 @@ To provide additional context on hover, make [`Breadcrumbs.ItemTrigger`](./#brea
 
 ### Item
 
-The [`Breadcrumbs.Item`](./#breadcrumbs-item) component is a convenient shorthand for rendering each part of the breadcrumb item. When `href` or `render` is provided, it renders a link trigger. Otherwise, it renders non-link content for the current page item.
+The [`Breadcrumbs.Item`](./#breadcrumbs-item) component is a convenient shorthand for rendering each part of the breadcrumb item. The trigger renders a `<span>` by default; pass the `render` prop to swap it for an anchor or a router link component.
 
 ```tsx
-/* Link item */
 <Breadcrumbs.ItemRoot>
-  <Breadcrumbs.ItemTrigger aria-current={ariaCurrent} href={href}>
+  <Breadcrumbs.ItemTrigger aria-current={ariaCurrent} render={render}>
     <Breadcrumbs.ItemIcon icon={icon} />
     {children}
   </Breadcrumbs.ItemTrigger>
-  <Breadcrumbs.ItemSeparator />
-</Breadcrumbs.ItemRoot>
-
-/* Non-link item (e.g. current page) */
-<Breadcrumbs.ItemRoot>
-  <span aria-current={ariaCurrent}>{children}</span>
   <Breadcrumbs.ItemSeparator />
 </Breadcrumbs.ItemRoot>
 ```

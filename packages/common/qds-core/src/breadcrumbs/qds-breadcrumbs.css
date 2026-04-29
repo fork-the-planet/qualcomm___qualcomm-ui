@@ -49,6 +49,8 @@
   border: 0 solid;
   border-radius: var(--border-radius-sm);
   box-sizing: border-box;
+
+  cursor: pointer;
   display: inline-flex;
   gap: var(--spacing-40);
   margin: 0;
@@ -65,8 +67,6 @@
   &[data-size="lg"] {
     font: var(--font-static-body-md-default);
   }
-
-  cursor: pointer;
 
   &:hover {
     text-decoration: underline;
