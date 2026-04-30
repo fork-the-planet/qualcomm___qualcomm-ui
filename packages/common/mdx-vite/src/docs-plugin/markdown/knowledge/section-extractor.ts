@@ -250,12 +250,22 @@ export class SectionExtractor {
     for (const node of nodes) {
       if (node.type === "code") {
         const codeNode = node as Code & {
-          data?: {typeDocProps?: {name: string; props: SimplifiedProp[]}}
+          data?: {
+            typeDocProps?: {
+              name: string
+              props: SimplifiedProp[]
+              since?: string
+            }
+          }
         }
 
         if (codeNode.data?.typeDocProps) {
-          const {name, props} = codeNode.data.typeDocProps
-          sectionTypes.push({props, type: name})
+          const {name, props, since} = codeNode.data.typeDocProps
+          sectionTypes.push({
+            props,
+            since,
+            type: name,
+          })
         }
 
         codeExamples.push({

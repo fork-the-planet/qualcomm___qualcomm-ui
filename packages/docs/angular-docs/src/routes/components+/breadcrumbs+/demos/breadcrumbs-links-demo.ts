@@ -21,7 +21,9 @@ import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
           </a>
         </li>
         <li q-breadcrumb-item>
-          <a q-breadcrumb-item-trigger routerLink="/components">Components</a>
+          <a q-breadcrumb-item-trigger routerLink="/components/overview">
+            Components
+          </a>
         </li>
         <li q-breadcrumb-item>
           <a

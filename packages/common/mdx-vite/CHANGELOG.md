@@ -1,5 +1,18 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 3.6.0
+
+Apr 29th, 2026
+
+### Features
+
+- [knowledge]: add since field for version lookup ([ebe1d3a](https://github.com/qualcomm/qualcomm-ui/commit/ebe1d3a))
+
+### Miscellaneous Chores
+
+- update uuid ([f6e9c6c](https://github.com/qualcomm/qualcomm-ui/commit/f6e9c6c))
+- **deps:** update dependencies [@qualcomm-ui/mdx-common]
+
 ## 3.5.0
 
 Apr 23rd, 2026

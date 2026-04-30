@@ -21,16 +21,11 @@ export type TocHighlightStrategy = "nearest" | "viewport"
 
 /**
  * The function used to render the application's clientside link component.
- *
- * @public
  */
 export type RenderLink = (
   props: HTMLAttributes<HTMLAnchorElement> & {href: string},
 ) => ReactNode
 
-/**
- * @public
- */
 export interface DocPropsSettings {
   /**
    * URL for the changelog, used by the `@since` tags.
@@ -38,9 +33,8 @@ export interface DocPropsSettings {
   changelogUrl?: string
 }
 
-/**
- * @public
- */
+export type NavDensity = "compact" | "comfy"
+
 export interface DocsLayoutSettings extends Pick<
   MdxDocsContextValue,
   "demoSettings" | "packageManager" | "ssrUserAgent"
@@ -80,6 +74,16 @@ export interface DocsLayoutSettings extends Pick<
    * @inheritDoc
    */
   mdxComponents?: ReturnType<typeof useMDXComponents>
+
+  /**
+   * Governs sidebar nav item padding and size.
+   *
+   * @option `compact`: sidebar nav items render with reduced padding.
+   * @option 'comfy': sidebar nav items render with increased padding.
+   *
+   * @default 'compact'
+   */
+  navDensity?: NavDensity
 
   /**
    * Function fired when the demo settings change.

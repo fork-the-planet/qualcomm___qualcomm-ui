@@ -14,6 +14,7 @@ import type {
   QdsBreadcrumbsItemSeparatorBindings,
   QdsBreadcrumbsItemTriggerBindings,
   QdsBreadcrumbsListBindings,
+  QdsBreadcrumbsOverflowTriggerBindings,
   QdsBreadcrumbsRootBindings,
 } from "./breadcrumbs.types"
 
@@ -50,7 +51,7 @@ export function createQdsBreadcrumbsApi(
       })
     },
     getItemTriggerBindings(): QdsBreadcrumbsItemTriggerBindings {
-      return normalize.button({
+      return normalize.element({
         className: breadcrumbsClasses.itemTrigger,
         "data-emphasis": emphasis,
         "data-size": size,
@@ -59,6 +60,13 @@ export function createQdsBreadcrumbsApi(
     getListBindings(): QdsBreadcrumbsListBindings {
       return normalize.element({
         className: breadcrumbsClasses.list,
+      })
+    },
+    getOverflowTriggerBindings(): QdsBreadcrumbsOverflowTriggerBindings {
+      return normalize.button({
+        className: `${breadcrumbsClasses.itemTrigger} ${breadcrumbsClasses.overflowTrigger}`,
+        "data-emphasis": emphasis,
+        "data-size": size,
       })
     },
     getRootBindings(): QdsBreadcrumbsRootBindings {

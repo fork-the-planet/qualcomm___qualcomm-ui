@@ -284,8 +284,7 @@
   }
 
   &[data-variant="outline"] {
-    border: var(--component-button-variant-outline-border-width) solid
-      var(--outline-border-idle);
+    border: var(--border-width-sm) solid var(--outline-border-idle);
     box-shadow: 0 0 0 1px inset transparent;
 
     --outline-border-idle: var(

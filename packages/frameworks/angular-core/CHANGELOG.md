@@ -1,5 +1,17 @@
 # @qualcomm-ui/angular-core Changelog
 
+## 2.1.3
+
+Apr 29th, 2026
+
+### Bug Fixes
+
+- [menu]: support disabled state for all item variants ([a55faf1](https://github.com/qualcomm/qualcomm-ui/commit/a55faf1))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core]
+
 ## 2.1.2
 
 Apr 19th, 2026
