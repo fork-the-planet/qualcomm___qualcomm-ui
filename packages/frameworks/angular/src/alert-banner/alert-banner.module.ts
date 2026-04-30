@@ -3,7 +3,11 @@
 
 import {NgModule} from "@angular/core"
 
-import {IconDirective} from "@qualcomm-ui/angular/icon"
+import {
+  EndIconDirective,
+  IconDirective,
+  StartIconDirective,
+} from "@qualcomm-ui/angular/icon"
 import {QBindDirective} from "@qualcomm-ui/angular-core/machine"
 
 import {AlertBannerActionDirective} from "./alert-banner-action.directive"
@@ -36,6 +40,11 @@ import {AlertBannerDirective} from "./alert-banner.directive"
     AlertBannerHeadingDirective,
     AlertBannerIconDirective,
   ],
-  imports: [IconDirective, QBindDirective],
+  imports: [
+    IconDirective,
+    QBindDirective,
+    StartIconDirective,
+    EndIconDirective,
+  ],
 })
 export class AlertBannerModule {}
