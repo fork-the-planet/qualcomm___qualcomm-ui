@@ -9,7 +9,6 @@ export function AlertBannerEmphasisDemo(): ReactElement {
       <AlertBanner
         action={<AlertBanner.Button>Action</AlertBanner.Button>}
         description="Description"
-        dismissable
         emphasis="info"
         heading="info"
       />
@@ -17,28 +16,24 @@ export function AlertBannerEmphasisDemo(): ReactElement {
       <AlertBanner
         action={<AlertBanner.Button>Action</AlertBanner.Button>}
         description="Description"
-        dismissable
         emphasis="success"
         heading="success"
       />
       <AlertBanner
         action={<AlertBanner.Button>Action</AlertBanner.Button>}
         description="Description"
-        dismissable
         emphasis="warning"
         heading="warning"
       />
       <AlertBanner
         action={<AlertBanner.Button>Action</AlertBanner.Button>}
         description="Description"
-        dismissable
         emphasis="danger"
         heading="danger"
       />
       <AlertBanner
         action={<AlertBanner.Button>Action</AlertBanner.Button>}
         description="Description"
-        dismissable
         emphasis="neutral"
         heading="neutral"
       />
