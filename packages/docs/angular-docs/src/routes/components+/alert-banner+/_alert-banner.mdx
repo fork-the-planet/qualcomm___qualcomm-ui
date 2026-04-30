@@ -2,16 +2,7 @@
 title: Alert Banner
 description: A prominent notification component for displaying important information or system status messages. Alert banners span the full width of their container and use distinctive colors to indicate message severity.
 component: AlertBanner
-keywords:
-  [
-    page banner,
-    system message,
-    global alert,
-    site notification,
-    top banner,
-    status banner,
-    announcement,
-  ]
+aliases: page banner, system message, global alert, site notification, top banner, status banner, announcement
 badges:
   - id: since
     label: 1.17.0
@@ -49,8 +40,8 @@ The composite API provides individual sub-components for custom layouts or when 
 
 ### Emphasis
 
-::: meta
-keywords: [severity, notification type, error banner, success banner, alert level]
+::: terms
+severity, notification type, error banner, success banner, alert level
 :::
 
 The [emphasis](./#emphasis) prop controls the banner's color scheme. The default is `info`. Each emphasis also determines the default icon.
@@ -59,8 +50,8 @@ The [emphasis](./#emphasis) prop controls the banner's color scheme. The default
 
 ### Variant
 
-::: meta
-keywords: [strong banner, subtle banner, banner style, visual weight]
+::: terms
+strong banner, subtle banner, banner style, visual weight
 :::
 
 The [variant](./#variant) prop controls visual prominence. The default `strong` variant uses solid backgrounds for high visibility. The `subtle` variant uses muted backgrounds with borders.
@@ -69,8 +60,8 @@ The [variant](./#variant) prop controls visual prominence. The default `strong` 
 
 ### Dismissable
 
-::: meta
-keywords: [closeable, close banner, remove banner, hide banner]
+::: terms
+closeable, close banner, remove banner, hide banner
 :::
 
 The banner is a controlled component. Set [dismissable](./#dismissable) to render a close button, then handle visibility state via the [closed](./#closed) output. With the composite API, use `q-alert-banner-close-button`.
@@ -79,11 +70,11 @@ The banner is a controlled component. Set [dismissable](./#dismissable) to rende
 
 ### Action
 
-::: meta
-keywords: [banner button, banner cta, call to action]
+::: terms
+banner button, banner cta, call to action
 :::
 
-Pass a button using the `q-alert-banner-action` directive. Use `size="sm"` with `emphasis="white-persistent"` for strong banners, or `emphasis="neutral"` for subtle banners.
+The `q-alert-banner-button` was added in [v2.6.0](https://github.com/qualcomm/qualcomm-ui/blob/main/packages/frameworks/angular/CHANGELOG.md#260) and should be used instead of the `q-alert-banner-action` directive.
 
 <QdsDemo name="AlertBannerActionDemo" />
 
@@ -124,6 +115,12 @@ The `q-alert-banner` directive extends the [q-alert-banner-root](./#q-alert-bann
 <TypeDocProps name="AlertBannerCloseButtonDirective" />
 
 <TypeDocAngularAttributes name="QdsAlertBannerCloseButtonBindings" />
+
+### q-alert-banner-button
+
+<TypeDocProps name="AlertBannerButtonDirective" />
+
+<TypeDocAngularAttributes name={["QdsButtonRootBindings", "QdsAlertBannerActionBindings"]} />
 
 ### q-alert-banner-action
 

@@ -1,5 +1,13 @@
 # @qualcomm-ui/tailwind-plugin Changelog
 
+## 1.7.1
+
+Apr 29th, 2026
+
+### Miscellaneous Chores
+
+- update tokens ([d706b7c](https://github.com/qualcomm/qualcomm-ui/commit/d706b7c))
+
 ## 1.7.0
 
 Mar 24th, 2026

@@ -1,5 +1,13 @@
 # @qualcomm-ui/core Changelog
 
+## 1.9.1
+
+Apr 29th, 2026
+
+### Bug Fixes
+
+- [menu]: support disabled state for all item variants ([a55faf1](https://github.com/qualcomm/qualcomm-ui/commit/a55faf1))
+
 ## 1.9.0
 
 Apr 19th, 2026

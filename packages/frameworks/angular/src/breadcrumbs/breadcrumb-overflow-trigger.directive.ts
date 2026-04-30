@@ -7,6 +7,9 @@ import {MenuTriggerDirective} from "@qualcomm-ui/angular/menu"
 
 import {useQdsBreadcrumbsContext} from "./qds-breadcrumbs-context.service"
 
+/**
+ * @since 2.6.0
+ */
 @Directive({
   selector: "[q-breadcrumb-overflow-trigger]",
   standalone: false,
