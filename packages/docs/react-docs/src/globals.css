@@ -23,6 +23,7 @@
   color-scheme: light dark;
 
   font-family: "Roboto Flex", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   --q-font-mono: "Roboto Mono", monospace;
   --qui-header-height: 48px;

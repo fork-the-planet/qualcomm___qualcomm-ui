@@ -13,7 +13,7 @@ export function OverviewThemeDemo(): ReactNode {
   return (
     <div className="flex flex-col gap-4">
       <div className="dark" data-brand="qualcomm" data-theme="dark">
-        <div className="border-neutral-03 bg-neutral-01 flex w-full rounded-sm border px-3 py-2">
+        <div className="border-neutral-03 bg-neutral-01 box-border flex w-full rounded-sm border px-3 py-2">
           <span className="text-neutral-primary">
             This section will always feature the dark theme regardless of the
             active theme.

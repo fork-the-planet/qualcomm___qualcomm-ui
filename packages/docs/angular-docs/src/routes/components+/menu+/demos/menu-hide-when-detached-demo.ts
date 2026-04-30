@@ -10,7 +10,7 @@ import {PortalDirective} from "@qualcomm-ui/angular-core/portal"
   template: `
     <q-menu [open]="open()" [positioning]="{hideWhenDetached: true}">
       <div
-        class="border-neutral-03 flex max-w-72 gap-2 overflow-x-scroll rounded-md border p-4"
+        class="border-neutral-03 box-border flex max-w-72 gap-2 overflow-x-scroll rounded-md border p-4"
       >
         @for (item of items; track item) {
           <div

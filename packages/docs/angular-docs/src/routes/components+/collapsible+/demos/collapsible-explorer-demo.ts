@@ -23,7 +23,7 @@ import {CollapsibleModule} from "@qualcomm-ui/angular/collapsible"
       </button>
       <div q-collapsible-content>
         <div
-          class="border-neutral-01 flex h-24 w-72 flex-col rounded-sm border p-4"
+          class="border-neutral-01 box-border flex h-24 w-72 flex-col rounded-sm border p-4"
         >
           Content
         </div>
