@@ -1,11 +1,15 @@
-// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-// SPDX-License-Identifier: BSD-3-Clause-Clear
-
-import {AlertBanner as SimpleAlertBanner} from "./alert-banner"
+import {
+  type AlertBannerProps,
+  AlertBanner as SimpleAlertBanner,
+} from "./alert-banner"
 import {
   AlertBannerActionContainer,
   type AlertBannerActionContainerProps,
 } from "./alert-banner-action-container"
+import {
+  AlertBannerButton,
+  type AlertBannerButtonProps,
+} from "./alert-banner-button"
 import {
   AlertBannerCloseButton,
   type AlertBannerCloseButtonProps,
@@ -21,39 +25,36 @@ import {
 import {AlertBannerIcon, type AlertBannerIconProps} from "./alert-banner-icon"
 import {AlertBannerRoot, type AlertBannerRootProps} from "./alert-banner-root"
 
-export {
-  AlertBannerContextProvider,
-  type AlertBannerContextValue,
-  useAlertBannerContext,
-} from "./qds-alert-banner-context"
-
+export * from "./qds-alert-banner-context"
 export type {
+  AlertBannerIconProps,
   AlertBannerActionContainerProps,
+  AlertBannerButtonProps,
   AlertBannerCloseButtonProps,
+  AlertBannerRootProps,
   AlertBannerDescriptionProps,
   AlertBannerHeadingProps,
-  AlertBannerIconProps,
-  AlertBannerRootProps,
+  AlertBannerProps,
 }
 
 type AlertBannerComponent = typeof SimpleAlertBanner & {
   /**
-   * A container for the banner's action button. Renders a `<div>` element by
-   * default.
+   * A container for the banner's primary action button. Renders a `<div>`
+   * element by default.
    */
   ActionContainer: typeof AlertBannerActionContainer
+  Button: typeof AlertBannerButton
   /**
    * Calls the root's `onClose` when clicked. Renders a `<button>` element by
    * default.
    */
   CloseButton: typeof AlertBannerCloseButton
   /**
-   * A paragraph with additional information about the banner. Renders a
-   * `<div>` element by default.
+   * Description of the alert banner. Renders a `<div>` element by default.
    */
   Description: typeof AlertBannerDescription
   /**
-   * A heading that labels the banner. Renders a `<div>` element by default.
+   * Heading of the alert banner. Renders a `<div>` element by default.
    */
   Heading: typeof AlertBannerHeading
   /**
@@ -62,7 +63,7 @@ type AlertBannerComponent = typeof SimpleAlertBanner & {
    */
   Icon: typeof AlertBannerIcon
   /**
-   * Groups all parts of the banner. Renders a `<div>` element by default.
+   * Groups all parts of the alert banner. Renders a `<div>` element by default.
    */
   Root: typeof AlertBannerRoot
 }
@@ -70,9 +71,10 @@ type AlertBannerComponent = typeof SimpleAlertBanner & {
 export const AlertBanner: AlertBannerComponent =
   SimpleAlertBanner as AlertBannerComponent
 
+AlertBanner.Icon = AlertBannerIcon
 AlertBanner.ActionContainer = AlertBannerActionContainer
+AlertBanner.Button = AlertBannerButton
 AlertBanner.CloseButton = AlertBannerCloseButton
+AlertBanner.Root = AlertBannerRoot
 AlertBanner.Description = AlertBannerDescription
 AlertBanner.Heading = AlertBannerHeading
-AlertBanner.Icon = AlertBannerIcon
-AlertBanner.Root = AlertBannerRoot

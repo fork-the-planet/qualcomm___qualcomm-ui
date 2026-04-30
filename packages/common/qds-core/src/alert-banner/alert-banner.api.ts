@@ -1,6 +1,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
+import type {QdsButtonApiProps} from "@qualcomm-ui/qds-core/button"
 import type {Explicit} from "@qualcomm-ui/utils/guard"
 import type {PropNormalizer} from "@qualcomm-ui/utils/machine"
 
@@ -12,9 +13,11 @@ import type {
   QdsAlertBannerApiProps,
   QdsAlertBannerCloseButtonBindings,
   QdsAlertBannerDescriptionBindings,
+  QdsAlertBannerEmphasis,
   QdsAlertBannerHeadingBindings,
   QdsAlertBannerIconBindings,
   QdsAlertBannerRootBindings,
+  QdsAlertBannerVariant,
 } from "./alert-banner.types"
 
 const parts = alertBannerAnatomy.parts
@@ -86,5 +89,24 @@ export function createQdsAlertBannerApi(
         role: emphasis === "danger" ? "alert" : "status",
       })
     },
+  }
+}
+
+export function resolveAlertBannerButtonProps({
+  emphasis,
+  variant,
+}: {
+  emphasis: QdsAlertBannerEmphasis
+  variant: QdsAlertBannerVariant
+}): QdsButtonApiProps {
+  return {
+    emphasis:
+      variant === "strong" && emphasis === "warning"
+        ? "black-persistent"
+        : variant === "strong"
+          ? "inverse"
+          : "neutral",
+    size: "sm",
+    variant: "outline",
   }
 }
