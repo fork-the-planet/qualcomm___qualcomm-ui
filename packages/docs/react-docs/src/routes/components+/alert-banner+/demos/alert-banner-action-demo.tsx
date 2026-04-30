@@ -8,14 +8,12 @@ export function AlertBannerActionDemo(): ReactElement {
       {/* preview */}
       <AlertBanner
         action={<AlertBanner.Button>Take action</AlertBanner.Button>}
-        description="Use white-persistent emphasis for strong variant"
         heading="Strong"
         variant="strong"
       />
 
       <AlertBanner
         action={<AlertBanner.Button>Take action</AlertBanner.Button>}
-        description="Use neutral emphasis for subtle variant"
         heading="Subtle"
         variant="subtle"
       />

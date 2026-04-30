@@ -1,5 +1,13 @@
 # @qualcomm-ui/mdx-common Changelog
 
+## 2.3.0
+
+Apr 29th, 2026
+
+### Features
+
+- [docs-plugin]: add since field to SimplifiedProp and SectionTypes ([c853f18](https://github.com/qualcomm/qualcomm-ui/commit/c853f18))
+
 ## 2.2.0
 
 Apr 23rd, 2026
