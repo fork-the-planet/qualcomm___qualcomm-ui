@@ -25,7 +25,7 @@ a11y, WCAG, site hierarchy, wayfinding, location indicator
 
 - The root component should be labeled with `aria-label="Breadcrumbs"` to indicate that it's a breadcrumb navigation.
 - The first breadcrumb item is always the root item, and is typically reserved for the home page or base route of your application.
-- The last breadcrumb item represents the current page. Mark it with [`aria-current`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current)`="page"`.
+- The last breadcrumb item represents the current page. Mark it with [`aria-current="page"`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current).
 - By default, `Breadcrumbs.Item` renders a `<span>` (non-link content). Pass the `render` prop when an item should navigate.
 
 ## Examples
@@ -82,7 +82,7 @@ Use the [disabled](./#disabled) prop to disable a breadcrumb item.
 overflow, collapsed, ellipsis, truncated
 :::
 
-Use the [`Breadcrumbs.OverflowItem`](./#breadcrumbs-overflow-item) component to collapse intermediate breadcrumb items into a [menu](/components/menu). The overflow trigger displays an ellipsis by default. Use the [icon](./#icon-3) prop to add an icon, or provide your own trigger via [`Breadcrumbs.OverflowTrigger`](./#breadcrumbs-overflow-trigger).
+Use the [`Breadcrumbs.OverflowItem`](./#breadcrumbs-overflow-item) component to collapse intermediate breadcrumb items into a [menu](/components/menu). The overflow trigger displays an ellipsis by default. Use the [icon](./#icon) prop to add an icon, or provide your own trigger via [`Breadcrumbs.OverflowTrigger`](./#breadcrumbs-overflow-trigger).
 
 <Demo
   name="BreadcrumbsOverflowDemo"
