@@ -1,5 +1,26 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 2.6.1
+
+Apr 29th, 2026
+
+### Code Refactoring
+
+- [breadcrumbs]: change default item trigger to anchor element ([f08b622](https://github.com/qualcomm/qualcomm-ui/commit/f08b622))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react, @qualcomm-ui/mdx-common, @qualcomm-ui/core, @qualcomm-ui/react-core]
+
+## 2.6.0
+
+Apr 28th, 2026
+
+### Features
+
+- [docs-layout]: add NavDensity type and prop, defaults to "compact" ([4cd65b5](https://github.com/qualcomm/qualcomm-ui/commit/4cd65b5))
+- [sidebar]: integrate navDensity from context ([9636533](https://github.com/qualcomm/qualcomm-ui/commit/9636533))
+
 ## 2.5.0
 
 Apr 23rd, 2026

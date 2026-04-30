@@ -1,5 +1,24 @@
 # @qualcomm-ui/angular Changelog
 
+## 2.6.0
+
+Apr 29th, 2026
+
+### Features
+
+- [alert-banner]: implement button api and template ([47d0882](https://github.com/qualcomm/qualcomm-ui/commit/47d0882))
+- [breadcrumbs]: support tooltip composition ([ab3604b](https://github.com/qualcomm/qualcomm-ui/commit/ab3604b))
+- [alert-banner]: fix styles, add dedicated button directive ([8be8404](https://github.com/qualcomm/qualcomm-ui/commit/8be8404))
+- [breadcrumbs]: add overflow component ([603c6e5](https://github.com/qualcomm/qualcomm-ui/commit/603c6e5))
+
+### Code Refactoring
+
+- [breadcrumbs]: change default item trigger to anchor element ([f08b622](https://github.com/qualcomm/qualcomm-ui/commit/f08b622))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core, @qualcomm-ui/core, @qualcomm-ui/angular-core]
+
 ## 2.5.3
 
 Apr 23rd, 2026

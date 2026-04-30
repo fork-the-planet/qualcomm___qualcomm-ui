@@ -7,7 +7,7 @@ import {IconDirective} from "@qualcomm-ui/angular/icon"
 import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 
 @Component({
-  imports: [BreadcrumbsModule, RouterLink, IconDirective],
+  imports: [BreadcrumbsModule, IconDirective, RouterLink],
   providers: [provideIcons({Home})],
   selector: "breadcrumbs-disabled-demo",
   template: `
@@ -21,15 +21,7 @@ import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
           </a>
         </li>
         <li disabled q-breadcrumb-item>Components</li>
-        <li q-breadcrumb-item>
-          <a
-            aria-current="page"
-            q-breadcrumb-item-trigger
-            routerLink="/components/breadcrumbs"
-          >
-            Breadcrumbs
-          </a>
-        </li>
+        <li aria-current="page" q-breadcrumb-item>Breadcrumbs</li>
       </ol>
     </nav>
     <!-- preview -->

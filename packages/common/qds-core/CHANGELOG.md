@@ -1,5 +1,29 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.27.0
+
+Apr 29th, 2026
+
+### Features
+
+- [breadcrumbs]: support tooltip composition ([ab3604b](https://github.com/qualcomm/qualcomm-ui/commit/ab3604b))
+- [alert-banner]: fix styles, add dedicated button component ([8ddea37](https://github.com/qualcomm/qualcomm-ui/commit/8ddea37))
+- [breadcrumbs]: add overflow component ([603c6e5](https://github.com/qualcomm/qualcomm-ui/commit/603c6e5))
+
+### Miscellaneous Chores
+
+- update tokens ([d706b7c](https://github.com/qualcomm/qualcomm-ui/commit/d706b7c))
+- **deps:** update dependencies [@qualcomm-ui/core]
+
+### Bug Fixes
+
+- [menu]: support disabled state for all item variants ([a55faf1](https://github.com/qualcomm/qualcomm-ui/commit/a55faf1))
+
+### Code Refactoring
+
+- [breadcrumbs]: change default item trigger to anchor element ([f08b622](https://github.com/qualcomm/qualcomm-ui/commit/f08b622))
+- [breadcrumbs]: default item trigger to <span> ([b36b903](https://github.com/qualcomm/qualcomm-ui/commit/b36b903))
+
 ## 1.26.1
 
 Apr 23rd, 2026

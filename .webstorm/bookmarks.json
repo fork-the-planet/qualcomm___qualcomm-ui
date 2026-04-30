@@ -116,27 +116,9 @@
         "line": "-1"
       },
       {
-        "description": "angular-core",
-        "provider": "com.intellij.ide.bookmark.providers.LineBookmarkProvider",
-        "url": "file://$PROJECT_DIR$/packages/frameworks/angular-core/src/alert-banner",
-        "line": "-1"
-      },
-      {
         "description": "react",
         "provider": "com.intellij.ide.bookmark.providers.LineBookmarkProvider",
-        "url": "file://$PROJECT_DIR$/packages/frameworks/react/src/components/alert-banner",
-        "line": "-1"
-      },
-      {
-        "description": "react-core",
-        "provider": "com.intellij.ide.bookmark.providers.LineBookmarkProvider",
-        "url": "file://$PROJECT_DIR$/packages/frameworks/react-core/src/alert-banner",
-        "line": "-1"
-      },
-      {
-        "description": "core",
-        "provider": "com.intellij.ide.bookmark.providers.LineBookmarkProvider",
-        "url": "file://$PROJECT_DIR$/packages/common/core/src/alert-banner",
+        "url": "file://$PROJECT_DIR$/packages/frameworks/react/src/alert-banner",
         "line": "-1"
       },
       {

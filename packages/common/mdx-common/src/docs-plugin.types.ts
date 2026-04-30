@@ -381,6 +381,7 @@ export interface SimplifiedProp {
   name: string
   propType?: "input" | "output" | undefined
   required: boolean | undefined
+  since?: string
   type: string
 }
 
@@ -404,6 +405,11 @@ export interface SectionTypes {
    * Props extracted from the TypeDoc code block.
    */
   props: SimplifiedProp[]
+
+  /**
+   * Version that the type was added in.
+   */
+  since?: string
 
   /**
    * Name of the type, interface, or class.

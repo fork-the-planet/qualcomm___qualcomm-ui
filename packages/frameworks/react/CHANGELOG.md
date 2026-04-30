@@ -1,5 +1,28 @@
 # @qualcomm-ui/react Changelog
 
+## 1.21.0
+
+Apr 29th, 2026
+
+### Features
+
+- [alert-banner]: add @since tag to AlertBannerButtonProps ([c6a44bf](https://github.com/qualcomm/qualcomm-ui/commit/c6a44bf))
+- [alert-banner]: fix styles, add dedicated button component ([8ddea37](https://github.com/qualcomm/qualcomm-ui/commit/8ddea37))
+- [breadcrumbs]: add overflow component ([603c6e5](https://github.com/qualcomm/qualcomm-ui/commit/603c6e5))
+
+### Documentation
+
+- [alert-banner]: add jsdoc comment ([52c2a46](https://github.com/qualcomm/qualcomm-ui/commit/52c2a46))
+
+### Code Refactoring
+
+- [breadcrumbs]: change default item trigger to anchor element ([f08b622](https://github.com/qualcomm/qualcomm-ui/commit/f08b622))
+- [breadcrumbs]: default item trigger to <span> ([b36b903](https://github.com/qualcomm/qualcomm-ui/commit/b36b903))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core, @qualcomm-ui/core, @qualcomm-ui/react-core]
+
 ## 1.20.3
 
 Apr 23rd, 2026

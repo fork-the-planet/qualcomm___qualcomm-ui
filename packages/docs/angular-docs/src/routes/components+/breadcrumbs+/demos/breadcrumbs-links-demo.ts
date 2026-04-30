@@ -20,8 +20,10 @@ import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
             Home
           </a>
         </li>
-        <li disabled q-breadcrumb-item>
-          <a routerLink="/components">Components</a>
+        <li q-breadcrumb-item>
+          <a q-breadcrumb-item-trigger routerLink="/components/overview">
+            Components
+          </a>
         </li>
         <li q-breadcrumb-item>
           <a

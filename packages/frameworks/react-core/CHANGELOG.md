@@ -1,5 +1,17 @@
 # @qualcomm-ui/react-core Changelog
 
+## 1.4.4
+
+Apr 29th, 2026
+
+### Bug Fixes
+
+- [menu]: support disabled state for all item variants ([a55faf1](https://github.com/qualcomm/qualcomm-ui/commit/a55faf1))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core]
+
 ## 1.4.3
 
 Apr 23rd, 2026
