@@ -5,12 +5,14 @@
 
 import figma from "@figma/code-connect"
 
-import {Button} from "@qualcomm-ui/react/button"
+import {Button, IconButton} from "@qualcomm-ui/react/button"
 
 const BUTTON_URL = "<FIGMA_COMPONENTS_BASE>?node-id=3571-1400"
 const COMPACT_BUTTON_URL = "<FIGMA_COMPONENTS_BASE>?node-id=16548-1775"
+const ICON_BUTTON_URL = "<FIGMA_COMPONENTS_BASE>?node-id=22444-21587"
+const COMPACT_ICON_BUTTON_URL = "<FIGMA_COMPONENTS_BASE>?node-id=22861-1682"
 
-const sharedProps = {
+const baseProps = {
   disabled: figma.enum("state", {
     disabled: true,
   }),
@@ -20,7 +22,6 @@ const sharedProps = {
     primary: "primary",
     "white-persistent": "white-persistent",
   }),
-  label: figma.string("label"),
   size: figma.enum("size", {
     large: "lg",
     small: "sm",
@@ -31,11 +32,20 @@ const sharedProps = {
   }),
 }
 
+const sharedButtonProps = {
+  ...baseProps,
+  label: figma.string("label"),
+}
+
+const sharedIconButtonProps = {
+  ...baseProps,
+}
+
 // Main Button
 figma.connect(Button, BUTTON_URL, {
   example: ({label, ...props}) => <Button {...props}>{label}</Button>,
   props: {
-    ...sharedProps,
+    ...sharedButtonProps,
     startIcon: figma.enum("icon", {
       start: figma.instance("iconXxs"),
     }),
@@ -46,7 +56,7 @@ figma.connect(Button, BUTTON_URL, {
 figma.connect(Button, BUTTON_URL, {
   example: ({label, ...props}) => <Button {...props}>{label}</Button>,
   props: {
-    ...sharedProps,
+    ...sharedButtonProps,
     endIcon: figma.enum("icon", {
       end: figma.instance("iconXxs"),
     }),
@@ -55,17 +65,8 @@ figma.connect(Button, BUTTON_URL, {
 })
 
 figma.connect(Button, BUTTON_URL, {
-  example: ({icon, ...props}) => <Button {...props}>{icon}</Button>,
-  props: {
-    ...sharedProps,
-    icon: figma.instance("iconXxs"),
-  },
-  variant: {icon: "only"},
-})
-
-figma.connect(Button, BUTTON_URL, {
   example: ({label, ...props}) => <Button {...props}>{label}</Button>,
-  props: sharedProps,
+  props: sharedButtonProps,
   variant: {icon: "none"},
 })
 
@@ -77,7 +78,7 @@ figma.connect(Button, COMPACT_BUTTON_URL, {
     </Button>
   ),
   props: {
-    ...sharedProps,
+    ...sharedButtonProps,
     startIcon: figma.enum("icon", {
       start: figma.instance("iconXxs"),
     }),
@@ -92,7 +93,7 @@ figma.connect(Button, COMPACT_BUTTON_URL, {
     </Button>
   ),
   props: {
-    ...sharedProps,
+    ...sharedButtonProps,
     endIcon: figma.enum("icon", {
       end: figma.instance("iconXxs"),
     }),
@@ -101,24 +102,60 @@ figma.connect(Button, COMPACT_BUTTON_URL, {
 })
 
 figma.connect(Button, COMPACT_BUTTON_URL, {
-  example: ({icon, ...props}) => (
-    <Button density="compact" {...props}>
-      {icon}
-    </Button>
-  ),
-  props: {
-    ...sharedProps,
-    icon: figma.instance("iconXxs"),
-  },
-  variant: {icon: "only"},
-})
-
-figma.connect(Button, COMPACT_BUTTON_URL, {
   example: ({label, ...props}) => (
     <Button density="compact" {...props}>
       {label}
     </Button>
   ),
-  props: sharedProps,
+  props: sharedButtonProps,
   variant: {icon: "none"},
+})
+
+// Icon Button
+figma.connect(IconButton, ICON_BUTTON_URL, {
+  example: (props) => <IconButton {...props} />,
+  props: {...sharedIconButtonProps, icon: figma.instance("iconXs")},
+  variant: {
+    size: "small",
+  },
+})
+
+figma.connect(IconButton, ICON_BUTTON_URL, {
+  example: (props) => <IconButton {...props} />,
+  props: {...sharedIconButtonProps, icon: figma.instance("iconSm")},
+  variant: {
+    size: "medium",
+  },
+})
+
+figma.connect(IconButton, ICON_BUTTON_URL, {
+  example: (props) => <IconButton {...props} />,
+  props: {...sharedIconButtonProps, icon: figma.instance("iconMd")},
+  variant: {
+    size: "large",
+  },
+})
+
+figma.connect(IconButton, COMPACT_ICON_BUTTON_URL, {
+  example: (props) => <IconButton density="compact" {...props} />,
+  props: {...sharedIconButtonProps, icon: figma.instance("iconXxs")},
+  variant: {
+    size: "small",
+  },
+})
+
+figma.connect(IconButton, COMPACT_ICON_BUTTON_URL, {
+  example: (props) => <IconButton density="compact" {...props} />,
+  props: {...sharedIconButtonProps, icon: figma.instance("iconXs")},
+  variant: {
+    size: "medium",
+  },
+})
+
+figma.connect(IconButton, COMPACT_ICON_BUTTON_URL, {
+  example: (props) => <IconButton density="compact" {...props} />,
+  props: {...sharedIconButtonProps, icon: figma.instance("iconXs")},
+  variant: {
+    size: "large",
+  },
 })

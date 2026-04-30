@@ -7,8 +7,7 @@ import figma from "@figma/code-connect"
 
 import {AlertBanner} from "@qualcomm-ui/react/alert-banner"
 
-const FIGMA_URL =
-  "https://www.figma.com/design/G6YKSbQ5Jn83xQBRvlqe6M/Code-Connect?node-id=3566-16209"
+const FIGMA_URL = "<FIGMA_COMPONENTS_BASE>?node-id=3566-16209"
 
 const sharedProps = {
   description: figma.boolean("description", {
