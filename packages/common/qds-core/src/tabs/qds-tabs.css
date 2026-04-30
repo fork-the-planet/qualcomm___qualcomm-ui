@@ -249,24 +249,34 @@
 }
 
 .qui-tab__icon {
-  /* override the default size */
-  &[data-size] {
-    --icon-size: var(--sizing-70);
+  border-radius: var(--border-radius-xs);
+
+  &[data-variant="line"] {
+    &[data-size="sm"] {
+      --icon-size: var(--sizing-60);
+      padding: var(--spacing-20);
+    }
+    &[data-size="md"],
+    &[data-size="lg"],
+    &[data-size="xl"] {
+      --icon-size: var(--sizing-70);
+      padding: var(--spacing-10);
+    }
   }
-  &[data-size="sm"] {
-    --icon-size: var(--sizing-60);
+
+  &[data-variant="contained"] {
+    &[data-size="sm"] {
+      --icon-size: var(--sizing-60);
+      padding: var(--spacing-20);
+    }
+    &[data-size="md"] {
+      --icon-size: var(--sizing-70);
+      padding: var(--spacing-10);
+    }
   }
 
   &[data-icon-variant="filled"] {
     background: var(--color-background-support-neutral);
-    border-radius: var(--border-radius-xs);
     color: var(--color-utility-persistent-white);
-    padding: var(--spacing-30);
-    &[data-size="sm"] {
-      padding: var(--spacing-20);
-    }
-    .qui-icon__root {
-      --icon-size: var(--sizing-60);
-    }
   }
 }
