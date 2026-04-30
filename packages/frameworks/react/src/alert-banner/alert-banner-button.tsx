@@ -6,6 +6,9 @@ import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {useAlertBannerContext} from "./qds-alert-banner-context"
 
+/**
+ * @since 1.21.0
+ */
 export interface AlertBannerButtonProps extends Omit<
   ButtonProps,
   "density" | "emphasis" | "size" | "variant"
