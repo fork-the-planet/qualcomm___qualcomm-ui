@@ -8,10 +8,12 @@ import {useAlertBannerContext} from "./qds-alert-banner-context"
 
 export interface AlertBannerButtonProps extends Omit<
   ButtonProps,
-  "emphasis" | "size" | "variant"
+  "density" | "emphasis" | "size" | "variant"
 > {}
 
 /**
+ * The alert's primary action. Use this instead of `AlertBanner.ActionContainer`
+ *
  * @since 1.21.0
  */
 export function AlertBannerButton(props: AlertBannerButtonProps): ReactElement {
