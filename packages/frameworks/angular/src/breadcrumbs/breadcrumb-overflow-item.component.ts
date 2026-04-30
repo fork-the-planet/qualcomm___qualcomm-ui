@@ -40,6 +40,9 @@ const breadcrumbsSizeToMenuSize: Record<string, QdsMenuSize> = {
   sm: "sm",
 }
 
+/**
+ * @since 2.6.0
+ */
 @Component({
   providers: [
     provideIcons({ChevronRight}),

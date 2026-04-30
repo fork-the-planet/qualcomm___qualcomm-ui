@@ -16,6 +16,9 @@ import {
 } from "./breadcrumbs-item-icon"
 import {useQdsBreadcrumbsContext} from "./qds-breadcrumbs-context"
 
+/**
+ * @since 1.21.0
+ */
 export interface BreadcrumbsOverflowTriggerProps extends ElementRenderProp<"button"> {
   /**
    * React {@link https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children children} prop.
@@ -35,6 +38,9 @@ export interface BreadcrumbsOverflowTriggerProps extends ElementRenderProp<"butt
   itemIconProps?: BreadcrumbsItemIconProps
 }
 
+/**
+ * @since 1.21.0
+ */
 export function BreadcrumbsOverflowTrigger({
   children = "\u2026",
   icon,

@@ -28,6 +28,9 @@ const breadcrumbsSizeToMenuSize: Record<string, QdsMenuSize> = {
   sm: "sm",
 }
 
+/**
+ * @since 1.21.0
+ */
 export interface BreadcrumbsOverflowItemProps extends BreadcrumbsItemRootProps {
   /**
    * Accessible label for the overflow trigger button.
@@ -64,6 +67,9 @@ export interface BreadcrumbsOverflowItemProps extends BreadcrumbsItemRootProps {
   separatorProps?: BreadcrumbsItemSeparatorProps
 }
 
+/**
+ * @since 1.21.0
+ */
 export function BreadcrumbsOverflowItem({
   "aria-label": ariaLabel = "Show more",
   children,

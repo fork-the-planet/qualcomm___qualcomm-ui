@@ -6,7 +6,6 @@
 import figma from "@figma/code-connect"
 
 import {AlertBanner} from "@qualcomm-ui/react/alert-banner"
-import {Button} from "@qualcomm-ui/react/button"
 
 const FIGMA_URL =
   "https://www.figma.com/design/G6YKSbQ5Jn83xQBRvlqe6M/Code-Connect?node-id=3566-16209"
@@ -30,11 +29,7 @@ figma.connect(AlertBanner, FIGMA_URL, {
   props: {
     ...sharedProps,
     action: figma.boolean("button", {
-      true: (
-        <Button emphasis="white-persistent" size="sm">
-          Button
-        </Button>
-      ),
+      true: <AlertBanner.Button>Button</AlertBanner.Button>,
     }),
     dismissable: figma.boolean("dismiss"),
   },
@@ -54,11 +49,7 @@ figma.connect(AlertBanner.Root, FIGMA_URL, {
   props: {
     ...sharedProps,
     action: figma.boolean("button", {
-      true: (
-        <Button emphasis="white-persistent" size="sm">
-          Button
-        </Button>
-      ),
+      true: <AlertBanner.Button>Button</AlertBanner.Button>,
     }),
     dismissButton: figma.boolean("dismiss", {
       true: <AlertBanner.CloseButton />,
@@ -73,11 +64,7 @@ figma.connect(AlertBanner, FIGMA_URL, {
   props: {
     ...sharedProps,
     action: figma.boolean("button", {
-      true: (
-        <Button emphasis="neutral" size="sm" variant="outline">
-          Button
-        </Button>
-      ),
+      true: <AlertBanner.Button>Button</AlertBanner.Button>,
     }),
     dismissable: figma.boolean("dismiss"),
     variant: "subtle",
@@ -98,11 +85,7 @@ figma.connect(AlertBanner.Root, FIGMA_URL, {
   props: {
     ...sharedProps,
     action: figma.boolean("button", {
-      true: (
-        <Button emphasis="neutral" size="sm" variant="outline">
-          Button
-        </Button>
-      ),
+      true: <AlertBanner.Button>Button</AlertBanner.Button>,
     }),
     dismissButton: figma.boolean("dismiss", {
       true: <AlertBanner.CloseButton />,
