@@ -15,15 +15,7 @@ import {ButtonModule} from "@qualcomm-ui/angular/button"
       q-alert-banner
       variant="subtle"
     >
-      <button
-        emphasis="neutral"
-        q-alert-banner-action
-        q-button
-        size="sm"
-        variant="outline"
-      >
-        Action
-      </button>
+      <button q-alert-banner-button>Action</button>
     </div>
     <!-- preview -->
   `,
