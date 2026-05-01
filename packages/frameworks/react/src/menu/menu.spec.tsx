@@ -6,6 +6,7 @@ import {page, userEvent} from "vitest/browser"
 import {render} from "vitest-browser-react"
 
 import {Menu} from "@qualcomm-ui/react/menu"
+import {MenuContext as CoreMenuContext} from "@qualcomm-ui/react-core/menu"
 import {Portal} from "@qualcomm-ui/react-core/portal"
 
 async function expectLastCallWith(
@@ -70,6 +71,39 @@ describe("Menu", () => {
     await expect.element(page.getByRole("menu")).toBeVisible()
     await page.getByText("Item 1").click()
     await expect.element(page.getByRole("menu")).not.toBeInTheDocument()
+  })
+
+  test("Context render prop exposes live menu state", async () => {
+    await render(
+      <Menu.Root>
+        <Menu.Trigger>
+          <Menu.Button>Context Menu</Menu.Button>
+        </Menu.Trigger>
+        <CoreMenuContext>
+          {(context) => (
+            <div data-test-id="menu-context-state">
+              {context.open ? "open" : "closed"}
+            </div>
+          )}
+        </CoreMenuContext>
+        <Portal>
+          <Menu.Positioner>
+            <Menu.Content>
+              <Menu.Item value="duplicate">Duplicate</Menu.Item>
+            </Menu.Content>
+          </Menu.Positioner>
+        </Portal>
+      </Menu.Root>,
+    )
+
+    const contextState = page.getByTestId("menu-context-state")
+    await expect.element(contextState).toHaveTextContent("closed")
+
+    await page.getByRole("button", {name: "Context Menu"}).click()
+    await expect.element(contextState).toHaveTextContent("open")
+
+    await userEvent.keyboard("{Escape}")
+    await expect.element(contextState).toHaveTextContent("closed")
   })
 
   test("Checkbox items", async () => {
