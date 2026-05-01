@@ -1,16 +1,11 @@
 import type {ReactElement} from "react"
 
 import {AlertBanner} from "@qualcomm-ui/react/alert-banner"
-import {Button} from "@qualcomm-ui/react/button"
 
 export function AlertBannerExplorerDemo(): ReactElement {
   return (
     <AlertBanner
-      action={
-        <Button emphasis="neutral" size="sm" variant="outline">
-          Action
-        </Button>
-      }
+      action={<AlertBanner.Button>Action</AlertBanner.Button>}
       description="Description"
       dismissable
       heading="Heading"
