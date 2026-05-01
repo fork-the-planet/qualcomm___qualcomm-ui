@@ -168,7 +168,7 @@ catalogs:
 
 overrides:
   eslint: 9.39.1
-  lodash: 4.17.23
+  lodash: 4.18.1
   playwright: 1.56.1
   prettier: 3.8.3
   typescript: 5.9.3
@@ -575,8 +575,8 @@ importers:
         specifier: 'catalog:'
         version: 4.18.1
       minimatch:
-        specifier: ^10.2.4
-        version: 10.2.4
+        specifier: ^10.2.5
+        version: 10.2.5
       ora:
         specifier: ^9.0.0
         version: 9.0.0
@@ -4139,8 +4139,8 @@ importers:
         specifier: 'catalog:'
         version: 0.27.3
       minimatch:
-        specifier: ^10.2.4
-        version: 10.2.4
+        specifier: ^10.2.5
+        version: 10.2.5
       react:
         specifier: 'catalog:'
         version: 19.2.4
@@ -12182,8 +12182,8 @@ packages:
   lodash.truncate@4.4.2:
     resolution: {integrity: sha512-jttmRe7bRse52OsWIMDLaXxWqRAmtIUccAQ3garviCqJjafXOfNMO0yMfNpdD6zbGaTU0P5Nz7e7gAT6cKmJRw==}
 
-  lodash@4.17.23:
-    resolution: {integrity: sha512-LgVTMpQtIopCi79SJeDiP0TfWi5CNEc/L/aRdTh3yIvmZXTnheWpKjSZhnvMl8iXbC1tFg9gdHHDMLoV7CnG+w==}
+  lodash@4.18.1:
+    resolution: {integrity: sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==}
 
   log-symbols@4.1.0:
     resolution: {integrity: sha512-8XPvpAA8uyhfteu8pIvQxpJZ7SYYdpUivZpGy6sFsBuKRY/7rQGavedeB8aK+Zkyq6upMFVL/9AW6vOYzfRyLg==}
@@ -12581,10 +12581,6 @@ packages:
   minimatch@10.2.0:
     resolution: {integrity: sha512-ugkC31VaVg9cF0DFVoADH12k6061zNZkZON+aX8AWsR9GhPcErkcMBceb6znR8wLERM2AkkOxy2nWRLpT9Jq5w==}
     engines: {node: 20 || >=22}
-
-  minimatch@10.2.4:
-    resolution: {integrity: sha512-oRjTw/97aTBN0RHbYCdtF1MQfvusSIBQM0IZEgzl6426+8jSC0nF1a/GmnVLpfB9yyr6g6FTqWqiZVbxrtaCIg==}
-    engines: {node: 18 || 20 || >=22}
 
   minimatch@10.2.5:
     resolution: {integrity: sha512-MULkVLfKGYDFYejP07QOurDLLQpcjk7Fw+7jXS2R2czRQzR56yHRveU5NDJEOviH+hETZKSkIk5c+T23GjFUMg==}
@@ -18609,7 +18605,7 @@ snapshots:
       find-up: 5.0.0
       glob: 11.1.0
       jsdom: 24.1.3
-      lodash: 4.17.23
+      lodash: 4.18.1
       minimatch: 9.0.5
       ora: 5.4.1
       parse5: 7.3.0
@@ -19328,7 +19324,7 @@ snapshots:
     dependencies:
       '@swc/helpers': 0.5.17
       caniuse-lite: 1.0.30001777
-      lodash: 4.17.23
+      lodash: 4.18.1
       rslog: 1.3.0
 
   '@module-federation/bridge-react-webpack-plugin@0.21.2':
@@ -20049,7 +20045,7 @@ snapshots:
       exit-hook: 2.2.1
       isbot: 5.1.32
       jsesc: 3.0.2
-      lodash: 4.17.23
+      lodash: 4.18.1
       p-map: 7.0.4
       pathe: 1.1.2
       picocolors: 1.1.1
@@ -20099,7 +20095,7 @@ snapshots:
       exit-hook: 2.2.1
       isbot: 5.1.32
       jsesc: 3.0.2
-      lodash: 4.17.23
+      lodash: 4.18.1
       p-map: 7.0.4
       pathe: 1.1.2
       picocolors: 1.1.1
@@ -21820,7 +21816,7 @@ snapshots:
       '@typescript-eslint/types': 8.58.2
       '@typescript-eslint/visitor-keys': 8.58.2
       debug: 4.4.3
-      minimatch: 10.2.4
+      minimatch: 10.2.5
       semver: 7.7.4
       tinyglobby: 0.2.15
       ts-api-utils: 2.5.0(typescript@5.9.3)
@@ -22498,7 +22494,7 @@ snapshots:
       graceful-fs: 4.2.11
       is-stream: 2.0.1
       lazystream: 1.0.1
-      lodash: 4.17.23
+      lodash: 4.18.1
       normalize-path: 3.0.0
       readable-stream: 4.7.0
 
@@ -26026,7 +26022,7 @@ snapshots:
 
   lodash.truncate@4.4.2: {}
 
-  lodash@4.17.23: {}
+  lodash@4.18.1: {}
 
   log-symbols@4.1.0:
     dependencies:
@@ -26696,15 +26692,11 @@ snapshots:
 
   minim@0.23.8:
     dependencies:
-      lodash: 4.17.23
+      lodash: 4.18.1
 
   minimalistic-assert@1.0.1: {}
 
   minimatch@10.2.0:
-    dependencies:
-      brace-expansion: 5.0.2
-
-  minimatch@10.2.4:
     dependencies:
       brace-expansion: 5.0.2
 
@@ -29487,7 +29479,7 @@ snapshots:
       immutable: 3.8.2
       js-file-download: 0.4.12
       js-yaml: 4.1.1
-      lodash: 4.17.23
+      lodash: 4.18.1
       prop-types: 15.8.1
       randexp: 0.5.3
       randombytes: 2.1.0
@@ -29529,7 +29521,7 @@ snapshots:
       immutable: 3.8.2
       js-file-download: 0.4.12
       js-yaml: 4.1.1
-      lodash: 4.17.23
+      lodash: 4.18.1
       prop-types: 15.8.1
       randexp: 0.5.3
       randombytes: 2.1.0
