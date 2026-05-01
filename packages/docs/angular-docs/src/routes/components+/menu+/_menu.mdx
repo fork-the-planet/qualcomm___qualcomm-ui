@@ -5,15 +5,18 @@ component: Menu
 aliases: [dropdown menu, context menu, popup menu]
 ---
 
-import {QdsDemo} from "~components/demo"
-import {TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
+import {ComponentExplorer, QdsDemo} from "~components/demo"
+import {
+  TypeDocAngularAttributes,
+  TypeDocProps,
+} from "@qualcomm-ui/react-mdx/typedoc"
 
 # {frontmatter.title}
 
 {frontmatter.description}
 
-```tsx
-import {Menu} from "@qualcomm-ui/react/menu"
+```typescript
+import {MenuModule} from "@qualcomm-ui/angular/menu"
 ```
 
 ## Examples
@@ -34,7 +37,7 @@ Compose the menu to include icons and commands.
 menu trigger, dropdown button, icon menu button
 :::
 
-Use [`q-menu-button`](./#q-menu-button) for a labeled trigger and [`q-menu-icon-button`](./#q-menu-icon-button) for an icon-only trigger. Both automatically render a chevron indicator. Always provide an `aria-label` on `q-menu-icon-button` to give assistive technologies an accessible name. Control the menu position with [positioning.placement](./#positioning).
+Use [`q-menu-button`](./#q-menu-button) for a labeled trigger and [`q-menu-icon-button`](./#q-menu-icon-button) for an icon-only trigger. Both automatically render a chevron indicator. Always provide an [`aria-label`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-label) on `q-menu-icon-button` to give assistive technologies an accessible name. Control the menu position with [positioning.placement](./#positioning).
 
 <QdsDemo name="MenuButtonDemo" />
 
@@ -86,17 +89,20 @@ There are three item types, each corresponding to one of the three types of aria
 multi-select, toggle
 :::
 
-Use checkbox items when you need options that are individually selectable.
+There are two appearance options:
+
+- For a checkbox appearance, render the [`q-menu-checkbox-item-control`](./#q-menu-checkbox-item-control) directive as a child of the item.
+- Render the [`q-menu-item-indicator`](./#q-menu-item-indicator) element for a simple selection indicator.
 
 <QdsDemo name="MenuCheckboxItemsDemo" />
 
-#### Checkbox Group State
+#### Checkbox Selection State
 
 ::: terms
-controlled checkbox
+checkedChanged, controlled checkbox
 :::
 
-Checkbox item state is controlled individually on each item. Use the `useCheckboxGroup` hook to manage the state of a group of checkbox items.
+Illustrates how to manage and reflect the checked state of checkbox menu items. The `useCheckboxGroup` helper from `@qualcomm-ui/angular-core/checkbox` manages a group of values; wire each item's [checked](./#checked) and [(checkedChanged)](./#checkedChanged) bindings to it.
 
 <QdsDemo name="MenuCheckboxStateDemo" />
 
@@ -106,7 +112,7 @@ Checkbox item state is controlled individually on each item. Use the `useCheckbo
 single-select, exclusive selection
 :::
 
-Radio items are grouped such that only one can be selected at a time.
+Demonstrates how to group radio menu items so only one can be selected at a time.
 
 <QdsDemo name="MenuRadioGroupDemo" />
 
@@ -116,7 +122,7 @@ Radio items are grouped such that only one can be selected at a time.
 controlled radio, radio selection
 :::
 
-Radio item state can be controlled via the [value](./#value) property on the parent `menu-radio-item-group` element.
+Radio item state can be controlled via the [value](./#value) input on the parent `q-menu-radio-item-group` element.
 
 <QdsDemo name="MenuRadioGroupStateDemo" />
 
@@ -186,6 +192,28 @@ Use the [positioning.hideWhenDetached](./#positioning) prop to hide the menu whe
 
 <QdsDemo name="MenuHideWhenDetachedDemo" />
 
+## Explorer
+
+<ComponentExplorer
+  linkPrefix="q-menu"
+  name="MenuExplorerDemo"
+  parts={[
+    "trigger",
+    "content",
+    "item-group",
+    "item-group-label",
+    "item",
+    {name: "start-icon", link: "#q-menu-item-start-icon"},
+    {name: "item-text", link: "#q-menu-item-label"},
+    {name: "description", link: "#q-menu-item-description"},
+    {name: "item-control", link: "#q-menu-checkbox-item-control"},
+    "item-indicator",
+    "separator",
+  ]}
+  previewClassName="items-start mt-6"
+  scope="menu"
+/>
+
 ## API
 
 ### \<q-menu\>
@@ -196,17 +224,109 @@ Use the [positioning.hideWhenDetached](./#positioning) prop to hide the menu whe
 
 <TypeDocProps name="MenuButtonComponent" />
 
+<TypeDocAngularAttributes name="QdsMenuButtonBindings" />
+
 ### q-menu-icon-button
 
 <TypeDocProps name="MenuIconButtonComponent" />
+
+<TypeDocAngularAttributes name="QdsMenuButtonBindings" />
+
+### q-menu-trigger
+
+<TypeDocProps name="MenuTriggerDirective" />
+
+<TypeDocAngularAttributes name="MenuTriggerBindings" />
+
+### q-menu-content
+
+<TypeDocProps name="MenuContentDirective" />
+
+<TypeDocAngularAttributes
+  name={["QdsMenuContentBindings", "MenuContentBindings"]}
+/>
+
+### q-menu-item-group
+
+<TypeDocProps name="MenuItemGroupDirective" />
+
+<TypeDocAngularAttributes
+  name={["QdsMenuItemGroupBindings", "MenuItemGroupBindings"]}
+/>
+
+### q-menu-item-group-label
+
+<TypeDocProps name="MenuItemGroupLabelDirective" />
+
+<TypeDocAngularAttributes
+  name={["QdsMenuItemGroupLabelBindings", "MenuItemGroupLabelBindings"]}
+/>
 
 ### q-menu-item
 
 <TypeDocProps name="MenuItemDirective" />
 
+<TypeDocAngularAttributes name={["QdsMenuItemBindings", "MenuItemBindings"]} />
+
+### q-menu-item-label
+
+<TypeDocProps name="MenuItemLabelDirective" />
+
+<TypeDocAngularAttributes
+  name={["QdsMenuItemLabelBindings", "MenuItemLabelBindings"]}
+/>
+
+### q-menu-item-start-icon
+
+<TypeDocProps name="MenuItemStartIconComponent" />
+
+<TypeDocAngularAttributes name="QdsMenuItemStartIconBindings" />
+
+### q-menu-item-description
+
+<TypeDocProps name="MenuItemDescriptionDirective" />
+
+<TypeDocAngularAttributes name="QdsMenuDescriptionBindings" />
+
+### q-menu-item-indicator
+
+<TypeDocProps name="MenuItemIndicatorComponent" />
+
+<TypeDocAngularAttributes
+  name={["QdsMenuItemIndicatorBindings", "MenuItemIndicatorBindings"]}
+/>
+
+### q-menu-separator
+
+<TypeDocProps name="MenuSeparatorDirective" />
+
+<TypeDocAngularAttributes
+  name={["QdsMenuSeparatorBindings", "MenuSeparatorBindings"]}
+/>
+
 ### q-menu-checkbox-item
 
 <TypeDocProps name="MenuCheckboxItemDirective" />
+
+<TypeDocAngularAttributes
+  name={["QdsMenuItemBindings", "MenuOptionItemBindings"]}
+/>
+
+### q-menu-checkbox-item-control
+
+<TypeDocProps name="MenuCheckboxItemControlComponent" />
+
+<TypeDocAngularAttributes
+  name={["QdsMenuCheckboxItemControlBindings", "MenuOptionItemControlBindings"]}
+/>
+
+### q-menu-radio-item-control
+
+<TypeDocProps name="MenuRadioItemControlDirective" />
+
+<TypeDocAngularAttributes
+  name={["QdsMenuRadioItemControlBindings", "MenuOptionItemControlBindings"]}
+/>
 
 ### PositioningOptions
 

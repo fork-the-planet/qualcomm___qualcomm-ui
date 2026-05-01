@@ -37,7 +37,11 @@ export function PaginationPageSize({
   const setPageSize = context.setPageSize
   const pageSizeLabelId = context.pageSizeLabelId
 
-  const mergedProps = mergeProps(qdsContext.getPageSizeBindings(), props)
+  const mergedProps = mergeProps(
+    context.getPageSizeBindings(),
+    qdsContext.getPageSizeBindings(),
+    props,
+  )
 
   return (
     <PolymorphicElement as="div" {...mergedProps}>

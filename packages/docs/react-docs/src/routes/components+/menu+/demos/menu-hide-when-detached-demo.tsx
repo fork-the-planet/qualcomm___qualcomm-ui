@@ -7,7 +7,7 @@ import {Portal} from "@qualcomm-ui/react-core/portal"
 export function MenuHideWhenDetachedDemo(): ReactElement {
   return (
     <Menu.Root open positioning={{hideWhenDetached: true}}>
-      <div className="border-neutral-03 flex max-w-72 gap-2 overflow-x-scroll rounded-md border p-4">
+      <div className="border-neutral-03 box-border flex max-w-72 gap-2 overflow-x-scroll rounded-md border p-4">
         {[...Array(6).keys()].map((x) => (
           <div
             key={x}

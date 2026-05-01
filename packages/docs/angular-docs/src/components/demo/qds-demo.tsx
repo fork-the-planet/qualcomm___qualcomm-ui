@@ -1,4 +1,4 @@
-import {Fragment, useEffect, useId, useMemo, useRef, useState} from "react"
+import {useEffect, useId, useMemo, useRef, useState} from "react"
 
 import {getAngularDemoInfo} from "virtual:angular-demo-registry"
 
@@ -212,7 +212,7 @@ function QdsDemoImpl({
 
   if (hideDemoControls) {
     return (
-      <div ref={demoRef} className="w-full">
+      <div ref={demoRef} className="contents">
         {demoContent}
       </div>
     )

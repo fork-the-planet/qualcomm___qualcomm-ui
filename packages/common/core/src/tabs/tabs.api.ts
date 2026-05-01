@@ -207,6 +207,7 @@ export function createTabsApi(
         hidden: !selected,
         id,
         role: "tabpanel",
+        style: selected ? undefined : {display: "none"},
         tabIndex: composite ? 0 : -1,
       })
     },
