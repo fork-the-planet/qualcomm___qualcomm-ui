@@ -33,8 +33,9 @@
     "lint": "eslint --quiet",
     "prepublishOnly": "qui-cli pre-publish",
     "postpublish": "qui-cli post-publish",
-    "test": "vitest --run -c vitest.config.ts",
-    "test:unit:ci": "cross-env NODE_OPTIONS='' vitest -c vitest.config.ts --run --pool=threads"
+    "test": "vitest --run",
+    "test:coverage": "pnpm test --coverage",
+    "test:unit:ci": "cross-env NODE_OPTIONS='' vitest --run --pool=threads"
   },
   "devDependencies": {
     "@qualcomm-ui/cli": "catalog:",

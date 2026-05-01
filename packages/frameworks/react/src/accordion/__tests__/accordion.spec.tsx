@@ -4,6 +4,8 @@ import {describe, expect, test, vi} from "vitest"
 import {page, userEvent} from "vitest/browser"
 import {render} from "vitest-browser-react"
 
+import {Accordion} from "@qualcomm-ui/react/accordion"
+
 import {items, TestAccordion, testIds} from "./test-accordion"
 
 describe("Accordion", () => {
@@ -25,6 +27,39 @@ describe("Accordion", () => {
         .element(page.getByTestId(testIds.accordionContent + items[i].value))
         .not.toBeVisible()
     }
+  })
+
+  test("Item renders indicator and secondary text", async () => {
+    await render(
+      <Accordion.Root>
+        <Accordion.Item
+          contentProps={{"data-test-id": "accordion-item-content"}}
+          indicatorProps={{
+            "data-test-id": "accordion-item-indicator",
+            icon: <span>Toggle</span>,
+          }}
+          secondaryText="Updated yesterday"
+          text="Account details"
+          value="account-details"
+        >
+          Account content
+        </Accordion.Item>
+      </Accordion.Root>,
+    )
+
+    const trigger = page.getByRole("button", {name: /Account details/})
+    const indicator = page.getByTestId("accordion-item-indicator")
+    const content = page.getByTestId("accordion-item-content")
+
+    await expect.element(page.getByText("Updated yesterday")).toBeVisible()
+    await expect.element(page.getByText("Toggle")).toBeVisible()
+    await expect.element(indicator).toHaveAttribute("data-state", "closed")
+    await expect.element(content).not.toBeVisible()
+
+    await trigger.click()
+
+    await expect.element(indicator).toHaveAttribute("data-state", "open")
+    await expect.element(content).toBeVisible()
   })
 
   test("single mode (default) should allow only open one item at a time", async () => {
