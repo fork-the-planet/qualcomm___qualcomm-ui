@@ -1,4 +1,5 @@
 export * from "./tabs-add-remove-demo"
+export * from "./tabs-explorer-demo"
 export * from "./tabs-contained-sizes-demo"
 export * from "./tabs-context-demo"
 export * from "./tabs-controlled-value-demo"

@@ -1,5 +1,13 @@
 # @qualcomm-ui/core Changelog
 
+## 1.9.2
+
+May 1st, 2026
+
+### Bug Fixes
+
+- [tabs]: hide non-selected panels and rework icon sizing ([885e7da](https://github.com/qualcomm/qualcomm-ui/commit/885e7da))
+
 ## 1.9.1
 
 Apr 29th, 2026

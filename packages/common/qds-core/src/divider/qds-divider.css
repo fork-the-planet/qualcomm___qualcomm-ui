@@ -1,4 +1,6 @@
 .qui-divider__root {
+  border: 0 solid;
+  height: 0;
   margin: 8px 0;
   outline: none;
   position: relative;

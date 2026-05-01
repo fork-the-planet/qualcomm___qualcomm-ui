@@ -9,7 +9,7 @@ badges:
     url: https://github.com/qualcomm/qualcomm-ui/blob/main/packages/frameworks/react/CHANGELOG.md#1120
 ---
 
-import {Demo} from "~components/demo"
+import {ComponentExplorer, Demo} from "~components/demo"
 import * as demos from "./demos"
 import {TypeDocAttributes, TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
 
@@ -76,6 +76,22 @@ The `<AlertBanner.Button>` was added in [v1.21.0](https://github.com/qualcomm/qu
 Pass an `<AlertBanner.Button>` instance to the [action](./#action-1) prop.
 
 <Demo name="AlertBannerActionDemo" component={demos.AlertBannerActionDemo} />
+
+## Explorer
+
+<ComponentExplorer
+  component={demos.AlertBannerExplorerDemo}
+  linkPrefix="alert-banner"
+  parts={[
+    "root",
+    {name: "status-icon", link: "#alert-banner-icon"},
+    "heading",
+    "description",
+    {name: "action", link: "#alert-banner-action-container"},
+    "close-button",
+  ]}
+  scope="alert-banner"
+/>
 
 ## API
 
