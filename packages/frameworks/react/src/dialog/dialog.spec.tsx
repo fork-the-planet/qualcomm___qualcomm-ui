@@ -20,6 +20,7 @@ const labels = {
 
 const testIds = {
   content: "dialog-content",
+  positioner: "dialog-positioner",
 }
 
 interface Props extends Partial<DialogRootProps> {
@@ -38,7 +39,7 @@ function SimpleDialog({confirmButtonProps, contentProps, ...props}: Props) {
       </Dialog.Trigger>
       <Portal>
         <Dialog.Backdrop />
-        <Dialog.Positioner>
+        <Dialog.Positioner data-test-id={testIds.positioner}>
           <Dialog.Content data-test-id={testIds.content} {...contentProps}>
             <Dialog.Body>
               <Dialog.Heading>{labels.title}</Dialog.Heading>
@@ -157,5 +158,72 @@ describe("Dialog", () => {
       .element(page.getByTestId(testIds.content))
       .toHaveAttribute("data-state", "open")
     await assertVisible()
+  })
+
+  test("trigger opens dialog", async () => {
+    await render(<SimpleDialog />)
+
+    await assertHidden()
+    await page.getByText(labels.openButton).click()
+    await assertVisible()
+  })
+
+  test("defaultOpen", async () => {
+    await render(<SimpleDialog defaultOpen />)
+
+    await assertVisible()
+  })
+
+  test("onOpenChange callback", async () => {
+    const spy = vi.fn()
+    await render(<SimpleDialog onOpenChange={spy} />)
+
+    await page.getByText(labels.openButton).click()
+    await assertVisible()
+    expect(spy).toHaveBeenLastCalledWith(true)
+
+    await page.getByLabelText(labels.closeButton).click()
+    await assertHidden()
+    expect(spy).toHaveBeenLastCalledWith(false)
+  })
+
+  test("closeOnInteractOutside", async () => {
+    await render(<SimpleDialog />)
+
+    await page.getByText(labels.openButton).click()
+    await assertVisible()
+    // The positioner is the full-screen overlay layered above the backdrop that
+    // a user sees as the "backdrop"; clicking it fires the interact-outside event.
+    await page.getByTestId(testIds.positioner).click({position: {x: 5, y: 5}})
+    await assertHidden()
+  })
+
+  test("closeOnInteractOutside: false", async () => {
+    await render(<SimpleDialog closeOnInteractOutside={false} />)
+
+    await page.getByText(labels.openButton).click()
+    await assertVisible()
+    await page.getByTestId(testIds.positioner).click({position: {x: 5, y: 5}})
+    await assertVisible()
+  })
+
+  test("CloseTrigger closes dialog", async () => {
+    await render(<SimpleDialog />)
+
+    await page.getByText(labels.openButton).click()
+    await assertVisible()
+    await page.getByText(labels.confirmButton).click()
+    await assertHidden()
+  })
+
+  test("exposes dialog role and accessible name/description", async () => {
+    await render(<SimpleDialog defaultOpen />)
+
+    const dialog = page.getByRole("dialog")
+    await expect.element(dialog).toBeVisible()
+    await expect.element(dialog).toHaveAccessibleName(labels.title)
+    await expect
+      .element(dialog)
+      .toHaveAccessibleDescription(labels.description)
   })
 })
