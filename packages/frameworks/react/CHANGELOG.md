@@ -1,5 +1,17 @@
 # @qualcomm-ui/react Changelog
 
+## 1.21.1
+
+May 1st, 2026
+
+### Bug Fixes
+
+- [react/pagination]: merge core bindings so page-size emits data-part ([8c5f45b](https://github.com/qualcomm/qualcomm-ui/commit/8c5f45b))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core, @qualcomm-ui/core, @qualcomm-ui/react-core]
+
 ## 1.21.0
 
 Apr 29th, 2026
