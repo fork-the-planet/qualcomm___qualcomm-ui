@@ -179,13 +179,17 @@ const tests: MultiComponentTestCase[] = [
         await render(getComponent())
 
         const trigger = page.getByText(triggerText)
-        await expect.element(page.getByLabelText(popoverLabel)).not.toBeVisible()
+        await expect
+          .element(page.getByLabelText(popoverLabel))
+          .not.toBeVisible()
 
         await trigger.click()
         await expect.element(page.getByLabelText(popoverLabel)).toBeVisible()
 
         await trigger.click()
-        await expect.element(page.getByLabelText(popoverLabel)).not.toBeVisible()
+        await expect
+          .element(page.getByLabelText(popoverLabel))
+          .not.toBeVisible()
       })
     },
   },
@@ -225,7 +229,9 @@ const tests: MultiComponentTestCase[] = [
         await expect.element(page.getByLabelText(popoverLabel)).toBeVisible()
 
         await userEvent.keyboard("{Escape}")
-        await expect.element(page.getByLabelText(popoverLabel)).not.toBeVisible()
+        await expect
+          .element(page.getByLabelText(popoverLabel))
+          .not.toBeVisible()
       })
     },
   },
@@ -271,7 +277,9 @@ const tests: MultiComponentTestCase[] = [
         await expect.element(page.getByLabelText(popoverLabel)).toBeVisible()
 
         await page.getByText(outsideButtonText).click()
-        await expect.element(page.getByLabelText(popoverLabel)).not.toBeVisible()
+        await expect
+          .element(page.getByLabelText(popoverLabel))
+          .not.toBeVisible()
       })
     },
   },
@@ -372,7 +380,9 @@ const tests: MultiComponentTestCase[] = [
 
         const stateValue = page.getByTestId("state-value")
         await expect.element(stateValue).toHaveTextContent("closed")
-        await expect.element(page.getByLabelText(popoverLabel)).not.toBeVisible()
+        await expect
+          .element(page.getByLabelText(popoverLabel))
+          .not.toBeVisible()
 
         await page.getByText(triggerText).click()
         await expect.element(stateValue).toHaveTextContent("open")
@@ -380,7 +390,9 @@ const tests: MultiComponentTestCase[] = [
 
         await userEvent.keyboard("{Escape}")
         await expect.element(stateValue).toHaveTextContent("closed")
-        await expect.element(page.getByLabelText(popoverLabel)).not.toBeVisible()
+        await expect
+          .element(page.getByLabelText(popoverLabel))
+          .not.toBeVisible()
       })
     },
   },
@@ -450,7 +462,9 @@ const tests: MultiComponentTestCase[] = [
         await expect.element(page.getByLabelText(popoverLabel)).toBeVisible()
 
         await page.getByText(triggerText).click()
-        await expect.element(page.getByLabelText(popoverLabel)).not.toBeVisible()
+        await expect
+          .element(page.getByLabelText(popoverLabel))
+          .not.toBeVisible()
       })
     },
   },
@@ -498,7 +512,9 @@ const tests: MultiComponentTestCase[] = [
 
         // Tab cycles focus within the popover - should not land on outside button.
         await userEvent.tab()
-        await expect.element(page.getByText(outsideButtonText)).not.toHaveFocus()
+        await expect
+          .element(page.getByText(outsideButtonText))
+          .not.toHaveFocus()
       })
     },
   },
@@ -568,7 +584,9 @@ const tests: MultiComponentTestCase[] = [
         await expect.element(page.getByLabelText(popoverLabel)).toBeVisible()
 
         await page.getByLabelText(closeButtonLabel).click()
-        await expect.element(page.getByLabelText(popoverLabel)).not.toBeVisible()
+        await expect
+          .element(page.getByLabelText(popoverLabel))
+          .not.toBeVisible()
       })
     },
   },

@@ -166,7 +166,9 @@ const tests: MultiComponentTest[] = [
         await expect.element(page.getByTestId(testIds.root)).toBeVisible()
         await expect.element(page.getByTestId(testIds.icon)).toBeVisible()
         await expect.element(page.getByTestId(testIds.label)).toBeVisible()
-        await expect.element(page.getByTestId(testIds.description)).toBeVisible()
+        await expect
+          .element(page.getByTestId(testIds.description))
+          .toBeVisible()
         await expect
           .element(page.getByTestId(testIds.actionContainer))
           .toBeVisible()

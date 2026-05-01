@@ -109,7 +109,7 @@ const tests: MultiComponentTest[] = [
         </Collapsible.Root>
       )
     },
-    testCase: (getComponent) => {
+    testCase: () => {
       test("disabled - trigger clicks are no-ops", async () => {
         const spy = vi.fn()
         await render(

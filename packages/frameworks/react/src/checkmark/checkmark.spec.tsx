@@ -87,9 +87,7 @@ describe("CheckmarkIcon", () => {
   })
 
   test("renders a visible icon when indeterminate is true", async () => {
-    await render(
-      <CheckmarkIcon data-test-id={iconTestId} indeterminate={true} />,
-    )
+    await render(<CheckmarkIcon data-test-id={iconTestId} indeterminate />)
     await expect.element(page.getByTestId(iconTestId)).toBeVisible()
   })
 })

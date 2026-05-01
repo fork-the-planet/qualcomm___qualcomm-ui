@@ -1,4 +1,5 @@
 import {useState} from "react"
+
 import {describe, expect, test, vi} from "vitest"
 import {page} from "vitest/browser"
 import {render} from "vitest-browser-react"
@@ -26,7 +27,7 @@ describe("Avatar", () => {
 
   test("`onStateChange` fires with `loaded` when image loads", async () => {
     const onStateChange = vi.fn()
-    await render(<TestAvatar src={imgURL} onStateChange={onStateChange} />)
+    await render(<TestAvatar onStateChange={onStateChange} src={imgURL} />)
     await expect.element(page.getByTestId(testIds.avatarImage)).toBeVisible()
     await expect
       .poll(() => onStateChange)
@@ -36,10 +37,7 @@ describe("Avatar", () => {
   test("`onStateChange` fires with `error` when image fails to load", async () => {
     const onStateChange = vi.fn()
     await render(
-      <TestAvatar
-        src="http://example.invalid"
-        onStateChange={onStateChange}
-      />,
+      <TestAvatar onStateChange={onStateChange} src="http://example.invalid" />,
     )
     await expect.element(page.getByTestId(testIds.avatarContent)).toBeVisible()
     await expect

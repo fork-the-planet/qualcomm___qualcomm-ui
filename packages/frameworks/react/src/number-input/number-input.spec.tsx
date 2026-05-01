@@ -1,13 +1,10 @@
 import {useState} from "react"
 
 import {describe, expect, test, vi} from "vitest"
-import {page} from "vitest/browser"
+import {page, userEvent} from "vitest/browser"
 import {render} from "vitest-browser-react"
 
-import {
-  NumberInput,
-  type UnitOption,
-} from "@qualcomm-ui/react/number-input"
+import {NumberInput, type UnitOption} from "@qualcomm-ui/react/number-input"
 
 import {type MultiComponentTestCase, runTests} from "~test-utils/runner"
 
@@ -67,9 +64,7 @@ const tests: MultiComponentTestCase[] = [
       )
     },
     simple() {
-      return (
-        <NumberInput label={demoLabel} placeholder={demoPlaceholder} />
-      )
+      return <NumberInput label={demoLabel} placeholder={demoPlaceholder} />
     },
     testCase: (getComponent) => {
       test("Typing a number updates the input value", async () => {
@@ -170,9 +165,7 @@ const tests: MultiComponentTestCase[] = [
       )
     },
     simple() {
-      return (
-        <NumberInput defaultValue="5" label={demoLabel} max={10} min={5} />
-      )
+      return <NumberInput defaultValue="5" label={demoLabel} max={10} min={5} />
     },
     testCase: (getComponent) => {
       test("Respects min boundary - decrement trigger is disabled at min", async () => {
@@ -333,9 +326,7 @@ const tests: MultiComponentTestCase[] = [
       )
     },
     simple() {
-      return (
-        <NumberInput defaultValue="5" disabled label={demoLabel} />
-      )
+      return <NumberInput defaultValue="5" disabled label={demoLabel} />
     },
     testCase: (getComponent) => {
       test("Disabled state disables input and triggers", async () => {
@@ -364,9 +355,7 @@ const tests: MultiComponentTestCase[] = [
       )
     },
     simple() {
-      return (
-        <NumberInput defaultValue="5" label={demoLabel} readOnly />
-      )
+      return <NumberInput defaultValue="5" label={demoLabel} readOnly />
     },
     testCase: (getComponent) => {
       test("ReadOnly state marks input readonly and disables triggers", async () => {
@@ -399,13 +388,7 @@ const tests: MultiComponentTestCase[] = [
       )
     },
     simple() {
-      return (
-        <NumberInput
-          errorText={demoErrorText}
-          invalid
-          label={demoLabel}
-        />
-      )
+      return <NumberInput errorText={demoErrorText} invalid label={demoLabel} />
     },
     testCase: (getComponent) => {
       test("Invalid state shows error text and aria-invalid", async () => {
@@ -493,14 +476,111 @@ const tests: MultiComponentTestCase[] = [
         await input.click()
         await expect.element(input).toHaveFocus()
         await expect.element(input).toHaveValue("5")
-        await input.element().dispatchEvent(
-          new KeyboardEvent("keydown", {bubbles: true, key: "ArrowUp"}),
-        )
+        await userEvent.keyboard("{ArrowUp}")
         await expect.element(input).toHaveValue("6")
-        await input.element().dispatchEvent(
-          new KeyboardEvent("keydown", {bubbles: true, key: "ArrowDown"}),
-        )
+        await userEvent.keyboard("{ArrowDown}")
         await expect.element(input).toHaveValue("5")
+      })
+    },
+  },
+  {
+    composite() {
+      return (
+        <NumberInput.Root defaultValue="5" max={10} min={2}>
+          <NumberInput.Label>{demoLabel}</NumberInput.Label>
+          <NumberInput.InputGroup>
+            <NumberInput.Input />
+            <NumberInput.Control />
+          </NumberInput.InputGroup>
+        </NumberInput.Root>
+      )
+    },
+    simple() {
+      return <NumberInput defaultValue="5" label={demoLabel} max={10} min={2} />
+    },
+    testCase: (getComponent) => {
+      test("Home and End keys move the value to the range boundaries", async () => {
+        await render(getComponent())
+        const input = page.getByLabelText(demoLabel)
+
+        await input.click()
+        await userEvent.keyboard("{Home}")
+        await expect.element(input).toHaveValue("2")
+
+        await userEvent.keyboard("{End}")
+        await expect.element(input).toHaveValue("10")
+      })
+    },
+  },
+  {
+    composite() {
+      return (
+        <NumberInput.Root defaultValue="5" max={10} min={2}>
+          <NumberInput.Label>{demoLabel}</NumberInput.Label>
+          <NumberInput.InputGroup>
+            <NumberInput.Input />
+            <NumberInput.Control />
+          </NumberInput.InputGroup>
+          <NumberInput.ErrorText>{demoErrorText}</NumberInput.ErrorText>
+        </NumberInput.Root>
+      )
+    },
+    simple() {
+      return (
+        <NumberInput
+          defaultValue="5"
+          errorText={demoErrorText}
+          label={demoLabel}
+          max={10}
+          min={2}
+        />
+      )
+    },
+    testCase: (getComponent) => {
+      test("Clamps out-of-range typed values to the nearest boundary on blur", async () => {
+        await render(
+          <>
+            {getComponent()}
+            <button type="button">Blur target</button>
+          </>,
+        )
+        const input = page.getByLabelText(demoLabel)
+
+        await input.fill("99")
+        await expect.element(input).toHaveAttribute("aria-invalid", "true")
+
+        await page.getByRole("button", {name: "Blur target"}).click()
+        await expect.element(input).toHaveValue("10")
+        await expect.element(page.getByText(demoErrorText)).not.toBeVisible()
+      })
+    },
+  },
+  {
+    composite() {
+      return (
+        <NumberInput.Root allowMouseWheel defaultValue="4">
+          <NumberInput.Label>{demoLabel}</NumberInput.Label>
+          <NumberInput.InputGroup>
+            <NumberInput.Input />
+            <NumberInput.Control />
+          </NumberInput.InputGroup>
+        </NumberInput.Root>
+      )
+    },
+    simple() {
+      return <NumberInput allowMouseWheel defaultValue="4" label={demoLabel} />
+    },
+    testCase: (getComponent) => {
+      test("Focused input responds to mouse wheel increments and decrements", async () => {
+        await render(getComponent())
+        const input = page.getByLabelText(demoLabel)
+
+        await input.click()
+        await userEvent.wheel(input, {delta: {y: -1}})
+        await expect.element(input).toHaveValue("5")
+
+        await userEvent.wheel(input, {delta: {y: 1}})
+        await expect.element(input).toHaveValue("4")
       })
     },
   },
@@ -538,4 +618,174 @@ const unitSelectTests: MultiComponentTestCase[] = [
 describe("NumberInput", () => {
   runTests(tests)
   runTests(unitSelectTests)
+
+  test("Shift Arrow keys apply the larger keyboard step", async () => {
+    await render(<NumberInput defaultValue="5" label={demoLabel} step={2} />)
+    const input = page.getByLabelText(demoLabel)
+
+    await input.click()
+    await userEvent.keyboard("{Shift>}{ArrowUp}{/Shift}")
+    await expect.element(input).toHaveValue("25")
+
+    await userEvent.keyboard("{Shift>}{ArrowDown}{/Shift}")
+    await expect.element(input).toHaveValue("5")
+  })
+
+  test("Enter commits a formatted value and reports focus details", async () => {
+    const onFocusChange = vi.fn()
+    await render(
+      <NumberInput
+        defaultValue="1"
+        label={demoLabel}
+        onFocusChange={onFocusChange}
+      />,
+    )
+    const input = page.getByLabelText(demoLabel)
+
+    await input.click()
+    await input.fill("01")
+    await userEvent.keyboard("{Enter}")
+
+    await expect.element(input).toHaveValue("1")
+    await vi.waitFor(() => {
+      expect(onFocusChange).toHaveBeenCalledWith({
+        focused: true,
+        value: "1",
+        valueAsNumber: 1,
+      })
+      expect(onFocusChange).toHaveBeenLastCalledWith({
+        focused: false,
+        value: "1",
+        valueAsNumber: 1,
+      })
+    })
+  })
+
+  test("onValueChange receives parsed value details from input changes and triggers", async () => {
+    const onValueChange = vi.fn()
+    await render(
+      <NumberInput
+        defaultValue="4"
+        label={demoLabel}
+        onValueChange={onValueChange}
+        step={2}
+      />,
+    )
+    const input = page.getByLabelText(demoLabel)
+
+    await page.getByRole("button", {name: incrementLabel}).click()
+    await vi.waitFor(() => {
+      expect(onValueChange).toHaveBeenCalledWith({
+        value: "6",
+        valueAsNumber: 6,
+      })
+    })
+
+    await input.fill("12.5")
+    await vi.waitFor(() => {
+      expect(onValueChange).toHaveBeenLastCalledWith({
+        value: "12.5",
+        valueAsNumber: 12.5,
+      })
+    })
+  })
+
+  test("onValueInvalid reports the out-of-range reason when overflow is allowed", async () => {
+    const onValueInvalid = vi.fn()
+    await render(
+      <>
+        <NumberInput
+          allowOverflow
+          defaultValue="5"
+          label={demoLabel}
+          max={10}
+          min={2}
+          onValueInvalid={onValueInvalid}
+        />
+        <button type="button">Blur target</button>
+      </>,
+    )
+    const input = page.getByLabelText(demoLabel)
+
+    await input.fill("1")
+    await page.getByRole("button", {name: "Blur target"}).click()
+
+    await expect.element(input).toHaveValue("1")
+    await vi.waitFor(() => {
+      expect(onValueInvalid).toHaveBeenCalledWith({
+        reason: "rangeUnderflow",
+        value: "1",
+        valueAsNumber: 1,
+      })
+    })
+  })
+
+  test("Native form submission uses the current value and reset restores the default value", async () => {
+    const onSubmit = vi.fn()
+    await render(
+      <form
+        onSubmit={(event) => {
+          event.preventDefault()
+          onSubmit(new FormData(event.currentTarget).get("quantity"))
+        }}
+      >
+        <NumberInput defaultValue="2" label={demoLabel} name="quantity" />
+        <button type="submit">Submit form</button>
+        <button type="reset">Reset form</button>
+      </form>,
+    )
+    const input = page.getByLabelText(demoLabel)
+
+    await input.fill("9")
+    await page.getByRole("button", {name: "Submit form"}).click()
+    expect(onSubmit).toHaveBeenCalledWith("9")
+
+    await page.getByRole("button", {name: "Reset form"}).click()
+    await expect.element(input).toHaveValue("2")
+  })
+
+  test("Unit selector updates the selected unit and calls onUnitChange", async () => {
+    const onUnitChange = vi.fn()
+    await render(
+      <NumberInput
+        defaultUnit="USD"
+        defaultValue="0"
+        label={demoLabel}
+        onUnitChange={onUnitChange}
+        unitOptions={[
+          {displayText: "$ (USD)", label: "$", value: "USD"},
+          {displayText: "€ (EUR)", label: "€", value: "EUR"},
+        ]}
+      />,
+    )
+
+    const unitTrigger = page.getByRole("button").filter({hasText: "$"})
+    await expect.element(unitTrigger).toBeVisible()
+
+    await unitTrigger.click()
+    await page.getByRole("menuitemradio", {name: "€ (EUR)"}).click()
+
+    await expect
+      .element(page.getByRole("button").filter({hasText: "€"}))
+      .toBeVisible()
+    await vi.waitFor(() => {
+      expect(onUnitChange).toHaveBeenCalledWith("EUR")
+    })
+  })
+
+  test("Read-only state disables the unit selector", async () => {
+    await render(
+      <NumberInput
+        defaultUnit="USD"
+        defaultValue="0"
+        label={demoLabel}
+        readOnly
+        unitOptions={unitOptions}
+      />,
+    )
+
+    await expect
+      .element(page.getByRole("button").filter({hasText: "$"}))
+      .toBeDisabled()
+  })
 })

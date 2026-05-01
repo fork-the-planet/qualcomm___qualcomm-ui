@@ -12,10 +12,11 @@ export const testIds = {
 } as const
 
 export interface TestAvatarProps
-  extends Pick<AvatarImageProps, "src">,
+  extends
+    Pick<AvatarImageProps, "src">,
     Pick<AvatarRootProps, "onStateChange"> {}
 
-export function TestAvatar({src, onStateChange}: TestAvatarProps) {
+export function TestAvatar({onStateChange, src}: TestAvatarProps) {
   return (
     <Avatar.Root
       data-test-id={testIds.avatarRoot}

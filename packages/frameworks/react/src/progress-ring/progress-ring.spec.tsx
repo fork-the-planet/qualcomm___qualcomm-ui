@@ -316,9 +316,7 @@ const tests: MultiComponentTestCase[] = [
       )
     },
     simple() {
-      return (
-        <ProgressRing errorText={errorMessage} invalid label={testLabel} />
-      )
+      return <ProgressRing errorText={errorMessage} invalid label={testLabel} />
     },
     testCase: (getComponent) => {
       test("Invalid progress ring with error text", async () => {
@@ -416,7 +414,9 @@ const tests: MultiComponentTestCase[] = [
         await expect.element(page.getByTestId(testIds.label)).toBeVisible()
         await expect.element(page.getByTestId(testIds.valueText)).toBeVisible()
         await expect.element(page.getByTestId(testIds.circle)).toBeVisible()
-        await expect.element(page.getByTestId(testIds.track)).toBeInTheDocument()
+        await expect
+          .element(page.getByTestId(testIds.track))
+          .toBeInTheDocument()
         await expect.element(page.getByTestId(testIds.bar)).toBeInTheDocument()
         await expect.element(page.getByTestId(testIds.errorText)).toBeVisible()
       })

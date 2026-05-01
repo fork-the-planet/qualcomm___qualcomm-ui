@@ -27,7 +27,10 @@ function getNextButton() {
 }
 
 function getPageButton(pageNumber: number) {
-  return page.getByRole("button", {exact: true, name: `Go to page ${pageNumber}`})
+  return page.getByRole("button", {
+    exact: true,
+    name: `Go to page ${pageNumber}`,
+  })
 }
 
 const tests: MultiComponentTest[] = [
@@ -89,9 +92,9 @@ const tests: MultiComponentTest[] = [
         await expect
           .element(getPageButton(2))
           .toHaveAttribute("aria-current", "page")
-        await expect.element(page.getByTestId("current-page")).toHaveTextContent(
-          "2",
-        )
+        await expect
+          .element(page.getByTestId("current-page"))
+          .toHaveTextContent("2")
       })
     },
   },
@@ -130,9 +133,9 @@ const tests: MultiComponentTest[] = [
         await expect
           .element(getPageButton(2))
           .toHaveAttribute("aria-current", "page")
-        await expect.element(page.getByTestId("current-page")).toHaveTextContent(
-          "2",
-        )
+        await expect
+          .element(page.getByTestId("current-page"))
+          .toHaveTextContent("2")
       })
     },
   },
@@ -235,15 +238,15 @@ const tests: MultiComponentTest[] = [
       test("controlled page reflects external state changes", async () => {
         await render(getComponent())
 
-        await expect.element(page.getByTestId("current-page")).toHaveTextContent(
-          "1",
-        )
+        await expect
+          .element(page.getByTestId("current-page"))
+          .toHaveTextContent("1")
 
         await getPageButton(4).click()
 
-        await expect.element(page.getByTestId("current-page")).toHaveTextContent(
-          "4",
-        )
+        await expect
+          .element(page.getByTestId("current-page"))
+          .toHaveTextContent("4")
         await expect
           .element(getPageButton(4))
           .toHaveAttribute("aria-current", "page")
@@ -364,8 +367,12 @@ const tests: MultiComponentTest[] = [
         await render(getComponent())
 
         await expect.element(page.getByTestId(testIds.root)).toBeVisible()
-        await expect.element(page.getByTestId(testIds.prevTrigger)).toBeVisible()
-        await expect.element(page.getByTestId(testIds.nextTrigger)).toBeVisible()
+        await expect
+          .element(page.getByTestId(testIds.prevTrigger))
+          .toBeVisible()
+        await expect
+          .element(page.getByTestId(testIds.nextTrigger))
+          .toBeVisible()
         await expect
           .element(page.getByTestId(testIds.pageMetadata))
           .toBeVisible()
@@ -390,7 +397,9 @@ const tests: MultiComponentTest[] = [
               pageSize={pageSize}
             >
               <Pagination.PageSize options={[10, 20, 50]}>
-                <Pagination.PageSizeLabel>Items per page</Pagination.PageSizeLabel>
+                <Pagination.PageSizeLabel>
+                  Items per page
+                </Pagination.PageSizeLabel>
               </Pagination.PageSize>
             </Pagination.Root>
           </>
@@ -442,14 +451,14 @@ const tests: MultiComponentTest[] = [
         await render(getComponent())
 
         const targetPage = getPageButton(3)
-        await targetPage.element().focus()
+        targetPage.element().focus()
         await expect.element(targetPage).toHaveFocus()
 
         await userEvent.keyboard("{Enter}")
 
-        await expect.element(page.getByTestId("current-page")).toHaveTextContent(
-          "3",
-        )
+        await expect
+          .element(page.getByTestId("current-page"))
+          .toHaveTextContent("3")
         await expect
           .element(getPageButton(3))
           .toHaveAttribute("aria-current", "page")
@@ -483,14 +492,14 @@ const tests: MultiComponentTest[] = [
         await render(getComponent())
 
         const targetPage = getPageButton(2)
-        await targetPage.element().focus()
+        targetPage.element().focus()
         await expect.element(targetPage).toHaveFocus()
 
         await userEvent.keyboard(" ")
 
-        await expect.element(page.getByTestId("current-page")).toHaveTextContent(
-          "2",
-        )
+        await expect
+          .element(page.getByTestId("current-page"))
+          .toHaveTextContent("2")
         await expect
           .element(getPageButton(2))
           .toHaveAttribute("aria-current", "page")
