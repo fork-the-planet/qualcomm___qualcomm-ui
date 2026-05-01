@@ -1,5 +1,6 @@
 import {useState} from "react"
 
+import {Ellipsis} from "lucide-react"
 import {describe, expect, test, vi} from "vitest"
 import {page, userEvent} from "vitest/browser"
 import {render} from "vitest-browser-react"
@@ -277,5 +278,115 @@ describe("Menu", () => {
     await page.getByText("Menu with Separators").click()
     await expect.element(page.getByRole("menu")).toBeVisible()
     await expect.element(page.getByRole("separator")).toBeVisible()
+  })
+
+  test("IconButton trigger opens the menu by accessible name", async () => {
+    await render(
+      <div>
+        <Menu.Root>
+          <Menu.Trigger>
+            <Menu.IconButton aria-label="More actions" icon={Ellipsis} />
+          </Menu.Trigger>
+          <Portal>
+            <Menu.Positioner>
+              <Menu.Content>
+                <Menu.Item value="rename">Rename</Menu.Item>
+              </Menu.Content>
+            </Menu.Positioner>
+          </Portal>
+        </Menu.Root>
+
+        <Menu.Root>
+          <Menu.Trigger>
+            <Menu.IconButton aria-label="Filter actions" />
+          </Menu.Trigger>
+          <Portal>
+            <Menu.Positioner>
+              <Menu.Content>
+                <Menu.Item value="filter-by-owner">Filter by owner</Menu.Item>
+              </Menu.Content>
+            </Menu.Positioner>
+          </Portal>
+        </Menu.Root>
+      </div>,
+    )
+
+    const moreActionsTrigger = page.getByRole("button", {
+      name: "More actions",
+    })
+    await expect
+      .element(moreActionsTrigger)
+      .toHaveAttribute("aria-expanded", "false")
+    await moreActionsTrigger.click()
+    await expect.element(page.getByRole("menu")).toBeVisible()
+    await expect.element(page.getByText("Rename")).toBeVisible()
+    await expect
+      .element(moreActionsTrigger)
+      .toHaveAttribute("aria-expanded", "true")
+
+    await userEvent.keyboard("{Escape}")
+    await expect.element(page.getByRole("menu")).not.toBeInTheDocument()
+
+    await page.getByRole("button", {name: "Filter actions"}).click()
+    await expect.element(page.getByRole("menu")).toBeVisible()
+    await expect.element(page.getByText("Filter by owner")).toBeVisible()
+  })
+
+  test("ContextTrigger opens the menu from a context menu interaction", async () => {
+    await render(
+      <Menu.Root>
+        <Menu.ContextTrigger>Right click here</Menu.ContextTrigger>
+        <Portal>
+          <Menu.Positioner>
+            <Menu.Content>
+              <Menu.Item value="new-text-file">New Text File</Menu.Item>
+              <Menu.Item value="export">Export</Menu.Item>
+            </Menu.Content>
+          </Menu.Positioner>
+        </Portal>
+      </Menu.Root>,
+    )
+
+    await expect.element(page.getByRole("menu")).not.toBeInTheDocument()
+    await page.getByRole("button", {name: "Right click here"}).click({
+      button: "right",
+    })
+
+    const menu = page.getByRole("menu")
+    await expect.element(menu).toBeVisible()
+    await expect.element(page.getByText("New Text File")).toBeVisible()
+  })
+
+  test("renders item start icon, command, description, and accessory content", async () => {
+    await render(
+      <Menu.Root size="sm">
+        <Menu.Trigger>
+          <Menu.Button>Open actions</Menu.Button>
+        </Menu.Trigger>
+        <Portal>
+          <Menu.Positioner>
+            <Menu.Content>
+              <Menu.Item value="open-project">
+                <Menu.ItemStartIcon icon={<span>TXT</span>} />
+                <Menu.ItemLabel>Open Project</Menu.ItemLabel>
+                <Menu.ItemDescription>Recently opened</Menu.ItemDescription>
+                <Menu.ItemAccessory>Synced</Menu.ItemAccessory>
+                <Menu.ItemCommand>Ctrl+O</Menu.ItemCommand>
+              </Menu.Item>
+            </Menu.Content>
+          </Menu.Positioner>
+        </Portal>
+      </Menu.Root>,
+    )
+
+    await page.getByRole("button", {name: "Open actions"}).click()
+
+    await expect
+      .element(page.getByRole("menuitem", {name: /Open Project/}))
+      .toBeVisible()
+    await expect.element(page.getByText("TXT")).toBeVisible()
+    await expect.element(page.getByText("Synced")).toBeVisible()
+    await expect.element(page.getByText("Recently opened")).toBeVisible()
+    await expect.element(page.getByText("Ctrl+O")).toBeVisible()
   })
 })

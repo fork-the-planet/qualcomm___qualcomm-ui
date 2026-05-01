@@ -21,6 +21,9 @@ const labels = {
 const testIds = {
   content: "dialog-content",
   positioner: "dialog-positioner",
+  shortcutBackdrop: "shortcut-dialog-backdrop",
+  shortcutContent: "shortcut-dialog-content",
+  shortcutPositioner: "shortcut-dialog-positioner",
 }
 
 interface Props extends Partial<DialogRootProps> {
@@ -62,6 +65,29 @@ function SimpleDialog({confirmButtonProps, contentProps, ...props}: Props) {
           </Dialog.Content>
         </Dialog.Positioner>
       </Portal>
+    </Dialog.Root>
+  )
+}
+
+function ShortcutDialog() {
+  return (
+    <Dialog.Root>
+      <Dialog.Trigger>
+        <Button emphasis="primary" variant="fill">
+          {labels.openButton}
+        </Button>
+      </Dialog.Trigger>
+      <Dialog.FloatingPortal
+        backdropProps={{"data-test-id": testIds.shortcutBackdrop}}
+        contentProps={{"data-test-id": testIds.shortcutContent}}
+        positionerProps={{"data-test-id": testIds.shortcutPositioner}}
+      >
+        <Dialog.Body>
+          <Dialog.Heading>{labels.title}</Dialog.Heading>
+          <Dialog.CloseButton aria-label={labels.closeButton} />
+          <Dialog.Description>{labels.description}</Dialog.Description>
+        </Dialog.Body>
+      </Dialog.FloatingPortal>
     </Dialog.Root>
   )
 }
@@ -222,8 +248,112 @@ describe("Dialog", () => {
     const dialog = page.getByRole("dialog")
     await expect.element(dialog).toBeVisible()
     await expect.element(dialog).toHaveAccessibleName(labels.title)
+    await expect.element(dialog).toHaveAccessibleDescription(labels.description)
+  })
+
+  test("FloatingPortal renders an accessible dialog and closes on outside interaction", async () => {
+    await render(<ShortcutDialog />)
+
     await expect
-      .element(dialog)
-      .toHaveAccessibleDescription(labels.description)
+      .element(page.getByTestId(testIds.shortcutContent))
+      .not.toBeVisible()
+    await page.getByText(labels.openButton).click()
+
+    const dialog = page.getByRole("dialog", {name: labels.title})
+    await expect.element(dialog).toBeVisible()
+    await expect.element(dialog).toHaveAccessibleDescription(labels.description)
+    await expect
+      .element(page.getByTestId(testIds.shortcutBackdrop))
+      .toBeVisible()
+
+    await page
+      .getByTestId(testIds.shortcutPositioner)
+      .click({position: {x: 5, y: 5}})
+    await expect
+      .element(page.getByTestId(testIds.shortcutContent))
+      .not.toBeVisible()
+  })
+
+  test("Context render prop reflects whether the dialog is open", async () => {
+    await render(
+      <Dialog.Root>
+        <Dialog.Context>
+          {(dialog) => (
+            <p>{dialog.open ? "Dialog is open" : "Dialog is closed"}</p>
+          )}
+        </Dialog.Context>
+        <Dialog.Trigger>
+          <Button>{labels.openButton}</Button>
+        </Dialog.Trigger>
+        <Portal>
+          <Dialog.Backdrop />
+          <Dialog.Positioner>
+            <Dialog.Content>
+              <Dialog.Body>
+                <Dialog.Heading>{labels.title}</Dialog.Heading>
+                <Dialog.CloseButton aria-label={labels.closeButton} />
+              </Dialog.Body>
+            </Dialog.Content>
+          </Dialog.Positioner>
+        </Portal>
+      </Dialog.Root>,
+    )
+
+    await expect.element(page.getByText("Dialog is closed")).toBeVisible()
+    await page.getByText(labels.openButton).click()
+    await expect.element(page.getByText("Dialog is open")).toBeVisible()
+    await page.getByLabelText(labels.closeButton).click()
+    await expect.element(page.getByText("Dialog is closed")).toBeVisible()
+  })
+
+  const emphases: NonNullable<DialogRootProps["emphasis"]>[] = [
+    "neutral",
+    "info",
+    "success",
+    "warning",
+    "danger",
+  ]
+
+  for (const emphasis of emphases) {
+    test(`IndicatorIcon renders a status icon for ${emphasis} emphasis`, async () => {
+      await render(
+        <Dialog.Root defaultOpen emphasis={emphasis}>
+          <Portal>
+            <Dialog.Positioner>
+              <Dialog.Content aria-label={`${emphasis} dialog`}>
+                <Dialog.Body>
+                  <Dialog.IndicatorIcon
+                    aria-label={`${emphasis} status`}
+                    role="img"
+                  />
+                </Dialog.Body>
+              </Dialog.Content>
+            </Dialog.Positioner>
+          </Portal>
+        </Dialog.Root>,
+      )
+
+      await expect
+        .element(page.getByRole("img", {name: `${emphasis} status`}))
+        .toBeVisible()
+    })
+  }
+
+  test("IndicatorIcon renders a custom icon element when provided", async () => {
+    await render(
+      <Dialog.Root defaultOpen emphasis="danger">
+        <Portal>
+          <Dialog.Positioner>
+            <Dialog.Content aria-label="Custom indicator dialog">
+              <Dialog.Body>
+                <Dialog.IndicatorIcon icon={<span>Custom status</span>} />
+              </Dialog.Body>
+            </Dialog.Content>
+          </Dialog.Positioner>
+        </Portal>
+      </Dialog.Root>,
+    )
+
+    await expect.element(page.getByText("Custom status")).toBeVisible()
   })
 })

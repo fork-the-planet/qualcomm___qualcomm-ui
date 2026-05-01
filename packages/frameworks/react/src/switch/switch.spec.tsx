@@ -9,6 +9,7 @@ import {Switch} from "@qualcomm-ui/react/switch"
 import {type MultiComponentTest, runTests} from "~test-utils/runner"
 
 const demoLabel = "Demo Label"
+const demoHint = "Demo Hint"
 
 const testIds = {
   control: "switch-control",
@@ -215,6 +216,27 @@ const tests: MultiComponentTest[] = [
         await expect.element(page.getByLabelText(demoLabel)).toBeChecked()
         await page.getByText(demoLabel).click()
         await expect.element(page.getByLabelText(demoLabel)).not.toBeChecked()
+      })
+    },
+  },
+  {
+    composite() {
+      return (
+        <Switch.Root>
+          <Switch.HiddenInput />
+          <Switch.Control />
+          <Switch.Label>{demoLabel}</Switch.Label>
+          <Switch.Hint>{demoHint}</Switch.Hint>
+        </Switch.Root>
+      )
+    },
+    simple() {
+      return <Switch hint={demoHint} label={demoLabel} />
+    },
+    testCase: (getComponent) => {
+      test("hint is visible", async () => {
+        await render(getComponent())
+        await expect.element(page.getByText(demoHint)).toBeVisible()
       })
     },
   },

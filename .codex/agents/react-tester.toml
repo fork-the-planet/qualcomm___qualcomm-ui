@@ -115,7 +115,6 @@ Attributes and values:
 ```typescript
 await expect.element(page.getByRole("tab")).toHaveAttribute("aria-selected", "true")
 await expect.element(page.getByRole("textbox")).toHaveValue("text")
-await expect.element(page.getByRole("button")).toHaveClass("custom-class")
 await expect.element(page.getByText("Title")).toHaveTextContent("Title")
 await expect.element(page.getByRole("region")).toHaveAccessibleDescription("Description")
 ```
@@ -123,10 +122,6 @@ await expect.element(page.getByRole("region")).toHaveAccessibleDescription("Desc
 Polling assertions (for async operations):
 ```typescript
 await expect.poll(() => mockFn).toHaveBeenCalledWith(expectedValue)
-await expect.poll(() => {
-  const box = element.element().getBoundingClientRect()
-  return box.width > 100
-}).toBe(true)
 ```
 
 **User Interactions**:
@@ -182,6 +177,24 @@ expect(spy).toHaveBeenCalledWith(expectedValue)
 - Test what users see and interact with, not internal state or methods
 - Tests should pass even if internal implementation changes completely
 - Focus on inputs (props, user actions) and outputs (rendered content, callbacks, side effects)
+
+**Implementation Detail Firewall**:
+Before committing any assertion, ask: "Would this still pass if the component were rewritten with different internal markup but the same public behavior?" If no, rewrite the test.
+
+Do not assert on:
+- Internal anatomy attributes such as `data-*-part`, `data-state`, `data-size`, `data-value`, or `data-from`, unless that exact attribute is documented as the public contract for the component under test.
+- Private DOM structure: `querySelector()` for implementation elements, `childNodes`, `compareDocumentPosition()`, wrapper nesting, or exact element type such as `svg`, `path`, `span`, or `mark`.
+- Visual implementation measurements: `getBoundingClientRect()`, computed dimensions, SVG `viewBox`, icon path data, CSS class names, or styling tokens.
+- Child component internals. Example: a Select test must not query Checkmark internals like `[data-checkmark-part='root']`.
+- Generated IDs, framework internals, or attributes added only to make styling work.
+
+Prefer these alternatives:
+- User-facing roles, labels, text, values, focus, enabled/disabled state, selection state, open/closed presence, submitted form values, and callback arguments.
+- ARIA attributes only when they are the accessible contract users or assistive technology observe, such as `aria-selected`, `aria-expanded`, `aria-valuenow`, `aria-label`, and `aria-labelledby`.
+- Explicit test-owned props such as `data-test-id` passed directly to the public part being tested, when no accessible query exists.
+- Textual stand-ins for icons only when order is part of the public API; verify rendered text order with `toHaveTextContent(/^Icon\\s*Label$/)` rather than DOM node order.
+
+When a coverage target appears to require implementation details, do not force it. Add a lower-level component test with explicit public props, or report that the behavior has no stable public surface.
 
 **Descriptive Test Names**:
 - Use clear, scenario-based names: "renders error message when validation fails"
@@ -259,6 +272,8 @@ This pattern ensures both API styles are tested with identical behavior expectat
 4. **Review and Refine**:
    - Ensure tests query by accessible attributes
    - Verify tests focus on behavior, not implementation
+   - Run a self-review grep for brittle implementation-detail patterns before finishing: `querySelector`, `childNodes`, `compareDocumentPosition`, `getBoundingClientRect`, `data-*-part`, `data-state`, `data-size`, `data-value`, `data-from`, `viewBox`
+   - If any of those patterns remain, justify why they are part of the public contract or rewrite the test
    - Check that test names clearly describe scenarios
    - Confirm appropriate mocking of dependencies
 
@@ -271,8 +286,9 @@ pnpm react test src/tree/tree.spec.tsx
 
 ## What You Never Do
 
-- Never test implementation details like internal state or private methods
-- Never use test IDs or data attributes unless absolutely necessary
+- Never test implementation details like internal state, private methods, child component internals, internal anatomy attributes, CSS classes, SVG internals, DOM node order, or wrapper structure
+- Never use `querySelector`, `childNodes`, `compareDocumentPosition`, `getBoundingClientRect`, or internal `data-*` selectors to prove component behavior
+- Never use test IDs or data attributes unless accessible queries cannot reach a public part; when needed, pass the test ID through a public prop in the test itself
 - Never write vague test names that don't explain the scenario
 - Never mock the component under test
 - Never ignore the MultiComponentTestCase pattern when both APIs exist

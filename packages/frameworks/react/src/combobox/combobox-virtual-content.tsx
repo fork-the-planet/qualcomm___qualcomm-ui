@@ -73,8 +73,13 @@ export function ComboboxVirtualContent<
   const mergedRef = useMergedRef(ref, localRef)
 
   useEffect(() => {
-    requestAnimationFrame(() => {
-      const positioner: HTMLDivElement | null = localRef.current.closest(
+    const frame = requestAnimationFrame(() => {
+      const content = localRef.current
+      if (!content) {
+        return
+      }
+
+      const positioner: HTMLDivElement | null = content.closest(
         `[data-combobox-part="positioner"]`,
       )
       if (!positioner) {
@@ -85,6 +90,7 @@ export function ComboboxVirtualContent<
         `${positioner.offsetWidth - positioner.clientWidth}px`,
       )
     })
+    return () => cancelAnimationFrame(frame)
   }, [inputValue, open])
 
   const virtualizer = useVirtualizer({

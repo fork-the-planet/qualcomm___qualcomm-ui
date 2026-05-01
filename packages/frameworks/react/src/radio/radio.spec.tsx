@@ -10,6 +10,7 @@ import {Radio} from "./index"
 import {RadioGroup} from "./radio-group"
 
 const demoGroupLabel = "Radio Group Label"
+const demoHint = "Demo Hint"
 const demoLabel = "Demo Label"
 const demoValue = "demo-value"
 
@@ -515,6 +516,33 @@ const tests: MultiComponentTestCase[] = [
         await expect
           .element(page.getByTestId(testIds.hiddenInput))
           .toBeInTheDocument()
+      })
+    },
+  },
+  {
+    composite() {
+      return (
+        <RadioGroup.Root name="group">
+          <Radio.Root value={demoValue}>
+            <Radio.HiddenInput />
+            <Radio.Control />
+            <Radio.Label>{demoLabel}</Radio.Label>
+            <Radio.Hint>{demoHint}</Radio.Hint>
+          </Radio.Root>
+        </RadioGroup.Root>
+      )
+    },
+    simple() {
+      return (
+        <RadioGroup>
+          <Radio hint={demoHint} label={demoLabel} value={demoValue} />
+        </RadioGroup>
+      )
+    },
+    testCase: (getComponent) => {
+      test("hint is visible", async () => {
+        await render(getComponent())
+        await expect.element(page.getByText(demoHint)).toBeVisible()
       })
     },
   },

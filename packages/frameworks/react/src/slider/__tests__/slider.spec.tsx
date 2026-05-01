@@ -4,14 +4,18 @@ import {describe, expect, test, vi} from "vitest"
 import {page, userEvent} from "vitest/browser"
 import {render} from "vitest-browser-react"
 
+import {Slider} from "@qualcomm-ui/react/slider"
 import type {MultiComponentTestCase} from "@qualcomm-ui/react-test-utils"
 
 import {
   clickFocusTarget,
   CompositeSlider,
   SimpleSlider,
+  TestSlider,
   testIds,
 } from "./test-slider"
+
+const thumbIndicatorTestId = "slider-thumb-indicator"
 
 const tests: MultiComponentTestCase[] = [
   {
@@ -855,6 +859,99 @@ const tests: MultiComponentTestCase[] = [
   },
 ]
 
+const thumbIndicatorTests: MultiComponentTestCase[] = [
+  {
+    simple: () => <Slider defaultValue={[41]} label="Volume" tooltip />,
+    testCase(component) {
+      test(`keeps the current value on the slider when tooltip is enabled - ${component.name}`, async () => {
+        await render(component())
+
+        await expect
+          .element(page.getByRole("slider", {name: "Volume"}))
+          .toHaveAttribute("aria-valuenow", "41")
+      })
+    },
+  },
+  {
+    composite: () => (
+      <div>
+        <button type="button">Focus target</button>
+        <Slider.Root defaultValue={[25]}>
+          <Slider.Label>Volume</Slider.Label>
+          <Slider.Control>
+            <Slider.Track>
+              <Slider.Range />
+            </Slider.Track>
+            <Slider.Thumb index={0}>
+              <Slider.HiddenInput />
+              <Slider.ThumbIndicator
+                data-test-id={thumbIndicatorTestId}
+                display={(value) => `${value}% selected`}
+              />
+            </Slider.Thumb>
+          </Slider.Control>
+        </Slider.Root>
+      </div>
+    ),
+    testCase(component) {
+      test(`formats thumb tooltip content with a display function - ${component.name}`, async () => {
+        await render(component())
+
+        await expect
+          .element(page.getByTestId(thumbIndicatorTestId))
+          .toHaveTextContent("25% selected")
+
+        await clickFocusTarget()
+        await userEvent.tab()
+        await userEvent.keyboard("{ArrowRight}")
+
+        await expect
+          .element(page.getByTestId(thumbIndicatorTestId))
+          .toHaveTextContent("26% selected")
+      })
+    },
+  },
+  {
+    composite: () => (
+      <Slider.Root defaultValue={[25]}>
+        <Slider.Label>Volume</Slider.Label>
+        <Slider.Control>
+          <Slider.Track>
+            <Slider.Range />
+          </Slider.Track>
+          <Slider.Thumb index={0}>
+            <Slider.HiddenInput />
+            <Slider.ThumbIndicator data-test-id={thumbIndicatorTestId}>
+              Current volume
+            </Slider.ThumbIndicator>
+          </Slider.Thumb>
+        </Slider.Control>
+      </Slider.Root>
+    ),
+    testCase(component) {
+      test(`renders thumb tooltip children instead of the numeric value - ${component.name}`, async () => {
+        await render(component())
+
+        await expect
+          .element(page.getByTestId(thumbIndicatorTestId))
+          .toHaveTextContent("Current volume")
+      })
+    },
+  },
+  {
+    composite: () => <TestSlider defaultValue={[50]} />,
+    testCase(component) {
+      test(`renders a baseline slider value - ${component.name}`, async () => {
+        await render(component())
+
+        await expect
+          .element(page.getByTestId(testIds.sliderValueText))
+          .toHaveTextContent("50")
+      })
+    },
+  },
+]
+
 let formSubmittedData: Record<string, string> = {}
 
 function handleFormSubmit(e: FormEvent<HTMLFormElement>) {
@@ -926,6 +1023,15 @@ const formTests: MultiComponentTestCase[] = [
 
 describe("Slider", () => {
   for (const {composite, simple, testCase} of tests) {
+    if (composite) {
+      testCase(composite)
+    }
+    if (simple) {
+      testCase(simple)
+    }
+  }
+
+  for (const {composite, simple, testCase} of thumbIndicatorTests) {
     if (composite) {
       testCase(composite)
     }
