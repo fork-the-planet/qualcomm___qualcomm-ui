@@ -82,7 +82,8 @@ describe("FieldGroup", () => {
 
     const errorText = page.getByText(errorMessage).element()
     await expect.element(page.getByText(errorMessage)).toBeVisible()
-    expect(errorText.closest("q-field-group-error-text")?.querySelector("svg"))
-      .toBeTruthy()
+    expect(
+      errorText.closest("q-field-group-error-text")?.querySelector("svg"),
+    ).toBeTruthy()
   })
 })

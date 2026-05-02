@@ -156,12 +156,7 @@ class PageInfoMetadataComponent {}
 @Component({
   imports: [PaginationModule],
   template: `
-    <div
-      count="115"
-      defaultPage="2"
-      defaultPageSize="10"
-      q-pagination-root
-    >
+    <div count="115" defaultPage="2" defaultPageSize="10" q-pagination-root>
       <span *paginationContext="let context" q-pagination-page-metadata>
         @let metadata = context.pageMetadata;
         Showing {{ metadata.pageStart }}-{{ metadata.pageEnd }} of
@@ -216,29 +211,39 @@ describe("Pagination", () => {
   test("renders initial page", async () => {
     await render(DefaultPaginationComponent)
 
-    await expect.element(getPageButton(1)).toHaveAttribute("aria-current", "page")
+    await expect
+      .element(getPageButton(1))
+      .toHaveAttribute("aria-current", "page")
     await expect.element(getPageButton(2)).not.toHaveAttribute("aria-current")
   })
 
   test("next trigger advances page and emits the page change", async () => {
     await render(ControlledPaginationComponent)
 
-    await expect.element(getPageButton(1)).toHaveAttribute("aria-current", "page")
+    await expect
+      .element(getPageButton(1))
+      .toHaveAttribute("aria-current", "page")
 
     await getNextButton().click()
 
-    await expect.element(getPageButton(2)).toHaveAttribute("aria-current", "page")
+    await expect
+      .element(getPageButton(2))
+      .toHaveAttribute("aria-current", "page")
     await expect.element(getCurrentPageStatus()).toHaveTextContent("2")
   })
 
   test("prev trigger goes back and emits the page change", async () => {
     await render(ControlledPageThreePaginationComponent)
 
-    await expect.element(getPageButton(3)).toHaveAttribute("aria-current", "page")
+    await expect
+      .element(getPageButton(3))
+      .toHaveAttribute("aria-current", "page")
 
     await getPrevButton().click()
 
-    await expect.element(getPageButton(2)).toHaveAttribute("aria-current", "page")
+    await expect
+      .element(getPageButton(2))
+      .toHaveAttribute("aria-current", "page")
     await expect.element(getCurrentPageStatus()).toHaveTextContent("2")
   })
 
@@ -259,11 +264,15 @@ describe("Pagination", () => {
   test("clicking a specific page number navigates to that page", async () => {
     await render(DefaultPaginationComponent)
 
-    await expect.element(getPageButton(1)).toHaveAttribute("aria-current", "page")
+    await expect
+      .element(getPageButton(1))
+      .toHaveAttribute("aria-current", "page")
 
     await getPageButton(3).click()
 
-    await expect.element(getPageButton(3)).toHaveAttribute("aria-current", "page")
+    await expect
+      .element(getPageButton(3))
+      .toHaveAttribute("aria-current", "page")
     await expect.element(getPageButton(1)).not.toHaveAttribute("aria-current")
   })
 
@@ -275,13 +284,17 @@ describe("Pagination", () => {
     await page.getByRole("button", {name: "Set page 4"}).click()
 
     await expect.element(getCurrentPageStatus()).toHaveTextContent("4")
-    await expect.element(getPageButton(4)).toHaveAttribute("aria-current", "page")
+    await expect
+      .element(getPageButton(4))
+      .toHaveAttribute("aria-current", "page")
   })
 
   test("defaultPage sets the initial rendered page", async () => {
     await render(DefaultPagePaginationComponent)
 
-    await expect.element(getPageButton(5)).toHaveAttribute("aria-current", "page")
+    await expect
+      .element(getPageButton(5))
+      .toHaveAttribute("aria-current", "page")
     await expect.element(getPageButton(1)).not.toHaveAttribute("aria-current")
   })
 
@@ -290,7 +303,9 @@ describe("Pagination", () => {
 
     await expect.element(getPrevButton()).toBeDisabled()
     await expect.element(getNextButton()).toBeDisabled()
-    await expect.element(getPageButton(1)).toHaveAttribute("aria-current", "page")
+    await expect
+      .element(getPageButton(1))
+      .toHaveAttribute("aria-current", "page")
   })
 
   test("page metadata renders current page information from context", async () => {
@@ -345,7 +360,9 @@ describe("Pagination", () => {
     await userEvent.keyboard("{Enter}")
 
     await expect.element(getCurrentPageStatus()).toHaveTextContent("3")
-    await expect.element(getPageButton(3)).toHaveAttribute("aria-current", "page")
+    await expect
+      .element(getPageButton(3))
+      .toHaveAttribute("aria-current", "page")
   })
 
   test("keyboard Space on a focused page item selects it", async () => {
@@ -358,6 +375,8 @@ describe("Pagination", () => {
     await userEvent.keyboard("{Space}")
 
     await expect.element(getCurrentPageStatus()).toHaveTextContent("2")
-    await expect.element(getPageButton(2)).toHaveAttribute("aria-current", "page")
+    await expect
+      .element(getPageButton(2))
+      .toHaveAttribute("aria-current", "page")
   })
 })

@@ -36,7 +36,11 @@ describe("Tag", () => {
 
     await expect.element(page.getByText("Label")).toBeVisible()
     expect(
-      page.getByText("Label").element().closest("[q-tag]")?.querySelector("svg"),
+      page
+        .getByText("Label")
+        .element()
+        .closest("[q-tag]")
+        ?.querySelector("svg"),
     ).toBeNull()
   })
 
@@ -81,7 +85,7 @@ describe("Tag", () => {
       template: `
         <span q-tag variant="dismissable">
           Label
-          <svg data-test-id="tag-end-icon" q-end-icon icon="Star"></svg>
+          <svg data-test-id="tag-end-icon" icon="Star" q-end-icon></svg>
         </span>
       `,
     })
@@ -221,12 +225,7 @@ describe("Tag", () => {
     @Component({
       imports: [TagDirective],
       template: `
-        <span
-          disabled
-          q-tag
-          variant="dismissable"
-          (dismiss)="dismissed.emit()"
-        >
+        <span disabled q-tag variant="dismissable" (dismiss)="dismissed.emit()">
           Label
         </span>
       `,

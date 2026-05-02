@@ -66,81 +66,6 @@ function createTestCollection() {
   })
 }
 
-function getTreeNodeText(text: string): HTMLElement {
-  const nodeText = Array.from(
-    document.querySelectorAll<HTMLElement>("[q-tree-node-text]"),
-  ).find((element) => element.textContent?.trim() === text)
-
-  expect(nodeText).toBeTruthy()
-  return nodeText!
-}
-
-const defaultTreeNodesTemplate = `
-  @for (
-    node of collection.rootNode.nodes;
-    let i = $index;
-    track collection.getNodeValue(node)
-  ) {
-    <q-tree-nodes [indexPath]="[i]" [node]="node">
-      <ng-template
-        let-branch
-        q-tree-branch-template
-        [rootNode]="collection.rootNode"
-      >
-        <div q-tree-branch-node>
-          <div q-tree-branch-trigger></div>
-          <span q-tree-node-text>{{ branch.node.text }}</span>
-        </div>
-      </ng-template>
-
-      <ng-template
-        let-leaf
-        q-tree-leaf-template
-        [rootNode]="collection.rootNode"
-      >
-        <div q-tree-leaf-node>
-          <div q-tree-node-indicator></div>
-          <span q-tree-node-text>{{ leaf.node.text }}</span>
-        </div>
-      </ng-template>
-    </q-tree-nodes>
-  }
-`
-
-const checkboxTreeNodesTemplate = `
-  @for (
-    node of collection.rootNode.nodes;
-    let i = $index;
-    track collection.getNodeValue(node)
-  ) {
-    <q-tree-nodes [indexPath]="[i]" [node]="node">
-      <ng-template
-        let-branch
-        q-tree-branch-template
-        [rootNode]="collection.rootNode"
-      >
-        <div q-tree-branch-node>
-          <div q-tree-branch-trigger></div>
-          <span q-tree-node-checkbox></span>
-          <span q-tree-node-text>{{ branch.node.text }}</span>
-        </div>
-      </ng-template>
-
-      <ng-template
-        let-leaf
-        q-tree-leaf-template
-        [rootNode]="collection.rootNode"
-      >
-        <div q-tree-leaf-node>
-          <div q-tree-node-indicator></div>
-          <span q-tree-node-checkbox></span>
-          <span q-tree-node-text>{{ leaf.node.text }}</span>
-        </div>
-      </ng-template>
-    </q-tree-nodes>
-  }
-`
-
 @Component({
   selector: "test-tree-api-summary",
   standalone: true,
@@ -1238,9 +1163,37 @@ describe("Tree", () => {
     @Component({
       imports: [TreeModule],
       template: `
-        <div q-tree-root [collection]="collection" size="sm">
+        <div q-tree-root size="sm" [collection]="collection">
           <div q-tree-label>Project files</div>
-          ${defaultTreeNodesTemplate}
+          @for (
+            node of collection.rootNode.nodes;
+            let i = $index;
+            track collection.getNodeValue(node)
+          ) {
+            <q-tree-nodes [indexPath]="[i]" [node]="node">
+              <ng-template
+                let-branch
+                q-tree-branch-template
+                [rootNode]="collection.rootNode"
+              >
+                <div q-tree-branch-node>
+                  <div q-tree-branch-trigger></div>
+                  <span q-tree-node-text>{{ branch.node.text }}</span>
+                </div>
+              </ng-template>
+
+              <ng-template
+                let-leaf
+                q-tree-leaf-template
+                [rootNode]="collection.rootNode"
+              >
+                <div q-tree-leaf-node>
+                  <div q-tree-node-indicator></div>
+                  <span q-tree-node-text>{{ leaf.node.text }}</span>
+                </div>
+              </ng-template>
+            </q-tree-nodes>
+          }
         </div>
       `,
     })
@@ -1271,7 +1224,35 @@ describe("Tree", () => {
           [defaultExpandedValue]="['documents']"
         >
           <test-tree-api-summary />
-          ${defaultTreeNodesTemplate}
+          @for (
+            node of collection.rootNode.nodes;
+            let i = $index;
+            track collection.getNodeValue(node)
+          ) {
+            <q-tree-nodes [indexPath]="[i]" [node]="node">
+              <ng-template
+                let-branch
+                q-tree-branch-template
+                [rootNode]="collection.rootNode"
+              >
+                <div q-tree-branch-node>
+                  <div q-tree-branch-trigger></div>
+                  <span q-tree-node-text>{{ branch.node.text }}</span>
+                </div>
+              </ng-template>
+
+              <ng-template
+                let-leaf
+                q-tree-leaf-template
+                [rootNode]="collection.rootNode"
+              >
+                <div q-tree-leaf-node>
+                  <div q-tree-node-indicator></div>
+                  <span q-tree-node-text>{{ leaf.node.text }}</span>
+                </div>
+              </ng-template>
+            </q-tree-nodes>
+          }
         </div>
       `,
     })
@@ -1393,7 +1374,35 @@ describe("Tree", () => {
           [defaultExpandedValue]="['documents']"
           (selectedValueChanged)="selectedValueChanged.emit($event)"
         >
-          ${defaultTreeNodesTemplate}
+          @for (
+            node of collection.rootNode.nodes;
+            let i = $index;
+            track collection.getNodeValue(node)
+          ) {
+            <q-tree-nodes [indexPath]="[i]" [node]="node">
+              <ng-template
+                let-branch
+                q-tree-branch-template
+                [rootNode]="collection.rootNode"
+              >
+                <div q-tree-branch-node>
+                  <div q-tree-branch-trigger></div>
+                  <span q-tree-node-text>{{ branch.node.text }}</span>
+                </div>
+              </ng-template>
+
+              <ng-template
+                let-leaf
+                q-tree-leaf-template
+                [rootNode]="collection.rootNode"
+              >
+                <div q-tree-leaf-node>
+                  <div q-tree-node-indicator></div>
+                  <span q-tree-node-text>{{ leaf.node.text }}</span>
+                </div>
+              </ng-template>
+            </q-tree-nodes>
+          }
         </div>
       `,
     })
@@ -1440,7 +1449,35 @@ describe("Tree", () => {
           [defaultExpandedValue]="['documents']"
           (selectedValueChanged)="selectedValueChanged.emit($event)"
         >
-          ${defaultTreeNodesTemplate}
+          @for (
+            node of collection.rootNode.nodes;
+            let i = $index;
+            track collection.getNodeValue(node)
+          ) {
+            <q-tree-nodes [indexPath]="[i]" [node]="node">
+              <ng-template
+                let-branch
+                q-tree-branch-template
+                [rootNode]="collection.rootNode"
+              >
+                <div q-tree-branch-node>
+                  <div q-tree-branch-trigger></div>
+                  <span q-tree-node-text>{{ branch.node.text }}</span>
+                </div>
+              </ng-template>
+
+              <ng-template
+                let-leaf
+                q-tree-leaf-template
+                [rootNode]="collection.rootNode"
+              >
+                <div q-tree-leaf-node>
+                  <div q-tree-node-indicator></div>
+                  <span q-tree-node-text>{{ leaf.node.text }}</span>
+                </div>
+              </ng-template>
+            </q-tree-nodes>
+          }
         </div>
       `,
     })
@@ -1597,7 +1634,37 @@ describe("Tree", () => {
           [collection]="collection"
           [defaultExpandedValue]="['documents', 'reports']"
         >
-          ${checkboxTreeNodesTemplate}
+          @for (
+            node of collection.rootNode.nodes;
+            let i = $index;
+            track collection.getNodeValue(node)
+          ) {
+            <q-tree-nodes [indexPath]="[i]" [node]="node">
+              <ng-template
+                let-branch
+                q-tree-branch-template
+                [rootNode]="collection.rootNode"
+              >
+                <div q-tree-branch-node>
+                  <div q-tree-branch-trigger></div>
+                  <span q-tree-node-checkbox></span>
+                  <span q-tree-node-text>{{ branch.node.text }}</span>
+                </div>
+              </ng-template>
+
+              <ng-template
+                let-leaf
+                q-tree-leaf-template
+                [rootNode]="collection.rootNode"
+              >
+                <div q-tree-leaf-node>
+                  <div q-tree-node-indicator></div>
+                  <span q-tree-node-checkbox></span>
+                  <span q-tree-node-text>{{ leaf.node.text }}</span>
+                </div>
+              </ng-template>
+            </q-tree-nodes>
+          }
         </div>
       `,
     })
@@ -1635,7 +1702,39 @@ describe("Tree", () => {
           (selectedValueChanged)="selectedValueChanged.emit($event)"
         >
           <test-tree-api-controls />
-          ${defaultTreeNodesTemplate}
+          @for (
+            node of collection.rootNode.nodes;
+            let i = $index;
+            track collection.getNodeValue(node)
+          ) {
+            <q-tree-nodes [indexPath]="[i]" [node]="node">
+              <ng-template
+                let-branch
+                q-tree-branch-template
+                [rootNode]="collection.rootNode"
+              >
+                <div q-tree-branch-node>
+                  <div q-tree-branch-trigger></div>
+                  <span data-test-id="tree-node-text" q-tree-node-text>
+                    {{ branch.node.text }}
+                  </span>
+                </div>
+              </ng-template>
+
+              <ng-template
+                let-leaf
+                q-tree-leaf-template
+                [rootNode]="collection.rootNode"
+              >
+                <div q-tree-leaf-node>
+                  <div q-tree-node-indicator></div>
+                  <span data-test-id="tree-node-text" q-tree-node-text>
+                    {{ leaf.node.text }}
+                  </span>
+                </div>
+              </ng-template>
+            </q-tree-nodes>
+          }
         </div>
       `,
     })
@@ -1742,7 +1841,10 @@ describe("Tree", () => {
       .toHaveTextContent("none")
 
     await page.getByRole("button", {name: "API focus images"}).click()
-    expect(getTreeNodeText("Images")).toHaveAttribute("data-focus")
+    const imagesNodeText = page
+      .getByTestId("tree-node-text")
+      .filter({hasText: "Images"})
+    await expect.element(imagesNodeText).toHaveAttribute("data-focus")
   })
 
   test("context api expansion loads children asynchronously", async () => {

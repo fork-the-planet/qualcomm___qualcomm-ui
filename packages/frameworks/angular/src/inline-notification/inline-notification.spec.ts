@@ -171,30 +171,33 @@ const tests: MultiComponentTest[] = [
       @Component({
         imports: [InlineNotificationModule],
         template: `
-          <div [attr.data-test-id]="testIds.root" q-inline-notification-root>
+          <div q-inline-notification-root [attr.data-test-id]="testIds.root">
             <span
-              [attr.data-test-id]="testIds.icon"
               q-inline-notification-icon
+              [attr.data-test-id]="testIds.icon"
             ></span>
-            <div [attr.data-test-id]="testIds.label" q-inline-notification-label>
+            <div
+              q-inline-notification-label
+              [attr.data-test-id]="testIds.label"
+            >
               {{ demoLabel() }}
             </div>
             <div
-              [attr.data-test-id]="testIds.description"
               q-inline-notification-description
+              [attr.data-test-id]="testIds.description"
             >
               {{ demoDescription() }}
             </div>
             <a
               href="#action"
-              [attr.data-test-id]="testIds.action"
               q-inline-notification-action
+              [attr.data-test-id]="testIds.action"
             >
               Action
             </a>
             <button
-              [attr.data-test-id]="testIds.closeButton"
               q-inline-notification-close-button
+              [attr.data-test-id]="testIds.closeButton"
             ></button>
           </div>
         `,
@@ -211,30 +214,33 @@ const tests: MultiComponentTest[] = [
       @Component({
         imports: [InlineNotificationModule],
         template: `
-          <div [attr.data-test-id]="testIds.root" q-inline-notification>
+          <div q-inline-notification [attr.data-test-id]="testIds.root">
             <span
-              [attr.data-test-id]="testIds.icon"
               q-inline-notification-icon
+              [attr.data-test-id]="testIds.icon"
             ></span>
-            <div [attr.data-test-id]="testIds.label" q-inline-notification-label>
+            <div
+              q-inline-notification-label
+              [attr.data-test-id]="testIds.label"
+            >
               {{ demoLabel() }}
             </div>
             <div
-              [attr.data-test-id]="testIds.description"
               q-inline-notification-description
+              [attr.data-test-id]="testIds.description"
             >
               {{ demoDescription() }}
             </div>
             <a
               href="#action"
-              [attr.data-test-id]="testIds.action"
               q-inline-notification-action
+              [attr.data-test-id]="testIds.action"
             >
               Action
             </a>
             <button
-              [attr.data-test-id]="testIds.closeButton"
               q-inline-notification-close-button
+              [attr.data-test-id]="testIds.closeButton"
             ></button>
           </div>
         `,
@@ -257,7 +263,8 @@ const tests: MultiComponentTest[] = [
         await expect
           .element(page.getByTestId(testIds.description))
           .toBeVisible()
-        await expect.element(page.getByRole("link", {name: "Action"}))
+        await expect
+          .element(page.getByRole("link", {name: "Action"}))
           .toBeVisible()
         await expect
           .element(page.getByTestId(testIds.closeButton))
@@ -270,7 +277,7 @@ const tests: MultiComponentTest[] = [
       @Component({
         imports: [InlineNotificationModule],
         template: `
-          <div role="alert" q-inline-notification-root>
+          <div q-inline-notification-root role="alert">
             <span q-inline-notification-icon></span>
             <div q-inline-notification-label>{{ demoLabel() }}</div>
           </div>
@@ -286,7 +293,7 @@ const tests: MultiComponentTest[] = [
       @Component({
         imports: [InlineNotificationModule],
         template: `
-          <div role="alert" q-inline-notification [label]="demoLabel()"></div>
+          <div q-inline-notification role="alert" [label]="demoLabel()"></div>
         `,
       })
       class SimpleComponent {

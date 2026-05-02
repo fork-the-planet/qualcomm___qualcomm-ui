@@ -1377,12 +1377,7 @@ const testCases: MultiComponentTest[] = [
       @Component({
         imports: [NumberInputModule],
         template: `
-          <div
-            defaultValue="5"
-            max="10"
-            min="2"
-            q-number-input-root
-          >
+          <div defaultValue="5" max="10" min="2" q-number-input-root>
             <label q-number-input-label>{{ demoLabel }}</label>
             <div q-number-input-input-group>
               <input q-number-input-input />
@@ -1445,7 +1440,7 @@ const testCases: MultiComponentTest[] = [
             max="10"
             min="2"
             q-number-input-root
-            (valueInvalid)="invalid.emit($event)"
+            (valueInvalid)="isInvalid.emit($event)"
           >
             <label q-number-input-label>{{ demoLabel }}</label>
             <div q-number-input-input-group>
@@ -1458,7 +1453,7 @@ const testCases: MultiComponentTest[] = [
       })
       class CompositeComponent {
         protected readonly demoLabel = demoLabel
-        invalid = output<NumberInputValueInvalidDetails>()
+        protected readonly isInvalid = output<NumberInputValueInvalidDetails>()
       }
       return CompositeComponent
     },
@@ -1472,14 +1467,14 @@ const testCases: MultiComponentTest[] = [
             max="10"
             min="2"
             [label]="demoLabel"
-            (valueInvalid)="invalid.emit($event)"
+            (valueInvalid)="isInvalid.emit($event)"
           />
           <button type="button">Blur target</button>
         `,
       })
       class SimpleComponent {
         protected readonly demoLabel = demoLabel
-        invalid = output<NumberInputValueInvalidDetails>()
+        protected readonly isInvalid = output<NumberInputValueInvalidDetails>()
       }
       return SimpleComponent
     },
@@ -1488,7 +1483,7 @@ const testCases: MultiComponentTest[] = [
         const invalidSpy = vi.fn()
         await render(component, {
           on: {
-            invalid: invalidSpy,
+            isInvalid: invalidSpy,
           },
         })
 
@@ -1497,11 +1492,13 @@ const testCases: MultiComponentTest[] = [
         await page.getByRole("button", {name: "Blur target"}).click()
 
         await expect.element(input).toHaveValue("1")
-        await expect.poll(() => invalidSpy).toHaveBeenCalledWith({
-          reason: "rangeUnderflow",
-          value: "1",
-          valueAsNumber: 1,
-        })
+        await expect
+          .poll(() => invalidSpy)
+          .toHaveBeenCalledWith({
+            reason: "rangeUnderflow",
+            value: "1",
+            valueAsNumber: 1,
+          })
       })
     },
   },
@@ -1568,16 +1565,20 @@ const testCases: MultiComponentTest[] = [
         const input = page.getByLabelText(demoLabel)
 
         await page.getByRole("button", {name: "Increment"}).click()
-        await expect.poll(() => changedSpy).toHaveBeenCalledWith({
-          value: "6",
-          valueAsNumber: 6,
-        })
+        await expect
+          .poll(() => changedSpy)
+          .toHaveBeenCalledWith({
+            value: "6",
+            valueAsNumber: 6,
+          })
 
         await input.fill("12.5")
-        await expect.poll(() => changedSpy).toHaveBeenLastCalledWith({
-          value: "12.5",
-          valueAsNumber: 12.5,
-        })
+        await expect
+          .poll(() => changedSpy)
+          .toHaveBeenLastCalledWith({
+            value: "12.5",
+            valueAsNumber: 12.5,
+          })
       })
     },
   },
@@ -1600,7 +1601,10 @@ const testCases: MultiComponentTest[] = [
               <div q-number-input-control></div>
             </div>
           </div>
-          <output aria-label="selected unit" class="text-neutral-primary m-4 block">
+          <output
+            aria-label="selected unit"
+            class="text-neutral-primary m-4 block"
+          >
             {{ selectedUnit() }}
           </output>
         `,
@@ -1623,7 +1627,10 @@ const testCases: MultiComponentTest[] = [
             [unitOptions]="unitOptions"
             (unitChanged)="selectedUnit.set($event)"
           />
-          <output aria-label="selected unit" class="text-neutral-primary m-4 block">
+          <output
+            aria-label="selected unit"
+            class="text-neutral-primary m-4 block"
+          >
             {{ selectedUnit() }}
           </output>
         `,
@@ -1713,10 +1720,7 @@ const testCases: MultiComponentTest[] = [
       @Component({
         imports: [NumberInputModule],
         template: `
-          <form
-            (submit)="handleSubmit($event)"
-            (reset)="handleReset()"
-          >
+          <form (reset)="handleReset()" (submit)="handleSubmit($event)">
             <div defaultValue="2" name="quantity" q-number-input-root>
               <label q-number-input-label>{{ demoLabel }}</label>
               <div q-number-input-input-group>
@@ -1727,7 +1731,10 @@ const testCases: MultiComponentTest[] = [
             <button type="submit">Submit form</button>
             <button type="reset">Reset form</button>
           </form>
-          <output aria-label="submitted value" class="text-neutral-primary m-4 block">
+          <output
+            aria-label="submitted value"
+            class="text-neutral-primary m-4 block"
+          >
             {{ submittedValue() }}
           </output>
         `,
@@ -1755,10 +1762,7 @@ const testCases: MultiComponentTest[] = [
       @Component({
         imports: [NumberInputModule],
         template: `
-          <form
-            (submit)="handleSubmit($event)"
-            (reset)="handleReset()"
-          >
+          <form (reset)="handleReset()" (submit)="handleSubmit($event)">
             <q-number-input
               defaultValue="2"
               name="quantity"
@@ -1767,7 +1771,10 @@ const testCases: MultiComponentTest[] = [
             <button type="submit">Submit form</button>
             <button type="reset">Reset form</button>
           </form>
-          <output aria-label="submitted value" class="text-neutral-primary m-4 block">
+          <output
+            aria-label="submitted value"
+            class="text-neutral-primary m-4 block"
+          >
             {{ submittedValue() }}
           </output>
         `,

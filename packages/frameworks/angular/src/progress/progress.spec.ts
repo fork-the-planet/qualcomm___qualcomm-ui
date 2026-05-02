@@ -542,23 +542,23 @@ const tests: MultiComponentTest[] = [
         template: `
           <div
             invalid
-            [attr.data-test-id]="testIds.root"
             q-progress-root
+            [attr.data-test-id]="testIds.root"
             [value]="60"
           >
-            <div [attr.data-test-id]="testIds.label" q-progress-label>
+            <div q-progress-label [attr.data-test-id]="testIds.label">
               {{ testLabel() }}
             </div>
-            <div [attr.data-test-id]="testIds.valueText" q-progress-value-text>
+            <div q-progress-value-text [attr.data-test-id]="testIds.valueText">
               60%
             </div>
-            <div [attr.data-test-id]="testIds.track" q-progress-track>
-              <div [attr.data-test-id]="testIds.bar" q-progress-bar></div>
+            <div q-progress-track [attr.data-test-id]="testIds.track">
+              <div q-progress-bar [attr.data-test-id]="testIds.bar"></div>
             </div>
-            <div [attr.data-test-id]="testIds.errorText" q-progress-error-text>
+            <div q-progress-error-text [attr.data-test-id]="testIds.errorText">
               {{ errorMessage() }}
             </div>
-            <div [attr.data-test-id]="testIds.hint" q-progress-hint>
+            <div q-progress-hint [attr.data-test-id]="testIds.hint">
               {{ hintMessage() }}
             </div>
           </div>
@@ -579,23 +579,23 @@ const tests: MultiComponentTest[] = [
         template: `
           <div
             invalid
-            [attr.data-test-id]="testIds.root"
             q-progress
+            [attr.data-test-id]="testIds.root"
             [value]="60"
           >
-            <div [attr.data-test-id]="testIds.label" q-progress-label>
+            <div q-progress-label [attr.data-test-id]="testIds.label">
               {{ testLabel() }}
             </div>
-            <div [attr.data-test-id]="testIds.valueText" q-progress-value-text>
+            <div q-progress-value-text [attr.data-test-id]="testIds.valueText">
               60%
             </div>
-            <div [attr.data-test-id]="testIds.track" q-progress-track>
-              <div [attr.data-test-id]="testIds.bar" q-progress-bar></div>
+            <div q-progress-track [attr.data-test-id]="testIds.track">
+              <div q-progress-bar [attr.data-test-id]="testIds.bar"></div>
             </div>
-            <div [attr.data-test-id]="testIds.errorText" q-progress-error-text>
+            <div q-progress-error-text [attr.data-test-id]="testIds.errorText">
               {{ errorMessage() }}
             </div>
-            <div [attr.data-test-id]="testIds.hint" q-progress-hint>
+            <div q-progress-hint [attr.data-test-id]="testIds.hint">
               {{ hintMessage() }}
             </div>
           </div>

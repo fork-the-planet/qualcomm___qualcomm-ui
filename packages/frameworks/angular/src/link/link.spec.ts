@@ -34,7 +34,7 @@ describe("Link", () => {
     @Component({
       imports: [LinkDirective],
       template: `
-        <a disabled dir="rtl" emphasis="strong" href="/docs" q-link size="lg">
+        <a dir="rtl" disabled emphasis="strong" href="/docs" q-link size="lg">
           Disabled docs
         </a>
       `,

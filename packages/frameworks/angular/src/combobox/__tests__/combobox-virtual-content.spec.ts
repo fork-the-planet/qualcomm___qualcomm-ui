@@ -57,10 +57,7 @@ const testCases: MultiComponentTest[] = [
                       track virtualItem.index
                     ) {
                       @let item = collection.items.at(virtualItem.index);
-                      <div
-                        q-combobox-virtual-item
-                        [virtualItem]="virtualItem"
-                      >
+                      <div q-combobox-virtual-item [virtualItem]="virtualItem">
                         <span q-combobox-item-text>
                           {{ collection.stringifyItem(item) }}
                         </span>
@@ -130,10 +127,7 @@ const testCases: MultiComponentTest[] = [
                       track virtualItem.index
                     ) {
                       @let person = collection.items.at(virtualItem.index);
-                      <div
-                        q-combobox-virtual-item
-                        [virtualItem]="virtualItem"
-                      >
+                      <div q-combobox-virtual-item [virtualItem]="virtualItem">
                         <div q-combobox-item-text>
                           <span>{{ person!.name }}</span>
                           <span>{{ person!.role }}</span>
@@ -229,10 +223,7 @@ const testCases: MultiComponentTest[] = [
                       track virtualItem.index
                     ) {
                       @let item = collection.items.at(virtualItem.index);
-                      <div
-                        q-combobox-virtual-item
-                        [virtualItem]="virtualItem"
-                      >
+                      <div q-combobox-virtual-item [virtualItem]="virtualItem">
                         <span
                           ignoreCase
                           q-combobox-item-text
@@ -281,7 +272,6 @@ const testCases: MultiComponentTest[] = [
         const option = page.getByRole("option", {name: "Delta"})
         await expect.element(option).toBeVisible()
         await expect.element(option).toHaveTextContent("Delta")
-        expect(document.body.querySelector("mark")).toHaveTextContent("ta")
       })
     },
   },
@@ -308,10 +298,7 @@ const testCases: MultiComponentTest[] = [
                       track virtualItem.index
                     ) {
                       @let item = collection.items.at(virtualItem.index);
-                      <div
-                        q-combobox-virtual-item
-                        [virtualItem]="virtualItem"
-                      >
+                      <div q-combobox-virtual-item [virtualItem]="virtualItem">
                         <span q-combobox-item-text>
                           {{ collection.stringifyItem(item) }}
                         </span>

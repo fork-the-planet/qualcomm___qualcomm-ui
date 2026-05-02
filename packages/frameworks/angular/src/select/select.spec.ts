@@ -348,11 +348,11 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule],
         template: `
           <q-select
+            label="Select a city"
+            placeholder="Select a city"
             [clearable]="false"
             [collection]="cityCollection"
             [defaultValue]="['Nashville']"
-            label="Select a city"
-            placeholder="Select a city"
           />
         `,
       })

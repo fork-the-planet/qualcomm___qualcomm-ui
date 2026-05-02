@@ -541,7 +541,9 @@ describe("Toast", () => {
         <button q-button (click)="createQueuedToasts()">
           Create queued toasts
         </button>
-        <button q-button (click)="removeFirstToast()">Remove first toast</button>
+        <button q-button (click)="removeFirstToast()">
+          Remove first toast
+        </button>
       `,
     })
     class TestComponent {

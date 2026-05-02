@@ -317,8 +317,8 @@ const tests: MultiComponentTest[] = [
         template: `
           <div
             q-progress-ring
-            [label]="testLabel()"
             size="lg"
+            [label]="testLabel()"
             [value]="50"
             [valueText]="valueText()"
           ></div>
@@ -369,11 +369,7 @@ const tests: MultiComponentTest[] = [
         imports: [ProgressRingModule],
         template: `
           <div>
-            <div
-              q-progress-ring
-              [label]="testLabel()"
-              [value]="value()"
-            ></div>
+            <div q-progress-ring [label]="testLabel()" [value]="value()"></div>
             <button type="button" (click)="value.set(75)">
               Update Progress
             </button>
@@ -494,32 +490,35 @@ const tests: MultiComponentTest[] = [
         template: `
           <div
             invalid
-            [attr.data-test-id]="testIds.root"
             q-progress-ring-root
             size="lg"
+            [attr.data-test-id]="testIds.root"
             [value]="60"
           >
             <div
-              [attr.data-test-id]="testIds.circleContainer"
               q-progress-ring-circle-container
+              [attr.data-test-id]="testIds.circleContainer"
             >
               <div
-                [attr.data-test-id]="testIds.valueText"
                 q-progress-ring-value-text
+                [attr.data-test-id]="testIds.valueText"
               >
                 60%
               </div>
-              <svg [attr.data-test-id]="testIds.circle" q-progress-ring-circle>
-                <circle [attr.data-test-id]="testIds.track" q-progress-ring-track />
-                <circle [attr.data-test-id]="testIds.bar" q-progress-ring-bar />
+              <svg q-progress-ring-circle [attr.data-test-id]="testIds.circle">
+                <circle
+                  q-progress-ring-track
+                  [attr.data-test-id]="testIds.track"
+                />
+                <circle q-progress-ring-bar [attr.data-test-id]="testIds.bar" />
               </svg>
             </div>
-            <div [attr.data-test-id]="testIds.label" q-progress-ring-label>
+            <div q-progress-ring-label [attr.data-test-id]="testIds.label">
               {{ testLabel() }}
             </div>
             <div
-              [attr.data-test-id]="testIds.errorText"
               q-progress-ring-error-text
+              [attr.data-test-id]="testIds.errorText"
             >
               {{ errorMessage() }}
             </div>

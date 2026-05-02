@@ -16,8 +16,8 @@ import {
 describe("function helpers", () => {
   test("runIfFn invokes functions and returns non-null values directly", () => {
     expect(runIfFn((value: number) => value * 2, 4)).toBe(8)
-    expect(runIfFn("value")).toBe("value")
-    expect(runIfFn(null)).toBeUndefined()
+    expect(runIfFn("value" as unknown as any)).toBe("value")
+    expect(runIfFn(null as unknown as any)).toBeUndefined()
   })
 
   test("callAll invokes all provided callbacks with arguments", () => {
@@ -31,9 +31,13 @@ describe("function helpers", () => {
   })
 
   test("match returns values, invokes handlers, and throws for missing keys", () => {
-    expect(match("static", {dynamic: () => 2, static: 1})).toBe(1)
+    expect(match("static", {dynamic: () => 2, static: 1} as any)).toBe(1)
     expect(
-      match("dynamic", {dynamic: (value: number) => value * 2, static: 1}, 3),
+      match(
+        "dynamic",
+        {dynamic: (value: number) => value * 2, static: 1} as any,
+        3,
+      ),
     ).toBe(6)
     expect(() => match("missing", {static: 1} as any)).toThrow(
       'No matching key: "missing"',

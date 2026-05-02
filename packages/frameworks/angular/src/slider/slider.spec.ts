@@ -1,5 +1,4 @@
 import {Component, input, output} from "@angular/core"
-import {FormControl, ReactiveFormsModule} from "@angular/forms"
 import {render} from "@testing-library/angular"
 import {describe, expect, test, vi} from "vitest"
 import {page, userEvent} from "vitest/browser"

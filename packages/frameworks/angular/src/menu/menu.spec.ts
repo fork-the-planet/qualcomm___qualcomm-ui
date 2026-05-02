@@ -23,10 +23,7 @@ async function openMenu(name: string | RegExp) {
     <output data-test-id="open-state">
       {{ open() ? "open" : "closed" }}
     </output>
-    <q-menu
-      (openChanged)="open.set($event)"
-      (selected)="selected.emit($event)"
-    >
+    <q-menu (openChanged)="open.set($event)" (selected)="selected.emit($event)">
       <button q-menu-button>Shortcut Menu</button>
       <ng-template qPortal>
         <div q-menu-positioner>
@@ -121,11 +118,7 @@ class DisabledMenuComponent {
               <span q-menu-item-indicator>Selected</span>
             </button>
             <div q-menu-radio-item-group [(value)]="density">
-              <button
-                q-menu-radio-item
-                value="compact"
-                [closeOnSelect]="false"
-              >
+              <button q-menu-radio-item value="compact" [closeOnSelect]="false">
                 <span q-menu-item-label>Compact</span>
               </button>
               <button
@@ -190,8 +183,11 @@ class SubmenuComponent {
   providers: [provideIcons({Ellipsis})],
   template: `
     <q-menu>
-      <button aria-label="More actions" icon="Ellipsis" q-menu-icon-button>
-      </button>
+      <button
+        aria-label="More actions"
+        icon="Ellipsis"
+        q-menu-icon-button
+      ></button>
       <ng-template qPortal>
         <div q-menu-positioner>
           <div q-menu-content>
@@ -268,7 +264,9 @@ describe("Menu", () => {
 
     await userEvent.keyboard("{Enter}")
     await expect.element(menu()).toBeVisible()
-    await expect.element(page.getByTestId("open-state")).toHaveTextContent("open")
+    await expect
+      .element(page.getByTestId("open-state"))
+      .toHaveTextContent("open")
 
     await userEvent.keyboard("{Enter}")
     await expect.poll(() => selected).toHaveBeenCalledWith("new-file")

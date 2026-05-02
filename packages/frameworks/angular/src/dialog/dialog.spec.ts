@@ -313,7 +313,7 @@ describe("Dialog", () => {
     await page.getByRole("button", {name: text.open}).click()
     await assertVisible()
 
-    await page.getByRole("button", {name: text.close, exact: true}).click()
+    await page.getByRole("button", {exact: true, name: text.close}).click()
     await assertHidden()
   })
 
@@ -362,9 +362,7 @@ describe("Dialog", () => {
         inputs: {emphasis},
       })
 
-      const indicatorIcon = document.querySelector(
-        "svg[q-dialog-indicator-icon]",
-      )
+      const indicatorIcon = page.getByTestId("dialog-indicator-icon")
 
       expect(indicatorIcon).toBeVisible()
     })

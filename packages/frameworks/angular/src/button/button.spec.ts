@@ -12,11 +12,11 @@ import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
   providers: [provideIcons({Plus, Search})],
   template: `
     <button
+      q-button
       [attr.aria-label]="ariaLabel"
       [disabled]="disabled"
-      q-button
-      [startIcon]="startIcon"
       [endIcon]="endIcon"
+      [startIcon]="startIcon"
       (click)="clicked.emit()"
     >
       {{ label }}
@@ -38,9 +38,9 @@ class ButtonComponent {
   template: `
     <button
       aria-label="Search"
-      [disabled]="disabled"
       icon="Search"
       q-icon-button
+      [disabled]="disabled"
       (click)="clicked.emit()"
     ></button>
   `,

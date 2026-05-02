@@ -16,7 +16,7 @@ describe("CheckmarkIcon", () => {
           <q-checkmark-icon
             [attr.data-test-id]="'checkmark-icon-' + size"
             [size]="size"
-          ></q-checkmark-icon>
+          />
         }
       `,
     })
@@ -42,10 +42,10 @@ describe("CheckmarkIcon", () => {
       template: `
         @for (size of sizes; track size) {
           <q-checkmark-icon
-            [attr.data-test-id]="'checkmark-icon-' + size"
             indeterminate
+            [attr.data-test-id]="'checkmark-icon-' + size"
             [size]="size"
-          ></q-checkmark-icon>
+          />
         }
       `,
     })
@@ -69,10 +69,7 @@ describe("CheckmarkIcon", () => {
     @Component({
       imports: [CheckmarkIconComponent],
       template: `
-        <q-checkmark-icon
-          aria-label="Checked"
-          role="img"
-        ></q-checkmark-icon>
+        <q-checkmark-icon aria-label="Checked" role="img" />
       `,
     })
     class AriaLabelCheckmarkIconComponent {}
