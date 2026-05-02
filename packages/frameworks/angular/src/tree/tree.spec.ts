@@ -66,6 +66,15 @@ function createTestCollection() {
   })
 }
 
+function getTreeNodeText(text: string): HTMLElement {
+  const nodeText = Array.from(
+    document.querySelectorAll<HTMLElement>("[q-tree-node-text]"),
+  ).find((element) => element.textContent?.trim() === text)
+
+  expect(nodeText).toBeTruthy()
+  return nodeText!
+}
+
 const defaultTreeNodesTemplate = `
   @for (
     node of collection.rootNode.nodes;
@@ -170,9 +179,7 @@ class TreeApiSummaryComponent {
       <button (click)="treeContext.context().expand(['documents'])">
         API expand documents
       </button>
-      <button (click)="treeContext.context().expand()">
-        API expand all
-      </button>
+      <button (click)="treeContext.context().expand()">API expand all</button>
       <button (click)="treeContext.context().collapse()">
         API collapse all
       </button>
@@ -197,9 +204,7 @@ class TreeApiSummaryComponent {
       <button (click)="treeContext.context().deselect()">
         API deselect all
       </button>
-      <button (click)="treeContext.context().select()">
-        API select all
-      </button>
+      <button (click)="treeContext.context().select()">API select all</button>
       <button (click)="treeContext.context().setChecked(['doc1'])">
         API set checked doc1
       </button>
@@ -221,9 +226,7 @@ class TreeApiControlsComponent {
   checkedMapText() {
     return (
       Array.from(this.treeContext.context().getCheckedMap())
-        .map(
-          ([value, state]) => `${value}:${state.type}:${state.checked}`,
-        )
+        .map(([value, state]) => `${value}:${state.type}:${state.checked}`)
         .join("|") || "none"
     )
   }
@@ -1673,9 +1676,7 @@ describe("Tree", () => {
       .element(page.getByLabelText("API expanded value"))
       .toHaveTextContent("none")
 
-    await page
-      .getByRole("button", {name: "API set expanded documents"})
-      .click()
+    await page.getByRole("button", {name: "API set expanded documents"}).click()
     await page.getByRole("button", {name: "API expand report parent"}).click()
     await expect
       .element(page.getByLabelText("API expanded value"))
@@ -1741,7 +1742,7 @@ describe("Tree", () => {
       .toHaveTextContent("none")
 
     await page.getByRole("button", {name: "API focus images"}).click()
-    expect(page.getByText("Images")).toHaveAttribute("data-focus")
+    expect(getTreeNodeText("Images")).toHaveAttribute("data-focus")
   })
 
   test("context api expansion loads children asynchronously", async () => {
