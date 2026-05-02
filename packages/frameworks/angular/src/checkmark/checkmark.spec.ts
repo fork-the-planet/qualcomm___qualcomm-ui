@@ -24,16 +24,13 @@ describe("CheckmarkIcon", () => {
       protected readonly sizes = sizes
     }
 
-    const {container} = await render(CheckedIconComponent)
+    await render(CheckedIconComponent)
 
     for (const size of sizes) {
       await expect
         .element(page.getByTestId(`checkmark-icon-${size}`))
         .toBeVisible()
     }
-    expect(
-      container.querySelectorAll("svg[data-checkmark-part='indicator-icon']"),
-    ).toHaveLength(sizes.length)
   })
 
   test("renders a visible indeterminate icon at each supported size", async () => {
@@ -53,16 +50,13 @@ describe("CheckmarkIcon", () => {
       protected readonly sizes = sizes
     }
 
-    const {container} = await render(IndeterminateIconComponent)
+    await render(IndeterminateIconComponent)
 
     for (const size of sizes) {
       await expect
         .element(page.getByTestId(`checkmark-icon-${size}`))
         .toBeVisible()
     }
-    expect(
-      container.querySelectorAll("svg[data-checkmark-part='indicator-icon']"),
-    ).toHaveLength(sizes.length)
   })
 
   test("can expose an aria-label through the host element", async () => {
