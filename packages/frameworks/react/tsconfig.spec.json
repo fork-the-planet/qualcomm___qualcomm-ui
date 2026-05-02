@@ -9,6 +9,7 @@
       "@vitest/browser/providers/playwright"
     ],
     "paths": {
+      "@qualcomm-ui/react/*": ["./src/*/index.ts"],
       "~test-utils/runner": ["./test-utils/runner.ts"]
     }
   },
