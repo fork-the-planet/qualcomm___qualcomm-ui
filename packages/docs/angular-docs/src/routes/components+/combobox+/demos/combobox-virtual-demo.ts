@@ -13,8 +13,8 @@ import type {ComboboxInputValueChangeDetails} from "@qualcomm-ui/core/combobox"
     <!-- preview -->
     <q-combobox
       class="w-56"
-      label="Country"
-      placeholder="Select a country"
+      label="Users"
+      placeholder="Search for a username"
       virtual
       [collection]="listCollection.collection()"
       (inputValueChanged)="onInputChange($event)"
