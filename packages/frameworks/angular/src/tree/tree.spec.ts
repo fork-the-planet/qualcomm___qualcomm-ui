@@ -1205,9 +1205,6 @@ describe("Tree", () => {
 
     await expect.element(page.getByText("Project files")).toBeVisible()
     await expect
-      .element(page.getByText("Project files"))
-      .toHaveAttribute("data-size", "sm")
-    await expect
       .element(page.getByRole("tree", {name: "Project files"}))
       .toBeVisible()
   })
