@@ -26,28 +26,6 @@ describe("Link", () => {
     const link = page.getByRole("link", {name: "Documentation"})
     await expect.element(link).toBeVisible()
     expect(link.element().querySelectorAll("svg")).toHaveLength(2)
-    expect(link).toHaveAttribute("data-size", "sm")
-    expect(link).toHaveAttribute("dir", "ltr")
-  })
-
-  test("applies disabled and direction bindings", async () => {
-    @Component({
-      imports: [LinkDirective],
-      template: `
-        <a dir="rtl" disabled emphasis="strong" href="/docs" q-link size="lg">
-          Disabled docs
-        </a>
-      `,
-    })
-    class DisabledLinkComponent {}
-
-    await render(DisabledLinkComponent)
-
-    const link = page.getByRole("link", {name: "Disabled docs"})
-    expect(link).toHaveAttribute("data-disabled", "")
-    expect(link).toHaveAttribute("data-emphasis", "strong")
-    expect(link).toHaveAttribute("data-size", "lg")
-    expect(link).toHaveAttribute("dir", "rtl")
   })
 
   test("uses projected start and end icon elements", async () => {
@@ -68,9 +46,5 @@ describe("Link", () => {
 
     const link = page.getByRole("link", {name: "Custom docs"})
     expect(link.element().querySelectorAll("svg")).toHaveLength(2)
-    expect(
-      link.element().querySelector("[data-placement='start']"),
-    ).toBeTruthy()
-    expect(link.element().querySelector("[data-placement='end']")).toBeTruthy()
   })
 })

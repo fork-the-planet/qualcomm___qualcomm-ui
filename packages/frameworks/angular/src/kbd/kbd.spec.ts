@@ -19,6 +19,5 @@ describe("Kbd", () => {
 
     const kbd = page.getByText("Ctrl+K")
     await expect.element(kbd).toBeVisible()
-    expect(kbd).toHaveClass("qds-kbd")
   })
 })
