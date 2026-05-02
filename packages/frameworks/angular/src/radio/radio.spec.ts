@@ -16,6 +16,9 @@ import {RadioModule} from "@qualcomm-ui/angular/radio"
 import {type MultiComponentTest, runTests} from "~test-utils"
 
 const groupLabel = "Group Label"
+const demoGroupError = "Demo Group Error"
+const demoGroupHint = "Demo Group Hint"
+const demoHint = "Demo Hint"
 const demoLabel1 = "Option 1"
 const demoLabel2 = "Option 2"
 
@@ -84,6 +87,217 @@ const testCases: MultiComponentTest[] = [
         await userEvent.click(page.getByText(demoLabel2))
         expect(radio1).not.toBeChecked()
         expect(radio2).toBeChecked()
+      })
+    },
+  },
+  {
+    composite() {
+      @Component({
+        imports: [RadioModule],
+        template: `
+          <fieldset name="group" q-radio-group>
+            <div q-radio-group-label>{{ labels.groupLabel }}</div>
+            <div q-radio-group-items>
+              <label q-radio value="option1">
+                <input q-radio-hidden-input />
+                <div q-radio-control></div>
+                <span q-radio-label>{{ labels.demoLabel1 }}</span>
+              </label>
+              <label q-radio value="option2">
+                <input q-radio-hidden-input />
+                <div q-radio-control></div>
+                <span q-radio-label>{{ labels.demoLabel2 }}</span>
+              </label>
+            </div>
+            <div q-radio-group-hint>{{ demoGroupHint }}</div>
+          </fieldset>
+        `,
+      })
+      class CompositeComponent {
+        protected readonly labels = labels
+        protected readonly demoGroupHint = demoGroupHint
+      }
+      return CompositeComponent
+    },
+    simple() {
+      @Component({
+        imports: [RadioModule],
+        template: `
+          <fieldset name="group" q-radio-group>
+            <div q-radio-group-label>{{ labels.groupLabel }}</div>
+            <div q-radio-group-items>
+              <label label="${demoLabel1}" q-radio value="option1"></label>
+              <label label="${demoLabel2}" q-radio value="option2"></label>
+            </div>
+            <div q-radio-group-hint>${demoGroupHint}</div>
+          </fieldset>
+        `,
+      })
+      class SimpleComponent {
+        protected readonly labels = labels
+      }
+      return SimpleComponent
+    },
+    testCase(component) {
+      test(`group hint text describes the radio group while valid — ${component.name}`, async () => {
+        await render(component)
+
+        await expect.element(page.getByText(demoGroupHint)).toBeVisible()
+        await expect
+          .element(page.getByText(demoGroupHint))
+          .not.toHaveAttribute("hidden")
+        await expect
+          .element(page.getByLabelText(groupLabel))
+          .not.toHaveAttribute("aria-invalid", "true")
+      })
+    },
+  },
+  {
+    composite() {
+      @Component({
+        imports: [RadioModule, ReactiveFormsModule],
+        template: `
+          <form [formGroup]="form">
+            <fieldset
+              formControlName="selectedOption"
+              name="group"
+              q-radio-group
+            >
+              <div q-radio-group-label>{{ labels.groupLabel }}</div>
+              <div q-radio-group-items>
+                <label q-radio value="option1">
+                  <input q-radio-hidden-input />
+                  <div q-radio-control></div>
+                  <span q-radio-label>{{ labels.demoLabel1 }}</span>
+                </label>
+                <label q-radio value="option2">
+                  <input q-radio-hidden-input />
+                  <div q-radio-control></div>
+                  <span q-radio-label>{{ labels.demoLabel2 }}</span>
+                </label>
+              </div>
+              <div q-radio-group-hint>{{ demoGroupHint }}</div>
+              <div q-radio-group-error-text>{{ demoGroupError }}</div>
+            </fieldset>
+            <button type="submit">Submit</button>
+          </form>
+        `,
+      })
+      class CompositeComponent {
+        protected readonly labels = labels
+        protected readonly demoGroupHint = demoGroupHint
+        protected readonly demoGroupError = demoGroupError
+        form = new FormGroup({
+          selectedOption: new FormControl("", Validators.required),
+        })
+      }
+      return CompositeComponent
+    },
+    simple() {
+      @Component({
+        imports: [RadioModule, ReactiveFormsModule],
+        template: `
+          <form [formGroup]="form">
+            <fieldset
+              formControlName="selectedOption"
+              name="group"
+              q-radio-group
+            >
+              <div q-radio-group-label>{{ labels.groupLabel }}</div>
+              <div q-radio-group-items>
+                <label label="${demoLabel1}" q-radio value="option1"></label>
+                <label label="${demoLabel2}" q-radio value="option2"></label>
+              </div>
+              <div q-radio-group-hint>${demoGroupHint}</div>
+              <div q-radio-group-error-text>${demoGroupError}</div>
+            </fieldset>
+            <button type="submit">Submit</button>
+          </form>
+        `,
+      })
+      class SimpleComponent {
+        protected readonly labels = labels
+        form = new FormGroup({
+          selectedOption: new FormControl("", Validators.required),
+        })
+      }
+      return SimpleComponent
+    },
+    testCase(component) {
+      test(`group error text replaces hint while invalid — ${component.name}`, async () => {
+        await render(component)
+
+        await expect.element(page.getByText(demoGroupHint)).toBeVisible()
+        await expect.element(page.getByText(demoGroupError)).not.toBeVisible()
+
+        await userEvent.click(page.getByText("Submit"))
+
+        await expect.element(page.getByText(demoGroupError)).toBeVisible()
+        await expect.element(page.getByText(demoGroupHint)).not.toBeVisible()
+        await expect
+          .element(page.getByLabelText(groupLabel))
+          .toHaveAttribute("aria-invalid", "true")
+      })
+    },
+  },
+  {
+    composite() {
+      @Component({
+        imports: [RadioModule, FormsModule],
+        template: `
+          <fieldset name="group" q-radio-group [(ngModel)]="selectedValue">
+            <div q-radio-group-label>{{ labels.groupLabel }}</div>
+            <output>{{ selectedValue() || "none" }}</output>
+            <div q-radio-group-items>
+              <label q-radio value="option1">
+                <input q-radio-hidden-input />
+                <div q-radio-control></div>
+                <span q-radio-label>{{ labels.demoLabel1 }}</span>
+              </label>
+              <label q-radio value="option2">
+                <input q-radio-hidden-input />
+                <div q-radio-control></div>
+                <span q-radio-label>{{ labels.demoLabel2 }}</span>
+              </label>
+            </div>
+          </fieldset>
+        `,
+      })
+      class CompositeComponent {
+        protected readonly labels = labels
+        readonly selectedValue = signal("option1")
+      }
+      return CompositeComponent
+    },
+    simple() {
+      @Component({
+        imports: [RadioModule, FormsModule],
+        template: `
+          <fieldset name="group" q-radio-group [(ngModel)]="selectedValue">
+            <div q-radio-group-label>{{ labels.groupLabel }}</div>
+            <output>{{ selectedValue() || "none" }}</output>
+            <div q-radio-group-items>
+              <label label="${demoLabel1}" q-radio value="option1"></label>
+              <label label="${demoLabel2}" q-radio value="option2"></label>
+            </div>
+          </fieldset>
+        `,
+      })
+      class SimpleComponent {
+        protected readonly labels = labels
+        readonly selectedValue = signal("option1")
+      }
+      return SimpleComponent
+    },
+    testCase(component) {
+      test(`bound selected value reflects radio selection — ${component.name}`, async () => {
+        await render(component)
+
+        await expect.element(page.getByText("option1")).toBeVisible()
+
+        await userEvent.click(page.getByText(demoLabel2))
+
+        await expect.element(page.getByText("option2")).toBeVisible()
       })
     },
   },
@@ -1080,6 +1294,52 @@ const testCases: MultiComponentTest[] = [
 
         await expect.element(radio1).not.toBeChecked()
         await expect.element(radio2).toBeChecked()
+      })
+    },
+  },
+  {
+    composite() {
+      @Component({
+        imports: [RadioModule],
+        template: `
+          <fieldset name="group" q-radio-group>
+            <label q-radio value="option1">
+              <input q-radio-hidden-input />
+              <div q-radio-control></div>
+              <span q-radio-label>{{ demoLabel1 }}</span>
+              <span q-radio-hint>{{ demoHint }}</span>
+            </label>
+          </fieldset>
+        `,
+      })
+      class CompositeComponent {
+        protected readonly demoLabel1 = demoLabel1
+        protected readonly demoHint = demoHint
+      }
+      return CompositeComponent
+    },
+    simple() {
+      @Component({
+        imports: [RadioModule],
+        template: `
+          <fieldset name="group" q-radio-group>
+            <label
+              hint="${demoHint}"
+              label="${demoLabel1}"
+              q-radio
+              value="option1"
+            ></label>
+          </fieldset>
+        `,
+      })
+      class SimpleComponent {}
+      return SimpleComponent
+    },
+    testCase(component) {
+      test(`hint is visible — ${component.name}`, async () => {
+        await render(component)
+
+        await expect.element(page.getByText(demoHint)).toBeVisible()
       })
     },
   },

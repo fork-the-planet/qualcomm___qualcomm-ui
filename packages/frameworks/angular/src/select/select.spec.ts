@@ -94,6 +94,163 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule, PortalDirective],
         template: `
           <div
+            multiple
+            placeholder="Select cities"
+            q-select-root
+            selectionIndicator="checkbox"
+            [collection]="cityCollection"
+          >
+            <div q-select-control>
+              <span q-select-value-text></span>
+              <button q-select-indicator></button>
+            </div>
+
+            <select q-select-hidden-select></select>
+
+            <ng-template qPortal>
+              <div q-select-positioner>
+                <div q-select-content>
+                  @for (item of cityCollection.items; track item) {
+                    <div q-select-item [item]="item">
+                      <span q-select-item-checkbox></span>
+                      <span q-select-item-text>
+                        {{ cityCollection.stringifyItem(item) }}
+                      </span>
+                    </div>
+                  }
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        `,
+      })
+      class CompositeComponent {
+        cityCollection = selectCollection({items: cityItems})
+      }
+      return CompositeComponent
+    },
+    simple() {
+      @Component({
+        imports: [SelectModule],
+        template: `
+          <q-select
+            multiple
+            placeholder="Select cities"
+            selectionIndicator="checkbox"
+            [collection]="cityCollection"
+          />
+        `,
+      })
+      class SimpleComponent {
+        cityCollection = selectCollection({items: cityItems})
+      }
+      return SimpleComponent
+    },
+    testCase(component) {
+      test(`multiple selection with checkbox indicators — ${component.name}`, async () => {
+        await render(component)
+
+        const trigger = page.getByRole("combobox")
+        await trigger.click()
+
+        await expect
+          .element(page.getByRole("option", {name: "Denver"}))
+          .not.toHaveAttribute("aria-selected")
+        await expect
+          .element(page.getByRole("option", {name: "Miami"}))
+          .not.toHaveAttribute("aria-selected")
+
+        await page.getByRole("option", {name: "Denver"}).click()
+
+        await expect
+          .element(page.getByRole("option", {name: "Denver"}))
+          .toHaveAttribute("aria-selected", "")
+        await expect
+          .element(page.getByRole("option", {name: "Miami"}))
+          .not.toHaveAttribute("aria-selected")
+        await expect.element(page.getByRole("listbox")).toBeVisible()
+      })
+    },
+  },
+  {
+    composite() {
+      @Component({
+        imports: [SelectModule, PortalDirective],
+        template: `
+          <div
+            multiple
+            placeholder="Select cities"
+            q-select-root
+            [collection]="cityCollection"
+            [defaultValue]="['Denver', 'Miami']"
+          >
+            <div q-select-control>
+              <span q-select-value-text></span>
+              <button q-select-indicator></button>
+            </div>
+
+            <select q-select-hidden-select></select>
+
+            <ng-template qPortal>
+              <div q-select-positioner>
+                <div q-select-content>
+                  @for (item of cityCollection.items; track item) {
+                    <div q-select-item [item]="item">
+                      <span q-select-item-text>
+                        {{ cityCollection.stringifyItem(item) }}
+                      </span>
+                      <span q-select-item-indicator></span>
+                    </div>
+                  }
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        `,
+      })
+      class CompositeComponent {
+        cityCollection = selectCollection({items: cityItems})
+      }
+      return CompositeComponent
+    },
+    simple() {
+      @Component({
+        imports: [SelectModule],
+        template: `
+          <q-select
+            multiple
+            placeholder="Select cities"
+            [collection]="cityCollection"
+            [defaultValue]="['Denver', 'Miami']"
+          />
+        `,
+      })
+      class SimpleComponent {
+        cityCollection = selectCollection({items: cityItems})
+      }
+      return SimpleComponent
+    },
+    testCase(component) {
+      test(`removes a selected value from the trigger tag — ${component.name}`, async () => {
+        await render(component)
+
+        const trigger = page.getByRole("combobox")
+        await expect.element(trigger).toHaveTextContent("Denver")
+        await expect.element(trigger).toHaveTextContent("Miami")
+
+        await trigger.getByText("Denver").click()
+
+        await expect.element(trigger).not.toHaveTextContent("Denver")
+        await expect.element(trigger).toHaveTextContent("Miami")
+      })
+    },
+  },
+  {
+    composite() {
+      @Component({
+        imports: [SelectModule, PortalDirective],
+        template: `
+          <div
             placeholder="Select a city"
             q-select-root
             [collection]="cityCollection"
@@ -155,6 +312,65 @@ const testCases: MultiComponentTest[] = [
         await trigger.click()
         await expect.element(trigger).toHaveAttribute("aria-expanded", "false")
         await expect.element(content).not.toBeInTheDocument()
+      })
+    },
+  },
+  {
+    simple() {
+      @Component({
+        imports: [SelectModule],
+        template: `
+          <q-select
+            aria-label="City"
+            placeholder="Select a city"
+            [collection]="cityCollection"
+          />
+        `,
+      })
+      class SimpleComponent {
+        cityCollection = selectCollection({items: cityItems})
+      }
+      return SimpleComponent
+    },
+    testCase(component) {
+      test(`simple select applies aria-label to the control — ${component.name}`, async () => {
+        await render(component)
+
+        await expect
+          .element(page.getByRole("combobox", {name: "City"}))
+          .toBeVisible()
+      })
+    },
+  },
+  {
+    simple() {
+      @Component({
+        imports: [SelectModule],
+        template: `
+          <q-select
+            [clearable]="false"
+            [collection]="cityCollection"
+            [defaultValue]="['Nashville']"
+            label="Select a city"
+            placeholder="Select a city"
+          />
+        `,
+      })
+      class SimpleComponent {
+        cityCollection = selectCollection({items: cityItems})
+      }
+      return SimpleComponent
+    },
+    testCase(component) {
+      test(`simple select omits the clear button when clearable is false — ${component.name}`, async () => {
+        await render(component)
+
+        await expect
+          .element(page.getByRole("combobox", {name: /select a city/i}))
+          .toHaveTextContent("Nashville")
+        await expect
+          .element(page.getByRole("button", {name: "Clear value"}))
+          .not.toBeInTheDocument()
       })
     },
   },
