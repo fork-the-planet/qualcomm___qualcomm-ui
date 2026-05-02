@@ -4,7 +4,10 @@
     "jsx": "preserve",
     "noEmit": true,
     "strictPropertyInitialization": false,
-    "composite": true
+    "composite": true,
+    "paths": {
+      "@qualcomm-ui/utils/*": ["./src/*/index.ts"]
+    }
   },
   "include": [
     "./src/**/*.spec.ts"
