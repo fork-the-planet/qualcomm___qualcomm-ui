@@ -56,8 +56,7 @@ export default defineConfig(({mode}) => ({
       },
     },
     globals: true,
-    include: "src/**/*.spec.ts",
-    reporters: ["default"],
+    include: ["src/**/*.spec.ts"],
     setupFiles: ["test/test-setup.ts"],
   },
 }))

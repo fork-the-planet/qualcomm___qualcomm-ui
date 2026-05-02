@@ -326,4 +326,50 @@ const testCases: MultiComponentTest[] = [
 
 describe("Combobox - Parts", () => {
   runTests(testCases)
+
+  test("context template exposes live combobox state", async () => {
+    @Component({
+      imports: [ComboboxModule, PortalDirective],
+      template: `
+        <div q-combobox-root [collection]="collection">
+          <label q-combobox-label>Context Label</label>
+          <ng-container *comboboxContext="let context">
+            <div data-test-id="combobox-context-state">
+              {{ context.open ? "open" : "closed" }}
+            </div>
+          </ng-container>
+          <div q-combobox-control>
+            <input q-combobox-input />
+            <button q-combobox-trigger></button>
+          </div>
+          <ng-template qPortal>
+            <div q-combobox-positioner>
+              <div q-combobox-content>
+                @for (item of collection.items; track item) {
+                  <div q-combobox-item [item]="item">
+                    <span q-combobox-item-text>
+                      {{ collection.stringifyItem(item) }}
+                    </span>
+                    <span q-combobox-item-indicator></span>
+                  </div>
+                }
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      `,
+    })
+    class ContextComponent {
+      collection = stringCollection
+    }
+
+    await render(ContextComponent)
+
+    const contextState = page.getByTestId("combobox-context-state")
+    await expect.element(contextState).toHaveTextContent("closed")
+
+    await page.getByRole("button", {name: /toggle suggestions/i}).click()
+
+    await expect.element(contextState).toHaveTextContent("open")
+  })
 })

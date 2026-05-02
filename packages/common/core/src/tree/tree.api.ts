@@ -452,8 +452,10 @@ export function createTreeApi<V extends TreeNode = TreeNode>(
         ...parts.root,
         "aria-label": "Tree View",
         "aria-labelledby": domIds.label(scope),
-        "aria-multiselectable":
-          prop("selectionMode") === "multiple" || undefined,
+        "aria-multiselectable": booleanAriaAttr(
+          prop("selectionMode") === "multiple",
+          null,
+        ),
         dir: prop("dir") || "ltr",
         id: props.id,
         onKeyDown(event) {

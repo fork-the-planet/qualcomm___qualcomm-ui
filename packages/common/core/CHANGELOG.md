@@ -1,5 +1,21 @@
 # @qualcomm-ui/core Changelog
 
+## 1.9.3
+
+May 1st, 2026
+
+### Bug Fixes
+
+- [tree]: use booleanAriaAttr for aria-multiselectable in tree root bindings ([bf8f5e5](https://github.com/qualcomm/qualcomm-ui/commit/bf8f5e5))
+
+### Code Refactoring
+
+- [tree]: use replaceChildren instead of manual node spread in expandBranches ([4dc7f37](https://github.com/qualcomm/qualcomm-ui/commit/4dc7f37))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils, @qualcomm-ui/dom]
+
 ## 1.9.2
 
 May 1st, 2026

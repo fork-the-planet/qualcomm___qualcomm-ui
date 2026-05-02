@@ -5,7 +5,7 @@ import viteTsconfigPaths from "vite-tsconfig-paths"
 import {defineConfig} from "vitest/config"
 
 export default defineConfig({
-  plugins: [tailwindcss(), viteTsconfigPaths(), react({}) as any],
+  plugins: [tailwindcss(), viteTsconfigPaths(), react()],
   test: {
     browser: {
       enabled: true,

@@ -1,5 +1,17 @@
 # @qualcomm-ui/angular Changelog
 
+## 2.7.1
+
+May 1st, 2026
+
+### Tests
+
+- improve test coverage ([e255457](https://github.com/qualcomm/qualcomm-ui/commit/e255457))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/utils, @qualcomm-ui/qds-core, @qualcomm-ui/angular-core]
+
 ## 2.7.0
 
 May 1st, 2026

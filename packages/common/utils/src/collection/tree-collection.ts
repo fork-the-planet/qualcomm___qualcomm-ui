@@ -769,6 +769,19 @@ export class TreeCollection<T> {
   }
 
   /**
+   * Replaces the children for the node at the specified index path.
+   * @param indexPath - Array of indices representing the path to the node
+   * @param children - Array of child nodes to set on the target node
+   */
+  replaceChildren: (indexPath: IndexPath, children: T[]) => TreeCollection<T> =
+    (indexPath: IndexPath, children: T[]): TreeCollection<T> => {
+      const node = this.at(indexPath)
+      return node
+        ? this._replace(this.rootNode, indexPath, this._create(node, children))
+        : this.copy(this.rootNode)
+    }
+
+  /**
    * Removes nodes at the specified index paths.
    * @param indexPaths - Array of index paths to remove
    */
