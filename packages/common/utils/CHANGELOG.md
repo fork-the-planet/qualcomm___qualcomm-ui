@@ -1,5 +1,13 @@
 # @qualcomm-ui/utils Changelog
 
+## 1.2.4
+
+May 1st, 2026
+
+### Code Refactoring
+
+- [tree]: use replaceChildren instead of manual node spread in expandBranches ([4dc7f37](https://github.com/qualcomm/qualcomm-ui/commit/4dc7f37))
+
 ## 1.2.3
 
 Apr 19th, 2026
