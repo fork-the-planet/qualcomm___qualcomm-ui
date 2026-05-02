@@ -45,6 +45,7 @@ export default defineConfig(({mode}) => ({
     },
     coverage: {
       allowExternal: true,
+      exclude: ["**common/utils/**/*"],
       provider: "v8",
       reportOnFailure: true,
     },

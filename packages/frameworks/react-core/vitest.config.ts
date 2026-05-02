@@ -12,7 +12,7 @@ export default defineConfig({
       babel: {
         plugins: ["babel-plugin-react-compiler"],
       },
-    }) as any,
+    }),
   ],
   test: getReactTestConfig({
     include: "src/**/*.spec.tsx",
