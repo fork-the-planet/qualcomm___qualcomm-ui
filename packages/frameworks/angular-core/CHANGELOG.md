@@ -1,5 +1,29 @@
 # @qualcomm-ui/angular-core Changelog
 
+## 2.2.1
+
+May 1st, 2026
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/utils, @qualcomm-ui/dom]
+
+## 2.2.0
+
+May 1st, 2026
+
+### Features
+
+- [angular/menu]: add item-description + checkbox/radio item-control directives ([94a59a2](https://github.com/qualcomm/qualcomm-ui/commit/94a59a2))
+
+### Bug Fixes
+
+- [angular-core/popover]: make defaultOpen a boolean attribute ([e7d7d22](https://github.com/qualcomm/qualcomm-ui/commit/e7d7d22))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core]
+
 ## 2.1.3
 
 Apr 29th, 2026

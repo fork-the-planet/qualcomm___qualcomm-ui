@@ -6,7 +6,7 @@ aliases:
   [circular progress, spinner, activity indicator, radial progress, ring loader]
 ---
 
-import {Demo} from "~components/demo"
+import {ComponentExplorer, Demo} from "~components/demo"
 import * as demos from "./demos"
 import {TypeDocAttributes, TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
 
@@ -70,11 +70,7 @@ Display the value text by passing a value to the [valueText](./#valueText) prop.
 ### Sizes
 
 ::: terms
-extra small
-extra large
-small
-medium
-large
+extra small, extra large, small, medium, large
 :::
 
 Use the [size](./#size) prop to change the size of the circle.
@@ -84,9 +80,7 @@ Use the [size](./#size) prop to change the size of the circle.
 ### Thickness
 
 ::: terms
-stroke width
-stroke thickness
-track width
+stroke width, stroke thickness, track width
 :::
 
 Use the [thickness](./#thickness) prop to change the pixel width of the track and bar.
@@ -120,8 +114,24 @@ a11y
 :::
 
 - When the value is supplied, the component automatically provides the corresponding `aria-value*` attributes to the element.
-- The progress element is automatically marked with `role="progressbar"`.
-- The [label](./#label) is automatically associated with the progress bar. If you omit the [label](./#label) property, the `aria-label` of the progress element defaults to the [value](./#value) when determinate, and "Loading" when indeterminate.
+- The progress element is automatically marked with [`role="progressbar"`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles).
+- The [label](./#label) is automatically associated with the progress bar. If you omit the [label](./#label) property, the [`aria-label`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-label) of the progress element defaults to the [value](./#value) when determinate, and "Loading" when indeterminate.
+
+## Explorer
+
+<ComponentExplorer
+  component={demos.ProgressRingExplorerDemo}
+  linkPrefix="progress-ring"
+  parts={[
+    "root",
+    "label",
+    "circle-container",
+    {name: "circle-track", link: "#progress-ring-track"},
+    {name: "circle-bar", link: "#progress-ring-bar"},
+    "value-text",
+  ]}
+  scope="progress"
+/>
 
 ## API
 

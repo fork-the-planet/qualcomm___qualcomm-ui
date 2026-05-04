@@ -126,10 +126,7 @@ export function expandBranches(
       if (result.status === "fulfilled") {
         nextLoadingStatus[id] = "loaded"
         loadedValues.push(id)
-        collection = collection.replace(indexPath, {
-          ...node,
-          children: result.value,
-        })
+        collection = collection.replaceChildren(indexPath, result.value)
       } else {
         pendingAborts.delete(id)
         Reflect.deleteProperty(nextLoadingStatus, id)

@@ -16,6 +16,8 @@ import {CheckboxModule} from "@qualcomm-ui/angular/checkbox"
 import {type MultiComponentTest, runTests} from "~test-utils"
 
 const demoLabel = "Demo Label"
+const demoHint = "Demo Hint"
+const demoError = "Demo Error"
 
 const testCases: MultiComponentTest[] = [
   {
@@ -54,6 +56,103 @@ const testCases: MultiComponentTest[] = [
         expect(page.getByLabelText(demoLabel)).toBeChecked()
         await userEvent.click(page.getByText(demoLabel))
         expect(page.getByLabelText(demoLabel)).not.toBeChecked()
+      })
+    },
+  },
+  {
+    composite() {
+      @Component({
+        imports: [CheckboxModule],
+        template: `
+          <label q-checkbox-root>
+            <input q-checkbox-hidden-input />
+            <div q-checkbox-control></div>
+            <span q-checkbox-label>{{ demoLabel }}</span>
+            <span q-checkbox-hint>{{ demoHint }}</span>
+          </label>
+        `,
+      })
+      class CompositeComponent {
+        protected readonly demoLabel = demoLabel
+        protected readonly demoHint = demoHint
+      }
+      return CompositeComponent
+    },
+    simple() {
+      @Component({
+        imports: [CheckboxModule],
+        template: `
+          <label hint="${demoHint}" label="${demoLabel}" q-checkbox></label>
+        `,
+      })
+      class SimpleComponent {}
+      return SimpleComponent
+    },
+    testCase(component) {
+      test(`hint text describes the checkbox while valid — ${component.name}`, async () => {
+        await render(component)
+
+        await expect.element(page.getByText(demoHint)).toBeVisible()
+        await expect
+          .element(page.getByText(demoHint))
+          .not.toHaveAttribute("hidden")
+      })
+    },
+  },
+  {
+    composite() {
+      @Component({
+        imports: [CheckboxModule, ReactiveFormsModule],
+        template: `
+          <label q-checkbox-root [formControl]="formControl">
+            <input q-checkbox-hidden-input />
+            <div q-checkbox-control></div>
+            <span q-checkbox-label>{{ demoLabel }}</span>
+            <span q-checkbox-hint>{{ demoHint }}</span>
+            <span q-checkbox-error-text>{{ demoError }}</span>
+          </label>
+        `,
+      })
+      class CompositeComponent {
+        protected readonly demoLabel = demoLabel
+        protected readonly demoHint = demoHint
+        protected readonly demoError = demoError
+        formControl = new FormControl(true, Validators.requiredTrue)
+      }
+      return CompositeComponent
+    },
+    simple() {
+      @Component({
+        imports: [CheckboxModule, ReactiveFormsModule],
+        template: `
+          <label
+            errorText="${demoError}"
+            hint="${demoHint}"
+            label="${demoLabel}"
+            q-checkbox
+            [formControl]="formControl"
+          ></label>
+        `,
+      })
+      class SimpleComponent {
+        formControl = new FormControl(true, Validators.requiredTrue)
+      }
+      return SimpleComponent
+    },
+    testCase(component) {
+      test(`error text replaces hint while invalid — ${component.name}`, async () => {
+        await render(component)
+
+        await expect.element(page.getByText(demoHint)).toBeVisible()
+        await expect.element(page.getByText(demoError)).not.toBeVisible()
+
+        await userEvent.click(page.getByText(demoLabel))
+
+        await expect.element(page.getByText(demoError)).toBeVisible()
+        await expect.element(page.getByText(demoHint)).not.toBeVisible()
+        await expect
+          .element(page.getByLabelText(demoLabel))
+          .toHaveAttribute("aria-invalid", "true")
       })
     },
   },

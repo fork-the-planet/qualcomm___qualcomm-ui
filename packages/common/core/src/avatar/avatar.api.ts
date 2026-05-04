@@ -34,7 +34,7 @@ export function createAvatarApi(
         "data-state": loaded ? "hidden" : "visible",
         dir: prop("dir"),
         hidden: loaded,
-        id: props.id,
+        id: scope.ids.get("content"),
       })
     },
 
@@ -45,7 +45,7 @@ export function createAvatarApi(
         "data-state": loaded ? "visible" : "hidden",
         dir: prop("dir"),
         hidden: !loaded,
-        id: props.id,
+        id: scope.ids.get("image"),
         onError() {
           send({type: "IMG.ERROR"})
         },
@@ -60,7 +60,7 @@ export function createAvatarApi(
       return normalize.element({
         ...parts.root,
         dir: prop("dir"),
-        id: props.id,
+        id: scope.ids.get("root"),
       })
     },
 
@@ -69,7 +69,7 @@ export function createAvatarApi(
       return normalize.element({
         ...parts.status,
         dir: prop("dir"),
-        id: props.id,
+        id: scope.ids.get("status"),
       })
     },
   }

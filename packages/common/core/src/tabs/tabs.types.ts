@@ -205,6 +205,7 @@ export interface TabsPanelBindings extends Part<"panel"> {
   "data-selected": BooleanDataAttr
   hidden: boolean
   role: "tabpanel"
+  style: {display: "none"} | undefined
   tabIndex: 0 | -1
 }
 

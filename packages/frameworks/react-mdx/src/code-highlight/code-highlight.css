@@ -84,7 +84,6 @@
     border-radius: 3px;
     font-family: var(--q-font-code-demo, var(--q-font-mono)), monospace;
     font-size: 14px;
-    line-height: 18px;
     &.disable-padding {
       padding: 0;
     }

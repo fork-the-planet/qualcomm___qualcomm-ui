@@ -17,7 +17,7 @@ export function DrawerCustomContainerDemo(): ReactElement {
       >
         <div
           ref={containerRef}
-          className="border-neutral-03 relative flex h-96 w-[600px] overflow-hidden border p-8"
+          className="border-neutral-03 relative box-border flex h-96 w-[600px] overflow-hidden border p-8"
         >
           <Drawer.Trigger>
             <Button emphasis="primary" variant="fill">

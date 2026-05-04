@@ -1,5 +1,32 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.27.2
+
+May 1st, 2026
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/utils]
+
+## 1.27.1
+
+May 1st, 2026
+
+### Bug Fixes
+
+- [qds-core]: polish disabled and hover states ([b5d481c](https://github.com/qualcomm/qualcomm-ui/commit/b5d481c))
+- [qds-core/menu]: separator css ([2035383](https://github.com/qualcomm/qualcomm-ui/commit/2035383))
+- [tabs]: hide non-selected panels and rework icon sizing ([885e7da](https://github.com/qualcomm/qualcomm-ui/commit/885e7da))
+- [docs]: scope tailwind layers and reset defaults ([af2b476](https://github.com/qualcomm/qualcomm-ui/commit/af2b476))
+
+### Styles
+
+- [tabs]: update icon size ([95a412b](https://github.com/qualcomm/qualcomm-ui/commit/95a412b))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core]
+
 ## 1.27.0
 
 Apr 29th, 2026

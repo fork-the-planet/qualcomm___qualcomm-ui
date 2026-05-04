@@ -9,7 +9,7 @@ badges:
     url: https://github.com/qualcomm/qualcomm-ui/blob/main/packages/frameworks/react/CHANGELOG.md#1120
 ---
 
-import {Demo} from "~components/demo"
+import {ComponentExplorer, Demo} from "~components/demo"
 import * as demos from "./demos"
 import {TypeDocAttributes, TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
 
@@ -18,8 +18,7 @@ import {TypeDocAttributes, TypeDocProps} from "@qualcomm-ui/react-mdx/typedoc"
 {frontmatter.description}
 
 ::: terms
-system notification
-user feedback
+system notification, user feedback
 :::
 
 ```tsx
@@ -40,9 +39,7 @@ Basic inline notification using the simple API with heading and description.
 ### Composite
 
 ::: terms
-compound component
-slots
-parts
+compound component, slots, parts
 :::
 
 Use the composite API with individual components for more granular control.
@@ -55,8 +52,7 @@ Use the composite API with individual components for more granular control.
 ### Emphasis (color)
 
 ::: terms
-severity
-alert level
+severity, alert level
 :::
 
 Control the visual emphasis with different colors: info, success, warning, danger, and neutral. Customize these with the [emphasis](./#emphasis) prop.
@@ -69,8 +65,7 @@ Control the visual emphasis with different colors: info, success, warning, dange
 ### Dismissable
 
 ::: terms
-closeable
-closable
+closeable, closable
 :::
 
 Add dismiss functionality to the simple notification using the [dismissable](./#dismissable) prop. Use the `<InlineNotification.CloseButton />` component when using the composite API.
@@ -83,8 +78,7 @@ Add dismiss functionality to the simple notification using the [dismissable](./#
 ### Action
 
 ::: terms
-cta
-call to action
+cta, call to action
 :::
 
 Include action links in notifications using the [action](./#action) property or the `<InlineNotification.Action>` component via the composite API.
@@ -97,16 +91,30 @@ Include action links in notifications using the [action](./#action) property or 
 ### Layout
 
 ::: terms
-horizontal
-vertical
-orientation
+horizontal, vertical, orientation
 :::
 
-Choose between inline and stacked layouts using the [layout](./#layout) property. Stacked layout places the description and action below the content.
+Choose between inline and stacked layouts using the [orientation](./#orientation) property. Stacked layout places the description and action below the content.
 
 <Demo
   name="InlineNotificationLayoutDemo"
   component={demos.InlineNotificationLayoutDemo}
+/>
+
+## Explorer
+
+<ComponentExplorer
+  component={demos.InlineNotificationExplorerDemo}
+  linkPrefix="inline-notification"
+  parts={[
+    "root",
+    {name: "status-icon", link: "#inline-notification-icon"},
+    {name: "heading", link: "#inline-notification-label"},
+    "description",
+    {name: "action", link: "#inline-notification-action-container"},
+    {name: "close-trigger", link: "#inline-notification-close-button"},
+  ]}
+  scope="inline-notification"
 />
 
 ## API

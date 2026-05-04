@@ -1,5 +1,30 @@
 # @qualcomm-ui/angular Changelog
 
+## 2.7.1
+
+May 1st, 2026
+
+### Tests
+
+- improve test coverage ([e255457](https://github.com/qualcomm/qualcomm-ui/commit/e255457))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/utils, @qualcomm-ui/qds-core, @qualcomm-ui/angular-core]
+
+## 2.7.0
+
+May 1st, 2026
+
+### Features
+
+- [angular/menu]: add item-description + checkbox/radio item-control directives ([94a59a2](https://github.com/qualcomm/qualcomm-ui/commit/94a59a2))
+- [angular/tree]: add showIndentGuide input to q-tree-nodes ([625c51a](https://github.com/qualcomm/qualcomm-ui/commit/625c51a))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core, @qualcomm-ui/angular-core, @qualcomm-ui/core]
+
 ## 2.6.0
 
 Apr 29th, 2026

@@ -10,14 +10,25 @@ import {render} from "@testing-library/angular"
 import {describe, expect, test, vi} from "vitest"
 import {page, userEvent} from "vitest/browser"
 
-import {NumberInputModule} from "@qualcomm-ui/angular/number-input"
+import {
+  NumberInputModule,
+  type UnitOption,
+} from "@qualcomm-ui/angular/number-input"
 import {requiredNumberValidator} from "@qualcomm-ui/angular-core/number-input"
-import type {NumberInputValueChangeDetails} from "@qualcomm-ui/core/number-input"
+import type {
+  NumberInputValueChangeDetails,
+  NumberInputValueInvalidDetails,
+} from "@qualcomm-ui/core/number-input"
 
 import {type MultiComponentTest, runTests} from "~test-utils"
 
 const demoLabel = "Demo Label"
 const demoHint = "Optional hint"
+const demoErrorText = "Value must be between 2 and 10"
+const unitOptions: UnitOption[] = [
+  {displayText: "$ (USD)", label: "$", value: "USD"},
+  {displayText: "€ (EUR)", label: "€", value: "EUR"},
+]
 
 const testCases: MultiComponentTest[] = [
   {
@@ -1211,6 +1222,598 @@ const testCases: MultiComponentTest[] = [
         await userEvent.click(page.getByRole("button", {name: "Decrement"}))
         await expect.element(input).toHaveValue("25")
         await expect.poll(() => instance.formControl.value).toBe(25)
+      })
+    },
+  },
+  {
+    composite() {
+      @Component({
+        imports: [NumberInputModule],
+        template: `
+          <div invalid q-number-input-root>
+            <label q-number-input-label>{{ demoLabel }}</label>
+            <div q-number-input-input-group>
+              <input q-number-input-input />
+              <div q-number-input-control></div>
+              <span q-number-input-error-indicator></span>
+            </div>
+            <div q-number-input-error-text>{{ demoErrorText }}</div>
+          </div>
+        `,
+      })
+      class CompositeComponent {
+        protected readonly demoLabel = demoLabel
+        protected readonly demoErrorText = demoErrorText
+      }
+      return CompositeComponent
+    },
+    simple() {
+      @Component({
+        imports: [NumberInputModule],
+        template: `
+          <q-number-input
+            invalid
+            [errorText]="demoErrorText"
+            [label]="demoLabel"
+          />
+        `,
+      })
+      class SimpleComponent {
+        protected readonly demoLabel = demoLabel
+        protected readonly demoErrorText = demoErrorText
+      }
+      return SimpleComponent
+    },
+    testCase(component) {
+      test(`manual invalid state shows error text and aria-invalid — ${component.name}`, async () => {
+        await render(component)
+
+        await expect
+          .element(page.getByLabelText(demoLabel))
+          .toHaveAttribute("aria-invalid", "true")
+        await expect.element(page.getByText(demoErrorText)).toBeVisible()
+      })
+    },
+  },
+  {
+    composite() {
+      @Component({
+        imports: [NumberInputModule],
+        template: `
+          <div defaultValue="5" q-number-input-root>
+            <label q-number-input-label>{{ demoLabel }}</label>
+            <div q-number-input-input-group>
+              <input q-number-input-input />
+              <div q-number-input-control></div>
+            </div>
+          </div>
+        `,
+      })
+      class CompositeComponent {
+        protected readonly demoLabel = demoLabel
+      }
+      return CompositeComponent
+    },
+    simple() {
+      @Component({
+        imports: [NumberInputModule],
+        template: `
+          <q-number-input defaultValue="5" [label]="demoLabel" />
+        `,
+      })
+      class SimpleComponent {
+        protected readonly demoLabel = demoLabel
+      }
+      return SimpleComponent
+    },
+    testCase(component) {
+      test(`arrow keys increment and decrement the value — ${component.name}`, async () => {
+        await render(component)
+
+        const input = page.getByLabelText(demoLabel)
+        await input.click()
+
+        await userEvent.keyboard("{ArrowUp}")
+        await expect.element(input).toHaveValue("6")
+
+        await userEvent.keyboard("{ArrowDown}")
+        await expect.element(input).toHaveValue("5")
+      })
+    },
+  },
+  {
+    composite() {
+      @Component({
+        imports: [NumberInputModule],
+        template: `
+          <div defaultValue="5" max="10" min="2" q-number-input-root>
+            <label q-number-input-label>{{ demoLabel }}</label>
+            <div q-number-input-input-group>
+              <input q-number-input-input />
+              <div q-number-input-control></div>
+            </div>
+          </div>
+        `,
+      })
+      class CompositeComponent {
+        protected readonly demoLabel = demoLabel
+      }
+      return CompositeComponent
+    },
+    simple() {
+      @Component({
+        imports: [NumberInputModule],
+        template: `
+          <q-number-input
+            defaultValue="5"
+            max="10"
+            min="2"
+            [label]="demoLabel"
+          />
+        `,
+      })
+      class SimpleComponent {
+        protected readonly demoLabel = demoLabel
+      }
+      return SimpleComponent
+    },
+    testCase(component) {
+      test(`home and end keys move the value to range boundaries — ${component.name}`, async () => {
+        await render(component)
+
+        const input = page.getByLabelText(demoLabel)
+        await input.click()
+
+        await userEvent.keyboard("{Home}")
+        await expect.element(input).toHaveValue("2")
+
+        await userEvent.keyboard("{End}")
+        await expect.element(input).toHaveValue("10")
+      })
+    },
+  },
+  {
+    composite() {
+      @Component({
+        imports: [NumberInputModule],
+        template: `
+          <div defaultValue="5" max="10" min="2" q-number-input-root>
+            <label q-number-input-label>{{ demoLabel }}</label>
+            <div q-number-input-input-group>
+              <input q-number-input-input />
+              <div q-number-input-control></div>
+            </div>
+            <div q-number-input-error-text>{{ demoErrorText }}</div>
+          </div>
+          <button type="button">Blur target</button>
+        `,
+      })
+      class CompositeComponent {
+        protected readonly demoLabel = demoLabel
+        protected readonly demoErrorText = demoErrorText
+      }
+      return CompositeComponent
+    },
+    simple() {
+      @Component({
+        imports: [NumberInputModule],
+        template: `
+          <q-number-input
+            defaultValue="5"
+            max="10"
+            min="2"
+            [errorText]="demoErrorText"
+            [label]="demoLabel"
+          />
+          <button type="button">Blur target</button>
+        `,
+      })
+      class SimpleComponent {
+        protected readonly demoLabel = demoLabel
+        protected readonly demoErrorText = demoErrorText
+      }
+      return SimpleComponent
+    },
+    testCase(component) {
+      test(`out-of-range typed values clamp to the nearest boundary on blur — ${component.name}`, async () => {
+        await render(component)
+
+        const input = page.getByLabelText(demoLabel)
+        await input.fill("99")
+
+        await expect.element(input).toHaveAttribute("aria-invalid", "true")
+
+        await page.getByRole("button", {name: "Blur target"}).click()
+        await expect.element(input).toHaveValue("10")
+        await expect.element(page.getByText(demoErrorText)).not.toBeVisible()
+      })
+    },
+  },
+  {
+    composite() {
+      @Component({
+        imports: [NumberInputModule],
+        template: `
+          <div
+            allowOverflow
+            defaultValue="5"
+            max="10"
+            min="2"
+            q-number-input-root
+            (valueInvalid)="isInvalid.emit($event)"
+          >
+            <label q-number-input-label>{{ demoLabel }}</label>
+            <div q-number-input-input-group>
+              <input q-number-input-input />
+              <div q-number-input-control></div>
+            </div>
+          </div>
+          <button type="button">Blur target</button>
+        `,
+      })
+      class CompositeComponent {
+        protected readonly demoLabel = demoLabel
+        protected readonly isInvalid = output<NumberInputValueInvalidDetails>()
+      }
+      return CompositeComponent
+    },
+    simple() {
+      @Component({
+        imports: [NumberInputModule],
+        template: `
+          <q-number-input
+            allowOverflow
+            defaultValue="5"
+            max="10"
+            min="2"
+            [label]="demoLabel"
+            (valueInvalid)="isInvalid.emit($event)"
+          />
+          <button type="button">Blur target</button>
+        `,
+      })
+      class SimpleComponent {
+        protected readonly demoLabel = demoLabel
+        protected readonly isInvalid = output<NumberInputValueInvalidDetails>()
+      }
+      return SimpleComponent
+    },
+    testCase(component) {
+      test(`valueInvalid reports the range reason when overflow is allowed — ${component.name}`, async () => {
+        const invalidSpy = vi.fn()
+        await render(component, {
+          on: {
+            isInvalid: invalidSpy,
+          },
+        })
+
+        const input = page.getByLabelText(demoLabel)
+        await input.fill("1")
+        await page.getByRole("button", {name: "Blur target"}).click()
+
+        await expect.element(input).toHaveValue("1")
+        await expect
+          .poll(() => invalidSpy)
+          .toHaveBeenCalledWith({
+            reason: "rangeUnderflow",
+            value: "1",
+            valueAsNumber: 1,
+          })
+      })
+    },
+  },
+  {
+    composite() {
+      @Component({
+        imports: [NumberInputModule],
+        template: `
+          <div
+            defaultValue="4"
+            q-number-input-root
+            step="2"
+            [translations]="{
+              incrementLabel: 'Increment',
+              decrementLabel: 'Decrement',
+            }"
+            (valueChanged)="changed.emit($event)"
+          >
+            <label q-number-input-label>{{ demoLabel }}</label>
+            <div q-number-input-input-group>
+              <input q-number-input-input />
+              <div q-number-input-control></div>
+            </div>
+          </div>
+        `,
+      })
+      class CompositeComponent {
+        protected readonly demoLabel = demoLabel
+        changed = output<NumberInputValueChangeDetails>()
+      }
+      return CompositeComponent
+    },
+    simple() {
+      @Component({
+        imports: [NumberInputModule],
+        template: `
+          <q-number-input
+            defaultValue="4"
+            step="2"
+            [label]="demoLabel"
+            [translations]="{
+              incrementLabel: 'Increment',
+              decrementLabel: 'Decrement',
+            }"
+            (valueChanged)="changed.emit($event)"
+          />
+        `,
+      })
+      class SimpleComponent {
+        protected readonly demoLabel = demoLabel
+        changed = output<NumberInputValueChangeDetails>()
+      }
+      return SimpleComponent
+    },
+    testCase(component) {
+      test(`valueChanged emits parsed details from triggers and typing — ${component.name}`, async () => {
+        const changedSpy = vi.fn()
+        await render(component, {
+          on: {
+            changed: changedSpy,
+          },
+        })
+
+        const input = page.getByLabelText(demoLabel)
+
+        await page.getByRole("button", {name: "Increment"}).click()
+        await expect
+          .poll(() => changedSpy)
+          .toHaveBeenCalledWith({
+            value: "6",
+            valueAsNumber: 6,
+          })
+
+        await input.fill("12.5")
+        await expect
+          .poll(() => changedSpy)
+          .toHaveBeenLastCalledWith({
+            value: "12.5",
+            valueAsNumber: 12.5,
+          })
+      })
+    },
+  },
+  {
+    composite() {
+      @Component({
+        imports: [NumberInputModule],
+        template: `
+          <div
+            defaultUnit="USD"
+            defaultValue="0"
+            q-number-input-root
+            [unitOptions]="unitOptions"
+            (unitChanged)="selectedUnit.set($event)"
+          >
+            <label q-number-input-label>{{ demoLabel }}</label>
+            <div q-number-input-input-group>
+              <q-number-input-unit-select />
+              <input q-number-input-input />
+              <div q-number-input-control></div>
+            </div>
+          </div>
+          <output
+            aria-label="selected unit"
+            class="text-neutral-primary m-4 block"
+          >
+            {{ selectedUnit() }}
+          </output>
+        `,
+      })
+      class CompositeComponent {
+        protected readonly demoLabel = demoLabel
+        protected readonly unitOptions = unitOptions
+        readonly selectedUnit = signal("USD")
+      }
+      return CompositeComponent
+    },
+    simple() {
+      @Component({
+        imports: [NumberInputModule],
+        template: `
+          <q-number-input
+            defaultUnit="USD"
+            defaultValue="0"
+            [label]="demoLabel"
+            [unitOptions]="unitOptions"
+            (unitChanged)="selectedUnit.set($event)"
+          />
+          <output
+            aria-label="selected unit"
+            class="text-neutral-primary m-4 block"
+          >
+            {{ selectedUnit() }}
+          </output>
+        `,
+      })
+      class SimpleComponent {
+        protected readonly demoLabel = demoLabel
+        protected readonly unitOptions = unitOptions
+        readonly selectedUnit = signal("USD")
+      }
+      return SimpleComponent
+    },
+    testCase(component) {
+      test(`unit selector shows the default unit and emits selection changes — ${component.name}`, async () => {
+        await render(component)
+
+        const unitTrigger = page.getByRole("button").filter({hasText: "$"})
+        await expect.element(unitTrigger).toBeVisible()
+
+        await unitTrigger.click()
+        await page.getByRole("menuitemradio", {name: "€ (EUR)"}).click()
+
+        await expect
+          .element(page.getByRole("button").filter({hasText: "€"}))
+          .toBeVisible()
+        await expect
+          .element(page.getByLabelText("selected unit"))
+          .toHaveTextContent("EUR")
+      })
+    },
+  },
+  {
+    composite() {
+      @Component({
+        imports: [NumberInputModule],
+        template: `
+          <div
+            defaultUnit="USD"
+            q-number-input-root
+            readOnly
+            [unitOptions]="unitOptions"
+          >
+            <label q-number-input-label>{{ demoLabel }}</label>
+            <div q-number-input-input-group>
+              <q-number-input-unit-select />
+              <input q-number-input-input />
+              <div q-number-input-control></div>
+            </div>
+          </div>
+        `,
+      })
+      class CompositeComponent {
+        protected readonly demoLabel = demoLabel
+        protected readonly unitOptions = unitOptions
+      }
+      return CompositeComponent
+    },
+    simple() {
+      @Component({
+        imports: [NumberInputModule],
+        template: `
+          <q-number-input
+            defaultUnit="USD"
+            readOnly
+            [label]="demoLabel"
+            [unitOptions]="unitOptions"
+          />
+        `,
+      })
+      class SimpleComponent {
+        protected readonly demoLabel = demoLabel
+        protected readonly unitOptions = unitOptions
+      }
+      return SimpleComponent
+    },
+    testCase(component) {
+      test(`read-only state disables the unit selector — ${component.name}`, async () => {
+        await render(component)
+
+        await expect
+          .element(page.getByRole("button").filter({hasText: "$"}))
+          .toBeDisabled()
+      })
+    },
+  },
+  {
+    composite() {
+      @Component({
+        imports: [NumberInputModule],
+        template: `
+          <form (reset)="handleReset()" (submit)="handleSubmit($event)">
+            <div defaultValue="2" name="quantity" q-number-input-root>
+              <label q-number-input-label>{{ demoLabel }}</label>
+              <div q-number-input-input-group>
+                <input q-number-input-input />
+                <div q-number-input-control></div>
+              </div>
+            </div>
+            <button type="submit">Submit form</button>
+            <button type="reset">Reset form</button>
+          </form>
+          <output
+            aria-label="submitted value"
+            class="text-neutral-primary m-4 block"
+          >
+            {{ submittedValue() }}
+          </output>
+        `,
+      })
+      class CompositeComponent {
+        protected readonly demoLabel = demoLabel
+        readonly submittedValue = signal<string | null>(null)
+
+        handleSubmit(event: SubmitEvent) {
+          event.preventDefault()
+          this.submittedValue.set(
+            new FormData(event.currentTarget as HTMLFormElement).get(
+              "quantity",
+            ) as string | null,
+          )
+        }
+
+        handleReset() {
+          this.submittedValue.set(null)
+        }
+      }
+      return CompositeComponent
+    },
+    simple() {
+      @Component({
+        imports: [NumberInputModule],
+        template: `
+          <form (reset)="handleReset()" (submit)="handleSubmit($event)">
+            <q-number-input
+              defaultValue="2"
+              name="quantity"
+              [label]="demoLabel"
+            />
+            <button type="submit">Submit form</button>
+            <button type="reset">Reset form</button>
+          </form>
+          <output
+            aria-label="submitted value"
+            class="text-neutral-primary m-4 block"
+          >
+            {{ submittedValue() }}
+          </output>
+        `,
+      })
+      class SimpleComponent {
+        protected readonly demoLabel = demoLabel
+        readonly submittedValue = signal<string | null>(null)
+
+        handleSubmit(event: SubmitEvent) {
+          event.preventDefault()
+          this.submittedValue.set(
+            new FormData(event.currentTarget as HTMLFormElement).get(
+              "quantity",
+            ) as string | null,
+          )
+        }
+
+        handleReset() {
+          this.submittedValue.set(null)
+        }
+      }
+      return SimpleComponent
+    },
+    testCase(component) {
+      test(`native form submission uses the current value and reset restores the default — ${component.name}`, async () => {
+        await render(component)
+
+        const input = page.getByLabelText(demoLabel)
+        await input.fill("9")
+        await page.getByRole("button", {name: "Submit form"}).click()
+        await expect
+          .element(page.getByLabelText("submitted value"))
+          .toHaveTextContent("9")
+
+        await page.getByRole("button", {name: "Reset form"}).click()
+        await expect.element(input).toHaveValue("2")
+        await expect
+          .element(page.getByLabelText("submitted value"))
+          .toHaveTextContent("")
       })
     },
   },

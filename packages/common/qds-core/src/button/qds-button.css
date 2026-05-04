@@ -538,6 +538,7 @@
 }
 
 .qui-button-group {
+  box-sizing: border-box;
   display: inline-flex;
 
   gap: var(--button-group-gap, var(--spacing-90));

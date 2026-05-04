@@ -5,7 +5,7 @@ import viteTsconfigPaths from "vite-tsconfig-paths"
 import {defineConfig} from "vitest/config"
 
 export default defineConfig({
-  plugins: [tailwindcss(), viteTsconfigPaths(), react({}) as any],
+  plugins: [tailwindcss(), viteTsconfigPaths(), react()],
   test: {
     browser: {
       enabled: true,
@@ -27,6 +27,7 @@ export default defineConfig({
     },
     coverage: {
       allowExternal: true,
+      exclude: ["**common/utils/**/*"],
       provider: "v8",
       reportOnFailure: true,
     },

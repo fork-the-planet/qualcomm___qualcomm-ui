@@ -45,6 +45,7 @@ export default defineConfig(({mode}) => ({
     },
     coverage: {
       allowExternal: true,
+      exclude: ["**common/utils/**/*"],
       provider: "v8",
       reportOnFailure: true,
     },
@@ -55,8 +56,7 @@ export default defineConfig(({mode}) => ({
       },
     },
     globals: true,
-    include: "src/**/*.spec.ts",
-    reporters: ["default"],
+    include: ["src/**/*.spec.ts"],
     setupFiles: ["test/test-setup.ts"],
   },
 }))
