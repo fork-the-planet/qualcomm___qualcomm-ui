@@ -4124,7 +4124,7 @@ importers:
         specifier: workspace:^2.3.0
         version: link:../../common/mdx-common
       '@qualcomm-ui/mdx-vite':
-        specifier: workspace:^3.6.1
+        specifier: workspace:^3.7.0
         version: link:../../common/mdx-vite
       '@qualcomm-ui/tsconfig':
         specifier: 'catalog:'
