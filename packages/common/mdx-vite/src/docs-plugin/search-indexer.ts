@@ -17,6 +17,7 @@ import {defined} from "@qualcomm-ui/utils/guard"
 import type {SearchIndexerOptions} from "./config"
 import {DocPropsIndexer} from "./doc-props"
 import {
+  collectAnchorIds,
   type CollectedLink,
   collectLinks,
   reportInvalidLinks,
@@ -55,6 +56,7 @@ export class SearchIndexer {
   private readonly allowedHeadings: Set<string>
   private readonly metaJson: RouteMetaInternal
   private _collectedLinks: CollectedLink[] = []
+  private _anchorIds: Record<string, Set<string>> = {}
   private _docPropIds: Record<string, Set<string>> = {}
   private readonly routeMetaNav: Record<string, RouteMetaNavInternal> = {}
   readonly config: SearchIndexerOptions
@@ -91,6 +93,7 @@ export class SearchIndexer {
   reset(): void {
     this.mdxFileReader.reset()
     this._collectedLinks = []
+    this._anchorIds = {}
     this._docPropIds = {}
     this._pageMap = {}
     this._searchIndex = []
@@ -247,6 +250,17 @@ export class SearchIndexer {
     let indexedPage: IndexedPage
 
     try {
+      if (this.config.validatePageLinks) {
+        const anchorTree = createRemarkProcessor({
+          frontmatter: true,
+          mdx: true,
+        }).parse(fileContents)
+        const anchorIds = collectAnchorIds(anchorTree)
+        if (anchorIds.size) {
+          this._anchorIds[defaultSection.pathname] = anchorIds
+        }
+      }
+
       if (cached?.page) {
         indexedPage = cached.page
       } else {
@@ -477,6 +491,7 @@ export class SearchIndexer {
         this._collectedLinks,
         this._pageMap,
         this._docPropIds,
+        this._anchorIds,
       )
       reportInvalidLinks(invalidLinks)
     }
