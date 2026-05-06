@@ -16,6 +16,7 @@ import type {PageFrontmatter} from "@qualcomm-ui/mdx-common"
 import type {QuiPropTypes} from "@qualcomm-ui/typedoc-common"
 
 import type {PageTimestampMetadataMode} from "../config"
+import type {CollectedLink} from "../link-validator"
 
 import {frontmatterSchema} from "./frontmatter-schema"
 import type {IndexedPage, IndexedSection} from "./markdown.types"
@@ -73,6 +74,7 @@ export function buildGitMetadataMap(
 }
 
 interface PageCache {
+  collectedLinks: CollectedLink[]
   frontmatter: PageFrontmatter
   md5: string
   page: IndexedPage
@@ -121,6 +123,7 @@ export class MdxFileReader {
     this.cachedFileCount++
 
     return {
+      collectedLinks: cached.collectedLinks,
       frontmatter: cached.frontmatter,
       page: cached.page,
       pageDocProps: cached.pageDocProps,

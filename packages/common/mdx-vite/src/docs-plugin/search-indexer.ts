@@ -248,6 +248,7 @@ export class SearchIndexer {
     this._pageMap[defaultSection.pathname] = defaultSection
 
     let indexedPage: IndexedPage
+    let collectedLinks: CollectedLink[] = []
 
     try {
       if (this.config.validatePageLinks) {
@@ -263,6 +264,8 @@ export class SearchIndexer {
 
       if (cached?.page) {
         indexedPage = cached.page
+        collectedLinks = cached.collectedLinks
+        this._collectedLinks.push(...collectedLinks)
       } else {
         const processor = createRemarkProcessor({
           alerts: true,
@@ -277,9 +280,8 @@ export class SearchIndexer {
         const tree = processor.runSync(processor.parse(fileContents)) as Root
 
         if (this.config.validatePageLinks) {
-          this._collectedLinks.push(
-            ...collectLinks(tree, filePath, defaultSection.pathname),
-          )
+          collectedLinks = collectLinks(tree, filePath, defaultSection.pathname)
+          this._collectedLinks.push(...collectedLinks)
         }
 
         const pageInfo: PageInfo = {
@@ -353,6 +355,7 @@ export class SearchIndexer {
 
     if (!cached) {
       this.mdxFileReader.updateCache(filePath, fileContents, {
+        collectedLinks,
         frontmatter,
         page: indexedPage,
         pageDocProps: docProps,
