@@ -1,5 +1,14 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 3.7.0
+
+May 6th, 2026
+
+### Features
+
+- [docs-plugin]: support anchor IDs in link validation ([1b88e2b](https://github.com/qualcomm/qualcomm-ui/commit/1b88e2b))
+- [docs-plugin]: cache collected links in page cache for revalidation ([9868ee8](https://github.com/qualcomm/qualcomm-ui/commit/9868ee8))
+
 ## 3.6.1
 
 May 1st, 2026
