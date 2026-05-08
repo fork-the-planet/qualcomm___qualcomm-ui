@@ -62,8 +62,8 @@
     "react-compiler-runtime": "^1.0.0",
     "react-dom": "catalog:",
     "react-router": "catalog:",
-    "shx": "^0.4.0",
-    "tailwindcss": "^4.1.17",
+    "shx": "catalog:",
+    "tailwindcss": "catalog:",
     "tsx": "catalog:",
     "typescript-plugin-css-modules": "^5.0.1",
     "vite": "catalog:"

@@ -49,7 +49,7 @@
     "remark-lint-no-duplicate-headings-in-section": "^4.0.1",
     "remark-lint-no-heading-punctuation": "^4.0.1",
     "remark-lint-unordered-list-marker-style": "^4.0.1",
-    "unified": "^11.0.5"
+    "unified": "catalog:"
   },
   "peerDependencies": {
     "eslint": ">=9.37.0",

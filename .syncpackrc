@@ -13,7 +13,7 @@
       "isIgnored": true
     },
     {
-      "label": "No wildcards",
+      "label": "Highest Semver",
       "preferVersion": "highestSemver",
       "dependencyTypes": ["dev", "prod"]
     }
