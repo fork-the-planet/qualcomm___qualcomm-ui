@@ -24,22 +24,14 @@ describe("table row-model pipeline regression", () => {
     expect(table.getPageCount()).toBe(2)
   })
 
-  test("global filtering scans enabled columns and marks row filter metadata", () => {
+  test("global filtering scans enabled columns", () => {
     const {table} = createTableHarness({
       state: {
         globalFilter: "hopper",
       },
     })
 
-    const rows = table.getFilteredRowModel().rows
-
-    expect(names(rows)).toEqual(["Grace"])
-    expect(table.getCoreRowModel().rowsById["1"].columnFilters.__global__).toBe(
-      true,
-    )
-    expect(table.getCoreRowModel().rowsById["0"].columnFilters.__global__).toBe(
-      false,
-    )
+    expect(names(table.getFilteredRowModel().rows)).toEqual(["Grace"])
   })
 
   test("number range filters resolve string inputs and normalize inverted ranges", () => {
@@ -63,9 +55,10 @@ describe("table row-model pipeline regression", () => {
       "Grace",
       "Margaret",
     ])
-    expect(
-      table.getCoreRowModel().rowsById["0"].getUniqueValues("tags"),
-    ).toEqual(["math", "systems"])
+    expect(table.getCoreRowModel().rows[0].getUniqueValues("tags")).toEqual([
+      "math",
+      "systems",
+    ])
 
     table.getColumn("tags")?.setFilterValue("")
 

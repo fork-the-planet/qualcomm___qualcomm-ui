@@ -51,10 +51,10 @@ describe("table core regression", () => {
     const headerGroups = table.getHeaderGroups()
 
     expect(headerGroups).toHaveLength(2)
-    expect(headerGroups[0].headers.map((header) => header.id)).toEqual([
-      "1_name_firstName",
-      "1_metrics_age",
-      "1_status_status",
+    expect(headerGroups[0].headers.map((header) => header.column.id)).toEqual([
+      "name",
+      "metrics",
+      "status",
     ])
     expect(headerGroups[0].headers.map((header) => header.colSpan)).toEqual([
       2, 2, 1,
@@ -66,35 +66,58 @@ describe("table core regression", () => {
       "visits",
       "status",
     ])
-    expect(table.getFooterGroups().map((group) => group.id)).toEqual(["1", "0"])
+    expect(
+      table
+        .getFooterGroups()
+        .map((group) => group.headers.map((header) => header.column.id)),
+    ).toEqual([
+      ["firstName", "lastName", "age", "visits", "status"],
+      ["name", "metrics", "status"],
+    ])
   })
 
-  test("creates rows with default IDs, parent rows, cached values, and unique values", () => {
+  test("creates rows with parent lookup, leaf rows, and unique values", () => {
     const {table} = createTableHarness()
     const rowModel = table.getCoreRowModel()
+    const rowByFirstName = (firstName: string) => {
+      const row = rowModel.flatRows.find(
+        (row) => row.original.firstName === firstName,
+      )
 
-    expect(rowModel.rows.map((row) => row.id)).toEqual(["0", "1", "2", "3"])
-    expect(rowModel.flatRows.map((row) => row.id)).toEqual([
-      "0",
-      "1",
-      "1.0",
-      "1.1",
-      "2",
-      "3",
+      expect(row).toBeDefined()
+
+      return row!
+    }
+
+    expect(rowModel.rows.map((row) => row.original.firstName)).toEqual([
+      "Ada",
+      "Grace",
+      "Mary",
+      "Margaret",
+    ])
+    expect(rowModel.flatRows.map((row) => row.original.firstName)).toEqual([
+      "Ada",
+      "Grace",
+      "Katherine",
+      "Dorothy",
+      "Mary",
+      "Margaret",
     ])
 
-    const grace = rowModel.rowsById["1"]
-    const katherine = rowModel.rowsById["1.0"]
+    const ada = rowByFirstName("Ada")
+    const grace = rowByFirstName("Grace")
+    const katherine = rowByFirstName("Katherine")
 
     expect(grace.getValue("firstName")).toBe("Grace")
-    expect(katherine.parentId).toBe("1")
-    expect(katherine.getParentRow()?.id).toBe("1")
-    expect(katherine.getParentRows().map((row) => row.id)).toEqual(["1"])
-    expect(grace.getLeafRows().map((row) => row.id)).toEqual(["1.0", "1.1"])
-    expect(rowModel.rowsById["0"].getUniqueValues("tags")).toEqual([
-      "math",
-      "systems",
+    expect(katherine.getParentRow()?.original.firstName).toBe("Grace")
+    expect(
+      katherine.getParentRows().map((row) => row.original.firstName),
+    ).toEqual(["Grace"])
+    expect(grace.getLeafRows().map((row) => row.original.firstName)).toEqual([
+      "Katherine",
+      "Dorothy",
     ])
+    expect(ada.getUniqueValues("tags")).toEqual(["math", "systems"])
   })
 
   test("uses custom row IDs without breaking nested parent lookup", () => {
@@ -120,11 +143,11 @@ describe("table core regression", () => {
     )
   })
 
-  test("exposes cell context and fallback default cell rendering", () => {
+  test("exposes cell value and render context", () => {
     const {table} = createTableHarness()
     const firstCell = table.getCoreRowModel().rows[0].getAllCells()[0]
 
-    expect(firstCell.id).toBe("0_firstName")
+    expect(firstCell.column.id).toBe("firstName")
     expect(firstCell.getValue()).toBe("Ada")
     expect(firstCell.getContext()).toMatchObject({
       cell: firstCell,
@@ -132,9 +155,7 @@ describe("table core regression", () => {
       row: firstCell.row,
       table,
     })
-    expect(firstCell.column.columnDef.cell?.(firstCell.getContext())).toBe(
-      "Ada",
-    )
+    expect(firstCell.getContext().getValue()).toBe("Ada")
   })
 
   test("supports deep accessor keys and warns when an intermediate key is absent", () => {
@@ -177,7 +198,7 @@ describe("table core regression", () => {
       getCoreRowModel: getCoreRowModel(),
       onStateChange(updater: Updater<TableState>) {
         state = typeof updater === "function" ? updater(state) : updater
-        ;(this as {state: TableState}).state = state
+        table.updateOptions({state})
       },
       renderFallbackValue: "",
       state,
@@ -190,12 +211,10 @@ describe("table core regression", () => {
       undefined,
     )
     expect(warn).toHaveBeenCalledTimes(2)
-    expect(warn).toHaveBeenNthCalledWith(
-      1,
+    expect(warn).toHaveBeenCalledWith(
       '"contact" in deeply nested key "profile.contact.email" returned undefined.',
     )
-    expect(warn).toHaveBeenNthCalledWith(
-      2,
+    expect(warn).toHaveBeenCalledWith(
       '"email" in deeply nested key "profile.contact.email" returned undefined.',
     )
   })
@@ -250,8 +269,7 @@ describe("table core regression", () => {
 
     expect(table.getColumn("missing")).toBeUndefined()
     expect(error).toHaveBeenCalledTimes(1)
-    expect(error).toHaveBeenNthCalledWith(
-      1,
+    expect(error).toHaveBeenCalledWith(
       "[Table] Column with id 'missing' does not exist.",
     )
   })

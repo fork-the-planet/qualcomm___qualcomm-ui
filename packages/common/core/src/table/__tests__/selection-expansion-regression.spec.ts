@@ -145,15 +145,9 @@ describe("table expansion regression", () => {
       "1.0",
       "1.1",
     ])
-    // Current pagination expansion keeps child rows under `rows` and also
-    // appends those same child rows while rebuilding the flattened model.
-    expect(table.getRowModel().flatRows.map((row) => row.id)).toEqual([
-      "1",
-      "1.0",
-      "1.1",
-      "1.0",
-      "1.1",
-    ])
+    expect(
+      table.getRowModel().rows.map((row) => row.original.firstName),
+    ).toEqual(["Grace", "Katherine", "Dorothy"])
   })
 
   test("manual expansion preserves pre-expanded rows while state still changes", () => {

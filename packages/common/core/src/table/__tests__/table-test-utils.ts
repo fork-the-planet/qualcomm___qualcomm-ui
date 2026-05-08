@@ -300,7 +300,7 @@ export function createTableHarness(
     },
     onStateChange(updater: Updater<TableState>) {
       state = typeof updater === "function" ? updater(state) : updater
-      ;(this as {state: TableState}).state = state
+      table.updateOptions({state})
     },
     renderFallbackValue: "",
     state,
