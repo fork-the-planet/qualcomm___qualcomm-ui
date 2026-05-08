@@ -18,6 +18,8 @@
     "../../frameworks/angular/src/**/*.spec.ts",
     "../../frameworks/angular/src/**/*.figma.ts",
     "../../frameworks/angular-core/src/**/*.spec.ts",
-    "../../**/*internal*/**"
+    "../../**/*internal*/**",
+    "../../**/*__test__/**",
+    "../../**/*__tests__/**"
   ]
 }

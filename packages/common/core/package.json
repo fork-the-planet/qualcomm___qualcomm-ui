@@ -1,6 +1,6 @@
 {
   "name": "@qualcomm-ui/core",
-  "version": "1.9.3",
+  "version": "1.9.4",
   "description": "core components",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
@@ -30,7 +30,7 @@
     "watch:js": "tsx build.ts --watch",
     "watch:ts": "pnpm build:ts -w --preserveWatchOutput",
     "lint": "eslint --quiet",
-    "test": "vitest -c vitest.config.ts --run --reporter tap",
+    "test": "vitest -c vitest.config.ts --run",
     "test:ui": "vitest -c vitest.config.ts --ui --coverage.enabled=true",
     "test:coverage": "pnpm test -- --coverage",
     "test:watch": "vitest -c vitest.config.ts",
