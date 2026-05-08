@@ -114,7 +114,7 @@
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.0",
     "remark-mdx-frontmatter": "^4.0.0",
-    "shiki": "^3.13.0",
+    "shiki": "catalog:",
     "shx": "catalog:",
     "tailwindcss": "catalog:",
     "test": "^3.3.0",

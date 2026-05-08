@@ -59,7 +59,7 @@
     "react-device-detect": "^2.2.3",
     "react-dom": "catalog:",
     "react-router": "catalog:",
-    "shiki": "^3.13.0",
+    "shiki": "catalog:",
     "sucrase": "^3.35.0",
     "zod": "^4.1.13",
     "zustand": "^4.5.2"

@@ -186,6 +186,12 @@ catalogs:
     react-router:
       specifier: 7.14.0
       version: 7.14.0
+    react-shiki:
+      specifier: 0.8.0
+      version: 0.8.0
+    shiki:
+      specifier: 3.15.0
+      version: 3.15.0
     shx:
       specifier: 0.4.0
       version: 0.4.0
@@ -632,7 +638,7 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0
       shiki:
-        specifier: ^3.13.0
+        specifier: 'catalog:'
         version: 3.15.0
       shx:
         specifier: 'catalog:'
@@ -1623,7 +1629,7 @@ importers:
         specifier: 'catalog:'
         version: 7.14.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-shiki:
-        specifier: ^0.8.0
+        specifier: 'catalog:'
         version: 0.8.0(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-simple-code-editor:
         specifier: ^0.14.1
@@ -1635,7 +1641,7 @@ importers:
         specifier: ^17.6.0
         version: 17.6.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       shiki:
-        specifier: ^3.13.0
+        specifier: 'catalog:'
         version: 3.15.0
       sucrase:
         specifier: ^3.35.0
@@ -1918,7 +1924,7 @@ importers:
         specifier: 'catalog:'
         version: 7.14.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-shiki:
-        specifier: ^0.8.0
+        specifier: 'catalog:'
         version: 0.8.0(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-simple-code-editor:
         specifier: ^0.14.1
@@ -1930,7 +1936,7 @@ importers:
         specifier: ~7.8.0
         version: 7.8.2
       shiki:
-        specifier: ^3.13.0
+        specifier: 'catalog:'
         version: 3.15.0
       sucrase:
         specifier: ^3.35.0
@@ -2249,7 +2255,7 @@ importers:
         specifier: 'catalog:'
         version: 7.14.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-shiki:
-        specifier: ^0.8.0
+        specifier: 'catalog:'
         version: 0.8.0(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-simple-code-editor:
         specifier: ^0.14.1
@@ -2261,7 +2267,7 @@ importers:
         specifier: ~7.8.0
         version: 7.8.2
       shiki:
-        specifier: ^3.13.0
+        specifier: 'catalog:'
         version: 3.15.0
       sucrase:
         specifier: ^3.35.0
@@ -2951,7 +2957,7 @@ importers:
         specifier: 'catalog:'
         version: 7.14.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-shiki:
-        specifier: ^0.8.0
+        specifier: 'catalog:'
         version: 0.8.0(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-simple-code-editor:
         specifier: ^0.14.1
@@ -2963,7 +2969,7 @@ importers:
         specifier: ^17.6.0
         version: 17.6.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       shiki:
-        specifier: ^3.13.0
+        specifier: 'catalog:'
         version: 3.15.0
       sucrase:
         specifier: ^3.35.0
@@ -3201,7 +3207,7 @@ importers:
         specifier: 'catalog:'
         version: 7.14.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       shiki:
-        specifier: ^3.13.0
+        specifier: 'catalog:'
         version: 3.15.0
       sucrase:
         specifier: ^3.35.0
@@ -4122,13 +4128,13 @@ importers:
         specifier: 'catalog:'
         version: 19.2.4(react@19.2.4)
       react-shiki:
-        specifier: ^0.8.0
+        specifier: 'catalog:'
         version: 0.8.0(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       rollup-plugin-visualizer:
         specifier: ^5.12.0
         version: 5.14.0(rollup@4.59.0)
       shiki:
-        specifier: ^3.13.0
+        specifier: 'catalog:'
         version: 3.15.0
       shx:
         specifier: 'catalog:'
