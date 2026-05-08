@@ -113,7 +113,7 @@ export default {
 
 #### Typedoc tsconfig
 
-```json
+```jsonc
 // tsconfig.typedoc.json
 {
   "compilerOptions": {
@@ -150,7 +150,7 @@ Consider an example project with the following project structure:
 
 The tsconfig needs to account for both modules:
 
-```json
+```jsonc
 // packages/react-docs/tsconfig.typedoc.json
 {
   "compilerOptions": {
@@ -168,7 +168,7 @@ Types from external modules aren't compiled by default. To include external type
 
 ##### 1. Modify your tsconfig to include the module's compiled types
 
-```json
+```jsonc
 // tsconfig.typedoc.json
 {
   "compilerOptions": {
