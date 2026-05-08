@@ -82,7 +82,7 @@
     "@qualcomm-ui/dom": "workspace:^1.1.1",
     "@qualcomm-ui/utils": "workspace:^1.2.4",
     "@tanstack/react-virtual": ">=3.13.9",
-    "lucide-react": ">=0.483.0 <1",
+    "lucide-react": ">=0.483.0 <2",
     "react": ">=19.0.0",
     "react-dom": ">=19.0.0"
   },
