@@ -1,5 +1,13 @@
 # @qualcomm-ui/core Changelog
 
+## 1.9.4
+
+May 7th, 2026
+
+### Tests
+
+- [table]: add regression tests ([8d93335](https://github.com/qualcomm/qualcomm-ui/commit/8d93335))
+
 ## 1.9.3
 
 May 1st, 2026

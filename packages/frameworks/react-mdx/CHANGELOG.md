@@ -1,5 +1,13 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 2.7.2
+
+May 7th, 2026
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/react-core, @qualcomm-ui/react]
+
 ## 2.7.1
 
 May 1st, 2026

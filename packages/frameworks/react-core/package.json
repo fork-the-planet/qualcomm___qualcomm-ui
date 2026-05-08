@@ -1,6 +1,6 @@
 {
   "name": "@qualcomm-ui/react-core",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "description": "Design-agnostic React building blocks and utilities.",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
@@ -43,7 +43,7 @@
     "esbuild": "catalog:",
     "@floating-ui/react": "^0.27.3",
     "@qualcomm-ui/cli": "catalog:",
-    "@qualcomm-ui/core": "workspace:^1.9.3",
+    "@qualcomm-ui/core": "workspace:^1.9.4",
     "@qualcomm-ui/dom": "workspace:^1.1.1",
     "@qualcomm-ui/esbuild": "catalog:",
     "@qualcomm-ui/react-test-utils": "workspace:^1.0.1",
@@ -78,7 +78,7 @@
     "vitest-browser-react": "^2.0.2"
   },
   "peerDependencies": {
-    "@qualcomm-ui/core": "workspace:^1.9.3",
+    "@qualcomm-ui/core": "workspace:^1.9.4",
     "@qualcomm-ui/dom": "workspace:^1.1.1",
     "@qualcomm-ui/utils": "workspace:^1.2.4",
     "@tanstack/react-virtual": ">=3.13.9",
