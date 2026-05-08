@@ -1,5 +1,14 @@
 # @qualcomm-ui/react-core Changelog
 
+## 1.4.7
+
+May 7th, 2026
+
+### Miscellaneous Chores
+
+- [deps]: allow lucide-react v1 ([510b95c](https://github.com/qualcomm/qualcomm-ui/commit/510b95c))
+- **deps:** update dependencies [@qualcomm-ui/core]
+
 ## 1.4.6
 
 May 1st, 2026

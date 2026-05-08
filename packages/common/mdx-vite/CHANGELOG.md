@@ -1,5 +1,13 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 3.7.1
+
+May 7th, 2026
+
+### Bug Fixes
+
+- [docs-plugin]: use plaintext code fallback ([2ecb4fa](https://github.com/qualcomm/qualcomm-ui/commit/2ecb4fa))
+
 ## 3.7.0
 
 May 6th, 2026

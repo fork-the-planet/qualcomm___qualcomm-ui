@@ -74,7 +74,8 @@ export function getRehypePlugins(
       merge(
         {
           defaultColor: "light-dark()",
-          fallbackLanguage: "text",
+          defaultLanguage: "plaintext",
+          fallbackLanguage: "plaintext",
           themes: {
             dark: quiCustomDarkTheme,
             light: "github-light-high-contrast",
