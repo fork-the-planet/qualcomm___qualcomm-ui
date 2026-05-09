@@ -20,6 +20,14 @@
   padding: 16px;
 }
 
+.shiki-wrapper {
+  code.language-md {
+    span {
+      white-space: wrap;
+    }
+  }
+}
+
 .shiki-wrapper,
 .qui-docs-highlighter__root {
   > .qui-code-copy-button {
