@@ -130,6 +130,10 @@ li.mdx {
   font: var(--font-static-body-md-default);
 }
 
+li.mdx:has(.shiki-wrapper.mdx:last-child) + li.mdx {
+  margin-top: var(--qui-mdx-margin-default);
+}
+
 ol.mdx {
   font: var(--font-static-body-md-default);
   list-style-type: decimal;
