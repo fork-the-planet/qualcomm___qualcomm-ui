@@ -1,5 +1,19 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 2.7.3
+
+May 10th, 2026
+
+### Styles
+
+- [blockquotes]: use inline notification info styles for default blockquotes ([e6c21a5](https://github.com/qualcomm/qualcomm-ui/commit/e6c21a5))
+- [shiki]: soft-wrap rendered markdown examples in code fences ([f491c33](https://github.com/qualcomm/qualcomm-ui/commit/f491c33))
+
+### Bug Fixes
+
+- [docs-layout]: add spacing after list item code blocks ([8a80339](https://github.com/qualcomm/qualcomm-ui/commit/8a80339))
+- [docs-layout]: add spacing between blockquote paragraphs ([b27e3ea](https://github.com/qualcomm/qualcomm-ui/commit/b27e3ea))
+
 ## 2.7.2
 
 May 7th, 2026

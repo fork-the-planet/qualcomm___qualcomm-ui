@@ -46,8 +46,8 @@ const navConfig: NavConfig[] = [
   },
   {
     expanded: true,
-    id: "components",
-    title: "Components",
+    id: "authoring",
+    title: "Authoring Guidelines",
   },
   {
     expanded: true,

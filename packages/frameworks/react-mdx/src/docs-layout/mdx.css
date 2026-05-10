@@ -130,6 +130,10 @@ li.mdx {
   font: var(--font-static-body-md-default);
 }
 
+li.mdx:has(.shiki-wrapper.mdx:last-child) + li.mdx {
+  margin-top: var(--qui-mdx-margin-default);
+}
+
 ol.mdx {
   font: var(--font-static-body-md-default);
   list-style-type: decimal;
@@ -268,13 +272,19 @@ code.mdx:not(pre > code.mdx):not(.q-link--text > code.mdx) {
 }
 
 blockquote.mdx {
-  border-inline-start-color: var(--color-border-brand-primary);
-  border-inline-start-width: 0.25rem;
+  background-color: var(--color-background-support-info-subtle);
+  border: solid var(--border-width-sm) var(--color-border-support-info-medium);
+  border-radius: var(--border-radius-md);
+  box-sizing: border-box;
   margin-top: var(--qui-mdx-margin-default);
-  padding: 4px 12px;
+  padding: var(--spacing-90) var(--spacing-100);
 
   > p.mdx {
     margin-top: 0;
+  }
+
+  p.mdx + p.mdx {
+    margin-top: var(--spacing-90);
   }
 }
 

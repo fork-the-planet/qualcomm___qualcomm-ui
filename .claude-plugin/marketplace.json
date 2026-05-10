@@ -1,0 +1,21 @@
+{
+  "name": "qualcomm-ui",
+  "description": "Plugins for contributors to the Qualcomm UI repo.",
+  "owner": {
+    "name": "Qualcomm UI Maintainers",
+    "email": "qui-maintainers@qualcomm.com"
+  },
+  "plugins": [
+    {
+      "name": "qui-docs",
+      "source": {
+        "source": "git-subdir",
+        "url": "qualcomm/qualcomm-ui",
+        "path": "plugins/qui-docs"
+      },
+      "description": "QUI Docs workflows for documentation contributors.",
+      "category": "Documentation",
+      "keywords": ["claude-code", "documentation", "mdx", "qui-docs"]
+    }
+  ]
+}

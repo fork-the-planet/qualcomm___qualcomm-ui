@@ -1,0 +1,96 @@
+---
+title: Principles
+---
+
+# {frontmatter.title}
+
+> \[!note]
+> This guide is intended for Qualcomm employees and QUI contributors.
+
+These guidelines cover the principles behind effective documentation. The detailed enforceable rules live in [Rules](/authoring/rules).
+
+## Effective documentation
+
+A good page answers the reader's next practical question:
+
+- What can I do with this feature?
+- When should I use it?
+- What access, setup, or data do I need first?
+- What exact steps or calls complete the task?
+- What changes after I do it?
+- How do I know it worked?
+- What can fail, and how do I fix it?
+- Where do I go next?
+
+If the reader cannot answer those questions after reading, the page is not done.
+
+## Pick a page type before writing
+
+Every page is one of these. If a page does not fit one type cleanly, split it.
+
+<div className="page-type-table-prev-element"></div>
+
+| Page Type | Examples |
+| --- | --- |
+| **Task Guide:** complete one concrete action. | - *Submit a job* <br /> - *Re-run a failed task run* |
+| **Workflow Guide:** move through multiple pages, tools, or systems to finish real work. | - *Prepare a host* <br /> - *Install Launcher* <br /> - *Run a test* <br /> - *Collect logs* |
+| **Capability Reference:** explain what a feature controls and how its fields, actions, states, and side effects work. | - *Build copy support API behavior* <br /> - *Resource pool fields* |
+| **Troubleshooting Guide:** start from a symptom or error and give checks, fixes, and escalation guidance. | - *Job stays queued* <br /> - *Device is unavailable* |
+| **Concept Page:** build the mental model a reader needs before following tasks. | - *Taxonomy and access control* <br /> - *Task runs and verdict impact* |
+| **Field or State Reference:** define dense columns, statuses, filters, fields, or actions. | - *Job report columns* <br /> - *Task run statuses* |
+| **Recipe Collection:** short, repeatable operations that do not need full workflow treatment. | - *Re-run a failed test case* <br /> - *Download logs for a job* |
+| **Decision Guide:** choose between valid options and understand the tradeoffs. | - *Launcher vs. Axiom Cloud vs. API* |
+
+## Structure pages around reader value
+
+Open with what the page helps the reader do. Do not start with "This page contains..." or "The below sections...".
+
+**Weak (screen-tour opening):**
+
+```md
+This document explains the Device Status Dashboard. The below screenshots show the available filters and columns.
+```
+
+**Better (task-guide opening):**
+
+```md
+Use Device Status to investigate why a device is unavailable for job execution. Start by checking allocation state, host connection, last heartbeat, and the active job linked to the device.
+```
+
+## Omit ToC sections
+
+The docs site automatically builds a table of contents from H2-H4 headings. Do not add a manual "Table of Contents" or "Summary" that just lists the headings already on the page.
+
+## Screenshots support, they don't replace
+
+Screenshots confirm a state, clarify a dense table, or show a non-obvious control location. They are not the documentation. Every screenshot needs nearby text explaining why it matters. If removing the screenshots leaves no useful documentation, the page is not developer documentation: rewrite it as a task, workflow, capability, or troubleshooting guide.
+
+## Plain, direct writing
+
+Use active voice, present tense, imperative steps, and exact UI labels, field names, commands, statuses, and file names.
+
+**Weak (passive voice):**
+
+```md
+User can check task stdout and task stderr files and decide if it can be taken care of by user itself.
+```
+
+**Better (active voice):**
+
+```md
+Open the task run details and inspect `stdout` and `stderr`. If the error is caused by missing input data, fix the input and re-run the task. If the error is caused by infrastructure failure, collect the task run ID and contact the Axiom Cloud support team.
+```
+
+Avoid `below`, `above`, `here`, `please`, `user can`, `as per`, and `kindly`. Name the thing directly.
+
+## Before submitting
+
+Always do a quick check before you open the PR:
+
+- Each page should have one clear primary type, and the first paragraph states the reader value.
+- Prerequisites, steps, expected result, and failure modes are explicit.
+- Examples use realistic values, not `{"status": "string"}` placeholders.
+- Screenshots support the text instead of replacing it.
+- Terminology matches the canonical glossary (`test case` vs `Test Case` vs `Testcase`). Pick one and use the same terminology through out the docs
+
+If you cannot tick all five, the page is not ready. The detailed rules and the reviewer checklist live in [Rules](/authoring/rules).

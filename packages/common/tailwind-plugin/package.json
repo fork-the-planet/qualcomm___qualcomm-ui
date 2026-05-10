@@ -55,8 +55,8 @@
     "@qualcomm-ui/esbuild": "catalog:",
     "@qualcomm-ui/tsconfig": "catalog:",
     "esbuild": "catalog:",
-    "shx": "^0.4.0",
-    "tailwindcss": "^4.1.17",
+    "shx": "catalog:",
+    "tailwindcss": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:"
   },

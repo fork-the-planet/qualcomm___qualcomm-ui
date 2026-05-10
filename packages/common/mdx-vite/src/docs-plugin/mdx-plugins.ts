@@ -73,6 +73,7 @@ export function getRehypePlugins(
       rehypeShiki,
       merge(
         {
+          addLanguageClass: true,
           defaultColor: "light-dark()",
           defaultLanguage: "plaintext",
           fallbackLanguage: "plaintext",

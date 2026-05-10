@@ -1,5 +1,17 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 3.7.2
+
+May 10th, 2026
+
+### Bug Fixes
+
+- [docs-plugin]: trigger full reload when unloaded module is refreshed ([c45f9bb](https://github.com/qualcomm/qualcomm-ui/commit/c45f9bb))
+
+### Code Refactoring
+
+- [rehype-shiki]: add language class to code element ([d1eef70](https://github.com/qualcomm/qualcomm-ui/commit/d1eef70))
+
 ## 3.7.1
 
 May 7th, 2026

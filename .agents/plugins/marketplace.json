@@ -1,0 +1,21 @@
+{
+  "name": "qualcomm-ui",
+  "interface": {
+    "displayName": "Qualcomm UI"
+  },
+  "plugins": [
+    {
+      "name": "qui-docs",
+      "source": {
+        "source": "git-subdir",
+        "url": "qualcomm/qualcomm-ui",
+        "path": "plugins/qui-docs"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Documentation"
+    }
+  ]
+}
