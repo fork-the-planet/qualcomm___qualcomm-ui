@@ -7,8 +7,9 @@
     {
       "name": "qui-docs",
       "source": {
-        "source": "local",
-        "path": "./plugins/qui-docs"
+        "source": "git-subdir",
+        "url": "qualcomm/qualcomm-ui",
+        "path": "plugins/qui-docs"
       },
       "policy": {
         "installation": "AVAILABLE",

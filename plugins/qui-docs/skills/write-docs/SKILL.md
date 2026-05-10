@@ -5,34 +5,22 @@ description: Write or revise QUI Docs documentation. Use whenever Codex is creat
 
 # Write Docs
 
-Use this skill to produce QUI Docs pages that are useful before they are polished. Start from the reader's task, then apply the rules.
+Use this skill to produce QUI Docs pages that are useful before they are polished. The bundled references are the source of truth for page structure, writing style, naming, links, assets, and self-check criteria. Apply them directly.
 
 ## Required Context
 
-Read these shared references before making documentation changes:
+Read these bundled references before making documentation changes:
 
-- `.plugin-references/qui-docs/principles.md`
-- `.plugin-references/qui-docs/rules.md`
+- `references/principles.md`
+- `references/rules.md`
 
-If either shared reference is missing, stop and report that the `qui-docs` plugin cannot run because its shared authoring references are unavailable. Do not use fallback reference files.
+These live at the root of the `qui-docs` plugin's installed directory. In Claude Code, that resolves to `${CLAUDE_PLUGIN_ROOT}/references/principles.md` and `${CLAUDE_PLUGIN_ROOT}/references/rules.md`.
+
+If either reference is missing, stop and report that the `qui-docs` plugin is misinstalled.
 
 ## Workflow
 
-1. Identify the page type before writing: task guide, workflow guide, capability reference, troubleshooting guide, concept page, field or state reference, recipe collection, or decision guide. Split the work if one page is trying to be several page types.
-2. Open with reader value. The first paragraph must say what the reader can do, decide, verify, or troubleshoot after reading.
-3. Use the standard page shell: frontmatter with `title`, then `# {frontmatter.title}`. Keep one H1 per page.
-4. Structure H2 sections around reader tasks or topics. Use H3 and H4 only when they add real hierarchy.
-5. Make prerequisites, access requirements, setup, steps, expected result, side effects, and failure modes explicit.
-6. Use active voice, present tense, imperative steps, exact UI labels, field names, commands, statuses, file names, and root-relative links.
-7. Use realistic examples. For API or CLI docs, include setup assumptions, a minimal working request, a successful response, at least one common error when relevant, and how returned identifiers are reused.
-8. Add screenshots only when they clarify a state, dense table, or non-obvious control. Name, place, and describe screenshots according to the rules reference.
-9. Update `qui-docs.config.ts` when route order, nesting, or visibility matters.
-10. Before finishing, apply the review checklist from `.plugin-references/qui-docs/rules.md`. If code snippets cannot be run or compiled, say that explicitly.
-
-## Avoid
-
-- Do not create section `index.mdx` pages. Use `overview.mdx` only when it explains a section's purpose.
-- Do not write screen tours that only describe visible controls.
-- Do not add manual tables of contents, summary sections that repeat headings, `<br>` tags, inline `style` attributes, emojis, placeholder-only examples, vague link text, or relative docs links.
-- Do not grow legacy mixed-case route or asset folders.
-- Do not use banned openings such as `This page contains...`, `The below...`, or `This document explains...`.
+1. Identify the page type per `references/principles.md`. Split the work if a page is trying to be more than one type.
+2. Draft with reader value in the first paragraph — what the reader can do, decide, verify, or troubleshoot after reading.
+3. Apply every rule in `references/rules.md` while writing. Update `qui-docs.config.ts` when route order, nesting, or visibility changes.
+4. Run the Author Self-Check in `references/rules.md` before finishing. If any code snippet cannot be run or compiled, state that explicitly.

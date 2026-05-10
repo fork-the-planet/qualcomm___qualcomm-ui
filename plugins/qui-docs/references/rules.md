@@ -167,6 +167,8 @@ Reject a page when:
 - It includes placeholder examples.
 - It duplicates another page.
 - It links to stale content.
+- It moves a page without adding a redirect or compatibility route for inbound URLs.
+- Frontmatter is missing or invalid, or the H1 is not `# {frontmatter.title}`.
 - A new developer could not complete the documented work without asking the author for context.
 
 Approve a page when a new developer can complete the documented work without asking the author for context and an experienced developer can scan for the field, status, command, API behavior, or failure mode they need.

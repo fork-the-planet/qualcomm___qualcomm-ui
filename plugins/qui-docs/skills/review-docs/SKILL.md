@@ -5,26 +5,26 @@ description: Review QUI Docs documentation for authoring compliance. Use wheneve
 
 # Review Docs
 
-Use this skill to review documentation changes as a docs reviewer. Prioritize issues that block merge or make the page unusable for a new developer.
+Use this skill to review documentation changes as a docs reviewer. The bundled references are the source of truth for what to check. Cite them in findings — do not paraphrase or substitute.
 
 ## Required Context
 
-Read these shared references before reviewing documentation changes:
+Read these bundled references before reviewing documentation changes:
 
-- `.plugin-references/qui-docs/principles.md`
-- `.plugin-references/qui-docs/rules.md`
+- `references/principles.md`
+- `references/rules.md`
 
-If either shared reference is missing, stop and report that the `qui-docs` plugin cannot run because its shared authoring references are unavailable. Do not use fallback reference files.
+These live at the root of the `qui-docs` plugin's installed directory. In Claude Code, that resolves to `${CLAUDE_PLUGIN_ROOT}/references/principles.md` and `${CLAUDE_PLUGIN_ROOT}/references/rules.md`.
+
+If either reference is missing, stop and report that the `qui-docs` plugin is misinstalled.
 
 ## Review Workflow
 
-1. Identify the files under review: MDX route files, `qui-docs.config.ts`, links, examples, screenshots, and docs assets.
-2. Determine the intended page type for each page. Flag pages that mix unrelated page types or read as screen tours.
-3. Check merge blockers first: missing reader value, hidden prerequisites, placeholder examples, screenshot-only content, stale links, missing redirects after moves, broken frontmatter or H1, and unverified snippets.
-4. Check structural rules: route names, asset names, no section `index.mdx`, frontmatter `title`, `# {frontmatter.title}`, heading hierarchy, no manual ToC, no weak headings, and navigation config alignment.
-5. Check writing quality: active voice, present tense, direct nouns, imperative procedures, canonical terminology, no chat shorthand, no emojis, no vague internal phrasing, and no banned opening phrases.
-6. Check examples and screenshots: realistic values, runnable snippets, expected results, common errors, useful alt text, lowercase PNG filenames, and screenshots that support nearby text.
-7. When feasible, run or compile code snippets touched by the change. If that is not feasible, list snippet verification as residual risk.
+1. List the files under review: MDX route files, `qui-docs.config.ts`, links, examples, screenshots, and asset folders.
+2. For each page, determine its intended page type per `references/principles.md`. Flag pages that mix unrelated types.
+3. Check every Reviewer Rejection Gate in `references/rules.md`. Each match is a P1 finding.
+4. Check the rest of `references/rules.md` (naming, frontmatter, headings, MDX formatting, links, navigation, assets, terminology, writing mechanics, examples, API/CLI page order, compatibility routes). Report violations as P2 unless they degrade reader usability, in which case P1.
+5. Run or compile any code snippets touched by the change. If that is not feasible, list snippet verification as residual risk.
 
 ## Output
 

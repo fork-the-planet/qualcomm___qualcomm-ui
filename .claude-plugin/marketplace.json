@@ -8,7 +8,11 @@
   "plugins": [
     {
       "name": "qui-docs",
-      "source": "./plugins/qui-docs",
+      "source": {
+        "source": "git-subdir",
+        "url": "qualcomm/qualcomm-ui",
+        "path": "plugins/qui-docs"
+      },
       "description": "QUI Docs workflows for documentation contributors.",
       "category": "Documentation",
       "keywords": ["claude-code", "documentation", "mdx", "qui-docs"]
