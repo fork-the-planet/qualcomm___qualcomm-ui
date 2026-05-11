@@ -1,0 +1,94 @@
+---
+title: QUI Docs
+---
+
+# {frontmatter.title}
+
+Install the QUI Documentation Authoring plugin when you want Claude Code to
+draft, revise, or review documentation pages. The plugin gives Claude Code two
+documentation-specific skills:
+
+- **write-docs**: guidelines for writing MDX pages
+- **review-docs**: guidelines for reviewing MDX pages
+
+## Prerequisites
+
+- Enable the Qualcomm UI Claude Code [marketplace](/claude-code/marketplace).
+- Reload plugins after installing so the skills load into the session.
+
+## Install the plugin
+
+1. In Claude Code, open the plugin browser:
+
+   ```shell
+   /plugin
+   ```
+
+2. Open the **Discover** tab and search for `qui`.
+
+3. Install **qui-docs**.
+
+4. Activate the plugin:
+
+   ```shell
+   /reload-plugins
+   ```
+
+You can also install directly from the command line:
+
+```shell
+/plugin install qui-docs@qualcomm-ui
+```
+
+## Use the writing skill
+
+Ask Claude Code to use the writing skill when creating or revising
+documentation:
+
+```md
+Use the qui docs plugin to write a setup guide for this integration
+```
+
+Claude Code should load `qui-docs:write-docs`, read the plugin's authoring
+principles and rules, determine the page type, write with reader value in the
+first paragraph, and update `qui-docs.config.ts` when navigation changes.
+
+## Use the review skill
+
+Ask Claude Code to use the review skill before submitting documentation
+changes:
+
+```md
+Use the QUI Docs plugin to review the documentation changes in this branch
+```
+
+Claude Code should load `qui-docs:review-docs`, list the files under review,
+check the Reviewer Rejection Gates, and report findings with file and line
+references. If there are no issues, Claude Code should still list any residual
+verification gaps.
+
+## When to use the plugin
+
+Use this plugin for changes to MDX route files, `qui-docs.config.ts`,
+navigation entries, examples, screenshots, documentation links, and docs assets
+in a QUI Docs site.
+
+Do not use this plugin as the only validation for code snippets. The plugin
+checks the documentation rules, but code snippets and CLI examples still need
+to be run or compiled when feasible.
+
+## Troubleshoot plugin usage
+
+If Claude Code does not load a `qui-docs:*` skill, confirm that **qui-docs** is
+installed from the `/plugin` view, then run `/reload-plugins`.
+If the skills still do not appear, start a new Claude Code session.
+
+Keep the plugin up to date by refreshing the marketplace:
+
+```shell
+/plugin marketplace update qualcomm-ui
+```
+
+If Claude Code writes a page without applying the QUI Docs rules, ask it to use
+the QUI Docs plugin explicitly and rerun the review skill before submitting the
+change.

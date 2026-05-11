@@ -18,6 +18,7 @@ const navConfig: NavConfig[] = [
   {
     id: "installation",
   },
+  {id: "integrations"},
   {
     id: "help",
     title: "Help",

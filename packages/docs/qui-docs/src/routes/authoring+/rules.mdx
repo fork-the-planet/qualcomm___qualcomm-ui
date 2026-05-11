@@ -5,7 +5,7 @@ title: Rules
 # {frontmatter.title}
 
 > \[!note]
-> This guide is intended for Qualcomm employees and QUI contributors.
+> This guide is intended for Qualcomm developers and QUI contributors.
 
 These are what reviewers check. **PRs must comply with the rules and conventions below before they can be merged.**
 
@@ -206,7 +206,7 @@ Weak (chat shorthand):
 
 Better (complete sentence):
 
-> For more details, see [Authentication setup](/getting-started/authentication).
+> For more details, see [Authentication setup]().
 
 ## Examples must prove the workflow
 
@@ -292,3 +292,10 @@ Before opening the PR, confirm each item:
 - No duplicate page exists under another route.
 - Page explains side effects, permissions, and failure modes when relevant.
 - Page is short enough to maintain, or has been split by task, workflow, capability, or reference area.
+
+## Agentic Workflows
+
+We provide agentic plugins that enforce these guidelines. Refer to the following for details:
+
+- [Claude Code](https://react.qui.qualcomm.com/claude-code/plugins/qui-docs-plugin)
+- [Codex](https://react.qui.qualcomm.com/codex/plugins/qui-docs-plugin)
