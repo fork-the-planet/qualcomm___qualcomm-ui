@@ -9,13 +9,16 @@
       "source": {
         "source": "git-subdir",
         "url": "qualcomm/qualcomm-ui",
-        "path": "plugins/qui-docs"
+        "path": "./plugins/qui-docs"
       },
       "policy": {
         "installation": "AVAILABLE",
         "authentication": "ON_INSTALL"
       },
-      "category": "Documentation"
+      "category": "Documentation",
+      "interface": {
+        "displayName": "QUI Documentation Authoring"
+      }
     }
   ]
 }
