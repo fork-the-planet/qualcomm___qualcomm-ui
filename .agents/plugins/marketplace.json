@@ -15,7 +15,10 @@
         "installation": "AVAILABLE",
         "authentication": "ON_INSTALL"
       },
-      "category": "Documentation"
+      "category": "Documentation",
+      "interface": {
+        "displayName": "QUI Documentation Authoring"
+      }
     }
   ]
 }
