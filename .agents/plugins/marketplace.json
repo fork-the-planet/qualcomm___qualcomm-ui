@@ -5,11 +5,11 @@
   },
   "plugins": [
     {
-      "name": "qui-docs",
+      "name": "QUI Documentation Authoring",
       "source": {
         "source": "git-subdir",
         "url": "qualcomm/qualcomm-ui",
-        "path": "plugins/qui-docs"
+        "path": "./plugins/qui-docs"
       },
       "policy": {
         "installation": "AVAILABLE",
