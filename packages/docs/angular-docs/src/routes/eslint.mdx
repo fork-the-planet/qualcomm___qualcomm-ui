@@ -6,15 +6,12 @@ import {NpmInstallTabs} from "@qualcomm-ui/react-mdx/npm-install-tabs"
 
 # {frontmatter.title}
 
-> [!tip/Optional Integration]
-> Our ESLint integration is not required to use the QUI component library.
-
 ## Plugin
 
 We provide an ESLint plugin that enforces best-practices for accessibility and component consumption. This guide assumes you've already set up and configured ESLint. If not, we recommend starting with the [configs](./#configs) section below.
 
-> [!note/In Development]
-> This plugin is currently in development. New rules will be added over time.
+> \[!note/In Development]
+> This plugin is currently in development. New rules will be added over time. Refer to the [changelog](https://github.com/qualcomm/qualcomm-ui/blob/main/packages/configs/eslint-plugin-angular/CHANGELOG.md) for updates.
 
 ### Installation
 
@@ -86,12 +83,12 @@ Both packages use ESLint's flat config format.
 
 <NpmInstallTabs
   packages={[
-    "@qualcomm-ui/eslint-config-typescript",
-    "@qualcomm-ui/eslint-config-angular",
-    "eslint",
-    "globals",
-    "typescript-eslint",
-  ]}
+  "@qualcomm-ui/eslint-config-typescript",
+  "@qualcomm-ui/eslint-config-angular",
+  "eslint",
+  "globals",
+  "typescript-eslint",
+]}
   dev
 />
 
@@ -190,7 +187,7 @@ The `templateSelfClosingTags` config requires self-closing syntax for components
 
 ### Example Configuration
 
-> [!note/Type-aware rules]
+> \[!note/Type-aware rules]
 > This configuration uses type-aware linting. Learn more [here](./#type-aware-rules) about potential pitfalls.
 
 Create an `eslint.config.js` file in your project root:

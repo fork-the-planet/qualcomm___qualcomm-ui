@@ -16,13 +16,21 @@ const navConfig: NavConfig[] = [
   {
     id: "installation",
   },
+
+  {separator: true},
+  {sectionTitle: "Integrations"},
   {
-    id: "integrations",
-    title: "Integrations & Configs",
+    children: [{id: "mcp"}, {id: "marketplace"}, {id: "plugins"}],
+    id: "claude-code",
   },
   {
-    separator: true,
+    children: [{id: "mcp"}, {id: "marketplace"}, {id: "plugins"}],
+    id: "codex",
   },
+  {id: "eslint"},
+  {id: "tailwind"},
+
+  {separator: true},
   {sectionTitle: "Theming, Patterns, and Pitfalls"},
   {
     children: [
