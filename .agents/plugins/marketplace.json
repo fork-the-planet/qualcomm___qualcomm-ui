@@ -5,7 +5,7 @@
   },
   "plugins": [
     {
-      "name": "QUI Documentation Authoring",
+      "name": "qui-docs",
       "source": {
         "source": "git-subdir",
         "url": "qualcomm/qualcomm-ui",
