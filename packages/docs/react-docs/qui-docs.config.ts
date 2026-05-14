@@ -19,6 +19,9 @@ const navConfig: NavConfig[] = [
   {
     id: "setup",
   },
+  {
+    id: "versioning",
+  },
 
   {separator: true},
   {sectionTitle: "Integrations"},
@@ -55,9 +58,6 @@ const navConfig: NavConfig[] = [
     ],
     id: "patterns",
     title: "Patterns & Best Practices",
-  },
-  {
-    id: "developer-previews",
   },
   {separator: true},
   {
