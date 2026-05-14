@@ -441,11 +441,7 @@ pre.qui-docs-code {
     white-space: nowrap;
   }
 
-  .qui-docs__page-header-badge {
-    height: 20px;
-  }
-
-  a.qui-docs__page-header-badge {
+  a.qui-badge__root {
     cursor: pointer;
     text-decoration: none;
   }

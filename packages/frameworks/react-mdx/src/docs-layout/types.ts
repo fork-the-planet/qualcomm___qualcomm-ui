@@ -37,7 +37,7 @@ export type NavDensity = "compact" | "comfy"
 
 export interface DocsLayoutSettings extends Pick<
   MdxDocsContextValue,
-  "demoSettings" | "packageManager" | "ssrUserAgent"
+  "demoSettings" | "layoutComponents" | "packageManager" | "ssrUserAgent"
 > {
   /**
    * Demo state for each route, typically persisted via localStorage or a session

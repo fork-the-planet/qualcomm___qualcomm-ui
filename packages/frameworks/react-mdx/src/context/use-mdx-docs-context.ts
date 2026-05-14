@@ -4,11 +4,13 @@
 import {
   createContext,
   type Dispatch,
+  type FunctionComponent,
   type Provider,
   type SetStateAction,
   useContext,
 } from "react"
 
+import type {NavBadge} from "@qualcomm-ui/mdx-common"
 import type {
   DocPropsSettings,
   RenderLink,
@@ -38,6 +40,26 @@ export interface DemoSettings {
   transformTailwindClasses?: boolean
 }
 
+/**
+ * @since next-release
+ */
+export interface LayoutComponents {
+  /**
+   * Badge renderer for the page header. Renders badges from the corresponding
+   * page's frontmatter.badges field. Return null to hide the badge.
+   *
+   * @since next-release
+   */
+  PageHeaderBadges?: FunctionComponent<{badges: NavBadge[]}>
+  /**
+   * Badge renderer for the side navigation. Renders badges from the corresponding
+   * page's frontmatter.badges field. Return null to hide the badge.
+   *
+   * @since next-release
+   */
+  SideNavBadges?: FunctionComponent<{badges: NavBadge[]}>
+}
+
 export interface MdxDocsContextValue {
   /**
    * @default {styleMode: 'default'}
@@ -51,6 +73,13 @@ export interface MdxDocsContextValue {
   demoState: RouteDemoState
 
   docProps?: DocPropsSettings
+
+  /**
+   * Configuration for layout subcomponents.
+   *
+   * @since next-release
+   */
+  layoutComponents?: LayoutComponents
 
   /**
    * When the user selects the package manager in our npm install tabs component,
@@ -68,7 +97,7 @@ export interface MdxDocsContextValue {
   setPackageManager?: (packageManager: PackageManager) => void
 
   /**
-   * User agent from SSR>
+   * User agent from SSR
    */
   ssrUserAgent?: string | null
 
