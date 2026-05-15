@@ -1,5 +1,23 @@
 # @qualcomm-ui/angular Changelog
 
+## 2.8.0
+
+May 14th, 2026
+
+### Features
+
+- [link]: allow links to inherit font size ([7ef35d6](https://github.com/qualcomm/qualcomm-ui/commit/7ef35d6))
+- [file-input]: add angular and react components ([83900b7](https://github.com/qualcomm/qualcomm-ui/commit/83900b7))
+- [file-upload]: add angular component surface ([2ba7482](https://github.com/qualcomm/qualcomm-ui/commit/2ba7482))
+
+### Tests
+
+- [file-input]: cover file input behavior ([ae8199d](https://github.com/qualcomm/qualcomm-ui/commit/ae8199d))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/qds-core, @qualcomm-ui/utils, @qualcomm-ui/angular-core]
+
 ## 2.7.2
 
 May 7th, 2026

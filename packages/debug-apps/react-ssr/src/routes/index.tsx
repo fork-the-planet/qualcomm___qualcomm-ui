@@ -12,6 +12,7 @@ const components = [
   "dialog",
   "divider",
   "drawer",
+  "file-input",
   "header-bar",
   "icon",
   "icon-button",

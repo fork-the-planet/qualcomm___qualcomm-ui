@@ -48,12 +48,19 @@ export function Link({
   disabled,
   emphasis,
   endIcon,
+  inheritFontSize,
   size,
   startIcon,
   ...props
 }: LinkProps): ReactElement {
   const api = createQdsLinkApi(
-    {dir, disabled, emphasis, size} satisfies Explicit<QdsLinkApiProps>,
+    {
+      dir,
+      disabled,
+      emphasis,
+      inheritFontSize,
+      size,
+    } satisfies Explicit<QdsLinkApiProps>,
     normalizeProps,
   )
   const mergedProps = mergeProps(api.getRootBindings(), props)

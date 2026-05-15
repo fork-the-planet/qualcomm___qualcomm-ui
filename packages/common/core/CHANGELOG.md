@@ -1,5 +1,17 @@
 # @qualcomm-ui/core Changelog
 
+## 1.10.0
+
+May 14th, 2026
+
+### Features
+
+- [file-upload]: add shared file upload primitives ([c6f26f5](https://github.com/qualcomm/qualcomm-ui/commit/c6f26f5))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils, @qualcomm-ui/dom]
+
 ## 1.9.4
 
 May 7th, 2026

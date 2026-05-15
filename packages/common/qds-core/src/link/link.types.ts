@@ -31,8 +31,15 @@ export interface QdsLinkApiProps extends DirectionProperty {
   emphasis?: QdsLinkEmphasis
 
   /**
+   * Controls whether the link inherits font size from its parent element.
+   *
+   * @since 1.28.0
+   */
+  inheritFontSize?: boolean | undefined
+
+  /**
    * The size of the link and its elements. Governs properties like font size,
-   * item padding, and icon sizes.
+   * padding, and icon sizes.
    *
    * @default 'sm'
    */
@@ -48,6 +55,7 @@ export interface QdsLinkRootBindings extends Part<"root">, DirectionProperty {
   className: LinkClasses["root"]
   "data-disabled": BooleanDataAttr
   "data-emphasis": QdsLinkEmphasis
+  "data-inherit-font-size": BooleanDataAttr
   "data-size": QdsLinkSize
 }
 

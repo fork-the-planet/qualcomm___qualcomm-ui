@@ -1,5 +1,13 @@
 # @qualcomm-ui/utils Changelog
 
+## 1.3.0
+
+May 14th, 2026
+
+### Features
+
+- [file-upload]: add shared file upload primitives ([c6f26f5](https://github.com/qualcomm/qualcomm-ui/commit/c6f26f5))
+
 ## 1.2.4
 
 May 1st, 2026
