@@ -40,6 +40,7 @@ export function createQdsLinkApi(
         className: linkClasses.root,
         "data-disabled": booleanDataAttr(props.disabled),
         "data-emphasis": emphasis,
+        "data-inherit-font-size": booleanDataAttr(props.inheritFontSize),
         "data-size": size,
         dir: props.dir || "ltr",
       })

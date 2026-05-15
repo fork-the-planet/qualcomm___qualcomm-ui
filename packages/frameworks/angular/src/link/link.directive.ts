@@ -113,6 +113,16 @@ export class LinkDirective implements SignalifyInput<QdsLinkApiProps>, OnInit {
   readonly endIcon = input<LucideIconOrString>()
 
   /**
+   * Controls whether the link inherits font size from its parent element.
+   */
+  readonly inheritFontSize = input<boolean | undefined, Booleanish>(
+    undefined,
+    {
+      transform: booleanAttribute,
+    },
+  )
+
+  /**
    * The size of the link and its elements. Governs properties like font size,
    * item padding, and icon sizes.
    *
@@ -137,6 +147,7 @@ export class LinkDirective implements SignalifyInput<QdsLinkApiProps>, OnInit {
         dir: this.dir(),
         disabled: this.disabled(),
         emphasis: this.emphasis(),
+        inheritFontSize: this.inheritFontSize(),
         size: this.size(),
       } satisfies Explicit<QdsLinkApiProps>,
       normalizeProps,
