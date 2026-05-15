@@ -383,17 +383,6 @@ export function createFileUploadApi(
         type: "button",
       })
     },
-    getItemSizeTextBindings(props): FileUploadItemSizeTextBindings {
-      const {file, type = DEFAULT_ITEM_TYPE} = props
-      return normalize.element({
-        ...parts.itemSizeText,
-        ...commonBindings,
-        "data-disabled": booleanDataAttr(disabled),
-        "data-type": type,
-        id: getItemSizeText(scope, file.name),
-      })
-    },
-
     getItemGroupBindings(props = {}): FileUploadItemGroupBindings {
       const {type = DEFAULT_ITEM_TYPE} = props
       return normalize.element({
@@ -439,6 +428,17 @@ export function createFileUploadApi(
         "data-disabled": booleanDataAttr(disabled),
         "data-type": type,
         src: url,
+      })
+    },
+
+    getItemSizeTextBindings(props): FileUploadItemSizeTextBindings {
+      const {file, type = DEFAULT_ITEM_TYPE} = props
+      return normalize.element({
+        ...parts.itemSizeText,
+        ...commonBindings,
+        "data-disabled": booleanDataAttr(disabled),
+        "data-type": type,
+        id: getItemSizeText(scope, file.name),
       })
     },
 

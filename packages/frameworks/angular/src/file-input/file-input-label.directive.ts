@@ -5,8 +5,8 @@ import {Component, computed} from "@angular/core"
 import {Asterisk} from "lucide-angular"
 
 import {useQdsInputContext} from "@qualcomm-ui/angular/input"
-import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 import {CoreFileUploadLabelDirective} from "@qualcomm-ui/angular-core/file-upload"
+import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 
 @Component({
   providers: [provideIcons({Asterisk})],

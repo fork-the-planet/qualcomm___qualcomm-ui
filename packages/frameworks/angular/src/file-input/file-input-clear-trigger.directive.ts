@@ -6,8 +6,8 @@ import {X} from "lucide-angular"
 
 import {useInputClearTrigger} from "@qualcomm-ui/angular/input"
 import {QuiPreloadDirective} from "@qualcomm-ui/angular/transitions"
-import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 import {CoreFileUploadClearTriggerDirective} from "@qualcomm-ui/angular-core/file-upload"
+import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 
 @Component({
   hostDirectives: [QuiPreloadDirective],

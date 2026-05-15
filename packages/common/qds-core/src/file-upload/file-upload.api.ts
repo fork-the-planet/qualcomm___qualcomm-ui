@@ -120,12 +120,6 @@ export function createQdsFileUploadApi(
         "data-size": size,
       })
     },
-    getItemSizeTextBindings(): QdsFileUploadItemSizeTextBindings {
-      return normalize.element({
-        className: fileUploadClasses.itemSizeText,
-        "data-size": size,
-      })
-    },
     getItemGroupBindings(): QdsFileUploadItemGroupBindings {
       return normalize.element({
         className: fileUploadClasses.itemGroup,
@@ -147,6 +141,12 @@ export function createQdsFileUploadApi(
     getItemPreviewImageBindings(): QdsFileUploadItemPreviewImageBindings {
       return normalize.element({
         className: fileUploadClasses.itemPreviewImage,
+        "data-size": size,
+      })
+    },
+    getItemSizeTextBindings(): QdsFileUploadItemSizeTextBindings {
+      return normalize.element({
+        className: fileUploadClasses.itemSizeText,
         "data-size": size,
       })
     },
