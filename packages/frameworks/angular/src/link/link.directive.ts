@@ -115,7 +115,7 @@ export class LinkDirective implements SignalifyInput<QdsLinkApiProps>, OnInit {
   /**
    * Controls whether the link inherits font size from its parent element.
    *
-   * @since next-release
+   * @since 2.8.0
    */
   readonly inheritFontSize = input<boolean | undefined, Booleanish>(undefined, {
     transform: booleanAttribute,

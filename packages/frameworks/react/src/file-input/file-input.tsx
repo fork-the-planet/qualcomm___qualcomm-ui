@@ -87,7 +87,7 @@ export interface FileInputProps extends FileInputRootProps {
 }
 
 /**
- * @since next-release
+ * @since 1.22.0
  */
 export function FileInput({
   clearable = true,

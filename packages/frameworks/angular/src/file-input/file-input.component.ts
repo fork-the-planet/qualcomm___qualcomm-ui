@@ -11,7 +11,7 @@ import type {Booleanish} from "@qualcomm-ui/utils/coercion"
 import {FileInputRootDirective} from "./file-input-root.directive"
 
 /**
- * @since next-release
+ * @since 2.8.0
  */
 @Component({
   providers: [

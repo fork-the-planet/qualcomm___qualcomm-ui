@@ -20,7 +20,7 @@ import {FileInputRootDirective} from "./file-input-root.directive"
 import {FileInputComponent} from "./file-input.component"
 
 /**
- * @since next-release
+ * @since 2.8.0
  */
 @NgModule({
   declarations: [

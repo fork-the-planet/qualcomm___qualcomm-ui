@@ -46,7 +46,7 @@ type FileInputComponent = typeof SimpleFileInput & {
 }
 
 /**
- * @since next-release
+ * @since 1.22.0
  */
 export const FileInput: FileInputComponent =
   SimpleFileInput as FileInputComponent

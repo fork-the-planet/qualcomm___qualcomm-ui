@@ -1,5 +1,17 @@
 # @qualcomm-ui/angular-core Changelog
 
+## 2.3.0
+
+May 14th, 2026
+
+### Features
+
+- [file-upload]: add framework core bindings ([fcec116](https://github.com/qualcomm/qualcomm-ui/commit/fcec116))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/utils, @qualcomm-ui/dom]
+
 ## 2.2.2
 
 May 7th, 2026

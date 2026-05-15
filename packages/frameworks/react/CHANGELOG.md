@@ -1,5 +1,23 @@
 # @qualcomm-ui/react Changelog
 
+## 1.22.0
+
+May 14th, 2026
+
+### Features
+
+- [link]: allow links to inherit font size ([7ef35d6](https://github.com/qualcomm/qualcomm-ui/commit/7ef35d6))
+- [file-input]: add angular and react components ([83900b7](https://github.com/qualcomm/qualcomm-ui/commit/83900b7))
+- [file-upload]: add react component surface ([2a1b934](https://github.com/qualcomm/qualcomm-ui/commit/2a1b934))
+
+### Tests
+
+- [file-input]: cover file input behavior ([ae8199d](https://github.com/qualcomm/qualcomm-ui/commit/ae8199d))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/qds-core, @qualcomm-ui/utils, @qualcomm-ui/react-core]
+
 ## 1.21.3
 
 May 7th, 2026

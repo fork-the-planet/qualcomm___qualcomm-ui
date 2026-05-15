@@ -33,7 +33,7 @@ export interface QdsLinkApiProps extends DirectionProperty {
   /**
    * Controls whether the link inherits font size from its parent element.
    *
-   * @since next-release
+   * @since 1.28.0
    */
   inheritFontSize?: boolean | undefined
 
