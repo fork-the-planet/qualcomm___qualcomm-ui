@@ -16,6 +16,9 @@ const navConfig: NavConfig[] = [
   {
     id: "installation",
   },
+  {
+    id: "versioning",
+  },
 
   {separator: true},
   {sectionTitle: "Integrations"},
@@ -46,9 +49,6 @@ const navConfig: NavConfig[] = [
   },
   {
     id: "pitfalls",
-  },
-  {
-    id: "developer-previews",
   },
   {
     separator: true,

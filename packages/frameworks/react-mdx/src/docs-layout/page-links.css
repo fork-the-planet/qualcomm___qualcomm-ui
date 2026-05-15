@@ -29,6 +29,8 @@
 }
 
 .qui-page-link__adjacent-route-title {
+  color: var(--color-text-neutral-secondary);
+  font: var(--font-static-body-sm-bold);
   padding-left: 20px;
   &[data-next] {
     align-self: flex-end;

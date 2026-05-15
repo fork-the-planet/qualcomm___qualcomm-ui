@@ -15,9 +15,12 @@ import {
   HeaderAiLink,
   HeaderLogo,
   HeaderRepositoryLink,
+  PageHeaderBadges,
   QuiEcosystemMenu,
+  SideNavBadges,
   ThemeToggle,
 } from "@qualcomm-ui/react-internal/layout"
+import type {LayoutComponents} from "@qualcomm-ui/react-mdx/context"
 import {
   DocsLayout,
   type DocsLayoutSettings,
@@ -31,6 +34,11 @@ import {ResetDemoDimensionsButton} from "./reset-demo-dimensions-button"
 import {useAngularDemoReloader} from "./use-angular-demo-reloader"
 import {useRouterLinkInterceptor} from "./use-router-link-interceptor"
 import {useThemeSwitchInterceptor} from "./use-theme-switch-interceptor"
+
+const layoutComponents: LayoutComponents = {
+  PageHeaderBadges,
+  SideNavBadges,
+}
 
 interface Props extends Partial<DocsLayoutSettings> {
   /**
@@ -96,6 +104,7 @@ export function AppDocsLayout({children, ...props}: Props): ReactNode {
           </HeaderBar.Root>
         </div>
       }
+      layoutComponents={layoutComponents}
       pathname={location.pathname}
       renderLink={DocLink}
       rootBreadcrumb={{

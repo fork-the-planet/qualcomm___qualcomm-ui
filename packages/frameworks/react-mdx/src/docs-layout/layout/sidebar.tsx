@@ -13,8 +13,7 @@ import {
 } from "react"
 
 import {createTreeCollection} from "@qualcomm-ui/core/tree"
-import type {NavBadge, NavItem} from "@qualcomm-ui/mdx-common"
-import {Badge} from "@qualcomm-ui/react/badge"
+import type {NavItem} from "@qualcomm-ui/mdx-common"
 import {SideNav} from "@qualcomm-ui/react/side-nav"
 import {useSafeLayoutEffect} from "@qualcomm-ui/react-core/effects"
 import type {ElementRenderProp} from "@qualcomm-ui/react-core/system"
@@ -63,7 +62,8 @@ export function Sidebar({
 }: SidebarProps): ReactElement {
   const ref = useRef<HTMLDivElement | null>(null)
   const {navDensity, navItems, pathname} = useMdxDocsLayoutContext()
-  const {renderLink: RenderLink} = useMdxDocsContext()
+  const {layoutComponents, renderLink: RenderLink} = useMdxDocsContext()
+  const SideNavBadgesComponent = layoutComponents?.SideNavBadges
 
   const initialCollection = useMemo(
     () =>
@@ -312,11 +312,9 @@ export function Sidebar({
                 >
                   <SideNav.NodeIndicator />
                   <SideNav.NodeText>{node.title}</SideNav.NodeText>
-                  {node.badges ? (
+                  {SideNavBadgesComponent && node.badges ? (
                     <SideNav.NodeAccessory className="qui-docs-sidebar__item-badges">
-                      {node.badges.map((badge) => (
-                        <SidebarBadge key={badge.id} badge={badge} />
-                      ))}
+                      <SideNavBadgesComponent badges={node.badges} />
                     </SideNav.NodeAccessory>
                   ) : null}
                 </SideNav.LeafNode>
@@ -349,22 +347,4 @@ function getExpandedItems(items: NavItem[], pathname: string): string[] {
     }
     return [...acc, ...expandedChildren]
   }, [])
-}
-
-function SidebarBadge({badge}: {badge: NavBadge}): ReactElement | null {
-  if (badge.id === "developerPreview") {
-    return (
-      <Badge emphasis="purple" size="sm" variant="subtle">
-        Dev Preview
-      </Badge>
-    )
-  } else if (badge.id === "since") {
-    return null
-  }
-
-  return (
-    <Badge key={badge.id} size="sm" variant="subtle">
-      {badge.label}
-    </Badge>
-  )
 }

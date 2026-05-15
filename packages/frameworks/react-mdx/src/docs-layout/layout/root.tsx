@@ -43,6 +43,7 @@ export function Root({
   demoState: demoStateProp,
   docProps,
   hideToc,
+  layoutComponents,
   mdxComponents,
   navDensity = "compact",
   onDemoSettingsChange,
@@ -73,6 +74,7 @@ export function Root({
       demoSettings,
       demoState,
       docProps,
+      layoutComponents,
       packageManager,
       renderLink,
       setDemoSettings: (updaterOrValue) => {
@@ -113,6 +115,7 @@ export function Root({
       demoState,
       docProps,
       onDemoSettingsChange,
+      layoutComponents,
       onDemoStateChange,
       onPackageManagerChange,
       packageManager,

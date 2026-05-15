@@ -561,6 +561,15 @@ export interface NavBadge {
   label: string
 
   /**
+   * Optional label override for the side nav. Set to false to prevent the badge from
+   * appearing in the side nav. When not defined, the side nav will render the
+   * {@link label}.
+   *
+   * @since 2.4.0
+   */
+  sideNavLabel?: string | false
+
+  /**
    * Optional HTML title attribute to show on hover.
    */
   title?: string

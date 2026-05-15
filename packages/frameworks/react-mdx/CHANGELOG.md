@@ -1,5 +1,21 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 2.8.0
+
+May 14th, 2026
+
+### Features
+
+- [docs-layout]: add configurable badge renderers ([b2e87d5](https://github.com/qualcomm/qualcomm-ui/commit/b2e87d5))
+
+### Styles
+
+- [docs-layout]: style adjacent route labels ([847de13](https://github.com/qualcomm/qualcomm-ui/commit/847de13))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-common]
+
 ## 2.7.3
 
 May 10th, 2026

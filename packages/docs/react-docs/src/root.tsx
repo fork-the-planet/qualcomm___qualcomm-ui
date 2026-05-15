@@ -51,7 +51,7 @@ import {
   useTheme,
 } from "@qualcomm-ui/react-router-utils/client"
 
-import {AppDocsLayout} from "./components"
+import {MdxLayout} from "./components"
 import {
   demoStateCookie,
   qdsBrandCookie,
@@ -174,7 +174,7 @@ function App() {
       <body>
         <GlobalConfigContextProvider value={globalConfigContext}>
           <QueryClientProvider client={queryClient}>
-            <AppDocsLayout
+            <MdxLayout
               demoSettings={data.demoSettings}
               demoState={data.demoState}
               onDemoSettingsChange={(nextValue) => {
@@ -195,7 +195,7 @@ function App() {
               ssrUserAgent={data.ssrUserAgent}
             >
               <Outlet />
-            </AppDocsLayout>
+            </MdxLayout>
           </QueryClientProvider>
         </GlobalConfigContextProvider>
         <ScrollRestoration />
