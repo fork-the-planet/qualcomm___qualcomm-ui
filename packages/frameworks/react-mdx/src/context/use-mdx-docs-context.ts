@@ -41,21 +41,21 @@ export interface DemoSettings {
 }
 
 /**
- * @since next-release
+ * @since 2.8.0
  */
 export interface LayoutComponents {
   /**
    * Badge renderer for the page header. Renders badges from the corresponding
    * page's frontmatter.badges field. Return null to hide the badge.
    *
-   * @since next-release
+   * @since 2.8.0
    */
   PageHeaderBadges?: FunctionComponent<{badges: NavBadge[]}>
   /**
    * Badge renderer for the side navigation. Renders badges from the corresponding
    * page's frontmatter.badges field. Return null to hide the badge.
    *
-   * @since next-release
+   * @since 2.8.0
    */
   SideNavBadges?: FunctionComponent<{badges: NavBadge[]}>
 }
@@ -77,7 +77,7 @@ export interface MdxDocsContextValue {
   /**
    * Configuration for layout subcomponents.
    *
-   * @since next-release
+   * @since 2.8.0
    */
   layoutComponents?: LayoutComponents
 

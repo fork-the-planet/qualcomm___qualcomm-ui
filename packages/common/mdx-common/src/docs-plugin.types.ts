@@ -565,7 +565,7 @@ export interface NavBadge {
    * appearing in the side nav. When not defined, the side nav will render the
    * {@link label}.
    *
-   * @since next-release
+   * @since 2.4.0
    */
   sideNavLabel?: string | false
 

@@ -1,5 +1,13 @@
 # @qualcomm-ui/mdx-common Changelog
 
+## 2.4.0
+
+May 14th, 2026
+
+### Features
+
+- [docs-layout]: add configurable badge renderers ([b2e87d5](https://github.com/qualcomm/qualcomm-ui/commit/b2e87d5))
+
 ## 2.3.0
 
 Apr 29th, 2026
