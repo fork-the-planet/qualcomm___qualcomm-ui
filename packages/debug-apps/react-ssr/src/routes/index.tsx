@@ -13,7 +13,6 @@ const components = [
   "divider",
   "drawer",
   "file-input",
-  "file-upload",
   "header-bar",
   "icon",
   "icon-button",
