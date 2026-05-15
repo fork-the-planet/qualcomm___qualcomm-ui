@@ -140,6 +140,28 @@ Here are a few things you can do that will increase the likelihood of your pull 
 
 ## Troubleshooting
 
+### GPG signing fails with "Inappropriate ioctl for device"
+
+This shows up in terminal-only environments (Linux, macOS, WSL, Git Bash) when GPG can't open a passphrase prompt because `GPG_TTY` isn't set. The full error looks like:
+
+```
+gpg: signing failed: Inappropriate ioctl for device
+```
+
+Quick fix in the current shell:
+
+```bash
+export GPG_TTY=$(tty)
+```
+
+To make it permanent, add it to your shell profile (e.g. `~/.bashrc` or `~/.zshrc`):
+
+```bash
+echo 'export GPG_TTY=$(tty)' >> ~/.bashrc
+```
+
+If you see other signing failures on Windows, see GitHub's [Troubleshooting commit signature verification](https://docs.github.com/en/authentication/troubleshooting-commit-signature-verification/).
+
 ### Adding GPG signatures to commits you already pushed
 
 If your existing commits show as **Unverified** on GitHub, re-sign them with a rebase:
