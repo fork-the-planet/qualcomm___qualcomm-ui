@@ -45,6 +45,9 @@ type FileInputComponent = typeof SimpleFileInput & {
   Root: FunctionComponent<FileInputRootProps>
 }
 
+/**
+ * @since next-release
+ */
 export const FileInput: FileInputComponent =
   SimpleFileInput as FileInputComponent
 

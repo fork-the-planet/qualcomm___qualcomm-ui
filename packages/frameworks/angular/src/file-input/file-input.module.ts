@@ -19,6 +19,9 @@ import {FileInputLabelDirective} from "./file-input-label.directive"
 import {FileInputRootDirective} from "./file-input-root.directive"
 import {FileInputComponent} from "./file-input.component"
 
+/**
+ * @since next-release
+ */
 @NgModule({
   declarations: [
     FileInputComponent,

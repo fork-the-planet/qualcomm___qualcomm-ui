@@ -86,6 +86,9 @@ export interface FileInputProps extends FileInputRootProps {
   placeholder?: ReactNode
 }
 
+/**
+ * @since next-release
+ */
 export function FileInput({
   clearable = true,
   clearTriggerProps,

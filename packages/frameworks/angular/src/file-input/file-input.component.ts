@@ -10,6 +10,9 @@ import type {Booleanish} from "@qualcomm-ui/utils/coercion"
 
 import {FileInputRootDirective} from "./file-input-root.directive"
 
+/**
+ * @since next-release
+ */
 @Component({
   providers: [
     provideFileUploadContext(),
