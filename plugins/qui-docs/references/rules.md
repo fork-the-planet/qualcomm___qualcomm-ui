@@ -194,4 +194,4 @@ Approve a page when a new developer can complete the documented work without ask
 - Frontmatter has `title` and H1 is `# {frontmatter.title}`.
 - No duplicate page exists under another route.
 - Page explains side effects, permissions, and failure modes when relevant.
-- Page is short enough to maintain or has been split by task, workflow, capability, or reference area.
+- Page is short enough to maintain or has been split by how-to, concept, or API area.

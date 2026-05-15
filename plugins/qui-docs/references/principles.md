@@ -2,31 +2,23 @@
 
 ## Effective Documentation
 
-A good page answers the reader's next practical question:
+Effective documentation answers the reader's next practical question. Across page types, that usually means:
 
-- What can I do with this feature?
-- When should I use it?
-- What access, setup, or data do I need first?
-- What exact steps or calls complete the task?
-- What changes after I do it?
-- How do I know it worked?
-- What can fail, and how do I fix it?
-- Where do I go next?
+- What is this and when do I use it?
+- What do I need to know or have before I start?
+- What are the exact steps, shape, or answer?
+- How do I know it worked, and what can go wrong?
 
-If the reader cannot answer those questions after reading, the page is not done.
+If the reader cannot answer those after reading, the page is not done.
 
 ## Page Types
 
 Every page has one primary type. Split the page if it does not fit one type cleanly.
 
-- **Task Guide**: complete one concrete action.
-- **Workflow Guide**: move through multiple pages, tools, or systems to finish real work.
-- **Capability Reference**: explain what a feature controls and how fields, actions, states, and side effects work.
-- **Troubleshooting Guide**: start from a symptom or error and give checks, fixes, and escalation guidance.
-- **Concept Page**: build the mental model a reader needs before following tasks.
-- **Field or State Reference**: define dense columns, statuses, filters, fields, or actions.
-- **Recipe Collection**: short, repeatable operations that do not need full workflow treatment.
-- **Decision Guide**: choose between valid options and understand tradeoffs.
+- **How-to**: walk a reader through an action — one step, many steps, or a short repeatable recipe. Examples: submit a job, re-run a failed task run, prepare a host, install Launcher.
+- **Concept**: build the mental model a reader needs before following tasks. Examples: what is a taxonomy, how utilization is calculated, what is a coverage plan.
+- **API Guide**: document an API surface — endpoints, parameters, request/response shapes, component props, fields, and states.
+- **FAQ**: answer questions readers ask repeatedly — errors, symptoms, edge cases, and "why does it work this way."
 
 ## Page Value
 
@@ -44,7 +36,7 @@ Avoid manual table-of-contents or summary sections that duplicate the H2-H4 head
 
 Screenshots support the text. They do not replace it. Use screenshots to confirm a state, clarify a dense table, or show a non-obvious control location.
 
-Every screenshot needs nearby text explaining why it matters. If removing screenshots leaves no useful documentation, rewrite the page as a task, workflow, capability, troubleshooting, concept, field/state, recipe, or decision page.
+Every screenshot needs nearby text explaining why it matters. If removing screenshots leaves no useful documentation, rewrite the page as a how-to, concept, API guide, or FAQ.
 
 ## Writing
 
