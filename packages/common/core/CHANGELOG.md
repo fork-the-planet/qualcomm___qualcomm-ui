@@ -1,5 +1,15 @@
 # @qualcomm-ui/core Changelog
 
+## 1.11.0
+
+May 22nd, 2026
+
+### Features
+
+- [number-input]: support aria labels ([cf182d6](https://github.com/qualcomm/qualcomm-ui/commit/cf182d6))
+- [select]: support aria labels ([e6f41e1](https://github.com/qualcomm/qualcomm-ui/commit/e6f41e1))
+- [combobox]: support aria labels ([cfaa97b](https://github.com/qualcomm/qualcomm-ui/commit/cfaa97b))
+
 ## 1.10.0
 
 May 14th, 2026

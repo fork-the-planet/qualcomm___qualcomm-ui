@@ -1,5 +1,14 @@
 # @qualcomm-ui/react Changelog
 
+## 1.22.1
+
+May 22nd, 2026
+
+### Miscellaneous Chores
+
+- update pnpm and test dependencies ([b175d6a](https://github.com/qualcomm/qualcomm-ui/commit/b175d6a))
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/react-core, @qualcomm-ui/qds-core]
+
 ## 1.22.0
 
 May 14th, 2026

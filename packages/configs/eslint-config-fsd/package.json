@@ -1,6 +1,6 @@
 {
   "name": "@qualcomm-ui/eslint-config-fsd",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "QUI ESLint config for feature-sliced design",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
@@ -32,7 +32,7 @@
   "devDependencies": {
     "@qualcomm-ui/cli": "catalog:",
     "@qualcomm-ui/tsconfig": "catalog:",
-    "@typescript-eslint/rule-tester": "8.48.1",
+    "@typescript-eslint/rule-tester": "catalog:",
     "cross-env": "^10.1.0",
     "eslint-plugin-boundaries": "^5.0.1",
     "eslint-plugin-import": "^2.31.0",

@@ -134,13 +134,9 @@ The composite elements are only intended to be used as direct descendants of the
   - it makes the entire component clickable, not just the input/control.
   - it provides implicit association between the text and input element, which is ideal for screen readers.
 - Always use the associated [label](./#label) or [q-checkbox-label](./#q-checkbox-label) directive when authoring the text label. This is automatically associated with the input element.
-- If you omit the label, you must provide an [aria-label](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-label) or [aria-labelledby](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-labelled-by) attribute on the `q-checkbox-hidden-input` element:
+- If you omit the visible label, give the checkbox an accessible name with `aria-label` or `aria-labelledby` on the simple `q-checkbox`. If you use the composite API, provide `aria-label` or `aria-labelledby` on the `q-checkbox-hidden-input` element. Avoid `[attr.aria-label]` and `[attr.aria-labelledby]`; use `[aria-label]` or `[aria-labelledby]` for dynamic values.
 
-```angular-html
-<label q-checkbox>
-  <input q-checkbox-hidden-input aria-label="Accessible label" />
-</label>
-```
+<QdsDemo name="CheckboxAriaLabelDemo" />
 
 ## Explorer
 

@@ -83,6 +83,29 @@ const testCases: MultiComponentTest[] = [
     },
   },
   {
+    simple() {
+      @Component({
+        imports: [ComboboxModule],
+        template: `
+          <q-combobox aria-label="City" [collection]="collection" />
+        `,
+      })
+      class SimpleComponent {
+        collection = stringCollection
+      }
+      return SimpleComponent
+    },
+    testCase(component) {
+      test(`aria-label labels the input — ${component.name}`, async () => {
+        await render(component)
+
+        await expect
+          .element(page.getByRole("combobox", {name: "City"}))
+          .toBeVisible()
+      })
+    },
+  },
+  {
     composite() {
       @Component({
         imports: [ComboboxModule, PortalDirective],

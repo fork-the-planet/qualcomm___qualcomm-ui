@@ -1,6 +1,6 @@
 {
   "name": "@qualcomm-ui/eslint-plugin-angular",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "ESLint plugin for enforcing best-practices with QUI Angular component consumption",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
@@ -30,7 +30,7 @@
     "watch:types": "tsc -p tsconfig.lib.json -w --preserveWatchOutput",
     "clean": "shx rm -rf dist",
     "lint": "eslint --quiet",
-    "test": "pnpm build && vitest -c vitest.config.ts --run",
+    "test": "turbo build --filter @qualcomm-ui/eslint-plugin-angular && vitest -c vitest.config.ts --run",
     "test:unit:ci": "pnpm build && cross-env NODE_OPTIONS='' vitest -c vitest.config.ts --run --pool=threads --no-file-parallelism",
     "prepublishOnly": "pnpm build && qui-cli pre-publish",
     "postpublish": "qui-cli post-publish"
@@ -40,7 +40,7 @@
     "@qualcomm-ui/cli": "catalog:",
     "@qualcomm-ui/esbuild": "catalog:",
     "@qualcomm-ui/tsconfig": "catalog:",
-    "@typescript-eslint/rule-tester": "8.48.1",
+    "@typescript-eslint/rule-tester": "catalog:",
     "@typescript-eslint/utils": "catalog:",
     "angular-eslint": "^21.3.1",
     "esbuild": "catalog:",

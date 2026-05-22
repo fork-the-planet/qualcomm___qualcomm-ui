@@ -1,6 +1,5 @@
 import type {ReactElement} from "react"
 
-import {Button} from "@qualcomm-ui/react/button"
 import {Menu} from "@qualcomm-ui/react/menu"
 import {Portal} from "@qualcomm-ui/react-core/portal"
 
@@ -17,9 +16,9 @@ export function MenuHideWhenDetachedDemo(): ReactElement {
           </div>
         ))}
         <Menu.Trigger>
-          <Button className="whitespace-nowrap" emphasis="primary">
+          <Menu.Button className="whitespace-nowrap" emphasis="primary">
             Show Menu
-          </Button>
+          </Menu.Button>
         </Menu.Trigger>
       </div>
 

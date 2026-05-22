@@ -1329,4 +1329,115 @@ const testCases: MultiComponentTest[] = [
 
 describe("checkbox", () => {
   runTests(testCases)
+
+  test("simple component forwards a static native aria-label to the generated input", async () => {
+    @Component({
+      imports: [CheckboxModule],
+      template: `
+        <label
+          aria-label="Subscribe to updates"
+          aria-labelledby="unused-label"
+          q-checkbox
+        ></label>
+      `,
+    })
+    class SimpleAriaLabelComponent {}
+
+    const {fixture} = await render(SimpleAriaLabelComponent)
+
+    await expect
+      .element(page.getByRole("checkbox", {name: "Subscribe to updates"}))
+      .toBeVisible()
+
+    const host = fixture.nativeElement.querySelector("[q-checkbox]")
+    expect(host).not.toHaveAttribute("aria-label")
+    expect(host).not.toHaveAttribute("aria-labelledby")
+  })
+
+  test("simple component forwards a dynamic native aria-labelledby to the generated input", async () => {
+    @Component({
+      imports: [CheckboxModule],
+      template: `
+        <span id="external-label">External label</span>
+        <span id="updated-label">Updated label</span>
+        <label
+          label="Internal label"
+          q-checkbox
+          [aria-labelledby]="labelId()"
+        ></label>
+        <button type="button" (click)="labelId.set('updated-label')">
+          Update label
+        </button>
+      `,
+    })
+    class SimpleAriaLabelledbyComponent {
+      protected readonly labelId = signal("external-label")
+    }
+
+    const {fixture} = await render(SimpleAriaLabelledbyComponent)
+
+    const checkbox = page.getByRole("checkbox", {name: "External label"})
+    await expect.element(checkbox).not.toHaveAttribute("aria-label")
+    await expect
+      .element(checkbox)
+      .toHaveAttribute("aria-labelledby", "external-label")
+
+    const host = fixture.nativeElement.querySelector("[q-checkbox]")
+    expect(host).not.toHaveAttribute("aria-labelledby")
+
+    await userEvent.click(page.getByRole("button", {name: "Update label"}))
+
+    await expect
+      .element(page.getByRole("checkbox", {name: "Updated label"}))
+      .toHaveAttribute("aria-labelledby", "updated-label")
+  })
+
+  test("hidden input uses a static native aria-label", async () => {
+    @Component({
+      imports: [CheckboxModule],
+      template: `
+        <label q-checkbox-root>
+          <input aria-label="External label" q-checkbox-hidden-input />
+          <div q-checkbox-control></div>
+        </label>
+      `,
+    })
+    class StaticHiddenInputAriaLabelComponent {}
+
+    await render(StaticHiddenInputAriaLabelComponent)
+
+    await expect
+      .element(page.getByRole("checkbox", {name: "External label"}))
+      .toBeVisible()
+  })
+
+  test("hidden input updates a dynamic native aria-label", async () => {
+    @Component({
+      imports: [CheckboxModule],
+      template: `
+        <label q-checkbox-root>
+          <input q-checkbox-hidden-input [aria-label]="label()" />
+          <div q-checkbox-control></div>
+        </label>
+        <button type="button" (click)="label.set('Updated label')">
+          Update label
+        </button>
+      `,
+    })
+    class DynamicHiddenInputAriaLabelComponent {
+      protected readonly label = signal("External label")
+    }
+
+    await render(DynamicHiddenInputAriaLabelComponent)
+
+    await expect
+      .element(page.getByRole("checkbox", {name: "External label"}))
+      .toBeVisible()
+
+    await userEvent.click(page.getByRole("button", {name: "Update label"}))
+
+    await expect
+      .element(page.getByRole("checkbox", {name: "Updated label"}))
+      .toBeVisible()
+  })
 })

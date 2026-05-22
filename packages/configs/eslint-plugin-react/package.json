@@ -1,6 +1,6 @@
 {
   "name": "@qualcomm-ui/eslint-plugin-react",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "ESLint plugin for enforcing best-practices with QUI React component consumption",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
@@ -40,7 +40,7 @@
     "@qualcomm-ui/cli": "catalog:",
     "@qualcomm-ui/esbuild": "catalog:",
     "@qualcomm-ui/tsconfig": "catalog:",
-    "@typescript-eslint/rule-tester": "8.48.1",
+    "@typescript-eslint/rule-tester": "catalog:",
     "@typescript-eslint/utils": "catalog:",
     "esbuild": "catalog:",
     "npm-run-all2": "catalog:",

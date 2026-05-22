@@ -55,6 +55,7 @@ Enforces that certain QUI components have an `aria-label` or `aria-labelledby` a
 
 - `q-icon-button`
 - `q-inline-icon-button`
+- `q-header-bar-action-icon-button`
 
 ```html
 <!-- Invalid -->
@@ -65,6 +66,190 @@ Enforces that certain QUI components have an `aria-label` or `aria-labelledby` a
 <button q-icon-button icon="close" aria-labelledby="close-label"></button>
 <button q-icon-button icon="close" [attr.aria-label]="closeLabel"></button>
 ```
+
+#### `avatar-image-alt`
+
+Enforces that `q-avatar-image` has an `alt` attribute for accessibility.
+
+```html
+<!-- Invalid -->
+<img q-avatar-image src="/user.jpg" />
+
+<!-- Valid -->
+<img q-avatar-image alt="John Doe" src="/user.jpg" />
+<img q-avatar-image [alt]="userName" src="/user.jpg" />
+```
+
+#### `input-label-association`
+
+Enforces that form input components have proper label association for accessibility. Supports both simple and compound component patterns.
+
+**Affected components and directives:**
+
+| Component            | Compound Label            | Labeled Control                                  |
+| -------------------- | ------------------------- | ------------------------------------------------ |
+| `q-text-input`       | `q-text-input-label`      | `q-text-input-input`                            |
+| `q-number-input`     | `q-number-input-label`    | `q-number-input-input`                          |
+| `q-password-input`   | `q-password-input-label`  | `q-password-input-input`                        |
+| `q-combobox`         | `q-combobox-label`        | `q-combobox-input`                              |
+| `q-select`           | `q-select-label`          | `q-select-control` or `q-select-hidden-select` |
+| `q-switch`           | `q-switch-label`          | `q-switch-hidden-input`                         |
+| `q-checkbox`         | `q-checkbox-label`        | `q-checkbox-hidden-input`                       |
+| `q-radio`            | `q-radio-label`           | `q-radio-hidden-input`                          |
+
+**Simple component usage:**
+
+```html
+<!-- Invalid -->
+<q-text-input placeholder="Enter name"></q-text-input>
+
+<!-- Valid -->
+<q-text-input label="Full name" placeholder="Enter name"></q-text-input>
+<q-text-input aria-label="Full name" placeholder="Enter name"></q-text-input>
+<q-text-input [aria-label]="nameLabel" placeholder="Enter name"></q-text-input>
+<q-combobox aria-label="Country"></q-combobox>
+<q-combobox [aria-label]="countryLabel"></q-combobox>
+<label q-switch aria-label="Enable notifications"></label>
+
+<!-- Valid - projected label -->
+<q-text-input>
+  <label q-text-input-label>Full name</label>
+</q-text-input>
+```
+
+**Compound component usage:**
+
+```html
+<!-- Invalid -->
+<div q-text-input-root>
+  <input q-text-input-input placeholder="Enter name" />
+</div>
+
+<!-- Valid -->
+<div q-text-input-root>
+  <label q-text-input-label>Full name</label>
+  <input q-text-input-input placeholder="Enter name" />
+</div>
+
+<label q-switch-root>
+  <input q-switch-hidden-input aria-label="Enable notifications" />
+  <div q-switch-control></div>
+</label>
+```
+
+Projected controls on simple components can also provide the accessible name:
+
+```html
+<q-select>
+  <button q-select-control aria-label="Country"></button>
+</q-select>
+
+<label q-checkbox>
+  <input q-checkbox-hidden-input aria-label="Accept terms" />
+</label>
+```
+
+#### `interactive-card-element-nesting`
+
+Disallows interactive elements inside `q-card` when the card itself is interactive.
+
+```html
+<!-- Invalid -->
+<button q-card interactive>
+  <button q-button>Open</button>
+</button>
+
+<!-- Valid -->
+<button q-card interactive>
+  <div q-card-heading>Open</div>
+</button>
+```
+
+#### `prefer-alert-banner-button`
+
+Enforces `q-alert-banner-button` for alert banner actions.
+
+```html
+<!-- Invalid -->
+<div q-alert-banner>
+  <button q-button>Retry</button>
+</div>
+
+<!-- Valid -->
+<div q-alert-banner>
+  <button q-alert-banner-button>Retry</button>
+</div>
+```
+
+#### `prefer-card-actions`
+
+Enforces `q-card-button` and `q-card-link` for direct QUI actions rendered inside `q-card`.
+
+```html
+<!-- Invalid -->
+<div q-card>
+  <button q-button>Confirm</button>
+  <a q-link href="/details">Details</a>
+</div>
+
+<!-- Valid -->
+<div q-card>
+  <button q-card-button>Confirm</button>
+  <a q-card-link href="/details">Details</a>
+</div>
+```
+
+#### `prefer-header-bar-actions`
+
+Enforces `q-header-bar-action-button` and `q-header-bar-action-icon-button` inside `q-header-bar-action-bar`.
+
+```html
+<!-- Invalid -->
+<div q-header-bar-action-bar>
+  <button q-button>Apps</button>
+  <button q-icon-button aria-label="Settings"></button>
+</div>
+
+<!-- Valid -->
+<div q-header-bar-action-bar>
+  <button q-header-bar-action-button>Apps</button>
+  <button q-header-bar-action-icon-button aria-label="Settings"></button>
+</div>
+```
+
+#### `prefer-menu-trigger-buttons`
+
+Enforces menu-specific trigger button components inside `q-menu-trigger`.
+
+```html
+<!-- Invalid -->
+<div q-menu-trigger>
+  <button q-button>Open</button>
+</div>
+
+<!-- Valid -->
+<div q-menu-trigger>
+  <button q-menu-button>Open</button>
+</div>
+```
+
+#### `prefer-select-item-checkbox`
+
+Enforces `q-select-item-checkbox` when `q-select-root` statically sets `selectionIndicator="checkbox"`.
+
+```html
+<!-- Invalid -->
+<div q-select-root selectionIndicator="checkbox">
+  <span q-select-item-indicator></span>
+</div>
+
+<!-- Valid -->
+<div q-select-root selectionIndicator="checkbox">
+  <span q-select-item-checkbox></span>
+</div>
+```
+
+These contextual component usage rules target direct QUI Angular selectors. Custom wrapper components are ignored.
 
 ## Configs
 

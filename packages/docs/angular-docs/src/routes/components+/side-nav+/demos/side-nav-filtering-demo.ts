@@ -45,6 +45,7 @@ import {QLogoComponent} from "./q-logo.component"
         <hr q-side-nav-divider />
 
         <q-text-input
+          aria-label="Search filter"
           placeholder="Search"
           q-side-nav-filter-input
           size="sm"

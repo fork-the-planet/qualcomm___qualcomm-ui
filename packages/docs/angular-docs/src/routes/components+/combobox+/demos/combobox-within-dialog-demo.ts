@@ -22,7 +22,7 @@ import {countries} from "./country-list"
           <button q-dialog-close-button></button>
           <!-- preview -->
           <q-combobox
-            ariaLabel="Country"
+            aria-label="Country"
             class="w-48"
             disablePortal
             placeholder="Select a country"

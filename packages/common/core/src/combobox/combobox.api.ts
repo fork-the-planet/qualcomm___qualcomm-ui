@@ -274,6 +274,7 @@ export function createComboboxApi(
         "aria-controls": domIds.content(scope),
         "aria-expanded": booleanAriaAttr(open),
         "aria-invalid": booleanAriaAttr(invalid),
+        "aria-labelledby": domIds.label(scope),
         autoCapitalize: "none",
         autoComplete: "off",
         autoCorrect: "off",

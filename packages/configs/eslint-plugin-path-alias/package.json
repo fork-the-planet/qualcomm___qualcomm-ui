@@ -1,6 +1,6 @@
 {
   "name": "@qualcomm-ui/eslint-plugin-path-alias",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "ESLint config for restricting import boundaries to tsconfig paths",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
@@ -29,7 +29,7 @@
     "@qualcomm-ui/cli": "catalog:",
     "@qualcomm-ui/tsconfig": "catalog:",
     "@typescript-eslint/utils": "catalog:",
-    "@typescript-eslint/rule-tester": "8.48.1",
+    "@typescript-eslint/rule-tester": "catalog:",
     "typescript-eslint": "catalog:",
     "vitest": "catalog:"
   },

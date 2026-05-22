@@ -38,7 +38,7 @@ const testCases: MultiComponentTest[] = [
             q-select-root
             [collection]="cityCollection"
           >
-            <div q-select-control>
+            <div aria-label="Select a city" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -71,7 +71,11 @@ const testCases: MultiComponentTest[] = [
       @Component({
         imports: [SelectModule],
         template: `
-          <q-select placeholder="Select a city" [collection]="cityCollection" />
+          <q-select
+            aria-label="Test select"
+            placeholder="Select a city"
+            [collection]="cityCollection"
+          />
         `,
       })
       class SimpleComponent {
@@ -100,7 +104,7 @@ const testCases: MultiComponentTest[] = [
             selectionIndicator="checkbox"
             [collection]="cityCollection"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -134,6 +138,7 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule],
         template: `
           <q-select
+            aria-label="Test select"
             multiple
             placeholder="Select cities"
             selectionIndicator="checkbox"
@@ -184,7 +189,7 @@ const testCases: MultiComponentTest[] = [
             [collection]="cityCollection"
             [defaultValue]="['Denver', 'Miami']"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -218,6 +223,7 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule],
         template: `
           <q-select
+            aria-label="Test select"
             multiple
             placeholder="Select cities"
             [collection]="cityCollection"
@@ -255,7 +261,7 @@ const testCases: MultiComponentTest[] = [
             q-select-root
             [collection]="cityCollection"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -288,7 +294,11 @@ const testCases: MultiComponentTest[] = [
       @Component({
         imports: [SelectModule],
         template: `
-          <q-select placeholder="Select a city" [collection]="cityCollection" />
+          <q-select
+            aria-label="Test select"
+            placeholder="Select a city"
+            [collection]="cityCollection"
+          />
         `,
       })
       class SimpleComponent {
@@ -321,19 +331,21 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule],
         template: `
           <q-select
-            aria-label="City"
+            aria-label="Test select"
             placeholder="Select a city"
+            [aria-label]="cityLabel()"
             [collection]="cityCollection"
           />
         `,
       })
       class SimpleComponent {
         cityCollection = selectCollection({items: cityItems})
+        readonly cityLabel = signal("City")
       }
       return SimpleComponent
     },
     testCase(component) {
-      test(`simple select applies aria-label to the control — ${component.name}`, async () => {
+      test(`simple select applies bound aria-label to the control — ${component.name}`, async () => {
         await render(component)
 
         await expect
@@ -348,6 +360,7 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule],
         template: `
           <q-select
+            aria-label="Test select"
             label="Select a city"
             placeholder="Select a city"
             [clearable]="false"
@@ -384,74 +397,7 @@ const testCases: MultiComponentTest[] = [
             q-select-root
             [collection]="cityCollection"
           >
-            <div q-select-control>
-              <span q-select-value-text></span>
-              <button q-select-indicator></button>
-            </div>
-
-            <select q-select-hidden-select></select>
-
-            <ng-template qPortal>
-              <div q-select-positioner>
-                <div q-select-content>
-                  @for (item of cityCollection.items; track item) {
-                    <div q-select-item [item]="item">
-                      <span q-select-item-text>
-                        {{ cityCollection.stringifyItem(item) }}
-                      </span>
-                      <span q-select-item-indicator></span>
-                    </div>
-                  }
-                </div>
-              </div>
-            </ng-template>
-          </div>
-        `,
-      })
-      class CompositeComponent {
-        cityCollection = selectCollection({items: cityItems})
-      }
-      return CompositeComponent
-    },
-    simple() {
-      @Component({
-        imports: [SelectModule],
-        template: `
-          <q-select placeholder="Select a city" [collection]="cityCollection" />
-        `,
-      })
-      class SimpleComponent {
-        cityCollection = selectCollection({items: cityItems})
-      }
-      return SimpleComponent
-    },
-    testCase(component) {
-      test(`single selection — ${component.name}`, async () => {
-        await render(component)
-
-        const trigger = page.getByRole("combobox")
-        await trigger.click()
-
-        const option = page.getByRole("option", {name: "Denver"})
-        await option.click()
-
-        await expect.element(trigger).toHaveTextContent("Denver")
-        expect(trigger).toHaveAttribute("aria-expanded", "false")
-      })
-    },
-  },
-  {
-    composite() {
-      @Component({
-        imports: [SelectModule, PortalDirective],
-        template: `
-          <div
-            multiple
-            placeholder="Select cities"
-            q-select-root
-            [collection]="cityCollection"
-          >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -485,6 +431,78 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule],
         template: `
           <q-select
+            aria-label="Test select"
+            placeholder="Select a city"
+            [collection]="cityCollection"
+          />
+        `,
+      })
+      class SimpleComponent {
+        cityCollection = selectCollection({items: cityItems})
+      }
+      return SimpleComponent
+    },
+    testCase(component) {
+      test(`single selection — ${component.name}`, async () => {
+        await render(component)
+
+        const trigger = page.getByRole("combobox")
+        await trigger.click()
+
+        const option = page.getByRole("option", {name: "Denver"})
+        await option.click()
+
+        await expect.element(trigger).toHaveTextContent("Denver")
+        expect(trigger).toHaveAttribute("aria-expanded", "false")
+      })
+    },
+  },
+  {
+    composite() {
+      @Component({
+        imports: [SelectModule, PortalDirective],
+        template: `
+          <div
+            multiple
+            placeholder="Select cities"
+            q-select-root
+            [collection]="cityCollection"
+          >
+            <div aria-label="Test select" q-select-control>
+              <span q-select-value-text></span>
+              <button q-select-indicator></button>
+            </div>
+
+            <select q-select-hidden-select></select>
+
+            <ng-template qPortal>
+              <div q-select-positioner>
+                <div q-select-content>
+                  @for (item of cityCollection.items; track item) {
+                    <div q-select-item [item]="item">
+                      <span q-select-item-text>
+                        {{ cityCollection.stringifyItem(item) }}
+                      </span>
+                      <span q-select-item-indicator></span>
+                    </div>
+                  }
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        `,
+      })
+      class CompositeComponent {
+        cityCollection = selectCollection({items: cityItems})
+      }
+      return CompositeComponent
+    },
+    simple() {
+      @Component({
+        imports: [SelectModule],
+        template: `
+          <q-select
+            aria-label="Test select"
             multiple
             placeholder="Select cities"
             [collection]="cityCollection"
@@ -524,7 +542,7 @@ const testCases: MultiComponentTest[] = [
             [closeOnSelect]="false"
             [collection]="cityCollection"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -558,6 +576,7 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule],
         template: `
           <q-select
+            aria-label="Test select"
             placeholder="Select a city"
             [closeOnSelect]="false"
             [collection]="cityCollection"
@@ -593,7 +612,7 @@ const testCases: MultiComponentTest[] = [
             q-select-root
             [collection]="cityCollection"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -627,6 +646,7 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule],
         template: `
           <q-select
+            aria-label="Test select"
             deselectable
             placeholder="Select a city"
             [collection]="cityCollection"
@@ -666,7 +686,7 @@ const testCases: MultiComponentTest[] = [
             q-select-root
             [collection]="cityCollection"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -700,6 +720,7 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule],
         template: `
           <q-select
+            aria-label="Test select"
             disabled
             placeholder="Select a city"
             [collection]="cityCollection"
@@ -734,7 +755,7 @@ const testCases: MultiComponentTest[] = [
             readOnly
             [collection]="cityCollection"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -768,6 +789,7 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule],
         template: `
           <q-select
+            aria-label="Test select"
             placeholder="Select a city"
             readOnly
             [collection]="cityCollection"
@@ -802,7 +824,7 @@ const testCases: MultiComponentTest[] = [
             q-select-root
             [collection]="cityCollection"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
               <div q-select-error-indicator></div>
@@ -839,6 +861,7 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule],
         template: `
           <q-select
+            aria-label="Test select"
             errorText="Invalid selection"
             invalid
             placeholder="Select a city"
@@ -870,7 +893,7 @@ const testCases: MultiComponentTest[] = [
             [collection]="cityCollection"
             (openChanged)="openChangedHandler.emit($event)"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -905,6 +928,7 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule],
         template: `
           <q-select
+            aria-label="Test select"
             placeholder="Select a city"
             [collection]="cityCollection"
             (openChanged)="openChangedHandler.emit($event)"
@@ -947,7 +971,7 @@ const testCases: MultiComponentTest[] = [
             [collection]="cityCollection"
             (valueChanged)="valueChangedHandler.emit($event)"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -982,6 +1006,7 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule],
         template: `
           <q-select
+            aria-label="Test select"
             placeholder="Select a city"
             [collection]="cityCollection"
             (valueChanged)="valueChangedHandler.emit($event)"
@@ -1028,7 +1053,7 @@ const testCases: MultiComponentTest[] = [
             [collection]="cityCollection"
             (selected)="selectedHandler.emit($event)"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -1063,6 +1088,7 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule],
         template: `
           <q-select
+            aria-label="Test select"
             placeholder="Select a city"
             [collection]="cityCollection"
             (selected)="selectedHandler.emit($event)"
@@ -1104,7 +1130,7 @@ const testCases: MultiComponentTest[] = [
             [collection]="cityCollection"
             (highlightChanged)="highlightChangedHandler.emit($event)"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -1139,6 +1165,7 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule],
         template: `
           <q-select
+            aria-label="Test select"
             placeholder="Select a city"
             [collection]="cityCollection"
             (highlightChanged)="highlightChangedHandler.emit($event)"
@@ -1195,7 +1222,7 @@ const testCases: MultiComponentTest[] = [
             q-select-root
             [collection]="cityCollection"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -1228,7 +1255,11 @@ const testCases: MultiComponentTest[] = [
       @Component({
         imports: [SelectModule],
         template: `
-          <q-select placeholder="Select a city" [collection]="cityCollection" />
+          <q-select
+            aria-label="Test select"
+            placeholder="Select a city"
+            [collection]="cityCollection"
+          />
         `,
       })
       class SimpleComponent {
@@ -1275,72 +1306,7 @@ const testCases: MultiComponentTest[] = [
             q-select-root
             [collection]="cityCollection"
           >
-            <div q-select-control>
-              <span q-select-value-text></span>
-              <button q-select-indicator></button>
-            </div>
-
-            <select q-select-hidden-select></select>
-
-            <ng-template qPortal>
-              <div q-select-positioner>
-                <div q-select-content>
-                  @for (item of cityCollection.items; track item) {
-                    <div q-select-item [item]="item">
-                      <span q-select-item-text>
-                        {{ cityCollection.stringifyItem(item) }}
-                      </span>
-                      <span q-select-item-indicator></span>
-                    </div>
-                  }
-                </div>
-              </div>
-            </ng-template>
-          </div>
-        `,
-      })
-      class CompositeComponent {
-        cityCollection = selectCollection({items: cityItems})
-      }
-      return CompositeComponent
-    },
-    simple() {
-      @Component({
-        imports: [SelectModule],
-        template: `
-          <q-select placeholder="Select a city" [collection]="cityCollection" />
-        `,
-      })
-      class SimpleComponent {
-        cityCollection = selectCollection({items: cityItems})
-      }
-      return SimpleComponent
-    },
-    testCase(component) {
-      test(`closes on Escape key — ${component.name}`, async () => {
-        await render(component)
-
-        const trigger = page.getByRole("combobox")
-        await trigger.click()
-        expect(trigger).toHaveAttribute("aria-expanded", "true")
-
-        await userEvent.keyboard("{Escape}")
-        await expect.element(trigger).toHaveAttribute("aria-expanded", "false")
-      })
-    },
-  },
-  {
-    composite() {
-      @Component({
-        imports: [SelectModule, PortalDirective],
-        template: `
-          <div
-            loopFocus
-            placeholder="Select a city"
-            q-select-root
-            [collection]="cityCollection"
-          >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -1374,6 +1340,76 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule],
         template: `
           <q-select
+            aria-label="Test select"
+            placeholder="Select a city"
+            [collection]="cityCollection"
+          />
+        `,
+      })
+      class SimpleComponent {
+        cityCollection = selectCollection({items: cityItems})
+      }
+      return SimpleComponent
+    },
+    testCase(component) {
+      test(`closes on Escape key — ${component.name}`, async () => {
+        await render(component)
+
+        const trigger = page.getByRole("combobox")
+        await trigger.click()
+        expect(trigger).toHaveAttribute("aria-expanded", "true")
+
+        await userEvent.keyboard("{Escape}")
+        await expect.element(trigger).toHaveAttribute("aria-expanded", "false")
+      })
+    },
+  },
+  {
+    composite() {
+      @Component({
+        imports: [SelectModule, PortalDirective],
+        template: `
+          <div
+            loopFocus
+            placeholder="Select a city"
+            q-select-root
+            [collection]="cityCollection"
+          >
+            <div aria-label="Test select" q-select-control>
+              <span q-select-value-text></span>
+              <button q-select-indicator></button>
+            </div>
+
+            <select q-select-hidden-select></select>
+
+            <ng-template qPortal>
+              <div q-select-positioner>
+                <div q-select-content>
+                  @for (item of cityCollection.items; track item) {
+                    <div q-select-item [item]="item">
+                      <span q-select-item-text>
+                        {{ cityCollection.stringifyItem(item) }}
+                      </span>
+                      <span q-select-item-indicator></span>
+                    </div>
+                  }
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        `,
+      })
+      class CompositeComponent {
+        cityCollection = selectCollection({items: cityItems})
+      }
+      return CompositeComponent
+    },
+    simple() {
+      @Component({
+        imports: [SelectModule],
+        template: `
+          <q-select
+            aria-label="Test select"
             loopFocus
             placeholder="Select a city"
             [collection]="cityCollection"
@@ -1419,7 +1455,7 @@ const testCases: MultiComponentTest[] = [
             q-select-root
             [collection]="countryCollection"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -1457,6 +1493,7 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule],
         template: `
           <q-select
+            aria-label="Test select"
             placeholder="Select a country"
             [collection]="countryCollection"
           />
@@ -1496,7 +1533,7 @@ const testCases: MultiComponentTest[] = [
             [open]="isOpen()"
             (openChanged)="isOpen.set($event)"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -1531,6 +1568,7 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule],
         template: `
           <q-select
+            aria-label="Test select"
             placeholder="Select a city"
             [collection]="cityCollection"
             [open]="isOpen()"
@@ -1570,7 +1608,7 @@ const testCases: MultiComponentTest[] = [
             [collection]="cityCollection"
             [highlightedValue]="highlightedCity()"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -1605,6 +1643,7 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule],
         template: `
           <q-select
+            aria-label="Test select"
             placeholder="Select a city"
             [collection]="cityCollection"
             [highlightedValue]="highlightedCity()"
@@ -1643,7 +1682,7 @@ const testCases: MultiComponentTest[] = [
             [collection]="cityCollection"
             [defaultValue]="['Denver']"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -1677,6 +1716,7 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule],
         template: `
           <q-select
+            aria-label="Test select"
             placeholder="Select a city"
             [collection]="cityCollection"
             [defaultValue]="['Denver']"
@@ -1707,7 +1747,7 @@ const testCases: MultiComponentTest[] = [
             q-select-root
             [collection]="cityCollection"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-clear-trigger></button>
               <button q-select-indicator></button>
@@ -1741,7 +1781,11 @@ const testCases: MultiComponentTest[] = [
       @Component({
         imports: [SelectModule],
         template: `
-          <q-select placeholder="Select a city" [collection]="cityCollection" />
+          <q-select
+            aria-label="Test select"
+            placeholder="Select a city"
+            [collection]="cityCollection"
+          />
         `,
       })
       class SimpleComponent {
@@ -1779,7 +1823,7 @@ const testCases: MultiComponentTest[] = [
             q-select-root
             [collection]="cityCollection"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -1813,6 +1857,7 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule],
         template: `
           <q-select
+            aria-label="Test select"
             defaultOpen
             placeholder="Select a city"
             [collection]="cityCollection"
@@ -1847,7 +1892,7 @@ const testCases: MultiComponentTest[] = [
             q-select-root
             [collection]="cityCollection"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -1881,6 +1926,7 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule],
         template: `
           <q-select
+            aria-label="Test select"
             defaultHighlightedValue="Miami"
             placeholder="Select a city"
             [collection]="cityCollection"
@@ -1918,7 +1964,7 @@ const testCases: MultiComponentTest[] = [
             [collection]="cityCollection"
             (focusOutside)="focusOutsideHandler.emit($event)"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -1954,6 +2000,7 @@ const testCases: MultiComponentTest[] = [
         template: `
           <button autofocus>focus target</button>
           <q-select
+            aria-label="Test select"
             placeholder="Select a city"
             [collection]="cityCollection"
             (focusOutside)="focusOutsideHandler.emit($event)"
@@ -1995,7 +2042,7 @@ const testCases: MultiComponentTest[] = [
             [collection]="cityCollection"
             (interactOutside)="interactOutsideHandler.emit($event)"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -2031,6 +2078,7 @@ const testCases: MultiComponentTest[] = [
         template: `
           <button data-test-id="outside-button">Outside</button>
           <q-select
+            aria-label="Test select"
             placeholder="Select a city"
             [collection]="cityCollection"
             (interactOutside)="interactOutsideHandler.emit($event)"
@@ -2072,7 +2120,7 @@ const testCases: MultiComponentTest[] = [
             q-select-root
             [collection]="cityCollection"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -2106,6 +2154,7 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule],
         template: `
           <q-select
+            aria-label="Test select"
             dir="rtl"
             placeholder="Select a city"
             [collection]="cityCollection"
@@ -2171,6 +2220,7 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule],
         template: `
           <q-select
+            aria-label="Test select"
             label="Choose a city"
             placeholder="Select a city"
             [collection]="cityCollection"

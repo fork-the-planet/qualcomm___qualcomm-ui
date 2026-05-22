@@ -43,7 +43,7 @@ const testCases: MultiComponentTest[] = [
             [collection]="cityCollection"
             [formControl]="formControl"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -78,6 +78,7 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule, ReactiveFormsModule],
         template: `
           <q-select
+            aria-label="Test select"
             placeholder="Select a city"
             [collection]="cityCollection"
             [formControl]="formControl"
@@ -116,7 +117,7 @@ const testCases: MultiComponentTest[] = [
             [collection]="cityCollection"
             [formControl]="formControl"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -151,6 +152,7 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule, ReactiveFormsModule],
         template: `
           <q-select
+            aria-label="Test select"
             multiple
             placeholder="Select cities"
             [collection]="cityCollection"
@@ -192,7 +194,7 @@ const testCases: MultiComponentTest[] = [
             [collection]="cityCollection"
             [formControl]="formControl"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -233,6 +235,7 @@ const testCases: MultiComponentTest[] = [
         template: `
           <button data-test-id="focus-target">Focus Target</button>
           <q-select
+            aria-label="Test select"
             errorText="Selection is required"
             placeholder="Select a city"
             [collection]="cityCollection"
@@ -281,7 +284,7 @@ const testCases: MultiComponentTest[] = [
             [collection]="cityCollection"
             [formControl]="formControl"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -316,6 +319,7 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule, ReactiveFormsModule],
         template: `
           <q-select
+            aria-label="Test select"
             placeholder="Select a city"
             [collection]="cityCollection"
             [formControl]="formControl"
@@ -351,7 +355,7 @@ const testCases: MultiComponentTest[] = [
             [collection]="cityCollection"
             [formControl]="formControl"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -386,6 +390,7 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule, ReactiveFormsModule],
         template: `
           <q-select
+            aria-label="Test select"
             placeholder="Select a city"
             [collection]="cityCollection"
             [formControl]="formControl"
@@ -424,7 +429,7 @@ const testCases: MultiComponentTest[] = [
             [collection]="countryCollection"
             [formControl]="formControl"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -463,6 +468,7 @@ const testCases: MultiComponentTest[] = [
         imports: [SelectModule, ReactiveFormsModule],
         template: `
           <q-select
+            aria-label="Test select"
             placeholder="Select a country"
             [collection]="countryCollection"
             [formControl]="formControl"
@@ -506,7 +512,7 @@ const testCases: MultiComponentTest[] = [
             [collection]="cityCollection"
             [(ngModel)]="selectedCity"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -542,6 +548,7 @@ const testCases: MultiComponentTest[] = [
         template: `
           <output class="mb-4 block">{{ selectedCity() }}</output>
           <q-select
+            aria-label="Test select"
             name="city"
             placeholder="Select a city"
             [collection]="cityCollection"
@@ -591,7 +598,7 @@ const testCases: MultiComponentTest[] = [
             [collection]="cityCollection"
             [(ngModel)]="selectedCities"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -627,6 +634,7 @@ const testCases: MultiComponentTest[] = [
         template: `
           <output class="mb-4 block">{{ selectedCities().join(", ") }}</output>
           <q-select
+            aria-label="Test select"
             multiple
             name="cities"
             placeholder="Select cities"
@@ -673,7 +681,7 @@ const testCases: MultiComponentTest[] = [
             [collection]="cityCollection"
             [(ngModel)]="selectedCity"
           >
-            <div q-select-control>
+            <div aria-label="Test select" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>
@@ -711,6 +719,7 @@ const testCases: MultiComponentTest[] = [
         template: `
           <button data-test-id="focus-target">Focus Target</button>
           <q-select
+            aria-label="Test select"
             errorText="Selection is required"
             name="city"
             placeholder="Select a city"

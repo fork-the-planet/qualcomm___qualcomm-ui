@@ -8,6 +8,11 @@ import {
   avatarImageAlt,
   inputLabelAssociation,
   interactiveCardElementNesting,
+  preferAlertBannerButton,
+  preferCardActions,
+  preferHeaderBarActions,
+  preferMenuTriggerButtons,
+  preferSelectItemCheckbox,
 } from "./rules"
 
 export const rules = {
@@ -15,6 +20,11 @@ export const rules = {
   "avatar-image-alt": avatarImageAlt,
   "input-label-association": inputLabelAssociation,
   "interactive-card-element-nesting": interactiveCardElementNesting,
+  "prefer-alert-banner-button": preferAlertBannerButton,
+  "prefer-card-actions": preferCardActions,
+  "prefer-header-bar-actions": preferHeaderBarActions,
+  "prefer-menu-trigger-buttons": preferMenuTriggerButtons,
+  "prefer-select-item-checkbox": preferSelectItemCheckbox,
 }
 
 export const plugin: ESLint.Plugin = {
@@ -33,6 +43,11 @@ export const config: Linter.Config[] = [
       "@qualcomm-ui/react/avatar-image-alt": "error",
       "@qualcomm-ui/react/input-label-association": "error",
       "@qualcomm-ui/react/interactive-card-element-nesting": "error",
+      "@qualcomm-ui/react/prefer-alert-banner-button": "error",
+      "@qualcomm-ui/react/prefer-card-actions": "error",
+      "@qualcomm-ui/react/prefer-header-bar-actions": "error",
+      "@qualcomm-ui/react/prefer-menu-trigger-buttons": "error",
+      "@qualcomm-ui/react/prefer-select-item-checkbox": "error",
     },
   },
 ]

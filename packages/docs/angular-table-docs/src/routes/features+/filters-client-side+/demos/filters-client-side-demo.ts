@@ -40,6 +40,7 @@ import {TableColumnFilter} from "./table-column-filter"
     <div q-table-root>
       <div q-table-action-bar>
         <q-text-input
+          aria-label="Search columns"
           class="w-56"
           placeholder="Search every column..."
           size="sm"

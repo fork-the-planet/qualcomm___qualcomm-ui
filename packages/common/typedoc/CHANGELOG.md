@@ -1,5 +1,13 @@
 # @qualcomm-ui/typedoc Changelog
 
+## 1.1.2
+
+May 22nd, 2026
+
+### Miscellaneous Chores
+
+- update pnpm and test dependencies ([b175d6a](https://github.com/qualcomm/qualcomm-ui/commit/b175d6a))
+
 ## 1.1.1
 
 Apr 23rd, 2026

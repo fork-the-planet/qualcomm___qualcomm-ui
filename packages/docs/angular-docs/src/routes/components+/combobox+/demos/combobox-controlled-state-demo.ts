@@ -13,7 +13,7 @@ import {countries} from "./country-list"
   template: `
     <!-- preview -->
     <q-combobox
-      ariaLabel="Country"
+      aria-label="Country"
       class="w-48"
       placeholder="Select a country"
       [collection]="listCollection.collection()"

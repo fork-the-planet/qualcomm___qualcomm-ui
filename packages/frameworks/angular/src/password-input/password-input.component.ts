@@ -18,6 +18,10 @@ import type {Booleanish} from "@qualcomm-ui/utils/coercion"
 import {PasswordInputRootDirective} from "./password-input-root.directive"
 
 @Component({
+  host: {
+    "[attr.aria-label]": "undefined",
+    "[attr.aria-labelledby]": "undefined",
+  },
   providers: [
     provideQdsInputContext(),
     providePasswordInputContext(),
@@ -40,7 +44,12 @@ import {PasswordInputRootDirective} from "./password-input-root.directive"
       }
     </ng-content>
     <div q-password-input-input-group>
-      <input q-password-input-input [placeholder]="placeholder()" />
+      <input
+        q-password-input-input
+        [aria-label]="ariaLabel()"
+        [aria-labelledby]="ariaLabelledby()"
+        [placeholder]="placeholder()"
+      />
 
       <ng-content select="[q-password-input-clear-trigger]">
         @if (clearable()) {
@@ -74,6 +83,25 @@ import {PasswordInputRootDirective} from "./password-input-root.directive"
   `,
 })
 export class PasswordInputComponent extends PasswordInputRootDirective {
+  /**
+   * ARIA label applied to the input element. Use this if you omit the {@link
+   * label}
+   *
+   * @since 2.9.0
+   */
+  readonly ariaLabel = input<string | undefined>(undefined, {
+    alias: "aria-label",
+  })
+
+  /**
+   * ID reference for an external label applied to the input element.
+   *
+   * @since 2.9.0
+   */
+  readonly ariaLabelledby = input<string | undefined>(undefined, {
+    alias: "aria-labelledby",
+  })
+
   /**
    * When `true`, renders a clear button that resets the input value on click.
    * The button only appears when the input has a value.

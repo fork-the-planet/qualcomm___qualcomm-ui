@@ -12,7 +12,7 @@ const cityList = ["San Diego", "Dallas", "Denver"]
   template: `
     <div class="flex flex-col items-center gap-4">
       <q-combobox
-        ariaLabel="City"
+        aria-label="City"
         class="w-40"
         placeholder="sm"
         size="sm"
@@ -20,7 +20,7 @@ const cityList = ["San Diego", "Dallas", "Denver"]
         (inputValueChanged)="onInputChange($event)"
       />
       <q-combobox
-        ariaLabel="City"
+        aria-label="City"
         class="w-48"
         placeholder="md"
         size="md"
@@ -28,7 +28,7 @@ const cityList = ["San Diego", "Dallas", "Denver"]
         (inputValueChanged)="onInputChange($event)"
       />
       <q-combobox
-        ariaLabel="City"
+        aria-label="City"
         class="w-56"
         placeholder="lg"
         size="lg"

@@ -817,6 +817,10 @@ export interface ComboboxInputBindings extends Part<"input"> {
   "aria-controls": string
   "aria-expanded": BooleanAriaAttr
   "aria-invalid": BooleanAriaAttr
+  /**
+   * @since 1.11.0
+   */
+  "aria-labelledby": string | undefined
   autoCapitalize: "none"
   autoComplete: "off"
   autoCorrect: "off"

@@ -1,5 +1,24 @@
 # @qualcomm-ui/eslint-plugin-react Changelog
 
+## 1.2.0
+
+May 22nd, 2026
+
+### Features
+
+- add react component usage lint rules ([5f1bb4c](https://github.com/qualcomm/qualcomm-ui/commit/5f1bb4c))
+
+### Miscellaneous Chores
+
+- update pnpm and test dependencies ([b175d6a](https://github.com/qualcomm/qualcomm-ui/commit/b175d6a))
+
+## Unreleased
+
+### Features
+
+- [eslint-plugin]: add contextual component usage rules for AlertBanner, Card,
+  HeaderBar, Menu, and Select.
+
 ## 1.1.0
 
 Apr 16th, 2026
