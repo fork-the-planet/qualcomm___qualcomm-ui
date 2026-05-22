@@ -237,6 +237,7 @@ export function createNumberInputApi(
       return normalize.input({
         ...parts.input,
         "aria-invalid": booleanAriaAttr(invalid),
+        "aria-labelledby": domIds.label(scope),
         "aria-roledescription": "numberfield",
         "aria-valuemax": prop("max"),
         "aria-valuemin": prop("min"),

@@ -521,6 +521,10 @@ export interface NumberInputValueTextBindings extends Part<"valueText"> {
 
 export interface NumberInputInputBindings extends Part<"input"> {
   "aria-invalid": BooleanAriaAttr
+  /**
+   * @since next-release
+   */
+  "aria-labelledby": string | undefined
   "aria-roledescription": "numberfield"
   "aria-valuemax": number
   "aria-valuemin": number
