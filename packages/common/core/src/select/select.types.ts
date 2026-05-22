@@ -503,7 +503,7 @@ export interface SelectControlBindings extends Part<"control"> {
   "aria-expanded": BooleanAriaAttr
   "aria-haspopup": "listbox"
   "aria-invalid": boolean | undefined
-  "aria-labelledby": string
+  "aria-labelledby": string | undefined
   "data-disabled": BooleanDataAttr
   "data-invalid": BooleanDataAttr
   "data-placeholder-shown": BooleanDataAttr
