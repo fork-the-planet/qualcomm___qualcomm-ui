@@ -99,19 +99,6 @@
   position: sticky;
   top: var(--qui-header-height);
 
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--color-border-neutral-02);
-    border-radius: 3px;
-  }
-
   @media screen and (min-width: 950px) {
     appearance: auto;
     display: block;
@@ -324,7 +311,7 @@
   .indicator {
     align-items: center;
     border: solid 1px var(--color-border-neutral-02);
-    border-radius: 4px;
+    border-radius: var(--border-radius-md);
     display: flex;
     font-size: 12px;
     gap: 2px;
@@ -348,7 +335,7 @@ pre.qui-docs-code {
 
   * code {
     background: var(--qui-docs-code-background);
-    border-radius: 3px;
+    border-radius: var(--border-radius-sm);
     color: var(--qui-docs-code-color);
     font-family: var(--q-font-mono), monospace;
     font-size: 14px !important;
@@ -362,7 +349,7 @@ pre.qui-docs-code {
 
 .qui-docs-code {
   background: var(--qui-docs-code-background);
-  border-radius: 3px;
+  border-radius: var(--border-radius-sm);
   color: var(--qui-docs-code-color);
   font: var(--font-static-code-sm-default);
   font-size: 14px;

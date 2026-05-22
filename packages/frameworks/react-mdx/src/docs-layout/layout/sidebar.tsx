@@ -213,7 +213,11 @@ export function Sidebar({
   }, [scrollIntoView])
 
   const mergedProps = mergeProps(
-    {className: "qui-docs-sidebar__root", "data-nav-density": navDensity, ref},
+    {
+      className: "qui-docs-sidebar__root qui-docs__mdx-scrollbar",
+      "data-nav-density": navDensity,
+      ref,
+    },
     props,
   )
 

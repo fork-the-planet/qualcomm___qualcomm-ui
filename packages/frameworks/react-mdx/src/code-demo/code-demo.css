@@ -21,7 +21,7 @@
 
 .qui-docs-demo-container__root {
   border: solid 1px var(--color-border-neutral-01);
-  border-radius: 4px;
+  border-radius: var(--border-radius-md);
   box-sizing: border-box;
   container-name: qui-docs-demo-container;
   container-type: inline-size;
@@ -179,7 +179,7 @@ pre.shiki {
 
 pre.shiki.mdx {
   border: solid 1px var(--color-border-neutral-01);
-  border-radius: 4px;
+  border-radius: var(--border-radius-md);
 }
 
 .qui-demo-runner__wrapper {

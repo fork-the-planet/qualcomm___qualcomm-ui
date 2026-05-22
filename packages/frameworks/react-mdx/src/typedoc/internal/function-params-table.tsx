@@ -90,7 +90,7 @@ export function FunctionParamsTable({
   return (
     <div className="typedoc-props__table-wrapper" data-function-table>
       <Table.Root size="sm">
-        <Table.ScrollContainer>
+        <Table.ScrollContainer className="qui-docs__mdx-scrollbar">
           <Table.Table>
             <Table.Header>
               {table.getHeaderGroups().map((headerGroup) => (
