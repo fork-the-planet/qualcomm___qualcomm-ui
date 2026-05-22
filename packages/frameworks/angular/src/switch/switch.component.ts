@@ -57,7 +57,7 @@ export class SwitchComponent extends SwitchRootDirective {
    * Accessible label applied to the generated hidden input when no visible label
    * is provided.
    *
-   * @since next-release
+   * @since 2.9.0
    */
   readonly ariaLabel = input<string | undefined>(undefined, {
     alias: "aria-label",
@@ -66,7 +66,7 @@ export class SwitchComponent extends SwitchRootDirective {
   /**
    * ID reference for an external label applied to the generated hidden input.
    *
-   * @since next-release
+   * @since 2.9.0
    */
   readonly ariaLabelledby = input<string | undefined>(undefined, {
     alias: "aria-labelledby",

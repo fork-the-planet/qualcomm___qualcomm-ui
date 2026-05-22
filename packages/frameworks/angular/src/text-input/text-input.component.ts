@@ -63,7 +63,7 @@ export class TextInputComponent extends TextInputRootDirective {
    * ARIA label applied to the input element. Use this if you omit the {@link
    * label}
    *
-   * @since next-release
+   * @since 2.9.0
    */
   readonly ariaLabel = input<string | undefined>(undefined, {
     alias: "aria-label",
@@ -72,7 +72,7 @@ export class TextInputComponent extends TextInputRootDirective {
   /**
    * ID reference for an external label applied to the input element.
    *
-   * @since next-release
+   * @since 2.9.0
    */
   readonly ariaLabelledby = input<string | undefined>(undefined, {
     alias: "aria-labelledby",

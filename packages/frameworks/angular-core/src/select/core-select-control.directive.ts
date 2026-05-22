@@ -19,7 +19,7 @@ export class CoreSelectControlDirective implements OnInit {
   /**
    * ARIA label applied to the control. Use this instead of `[attr.aria-label]`
    *
-   * @since next-release
+   * @since 2.4.0
    */
   readonly ariaLabel = input<string | undefined>(undefined, {
     alias: "aria-label",
@@ -28,7 +28,7 @@ export class CoreSelectControlDirective implements OnInit {
   /**
    * ID reference for an external label applied to the control.
    *
-   * @since next-release
+   * @since 2.4.0
    */
   readonly ariaLabelledby = input<string | undefined>(undefined, {
     alias: "aria-labelledby",

@@ -15,7 +15,7 @@ export class CoreNumberInputInputDirective implements OnInit {
   /**
    * ARIA label applied to the input.
    *
-   * @since next-release
+   * @since 2.4.0
    */
   readonly ariaLabel = input<string | undefined>(undefined, {
     alias: "aria-label",
@@ -24,7 +24,7 @@ export class CoreNumberInputInputDirective implements OnInit {
   /**
    * ID reference for an external label applied to the input.
    *
-   * @since next-release
+   * @since 2.4.0
    */
   readonly ariaLabelledby = input<string | undefined>(undefined, {
     alias: "aria-labelledby",

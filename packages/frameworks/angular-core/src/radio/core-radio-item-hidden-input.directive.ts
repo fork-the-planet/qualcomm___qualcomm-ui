@@ -23,7 +23,7 @@ export class CoreRadioItemHiddenInputDirective
   /**
    * ARIA label applied to the hidden input.
    *
-   * @since next-release
+   * @since 2.4.0
    */
   readonly ariaLabel = input<string | undefined>(undefined, {
     alias: "aria-label",
@@ -32,7 +32,7 @@ export class CoreRadioItemHiddenInputDirective
   /**
    * ID reference for an external item label applied to the hidden input.
    *
-   * @since next-release
+   * @since 2.4.0
    */
   readonly ariaLabelledby = input<string | undefined>(undefined, {
     alias: "aria-labelledby",

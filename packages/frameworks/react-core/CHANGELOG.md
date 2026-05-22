@@ -1,5 +1,14 @@
 # @qualcomm-ui/react-core Changelog
 
+## 1.5.1
+
+May 22nd, 2026
+
+### Miscellaneous Chores
+
+- update pnpm and test dependencies ([b175d6a](https://github.com/qualcomm/qualcomm-ui/commit/b175d6a))
+- **deps:** update dependencies [@qualcomm-ui/core]
+
 ## 1.5.0
 
 May 14th, 2026

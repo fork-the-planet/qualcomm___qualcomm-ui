@@ -1,5 +1,17 @@
 # @qualcomm-ui/eslint-plugin-react Changelog
 
+## 1.2.0
+
+May 22nd, 2026
+
+### Features
+
+- add react component usage lint rules ([5f1bb4c](https://github.com/qualcomm/qualcomm-ui/commit/5f1bb4c))
+
+### Miscellaneous Chores
+
+- update pnpm and test dependencies ([b175d6a](https://github.com/qualcomm/qualcomm-ui/commit/b175d6a))
+
 ## Unreleased
 
 ### Features

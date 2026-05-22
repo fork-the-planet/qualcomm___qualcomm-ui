@@ -1,5 +1,29 @@
 # @qualcomm-ui/angular-core Changelog
 
+## 2.4.0
+
+May 22nd, 2026
+
+### Features
+
+- [text-input]: support aria labels ([cc0b8b6](https://github.com/qualcomm/qualcomm-ui/commit/cc0b8b6))
+- [checkbox]: support aria labels ([c2e484c](https://github.com/qualcomm/qualcomm-ui/commit/c2e484c))
+- [password-input]: support aria labels ([3fb240c](https://github.com/qualcomm/qualcomm-ui/commit/3fb240c))
+- [number-input]: support aria labels ([cf182d6](https://github.com/qualcomm/qualcomm-ui/commit/cf182d6))
+- [switch]: support aria labels ([0eb172a](https://github.com/qualcomm/qualcomm-ui/commit/0eb172a))
+- [radio]: support aria labels ([b603e42](https://github.com/qualcomm/qualcomm-ui/commit/b603e42))
+- [select]: support aria labels ([e6f41e1](https://github.com/qualcomm/qualcomm-ui/commit/e6f41e1))
+- [combobox]: support aria labels ([cfaa97b](https://github.com/qualcomm/qualcomm-ui/commit/cfaa97b))
+
+### Bug Fixes
+
+- [angular-core/use-id]: hash collision ([dd06a6e](https://github.com/qualcomm/qualcomm-ui/commit/dd06a6e))
+
+### Miscellaneous Chores
+
+- update pnpm and test dependencies ([b175d6a](https://github.com/qualcomm/qualcomm-ui/commit/b175d6a))
+- **deps:** update dependencies [@qualcomm-ui/core]
+
 ## 2.3.0
 
 May 14th, 2026
