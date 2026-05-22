@@ -16,14 +16,40 @@ export class CoreSwitchHiddenInputDirective implements OnInit {
    */
   readonly id = input<string>()
 
+  /**
+   * ARIA label applied to the hidden input.
+   *
+   * @since next-release
+   */
+  readonly ariaLabel = input<string | undefined>(undefined, {
+    alias: "aria-label",
+  })
+
+  /**
+   * ID reference for an external label applied to the hidden input.
+   *
+   * @since next-release
+   */
+  readonly ariaLabelledby = input<string | undefined>(undefined, {
+    alias: "aria-labelledby",
+  })
+
   protected readonly switchContext = useSwitchContext()
 
-  protected readonly trackBindings = useTrackBindings(() =>
-    this.switchContext().getHiddenInputBindings({
+  protected readonly trackBindings = useTrackBindings(() => {
+    const bindings = this.switchContext().getHiddenInputBindings({
       id: this.hostId(),
       onDestroy: this.onDestroy,
-    }),
-  )
+    })
+    const ariaLabel = this.ariaLabel() ?? undefined
+    const ariaLabelledby = this.ariaLabelledby() ?? bindings["aria-labelledby"]
+
+    return {
+      ...bindings,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledby,
+    }
+  })
 
   private readonly hostId = computed(() => useId(this, this.id()))
 
