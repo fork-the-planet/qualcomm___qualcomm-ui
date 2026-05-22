@@ -1,5 +1,12 @@
 # @qualcomm-ui/eslint-plugin-react Changelog
 
+## Unreleased
+
+### Features
+
+- [eslint-plugin]: add contextual component usage rules for AlertBanner, Card,
+  HeaderBar, Menu, and Select.
+
 ## 1.1.0
 
 Apr 16th, 2026

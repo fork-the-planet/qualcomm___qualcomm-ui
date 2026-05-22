@@ -466,13 +466,13 @@ export const inputLabelAssociation = createRule<[], MessageIds>({
   meta: {
     docs: {
       description:
-        "Enforce that form input components have proper label association for accessibility.",
+        "Enforce that form input components have proper label association for accessibility",
     },
     messages: {
       missingLabel:
-        "{{componentName}} must have a non-empty label prop or aria-label/aria-labelledby attribute.",
+        "{{componentName}} must have a non-empty label prop or aria-label/aria-labelledby attribute",
       missingLabelChild:
-        "{{componentName}}.Root must have a non-empty {{componentName}}.Label child or aria-label/aria-labelledby on {{componentName}}.{{compositeElementName}} for accessibility.",
+        "{{componentName}}.Root must have a non-empty {{componentName}}.Label child or aria-label/aria-labelledby on {{componentName}}.{{compositeElementName}} for accessibility",
     },
     schema: [],
     type: "problem",
