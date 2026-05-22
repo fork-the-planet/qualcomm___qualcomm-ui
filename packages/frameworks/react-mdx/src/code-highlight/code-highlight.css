@@ -265,5 +265,9 @@ pre.shiki.has-focused {
         background: var(--color-border-neutral-03);
       }
     }
+
+    &::-webkit-scrollbar-corner {
+      background: transparent;
+    }
   }
 }
