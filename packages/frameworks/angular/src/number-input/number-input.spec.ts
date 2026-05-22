@@ -84,6 +84,29 @@ const testCases: MultiComponentTest[] = [
     },
   },
   {
+    simple() {
+      @Component({
+        imports: [NumberInputModule],
+        template: `
+          <q-number-input [aria-label]="inputLabel" />
+        `,
+      })
+      class SimpleComponent {
+        protected readonly inputLabel = "Amount"
+      }
+      return SimpleComponent
+    },
+    testCase(component) {
+      test(`simple component applies aria-label to the input — ${component.name}`, async () => {
+        await render(component)
+
+        await expect
+          .element(page.getByRole("spinbutton", {name: "Amount"}))
+          .toBeVisible()
+      })
+    },
+  },
+  {
     composite() {
       @Component({
         imports: [NumberInputModule],

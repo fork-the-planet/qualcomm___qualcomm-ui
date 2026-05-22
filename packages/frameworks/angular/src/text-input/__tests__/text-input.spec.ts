@@ -80,6 +80,27 @@ const testCases: MultiComponentTest[] = [
       })
     },
   },
+  {
+    simple() {
+      @Component({
+        imports: [TextInputModule],
+        template: `
+          <q-text-input aria-label="Search query" />
+        `,
+      })
+      class SimpleComponent {}
+      return SimpleComponent
+    },
+    testCase(component) {
+      test(`simple component applies aria-label to the input — ${component.name}`, async () => {
+        await render(component)
+
+        await expect
+          .element(page.getByRole("textbox", {name: "Search query"}))
+          .toBeVisible()
+      })
+    },
+  },
   () => {
     const errorText = "Email is required"
     return {

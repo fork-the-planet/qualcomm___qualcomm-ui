@@ -1794,4 +1794,133 @@ const testCases: MultiComponentTest[] = [
 
 describe("radio", () => {
   runTests(testCases)
+
+  test("simple component forwards static aria-label to the generated input only", async () => {
+    @Component({
+      imports: [RadioModule],
+      template: `
+        <fieldset name="notifications" q-radio-group>
+          <div q-radio-group-items>
+            <label
+              aria-label="Email notifications"
+              q-radio
+              value="email"
+            ></label>
+            <label label="SMS notifications" q-radio value="sms"></label>
+          </div>
+        </fieldset>
+      `,
+    })
+    class SimpleAriaLabelComponent {}
+
+    const {container} = await render(SimpleAriaLabelComponent)
+
+    await expect
+      .element(page.getByRole("radio", {name: "Email notifications"}))
+      .toBeVisible()
+    expect(container.querySelector("label[q-radio]")).not.toHaveAttribute(
+      "aria-label",
+    )
+  })
+
+  test("simple component forwards static aria-labelledby to the generated input only", async () => {
+    @Component({
+      imports: [RadioModule],
+      template: `
+        <span id="external-label">External label</span>
+        <fieldset name="notifications" q-radio-group>
+          <div q-radio-group-items>
+            <label
+              aria-labelledby="external-label"
+              label="Internal label"
+              q-radio
+              value="email"
+            ></label>
+          </div>
+        </fieldset>
+      `,
+    })
+    class SimpleAriaLabelledbyComponent {}
+
+    const {container} = await render(SimpleAriaLabelledbyComponent)
+
+    const radio = page.getByRole("radio", {name: "External label"})
+    await expect.element(radio).not.toHaveAttribute("aria-label")
+    await expect
+      .element(radio)
+      .toHaveAttribute("aria-labelledby", "external-label")
+    expect(container.querySelector("label[q-radio]")).not.toHaveAttribute(
+      "aria-labelledby",
+    )
+  })
+
+  test("simple component forwards dynamic aria-label to the generated input", async () => {
+    @Component({
+      imports: [RadioModule],
+      template: `
+        <fieldset name="notifications" q-radio-group>
+          <div q-radio-group-items>
+            <label q-radio value="email" [aria-label]="radioLabel()"></label>
+          </div>
+        </fieldset>
+        <button (click)="radioLabel.set('Updated label')">Update</button>
+      `,
+    })
+    class DynamicSimpleAriaLabelComponent {
+      readonly radioLabel = signal("Initial label")
+    }
+
+    await render(DynamicSimpleAriaLabelComponent)
+
+    await expect
+      .element(page.getByRole("radio", {name: "Initial label"}))
+      .toBeVisible()
+
+    await userEvent.click(page.getByRole("button", {name: "Update"}))
+
+    await expect
+      .element(page.getByRole("radio", {name: "Updated label"}))
+      .toBeVisible()
+  })
+
+  test("hidden input forwards static and dynamic native aria labels", async () => {
+    @Component({
+      imports: [RadioModule],
+      template: `
+        <fieldset name="notifications" q-radio-group>
+          <div q-radio-group-items>
+            <label q-radio value="email">
+              <input aria-label="Static label" q-radio-hidden-input />
+              <div q-radio-control></div>
+            </label>
+            <label q-radio value="sms">
+              <input q-radio-hidden-input [aria-label]="dynamicLabel()" />
+              <div q-radio-control></div>
+            </label>
+          </div>
+        </fieldset>
+        <button (click)="dynamicLabel.set('Dynamic label updated')">
+          Update
+        </button>
+      `,
+    })
+    class HiddenInputAriaLabelComponent {
+      readonly dynamicLabel = signal("Dynamic label")
+    }
+
+    await render(HiddenInputAriaLabelComponent)
+
+    await expect
+      .element(page.getByRole("radio", {name: "Static label"}))
+      .toBeVisible()
+    await expect
+      .element(page.getByRole("radio", {name: "Dynamic label"}))
+      .toBeVisible()
+
+    await userEvent.click(page.getByRole("button", {name: "Update"}))
+
+    await expect
+      .element(page.getByRole("radio", {name: "Dynamic label updated"}))
+      .toBeVisible()
+  })
 })

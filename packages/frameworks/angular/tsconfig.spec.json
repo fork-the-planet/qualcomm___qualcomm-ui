@@ -5,7 +5,10 @@
     "composite": true,
     "baseUrl": "./",
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDirs": [
+      "./src",
+      "./test"
+    ],
     "emitDeclarationOnly": false,
     "strictPropertyInitialization": false,
     "moduleResolution": "bundler",
