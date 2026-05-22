@@ -13,6 +13,7 @@ const createRule = ESLintUtils.RuleCreator(
 const DIRECTIVES_REQUIRING_LABEL = [
   "q-icon-button",
   "q-inline-icon-button",
+  "q-header-bar-action-icon-button",
 ] as const
 
 type MessageIds = "missingLabel"
@@ -57,15 +58,14 @@ export const accessibleName = createRule<[], MessageIds>({
       },
     }
   },
-  defaultOptions: [],
   meta: {
     docs: {
       description:
-        "Enforce that certain components have an aria-label or aria-labelledby attribute for accessibility.",
+        "Enforce that certain components have appropriate accessibility attributes",
     },
     messages: {
       missingLabel:
-        "{{componentName}} must have an aria-label or aria-labelledby attribute for accessibility.",
+        "{{componentName}} must have an aria-label or aria-labelledby attribute for accessibility",
     },
     schema: [],
     type: "problem",

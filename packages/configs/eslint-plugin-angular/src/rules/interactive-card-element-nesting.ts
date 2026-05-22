@@ -153,15 +153,14 @@ export const interactiveCardElementNesting = createRule<[], MessageIds>({
       },
     }
   },
-  defaultOptions: [],
   meta: {
     docs: {
       description:
-        "Disallow interactive elements nested inside q-card with the interactive attribute.",
+        "Disallow interactive elements nested inside q-card with the interactive attribute",
     },
     messages: {
       noInteractiveChildren:
-        "{{elementName}} is an interactive element and should not be nested inside an interactive Card. This violates web standards. You should not nest interactive elements.",
+        "{{elementName}} is an interactive element and should not be nested inside an interactive Card. This violates web standards. You should not nest interactive elements",
     },
     schema: [],
     type: "problem",

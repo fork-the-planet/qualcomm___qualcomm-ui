@@ -38,6 +38,10 @@ ruleTester.run("accessible-name", accessibleName, {
       code: `<button q-icon-button (click)="handleClick()"></button>`,
       errors: [{messageId: "missingLabel"}],
     },
+    {
+      code: `<button q-header-bar-action-icon-button></button>`,
+      errors: [{messageId: "missingLabel"}],
+    },
   ],
   valid: [
     {
@@ -57,6 +61,9 @@ ruleTester.run("accessible-name", accessibleName, {
     },
     {
       code: `<button q-icon-button [attr.aria-labelledby]="labelId"></button>`,
+    },
+    {
+      code: `<button q-header-bar-action-icon-button aria-label="Settings"></button>`,
     },
     {
       code: `<button q-button>Click me</button>`,
