@@ -1,0 +1,75 @@
+// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+// SPDX-License-Identifier: BSD-3-Clause-Clear
+
+import {defineConfig} from "oxfmt"
+
+export default defineConfig({
+  arrowParens: "always",
+  bracketSameLine: false,
+  bracketSpacing: false,
+  embeddedLanguageFormatting: "auto",
+  endOfLine: "lf",
+  htmlWhitespaceSensitivity: "css",
+  insertFinalNewline: true,
+  jsdoc: {
+    addDefaultToDescription: false,
+    bracketSpacing: false,
+    capitalizeDescriptions: false,
+    commentLineStrategy: "keep",
+    descriptionTag: false,
+    descriptionWithDot: false,
+    keepUnparsableExampleIndent: true,
+    lineWrappingStyle: "balance",
+    preferCodeFences: true,
+    separateReturnsFromParam: false,
+    separateTagGroups: false,
+  },
+  jsxSingleQuote: false,
+  objectWrap: "preserve",
+  printWidth: 80,
+  proseWrap: "preserve",
+  quoteProps: "as-needed",
+  semi: false,
+  singleAttributePerLine: false,
+  singleQuote: false,
+  sortImports: {
+    customGroups: [
+      {
+        elementNamePattern: ["react", "react-dom", "react-dom/*"],
+        groupName: "react",
+        selector: "external",
+      },
+      {
+        elementNamePattern: ["@qualcomm-ui/**"],
+        groupName: "qualcomm-ui",
+        selector: "external",
+      },
+    ],
+    groups: [
+      "react",
+      {newlinesBetween: true},
+      ["builtin", "external"],
+      {newlinesBetween: true},
+      "qualcomm-ui",
+      "internal",
+      "parent",
+      ["sibling", "index"],
+      "unknown",
+      "style",
+      "side_effect_style",
+    ],
+    ignoreCase: true,
+    internalPattern: ["~"],
+    newlinesBetween: true,
+    order: "asc",
+    sortSideEffects: false,
+  },
+  sortPackageJson: {
+    sortScripts: false,
+  },
+  sortTailwindcss: true,
+  tabWidth: 2,
+  trailingComma: "all",
+  useTabs: false,
+  vueIndentScriptAndStyle: false,
+})

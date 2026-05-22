@@ -22,7 +22,7 @@ Apr 19th, 2026
 
 ### Miscellaneous Chores
 
-- upgrade prettier and eslint dependenies, fix resulting formatting issues ([332185a](https://github.com/qualcomm/qualcomm-ui/commit/332185a))
+- upgrade prettier and eslint dependencies, fix resulting formatting issues ([332185a](https://github.com/qualcomm/qualcomm-ui/commit/332185a))
 
 ## 1.1.0
 

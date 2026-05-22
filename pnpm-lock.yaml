@@ -1051,9 +1051,6 @@ importers:
       eslint:
         specifier: '>=9.37.0'
         version: 9.39.1(jiti@2.6.1)
-      typescript:
-        specifier: '>=5.9.3'
-        version: 5.9.3
       typescript-eslint:
         specifier: '>=8.31.1'
         version: 8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)
@@ -1064,6 +1061,18 @@ importers:
       '@qualcomm-ui/cli':
         specifier: 'catalog:'
         version: 1.0.6
+      '@qualcomm-ui/esbuild':
+        specifier: 'catalog:'
+        version: 1.0.5
+      '@qualcomm-ui/tsconfig':
+        specifier: 'catalog:'
+        version: 2.0.0(typescript@5.9.3)
+      cross-env:
+        specifier: ^10.1.0
+        version: 10.1.0
+      esbuild:
+        specifier: 'catalog:'
+        version: 0.27.3
       eslint-mdx:
         specifier: ^3.7.0
         version: 3.7.0(eslint@9.39.1(jiti@2.6.1))
@@ -1073,6 +1082,9 @@ importers:
       eslint-plugin-react:
         specifier: ^7.37.5
         version: 7.37.5(eslint@9.39.1(jiti@2.6.1))
+      npm-run-all2:
+        specifier: 'catalog:'
+        version: 8.0.4
       oxfmt:
         specifier: ^0.48.0
         version: 0.48.0
@@ -1109,6 +1121,15 @@ importers:
       remark-lint-unordered-list-marker-style:
         specifier: ^4.0.1
         version: 4.0.1
+      shx:
+        specifier: 'catalog:'
+        version: 0.4.0
+      tsx:
+        specifier: 'catalog:'
+        version: 4.21.0
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
       unified:
         specifier: 'catalog:'
         version: 11.0.5
