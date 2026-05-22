@@ -47,12 +47,12 @@ Build with the composite API for granular control. This API requires you to prov
 a11y, screen reader, labelless, hidden label
 :::
 
-The Select's label is automatically associated with the input element for accessibility. If you omit the label, you should provide the [aria-label](./#aria-label) prop to give your select an accessible name.
+The Select's label is automatically associated with the control for accessibility. If you omit the label, give the control an accessible name with [aria-label](./#aria-label) or [aria-labelledby](./#aria-labelledby).
 
 <QdsDemo name="SelectAriaLabelDemo" />
 
 > [!note]
-> If you're using the composite API, provide the [`aria-label`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-label) attribute to the `q-select-trigger` element instead.
+> Use `aria-label` or `aria-labelledby` on the simple `<q-select>` to forward an accessible name to the internal control. The `q-select` host removes those attributes after forwarding them. If you use the composite API, provide `aria-label` or `aria-labelledby` on the `q-select-control` element. For dynamic label references, use `[aria-labelledby]` instead of `[attr.aria-labelledby]` so the control can treat the value as a consumer-provided override.
 
 ### Content Width
 
@@ -239,7 +239,7 @@ The [disabled](./#disabled), [invalid](./#invalid), and [required](./#required-1
   parts={[
     "root",
     "label",
-    {name: "control", link: "#q-select-trigger"},
+    {name: "control", link: "#q-select-control"},
     "value-text",
     "clear-trigger",
     "indicator",
@@ -274,12 +274,12 @@ The simple select extends the [q-select-root](./#q-select-root) directive with t
   name={["QdsSelectLabelBindings", "SelectLabelBindings"]}
 />
 
-### q-select-trigger
+### q-select-control
 
-<TypeDocProps name="SelectTriggerDirective" />
+<TypeDocProps name="SelectControlDirective" />
 
 <TypeDocAngularAttributes
-  name={["QdsSelectTriggerBindings", "SelectTriggerBindings"]}
+  name={["QdsSelectControlBindings", "SelectControlBindings"]}
 />
 
 ### q-select-indicator

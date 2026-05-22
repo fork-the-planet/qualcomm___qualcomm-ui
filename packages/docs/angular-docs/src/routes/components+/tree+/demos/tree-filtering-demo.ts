@@ -84,6 +84,7 @@ const initialCollection = createTreeCollection<FileNode>({
       (expandedValueChanged)="expanded.set($event.expandedValue)"
     >
       <q-text-input
+        aria-label="Search for files"
         class="mb-1"
         placeholder="Search for files: 'react'"
         size="sm"

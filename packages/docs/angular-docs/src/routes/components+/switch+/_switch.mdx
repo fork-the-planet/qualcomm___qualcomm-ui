@@ -162,7 +162,9 @@ The composite elements are only intended to be used as direct descendants of the
   - it makes the entire component clickable, not just the input/control.
   - it provides implicit association between the text and input element, which is ideal for screen readers.
 - Always use the associated [label](./#label) or [q-switch-label](./#q-switch-label) directive when authoring the text label. This is automatically associated with the input element.
-- If you omit the label, you must provide an [aria-label](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-label) or [aria-labelledby](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-labelled-by) attribute on the `q-switch-hidden-input` element.
+- If you omit the visible label, give the switch an accessible name with [aria-label](./#aria-label) or [aria-labelledby](./#aria-labelledby) on the simple `q-switch` or `q-switch-hidden-input` element. Avoid `[attr.aria-label]` and `[attr.aria-labelledby]`; use `[aria-label]` or `[aria-labelledby]` for dynamic values.
+
+<QdsDemo name="SwitchAriaLabelDemo" />
 
 ## Explorer
 

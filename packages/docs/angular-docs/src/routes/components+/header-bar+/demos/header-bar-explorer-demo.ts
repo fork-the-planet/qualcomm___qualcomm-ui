@@ -21,8 +21,16 @@ import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
         <button q-header-bar-nav-item>Settings</button>
       </nav>
       <div q-header-bar-action-bar>
-        <button icon="Moon" q-header-bar-action-icon-button></button>
-        <button icon="Settings" q-header-bar-action-icon-button></button>
+        <button
+          aria-label="Toggle theme"
+          icon="Moon"
+          q-header-bar-action-icon-button
+        ></button>
+        <button
+          aria-label="Open settings"
+          icon="Settings"
+          q-header-bar-action-icon-button
+        ></button>
       </div>
     </div>
   `,

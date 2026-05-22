@@ -161,6 +161,13 @@ The Radio's composite components are only intended to be used as direct descenda
 </label>
 ```
 
+## Accessibility
+
+- Always use the associated [label](./#label) or [q-radio-label](./#q-radio-label) directive when authoring each radio item's text label. This is automatically associated with the input element.
+- If you omit a visible item label, give the radio item an accessible name with [aria-label](./#aria-label) or [aria-labelledby](./#aria-labelledby) on the simple `q-radio`. If you use the composite API, provide `aria-label` or `aria-labelledby` on the `q-radio-hidden-input` element. Avoid `[attr.aria-label]` and `[attr.aria-labelledby]`; use `[aria-label]` or `[aria-labelledby]` for dynamic values.
+
+<QdsDemo name="RadioAriaLabelDemo" />
+
 ## Explorer
 
 <ComponentExplorer

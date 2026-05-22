@@ -15,7 +15,7 @@ import {countries} from "./country-list"
   template: `
     <!-- preview -->
     <q-combobox
-      ariaLabel="Country"
+      aria-label="Country"
       class="w-48"
       icon="MapPin"
       placeholder="Select a country"

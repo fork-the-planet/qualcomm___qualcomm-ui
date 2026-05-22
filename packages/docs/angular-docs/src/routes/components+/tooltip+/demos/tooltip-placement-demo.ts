@@ -20,7 +20,7 @@ import type {Placement} from "@qualcomm-ui/dom/floating-ui"
           [(ngModel)]="placement"
         >
           <div q-tooltip-trigger>
-            <div q-select-control>
+            <div aria-label="Select placement" q-select-control>
               <span q-select-value-text></span>
               <button q-select-indicator></button>
             </div>

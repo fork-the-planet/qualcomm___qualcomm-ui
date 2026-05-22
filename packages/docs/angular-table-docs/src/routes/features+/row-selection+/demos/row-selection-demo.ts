@@ -38,6 +38,7 @@ import {createUserQuery, type User, userColumns} from "./data"
       <div q-table-root>
         <div q-table-action-bar>
           <q-text-input
+            aria-label="Search columns"
             class="w-56"
             placeholder="Search every column..."
             size="sm"
