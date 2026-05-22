@@ -826,9 +826,6 @@ importers:
 
   packages/common/typedoc:
     dependencies:
-      prettier:
-        specifier: '>=3 <4'
-        version: 3.8.3
       typescript:
         specifier: '>=5.3.3'
         version: 5.9.3
@@ -884,6 +881,9 @@ importers:
       npm-run-all2:
         specifier: 'catalog:'
         version: 8.0.4
+      oxfmt:
+        specifier: ^0.48.0
+        version: 0.48.0
       shx:
         specifier: 'catalog:'
         version: 0.4.0
@@ -1073,6 +1073,9 @@ importers:
       eslint-plugin-react:
         specifier: ^7.37.5
         version: 7.37.5(eslint@9.39.1(jiti@2.6.1))
+      oxfmt:
+        specifier: ^0.48.0
+        version: 0.48.0
       remark-frontmatter:
         specifier: ^5.0.0
         version: 5.0.0

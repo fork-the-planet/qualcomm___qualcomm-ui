@@ -6,18 +6,20 @@ async function main(argv: string[]) {
   const IS_WATCH = hasArg(argv, "--watch")
   const BUILD_MODE = getArg(argv, "--mode") || "production"
 
+  const external: string[] = [
+    "@commander-js/extra-typings",
+    "cosmiconfig",
+    "oxfmt",
+    "typedoc",
+    "typescript",
+  ]
+
   const buildOpts: BuildOptions = {
     bundle: true,
     define: {
       "process.env.BUILD_MODE": JSON.stringify(BUILD_MODE),
     },
-    external: [
-      "typescript",
-      "prettier",
-      "typedoc",
-      "@commander-js/extra-typings",
-      "cosmiconfig",
-    ],
+    external,
     loader: {
       ".node": "copy",
     },
@@ -34,13 +36,7 @@ async function main(argv: string[]) {
         ...buildOpts,
         banner: {js: "#!/usr/bin/env node"},
         entryPoints: ["./src/cli.ts"],
-        external: [
-          "typescript",
-          "prettier",
-          "typedoc",
-          "@commander-js/extra-typings",
-          "cosmiconfig",
-        ],
+        external,
         format: "esm",
         logLevel: IS_WATCH ? "error" : "warning",
         metafile: true,
