@@ -84,7 +84,12 @@ export default defineConfig({
   server: {
     port: process.env.PORT ? parseInt(process.env.PORT) : 3100,
     warmup: {
-      clientFiles: ["./src/root.tsx", "./src/components/**/*.tsx"],
+      clientFiles: [
+        "./src/root.tsx",
+        "./src/components/**/*.tsx",
+        "./src/routes/**/demos/**/*.tsx",
+        "./src/routes/**/*.ts",
+      ],
     },
   },
 })
