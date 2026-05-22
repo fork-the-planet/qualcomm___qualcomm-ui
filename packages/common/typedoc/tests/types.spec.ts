@@ -63,6 +63,23 @@ function getTestCases(parseResult: ParseResult): TestCase[] {
       },
     ],
     [
+      "DashCasedBindingProps",
+      {
+        actual: interfaces.DashCasedBindingProps.resolvedType.type,
+        expected:
+          "{\"data-disabled\": ''; \"data-stepper-part\": 'prev-trigger'; dir: 'ltr' | 'rtl'; disabled: boolean;}",
+      },
+    ],
+    [
+      "DashCasedRenderPropHost.children",
+      {
+        actual: findResolvedType(props.DashCasedRenderPropHost, "children")
+          .type,
+        expected:
+          "string | ((props: {\"data-disabled\": ''; \"data-stepper-part\": 'prev-trigger'; dir: 'ltr' | 'rtl'; disabled: boolean;}) => string)",
+      },
+    ],
+    [
       "TestTuple1",
       {
         actual: interfaces.TestTuple1.resolvedType.type,
