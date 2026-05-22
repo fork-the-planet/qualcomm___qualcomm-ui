@@ -129,6 +129,110 @@ Enforces that form input components have proper label association for accessibil
 </Switch.Root>
 ```
 
+#### `interactive-card-element-nesting`
+
+Disallows interactive elements inside `Card.Root` when the card itself is
+interactive.
+
+```tsx
+// Invalid
+<Card.Root interactive>
+  <Button>Open</Button>
+</Card.Root>
+
+// Valid
+<Card.Root interactive>
+  <Card.Heading>Open</Card.Heading>
+</Card.Root>
+```
+
+#### `prefer-alert-banner-button`
+
+Enforces `AlertBanner.Button` for alert banner actions.
+
+```tsx
+// Invalid
+<AlertBanner action={<Button>Retry</Button>} />
+
+// Valid
+<AlertBanner action={<AlertBanner.Button>Retry</AlertBanner.Button>} />
+```
+
+#### `prefer-card-actions`
+
+Enforces `Card.Button` and `Card.Link` for direct QUI actions rendered inside
+`Card.Root`.
+
+```tsx
+// Invalid
+<Card.Root>
+  <Button>Confirm</Button>
+  <Link href="/details">Details</Link>
+</Card.Root>
+
+// Valid
+<Card.Root>
+  <Card.Button>Confirm</Card.Button>
+  <Card.Link href="/details">Details</Card.Link>
+</Card.Root>
+```
+
+#### `prefer-header-bar-actions`
+
+Enforces `HeaderBar.ActionButton` and `HeaderBar.ActionIconButton` inside
+`HeaderBar.ActionBar`.
+
+```tsx
+// Invalid
+<HeaderBar.ActionBar>
+  <Button>Apps</Button>
+  <IconButton aria-label="Settings" icon={Settings} />
+</HeaderBar.ActionBar>
+
+// Valid
+<HeaderBar.ActionBar>
+  <HeaderBar.ActionButton>Apps</HeaderBar.ActionButton>
+  <HeaderBar.ActionIconButton aria-label="Settings" icon={Settings} />
+</HeaderBar.ActionBar>
+```
+
+#### `prefer-menu-trigger-buttons`
+
+Enforces menu-specific trigger button components inside `Menu.Trigger`.
+
+```tsx
+// Invalid
+<Menu.Trigger>
+  <Button>Open</Button>
+</Menu.Trigger>
+
+// Valid
+<Menu.Trigger>
+  <Menu.Button>Open</Menu.Button>
+</Menu.Trigger>
+```
+
+#### `prefer-select-item-checkbox`
+
+Enforces `Select.ItemCheckbox` when `Select.Root` statically sets
+`selectionIndicator="checkbox"`.
+
+```tsx
+// Invalid
+<Select.Root selectionIndicator="checkbox">
+  <Select.ItemIndicator />
+</Select.Root>
+
+// Valid
+<Select.Root selectionIndicator="checkbox">
+  <Select.ItemCheckbox />
+</Select.Root>
+```
+
+These contextual component usage rules only target direct QUI imports from
+`@qualcomm-ui/react/*` and `@qualcomm-ui/react-internal/*`, including aliases and
+namespace imports. Custom wrapper components are ignored.
+
 ## Configs
 
 We provide shared ESLint configurations to enforce consistent code style and quality across our internal projects. These packages wrap popular open source plugins and provide a common baseline that makes it easier for developers to move between codebases.
