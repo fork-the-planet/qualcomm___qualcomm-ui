@@ -40,7 +40,7 @@
     "@qualcomm-ui/cli": "catalog:",
     "@qualcomm-ui/esbuild": "catalog:",
     "@qualcomm-ui/tsconfig": "catalog:",
-    "@typescript-eslint/rule-tester": "8.48.1",
+    "@typescript-eslint/rule-tester": "catalog:",
     "@typescript-eslint/utils": "catalog:",
     "esbuild": "catalog:",
     "npm-run-all2": "catalog:",

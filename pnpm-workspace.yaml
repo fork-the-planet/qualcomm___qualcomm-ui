@@ -5,6 +5,18 @@ packages:
   - packages/docs/*
   - packages/frameworks/*
 
+allowBuilds:
+  '@parcel/watcher': true
+  '@scarf/scarf': true
+  '@tree-sitter-grammars/tree-sitter-yaml': true
+  core-js-pure: true
+  esbuild: true
+  lmdb: true
+  msgpackr-extract: true
+  tree-sitter: true
+  tree-sitter-json: true
+  unrs-resolver: true
+
 autoInstallPeers: true
 
 catalog:
@@ -50,6 +62,7 @@ catalog:
   '@types/react-dom': 19.2.3
   '@typescript-eslint/eslint-plugin': 8.58.2
   '@typescript-eslint/parser': 8.58.2
+  '@typescript-eslint/rule-tester': 8.58.2
   '@typescript-eslint/utils': 8.58.2
   '@vitest/browser': 4.1.2
   '@vitest/browser-playwright': 4.1.2
@@ -74,6 +87,7 @@ catalog:
   shx: 0.4.0
   tailwindcss: 4.2.4
   tsx: 4.21.0
+  typescript: 5.9.3
   typescript-eslint: 8.58.2
   unified: 11.0.5
   vite: 8.0.8
@@ -84,21 +98,3 @@ minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
   - '@qualcomm-ui/*'
   - 'vite'
-
-onlyBuiltDependencies:
-  - '@bundled-es-modules/glob'
-  - '@parcel/watcher'
-  - '@scarf/scarf'
-  - '@swc/core'
-  - '@tailwindcss/oxide'
-  - '@tree-sitter-grammars/tree-sitter-yaml'
-  - aws-sdk
-  - core-js-pure
-  - esbuild
-  - lmdb
-  - msgpackr-extract
-  - nx
-  - style-dictionary
-  - tree-sitter
-  - tree-sitter-json
-  - unrs-resolver
