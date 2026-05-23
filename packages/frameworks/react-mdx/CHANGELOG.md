@@ -1,5 +1,14 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 2.8.3
+
+May 23rd, 2026
+
+### Styles
+
+- [scrollbars]: make corner background transparent ([2e063eb](https://github.com/qualcomm/qualcomm-ui/commit/2e063eb))
+- unify scrollbar styles for tables, code blocks, and side nav ([f5a7e0e](https://github.com/qualcomm/qualcomm-ui/commit/f5a7e0e))
+
 ## 2.8.2
 
 May 22nd, 2026

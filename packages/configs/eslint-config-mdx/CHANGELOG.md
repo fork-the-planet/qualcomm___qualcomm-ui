@@ -1,5 +1,13 @@
 # @qualcomm-ui/eslint-config-mdx Changelog
 
+## 3.0.0
+
+May 23rd, 2026
+
+### BREAKING CHANGES
+
+- add code block rule and mdx formatters using oxfmt ([3fd4115](https://github.com/qualcomm/qualcomm-ui/commit/3fd4115))
+
 ## 2.0.1
 
 Apr 22nd, 2026
