@@ -1,3 +1,6 @@
+// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+// SPDX-License-Identifier: BSD-3-Clause-Clear
+
 import remarkLintCodeFormat from "./remark-lint-code-format.js"
 import remarkLintMdxJsxFormat from "./remark-lint-mdx-jsx-format.js"
 import remarkPreserveAlertMarkers from "./remark-preserve-alert-markers.js"

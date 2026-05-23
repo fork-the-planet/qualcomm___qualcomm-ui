@@ -1,3 +1,6 @@
+// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+// SPDX-License-Identifier: BSD-3-Clause-Clear
+
 import {readFile} from "node:fs/promises"
 import {dirname, isAbsolute, join, parse, resolve} from "node:path"
 import {pathToFileURL} from "node:url"
