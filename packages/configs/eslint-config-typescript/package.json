@@ -8,6 +8,10 @@
   "publishConfig": {
     "access": "public"
   },
+  "keywords": [
+    "eslint",
+    "config"
+  ],
   "type": "module",
   "sideEffects": false,
   "files": [
@@ -52,9 +56,5 @@
     "prettier": ">=3.5.3",
     "typescript": ">=5.7.3",
     "typescript-eslint": ">=8.31.1"
-  },
-  "keywords": [
-    "eslint",
-    "config"
-  ]
+  }
 }

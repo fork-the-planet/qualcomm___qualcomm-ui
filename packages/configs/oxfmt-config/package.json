@@ -2,20 +2,23 @@
   "name": "@qualcomm-ui/oxfmt-config",
   "version": "1.0.0",
   "description": "QUI Oxfmt config for consistent code formatting",
+  "author": "Ryan Bower",
+  "license": "BSD-3-Clause-Clear",
+  "repository": "https://github.com/qualcomm/qualcomm-ui",
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "config",
     "formatter",
     "oxfmt"
   ],
-  "license": "BSD-3-Clause-Clear",
-  "author": "Ryan Bower",
-  "repository": "https://github.com/qualcomm/qualcomm-ui",
+  "type": "module",
+  "sideEffects": false,
   "files": [
     "index.d.ts",
     "index.js"
   ],
-  "type": "module",
-  "sideEffects": false,
   "types": "index.d.ts",
   "exports": {
     ".": {
@@ -23,9 +26,6 @@
       "import": "./index.js",
       "default": "./index.js"
     }
-  },
-  "publishConfig": {
-    "access": "public"
   },
   "scripts": {
     "prepublishOnly": "qui-cli pre-publish",
