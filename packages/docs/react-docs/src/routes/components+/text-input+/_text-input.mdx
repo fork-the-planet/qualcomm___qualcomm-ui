@@ -60,7 +60,10 @@ compound component, slots, parts
 
 Build with the composite API for granular control. This API requires you to provide each subcomponent, but gives you full control over the structure and layout.
 
-<Demo name="TextInputCompositeDemo" component={demos.TextInputCompositeDemo} />
+<Demo
+  name="TextInputCompositeDemo"
+  component={demos.TextInputCompositeDemo}
+/>
 
 ### Composite Layout
 
@@ -133,7 +136,10 @@ Error messages are displayed using two props:
 
 The error text and indicator will only render when [invalid](./#invalid) is true.
 
-<Demo name="TextInputErrorTextDemo" component={demos.TextInputErrorTextDemo} />
+<Demo
+  name="TextInputErrorTextDemo"
+  component={demos.TextInputErrorTextDemo}
+/>
 
 ## Forms
 
@@ -180,7 +186,7 @@ Tanstack form also supports [ArkType](https://tanstack.com/form/latest/docs/fram
 
 ## API
 
-### \<TextInput /\>
+### \<TextInput />
 
 The `TextInput` extends the [TextInput.Root](./#text-input-root) with the following props:
 
@@ -188,13 +194,15 @@ The `TextInput` extends the [TextInput.Root](./#text-input-root) with the follow
 
 ## Composite API
 
-### \<TextInput.Root\>
+### \<TextInput.Root>
 
 <TypeDocProps name="TextInputRootProps" />
 
-<TypeDocAttributes name={["TextInputRootBindings", "QdsInputRootBindings"]} />
+<TypeDocAttributes
+  name={["TextInputRootBindings", "QdsInputRootBindings"]}
+/>
 
-### \<TextInput.InputGroup\>
+### \<TextInput.InputGroup>
 
 <TypeDocProps name="TextInputInputGroupProps" />
 
@@ -202,19 +210,23 @@ The `TextInput` extends the [TextInput.Root](./#text-input-root) with the follow
   name={["TextInputInputGroupBindings", "QdsInputGroupBindings"]}
 />
 
-### \<TextInput.Label\>
+### \<TextInput.Label>
 
 <TypeDocProps name="TextInputLabelProps" />
 
-<TypeDocAttributes name={["TextInputLabelBindings", "QdsInputLabelBindings"]} />
+<TypeDocAttributes
+  name={["TextInputLabelBindings", "QdsInputLabelBindings"]}
+/>
 
-### \<TextInput.Hint\>
+### \<TextInput.Hint>
 
 <TypeDocProps name="TextInputHintProps" />
 
-<TypeDocAttributes name={["TextInputHintBindings", "QdsInputHintBindings"]} />
+<TypeDocAttributes
+  name={["TextInputHintBindings", "QdsInputHintBindings"]}
+/>
 
-### \<TextInput.ClearTrigger\>
+### \<TextInput.ClearTrigger>
 
 <TypeDocProps name="TextInputClearTriggerProps" />
 
@@ -222,13 +234,15 @@ The `TextInput` extends the [TextInput.Root](./#text-input-root) with the follow
   name={["TextInputClearTriggerBindings", "QdsInputClearTriggerBindings"]}
 />
 
-### \<TextInput.Input\>
+### \<TextInput.Input>
 
 <TypeDocProps name="TextInputInputProps" />
 
-<TypeDocAttributes name={["TextInputInputBindings", "QdsInputInputBindings"]} />
+<TypeDocAttributes
+  name={["TextInputInputBindings", "QdsInputInputBindings"]}
+/>
 
-### \<TextInput.ErrorText\>
+### \<TextInput.ErrorText>
 
 <TypeDocProps name="TextInputErrorTextProps" />
 
@@ -236,10 +250,13 @@ The `TextInput` extends the [TextInput.Root](./#text-input-root) with the follow
   name={["TextInputErrorTextBindings", "QdsInputErrorTextBindings"]}
 />
 
-### \<TextInput.ErrorIndicator\>
+### \<TextInput.ErrorIndicator>
 
 <TypeDocProps name="TextInputErrorIndicatorProps" />
 
 <TypeDocAttributes
-  name={["TextInputErrorIndicatorBindings", "QdsInputErrorIndicatorBindings"]}
+  name={[
+    "TextInputErrorIndicatorBindings",
+    "QdsInputErrorIndicatorBindings",
+  ]}
 />

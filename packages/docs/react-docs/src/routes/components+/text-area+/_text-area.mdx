@@ -45,7 +45,10 @@ The simple `<TextArea>` bundles all subcomponents together into a single compone
 
 Build with the composite API for granular control. This API requires you to provide each subcomponent, but gives you full control over the structure and layout.
 
-<Demo name="TextAreaCompositeDemo" component={demos.TextAreaCompositeDemo} />
+<Demo
+  name="TextAreaCompositeDemo"
+  component={demos.TextAreaCompositeDemo}
+/>
 
 ### Counter
 
@@ -103,7 +106,10 @@ Error messages are displayed using two props:
 
 The error text and indicator will only render when [invalid](./#invalid) is true.
 
-<Demo name="TextAreaErrorTextDemo" component={demos.TextAreaErrorTextDemo} />
+<Demo
+  name="TextAreaErrorTextDemo"
+  component={demos.TextAreaErrorTextDemo}
+/>
 
 ## Forms
 
@@ -150,7 +156,7 @@ Tanstack form also supports [ArkType](https://tanstack.com/form/latest/docs/fram
 
 ## API
 
-### \<TextArea /\>
+### \<TextArea />
 
 The `TextArea` extends the [TextArea.Root](./#text-area-root) with the following props:
 
@@ -158,13 +164,15 @@ The `TextArea` extends the [TextArea.Root](./#text-area-root) with the following
 
 ## Composite API
 
-### \<TextArea.Root\>
+### \<TextArea.Root>
 
 <TypeDocProps name="TextAreaRootProps" />
 
-<TypeDocAttributes name={["TextAreaRootBindings", "QdsTextAreaRootBindings"]} />
+<TypeDocAttributes
+  name={["TextAreaRootBindings", "QdsTextAreaRootBindings"]}
+/>
 
-### \<TextArea.Label\>
+### \<TextArea.Label>
 
 <TypeDocProps name="TextAreaLabelProps" />
 
@@ -172,13 +180,15 @@ The `TextArea` extends the [TextArea.Root](./#text-area-root) with the following
   name={["TextAreaLabelBindings", "QdsTextAreaLabelBindings"]}
 />
 
-### \<TextArea.Hint\>
+### \<TextArea.Hint>
 
 <TypeDocProps name="TextAreaHintProps" />
 
-<TypeDocAttributes name={["TextAreaHintBindings", "QdsTextAreaHintBindings"]} />
+<TypeDocAttributes
+  name={["TextAreaHintBindings", "QdsTextAreaHintBindings"]}
+/>
 
-### \<TextArea.Counter\>
+### \<TextArea.Counter>
 
 <TypeDocProps name="TextAreaCounterProps" />
 
@@ -186,7 +196,7 @@ The `TextArea` extends the [TextArea.Root](./#text-area-root) with the following
   name={["TextAreaCounterBindings", "QdsTextAreaCounterBindings"]}
 />
 
-### \<TextArea.Input\>
+### \<TextArea.Input>
 
 <TypeDocProps name="TextAreaInputProps" />
 
@@ -194,7 +204,7 @@ The `TextArea` extends the [TextArea.Root](./#text-area-root) with the following
   name={["TextAreaInputBindings", "QdsTextAreaInputBindings"]}
 />
 
-### \<TextArea.ErrorText\>
+### \<TextArea.ErrorText>
 
 <TypeDocProps name="TextAreaErrorTextProps" />
 

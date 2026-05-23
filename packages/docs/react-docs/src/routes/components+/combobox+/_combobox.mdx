@@ -37,7 +37,10 @@ clear trigger, item indicator, subcomponents
 
 Build with the composite API for granular control. This API requires you to provide each subcomponent, but gives you full control over the structure and layout.
 
-<Demo name="ComboboxCompositeDemo" component={demos.ComboboxCompositeDemo} />
+<Demo
+  name="ComboboxCompositeDemo"
+  component={demos.ComboboxCompositeDemo}
+/>
 
 ### Open on Click
 
@@ -83,7 +86,10 @@ search highlight
 
 Use the [highlightMatchingText](./#highlightMatchingText) prop to highlight the portion of each option that matches the user's input. This provides visual feedback during filtering.
 
-<Demo name="ComboboxHighlightDemo" component={demos.ComboboxHighlightDemo} />
+<Demo
+  name="ComboboxHighlightDemo"
+  component={demos.ComboboxHighlightDemo}
+/>
 
 ### ARIA Label
 
@@ -93,7 +99,10 @@ screen reader, a11y
 
 The Combobox's label is automatically associated with the input element for accessibility. If you omit the label, you should provide an aria-label to the input to give your combobox an accessible name.
 
-<Demo name="ComboboxAriaLabelDemo" component={demos.ComboboxAriaLabelDemo} />
+<Demo
+  name="ComboboxAriaLabelDemo"
+  component={demos.ComboboxAriaLabelDemo}
+/>
 
 ### Content Width
 
@@ -103,7 +112,10 @@ dropdown width, popup width, popover width
 
 The [positioning.sameWidth](./#sameWidth) property controls whether the width of the combobox content matches the width of the input element. The default is `true`.
 
-<Demo name="ComboboxSameWidthDemo" component={demos.ComboboxSameWidthDemo} />
+<Demo
+  name="ComboboxSameWidthDemo"
+  component={demos.ComboboxSameWidthDemo}
+/>
 
 ### Input Icon
 
@@ -146,9 +158,12 @@ custom option, rich item content
 
 When using the simple API, use the [renderItem](./#renderItem) prop to customize the rendering of each item.
 
-<Demo name="ComboboxRenderItemDemo" component={demos.ComboboxRenderItemDemo} />
+<Demo
+  name="ComboboxRenderItemDemo"
+  component={demos.ComboboxRenderItemDemo}
+/>
 
-> [!warning]
+> \[!warning]
 > When rendering custom items with [virtual](./#virtual) set to `true`, you must forward the `data-virtual` and `style` props to the rendered item:
 
 ```tsx
@@ -183,7 +198,10 @@ max height, scrollable list
 
 Change the height of the item container by adjusting the style of the Content element.
 
-<Demo name="ComboboxMaxHeightDemo" component={demos.ComboboxMaxHeightDemo} />
+<Demo
+  name="ComboboxMaxHeightDemo"
+  component={demos.ComboboxMaxHeightDemo}
+/>
 
 ### Controlled State
 
@@ -332,7 +350,7 @@ Tanstack form also supports [ArkType](https://tanstack.com/form/latest/docs/fram
 
 ## API
 
-### \<Combobox\>
+### \<Combobox>
 
 The simple combobox extends the [Combobox.Root](./#combobox-root) component with the following props:
 
@@ -342,17 +360,19 @@ The simple combobox extends the [Combobox.Root](./#combobox-root) component with
 
 This section describes the elements of the Combobox's composite API.
 
-### \<Combobox.Root\>
+### \<Combobox.Root>
 
 <TypeDocProps name="ComboboxRootProps" />
 
-### \<Combobox.Label\>
+### \<Combobox.Label>
 
 <TypeDocProps name="ComboboxLabelProps" />
 
-<TypeDocAttributes name={["QdsSelectLabelBindings", "ComboboxLabelBindings"]} />
+<TypeDocAttributes
+  name={["QdsSelectLabelBindings", "ComboboxLabelBindings"]}
+/>
 
-### \<Combobox.Control\>
+### \<Combobox.Control>
 
 <TypeDocProps name="ComboboxControlProps" />
 
@@ -360,13 +380,15 @@ This section describes the elements of the Combobox's composite API.
   name={["QdsSelectControlBindings", "ComboboxControlBindings"]}
 />
 
-### \<Combobox.Input\>
+### \<Combobox.Input>
 
 <TypeDocProps name="ComboboxInputProps" />
 
-<TypeDocAttributes name={["QdsInputInputBindings", "ComboboxInputBindings"]} />
+<TypeDocAttributes
+  name={["QdsInputInputBindings", "ComboboxInputBindings"]}
+/>
 
-### \<Combobox.Trigger\>
+### \<Combobox.Trigger>
 
 <TypeDocProps name="ComboboxTriggerProps" />
 
@@ -374,7 +396,7 @@ This section describes the elements of the Combobox's composite API.
   name={["QdsSelectIndicatorBindings", "ComboboxTriggerBindings"]}
 />
 
-### \<Combobox.ClearTrigger\>
+### \<Combobox.ClearTrigger>
 
 <TypeDocProps name="ComboboxClearTriggerProps" />
 
@@ -382,7 +404,7 @@ This section describes the elements of the Combobox's composite API.
   name={["QdsSelectClearTriggerBindings", "ComboboxClearTriggerBindings"]}
 />
 
-### \<Combobox.Positioner\>
+### \<Combobox.Positioner>
 
 <TypeDocProps name="ComboboxPositionerProps" />
 
@@ -390,7 +412,7 @@ This section describes the elements of the Combobox's composite API.
   name={["QdsSelectPositionerBindings", "ComboboxPositionerBindings"]}
 />
 
-### \<Combobox.Content\>
+### \<Combobox.Content>
 
 <TypeDocProps name="ComboboxContentProps" />
 
@@ -398,19 +420,21 @@ This section describes the elements of the Combobox's composite API.
   name={["QdsSelectContentBindings", "ComboboxContentBindings"]}
 />
 
-### \<Combobox.Item\>
+### \<Combobox.Item>
 
 <TypeDocProps name="ComboboxItemProps" />
 
-<TypeDocAttributes name={["QdsSelectItemBindings", "ComboboxItemBindings"]} />
+<TypeDocAttributes
+  name={["QdsSelectItemBindings", "ComboboxItemBindings"]}
+/>
 
-### \<Combobox.ItemIndicator\>
+### \<Combobox.ItemIndicator>
 
 <TypeDocProps name="ComboboxItemIndicatorProps" />
 
 <TypeDocAttributes name="ComboboxItemIndicatorBindings" />
 
-### \<Combobox.ItemText\>
+### \<Combobox.ItemText>
 
 <TypeDocProps name="ComboboxItemTextProps" />
 
@@ -418,13 +442,13 @@ This section describes the elements of the Combobox's composite API.
   name={["ComboboxItemTextBindings", "QdsSelectItemTextBindings"]}
 />
 
-### \<Combobox.Hint\>
+### \<Combobox.Hint>
 
 <TypeDocProps name="ComboboxHintProps" />
 
 <TypeDocAttributes name={["QdsInputHintBindings", "SelectHintBindings"]} />
 
-### \<Combobox.ErrorText\>
+### \<Combobox.ErrorText>
 
 <TypeDocProps name="ComboboxErrorTextProps" />
 
@@ -432,7 +456,7 @@ This section describes the elements of the Combobox's composite API.
   name={["QdsInputErrorTextBindings", "SelectErrorTextBindings"]}
 />
 
-### \<Combobox.ErrorIndicator\>
+### \<Combobox.ErrorIndicator>
 
 <TypeDocProps name="ComboboxErrorIndicatorProps" />
 

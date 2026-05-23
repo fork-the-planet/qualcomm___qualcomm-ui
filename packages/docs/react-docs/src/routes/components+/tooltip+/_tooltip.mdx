@@ -79,7 +79,10 @@ dismiss, persist
 
 By default, the tooltip will close when the `Escape` key is pressed or a click is detected. You can customize this behavior by using the [closeOnClick](./#closeOnClick) and [closeOnEscape](./#closeOnEscape) props.
 
-<Demo name="TooltipCloseEventsDemo" component={demos.TooltipCloseEventsDemo} />
+<Demo
+  name="TooltipCloseEventsDemo"
+  component={demos.TooltipCloseEventsDemo}
+/>
 
 ### Controlled Visibility
 
@@ -129,7 +132,7 @@ If you don't wish to customize the arrow tip, you can omit it and `Tooltip.Arrow
 
 ## API
 
-### \<Tooltip\>
+### \<Tooltip>
 
 The simple tooltip extends the [Tooltip.Root](./#tooltip-root) component with the following props:
 
@@ -137,17 +140,17 @@ The simple tooltip extends the [Tooltip.Root](./#tooltip-root) component with th
 
 ## Composite API
 
-### \<Tooltip.Root\>
+### \<Tooltip.Root>
 
 <TypeDocProps name="TooltipRootProps" />
 
-### \<Tooltip.Trigger\>
+### \<Tooltip.Trigger>
 
 <TypeDocProps name="TooltipTriggerProps" />
 
 <TypeDocAttributes name={["TooltipTriggerBindings"]} />
 
-### \<Tooltip.Positioner\>
+### \<Tooltip.Positioner>
 
 <TypeDocProps name="TooltipPositionerProps" />
 
@@ -155,7 +158,7 @@ The simple tooltip extends the [Tooltip.Root](./#tooltip-root) component with th
   name={["TooltipPositionerBindings", "QdsTooltipPositionerBindings"]}
 />
 
-### \<Tooltip.Content\>
+### \<Tooltip.Content>
 
 <TypeDocProps name="TooltipContentProps" />
 
@@ -163,13 +166,15 @@ The simple tooltip extends the [Tooltip.Root](./#tooltip-root) component with th
   name={["TooltipContentBindings", "QdsTooltipContentBindings"]}
 />
 
-### \<Tooltip.Arrow\>
+### \<Tooltip.Arrow>
 
 <TypeDocProps name="TooltipArrowProps" />
 
-<TypeDocAttributes name={["TooltipArrowBindings", "QdsTooltipArrowBindings"]} />
+<TypeDocAttributes
+  name={["TooltipArrowBindings", "QdsTooltipArrowBindings"]}
+/>
 
-### \<Tooltip.ArrowTip\>
+### \<Tooltip.ArrowTip>
 
 <TypeDocProps name="TooltipArrowTipProps" />
 

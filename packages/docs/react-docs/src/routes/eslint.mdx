@@ -25,6 +25,7 @@ Add the plugin to your ESLint configuration:
 
 ```js
 import {defineConfig} from "eslint/config"
+
 import quiEslintPluginReact from "@qualcomm-ui/eslint-plugin-react"
 
 export default defineConfig([
@@ -252,9 +253,9 @@ Both packages use ESLint's flat config format.
 
 <NpmInstallTabs
   packages={[
-  "@qualcomm-ui/eslint-config-typescript",
-  "@qualcomm-ui/eslint-config-react",
-]}
+    "@qualcomm-ui/eslint-config-typescript",
+    "@qualcomm-ui/eslint-config-react",
+  ]}
   dev
 />
 
@@ -295,12 +296,12 @@ The `styleGuide` config enforces these conventions:
 The style guide enforces import organization with lines between groups:
 
 ```ts
-// 1. Built-in and external packages
-import {readFile} from "node:fs/promises"
 import React from "react"
 
 // 2. Internal imports
 import {utils} from "@/lib/utils"
+// 1. Built-in and external packages
+import {readFile} from "node:fs/promises"
 
 // 3. Parent imports
 import {parent} from "../parent"
@@ -357,7 +358,6 @@ The config also blocks the default React import:
 // Disallowed
 // [!code warning]
 import React from "react"
-
 // Use named imports
 import {useState, useEffect} from "react"
 ```
@@ -375,8 +375,8 @@ The `strict` config adds React Compiler rules for optimization:
 Use the `strict` config when using the React Compiler:
 
 ```js
-import tsConfigs from "@qualcomm-ui/eslint-config-typescript"
 import reactConfigs from "@qualcomm-ui/eslint-config-react"
+import tsConfigs from "@qualcomm-ui/eslint-config-typescript"
 
 export default [
   ...tsConfigs.configs.recommended,

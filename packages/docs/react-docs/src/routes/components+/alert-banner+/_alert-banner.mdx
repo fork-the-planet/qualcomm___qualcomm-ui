@@ -27,13 +27,19 @@ import {AlertBanner} from "@qualcomm-ui/react/alert-banner"
 
 Use the simple API to create a banner using minimal markup.
 
-<Demo name="AlertBannerSimpleDemo" component={demos.AlertBannerSimpleDemo} />
+<Demo
+  name="AlertBannerSimpleDemo"
+  component={demos.AlertBannerSimpleDemo}
+/>
 
 ### Composite
 
 The composite API provides individual sub-components for custom layouts or when you need to render custom content within each slot.
 
-<Demo name="AlertBannerCompositeDemo" component={demos.AlertBannerCompositeDemo} />
+<Demo
+  name="AlertBannerCompositeDemo"
+  component={demos.AlertBannerCompositeDemo}
+/>
 
 ### Emphasis
 
@@ -43,7 +49,10 @@ severity, notification type, error banner, success banner, alert level
 
 The [emphasis](./#emphasis-1) prop controls the banner's color scheme. The default is `info`. Each emphasis also determines the default icon.
 
-<Demo name="AlertBannerEmphasisDemo" component={demos.AlertBannerEmphasisDemo} />
+<Demo
+  name="AlertBannerEmphasisDemo"
+  component={demos.AlertBannerEmphasisDemo}
+/>
 
 ### Variant
 
@@ -53,7 +62,10 @@ strong banner, subtle banner, banner style, visual weight
 
 The [variant](./#variant-1) prop controls visual prominence. The default `strong` variant uses solid backgrounds for high visibility. The `subtle` variant uses muted backgrounds with borders.
 
-<Demo name="AlertBannerVariantDemo" component={demos.AlertBannerVariantDemo} />
+<Demo
+  name="AlertBannerVariantDemo"
+  component={demos.AlertBannerVariantDemo}
+/>
 
 ### Dismissable
 
@@ -63,7 +75,10 @@ closeable, close banner, remove banner, hide banner
 
 The banner is a controlled component. Set [dismissable](./#dismissable-1) to render a close button, then handle visibility state via the [onClose](./#onClose) callback. With the composite API, use [`<AlertBanner.CloseButton />`](./#alert-banner-close-button).
 
-<Demo name="AlertBannerDismissableDemo" component={demos.AlertBannerDismissableDemo} />
+<Demo
+  name="AlertBannerDismissableDemo"
+  component={demos.AlertBannerDismissableDemo}
+/>
 
 ### Action
 
@@ -75,7 +90,10 @@ The `<AlertBanner.Button>` was added in [v1.21.0](https://github.com/qualcomm/qu
 
 Pass an `<AlertBanner.Button>` instance to the [action](./#action-1) prop.
 
-<Demo name="AlertBannerActionDemo" component={demos.AlertBannerActionDemo} />
+<Demo
+  name="AlertBannerActionDemo"
+  component={demos.AlertBannerActionDemo}
+/>
 
 ## Explorer
 
@@ -135,7 +153,9 @@ The `AlertBanner` component supports every property from the [AlertBanner.Root](
 
 <TypeDocProps name="AlertBannerButtonProps" />
 
-<TypeDocAttributes name={["QdsButtonRootBindings", "QdsAlertBannerActionBindings"]} />
+<TypeDocAttributes
+  name={["QdsButtonRootBindings", "QdsAlertBannerActionBindings"]}
+/>
 
 ### \<AlertBanner.ActionContainer>
 
