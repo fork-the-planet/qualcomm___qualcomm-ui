@@ -73,7 +73,7 @@ title: Setup
 This page contains setup instructions.
 ```
 
-> \[!note]
+> [!note]
 > We'll explain the `# {frontmatter.title}` syntax in the [Markdown](/guide/markdown) guide.
 
 After adding this page, your sidebar should look like this:
@@ -183,7 +183,7 @@ Your sidebar will immediately update to reflect the config changes. And now Setu
 - Items defined in the navConfig are ordered before items that aren't defined.
   - This is why the order of the Setup item changed as soon as we added it to the config.
 
-> \[!tip/API]
+> [!tip/API]
 > Refer to the [API documentation](/api/nav-config) to learn more about the available customization options.
 
 #### Expanded State
@@ -209,7 +209,7 @@ Now your sidebar should look something like this:
 
 <ExpandedNestedNav />
 
-> \[!note]
+> [!note]
 > If the site navigates to a nested route, the sidebar will automatically expand to show the route's item
 > regardless of the route's `navConfig` entry.
 
@@ -257,7 +257,7 @@ Since these routes are nested under the `/help` route, we'll need to add them to
 }
 ```
 
-> \[!note]
+> [!note]
 > For each id, we only need to match the path segment of the route at its current nesting level.
 > The plugin walks the navConfig tree recursively to assemble the route and match against the MDX file.
 

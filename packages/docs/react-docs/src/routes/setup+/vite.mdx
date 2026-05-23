@@ -60,7 +60,7 @@ In your global CSS file (default `app/app.css`), import the QUI styles.
 @import "@qualcomm-ui/qds-core/themes/qualcomm-dark.css" layer(components);
 ```
 
-> \[!note/Multi Theme]
+> [!note/Multi Theme]
 > If you only intend to support a single theme, you may omit the other import.
 
 ## Configure fonts
@@ -107,7 +107,7 @@ If you only intend to support one theme, apply the theme attribute to your app's
 
 Follow this step to configure your application for theme switching. The user's preferred theme will be restored when they return to the site.
 
-> \[!note]
+> [!note]
 > This approach won't work with SSR due to its reliance on `window.localStorage`. If your app is rendered on the server, you should use a cookie-based approach instead like in our [react-router](/setup/react-router) guide.
 
 ```tsx
@@ -265,7 +265,7 @@ Note that you need to import the corresponding CSS for the brand you've selected
 @import "@qualcomm-ui/qds-core/themes/dragonwing-light.css";
 ```
 
-> \[!tip/Component Styles]
+> [!tip/Component Styles]
 > Always import component styles, regardless of the chosen brand.
 
 ```css

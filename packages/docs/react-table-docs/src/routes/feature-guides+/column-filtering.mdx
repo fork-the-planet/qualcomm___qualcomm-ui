@@ -63,7 +63,7 @@ const table = useReactTable({
 })
 ```
 
-> \[!note]
+> [!note]
 > Setting `manualFiltering: true` disables client-side filtering logic. The table uses the provided data without applying filter options. But individual columns may still configure whether they support filtering, which is used to render the filter controls in the table.
 
 ### Column Filter State
@@ -136,7 +136,7 @@ const table = useReactTable({
 })
 ```
 
-> \[!warning]
+> [!warning]
 > Do not use `initialState.columnFilters` and `state.columnFilters` together. The `state.columnFilters` value overrides `initialState.columnFilters`.
 
 ### FilterFns
@@ -160,7 +160,7 @@ Define custom filter functions using the `filterFn` column option or the `filter
 
 #### Custom Filter Functions
 
-> \[!tip]
+> [!tip]
 > These filter functions only run during client-side filtering.
 
 When defining a custom filter function in either the `filterFn` column option or the `filterFns` table option, it should have the following signature:
