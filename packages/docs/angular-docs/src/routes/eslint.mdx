@@ -24,8 +24,9 @@ Our configs are provided in ESM format. You will need `"type": "module"` in your
 Add the plugin to your ESLint configuration:
 
 ```js
-import {defineConfig} from "eslint/config"
 import angularEslint from "angular-eslint"
+import {defineConfig} from "eslint/config"
+
 import angularPlugin from "@qualcomm-ui/eslint-plugin-angular"
 
 export default defineConfig([
@@ -268,12 +269,12 @@ Both packages use ESLint's flat config format.
 
 <NpmInstallTabs
   packages={[
-  "@qualcomm-ui/eslint-config-typescript",
-  "@qualcomm-ui/eslint-config-angular",
-  "eslint",
-  "globals",
-  "typescript-eslint",
-]}
+    "@qualcomm-ui/eslint-config-typescript",
+    "@qualcomm-ui/eslint-config-angular",
+    "eslint",
+    "globals",
+    "typescript-eslint",
+  ]}
   dev
 />
 

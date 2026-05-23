@@ -125,7 +125,7 @@ ngModel, template-driven, FormsModule, two-way binding
 
 When using template-driven forms with `ngModel`, perform validation manually in your component and pass the result to the [invalid](./#invalid) property.
 
-> [!tip]
+> \[!tip]
 > Form validation timing is controlled by the [updateOn](https://angular.dev/api/forms/FormControl#updateOn) property on the form control.
 
 <QdsDemo name="NumberInputTemplateFormsDemo" />
@@ -182,11 +182,14 @@ When using the composite API with Reactive Forms, always apply form control bind
 
 ## API
 
-### \<q-number-input\>
+### \<q-number-input>
 
 The `<q-number-input>` component extends the [q-number-input-root](./#q-number-input-root) directive with the following properties:
 
-<TypeDocProps name="NumberInputComponent" omitFrom="NumberInputRootDirective" />
+<TypeDocProps
+  name="NumberInputComponent"
+  omitFrom="NumberInputRootDirective"
+/>
 
 ## Composite API
 
@@ -271,7 +274,10 @@ The `<q-number-input>` component extends the [q-number-input-root](./#q-number-i
 <TypeDocProps name="NumberInputErrorIndicatorComponent" />
 
 <TypeDocAngularAttributes
-  name={["NumberInputErrorIndicatorBindings", "QdsInputErrorIndicatorBindings"]}
+  name={[
+    "NumberInputErrorIndicatorBindings",
+    "QdsInputErrorIndicatorBindings",
+  ]}
 />
 
 ### q-number-input-unit-select
@@ -279,7 +285,10 @@ The `<q-number-input>` component extends the [q-number-input-root](./#q-number-i
 <TypeDocProps name="NumberInputUnitSelectComponent" />
 
 <TypeDocAngularAttributes
-  name={["NumberInputUnitSelectBindings", "QdsNumberInputUnitSelectBindings"]}
+  name={[
+    "NumberInputUnitSelectBindings",
+    "QdsNumberInputUnitSelectBindings",
+  ]}
 />
 
 ## Data Structures
