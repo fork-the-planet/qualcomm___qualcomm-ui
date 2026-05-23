@@ -56,7 +56,7 @@ When moving an existing route:
    import {redirect} from "react-router"
 
    export const loader = () => {
-   // absolute path to new route, not including the site url
+     // absolute path to new route, not including the site url
      return redirect("/path/to/new/route")
    }
    ```
@@ -80,6 +80,7 @@ When moving an existing route:
   ```
 
 - Use `# {frontmatter.title}` as the page H1. Do not hard-code a different H1 and let it drift from frontmatter.
+
 - Pages intentionally hidden from navigation may add `hidden: true` to their frontmatter.
 
 ## Headings

@@ -63,7 +63,7 @@ async function replaceMdxJsxFlowElements(
 
       if (formatted !== raw) {
         file.message(
-          "Format MDX JSX block with oxfmt",
+          "Format MDX JSX block",
           child,
           "remark-lint:mdx-jsx-format",
         )
