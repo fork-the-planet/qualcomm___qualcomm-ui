@@ -92,7 +92,7 @@
     "stylelint-config-standard": "^39.0.1",
     "stylelint-order": "^7.0.0",
     "stylelint-prettier": "^5.0.3",
-    "syncpack": "^15.0.0",
+    "syncpack": "^15.3.1",
     "tailwindcss": "catalog:",
     "tsx": "catalog:",
     "turbo": "^2.9.14",
