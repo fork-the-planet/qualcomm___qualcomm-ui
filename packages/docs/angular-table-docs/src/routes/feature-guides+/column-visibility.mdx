@@ -19,6 +19,7 @@ The `columnVisibility` state is a map of column IDs to boolean values. A column 
 
 ```ts
 import {signal} from "@angular/core"
+
 import type {VisibilityState} from "@qualcomm-ui/core/table"
 
 // ...
@@ -48,7 +49,7 @@ export class ExampleComponent {
 
 Use `initialState` to set default column visibility without managing state externally.
 
-> [!warning]
+> \[!warning]
 > Do not provide `columnVisibility` to both `initialState` and `state`. The `state` option overrides `initialState`
 
 ```ts

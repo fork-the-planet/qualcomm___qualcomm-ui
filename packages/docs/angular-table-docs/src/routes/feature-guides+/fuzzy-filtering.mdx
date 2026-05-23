@@ -16,7 +16,7 @@ You can implement client-side fuzzy filtering by defining a custom filter functi
 
 Fuzzy filtering is mostly used with global filtering, but you can also apply it to individual columns. We will discuss how to implement fuzzy filtering for both cases.
 
-> [!note]
+> \[!note]
 > You will need to install a fuzzy matching library like `fuzzysort` to use fuzzy filtering. Fuzzy matching libraries provide algorithms for approximate string matching, which is useful for implementing search functionality that is more forgiving of typos and variations.
 
 Using a fuzzy matching library is optional, but libraries like `fuzzysort` provide a great way to both fuzzy filter and sort by the match score, so that rows can be sorted by their closest matches to the search query.
@@ -27,6 +27,7 @@ Here's an example of a custom fuzzy filter function using fuzzysort:
 
 ```ts
 import Fuzzysort from "fuzzysort"
+
 import type {FilterFn} from "@qualcomm-ui/core/table"
 
 const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
