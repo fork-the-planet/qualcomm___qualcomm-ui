@@ -139,7 +139,7 @@ function getSourceSlice(source: string, node: RemarkNode): null | string {
 }
 
 function getFileValue(file: RemarkFile): string {
-  return typeof file.value === "string" ? file.value : String(file.value ?? "")
+  return (file.value ?? "") as string
 }
 
 function getBlockFilePath(filePath: string | undefined): string {

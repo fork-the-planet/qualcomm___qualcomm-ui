@@ -5,6 +5,9 @@
     "composite": true,
     "jsx": "preserve",
     "outDir": "./node_modules/.tmp/tsbuildinfo-test",
+    "paths": {
+      "@qualcomm-ui/eslint-config-mdx": ["./src"]
+    }
   },
   "include": ["./tests", "./src"]
 }

@@ -127,7 +127,7 @@ function readJsoncConfig(configPath: string, source: string): unknown {
   const result = parseConfigFileTextToJson(configPath, source)
 
   if (result.error) {
-    throw new Error(String(result.error.messageText))
+    throw new Error(String(result.error.messageText as string))
   }
 
   return result.config
