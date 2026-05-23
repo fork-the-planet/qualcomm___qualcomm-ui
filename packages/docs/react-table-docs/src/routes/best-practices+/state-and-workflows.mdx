@@ -148,9 +148,9 @@ Row index is always available and can look sufficient in static examples. It is 
 `row.index` is not stable identity. Index-keyed state can attach to the wrong record after sorting, filtering, refetching, insertion, deletion, grouping, expansion, or editing.
 
 ```tsx
-const [editedValues, setEditedValues] = useState<
-  Record<number, Partial<User>>
->({})
+const [editedValues, setEditedValues] = useState<Record<number, Partial<User>>>(
+  {},
+)
 
 const columns = useMemo<ColumnDef<User>[]>(
   () => [
