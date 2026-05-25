@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite"
 import {access, readFile} from "node:fs/promises"
 import {dirname, resolve} from "node:path"
 import {fileURLToPath} from "node:url"
-import {defineConfig} from "vite"
+import {defineConfig, type Plugin} from "vite"
 import tsconfigPaths from "vite-tsconfig-paths"
 
 import {
@@ -21,6 +21,28 @@ const demoElementsJsonPath = resolve(
   __dirname,
   "./angular-demo-module/generated/demo-elements.json",
 )
+
+function preserveRouteMdxSymlinks(): Plugin {
+  return {
+    enforce: "pre",
+    name: "preserve-route-mdx-symlinks",
+    resolveId(source) {
+      const [id, query] = source.split("?")
+      if (!id.includes("/src/routes/") || !id.endsWith(".mdx")) {
+        return
+      }
+
+      // React Router tracks route chunks by the symlinked route path.
+      // Preserve only route MDX symlinks so pnpm package symlinks still resolve
+      // normally.
+      const routeId = id.startsWith("/src/routes/")
+        ? resolve(__dirname, `.${id}`)
+        : id
+
+      return query ? `${routeId}?${query}` : routeId
+    },
+  }
+}
 
 let demoElementsJson = {}
 if (
@@ -59,6 +81,7 @@ export default defineConfig({
     ],
   },
   plugins: [
+    preserveRouteMdxSymlinks(),
     tailwindcss(),
     mdx({
       providerImportSource: "@mdx-js/react",
@@ -89,6 +112,13 @@ export default defineConfig({
       transformTailwindStyles: true,
     }),
   ],
+  resolve: {
+    alias: {
+      // Shared MDX resolves provider imports from packages/docs/shared.
+      // Use this docs app's MDX runtime while preserving route symlinks above.
+      "@mdx-js/react": resolve(__dirname, "./node_modules/@mdx-js/react"),
+    },
+  },
   server: {
     port: 4300,
     warmup: {

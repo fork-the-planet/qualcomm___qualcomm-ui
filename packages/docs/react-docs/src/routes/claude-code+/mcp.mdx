@@ -1,9 +1,0 @@
----
-title: MCP
----
-
-# {frontmatter.title}
-
-The QUI MCP server is a powerful utility that provides Claude Code with QUI component APIs, usage examples, and best practices.
-
-Access is available for Qualcomm developers only. Head over to the [internal documentation](https://qui-ai.qualcomm.com/docs/mcp/setup) to get started.
