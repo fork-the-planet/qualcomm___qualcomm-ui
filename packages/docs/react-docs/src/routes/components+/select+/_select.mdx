@@ -162,7 +162,10 @@ modal, portalProps, disable portal
 
 To use the Select within a [Dialog](/components/dialog), you need to avoid portalling the `Select.Positioner` to the document's body. To do this using the simple API, set `portalProps.disabled` to `true`:
 
-<Demo name="SelectWithinDialogDemo" component={demos.SelectWithinDialogDemo} />
+<Demo
+  name="SelectWithinDialogDemo"
+  component={demos.SelectWithinDialogDemo}
+/>
 
 ### Within Popover
 
@@ -189,7 +192,11 @@ rhf
 
 Use [React Hook Form](https://react-hook-form.com/) to handle the input state and validation. [ArkType](https://arktype.io/) works great for schema validation if you need it.
 
-<Demo expanded name="SelectHookFormDemo" component={demos.SelectHookFormDemo} />
+<Demo
+  expanded
+  name="SelectHookFormDemo"
+  component={demos.SelectHookFormDemo}
+/>
 
 ### Tanstack Form
 
@@ -230,7 +237,7 @@ Tanstack form also supports [ArkType](https://tanstack.com/form/latest/docs/fram
 
 ## API
 
-### \<Select\>
+### \<Select>
 
 The simple select extends the [Select.Root](./#select-root) component with the following props:
 
@@ -240,17 +247,19 @@ The simple select extends the [Select.Root](./#select-root) component with the f
 
 This section describes the elements of the Select's composite API.
 
-### \<Select.Root\>
+### \<Select.Root>
 
 <TypeDocProps name="SelectRootProps" />
 
-### \<Select.Label\>
+### \<Select.Label>
 
 <TypeDocProps name="SelectLabelProps" />
 
-<TypeDocAttributes name={["QdsSelectLabelBindings", "SelectLabelBindings"]} />
+<TypeDocAttributes
+  name={["QdsSelectLabelBindings", "SelectLabelBindings"]}
+/>
 
-### \<Select.Control\>
+### \<Select.Control>
 
 <TypeDocProps name="SelectControlProps" />
 
@@ -258,7 +267,7 @@ This section describes the elements of the Select's composite API.
   name={["QdsSelectControlBindings", "SelectControlBindings"]}
 />
 
-### \<Select.Indicator\>
+### \<Select.Indicator>
 
 <TypeDocProps name="SelectIndicatorProps" />
 
@@ -266,7 +275,7 @@ This section describes the elements of the Select's composite API.
   name={["QdsSelectIndicatorBindings", "SelectIndicatorBindings"]}
 />
 
-### \<Select.ValueText\>
+### \<Select.ValueText>
 
 <TypeDocProps name="SelectValueTextProps" />
 
@@ -274,7 +283,7 @@ This section describes the elements of the Select's composite API.
   name={["QdsSelectValueTextBindings", "SelectValueTextBindings"]}
 />
 
-### \<Select.ClearTrigger\>
+### \<Select.ClearTrigger>
 
 <TypeDocProps name="SelectClearTriggerProps" />
 
@@ -282,7 +291,7 @@ This section describes the elements of the Select's composite API.
   name={["QdsSelectClearTriggerBindings", "SelectClearTriggerBindings"]}
 />
 
-### \<Select.Positioner\>
+### \<Select.Positioner>
 
 <TypeDocProps name="SelectPositionerProps" />
 
@@ -290,7 +299,7 @@ This section describes the elements of the Select's composite API.
   name={["QdsSelectPositionerBindings", "SelectPositionerBindings"]}
 />
 
-### \<Select.Content\>
+### \<Select.Content>
 
 <TypeDocProps name="SelectContentProps" />
 
@@ -298,25 +307,25 @@ This section describes the elements of the Select's composite API.
   name={["QdsSelectContentBindings", "SelectContentBindings"]}
 />
 
-### \<Select.Item\>
+### \<Select.Item>
 
 <TypeDocProps name="SelectItemProps" />
 
 <TypeDocAttributes name={["QdsSelectItemBindings", "SelectItemBindings"]} />
 
-### \<Select.ItemCheckbox\>
+### \<Select.ItemCheckbox>
 
 Checkbox-style indicator for select items. Use this instead of `Select.ItemIndicator` when `selectionIndicator="checkbox"` is set on the root. The checkbox is always visible and fills when the item is selected.
 
 <TypeDocProps name="SelectItemCheckboxProps" />
 
-### \<Select.ItemIndicator\>
+### \<Select.ItemIndicator>
 
 <TypeDocProps name="SelectItemIndicatorProps" />
 
 <TypeDocAttributes name="SelectItemIndicatorBindings" />
 
-### \<Select.ItemText\>
+### \<Select.ItemText>
 
 <TypeDocProps name="SelectItemTextProps" />
 
@@ -324,7 +333,7 @@ Checkbox-style indicator for select items. Use this instead of `Select.ItemIndic
   name={["SelectItemTextBindings", "QdsSelectItemTextBindings"]}
 />
 
-### \<Select.HiddenSelect\>
+### \<Select.HiddenSelect>
 
 <TypeDocProps name="SelectHiddenSelectProps" />
 
@@ -332,13 +341,13 @@ Checkbox-style indicator for select items. Use this instead of `Select.ItemIndic
   name={["QdsSelectHiddenSelectBindings", "SelectHiddenSelectBindings"]}
 />
 
-### \<Select.Hint\>
+### \<Select.Hint>
 
 <TypeDocProps name="SelectHintProps" />
 
 <TypeDocAttributes name={["QdsInputHintBindings", "SelectHintBindings"]} />
 
-### \<Select.ErrorText\>
+### \<Select.ErrorText>
 
 <TypeDocProps name="SelectErrorTextProps" />
 
@@ -346,7 +355,7 @@ Checkbox-style indicator for select items. Use this instead of `Select.ItemIndic
   name={["QdsInputErrorTextBindings", "SelectErrorTextBindings"]}
 />
 
-### \<Select.ErrorIndicator\>
+### \<Select.ErrorIndicator>
 
 <TypeDocProps name="SelectErrorIndicatorProps" />
 

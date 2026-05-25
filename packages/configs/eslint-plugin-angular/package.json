@@ -8,6 +8,13 @@
   "publishConfig": {
     "access": "public"
   },
+  "keywords": [
+    "eslint",
+    "plugin",
+    "angular",
+    "accessibility",
+    "a11y"
+  ],
   "type": "module",
   "sideEffects": false,
   "files": [
@@ -53,12 +60,5 @@
   },
   "peerDependencies": {
     "eslint": "^9.0.0"
-  },
-  "keywords": [
-    "eslint",
-    "plugin",
-    "angular",
-    "accessibility",
-    "a11y"
-  ]
+  }
 }

@@ -34,7 +34,10 @@ export function TypedocPropsTable({
   }
 
   return (
-    <div className="typedoc-props__table-wrapper" suppressHydrationWarning>
+    <div
+      className="typedoc-props__table-wrapper qui-docs__mdx-scrollbar"
+      suppressHydrationWarning
+    >
       <table>
         <thead>
           <tr>

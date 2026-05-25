@@ -9,7 +9,7 @@
 
 .qui-page-link__root {
   border: solid 1px var(--color-border-neutral-01);
-  border-radius: 3px;
+  border-radius: var(--border-radius-sm);
   color: inherit;
   display: flex;
   flex-direction: column;

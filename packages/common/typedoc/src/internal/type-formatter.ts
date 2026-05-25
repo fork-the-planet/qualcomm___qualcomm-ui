@@ -1,13 +1,13 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
+import {format, type FormatConfig} from "oxfmt"
 import path from "path"
-import {format, type Options} from "prettier"
 import type {JSONOutput} from "typedoc"
 
 import type {FormattedType} from "@qualcomm-ui/typedoc-common"
 
-import {isTypeOverride} from "../guards"
+import {formatObjectPropertyName, isTypeOverride} from "../guards"
 
 import {dedent} from "./dedent"
 import type {KnownInterfaces, QuiDeclarationReflection} from "./types"
@@ -93,11 +93,11 @@ export function escape(src: string) {
 
 export const defaultPrintWidth = 30
 
-const prettierOpts: Options = {
+const formatConfig: FormatConfig = {
   bracketSpacing: false,
-  endOfLine: "auto",
+  endOfLine: "lf",
+  insertFinalNewline: false,
   jsxSingleQuote: true,
-  parser: "typescript",
   printWidth: defaultPrintWidth,
   semi: false,
   singleQuote: true,
@@ -118,14 +118,14 @@ export async function prettyType(type: string, printWidth: number) {
   try {
     // we need valid typescript for prettier to work.
     const dummyType = `type ___DUMMY = ${type}`
-    const result = await format(dummyType, {
-      ...prettierOpts,
+    const result = await format("file.tsx", dummyType, {
+      ...formatConfig,
       printWidth,
     })
-    const formatted = dedent(result.replace("type ___DUMMY =", " ").trim())
+    const formatted = dedent(result.code.replace("type ___DUMMY =", " ").trim())
     prettierCache[type] = formatted
     return formatted
-  } catch (e) {
+  } catch {
     return type
   }
 }
@@ -135,7 +135,9 @@ export async function prettyImportStatement(str: string): Promise<string> {
     return prettierCache[str]
   }
   try {
-    prettierCache[str] = (await format(str, prettierOpts)).trim()
+    prettierCache[str] = (
+      await format("file.tsx", str, formatConfig)
+    ).code.trim()
     return prettierCache[str]
   } catch (e) {
     return str
@@ -211,9 +213,9 @@ export class TypeFormatter {
           }`
         }
       }
-      const name = `${p.flags.isRest ? "..." : ""}${
-        p.name.includes("-") ? `"${p.name}"` : p.name
-      }`
+      const name = `${p.flags.isRest ? "..." : ""}${formatObjectPropertyName(
+        p.name,
+      )}`
       return `${name}${p.flags?.isOptional ? "?" : ""}: ${replaceType(
         p.type
           ? this.formatType(p.type as JSONOutput.SomeType, opts)
@@ -360,7 +362,7 @@ export class TypeFormatter {
         if (children && children.length > 0) {
           children.forEach((child) => {
             obj.push({
-              name: child.name.includes("-") ? `"${child.name}"` : child.name,
+              name: formatObjectPropertyName(child.name),
               optional: child.flags?.isOptional,
               type:
                 // exported variable with methods

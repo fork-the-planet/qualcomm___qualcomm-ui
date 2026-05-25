@@ -1,5 +1,17 @@
 # @qualcomm-ui/typedoc Changelog
 
+## 1.1.3
+
+May 23rd, 2026
+
+### Code Refactoring
+
+- [type-formatter]: replace prettier with oxfmt ([97cd586](https://github.com/qualcomm/qualcomm-ui/commit/97cd586))
+
+### Bug Fixes
+
+- [guards]: quote kebab-case object property identifiers ([f535c90](https://github.com/qualcomm/qualcomm-ui/commit/f535c90))
+
 ## 1.1.2
 
 May 22nd, 2026

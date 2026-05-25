@@ -8,6 +8,11 @@
   "publishConfig": {
     "access": "public"
   },
+  "keywords": [
+    "eslint",
+    "config",
+    "fsd"
+  ],
   "type": "module",
   "sideEffects": false,
   "files": [
@@ -44,10 +49,5 @@
     "eslint-plugin-import": ">=2.29.1",
     "typescript": ">=5.0.0",
     "typescript-eslint": ">=8.31.1"
-  },
-  "keywords": [
-    "eslint",
-    "config",
-    "fsd"
-  ]
+  }
 }

@@ -25,11 +25,7 @@ function UsersTable() {
       columnHelper.accessor("name", {
         header: "Name",
         cell: ({getValue}) =>
-          query.isFetching ? (
-            <Skeleton className="h-4 w-32" />
-          ) : (
-            getValue()
-          ),
+          query.isFetching ? <Skeleton className="h-4 w-32" /> : getValue(),
       }),
       columnHelper.accessor("status", {
         header: "Status",

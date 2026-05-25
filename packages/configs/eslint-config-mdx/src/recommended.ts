@@ -5,7 +5,7 @@ import {defineConfig} from "eslint/config"
 import * as mdx from "eslint-plugin-mdx"
 import reactPlugin from "eslint-plugin-react"
 
-export default defineConfig({
+const recommended = defineConfig({
   ...mdx.flat,
   plugins: {
     ...mdx.flat.plugins,
@@ -17,3 +17,5 @@ export default defineConfig({
     "no-unused-expressions": "off",
   },
 })
+
+export default recommended

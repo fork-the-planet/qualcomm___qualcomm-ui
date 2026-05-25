@@ -71,6 +71,7 @@ export function NpmInstallTabs({
           code={copyCommands.pnpm}
           language="shell"
           preProps={{
+            className: "qui-docs__mdx-scrollbar",
             style: {borderTopLeftRadius: 0, borderTopRightRadius: 0},
           }}
         />
@@ -82,6 +83,7 @@ export function NpmInstallTabs({
           code={copyCommands.npm}
           language="shell"
           preProps={{
+            className: "qui-docs__mdx-scrollbar",
             style: {borderTopLeftRadius: 0, borderTopRightRadius: 0},
           }}
         />
@@ -93,6 +95,7 @@ export function NpmInstallTabs({
           code={copyCommands.yarn}
           language="shell"
           preProps={{
+            className: "qui-docs__mdx-scrollbar",
             style: {borderTopLeftRadius: 0, borderTopRightRadius: 0},
           }}
         />

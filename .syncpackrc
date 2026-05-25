@@ -28,6 +28,7 @@
     "repository",
     "private",
     "publishConfig",
+    "keywords",
     "type",
     "bin",
     "sideEffects",

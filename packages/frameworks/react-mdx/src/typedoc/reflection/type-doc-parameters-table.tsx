@@ -16,7 +16,7 @@ export function TypeDocParametersTable({
   parameters,
 }: TypeDocParametersTableProps): ReactElement {
   return (
-    <div className="typedoc-props__table-wrapper">
+    <div className="typedoc-props__table-wrapper qui-docs__mdx-scrollbar">
       <table>
         <thead>
           <tr>
