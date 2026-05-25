@@ -1,17 +1,18 @@
 ---
-title: Marketplace
+title: Claude Code
 ---
 
 # {frontmatter.title}
 
-The Qualcomm UI plugin marketplace lets Claude Code discover available Qualcomm
-UI plugins. Follow this guide to register it with your Claude Code installation.
+The Qualcomm UI plugin marketplace lets Claude Code discover available Qualcomm UI plugins. Each plugin provides a set of skills for development assistance in problem domains like testing, QUI component best practices, and documentation authoring with MDX. These are in development and will evolve over time.
+
+Follow this guide to register it with your Claude Code installation.
 
 ## Prerequisites
 
 - Claude Code is installed.
 - Your Claude Code environment can clone from GitHub during marketplace
-registration.
+  registration.
 
 ## Register the marketplace
 
@@ -32,7 +33,7 @@ Claude Code clones the repository and reads the marketplace manifest from
 
 ```shell
 /plugin
-   ```
+```
 
 2. Filter for `qui`.
 
@@ -42,7 +43,7 @@ Claude Code clones the repository and reads the marketplace manifest from
 
 ```shell
 /reload-plugins
-   ```
+```
 
 ## Verify the marketplace
 
