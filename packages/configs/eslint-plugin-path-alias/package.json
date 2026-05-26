@@ -8,6 +8,10 @@
   "publishConfig": {
     "access": "public"
   },
+  "keywords": [
+    "eslint",
+    "config"
+  ],
   "type": "module",
   "sideEffects": false,
   "files": [
@@ -32,9 +36,5 @@
     "@typescript-eslint/rule-tester": "catalog:",
     "typescript-eslint": "catalog:",
     "vitest": "catalog:"
-  },
-  "keywords": [
-    "eslint",
-    "config"
-  ]
+  }
 }

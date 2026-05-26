@@ -22,16 +22,25 @@ const navConfig: NavConfig[] = [
   {
     id: "versioning",
   },
-
   {separator: true},
   {sectionTitle: "Integrations"},
   {
-    children: [{id: "mcp"}, {id: "marketplace"}, {id: "plugins"}],
-    id: "claude-code",
-  },
-  {
-    children: [{id: "mcp"}, {id: "marketplace"}, {id: "plugins"}],
-    id: "codex",
+    children: [
+      {id: "mcp"},
+      {id: "claude-code"},
+      {id: "codex"},
+      {
+        children: [
+          {id: "qui-docs"},
+          {id: "qui-react-development"},
+          {id: "qui-angular-development"},
+          {id: "ui-testing"},
+        ],
+        id: "plugins",
+      },
+    ],
+    id: "ai-tools",
+    title: "AI Tools",
   },
   {id: "eslint"},
   {id: "tailwind"},

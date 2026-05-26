@@ -1,0 +1,13 @@
+{
+  "extends": "@qualcomm-ui/tsconfig/tsconfig.node.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "composite": true,
+    "jsx": "preserve",
+    "outDir": "./node_modules/.tmp/tsbuildinfo-test",
+    "paths": {
+      "@qualcomm-ui/eslint-config-mdx": ["./src"]
+    }
+  },
+  "include": ["./tests", "./src"]
+}

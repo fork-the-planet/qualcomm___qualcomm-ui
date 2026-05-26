@@ -31,9 +31,10 @@ Generation runs automatically during `buildStart` (production builds) and `confi
 Define the `knowledge` field in your `qui-docs.config.ts`:
 
 ```typescript
-import type {QuiDocsConfig} from "@qualcomm-ui/mdx-vite"
 import {readFileSync} from "node:fs"
 import {resolve} from "node:path"
+
+import type {QuiDocsConfig} from "@qualcomm-ui/mdx-vite"
 
 export default {
   knowledge: {

@@ -38,6 +38,12 @@ export function isUndefinedType(
   return type?.type === "intrinsic" && type?.name === "undefined"
 }
 
+const identifierName = /^[$A-Z_a-z][$\w]*$/
+
+export function formatObjectPropertyName(name: string) {
+  return identifierName.test(name) ? name : JSON.stringify(name)
+}
+
 export function getTypeFromProperties(
   properties: SerializedType["properties"],
 ) {
@@ -47,7 +53,9 @@ export function getTypeFromProperties(
   return properties
     .filter((property) => property.name && property.type)
     .map((property) => {
-      return `${property.name}${property.required ? "" : "?"}: ${
+      return `${formatObjectPropertyName(property.name)}${
+        property.required ? "" : "?"
+      }: ${
         property.inheritDoc
           ? property.type
           : (property.referencedType ?? property.type)

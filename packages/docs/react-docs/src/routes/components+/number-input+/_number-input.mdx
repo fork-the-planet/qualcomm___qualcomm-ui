@@ -23,7 +23,10 @@ import {NumberInput} from "@qualcomm-ui/react/number-input"
 
 The simple API bundles all subcomponents together into a single component.
 
-<Demo name="NumberInputSimpleDemo" component={demos.NumberInputSimpleDemo} />
+<Demo
+  name="NumberInputSimpleDemo"
+  component={demos.NumberInputSimpleDemo}
+/>
 
 ### Composite
 
@@ -48,7 +51,10 @@ Pass the [min](./#min) and [max](./#max) props to the root component to set the 
 
 If the value entered is less than min or greater than max, it will be clamped to the nearest boundary on blur or enter.
 
-<Demo name="NumberInputMinMaxDemo" component={demos.NumberInputMinMaxDemo} />
+<Demo
+  name="NumberInputMinMaxDemo"
+  component={demos.NumberInputMinMaxDemo}
+/>
 
 ### Step interval
 
@@ -64,7 +70,10 @@ disabled, readonly, required
 
 The following shows how the NumberInput component appears in each interactive state.
 
-<Demo name="NumberInputStatesDemo" component={demos.NumberInputStatesDemo} />
+<Demo
+  name="NumberInputStatesDemo"
+  component={demos.NumberInputStatesDemo}
+/>
 
 ### Controlled Value
 
@@ -142,7 +151,7 @@ The error text and indicator will only render when [invalid](./#invalid) is true
 
 ## API
 
-### \<NumberInput\>
+### \<NumberInput>
 
 The `NumberInput` component supports all props from [NumberInput.Root](./#number-input-root), plus the additional props listed below.
 
@@ -150,27 +159,30 @@ The `NumberInput` component supports all props from [NumberInput.Root](./#number
 
 ## Composite API
 
-### \<NumberInput.Root\>
+### \<NumberInput.Root>
 
 <TypeDocProps name="NumberInputRootProps" />
 
 <TypeDocAttributes name="NumberInputRootBindings" />
 
-### \<NumberInput.Label\>
+### \<NumberInput.Label>
 
 <TypeDocProps name="NumberInputLabelProps" />
 
 <TypeDocAttributes name="NumberInputLabelBindings" />
 
-### \<NumberInput.InputGroup\>
+### \<NumberInput.InputGroup>
 
 <TypeDocProps name="NumberInputInputGroupProps" />
 
 <TypeDocAttributes
-  name={["NumberInputInputGroupBindings", "QdsNumberInputInputGroupBindings"]}
+  name={[
+    "NumberInputInputGroupBindings",
+    "QdsNumberInputInputGroupBindings",
+  ]}
 />
 
-### \<NumberInput.Input\>
+### \<NumberInput.Input>
 
 <TypeDocProps name="NumberInputInputProps" />
 
@@ -178,7 +190,7 @@ The `NumberInput` component supports all props from [NumberInput.Root](./#number
   name={["NumberInputInputBindings", "QdsNumberInputInputBindings"]}
 />
 
-### \<NumberInput.Control\>
+### \<NumberInput.Control>
 
 <TypeDocProps name="NumberInputControlProps" />
 
@@ -186,7 +198,7 @@ The `NumberInput` component supports all props from [NumberInput.Root](./#number
   name={["NumberInputControlBindings", "QdsNumberInputControlBindings"]}
 />
 
-### \<NumberInput.IncrementTrigger\>
+### \<NumberInput.IncrementTrigger>
 
 <TypeDocProps name="NumberInputIncrementTriggerProps" />
 
@@ -197,7 +209,7 @@ The `NumberInput` component supports all props from [NumberInput.Root](./#number
   ]}
 />
 
-### \<NumberInput.DecrementTrigger\>
+### \<NumberInput.DecrementTrigger>
 
 <TypeDocProps name="NumberInputDecrementTriggerProps" />
 
@@ -208,19 +220,19 @@ The `NumberInput` component supports all props from [NumberInput.Root](./#number
   ]}
 />
 
-### \<NumberInput.Hint\>
+### \<NumberInput.Hint>
 
 <TypeDocProps name="NumberInputHintProps" />
 
 <TypeDocAttributes name="NumberInputHintBindings" />
 
-### \<NumberInput.ErrorText\>
+### \<NumberInput.ErrorText>
 
 <TypeDocProps name="NumberInputErrorTextProps" />
 
 <TypeDocAttributes name="NumberInputErrorTextBindings" />
 
-### \<NumberInput.ErrorIndicator\>
+### \<NumberInput.ErrorIndicator>
 
 <TypeDocProps name="NumberInputErrorIndicatorProps" />
 
@@ -231,12 +243,15 @@ The `NumberInput` component supports all props from [NumberInput.Root](./#number
   ]}
 />
 
-### \<NumberInput.UnitSelect\>
+### \<NumberInput.UnitSelect>
 
 <TypeDocProps name="NumberInputUnitSelectProps" />
 
 <TypeDocAttributes
-  name={["NumberInputUnitSelectBindings", "QdsNumberInputUnitSelectBindings"]}
+  name={[
+    "NumberInputUnitSelectBindings",
+    "QdsNumberInputUnitSelectBindings",
+  ]}
 />
 
 ## Data Structures
