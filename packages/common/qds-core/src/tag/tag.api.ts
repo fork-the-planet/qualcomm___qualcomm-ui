@@ -22,6 +22,7 @@ export function createQdsTagApi(
   normalize: PropNormalizer,
 ): QdsTagApi {
   const size = props.size || "md"
+  const selected = props.variant === "selectable" && props.selected
 
   function isInteractiveVariant(): boolean {
     return props.variant === "link" || props.variant === "selectable"
@@ -32,7 +33,7 @@ export function createQdsTagApi(
     className: tagClasses.root,
     "data-disabled": booleanDataAttr(props.disabled),
     "data-emphasis": props.emphasis || "outline-brand",
-    "data-selected": booleanDataAttr(props.selected),
+    "data-selected": booleanDataAttr(selected),
     "data-shape": props.shape || props.radius || "square",
     "data-size": size,
     "data-variant": props.variant,

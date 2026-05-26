@@ -1,3 +1,5 @@
+import {useState} from "react"
+
 import {Plus, Star} from "lucide-react"
 import {describe, expect, test, vi} from "vitest"
 import {page} from "vitest/browser"
@@ -128,6 +130,107 @@ describe("Tag", () => {
     })
 
     expect(onClick).not.toHaveBeenCalled()
+  })
+
+  test("toggles data-selected on a selectable tag when uncontrolled", async () => {
+    await render(<Tag variant="selectable">Label</Tag>)
+
+    const tag = page.getByRole("button", {name: "Label"})
+    await expect.element(tag).not.toHaveAttribute("data-selected")
+
+    await tag.click()
+    await expect.element(tag).toHaveAttribute("data-selected", "")
+
+    await tag.click()
+    await expect.element(tag).not.toHaveAttribute("data-selected")
+  })
+
+  test("starts selected when defaultSelected is true and toggles from there", async () => {
+    await render(
+      <Tag defaultSelected variant="selectable">
+        Label
+      </Tag>,
+    )
+
+    const tag = page.getByRole("button", {name: "Label"})
+    await expect.element(tag).toHaveAttribute("data-selected", "")
+
+    await tag.click()
+    await expect.element(tag).not.toHaveAttribute("data-selected")
+  })
+
+  test("fires onSelectedChange with the next value on each toggle when uncontrolled", async () => {
+    const onSelectedChange = vi.fn()
+    await render(
+      <Tag onSelectedChange={onSelectedChange} variant="selectable">
+        Label
+      </Tag>,
+    )
+
+    const tag = page.getByRole("button", {name: "Label"})
+    await tag.click()
+    await tag.click()
+
+    await expect
+      .poll(() => onSelectedChange.mock.calls)
+      .toEqual([[true], [false]])
+  })
+
+  test("does not toggle internal state when controlled, but fires onSelectedChange", async () => {
+    const onSelectedChange = vi.fn()
+    await render(
+      <Tag
+        onSelectedChange={onSelectedChange}
+        selected={false}
+        variant="selectable"
+      >
+        Label
+      </Tag>,
+    )
+
+    const tag = page.getByRole("button", {name: "Label"})
+    await tag.click()
+
+    expect(onSelectedChange).toHaveBeenCalledWith(true)
+    await expect.element(tag).not.toHaveAttribute("data-selected")
+  })
+
+  test("reflects parent-driven changes to selected when controlled", async () => {
+    function ControlledTag() {
+      const [selected, setSelected] = useState(false)
+      return (
+        <Tag
+          onSelectedChange={setSelected}
+          selected={selected}
+          variant="selectable"
+        >
+          Label
+        </Tag>
+      )
+    }
+
+    await render(<ControlledTag />)
+
+    const tag = page.getByRole("button", {name: "Label"})
+    await expect.element(tag).not.toHaveAttribute("data-selected")
+
+    await tag.click()
+    await expect.element(tag).toHaveAttribute("data-selected", "")
+
+    await tag.click()
+    await expect.element(tag).not.toHaveAttribute("data-selected")
+  })
+
+  test("ignores selected on non-selectable variants", async () => {
+    await render(
+      <Tag selected variant="link">
+        Label
+      </Tag>,
+    )
+
+    await expect
+      .element(page.getByText("Label"))
+      .not.toHaveAttribute("data-selected")
   })
 
   test("disables the Dismiss button on a disabled dismissable tag", async () => {
