@@ -54,7 +54,6 @@ export function createQdsTagApi(
       return normalize.element({
         ...parts.endIcon,
         className: tagClasses.icon,
-        "data-size": size,
       })
     },
     getRootBindings(): QdsTagRootBindings {
@@ -66,7 +65,6 @@ export function createQdsTagApi(
       return normalize.element({
         ...parts.startIcon,
         className: tagClasses.icon,
-        "data-size": size,
       })
     },
     isInteractiveVariant,

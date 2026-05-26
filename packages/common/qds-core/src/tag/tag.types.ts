@@ -113,12 +113,10 @@ export type QdsTagRootBindings =
 
 export interface QdsTagStartIconBindings extends Part<"startIcon"> {
   className: TagClasses["icon"]
-  "data-size": QdsTagSize
 }
 
 export interface QdsTagEndIconBindings extends Part<"endIcon"> {
   className: TagClasses["icon"]
-  "data-size": QdsTagSize
 }
 
 export interface QdsTagDismissButtonBindings extends Part<"dismissButton"> {
