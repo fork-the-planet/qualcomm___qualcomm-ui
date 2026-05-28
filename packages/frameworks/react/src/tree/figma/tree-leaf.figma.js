@@ -2,14 +2,16 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
 // url=<FIGMA_COMPONENTS_BASE>?node-id=8859-910
-// component=Tree Leaf Node
+// component=TreeLeaf
 
 const figma = require("figma")
 
 const instance = figma.selectedInstance
 
-const variant = instance.getString("variant")
-const nodeText = instance.getString("leafText") || "Leaf name"
+const variant = instance.getEnum("variant", {
+  checkbox: "checkbox",
+  icon: "icon",
+})
 
 const figmaSize = instance.getString("size")
 const swapPropName = figmaSize === "sm" ? "iconXs" : "iconSm"
@@ -18,30 +20,23 @@ const iconInstance =
   variant === "icon" ? instance.getInstanceSwap(swapPropName) : undefined
 const iconName = iconInstance ? toLucideName(iconInstance.name) : "FileCode"
 
-const indicatorEl = `<div q-tree-node-indicator></div>`
-const iconEl =
-  variant === "icon" ? `<svg q-tree-node-icon qIcon="${iconName}"></svg>` : ""
-const checkboxEl =
-  variant === "checkbox" ? `<span q-tree-node-checkbox></span>` : ""
+const indicatorEl = variant === "icon" ? `<Tree.NodeIndicator />` : ""
+const iconEl = variant === "icon" ? `<Tree.NodeIcon icon={${iconName}} />` : ""
+const checkboxEl = variant === "checkbox" ? `<Tree.NodeCheckbox />` : ""
+const nodeText = instance.getString("leafText") || "Leaf name"
 
-const iconImports =
-  variant === "icon"
-    ? [
-        `import {IconDirective} from "@qualcomm-ui/angular/icon"`,
-        `import {${iconName}} from "lucide-angular"`,
-      ]
-    : []
+const example = figma.code`
+    <Tree.LeafNode>
+      ${indicatorEl}${iconEl}${checkboxEl}
+      <Tree.NodeText>${nodeText}</Tree.NodeText>
+    </Tree.LeafNode>`
 
 export default {
-  example: figma.code`
-    <div q-tree-leaf-node>
-      ${indicatorEl}${iconEl}${checkboxEl}
-      <span q-tree-node-text>${nodeText}</span>
-    </div>`,
-  id: "TreeLeafNode",
+  example,
+  id: "TreeLeaf",
   imports: [
-    `import {TreeModule} from "@qualcomm-ui/angular/tree"`,
-    ...iconImports,
+    `import {Tree} from "@qualcomm-ui/react/tree"`,
+    ...(variant === "icon" ? [`import {${iconName}} from "lucide-react"`] : []),
   ],
   metadata: {nestable: true},
 }
