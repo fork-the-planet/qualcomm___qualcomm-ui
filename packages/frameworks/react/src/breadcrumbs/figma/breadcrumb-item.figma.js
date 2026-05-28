@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
 // url=<FIGMA_COMPONENTS_BASE>?node-id=3728-13488
-// component=BreadcrumbItem
+// component=BreadcrumbsItem
 
 const figma = require("figma")
 
@@ -23,31 +23,20 @@ const iconInstance = showIcon
   : undefined
 const iconName = iconInstance ? toLucideName(iconInstance.name) : "FolderClosed"
 
+const currentAttr = state === "active" ? ` aria-current="page"` : ""
 const disabledAttr = state === "disabled" ? " disabled" : ""
-const currentPageAttr = state === "active" ? ` aria-current="page"` : ""
-const triggerTag = state === "active" ? "span" : "a"
-const hrefAttr = state === "active" ? "" : ` href="/components"`
-const iconEl = showIcon
-  ? `<svg q-breadcrumb-item-icon qIcon="${iconName}"></svg>`
-  : ""
+const iconAttr = showIcon ? ` icon={${iconName}}` : ""
+const renderAttr =
+  state === "active" ? "" : ` render={<a href="/components" />}`
+
+const example = figma.code`<Breadcrumbs.Item${currentAttr}${disabledAttr}${iconAttr}${renderAttr}>Breadcrumb</Breadcrumbs.Item>`
 
 export default {
-  example: figma.code`
-    <li${disabledAttr}${currentPageAttr} q-breadcrumb-item>
-      <${triggerTag}${hrefAttr} q-breadcrumb-item-trigger>
-        ${iconEl}
-        Breadcrumb
-      </${triggerTag}>
-    </li>`,
-  id: "BreadcrumbItem",
+  example,
+  id: "BreadcrumbsItem",
   imports: [
-    `import {BreadcrumbsModule} from "@qualcomm-ui/angular/breadcrumbs"`,
-    ...(showIcon
-      ? [
-          `import {IconDirective} from "@qualcomm-ui/angular/icon"`,
-          `import {${iconName}} from "lucide-angular"`,
-        ]
-      : []),
+    `import {Breadcrumbs} from "@qualcomm-ui/react/breadcrumbs"`,
+    ...(showIcon ? [`import {${iconName}} from "lucide-react"`] : []),
   ],
   metadata: {nestable: true},
 }
