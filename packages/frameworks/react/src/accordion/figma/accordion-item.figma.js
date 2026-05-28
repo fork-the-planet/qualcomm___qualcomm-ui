@@ -25,44 +25,34 @@ const iconInstance = needsIcon
 const iconName = iconInstance ? toLucideName(iconInstance.name) : "AArrowDown"
 
 const disabledAttr = disabled ? " disabled" : ""
-const iconAttr = icon ? ` icon="${iconName}"` : ""
+const iconAttr = icon ? ` icon={${iconName}}` : ""
 const secondaryTextAttr =
   subHeader && subHeaderText ? ` secondaryText="${subHeaderText}"` : ""
-const textAttr = ` text="${header}"`
 
 let example
 if (leftChevron) {
   const secondaryTextEl =
     subHeader && subHeaderText
-      ? `<span q-accordion-item-secondary-text>${subHeaderText}</span>`
+      ? `\n          <Accordion.ItemSecondaryText>${subHeaderText}</Accordion.ItemSecondaryText>`
       : ""
   example = figma.code`
-    <div${disabledAttr} q-accordion-item-root value="">
-      <button q-accordion-item-trigger>
-        <q-accordion-item-indicator />
-        <span q-accordion-item-text>${header}</span>
-        ${secondaryTextEl}
-      </button>
-      <div q-accordion-item-content>Panel contents</div>
-    </div>`
+    <Accordion.ItemRoot${disabledAttr} value="">
+      <Accordion.ItemTrigger>
+        <Accordion.ItemIndicator />
+        <Accordion.ItemText>${header}</Accordion.ItemText>${secondaryTextEl}
+      </Accordion.ItemTrigger>
+      <Accordion.ItemContent>Panel contents</Accordion.ItemContent>
+    </Accordion.ItemRoot>`
 } else {
-  example = figma.code`
-    <div${disabledAttr}${iconAttr} q-accordion-item${secondaryTextAttr}${textAttr} value="">
-      Panel contents
-    </div>`
+  example = figma.code`<Accordion.Item${disabledAttr}${iconAttr}${secondaryTextAttr} text="${header}" value="">Panel contents</Accordion.Item>`
 }
 
 export default {
   example,
   id: "AccordionItem",
   imports: [
-    `import {AccordionModule} from "@qualcomm-ui/angular/accordion"`,
-    ...(needsIcon
-      ? [
-          `import {IconDirective} from "@qualcomm-ui/angular/icon"`,
-          `import {${iconName}} from "lucide-angular"`,
-        ]
-      : []),
+    `import {Accordion} from "@qualcomm-ui/react/accordion"`,
+    ...(needsIcon ? [`import {${iconName}} from "lucide-react"`] : []),
   ],
   metadata: {nestable: true},
 }
