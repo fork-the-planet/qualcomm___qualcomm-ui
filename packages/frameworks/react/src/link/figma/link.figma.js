@@ -50,8 +50,8 @@ const endIconName = endIconInstance
 const disabledAttr = disabled ? " disabled" : ""
 const emphasisAttr = emphasis ? ` emphasis="${emphasis}"` : ""
 const sizeAttr = size ? ` size="${size}"` : ""
-const startIconAttr = startIcon ? ` startIcon="${startIconName}"` : ""
-const endIconAttr = endIcon ? ` endIcon="${endIconName}"` : ""
+const startIconAttr = startIcon ? ` startIcon={${startIconName}}` : ""
+const endIconAttr = endIcon ? ` endIcon={${endIconName}}` : ""
 
 const icons = [
   ...new Set(
@@ -59,15 +59,15 @@ const icons = [
   ),
 ]
 
-const example = figma.code`<a${disabledAttr}${emphasisAttr}${endIconAttr} href="#" q-link${sizeAttr}${startIconAttr}>${label}</a>`
+const example = figma.code`<Link${disabledAttr}${emphasisAttr}${sizeAttr}${startIconAttr}${endIconAttr} href="#">${label}</Link>`
 
 export default {
   example,
   id: "Link",
   imports: [
-    `import {LinkDirective} from "@qualcomm-ui/angular/link"`,
+    `import {Link} from "@qualcomm-ui/react/link"`,
     ...(icons.length > 0
-      ? [`import {${icons.join(", ")}} from "lucide-angular"`]
+      ? [`import {${icons.join(", ")}} from "lucide-react"`]
       : []),
   ],
   metadata: {nestable: true},
