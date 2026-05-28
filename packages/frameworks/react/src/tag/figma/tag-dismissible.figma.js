@@ -29,21 +29,16 @@ const disabledAttr = disabled ? " disabled" : ""
 const emphasisAttr = emphasis ? ` emphasis="${emphasis}"` : ""
 const shapeAttr = shape ? ` shape="${shape}"` : ""
 const sizeAttr = size ? ` size="${size}"` : ""
-const startIconAttr = startIcon ? ` startIcon="${startIconName}"` : ""
+const startIconAttr = startIcon ? ` startIcon={${startIconName}}` : ""
 
-const example = figma.code`<span${disabledAttr}${emphasisAttr} q-tag${shapeAttr}${sizeAttr}${startIconAttr} variant="dismissable">${label}</span>`
+const example = figma.code`<Tag${disabledAttr}${emphasisAttr}${shapeAttr}${sizeAttr}${startIconAttr} variant="dismissable">${label}</Tag>`
 
 export default {
   example,
   id: "TagDismissible",
   imports: [
-    `import {TagDirective} from "@qualcomm-ui/angular/tag"`,
-    ...(startIcon
-      ? [
-          `import {IconDirective} from "@qualcomm-ui/angular/icon"`,
-          `import {${startIconName}} from "lucide-angular"`,
-        ]
-      : []),
+    `import {Tag} from "@qualcomm-ui/react/tag"`,
+    ...(startIcon ? [`import {${startIconName}} from "lucide-react"`] : []),
   ],
   metadata: {nestable: true},
 }
