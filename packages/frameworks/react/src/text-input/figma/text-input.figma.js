@@ -43,7 +43,7 @@ const endIconName = endIconInstance
 
 const defaultValueAttr = defaultValue ? ` defaultValue="${defaultValue}"` : ""
 const disabledAttr = disabled ? " disabled" : ""
-const endIconAttr = endIcon ? ` endIcon="${endIconName}"` : ""
+const endIconAttr = endIcon ? ` endIcon={${endIconName}}` : ""
 const errorTextAttr = errorText ? ` errorText="${errorText}"` : ""
 const hintAttr = hint ? ` hint="${hint}"` : ""
 const invalidAttr = invalid ? " invalid" : ""
@@ -54,7 +54,7 @@ const placeholderAttr = placeholder
 const readOnlyAttr = readOnly ? " readOnly" : ""
 const requiredAttr = required ? " required" : ""
 const sizeAttr = size === "md" ? "" : ` size="${size}"`
-const startIconAttr = startIcon ? ` startIcon="${startIconName}"` : ""
+const startIconAttr = startIcon ? ` startIcon={${startIconName}}` : ""
 
 const icons = [
   ...new Set(
@@ -62,18 +62,15 @@ const icons = [
   ),
 ]
 
+const example = figma.code`<TextInput${defaultValueAttr}${disabledAttr}${endIconAttr}${errorTextAttr}${hintAttr}${invalidAttr}${labelAttr}${placeholderAttr}${readOnlyAttr}${requiredAttr}${sizeAttr}${startIconAttr} />`
+
 export default {
-  example: figma.code`
-    <q-text-input${defaultValueAttr}${disabledAttr}${endIconAttr}${errorTextAttr}${hintAttr}${invalidAttr}${labelAttr}${placeholderAttr}${readOnlyAttr}${requiredAttr}${sizeAttr}${startIconAttr}>
-    </q-text-input>`,
+  example,
   id: "TextInput",
   imports: [
-    `import {TextInputModule} from "@qualcomm-ui/angular/text-input"`,
+    `import {TextInput} from "@qualcomm-ui/react/text-input"`,
     ...(icons.length > 0
-      ? [
-          `import {IconDirective} from "@qualcomm-ui/angular/icon"`,
-          `import {${icons.join(", ")}} from "lucide-angular"`,
-        ]
+      ? [`import {${icons.join(", ")}} from "lucide-react"`]
       : []),
   ],
   metadata: {nestable: true},
