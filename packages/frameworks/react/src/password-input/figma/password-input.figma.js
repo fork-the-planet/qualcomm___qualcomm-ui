@@ -8,21 +8,16 @@ const figma = require("figma")
 
 const instance = figma.selectedInstance
 
-const defaultValue = instance.getBoolean("filled", {
-  true: instance.getString("passwordText"),
-})
-const defaultVisible = instance.getEnum("password", {
-  show: true,
-})
-const label = instance.getBoolean("label", {
-  true: instance.getString("labelText"),
-})
-const hint = instance.getBoolean("hint", {
-  true: instance.getString("hintText"),
-})
-const placeholder = instance.getBoolean("filled", {
-  false: instance.getString("holderText"),
-})
+const filled = instance.getBoolean("filled")
+const defaultValue = filled ? instance.getString("passwordText") : undefined
+const placeholder = !filled ? instance.getString("holderText") : undefined
+const defaultVisible = instance.getEnum("password", {show: true})
+const label = instance.getBoolean("label")
+  ? instance.getString("labelText")
+  : undefined
+const hint = instance.getBoolean("hint")
+  ? instance.getString("hintText")
+  : undefined
 const state = instance.getString("state")
 const disabled = state === "disabled"
 const invalid = state === "invalid" || state === "invalid-focus"
@@ -50,16 +45,16 @@ const placeholderAttr = placeholder
 const readOnlyAttr = readOnly ? " readOnly" : ""
 const requiredAttr = required ? " required" : ""
 const sizeAttr = size === "md" ? "" : ` size="${size}"`
-const startIconAttr = startIcon ? ` startIcon="${iconName}"` : ""
+const startIconAttr = startIcon ? ` startIcon={${iconName}}` : ""
+
+const example = figma.code`<PasswordInput${defaultValueAttr}${defaultVisibleAttr}${disabledAttr}${errorTextAttr}${hintAttr}${invalidAttr}${labelAttr}${placeholderAttr}${readOnlyAttr}${requiredAttr}${sizeAttr}${startIconAttr} />`
 
 export default {
-  example: figma.code`
-    <q-password-input${defaultValueAttr}${defaultVisibleAttr}${disabledAttr}${errorTextAttr}${hintAttr}${invalidAttr}${labelAttr}${placeholderAttr}${readOnlyAttr}${requiredAttr}${sizeAttr}${startIconAttr}>
-    </q-password-input>`,
+  example,
   id: "PasswordInput",
   imports: [
-    `import {PasswordInputModule} from "@qualcomm-ui/angular/password-input"`,
-    ...(startIcon ? [`import {${iconName}} from "lucide-angular"`] : []),
+    `import {PasswordInput} from "@qualcomm-ui/react/password-input"`,
+    ...(startIcon ? [`import {${iconName}} from "lucide-react"`] : []),
   ],
   metadata: {nestable: true},
 }
