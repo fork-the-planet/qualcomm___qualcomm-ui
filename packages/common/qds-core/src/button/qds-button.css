@@ -526,15 +526,6 @@
       }
     }
   }
-
-  /* For when the icon is declared as a node, i.e. `<ExternalLink />` */
-  .lucide {
-    height: var(--icon-size);
-    stroke: currentColor;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    width: var(--icon-size);
-  }
 }
 
 .qui-button-group {
