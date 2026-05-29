@@ -118,7 +118,13 @@ export const configSchema = implement<QuiDocsConfig>().with({
       z.literal("user-and-timestamp"),
     ])
     .optional(),
-  routingStrategy: z.union([z.literal("vite-generouted"), z.any()]).optional(),
+  routingStrategy: z
+    .union([
+      z.literal("vite-generouted"),
+      z.literal("react-router-directory-groups"),
+      z.any(),
+    ])
+    .optional(),
   throwOnError: z.boolean().optional(),
   typeDocProps: z.string().optional(),
   typeDocPropsOptions: typeDocPropsSchema.optional(),
