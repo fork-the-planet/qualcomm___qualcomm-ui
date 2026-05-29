@@ -31,6 +31,7 @@ import {
   remarkCodeTabs,
   remarkFrontmatterDescription,
   remarkFrontmatterTitle,
+  remarkSerializeJsxRender,
   remarkSpoilers,
   remarkSteps,
 } from "./remark"
@@ -117,6 +118,7 @@ export function getRemarkPlugins(): PluggableList {
     remarkFrontmatterDescription,
     remarkSpoilers,
     remarkSteps,
+    remarkSerializeJsxRender,
     remarkExtractMeta,
   ]
 }

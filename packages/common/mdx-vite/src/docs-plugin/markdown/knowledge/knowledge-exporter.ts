@@ -26,6 +26,7 @@ import {
   getPathnameFromPathSegments,
   getPathSegmentsFromFileName,
 } from "../../nav-builder"
+import {remarkSerializeJsxKnowledge} from "../../remark"
 import type {MdxFileReader} from "../markdown-file-reader"
 import {createRemarkProcessor} from "../remark-pipeline"
 
@@ -371,6 +372,7 @@ export class KnowledgeExporter {
       gfm: true,
       mdx: true,
       plugins: [
+        remarkSerializeJsxKnowledge,
         formatNpmInstallTabs,
         this.propFormatter.propsToMarkdownList(),
         this.formatFrontmatterExpressions(frontmatter),
