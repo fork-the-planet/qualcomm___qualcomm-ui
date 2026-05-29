@@ -47,19 +47,19 @@ const swapPropName = {
 const iconInstance = instance.getInstanceSwap(swapPropName)
 const iconName = iconInstance ? toLucideName(iconInstance.name) : "AArrowDown"
 
-const variantAttr = variant ? ` variant="${variant}"` : ""
+const disabledAttr = disabled ? " disabled" : ""
 const emphasisAttr = emphasis ? ` emphasis="${emphasis}"` : ""
 const sizeAttr = size ? ` size="${size}"` : ""
-const disabledAttr = disabled ? " disabled" : ""
+const variantAttr = variant ? ` variant="${variant}"` : ""
 
-const example = figma.code`<span${disabledAttr}${emphasisAttr} icon="${iconName}" q-icon-badge${sizeAttr}${variantAttr}></span>`
+const example = figma.code`<IconBadge${disabledAttr}${emphasisAttr} icon={${iconName}}${sizeAttr}${variantAttr} />`
 
 export default {
   example,
   id: "IconBadge",
   imports: [
-    `import {IconBadgeDirective} from "@qualcomm-ui/angular/badge"`,
-    `import {${iconName}} from "lucide-angular"`,
+    `import {IconBadge} from "@qualcomm-ui/react/badge"`,
+    `import {${iconName}} from "lucide-react"`,
   ],
   metadata: {nestable: true},
 }

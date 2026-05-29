@@ -1,16 +1,17 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-// url=<FIGMA_COMPONENTS_BASE>?node-id=4227-2418
-// component=TextInput
+// url=<FIGMA_COMPONENTS_BASE>?node-id=5307-3964
+// component=PasswordInput
 
 const figma = require("figma")
 
 const instance = figma.selectedInstance
 
 const filled = instance.getBoolean("filled")
-const defaultValue = filled ? instance.getString("inputText") : undefined
+const defaultValue = filled ? instance.getString("passwordText") : undefined
 const placeholder = !filled ? instance.getString("holderText") : undefined
+const defaultVisible = instance.getEnum("password", {show: true})
 const label = instance.getBoolean("label")
   ? instance.getString("labelText")
   : undefined
@@ -21,60 +22,39 @@ const state = instance.getString("state")
 const disabled = state === "disabled"
 const invalid = state === "invalid" || state === "invalid-focus"
 const readOnly = state === "read-only"
-const errorText = invalid ? instance.getString("errorText") : undefined
 const required = instance.getBoolean("required")
 const startIcon = instance.getBoolean("startIcon")
-const endIcon = instance.getBoolean("endIcon")
 const size = instance.getString("size")
-const startSwap = size === "lg" ? "iconLsm" : "iconLxs"
-const endSwap = size === "lg" ? "iconRsm" : "iconRxs"
+const swapPropName = size === "lg" ? "iconSm" : "iconXs"
 
-const startIconInstance = startIcon
-  ? instance.getInstanceSwap(startSwap)
+const iconInstance = startIcon
+  ? instance.getInstanceSwap(swapPropName)
   : undefined
-const endIconInstance = endIcon ? instance.getInstanceSwap(endSwap) : undefined
-
-const startIconName = startIconInstance
-  ? toLucideName(startIconInstance.name)
-  : "Search"
-const endIconName = endIconInstance
-  ? toLucideName(endIconInstance.name)
-  : "Calendar"
+const iconName = iconInstance ? toLucideName(iconInstance.name) : "KeyRound"
 
 const defaultValueAttr = defaultValue ? ` defaultValue="${defaultValue}"` : ""
+const defaultVisibleAttr = defaultVisible ? " defaultVisible" : ""
 const disabledAttr = disabled ? " disabled" : ""
-const endIconAttr = endIcon ? ` endIcon="${endIconName}"` : ""
-const errorTextAttr = errorText ? ` errorText="${errorText}"` : ""
+const errorTextAttr = invalid ? ` errorText="Error message"` : ""
 const hintAttr = hint ? ` hint="${hint}"` : ""
 const invalidAttr = invalid ? " invalid" : ""
 const labelAttr = label ? ` label="${label}"` : ""
 const placeholderAttr = placeholder
   ? ` placeholder="${placeholder}"`
-  : ` placeholder="Enter text"`
+  : ` placeholder="Enter password"`
 const readOnlyAttr = readOnly ? " readOnly" : ""
 const requiredAttr = required ? " required" : ""
 const sizeAttr = size === "md" ? "" : ` size="${size}"`
-const startIconAttr = startIcon ? ` startIcon="${startIconName}"` : ""
+const startIconAttr = startIcon ? ` startIcon={${iconName}}` : ""
 
-const icons = [
-  ...new Set(
-    [startIcon && startIconName, endIcon && endIconName].filter(Boolean),
-  ),
-]
+const example = figma.code`<PasswordInput${defaultValueAttr}${defaultVisibleAttr}${disabledAttr}${errorTextAttr}${hintAttr}${invalidAttr}${labelAttr}${placeholderAttr}${readOnlyAttr}${requiredAttr}${sizeAttr}${startIconAttr} />`
 
 export default {
-  example: figma.code`
-    <q-text-input${defaultValueAttr}${disabledAttr}${endIconAttr}${errorTextAttr}${hintAttr}${invalidAttr}${labelAttr}${placeholderAttr}${readOnlyAttr}${requiredAttr}${sizeAttr}${startIconAttr}>
-    </q-text-input>`,
-  id: "TextInput",
+  example,
+  id: "PasswordInput",
   imports: [
-    `import {TextInputModule} from "@qualcomm-ui/angular/text-input"`,
-    ...(icons.length > 0
-      ? [
-          `import {IconDirective} from "@qualcomm-ui/angular/icon"`,
-          `import {${icons.join(", ")}} from "lucide-angular"`,
-        ]
-      : []),
+    `import {PasswordInput} from "@qualcomm-ui/react/password-input"`,
+    ...(startIcon ? [`import {${iconName}} from "lucide-react"`] : []),
   ],
   metadata: {nestable: true},
 }

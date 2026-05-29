@@ -2,22 +2,15 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
 // url=<FIGMA_COMPONENTS_BASE>?node-id=7394-1748
-// component=Contained tab group
+// component=ContainedTabGroup
 
 const figma = require("figma")
 
 const instance = figma.selectedInstance
 
-const iconVariant = instance.getEnum("iconVariant", {
-  filled: "filled",
-})
-const orientation = instance.getEnum("orientation", {
-  vertical: "vertical",
-})
-const size = instance.getEnum("size", {
-  sm: "sm",
-})
-
+const iconVariant = instance.getEnum("iconVariant", {filled: "filled"})
+const orientation = instance.getEnum("orientation", {vertical: "vertical"})
+const size = instance.getEnum("size", {sm: "sm"})
 const plusBtn = instance.getBoolean("plusBtn")
 
 const iconVariantAttr = iconVariant ? ` iconVariant="${iconVariant}"` : ""
@@ -41,28 +34,28 @@ const children = items.reduce(
 )
 
 const addButtonEl = plusBtn
-  ? `\n<button aria-label="Add tab" q-button size="sm" startIcon="Plus" variant="ghost" (click)="addTab()"></button>`
+  ? `\n<Button aria-label="Add tab" onClick={addTab} size="sm" startIcon={Plus} variant="ghost" />`
   : ""
 
 const panels = items
-  .map((_, i) => `<div q-tabs-panel value="tab-id">Panel ${i + 1}</div>`)
+  .map((_, i) => `<Tabs.Panel value="tab-id">Content ${i + 1}</Tabs.Panel>`)
   .join("\n")
 
 export default {
   example: figma.code`
-    <div defaultValue="tab-id"${iconVariantAttr}${orientationAttr} q-tabs-root${sizeAttr} variant="contained">
-      <div q-tabs-list>
+    <Tabs.Root defaultValue="tab1"${iconVariantAttr}${orientationAttr}${sizeAttr} variant="contained">
+      <Tabs.List>
         ${children}${addButtonEl}
-      </div>
+      </Tabs.List>
       ${panels}
-    </div>`,
+    </Tabs.Root>`,
   id: "ContainedTabGroup",
   imports: [
-    `import {TabsModule} from "@qualcomm-ui/angular/tabs"`,
+    `import {Tab, Tabs} from "@qualcomm-ui/react/tabs"`,
     ...(plusBtn
       ? [
-          `import {ButtonModule} from "@qualcomm-ui/angular/button"`,
-          `import {Plus} from "lucide-angular"`,
+          `import {Button} from "@qualcomm-ui/react/button"`,
+          `import {Plus} from "lucide-react"`,
         ]
       : []),
   ],

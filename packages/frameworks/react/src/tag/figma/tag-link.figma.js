@@ -35,28 +35,24 @@ const disabledAttr = disabled ? " disabled" : ""
 const emphasisAttr = emphasis ? ` emphasis="${emphasis}"` : ""
 const shapeAttr = shape ? ` shape="${shape}"` : ""
 const sizeAttr = size === "md" ? "" : ` size="${size}"`
-const startIconAttr = startIcon ? ` startIcon="${startIconName}"` : ""
-const endIconAttr = endIcon ? ` endIcon="${endIconName}"` : ""
+const startIconAttr = startIcon ? ` startIcon={${startIconName}}` : ""
+const endIconAttr = endIcon ? ` endIcon={${endIconName}}` : ""
 
 const icons = [
   ...new Set(
     [startIcon && startIconName, endIcon && endIconName].filter(Boolean),
   ),
 ]
-const needsIcon = icons.length > 0
 
-const example = figma.code`<button${disabledAttr}${emphasisAttr} q-tag${shapeAttr}${sizeAttr}${startIconAttr}${endIconAttr} variant="link">${label}</button>`
+const example = figma.code`<Tag${disabledAttr}${emphasisAttr}${shapeAttr}${sizeAttr}${startIconAttr}${endIconAttr} variant="link">${label}</Tag>`
 
 export default {
   example,
   id: "TagLink",
   imports: [
-    `import {TagDirective} from "@qualcomm-ui/angular/tag"`,
-    ...(needsIcon
-      ? [
-          `import {IconDirective} from "@qualcomm-ui/angular/icon"`,
-          `import {${icons.join(", ")}} from "lucide-angular"`,
-        ]
+    `import {Tag} from "@qualcomm-ui/react/tag"`,
+    ...(icons.length > 0
+      ? [`import {${icons.join(", ")}} from "lucide-react"`]
       : []),
   ],
   metadata: {nestable: true},

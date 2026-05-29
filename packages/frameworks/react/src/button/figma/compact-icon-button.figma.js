@@ -1,8 +1,8 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-// url=<FIGMA_COMPONENTS_BASE>?node-id=22926-18170
-// component=Button compact
+// url=<FIGMA_COMPONENTS_BASE>?node-id=22861-1682
+// component=IconButton
 
 const figma = require("figma")
 
@@ -15,12 +15,9 @@ const emphasis = instance.getEnum("emphasis", {
   primary: "primary",
   "white-persistent": "white-persistent",
 })
-const icon = instance.getEnum("icon", {
-  end: "end",
-  none: "none",
-  start: "start",
+const shape = instance.getEnum("shape", {
+  rounded: "rounded",
 })
-const label = instance.getString("label") || "Button"
 const size = instance.getEnum("size", {
   large: "lg",
   small: "sm",
@@ -30,36 +27,26 @@ const variant = instance.getEnum("variant", {
   outline: "outline",
 })
 
-const iconInstance =
-  icon === "start" || icon === "end"
-    ? instance.getInstanceSwap("iconXxs")
-    : undefined
+const figmaSize = instance.getString("size")
+const swapPropName = figmaSize === "small" ? "iconXxs" : "iconXs"
 
+const iconInstance = instance.getInstanceSwap(swapPropName)
 const iconName = iconInstance ? toLucideName(iconInstance.name) : "Star"
-const needsIcon = icon === "start" || icon === "end"
 
 const disabledAttr = disabled ? " disabled" : ""
 const emphasisAttr = emphasis ? ` emphasis="${emphasis}"` : ""
+const shapeAttr = shape ? ` shape="${shape}"` : ""
 const sizeAttr = size ? ` size="${size}"` : ""
 const variantAttr = variant ? ` variant="${variant}"` : ""
-const startIconEl =
-  icon === "start" ? `<svg q-start-icon qIcon="${iconName}"></svg>` : ""
-const endIconEl =
-  icon === "end" ? `<svg q-end-icon qIcon="${iconName}"></svg>` : ""
 
-const example = figma.code`<button density="compact"${disabledAttr}${emphasisAttr} q-button${sizeAttr}${variantAttr}>${startIconEl}${label}${endIconEl}</button>`
+const example = figma.code`<IconButton density="compact" icon={${iconName}}${variantAttr}${emphasisAttr}${shapeAttr}${sizeAttr}${disabledAttr} />`
 
 export default {
   example,
-  id: "CompactButton",
+  id: "IconButton",
   imports: [
-    `import {ButtonModule} from "@qualcomm-ui/angular/button"`,
-    ...(needsIcon
-      ? [
-          `import {IconDirective} from "@qualcomm-ui/angular/icon"`,
-          `import {${iconName}} from "lucide-angular"`,
-        ]
-      : []),
+    `import {IconButton} from "@qualcomm-ui/react/button"`,
+    `import {${iconName}} from "lucide-react"`,
   ],
   metadata: {nestable: true},
 }

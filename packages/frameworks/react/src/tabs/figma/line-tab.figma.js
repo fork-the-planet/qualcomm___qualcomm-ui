@@ -25,26 +25,21 @@ const iconInstance = needsIcon
 const iconName = iconInstance ? toLucideName(iconInstance.name) : "AArrowDown"
 
 const disabledAttr = disabled ? " disabled" : ""
-const startIconAttr = needsIcon ? ` startIcon="${iconName}"` : ""
+const startIconAttr = needsIcon ? ` startIcon={${iconName}}` : ""
 const ariaLabelAttr = icon === "only" ? ` aria-label="${label}"` : ""
 const labelText = icon === "only" ? "" : label
 
 const example = figma.code`
-    <div${disabledAttr} q-tab-root value="tab-id">
-      <button${ariaLabelAttr}${startIconAttr} q-tab-button>${labelText}</button>
-    </div>`
+    <Tab.Root${disabledAttr} value="tab-id">
+      <Tab.Button${ariaLabelAttr}${startIconAttr}>${labelText}</Tab.Button>
+    </Tab.Root>`
 
 export default {
   example,
   id: "LineTab",
   imports: [
-    `import {TabsModule} from "@qualcomm-ui/angular/tabs"`,
-    ...(needsIcon
-      ? [
-          `import {IconDirective} from "@qualcomm-ui/angular/icon"`,
-          `import {${iconName}} from "lucide-angular"`,
-        ]
-      : []),
+    `import {Tab} from "@qualcomm-ui/react/tabs"`,
+    ...(needsIcon ? [`import {${iconName}} from "lucide-react"`] : []),
   ],
   metadata: {nestable: true},
 }

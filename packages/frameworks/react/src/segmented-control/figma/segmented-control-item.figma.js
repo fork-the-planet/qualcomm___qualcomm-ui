@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
 // url=<FIGMA_COMPONENTS_BASE>?node-id=7169-3039
-// component=_Segmented control foundation
+// component=SegmentedControlItem
 
 const figma = require("figma")
 
@@ -27,24 +27,18 @@ const iconInstance = needsIcon
 const iconName = iconInstance ? toLucideName(iconInstance.name) : "AArrowDown"
 
 const disabledAttr = disabled ? " disabled" : ""
-const ariaLabelAttr = icon === "only" ? ` aria-label="Section"` : ""
-const iconAttr = needsIcon ? ` icon="${iconName}"` : ""
+const iconAttr = needsIcon ? ` icon={${iconName}}` : ""
 const textAttr = icon === "only" ? "" : ` text="${text}"`
 const valueAttr = icon === "only" ? ` value="section"` : ` value="${text}"`
 
-const example = figma.code`<label${disabledAttr}${ariaLabelAttr}${iconAttr} q-segmented-control-item${textAttr}${valueAttr}></label>`
+const example = figma.code`<SegmentedControl.Item${disabledAttr}${iconAttr}${textAttr}${valueAttr} />`
 
 export default {
   example,
   id: "SegmentedControlItem",
   imports: [
-    `import {SegmentedControlModule} from "@qualcomm-ui/angular/segmented-control"`,
-    ...(needsIcon
-      ? [
-          `import {IconDirective} from "@qualcomm-ui/angular/icon"`,
-          `import {${iconName}} from "lucide-angular"`,
-        ]
-      : []),
+    `import {SegmentedControl} from "@qualcomm-ui/react/segmented-control"`,
+    ...(needsIcon ? [`import {${iconName}} from "lucide-react"`] : []),
   ],
   metadata: {nestable: true},
 }
