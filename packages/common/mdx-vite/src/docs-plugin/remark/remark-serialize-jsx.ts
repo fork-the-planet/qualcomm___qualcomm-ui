@@ -14,7 +14,7 @@ function getSerializeJsxEndMatch(text: string) {
 }
 
 /**
- * @since next-release
+ * @since 3.8.0
  */
 export function isSerializeJsxBlock(text: string) {
   return !!getSerializeJsxStartMatch(text) || !!getSerializeJsxEndMatch(text)
@@ -99,7 +99,7 @@ function createSerializeJsxPlugin(
  * <NestedRouteOrderDemo />
  * ```
  *
- * @since next-release
+ * @since 3.8.0
  */
 export const remarkSerializeJsxRender: Plugin<[], Root> =
   createSerializeJsxPlugin(isJsxNode)
@@ -129,7 +129,7 @@ export const remarkSerializeJsxRender: Plugin<[], Root> =
  * before "Troubleshooting" because its entry comes first.
  * ```
  *
- * @since next-release
+ * @since 3.8.0
  */
 export const remarkSerializeJsxKnowledge: Plugin<[], Root> =
   createSerializeJsxPlugin((n) => !isJsxNode(n))

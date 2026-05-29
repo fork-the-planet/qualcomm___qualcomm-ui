@@ -1,5 +1,18 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 3.8.0
+
+May 29th, 2026
+
+### Features
+
+- [remark]: add serialize-jsx plugin ([521b200](https://github.com/qualcomm/qualcomm-ui/commit/521b200))
+- [docs-plugin]: add simplified directory routing strategy ([a7a622a](https://github.com/qualcomm/qualcomm-ui/commit/a7a622a))
+
+### Tests
+
+- [docs-plugin]: add tests for directory routes ([734463d](https://github.com/qualcomm/qualcomm-ui/commit/734463d))
+
 ## 3.7.4
 
 May 14th, 2026

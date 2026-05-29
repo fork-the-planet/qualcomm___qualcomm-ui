@@ -1,5 +1,13 @@
 # @qualcomm-ui/eslint-config-mdx Changelog
 
+## 3.0.1
+
+May 29th, 2026
+
+### Miscellaneous Chores
+
+- build eslint plugins in postinstall, warn if not built ([893794f](https://github.com/qualcomm/qualcomm-ui/commit/893794f))
+
 ## 3.0.0
 
 May 23rd, 2026
