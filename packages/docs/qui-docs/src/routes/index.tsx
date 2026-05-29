@@ -6,12 +6,12 @@ import {Link as ReactRouterLink} from "react-router"
 import {Button} from "@qualcomm-ui/react/button"
 import {Link} from "@qualcomm-ui/react/link"
 
-import docs from "../../assets/images/docs-2-final.webp"
-import mdx from "../../assets/images/mdx.svg"
-import vite from "../../assets/images/vite.svg"
-import fullText from "../../assets/videos/polymorphic.mp4"
+import docs from "../assets/images/docs-2-final.webp"
+import mdx from "../assets/images/mdx.svg"
+import vite from "../assets/images/vite.svg"
+import fullText from "../assets/videos/polymorphic.mp4"
 
-import {FeatureCard, LinkOverlayPanel} from "./components"
+import {FeatureCard, LinkOverlayPanel} from "./_index/components"
 
 export default function HomePage(): ReactNode {
   const videoRef = useRef<HTMLVideoElement>(null)

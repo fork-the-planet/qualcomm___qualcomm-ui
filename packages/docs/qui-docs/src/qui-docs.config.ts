@@ -12,52 +12,28 @@ const navConfig: NavConfig[] = [
     hideToc: true,
     id: "_index",
   },
-  {
-    id: "introduction",
-  },
-  {
-    id: "installation",
-  },
+  {id: "introduction"},
   {id: "integrations"},
+  {sectionTitle: "Authoring", separator: true},
+  {id: "pages"},
+  {id: "markdown"},
+  {id: "typedoc"},
+  {id: "configuration"},
+  {sectionTitle: "Content Guidelines", separator: true},
+  {id: "principles"},
+  {id: "routing"},
+  {id: "rules"},
+  {sectionTitle: "Advanced", separator: true},
+  {id: "ai-knowledge"},
+  {id: "custom-routing"},
+  {separator: true},
   {
-    id: "help",
-    title: "Help",
-  },
-  {
-    children: [
-      {
-        expanded: true,
-        id: "page-setup",
-      },
-      {
-        id: "markdown",
-      },
-      {
-        id: "typedoc",
-      },
-      {
-        expanded: true,
-        id: "swagger",
-        title: "Swagger",
-      },
-    ],
-    expanded: true,
-    id: "guide",
-    title: "Guide",
-  },
-  {
-    expanded: true,
-    id: "authoring",
-    title: "Authoring Guidelines",
-  },
-  {
-    expanded: true,
     id: "api",
     title: "API",
   },
 ]
 
-export default {
+const config: QuiDocsConfig = {
   appDirectory: "src",
   knowledge: {
     baseUrl: "https://docs-next.qui.qualcomm.com",
@@ -65,14 +41,14 @@ export default {
     extraFiles: [
       {
         contents: readFileSync(
-          resolve(__dirname, "../../frameworks/react-mdx/CHANGELOG.md"),
+          resolve(__dirname, "../../../frameworks/react-mdx/CHANGELOG.md"),
           "utf-8",
         ),
         id: "react-mdx-changelog",
       },
       {
         contents: readFileSync(
-          resolve(__dirname, "../../common/mdx-vite/CHANGELOG.md"),
+          resolve(__dirname, "../../../common/mdx-vite/CHANGELOG.md"),
           "utf-8",
         ),
         id: "mdx-vite-changelog",
@@ -82,5 +58,8 @@ export default {
   navConfig,
   pageDirectory: "routes",
   pageTimestampMetadata: "user-and-timestamp",
+  routingStrategy: "react-router-directory-groups",
   typeDocProps: ".typedoc/doc-props.json",
-} satisfies QuiDocsConfig
+}
+
+export default config
