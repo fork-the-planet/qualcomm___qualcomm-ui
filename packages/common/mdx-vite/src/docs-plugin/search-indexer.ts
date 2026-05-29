@@ -47,6 +47,7 @@ import {
 } from "./nav-builder"
 import type {RouteMetaInternal, RouteMetaNavInternal} from "./nav-builder/types"
 import {fixPath} from "./path-utils"
+import {remarkSerializeJsxKnowledge} from "./remark"
 
 export class SearchIndexer {
   private readonly docPropsIndexer: DocPropsIndexer
@@ -274,6 +275,7 @@ export class SearchIndexer {
           gfm: true,
           interpolateFrontmatter: frontmatter,
           mdx: true,
+          plugins: [remarkSerializeJsxKnowledge],
           removeJsx: true,
           removeMermaidCodeBlocks: true,
         })

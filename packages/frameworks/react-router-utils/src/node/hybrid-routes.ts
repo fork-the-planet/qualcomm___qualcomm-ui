@@ -5,6 +5,8 @@ import {minimatch} from "minimatch"
 import {readdirSync, statSync} from "node:fs"
 import {extname, join, relative, resolve, sep, win32} from "node:path"
 
+import type {RoutingStrategy} from "@qualcomm-ui/mdx-vite"
+
 export interface ConfigRoute {
   /**
    * Should be `true` if the `path` is case-sensitive. Defaults to `false`.
@@ -95,6 +97,7 @@ export type FlatRoutesOptions = {
   paramPrefixChar?: string
   routeDir?: string | string[]
   routeRegex?: RegExp
+  routingStrategy?: RoutingStrategy
   visitFiles?: VisitFilesFunction
 }
 
@@ -107,9 +110,12 @@ const defaultOptions: FlatRoutesOptions = {
   basePath: "/",
   paramPrefixChar: "$",
   routeDir: "routes",
-  routeRegex:
-    /(([+][\/\\][^\/\\:?*]+)|[\/\\]((index|route|layout|page)|(_[^\/\\:?*]+)|([^\/\\:?*]+\.route)))\.(ts|tsx|js|jsx|md|mdx)$$/,
 }
+
+const routeRegex =
+  /(([+][\/\\][^\/\\:?*]+)|[\/\\]((index|route|layout|page)|(_[^\/\\:?*]+)|([^\/\\:?*]+\.route)))\.(ts|tsx|js|jsx|md|mdx)$$/
+
+const directoryRouteRegex = /(([+]?[\/\\][^\/\\:?*]+))\.(ts|tsx|js|jsx|md|mdx)$/
 
 export function hybridRoutes(
   routeDir: string | string[],
@@ -124,6 +130,11 @@ export function hybridRoutes(
       ...options,
       defineRoutes,
       routeDir,
+      routeRegex:
+        (options.routeRegex ??
+        options.routingStrategy === "react-router-directory-groups")
+          ? directoryRouteRegex
+          : routeRegex,
     },
   )
   // update undefined parentIds to 'root'
@@ -168,8 +179,19 @@ function _flatRoutes(
   if (!defineRoutes) {
     throw new Error("You must provide a defineRoutes function")
   }
-  const visitFiles = options.visitFiles ?? defaultVisitFiles
-  const routeRegex = options.routeRegex ?? defaultOptions.routeRegex!
+  const isDirectoryMode =
+    options.routingStrategy === "react-router-directory-groups"
+  const visitFiles =
+    options.visitFiles ??
+    (isDirectoryMode
+      ? (dir, visitor, baseDir) =>
+          defaultVisitFiles(dir, visitor, baseDir, {
+            excludePrivateFolders: true,
+          })
+      : defaultVisitFiles)
+  const routeRegex =
+    options.routeRegex ??
+    (isDirectoryMode ? directoryRouteRegex : defaultOptions.routeRegex!)
 
   for (const routeDir of routeDirs) {
     visitFiles(join(appDir, routeDir), (file) => {
@@ -281,6 +303,7 @@ export function getRouteInfo(
     routeIdWithoutRoutes,
     index,
     options.paramPrefixChar,
+    options.routingStrategy,
   )
   const routePath = createRoutePath(routeSegments, index, options)
   const routeInfo = {
@@ -361,6 +384,7 @@ export function getRouteSegments(
   name: string,
   index: boolean,
   paramPrefixChar: string = "$",
+  routingStrategy?: RoutingStrategy,
 ) {
   let routeSegments: string[] = []
   let i = 0
@@ -368,6 +392,7 @@ export function getRouteSegments(
   let state = "START"
   let subState = "NORMAL"
   let hasPlus = false
+  const isDirectoryMode = routingStrategy === "react-router-directory-groups"
 
   // name has already been normalized to use / as path separator
 
@@ -387,6 +412,24 @@ export function getRouteSegments(
     name = name.replace(/\+\//g, ".")
     hasPlus = true
   }
+
+  if (isDirectoryMode && /\//.test(name)) {
+    /**
+     * In directory mode, plain folders flatten the same way `+` folders do.
+     * Preserve trailing `.route` so route-directory naming still works.
+     */
+    if (name.endsWith(".route")) {
+      const lastSlash = name.lastIndexOf("/")
+      if (lastSlash >= 0) {
+        const head = name.substring(0, lastSlash).replace(/\//g, ".")
+        name = `${head}/${name.substring(lastSlash + 1)}`
+      }
+    } else {
+      name = name.replace(/\//g, ".")
+    }
+    hasPlus = true
+  }
+
   const hasFolder = /\//.test(name)
   // if name has plus folder, but we still have regular folders
   // then treat ending route as flat-folders
@@ -480,13 +523,21 @@ export function defaultVisitFiles(
   dir: string,
   visitor: (file: string) => void,
   baseDir = dir,
+  visitOptions?: {excludePrivateFolders?: boolean},
 ) {
   for (const filename of readdirSync(dir)) {
     const file = resolve(dir, filename)
     const stat = statSync(file)
 
     if (stat.isDirectory()) {
-      defaultVisitFiles(file, visitor, baseDir)
+      if (
+        visitOptions?.excludePrivateFolders &&
+        filename.startsWith("_") &&
+        !filename.includes("+")
+      ) {
+        continue
+      }
+      defaultVisitFiles(file, visitor, baseDir, visitOptions)
     } else if (stat.isFile()) {
       visitor(relative(baseDir, file))
     }

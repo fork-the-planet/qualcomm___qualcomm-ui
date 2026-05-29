@@ -51,6 +51,7 @@ export function createSegmentedControlApi(
     },
     getItemBindings({id}) {
       return normalize.element({
+        "data-orientation": prop("orientation"),
         onKeyDown(event) {
           if (event.defaultPrevented) {
             return

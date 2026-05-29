@@ -38,6 +38,7 @@ export function createQdsSegmentedControlApi(
     getItemBindings(): QdsSegmentedControlItemBindings {
       return normalize.element({
         className: segmentedControlClasses.item,
+        "data-size": size,
       })
     },
     getItemHiddenInputBindings(): QdsSegmentedControlItemHiddenInputBindings {

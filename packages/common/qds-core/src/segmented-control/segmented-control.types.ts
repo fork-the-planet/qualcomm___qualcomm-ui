@@ -45,6 +45,7 @@ export interface QdsSegmentedControlGroupBindings {
 
 export interface QdsSegmentedControlItemBindings {
   className: SegmentedControlClasses["item"]
+  "data-size": QdsSegmentedControlSize
 }
 
 export interface QdsSegmentedControlItemTextBindings {

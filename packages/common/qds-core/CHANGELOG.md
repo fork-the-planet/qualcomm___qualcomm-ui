@@ -1,5 +1,18 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.28.2
+
+May 29th, 2026
+
+### Bug Fixes
+
+- [segmented-control]: use own component context for size and orientation selectors ([a9cda21](https://github.com/qualcomm/qualcomm-ui/commit/a9cda21))
+- [divider]: use min-height for flex container compat in vertical orientation ([42e0286](https://github.com/qualcomm/qualcomm-ui/commit/42e0286))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core]
+
 ## 1.28.1
 
 May 22nd, 2026

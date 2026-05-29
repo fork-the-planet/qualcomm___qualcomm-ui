@@ -12,6 +12,8 @@ import {
   reactDemoPlugin,
 } from "@qualcomm-ui/mdx-vite"
 
+const quiDocsConfigFile = "./src/qui-docs.config.ts"
+
 export default defineConfig({
   define: {
     global: "globalThis",
@@ -20,14 +22,14 @@ export default defineConfig({
     tailwindcss(),
     mdx({
       providerImportSource: "@mdx-js/react",
-      rehypePlugins: [...getRehypePlugins()],
+      rehypePlugins: [...getRehypePlugins({configFile: quiDocsConfigFile})],
       remarkPlugins: [...getRemarkPlugins()],
     }),
     reactRouter(),
     tsconfigPaths({
       projects: ["./tsconfig.lib.json"],
     }),
-    quiDocsPlugin(),
+    quiDocsPlugin({configFile: quiDocsConfigFile}),
     frontmatterHmrPlugin(),
     reactDemoPlugin({
       demoPattern: "./src/routes/debug+/**/demos/*.tsx",
