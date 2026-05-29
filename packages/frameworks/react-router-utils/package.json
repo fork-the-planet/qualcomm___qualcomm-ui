@@ -33,6 +33,7 @@
     "watch:js": "tsx build.ts --watch",
     "watch:ts": "pnpm build:ts -w --preserveWatchOutput",
     "lint": "eslint --quiet",
+    "test": "vitest --run -c vitest.config.ts",
     "prepublishOnly": "qui-cli pre-publish",
     "postpublish": "qui-cli post-publish"
   },
@@ -45,6 +46,7 @@
     "@qualcomm-ui/mdx-common": "workspace:^2.4.0",
     "@qualcomm-ui/mdx-vite": "workspace:^3.7.4",
     "@qualcomm-ui/tsconfig": "catalog:",
+    "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "esbuild": "catalog:",
@@ -54,7 +56,8 @@
     "react-router": "catalog:",
     "shx": "catalog:",
     "tsx": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   },
   "peerDependencies": {
     "@qualcomm-ui/mdx-common": "workspace:^2.4.0",
