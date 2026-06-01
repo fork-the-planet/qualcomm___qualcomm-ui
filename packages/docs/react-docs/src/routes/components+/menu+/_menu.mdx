@@ -154,7 +154,11 @@ Configure the menu's placement using the [positioning.placement](./#positioning)
 small, medium
 :::
 
-Use the [size](./#size) prop to control the size of the menu. The default size is `md`. The demo features the small (`sm`) size.
+Use the [size](./#size) prop on `<Menu.Root>` to control the size of the menu. The default size is `md`. The demo features the small (`sm`) size.
+
+The `<Menu.Button>` and `<Menu.IconButton>` triggers inherit the menu's size, so the trigger and menu match by default. Such a trigger can run larger than its menu: set [size](./#size) on it to override the inherited value. An `md` menu pairs with an `md` or `lg` trigger. A compact trigger should always pair with an `sm` menu. When a trigger uses `density="compact"`, set `size="sm"` on `<Menu.Root>`.
+
+Other trigger content does not inherit the menu size. A link, an avatar, or a custom element placed in the trigger must be sized directly.
 
 <Demo name="MenuSizesDemo" component={demos.MenuSizesDemo} />
 

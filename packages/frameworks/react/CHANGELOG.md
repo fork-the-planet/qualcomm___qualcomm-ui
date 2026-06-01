@@ -1,5 +1,21 @@
 # @qualcomm-ui/react Changelog
 
+## 1.23.0
+
+Jun 1st, 2026
+
+### Features
+
+- [menu]: inherit trigger size from the menu size ([6fc9966](https://github.com/qualcomm/qualcomm-ui/commit/6fc9966))
+
+### Tests
+
+- [menu]: cover trigger size inheritance ([dccdd60](https://github.com/qualcomm/qualcomm-ui/commit/dccdd60))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/qds-core, @qualcomm-ui/react-core]
+
 ## 1.22.2
 
 May 29th, 2026
