@@ -5,11 +5,11 @@ import {
   type ComponentPropsWithRef,
   type ReactElement,
   type ReactNode,
-  useLayoutEffect,
   useRef,
   useState,
 } from "react"
 
+import {useSafeLayoutEffect} from "@qualcomm-ui/react-core/effects"
 import {useMdxDocsContext} from "@qualcomm-ui/react-mdx/context"
 
 interface HighlightRect {
@@ -100,11 +100,10 @@ export function ComponentExplorerBase({
   const [hoveredPart, setHoveredPart] = useState<string | null>(null)
   const [highlightRects, setHighlightRects] = useState<HighlightRect[]>([])
 
-  useLayoutEffect(() => {
+  useSafeLayoutEffect(() => {
     const previewElement = previewRef.current
 
     if (!previewElement || !hoveredPart) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- DOM measurement requires post-render setState
       setHighlightRects([])
       return
     }

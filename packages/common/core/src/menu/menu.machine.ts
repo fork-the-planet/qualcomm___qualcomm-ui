@@ -608,7 +608,6 @@ export const menuMachine: MachineConfig<MenuSchema> = createMachine<MenuSchema>(
         typeahead: true,
         ...props,
         positioning: {
-          gutter: 5,
           placement: "bottom-start",
           ...props.positioning,
         },

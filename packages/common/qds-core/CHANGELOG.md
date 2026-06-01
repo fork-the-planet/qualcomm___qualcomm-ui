@@ -1,5 +1,17 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.28.3
+
+Jun 1st, 2026
+
+### Bug Fixes
+
+- correct compact button spacing and menu trigger sizing ([f0cbaac](https://github.com/qualcomm/qualcomm-ui/commit/f0cbaac))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core]
+
 ## 1.28.2
 
 May 29th, 2026

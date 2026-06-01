@@ -33,14 +33,15 @@ export function MenuIconButton({
   ...props
 }: MenuIconButtonProps): ReactElement {
   const qdsMenuContext = useQdsMenuContext()
+  const resolvedSize = size ?? qdsMenuContext.size
 
   const api = useMemo(
     () =>
       createQdsIconButtonApi(
-        {density, disabled, emphasis, shape, size, variant},
+        {density, disabled, emphasis, shape, size: resolvedSize, variant},
         normalizeProps,
       ),
-    [density, disabled, emphasis, shape, size, variant],
+    [density, disabled, emphasis, resolvedSize, shape, variant],
   )
 
   const mergedProps = mergeProps(
@@ -55,7 +56,7 @@ export function MenuIconButton({
       <Icon
         {...qdsMenuContext.getIndicatorBindings()}
         icon={ChevronDown}
-        size={size}
+        size={resolvedSize}
       />
     </PolymorphicElement>
   )
