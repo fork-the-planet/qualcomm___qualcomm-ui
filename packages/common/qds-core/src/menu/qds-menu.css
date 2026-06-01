@@ -15,14 +15,18 @@
 
 .qui-menu__button .qui-menu__indicator {
   &[data-size="sm"] {
-    --icon-size: 12px;
+    --icon-size: var(--sizing-60);
   }
   &[data-size="md"] {
-    --icon-size: 16px;
+    --icon-size: var(--sizing-70);
   }
   &[data-size="lg"] {
-    --icon-size: 20px;
+    --icon-size: var(--sizing-80);
   }
+}
+
+.qui-menu__button[data-density="compact"] .qui-menu__indicator {
+  --icon-size: var(--sizing-60);
 }
 
 .qui-menu__button[data-kind="icon"]:has(.qui-button__icon) {
@@ -40,8 +44,18 @@
     width: auto;
   }
 
+  /* compact overrides the square display and uses the inline padding above */
+  &[data-density="compact"] {
+    gap: var(--spacing-20);
+    &[data-size="sm"],
+    &[data-size="md"],
+    &[data-size="lg"] {
+      width: auto;
+    }
+  }
+
   .qui-menu__indicator {
-    --icon-size: 12px;
+    --icon-size: var(--sizing-60);
   }
 }
 
