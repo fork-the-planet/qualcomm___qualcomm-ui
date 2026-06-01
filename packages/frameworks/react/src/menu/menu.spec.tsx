@@ -738,4 +738,67 @@ describe("Menu", () => {
     await expect.element(page.getByText("Recently opened")).toBeVisible()
     await expect.element(page.getByText("Ctrl+O")).toBeVisible()
   })
+
+  test("Menu.Button trigger inherits the menu size", async () => {
+    await render(
+      <Menu.Root size="sm">
+        <Menu.Trigger>
+          <Menu.Button>Sized Menu</Menu.Button>
+        </Menu.Trigger>
+        <Portal>
+          <Menu.Positioner>
+            <Menu.Content>
+              <Menu.Item value="option-1">Option 1</Menu.Item>
+            </Menu.Content>
+          </Menu.Positioner>
+        </Portal>
+      </Menu.Root>,
+    )
+
+    await expect
+      .element(page.getByRole("button", {name: "Sized Menu"}))
+      .toHaveAttribute("data-size", "sm")
+  })
+
+  test("Menu.IconButton trigger inherits the menu size", async () => {
+    await render(
+      <Menu.Root size="sm">
+        <Menu.Trigger>
+          <Menu.IconButton aria-label="More actions" icon={Ellipsis} />
+        </Menu.Trigger>
+        <Portal>
+          <Menu.Positioner>
+            <Menu.Content>
+              <Menu.Item value="rename">Rename</Menu.Item>
+            </Menu.Content>
+          </Menu.Positioner>
+        </Portal>
+      </Menu.Root>,
+    )
+
+    await expect
+      .element(page.getByRole("button", {name: "More actions"}))
+      .toHaveAttribute("data-size", "sm")
+  })
+
+  test("an explicit trigger size overrides the inherited menu size", async () => {
+    await render(
+      <Menu.Root size="sm">
+        <Menu.Trigger>
+          <Menu.Button size="lg">Override Menu</Menu.Button>
+        </Menu.Trigger>
+        <Portal>
+          <Menu.Positioner>
+            <Menu.Content>
+              <Menu.Item value="option-1">Option 1</Menu.Item>
+            </Menu.Content>
+          </Menu.Positioner>
+        </Portal>
+      </Menu.Root>,
+    )
+
+    await expect
+      .element(page.getByRole("button", {name: "Override Menu"}))
+      .toHaveAttribute("data-size", "lg")
+  })
 })

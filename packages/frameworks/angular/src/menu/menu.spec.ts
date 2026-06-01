@@ -252,6 +252,62 @@ class ContextMenuComponent {}
 })
 class RichItemMenuComponent {}
 
+@Component({
+  imports: [MenuModule, PortalDirective],
+  template: `
+    <q-menu size="sm">
+      <button q-menu-button>Sized Menu</button>
+      <ng-template qPortal>
+        <div q-menu-positioner>
+          <div q-menu-content>
+            <button q-menu-item value="rename">Rename</button>
+          </div>
+        </div>
+      </ng-template>
+    </q-menu>
+  `,
+})
+class InheritedButtonSizeMenuComponent {}
+
+@Component({
+  imports: [MenuModule, PortalDirective],
+  providers: [provideIcons({Ellipsis})],
+  template: `
+    <q-menu size="sm">
+      <button
+        aria-label="More actions"
+        icon="Ellipsis"
+        q-menu-icon-button
+      ></button>
+      <ng-template qPortal>
+        <div q-menu-positioner>
+          <div q-menu-content>
+            <button q-menu-item value="rename">Rename</button>
+          </div>
+        </div>
+      </ng-template>
+    </q-menu>
+  `,
+})
+class InheritedIconButtonSizeMenuComponent {}
+
+@Component({
+  imports: [MenuModule, PortalDirective],
+  template: `
+    <q-menu size="sm">
+      <button q-menu-button size="lg">Sized Menu</button>
+      <ng-template qPortal>
+        <div q-menu-positioner>
+          <div q-menu-content>
+            <button q-menu-item value="rename">Rename</button>
+          </div>
+        </div>
+      </ng-template>
+    </q-menu>
+  `,
+})
+class OverriddenButtonSizeMenuComponent {}
+
 describe("Menu", () => {
   test("opens from trigger keyboard shortcuts and selects the highlighted item", async () => {
     const selected = vi.fn()
@@ -423,5 +479,29 @@ describe("Menu", () => {
     await expect.element(page.getByText("Synced")).toBeVisible()
     await expect.element(page.getByText("Recently opened")).toBeVisible()
     await expect.element(page.getByText("Ctrl+O")).toBeVisible()
+  })
+
+  test("button trigger inherits the menu size", async () => {
+    await render(InheritedButtonSizeMenuComponent)
+
+    await expect
+      .element(page.getByRole("button", {name: "Sized Menu"}))
+      .toHaveAttribute("data-size", "sm")
+  })
+
+  test("icon button trigger inherits the menu size", async () => {
+    await render(InheritedIconButtonSizeMenuComponent)
+
+    await expect
+      .element(page.getByRole("button", {name: "More actions"}))
+      .toHaveAttribute("data-size", "sm")
+  })
+
+  test("explicit trigger size overrides the inherited menu size", async () => {
+    await render(OverriddenButtonSizeMenuComponent)
+
+    await expect
+      .element(page.getByRole("button", {name: "Sized Menu"}))
+      .toHaveAttribute("data-size", "lg")
   })
 })
