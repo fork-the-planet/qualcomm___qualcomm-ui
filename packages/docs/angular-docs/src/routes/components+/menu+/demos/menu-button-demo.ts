@@ -43,7 +43,7 @@ import {PortalComponent} from "@qualcomm-ui/angular-core/portal"
         </q-portal>
       </q-menu>
 
-      <q-menu>
+      <q-menu size="sm">
         <button
           aria-label="More actions"
           emphasis="primary"

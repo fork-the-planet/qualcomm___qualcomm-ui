@@ -42,7 +42,7 @@ export function MenuButtonDemo(): ReactElement {
         </Portal>
       </Menu.Root>
 
-      <Menu.Root>
+      <Menu.Root size="sm">
         <Menu.Trigger>
           <Menu.IconButton
             aria-label="More actions"
