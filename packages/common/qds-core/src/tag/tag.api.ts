@@ -1,7 +1,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
+import {booleanAriaAttr, booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 import type {PropNormalizer} from "@qualcomm-ui/utils/machine"
 
 import {tagAnatomy} from "./tag.anatomy"
@@ -58,9 +58,17 @@ export function createQdsTagApi(
       })
     },
     getRootBindings(): QdsTagRootBindings {
-      return isInteractiveVariant()
-        ? normalize.button({...commonBindings, disabled: props.disabled})
-        : normalize.element(commonBindings)
+      if (!isInteractiveVariant()) {
+        return normalize.element(commonBindings)
+      }
+      return normalize.button({
+        ...commonBindings,
+        "aria-pressed":
+          props.variant === "selectable"
+            ? booleanAriaAttr(selected)
+            : undefined,
+        disabled: props.disabled,
+      })
     },
     getStartIconBindings(): QdsTagStartIconBindings {
       return normalize.element({

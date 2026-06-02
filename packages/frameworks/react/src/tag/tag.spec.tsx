@@ -132,20 +132,20 @@ describe("Tag", () => {
     expect(onClick).not.toHaveBeenCalled()
   })
 
-  test("toggles data-selected on a selectable tag when uncontrolled", async () => {
+  test("exposes the selectable tag's pressed state to assistive tech and toggles it when uncontrolled", async () => {
     await render(<Tag variant="selectable">Label</Tag>)
 
     const tag = page.getByRole("button", {name: "Label"})
-    await expect.element(tag).not.toHaveAttribute("data-selected")
+    await expect.element(tag).toHaveAttribute("aria-pressed", "false")
 
     await tag.click()
-    await expect.element(tag).toHaveAttribute("data-selected", "")
+    await expect.element(tag).toHaveAttribute("aria-pressed", "true")
 
     await tag.click()
-    await expect.element(tag).not.toHaveAttribute("data-selected")
+    await expect.element(tag).toHaveAttribute("aria-pressed", "false")
   })
 
-  test("starts selected when defaultSelected is true and toggles from there", async () => {
+  test("starts pressed when defaultSelected is true and toggles from there", async () => {
     await render(
       <Tag defaultSelected variant="selectable">
         Label
@@ -153,10 +153,10 @@ describe("Tag", () => {
     )
 
     const tag = page.getByRole("button", {name: "Label"})
-    await expect.element(tag).toHaveAttribute("data-selected", "")
+    await expect.element(tag).toHaveAttribute("aria-pressed", "true")
 
     await tag.click()
-    await expect.element(tag).not.toHaveAttribute("data-selected")
+    await expect.element(tag).toHaveAttribute("aria-pressed", "false")
   })
 
   test("fires onSelectedChange with the next value on each toggle when uncontrolled", async () => {
@@ -192,7 +192,7 @@ describe("Tag", () => {
     await tag.click()
 
     expect(onSelectedChange).toHaveBeenCalledWith(true)
-    await expect.element(tag).not.toHaveAttribute("data-selected")
+    await expect.element(tag).toHaveAttribute("aria-pressed", "false")
   })
 
   test("reflects parent-driven changes to selected when controlled", async () => {
@@ -212,16 +212,16 @@ describe("Tag", () => {
     await render(<ControlledTag />)
 
     const tag = page.getByRole("button", {name: "Label"})
-    await expect.element(tag).not.toHaveAttribute("data-selected")
+    await expect.element(tag).toHaveAttribute("aria-pressed", "false")
 
     await tag.click()
-    await expect.element(tag).toHaveAttribute("data-selected", "")
+    await expect.element(tag).toHaveAttribute("aria-pressed", "true")
 
     await tag.click()
-    await expect.element(tag).not.toHaveAttribute("data-selected")
+    await expect.element(tag).toHaveAttribute("aria-pressed", "false")
   })
 
-  test("ignores selected on non-selectable variants", async () => {
+  test("does not expose pressed state on non-selectable variants", async () => {
     await render(
       <Tag selected variant="link">
         Label
@@ -229,8 +229,8 @@ describe("Tag", () => {
     )
 
     await expect
-      .element(page.getByText("Label"))
-      .not.toHaveAttribute("data-selected")
+      .element(page.getByRole("button", {name: "Label"}))
+      .not.toHaveAttribute("aria-pressed")
   })
 
   test("disables the Dismiss button on a disabled dismissable tag", async () => {
