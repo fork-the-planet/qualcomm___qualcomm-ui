@@ -11,21 +11,27 @@ const instance = figma.selectedInstance
 const disabled = instance.getEnum("state", {disabled: true})
 const emphasis = instance.getString("emphasis")
 const label = instance.getString("label") || "Label"
-const radius = instance.getEnum("radius", {rounded: "rounded"})
+const shape = instance.getEnum("radius", {rounded: "rounded"})
 const size = instance.getEnum("size", {large: "lg", small: "sm"})
 const startIcon = instance.getBoolean("icon")
 
+const figmaSize = instance.getString("size")
+const swapPropName = figmaSize === "small" ? "iconXxs" : "iconXs"
+
+const startIconInstance = startIcon
+  ? instance.getInstanceSwap(swapPropName)
+  : undefined
+const startIconName = startIconInstance
+  ? toLucideName(startIconInstance.name)
+  : "Smile"
+
 const disabledAttr = disabled ? " disabled" : ""
 const emphasisAttr = emphasis ? ` emphasis="${emphasis}"` : ""
-const radiusAttr = radius ? ` radius="${radius}"` : ""
+const shapeAttr = shape ? ` shape="${shape}"` : ""
 const sizeAttr = size ? ` size="${size}"` : ""
-const startIconAttr = startIcon ? ` startIcon="Smile"` : ""
+const startIconAttr = startIcon ? ` startIcon="${startIconName}"` : ""
 
-const example = figma.code`
-  <span${disabledAttr}${emphasisAttr} q-tag${radiusAttr}${sizeAttr}${startIconAttr} variant="dismissable"
-    (dismiss)="onDismiss()">
-    ${label}
-  </span>`
+const example = figma.code`<span${disabledAttr}${emphasisAttr} q-tag${shapeAttr}${sizeAttr}${startIconAttr} variant="dismissable">${label}</span>`
 
 export default {
   example,
@@ -35,9 +41,17 @@ export default {
     ...(startIcon
       ? [
           `import {IconDirective} from "@qualcomm-ui/angular/icon"`,
-          `import {Smile} from "lucide-angular"`,
+          `import {${startIconName}} from "lucide-angular"`,
         ]
       : []),
   ],
   metadata: {nestable: true},
+}
+
+function toLucideName(figmaName) {
+  return figmaName
+    .replace(/^utl\//, "")
+    .split("-")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join("")
 }

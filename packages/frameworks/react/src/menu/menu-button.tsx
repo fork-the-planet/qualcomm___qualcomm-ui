@@ -20,18 +20,21 @@ export interface MenuButtonProps extends Omit<ButtonProps, "endIcon"> {
 
 export function MenuButton({
   children,
+  density,
   size,
   ...props
 }: MenuButtonProps): ReactElement {
   const qdsMenuContext = useQdsMenuContext()
+  const resolvedSize = size ?? qdsMenuContext.size
+
   const mergedProps = mergeProps(qdsMenuContext.getButtonBindings(), props)
   return (
-    <Button {...mergedProps} size={size}>
+    <Button {...mergedProps} density={density} size={resolvedSize}>
       {children}
       <Icon
         {...qdsMenuContext.getIndicatorBindings()}
         icon={ChevronDown}
-        size={size}
+        size={resolvedSize}
       />
     </Button>
   )

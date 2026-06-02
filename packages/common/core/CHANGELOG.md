@@ -1,5 +1,21 @@
 # @qualcomm-ui/core Changelog
 
+## 1.11.2
+
+Jun 1st, 2026
+
+### Bug Fixes
+
+- [menu]: drop default positioning gutter ([e615b70](https://github.com/qualcomm/qualcomm-ui/commit/e615b70))
+
+## 1.11.1
+
+May 29th, 2026
+
+### Bug Fixes
+
+- [segmented-control]: use own component context for size and orientation selectors ([a9cda21](https://github.com/qualcomm/qualcomm-ui/commit/a9cda21))
+
 ## 1.11.0
 
 May 22nd, 2026

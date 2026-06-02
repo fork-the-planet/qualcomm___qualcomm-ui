@@ -47,9 +47,10 @@ export function MenuRoot({
     mergeProps({present: api.open}, presenceProps),
   )
   const qdsContext = useQdsMenuContext(false)
+  const finalSize = size ?? qdsContext?.size
   const qdsContextValue = useMemo(
-    () => createQdsMenuApi({size: size || qdsContext?.size}, normalizeProps),
-    [qdsContext?.size, size],
+    () => createQdsMenuApi({size: finalSize}, normalizeProps),
+    [finalSize],
   )
 
   return (

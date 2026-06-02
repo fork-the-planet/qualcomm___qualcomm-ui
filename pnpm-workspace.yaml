@@ -7,6 +7,7 @@ packages:
 
 allowBuilds:
   '@parcel/watcher': true
+  '@qualcomm-ui/root': true
   '@scarf/scarf': true
   '@tree-sitter-grammars/tree-sitter-yaml': true
   core-js-pure: true

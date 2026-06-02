@@ -153,7 +153,7 @@
 
     &[data-density="compact"] {
       height: var(--sizing-80);
-      padding: 0 var(--spacing-40);
+      padding: 0 var(--spacing-70);
     }
 
     &[data-kind="icon"] {
@@ -174,9 +174,8 @@
     padding: 0 var(--spacing-100);
 
     &[data-density="compact"] {
-      gap: var(--spacing-40);
       height: var(--sizing-90);
-      padding: 0 var(--spacing-50);
+      padding: 0 var(--spacing-80);
     }
 
     &[data-kind="icon"] {
@@ -197,9 +196,8 @@
     padding: 0 var(--spacing-110);
 
     &[data-density="compact"] {
-      gap: var(--spacing-50);
       height: var(--sizing-100);
-      padding: 0 var(--spacing-70);
+      padding: 0 var(--spacing-90);
     }
 
     &[data-kind="icon"] {
@@ -222,6 +220,7 @@
     font-family: var(--component-button-type-sm-font-family);
     font-size: var(--component-button-type-sm-font-size);
     font-weight: var(--component-button-type-sm-font-weight);
+    gap: var(--spacing-40);
     line-height: var(--component-button-type-sm-line-height);
   }
 
@@ -525,15 +524,6 @@
         --icon-size: 16px;
       }
     }
-  }
-
-  /* For when the icon is declared as a node, i.e. `<ExternalLink />` */
-  .lucide {
-    height: var(--icon-size);
-    stroke: currentColor;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    width: var(--icon-size);
   }
 }
 

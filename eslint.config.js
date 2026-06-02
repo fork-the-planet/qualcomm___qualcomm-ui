@@ -1,5 +1,21 @@
+const __dirname = dirname(fileURLToPath(import.meta.url))
+
+for (const pkgName of [
+  "eslint-config-mdx",
+  "eslint-plugin-angular",
+  "eslint-plugin-react",
+]) {
+  assert.ok(
+    existsSync(resolve(__dirname, `packages/configs/${pkgName}/dist/index.js`)),
+    `@qualcomm-ui/${pkgName} must be built`,
+  )
+}
+
 import {defineConfig} from "eslint/config"
-import {join} from "node:path"
+import assert from "node:assert"
+import {existsSync} from "node:fs"
+import {dirname, join, resolve} from "node:path"
+import {fileURLToPath} from "node:url"
 import tseslint from "typescript-eslint"
 
 import quiEslintAngular from "@qualcomm-ui/eslint-config-angular"

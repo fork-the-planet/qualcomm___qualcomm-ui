@@ -1,5 +1,33 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 2.9.1
+
+Jun 1st, 2026
+
+### Code Refactoring
+
+- [ComponentExplorer]: use useSafeLayoutEffect for SSR safety ([c00b6bd](https://github.com/qualcomm/qualcomm-ui/commit/c00b6bd))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react, @qualcomm-ui/core, @qualcomm-ui/react-core]
+
+## 2.9.0
+
+May 29th, 2026
+
+### Features
+
+- [demo]: add simple react demo component ([7f50925](https://github.com/qualcomm/qualcomm-ui/commit/7f50925))
+
+### Documentation
+
+- [qui-docs]: update authoring and configuration guides ([433731f](https://github.com/qualcomm/qualcomm-ui/commit/433731f))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/react, @qualcomm-ui/react-core]
+
 ## 2.8.3
 
 May 23rd, 2026

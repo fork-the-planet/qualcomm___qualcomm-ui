@@ -26,12 +26,16 @@ import {useQdsMenuContext} from "./qds-menu-context.service"
     <svg
       qIcon="ChevronDown"
       [q-bind]="indicatorBindings()"
-      [size]="size()"
+      [size]="resolvedSize()"
     ></svg>
   `,
 })
 export class MenuIconButtonComponent extends IconButtonDirective {
   protected readonly qdsMenuContext = useQdsMenuContext()
+
+  protected override readonly resolvedSize = computed(
+    () => this.size() ?? this.qdsMenuContext().size,
+  )
 
   readonly indicatorBindings = computed(() =>
     this.qdsMenuContext().getIndicatorBindings(),

@@ -114,6 +114,11 @@ export class IconButtonDirective
 
   protected readonly iconButtonContext = inject(QdsIconButtonContextService)
 
+  /**
+   * Effective size (subclasses may override this based on context).
+   */
+  protected readonly resolvedSize = computed(() => this.size())
+
   readonly iconChild = contentChild(IconDirective)
 
   ngOnInit() {
@@ -124,7 +129,7 @@ export class IconButtonDirective
           disabled: this.disabled(),
           emphasis: this.emphasis(),
           shape: this.shape(),
-          size: this.size(),
+          size: this.resolvedSize(),
           variant: this.variant(),
         },
         normalizeProps,

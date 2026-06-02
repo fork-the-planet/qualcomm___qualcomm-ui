@@ -1,5 +1,29 @@
 # @qualcomm-ui/angular Changelog
 
+## 2.10.0
+
+Jun 1st, 2026
+
+### Features
+
+- [menu]: inherit trigger size from the menu size ([6fc9966](https://github.com/qualcomm/qualcomm-ui/commit/6fc9966))
+
+### Tests
+
+- [menu]: cover trigger size inheritance ([dccdd60](https://github.com/qualcomm/qualcomm-ui/commit/dccdd60))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/qds-core, @qualcomm-ui/angular-core]
+
+## 2.9.1
+
+May 29th, 2026
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/qds-core, @qualcomm-ui/angular-core]
+
 ## 2.9.0
 
 May 22nd, 2026

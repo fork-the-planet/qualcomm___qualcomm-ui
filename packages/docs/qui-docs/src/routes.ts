@@ -3,11 +3,14 @@ import {remixRoutesOptionAdapter} from "@react-router/remix-routes-option-adapte
 
 import {hybridRoutes} from "@qualcomm-ui/react-router-utils/node"
 
+import quiDocsConfig from "./qui-docs.config"
+
 export const routes: Promise<RouteConfigEntry[]> = remixRoutesOptionAdapter(
   (defineRoutes) => {
     return hybridRoutes("routes", defineRoutes, {
-      appDir: "src",
+      appDir: quiDocsConfig.appDirectory ?? "src",
       ignoredRouteFiles: ["**/*components/**/*", "**/*demos/**/*"],
+      routingStrategy: quiDocsConfig.routingStrategy,
     })
   },
 )

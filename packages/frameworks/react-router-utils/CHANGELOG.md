@@ -1,5 +1,22 @@
 # @qualcomm-ui/react-router-utils Changelog
 
+## 2.1.0
+
+May 29th, 2026
+
+### Features
+
+- [hybrid-routes]: add simplified directory routing strategy ([bf71530](https://github.com/qualcomm/qualcomm-ui/commit/bf71530))
+
+### Tests
+
+- [hybrid-routes]: add unit tests for plus and directory route groups ([a314a4d](https://github.com/qualcomm/qualcomm-ui/commit/a314a4d))
+
+### Miscellaneous Chores
+
+- [react-router-utils]: add vitest and test infrastructure ([0fe4d8a](https://github.com/qualcomm/qualcomm-ui/commit/0fe4d8a))
+- **deps:** update dependencies [@qualcomm-ui/mdx-vite]
+
 ## 2.0.20
 
 May 14th, 2026

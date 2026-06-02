@@ -7,6 +7,7 @@ import type {QuiPropTypes} from "@qualcomm-ui/typedoc-common"
 import type {NavConfig} from "../nav-builder/types"
 
 export type RoutingStrategy =
+  | "react-router-directory-groups"
   | "vite-generouted"
   | ((filePath: string) => string[])
 

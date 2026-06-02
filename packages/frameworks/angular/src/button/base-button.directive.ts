@@ -85,6 +85,11 @@ export class BaseButtonDirective
   readonly buttonService = inject(QdsButtonContextService)
   readonly buttonGroupContext = useQdsButtonGroupContext({optional: true})
 
+  /**
+   * Effective size (subclasses may override this based on context).
+   */
+  protected readonly resolvedSize = computed(() => this.size())
+
   protected readonly trackBindings = useTrackBindings(() =>
     this.buttonService.context().getRootBindings(),
   )
@@ -95,7 +100,7 @@ export class BaseButtonDirective
       const density = this.density()
       const disabled = this.disabled()
       const emphasis = this.emphasis()
-      const size = this.size()
+      const size = this.resolvedSize()
       const variant = this.variant()
 
       // certain button group props override button props
