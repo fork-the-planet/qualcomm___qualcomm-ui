@@ -27,10 +27,10 @@
   "scripts": {
     "build": "run-s clean build:js build:ts",
     "clean": "shx rm -rf dist/tsbuildinfo dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map",
-    "build:js": "tsx build.ts",
+    "build:js": "vite build",
     "build:ts": "tsc -b tsconfig.lib.json",
     "dev": "run-p watch:js watch:ts",
-    "watch:js": "tsx build.ts --watch",
+    "watch:js": "vite build -w",
     "watch:ts": "pnpm build:ts -w --preserveWatchOutput",
     "lint": "eslint --quiet",
     "test": "vitest --run -c vitest.config.ts",
@@ -46,6 +46,7 @@
     "@qualcomm-ui/mdx-common": "workspace:^2.4.0",
     "@qualcomm-ui/mdx-vite": "workspace:^3.8.0",
     "@qualcomm-ui/tsconfig": "catalog:",
+    "@qualcomm-ui/vite": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
@@ -57,6 +58,7 @@
     "shx": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:",
+    "vite": "catalog:",
     "vitest": "catalog:"
   },
   "peerDependencies": {

@@ -25,10 +25,10 @@
   "scripts": {
     "build": "run-s clean build:js build:ts",
     "clean": "shx rm -rf dist/tsbuildinfo dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map",
-    "build:js": "tsx build.ts",
+    "build:js": "vite build",
     "build:ts": "tsc -b tsconfig.lib.json",
     "dev": "run-p watch:js watch:ts",
-    "watch:js": "tsx build.ts --watch",
+    "watch:js": "vite build -w",
     "watch:ts": "pnpm build:ts -w --preserveWatchOutput",
     "lint": "eslint --quiet",
     "prepublishOnly": "qui-cli pre-publish",
@@ -41,6 +41,7 @@
     "@qualcomm-ui/cli": "catalog:",
     "@qualcomm-ui/esbuild": "catalog:",
     "@qualcomm-ui/tsconfig": "catalog:",
+    "@qualcomm-ui/vite": "catalog:",
     "@types/node": "catalog:",
     "chalk": "catalog:",
     "chokidar": "catalog:",
@@ -50,6 +51,7 @@
     "shx": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:",
+    "vite": "catalog:",
     "vitest": "catalog:"
   }
 }

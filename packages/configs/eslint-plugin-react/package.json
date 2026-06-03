@@ -30,10 +30,10 @@
   },
   "scripts": {
     "build": "run-s clean build:js build:types",
-    "build:js": "tsx build.ts",
+    "build:js": "vite build",
     "build:types": "tsc -p tsconfig.lib.json",
     "build:watch": "run-p watch:js watch:types",
-    "watch:js": "tsx build.ts --watch",
+    "watch:js": "vite build -w",
     "watch:types": "tsc -p tsconfig.lib.json -w --preserveWatchOutput",
     "clean": "shx rm -rf dist",
     "lint": "eslint --quiet",
@@ -47,6 +47,7 @@
     "@qualcomm-ui/cli": "catalog:",
     "@qualcomm-ui/esbuild": "catalog:",
     "@qualcomm-ui/tsconfig": "catalog:",
+    "@qualcomm-ui/vite": "catalog:",
     "@typescript-eslint/rule-tester": "catalog:",
     "@typescript-eslint/utils": "catalog:",
     "esbuild": "catalog:",
@@ -55,6 +56,7 @@
     "tsx": "catalog:",
     "typescript": "catalog:",
     "typescript-eslint": "catalog:",
+    "vite": "catalog:",
     "vitest": "catalog:"
   },
   "peerDependencies": {
