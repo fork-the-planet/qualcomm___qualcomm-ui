@@ -158,4 +158,36 @@ describe("ButtonGroup", () => {
 
     await expect.element(page.getByRole("button", {name: "Add"})).toBeDisabled()
   })
+
+  test("group density and size win over the child's own values", async () => {
+    await render(
+      <ButtonGroup aria-label="Editor actions" density="compact" size="lg">
+        <Button density="default" size="sm">
+          Save
+        </Button>
+      </ButtonGroup>,
+    )
+
+    const button = page.getByRole("button", {name: "Save"})
+    await expect.element(button).toHaveAttribute("data-density", "compact")
+    await expect.element(button).toHaveAttribute("data-size", "lg")
+  })
+
+  test("child emphasis and variant override the group's values", async () => {
+    await render(
+      <ButtonGroup
+        aria-label="Editor actions"
+        emphasis="primary"
+        variant="outline"
+      >
+        <Button emphasis="neutral" variant="fill">
+          Save
+        </Button>
+      </ButtonGroup>,
+    )
+
+    const button = page.getByRole("button", {name: "Save"})
+    await expect.element(button).toHaveAttribute("data-emphasis", "neutral")
+    await expect.element(button).toHaveAttribute("data-variant", "fill")
+  })
 })
