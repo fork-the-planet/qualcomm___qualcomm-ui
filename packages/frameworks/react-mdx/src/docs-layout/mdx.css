@@ -448,22 +448,6 @@ hr.mdx {
   padding-left: 10px;
 }
 
-.qui-docs__page-actions-buttons {
-  align-items: center;
-  display: flex;
-  gap: 1px;
-}
-
-.qui-docs__page-actions-copy-button[data-size] {
-  border-bottom-right-radius: 0;
-  border-top-right-radius: 0;
-}
-
-.qui-docs__page-actions-menu-button[data-size] {
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
-}
-
 .qui-docs__theme-table-scroll-container {
   overflow-x: auto;
 }
