@@ -5,8 +5,14 @@ import {type ReactElement, useMemo} from "react"
 
 import {ChevronDown, type LucideIcon} from "lucide-react"
 
-import {createQdsIconButtonApi} from "@qualcomm-ui/qds-core/button"
-import type {IconButtonProps} from "@qualcomm-ui/react/button"
+import {
+  createQdsIconButtonApi,
+  resolveButtonPropsWithGroup,
+} from "@qualcomm-ui/qds-core/button"
+import {
+  type IconButtonProps,
+  useButtonGroupContext,
+} from "@qualcomm-ui/react/button"
 import {Icon} from "@qualcomm-ui/react/icon"
 import {normalizeProps} from "@qualcomm-ui/react-core/machine"
 import {PolymorphicElement} from "@qualcomm-ui/react-core/system"
@@ -33,15 +39,41 @@ export function MenuIconButton({
   ...props
 }: MenuIconButtonProps): ReactElement {
   const qdsMenuContext = useQdsMenuContext()
-  const resolvedSize = size ?? qdsMenuContext.size
+  const {
+    density: resolvedDensity,
+    disabled: resolvedDisabled,
+    emphasis: resolvedEmphasis,
+    size: resolvedSize,
+    variant: resolvedVariant,
+  } = resolveButtonPropsWithGroup(useButtonGroupContext(), {
+    density,
+    disabled,
+    emphasis,
+    size: size ?? qdsMenuContext.size,
+    variant,
+  })
 
   const api = useMemo(
     () =>
       createQdsIconButtonApi(
-        {density, disabled, emphasis, shape, size: resolvedSize, variant},
+        {
+          density: resolvedDensity,
+          disabled: resolvedDisabled,
+          emphasis: resolvedEmphasis,
+          shape,
+          size: resolvedSize,
+          variant: resolvedVariant,
+        },
         normalizeProps,
       ),
-    [density, disabled, emphasis, resolvedSize, shape, variant],
+    [
+      resolvedDensity,
+      resolvedDisabled,
+      resolvedEmphasis,
+      shape,
+      resolvedSize,
+      resolvedVariant,
+    ],
   )
 
   const mergedProps = mergeProps(

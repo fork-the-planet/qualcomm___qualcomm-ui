@@ -27,9 +27,11 @@ import {
   type QdsButtonVariant,
   type QdsIconButtonApiProps,
   type QdsIconButtonShape,
+  resolveButtonPropsWithGroup,
 } from "@qualcomm-ui/qds-core/button"
 import type {Booleanish} from "@qualcomm-ui/utils/coercion"
 
+import {useQdsButtonGroupContext} from "./qds-button-group-context.service"
 import {
   provideQdsIconButtonContext,
   QdsIconButtonContextService,
@@ -113,6 +115,9 @@ export class IconButtonDirective
   )
 
   protected readonly iconButtonContext = inject(QdsIconButtonContextService)
+  protected readonly buttonGroupContext = useQdsButtonGroupContext({
+    optional: true,
+  })
 
   /**
    * Effective size (subclasses may override this based on context).
@@ -122,19 +127,19 @@ export class IconButtonDirective
   readonly iconChild = contentChild(IconDirective)
 
   ngOnInit() {
-    const buttonApi = computed(() => {
-      return createQdsIconButtonApi(
-        {
+    const buttonApi = computed(() =>
+      createQdsIconButtonApi(
+        resolveButtonPropsWithGroup(this.buttonGroupContext?.(), {
           density: this.density(),
           disabled: this.disabled(),
           emphasis: this.emphasis(),
           shape: this.shape(),
           size: this.resolvedSize(),
           variant: this.variant(),
-        },
+        }),
         normalizeProps,
-      )
-    })
+      ),
+    )
 
     this.iconButtonContext.init(buttonApi)
 
