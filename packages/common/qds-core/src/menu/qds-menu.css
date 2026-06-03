@@ -1,5 +1,4 @@
 .qui-menu__button {
-  background: transparent;
   .qui-menu__indicator {
     transition: transform var(--animation-duration-faster) ease-out;
   }
@@ -9,6 +8,11 @@
       transform: rotate(180deg);
     }
   }
+}
+
+/* bare triggers only (e.g. header bar menu items) */
+.qui-menu__button:not(.qui-button__root) {
+  background: transparent;
 }
 
 /* icon-only menu button stuff */
