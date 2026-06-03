@@ -41,6 +41,22 @@ Use [`q-menu-button`](./#q-menu-button) for a labeled trigger and [`q-menu-icon-
 
 <QdsDemo name="MenuButtonDemo" />
 
+### Split Button
+
+::: terms
+split action, dropdown button, secondary actions
+:::
+
+Use [`q-menu-split-button`](./#q-menu-split-button) for a split button trigger. The icon-only trigger provides a default "More options" `aria-label`; project a `q-menu-icon-button` with your own to override it. Optionally add an `aria-label` on the group when both halves share an accessible name. Control the menu position with [positioning.placement](./#positioning) on the parent `<q-menu>`.
+
+<QdsDemo name="MenuSplitButtonDemo" />
+
+#### Custom Action Button
+
+To set HTML attributes on the action button (`type`, `form`, `name`, etc.), project a `<button q-button>`. Listen on its `(click)` directly as `(actionClicked)` will be ignored in that case. Group props (`density`, `emphasis`, `size`, `variant`) still cascade to the projected button via context.
+
+<QdsDemo name="MenuSplitButtonProjectionDemo" />
+
 ### Context Menu
 
 ::: terms
@@ -244,7 +260,11 @@ Use the [positioning.hideWhenDetached](./#positioning) prop to hide the menu whe
 
 <TypeDocProps name="MenuIconButtonComponent" />
 
-<TypeDocAngularAttributes name="QdsMenuButtonBindings" />
+### q-menu-split-button
+
+<TypeDocProps name="MenuSplitButtonComponent" />
+
+<TypeDocAngularAttributes name="QdsSplitButtonBindings" />
 
 ### q-menu-trigger
 

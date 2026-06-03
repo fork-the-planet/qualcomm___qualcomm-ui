@@ -27,6 +27,7 @@ import {MenuRadioItemControlDirective} from "./menu-radio-item-control.directive
 import {MenuRadioItemGroupDirective} from "./menu-radio-item-group.directive"
 import {MenuRadioItemDirective} from "./menu-radio-item.directive"
 import {MenuSeparatorDirective} from "./menu-separator.directive"
+import {MenuSplitButtonComponent} from "./menu-split-button.component"
 import {MenuTriggerItemIndicatorComponent} from "./menu-trigger-item-indicator.component"
 import {MenuTriggerItemComponent} from "./menu-trigger-item.component"
 import {MenuTriggerDirective} from "./menu-trigger.directive"
@@ -57,6 +58,7 @@ import {MenuComponent} from "./menu.component"
     MenuCheckboxItemControlComponent,
     MenuRadioItemGroupDirective,
     MenuItemLabelDirective,
+    MenuSplitButtonComponent,
   ],
   exports: [
     MenuComponent,
@@ -82,6 +84,7 @@ import {MenuComponent} from "./menu.component"
     MenuCheckboxItemControlComponent,
     MenuRadioItemGroupDirective,
     MenuItemLabelDirective,
+    MenuSplitButtonComponent,
   ],
   imports: [
     QBindDirective,

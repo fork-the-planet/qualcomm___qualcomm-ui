@@ -53,6 +53,7 @@ import {
 } from "./menu-radio-item-group"
 import {MenuRoot, type MenuRootProps} from "./menu-root"
 import {MenuSeparator, type MenuSeparatorProps} from "./menu-separator"
+import {MenuSplitButton, type MenuSplitButtonProps} from "./menu-split-button"
 import {MenuTrigger, type MenuTriggerProps} from "./menu-trigger"
 import {MenuTriggerItem, type MenuTriggerItemProps} from "./menu-trigger-item"
 
@@ -81,6 +82,7 @@ export type {
   MenuRadioItemProps,
   MenuRootProps,
   MenuSeparatorProps,
+  MenuSplitButtonProps,
   MenuTriggerItemProps,
   MenuTriggerProps,
 }
@@ -108,6 +110,7 @@ type MenuComponent = {
   RadioItemGroup: typeof MenuRadioItemGroup
   Root: typeof MenuRoot
   Separator: typeof MenuSeparator
+  SplitButton: typeof MenuSplitButton
   Trigger: typeof MenuTrigger
   TriggerItem: typeof MenuTriggerItem
 }
@@ -135,6 +138,7 @@ export const Menu: MenuComponent = {
   RadioItemGroup: MenuRadioItemGroup,
   Root: MenuRoot,
   Separator: MenuSeparator,
+  SplitButton: MenuSplitButton,
   Trigger: MenuTrigger,
   TriggerItem: MenuTriggerItem,
 }
