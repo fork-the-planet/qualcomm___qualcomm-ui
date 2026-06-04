@@ -14,7 +14,8 @@ import {useQdsStepperContext} from "./qds-stepper-context"
 export interface StepperCompletedContentProps extends CoreStepperCompletedContentProps {}
 
 /**
- * Content area displayed when all steps are completed. Renders a `<div>` element by default.
+ * Content area displayed when all steps are completed. Renders a `<div>` element by
+ * default.
  */
 export function StepperCompletedContent(
   props: StepperCompletedContentProps,

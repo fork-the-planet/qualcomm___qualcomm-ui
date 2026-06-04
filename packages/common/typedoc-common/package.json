@@ -1,6 +1,6 @@
 {
   "name": "@qualcomm-ui/typedoc-common",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Common types for the QUI typedoc package",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
@@ -23,10 +23,10 @@
   "scripts": {
     "build": "run-s clean build:js build:ts",
     "clean": "shx rm -rf dist/tsbuildinfo dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map",
-    "build:js": "tsx build.ts",
+    "build:js": "vite build",
     "build:ts": "tsc -b tsconfig.lib.json",
     "dev": "run-p watch:js watch:ts",
-    "watch:js": "tsx build.ts --watch",
+    "watch:js": "vite build -w",
     "watch:ts": "pnpm build:ts -w --preserveWatchOutput",
     "lint": "eslint --quiet",
     "prepublishOnly": "qui-cli pre-publish",
@@ -34,12 +34,12 @@
   },
   "devDependencies": {
     "@qualcomm-ui/cli": "catalog:",
-    "@qualcomm-ui/esbuild": "catalog:",
     "@qualcomm-ui/tsconfig": "catalog:",
+    "@qualcomm-ui/vite": "catalog:",
     "chalk": "catalog:",
     "chokidar": "catalog:",
-    "esbuild": "catalog:",
     "shx": "catalog:",
-    "tsx": "catalog:"
+    "tsx": "catalog:",
+    "vite": "catalog:"
   }
 }

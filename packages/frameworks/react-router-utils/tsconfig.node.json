@@ -5,8 +5,6 @@
   },
   "include": [
     "./scripts",
-    "build.ts",
-    "css.d.ts",
-    "vite.config.ts"
+    "*.ts"
   ]
 }
