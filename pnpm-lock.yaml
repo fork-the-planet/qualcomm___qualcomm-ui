@@ -165,6 +165,9 @@ catalogs:
     chokidar:
       specifier: 5.0.0
       version: 5.0.0
+    esbuild:
+      specifier: 0.27.3
+      version: 0.27.3
     eslint:
       specifier: 9.39.1
       version: 9.39.1
@@ -1928,6 +1931,9 @@ importers:
       dayjs:
         specifier: ^1.11.19
         version: 1.11.19
+      esbuild:
+        specifier: 'catalog:'
+        version: 0.27.3
       escape-string-regexp:
         specifier: ^5.0.0
         version: 5.0.0
@@ -2256,6 +2262,9 @@ importers:
       dayjs:
         specifier: ^1.11.19
         version: 1.11.19
+      esbuild:
+        specifier: 'catalog:'
+        version: 0.27.3
       escape-string-regexp:
         specifier: ^5.0.0
         version: 5.0.0

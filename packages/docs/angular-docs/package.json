@@ -73,6 +73,7 @@
     "arktype": "^2.1.26",
     "compression": "^1.7.4",
     "dayjs": "^1.11.19",
+    "esbuild": "catalog:",
     "escape-string-regexp": "^5.0.0",
     "express": "^5.1.0",
     "fuzzysort": "^3.0.1",
