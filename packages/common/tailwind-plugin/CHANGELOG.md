@@ -1,5 +1,14 @@
 # @qualcomm-ui/tailwind-plugin Changelog
 
+## 1.7.2
+
+Jun 3rd, 2026
+
+### Miscellaneous Chores
+
+- clean up dependencies and remove legacy build scripts ([961e1bb](https://github.com/qualcomm/qualcomm-ui/commit/961e1bb))
+- migrate to vite for library bundling ([2216473](https://github.com/qualcomm/qualcomm-ui/commit/2216473))
+
 ## 1.7.1
 
 Apr 29th, 2026

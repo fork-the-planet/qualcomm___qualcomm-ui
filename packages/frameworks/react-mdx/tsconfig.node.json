@@ -5,10 +5,7 @@
     "resolveJsonModule": true
   },
   "include": [
-    "types",
-    "vite.config.ts",
-    "vitest.config.ts",
-    "qui-css-utils.config.ts",
-    "build.ts"
+    "./types",
+    "*.ts"
   ]
 }

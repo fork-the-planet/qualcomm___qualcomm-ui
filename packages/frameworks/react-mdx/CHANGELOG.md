@@ -1,5 +1,15 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 2.9.2
+
+Jun 3rd, 2026
+
+### Miscellaneous Chores
+
+- clean up dependencies and remove legacy build scripts ([961e1bb](https://github.com/qualcomm/qualcomm-ui/commit/961e1bb))
+- migrate to vite for library bundling ([2216473](https://github.com/qualcomm/qualcomm-ui/commit/2216473))
+- **deps:** update dependencies [@qualcomm-ui/core, @qualcomm-ui/mdx-common, @qualcomm-ui/utils, @qualcomm-ui/react, @qualcomm-ui/react-core]
+
 ## 2.9.1
 
 Jun 1st, 2026

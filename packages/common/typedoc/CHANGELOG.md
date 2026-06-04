@@ -1,5 +1,19 @@
 # @qualcomm-ui/typedoc Changelog
 
+## 1.1.4
+
+Jun 3rd, 2026
+
+### Miscellaneous Chores
+
+- clean up dependencies and remove legacy build scripts ([961e1bb](https://github.com/qualcomm/qualcomm-ui/commit/961e1bb))
+- migrate to vite for library bundling ([2216473](https://github.com/qualcomm/qualcomm-ui/commit/2216473))
+- **deps:** update dependencies [@qualcomm-ui/typedoc-common]
+
+### Code Refactoring
+
+- prefix node imports with node namespace ([fa45462](https://github.com/qualcomm/qualcomm-ui/commit/fa45462))
+
 ## 1.1.3
 
 May 23rd, 2026
