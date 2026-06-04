@@ -1,5 +1,14 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 3.8.2
+
+Jun 4th, 2026
+
+### Bug Fixes
+
+- [cli]: remove unused banner, fix build error ([e59ad99](https://github.com/qualcomm/qualcomm-ui/commit/e59ad99))
+- [generate-page-map]: use typeDocProps in url detection ([2a621a7](https://github.com/qualcomm/qualcomm-ui/commit/2a621a7))
+
 ## 3.8.1
 
 Jun 3rd, 2026
