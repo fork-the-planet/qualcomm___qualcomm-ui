@@ -20,16 +20,8 @@ export default defineConfig({
         /^node/,
       ],
       output: {
-        banner: [
-          `import {createRequire} from "node:module";`,
-          `const require=createRequire(import.meta.url);`,
-        ].join(""),
         entryFileNames: "[name].js",
-        minify: {
-          mangle: {
-            keepNames: true,
-          },
-        },
+        minify: true,
       },
       platform: "node",
     },
