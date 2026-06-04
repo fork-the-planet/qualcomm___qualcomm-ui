@@ -4,14 +4,18 @@ import {defineConfig} from "vite"
 
 import {
   dependenciesToExternal,
+  getArg,
   libraryEntriesPlugin,
   packagesToExternal,
 } from "@qualcomm-ui/vite"
 
 import pkg from "./package.json"
 
+const mode = getArg(process.argv, "--mode")
+
 export default defineConfig({
   build: {
+    emptyOutDir: false,
     lib: {
       entry: {},
       formats: ["es"],
@@ -34,6 +38,9 @@ export default defineConfig({
       },
     },
     sourcemap: true,
+  },
+  define: {
+    __QUI_DEV___: mode === "development" ? "true" : "false",
   },
   plugins: [
     react(),

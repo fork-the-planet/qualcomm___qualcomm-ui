@@ -36,11 +36,9 @@
   "dependencies": {},
   "devDependencies": {
     "@qualcomm-ui/cli": "catalog:",
-    "@qualcomm-ui/esbuild": "catalog:",
     "@qualcomm-ui/tsconfig": "catalog:",
     "@qualcomm-ui/typedoc-common": "workspace:^1.0.6",
     "@qualcomm-ui/vite": "catalog:",
-    "esbuild": "catalog:",
     "fuzzysort": "^3.0.1",
     "shx": "catalog:",
     "tsx": "catalog:",

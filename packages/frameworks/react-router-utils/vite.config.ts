@@ -4,6 +4,7 @@ import {dependenciesToExternal, libraryEntriesPlugin} from "@qualcomm-ui/vite"
 
 export default defineConfig({
   build: {
+    emptyOutDir: false,
     lib: {
       entry: {},
       formats: ["es"],
@@ -14,15 +15,13 @@ export default defineConfig({
         /^@qualcomm-ui\//,
         /^node/,
       ],
-      output: [
-        {
-          minify: {
-            mangle: {
-              keepNames: true,
-            },
+      output: {
+        minify: {
+          mangle: {
+            keepNames: true,
           },
         },
-      ],
+      },
     },
     sourcemap: true,
   },

@@ -52,10 +52,8 @@
   "devDependencies": {
     "@qualcomm-ui/cli": "catalog:",
     "@qualcomm-ui/css-utils": "catalog:",
-    "@qualcomm-ui/esbuild": "catalog:",
     "@qualcomm-ui/tsconfig": "catalog:",
     "@qualcomm-ui/vite": "catalog:",
-    "esbuild": "catalog:",
     "shx": "catalog:",
     "tailwindcss": "catalog:",
     "tsx": "catalog:",

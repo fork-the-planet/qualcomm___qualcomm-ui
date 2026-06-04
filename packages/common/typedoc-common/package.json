@@ -34,12 +34,10 @@
   },
   "devDependencies": {
     "@qualcomm-ui/cli": "catalog:",
-    "@qualcomm-ui/esbuild": "catalog:",
     "@qualcomm-ui/tsconfig": "catalog:",
     "@qualcomm-ui/vite": "catalog:",
     "chalk": "catalog:",
     "chokidar": "catalog:",
-    "esbuild": "catalog:",
     "shx": "catalog:",
     "tsx": "catalog:",
     "vite": "catalog:"

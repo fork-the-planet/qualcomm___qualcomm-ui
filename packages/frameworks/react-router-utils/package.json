@@ -42,7 +42,6 @@
   },
   "devDependencies": {
     "@qualcomm-ui/cli": "catalog:",
-    "@qualcomm-ui/esbuild": "catalog:",
     "@qualcomm-ui/mdx-common": "workspace:^2.4.0",
     "@qualcomm-ui/mdx-vite": "workspace:^3.8.0",
     "@qualcomm-ui/tsconfig": "catalog:",
@@ -50,7 +49,6 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "esbuild": "catalog:",
     "minimatch": "^10.2.5",
     "react": "catalog:",
     "react-dom": "catalog:",

@@ -64,11 +64,9 @@
   "devDependencies": {
     "@eslint/core": "^1.0.0",
     "@qualcomm-ui/cli": "catalog:",
-    "@qualcomm-ui/esbuild": "catalog:",
     "@qualcomm-ui/tsconfig": "catalog:",
     "@qualcomm-ui/vite": "catalog:",
     "cross-env": "^10.1.0",
-    "esbuild": "catalog:",
     "eslint-mdx": "^3.7.0",
     "eslint-plugin-mdx": "^3.7.0",
     "eslint-plugin-react": "^7.37.5",

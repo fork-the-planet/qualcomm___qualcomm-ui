@@ -45,12 +45,10 @@
   "devDependencies": {
     "@eslint/core": "^1.0.0",
     "@qualcomm-ui/cli": "catalog:",
-    "@qualcomm-ui/esbuild": "catalog:",
     "@qualcomm-ui/tsconfig": "catalog:",
     "@qualcomm-ui/vite": "catalog:",
     "@typescript-eslint/rule-tester": "catalog:",
     "@typescript-eslint/utils": "catalog:",
-    "esbuild": "catalog:",
     "npm-run-all2": "catalog:",
     "shx": "catalog:",
     "tsx": "catalog:",

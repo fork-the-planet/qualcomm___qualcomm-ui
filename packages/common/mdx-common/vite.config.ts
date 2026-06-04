@@ -4,6 +4,7 @@ import {dependenciesToExternal} from "@qualcomm-ui/vite"
 
 export default defineConfig({
   build: {
+    emptyOutDir: false,
     lib: {
       entry: "./src/index.ts",
       fileName: "index",
