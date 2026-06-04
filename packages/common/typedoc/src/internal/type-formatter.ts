@@ -1,8 +1,8 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
+import path from "node:path"
 import {format, type FormatConfig} from "oxfmt"
-import path from "path"
 import type {JSONOutput} from "typedoc"
 
 import type {FormattedType} from "@qualcomm-ui/typedoc-common"
