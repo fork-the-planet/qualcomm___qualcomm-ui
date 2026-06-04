@@ -119,7 +119,6 @@
     "autoprefixer": "catalog:",
     "chalk": "catalog:",
     "chokidar": "catalog:",
-    "esbuild": "catalog:",
     "execa": "catalog:",
     "glob": "catalog:",
     "hast-util-to-text": "^4.0.2",

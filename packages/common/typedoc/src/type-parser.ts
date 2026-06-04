@@ -3,7 +3,7 @@
 
 import chalk from "chalk"
 import {lstat, readFile, writeFile} from "node:fs/promises"
-import {resolve} from "path"
+import {resolve} from "node:path"
 import {Application, type JSONOutput} from "typedoc"
 
 import {humanFileSize} from "@qualcomm-ui/typedoc-common"
