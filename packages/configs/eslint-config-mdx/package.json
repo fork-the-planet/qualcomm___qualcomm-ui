@@ -1,6 +1,6 @@
 {
   "name": "@qualcomm-ui/eslint-config-mdx",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "QUI ESLint config for consistent MDX code",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",

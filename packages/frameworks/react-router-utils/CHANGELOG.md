@@ -1,5 +1,15 @@
 # @qualcomm-ui/react-router-utils Changelog
 
+## 2.1.1
+
+Jun 3rd, 2026
+
+### Miscellaneous Chores
+
+- clean up dependencies and remove legacy build scripts ([961e1bb](https://github.com/qualcomm/qualcomm-ui/commit/961e1bb))
+- migrate to vite for library bundling ([2216473](https://github.com/qualcomm/qualcomm-ui/commit/2216473))
+- **deps:** update dependencies [@qualcomm-ui/mdx-common, @qualcomm-ui/mdx-vite]
+
 ## 2.1.0
 
 May 29th, 2026

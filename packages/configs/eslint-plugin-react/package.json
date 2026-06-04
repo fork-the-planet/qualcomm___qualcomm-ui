@@ -1,6 +1,6 @@
 {
   "name": "@qualcomm-ui/eslint-plugin-react",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "ESLint plugin for enforcing best-practices with QUI React component consumption",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
