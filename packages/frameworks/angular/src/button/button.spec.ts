@@ -254,4 +254,50 @@ describe("ButtonGroup", () => {
       .element(page.getByRole("button", {name: "Cancel"}))
       .toBeDisabled()
   })
+
+  test("group density and size win over the child's own values", async () => {
+    @Component({
+      imports: [ButtonModule],
+      template: `
+        <div
+          aria-label="Editor actions"
+          density="compact"
+          q-button-group
+          size="lg"
+        >
+          <button density="default" q-button size="sm">Save</button>
+        </div>
+      `,
+    })
+    class GroupSizingComponent {}
+
+    await render(GroupSizingComponent)
+
+    const button = page.getByRole("button", {name: "Save"})
+    await expect.element(button).toHaveAttribute("data-density", "compact")
+    await expect.element(button).toHaveAttribute("data-size", "lg")
+  })
+
+  test("child emphasis and variant override the group's values", async () => {
+    @Component({
+      imports: [ButtonModule],
+      template: `
+        <div
+          aria-label="Editor actions"
+          emphasis="primary"
+          q-button-group
+          variant="outline"
+        >
+          <button emphasis="neutral" q-button variant="fill">Save</button>
+        </div>
+      `,
+    })
+    class ChildOverrideComponent {}
+
+    await render(ChildOverrideComponent)
+
+    const button = page.getByRole("button", {name: "Save"})
+    await expect.element(button).toHaveAttribute("data-emphasis", "neutral")
+    await expect.element(button).toHaveAttribute("data-variant", "fill")
+  })
 })

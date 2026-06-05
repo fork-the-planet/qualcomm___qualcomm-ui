@@ -1,5 +1,17 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 2.9.3
+
+Jun 4th, 2026
+
+### Code Refactoring
+
+- [react-mdx]: use split button in docs ([bdb60d2](https://github.com/qualcomm/qualcomm-ui/commit/bdb60d2))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react]
+
 ## 2.9.2
 
 Jun 3rd, 2026

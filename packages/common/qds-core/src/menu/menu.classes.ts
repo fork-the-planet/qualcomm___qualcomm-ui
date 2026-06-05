@@ -6,4 +6,5 @@ export const menuClasses = {
   content: "qui-menu__content",
   indicator: "qui-menu__indicator",
   separator: "qui-menu__separator",
+  splitButton: "qui-menu__split-button",
 } as const

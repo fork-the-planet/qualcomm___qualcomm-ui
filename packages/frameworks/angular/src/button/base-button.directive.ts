@@ -23,6 +23,7 @@ import {
   type QdsButtonEmphasis,
   type QdsButtonSize,
   type QdsButtonVariant,
+  resolveButtonPropsWithGroup,
 } from "@qualcomm-ui/qds-core/button"
 import type {Booleanish} from "@qualcomm-ui/utils/coercion"
 
@@ -83,7 +84,9 @@ export class BaseButtonDirective
   readonly variant = input<QdsButtonVariant>()
 
   readonly buttonService = inject(QdsButtonContextService)
-  readonly buttonGroupContext = useQdsButtonGroupContext({optional: true})
+  protected readonly buttonGroupContext = useQdsButtonGroupContext({
+    optional: true,
+  })
 
   /**
    * Effective size (subclasses may override this based on context).
@@ -95,26 +98,18 @@ export class BaseButtonDirective
   )
 
   ngOnInit() {
-    const buttonApi = computed(() => {
-      const buttonGroup = this.buttonGroupContext?.() ?? {}
-      const density = this.density()
-      const disabled = this.disabled()
-      const emphasis = this.emphasis()
-      const size = this.resolvedSize()
-      const variant = this.variant()
-
-      // certain button group props override button props
-      return createQdsButtonApi(
-        {
-          density: buttonGroup.density || density,
-          disabled: buttonGroup.disabled ?? disabled,
-          emphasis: emphasis || buttonGroup.emphasis,
-          size: buttonGroup.size ?? size,
-          variant: variant || buttonGroup.variant,
-        },
+    const buttonApi = computed(() =>
+      createQdsButtonApi(
+        resolveButtonPropsWithGroup(this.buttonGroupContext?.(), {
+          density: this.density(),
+          disabled: this.disabled(),
+          emphasis: this.emphasis(),
+          size: this.resolvedSize(),
+          variant: this.variant(),
+        }),
         normalizeProps,
-      )
-    })
+      ),
+    )
 
     this.buttonService.init(buttonApi)
     this.trackBindings()

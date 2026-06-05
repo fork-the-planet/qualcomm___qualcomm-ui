@@ -1,5 +1,8 @@
 export * from "./menu.anatomy"
 export * from "./menu-item.classes"
+export * from "./menu-split-button.anatomy"
+export * from "./menu-split-button.api"
+export type * from "./menu-split-button.types"
 export * from "./menu.api"
 export * from "./menu.classes"
 export type * from "./menu.types"

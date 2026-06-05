@@ -1,3 +1,4 @@
+export type * from "./button-group-shared.types"
 export * from "./button-group.anatomy"
 export * from "./button-group.api"
 export type * from "./button-group.types"

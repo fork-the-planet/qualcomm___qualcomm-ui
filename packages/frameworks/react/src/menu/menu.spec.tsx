@@ -802,3 +802,76 @@ describe("Menu", () => {
       .toHaveAttribute("data-size", "lg")
   })
 })
+
+describe("Menu.SplitButton", () => {
+  function renderSplitButton(
+    props: Partial<Parameters<typeof Menu.SplitButton>[0]> = {},
+  ) {
+    return render(
+      <Menu.Root>
+        <Menu.SplitButton {...props}>Save</Menu.SplitButton>
+        <Portal>
+          <Menu.Positioner>
+            <Menu.Content>
+              <Menu.Item value="save-as">Save as</Menu.Item>
+              <Menu.Item value="save-copy">Save a copy</Menu.Item>
+            </Menu.Content>
+          </Menu.Positioner>
+        </Portal>
+      </Menu.Root>,
+    )
+  }
+
+  test("clicking the action button fires onClick without opening the menu", async () => {
+    const onClick = vi.fn()
+    await renderSplitButton({onClick})
+
+    await page.getByRole("button", {name: "Save"}).click()
+
+    await expect.poll(() => onClick.mock.calls.length).toBe(1)
+    await expect.element(page.getByRole("menu")).not.toBeInTheDocument()
+  })
+
+  test("clicking the chevron trigger opens the menu", async () => {
+    const onClick = vi.fn()
+    await renderSplitButton({onClick})
+
+    await expect.element(page.getByRole("menu")).not.toBeInTheDocument()
+
+    await page.getByRole("button", {name: "More options"}).click()
+
+    await expect.element(page.getByRole("menu")).toBeVisible()
+    await expect.element(page.getByText("Save as")).toBeVisible()
+    expect(onClick).not.toHaveBeenCalled()
+  })
+
+  test("the chevron trigger has a default accessible name of More options", async () => {
+    await renderSplitButton()
+
+    await expect
+      .element(page.getByRole("button", {name: "More options"}))
+      .toBeVisible()
+  })
+
+  test("triggerProps aria-label overrides the chevron accessible name", async () => {
+    await renderSplitButton({triggerProps: {"aria-label": "Custom name"}})
+
+    await expect
+      .element(page.getByRole("button", {name: "Custom name"}))
+      .toBeVisible()
+    await expect
+      .element(page.getByRole("button", {name: "More options"}))
+      .not.toBeInTheDocument()
+  })
+
+  test("shared props cascade to both the action and chevron buttons", async () => {
+    await renderSplitButton({emphasis: "primary"})
+
+    await expect
+      .element(page.getByRole("button", {name: "Save"}))
+      .toHaveAttribute("data-emphasis", "primary")
+    await expect
+      .element(page.getByRole("button", {name: "More options"}))
+      .toHaveAttribute("data-emphasis", "primary")
+  })
+})

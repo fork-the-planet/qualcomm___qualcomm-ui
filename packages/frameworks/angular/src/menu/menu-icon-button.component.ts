@@ -34,7 +34,10 @@ export class MenuIconButtonComponent extends IconButtonDirective {
   protected readonly qdsMenuContext = useQdsMenuContext()
 
   protected override readonly resolvedSize = computed(
-    () => this.size() ?? this.qdsMenuContext().size,
+    () =>
+      this.buttonGroupContext?.()?.size ??
+      this.size() ??
+      this.qdsMenuContext().size,
   )
 
   readonly indicatorBindings = computed(() =>
