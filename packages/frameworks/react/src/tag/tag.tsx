@@ -27,6 +27,8 @@ export interface TagProps extends QdsTagApiProps, ElementRenderProp<"button"> {
    * Only applicable when {@link variant} is `selectable`.
    * Ignored when {@link selected} is provided.
    *
+   * @since next-release
+   *
    * @default false
    */
   defaultSelected?: boolean
@@ -50,6 +52,8 @@ export interface TagProps extends QdsTagApiProps, ElementRenderProp<"button"> {
    * Callback fired when the selected state changes. Fires in both controlled
    * and uncontrolled modes.
    * Only applicable when {@link variant} is `selectable`.
+   *
+   * @since next-release
    */
   onSelectedChange?: (selected: boolean) => void
 
@@ -57,6 +61,8 @@ export interface TagProps extends QdsTagApiProps, ElementRenderProp<"button"> {
    * Controls the selected state. When omitted, the tag manages its own selected
    * state internally.
    * Only applicable when {@link variant} is `selectable`.
+   *
+   * @since next-release
    */
   selected?: boolean
 

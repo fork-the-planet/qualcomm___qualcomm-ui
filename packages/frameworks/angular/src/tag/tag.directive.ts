@@ -118,6 +118,8 @@ export class TagDirective implements SignalifyInput<QdsTagApiProps>, OnInit {
    * uncontrolled modes.
    * Only applicable when {@link variant} is `selectable`.
    *
+   * @since next-release
+   *
    * @remarks
    * Pair with {@link selected} to enable two-way binding via `[(selected)]`.
    */
@@ -127,6 +129,8 @@ export class TagDirective implements SignalifyInput<QdsTagApiProps>, OnInit {
    * Initial selected state when the component is uncontrolled.
    * Only applicable when {@link variant} is `selectable`.
    * Ignored when {@link selected} is provided.
+   *
+   * @since next-release
    *
    * @default false
    */
