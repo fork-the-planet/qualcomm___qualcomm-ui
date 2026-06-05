@@ -47,7 +47,7 @@ catalog:
   '@mdx-js/react': 3.1.1
   '@mdx-js/rollup': 3.1.1
   '@qualcomm-ui/cli': 1.0.6
-  '@qualcomm-ui/css-utils': 1.0.5
+  '@qualcomm-ui/css-utils': 1.1.0
   '@qualcomm-ui/esbuild': 1.0.5
   '@qualcomm-ui/tsconfig': 2.0.0
   '@qualcomm-ui/vite': 1.1.0
