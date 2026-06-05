@@ -36,7 +36,7 @@ The following guide assumes that you're using the file-based routing configurati
 - QUI Docs reads pages from the configured [appDirectory](/api/qui-docs-config#appDirectory) and [pageDirectory](/api/qui-docs-config#pageDirectory). The template uses this configuration: `src/routes`.
 - An `.mdx` file under `src/routes` creates a docs page and is included in search by default.
 - A page's URL comes from its file path relative to `src/routes`. Folders ending in `+` create nested URL segments.
-  - By default, plain folders do not create nested URL groups. See [routingStrategy](/configuration#routingStrategy) for the `"react-router-directory-groups"` mode.
+  - By default, plain folders do not create nested URL groups. See [routingStrategy](/configuration#routingstrategy) for the `"react-router-directory-groups"` mode.
 - If you define routes manually with React Router, see [Custom Routing](/custom-routing).
 
 ## URL Mapping
@@ -251,7 +251,7 @@ Use `.tsx` routes sparingly. TSX pages can appear in navigation when configured,
 
 ## Custom Routes
 
-React Router's [Framework Mode](https://reactrouter.com/home#react-router-as-a-framework) supports manually defined route definitions. When you define routes manually, add a [routingStrategy](/api/qui-docs-config#routingstrategy) so QUI Docs can map each discovered page file to its site URL.
+React Router's [Framework Mode](https://reactrouter.com/home#react-router-as-a-framework) supports manually defined route definitions. When you define routes manually, add a [routingStrategy](/api/qui-docs-config#routingStrategy) so QUI Docs can map each discovered page file to its site URL.
 
 See [Custom Routing](/custom-routing) for the full setup.
 

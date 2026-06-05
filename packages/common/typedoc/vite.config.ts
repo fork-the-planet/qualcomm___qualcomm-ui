@@ -20,11 +20,7 @@ export default defineConfig({
         /^node/,
       ],
       output: {
-        minify: {
-          mangle: {
-            keepNames: true,
-          },
-        },
+        minify: true,
       },
       platform: "node",
     },

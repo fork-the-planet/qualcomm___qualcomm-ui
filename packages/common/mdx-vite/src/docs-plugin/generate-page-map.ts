@@ -3,13 +3,35 @@
 
 import {program} from "@commander-js/extra-typings"
 import {glob} from "glob"
-import {writeFile} from "node:fs/promises"
+import {readFile, writeFile} from "node:fs/promises"
 import {resolve} from "node:path"
 import {cwd} from "node:process"
 
+import type {QuiPropTypes} from "@qualcomm-ui/typedoc-common"
+
 import {ConfigLoader} from "./config"
+import type {ResolvedQuiDocsConfig} from "./config/types"
 import {fixPath} from "./path-utils"
 import {SearchIndexer} from "./search-indexer"
+
+async function resolveDocProps(
+  config: ResolvedQuiDocsConfig,
+): Promise<Record<string, QuiPropTypes>> {
+  if (!config.typeDocProps) {
+    return {}
+  }
+
+  try {
+    const docPropsPath = fixPath(resolve(cwd(), config.typeDocProps))
+    const docProps = JSON.parse(await readFile(docPropsPath, "utf-8"))
+    return docProps?.props ?? {}
+  } catch {
+    console.debug(
+      "Invalid doc props file. Unable to parse JSON. Please check the file",
+    )
+    return {}
+  }
+}
 
 export function addGeneratePageMapCommand() {
   program
@@ -35,13 +57,14 @@ export function addGeneratePageMapCommand() {
       try {
         const configLoader = new ConfigLoader({configFile: options.configFile})
         const resolvedConfig = configLoader.loadConfig()
+        const typeDocProps = await resolveDocProps(resolvedConfig)
         const routesDir = fixPath(
           resolve(resolvedConfig.appDirectory, resolvedConfig.pageDirectory),
         )
         const indexer = new SearchIndexer({
           ...resolvedConfig,
           srcDir: fixPath(resolve(cwd(), resolvedConfig.appDirectory)),
-          typeDocProps: {},
+          typeDocProps,
         })
         const files = glob.sync(
           [`${routesDir}/**/*.mdx`, `${routesDir}/**/*.tsx`],
