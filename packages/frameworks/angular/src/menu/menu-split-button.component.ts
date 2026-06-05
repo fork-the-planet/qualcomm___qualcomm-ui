@@ -5,7 +5,6 @@ import {
   booleanAttribute,
   Component,
   computed,
-  HostAttributeToken,
   inject,
   input,
   type OnInit,
@@ -53,6 +52,22 @@ import type {Booleanish} from "@qualcomm-ui/utils/coercion"
 })
 export class MenuSplitButtonComponent implements OnInit {
   /**
+   * {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-label aria-label}
+   * attribute.
+   */
+  readonly ariaLabel = input<string | undefined>(undefined, {
+    alias: "aria-label",
+  })
+
+  /**
+   * {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-labelledby aria-labelledby}
+   * attribute.
+   */
+  readonly ariaLabelledby = input<string | undefined>(undefined, {
+    alias: "aria-labelledby",
+  })
+
+  /**
    * The density of both buttons.
    */
   readonly density = input<QdsButtonDensity>()
@@ -94,21 +109,13 @@ export class MenuSplitButtonComponent implements OnInit {
    */
   readonly actionClicked = output<MouseEvent>()
 
-  protected readonly ariaLabel = inject(new HostAttributeToken("aria-label"), {
-    optional: true,
-  })
-  protected readonly ariaLabelledBy = inject(
-    new HostAttributeToken("aria-labelledby"),
-    {optional: true},
-  )
-
   protected readonly buttonGroupService = inject(QdsButtonGroupContextService)
 
   protected readonly trackBindings = useTrackBindings(() =>
     getQdsSplitButtonBindings(
       {
-        "aria-label": this.ariaLabel || undefined,
-        "aria-labelledby": this.ariaLabelledBy || undefined,
+        "aria-label": this.ariaLabel() || undefined,
+        "aria-labelledby": this.ariaLabelledby() || undefined,
         density: this.density(),
         disabled: this.disabled(),
         emphasis: this.emphasis(),
