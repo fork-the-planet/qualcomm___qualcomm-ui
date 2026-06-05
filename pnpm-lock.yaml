@@ -255,8 +255,8 @@ importers:
         specifier: ^3.1.0
         version: 3.1.0
       '@qualcomm-ui/changesets-cli':
-        specifier: ^1.1.0
-        version: 1.1.0
+        specifier: ^1.2.0
+        version: 1.2.0
       '@qualcomm-ui/eslint-config-angular':
         specifier: workspace:*
         version: link:packages/configs/eslint-config-angular
@@ -7332,8 +7332,8 @@ packages:
   '@poppinss/exception@1.2.3':
     resolution: {integrity: sha512-dCED+QRChTVatE9ibtoaxc+WkdzOSjYTKi/+uacHWIsfodVfpsueo3+DKpgU5Px8qXjgmXkSvhXvSCz3fnP9lw==}
 
-  '@qualcomm-ui/changesets-cli@1.1.0':
-    resolution: {integrity: sha512-GG6UcRbCcwtXECGnnr7IqumbU8H2ubfSIWgxG8GKheB+RLUrQ681oI1jcFXZb9vBoZeTVcD8sdmRh3sRHe3TsA==}
+  '@qualcomm-ui/changesets-cli@1.2.0':
+    resolution: {integrity: sha512-nzKcrXWRKjZ2RPmEhytkykvXrbTkNg3Kpwc8SqrM7yACMLs1kHsuTkRZUfxHsaAba4ryr+pPcPmAyclkDlS86w==}
     hasBin: true
 
   '@qualcomm-ui/cli@1.0.6':
@@ -20036,7 +20036,7 @@ snapshots:
 
   '@poppinss/exception@1.2.3': {}
 
-  '@qualcomm-ui/changesets-cli@1.1.0':
+  '@qualcomm-ui/changesets-cli@1.2.0':
     dependencies:
       '@actions/core': 1.11.1
       '@manypkg/get-packages': 3.1.0
