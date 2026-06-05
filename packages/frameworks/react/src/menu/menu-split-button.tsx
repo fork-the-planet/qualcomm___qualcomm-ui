@@ -19,6 +19,9 @@ import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 import {MenuIconButton, type MenuIconButtonProps} from "./menu-icon-button"
 import {MenuTrigger} from "./menu-trigger"
 
+/**
+ * @since next-release
+ */
 export interface MenuSplitButtonProps
   extends Omit<ElementRenderProp<"div">, "onClick">, QdsSplitButtonApiProps {
   /**
@@ -52,6 +55,9 @@ export interface MenuSplitButtonProps
   triggerProps?: Omit<MenuIconButtonProps, keyof QdsButtonApiProps>
 }
 
+/**
+ * @since next-release
+ */
 export function MenuSplitButton({
   actionProps,
   "aria-label": ariaLabel,

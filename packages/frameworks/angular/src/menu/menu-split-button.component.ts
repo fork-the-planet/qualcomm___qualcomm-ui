@@ -30,6 +30,9 @@ import {
 import {getQdsSplitButtonBindings} from "@qualcomm-ui/qds-core/menu"
 import type {Booleanish} from "@qualcomm-ui/utils/coercion"
 
+/**
+ * @since next-release
+ */
 @Component({
   providers: [provideQdsButtonGroupContext()],
   selector: "[q-menu-split-button]",

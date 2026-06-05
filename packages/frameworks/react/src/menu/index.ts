@@ -1,3 +1,5 @@
+import type {FunctionComponent} from "react"
+
 import {MenuButton, type MenuButtonProps} from "./menu-button"
 import {
   MenuCheckboxItem,
@@ -58,61 +60,82 @@ import {MenuTrigger, type MenuTriggerProps} from "./menu-trigger"
 import {MenuTriggerItem, type MenuTriggerItemProps} from "./menu-trigger-item"
 
 export * from "./qds-menu-context"
-
 export type {
-  MenuButtonProps,
-  MenuCheckboxItemControlProps,
-  MenuCheckboxItemProps,
-  MenuContentProps,
-  MenuContextTriggerProps,
   MenuIconButtonProps,
-  MenuInlineIconButtonProps,
-  MenuItemAccessoryProps,
   MenuItemCommandProps,
-  MenuItemDescriptionProps,
-  MenuItemGroupLabelProps,
-  MenuItemGroupProps,
-  MenuItemIndicatorProps,
-  MenuItemLabelProps,
-  MenuItemStartIconProps,
-  MenuItemProps,
-  MenuPositionerProps,
+  MenuInlineIconButtonProps,
   MenuRadioItemControlProps,
-  MenuRadioItemGroupProps,
   MenuRadioItemProps,
-  MenuRootProps,
-  MenuSeparatorProps,
-  MenuSplitButtonProps,
+  MenuButtonProps,
   MenuTriggerItemProps,
   MenuTriggerProps,
+  MenuItemProps,
+  MenuContentProps,
+  MenuRootProps,
+  MenuItemLabelProps,
+  MenuItemDescriptionProps,
+  MenuItemGroupProps,
+  MenuRadioItemGroupProps,
+  MenuCheckboxItemControlProps,
+  MenuPositionerProps,
+  MenuItemIndicatorProps,
+  MenuItemGroupLabelProps,
+  MenuContextTriggerProps,
+  MenuSeparatorProps,
+  MenuSplitButtonProps,
+  MenuItemAccessoryProps,
+  MenuCheckboxItemProps,
+  MenuItemStartIconProps,
 }
 
-type MenuComponent = {
-  Button: typeof MenuButton
-  CheckboxItem: typeof MenuCheckboxItem
-  CheckboxItemControl: typeof MenuCheckboxItemControl
-  Content: typeof MenuContent
-  ContextTrigger: typeof MenuContextTrigger
-  IconButton: typeof MenuIconButton
-  InlineIconButton: typeof MenuInlineIconButton
-  Item: typeof MenuItem
-  ItemAccessory: typeof MenuItemAccessory
-  ItemCommand: typeof MenuItemCommand
-  ItemDescription: typeof MenuItemDescription
-  ItemGroup: typeof MenuItemGroup
-  ItemGroupLabel: typeof MenuItemGroupLabel
-  ItemIndicator: typeof MenuItemIndicator
-  ItemLabel: typeof MenuItemLabel
-  ItemStartIcon: typeof MenuItemStartIcon
-  Positioner: typeof MenuPositioner
-  RadioItem: typeof MenuRadioItem
-  RadioItemControl: typeof MenuRadioItemControl
-  RadioItemGroup: typeof MenuRadioItemGroup
-  Root: typeof MenuRoot
-  Separator: typeof MenuSeparator
-  SplitButton: typeof MenuSplitButton
-  Trigger: typeof MenuTrigger
-  TriggerItem: typeof MenuTriggerItem
+interface MenuComponent {
+  Button: FunctionComponent<MenuButtonProps>
+  CheckboxItem: FunctionComponent<MenuCheckboxItemProps>
+  CheckboxItemControl: FunctionComponent<MenuCheckboxItemControlProps>
+  Content: FunctionComponent<MenuContentProps>
+  ContextTrigger: FunctionComponent<MenuContextTriggerProps>
+  IconButton: FunctionComponent<MenuIconButtonProps>
+  InlineIconButton: FunctionComponent<MenuInlineIconButtonProps>
+  Item: FunctionComponent<MenuItemProps>
+  ItemAccessory: FunctionComponent<MenuItemAccessoryProps>
+  ItemCommand: FunctionComponent<MenuItemCommandProps>
+  ItemDescription: FunctionComponent<MenuItemDescriptionProps>
+  ItemGroup: FunctionComponent<MenuItemGroupProps>
+  ItemGroupLabel: FunctionComponent<MenuItemGroupLabelProps>
+  ItemIndicator: FunctionComponent<MenuItemIndicatorProps>
+  ItemLabel: FunctionComponent<MenuItemLabelProps>
+  ItemStartIcon: FunctionComponent<MenuItemStartIconProps>
+  /**
+   * A container that positions the menu relative to its anchor element. Renders a
+   * `<div>` element by default.
+   */
+  Positioner: FunctionComponent<MenuPositionerProps>
+  RadioItem: FunctionComponent<MenuRadioItemProps>
+  RadioItemControl: FunctionComponent<MenuRadioItemControlProps>
+  RadioItemGroup: FunctionComponent<MenuRadioItemGroupProps>
+  Root: FunctionComponent<MenuRootProps>
+  Separator: FunctionComponent<MenuSeparatorProps>
+  /**
+   * @since next-release
+   */
+  SplitButton: FunctionComponent<MenuSplitButtonProps>
+  /**
+   * Enhances a child element to open the menu when clicked. Requires a single child
+   * element.
+   *
+   * @example
+   * ```tsx
+   * <Menu.Trigger>
+   *   <button>Open</button>
+   * </Menu.Trigger>
+   * ```
+   */
+  Trigger: FunctionComponent<MenuTriggerProps>
+  /**
+   * A menu item that triggers a submenu on hover or click. Renders a `<button>`
+   * element by default.
+   */
+  TriggerItem: FunctionComponent<MenuTriggerItemProps>
 }
 
 export const Menu: MenuComponent = {
@@ -138,6 +161,9 @@ export const Menu: MenuComponent = {
   RadioItemGroup: MenuRadioItemGroup,
   Root: MenuRoot,
   Separator: MenuSeparator,
+  /**
+   * @since next-release
+   */
   SplitButton: MenuSplitButton,
   Trigger: MenuTrigger,
   TriggerItem: MenuTriggerItem,
