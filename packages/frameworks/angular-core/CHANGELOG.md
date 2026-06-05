@@ -1,5 +1,13 @@
 # @qualcomm-ui/angular-core Changelog
 
+## 2.4.4
+
+Jun 5th, 2026
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core@1.11.4]
+
 ## 2.4.3
 
 Jun 3rd, 2026
