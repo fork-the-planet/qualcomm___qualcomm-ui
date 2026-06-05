@@ -1,5 +1,13 @@
 # @qualcomm-ui/typedoc Changelog
 
+## 1.1.5
+
+Jun 4th, 2026
+
+### Build System
+
+- adjust minify options ([cc4b73c](https://github.com/qualcomm/qualcomm-ui/commit/cc4b73c))
+
 ## 1.1.4
 
 Jun 3rd, 2026

@@ -1,5 +1,13 @@
 # @qualcomm-ui/react-router-utils Changelog
 
+## 2.1.2
+
+Jun 4th, 2026
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-vite]
+
 ## 2.1.1
 
 Jun 3rd, 2026
