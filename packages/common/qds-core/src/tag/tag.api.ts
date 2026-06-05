@@ -1,7 +1,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
+import {booleanAriaAttr, booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 import type {PropNormalizer} from "@qualcomm-ui/utils/machine"
 
 import {tagAnatomy} from "./tag.anatomy"
@@ -22,6 +22,7 @@ export function createQdsTagApi(
   normalize: PropNormalizer,
 ): QdsTagApi {
   const size = props.size || "md"
+  const selected = props.variant === "selectable" && props.selected
 
   function isInteractiveVariant(): boolean {
     return props.variant === "link" || props.variant === "selectable"
@@ -32,7 +33,7 @@ export function createQdsTagApi(
     className: tagClasses.root,
     "data-disabled": booleanDataAttr(props.disabled),
     "data-emphasis": props.emphasis || "outline-brand",
-    "data-selected": booleanDataAttr(props.selected),
+    "data-selected": booleanDataAttr(selected),
     "data-shape": props.shape || props.radius || "square",
     "data-size": size,
     "data-variant": props.variant,
@@ -54,19 +55,25 @@ export function createQdsTagApi(
       return normalize.element({
         ...parts.endIcon,
         className: tagClasses.icon,
-        "data-size": size,
       })
     },
     getRootBindings(): QdsTagRootBindings {
-      return isInteractiveVariant()
-        ? normalize.button({...commonBindings, disabled: props.disabled})
-        : normalize.element(commonBindings)
+      if (!isInteractiveVariant()) {
+        return normalize.element(commonBindings)
+      }
+      return normalize.button({
+        ...commonBindings,
+        "aria-pressed":
+          props.variant === "selectable"
+            ? booleanAriaAttr(selected)
+            : undefined,
+        disabled: props.disabled,
+      })
     },
     getStartIconBindings(): QdsTagStartIconBindings {
       return normalize.element({
         ...parts.startIcon,
         className: tagClasses.icon,
-        "data-size": size,
       })
     },
     isInteractiveVariant,
