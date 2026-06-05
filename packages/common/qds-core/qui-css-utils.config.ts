@@ -40,7 +40,7 @@ export default {
       outFileName: "arduino-light.min.css",
     },
     {
-      cssFiles: ["src/**/qds-*.css"],
+      cssFiles: ["src/**/qds-*.css", "src/*.css"],
       emitIndividualCssFiles: true,
       ignore: ["src/styles/**/*"],
       outFileName: "components.min.css",
