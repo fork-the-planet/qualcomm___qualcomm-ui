@@ -1,5 +1,13 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.29.1
+
+Jun 4th, 2026
+
+### Bug Fixes
+
+- [styles]: sort global styles last for specificity ([a24c9dc](https://github.com/qualcomm/qualcomm-ui/commit/a24c9dc))
+
 ## 1.29.0
 
 Jun 4th, 2026
