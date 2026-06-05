@@ -42,6 +42,16 @@ Use [`<Menu.Button>`](./#menu-button-1) for a labeled trigger and [`<Menu.IconBu
 
 <Demo name="MenuButtonDemo" component={demos.MenuButtonDemo} />
 
+### Split Button
+
+::: terms
+split action, dropdown button, secondary actions
+:::
+
+Use [`<Menu.SplitButton>`](./#menu-split-button) for a split button trigger. The icon-only trigger provides a default "More options" `aria-label`; use [`triggerProps`](./#triggerProps) to override it. Optionally add an `aria-label` on the group when both halves share an accessible name. Control the menu position with [positioning.placement](./#positioning) on the parent [`<Menu.Root>`](./#menu-root).
+
+<Demo name="MenuSplitButtonDemo" component={demos.MenuSplitButtonDemo} />
+
 ### Context Menu
 
 ::: terms
@@ -252,6 +262,10 @@ The following describes the individual subcomponents of the `Menu` component.
 ### \<Menu.IconButton>
 
 <TypeDocProps name="MenuIconButtonProps" />
+
+### \<Menu.SplitButton\>
+
+<TypeDocProps name="MenuSplitButtonProps" />
 
 ### \<Menu.Content>
 

@@ -22,10 +22,7 @@ import {Tag} from "@qualcomm-ui/react/tag"
 ### Icons
 
 ::: terms
-leading icon
-trailing icon
-prefix
-suffix
+leading icon, trailing icon, prefix, suffix
 :::
 
 Icons are supplied using the [startIcon](./#startIcon) and [endIcon](./#endIcon) props.
@@ -35,14 +32,26 @@ Icons are supplied using the [startIcon](./#startIcon) and [endIcon](./#endIcon)
 ### Variants
 
 ::: terms
-clickable
-removable
-closable
+clickable, removable, closable
 :::
 
 Choose from three [variants](./#variant): `link`, `selectable` and `dismissable`.
 
 <Demo name="TagVariantsDemo" component={demos.TagVariantsDemo} />
+
+### Controlled State
+
+::: terms
+useState, state management, two-way binding
+:::
+
+Set the initial value using the [defaultSelected](./#defaultSelected) prop, or use [selected](./#selected) and [onSelectedChange](./#onSelectedChange) to control the value manually. These props follow our [controlled state](/patterns/controlled-state) pattern. Only applicable when [variant](./#variant) is `selectable`.
+
+<Demo
+  expanded
+  name="TagControlledDemo"
+  component={demos.TagControlledDemo}
+/>
 
 ### Colors
 
@@ -57,9 +66,7 @@ Control the visual emphasis with different colors via the [emphasis](./#emphasis
 ### Sizes
 
 ::: terms
-small
-medium
-large
+small, medium, large
 :::
 
 Choose from three [sizes](./#size): `sm`, `md` and `lg`. The default size is `md`.

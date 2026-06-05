@@ -5,7 +5,6 @@ import {type ReactNode, useCallback} from "react"
 
 import {Check, Copy, Download} from "lucide-react"
 
-import {Button} from "@qualcomm-ui/react/button"
 import {Menu} from "@qualcomm-ui/react/menu"
 import {Portal} from "@qualcomm-ui/react-core/portal"
 import {useSiteContext} from "@qualcomm-ui/react-mdx/context"
@@ -60,49 +59,40 @@ export function PageActions(): ReactNode {
 
   return (
     <div className="qui-docs__page-actions">
-      <div className="qui-docs__page-actions-buttons">
-        <Button
-          className="qui-docs__page-actions-copy-button"
+      <Menu.Root size="sm">
+        <Menu.SplitButton
           endIcon={isCopied ? Check : Copy}
           onClick={copyToClipboard}
           size="sm"
+          triggerProps={{"aria-label": "More page actions"}}
           variant="outline"
         >
           Copy Page
-        </Button>
-        <Menu.Root size="sm">
-          <Menu.Trigger>
-            <Menu.IconButton
-              className="qui-docs__page-actions-menu-button"
-              size="sm"
-              variant="outline"
-            />
-          </Menu.Trigger>
-          <Portal>
-            <Menu.Positioner>
-              <Menu.Content>
-                <Menu.Item onClick={copyToClipboard} value="copy-page">
-                  <Menu.ItemStartIcon icon={Copy} />
-                  <Menu.ItemLabel>Copy Page</Menu.ItemLabel>
-                  <Menu.ItemDescription>
-                    Copy page as markdown for LLMs
-                  </Menu.ItemDescription>
-                </Menu.Item>
-                <Menu.Item
-                  onClick={() => void handleDownload()}
-                  value="download-page"
-                >
-                  <Menu.ItemStartIcon icon={Download} />
-                  <Menu.ItemLabel>Download Page</Menu.ItemLabel>
-                  <Menu.ItemDescription>
-                    Download page as markdown
-                  </Menu.ItemDescription>
-                </Menu.Item>
-              </Menu.Content>
-            </Menu.Positioner>
-          </Portal>
-        </Menu.Root>
-      </div>
+        </Menu.SplitButton>
+        <Portal>
+          <Menu.Positioner>
+            <Menu.Content>
+              <Menu.Item onClick={copyToClipboard} value="copy-page">
+                <Menu.ItemStartIcon icon={Copy} />
+                <Menu.ItemLabel>Copy Page</Menu.ItemLabel>
+                <Menu.ItemDescription>
+                  Copy page as markdown for LLMs
+                </Menu.ItemDescription>
+              </Menu.Item>
+              <Menu.Item
+                onClick={() => void handleDownload()}
+                value="download-page"
+              >
+                <Menu.ItemStartIcon icon={Download} />
+                <Menu.ItemLabel>Download Page</Menu.ItemLabel>
+                <Menu.ItemDescription>
+                  Download page as markdown
+                </Menu.ItemDescription>
+              </Menu.Item>
+            </Menu.Content>
+          </Menu.Positioner>
+        </Portal>
+      </Menu.Root>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 .qui-tag__root {
-  > span {
+  > span:not(.qui-tag__icon) {
     text-box: cap alphabetic;
   }
 
@@ -20,6 +20,7 @@
   user-select: none;
 
   --tag-size: var(--sizing-90);
+  --tag-icon-size: var(--sizing-60);
   --tag-radius: var(--border-radius-md);
   --tag-bg-base: transparent;
   --tag-border-base: var(--color-interactive-border-neutral-idle);
@@ -35,7 +36,15 @@
   }
   &[data-size="lg"] {
     --tag-size: var(--sizing-100);
+    --tag-icon-size: var(--sizing-70);
     padding-inline: var(--spacing-80);
+
+    > .qui-tag__icon[data-tag-part="start-icon"] {
+      margin-inline-end: var(--spacing-70);
+    }
+    > .qui-tag__icon[data-tag-part="end-icon"] {
+      margin-inline-start: var(--spacing-70);
+    }
   }
 
   &[data-shape="rounded"] {
@@ -232,21 +241,34 @@
 
 .qui-tag__icon {
   color: var(--icon-color);
+
+  /* For when the icon is declared as a node, i.e. `<Plus />` */
+  .lucide {
+    display: block;
+    height: var(--icon-size);
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    width: var(--icon-size);
+  }
+
   &[data-tag-part="start-icon"] {
     margin-inline-end: var(--spacing-50);
-  }
-  &[data-size="lg"][data-tag-part="start-icon"] {
-    margin-inline-end: var(--spacing-70);
   }
   &[data-tag-part="end-icon"] {
     margin-inline-start: var(--spacing-50);
   }
-  &[data-size="lg"][data-tag-part="end-icon"] {
-    margin-inline-start: var(--spacing-70);
-  }
   .qui-tag__dismiss-button > &[data-tag-part="end-icon"] {
     margin-inline-start: 0;
   }
+}
+
+/*
+ * Overrides .qui-icon__root's own [data-size] mapping when the
+ * icon class lands directly on the SVG.
+ */
+.qui-tag__root .qui-tag__icon[data-tag-part] {
+  --icon-size: var(--tag-icon-size);
 }
 
 .qui-tag__dismiss-button {
@@ -278,16 +300,5 @@
     cursor: default;
     pointer-events: none;
     --icon-color: var(--color-utility-disabled-icon);
-  }
-
-  &[data-size] {
-    .qui-tag__icon[data-tag-part$="-icon"] {
-      --icon-size: var(--sizing-60);
-    }
-  }
-  &[data-size="lg"] {
-    .qui-tag__icon[data-tag-part$="-icon"] {
-      --icon-size: var(--sizing-70);
-    }
   }
 }
