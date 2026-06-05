@@ -1,5 +1,13 @@
 # @qualcomm-ui/core Changelog
 
+## 1.11.4
+
+Jun 5th, 2026
+
+### Bug Fixes
+
+- [menu]: prevent scroll in focus reclaim workaround ([2131276](https://github.com/qualcomm/qualcomm-ui/commit/2131276))
+
 ## 1.11.3
 
 Jun 3rd, 2026

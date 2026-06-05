@@ -411,7 +411,7 @@ export const menuMachine: MachineConfig<MenuSchema> = createMachine<MenuSchema>(
             if (contains(domEls.content(scope), event.currentTarget)) {
               // fix for angular nested portal behavior
               event.preventDefault()
-              domEls.content(scope)?.focus()
+              domEls.content(scope)?.focus({preventScroll: true})
             }
             prop("onFocusOutside")?.(event)
 
