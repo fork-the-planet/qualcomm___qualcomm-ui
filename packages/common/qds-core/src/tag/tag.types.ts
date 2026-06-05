@@ -2,7 +2,10 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
 import type {AnatomyPart, AnatomyPartName} from "@qualcomm-ui/utils/anatomy"
-import type {BooleanDataAttr} from "@qualcomm-ui/utils/attributes"
+import type {
+  BooleanAriaAttr,
+  BooleanDataAttr,
+} from "@qualcomm-ui/utils/attributes"
 
 import type {tagAnatomy} from "./tag.anatomy"
 import type {tagClasses} from "./tag.classes"
@@ -98,6 +101,7 @@ export interface QdsTagSpanRootBindings extends Part<"root"> {
 }
 
 export interface QdsTagButtonRootBindings extends Part<"root"> {
+  "aria-pressed"?: BooleanAriaAttr
   className: TagClasses["root"]
   "data-disabled": BooleanDataAttr
   "data-emphasis": QdsTagEmphasis
@@ -113,12 +117,10 @@ export type QdsTagRootBindings =
 
 export interface QdsTagStartIconBindings extends Part<"startIcon"> {
   className: TagClasses["icon"]
-  "data-size": QdsTagSize
 }
 
 export interface QdsTagEndIconBindings extends Part<"endIcon"> {
   className: TagClasses["icon"]
-  "data-size": QdsTagSize
 }
 
 export interface QdsTagDismissButtonBindings extends Part<"dismissButton"> {

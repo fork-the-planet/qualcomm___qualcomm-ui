@@ -1,4 +1,4 @@
-import {Component, output} from "@angular/core"
+import {Component, output, signal} from "@angular/core"
 import {render} from "@testing-library/angular"
 import {Plus, Star} from "lucide-angular"
 import {describe, expect, test, vi} from "vitest"
@@ -160,7 +160,7 @@ describe("Tag", () => {
       .not.toBeInTheDocument()
   })
 
-  test("composes user click output with selectable tag state changes", async () => {
+  test("composes user click output on a selectable tag", async () => {
     const clicked = vi.fn()
 
     @Component({
@@ -181,13 +181,9 @@ describe("Tag", () => {
       },
     })
 
-    const tag = page.getByRole("button", {name: "Label"})
-    expect(tag).not.toHaveAttribute("data-selected")
+    await page.getByRole("button", {name: "Label"}).click()
 
-    await tag.click()
-
-    await expect.poll(() => clicked).toHaveBeenCalledTimes(1)
-    expect(tag).toHaveAttribute("data-selected", "")
+    expect(clicked).toHaveBeenCalledTimes(1)
   })
 
   test("disables a selectable tag from receiving clicks when disabled", async () => {
@@ -217,6 +213,153 @@ describe("Tag", () => {
     await tag.click({force: true}).catch(() => {})
 
     expect(clicked).not.toHaveBeenCalled()
+  })
+
+  test("exposes the selectable tag's pressed state to assistive tech and toggles it when uncontrolled", async () => {
+    @Component({
+      imports: [TagDirective],
+      template: `
+        <button q-tag variant="selectable">Label</button>
+      `,
+    })
+    class UncontrolledSelectableTagComponent {}
+
+    await render(UncontrolledSelectableTagComponent)
+
+    const tag = page.getByRole("button", {name: "Label"})
+    await expect.element(tag).toHaveAttribute("aria-pressed", "false")
+
+    await tag.click()
+    await expect.element(tag).toHaveAttribute("aria-pressed", "true")
+
+    await tag.click()
+    await expect.element(tag).toHaveAttribute("aria-pressed", "false")
+  })
+
+  test("starts pressed when defaultSelected is true and toggles from there", async () => {
+    @Component({
+      imports: [TagDirective],
+      template: `
+        <button defaultSelected q-tag variant="selectable">Label</button>
+      `,
+    })
+    class DefaultSelectedTagComponent {}
+
+    await render(DefaultSelectedTagComponent)
+
+    const tag = page.getByRole("button", {name: "Label"})
+    await expect.element(tag).toHaveAttribute("aria-pressed", "true")
+
+    await tag.click()
+    await expect.element(tag).toHaveAttribute("aria-pressed", "false")
+  })
+
+  test("emits selectedChange with the next value on each toggle when uncontrolled", async () => {
+    const selectedChange = vi.fn()
+
+    @Component({
+      imports: [TagDirective],
+      template: `
+        <button
+          q-tag
+          variant="selectable"
+          (selectedChange)="changed.emit($event)"
+        >
+          Label
+        </button>
+      `,
+    })
+    class SelectedChangeTagComponent {
+      readonly changed = output<boolean>()
+    }
+
+    await render(SelectedChangeTagComponent, {
+      on: {
+        changed: selectedChange,
+      },
+    })
+
+    const tag = page.getByRole("button", {name: "Label"})
+    await tag.click()
+    await tag.click()
+
+    await expect
+      .poll(() => selectedChange.mock.calls)
+      .toEqual([[true], [false]])
+  })
+
+  test("does not toggle pressed state when controlled, but emits selectedChange", async () => {
+    const selectedChange = vi.fn()
+
+    @Component({
+      imports: [TagDirective],
+      template: `
+        <button
+          q-tag
+          variant="selectable"
+          [selected]="false"
+          (selectedChange)="changed.emit($event)"
+        >
+          Label
+        </button>
+      `,
+    })
+    class ControlledTagComponent {
+      readonly changed = output<boolean>()
+    }
+
+    await render(ControlledTagComponent, {
+      on: {
+        changed: selectedChange,
+      },
+    })
+
+    const tag = page.getByRole("button", {name: "Label"})
+    await tag.click()
+
+    expect(selectedChange).toHaveBeenCalledWith(true)
+    await expect.element(tag).toHaveAttribute("aria-pressed", "false")
+  })
+
+  test("reflects parent-driven changes to selected via two-way binding", async () => {
+    @Component({
+      imports: [TagDirective],
+      template: `
+        <button q-tag variant="selectable" [(selected)]="selected">
+          Label
+        </button>
+      `,
+    })
+    class TwoWayBoundTagComponent {
+      readonly selected = signal(false)
+    }
+
+    await render(TwoWayBoundTagComponent)
+
+    const tag = page.getByRole("button", {name: "Label"})
+    await expect.element(tag).toHaveAttribute("aria-pressed", "false")
+
+    await tag.click()
+    await expect.element(tag).toHaveAttribute("aria-pressed", "true")
+
+    await tag.click()
+    await expect.element(tag).toHaveAttribute("aria-pressed", "false")
+  })
+
+  test("does not expose pressed state on non-selectable variants", async () => {
+    @Component({
+      imports: [TagDirective],
+      template: `
+        <button q-tag variant="link" [selected]="true">Label</button>
+      `,
+    })
+    class SelectedLinkTagComponent {}
+
+    await render(SelectedLinkTagComponent)
+
+    await expect
+      .element(page.getByRole("button", {name: "Label"}))
+      .not.toHaveAttribute("aria-pressed")
   })
 
   test("disables the Dismiss button on a disabled dismissable tag", async () => {
