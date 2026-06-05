@@ -20,7 +20,7 @@ import {MenuIconButton, type MenuIconButtonProps} from "./menu-icon-button"
 import {MenuTrigger} from "./menu-trigger"
 
 /**
- * @since next-release
+ * @since 1.24.0
  */
 export interface MenuSplitButtonProps
   extends Omit<ElementRenderProp<"div">, "onClick">, QdsSplitButtonApiProps {
@@ -56,7 +56,7 @@ export interface MenuSplitButtonProps
 }
 
 /**
- * @since next-release
+ * @since 1.24.0
  */
 export function MenuSplitButton({
   actionProps,

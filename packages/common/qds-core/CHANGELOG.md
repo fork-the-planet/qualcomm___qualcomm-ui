@@ -1,5 +1,24 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.29.0
+
+Jun 4th, 2026
+
+### Features
+
+- [tag]: support controlled selected state ([f2b0d0c](https://github.com/qualcomm/qualcomm-ui/commit/f2b0d0c))
+- [menu]: add split button ([527d33e](https://github.com/qualcomm/qualcomm-ui/commit/527d33e))
+- [tag]: add aria-pressed to selectable tag ([81a24a3](https://github.com/qualcomm/qualcomm-ui/commit/81a24a3))
+
+### Code Refactoring
+
+- [button]: consolidate button-group prop resolution ([3922878](https://github.com/qualcomm/qualcomm-ui/commit/3922878))
+
+### Bug Fixes
+
+- [tag]: correct icon sizing for nested icons ([d1618e5](https://github.com/qualcomm/qualcomm-ui/commit/d1618e5))
+- [menu]: keep variant background on menu button triggers ([6892122](https://github.com/qualcomm/qualcomm-ui/commit/6892122))
+
 ## 1.28.4
 
 Jun 3rd, 2026

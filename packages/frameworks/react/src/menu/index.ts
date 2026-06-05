@@ -116,7 +116,7 @@ interface MenuComponent {
   Root: FunctionComponent<MenuRootProps>
   Separator: FunctionComponent<MenuSeparatorProps>
   /**
-   * @since next-release
+   * @since 1.24.0
    */
   SplitButton: FunctionComponent<MenuSplitButtonProps>
   /**
@@ -162,7 +162,7 @@ export const Menu: MenuComponent = {
   Root: MenuRoot,
   Separator: MenuSeparator,
   /**
-   * @since next-release
+   * @since 1.24.0
    */
   SplitButton: MenuSplitButton,
   Trigger: MenuTrigger,

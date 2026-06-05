@@ -11,7 +11,7 @@ import type {splitButtonAnatomy} from "./menu-split-button.anatomy"
 import type {menuClasses} from "./menu.classes"
 
 /**
- * @since next-release
+ * @since 1.29.0
  */
 export interface QdsSplitButtonApiProps extends QdsButtonGroupCommonProps {}
 
@@ -19,7 +19,7 @@ type PartName = AnatomyPartName<typeof splitButtonAnatomy>
 interface Part<P extends PartName> extends AnatomyPart<"splitButton", P> {}
 
 /**
- * @since next-release
+ * @since 1.29.0
  */
 export interface QdsSplitButtonBindings
   extends Part<"root">, QdsButtonGroupCommonBindings {

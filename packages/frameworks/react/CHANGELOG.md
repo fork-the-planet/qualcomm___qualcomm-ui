@@ -1,5 +1,28 @@
 # @qualcomm-ui/react Changelog
 
+## 1.24.0
+
+Jun 4th, 2026
+
+### Features
+
+- [tag]: support controlled selected state ([f2b0d0c](https://github.com/qualcomm/qualcomm-ui/commit/f2b0d0c))
+- [menu]: add split button ([527d33e](https://github.com/qualcomm/qualcomm-ui/commit/527d33e))
+- [tag]: add aria-pressed to selectable tag ([81a24a3](https://github.com/qualcomm/qualcomm-ui/commit/81a24a3))
+
+### Code Refactoring
+
+- [button]: consolidate button-group prop resolution ([3922878](https://github.com/qualcomm/qualcomm-ui/commit/3922878))
+
+### Tests
+
+- [button]: cover button-group prop precedence ([3d8a0ef](https://github.com/qualcomm/qualcomm-ui/commit/3d8a0ef))
+- [menu]: cover split button behavior ([bca46f7](https://github.com/qualcomm/qualcomm-ui/commit/bca46f7))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core]
+
 ## 1.23.1
 
 Jun 3rd, 2026
