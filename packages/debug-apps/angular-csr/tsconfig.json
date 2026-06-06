@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./out-tsc/app",
     "strict": false,
     "strictPropertyInitialization": false,
