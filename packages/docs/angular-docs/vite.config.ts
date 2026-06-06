@@ -5,7 +5,6 @@ import {access, readFile} from "node:fs/promises"
 import {dirname, resolve} from "node:path"
 import {fileURLToPath} from "node:url"
 import {defineConfig, type Plugin} from "vite"
-import tsconfigPaths from "vite-tsconfig-paths"
 
 import {
   angularDemoPlugin,
@@ -92,9 +91,6 @@ export default defineConfig({
       ],
       remarkPlugins: [...getRemarkPlugins()],
     }),
-    tsconfigPaths({
-      projects: ["./tsconfig.lib.json"],
-    }),
     reactRouter(),
     quiDocsPlugin(),
     frontmatterHmrPlugin(),
@@ -117,7 +113,10 @@ export default defineConfig({
       // Shared MDX resolves provider imports from packages/docs/shared.
       // Use this docs app's MDX runtime while preserving route symlinks above.
       "@mdx-js/react": resolve(__dirname, "./node_modules/@mdx-js/react"),
+      "~components": resolve(__dirname, "./src/components"),
+      "~utils": resolve(__dirname, "./src/utils"),
     },
+    tsconfigPaths: true,
   },
   server: {
     port: 4300,

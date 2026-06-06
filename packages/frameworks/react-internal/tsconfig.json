@@ -1,8 +1,5 @@
 {
-  "extends": "@qualcomm-ui/tsconfig/tsconfig.strict.json",
-  "compilerOptions": {
-    "baseUrl": "./",
-  },
+  "files": [],
   "references": [
     {
       "path": "./tsconfig.lib.json"

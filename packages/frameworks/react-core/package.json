@@ -1,6 +1,6 @@
 {
   "name": "@qualcomm-ui/react-core",
-  "version": "1.5.5",
+  "version": "1.5.6",
   "description": "Design-agnostic React building blocks and utilities.",
   "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
@@ -75,7 +75,6 @@
     "tsx": "catalog:",
     "typescript-plugin-css-modules": "^5.0.1",
     "vite": "catalog:",
-    "vite-tsconfig-paths": "^6.1.1",
     "vitest": "catalog:",
     "vitest-browser-react": "^2.0.2"
   },

@@ -1,9 +1,5 @@
 {
-  "compilerOptions": {
-    "paths": {
-      "@qualcomm-ui/qds-core/*": ["./src/*/index.ts"]
-    }
-  },
+  "files": [],
   "references": [
     {
       "path": "./tsconfig.lib.json"

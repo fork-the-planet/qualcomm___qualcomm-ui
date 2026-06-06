@@ -2,7 +2,6 @@
   "extends": "@qualcomm-ui/tsconfig/tsconfig.strict.json",
   "compilerOptions": {
     "composite": true,
-    "baseUrl": "./",
     "incremental": true,
     "outDir": "./dist",
     "rootDir": "./src",
@@ -12,7 +11,7 @@
     }
   },
   "include": ["./src"],
-  "exclude": ["./src/**/*.spec.tsx", "./src/**/*.figma.tsx"],
+  "exclude": ["./src/**/*.spec.tsx", "./src/**/*.figma.*"],
   "references": [
     {
       "path": "../react-core/tsconfig.lib.json"

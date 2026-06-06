@@ -1,7 +1,5 @@
 {
-  "compilerOptions": {
-    "baseUrl": "./",
-  },
+  "files": [],
   "references": [
     {
       "path": "./tsconfig.lib.json"

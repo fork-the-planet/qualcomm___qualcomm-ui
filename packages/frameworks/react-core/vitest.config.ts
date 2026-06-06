@@ -14,5 +14,8 @@ export default defineConfig({
       presets: [reactCompilerPreset()],
     }),
   ],
+  resolve: {
+    tsconfigPaths: true,
+  },
   test: getReactTestConfig(),
 })

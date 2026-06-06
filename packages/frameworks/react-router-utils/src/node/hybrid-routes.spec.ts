@@ -37,7 +37,6 @@ describe("hybridRoutes", () => {
 
     const routes = hybridRoutes("routes", createDefineRoutes(), {
       appDir,
-      routingStrategy: "react-router-directory-groups",
     })
 
     expect(Object.keys(routes).sort()).toEqual([

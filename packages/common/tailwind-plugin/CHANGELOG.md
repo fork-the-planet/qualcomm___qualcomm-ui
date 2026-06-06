@@ -1,5 +1,13 @@
 # @qualcomm-ui/tailwind-plugin Changelog
 
+## 1.7.3
+
+Jun 5th, 2026
+
+### Bug Fixes
+
+- [vscode-plugin]: add explicit return type ([3f7e07c](https://github.com/qualcomm/qualcomm-ui/commit/3f7e07c))
+
 ## 1.7.2
 
 Jun 3rd, 2026

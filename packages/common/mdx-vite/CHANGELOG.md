@@ -1,5 +1,13 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 3.8.3
+
+Jun 5th, 2026
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/tailwind-plugin@1.7.3]
+
 ## 3.8.2
 
 Jun 4th, 2026
