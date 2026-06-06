@@ -5,7 +5,6 @@ import {dirname, resolve} from "node:path"
 import {fileURLToPath} from "node:url"
 import {defineConfig} from "vite"
 import babel from "vite-plugin-babel"
-import tsconfigPaths from "vite-tsconfig-paths"
 
 import {
   getRehypePlugins,
@@ -31,7 +30,6 @@ export default defineConfig({
       },
       filter: /\.[jt]sx?$/,
     }),
-    tsconfigPaths(),
     quiDocsPlugin(),
   ],
   resolve: {
@@ -70,5 +68,6 @@ export default defineConfig({
         ),
       },
     ],
+    tsconfigPaths: true,
   },
 })

@@ -93,8 +93,7 @@
     "typescript": "catalog:",
     "unified": "catalog:",
     "vite": "catalog:",
-    "vite-plugin-babel": "^1.6.0",
-    "vite-tsconfig-paths": "^6.1.1"
+    "vite-plugin-babel": "^1.6.0"
   },
   "engines": {
     "node": ">=20"

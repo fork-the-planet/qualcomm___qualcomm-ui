@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.lib.json",
+  "compilerOptions": {
+    "paths": {
+      // this is only for dev IntelliSense.
+      "@qualcomm-ui/angular/*": ["./src/*/index.ts"],
+      // required for compilation
+      "@qualcomm-ui/angular-core/*": ["./node_modules/@qualcomm/ui/angular-core/src/*/index.ts"]
+    }
+  },
+}

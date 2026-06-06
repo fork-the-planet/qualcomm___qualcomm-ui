@@ -37,6 +37,7 @@
     "@angular/build": "catalog:",
     "@angular/cli": "catalog:",
     "@angular/compiler-cli": "catalog:",
+    "@qualcomm-ui/tsconfig": "catalog:",
     "typescript": "catalog:"
   }
 }

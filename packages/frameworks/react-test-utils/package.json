@@ -42,7 +42,6 @@
     "react": "catalog:",
     "react-dom": "catalog:",
     "shx": "catalog:",
-    "vite-tsconfig-paths": "^6.1.1",
     "vite": "catalog:",
     "vitest": "catalog:",
     "vitest-browser-react": "^2.0.2"

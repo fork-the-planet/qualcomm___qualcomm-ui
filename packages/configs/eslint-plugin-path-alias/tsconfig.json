@@ -4,5 +4,5 @@
     "baseUrl": "./",
     "outDir": "./dist"
   },
-  "include": ["vitest.config.ts", "./tests/*.ts"]
+  "include": ["vitest.config.ts", "./tests"]
 }

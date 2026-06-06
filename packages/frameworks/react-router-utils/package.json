@@ -34,6 +34,7 @@
     "watch:ts": "pnpm build:ts -w --preserveWatchOutput",
     "lint": "eslint --quiet",
     "test": "vitest --run -c vitest.config.ts",
+    "test:unit:ci": "cross-env NODE_OPTIONS='' vitest -c vitest.config.ts --run --pool=threads",
     "prepublishOnly": "qui-cli pre-publish",
     "postpublish": "qui-cli post-publish"
   },

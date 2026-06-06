@@ -1,11 +1,5 @@
 {
-  "compilerOptions": {
-    "baseUrl": "./",
-    "paths": {
-      // fixes WebStorm usage detection, not used otherwise
-      "@qualcomm-ui/react-mdx/*": ["./src/*/index.ts"],
-    }
-  },
+  "files": [],
   "references": [
     {
       "path": "./tsconfig.lib.json"

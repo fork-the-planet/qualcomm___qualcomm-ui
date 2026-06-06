@@ -19,7 +19,7 @@
   },
   "scripts": {
     "ng": "ng",
-    "build": "ng-packagr -p src/ng-package.json -c tsconfig.lib.json",
+    "build": "ng build",
     "dev": "node --import=tsx dev.ts",
     "lint": "eslint --quiet",
     "test": "vitest --run --pool=forks",
@@ -91,7 +91,6 @@
     "tslib": "~2.5.3",
     "tsx": "catalog:",
     "vite": "catalog:",
-    "vite-tsconfig-paths": "^6.1.1",
     "vitest": "catalog:"
   },
   "peerDependencies": {

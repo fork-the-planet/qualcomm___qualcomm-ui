@@ -2,18 +2,19 @@ import babel from "@rolldown/plugin-babel"
 import tailwindcss from "@tailwindcss/vite"
 import react, {reactCompilerPreset} from "@vitejs/plugin-react"
 import {playwright} from "@vitest/browser-playwright"
-import viteTsconfigPaths from "vite-tsconfig-paths"
 import {defineConfig} from "vitest/config"
 
 export default defineConfig({
   plugins: [
     tailwindcss(),
-    viteTsconfigPaths(),
     react(),
     babel({
       presets: [reactCompilerPreset()],
     }),
   ],
+  resolve: {
+    tsconfigPaths: true,
+  },
   test: {
     browser: {
       enabled: true,

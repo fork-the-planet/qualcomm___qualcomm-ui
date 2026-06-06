@@ -75,7 +75,6 @@
     "tsx": "catalog:",
     "typescript-plugin-css-modules": "^5.0.1",
     "vite": "catalog:",
-    "vite-tsconfig-paths": "^6.1.1",
     "vitest": "catalog:",
     "vitest-browser-react": "^2.0.2"
   },
