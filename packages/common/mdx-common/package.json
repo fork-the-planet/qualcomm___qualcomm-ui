@@ -2,17 +2,14 @@
   "name": "@qualcomm-ui/mdx-common",
   "version": "2.4.1",
   "description": "MDX common types and utilities",
-  "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
+  "author": "Ryan Bower",
   "repository": "https://github.com/qualcomm/qualcomm-ui",
-  "publishConfig": {
-    "access": "public"
-  },
-  "type": "module",
   "files": [
     "dist",
     "package.json"
   ],
+  "type": "module",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
@@ -21,9 +18,12 @@
       "default": "./dist/index.js"
     }
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "run-s clean build:js build:ts",
-    "clean": "shx rm -rf dist/tsbuildinfo dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map",
+    "clean": "shx rm -rf node_modules/.tmp dist",
     "build:js": "vite build",
     "build:ts": "tsc -b tsconfig.lib.json",
     "dev": "run-p watch:js watch:ts",
