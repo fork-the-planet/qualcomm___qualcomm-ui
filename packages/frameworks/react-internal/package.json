@@ -1,15 +1,15 @@
 {
   "name": "@qualcomm-ui/react-internal",
   "version": "0.0.0",
-  "description": "internal styles and utilities for documentation, used by the React and Angular documentation modules",
-  "author": "Ryan Bower",
-  "license": "BSD-3-Clause-Clear",
-  "repository": "https://github.com/qualcomm/qualcomm-ui",
   "private": true,
-  "type": "module",
+  "description": "internal styles and utilities for documentation, used by the React and Angular documentation modules",
+  "license": "BSD-3-Clause-Clear",
+  "author": "Ryan Bower",
+  "repository": "https://github.com/qualcomm/qualcomm-ui",
   "files": [
     "dist"
   ],
+  "type": "module",
   "exports": {
     "./*": {
       "types": "./dist/*/index.d.ts",
@@ -22,7 +22,7 @@
   },
   "scripts": {
     "build": "run-s clean build:js build:css build:ts",
-    "clean": "shx rm -rf dist/tsbuildinfo dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map",
+    "clean": "shx rm -rf node_modules/.tmp dist",
     "build:css": "qui-css-utils build",
     "build:js": "vite build",
     "build:ts": "tsc -b tsconfig.lib.json",
@@ -49,9 +49,9 @@
     "@qualcomm-ui/tsconfig": "catalog:",
     "@qualcomm-ui/utils": "workspace:*",
     "@qualcomm-ui/vite": "catalog:",
-    "@vitejs/plugin-react": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
     "dayjs": "^1.11.19",
     "lucide-react": "0.569.0",
     "quick-lru": "^7.2.0",
