@@ -2,12 +2,12 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
 import stylistic from "@stylistic/eslint-plugin"
-import {defineConfig} from "eslint/config"
 import commentLength from "eslint-plugin-comment-length"
 import importPlugin from "eslint-plugin-import"
+import eslintPluginOxfmt from "eslint-plugin-oxfmt"
 import perfectionist from "eslint-plugin-perfectionist"
-import prettierPlugin from "eslint-plugin-prettier"
 import unusedImportsPlugin from "eslint-plugin-unused-imports"
+import {defineConfig} from "eslint/config"
 
 export default defineConfig({
   name: "qui-style-guide",
@@ -15,8 +15,8 @@ export default defineConfig({
     "@stylistic": stylistic,
     "comment-length": commentLength,
     import: importPlugin,
+    oxfmt: eslintPluginOxfmt,
     perfectionist,
-    prettier: prettierPlugin,
     "unused-imports": unusedImportsPlugin,
   },
   rules: {
@@ -65,48 +65,7 @@ export default defineConfig({
     "import/newline-after-import": ["error", {count: 1}],
     "import/no-cycle": [0],
     "import/no-duplicates": ["error", {"prefer-inline": true}],
-    "import/order": [
-      "error",
-      {
-        alphabetize: {
-          caseInsensitive: true,
-          order: "asc",
-        },
-        groups: [
-          ["builtin", "external"],
-          ["internal"],
-          ["parent"],
-          ["sibling", "index"],
-          ["unknown"],
-        ],
-        "newlines-between": "always",
-        pathGroups: [
-          {
-            group: "external",
-            pattern: "react",
-            position: "before",
-          },
-          {
-            group: "external",
-            pattern: "@qualcomm-ui/**",
-            position: "after",
-          },
-          {
-            group: "internal",
-            pattern: "~**",
-          },
-          {
-            group: "internal",
-            pattern: "~**/*",
-          },
-          {
-            group: "internal",
-            pattern: "~**/**",
-          },
-        ],
-        pathGroupsExcludedImportTypes: ["react"],
-      },
-    ],
+    "import/order": "off",
     "multiline-comment-style": ["off"],
     "no-array-constructor": "error",
     "no-case-declarations": "off",
@@ -145,16 +104,9 @@ export default defineConfig({
     "no-useless-escape": "warn",
     "no-var": "error",
     "object-shorthand": "error",
+    "oxfmt/oxfmt": "error",
     "prefer-const": "error",
     "prefer-template": ["error"],
-    "prettier/prettier": "error",
-    "sort-imports": [
-      "error",
-      {
-        ignoreCase: true,
-        ignoreDeclarationSort: true,
-      },
-    ],
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [
       "error",

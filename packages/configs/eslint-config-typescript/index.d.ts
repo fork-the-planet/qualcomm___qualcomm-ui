@@ -75,7 +75,7 @@ interface TypescriptConfigExport {
 
     /**
      * Code style rules (imports, formatting, unused code, etc).
-     * Enforces Prettier, import ordering, and code quality standards.
+     * Enforces oxfmt, import ordering, and code quality standards.
      */
     styleGuide: ConfigObject
 
