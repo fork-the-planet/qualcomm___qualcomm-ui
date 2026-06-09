@@ -98,6 +98,8 @@ export function disableTextSelection(
     }),
   )
   return () => {
-    cleanups.forEach((fn) => fn?.())
+    for (const fn of cleanups) {
+      fn?.()
+    }
   }
 }

@@ -10,7 +10,7 @@ import type {Point, Rect, RectSide} from "./types.js"
 export function closest(...pts: Point[]): (a: Point) => Point {
   return (a: Point): Point => {
     const ds = pts.map((b) => distance(b, a))
-    const c = Math.min.apply(Math, ds)
+    const c = Math.min(...ds)
     return pts[ds.indexOf(c)]
   }
 }

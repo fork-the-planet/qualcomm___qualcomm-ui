@@ -15,7 +15,7 @@ export function fromRange(range: Range): Rect {
 
   if (rects.length) {
     rs = rs.concat(rects.map(createRect))
-    return union.apply(undefined, rs)
+    return union(...rs)
   }
 
   let start: Node | ParentNode | null = range.startContainer
@@ -29,5 +29,5 @@ export function fromRange(range: Range): Rect {
     rs.push({...r, width: 0, x: r.maxX})
   }
 
-  return union.apply(undefined, rs)
+  return union(...rs)
 }

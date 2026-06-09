@@ -40,9 +40,9 @@ export function trackElementsSize<T extends HTMLElement | null>(
   }
 
   return () => {
-    cleanups.forEach((cleanup) => {
+    for (const cleanup of cleanups) {
       cleanup?.()
-    })
+    }
   }
 }
 

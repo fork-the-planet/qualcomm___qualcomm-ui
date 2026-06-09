@@ -43,7 +43,7 @@ export function getInitialFocus(
 
   if (!node) {
     const tabbables = getTabbables(root)
-    node = filter ? tabbables.filter(filter)[0] : tabbables[0]
+    node = filter ? tabbables.find(filter) : tabbables[0]
   }
 
   return node || root || undefined

@@ -64,6 +64,8 @@ export function trackPointerMove(
   ]
 
   return (): void => {
-    cleanups.forEach((cleanup) => cleanup())
+    for (const cleanup of cleanups) {
+      cleanup()
+    }
   }
 }

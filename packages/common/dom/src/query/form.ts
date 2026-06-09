@@ -184,5 +184,9 @@ export function trackFormControl(
     trackFormReset(el, onFormReset),
     trackFieldsetDisabled(el, onFieldsetDisabledChange),
   ]
-  return (): void => cleanups.forEach((cleanup) => cleanup?.())
+  return (): void => {
+    for (const cleanup of cleanups) {
+      cleanup?.()
+    }
+  }
 }

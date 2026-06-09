@@ -234,7 +234,9 @@ function trackInteractOutsideImpl(
 
     if (event.pointerType === "touch") {
       // flush any pending pointerup events
-      pointerdownCleanups.forEach((fn) => fn())
+      for (const fn of pointerdownCleanups) {
+        fn()
+      }
       // add a pointerup event listener to the document and all frame documents
       pointerdownCleanups.add(addDomEvent(doc, "click", handler, {once: true}))
       pointerdownCleanups.add(
@@ -289,8 +291,12 @@ function trackInteractOutsideImpl(
 
   return () => {
     clearTimeout(timer)
-    pointerdownCleanups.forEach((fn) => fn())
-    cleanups.forEach((fn) => fn())
+    for (const fn of pointerdownCleanups) {
+      fn()
+    }
+    for (const fn of cleanups) {
+      fn()
+    }
   }
 }
 
@@ -308,7 +314,9 @@ export function trackInteractOutside(
     }),
   )
   return () => {
-    cleanups.forEach((fn) => fn?.())
+    for (const fn of cleanups) {
+      fn?.()
+    }
   }
 }
 

@@ -124,6 +124,8 @@ export function ariaHidden(
     }),
   )
   return () => {
-    cleanups.forEach((fn) => fn?.())
+    for (const fn of cleanups) {
+      fn?.()
+    }
   }
 }

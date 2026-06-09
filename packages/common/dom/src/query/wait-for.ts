@@ -35,11 +35,13 @@ export function waitForElements(
   cb: (el: HTMLElement) => void,
 ): VoidFunction {
   const cleanups: VoidFunction[] = []
-  queries?.forEach((query) => {
+  for (const query of queries) {
     const clean = waitForElement(query, cb)
     cleanups.push(clean)
-  })
+  }
   return () => {
-    cleanups.forEach((fn) => fn())
+    for (const fn of cleanups) {
+      fn()
+    }
   }
 }

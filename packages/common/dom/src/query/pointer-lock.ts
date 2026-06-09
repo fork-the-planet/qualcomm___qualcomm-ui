@@ -43,7 +43,9 @@ export function requestPointerLock(
   ]
 
   return () => {
-    cleanup.forEach((cleanup) => cleanup())
+    for (const cleanup1 of cleanup) {
+      cleanup1()
+    }
     doc.exitPointerLock()
   }
 }

@@ -51,7 +51,9 @@ export function observeAttributes(
     }),
   )
   return () => {
-    cleanups.forEach((fn) => fn?.())
+    for (const fn of cleanups) {
+      fn?.()
+    }
   }
 }
 
@@ -88,6 +90,8 @@ export function observeChildren(
     }),
   )
   return () => {
-    cleanups.forEach((fn) => fn?.())
+    for (const fn of cleanups) {
+      fn?.()
+    }
   }
 }

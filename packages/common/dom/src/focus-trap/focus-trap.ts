@@ -251,7 +251,9 @@ export class FocusTrap {
     if (!this.state.active) {
       return
     }
-    this.listenerCleanups.forEach((cleanup) => cleanup())
+    for (const cleanup of this.listenerCleanups) {
+      cleanup()
+    }
     this.listenerCleanups = []
     return this
   }

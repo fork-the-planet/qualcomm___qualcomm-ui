@@ -210,7 +210,9 @@ function trackDismissableElementImpl(
     assignPointerEventToLayers()
     // remove pointer event from removed layer
     clearPointerEvent(node)
-    cleanups.forEach((fn) => fn?.())
+    for (const fn of cleanups) {
+      fn?.()
+    }
   }
 }
 
@@ -228,7 +230,9 @@ export function trackDismissableElement(
     }),
   )
   return () => {
-    cleanups.forEach((fn) => fn?.())
+    for (const fn of cleanups) {
+      fn?.()
+    }
   }
 }
 
@@ -255,6 +259,8 @@ export function trackDismissableBranch(
   )
 
   return () => {
-    cleanups.forEach((fn) => fn?.())
+    for (const fn of cleanups) {
+      fn?.()
+    }
   }
 }
