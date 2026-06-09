@@ -1,25 +1,21 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {ESLintUtils} from "@typescript-eslint/utils"
-
 import {
+  createRule,
   forEachElementChild,
   getElementSourceLocation,
   hasSelector,
   type TemplateNode,
-} from "./utils"
-
-const createRule = ESLintUtils.RuleCreator(
-  (name) =>
-    `https://github.com/qualcomm/qualcomm-ui/tree/main/packages/configs/eslint-plugin-angular#${name}`,
-)
+} from "./utils.js"
 
 type MessageIds =
   | "preferHeaderBarActionButton"
   | "preferHeaderBarActionIconButton"
 
-export const preferHeaderBarActions = createRule<[], MessageIds>({
+export const preferHeaderBarActions: ReturnType<
+  typeof createRule<[], MessageIds>
+> = createRule<[], MessageIds>({
   create(context) {
     const reported = new Set<TemplateNode>()
 

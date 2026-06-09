@@ -13,9 +13,9 @@ import {
   preferHeaderBarActions,
   preferMenuTriggerButtons,
   preferSelectItemCheckbox,
-} from "./rules"
+} from "./rules/index.js"
 
-export const rules = {
+export const rules: ESLint.Plugin["rules"] = {
   "accessible-name": accessibleName,
   "avatar-image-alt": avatarImageAlt,
   "input-label-association": inputLabelAssociation,
@@ -25,10 +25,10 @@ export const rules = {
   "prefer-header-bar-actions": preferHeaderBarActions,
   "prefer-menu-trigger-buttons": preferMenuTriggerButtons,
   "prefer-select-item-checkbox": preferSelectItemCheckbox,
-}
+} as unknown as ESLint.Plugin["rules"]
 
 export const plugin: ESLint.Plugin = {
-  rules: rules as unknown as ESLint.Plugin["rules"],
+  rules,
 }
 
 export const config: Linter.Config[] = [

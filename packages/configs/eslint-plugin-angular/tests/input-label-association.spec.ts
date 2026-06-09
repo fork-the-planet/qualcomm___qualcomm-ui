@@ -1,7 +1,7 @@
 import {RuleTester} from "@typescript-eslint/rule-tester"
 import {afterAll, describe, it} from "vitest"
 
-import {inputLabelAssociation} from "../src/rules/input-label-association"
+import {inputLabelAssociation} from "../src/rules/input-label-association.js"
 
 RuleTester.afterAll = afterAll
 RuleTester.it = it

@@ -1,6 +1,8 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
+import {ESLintUtils} from "@typescript-eslint/utils"
+
 export const QUI_PACKAGE_PREFIXES = [
   "@qualcomm-ui/angular/",
   "@qualcomm-ui/angular-internal/",
@@ -186,3 +188,9 @@ export function getElementSourceLocation(
 
   return convertLoc ? convertLoc(context, node) : null
 }
+
+export const createRule: ReturnType<typeof ESLintUtils.RuleCreator> =
+  ESLintUtils.RuleCreator(
+    (name) =>
+      `https://github.com/qualcomm/qualcomm-ui/tree/main/packages/configs/eslint-plugin-angular#${name}`,
+  )

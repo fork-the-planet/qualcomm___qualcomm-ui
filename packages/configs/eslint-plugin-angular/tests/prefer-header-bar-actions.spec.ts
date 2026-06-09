@@ -1,7 +1,7 @@
 import {RuleTester} from "@typescript-eslint/rule-tester"
 import {afterAll, describe, it} from "vitest"
 
-import {preferHeaderBarActions} from "../src/rules/prefer-header-bar-actions"
+import {preferHeaderBarActions} from "../src/rules/prefer-header-bar-actions.js"
 
 RuleTester.afterAll = afterAll
 RuleTester.it = it

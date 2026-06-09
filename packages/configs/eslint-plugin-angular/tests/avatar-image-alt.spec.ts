@@ -1,7 +1,7 @@
 import {RuleTester} from "@typescript-eslint/rule-tester"
 import {afterAll, describe, it} from "vitest"
 
-import {avatarImageAlt} from "../src/rules/avatar-image-alt"
+import {avatarImageAlt} from "../src/rules/avatar-image-alt.js"
 
 RuleTester.afterAll = afterAll
 RuleTester.it = it
