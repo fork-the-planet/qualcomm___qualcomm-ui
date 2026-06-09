@@ -1,8 +1,8 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {defineConfig} from "eslint/config"
 import boundaries from "eslint-plugin-boundaries"
+import {defineConfig} from "eslint/config"
 
 import {getLowerLayers, getUpperLayers, layers} from "./utils.js"
 

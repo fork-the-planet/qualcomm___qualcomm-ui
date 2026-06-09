@@ -151,13 +151,7 @@ export default defineConfig(
     ],
   },
 
-  // TODO: remove when every package is on the performance config.
-  {
-    extends: [...quiEslintTs.configs.recommended],
-    files: ["{packages,scripts}/**/*.{ts,tsx}", "*.{ts,tsx}"],
-    languageOptions,
-  },
-
+  // react
   {
     extends: [
       ...quiEslintTs.configs.recommended,
@@ -170,22 +164,9 @@ export default defineConfig(
     ],
     languageOptions,
   },
-
   {
     extends: [quiEslintPluginReact.config],
     files: ["packages/*/react-mdx/**/*.{ts,tsx}"],
-    languageOptions,
-  },
-
-  // gradually adopt strict config
-  {
-    extends: [
-      ...quiEslintTs.configs.recommended,
-      quiEslintTs.configs.performance,
-    ],
-    files: [
-      "packages/*/{charts-base,core,eslint-config-qui-boundaries,mdx-vite,typedoc}/**/*.ts",
-    ],
     languageOptions,
   },
 
@@ -196,9 +177,7 @@ export default defineConfig(
       quiEslintTs.configs.performance,
       quiEslintTs.configs.strictExports,
     ],
-    files: [
-      "packages/*/{dom,qds-core,mdx-common,node-utils,utils,react-test-utils}/**/*.ts",
-    ],
+    files: ["{packages,scripts}/**/*.{ts,tsx}", "*.{ts,tsx}"],
     languageOptions,
   },
 

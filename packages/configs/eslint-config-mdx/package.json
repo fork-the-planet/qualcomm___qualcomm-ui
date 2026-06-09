@@ -2,23 +2,20 @@
   "name": "@qualcomm-ui/eslint-config-mdx",
   "version": "3.0.2",
   "description": "QUI ESLint config for consistent MDX code",
-  "author": "Ryan Bower",
-  "license": "BSD-3-Clause-Clear",
-  "repository": "https://github.com/qualcomm/qualcomm-ui",
-  "publishConfig": {
-    "access": "public"
-  },
   "keywords": [
     "config",
     "eslint",
     "react"
   ],
-  "type": "module",
-  "sideEffects": false,
+  "license": "BSD-3-Clause-Clear",
+  "author": "Ryan Bower",
+  "repository": "https://github.com/qualcomm/qualcomm-ui",
   "files": [
     "dist/",
     ".remarkrc"
   ],
+  "type": "module",
+  "sideEffects": false,
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
@@ -47,6 +44,9 @@
       "default": "./dist/remark-preserve-alert-markers.js"
     }
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "run-s clean build:js build:types",
     "build:js": "vite build",
@@ -54,7 +54,7 @@
     "build:watch": "run-p watch:js watch:types",
     "watch:js": "vite build -w",
     "watch:types": "tsc -p tsconfig.lib.json -w --preserveWatchOutput",
-    "clean": "shx rm -rf dist node_modules/.tmp/tsbuildinfo-lib",
+    "clean": "shx rm -rf dist node_modules/.tmp",
     "lint": "eslint --quiet",
     "test": "turbo build --filter @qualcomm-ui/eslint-config-mdx && vitest -c vitest.config.ts --run",
     "test:unit:ci": "pnpm build && cross-env NODE_OPTIONS='' vitest -c vitest.config.ts --run --pool=threads --no-file-parallelism",

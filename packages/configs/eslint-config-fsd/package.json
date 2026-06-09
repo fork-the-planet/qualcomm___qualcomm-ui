@@ -2,23 +2,20 @@
   "name": "@qualcomm-ui/eslint-config-fsd",
   "version": "1.0.2",
   "description": "QUI ESLint config for feature-sliced design",
-  "author": "Ryan Bower",
-  "license": "BSD-3-Clause-Clear",
-  "repository": "https://github.com/qualcomm/qualcomm-ui",
-  "publishConfig": {
-    "access": "public"
-  },
   "keywords": [
-    "eslint",
     "config",
+    "eslint",
     "fsd"
   ],
-  "type": "module",
-  "sideEffects": false,
+  "license": "BSD-3-Clause-Clear",
+  "author": "Ryan Bower",
+  "repository": "https://github.com/qualcomm/qualcomm-ui",
   "files": [
     "*.js",
     "index.d.ts"
   ],
+  "type": "module",
+  "sideEffects": false,
   "types": "index.d.ts",
   "exports": {
     ".": {
@@ -26,6 +23,9 @@
       "import": "./index.js",
       "default": "./index.js"
     }
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "test": "vitest -c vitest.config.ts --run",

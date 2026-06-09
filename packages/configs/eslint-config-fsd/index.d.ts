@@ -1,4 +1,4 @@
-import {InfiniteDepthConfigWithExtends} from "typescript-eslint"
+import type {InfiniteDepthConfigWithExtends} from "typescript-eslint"
 
 declare const configs: {
   layers: InfiniteDepthConfigWithExtends[]
