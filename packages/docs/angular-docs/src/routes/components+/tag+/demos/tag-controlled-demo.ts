@@ -1,8 +1,8 @@
 import {Component, signal} from "@angular/core"
 import {Check, Plus} from "lucide-angular"
 
-import {TagDirective} from "@qualcomm-ui/angular/tag"
 import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
+import {TagDirective} from "@qualcomm-ui/angular/tag"
 
 @Component({
   imports: [TagDirective],

@@ -1,10 +1,10 @@
 {
   "name": "@qualcomm-ui/angular-docs",
   "version": "0.0.0",
-  "author": "Ryan Bower",
-  "license": "BSD-3-Clause-Clear",
-  "repository": "https://github.com/qualcomm/qualcomm-ui",
   "private": true,
+  "license": "BSD-3-Clause-Clear",
+  "author": "Ryan Bower",
+  "repository": "https://github.com/qualcomm/qualcomm-ui",
   "type": "module",
   "scripts": {
     "build:prod": "./scripts/build-prod.sh",

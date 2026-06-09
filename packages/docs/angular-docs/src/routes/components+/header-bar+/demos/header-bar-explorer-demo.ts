@@ -1,9 +1,9 @@
 import {Component} from "@angular/core"
 import {Layers2, Moon, Settings} from "lucide-angular"
 
+import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 import {HeaderBarModule} from "@qualcomm-ui/angular/header-bar"
 import {IconDirective} from "@qualcomm-ui/angular/icon"
-import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 
 @Component({
   imports: [HeaderBarModule, IconDirective],

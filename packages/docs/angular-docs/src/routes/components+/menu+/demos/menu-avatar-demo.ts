@@ -1,10 +1,10 @@
 import {Component} from "@angular/core"
 import {LogOut, Settings, User} from "lucide-angular"
 
-import {AvatarModule} from "@qualcomm-ui/angular/avatar"
-import {MenuModule} from "@qualcomm-ui/angular/menu"
 import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 import {PortalDirective} from "@qualcomm-ui/angular-core/portal"
+import {AvatarModule} from "@qualcomm-ui/angular/avatar"
+import {MenuModule} from "@qualcomm-ui/angular/menu"
 
 @Component({
   imports: [AvatarModule, MenuModule, PortalDirective],

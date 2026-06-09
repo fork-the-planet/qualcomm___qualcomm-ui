@@ -2,9 +2,9 @@ import {Component} from "@angular/core"
 import {RouterLink} from "@angular/router"
 import {Home} from "lucide-angular"
 
+import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 import {BreadcrumbsModule} from "@qualcomm-ui/angular/breadcrumbs"
 import {IconDirective} from "@qualcomm-ui/angular/icon"
-import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 
 @Component({
   imports: [BreadcrumbsModule, IconDirective, RouterLink],

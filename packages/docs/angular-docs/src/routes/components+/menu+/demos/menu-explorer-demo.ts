@@ -1,9 +1,9 @@
 import {Component} from "@angular/core"
 import {Command, File, FolderOpen, Pencil} from "lucide-angular"
 
+import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 import {IconDirective} from "@qualcomm-ui/angular/icon"
 import {MenuModule} from "@qualcomm-ui/angular/menu"
-import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 
 @Component({
   imports: [MenuModule, IconDirective],

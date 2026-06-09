@@ -1,8 +1,8 @@
 import {Component, signal} from "@angular/core"
 
-import {MenuModule} from "@qualcomm-ui/angular/menu"
 import {IntersectionObserverDirective} from "@qualcomm-ui/angular-core/observers"
 import {PortalDirective} from "@qualcomm-ui/angular-core/portal"
+import {MenuModule} from "@qualcomm-ui/angular/menu"
 
 @Component({
   imports: [MenuModule, PortalDirective, IntersectionObserverDirective],

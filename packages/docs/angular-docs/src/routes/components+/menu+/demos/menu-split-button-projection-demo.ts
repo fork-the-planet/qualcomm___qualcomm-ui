@@ -1,10 +1,10 @@
 import {Component} from "@angular/core"
 import {Copy, FilePlus, Save} from "lucide-angular"
 
-import {ButtonModule} from "@qualcomm-ui/angular/button"
-import {MenuModule} from "@qualcomm-ui/angular/menu"
 import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 import {PortalDirective} from "@qualcomm-ui/angular-core/portal"
+import {ButtonModule} from "@qualcomm-ui/angular/button"
+import {MenuModule} from "@qualcomm-ui/angular/menu"
 
 @Component({
   imports: [ButtonModule, MenuModule, PortalDirective],
