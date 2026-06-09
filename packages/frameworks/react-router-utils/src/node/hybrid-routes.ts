@@ -138,11 +138,11 @@ export function hybridRoutes(
     },
   )
   // update undefined parentIds to 'root'
-  Object.values(routes).forEach((route) => {
+  for (const route of Object.values(routes)) {
     if (route.parentId === undefined) {
       route.parentId = "root"
     }
-  })
+  }
 
   return routes
 }
@@ -213,10 +213,10 @@ function _flatRoutes(
     })
   }
   // update parentIds for all routes
-  Array.from(routeMap.values()).forEach((routeInfo) => {
+  for (const routeInfo of Array.from(routeMap.values())) {
     const parentId = findParentRouteId(routeInfo, nameMap)
     routeInfo.parentId = parentId
-  })
+  }
 
   // Then, recurse through all routes using the public defineRoutes() API
   function defineNestedRoutes(

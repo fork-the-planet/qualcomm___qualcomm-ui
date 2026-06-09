@@ -11,7 +11,9 @@ export function updateDemoState(
 }
 
 // a simple cookie used to store arbitrary state for the SSR request
-export function createDemoStateUpdateAction(cookie: Cookie) {
+export function createDemoStateUpdateAction(
+  cookie: Cookie,
+): ({request}: ActionFunctionArgs) => Promise<Response> {
   return async ({request}: ActionFunctionArgs): Promise<Response> => {
     const state = await request.json()
 
