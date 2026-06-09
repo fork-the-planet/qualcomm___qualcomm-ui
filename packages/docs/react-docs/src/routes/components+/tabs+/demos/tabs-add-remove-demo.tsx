@@ -2,9 +2,9 @@ import {type ReactElement, type ReactNode, useState} from "react"
 
 import {Plus} from "lucide-react"
 
+import {LoremIpsum} from "@qualcomm-ui/react-core/lorem-ipsum"
 import {Button} from "@qualcomm-ui/react/button"
 import {Tab, Tabs} from "@qualcomm-ui/react/tabs"
-import {LoremIpsum} from "@qualcomm-ui/react-core/lorem-ipsum"
 
 interface Item {
   content: ReactNode
