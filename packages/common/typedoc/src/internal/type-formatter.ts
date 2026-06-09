@@ -144,7 +144,7 @@ export async function prettyImportStatement(str: string): Promise<string> {
       await format("file.tsx", str, formatConfig)
     ).code.trim()
     return prettierCache[str]
-  } catch (e) {
+  } catch {
     return str
   }
 }
@@ -365,7 +365,7 @@ export class TypeFormatter {
         const {children, signatures} = t.declaration
 
         if (children && children.length > 0) {
-          children.forEach((child) => {
+          for (const child of children) {
             obj.push({
               name: formatObjectPropertyName(child.name),
               optional: child.flags?.isOptional,
@@ -375,7 +375,7 @@ export class TypeFormatter {
                   ? this.formatSignature(child.signatures, opts)
                   : this.formatType(child.type as JSONOutput.SomeType, opts),
             })
-          })
+          }
 
           return `{ ${obj
             .map((param) => {

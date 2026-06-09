@@ -39,9 +39,10 @@ export function dedent(
   // 5. Perform interpolation.
   let string = strings[0]
 
-  values.forEach((value, i) => {
+  for (const value of values) {
+    const i = values.indexOf(value)
     string += (value as string) + strings[i + 1]
-  })
+  }
 
   return string
 }

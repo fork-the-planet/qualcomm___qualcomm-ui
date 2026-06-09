@@ -18,7 +18,7 @@ program
   .command(Commands.INIT)
   .summary("Initialize the config file")
   .action(async () => {
-    return init().catch(() => process.exit(0))
+    return await init().catch(() => process.exit(0))
   })
 
 program

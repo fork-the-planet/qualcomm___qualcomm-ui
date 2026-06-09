@@ -63,7 +63,7 @@ export function resolveTsconfig(
       ts.sys,
       dirname(tsconfigPath),
     )
-  } catch (e) {
+  } catch {
     console.log("Failed to read tsconfig")
     return null
   }
