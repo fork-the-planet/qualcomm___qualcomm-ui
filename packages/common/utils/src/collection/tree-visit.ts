@@ -178,13 +178,14 @@ export function filter<T>(node: T, options: FilterOptions<T>): T {
     const filteredChildren: T[] = []
 
     // Recursively filter children
-    children.forEach((child, index) => {
+    for (const child of children) {
+      const index = children.indexOf(child)
       const childIndexPath = [...indexPath, index]
       const filteredChild = filterRecursive(child, childIndexPath)
       if (filteredChild) {
         filteredChildren.push(filteredChild)
       }
-    })
+    }
 
     // Keep node if: root, matches predicate, or has filtered children (preserve
     // structure)
@@ -222,14 +223,14 @@ export function flatten<T>(
       const children = options.getChildren(node, indexPath)
 
       // Set parent-child relationships and assign indices to children
-      children.forEach((child) => {
+      for (const child of children) {
         if (!parentMap.has(child)) {
           parentMap.set(child, node)
         }
         if (!idxMap.has(child)) {
           idxMap.set(child, idx++)
         }
-      })
+      }
 
       const _children =
         children.length > 0
@@ -263,7 +264,7 @@ function replaceOperation<T>(): NodeOperation<T> {
 type OperationMap<T> = Map<string, NodeOperation<T>>
 
 function splitIndexPath(indexPath: IndexPath): [IndexPath, number] {
-  return [indexPath.slice(0, -1), indexPath[indexPath.length - 1]]
+  return [indexPath.slice(0, -1), indexPath.at(-1)!]
 }
 
 function getInsertionOperations<T>(
@@ -309,7 +310,7 @@ function getRemovalOperations<T>(indexPaths: IndexPath[]) {
   for (const indexPath of indexPaths) {
     const parentKey = indexPath.slice(0, -1).join()
     const value = indexesToRemove.get(parentKey) ?? []
-    value.push(indexPath[indexPath.length - 1])
+    value.push(indexPath.at(-1)!)
     indexesToRemove.set(
       parentKey,
       value.sort((a, b) => a - b),
@@ -511,7 +512,7 @@ export function visit<T>(node: T, options: TreeVisitOptions<T>): void {
     ? () => indexPath
     : () => indexPath.slice()
   while (stack.length > 0) {
-    const wrapper = stack[stack.length - 1]
+    const wrapper = stack.at(-1)!
     if (wrapper.state === undefined) {
       const enterResult = onEnter?.(wrapper.node, getIndexPath())
       if (enterResult === "stop") {

@@ -173,12 +173,12 @@ export function getMatchRanking(
 function getAcronym(string: string): string {
   let acronym = ""
   const wordsInString = string.split(" ")
-  wordsInString.forEach((wordInString) => {
+  for (const wordInString of wordsInString) {
     const splitByHyphenWords = wordInString.split("-")
-    splitByHyphenWords.forEach((splitByHyphenWord) => {
-      acronym += splitByHyphenWord.substr(0, 1)
-    })
-  })
+    for (const splitByHyphenWord of splitByHyphenWords) {
+      acronym += splitByHyphenWord.substring(0, 1)
+    }
+  }
   return acronym
 }
 

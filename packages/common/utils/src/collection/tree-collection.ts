@@ -543,7 +543,7 @@ export class TreeCollection<T> {
       return
     }
     const siblings = this.getNodeChildren(parentNode)
-    let idx = indexPath[indexPath.length - 1]
+    let idx = indexPath.at(-1)!
     while (--idx >= 0) {
       const sibling = siblings[idx]
       if (!this.getNodeDisabled(sibling)) {
@@ -565,7 +565,7 @@ export class TreeCollection<T> {
       return
     }
     const siblings = this.getNodeChildren(parentNode)
-    let idx = indexPath[indexPath.length - 1]
+    let idx = indexPath.at(-1)!
     while (++idx < siblings.length) {
       const sibling = siblings[idx]
       if (!this.getNodeDisabled(sibling)) {
@@ -825,10 +825,7 @@ export class TreeCollection<T> {
     if (!parentNode) {
       return
     }
-    const nextIndex = [
-      ...indexPath.slice(0, -1),
-      indexPath[indexPath.length - 1] + 1,
-    ]
+    const nextIndex = [...indexPath.slice(0, -1), indexPath.at(-1)! + 1]
     return this._insert(this.rootNode, nextIndex, nodes)
   }
 
@@ -914,7 +911,8 @@ export class TreeCollection<T> {
     const groupMap = new Map<string, Array<{indexPath: IndexPath; node: T}>>()
     const children = this.getNodeChildren(parentNode)
 
-    children.forEach((node, index) => {
+    for (const node of children) {
+      const index = children.indexOf(node)
       const key = groupBy(node, index)
       const indexPath = [...parentIndexPath, index]
       const group = groupMap.get(key)
@@ -923,7 +921,7 @@ export class TreeCollection<T> {
       } else {
         group.push({indexPath, node})
       }
-    })
+    }
 
     const groups = Array.from(groupMap.entries()).map(([key, items]) => ({
       items,
@@ -978,9 +976,9 @@ export function flattenedToTree<T extends TreeNode>(
 
   // Create node map for quick lookup
   const nodeMap = new Map<number, FlatTreeNode<T>>()
-  nodes.forEach((node) => {
+  for (const node of nodes) {
     nodeMap.set(node._index, node)
-  })
+  }
 
   // Build the tree recursively
   const buildNode = (idx: number): T => {
@@ -993,9 +991,9 @@ export function flattenedToTree<T extends TreeNode>(
 
     // Recursively build children
     const children: T[] = []
-    _children?.forEach((childIndex) => {
+    for (const childIndex of _children ?? []) {
       children.push(buildNode(childIndex))
-    })
+    }
 
     return {
       ...cleanNode,
@@ -1022,11 +1020,12 @@ export function filePathToTree(
     value: "ROOT",
   }
 
-  paths.forEach((path) => {
+  for (const path of paths) {
     const parts = path.split("/")
     let currentNode = rootNode
 
-    parts.forEach((part, index) => {
+    for (const part of parts) {
+      const index = parts.indexOf(part)
       let childNode = currentNode.children?.find(
         (child: any) => child.text === part,
       )
@@ -1041,8 +1040,8 @@ export function filePathToTree(
       }
 
       currentNode = childNode
-    })
-  })
+    }
+  }
 
   return new TreeCollection({rootNode})
 }

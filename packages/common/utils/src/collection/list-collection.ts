@@ -245,13 +245,14 @@ export class ListCollection<T extends CollectionItem = CollectionItem> {
 
     const groups = new Map<string, T[]>()
 
-    this.items.forEach((item, index) => {
+    for (const item of this.items) {
+      const index = this.items.indexOf(item)
       const groupKey = groupBy(item, index)
       if (!groups.has(groupKey)) {
         groups.set(groupKey, [])
       }
       groups.get(groupKey)!.push(item)
-    })
+    }
 
     const entries = Array.from(groups.entries())
 

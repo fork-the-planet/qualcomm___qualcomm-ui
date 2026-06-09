@@ -28,11 +28,11 @@ const addRelativePath = (file: File, path: string) => {
 export const getFileEntries = (
   items: DataTransferItemList,
   traverseDirectories: boolean | undefined,
-): Promise<(File | (File | null)[] | null)[]> =>
-  Promise.all(
+): Promise<(File | (File | null)[] | null)[]> => {
+  return Promise.all(
     Array.from(items)
       .filter((item) => item.kind === "file")
-      .map((item) => {
+      .map(async (item) => {
         const entry = getItemEntry(item)
         if (!entry) {
           return null
@@ -44,7 +44,7 @@ export const getFileEntries = (
 
         if (isFileEntry(entry) && typeof item.getAsFile === "function") {
           const file = item.getAsFile()
-          return Promise.resolve(file ? addRelativePath(file, "") : null)
+          return file ? addRelativePath(file, "") : null
         }
 
         if (isFileEntry(entry)) {
@@ -58,6 +58,7 @@ export const getFileEntries = (
       })
       .filter((b) => b !== null),
   )
+}
 
 const getDirectoryFiles = (
   reader: FileSystemDirectoryReader,

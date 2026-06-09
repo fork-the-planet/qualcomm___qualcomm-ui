@@ -211,7 +211,7 @@ function getItemValues<ItemType>(
     value = key(item)
   } else if (isFalsy(item)) {
     value = null
-  } else if (Object.hasOwnProperty.call(item, key)) {
+  } else if (Object.hasOwn(item as object, key)) {
     value = (item as IndexableByString)[key]
   } else if (key.includes(".")) {
     return getNestedValues<ItemType>(key, item)
@@ -257,7 +257,7 @@ function getNestedValues<ItemType>(
         continue
       }
 
-      if (Object.hasOwnProperty.call(nestedItem, nestedKey)) {
+      if (Object.hasOwn(nestedItem as any, nestedKey)) {
         const nestedValue = (nestedItem as IndexableByString)[nestedKey]
         if (!isFalsy(nestedValue)) {
           nestedValues.push(nestedValue as IndexableByString | string)
