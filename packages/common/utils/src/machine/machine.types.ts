@@ -6,8 +6,8 @@
 
 import type {IdParam} from "@qualcomm-ui/utils/attributes"
 
-import type {JSX} from "./jsx"
-import type {ElementCleanup} from "./prop-normalizer"
+import type {JSX} from "./jsx.js"
+import type {ElementCleanup} from "./prop-normalizer.js"
 
 export type Dict = Record<string, any>
 

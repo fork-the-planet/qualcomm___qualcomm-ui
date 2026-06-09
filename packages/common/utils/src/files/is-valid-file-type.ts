@@ -4,8 +4,8 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {getFileMimeType} from "./get-file-mime-type"
-import type {FileError} from "./types"
+import {getFileMimeType} from "./get-file-mime-type.js"
+import type {FileError} from "./types.js"
 
 function isFileAccepted(
   file: File | null,

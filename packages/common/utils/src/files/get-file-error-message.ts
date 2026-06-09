@@ -1,7 +1,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {FileError} from "./types"
+import type {FileError} from "./types.js"
 
 const FILE_ERROR_MESSAGES: Record<string, string> = {
   FILE_EXISTS: "File already exists",

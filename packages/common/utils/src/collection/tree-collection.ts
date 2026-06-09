@@ -23,7 +23,7 @@ import {
   remove,
   replace,
   visit,
-} from "./tree-visit"
+} from "./tree-visit.js"
 import type {
   DescendantOptions,
   FilePathTreeNode,
@@ -34,7 +34,7 @@ import type {
   TreeCollectionOptions,
   TreeNode,
   TreeSkipOptions,
-} from "./types"
+} from "./types.js"
 
 export class TreeCollection<T> {
   /**

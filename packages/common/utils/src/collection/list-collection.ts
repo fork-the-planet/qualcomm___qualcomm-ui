@@ -12,7 +12,7 @@ import type {
   CollectionSearchOptions,
   ListCollectionMethods,
   ListCollectionOptions,
-} from "./types"
+} from "./types.js"
 
 const fallback: ListCollectionMethods<any> = {
   itemDisabled(item) {

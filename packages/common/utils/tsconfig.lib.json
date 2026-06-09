@@ -5,6 +5,8 @@
     "incremental": true,
     "outDir": "./dist",
     "rootDir": "./src",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "tsBuildInfoFile": "dist/tsbuildinfo",
     "paths": {
       "@qualcomm-ui/utils/*": ["./src/*/index.ts"]

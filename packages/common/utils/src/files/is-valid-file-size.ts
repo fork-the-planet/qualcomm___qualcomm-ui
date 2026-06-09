@@ -4,7 +4,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {FileError} from "./types"
+import type {FileError} from "./types.js"
 
 const isDefined = <T>(v: T | undefined): v is T => v !== undefined && v !== null
 
