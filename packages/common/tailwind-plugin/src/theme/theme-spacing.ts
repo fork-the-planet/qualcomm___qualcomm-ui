@@ -1,7 +1,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {BasicThemeData} from "./theme.types"
+import type {BasicThemeData} from "./theme.types.js"
 
 export const themeSpacing: Required<BasicThemeData>[] = [
   {tailwindClass: "*-qds-0", variable: "--spacing-0"},

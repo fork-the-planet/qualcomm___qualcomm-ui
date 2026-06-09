@@ -35,7 +35,7 @@
   },
   "scripts": {
     "build": "run-s clean generate-css build:js build:ts build:css",
-    "clean": "shx rm -rf dist/tsbuildinfo dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map",
+    "clean": "shx rm -rf node_modules/.tmp dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map",
     "generate-css": "tsx scripts/generate-nextgen-plugin.ts",
     "build:js": "vite build",
     "build:ts": "tsc -b tsconfig.lib.json",

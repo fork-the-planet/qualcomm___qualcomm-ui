@@ -252,7 +252,14 @@ const category: ColorData[] = categories
   ])
   .flat()
 
-export const themeColors = {
+export const themeColors: {
+  background: ColorData[]
+  border: ColorData[]
+  category: ColorData[]
+  icon: ColorData[]
+  surface: ColorData[]
+  text: ColorData[]
+} = {
   background,
   border,
   category,

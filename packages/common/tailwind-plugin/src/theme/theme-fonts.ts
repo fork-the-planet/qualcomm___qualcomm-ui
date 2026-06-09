@@ -134,7 +134,18 @@ const codeBold: FontData[] = [
   {tailwindClass: "font-code-xs-bold", variable: "--font-static-code-xs-bold"},
 ]
 
-export const themeFonts = {
+export const themeFonts: {
+  body: FontData[]
+  bodyBold: FontData[]
+  code: FontData[]
+  codeBold: FontData[]
+  display: FontData[]
+  dynamicDisplay: FontData[]
+  dynamicHeading: FontData[]
+  dynamicHeadingBold: FontData[]
+  heading: FontData[]
+  headingBold: FontData[]
+} = {
   body,
   bodyBold,
   code,
