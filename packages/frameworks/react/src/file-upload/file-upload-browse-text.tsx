@@ -9,7 +9,7 @@ import {normalizeProps} from "@qualcomm-ui/react-core/machine"
 import type {ElementRenderProp} from "@qualcomm-ui/react-core/system"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useQdsFileUploadContext} from "./qds-file-upload-context"
+import {useQdsFileUploadContext} from "./qds-file-upload-context.js"
 
 export interface FileUploadBrowseTextProps extends ElementRenderProp<"span"> {}
 

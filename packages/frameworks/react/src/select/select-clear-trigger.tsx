@@ -10,7 +10,7 @@ import {useSelectClearTrigger} from "@qualcomm-ui/react-core/select"
 import type {ElementRenderProp, IdProp} from "@qualcomm-ui/react-core/system"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useQdsSelectContext} from "./qds-select-context"
+import {useQdsSelectContext} from "./qds-select-context.js"
 
 export interface SelectClearTriggerProps
   extends IdProp, ElementRenderProp<"button"> {}

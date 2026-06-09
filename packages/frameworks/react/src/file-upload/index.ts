@@ -1,1 +1,1 @@
-export * from "./qds-file-upload-context"
+export * from "./qds-file-upload-context.js"

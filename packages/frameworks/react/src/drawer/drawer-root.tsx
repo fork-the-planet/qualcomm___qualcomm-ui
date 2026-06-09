@@ -15,7 +15,7 @@ import {
 } from "@qualcomm-ui/react-core/dialog"
 import {normalizeProps} from "@qualcomm-ui/react-core/machine"
 
-import {QdsDrawerContextProvider} from "./qds-drawer-context"
+import {QdsDrawerContextProvider} from "./qds-drawer-context.js"
 
 export interface DrawerRootProps
   extends CoreDialogRootProps, QdsDrawerApiProps {

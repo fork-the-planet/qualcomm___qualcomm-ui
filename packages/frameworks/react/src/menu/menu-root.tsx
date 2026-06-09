@@ -26,7 +26,7 @@ import {
 import type {Optional} from "@qualcomm-ui/utils/guard"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {QdsMenuContextProvider, useQdsMenuContext} from "./qds-menu-context"
+import {QdsMenuContextProvider, useQdsMenuContext} from "./qds-menu-context.js"
 
 export interface MenuRootProps
   extends Optional<MenuApiProps, "id">, PresenceApiProps, QdsMenuApiProps {

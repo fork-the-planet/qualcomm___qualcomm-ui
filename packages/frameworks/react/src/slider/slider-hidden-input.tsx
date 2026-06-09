@@ -7,7 +7,7 @@ import {useSliderHiddenInput} from "@qualcomm-ui/react-core/slider"
 import type {IdProp} from "@qualcomm-ui/react-core/system"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useQdsSliderContext} from "./qds-slider-context"
+import {useQdsSliderContext} from "./qds-slider-context.js"
 
 export interface SliderHiddenInputProps
   extends IdProp, ComponentPropsWithRef<"input"> {

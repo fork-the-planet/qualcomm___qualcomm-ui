@@ -7,7 +7,7 @@ import {Avatar} from "@qualcomm-ui/react/avatar"
 import type {ElementRenderProp} from "@qualcomm-ui/react-core/system"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useQdsCardContext} from "./qds-card-context"
+import {useQdsCardContext} from "./qds-card-context.js"
 
 export interface CardAvatarProps extends Omit<ElementRenderProp<"div">, "dir"> {
   /**

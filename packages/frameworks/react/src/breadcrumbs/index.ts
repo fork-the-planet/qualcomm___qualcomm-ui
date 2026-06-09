@@ -1,32 +1,32 @@
-import {BreadcrumbsItem, type BreadcrumbsItemProps} from "./breadcrumbs-item"
 import {
   BreadcrumbsItemIcon,
   type BreadcrumbsItemIconProps,
-} from "./breadcrumbs-item-icon"
+} from "./breadcrumbs-item-icon.js"
 import {
   BreadcrumbsItemRoot,
   type BreadcrumbsItemRootProps,
-} from "./breadcrumbs-item-root"
+} from "./breadcrumbs-item-root.js"
 import {
   BreadcrumbsItemSeparator,
   type BreadcrumbsItemSeparatorProps,
-} from "./breadcrumbs-item-separator"
+} from "./breadcrumbs-item-separator.js"
 import {
   BreadcrumbsItemTrigger,
   type BreadcrumbsItemTriggerProps,
-} from "./breadcrumbs-item-trigger"
-import {BreadcrumbsList, type BreadcrumbsListProps} from "./breadcrumbs-list"
+} from "./breadcrumbs-item-trigger.js"
+import {BreadcrumbsItem, type BreadcrumbsItemProps} from "./breadcrumbs-item.js"
+import {BreadcrumbsList, type BreadcrumbsListProps} from "./breadcrumbs-list.js"
 import {
   BreadcrumbsOverflowItem,
   type BreadcrumbsOverflowItemProps,
-} from "./breadcrumbs-overflow-item"
+} from "./breadcrumbs-overflow-item.js"
 import {
   BreadcrumbsOverflowTrigger,
   type BreadcrumbsOverflowTriggerProps,
-} from "./breadcrumbs-overflow-trigger"
-import {BreadcrumbsRoot, type BreadcrumbsRootProps} from "./breadcrumbs-root"
+} from "./breadcrumbs-overflow-trigger.js"
+import {BreadcrumbsRoot, type BreadcrumbsRootProps} from "./breadcrumbs-root.js"
 
-export * from "./qds-breadcrumbs-context"
+export * from "./qds-breadcrumbs-context.js"
 
 export type {
   BreadcrumbsItemIconProps,

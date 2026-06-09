@@ -8,7 +8,7 @@ import type {ElementRenderProp} from "@qualcomm-ui/react-core/system"
 import {useTreeBranchContent} from "@qualcomm-ui/react-core/tree"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useQdsTreeContext} from "./qds-tree-context"
+import {useQdsTreeContext} from "./qds-tree-context.js"
 
 export interface TreeBranchContentProps extends ElementRenderProp<"div"> {
   /**

@@ -13,8 +13,8 @@ import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 import {
   BreadcrumbsItemIcon,
   type BreadcrumbsItemIconProps,
-} from "./breadcrumbs-item-icon"
-import {useQdsBreadcrumbsContext} from "./qds-breadcrumbs-context"
+} from "./breadcrumbs-item-icon.js"
+import {useQdsBreadcrumbsContext} from "./qds-breadcrumbs-context.js"
 
 /**
  * @since 1.21.0

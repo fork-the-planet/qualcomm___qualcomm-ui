@@ -11,7 +11,7 @@ import type {LucideIconOrElement} from "@qualcomm-ui/react-core/lucide"
 import type {ElementRenderProp} from "@qualcomm-ui/react-core/system"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useQdsDialogContext} from "./qds-dialog-context"
+import {useQdsDialogContext} from "./qds-dialog-context.js"
 
 export interface DialogIndicatorIconProps extends ElementRenderProp<"span"> {
   /**

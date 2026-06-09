@@ -8,25 +8,25 @@ import {useControlledId} from "@qualcomm-ui/react-core/state"
 import {
   FileInputClearTrigger,
   type FileInputClearTriggerProps,
-} from "./file-input-clear-trigger"
+} from "./file-input-clear-trigger.js"
 import {
   FileInputControl,
   type FileInputControlProps,
-} from "./file-input-control"
+} from "./file-input-control.js"
 import {
   FileInputDisplay,
   type FileInputDisplayProps,
-} from "./file-input-display"
+} from "./file-input-display.js"
 import {
   FileInputErrorText,
   type FileInputErrorTextProps,
-} from "./file-input-error-text"
+} from "./file-input-error-text.js"
 import {
   FileInputHiddenInput,
   type FileInputHiddenInputProps,
-} from "./file-input-hidden-input"
-import {FileInputLabel, type FileInputLabelProps} from "./file-input-label"
-import {FileInputRoot, type FileInputRootProps} from "./file-input-root"
+} from "./file-input-hidden-input.js"
+import {FileInputLabel, type FileInputLabelProps} from "./file-input-label.js"
+import {FileInputRoot, type FileInputRootProps} from "./file-input-root.js"
 
 export interface FileInputProps extends FileInputRootProps {
   /**

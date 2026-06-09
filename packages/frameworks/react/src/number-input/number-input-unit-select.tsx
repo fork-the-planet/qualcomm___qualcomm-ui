@@ -13,7 +13,7 @@ import {Portal} from "@qualcomm-ui/react-core/portal"
 import type {IdProp} from "@qualcomm-ui/react-core/system"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useQdsNumberInputContext} from "./qds-number-input-context"
+import {useQdsNumberInputContext} from "./qds-number-input-context.js"
 
 export interface NumberInputUnitSelectProps extends IdProp {}
 

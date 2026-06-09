@@ -21,7 +21,7 @@ import {
 import type {Explicit} from "@qualcomm-ui/utils/guard"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {QdsSelectContextProvider} from "./qds-select-context"
+import {QdsSelectContextProvider} from "./qds-select-context.js"
 
 export interface SelectRootProps
   extends CoreSelectRootProps, QdsSelectApiProps {

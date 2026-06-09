@@ -11,16 +11,16 @@ import {Portal} from "@qualcomm-ui/react-core/portal"
 import {
   BreadcrumbsItemRoot,
   type BreadcrumbsItemRootProps,
-} from "./breadcrumbs-item-root"
+} from "./breadcrumbs-item-root.js"
 import {
   BreadcrumbsItemSeparator,
   type BreadcrumbsItemSeparatorProps,
-} from "./breadcrumbs-item-separator"
+} from "./breadcrumbs-item-separator.js"
 import {
   BreadcrumbsOverflowTrigger,
   type BreadcrumbsOverflowTriggerProps,
-} from "./breadcrumbs-overflow-trigger"
-import {useQdsBreadcrumbsContext} from "./qds-breadcrumbs-context"
+} from "./breadcrumbs-overflow-trigger.js"
+import {useQdsBreadcrumbsContext} from "./qds-breadcrumbs-context.js"
 
 const breadcrumbsSizeToMenuSize: Record<string, QdsMenuSize> = {
   lg: "md",

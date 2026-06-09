@@ -9,7 +9,7 @@ import {IconButton} from "@qualcomm-ui/react/button"
 import type {ElementRenderProp} from "@qualcomm-ui/react-core/system"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useAlertBannerContext} from "./qds-alert-banner-context"
+import {useAlertBannerContext} from "./qds-alert-banner-context.js"
 
 export interface AlertBannerCloseButtonProps extends ElementRenderProp<"button"> {
   /**

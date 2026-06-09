@@ -12,7 +12,7 @@ import {
 import {useControlledId} from "@qualcomm-ui/react-core/state"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useQdsProgressContext} from "./qds-progress-context"
+import {useQdsProgressContext} from "./qds-progress-context.js"
 
 export interface ProgressErrorTextProps extends CoreProgressErrorTextProps {}
 

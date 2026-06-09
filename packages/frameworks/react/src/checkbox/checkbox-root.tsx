@@ -25,7 +25,7 @@ import {
 } from "@qualcomm-ui/react-core/system"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {QdsCheckboxContextProvider} from "./qds-checkbox-context"
+import {QdsCheckboxContextProvider} from "./qds-checkbox-context.js"
 
 export interface CheckboxRootProps
   extends

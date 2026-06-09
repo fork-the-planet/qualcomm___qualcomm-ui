@@ -9,7 +9,7 @@ import {IconOrNode, type IconOrNodeProps} from "@qualcomm-ui/react/icon"
 import type {LucideIconOrElement} from "@qualcomm-ui/react-core/lucide"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useQdsFileUploadContext} from "./qds-file-upload-context"
+import {useQdsFileUploadContext} from "./qds-file-upload-context.js"
 
 export interface FileUploadDropzoneIconProps extends Omit<
   IconOrNodeProps,

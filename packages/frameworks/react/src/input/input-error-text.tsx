@@ -11,7 +11,7 @@ import {
 } from "@qualcomm-ui/react-core/system"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useQdsInputContext} from "./qds-input-context"
+import {useQdsInputContext} from "./qds-input-context.js"
 
 export interface InputErrorTextProps extends ElementRenderProp<"div"> {
   /**

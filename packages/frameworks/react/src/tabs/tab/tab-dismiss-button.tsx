@@ -12,7 +12,7 @@ import {
 } from "@qualcomm-ui/react-core/tabs"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useQdsTabsContext} from "../qds-tabs-context"
+import {useQdsTabsContext} from "../qds-tabs-context.js"
 
 export interface TabDismissButtonProps extends CoreTabsTabDismissButtonProps {}
 

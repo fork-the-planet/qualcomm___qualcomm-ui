@@ -11,7 +11,7 @@ import {
 } from "@qualcomm-ui/react-core/file-upload"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useQdsFileUploadContext} from "./qds-file-upload-context"
+import {useQdsFileUploadContext} from "./qds-file-upload-context.js"
 
 export interface FileUploadItemSizeTextProps extends CoreFileUploadItemSizeTextProps {}
 

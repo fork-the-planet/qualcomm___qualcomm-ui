@@ -16,7 +16,7 @@ import {
 } from "@qualcomm-ui/react-core/number-input"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {QdsNumberInputContextProvider} from "./qds-number-input-context"
+import {QdsNumberInputContextProvider} from "./qds-number-input-context.js"
 
 export interface NumberInputRootProps
   extends CoreNumberInputRootProps, QdsReactInputApiProps {}

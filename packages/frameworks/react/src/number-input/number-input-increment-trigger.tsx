@@ -10,7 +10,7 @@ import {CoreNumberInput} from "@qualcomm-ui/react-core/number-input"
 import type {ElementRenderProp} from "@qualcomm-ui/react-core/system"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useQdsNumberInputContext} from "./qds-number-input-context"
+import {useQdsNumberInputContext} from "./qds-number-input-context.js"
 
 export interface NumberInputIncrementTriggerProps extends ElementRenderProp<"button"> {}
 

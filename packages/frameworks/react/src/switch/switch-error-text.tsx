@@ -14,7 +14,7 @@ import {useSwitchErrorText} from "@qualcomm-ui/react-core/switch"
 import type {IdProp} from "@qualcomm-ui/react-core/system"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useQdsSwitchContext} from "./qds-switch-context"
+import {useQdsSwitchContext} from "./qds-switch-context.js"
 
 export interface SwitchErrorTextProps extends IdProp, InputErrorTextProps {
   /**

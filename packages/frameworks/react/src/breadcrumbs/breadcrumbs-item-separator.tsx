@@ -13,7 +13,7 @@ import {
 } from "@qualcomm-ui/react-core/system"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useQdsBreadcrumbsContext} from "./qds-breadcrumbs-context"
+import {useQdsBreadcrumbsContext} from "./qds-breadcrumbs-context.js"
 
 export interface BreadcrumbsItemSeparatorProps extends Omit<
   ElementRenderProp<"span">,

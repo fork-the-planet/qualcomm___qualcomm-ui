@@ -12,7 +12,7 @@ import type {LucideIconOrNode} from "@qualcomm-ui/react-core/lucide"
 import type {ElementRenderProp} from "@qualcomm-ui/react-core/system"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useQdsToastContext} from "./qds-toast-context"
+import {useQdsToastContext} from "./qds-toast-context.js"
 
 export interface ToastIconProps extends ElementRenderProp<"span"> {
   /**
