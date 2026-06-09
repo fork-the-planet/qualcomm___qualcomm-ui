@@ -7,10 +7,10 @@ import type {JSONOutput} from "typedoc"
 
 import type {FormattedType} from "@qualcomm-ui/typedoc-common"
 
-import {formatObjectPropertyName, isTypeOverride} from "../guards"
+import {formatObjectPropertyName, isTypeOverride} from "../guards.js"
 
-import {dedent} from "./dedent"
-import type {KnownInterfaces, QuiDeclarationReflection} from "./types"
+import {dedent} from "./dedent.js"
+import type {KnownInterfaces, QuiDeclarationReflection} from "./types.js"
 
 /**
  * TypeDoc expands default generics, which is not desirable.
@@ -21,7 +21,7 @@ const knownGenerics =
 
 export function getName(
   decl: QuiDeclarationReflection | JSONOutput.SignatureReflection,
-) {
+): string {
   return decl.name === "default"
     ? path.parse(getFileName(decl) || "default").name
     : decl.name
@@ -63,7 +63,9 @@ export function extractDocLink(
   return docLinkTag.content[0].text
 }
 
-export function getInheritDoc(comment: JSONOutput.Comment | undefined) {
+export function getInheritDoc(
+  comment: JSONOutput.Comment | undefined,
+): JSONOutput.CommentTag | undefined {
   return (comment ?? {blockTags: []}).blockTags?.find(
     (tag) => tag.tag === "@inheritDoc",
   )
@@ -80,14 +82,14 @@ export function getFileGitUrl(
   return src.url
 }
 
-export function escape(src: string) {
+export function escape(src: string): string {
   return src
     .replace(/\[/g, "\\[")
-    .replace(/\</g, "\\<")
+    .replace(/</g, "\\<")
     .replace(/\*/g, "\\*")
-    .replace(/\-/g, "\\-")
+    .replace(/-/g, "\\-")
     .replace(/\|/g, "\\|")
-    .replace(/\`/g, "\\`")
+    .replace(/`/g, "\\`")
     .replace(/\{/g, "\\{")
 }
 
@@ -106,7 +108,10 @@ const formatConfig: FormatConfig = {
 
 const prettierCache: Record<string, string> = {}
 
-export async function prettyType(type: string, printWidth: number) {
+export async function prettyType(
+  type: string,
+  printWidth: number,
+): Promise<string> {
   // optimization: prettier is expensive, so skip it if it's unnecessary. This
   // bail-out results in a 50% speed increase.
   if (!type.includes(" ") && type.length <= printWidth) {
@@ -184,7 +189,7 @@ export class TypeFormatter {
   formatSignature(
     signatures: JSONOutput.SignatureReflection[],
     opts: ParseTypeOpts,
-  ) {
+  ): string {
     const s = signatures[0]
 
     const typeOverride = isTypeOverride(s.comment)

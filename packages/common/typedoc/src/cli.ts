@@ -3,7 +3,7 @@
 
 import {program} from "@commander-js/extra-typings"
 
-import {build, init, watch} from "./internal"
+import {build, init, watch} from "./internal/index.js"
 
 const Commands = {
   BUILD: "build",
