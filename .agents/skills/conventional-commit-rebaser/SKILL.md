@@ -13,7 +13,13 @@ Rebase the current branch into clean, single-concern conventional commits with c
 
 Format: `<type>(<scope>): <description>`
 
-`<scope>` is never the package within the workspace. It is the exported module within the package. This is not just the module's file name. If the folder name is a better fit, use that instead. Check the package.json exports field, that is usually your best bet.
+### Scope Rules
+
+- `<scope>` is never the package within the workspace.
+- It is often the exported module within the package.
+   - This is not just the module's file name. If the folder name is a better fit, use that instead. Check the package.json exports field, that is usually your best bet.
+- If changes apply to an entire package, omit the scope.
+- Never include a reference to the package name in the scope or description
 
 
 ### Types
