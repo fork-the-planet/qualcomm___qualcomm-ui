@@ -1,12 +1,9 @@
+import oxfmtPlugin from "eslint-plugin-oxfmt"
 import {defineConfig} from "eslint/config"
-import prettier from "eslint-plugin-prettier/recommended"
 
 export default defineConfig({
-  extends: [prettier],
+  extends: [oxfmtPlugin.configs.recommendedWithoutParser],
   rules: {
-    "prettier/prettier": [
-      "error",
-      {htmlWhitespaceSensitivity: "ignore", parser: "angular"},
-    ],
+    "oxfmt/oxfmt": "error",
   },
 })

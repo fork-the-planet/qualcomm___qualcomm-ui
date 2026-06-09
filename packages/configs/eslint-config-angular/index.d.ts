@@ -21,7 +21,7 @@ interface AngularConfigExport {
     templateAttributeOrder: ConfigObject
 
     /**
-     * Prettier formatting for Angular templates with Angular parser.
+     * oxfmt formatting for Angular templates with Angular parser.
      */
     templatePrettier: ConfigObject
 
