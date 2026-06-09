@@ -4,8 +4,9 @@
 import {defineConfig} from "eslint/config"
 import * as mdx from "eslint-plugin-mdx"
 import reactPlugin from "eslint-plugin-react"
+import {defineConfig, type Config} from "eslint/config"
 
-const recommended = defineConfig({
+const recommended: Config[] = defineConfig({
   ...mdx.flat,
   plugins: {
     ...mdx.flat.plugins,
