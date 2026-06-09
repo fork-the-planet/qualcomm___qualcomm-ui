@@ -9,10 +9,10 @@ import {cwd} from "node:process"
 
 import type {QuiPropTypes} from "@qualcomm-ui/typedoc-common"
 
-import {ConfigLoader} from "./config"
-import type {ResolvedQuiDocsConfig} from "./config/types"
-import {fixPath} from "./path-utils"
-import {SearchIndexer} from "./search-indexer"
+import {ConfigLoader} from "./config/index.js"
+import type {ResolvedQuiDocsConfig} from "./config/types.js"
+import {fixPath} from "./path-utils.js"
+import {SearchIndexer} from "./search-indexer.js"
 
 async function resolveDocProps(
   config: ResolvedQuiDocsConfig,
@@ -33,7 +33,7 @@ async function resolveDocProps(
   }
 }
 
-export function addGeneratePageMapCommand() {
+export function addGeneratePageMapCommand(): void {
   program
     .command("generate-page-map")
     .description(

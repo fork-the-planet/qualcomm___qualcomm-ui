@@ -6,7 +6,7 @@ import {access, readFile} from "node:fs/promises"
 import {dirname, join, resolve} from "node:path"
 import ts from "typescript"
 
-import type {ImportedModule} from "./types"
+import type {ImportedModule} from "./types.js"
 
 export async function exists(dirPath: string): Promise<boolean> {
   return access(dirPath)
@@ -33,7 +33,10 @@ export function removePreviewLines(code: string): string {
     .join("\n")
 }
 
-export function getIntroLines(projectName?: string, description?: string) {
+export function getIntroLines(
+  projectName?: string,
+  description?: string,
+): string {
   const lines: string[] = []
 
   if (projectName) {

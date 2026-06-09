@@ -18,13 +18,13 @@ import type {
 } from "@qualcomm-ui/mdx-common"
 import type {QuiPropTypes} from "@qualcomm-ui/typedoc-common"
 
-import type {ResolvedQuiDocsConfig} from "./config"
-import {ConfigLoader} from "./config/config-loader"
-import {type CompiledMdxFile, MdxFileReader} from "./markdown"
-import {KnowledgeExporter} from "./markdown/knowledge"
-import type {KnowledgePageCache} from "./markdown/knowledge/types"
-import {fixPath} from "./path-utils"
-import {SearchIndexer} from "./search-indexer"
+import {ConfigLoader} from "./config/config-loader.js"
+import type {ResolvedQuiDocsConfig} from "./config/index.js"
+import {type CompiledMdxFile, MdxFileReader} from "./markdown/index.js"
+import {KnowledgeExporter} from "./markdown/knowledge/index.js"
+import type {KnowledgePageCache} from "./markdown/knowledge/types.js"
+import {fixPath} from "./path-utils.js"
+import {SearchIndexer} from "./search-indexer.js"
 
 const isDev = process.env.NODE_ENV === "development"
 
@@ -67,15 +67,15 @@ export class PluginState {
 
   cwd!: string
 
-  init(cwd: string) {
+  init(cwd: string): void {
     this.cwd = cwd
   }
 
-  getCwd() {
+  getCwd(): string {
     return this.cwd
   }
 
-  get docPropsDirectory() {
+  get docPropsDirectory(): string {
     if (!this.docPropsFilePath) {
       return ""
     }
@@ -115,7 +115,7 @@ export class PluginState {
     }
   }
 
-  createIndexer(config: ResolvedQuiDocsConfig) {
+  createIndexer(config: ResolvedQuiDocsConfig): void {
     this.knowledgePageCache.clear()
     this.config = config
     this.configFilePath = config.filePath
@@ -165,7 +165,7 @@ export class PluginState {
     return compiledMdxFiles
   }
 
-  sendUpdate() {
+  sendUpdate(): void {
     for (const server of this.servers) {
       const virtualModule = server.moduleGraph.getModuleById(
         PLUGIN_VIRTUAL_MODULE_ID,
@@ -177,7 +177,7 @@ export class PluginState {
     }
   }
 
-  handleChange(opts: ChangeOptions = {}) {
+  handleChange(opts: ChangeOptions = {}): void {
     clearTimeout(this.timeout)
     this.timeout = setTimeout(() => {
       this.buildIndex(true)
@@ -186,7 +186,7 @@ export class PluginState {
     }, 300)
   }
 
-  initWatchers(configFile?: string) {
+  initWatchers(configFile?: string): void {
     if (this.watching) {
       return
     }

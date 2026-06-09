@@ -36,7 +36,7 @@
   "scripts": {
     "build": "run-s clean compile",
     "compile": "run-s build:js build:types",
-    "clean": "shx rm -rf dist/tsbuildinfo dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map",
+    "clean": "shx rm -rf node_modules/.tmp/tsbuildinfo-lib dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map",
     "build:js": "vite build",
     "build:types": "tsc -b tsconfig.lib.json",
     "dev": "run-p watch:js watch:types",

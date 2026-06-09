@@ -18,10 +18,13 @@ import {
   type FileUploadResponse,
   KnowledgeApi,
   type KnowledgeFilesResponse,
-} from "./api"
-import {loadOpenWebUiIntegrations, resolveOpenWebUiIntegration} from "./common"
-import {getConfigFromEnv, loadEnv, type SharedConfig} from "./env"
-import {KnowledgeCleaner} from "./knowledge-cleaner"
+} from "./api.js"
+import {
+  loadOpenWebUiIntegrations,
+  resolveOpenWebUiIntegration,
+} from "./common.js"
+import {getConfigFromEnv, loadEnv, type SharedConfig} from "./env.js"
+import {KnowledgeCleaner} from "./knowledge-cleaner.js"
 
 interface Config extends SharedConfig {
   force?: boolean
@@ -334,7 +337,7 @@ class Uploader {
   }
 }
 
-export function addUploadKnowledgeCommand() {
+export function addUploadKnowledgeCommand(): void {
   function getUploader(
     knowledgePath: string | undefined,
     forceUpload?: boolean,

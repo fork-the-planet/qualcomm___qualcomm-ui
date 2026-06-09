@@ -22,7 +22,7 @@ import {
   remarkFrontmatter,
   remarkGfm,
   remarkMdxFrontmatter,
-} from "../exports"
+} from "../exports.js"
 
 import {ConfigLoader, type ConfigLoaderOptions} from "./config"
 import {rehypeSectionize, rehypeSlug, type RehypeSlugOptions} from "./rehype"

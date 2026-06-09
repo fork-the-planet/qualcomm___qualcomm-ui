@@ -14,15 +14,15 @@ import type {
 import type {QuiPropTypes} from "@qualcomm-ui/typedoc-common"
 import {defined} from "@qualcomm-ui/utils/guard"
 
-import type {SearchIndexerOptions} from "./config"
-import {DocPropsIndexer} from "./doc-props"
+import type {SearchIndexerOptions} from "./config/index.js"
+import {DocPropsIndexer} from "./doc-props/index.js"
 import {
   collectAnchorIds,
   type CollectedLink,
   collectLinks,
   reportInvalidLinks,
   validateLinks,
-} from "./link-validator"
+} from "./link-validator.js"
 import {
   buildGitMetadataMap,
   type CompiledMdxFile,
@@ -31,11 +31,11 @@ import {
   type IndexedPage,
   type IndexedSection,
   MdxFileReader,
-} from "./markdown"
+} from "./markdown/index.js"
 import {
   type PageInfo,
   SectionExtractor,
-} from "./markdown/knowledge/section-extractor"
+} from "./markdown/knowledge/section-extractor.js"
 import {
   filterFileGlob,
   getCategoriesFromPathSegments,

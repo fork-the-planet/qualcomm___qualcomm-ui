@@ -9,7 +9,7 @@ import * as ts from "typescript"
 
 import {pascalCase} from "@qualcomm-ui/utils/change-case"
 
-import {LOG_PREFIX, NODE_BUILTINS} from "./demo-plugin-constants"
+import {LOG_PREFIX, NODE_BUILTINS} from "./demo-plugin-constants.js"
 
 interface PathAlias {
   pattern: RegExp
@@ -390,7 +390,7 @@ export function extractPageId(filePath: string, routesDir: string): string {
   return dirname(relativePath)
 }
 
-export function isCssAsset(filePath: string) {
+export function isCssAsset(filePath: string): boolean {
   return filePath.endsWith(".css")
 }
 

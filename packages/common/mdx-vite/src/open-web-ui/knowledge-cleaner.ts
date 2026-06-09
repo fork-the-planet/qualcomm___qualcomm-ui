@@ -1,8 +1,8 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {type ApiConfig, FilesApi, KnowledgeApi} from "./api"
-import type {SharedConfig} from "./env"
+import {type ApiConfig, FilesApi, KnowledgeApi} from "./api.js"
+import type {SharedConfig} from "./env.js"
 
 export interface KnowledgeCleanerConfig extends SharedConfig {}
 
@@ -23,5 +23,5 @@ export class KnowledgeCleaner {
    * TODO: fix. A recent OWUI update changed the KnowledgeApi.list command. We used
    *  that to determine which files belonged to which Knowledge Base.
    */
-  async cleanUpOrphanedFiles() {}
+  async cleanUpOrphanedFiles(): Promise<void> {}
 }

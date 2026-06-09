@@ -14,10 +14,10 @@ import type {
   QuiCommentDisplayPart,
 } from "@qualcomm-ui/typedoc-common"
 
-import {docPropsJsxNodes} from "../../../doc-props"
-import {extractNamesFromAttribute} from "../../mdx-utils"
-import type {ComponentProps, DocProps, PropInfo} from "../types"
-import {exists} from "../utils"
+import {docPropsJsxNodes} from "../../../doc-props/index.js"
+import {extractNamesFromAttribute} from "../../mdx-utils.js"
+import type {ComponentProps, DocProps, PropInfo} from "../types.js"
+import {exists} from "../utils.js"
 
 function extractBestType(propInfo: PropInfo): string {
   const type = propInfo.resolvedType?.prettyType || propInfo.type

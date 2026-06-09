@@ -16,16 +16,16 @@ import {
 } from "@qualcomm-ui/mdx-common"
 import {dedent} from "@qualcomm-ui/utils/dedent"
 
-import {getShikiTransformers} from "../docs-plugin"
+import {getShikiTransformers} from "../docs-plugin/index.js"
 import {
   extractPreviewFromHighlightedHtml,
   transformerCodeAttribute,
   transformerPreviewBlock,
-} from "../docs-plugin/shiki"
-import {createShikiTailwindTransformer} from "../docs-plugin/shiki/internal"
+} from "../docs-plugin/shiki/index.js"
+import {createShikiTailwindTransformer} from "../docs-plugin/shiki/internal/index.js"
 
-import {LOG_PREFIX, VIRTUAL_MODULE_IDS} from "./demo-plugin-constants"
-import type {QuiDemoPluginOptions} from "./demo-plugin-types"
+import {LOG_PREFIX, VIRTUAL_MODULE_IDS} from "./demo-plugin-constants.js"
+import type {QuiDemoPluginOptions} from "./demo-plugin-types.js"
 import {
   createDemoName,
   extractFileImports,
@@ -33,7 +33,7 @@ import {
   getScriptKind,
   isCssAsset,
   isDemoFile,
-} from "./demo-plugin-utils"
+} from "./demo-plugin-utils.js"
 
 interface HandleUpdateOptions {
   demoName?: string

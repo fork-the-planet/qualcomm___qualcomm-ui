@@ -23,13 +23,13 @@ import {
 } from "@qualcomm-ui/mdx-common"
 import {dedent} from "@qualcomm-ui/utils/dedent"
 
-import {getShikiTransformers} from "../docs-plugin"
+import {getShikiTransformers} from "../docs-plugin/index.js"
 import {
   extractPreviewFromHighlightedHtml,
   transformerCodeAttribute,
   transformerPreviewBlock,
-} from "../docs-plugin/shiki"
-import {createShikiTailwindTransformer} from "../docs-plugin/shiki/internal"
+} from "../docs-plugin/shiki/index.js"
+import {createShikiTailwindTransformer} from "../docs-plugin/shiki/internal/index.js"
 
 export interface AngularDemoPluginOptions {
   demoPattern?: string | string[]

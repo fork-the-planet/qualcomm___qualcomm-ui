@@ -6,15 +6,15 @@ import type {PluginOption, ResolvedConfig} from "vite"
 
 import {dedent} from "@qualcomm-ui/utils/dedent"
 
-import type {QuiDocsPluginOptions} from "./config"
-import {ConfigLoader} from "./config/config-loader"
-import {fixPath} from "./path-utils"
+import type {QuiDocsPluginOptions} from "./config/index.js"
+import {ConfigLoader} from "./config/config-loader.js"
+import {fixPath} from "./path-utils.js"
 import {
   CONFIG_VIRTUAL_MODULE_ID,
   EXPORTS_VIRTUAL_MODULE_ID,
   PLUGIN_VIRTUAL_MODULE_ID,
   PluginState,
-} from "./plugin-state"
+} from "./plugin-state.js"
 
 const isDev = process.env.NODE_ENV === "development"
 
