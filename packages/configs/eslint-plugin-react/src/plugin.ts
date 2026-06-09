@@ -13,7 +13,7 @@ import {
   preferHeaderBarActions,
   preferMenuTriggerButtons,
   preferSelectItemCheckbox,
-} from "./rules"
+} from "./rules/index.js"
 
 export const rules = {
   "accessible-name": accessibleName,
@@ -25,7 +25,7 @@ export const rules = {
   "prefer-header-bar-actions": preferHeaderBarActions,
   "prefer-menu-trigger-buttons": preferMenuTriggerButtons,
   "prefer-select-item-checkbox": preferSelectItemCheckbox,
-}
+} as unknown as ESLint.Plugin["rules"]
 
 export const plugin: ESLint.Plugin = {
   // typescript-eslint data structures are used for JSX support but

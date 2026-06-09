@@ -1,7 +1,11 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {AST_NODE_TYPES, type TSESTree} from "@typescript-eslint/utils"
+import {
+  AST_NODE_TYPES,
+  ESLintUtils,
+  type TSESTree,
+} from "@typescript-eslint/utils"
 
 export const QUI_PACKAGE_PREFIXES = [
   "@qualcomm-ui/react/",
@@ -193,3 +197,9 @@ export function forEachJsxChildElement(
     }
   }
 }
+
+export const createRule: ReturnType<typeof ESLintUtils.RuleCreator> =
+  ESLintUtils.RuleCreator(
+    (name) =>
+      `https://github.com/qualcomm/qualcomm-ui/tree/main/packages/configs/eslint-plugin-angular#${name}`,
+  )
