@@ -2,17 +2,14 @@
   "name": "@qualcomm-ui/react-swagger",
   "version": "1.3.15",
   "description": "Swagger component replacements using QUI React",
-  "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
+  "author": "Ryan Bower",
   "repository": "https://github.com/qualcomm/qualcomm-ui",
-  "publishConfig": {
-    "access": "public"
-  },
-  "type": "module",
-  "sideEffects": false,
   "files": [
     "dist"
   ],
+  "type": "module",
+  "sideEffects": false,
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
@@ -25,12 +22,15 @@
       "default": "./dist/all.min.css"
     }
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "run-s clean build:js build:ts build:css",
     "build:css": "qui-css-utils build",
     "build:js": "vite build",
     "build:ts": "tsc -b tsconfig.lib.json",
-    "clean": "shx rm -rf node_modules/.tmp/tsbuildinfo dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map dist/all.min.css",
+    "clean": "shx rm -rf node_modules/.tmp dist",
     "dev": "run-p watch:js watch:ts watch:css",
     "lint": "eslint --quiet",
     "postpublish": "qui-cli post-publish",
