@@ -27,8 +27,8 @@ import type {Optional} from "@qualcomm-ui/utils/guard"
 import type {Machine} from "@qualcomm-ui/utils/machine"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useMenuContext} from "./menu-context"
-import {useMenuMachineContext} from "./menu-machine-context"
+import {useMenuContext} from "./menu-context.js"
+import {useMenuMachineContext} from "./menu-machine-context.js"
 
 export interface UseMenuReturn {
   api: MenuApi

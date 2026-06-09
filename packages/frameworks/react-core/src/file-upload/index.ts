@@ -31,9 +31,9 @@ import {
   type CoreFileUploadRootProps,
   CoreFileUploadTrigger,
   type CoreFileUploadTriggerProps,
-} from "./core-file-upload"
+} from "./core-file-upload.js"
 
-export * from "./file-upload-context"
+export * from "./file-upload-context.js"
 export type {
   CoreFileUploadRootProps,
   CoreFileUploadClearTriggerProps,

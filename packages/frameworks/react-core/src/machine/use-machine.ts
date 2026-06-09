@@ -35,11 +35,11 @@ import {
 } from "@qualcomm-ui/utils/machine"
 import {compact} from "@qualcomm-ui/utils/object"
 
-import {useBindable} from "./use-bindable"
-import {useBindableId} from "./use-bindable-id"
-import {useBindableIdCollection} from "./use-bindable-id-collection"
-import {useLiveRef, useProp} from "./use-prop"
-import {useTrack} from "./use-track"
+import {useBindableIdCollection} from "./use-bindable-id-collection.js"
+import {useBindableId} from "./use-bindable-id.js"
+import {useBindable} from "./use-bindable.js"
+import {useLiveRef, useProp} from "./use-prop.js"
+import {useTrack} from "./use-track.js"
 
 export interface UseMachineOpts {
   /**

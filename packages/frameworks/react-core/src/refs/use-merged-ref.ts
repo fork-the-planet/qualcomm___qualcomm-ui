@@ -3,7 +3,7 @@
 
 import {type Ref, type RefCallback, type RefObject, useMemo} from "react"
 
-import {setRef} from "./set-ref"
+import {setRef} from "./set-ref.js"
 
 export type ReactRef<T> = RefCallback<T> | RefObject<T>
 

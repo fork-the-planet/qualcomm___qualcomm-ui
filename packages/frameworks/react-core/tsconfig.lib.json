@@ -1,11 +1,12 @@
 {
-  "extends": "@qualcomm-ui/tsconfig/tsconfig.strict.json",
+  "extends": "@qualcomm-ui/tsconfig/tsconfig.lib.json",
   "compilerOptions": {
     "composite": true,
     "incremental": true,
     "outDir": "./dist",
     "rootDir": "./src",
-    "tsBuildInfoFile": "dist/tsbuildinfo",
+    "tsBuildInfoFile": "node_modules/.tmp/tsbuildinfo-lib",
+    "isolatedDeclarations": false,
     "paths": {
       "@qualcomm-ui/react-core/*": ["./src/*/index.ts"],
     }

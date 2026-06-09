@@ -12,7 +12,7 @@ import {
 import {useCheckbox} from "@qualcomm-ui/react-core/checkbox"
 import {normalizeProps, useMachine} from "@qualcomm-ui/react-core/machine"
 
-import {useSegmentedControlContext} from "./segmented-control-context"
+import {useSegmentedControlContext} from "./segmented-control-context.js"
 
 export function useSegmentedControl(
   props: SegmentedControlApiProps,

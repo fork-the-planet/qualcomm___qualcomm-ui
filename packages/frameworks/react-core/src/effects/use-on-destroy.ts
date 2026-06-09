@@ -3,7 +3,7 @@
 
 import {useRef} from "react"
 
-import {useSafeLayoutEffect} from "./use-safe-layout-effect"
+import {useSafeLayoutEffect} from "./use-safe-layout-effect.js"
 
 interface OnDestroyOptions {
   debugName?: string
