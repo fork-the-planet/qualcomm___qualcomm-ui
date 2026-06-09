@@ -23,20 +23,20 @@ import {getWindow, raf} from "@qualcomm-ui/dom/query"
 import {noop, runIfFn} from "@qualcomm-ui/utils/functions"
 import {compact} from "@qualcomm-ui/utils/object"
 
-import {getAnchorElement} from "./get-anchor"
+import {getAnchorElement} from "./get-anchor.js"
 import {
   cssVars,
   rectMiddleware,
   shiftArrowMiddleware,
   transformOriginMiddleware,
-} from "./middleware"
-import {getPlacementDetails} from "./placement"
+} from "./middleware.js"
+import {getPlacementDetails} from "./placement.js"
 import type {
   MaybeElement,
   MaybeFn,
   MaybeRectElement,
   PositioningOptions,
-} from "./types"
+} from "./types.js"
 
 const defaultOptions: PositioningOptions = {
   arrowPadding: 4,

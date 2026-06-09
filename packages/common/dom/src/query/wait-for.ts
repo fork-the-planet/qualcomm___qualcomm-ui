@@ -4,7 +4,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {isHTMLElement} from "./node"
+import {isHTMLElement} from "./node.js"
 
 type ElementGetter = () => Element | null
 

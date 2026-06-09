@@ -4,10 +4,10 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {getElementRect} from "./from-element"
-import {createRect} from "./rect"
-import type {Rect} from "./types"
-import {union} from "./union"
+import {getElementRect} from "./from-element.js"
+import {createRect} from "./rect.js"
+import type {Rect} from "./types.js"
+import {union} from "./union.js"
 
 export function fromRange(range: Range): Rect {
   let rs: Rect[] = []

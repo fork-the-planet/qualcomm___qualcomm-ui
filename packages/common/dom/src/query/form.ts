@@ -4,8 +4,8 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {getWindow} from "./node"
-import type {HTMLElementWithValue} from "./types"
+import {getWindow} from "./node.js"
+import type {HTMLElementWithValue} from "./types.js"
 
 interface DescriptorOptions {
   property?: "value" | "checked" | undefined

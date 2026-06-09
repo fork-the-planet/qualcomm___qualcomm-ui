@@ -4,7 +4,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {getTabbableEdges, getTabbables} from "./tabbable"
+import {getTabbableEdges, getTabbables} from "./tabbable.js"
 
 /**
  * Represents options for managing the initial focus within a focusable area.

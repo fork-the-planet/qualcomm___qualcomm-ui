@@ -4,7 +4,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {type ElementSize, trackElementSize} from "./track-size"
+import {type ElementSize, trackElementSize} from "./track-size.js"
 
 export interface TrackElementsSizeOptions<T extends HTMLElement | null> {
   callback: (size: ElementSize | undefined, index: number) => void

@@ -25,7 +25,7 @@ import type {
   FocusTrapState,
   PauseOptions,
   UnpauseOptions,
-} from "./focus-trap.types"
+} from "./focus-trap.types.js"
 
 const activeFocusTraps = {
   activateTrap(trapStack: FocusTrap[], trap: FocusTrap) {

@@ -6,7 +6,7 @@
 
 import {getDocument, setStyle, waitForElements} from "@qualcomm-ui/dom/query"
 
-import {layerStack} from "./layer-stack"
+import {layerStack} from "./layer-stack.js"
 
 let originalBodyPointerEvents: string
 

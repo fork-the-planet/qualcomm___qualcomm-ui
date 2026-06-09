@@ -18,7 +18,7 @@ import {
 } from "@qualcomm-ui/dom/query"
 import {callAll} from "@qualcomm-ui/utils/functions"
 
-import {getParentWindow, getWindowFrames} from "./frame-utils"
+import {getParentWindow, getWindowFrames} from "./frame-utils.js"
 
 export interface InteractOutsideHandlers {
   /**

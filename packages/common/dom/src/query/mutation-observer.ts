@@ -4,8 +4,8 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {raf} from "./raf"
-import type {MaybeElement, MaybeElementOrFn} from "./types"
+import {raf} from "./raf.js"
+import type {MaybeElement, MaybeElementOrFn} from "./types.js"
 
 export interface ObserveAttributeOptions {
   attributes: string[]

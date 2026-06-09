@@ -20,18 +20,18 @@ import type {MaybeFunction} from "@qualcomm-ui/utils/functions"
 import {isFunction} from "@qualcomm-ui/utils/guard"
 import {warn} from "@qualcomm-ui/utils/warning"
 
-import {trackEscapeKeydown} from "./escape-keydown"
+import {trackEscapeKeydown} from "./escape-keydown.js"
 import {
   type Layer,
   type LayerDismissEvent,
   layerStack,
   type LayerType,
-} from "./layer-stack"
+} from "./layer-stack.js"
 import {
   assignPointerEventToLayers,
   clearPointerEvent,
   disablePointerEventsOutside,
-} from "./pointer-event-outside"
+} from "./pointer-event-outside.js"
 
 type MaybeElement = HTMLElement | null
 type Container = MaybeElement | Array<MaybeElement>

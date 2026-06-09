@@ -7,7 +7,7 @@
 // Based on https://github.com/theKashey/aria-hidden/blob/master/src/index.ts
 // Licensed under MIT
 
-import {walkTreeOutside} from "./walk-tree-outside"
+import {walkTreeOutside} from "./walk-tree-outside.js"
 
 function getParentNode(
   originalTarget: Element | Element[],

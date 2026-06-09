@@ -6,9 +6,9 @@
 
 import type {MaybeFn} from "@qualcomm-ui/utils/guard"
 
-import {contains} from "./node"
-import {isAndroid, isApple, isMac} from "./platform"
-import type {AnyPointerEvent, EventKeyOptions, NativeEvent} from "./types"
+import {contains} from "./node.js"
+import {isAndroid, isApple, isMac} from "./platform.js"
+import type {AnyPointerEvent, EventKeyOptions, NativeEvent} from "./types.js"
 
 export function getBeforeInputValue(
   event: Pick<InputEvent, "currentTarget">,
