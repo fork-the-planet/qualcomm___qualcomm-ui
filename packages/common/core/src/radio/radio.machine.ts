@@ -20,8 +20,8 @@ import {
   getFirstEnabledAndCheckedInputEl,
   getFirstEnabledInputEl,
   getInputEls,
-} from "./internal"
-import type {RadioSchema} from "./radio.types"
+} from "./internal/index.js"
+import type {RadioSchema} from "./radio.types.js"
 
 const {not} = createGuards<RadioSchema>()
 

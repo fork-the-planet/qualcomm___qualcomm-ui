@@ -4,8 +4,8 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {TableFeature} from "../core/table"
-import {safeDocument, safeWindow} from "../dom"
+import type {TableFeature} from "../core/table.js"
+import {safeDocument, safeWindow} from "../dom.js"
 import type {
   Column,
   Header,
@@ -13,10 +13,10 @@ import type {
   RowData,
   TableInstance,
   Updater,
-} from "../types"
-import {makeStateUpdater} from "../utils"
+} from "../types.js"
+import {makeStateUpdater} from "../utils.js"
 
-import type {ColumnPinningPosition} from "./pinning"
+import type {ColumnPinningPosition} from "./pinning.js"
 
 export interface ColumnSizingTableState {
   columnSizing: ColumnSizingState

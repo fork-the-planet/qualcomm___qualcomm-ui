@@ -4,10 +4,10 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {Row, RowData, RowModel, TableInstance} from "../types"
-import {memo} from "../utils"
+import type {Row, RowData, RowModel, TableInstance} from "../types.js"
+import {memo} from "../utils.js"
 
-import {expandRows} from "./get-expanded-row-model"
+import {expandRows} from "./get-expanded-row-model.js"
 
 export function getPaginationRowModel<TData extends RowData>(): (
   table: TableInstance<TData>,

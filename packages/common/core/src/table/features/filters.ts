@@ -4,19 +4,19 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {RowModel} from ".."
-import type {TableFeature} from "../core/table"
-import {type BuiltInFilterFn, filterFns} from "../filter-fns"
+import type {TableFeature} from "../core/table.js"
+import {type BuiltInFilterFn, filterFns} from "../filter-fns.js"
 import type {
   Column,
   FilterFns,
   OnChangeFn,
   Row,
   RowData,
+  RowModel,
   TableInstance,
   Updater,
-} from "../types"
-import {functionalUpdate, isFunction, makeStateUpdater} from "../utils"
+} from "../types.js"
+import {functionalUpdate, isFunction, makeStateUpdater} from "../utils.js"
 
 export interface FiltersTableState {
   columnFilters: ColumnFiltersState

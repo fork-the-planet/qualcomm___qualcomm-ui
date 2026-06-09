@@ -24,7 +24,7 @@ import type {
   PropNormalizer,
 } from "@qualcomm-ui/utils/machine"
 
-import {comboboxAnatomy} from "./combobox.anatomy"
+import {comboboxAnatomy} from "./combobox.anatomy.js"
 import type {
   ComboboxApi,
   ComboboxApiItemProps,
@@ -45,14 +45,14 @@ import type {
   ComboboxRootBindings,
   ComboboxSchema,
   ComboboxTriggerBindings,
-} from "./combobox.types"
+} from "./combobox.types.js"
 import {
   domEls,
   domIds,
   getItemGroupId,
   getItemGroupLabelId,
   getItemId,
-} from "./internal"
+} from "./internal/index.js"
 
 const parts = comboboxAnatomy.parts
 

@@ -15,7 +15,7 @@ import type {
   ToastOptions,
   ToastPromiseOptions,
   ToastStore,
-} from "./toast.types"
+} from "./toast.types.js"
 
 let id = 0
 export function getToastUuid(): string {

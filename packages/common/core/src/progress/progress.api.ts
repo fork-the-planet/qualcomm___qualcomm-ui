@@ -11,8 +11,8 @@ import type {
   PropNormalizer,
 } from "@qualcomm-ui/utils/machine"
 
-import {domIds} from "./internal"
-import {progressAnatomy} from "./progress.anatomy"
+import {domIds} from "./internal/index.js"
+import {progressAnatomy} from "./progress.anatomy.js"
 import type {
   ProgressApi,
   ProgressBarBindings,
@@ -27,7 +27,7 @@ import type {
   ProgressSchema,
   ProgressTrackBindings,
   ProgressValueTextBindings,
-} from "./progress.types"
+} from "./progress.types.js"
 
 const parts = progressAnatomy.parts
 

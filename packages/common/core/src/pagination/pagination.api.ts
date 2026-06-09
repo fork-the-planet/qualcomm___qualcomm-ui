@@ -7,7 +7,7 @@
 import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 import type {Machine, PropNormalizer} from "@qualcomm-ui/utils/machine"
 
-import {paginationAnatomy} from "./pagination.anatomy"
+import {paginationAnatomy} from "./pagination.anatomy.js"
 import type {
   PageItem,
   PaginationApi,
@@ -20,7 +20,7 @@ import type {
   PaginationPrevTriggerBindings,
   PaginationRootBindings,
   PaginationSchema,
-} from "./pagination.types"
+} from "./pagination.types.js"
 
 const parts = paginationAnatomy.parts
 

@@ -13,7 +13,7 @@ import type {
   MachineSchema,
 } from "@qualcomm-ui/utils/machine"
 
-import type {segmentedControlAnatomy} from "./segmented-control.anatomy"
+import type {segmentedControlAnatomy} from "./segmented-control.anatomy.js"
 
 type PartName = AnatomyPartName<typeof segmentedControlAnatomy>
 

@@ -11,8 +11,8 @@ import type {
   Row,
   RowData,
   TableInstance,
-} from "../types"
-import {type Getter, memo} from "../utils"
+} from "../types.js"
+import {type Getter, memo} from "../utils.js"
 
 export interface CellContext<
   TData extends RowData,

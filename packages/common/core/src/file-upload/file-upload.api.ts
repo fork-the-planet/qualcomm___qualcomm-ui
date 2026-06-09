@@ -25,7 +25,7 @@ import type {
 } from "@qualcomm-ui/utils/machine"
 import {warn} from "@qualcomm-ui/utils/warning"
 
-import {fileUploadAnatomy} from "./file-upload.anatomy"
+import {fileUploadAnatomy} from "./file-upload.anatomy.js"
 import {
   domEls,
   domIds,
@@ -33,7 +33,7 @@ import {
   getItemName,
   getItemPreview,
   getItemSizeText,
-} from "./file-upload.dom"
+} from "./file-upload.dom.js"
 import type {
   FileUploadApi,
   FileUploadClearTriggerBindings,
@@ -51,8 +51,8 @@ import type {
   FileUploadSchema,
   FileUploadTriggerBindings,
   ItemType,
-} from "./file-upload.types"
-import {isEventWithFiles} from "./file-upload.utils"
+} from "./file-upload.types.js"
+import {isEventWithFiles} from "./file-upload.utils.js"
 
 const DEFAULT_ITEM_TYPE: ItemType = "accepted"
 const parts = fileUploadAnatomy.parts
@@ -263,7 +263,7 @@ export function createFileUploadApi(
 
           getFileEntries(event.dataTransfer.items, prop("directory"))
             .then((files) => {
-              send({files: flatArray(files), type: "DROPZONE.DROP"})
+              return send({files: flatArray(files), type: "DROPZONE.DROP"})
             })
             .catch((err) => {
               warn(

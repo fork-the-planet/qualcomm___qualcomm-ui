@@ -4,9 +4,9 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {createRow} from "../core/row"
-import type {Row, RowData, RowModel, TableInstance} from "../types"
-import {flattenBy, memo} from "../utils"
+import {createRow} from "../core/row.js"
+import type {Row, RowData, RowModel, TableInstance} from "../types.js"
+import {flattenBy, memo} from "../utils.js"
 
 export function getGroupedRowModel<TData extends RowData>(): (
   table: TableInstance<TData>,

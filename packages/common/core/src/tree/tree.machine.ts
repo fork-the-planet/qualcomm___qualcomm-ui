@@ -28,8 +28,8 @@ import {
   focusNode,
   skipFn,
   toggleBranchChecked,
-} from "./internal"
-import type {TreeLoadingStatusMap, TreeSchema} from "./tree.types"
+} from "./internal/index.js"
+import type {TreeLoadingStatusMap, TreeSchema} from "./tree.types.js"
 
 const {and} = createGuards<TreeSchema>()
 

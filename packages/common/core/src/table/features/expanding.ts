@@ -4,10 +4,16 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {RowModel} from ".."
-import type {TableFeature} from "../core/table"
-import type {OnChangeFn, Row, RowData, TableInstance, Updater} from "../types"
-import {makeStateUpdater} from "../utils"
+import type {TableFeature} from "../core/table.js"
+import type {
+  OnChangeFn,
+  Row,
+  RowData,
+  RowModel,
+  TableInstance,
+  Updater,
+} from "../types.js"
+import {makeStateUpdater} from "../utils.js"
 
 export type ExpandedStateList = Record<string, boolean>
 export type ExpandedState = true | Record<string, boolean>

@@ -38,8 +38,8 @@ import {
   getItemId,
   isTargetDisabled,
   itemSelectEvent,
-} from "./internal"
-import {menuAnatomy} from "./menu.anatomy"
+} from "./internal/index.js"
+import {menuAnatomy} from "./menu.anatomy.js"
 import type {
   GetOptionItemPropsReturn,
   ItemProps,
@@ -63,7 +63,7 @@ import type {
   MenuTriggerItemBindings,
   OptionItemProps,
   OptionItemState,
-} from "./menu.types"
+} from "./menu.types.js"
 
 export function createMenuApi(
   machine: Machine<MenuSchema>,

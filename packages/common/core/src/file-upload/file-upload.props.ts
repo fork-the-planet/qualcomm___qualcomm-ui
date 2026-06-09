@@ -6,7 +6,7 @@
 
 import {createProps, createSplitProps} from "@qualcomm-ui/utils/object"
 
-import type {FileUploadApiProps, ItemProps} from "./file-upload.types"
+import type {FileUploadApiProps, ItemProps} from "./file-upload.types.js"
 
 export const fileUploadProps: (keyof FileUploadApiProps)[] =
   createProps<FileUploadApiProps>()(

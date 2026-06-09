@@ -14,7 +14,7 @@ import {
 import type {Params} from "@qualcomm-ui/utils/machine"
 import {warn} from "@qualcomm-ui/utils/warning"
 
-import type {FileRejection, FileUploadSchema} from "./file-upload.types"
+import type {FileRejection, FileUploadSchema} from "./file-upload.types.js"
 
 export function isEventWithFiles(
   event: Pick<DragEvent, "dataTransfer" | "target">,

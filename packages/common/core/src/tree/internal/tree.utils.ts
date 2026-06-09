@@ -18,7 +18,7 @@ import type {
   CheckedValueMap,
   NodeWithError,
   TreeSchema,
-} from "../tree.types"
+} from "../tree.types.js"
 
 export function skipFn(
   params: Pick<Params<TreeSchema>, "prop" | "context">,

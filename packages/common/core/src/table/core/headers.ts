@@ -11,10 +11,10 @@ import type {
   HeaderGroup,
   RowData,
   TableInstance,
-} from "../types"
-import {memo} from "../utils"
+} from "../types.js"
+import {memo} from "../utils.js"
 
-import type {TableFeature} from "./table"
+import type {TableFeature} from "./table.js"
 
 export interface CoreHeaderGroup<TData extends RowData> {
   depth: number

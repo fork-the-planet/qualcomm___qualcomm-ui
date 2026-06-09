@@ -21,7 +21,7 @@ import type {
   MachineSchema,
 } from "@qualcomm-ui/utils/machine"
 
-import type {tabsAnatomy} from "./tabs.anatomy"
+import type {tabsAnatomy} from "./tabs.anatomy.js"
 
 export interface IntlTranslations {
   listLabel?: string | undefined

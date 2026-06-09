@@ -4,7 +4,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {TableFeature} from "../core/table"
+import type {TableFeature} from "../core/table.js"
 import type {
   OnChangeFn,
   Row,
@@ -12,8 +12,8 @@ import type {
   RowModel,
   TableInstance,
   Updater,
-} from "../types"
-import {makeStateUpdater, memo} from "../utils"
+} from "../types.js"
+import {makeStateUpdater, memo} from "../utils.js"
 
 export type RowSelectionState = Record<string, boolean>
 
@@ -591,7 +591,7 @@ export function isRowSelected<TData extends RowData>(
 export function isSubRowSelected<TData extends RowData>(
   row: Row<TData>,
   selection: RowSelectionState,
-  table: TableInstance<TData>,
+  _table?: TableInstance<TData>,
 ): boolean | "some" | "all" {
   if (!row.subRows?.length) {
     return false
@@ -616,7 +616,7 @@ export function isSubRowSelected<TData extends RowData>(
 
     // Check row selection of nested subrows
     if (subRow.subRows && subRow.subRows.length) {
-      const subRowChildrenSelected = isSubRowSelected(subRow, selection, table)
+      const subRowChildrenSelected = isSubRowSelected(subRow, selection)
       if (subRowChildrenSelected === "all") {
         someSelected = true
       } else if (subRowChildrenSelected === "some") {

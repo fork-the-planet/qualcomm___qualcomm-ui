@@ -25,8 +25,8 @@ import {
   getRectById,
   getTabEl,
   resolveRect,
-} from "./internal"
-import type {TabsSchema} from "./tabs.types"
+} from "./internal/index.js"
+import type {TabsSchema} from "./tabs.types.js"
 
 const {not} = createGuards<TabsSchema>()
 

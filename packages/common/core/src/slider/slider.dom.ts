@@ -18,7 +18,7 @@ import type {
 } from "@qualcomm-ui/utils/machine"
 import {getPercentValue} from "@qualcomm-ui/utils/number"
 
-import type {SliderElementIds, SliderSchema} from "./slider.types"
+import type {SliderElementIds, SliderSchema} from "./slider.types.js"
 
 type Scope = ScopeWithIds<SliderSchema>
 

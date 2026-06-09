@@ -4,7 +4,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {TableState, Updater} from "./types"
+import type {TableState, Updater} from "./types.js"
 
 export type PartialKeys<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>
 export type RequiredKeys<T, K extends keyof T> = Omit<T, K> &

@@ -49,8 +49,8 @@ import {
   getNextEl,
   getPrevEl,
   isTriggerItem,
-} from "./internal"
-import type {MenuSchema, MenuScope} from "./menu.types"
+} from "./internal/index.js"
+import type {MenuSchema, MenuScope} from "./menu.types.js"
 
 const {and, not, or} = createGuards<MenuSchema>()
 

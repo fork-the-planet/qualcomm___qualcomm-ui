@@ -6,7 +6,7 @@
 
 import type {Machine, PropNormalizer} from "@qualcomm-ui/utils/machine"
 
-import {avatarAnatomy} from "./avatar.anatomy"
+import {avatarAnatomy} from "./avatar.anatomy.js"
 import type {
   AvatarApi,
   AvatarContentBindings,
@@ -14,7 +14,7 @@ import type {
   AvatarRootBindings,
   AvatarSchema,
   AvatarStatusBindings,
-} from "./avatar.types"
+} from "./avatar.types.js"
 
 const parts = avatarAnatomy.parts
 

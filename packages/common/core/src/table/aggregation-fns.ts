@@ -4,8 +4,8 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {AggregationFn} from "./features/grouping"
-import {isNumberArray} from "./utils"
+import type {AggregationFn} from "./features/grouping.js"
+import {isNumberArray} from "./utils.js"
 
 const sum: AggregationFn<any> = (columnId, _leafRows, childRows) => {
   // It's faster to just add the aggregations together instead of

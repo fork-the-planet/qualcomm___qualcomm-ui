@@ -20,9 +20,9 @@ import {
 } from "@qualcomm-ui/utils/machine"
 import {warn} from "@qualcomm-ui/utils/warning"
 
-import {domEls} from "./file-upload.dom"
-import type {FileRejection, FileUploadSchema} from "./file-upload.types"
-import {getEventFiles, setInputFiles} from "./file-upload.utils"
+import {domEls} from "./file-upload.dom.js"
+import type {FileRejection, FileUploadSchema} from "./file-upload.types.js"
+import {getEventFiles, setInputFiles} from "./file-upload.utils.js"
 
 const fileUploadMachineBase = {
   computed: {

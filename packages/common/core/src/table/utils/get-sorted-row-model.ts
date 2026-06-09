@@ -4,9 +4,9 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {SortingFn} from "../features/sorting"
-import type {Row, RowData, RowModel, TableInstance} from "../types"
-import {memo} from "../utils"
+import type {SortingFn} from "../features/sorting.js"
+import type {Row, RowData, RowModel, TableInstance} from "../types.js"
+import {memo} from "../utils.js"
 
 export function getSortedRowModel<TData extends RowData>(): (
   table: TableInstance<TData>,

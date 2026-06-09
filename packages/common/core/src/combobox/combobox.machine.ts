@@ -29,13 +29,13 @@ import {
 } from "@qualcomm-ui/utils/machine"
 import {maybeAccess} from "@qualcomm-ui/utils/object"
 
-import {emptyCollection} from "./combobox.collection"
+import {emptyCollection} from "./combobox.collection.js"
 import type {
   ComboboxInputValueChangeReason,
   ComboboxOpenChangeReason,
   ComboboxSchema,
-} from "./combobox.types"
-import {domEls, focusInputEl, focusTriggerEl, getItemEl} from "./internal"
+} from "./combobox.types.js"
+import {domEls, focusInputEl, focusTriggerEl, getItemEl} from "./internal/index.js"
 
 const {and, not} = createGuards<ComboboxSchema>()
 

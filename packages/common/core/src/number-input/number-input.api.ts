@@ -18,8 +18,8 @@ import type {
   PropNormalizer,
 } from "@qualcomm-ui/utils/machine"
 
-import {domEls, domIds} from "./internal"
-import {numberInputAnatomy} from "./number-input.anatomy"
+import {domEls, domIds} from "./internal/index.js"
+import {numberInputAnatomy} from "./number-input.anatomy.js"
 import type {
   NumberInputApi,
   NumberInputControlBindings,
@@ -35,7 +35,7 @@ import type {
   NumberInputSchema,
   NumberInputUnitSelectBindings,
   NumberInputValueTextBindings,
-} from "./number-input.types"
+} from "./number-input.types.js"
 
 const parts = numberInputAnatomy.parts
 
