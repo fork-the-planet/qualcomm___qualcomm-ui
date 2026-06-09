@@ -2,18 +2,15 @@
   "name": "@qualcomm-ui/qds-core",
   "version": "1.29.2",
   "description": "qds core components",
-  "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
+  "author": "Ryan Bower",
   "repository": "https://github.com/qualcomm/qualcomm-ui",
-  "publishConfig": {
-    "access": "public"
-  },
-  "type": "module",
-  "sideEffects": false,
   "files": [
     "dist",
     "package.json"
   ],
+  "type": "module",
+  "sideEffects": false,
   "types": "./dist/stub.d.ts",
   "exports": {
     "./*": {
@@ -43,9 +40,12 @@
       "default": "./dist/components.min.css"
     }
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "run-s clean build:js build:css build:ts",
-    "clean": "shx rm -rf node_modules/.tmp dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map dist/**/*.css",
+    "clean": "shx rm -rf node_modules/.tmp dist",
     "build:js": "vite build",
     "build:css": "qui-css-utils build",
     "build:ts": "tsc -b tsconfig.lib.json",

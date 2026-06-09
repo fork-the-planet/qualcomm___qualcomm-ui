@@ -4,13 +4,13 @@ import {mkdir, writeFile} from "node:fs/promises"
 import {dirname, resolve} from "node:path"
 import {fileURLToPath} from "node:url"
 import type {Dictionary, TransformedToken} from "style-dictionary"
+import {StyleDictionary} from "style-dictionary-utils"
 import {
   logBrokenReferenceLevels,
   propertyFormatNames,
 } from "style-dictionary/enums"
 import type {FormatFnArguments} from "style-dictionary/types"
 import {formattedVariables} from "style-dictionary/utils"
-import {StyleDictionary} from "style-dictionary-utils"
 
 import {dedent} from "@qualcomm-ui/utils/dedent"
 
