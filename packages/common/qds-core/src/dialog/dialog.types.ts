@@ -4,7 +4,7 @@
 import type {dialogAnatomy} from "@qualcomm-ui/core/dialog"
 import type {AnatomyPart, AnatomyPartName} from "@qualcomm-ui/utils/anatomy"
 
-import type {dialogClasses} from "./dialog.classes"
+import type {dialogClasses} from "./dialog.classes.js"
 
 export type QdsDialogSize = "sm" | "md"
 

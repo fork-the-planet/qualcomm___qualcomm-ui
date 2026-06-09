@@ -45,7 +45,7 @@
   },
   "scripts": {
     "build": "run-s clean build:js build:css build:ts",
-    "clean": "shx rm -rf dist/tsbuildinfo dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map dist/**/*.css",
+    "clean": "shx rm -rf node_modules/.tmp dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map dist/**/*.css",
     "build:js": "vite build",
     "build:css": "qui-css-utils build",
     "build:ts": "tsc -b tsconfig.lib.json",

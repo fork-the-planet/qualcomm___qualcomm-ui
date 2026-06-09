@@ -5,15 +5,15 @@ import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 import type {Explicit} from "@qualcomm-ui/utils/guard"
 import type {PropNormalizer} from "@qualcomm-ui/utils/machine"
 
-import {buttonAnatomy} from "./button.anatomy"
-import {buttonClasses} from "./button.classes"
+import {buttonAnatomy} from "./button.anatomy.js"
+import {buttonClasses} from "./button.classes.js"
 import type {
   QdsButtonApi,
   QdsButtonApiProps,
   QdsButtonEndIconBindings,
   QdsButtonRootBindings,
   QdsButtonStartIconBindings,
-} from "./button.types"
+} from "./button.types.js"
 
 const parts = buttonAnatomy.parts
 

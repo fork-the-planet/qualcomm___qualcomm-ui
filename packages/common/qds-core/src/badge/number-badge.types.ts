@@ -8,8 +8,8 @@ import type {
   BadgeClasses,
   QdsBadgeBasicSize,
   QdsBaseBadgeProps,
-} from "./badge.types"
-import type {numberBadgeAnatomy} from "./number-badge.anatomy"
+} from "./badge.types.js"
+import type {numberBadgeAnatomy} from "./number-badge.anatomy.js"
 
 export type QdsNumberBadgeEmphasis =
   | "neutral"

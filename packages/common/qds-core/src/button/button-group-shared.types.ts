@@ -8,7 +8,7 @@ import type {
   QdsButtonEmphasis,
   QdsButtonSize,
   QdsButtonVariant,
-} from "./button.types"
+} from "./button.types.js"
 
 /**
  * Props and bindings shared between button group and split button.

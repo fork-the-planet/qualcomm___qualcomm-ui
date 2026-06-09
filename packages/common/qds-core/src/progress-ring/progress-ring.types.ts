@@ -4,7 +4,7 @@
 import type {AnatomyPart} from "@qualcomm-ui/utils/anatomy"
 import type {JSX} from "@qualcomm-ui/utils/machine"
 
-import type {progressRingClasses} from "./progress-ring.classes"
+import type {progressRingClasses} from "./progress-ring.classes.js"
 
 export type QdsProgressRingSize =
   | "xxs"

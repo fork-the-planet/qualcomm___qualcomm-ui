@@ -5,7 +5,7 @@ import {dialogAnatomy} from "@qualcomm-ui/core/dialog"
 import type {Explicit} from "@qualcomm-ui/utils/guard"
 import type {PropNormalizer} from "@qualcomm-ui/utils/machine"
 
-import {dialogClasses} from "./dialog.classes"
+import {dialogClasses} from "./dialog.classes.js"
 import type {
   QdsDialogApi,
   QdsDialogApiProps,
@@ -17,7 +17,7 @@ import type {
   QdsDialogHeadingBindings,
   QdsDialogIndicatorIconBindings,
   QdsDialogPositionerBindings,
-} from "./dialog.types"
+} from "./dialog.types.js"
 
 const parts = dialogAnatomy.parts
 

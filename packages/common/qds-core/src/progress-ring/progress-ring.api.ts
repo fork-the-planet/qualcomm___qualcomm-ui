@@ -4,7 +4,7 @@
 import {progressAnatomy} from "@qualcomm-ui/core/progress"
 import type {JSX, PropNormalizer} from "@qualcomm-ui/utils/machine"
 
-import {progressRingClasses} from "./progress-ring.classes"
+import {progressRingClasses} from "./progress-ring.classes.js"
 import type {
   QdsProgressRingApi,
   QdsProgressRingApiProps,
@@ -16,7 +16,7 @@ import type {
   QdsProgressRingRootBindings,
   QdsProgressRingTrackBindings,
   QdsProgressRingValueTextBindings,
-} from "./progress-ring.types"
+} from "./progress-ring.types.js"
 
 export function createQdsProgressRingApi(
   props: QdsProgressRingApiProps,

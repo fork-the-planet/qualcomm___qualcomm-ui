@@ -4,8 +4,8 @@
 import {booleanAriaAttr, booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 import type {PropNormalizer} from "@qualcomm-ui/utils/machine"
 
-import {tagAnatomy} from "./tag.anatomy"
-import {tagClasses} from "./tag.classes"
+import {tagAnatomy} from "./tag.anatomy.js"
+import {tagClasses} from "./tag.classes.js"
 import type {
   QdsTagApi,
   QdsTagApiProps,
@@ -13,7 +13,7 @@ import type {
   QdsTagEndIconBindings,
   QdsTagRootBindings,
   QdsTagStartIconBindings,
-} from "./tag.types"
+} from "./tag.types.js"
 
 const parts = tagAnatomy.parts
 

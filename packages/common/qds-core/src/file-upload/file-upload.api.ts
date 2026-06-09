@@ -4,7 +4,7 @@
 import type {QdsButtonApiProps} from "@qualcomm-ui/qds-core/button"
 import type {PropNormalizer} from "@qualcomm-ui/utils/machine"
 
-import {fileUploadClasses} from "./file-upload.classes"
+import {fileUploadClasses} from "./file-upload.classes.js"
 import type {
   QdsFileUploadAddMoreButtonBindings,
   QdsFileUploadApi,
@@ -30,7 +30,7 @@ import type {
   QdsFileUploadRequiredIndicatorBindings,
   QdsFileUploadRootBindings,
   QdsFileUploadTriggerBindings,
-} from "./file-upload.types"
+} from "./file-upload.types.js"
 
 export function createQdsFileUploadApi(
   props: QdsFileUploadApiProps,

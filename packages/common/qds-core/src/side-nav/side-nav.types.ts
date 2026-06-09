@@ -1,7 +1,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {sideNavClasses} from "./side-nav.classes"
+import type {sideNavClasses} from "./side-nav.classes.js"
 
 export type QdsSideNavSurface = "primary" | "secondary"
 

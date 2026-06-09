@@ -1,7 +1,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import type {tooltipClasses} from "./tooltip.classes"
+import type {tooltipClasses} from "./tooltip.classes.js"
 
 type TooltipClasses = typeof tooltipClasses
 

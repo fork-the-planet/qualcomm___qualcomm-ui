@@ -3,7 +3,7 @@
 
 import type {BooleanDataAttr} from "@qualcomm-ui/utils/attributes"
 
-import type {breadcrumbsClasses} from "./breadcrumbs.classes"
+import type {breadcrumbsClasses} from "./breadcrumbs.classes.js"
 
 export type QdsBreadcrumbsSize = "sm" | "md" | "lg"
 

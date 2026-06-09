@@ -4,8 +4,8 @@
 import type {AnatomyPart, AnatomyPartName} from "@qualcomm-ui/utils/anatomy"
 import type {BooleanDataAttr} from "@qualcomm-ui/utils/attributes"
 
-import type {buttonAnatomy} from "./button.anatomy"
-import type {buttonClasses} from "./button.classes"
+import type {buttonAnatomy} from "./button.anatomy.js"
+import type {buttonClasses} from "./button.classes.js"
 
 /**
  * The QDS button variants

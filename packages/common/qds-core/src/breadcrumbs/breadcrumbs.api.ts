@@ -5,7 +5,7 @@ import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 import type {Explicit} from "@qualcomm-ui/utils/guard"
 import type {PropNormalizer} from "@qualcomm-ui/utils/machine"
 
-import {breadcrumbsClasses} from "./breadcrumbs.classes"
+import {breadcrumbsClasses} from "./breadcrumbs.classes.js"
 import type {
   QdsBreadcrumbsApi,
   QdsBreadcrumbsApiProps,
@@ -16,7 +16,7 @@ import type {
   QdsBreadcrumbsListBindings,
   QdsBreadcrumbsOverflowTriggerBindings,
   QdsBreadcrumbsRootBindings,
-} from "./breadcrumbs.types"
+} from "./breadcrumbs.types.js"
 
 export function createQdsBreadcrumbsApi(
   props: Explicit<QdsBreadcrumbsApiProps>,
