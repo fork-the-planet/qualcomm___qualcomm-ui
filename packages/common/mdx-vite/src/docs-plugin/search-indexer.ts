@@ -44,10 +44,13 @@ import {
   getRouteMeta,
   NavBuilder,
   transformRouteMetaArray,
-} from "./nav-builder"
-import type {RouteMetaInternal, RouteMetaNavInternal} from "./nav-builder/types"
-import {fixPath} from "./path-utils"
-import {remarkSerializeJsxKnowledge} from "./remark"
+} from "./nav-builder/index.js"
+import type {
+  RouteMetaInternal,
+  RouteMetaNavInternal,
+} from "./nav-builder/types.js"
+import {fixPath} from "./path-utils.js"
+import {remarkSerializeJsxKnowledge} from "./remark/index.js"
 
 export class SearchIndexer {
   private readonly docPropsIndexer: DocPropsIndexer

@@ -19,7 +19,10 @@ import type {
   QuiPropTypes,
 } from "@qualcomm-ui/typedoc-common"
 
-import {extractNamesFromAttribute, type IndexedSection} from "../markdown"
+import {
+  extractNamesFromAttribute,
+  type IndexedSection,
+} from "../markdown/index.js"
 
 function extractPickPropsRecord(
   node: MdxJsxAttribute,
@@ -139,7 +142,7 @@ export class DocPropsIndexer {
                   })),
                 )
               }
-            } catch (e) {}
+            } catch {}
           }
         }
       })

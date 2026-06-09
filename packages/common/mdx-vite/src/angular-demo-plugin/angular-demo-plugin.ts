@@ -184,7 +184,7 @@ export function angularDemoPlugin({
         const module = server.moduleGraph.getModuleById(VIRTUAL_MODULE_ID)
         if (module) {
           server.moduleGraph.invalidateModule(module)
-          server.reloadModule(module)
+          void server.reloadModule(module)
         }
       })
     },
@@ -838,7 +838,7 @@ export function angularDemoPlugin({
         })
 
         entries.push(entry)
-      } catch (error) {
+      } catch {
         logDev(
           `${chalk.blue.bold(LOG_PREFIX)} ${chalk.yellowBright("Failed to process relative import:")} ${chalk.cyan(resolvedPath)}`,
         )
@@ -1017,7 +1017,7 @@ export function getAngularDemoInfo(demoId) {
           }
 
           return pathAliases
-        } catch (error) {
+        } catch {
           currentDir = dirname(currentDir)
           continue
         }
@@ -1100,7 +1100,7 @@ export function getAngularDemoInfo(demoId) {
     if (mainModule) {
       devServer.moduleGraph.invalidateModule(mainModule)
       mainModule.lastHMRTimestamp = Date.now()
-      devServer.reloadModule(mainModule)
+      void devServer.reloadModule(mainModule)
     }
   }
 }

@@ -1,6 +1,7 @@
 // @ts-nocheck
-import {Card} from "./card.js"
+
 import {CardHeader} from "./card-header.js"
+import {Card} from "./card.js"
 
 export function WithHeaderDemo() {
   return (

@@ -1,4 +1,4 @@
-export * from "./config/config-loader.js"
+export * from "./config/index.js"
 export * from "./docs-plugin.js"
 export * from "./frontmatter-hmr-plugin.js"
 export type * from "./nav-builder/index.js"

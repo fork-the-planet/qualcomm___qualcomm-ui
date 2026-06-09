@@ -1,4 +1,7 @@
-import {z} from "zod"
+// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+// SPDX-License-Identifier: BSD-3-Clause-Clear
+
+import type {z} from "zod"
 
 export type Implements<Model> = {
   [key in keyof Model]-?: undefined extends Model[key]

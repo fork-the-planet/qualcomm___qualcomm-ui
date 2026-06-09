@@ -5,7 +5,11 @@ import type {Text} from "mdast"
 import type {Plugin} from "unified"
 import {visit} from "unist-util-visit"
 
-import {isSerializeJsxBlock, isSpoilerBlock, isStepBlock} from "../../../remark/index.js"
+import {
+  isSerializeJsxBlock,
+  isSpoilerBlock,
+  isStepBlock,
+} from "../../../remark/index.js"
 
 export const filterTextDirectives: Plugin = () => {
   return (tree, _file, done) => {

@@ -530,7 +530,7 @@ export function reactDemoPlugin({
         }
         return code.slice(range.start, endPos).trim()
       })
-    } catch (error) {
+    } catch {
       return []
     }
   }

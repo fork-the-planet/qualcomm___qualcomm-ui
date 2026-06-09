@@ -107,7 +107,7 @@ export class PluginState {
     }
     try {
       return JSON.parse(readFileSync(this.docPropsFilePath, "utf-8"))?.props
-    } catch (e) {
+    } catch {
       console.debug(
         "Invalid doc props file. Unable to parse JSON. Please check the file",
       )
@@ -172,7 +172,7 @@ export class PluginState {
       )
       if (virtualModule) {
         server.moduleGraph.invalidateModule(virtualModule)
-        server.reloadModule(virtualModule)
+        void server.reloadModule(virtualModule)
       }
     }
   }
@@ -211,9 +211,9 @@ export class PluginState {
         this.createIndexer(resolvedConfig)
         this.handleChange({
           onComplete: () => {
-            this.servers.forEach((server) =>
-              server.ws.send({type: "full-reload"}),
-            )
+            for (const server of this.servers) {
+              server.ws.send({type: "full-reload"})
+            }
           },
         })
       })

@@ -277,7 +277,7 @@ function loadTsConfigPaths(fromFile: string): PathAlias[] {
         }
 
         return pathAliases
-      } catch (error) {
+      } catch {
         currentDir = dirname(currentDir)
         continue
       }
@@ -340,7 +340,7 @@ function loadTsConfigPathsFromFile(tsconfigPath: string): PathAlias[] {
         pathAliases.push(...extendedAliases)
       }
     }
-  } catch (error) {
+  } catch {
     return pathAliases
   }
 
@@ -401,7 +401,7 @@ export function isDemoFile(filePath: string): boolean {
       filePath.endsWith(".tsx") &&
       !readFileSync(filePath).includes("export default")
     )
-  } catch (error) {
+  } catch {
     return false
   }
 }
