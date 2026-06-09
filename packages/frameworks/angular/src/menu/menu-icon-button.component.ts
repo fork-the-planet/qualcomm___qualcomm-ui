@@ -4,12 +4,12 @@
 import {Component, computed} from "@angular/core"
 import {ChevronDown} from "lucide-angular"
 
+import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
+import {CoreMenuTriggerDirective} from "@qualcomm-ui/angular-core/menu"
 import {
   IconButtonDirective,
   provideQdsIconButtonContext,
 } from "@qualcomm-ui/angular/button"
-import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
-import {CoreMenuTriggerDirective} from "@qualcomm-ui/angular-core/menu"
 
 import {useQdsMenuContext} from "./qds-menu-context.service"
 

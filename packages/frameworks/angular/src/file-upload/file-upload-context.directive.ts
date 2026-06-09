@@ -21,7 +21,7 @@ export class FileUploadContextDirective extends ApiContextDirective<FileUploadAp
    * Provides intellisense for the context in the template.
    */
   static ngTemplateContextGuard(
-    dir: FileUploadContextDirective,
+    _dir: FileUploadContextDirective,
     _ctx: unknown,
   ): _ctx is {$implicit: FileUploadApi} {
     return true

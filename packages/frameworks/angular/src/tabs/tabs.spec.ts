@@ -4,8 +4,8 @@ import {Code, FileText} from "lucide-angular"
 import {describe, expect, test, vi} from "vitest"
 import {page, userEvent} from "vitest/browser"
 
-import {TabsModule} from "@qualcomm-ui/angular/tabs"
 import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
+import {TabsModule} from "@qualcomm-ui/angular/tabs"
 
 const tabItems = [
   {content: "Documents content", title: "Documents", value: "documents"},

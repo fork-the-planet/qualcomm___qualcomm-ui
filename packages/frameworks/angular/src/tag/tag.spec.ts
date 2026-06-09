@@ -4,9 +4,9 @@ import {Plus, Star} from "lucide-angular"
 import {describe, expect, test, vi} from "vitest"
 import {page} from "vitest/browser"
 
+import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 import {EndIconDirective} from "@qualcomm-ui/angular/icon"
 import {TagDirective} from "@qualcomm-ui/angular/tag"
-import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 
 describe("Tag", () => {
   test("renders its content as the tag label", async () => {

@@ -11,10 +11,6 @@ import {
 import {ChevronRight} from "lucide-angular"
 
 import {
-  provideQdsMenuContext,
-  QdsMenuContextService,
-} from "@qualcomm-ui/angular/menu"
-import {
   type LucideIconOrString,
   provideIcons,
 } from "@qualcomm-ui/angular-core/lucide"
@@ -29,6 +25,10 @@ import {
   provideMenuTriggerContext,
 } from "@qualcomm-ui/angular-core/menu"
 import {providePresenceContext} from "@qualcomm-ui/angular-core/presence"
+import {
+  provideQdsMenuContext,
+  QdsMenuContextService,
+} from "@qualcomm-ui/angular/menu"
 import {createQdsMenuApi, type QdsMenuSize} from "@qualcomm-ui/qds-core/menu"
 import type {Booleanish} from "@qualcomm-ui/utils/coercion"
 

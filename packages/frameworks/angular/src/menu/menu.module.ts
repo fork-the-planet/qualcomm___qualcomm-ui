@@ -3,10 +3,10 @@
 
 import {NgModule} from "@angular/core"
 
+import {QBindDirective} from "@qualcomm-ui/angular-core/machine"
 import {ButtonModule} from "@qualcomm-ui/angular/button"
 import {CheckmarkIconComponent} from "@qualcomm-ui/angular/checkmark"
 import {IconDirective, StartIconDirective} from "@qualcomm-ui/angular/icon"
-import {QBindDirective} from "@qualcomm-ui/angular-core/machine"
 
 import {MenuButtonComponent} from "./menu-button.component"
 import {MenuCheckboxItemControlComponent} from "./menu-checkbox-item-control.component"

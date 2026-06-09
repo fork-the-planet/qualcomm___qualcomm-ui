@@ -4,6 +4,8 @@
 import {Component, computed, inject} from "@angular/core"
 import {ChevronDown} from "lucide-angular"
 
+import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
+import {CoreMenuTriggerDirective} from "@qualcomm-ui/angular-core/menu"
 import {
   BaseButtonDirective,
   provideQdsButtonContext,
@@ -13,8 +15,6 @@ import {
   START_ICON_CONTEXT_TOKEN,
 } from "@qualcomm-ui/angular/icon"
 import {QuiPreloadDirective} from "@qualcomm-ui/angular/transitions"
-import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
-import {CoreMenuTriggerDirective} from "@qualcomm-ui/angular-core/menu"
 
 import {useQdsMenuContext} from "./qds-menu-context.service"
 

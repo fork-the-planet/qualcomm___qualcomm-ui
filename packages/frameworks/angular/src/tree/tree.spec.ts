@@ -3,8 +3,8 @@ import {render} from "@testing-library/angular"
 import {describe, expect, test, vi} from "vitest"
 import {page, userEvent} from "vitest/browser"
 
-import {TreeModule} from "@qualcomm-ui/angular/tree"
 import {TreeContextService} from "@qualcomm-ui/angular-core/tree"
+import {TreeModule} from "@qualcomm-ui/angular/tree"
 import {
   type CheckedChangeDetails,
   createTreeCollection,

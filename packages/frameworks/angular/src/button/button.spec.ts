@@ -4,8 +4,8 @@ import {Plus, Search} from "lucide-angular"
 import {describe, expect, test, vi} from "vitest"
 import {page} from "vitest/browser"
 
-import {ButtonModule} from "@qualcomm-ui/angular/button"
 import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
+import {ButtonModule} from "@qualcomm-ui/angular/button"
 
 @Component({
   imports: [ButtonModule],

@@ -4,9 +4,9 @@
 import {NgTemplateOutlet} from "@angular/common"
 import {NgModule} from "@angular/core"
 
+import {PortalDirective} from "@qualcomm-ui/angular-core/portal"
 import {IconDirective} from "@qualcomm-ui/angular/icon"
 import {MenuModule} from "@qualcomm-ui/angular/menu"
-import {PortalDirective} from "@qualcomm-ui/angular-core/portal"
 
 import {BreadcrumbItemIconDirective} from "./breadcrumb-item-icon.directive"
 import {BreadcrumbItemSeparatorDirective} from "./breadcrumb-item-separator.directive"

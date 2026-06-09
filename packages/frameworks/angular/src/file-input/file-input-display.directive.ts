@@ -3,10 +3,10 @@
 
 import {Component, computed, input, type OnInit} from "@angular/core"
 
-import {useQdsFileUploadContext} from "@qualcomm-ui/angular/file-upload"
-import {useQdsInputContext} from "@qualcomm-ui/angular/input"
 import {useFileUploadContext} from "@qualcomm-ui/angular-core/file-upload"
 import {useTrackBindings} from "@qualcomm-ui/angular-core/machine"
+import {useQdsFileUploadContext} from "@qualcomm-ui/angular/file-upload"
+import {useQdsInputContext} from "@qualcomm-ui/angular/input"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 @Component({

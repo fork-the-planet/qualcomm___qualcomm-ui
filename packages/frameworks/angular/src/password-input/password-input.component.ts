@@ -9,10 +9,10 @@ import {
   input,
 } from "@angular/core"
 
-import {provideQdsInputContext} from "@qualcomm-ui/angular/input"
 import {INPUT_FORM_CONTROL_CONTEXT} from "@qualcomm-ui/angular-core/input"
 import type {LucideIconOrString} from "@qualcomm-ui/angular-core/lucide"
 import {providePasswordInputContext} from "@qualcomm-ui/angular-core/password-input"
+import {provideQdsInputContext} from "@qualcomm-ui/angular/input"
 import type {Booleanish} from "@qualcomm-ui/utils/coercion"
 
 import {PasswordInputRootDirective} from "./password-input-root.directive"

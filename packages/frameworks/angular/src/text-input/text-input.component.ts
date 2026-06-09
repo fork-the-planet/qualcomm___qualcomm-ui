@@ -3,8 +3,8 @@
 
 import {booleanAttribute, Component, input} from "@angular/core"
 
-import {provideQdsInputContext} from "@qualcomm-ui/angular/input"
 import {provideTextInputContext} from "@qualcomm-ui/angular-core/text-input"
+import {provideQdsInputContext} from "@qualcomm-ui/angular/input"
 import type {Booleanish} from "@qualcomm-ui/utils/coercion"
 
 import {TextInputRootDirective} from "./text-input-root.directive"

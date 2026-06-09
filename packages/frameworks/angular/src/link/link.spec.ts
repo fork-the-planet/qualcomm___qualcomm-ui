@@ -4,9 +4,9 @@ import {ExternalLink, Plus} from "lucide-angular"
 import {describe, expect, test} from "vitest"
 import {page} from "vitest/browser"
 
+import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 import {EndIconDirective, StartIconDirective} from "@qualcomm-ui/angular/icon"
 import {LinkDirective} from "@qualcomm-ui/angular/link"
-import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 
 describe("Link", () => {
   test("renders link content with generated start and end icons", async () => {

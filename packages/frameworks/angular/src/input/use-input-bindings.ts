@@ -3,8 +3,8 @@
 
 import {computed, type Signal} from "@angular/core"
 
-import {useInlineIconButtonApi} from "@qualcomm-ui/angular/inline-icon-button"
 import type {LucideIconOrString} from "@qualcomm-ui/angular-core/lucide"
+import {useInlineIconButtonApi} from "@qualcomm-ui/angular/inline-icon-button"
 import type {
   QdsInlineIconButtonIconBindings,
   QdsInlineIconButtonRootBindings,
