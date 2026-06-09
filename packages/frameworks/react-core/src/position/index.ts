@@ -1,1 +1,1 @@
-export * from "./position.types.js"
+export type * from "./position.types.js"

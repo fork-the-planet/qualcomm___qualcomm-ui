@@ -22,16 +22,16 @@ export function assignRef<T = any>(
 
   try {
     ref.current = value
-  } catch (error) {
+  } catch {
     throw new Error("Cannot assign value to ref", {cause: value})
   }
 }
 
 export function mergeRefs<T>(...refs: (ReactRef<T> | null | undefined)[]) {
   return (node: T | null): void => {
-    refs.forEach((ref) => {
+    for (const ref of refs) {
       assignRef(ref, node)
-    })
+    }
   }
 }
 
@@ -53,9 +53,9 @@ export function useMergedRef<Instance>(
     }
 
     return (instance) => {
-      refs.forEach((ref) => {
+      for (const ref of refs) {
         setRef(ref, instance)
-      })
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, refs)

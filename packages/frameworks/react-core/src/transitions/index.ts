@@ -1,2 +1,2 @@
 export * from "./get-transition-props.js"
-export * from "./transitions.types.js"
+export type * from "./transitions.types.js"
