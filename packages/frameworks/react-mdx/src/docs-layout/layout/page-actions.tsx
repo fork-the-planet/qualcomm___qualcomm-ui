@@ -5,10 +5,10 @@ import {type ReactNode, useCallback} from "react"
 
 import {Check, Copy, Download} from "lucide-react"
 
-import {Menu} from "@qualcomm-ui/react/menu"
 import {Portal} from "@qualcomm-ui/react-core/portal"
 import {useSiteContext} from "@qualcomm-ui/react-mdx/context"
 import {useCopyToClipboard} from "@qualcomm-ui/react-mdx/copy-to-clipboard"
+import {Menu} from "@qualcomm-ui/react/menu"
 
 import {useMdxDocsLayoutContext} from "./use-mdx-docs-layout.js"
 

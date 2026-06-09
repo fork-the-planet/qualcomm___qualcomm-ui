@@ -4,14 +4,14 @@
 import {type ReactNode, useMemo} from "react"
 
 import {
-  Breadcrumbs,
-  type BreadcrumbsItemProps,
-} from "@qualcomm-ui/react/breadcrumbs"
-import {
   type ElementRenderProp,
   PolymorphicElement,
 } from "@qualcomm-ui/react-core/system"
 import {useMdxDocsContext} from "@qualcomm-ui/react-mdx/context"
+import {
+  Breadcrumbs,
+  type BreadcrumbsItemProps,
+} from "@qualcomm-ui/react/breadcrumbs"
 import {clsx} from "@qualcomm-ui/utils/clsx"
 
 import {PageActions} from "./page-actions.js"

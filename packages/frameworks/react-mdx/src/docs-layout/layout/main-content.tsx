@@ -42,7 +42,7 @@ export function MainContent({
     if (mainContentElement !== ref.current) {
       setMainContentElement(ref.current)
     }
-  }, [mainContentElement])
+  }, [mainContentElement, setMainContentElement])
 
   const refs = useMergedRef(refProp, ref)
 

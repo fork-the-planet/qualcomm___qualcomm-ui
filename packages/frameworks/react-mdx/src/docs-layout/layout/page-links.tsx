@@ -6,7 +6,6 @@ import {type ReactElement, type ReactNode, useMemo} from "react"
 import {ChevronLeft, ChevronRight} from "lucide-react"
 
 import type {NavItem} from "@qualcomm-ui/mdx-common"
-import {Link} from "@qualcomm-ui/react/link"
 import {
   bindingRenderProp,
   type ElementRenderProp,
@@ -16,6 +15,7 @@ import {
   type MdxDocsContextValue,
   useMdxDocsContext,
 } from "@qualcomm-ui/react-mdx/context"
+import {Link} from "@qualcomm-ui/react/link"
 import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 import {capitalCase} from "@qualcomm-ui/utils/change-case"
 import {clsx} from "@qualcomm-ui/utils/clsx"

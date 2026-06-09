@@ -6,11 +6,11 @@ import type {ReactElement} from "react"
 import {FileTextIcon} from "lucide-react"
 
 import {isFocusVisible} from "@qualcomm-ui/dom/focus-visible"
-import {Icon} from "@qualcomm-ui/react/icon"
 import {
   type ElementRenderProp,
   PolymorphicElement,
 } from "@qualcomm-ui/react-core/system"
+import {Icon} from "@qualcomm-ui/react/icon"
 import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 import {clsx} from "@qualcomm-ui/utils/clsx"
 

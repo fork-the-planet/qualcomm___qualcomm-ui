@@ -18,13 +18,13 @@ import {
 import {SearchIcon} from "lucide-react"
 
 import {trackFocusVisible} from "@qualcomm-ui/dom/focus-visible"
+import {useDebounce} from "@qualcomm-ui/react-core/effects"
+import {Portal} from "@qualcomm-ui/react-core/portal"
+import {useMdxDocsContext} from "@qualcomm-ui/react-mdx/context"
 import {Dialog} from "@qualcomm-ui/react/dialog"
 import {HeaderBar} from "@qualcomm-ui/react/header-bar"
 import {Kbd} from "@qualcomm-ui/react/kbd"
 import {TextInput} from "@qualcomm-ui/react/text-input"
-import {useDebounce} from "@qualcomm-ui/react-core/effects"
-import {Portal} from "@qualcomm-ui/react-core/portal"
-import {useMdxDocsContext} from "@qualcomm-ui/react-mdx/context"
 
 import {GroupedResultItem} from "./grouped-result-item.js"
 import {SearchResultItem} from "./search-result-item.js"

@@ -10,7 +10,6 @@ import {
 
 import {ExternalLink} from "lucide-react"
 
-import {Link} from "@qualcomm-ui/react/link"
 import {CodeHighlight} from "@qualcomm-ui/react-mdx/code-highlight"
 import {Github} from "@qualcomm-ui/react-mdx/icons"
 import {
@@ -18,6 +17,7 @@ import {
   SpoilerRoot,
   SpoilerSummary,
 } from "@qualcomm-ui/react-mdx/spoiler"
+import {Link} from "@qualcomm-ui/react/link"
 import type {QuiComment, SerializedType} from "@qualcomm-ui/typedoc-common"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 

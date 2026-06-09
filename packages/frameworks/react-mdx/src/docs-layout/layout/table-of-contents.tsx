@@ -115,15 +115,13 @@ function useActiveHeading() {
       return
     }
 
-    contentElement
-      .querySelectorAll(
-        uniq(HEADING_LEVELS)
-          .map((level) => `${level}:not(.qui-demo-runner__wrapper ${level})`)
-          .join(","),
-      )
-      .forEach((element) => {
-        headingElements.push(element)
-      })
+    for (const element of contentElement.querySelectorAll(
+      uniq(HEADING_LEVELS)
+        .map((level) => `${level}:not(.qui-demo-runner__wrapper ${level})`)
+        .join(","),
+    )) {
+      headingElements.push(element)
+    }
 
     let activeIndex: number | null = null
 

@@ -12,9 +12,9 @@ import {
 import {ExternalLink} from "lucide-react"
 
 import type {PagePropType, PagePropTypes} from "@qualcomm-ui/mdx-common"
+import {CodeHighlight} from "@qualcomm-ui/react-mdx/code-highlight"
 import {InlineNotification} from "@qualcomm-ui/react/inline-notification"
 import {Link} from "@qualcomm-ui/react/link"
-import {CodeHighlight} from "@qualcomm-ui/react-mdx/code-highlight"
 import {ensureArray} from "@qualcomm-ui/utils/array"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 

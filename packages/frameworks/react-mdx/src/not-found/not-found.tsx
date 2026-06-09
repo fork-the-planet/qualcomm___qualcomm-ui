@@ -3,8 +3,8 @@
 
 import type {HTMLAttributes, ReactNode} from "react"
 
-import {Link} from "@qualcomm-ui/react/link"
 import {useMdxDocsContext} from "@qualcomm-ui/react-mdx/context"
+import {Link} from "@qualcomm-ui/react/link"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 export interface NotFoundProps extends Omit<
