@@ -2,17 +2,14 @@
   "name": "@qualcomm-ui/tailwind-plugin",
   "version": "1.7.3",
   "description": "Qualcomm UI Tailwind Plugin",
-  "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
+  "author": "Ryan Bower",
   "repository": "https://github.com/qualcomm/qualcomm-ui",
-  "publishConfig": {
-    "access": "public"
-  },
-  "type": "module",
-  "sideEffects": false,
   "files": [
     "dist"
   ],
+  "type": "module",
+  "sideEffects": false,
   "exports": {
     "./vscode": {
       "types": "./dist/vscode/index.d.ts",
@@ -33,9 +30,12 @@
       "default": "./dist/qui-strict.css"
     }
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "run-s clean generate-css build:js build:ts build:css",
-    "clean": "shx rm -rf node_modules/.tmp dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map",
+    "clean": "shx rm -rf node_modules/.tmp dist",
     "generate-css": "tsx scripts/generate-nextgen-plugin.ts",
     "build:js": "vite build",
     "build:ts": "tsc -b tsconfig.lib.json",
