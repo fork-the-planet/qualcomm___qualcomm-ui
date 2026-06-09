@@ -1,9 +1,9 @@
-import "./globals.css"
-
 import {useState} from "react"
 
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query"
 import {Links, Meta, Outlet, Scripts, ScrollRestoration} from "react-router"
+
+import "./globals.css"
 
 export default function App() {
   const [queryClient] = useState(new QueryClient())
