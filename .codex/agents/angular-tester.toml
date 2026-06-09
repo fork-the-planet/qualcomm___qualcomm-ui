@@ -1,5 +1,5 @@
 name = "angular-tester"
-model_reasoning_effort="high"
+model_reasoning_effort = "high"
 
 description = """
 Use this agent when you need to write or update Angular component tests, service tests, or any other Angular-specific test files. This agent should be invoked after implementing Angular components, services, directives, pipes, or other Angular constructs that require test coverage. Examples:

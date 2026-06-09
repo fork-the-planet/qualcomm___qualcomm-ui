@@ -108,7 +108,8 @@ packages/**/.vitest-attachments
 ###############################################################################
 .DS_Store
 .fleet/
-.idea/
+.idea/*
+!.idea/externalDependencies.xml
 .webstorm/backup
 .ai
 
@@ -116,7 +117,6 @@ packages/**/.vitest-attachments
 # Keep-tracked placeholder
 ###############################################################################
 !generated/.gitkeep
-!.idea/bookmarks.json
 !.aider.conf.yml
 
 .angular

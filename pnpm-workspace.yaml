@@ -6,10 +6,10 @@ packages:
   - packages/frameworks/*
 
 allowBuilds:
-  '@parcel/watcher': true
-  '@qualcomm-ui/root': true
-  '@scarf/scarf': true
-  '@tree-sitter-grammars/tree-sitter-yaml': true
+  "@parcel/watcher": true
+  "@qualcomm-ui/root": true
+  "@scarf/scarf": true
+  "@tree-sitter-grammars/tree-sitter-yaml": true
   core-js-pure: true
   esbuild: true
   lmdb: true
@@ -21,68 +21,69 @@ allowBuilds:
 autoInstallPeers: true
 
 catalog:
-  '@analogjs/platform': 2.4.0
-  '@analogjs/vite-plugin-angular': 2.4.0
-  '@analogjs/vitest-angular': 2.4.0
-  '@angular-devkit/architect': 0.2102.1
-  '@angular-devkit/build-angular': ~21.2.12
-  '@angular-devkit/core': ~21.2.12
-  '@angular/animations': ~21.2.14
-  '@angular/build': ~21.2.12
-  '@angular/cdk': ~21.2.12
-  '@angular/cdk-experimental': ~21.2.12
-  '@angular/cli': ~21.2.12
-  '@angular/common': ~21.2.14
-  '@angular/compiler': ~21.2.14
-  '@angular/compiler-cli': ~21.2.14
-  '@angular/core': ~21.2.14
-  '@angular/forms': ~21.2.14
-  '@angular/platform-browser': ~21.2.14
-  '@angular/platform-browser-dynamic': ~21.2.14
-  '@angular/platform-server': ~21.2.14
-  '@angular/router': ~21.2.14
-  '@angular/ssr': ~21.2.12
-  '@commander-js/extra-typings': 14.0.0
-  '@eslint/js': 9.39.1
-  '@mdx-js/react': 3.1.1
-  '@mdx-js/rollup': 3.1.1
-  '@qualcomm-ui/cli': 1.0.6
-  '@qualcomm-ui/css-utils': 1.1.0
-  '@qualcomm-ui/esbuild': 1.0.5
-  '@qualcomm-ui/tsconfig': 2.0.0
-  '@qualcomm-ui/vite': 1.1.0
-  '@react-router/dev': 7.16.0
-  '@react-router/express': 7.16.0
-  '@react-router/node': 7.16.0
-  '@react-router/remix-routes-option-adapter': 7.16.0
-  '@react-router/serve': 7.16.0
-  '@rolldown/plugin-babel': 0.2.3
-  '@tailwindcss/postcss': 4.2.4
-  '@tailwindcss/vite': 4.2.4
-  '@types/lodash-es': 4.17.12
-  '@types/node': 24.9.2
-  '@types/react': 19.2.7
-  '@types/react-dom': 19.2.3
-  '@typescript-eslint/eslint-plugin': 8.58.2
-  '@typescript-eslint/parser': 8.58.2
-  '@typescript-eslint/rule-tester': 8.58.2
-  '@typescript-eslint/utils': 8.58.2
-  '@vitejs/plugin-react': 6.0.1
-  '@vitest/browser': 4.1.6
-  '@vitest/browser-playwright': 4.1.6
-  '@vitest/coverage-v8': 4.1.6
-  '@vitest/ui': 4.1.6
+  "@analogjs/platform": 2.4.0
+  "@analogjs/vite-plugin-angular": 2.4.0
+  "@analogjs/vitest-angular": 2.4.0
+  "@angular-devkit/architect": 0.2102.1
+  "@angular-devkit/build-angular": ~21.2.12
+  "@angular-devkit/core": ~21.2.12
+  "@angular/animations": ~21.2.14
+  "@angular/build": ~21.2.12
+  "@angular/cdk": ~21.2.12
+  "@angular/cdk-experimental": ~21.2.12
+  "@angular/cli": ~21.2.12
+  "@angular/common": ~21.2.14
+  "@angular/compiler": ~21.2.14
+  "@angular/compiler-cli": ~21.2.14
+  "@angular/core": ~21.2.14
+  "@angular/forms": ~21.2.14
+  "@angular/platform-browser": ~21.2.14
+  "@angular/platform-browser-dynamic": ~21.2.14
+  "@angular/platform-server": ~21.2.14
+  "@angular/router": ~21.2.14
+  "@angular/ssr": ~21.2.12
+  "@commander-js/extra-typings": 14.0.0
+  "@eslint/js": 9.39.4
+  "@mdx-js/react": 3.1.1
+  "@mdx-js/rollup": 3.1.1
+  "@qualcomm-ui/cli": 1.0.7
+  "@qualcomm-ui/css-utils": 1.1.1
+  "@qualcomm-ui/esbuild": 1.0.5
+  "@qualcomm-ui/tsconfig": 2.1.1
+  "@qualcomm-ui/vite": 1.1.1
+  "@react-router/dev": 7.16.0
+  "@react-router/express": 7.16.0
+  "@react-router/node": 7.16.0
+  "@react-router/remix-routes-option-adapter": 7.16.0
+  "@react-router/serve": 7.16.0
+  "@rolldown/plugin-babel": 0.2.3
+  "@tailwindcss/postcss": 4.2.4
+  "@tailwindcss/vite": 4.2.4
+  "@types/lodash-es": 4.17.12
+  "@types/node": 24.9.2
+  "@types/react": 19.2.7
+  "@types/react-dom": 19.2.3
+  "@typescript-eslint/eslint-plugin": 8.58.2
+  "@typescript-eslint/parser": 8.58.2
+  "@typescript-eslint/rule-tester": 8.58.2
+  "@typescript-eslint/utils": 8.58.2
+  "@vitejs/plugin-react": 6.0.1
+  "@vitest/browser": 4.1.6
+  "@vitest/browser-playwright": 4.1.6
+  "@vitest/coverage-v8": 4.1.6
+  "@vitest/ui": 4.1.6
   autoprefixer: 10.4.22
   chalk: 5.6.2
   chokidar: 5.0.0
   execa: 9.6.0
   esbuild: 0.27.3
-  eslint: 9.39.1
+  eslint: 9.39.4
   glob: 13.0.3
   lodash-es: 4.18.1
   ng-packagr: 21.2.0
   npm-run-all2: 8.0.4
-  oxfmt: 0.51.0
+  oxfmt: 0.54.0
+  oxlint: 1.69.0
   postcss: 8.5.10
   react: 19.2.4
   react-dom: 19.2.4
@@ -102,5 +103,5 @@ catalog:
 minimumReleaseAge: 1440
 
 minimumReleaseAgeExclude:
-  - '@qualcomm-ui/*'
-  - 'vite'
+  - "@qualcomm-ui/*"
+  - "vite"
