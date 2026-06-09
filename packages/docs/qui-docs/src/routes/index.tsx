@@ -1,4 +1,4 @@
-import {ReactNode, useEffect, useRef} from "react"
+import {type ReactNode, useEffect, useRef} from "react"
 
 import {ChevronRightIcon} from "lucide-react"
 import {Link as ReactRouterLink} from "react-router"

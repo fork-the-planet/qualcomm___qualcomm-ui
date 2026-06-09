@@ -1,4 +1,4 @@
-import {RouteConfigEntry} from "@react-router/dev/routes"
+import type {RouteConfigEntry} from "@react-router/dev/routes"
 import {remixRoutesOptionAdapter} from "@react-router/remix-routes-option-adapter"
 
 import {hybridRoutes} from "@qualcomm-ui/react-router-utils/node"
