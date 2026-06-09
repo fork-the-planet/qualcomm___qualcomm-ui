@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./out-tsc/app",
+    "rootDir": "./src",
     "strict": false,
     "strictPropertyInitialization": false,
     "skipLibCheck": true,
@@ -12,6 +13,14 @@
       "@qualcomm-ui/angular-docs/*": ["../../docs/angular-docs/src/routes/*"]
     }
   },
+  "references": [
+    {
+      "path": "../../frameworks/angular/tsconfig.lib.json"
+    },
+    {
+      "path": "../../frameworks/angular-core/tsconfig.lib.json"
+    }
+  ],
   "include": [
     "src/**/*.ts"
   ],
