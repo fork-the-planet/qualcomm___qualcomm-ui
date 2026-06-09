@@ -1,5 +1,5 @@
 {
-  "extends": "@qualcomm-ui/tsconfig/tsconfig.super-strict.json",
+  "extends": "@qualcomm-ui/tsconfig/tsconfig.lib.json",
   "compilerOptions": {
     "composite": true,
     "incremental": true,

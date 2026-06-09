@@ -24,7 +24,7 @@
   },
   "scripts": {
     "build": "run-s clean build:js build:ts",
-    "clean": "shx rm -rf node_modules/.tmp/tsbuildinfo dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map",
+    "clean": "shx rm -rf node_modules/.tmp dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map",
     "build:js": "vite build",
     "build:ts": "tsc -b tsconfig.lib.json",
     "dev": "run-p watch:js watch:ts",
