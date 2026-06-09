@@ -5,8 +5,8 @@ import type {ReactElement} from "react"
 
 import {Upload} from "lucide-react"
 
-import {IconOrNode, type IconOrNodeProps} from "@qualcomm-ui/react/icon"
 import type {LucideIconOrElement} from "@qualcomm-ui/react-core/lucide"
+import {IconOrNode, type IconOrNodeProps} from "@qualcomm-ui/react/icon"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {useQdsFileUploadContext} from "./qds-file-upload-context.js"

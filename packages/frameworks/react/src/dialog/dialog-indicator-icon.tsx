@@ -6,9 +6,9 @@ import type {ReactElement} from "react"
 import {CircleAlert, CircleCheck, TriangleAlert} from "lucide-react"
 
 import type {QdsDialogEmphasis} from "@qualcomm-ui/qds-core/dialog"
-import {IconOrNode} from "@qualcomm-ui/react/icon"
 import type {LucideIconOrElement} from "@qualcomm-ui/react-core/lucide"
 import type {ElementRenderProp} from "@qualcomm-ui/react-core/system"
+import {IconOrNode} from "@qualcomm-ui/react/icon"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {useQdsDialogContext} from "./qds-dialog-context.js"

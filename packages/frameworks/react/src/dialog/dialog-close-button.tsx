@@ -5,9 +5,9 @@ import type {ReactElement} from "react"
 
 import {type LucideIcon, X} from "lucide-react"
 
-import {InlineIconButton} from "@qualcomm-ui/react/inline-icon-button"
 import {CoreDialog} from "@qualcomm-ui/react-core/dialog"
 import type {ElementRenderProp, IdProp} from "@qualcomm-ui/react-core/system"
+import {InlineIconButton} from "@qualcomm-ui/react/inline-icon-button"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {useQdsDialogContext} from "./qds-dialog-context.js"

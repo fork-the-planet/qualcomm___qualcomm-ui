@@ -9,13 +9,13 @@ import {
   createQdsIconButtonApi,
   resolveButtonPropsWithGroup,
 } from "@qualcomm-ui/qds-core/button"
+import {normalizeProps} from "@qualcomm-ui/react-core/machine"
+import {PolymorphicElement} from "@qualcomm-ui/react-core/system"
 import {
   type IconButtonProps,
   useButtonGroupContext,
 } from "@qualcomm-ui/react/button"
 import {Icon} from "@qualcomm-ui/react/icon"
-import {normalizeProps} from "@qualcomm-ui/react-core/machine"
-import {PolymorphicElement} from "@qualcomm-ui/react-core/system"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {useQdsMenuContext} from "./qds-menu-context.js"

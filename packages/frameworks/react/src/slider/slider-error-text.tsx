@@ -5,13 +5,13 @@ import type {ReactElement, ReactNode} from "react"
 
 import {AlertCircle} from "lucide-react"
 
-import {IconOrNode} from "@qualcomm-ui/react/icon"
 import {useSliderErrorText} from "@qualcomm-ui/react-core/slider"
 import {
   type ElementRenderProp,
   type IdProp,
   PolymorphicElement,
 } from "@qualcomm-ui/react-core/system"
+import {IconOrNode} from "@qualcomm-ui/react/icon"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {useQdsSliderContext} from "./qds-slider-context.js"

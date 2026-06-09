@@ -7,13 +7,13 @@ import {
   createQdsLinkApi,
   type QdsLinkApiProps,
 } from "@qualcomm-ui/qds-core/link"
-import {IconOrNode} from "@qualcomm-ui/react/icon"
 import type {LucideIconOrElement} from "@qualcomm-ui/react-core/lucide"
 import {normalizeProps} from "@qualcomm-ui/react-core/machine"
 import {
   type ElementRenderProp,
   PolymorphicElement,
 } from "@qualcomm-ui/react-core/system"
+import {IconOrNode} from "@qualcomm-ui/react/icon"
 import type {Explicit} from "@qualcomm-ui/utils/guard"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 

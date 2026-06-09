@@ -8,16 +8,16 @@ import {
   createQdsSelectApi,
   type QdsSelectApiProps,
 } from "@qualcomm-ui/qds-core/select"
-import {
-  QdsInputContextProvider,
-  type QdsReactInputApi,
-} from "@qualcomm-ui/react/input"
 import type {LucideIconOrElement} from "@qualcomm-ui/react-core/lucide"
 import {normalizeProps} from "@qualcomm-ui/react-core/machine"
 import {
   CoreSelect,
   type CoreSelectRootProps,
 } from "@qualcomm-ui/react-core/select"
+import {
+  QdsInputContextProvider,
+  type QdsReactInputApi,
+} from "@qualcomm-ui/react/input"
 import type {Explicit} from "@qualcomm-ui/utils/guard"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 

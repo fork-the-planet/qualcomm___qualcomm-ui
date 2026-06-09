@@ -5,11 +5,11 @@ import type {ReactElement} from "react"
 
 import {ChevronDown} from "lucide-react"
 
-import {Icon, IconOrNode} from "@qualcomm-ui/react/icon"
-import {useQdsMenuContext} from "@qualcomm-ui/react/menu"
 import type {LucideIconOrElement} from "@qualcomm-ui/react-core/lucide"
 import {useMenuContext} from "@qualcomm-ui/react-core/menu"
 import type {ElementRenderProp} from "@qualcomm-ui/react-core/system"
+import {Icon, IconOrNode} from "@qualcomm-ui/react/icon"
+import {useQdsMenuContext} from "@qualcomm-ui/react/menu"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {qdsHeaderBarApi} from "./qds-header-bar-context.js"

@@ -7,8 +7,8 @@ import {
   type QdsCardButtonApiProps,
   translateCardButtonProps,
 } from "@qualcomm-ui/qds-core/card"
-import {Button} from "@qualcomm-ui/react/button"
 import type {ElementRenderProp} from "@qualcomm-ui/react-core/system"
+import {Button} from "@qualcomm-ui/react/button"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {useQdsCardContext} from "./qds-card-context.js"

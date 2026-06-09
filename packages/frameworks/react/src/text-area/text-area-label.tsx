@@ -5,7 +5,6 @@ import type {ReactElement, ReactNode} from "react"
 
 import {Asterisk} from "lucide-react"
 
-import {Icon} from "@qualcomm-ui/react/icon"
 import {
   type ElementRenderProp,
   PolymorphicElement,
@@ -14,6 +13,7 @@ import {
   useTextAreaContext,
   useTextAreaLabel,
 } from "@qualcomm-ui/react-core/text-area"
+import {Icon} from "@qualcomm-ui/react/icon"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {useQdsTextAreaContext} from "./qds-text-area-context.js"

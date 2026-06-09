@@ -3,10 +3,7 @@
   "compilerOptions": {
     "composite": true,
     "moduleResolution": "bundler",
-    "types": [
-      "vitest",
-      "@vitest/browser/providers/playwright"
-    ],
+    "types": ["vitest"],
     "paths": {
       "@qualcomm-ui/react/*": ["./src/*/index.ts"],
       "~test-utils/runner": ["./test-utils/runner.ts"]

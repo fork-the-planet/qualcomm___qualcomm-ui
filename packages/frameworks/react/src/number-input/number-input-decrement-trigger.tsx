@@ -5,9 +5,9 @@ import type {ReactElement} from "react"
 
 import {Minus} from "lucide-react"
 
-import {InlineIconButton} from "@qualcomm-ui/react/inline-icon-button"
 import {CoreNumberInput} from "@qualcomm-ui/react-core/number-input"
 import type {ElementRenderProp} from "@qualcomm-ui/react-core/system"
+import {InlineIconButton} from "@qualcomm-ui/react/inline-icon-button"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {useQdsNumberInputContext} from "./qds-number-input-context.js"

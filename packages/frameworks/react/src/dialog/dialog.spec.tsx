@@ -1,11 +1,11 @@
 import {type ComponentPropsWithRef, useRef, useState} from "react"
 
 import {describe, expect, test, vi} from "vitest"
-import {page, userEvent} from "vitest/browser"
 import {render} from "vitest-browser-react"
+import {page, userEvent} from "vitest/browser"
 
-import {Button} from "@qualcomm-ui/react/button"
 import {Portal} from "@qualcomm-ui/react-core/portal"
+import {Button} from "@qualcomm-ui/react/button"
 
 import {Dialog, type DialogRootProps} from "./index"
 

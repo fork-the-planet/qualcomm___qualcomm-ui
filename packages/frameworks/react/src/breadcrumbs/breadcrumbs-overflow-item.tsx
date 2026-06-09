@@ -4,9 +4,9 @@
 import type {ReactElement, ReactNode} from "react"
 
 import type {QdsMenuSize} from "@qualcomm-ui/qds-core/menu"
-import {Menu} from "@qualcomm-ui/react/menu"
 import type {LucideIconOrElement} from "@qualcomm-ui/react-core/lucide"
 import {Portal} from "@qualcomm-ui/react-core/portal"
+import {Menu} from "@qualcomm-ui/react/menu"
 
 import {
   BreadcrumbsItemRoot,

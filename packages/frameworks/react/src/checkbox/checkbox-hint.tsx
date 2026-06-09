@@ -3,9 +3,9 @@
 
 import type {ReactElement, ReactNode} from "react"
 
-import {InputHint, type InputHintProps} from "@qualcomm-ui/react/input"
 import {useCheckboxHint} from "@qualcomm-ui/react-core/checkbox"
 import type {IdProp} from "@qualcomm-ui/react-core/system"
+import {InputHint, type InputHintProps} from "@qualcomm-ui/react/input"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {useQdsCheckboxContext} from "./qds-checkbox-context.js"

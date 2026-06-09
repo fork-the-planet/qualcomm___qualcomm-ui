@@ -5,8 +5,8 @@ import type {ReactElement} from "react"
 
 import {Search} from "lucide-react"
 
-import {TextInput, type TextInputProps} from "@qualcomm-ui/react/text-input"
 import {useSideNavContext} from "@qualcomm-ui/react-core/side-nav"
+import {TextInput, type TextInputProps} from "@qualcomm-ui/react/text-input"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {qdsSideNavApi} from "./qds-side-nav-context.js"

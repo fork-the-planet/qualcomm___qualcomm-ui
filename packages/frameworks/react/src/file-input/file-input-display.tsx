@@ -3,13 +3,13 @@
 
 import type {ReactElement, ReactNode} from "react"
 
-import {useQdsFileUploadContext} from "@qualcomm-ui/react/file-upload"
-import {useQdsInputContext} from "@qualcomm-ui/react/input"
 import {useFileUploadContext} from "@qualcomm-ui/react-core/file-upload"
 import {
   type ElementRenderProp,
   PolymorphicElement,
 } from "@qualcomm-ui/react-core/system"
+import {useQdsFileUploadContext} from "@qualcomm-ui/react/file-upload"
+import {useQdsInputContext} from "@qualcomm-ui/react/input"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 export interface FileInputDisplayProps extends ElementRenderProp<"span"> {

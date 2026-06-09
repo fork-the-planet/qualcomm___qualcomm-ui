@@ -3,9 +3,9 @@
 
 import type {ReactElement, ReactNode} from "react"
 
-import {InputLabel} from "@qualcomm-ui/react/input"
 import {useSelectContext, useSelectLabel} from "@qualcomm-ui/react-core/select"
 import type {ElementRenderProp, IdProp} from "@qualcomm-ui/react-core/system"
+import {InputLabel} from "@qualcomm-ui/react/input"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {useQdsSelectContext} from "./qds-select-context.js"

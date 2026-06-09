@@ -3,8 +3,8 @@
 
 import type {ReactElement, ReactNode} from "react"
 
-import {Avatar} from "@qualcomm-ui/react/avatar"
 import type {ElementRenderProp} from "@qualcomm-ui/react-core/system"
+import {Avatar} from "@qualcomm-ui/react/avatar"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {useQdsCardContext} from "./qds-card-context.js"

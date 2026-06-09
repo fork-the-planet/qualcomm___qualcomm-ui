@@ -1,8 +1,8 @@
 import {type ReactElement, useState} from "react"
 
 import {describe, expect, test, vi} from "vitest"
-import {page, userEvent} from "vitest/browser"
 import {render} from "vitest-browser-react"
+import {page, userEvent} from "vitest/browser"
 
 import {Pagination} from "@qualcomm-ui/react/pagination"
 

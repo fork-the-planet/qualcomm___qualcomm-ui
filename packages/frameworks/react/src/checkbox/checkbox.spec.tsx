@@ -1,11 +1,11 @@
 import {useState} from "react"
 
 import {describe, expect, test} from "vitest"
-import {page} from "vitest/browser"
 import {render} from "vitest-browser-react"
+import {page} from "vitest/browser"
 
-import {Checkbox} from "@qualcomm-ui/react/checkbox"
 import type {MultiComponentTestCase} from "@qualcomm-ui/react-test-utils"
+import {Checkbox} from "@qualcomm-ui/react/checkbox"
 import type {DataAttributes} from "@qualcomm-ui/utils/attributes"
 
 const demoLabel = "Demo Label"

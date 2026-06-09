@@ -2,12 +2,12 @@ import {useState} from "react"
 
 import {Ellipsis} from "lucide-react"
 import {describe, expect, test, vi} from "vitest"
-import {page, userEvent} from "vitest/browser"
 import {render} from "vitest-browser-react"
+import {page, userEvent} from "vitest/browser"
 
-import {Menu} from "@qualcomm-ui/react/menu"
 import {MenuContext as CoreMenuContext} from "@qualcomm-ui/react-core/menu"
 import {Portal} from "@qualcomm-ui/react-core/portal"
+import {Menu} from "@qualcomm-ui/react/menu"
 
 async function expectLastCallWith(
   spy: ReturnType<typeof vi.fn>,

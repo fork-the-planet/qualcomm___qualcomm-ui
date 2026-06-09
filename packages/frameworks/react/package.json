@@ -2,17 +2,14 @@
   "name": "@qualcomm-ui/react",
   "version": "1.24.3",
   "description": "QUI React components",
-  "author": "Ryan Bower",
   "license": "BSD-3-Clause-Clear",
+  "author": "Ryan Bower",
   "repository": "https://github.com/qualcomm/qualcomm-ui",
-  "publishConfig": {
-    "access": "public"
-  },
-  "type": "module",
-  "sideEffects": false,
   "files": [
     "dist"
   ],
+  "type": "module",
+  "sideEffects": false,
   "types": "./dist/stub.d.ts",
   "exports": {
     "./*": {
@@ -21,11 +18,14 @@
       "default": "./dist/*/index.js"
     }
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "run-s clean build:js build:ts",
     "build:js": "vite build",
     "build:ts": "tsc -b tsconfig.lib.json",
-    "clean": "shx rm -rf dist/tsbuildinfo dist/**/*.js dist/**/*.cjs dist/**/*.mjs dist/**/*.js.map",
+    "clean": "shx rm -rf node_modules/.tmp dist",
     "dev": "run-p watch:js watch:ts",
     "lint": "eslint --quiet",
     "postpublish": "qui-cli post-publish",
@@ -93,16 +93,16 @@
     "react-dom": ">=19.0.0"
   },
   "nyc": {
-    "reporter": [
-      "cobertura",
-      "html"
-    ],
     "extension": [
       ".js",
       ".cjs",
       ".mjs",
       ".ts",
       ".tsx"
+    ],
+    "reporter": [
+      "cobertura",
+      "html"
     ]
   }
 }

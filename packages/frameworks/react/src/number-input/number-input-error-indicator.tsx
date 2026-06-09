@@ -3,11 +3,11 @@
 
 import type {ReactElement} from "react"
 
+import {useNumberInputContext} from "@qualcomm-ui/react-core/number-input"
 import {
   InputErrorIndicator,
   type InputErrorIndicatorProps,
 } from "@qualcomm-ui/react/input"
-import {useNumberInputContext} from "@qualcomm-ui/react-core/number-input"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {useQdsNumberInputContext} from "./qds-number-input-context.js"

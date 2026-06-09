@@ -5,12 +5,12 @@ import type {ReactElement} from "react"
 
 import {X} from "lucide-react"
 
-import {IconButton} from "@qualcomm-ui/react/button"
 import {
   CoreFileUpload,
   type CoreFileUploadItemDeleteTriggerProps,
 } from "@qualcomm-ui/react-core/file-upload"
 import type {LucideIconOrElement} from "@qualcomm-ui/react-core/lucide"
+import {IconButton} from "@qualcomm-ui/react/button"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {useQdsFileUploadContext} from "./qds-file-upload-context.js"

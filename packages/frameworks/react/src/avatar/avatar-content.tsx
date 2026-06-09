@@ -5,13 +5,13 @@ import type {ReactNode} from "react"
 
 import type {LucideIcon} from "lucide-react"
 
-import {IconOrNode} from "@qualcomm-ui/react/icon"
 import {useAvatarContent} from "@qualcomm-ui/react-core/avatar"
 import {
   type ElementRenderProp,
   type IdProp,
   PolymorphicElement,
 } from "@qualcomm-ui/react-core/system"
+import {IconOrNode} from "@qualcomm-ui/react/icon"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {useQdsAvatarContext} from "./qds-avatar-context.js"

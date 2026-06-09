@@ -8,12 +8,12 @@ import {
   getQdsSplitButtonBindings,
   type QdsSplitButtonApiProps,
 } from "@qualcomm-ui/qds-core/menu"
-import {Button, type ButtonProps} from "@qualcomm-ui/react/button"
 import {normalizeProps} from "@qualcomm-ui/react-core/machine"
 import {
   type ElementRenderProp,
   PolymorphicElement,
 } from "@qualcomm-ui/react-core/system"
+import {Button, type ButtonProps} from "@qualcomm-ui/react/button"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {MenuIconButton, type MenuIconButtonProps} from "./menu-icon-button.js"

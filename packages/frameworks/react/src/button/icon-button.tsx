@@ -7,9 +7,9 @@ import {
   createQdsIconButtonApi,
   resolveButtonPropsWithGroup,
 } from "@qualcomm-ui/qds-core/button"
-import {Icon, IconOrNode} from "@qualcomm-ui/react/icon"
 import {normalizeProps} from "@qualcomm-ui/react-core/machine"
 import {PolymorphicElement} from "@qualcomm-ui/react-core/system"
+import {Icon, IconOrNode} from "@qualcomm-ui/react/icon"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {useButtonGroupContext} from "./button-group-context.js"

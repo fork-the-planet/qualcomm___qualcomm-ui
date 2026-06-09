@@ -5,11 +5,11 @@ import type {ReactElement, ReactNode} from "react"
 
 import {AlertCircle} from "lucide-react"
 
+import {useRadioGroupErrorText} from "@qualcomm-ui/react-core/radio"
 import {
   InputErrorText,
   type InputErrorTextProps,
 } from "@qualcomm-ui/react/input"
-import {useRadioGroupErrorText} from "@qualcomm-ui/react-core/radio"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 import {useQdsRadioContext} from "../qds-radio-context.js"
