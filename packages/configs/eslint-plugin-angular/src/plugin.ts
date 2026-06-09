@@ -15,7 +15,7 @@ import {
   preferSelectItemCheckbox,
 } from "./rules/index.js"
 
-export const rules: ESLint.Plugin["rules"] = {
+export const rules = {
   "accessible-name": accessibleName,
   "avatar-image-alt": avatarImageAlt,
   "input-label-association": inputLabelAssociation,
