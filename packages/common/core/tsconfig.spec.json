@@ -5,7 +5,7 @@
     "incremental": true,
     "outDir": "./dist",
     "rootDir": "./src",
-    "tsBuildInfoFile": "dist/tsbuildinfo"
+    "tsBuildInfoFile": "node_modules/.tmp/tsbuildinfo-spec"
   },
   "include": ["./src/**/*.spec.ts", "./src/**/__tests__/**/*.ts"],
   "references": [

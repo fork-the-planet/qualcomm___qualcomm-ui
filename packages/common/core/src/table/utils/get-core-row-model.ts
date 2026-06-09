@@ -34,7 +34,8 @@ export function getCoreRowModel<TData extends RowData>(): (
         ): Row<TData>[] => {
           const rows = [] as Row<TData>[]
 
-          originalRows.forEach((originalRow, i) => {
+          for (let i = 0; i < originalRows.length; i++) {
+            const originalRow = originalRows[i]
             // Make the row
             const row = createRow(
               table,
@@ -62,7 +63,7 @@ export function getCoreRowModel<TData extends RowData>(): (
                 row.subRows = accessRows(row.originalSubRows, depth + 1, row)
               }
             }
-          })
+          }
 
           return rows
         }

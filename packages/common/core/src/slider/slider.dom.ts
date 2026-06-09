@@ -85,13 +85,14 @@ export const getPointValue = (
 }
 
 export const dispatchChangeEvent = (scope: Scope, value: number[]): void => {
-  value.forEach((value, index) => {
+  for (const value1 of value) {
+    const index = value.indexOf(value1)
     const inputEl = domEls.hiddenInput(scope, index.toString())
     if (!inputEl) {
-      return
+      continue
     }
-    dispatchInputValueEvent(inputEl as HTMLInputElement, {value})
-  })
+    dispatchInputValueEvent(inputEl as HTMLInputElement, {value: value1})
+  }
 }
 
 export const getOffsetRect = (

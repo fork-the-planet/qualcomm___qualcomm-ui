@@ -54,12 +54,17 @@ export function getPaginationRowModel<TData extends RowData>(): (
 
         const handleRow = (row: Row<TData>) => {
           paginatedRowModel.flatRows.push(row)
-          if (row.subRows.length) {
-            row.subRows.forEach(handleRow)
+          const subRows: Row<TData>[] = row.subRows
+          if (subRows.length) {
+            for (const row of subRows) {
+              handleRow(row)
+            }
           }
         }
 
-        paginatedRowModel.rows.forEach(handleRow)
+        for (const row of paginatedRowModel.rows) {
+          handleRow(row)
+        }
 
         return paginatedRowModel
       },

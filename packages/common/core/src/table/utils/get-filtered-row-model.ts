@@ -35,11 +35,11 @@ export function getFilteredRowModel<TData extends RowData>(): (
         const resolvedColumnFilters: ResolvedColumnFilter<TData>[] = []
         const resolvedGlobalFilters: ResolvedColumnFilter<TData>[] = []
 
-        ;(columnFilters ?? []).forEach((d) => {
+        for (const d of columnFilters ?? []) {
           const column = table.getColumn(d.id)
 
           if (!column) {
-            return
+            continue
           }
 
           const filterFn = column.getFilterFn()
@@ -50,7 +50,7 @@ export function getFilteredRowModel<TData extends RowData>(): (
                 `Could not find a valid 'column.filterFn' for column with the ID: ${column.id}.`,
               )
             }
-            return
+            continue
           }
 
           resolvedColumnFilters.push({
@@ -58,7 +58,7 @@ export function getFilteredRowModel<TData extends RowData>(): (
             id: d.id,
             resolvedValue: filterFn.resolveFilterValue?.(d.value) ?? d.value,
           })
-        })
+        }
 
         const filterableIds = columnFilters.map((d) => d.id)
 
@@ -75,7 +75,7 @@ export function getFilteredRowModel<TData extends RowData>(): (
         ) {
           filterableIds.push("__global__")
 
-          globallyFilterableColumns.forEach((column) => {
+          for (const column of globallyFilterableColumns) {
             resolvedGlobalFilters.push({
               filterFn: globalFilterFn,
               id: column.id,
@@ -83,7 +83,7 @@ export function getFilteredRowModel<TData extends RowData>(): (
                 globalFilterFn.resolveFilterValue?.(globalFilter) ??
                 globalFilter,
             })
-          })
+          }
         }
 
         let currentColumnFilter

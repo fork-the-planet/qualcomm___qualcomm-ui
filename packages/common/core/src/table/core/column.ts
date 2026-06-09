@@ -149,7 +149,7 @@ export function createColumn<
       () => {
         return [
           column as unknown as Column<TData, TValue>,
-          ...column.columns?.flatMap((d) => d.getFlatColumns()),
+          ...(column.columns?.flatMap((d) => d.getFlatColumns()) ?? []),
         ]
       },
       {

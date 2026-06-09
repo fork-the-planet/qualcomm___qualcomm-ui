@@ -35,7 +35,12 @@ import type {
   ComboboxOpenChangeReason,
   ComboboxSchema,
 } from "./combobox.types.js"
-import {domEls, focusInputEl, focusTriggerEl, getItemEl} from "./internal/index.js"
+import {
+  domEls,
+  focusInputEl,
+  focusTriggerEl,
+  getItemEl,
+} from "./internal/index.js"
 
 const {and, not} = createGuards<ComboboxSchema>()
 
@@ -182,7 +187,9 @@ const comboboxMachineBase = {
       cleanups.push(observerCleanup)
 
       return () => {
-        cleanups.forEach((cleanup) => cleanup())
+        for (const cleanup of cleanups) {
+          cleanup()
+        }
       }
     },
     trackDismissableLayer({prop, scope, send}) {

@@ -273,7 +273,10 @@ export const ColumnSizing: TableFeature = {
 
       const recurse = (header: Header<TData, TValue>) => {
         if (header.subHeaders.length) {
-          header.subHeaders.forEach(recurse)
+          const subHeaders: Header<TData, TValue>[] = header.subHeaders
+          for (const header of subHeaders) {
+            recurse(header)
+          }
         } else {
           sum += header.column.getSize() ?? 0
         }
@@ -341,12 +344,12 @@ export const ColumnSizing: TableFeature = {
               -0.999999,
             )
 
-            old.columnSizingStart.forEach(([columnId, headerSize]) => {
+            for (const [columnId, headerSize] of old.columnSizingStart) {
               newColumnSizing[columnId] =
                 Math.round(
                   Math.max(headerSize + headerSize * deltaPercentage, 0) * 100,
                 ) / 100
-            })
+            }
 
             return {
               ...old,
@@ -537,7 +540,7 @@ export function passiveEventSupported(): boolean {
 
     safeWindow?.addEventListener("test", noop, options)
     safeWindow?.removeEventListener("test", noop)
-  } catch (err) {
+  } catch {
     supported = false
   }
   passiveSupported = supported

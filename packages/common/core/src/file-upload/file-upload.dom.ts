@@ -6,7 +6,10 @@
 
 import type {ScopeDomElements, ScopeDomIds} from "@qualcomm-ui/utils/machine"
 
-import type {FileUploadElementIds, FileUploadScope} from "./file-upload.types.js"
+import type {
+  FileUploadElementIds,
+  FileUploadScope,
+} from "./file-upload.types.js"
 
 export const domIds: ScopeDomIds<
   Omit<

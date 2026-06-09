@@ -358,9 +358,9 @@ export function createTable<TData extends RowData>(
     ...(options.initialState ?? {}),
   } as TableState
 
-  table._features.forEach((feature) => {
+  for (const feature of table._features) {
     initialState = feature.getInitialState?.(initialState) ?? initialState
-  })
+  }
 
   const queued: (() => void)[] = []
   let queuedTimeout = false

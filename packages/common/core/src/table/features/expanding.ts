@@ -167,9 +167,9 @@ export const Expanding: TableFeature = {
         let oldExpanded: ExpandedStateList = {}
 
         if (old === true) {
-          Object.keys(table.getRowModel().rowsById).forEach((rowId) => {
+          for (const rowId of Object.keys(table.getRowModel().rowsById)) {
             oldExpanded[rowId] = true
-          })
+          }
         } else {
           oldExpanded = old
         }
@@ -311,10 +311,10 @@ export const Expanding: TableFeature = {
           ? Object.keys(table.getRowModel().rowsById)
           : Object.keys(table.getState().expanded)
 
-      rowIds.forEach((id) => {
+      for (const id of rowIds) {
         const splitId = id.split(".")
         maxDepth = Math.max(maxDepth, splitId.length)
-      })
+      }
 
       return maxDepth
     }

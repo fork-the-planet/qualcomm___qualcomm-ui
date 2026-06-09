@@ -130,13 +130,13 @@ export function flattenBy<TNode>(
   const flat: TNode[] = []
 
   const recurse = (subArr: TNode[]) => {
-    subArr.forEach((item) => {
+    for (const item of subArr) {
       flat.push(item)
       const children = getChildren(item)
       if (children?.length) {
         recurse(children)
       }
-    })
+    }
   }
 
   recurse(arr)

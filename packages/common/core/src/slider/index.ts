@@ -1,5 +1,5 @@
 export * from "./slider.anatomy.js"
 export * from "./slider.machine.js"
-export * from "./slider.types.js"
+export type * from "./slider.types.js"
 export * from "./slider.api.js"
 export * from "./slider.props.js"

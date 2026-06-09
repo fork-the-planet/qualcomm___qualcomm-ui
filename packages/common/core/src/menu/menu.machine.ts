@@ -469,7 +469,7 @@ export const menuMachine: MachineConfig<MenuSchema> = createMachine<MenuSchema>(
         })
       },
       trackPositioning({context, prop, refs, scope}) {
-        if (!!domEls.contextTrigger(scope)) {
+        if (domEls.contextTrigger(scope)) {
           return
         }
         const positioning = {

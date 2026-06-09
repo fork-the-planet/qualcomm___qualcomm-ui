@@ -101,9 +101,9 @@ export function createCell<TData extends RowData, TValue>(
     row,
   }
 
-  table._features.forEach((feature) => {
+  for (const feature of table._features) {
     feature.createCell?.(cell as Cell<TData, TValue>, column, row, table)
-  }, {})
+  }
 
   return cell as Cell<TData, TValue>
 }

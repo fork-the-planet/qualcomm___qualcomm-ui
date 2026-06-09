@@ -52,11 +52,16 @@ export function expandRows<TData extends RowData>(
     expandedRows.push(row)
 
     if (row.subRows?.length && row.getIsExpanded()) {
-      row.subRows.forEach(handleRow)
+      const subRows: Row<TData>[] = row.subRows
+      for (const row of subRows) {
+        handleRow(row)
+      }
     }
   }
 
-  rowModel.rows.forEach(handleRow)
+  for (const row of rowModel.rows) {
+    handleRow(row)
+  }
 
   return {
     flatRows: rowModel.flatRows,

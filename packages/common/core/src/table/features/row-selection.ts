@@ -290,16 +290,16 @@ export const RowSelection: TableFeature = {
         // We don't use `mutateRowIsSelected` here for performance reasons.
         // All the rows are flat already, so it wouldn't be worth it
         if (value) {
-          preGroupedFlatRows.forEach((row) => {
+          for (const row of preGroupedFlatRows) {
             if (!row.getCanSelect()) {
-              return
+              continue
             }
             rowSelection[row.id] = true
-          })
+          }
         } else {
-          preGroupedFlatRows.forEach((row) => {
+          for (const row of preGroupedFlatRows) {
             delete rowSelection[row.id]
-          })
+          }
         }
 
         return rowSelection
@@ -314,9 +314,9 @@ export const RowSelection: TableFeature = {
 
         const rowSelection: RowSelectionState = {...old}
 
-        table.getRowModel().rows.forEach((row) => {
+        for (const row of table.getRowModel().rows) {
           mutateRowIsSelected(rowSelection, row.id, resolvedValue, true, table)
-        })
+        }
 
         return rowSelection
       })
@@ -487,7 +487,9 @@ const mutateRowIsSelected = <TData extends RowData>(
 
   if (value) {
     if (!row.getCanMultiSelect()) {
-      Object.keys(selectedRowIds).forEach((key) => delete selectedRowIds[key])
+      for (const key of Object.keys(selectedRowIds)) {
+        delete selectedRowIds[key]
+      }
     }
     if (row.getCanSelect()) {
       selectedRowIds[id] = true
@@ -497,15 +499,15 @@ const mutateRowIsSelected = <TData extends RowData>(
   }
 
   if (includeChildren && row.subRows?.length && row.getCanSelectSubRows()) {
-    row.subRows.forEach((row) =>
+    for (const row1 of row.subRows) {
       mutateRowIsSelected(
         selectedRowIds,
-        row.id,
+        row1.id,
         value,
         includeChildren,
         table,
-      ),
-    )
+      )
+    }
   }
 }
 
@@ -600,10 +602,10 @@ export function isSubRowSelected<TData extends RowData>(
   let allChildrenSelected = true
   let someSelected = false
 
-  row.subRows.forEach((subRow) => {
+  for (const subRow of row.subRows) {
     // Bail out early if we know both of these
     if (someSelected && !allChildrenSelected) {
-      return
+      continue
     }
 
     if (subRow.getCanSelect()) {
@@ -626,7 +628,7 @@ export function isSubRowSelected<TData extends RowData>(
         allChildrenSelected = false
       }
     }
-  })
+  }
 
   return allChildrenSelected ? "all" : someSelected ? "some" : false
 }
