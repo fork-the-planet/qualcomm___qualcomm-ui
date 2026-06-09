@@ -10,7 +10,7 @@ import type {
   QuiCommentTag,
 } from "@qualcomm-ui/typedoc-common"
 
-import {PropDescriptionSummary} from "./prop-description-summary"
+import {PropDescriptionSummary} from "./prop-description-summary.js"
 
 function isSingleLinkTag(tag: QuiCommentTag) {
   return (

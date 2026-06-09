@@ -7,7 +7,7 @@ import {Menu} from "@qualcomm-ui/react/menu"
 import type {QdsBrand} from "@qualcomm-ui/react/qds-theme"
 import {Portal} from "@qualcomm-ui/react-core/portal"
 
-import {themeOptCollection} from "./use-qds-demo-theme"
+import {themeOptCollection} from "./use-qds-demo-theme.js"
 
 export interface QdsDemoThemeSelectorProps {
   qdsBrand: QdsBrand

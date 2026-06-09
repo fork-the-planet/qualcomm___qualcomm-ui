@@ -24,7 +24,7 @@ import {isDefined} from "@qualcomm-ui/utils/guard"
 import {matchSorter} from "@qualcomm-ui/utils/match-sorter"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useMdxDocsLayoutContext} from "./use-mdx-docs-layout"
+import {useMdxDocsLayoutContext} from "./use-mdx-docs-layout.js"
 
 export interface SidebarProps extends Omit<ElementRenderProp<"div">, "dir"> {
   /**

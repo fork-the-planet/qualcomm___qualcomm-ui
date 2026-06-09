@@ -14,7 +14,7 @@ import {
 import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 import {clsx} from "@qualcomm-ui/utils/clsx"
 
-import type {GroupedSearchResult} from "./use-grouped-results"
+import type {GroupedSearchResult} from "./use-grouped-results.js"
 
 export type GroupedResultItemProps = ElementRenderProp<"button"> & {
   active: boolean

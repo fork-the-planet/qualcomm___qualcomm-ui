@@ -11,7 +11,7 @@ import {
   useCopyToClipboard,
 } from "@qualcomm-ui/react-mdx/copy-to-clipboard"
 
-import {TsIcon} from "./ts-icon"
+import {TsIcon} from "./ts-icon.js"
 
 interface Props {
   importStatement: string

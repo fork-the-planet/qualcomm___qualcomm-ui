@@ -12,10 +12,10 @@ import {dummyTypePrefix} from "@qualcomm-ui/react-mdx/shiki"
 import type {QuiPropDeclaration} from "@qualcomm-ui/typedoc-common"
 import {pascalCase} from "@qualcomm-ui/utils/change-case"
 
-import {DocsExternalLink} from "../docs-external-link"
-import {usePropsContext} from "../use-props-context"
+import {DocsExternalLink} from "../docs-external-link.js"
+import {usePropsContext} from "../use-props-context.js"
 
-import {SimpleType} from "./simple-type"
+import {SimpleType} from "./simple-type.js"
 
 interface Props {
   /**

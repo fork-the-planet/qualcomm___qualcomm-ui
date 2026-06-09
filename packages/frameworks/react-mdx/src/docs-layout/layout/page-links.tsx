@@ -21,7 +21,7 @@ import {capitalCase} from "@qualcomm-ui/utils/change-case"
 import {clsx} from "@qualcomm-ui/utils/clsx"
 import {TreeCollection} from "@qualcomm-ui/utils/collection"
 
-import {useMdxDocsLayoutContext} from "./use-mdx-docs-layout"
+import {useMdxDocsLayoutContext} from "./use-mdx-docs-layout.js"
 
 interface PageLinkProp {
   currentPage?: NavItem | false

@@ -26,9 +26,9 @@ import {useDebounce} from "@qualcomm-ui/react-core/effects"
 import {Portal} from "@qualcomm-ui/react-core/portal"
 import {useMdxDocsContext} from "@qualcomm-ui/react-mdx/context"
 
-import {GroupedResultItem} from "./grouped-result-item"
-import {SearchResultItem} from "./search-result-item"
-import {useGroupedResults} from "./use-grouped-results"
+import {GroupedResultItem} from "./grouped-result-item.js"
+import {SearchResultItem} from "./search-result-item.js"
+import {useGroupedResults} from "./use-grouped-results.js"
 
 interface SiteSearchMobileProps {
   /**

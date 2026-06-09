@@ -5,8 +5,8 @@ import type {ReactElement} from "react"
 
 import type {SerializedParameters} from "@qualcomm-ui/typedoc-common"
 
-import {PropDescriptionSummary} from "../prop-description"
-import {SimpleType} from "../prop-types"
+import {PropDescriptionSummary} from "../prop-description/index.js"
+import {SimpleType} from "../prop-types/index.js"
 
 export interface TypeDocFunctionParamsTableProps {
   parameters: SerializedParameters[]

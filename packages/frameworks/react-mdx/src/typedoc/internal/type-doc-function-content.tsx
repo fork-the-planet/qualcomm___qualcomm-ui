@@ -24,12 +24,12 @@ import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 import {
   PropDescriptionBlockTags,
   PropDescriptionSummary,
-} from "../prop-description"
-import {usePropsLayoutContext} from "../use-props-layout-context"
+} from "../prop-description/index.js"
+import {usePropsLayoutContext} from "../use-props-layout-context.js"
 
-import {FunctionParamsList} from "./function-params-list"
-import {FunctionParamsTable} from "./function-params-table"
-import {FunctionReturns} from "./function-returns"
+import {FunctionParamsList} from "./function-params-list.js"
+import {FunctionParamsTable} from "./function-params-table.js"
+import {FunctionReturns} from "./function-returns.js"
 
 export interface TypeDocFunctionContentProps extends Omit<
   ComponentPropsWithRef<"div">,

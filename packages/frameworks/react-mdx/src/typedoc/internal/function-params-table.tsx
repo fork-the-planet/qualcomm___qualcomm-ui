@@ -16,11 +16,11 @@ import {
 import type {QuiPropDeclaration} from "@qualcomm-ui/typedoc-common"
 import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 
-import {PropDescription} from "../prop-description"
-import {PropName} from "../prop-name"
-import {PropType} from "../prop-types"
+import {PropDescription} from "../prop-description/index.js"
+import {PropName} from "../prop-name.js"
+import {PropType} from "../prop-types/index.js"
 
-import {getDisplayName} from "./function-params-utils"
+import {getDisplayName} from "./function-params-utils.js"
 
 const paramColumns: ColumnDef<QuiPropDeclaration>[] = [
   {

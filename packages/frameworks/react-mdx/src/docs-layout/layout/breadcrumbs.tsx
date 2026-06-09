@@ -14,8 +14,8 @@ import {
 import {useMdxDocsContext} from "@qualcomm-ui/react-mdx/context"
 import {clsx} from "@qualcomm-ui/utils/clsx"
 
-import {PageActions} from "./page-actions"
-import {useMdxDocsLayoutContext} from "./use-mdx-docs-layout"
+import {PageActions} from "./page-actions.js"
+import {useMdxDocsLayoutContext} from "./use-mdx-docs-layout.js"
 
 export interface BreadcrumbsProps extends ElementRenderProp<"div"> {
   /**

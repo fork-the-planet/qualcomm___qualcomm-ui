@@ -17,7 +17,7 @@ import {
 import {clsx} from "@qualcomm-ui/utils/clsx"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {AnchorHeader, CodeTabs, PageHeader, ShikiPre} from "./internal"
+import {AnchorHeader, CodeTabs, PageHeader, ShikiPre} from "./internal/index.js"
 
 interface Props {
   /**

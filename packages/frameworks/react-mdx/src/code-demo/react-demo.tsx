@@ -17,7 +17,7 @@ import {CopyToClipboardButton} from "@qualcomm-ui/react-mdx/copy-to-clipboard"
 import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {DemoCodePanel, useDemoSourceCode} from "./internal"
+import {DemoCodePanel, useDemoSourceCode} from "./internal/index.js"
 
 export interface ReactDemoProps extends ComponentPropsWithRef<"div"> {
   /**

@@ -11,7 +11,7 @@ import {Tab, Tabs} from "@qualcomm-ui/react/tabs"
 import {useMdxDocsContext} from "@qualcomm-ui/react-mdx/context"
 import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 
-import {DemoStyleToggle} from "./demo-style-toggle"
+import {DemoStyleToggle} from "./demo-style-toggle.js"
 
 export interface DemoCodePanelProps {
   /**

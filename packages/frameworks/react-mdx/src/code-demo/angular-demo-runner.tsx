@@ -23,7 +23,7 @@ import {
   DemoCodePanel,
   QdsDemoThemeSelector,
   useDemoSourceCode,
-} from "./internal"
+} from "./internal/index.js"
 
 export interface AngularDemoRunnerProps extends ComponentPropsWithRef<"div"> {
   /**

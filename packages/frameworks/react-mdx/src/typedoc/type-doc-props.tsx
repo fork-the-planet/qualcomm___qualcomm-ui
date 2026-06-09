@@ -24,16 +24,16 @@ import {
   sortAndSelectProps,
   type TypeDocAngularPropConfig,
   TypeDocFunctionContent,
-} from "./internal"
-import {TypedocPropsList} from "./typedoc-props-list"
-import {TypedocPropsTable} from "./typedoc-props-table"
-import {usePropsContext} from "./use-props-context"
-import {usePropsLayoutContext} from "./use-props-layout-context"
+} from "./internal/index.js"
+import {TypedocPropsList} from "./typedoc-props-list.js"
+import {TypedocPropsTable} from "./typedoc-props-table.js"
+import {usePropsContext} from "./use-props-context.js"
+import {usePropsLayoutContext} from "./use-props-layout-context.js"
 import {
   type ColumnNames,
   TypeDocContextProvider,
   type TypeDocContextValue,
-} from "./use-typedoc-context"
+} from "./use-typedoc-context.js"
 
 export type TypeDocPropsProps = Omit<
   ComponentPropsWithRef<"div">,

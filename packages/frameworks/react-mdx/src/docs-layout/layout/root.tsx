@@ -19,13 +19,13 @@ import {
 } from "@qualcomm-ui/react-mdx/context"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {MdxProvider} from "../mdx-provider"
-import type {DocsLayoutSettings} from "../types"
+import {MdxProvider} from "../mdx-provider.js"
+import type {DocsLayoutSettings} from "../types.js"
 
 import {
   MdxDocsLayoutContextProvider,
   type MdxDocsLayoutContextState,
-} from "./use-mdx-docs-layout"
+} from "./use-mdx-docs-layout.js"
 
 export interface RootProps
   extends

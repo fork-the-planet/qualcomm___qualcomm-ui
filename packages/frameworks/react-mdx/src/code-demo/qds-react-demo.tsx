@@ -25,7 +25,7 @@ import {useRunner, type UseRunnerProps} from "@qualcomm-ui/react-mdx/runner"
 import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {getDefaultSourceCode} from "./code-demo.utils"
+import {getDefaultSourceCode} from "./code-demo.utils.js"
 
 export interface QdsReactDemoProps extends ComponentPropsWithRef<"div"> {
   /**

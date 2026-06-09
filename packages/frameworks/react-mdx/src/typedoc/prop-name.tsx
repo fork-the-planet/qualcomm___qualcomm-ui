@@ -12,7 +12,7 @@ import {Tooltip} from "@qualcomm-ui/react/tooltip"
 import {useMdxDocsContext} from "@qualcomm-ui/react-mdx/context"
 import type {QuiPropDeclaration} from "@qualcomm-ui/typedoc-common"
 
-import {useTypeDocContext} from "./use-typedoc-context"
+import {useTypeDocContext} from "./use-typedoc-context.js"
 
 interface Props {
   changelogPathname?: string | null
