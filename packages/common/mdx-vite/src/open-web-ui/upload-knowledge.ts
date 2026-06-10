@@ -24,7 +24,6 @@ import {
   resolveOpenWebUiIntegration,
 } from "./common.js"
 import {getConfigFromEnv, loadEnv, type SharedConfig} from "./env.js"
-import {KnowledgeCleaner} from "./knowledge-cleaner.js"
 
 interface Config extends SharedConfig {
   force?: boolean
@@ -74,7 +73,6 @@ class Uploader {
   readonly filesApi: FilesApi
   private fileHashCache: Map<string, string> = new Map()
   private knowledgeFilesCache: KnowledgeFile[] | null = null
-  private cleaner: KnowledgeCleaner
 
   constructor(config: Config) {
     this.config = config
@@ -84,7 +82,6 @@ class Uploader {
     }
     this.knowledgeApi = new KnowledgeApi(apiConfig)
     this.filesApi = new FilesApi(apiConfig)
-    this.cleaner = new KnowledgeCleaner(config)
   }
 
   private async buildHashCache(files: KnowledgeFile[]): Promise<void> {
@@ -318,8 +315,6 @@ class Uploader {
   }
 
   async uploadKnowledge() {
-    await this.cleaner.cleanUpOrphanedFiles()
-
     const inputPath = resolve(this.config.knowledgeFilePath)
     const pagesJsonPath = inputPath.endsWith("pages.json")
       ? inputPath
@@ -459,9 +454,6 @@ export function addUploadKnowledgeCommand(): void {
       }
       const filesApi = new FilesApi(apiConfig)
       const knowledgeApi = new KnowledgeApi(apiConfig)
-      const cleaner = new KnowledgeCleaner(sharedConfig)
-
-      await cleaner.cleanUpOrphanedFiles()
 
       const knowledge = await knowledgeApi.getById(sharedConfig.knowledgeId)
       const knowledgeFiles = knowledge.files ?? []
