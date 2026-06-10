@@ -3,27 +3,15 @@
 
 import reactPlugin from "eslint-plugin-react"
 import reactHooksPlugin from "eslint-plugin-react-hooks"
-import {defineConfig} from "eslint/config"
 
-export default defineConfig({
-  languageOptions: {
-    globals: {
-      JSX: "readonly",
-      ParentNode: "readonly",
-      RequestInit: "readonly",
-    },
-    parserOptions: {
-      ecmaFeatures: {jsx: true},
-    },
+/** @type {NonNullable<import("eslint").Linter.Config["plugins"]>} */
+export const reactPlugins = {
+  react: reactPlugin,
+  "react-hooks": reactHooksPlugin,
+}
+
+export const reactSettings = {
+  react: {
+    version: "detect",
   },
-  name: "qui-react-base",
-  plugins: {
-    react: reactPlugin,
-    "react-hooks": reactHooksPlugin,
-  },
-  settings: {
-    react: {
-      version: "detect",
-    },
-  },
-})
+}

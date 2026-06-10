@@ -4,8 +4,13 @@
 import reactPlugin from "eslint-plugin-react"
 import {defineConfig} from "eslint/config"
 
+import {reactPlugins, reactSettings} from "./base.js"
+
 export default defineConfig({
   name: "qui-react-recommended",
+  plugins: {
+    ...reactPlugins,
+  },
   rules: {
     ...reactPlugin.configs.recommended.rules,
     "no-prototype-builtins": "off",
@@ -44,4 +49,5 @@ export default defineConfig({
     "react/react-in-jsx-scope": "off",
     "react/self-closing-comp": ["error", {component: true, html: false}],
   },
+  settings: {...reactSettings},
 })
