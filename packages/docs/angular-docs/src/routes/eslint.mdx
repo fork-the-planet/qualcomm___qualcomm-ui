@@ -282,45 +282,92 @@ An example project featuring the complete configuration is available at https://
 
 Skip ahead to the [Example Configuration](./#example-configuration) section for a complete setup, or continue reading to learn more about the individual configs.
 
+### Migrate from v2 to v3
+
+Version 3 removes public base and split Angular configs. Each public config now includes the plugin, parser, processor, or formatting setup it needs.
+
+- Replace split Angular TypeScript configs with `typescriptRecommended`, and remove the array spread from `@qualcomm-ui/eslint-config-typescript`.
+- Replace split Angular template configs with `templateRecommended`:
+
+```js
+import quiEslintAngular from "@qualcomm-ui/eslint-config-angular"
+import quiEslintTs from "@qualcomm-ui/eslint-config-typescript"
+
+export default defineConfig(
+  // typescript
+  {
+    extends: [
+      ...quiEslintTs.configs.recommended, // [!code --]
+      quiEslintAngular.configs.baseTypescript, // [!code --]
+      quiEslintAngular.configs.typescript, // [!code --]
+      quiEslintTs.configs.recommended, // [!code ++]
+      quiEslintAngular.configs.typescriptRecommended, // [!code ++]
+    ],
+    // ...
+  },
+
+  // template
+  {
+    extends: [
+      quiEslintAngular.configs.baseTemplate, // [!code --]
+      quiEslintAngular.configs.templatePrettier, // [!code --]
+      quiEslintAngular.configs.templateAttributeOrder, // [!code --]
+      quiEslintAngular.configs.templateSelfClosingTags, // [!code --]
+      quiEslintAngular.configs.templateRecommended, // [!code ++]
+    ],
+    // ...
+  },
+)
+```
+
 ### Config Deep Dive
 
 #### TypeScript Configs
 
 The `@qualcomm-ui/eslint-config-typescript` package exports the following configurations:
 
-| Config              | Description                |
-| ------------------- | -------------------------- |
-| `base`              | Core TypeScript rules      |
-| `recommended`       | Recommended TypeScript rules |
-| `styleGuide`        | Code style enforcement     |
-| `sortKeys`          | Object key ordering        |
-| `typeChecks`        | Type-aware linting rules   |
-| `namingConventions` | Identifier naming patterns |
-| `strictExports`     | Export restrictions        |
-| `jsdoc`             | JSDoc comment validation   |
+- `recommended`: Recommended TypeScript rules. Composes each of the following:
+  - `styleGuide`: Code style enforcement
+  - `sortKeys`: Object key ordering
+  - `typeChecks`: Type-aware linting rules
+  - `namingConventions`: Identifier naming patterns
+- `strictExports`: Export restrictions
+- `jsdoc`: JSDoc comment validation
+
+Each config can be consumed individually. The following example targets JS files.
+
+```js
+import quiEslintTs from "@qualcomm-ui/eslint-config-typescript"
+
+export default defineConfig({
+  extends: [
+    quiEslintTs.configs.styleGuide,
+    quiEslintTs.configs.sortKeys,
+    quiEslintTs.configs.namingConventions,
+  ],
+  files: ["**/*.{js,cjs,mjs}"],
+  // ...
+})
+```
 
 #### Angular Configs
 
 The `@qualcomm-ui/eslint-config-angular` package exports the following configurations:
 
-| Config                    | Description                                  |
-| ------------------------- | -------------------------------------------- |
-| `baseTypescript`          | Extends angular-eslint recommended rules     |
-| `typescript`              | QUI-specific TypeScript rules for Angular    |
-| `baseTemplate`            | Extends angular-eslint template recommended  |
-| `templatePrettier`        | Prettier integration for Angular templates   |
-| `templateAttributeOrder`  | Enforces consistent attribute ordering       |
-| `templateSelfClosingTags` | Requires self-closing tags for void elements |
+| Config                  | Description                                      |
+| ----------------------- | ------------------------------------------------ |
+| `typescriptRecommended` | Angular TypeScript rules with inline templates   |
+| `templateRecommended`   | Template formatting, ordering, and closing rules |
 
 #### Type-Aware Rules
 
-Both the TypeScript and Angular configs include type-aware rules that require type information. Files matched by your ESLint config's `files` patterns must be included in the nearest `tsconfig.json` (or referenced project if you're using project references).
+The TypeScript configs and Angular TypeScript config include type-aware rules that require type information. Files matched by your ESLint config's `files` patterns must be included in the nearest `tsconfig.json` (or referenced project if you're using project references).
 
 If ESLint errors with "file not found in any configured project," ensure the file is included in your tsconfig's `files` or `include` patterns.
 
 #### TypeScript Rules
 
-The `typescript` config enforces these conventions:
+The `typescriptRecommended` config enforces these conventions:
 
 - `@angular-eslint/prefer-signals` - Require Angular signals for reactive state
 - `@angular-eslint/no-input-rename` - Warn when renaming inputs
@@ -334,7 +381,7 @@ The following rules are disabled to allow flexibility:
 
 ##### Template Attribute Order
 
-The `templateAttributeOrder` config enforces this order for template attributes:
+The `templateRecommended` config enforces this order for template attributes:
 
 ```html
 <!-- 1. Structural directives -->
@@ -360,7 +407,7 @@ Attributes within each group are sorted alphabetically.
 
 ##### Self-Closing Tags
 
-The `templateSelfClosingTags` config requires self-closing syntax for components without content:
+The `templateRecommended` config requires self-closing syntax for components without content:
 
 ```html
 <!-- Disallowed -->
@@ -417,11 +464,7 @@ export default defineConfig([
   },
   // JS
   {
-    extends: [
-      quiEslintTs.configs.base,
-      quiEslintTs.configs.sortKeys,
-      quiEslintTs.configs.styleGuide,
-    ],
+    extends: [quiEslintTs.configs.sortKeys, quiEslintTs.configs.styleGuide],
     files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
     languageOptions: {globals: globals.browser},
   },
@@ -439,8 +482,7 @@ export default defineConfig([
   {
     extends: [
       quiEslintTs.configs.recommended,
-      quiEslintAngular.configs.baseTypescript,
-      quiEslintAngular.configs.typescript,
+      quiEslintAngular.configs.typescriptRecommended,
       // optional: include the plugin as well
       quiEslintPluginAngular.config,
     ],
@@ -450,10 +492,7 @@ export default defineConfig([
   },
   {
     extends: [
-      quiEslintAngular.configs.baseTemplate,
-      quiEslintAngular.configs.templatePrettier,
-      quiEslintAngular.configs.templateAttributeOrder,
-      quiEslintAngular.configs.templateSelfClosingTags,
+      quiEslintAngular.configs.templateRecommended,
       // optional: include the plugin as well
       quiEslintPluginAngular.config,
     ],

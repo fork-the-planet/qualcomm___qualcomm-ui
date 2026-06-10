@@ -268,43 +268,56 @@ Version 2 removes public `base` configs. Each public config now includes the plu
 Remove `base` entries from `extends` arrays:
 
 ```js
-// v1
-extends: [
-  quiEslintTs.configs.base,
-  quiEslintTs.configs.sortKeys,
-  quiEslintTs.configs.styleGuide,
-]
+import quiEslintReact from "@qualcomm-ui/eslint-config-react"
+import quiEslintTs from "@qualcomm-ui/eslint-config-typescript"
 
-// v2
-extends: [quiEslintTs.configs.sortKeys, quiEslintTs.configs.styleGuide]
+export default defineConfig(
+  // @qualcomm-ui/eslint-config-react v1 -> v2
+  {
+    extends: [
+      quiEslintReact.configs.base, // [!code --]
+      quiEslintReact.configs.recommended,
+    ],
+    // ...
+  },
+  // @qualcomm-ui/eslint-config-typescript v2 -> v3
+  {
+    extends: [
+      ...quiEslintTs.configs.recommended, // [!code --]
+      quiEslintTs.configs.recommended, // [!code ++]
+    ],
+    // ...
+  },
+)
 ```
-
-```js
-// v1
-extends: [
-  quiEslintReact.configs.base,
-  quiEslintReact.configs.recommended,
-]
-
-// v2
-extends: [quiEslintReact.configs.recommended]
-```
-
-Keep explicit `languageOptions` when you need type-aware linting, such as `parserOptions.projectService`.
 
 ### TypeScript Configs
 
 The `@qualcomm-ui/eslint-config-typescript` package exports the following configurations:
 
-| Config              | Description                |
-| ------------------- | -------------------------- |
-| `recommended`       | Recommended TypeScript rules |
-| `styleGuide`        | Code style enforcement     |
-| `sortKeys`          | Object key ordering        |
-| `typeChecks`        | Type-aware linting rules   |
-| `namingConventions` | Identifier naming patterns |
-| `strictExports`     | Export restrictions        |
-| `jsdoc`             | JSDoc comment validation   |
+- `recommended`: Recommended TypeScript rules. Composes each of the following:
+  - `styleGuide`: Code style enforcement
+  - `sortKeys`: Object key ordering
+  - `typeChecks`: Type-aware linting rules
+  - `namingConventions`: Identifier naming patterns
+- `strictExports`: Export restrictions
+- `jsdoc`: JSDoc comment validation
+
+Each config can be consumed individually. The following example targets JS files.
+
+```js
+import quiEslintTs from "@qualcomm-ui/eslint-config-typescript"
+
+export default defineConfig({
+  extends: [
+    quiEslintTs.configs.styleGuide,
+    quiEslintTs.configs.sortKeys,
+    quiEslintTs.configs.namingConventions,
+  ],
+  files: ["**/*.{js,cjs,mjs}"],
+  // ...
+})
+```
 
 #### Style Guide Rules
 
