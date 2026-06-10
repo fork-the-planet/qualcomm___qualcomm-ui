@@ -261,13 +261,43 @@ Both packages use ESLint's flat config format.
 
 Skip ahead to the [Example Configuration](./#example-configuration) section for a complete setup, or continue reading to learn more about the individual configs.
 
+### Migrate from v1 to v2
+
+Version 2 removes public `base` configs. Each public config now includes the plugin, settings, or parser setup it needs.
+
+Remove `base` entries from `extends` arrays:
+
+```js
+// v1
+extends: [
+  quiEslintTs.configs.base,
+  quiEslintTs.configs.sortKeys,
+  quiEslintTs.configs.styleGuide,
+]
+
+// v2
+extends: [quiEslintTs.configs.sortKeys, quiEslintTs.configs.styleGuide]
+```
+
+```js
+// v1
+extends: [
+  quiEslintReact.configs.base,
+  quiEslintReact.configs.recommended,
+]
+
+// v2
+extends: [quiEslintReact.configs.recommended]
+```
+
+Keep explicit `languageOptions` when you need type-aware linting, such as `parserOptions.projectService`.
+
 ### TypeScript Configs
 
 The `@qualcomm-ui/eslint-config-typescript` package exports the following configurations:
 
 | Config              | Description                |
 | ------------------- | -------------------------- |
-| `base`              | Core TypeScript rules      |
 | `recommended`       | Recommended TypeScript rules |
 | `styleGuide`        | Code style enforcement     |
 | `sortKeys`          | Object key ordering        |
@@ -278,7 +308,7 @@ The `@qualcomm-ui/eslint-config-typescript` package exports the following config
 
 #### Style Guide Rules
 
-The `styleGuide` config enforces these conventions:
+The `styleGuide` config enforces these conventions, and more:
 
 - `curly` - Require braces for all control statements
 - `eqeqeq` - Require `===` and `!==` (except for `null` comparisons)
@@ -297,10 +327,11 @@ The style guide enforces import organization with lines between groups:
 ```ts
 import React from "react"
 
-// 2. Internal imports
-import {utils} from "@/lib/utils"
 // 1. Built-in and external packages
 import {readFile} from "node:fs/promises"
+
+// 2. Internal imports
+import {utils} from "~/lib/utils"
 
 // 3. Parent imports
 import {parent} from "../parent"
@@ -335,11 +366,10 @@ class Foo {
 
 The `@qualcomm-ui/eslint-config-react` package exports the following configurations:
 
-| Config        | Description                           |
-| ------------- | ------------------------------------- |
-| `base`        | Core React rules                      |
-| `recommended` | Base config plus hooks and JSX rules  |
-| `strict`      | Recommended plus React Compiler rules |
+| Config        | Description                                  |
+| ------------- | -------------------------------------------- |
+| `recommended` | React plugin setup plus hooks and JSX rules  |
+| `strict`      | Additional React Compiler rules              |
 
 #### Recommended Rules
 
@@ -377,7 +407,11 @@ Use the `strict` config when using the React Compiler:
 import reactConfigs from "@qualcomm-ui/eslint-config-react"
 import tsConfigs from "@qualcomm-ui/eslint-config-typescript"
 
-export default [tsConfigs.configs.recommended, reactConfigs.configs.strict]
+export default [
+  tsConfigs.configs.recommended,
+  reactConfigs.configs.recommended,
+  reactConfigs.configs.strict,
+]
 ```
 
 ### Type-Aware Rules
@@ -423,11 +457,7 @@ const eslintConfig = defineConfig([
   },
   // JS
   {
-    extends: [
-      quiEslintTs.configs.base,
-      quiEslintTs.configs.sortKeys,
-      quiEslintTs.configs.styleGuide,
-    ],
+    extends: [quiEslintTs.configs.sortKeys, quiEslintTs.configs.styleGuide],
     // recommendation: scope these to your source files in your package(s).
     files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
   },
@@ -445,7 +475,6 @@ const eslintConfig = defineConfig([
   {
     extends: [
       quiEslintTs.configs.recommended,
-      quiEslintReact.configs.base,
       quiEslintReact.configs.recommended,
       // optional: include the plugin as well
       quiEslintPluginReact.config,
