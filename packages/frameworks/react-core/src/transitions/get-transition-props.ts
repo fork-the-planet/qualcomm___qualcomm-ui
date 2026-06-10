@@ -12,7 +12,7 @@ export function reflow(node: Element): void {
   // We have to do something with node.scrollTop.
   // Otherwise, it's removed from the compiled code by optimizers
 
-  // oxlint-disable-next-line no-self-assign
+  // eslint-disable-next-line no-self-assign
   node.scrollTop = node.scrollTop
 }
 
