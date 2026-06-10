@@ -81,11 +81,7 @@ export default defineConfig(
     files: ["scripts/*.ts"],
   },
   {
-    extends: [
-      quiEslintTs.configs.base,
-      quiEslintTs.configs.sortKeys,
-      quiEslintTs.configs.styleGuide,
-    ],
+    extends: [quiEslintTs.configs.sortKeys, quiEslintTs.configs.styleGuide],
     files: [
       "{packages,scripts}/**/*.{jsx,js,mjs,cjs}",
       "*.{jsx,js,mjs.cjs}",
@@ -98,8 +94,7 @@ export default defineConfig(
   {
     extends: [
       quiEslintTs.configs.recommended,
-      quiEslintAngular.configs.baseTypescript,
-      quiEslintAngular.configs.typescript,
+      quiEslintAngular.configs.typescriptRecommended,
       quiEslintPluginAngular.config,
     ],
     files: [
@@ -115,8 +110,7 @@ export default defineConfig(
   {
     extends: [
       quiEslintTs.configs.recommended,
-      quiEslintAngular.configs.baseTypescript,
-      quiEslintAngular.configs.typescript,
+      quiEslintAngular.configs.typescriptRecommended,
     ],
     files: ["packages/*/{angular,angular-*}/**/*.ts"],
     ignores: [
@@ -130,23 +124,13 @@ export default defineConfig(
   },
   {
     extends: [
-      quiEslintAngular.configs.baseTemplate,
-      quiEslintAngular.configs.templatePrettier,
-      quiEslintAngular.configs.templateAttributeOrder,
-      quiEslintAngular.configs.templateSelfClosingTags,
+      quiEslintAngular.configs.templateRecommended,
       quiEslintPluginAngular.config,
     ],
     files: [
       "packages/*/{angular,angular-*}/**/*.html",
       "packages/docs/angular-docs/**/demos/**/*.html",
       "packages/debug-apps/angular*/src/**/*.html",
-    ],
-  },
-  {
-    extends: [quiEslintAngular.configs.templateSelfClosingTags],
-    files: [
-      "packages/*/{angular,angular-core,angular-table}/**/*.html",
-      "packages/docs/angular*/src/**/demos/**/*.html",
     ],
   },
 
@@ -164,7 +148,6 @@ export default defineConfig(
   {
     extends: [
       quiEslintTs.configs.recommended,
-      quiEslintReact.configs.base,
       quiEslintReact.configs.recommended,
       quiEslintPluginReact.config,
     ],
@@ -180,7 +163,7 @@ export default defineConfig(
   },
 
   {
-    extends: [quiEslintReact.configs.base, quiEslintReact.configs.recommended],
+    extends: [quiEslintReact.configs.recommended],
     files: ["packages/*/react-swagger/**/*.{ts,tsx}"],
     languageOptions,
     rules: {
@@ -192,7 +175,6 @@ export default defineConfig(
   {
     extends: [
       quiEslintTs.configs.recommended,
-      quiEslintReact.configs.base,
       quiEslintReact.configs.recommended,
       quiEslintReact.configs.strict,
     ],
