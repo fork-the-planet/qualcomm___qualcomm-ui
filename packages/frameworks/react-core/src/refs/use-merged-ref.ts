@@ -57,6 +57,7 @@ export function useMergedRef<Instance>(
         setRef(ref, instance)
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // TODO: determine whether changing this to a static array breaks this hook
+    // eslint-disable-next-line react-hooks/exhaustive-deps,react-hooks/use-memo
   }, refs)
 }

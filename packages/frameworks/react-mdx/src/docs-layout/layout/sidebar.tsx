@@ -115,7 +115,6 @@ export function Sidebar({
 
   useSafeLayoutEffect(() => {
     setSelectedValue(getSelectedValue())
-    // oxlint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
 
   useEffect(() => {
@@ -123,6 +122,8 @@ export function Sidebar({
     if (node) {
       const parents = collection.getParentNodes(node.id)
       if (parents.length) {
+        // TODO: fix
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setExpandedValue((prev) => [...prev, ...parents.map((node) => node.id)])
       }
     }
