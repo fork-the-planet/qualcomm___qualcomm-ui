@@ -24,7 +24,7 @@ function kebabToTitle(str: string): string {
 
 function MissingDemo({componentName}: {componentName: string}) {
   return (
-    <div role="alert" className="text-danger">
+    <div className="text-danger" role="alert">
       Missing demo export: {componentName}
     </div>
   )

@@ -10,9 +10,9 @@ export default function App() {
 
   return (
     <html
-      lang="en"
-      data-theme="dark"
       data-brand="qualcomm"
+      data-theme="dark"
+      lang="en"
       style={{colorScheme: "dark"}}
     >
       <head>

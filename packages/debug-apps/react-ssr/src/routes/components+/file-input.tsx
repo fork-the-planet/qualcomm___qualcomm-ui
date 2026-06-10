@@ -41,7 +41,7 @@ const demos = Object.entries(demoModules)
 
     if (!component) {
       const MissingDemo: DemoComponent = () => (
-        <div role="alert" className="text-danger">
+        <div className="text-danger" role="alert">
           Missing demo export: {componentName}
         </div>
       )
