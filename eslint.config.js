@@ -77,7 +77,7 @@ export default defineConfig(
     },
   },
   {
-    extends: [...quiEslintTs.configs.recommended],
+    extends: [quiEslintTs.configs.recommended],
     files: ["scripts/*.ts"],
   },
   {
@@ -97,7 +97,7 @@ export default defineConfig(
   // angular
   {
     extends: [
-      ...quiEslintTs.configs.recommended,
+      quiEslintTs.configs.recommended,
       quiEslintAngular.configs.baseTypescript,
       quiEslintAngular.configs.typescript,
       quiEslintPluginAngular.config,
@@ -114,8 +114,7 @@ export default defineConfig(
   },
   {
     extends: [
-      ...quiEslintTs.configs.recommended,
-      quiEslintTs.configs.performance,
+      quiEslintTs.configs.recommended,
       quiEslintAngular.configs.baseTypescript,
       quiEslintAngular.configs.typescript,
     ],
@@ -151,52 +150,37 @@ export default defineConfig(
     ],
   },
 
-  // react
+  // strict export config, enforces type-only exports
   {
     extends: [
-      ...quiEslintTs.configs.recommended,
-      quiEslintReact.configs.base,
-      quiEslintReact.configs.recommended,
-      quiEslintPluginReact.config,
-    ],
-    files: [
-      "packages/*/{qui-site,react-docs,qui-docs,react-table-docs,react-vscode-docs}/**/*.{ts,tsx}",
-    ],
-    languageOptions,
-  },
-  {
-    extends: [quiEslintPluginReact.config],
-    files: ["packages/*/react-mdx/**/*.{ts,tsx}"],
-    languageOptions,
-  },
-
-  // strict performance config, enforces strict type exports
-  {
-    extends: [
-      ...quiEslintTs.configs.recommended,
-      quiEslintTs.configs.performance,
+      quiEslintTs.configs.recommended,
       quiEslintTs.configs.strictExports,
     ],
     files: ["{packages,scripts}/**/*.{ts,tsx}", "*.{ts,tsx}"],
     languageOptions,
   },
 
-  // gradually adopt strict config (react)
+  // react docs and debug sites
   {
     extends: [
-      ...quiEslintTs.configs.recommended,
-      quiEslintTs.configs.performance,
+      quiEslintTs.configs.recommended,
       quiEslintReact.configs.base,
       quiEslintReact.configs.recommended,
+      quiEslintPluginReact.config,
     ],
     files: [
-      "packages/*/{react-mdx,react,react-core,react-docs,react-internal,react-swagger,react-table-docs,react-router-utils,react-vscode}/**/*.{ts,tsx}",
-      "packages/docs/angular-docs/src/**/*.tsx",
+      "packages/docs/qui-site/**/*.{ts,tsx}",
+      "packages/docs/qui-docs/**/*.{ts,tsx}",
+      "packages/docs/react-docs/**/*.{ts,tsx}",
+      "packages/docs/react-table-docs/**/*.{ts,tsx}",
+      "packages/debug-apps/react-ssr/**/*.{ts,tsx}",
+      "packages/docs/angular*/**/*.tsx",
     ],
     languageOptions,
   },
 
   {
+    extends: [quiEslintReact.configs.base, quiEslintReact.configs.recommended],
     files: ["packages/*/react-swagger/**/*.{ts,tsx}"],
     languageOptions,
     rules: {
@@ -205,15 +189,15 @@ export default defineConfig(
     },
   },
 
-  // react compiler
   {
-    extends: [quiEslintReact.configs.strict],
-    files: ["packages/*/{react,react-core,react-mdx}/**/*.{ts,tsx}"],
-    ignores: [
-      "packages/frameworks/react-core/src/components/**/*.{ts,tsx}",
-      "packages/frameworks/react-core/src/dom/use-clickable.ts",
-      "packages/frameworks/react/src/legacy/**/*",
+    extends: [
+      quiEslintTs.configs.recommended,
+      quiEslintReact.configs.base,
+      quiEslintReact.configs.recommended,
+      quiEslintReact.configs.strict,
     ],
+    files: ["packages/frameworks/react*/**/*.{ts,tsx}"],
+    ignores: ["packages/frameworks/react-swagger/**/*.{ts,tsx}"],
     languageOptions,
   },
 
