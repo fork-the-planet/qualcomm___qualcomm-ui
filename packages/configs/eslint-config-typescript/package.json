@@ -14,7 +14,6 @@
     "index.js",
     "base.js",
     "jsdoc.js",
-    "performance.js",
     "sort-keys.js",
     "style-guide.js",
     "naming-conventions.js",
@@ -35,10 +34,11 @@
     "@qualcomm-ui/tsconfig": "catalog:",
     "@stylistic/eslint-plugin": "5.2.0",
     "@typescript-eslint/eslint-plugin": "catalog:",
-    "eslint-plugin-oxfmt": "0.9.0",
     "@typescript-eslint/parser": "catalog:",
     "cross-env": "^10.1.0",
     "eslint-plugin-comment-length": "^2.2.1",
+    "eslint-plugin-oxfmt": "0.9.0",
+    "eslint-plugin-promise": "^7.2.1",
     "typescript-eslint": "catalog:"
   },
   "peerDependencies": {
@@ -53,6 +53,7 @@
     "eslint-plugin-jsdoc": ">=50.6.11",
     "eslint-plugin-oxfmt": ">=0.9.0",
     "eslint-plugin-perfectionist": ">=4.12.3",
+    "eslint-plugin-promise": ">=7.2.1",
     "eslint-plugin-unused-imports": ">=4.1.4",
     "oxfmt": ">=0.54.0",
     "typescript": ">=5.7.3",

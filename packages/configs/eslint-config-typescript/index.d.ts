@@ -21,24 +21,9 @@ interface TypescriptConfigExport {
     namingConventions: ConfigObject
 
     /**
-     * Import optimizations for library code (consistent type imports, no side
-     * effects). Use for packages consumed by other projects.
-     */
-    performance: ConfigObject
-
-    /**
-     * Array of recommended configs. This is equivalent to the following:
-     * ```js
-     * import qui from "@qualcomm-ui/eslint-config-typescript"
-     *
-     * const recommended = [
-     *   qui.configs.base,
-     *   qui.configs.styleGuide,
-     *   qui.configs.sortKeys,
-     *   qui.configs.typeChecks,
-     *   qui.configs.namingConventions,
-     * ]
-     * ```
+     * Recommended TypeScript configuration. This includes the settings from the
+     * `base`, `styleGuide`, `sortKeys`, `typeChecks`, and
+     * `namingConventions` configs. This rule requires type information.
      *
      * Usage:
      *
@@ -46,6 +31,7 @@ interface TypescriptConfigExport {
      * ```js
      * // eslint.config.js
      * import {defineConfig} from "eslint/config"
+     * import tseslint from "typescript-eslint"
      * import quiEslintTs from "@qualcomm-ui/eslint-config-typescript"
      *
      * export default defineConfig(
@@ -53,13 +39,19 @@ interface TypescriptConfigExport {
      *    // other settings
      *  },
      *  {
-     *    extends: [...quiEslintTs.configs.recommended],
-     *    files: [/*TS Files*\/]
+     *    extends: [quiEslintTs.configs.recommended],
+     *    files: [/*TS Files*\/],
+     *    languageOptions: {
+     *      parser: tseslint.parser,
+     *      parserOptions: {
+     *        projectService: true,
+     *      },
+     *    }
      *  },
      * )
      * ```
      */
-    recommended: ConfigObject[]
+    recommended: ConfigObject
 
     /**
      * Sort object properties, interface members, and type definitions
