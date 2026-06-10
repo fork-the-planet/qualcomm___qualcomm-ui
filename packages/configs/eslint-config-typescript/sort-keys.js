@@ -4,9 +4,14 @@
 import perfectionist from "eslint-plugin-perfectionist"
 import {defineConfig} from "eslint/config"
 
+/** @type {NonNullable<import("eslint").Linter.Config["plugins"]>} */
+const plugins = {
+  perfectionist,
+}
+
 export default defineConfig({
   name: "qui-sort-keys",
-  plugins: {perfectionist},
+  plugins,
   rules: {
     "perfectionist/sort-interfaces": [
       "error",

@@ -1,4 +1,4 @@
-import base from "./base.js"
+import {typescriptLanguageOptions} from "./base.js"
 import jsdoc from "./jsdoc.js"
 import namingConventions from "./naming-conventions.js"
 import sortKeys from "./sort-keys.js"
@@ -6,31 +6,30 @@ import strictExports from "./strict-exports.js"
 import styleGuide from "./style-guide.js"
 import typeChecks from "./type-checks.js"
 
-const [baseConfig] = base
 const [namingConventionsConfig] = namingConventions
 const [sortKeysConfig] = sortKeys
 const [styleGuideConfig] = styleGuide
 const [typeChecksConfig] = typeChecks
 
 const recommended = {
-  languageOptions: baseConfig.languageOptions,
+  languageOptions: typescriptLanguageOptions,
   name: "qui-typescript-recommended",
   plugins: {
-    ...baseConfig.plugins,
-    ...styleGuideConfig.plugins,
+    ...namingConventionsConfig.plugins,
     ...sortKeysConfig.plugins,
+    ...styleGuideConfig.plugins,
+    ...typeChecksConfig.plugins,
   },
   rules: {
-    ...styleGuideConfig.rules,
-    ...sortKeysConfig.rules,
-    ...typeChecksConfig.rules,
     ...namingConventionsConfig.rules,
+    ...sortKeysConfig.rules,
+    ...styleGuideConfig.rules,
+    ...typeChecksConfig.rules,
   },
 }
 
 export default {
   configs: {
-    base,
     jsdoc,
     namingConventions,
     recommended,

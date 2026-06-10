@@ -3,6 +3,8 @@
 
 import {defineConfig} from "eslint/config"
 
+import {typescriptLanguageOptions, typescriptPlugins} from "./base.js"
+
 /**
  * This configuration is based on
  * https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/src/configs/eslintrc/recommended-type-checked.ts
@@ -15,7 +17,9 @@ import {defineConfig} from "eslint/config"
  * that use `any` can cause issues with our own types.
  */
 export default defineConfig({
+  languageOptions: typescriptLanguageOptions,
   name: "qui-typechecked-recommended",
+  plugins: {...typescriptPlugins},
   rules: {
     "@typescript-eslint/await-thenable": "error",
     "@typescript-eslint/ban-ts-comment": "warn", // Allow use of @ts-ignore, but warn

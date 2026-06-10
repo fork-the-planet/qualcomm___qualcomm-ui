@@ -10,6 +10,8 @@ import promisePlugin from "eslint-plugin-promise"
 import unusedImportsPlugin from "eslint-plugin-unused-imports"
 import {defineConfig} from "eslint/config"
 
+import {typescriptLanguageOptions, typescriptPlugins} from "./base.js"
+
 const oxlintParityRules = {
   "@typescript-eslint/no-dupe-class-members": "error",
   "@typescript-eslint/no-loss-of-precision": "error",
@@ -100,8 +102,10 @@ const oxlintParityRules = {
 }
 
 export default defineConfig({
+  languageOptions: typescriptLanguageOptions,
   name: "qui-style-guide",
   plugins: {
+    ...typescriptPlugins,
     "@stylistic": stylistic,
     "comment-length": commentLength,
     import: importPlugin,
