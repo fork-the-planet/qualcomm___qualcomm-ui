@@ -268,12 +268,11 @@ The `@qualcomm-ui/eslint-config-typescript` package exports the following config
 | Config              | Description                |
 | ------------------- | -------------------------- |
 | `base`              | Core TypeScript rules      |
-| `recommended`       | Includes all configs below |
+| `recommended`       | Recommended TypeScript rules |
 | `styleGuide`        | Code style enforcement     |
 | `sortKeys`          | Object key ordering        |
 | `typeChecks`        | Type-aware linting rules   |
 | `namingConventions` | Identifier naming patterns |
-| `performance`       | Performance-related rules  |
 | `strictExports`     | Export restrictions        |
 | `jsdoc`             | JSDoc comment validation   |
 
@@ -379,8 +378,8 @@ import reactConfigs from "@qualcomm-ui/eslint-config-react"
 import tsConfigs from "@qualcomm-ui/eslint-config-typescript"
 
 export default [
-  ...tsConfigs.configs.recommended,
-  ...reactConfigs.configs.strict,
+  tsConfigs.configs.recommended,
+  reactConfigs.configs.strict,
 ]
 ```
 
@@ -438,8 +437,7 @@ const eslintConfig = defineConfig([
   // TS
   {
     extends: [
-      ...quiEslintTs.configs.recommended,
-      quiEslintTs.configs.performance,
+      quiEslintTs.configs.recommended,
       quiEslintTs.configs.strictExports,
     ],
     // recommendation: scope these to your source files in your package(s).
@@ -449,8 +447,7 @@ const eslintConfig = defineConfig([
   // React
   {
     extends: [
-      ...quiEslintTs.configs.recommended,
-      quiEslintTs.configs.performance,
+      quiEslintTs.configs.recommended,
       quiEslintReact.configs.base,
       quiEslintReact.configs.recommended,
       // optional: include the plugin as well

@@ -291,12 +291,11 @@ The `@qualcomm-ui/eslint-config-typescript` package exports the following config
 | Config              | Description                |
 | ------------------- | -------------------------- |
 | `base`              | Core TypeScript rules      |
-| `recommended`       | Includes all configs below |
+| `recommended`       | Recommended TypeScript rules |
 | `styleGuide`        | Code style enforcement     |
 | `sortKeys`          | Object key ordering        |
 | `typeChecks`        | Type-aware linting rules   |
 | `namingConventions` | Identifier naming patterns |
-| `performance`       | Performance-related rules  |
 | `strictExports`     | Export restrictions        |
 | `jsdoc`             | JSDoc comment validation   |
 
@@ -429,8 +428,7 @@ export default defineConfig([
   // TS
   {
     extends: [
-      ...quiEslintTs.configs.recommended,
-      quiEslintTs.configs.performance,
+      quiEslintTs.configs.recommended,
       quiEslintTs.configs.strictExports,
     ],
     // recommendation: scope these to your source files in your package(s).
@@ -440,8 +438,7 @@ export default defineConfig([
   // Angular
   {
     extends: [
-      ...quiEslintTs.configs.recommended,
-      quiEslintTs.configs.performance,
+      quiEslintTs.configs.recommended,
       quiEslintAngular.configs.baseTypescript,
       quiEslintAngular.configs.typescript,
       // optional: include the plugin as well
