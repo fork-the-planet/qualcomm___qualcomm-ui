@@ -13,12 +13,8 @@
   "files": [
     "index.d.ts",
     "index.js",
-    "base-template.js",
-    "base-typescript.js",
-    "template-attribute-order.js",
-    "template-prettier.js",
-    "template-self-closing-tags.js",
-    "typescript.js"
+    "template-recommended.js",
+    "typescript-recommended.js"
   ],
   "type": "module",
   "sideEffects": false,
