@@ -23,7 +23,8 @@ interface TypescriptConfigExport {
     /**
      * Recommended TypeScript configuration. This includes the settings from the
      * `base`, `styleGuide`, `sortKeys`, `typeChecks`, and
-     * `namingConventions` configs. This rule requires type information.
+     * `namingConventions` configs. This rule requires type information, which can
+     * be provided via `languageOptions`. An example configuration is available below:
      *
      * Usage:
      *
