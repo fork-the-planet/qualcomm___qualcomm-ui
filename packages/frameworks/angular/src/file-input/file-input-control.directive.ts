@@ -3,8 +3,8 @@
 
 import {Component} from "@angular/core"
 
-import {useInputGroup} from "@qualcomm-ui/angular/input"
 import {CoreFileUploadDropzoneDirective} from "@qualcomm-ui/angular-core/file-upload"
+import {useInputGroup} from "@qualcomm-ui/angular/input"
 
 @Component({
   selector: "[q-file-input-control]",

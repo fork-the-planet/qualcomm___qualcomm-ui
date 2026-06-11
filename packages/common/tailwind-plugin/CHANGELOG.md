@@ -1,5 +1,17 @@
 # @qualcomm-ui/tailwind-plugin Changelog
 
+## 1.7.4
+
+Jun 10th, 2026
+
+### Code Refactoring
+
+- support nodenext resolution ([bd1e322](https://github.com/qualcomm/qualcomm-ui/commit/bd1e322))
+
+### Styles
+
+- apply lint updates ([56dd6bc](https://github.com/qualcomm/qualcomm-ui/commit/56dd6bc))
+
 ## 1.7.3
 
 Jun 5th, 2026

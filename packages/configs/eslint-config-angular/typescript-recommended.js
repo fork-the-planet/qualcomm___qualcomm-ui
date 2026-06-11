@@ -1,7 +1,11 @@
+import angularEslint from "angular-eslint"
 import {defineConfig} from "eslint/config"
 
 export default defineConfig({
+  extends: [...angularEslint.configs.tsRecommended],
   name: "qui-angular-typescript",
+  plugins: {"@angular-eslint": angularEslint.tsPlugin},
+  processor: angularEslint.processInlineTemplates,
   rules: {
     "@angular-eslint/component-class-suffix": ["off"],
     "@angular-eslint/directive-class-suffix": "off",

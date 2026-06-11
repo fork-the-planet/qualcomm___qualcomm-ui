@@ -1,7 +1,7 @@
 import {RuleTester} from "@typescript-eslint/rule-tester"
 import {afterAll, describe, it} from "vitest"
 
-import {preferSelectItemCheckbox} from "../src/rules/prefer-select-item-checkbox"
+import {preferSelectItemCheckbox} from "../src/rules/prefer-select-item-checkbox.js"
 
 RuleTester.afterAll = afterAll
 RuleTester.it = it

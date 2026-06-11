@@ -1,9 +1,9 @@
 import {Component, signal} from "@angular/core"
 import {FormsModule} from "@angular/forms"
 
+import {PortalDirective} from "@qualcomm-ui/angular-core/portal"
 import {SelectModule} from "@qualcomm-ui/angular/select"
 import {TooltipModule} from "@qualcomm-ui/angular/tooltip"
-import {PortalDirective} from "@qualcomm-ui/angular-core/portal"
 import {selectCollection} from "@qualcomm-ui/core/select"
 import type {Placement} from "@qualcomm-ui/dom/floating-ui"
 

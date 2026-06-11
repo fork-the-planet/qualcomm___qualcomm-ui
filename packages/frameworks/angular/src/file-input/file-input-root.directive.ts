@@ -4,15 +4,6 @@
 import {computed, Directive, inject, input, type OnInit} from "@angular/core"
 
 import {
-  provideQdsFileUploadContext,
-  QdsFileUploadContextService,
-} from "@qualcomm-ui/angular/file-upload"
-import {
-  provideQdsInputContext,
-  type QdsAngularInputApiProps,
-  QdsInputContextService,
-} from "@qualcomm-ui/angular/input"
-import {
   CoreFileUploadRootDirective,
   FileUploadContextService,
   provideFileUploadContext,
@@ -23,6 +14,15 @@ import {
   useTrackBindings,
 } from "@qualcomm-ui/angular-core/machine"
 import type {SignalifyInput} from "@qualcomm-ui/angular-core/signals"
+import {
+  provideQdsFileUploadContext,
+  QdsFileUploadContextService,
+} from "@qualcomm-ui/angular/file-upload"
+import {
+  provideQdsInputContext,
+  type QdsAngularInputApiProps,
+  QdsInputContextService,
+} from "@qualcomm-ui/angular/input"
 import {createQdsFileUploadApi} from "@qualcomm-ui/qds-core/file-upload"
 import {createQdsInputApi, type QdsInputSize} from "@qualcomm-ui/qds-core/input"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"

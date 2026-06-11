@@ -11,14 +11,14 @@ import {
   type OnInit,
 } from "@angular/core"
 
-import {IconDirective} from "@qualcomm-ui/angular/icon"
-import {QuiPreloadDirective} from "@qualcomm-ui/angular/transitions"
 import type {LucideIconOrString} from "@qualcomm-ui/angular-core/lucide"
 import {
   normalizeProps,
   useTrackBindings,
 } from "@qualcomm-ui/angular-core/machine"
 import type {SignalifyInput} from "@qualcomm-ui/angular-core/signals"
+import {IconDirective} from "@qualcomm-ui/angular/icon"
+import {QuiPreloadDirective} from "@qualcomm-ui/angular/transitions"
 import {
   createQdsIconButtonApi,
   type QdsButtonDensity,

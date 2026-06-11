@@ -5,12 +5,12 @@ import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 import type {Explicit} from "@qualcomm-ui/utils/guard"
 import type {PropNormalizer} from "@qualcomm-ui/utils/machine"
 
-import {splitButtonAnatomy} from "./menu-split-button.anatomy"
+import {splitButtonAnatomy} from "./menu-split-button.anatomy.js"
 import type {
   QdsSplitButtonApiProps,
   QdsSplitButtonBindings,
-} from "./menu-split-button.types"
-import {menuClasses} from "./menu.classes"
+} from "./menu-split-button.types.js"
+import {menuClasses} from "./menu.classes.js"
 
 const parts = splitButtonAnatomy.parts
 

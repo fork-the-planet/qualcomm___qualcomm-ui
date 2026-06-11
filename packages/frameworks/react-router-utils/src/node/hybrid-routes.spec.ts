@@ -12,7 +12,7 @@ import {
   type DefineRoutesFunction,
   hybridRoutes,
   type RouteManifest,
-} from "./hybrid-routes"
+} from "./hybrid-routes.js"
 
 let tempDir: string | undefined
 

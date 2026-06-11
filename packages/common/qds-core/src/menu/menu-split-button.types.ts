@@ -7,8 +7,8 @@ import type {
 } from "@qualcomm-ui/qds-core/button"
 import type {AnatomyPart, AnatomyPartName} from "@qualcomm-ui/utils/anatomy"
 
-import type {splitButtonAnatomy} from "./menu-split-button.anatomy"
-import type {menuClasses} from "./menu.classes"
+import type {splitButtonAnatomy} from "./menu-split-button.anatomy.js"
+import type {menuClasses} from "./menu.classes.js"
 
 /**
  * @since 1.29.0

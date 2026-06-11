@@ -29,7 +29,7 @@ import type {
   Scope,
 } from "@qualcomm-ui/utils/machine"
 
-import type {treeAnatomy} from "./tree.anatomy"
+import type {treeAnatomy} from "./tree.anatomy.js"
 
 export interface FocusChangeDetails<T extends TreeNode = TreeNode> {
   /**

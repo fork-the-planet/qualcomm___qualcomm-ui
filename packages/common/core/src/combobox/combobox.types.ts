@@ -31,7 +31,7 @@ import type {
   ScopeWithIds,
 } from "@qualcomm-ui/utils/machine"
 
-import type {comboboxAnatomy} from "./combobox.anatomy"
+import type {comboboxAnatomy} from "./combobox.anatomy.js"
 
 export interface ComboboxValueChangeDetails<
   T extends CollectionItem = CollectionItem,

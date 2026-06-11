@@ -13,14 +13,6 @@ import {
 import {X} from "lucide-angular"
 
 import {
-  END_ICON_CONTEXT_TOKEN,
-  EndIconDirective,
-  IconDirective,
-  type IconTokenContext,
-  START_ICON_CONTEXT_TOKEN,
-  StartIconDirective,
-} from "@qualcomm-ui/angular/icon"
-import {
   type LucideIconOrString,
   provideIcons,
 } from "@qualcomm-ui/angular-core/lucide"
@@ -31,6 +23,14 @@ import {
 } from "@qualcomm-ui/angular-core/machine"
 import type {SignalifyInput} from "@qualcomm-ui/angular-core/signals"
 import {useControlledState} from "@qualcomm-ui/angular-core/state"
+import {
+  END_ICON_CONTEXT_TOKEN,
+  EndIconDirective,
+  IconDirective,
+  type IconTokenContext,
+  START_ICON_CONTEXT_TOKEN,
+  StartIconDirective,
+} from "@qualcomm-ui/angular/icon"
 import {
   createQdsTagApi,
   type QdsTagApiProps,

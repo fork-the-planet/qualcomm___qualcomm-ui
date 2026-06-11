@@ -3,7 +3,7 @@
 
 import {createContext as createReactContext, use} from "react"
 
-import type {CreateContextReturn} from "./context.types"
+import type {CreateContextReturn} from "./context.types.js"
 
 export interface CreateContextOptions<T> {
   defaultValue?: T

@@ -5,9 +5,9 @@ import type {checkboxClasses} from "@qualcomm-ui/qds-core/checkbox"
 import type {radioClasses} from "@qualcomm-ui/qds-core/radio"
 import type {AnatomyPart, AnatomyPartName} from "@qualcomm-ui/utils/anatomy"
 
-import type {menuItemClasses} from "./menu-item.classes"
-import type {qdsMenuAnatomy} from "./menu.anatomy"
-import type {menuClasses} from "./menu.classes"
+import type {menuItemClasses} from "./menu-item.classes.js"
+import type {qdsMenuAnatomy} from "./menu.anatomy.js"
+import type {menuClasses} from "./menu.classes.js"
 
 type PartName = AnatomyPartName<typeof qdsMenuAnatomy>
 interface Part<P extends PartName> extends AnatomyPart<"menu", P> {}

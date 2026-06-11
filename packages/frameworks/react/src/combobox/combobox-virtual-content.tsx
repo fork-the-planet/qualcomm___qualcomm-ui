@@ -23,12 +23,12 @@ import {useMergedRef} from "@qualcomm-ui/react-core/refs"
 import type {CollectionItem} from "@qualcomm-ui/utils/collection"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {ComboboxContent, type ComboboxContentProps} from "./combobox-content"
-import {ComboboxItem} from "./combobox-item"
-import {ComboboxItemIndicator} from "./combobox-item-indicator"
-import {ComboboxItemText} from "./combobox-item-text"
-import type {ComboboxItemRenderProp} from "./combobox-items"
-import {useQdsComboboxContext} from "./qds-combobox-context"
+import {ComboboxContent, type ComboboxContentProps} from "./combobox-content.js"
+import {ComboboxItemIndicator} from "./combobox-item-indicator.js"
+import {ComboboxItemText} from "./combobox-item-text.js"
+import {ComboboxItem} from "./combobox-item.js"
+import type {ComboboxItemRenderProp} from "./combobox-items.js"
+import {useQdsComboboxContext} from "./qds-combobox-context.js"
 
 export interface ComboboxVirtualContentProps<
   T extends CollectionItem,

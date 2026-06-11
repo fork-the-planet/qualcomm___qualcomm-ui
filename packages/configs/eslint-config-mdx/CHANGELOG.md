@@ -1,5 +1,17 @@
 # @qualcomm-ui/eslint-config-mdx Changelog
 
+## 3.0.3
+
+Jun 10th, 2026
+
+### Miscellaneous Chores
+
+- update shared eslint configs ([5ae86dc](https://github.com/qualcomm/qualcomm-ui/commit/5ae86dc))
+
+### Code Refactoring
+
+- support nodenext resolution ([59b5a72](https://github.com/qualcomm/qualcomm-ui/commit/59b5a72))
+
 ## 3.0.2
 
 Jun 3rd, 2026

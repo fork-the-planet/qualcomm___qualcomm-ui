@@ -32,7 +32,7 @@ import {
   FileUploadItemContextProvider,
   useFileUploadContext,
   useFileUploadItemContext,
-} from "./file-upload-context"
+} from "./file-upload-context.js"
 
 export interface CoreFileUploadRootProps
   extends

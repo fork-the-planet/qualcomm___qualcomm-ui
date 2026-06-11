@@ -4,23 +4,23 @@
 import type {ReactElement, ReactNode} from "react"
 
 import type {QdsMenuSize} from "@qualcomm-ui/qds-core/menu"
-import {Menu} from "@qualcomm-ui/react/menu"
 import type {LucideIconOrElement} from "@qualcomm-ui/react-core/lucide"
 import {Portal} from "@qualcomm-ui/react-core/portal"
+import {Menu} from "@qualcomm-ui/react/menu"
 
 import {
   BreadcrumbsItemRoot,
   type BreadcrumbsItemRootProps,
-} from "./breadcrumbs-item-root"
+} from "./breadcrumbs-item-root.js"
 import {
   BreadcrumbsItemSeparator,
   type BreadcrumbsItemSeparatorProps,
-} from "./breadcrumbs-item-separator"
+} from "./breadcrumbs-item-separator.js"
 import {
   BreadcrumbsOverflowTrigger,
   type BreadcrumbsOverflowTriggerProps,
-} from "./breadcrumbs-overflow-trigger"
-import {useQdsBreadcrumbsContext} from "./qds-breadcrumbs-context"
+} from "./breadcrumbs-overflow-trigger.js"
+import {useQdsBreadcrumbsContext} from "./qds-breadcrumbs-context.js"
 
 const breadcrumbsSizeToMenuSize: Record<string, QdsMenuSize> = {
   lg: "md",

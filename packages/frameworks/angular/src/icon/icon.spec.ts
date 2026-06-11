@@ -4,12 +4,12 @@ import {Search} from "lucide-angular"
 import {describe, expect, test} from "vitest"
 import {page} from "vitest/browser"
 
+import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 import {
   EndIconDirective,
   IconDirective,
   StartIconDirective,
 } from "@qualcomm-ui/angular/icon"
-import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 
 describe("Icon", () => {
   test("renders a qIcon from an injected icon name", async () => {

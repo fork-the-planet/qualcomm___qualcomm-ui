@@ -49,8 +49,8 @@ import {
   getNextEl,
   getPrevEl,
   isTriggerItem,
-} from "./internal"
-import type {MenuSchema, MenuScope} from "./menu.types"
+} from "./internal/index.js"
+import type {MenuSchema, MenuScope} from "./menu.types.js"
 
 const {and, not, or} = createGuards<MenuSchema>()
 
@@ -469,7 +469,7 @@ export const menuMachine: MachineConfig<MenuSchema> = createMachine<MenuSchema>(
         })
       },
       trackPositioning({context, prop, refs, scope}) {
-        if (!!domEls.contextTrigger(scope)) {
+        if (domEls.contextTrigger(scope)) {
           return
         }
         const positioning = {

@@ -1,5 +1,21 @@
 # @qualcomm-ui/mdx-common Changelog
 
+## 2.4.2
+
+Jun 10th, 2026
+
+### Styles
+
+- apply lint updates ([4826561](https://github.com/qualcomm/qualcomm-ui/commit/4826561))
+
+### Code Refactoring
+
+- support nodenext resolution ([4056254](https://github.com/qualcomm/qualcomm-ui/commit/4056254))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/typedoc-common@1.0.8]
+
 ## 2.4.1
 
 Jun 3rd, 2026

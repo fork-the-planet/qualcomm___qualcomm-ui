@@ -1,7 +1,7 @@
 import {RuleTester} from "@typescript-eslint/rule-tester"
 import {afterAll, describe, it} from "vitest"
 
-import {preferAlertBannerButton} from "../src/rules/prefer-alert-banner-button"
+import {preferAlertBannerButton} from "../src/rules/prefer-alert-banner-button.js"
 
 RuleTester.afterAll = afterAll
 RuleTester.it = it

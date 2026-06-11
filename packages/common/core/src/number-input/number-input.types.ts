@@ -29,7 +29,7 @@ import type {
   ScopeWithIds,
 } from "@qualcomm-ui/utils/machine"
 
-import type {numberInputAnatomy} from "./number-input.anatomy"
+import type {numberInputAnatomy} from "./number-input.anatomy.js"
 
 export interface NumberInputValueChangeDetails {
   value: string

@@ -10,9 +10,9 @@ import {
   input,
 } from "@angular/core"
 
-import {provideQdsInputContext} from "@qualcomm-ui/angular/input"
 import {provideComboboxContext} from "@qualcomm-ui/angular-core/combobox"
 import {providePresenceContext} from "@qualcomm-ui/angular-core/presence"
+import {provideQdsInputContext} from "@qualcomm-ui/angular/input"
 import type {Booleanish} from "@qualcomm-ui/utils/coercion"
 
 import {ComboboxContentDirective} from "./combobox-content.directive"

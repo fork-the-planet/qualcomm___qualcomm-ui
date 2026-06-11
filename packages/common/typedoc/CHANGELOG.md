@@ -1,5 +1,25 @@
 # @qualcomm-ui/typedoc Changelog
 
+## 1.1.6
+
+Jun 10th, 2026
+
+### Bug Fixes
+
+- properly account for index in forEach refactor ([eaf76b1](https://github.com/qualcomm/qualcomm-ui/commit/eaf76b1))
+
+### Code Refactoring
+
+- support nodenext resolution ([2ede18b](https://github.com/qualcomm/qualcomm-ui/commit/2ede18b))
+
+### Styles
+
+- apply lint updates ([1e0c493](https://github.com/qualcomm/qualcomm-ui/commit/1e0c493))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/typedoc-common@1.0.8]
+
 ## 1.1.5
 
 Jun 4th, 2026

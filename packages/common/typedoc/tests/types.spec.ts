@@ -1,5 +1,5 @@
 import {readFileSync, writeFileSync} from "node:fs"
-import {resolve} from "path"
+import {resolve} from "node:path"
 import {describe, expect, test} from "vitest"
 
 import type {QuiPropTypes, SerializedType} from "@qualcomm-ui/typedoc-common"

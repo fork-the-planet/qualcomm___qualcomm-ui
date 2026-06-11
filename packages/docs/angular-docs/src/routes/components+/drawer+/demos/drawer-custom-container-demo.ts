@@ -1,8 +1,8 @@
 import {Component} from "@angular/core"
 
+import {PortalComponent} from "@qualcomm-ui/angular-core/portal"
 import {ButtonModule} from "@qualcomm-ui/angular/button"
 import {DrawerModule} from "@qualcomm-ui/angular/drawer"
-import {PortalComponent} from "@qualcomm-ui/angular-core/portal"
 
 @Component({
   imports: [DrawerModule, ButtonModule, PortalComponent],

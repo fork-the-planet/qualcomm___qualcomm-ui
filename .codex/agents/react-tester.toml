@@ -1,5 +1,5 @@
 name = "react-tester"
-model_reasoning_effort="high"
+model_reasoning_effort = "high"
 
 description = """
 Use this agent when you need to write, review, or improve test cases for React components in the @qualcomm-ui/react library. Specifically invoke this agent when:

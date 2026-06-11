@@ -3,9 +3,9 @@
 
 import {Component, input} from "@angular/core"
 
-import {useInputErrorText} from "@qualcomm-ui/angular/input"
 import {CoreFileUploadErrorTextDirective} from "@qualcomm-ui/angular-core/file-upload"
 import type {LucideIcon} from "@qualcomm-ui/angular-core/lucide"
+import {useInputErrorText} from "@qualcomm-ui/angular/input"
 
 @Component({
   selector: "[q-file-input-error-text]",

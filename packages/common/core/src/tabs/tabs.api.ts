@@ -20,8 +20,8 @@ import type {
   PropNormalizer,
 } from "@qualcomm-ui/utils/machine"
 
-import {getTabButtonEl, tabsDomIds} from "./internal"
-import {tabsAnatomy} from "./tabs.anatomy"
+import {getTabButtonEl, tabsDomIds} from "./internal/index.js"
+import {tabsAnatomy} from "./tabs.anatomy.js"
 import type {
   PanelProps,
   TabDismissButtonApiProps,
@@ -36,7 +36,7 @@ import type {
   TabsTabButtonBindings,
   TabsTabDismissButtonBindings,
   TabState,
-} from "./tabs.types"
+} from "./tabs.types.js"
 
 const parts = tabsAnatomy.parts
 

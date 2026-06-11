@@ -1,8 +1,8 @@
 import {useState} from "react"
 
 import {describe, expect, test, vi} from "vitest"
-import {page} from "vitest/browser"
 import {render} from "vitest-browser-react"
+import {page} from "vitest/browser"
 
 // @ts-expect-error vitest understands this import
 import imgURL from "./avatar-man.png"

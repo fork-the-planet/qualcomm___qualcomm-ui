@@ -5,16 +5,16 @@ import {type ReactElement, useMemo} from "react"
 
 import {createQdsFileUploadApi} from "@qualcomm-ui/qds-core/file-upload"
 import {createQdsInputApi} from "@qualcomm-ui/qds-core/input"
-import {QdsFileUploadContextProvider} from "@qualcomm-ui/react/file-upload"
-import {
-  QdsInputContextProvider,
-  type QdsReactInputApiProps,
-} from "@qualcomm-ui/react/input"
 import {
   CoreFileUpload,
   type CoreFileUploadRootProps,
 } from "@qualcomm-ui/react-core/file-upload"
 import {normalizeProps} from "@qualcomm-ui/react-core/machine"
+import {QdsFileUploadContextProvider} from "@qualcomm-ui/react/file-upload"
+import {
+  QdsInputContextProvider,
+  type QdsReactInputApiProps,
+} from "@qualcomm-ui/react/input"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 export interface FileInputRootProps

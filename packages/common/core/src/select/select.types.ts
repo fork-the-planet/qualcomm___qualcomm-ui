@@ -28,7 +28,7 @@ import type {
   ScopeWithIds,
 } from "@qualcomm-ui/utils/machine"
 
-import type {selectAnatomy} from "./select.anatomy"
+import type {selectAnatomy} from "./select.anatomy.js"
 
 export interface SelectValueChangeDetails<
   T extends CollectionItem = CollectionItem,

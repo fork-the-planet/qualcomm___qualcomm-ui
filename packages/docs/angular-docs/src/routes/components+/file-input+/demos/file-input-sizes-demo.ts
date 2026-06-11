@@ -1,8 +1,8 @@
 import {Component} from "@angular/core"
 import {Upload} from "lucide-angular"
 
-import {FileInputModule} from "@qualcomm-ui/angular/file-input"
 import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
+import {FileInputModule} from "@qualcomm-ui/angular/file-input"
 
 @Component({
   imports: [FileInputModule],

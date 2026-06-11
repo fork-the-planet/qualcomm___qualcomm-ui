@@ -2,10 +2,10 @@ import {Component, signal} from "@angular/core"
 import {FormsModule} from "@angular/forms"
 import {Search} from "lucide-angular"
 
+import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 import {IconDirective} from "@qualcomm-ui/angular/icon"
 import {SideNavModule} from "@qualcomm-ui/angular/side-nav"
 import {TextInputModule} from "@qualcomm-ui/angular/text-input"
-import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 import type {TreeCollection} from "@qualcomm-ui/utils/collection"
 import {matchSorter} from "@qualcomm-ui/utils/match-sorter"
 

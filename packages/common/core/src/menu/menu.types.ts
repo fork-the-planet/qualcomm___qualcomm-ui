@@ -27,7 +27,7 @@ import type {
   ScopeWithIds,
 } from "@qualcomm-ui/utils/machine"
 
-import type {menuAnatomy} from "./menu.anatomy"
+import type {menuAnatomy} from "./menu.anatomy.js"
 
 type PartName = AnatomyPartName<typeof menuAnatomy>
 interface Part<P extends PartName> extends AnatomyPart<"menu", P> {}

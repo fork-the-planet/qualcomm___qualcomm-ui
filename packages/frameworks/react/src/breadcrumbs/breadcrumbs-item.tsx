@@ -9,19 +9,19 @@ import type {BindingRenderProp} from "@qualcomm-ui/react-core/system"
 import {
   BreadcrumbsItemIcon,
   type BreadcrumbsItemIconProps,
-} from "./breadcrumbs-item-icon"
+} from "./breadcrumbs-item-icon.js"
 import {
   BreadcrumbsItemRoot,
   type BreadcrumbsItemRootProps,
-} from "./breadcrumbs-item-root"
+} from "./breadcrumbs-item-root.js"
 import {
   BreadcrumbsItemSeparator,
   type BreadcrumbsItemSeparatorProps,
-} from "./breadcrumbs-item-separator"
+} from "./breadcrumbs-item-separator.js"
 import {
   BreadcrumbsItemTrigger,
   type BreadcrumbsItemTriggerProps,
-} from "./breadcrumbs-item-trigger"
+} from "./breadcrumbs-item-trigger.js"
 
 export interface BreadcrumbsItemProps extends BreadcrumbsItemRootProps {
   /**

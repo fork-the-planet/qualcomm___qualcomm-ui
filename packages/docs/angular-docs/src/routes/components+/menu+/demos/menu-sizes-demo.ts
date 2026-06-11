@@ -1,9 +1,9 @@
 import {Component} from "@angular/core"
 import {LogOut, Settings, User} from "lucide-angular"
 
-import {MenuModule} from "@qualcomm-ui/angular/menu"
 import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 import {PortalComponent} from "@qualcomm-ui/angular-core/portal"
+import {MenuModule} from "@qualcomm-ui/angular/menu"
 
 @Component({
   imports: [MenuModule, PortalComponent],

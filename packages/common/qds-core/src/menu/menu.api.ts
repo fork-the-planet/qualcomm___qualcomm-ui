@@ -5,9 +5,9 @@ import {checkboxClasses} from "@qualcomm-ui/qds-core/checkbox"
 import {radioClasses} from "@qualcomm-ui/qds-core/radio"
 import type {PropNormalizer} from "@qualcomm-ui/utils/machine"
 
-import {menuItemClasses} from "./menu-item.classes"
-import {qdsMenuAnatomy} from "./menu.anatomy"
-import {menuClasses} from "./menu.classes"
+import {menuItemClasses} from "./menu-item.classes.js"
+import {qdsMenuAnatomy} from "./menu.anatomy.js"
+import {menuClasses} from "./menu.classes.js"
 import type {
   QdsMenuApi,
   QdsMenuApiProps,
@@ -28,7 +28,7 @@ import type {
   QdsMenuRadioItemControlBindings,
   QdsMenuSeparatorBindings,
   QdsMenuTriggerItemIndicatorBindings,
-} from "./menu.types"
+} from "./menu.types.js"
 
 export function createQdsMenuApi(
   props: QdsMenuApiProps,

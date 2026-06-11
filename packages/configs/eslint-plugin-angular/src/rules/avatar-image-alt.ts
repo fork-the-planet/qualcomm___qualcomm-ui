@@ -1,23 +1,19 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {ESLintUtils} from "@typescript-eslint/utils"
-
 import {
+  createRule,
   getElementSourceLocation,
   hasNonEmptyAttributeOrInput,
   hasSelector,
   type TemplateNode,
-} from "./utils"
-
-const createRule = ESLintUtils.RuleCreator(
-  (name) =>
-    `https://github.com/qualcomm/qualcomm-ui/tree/main/packages/configs/eslint-plugin-angular#${name}`,
-)
+} from "./utils.js"
 
 type MessageIds = "missingAlt"
 
-export const avatarImageAlt = createRule<[], MessageIds>({
+export const avatarImageAlt: ReturnType<typeof createRule<[], MessageIds>> & {
+  name: string
+} = createRule<[], MessageIds>({
   create(context) {
     return {
       Element(node: TemplateNode) {

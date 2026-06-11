@@ -35,7 +35,7 @@ import {
   SelectItemContextProvider,
   useSelectContext,
   useSelectItemContext,
-} from "./select-context"
+} from "./select-context.js"
 
 export interface CoreSelectRootProps
   extends

@@ -3,7 +3,7 @@
 
 import type {BooleanDataAttr} from "@qualcomm-ui/utils/attributes"
 
-import type {tabClasses, tabsClasses} from "./tabs.classes"
+import type {tabClasses, tabsClasses} from "./tabs.classes.js"
 
 export type QdsTabsSize = "sm" | "md" | "lg" | "xl"
 

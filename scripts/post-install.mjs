@@ -9,10 +9,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const cwd = resolve(__dirname, "../")
 
 /**
- * Turbo runs package build scripts through pnpm. During postinstall, those nested
- * pnpm calls can re-enter the root postinstall script before running the package
- * build. This guard lets the nested invocation complete lightweight setup while
- * preventing it from launching another Turbo build recursively.
+ * Turbo runs package build scripts through pnpm. During postinstall, those
+ * nested pnpm calls can re-enter the root postinstall script before running the
+ * package build. This guard lets the nested invocation complete lightweight
+ * setup while preventing it from launching another Turbo build recursively.
  */
 const postinstallRunningEnvVar = "QUI_POSTINSTALL_RUNNING"
 const isNestedPostinstall = process.env[postinstallRunningEnvVar] === "1"
@@ -61,7 +61,8 @@ async function runNodeScript(scriptPath, args, options = {}) {
 
 /**
  * Build the config packages through Turbo so postinstall benefits from Turbo's
- * cache and dependency graph instead of rebuilding these packages every install.
+ * cache and dependency graph instead of rebuilding these packages every
+ * install.
  */
 async function buildConfigsIfNeeded() {
   const packageFolders = [

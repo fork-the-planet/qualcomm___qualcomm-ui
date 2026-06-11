@@ -2,10 +2,7 @@
   "extends": "@qualcomm-ui/tsconfig/tsconfig.node.json",
   "compilerOptions": {
     "composite": true,
-    "types": [
-      "vitest",
-      "@vitest/browser/providers/playwright"
-    ],
+    "types": ["vitest"],
     "paths": {
       "~test/*": ["./src/test/*"]
     }

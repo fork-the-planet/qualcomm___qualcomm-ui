@@ -1,7 +1,7 @@
 import type {ReactElement} from "react"
 
-import {Combobox} from "@qualcomm-ui/react/combobox"
 import {useListCollection} from "@qualcomm-ui/react-core/collection"
+import {Combobox} from "@qualcomm-ui/react/combobox"
 
 export function ComboboxExplorerDemo(): ReactElement {
   const {collection} = useListCollection({

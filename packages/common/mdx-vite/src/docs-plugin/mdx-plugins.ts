@@ -22,10 +22,14 @@ import {
   remarkFrontmatter,
   remarkGfm,
   remarkMdxFrontmatter,
-} from "../exports"
+} from "../exports.js"
 
-import {ConfigLoader, type ConfigLoaderOptions} from "./config"
-import {rehypeSectionize, rehypeSlug, type RehypeSlugOptions} from "./rehype"
+import {ConfigLoader, type ConfigLoaderOptions} from "./config/index.js"
+import {
+  rehypeSectionize,
+  rehypeSlug,
+  type RehypeSlugOptions,
+} from "./rehype/index.js"
 import {
   remarkAlerts,
   remarkCodeTabs,
@@ -34,9 +38,12 @@ import {
   remarkSerializeJsxRender,
   remarkSpoilers,
   remarkSteps,
-} from "./remark"
-import {remarkExtractMeta} from "./remark/remark-extract-meta"
-import {transformerCodeAttribute, transformerNotationHidden} from "./shiki"
+} from "./remark/index.js"
+import {remarkExtractMeta} from "./remark/remark-extract-meta.js"
+import {
+  transformerCodeAttribute,
+  transformerNotationHidden,
+} from "./shiki/index.js"
 
 export interface QuiRehypePluginOptions extends ConfigLoaderOptions {
   rehypeShikiOptions?: Partial<RehypeShikiOptions>

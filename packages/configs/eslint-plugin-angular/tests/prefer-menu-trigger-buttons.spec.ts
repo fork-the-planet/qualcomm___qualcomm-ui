@@ -1,7 +1,7 @@
 import {RuleTester} from "@typescript-eslint/rule-tester"
 import {afterAll, describe, it} from "vitest"
 
-import {preferMenuTriggerButtons} from "../src/rules/prefer-menu-trigger-buttons"
+import {preferMenuTriggerButtons} from "../src/rules/prefer-menu-trigger-buttons.js"
 
 RuleTester.afterAll = afterAll
 RuleTester.it = it

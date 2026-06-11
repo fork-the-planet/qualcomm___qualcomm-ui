@@ -3,10 +3,7 @@
   "compilerOptions": {
     "composite": true,
     "moduleResolution": "bundler",
-    "types": [
-      "vitest",
-      "@vitest/browser/providers/playwright"
-    ],
+    "types": ["vitest"]
   },
   "include": ["./src/**/*.spec.tsx"],
   "references": [

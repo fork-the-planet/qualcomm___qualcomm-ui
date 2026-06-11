@@ -14,7 +14,7 @@ import {
 import {normalizeProps} from "@qualcomm-ui/react-core/machine"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {QdsFileUploadContextProvider} from "./qds-file-upload-context"
+import {QdsFileUploadContextProvider} from "./qds-file-upload-context.js"
 
 export interface FileUploadRootProps
   extends CoreFileUploadRootProps, QdsFileUploadApiProps {}

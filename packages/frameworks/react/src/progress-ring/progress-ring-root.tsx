@@ -15,7 +15,7 @@ import {
 import type {Explicit} from "@qualcomm-ui/utils/guard"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {QdsProgressRingContextProvider} from "./qds-progress-ring-context"
+import {QdsProgressRingContextProvider} from "./qds-progress-ring-context.js"
 
 export interface ProgressRingRootProps
   extends CoreProgressRingRootProps, QdsProgressRingApiProps {}

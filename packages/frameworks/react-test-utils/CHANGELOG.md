@@ -1,5 +1,17 @@
 # @qualcomm-ui/react-test-utils
 
+## 1.0.4
+
+Jun 10th, 2026
+
+### Code Refactoring
+
+- support nodenext resolution ([9808c49](https://github.com/qualcomm/qualcomm-ui/commit/9808c49))
+
+### Styles
+
+- apply lint updates ([2f8b2bf](https://github.com/qualcomm/qualcomm-ui/commit/2f8b2bf))
+
 ## 1.0.3
 
 Jun 3rd, 2026

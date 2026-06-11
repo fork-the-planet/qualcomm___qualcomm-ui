@@ -1,5 +1,21 @@
 # @qualcomm-ui/utils Changelog
 
+## 1.3.2
+
+Jun 10th, 2026
+
+### Styles
+
+- apply lint updates ([6245b86](https://github.com/qualcomm/qualcomm-ui/commit/6245b86))
+
+### Bug Fixes
+
+- properly account for index in forEach refactor ([eaf76b1](https://github.com/qualcomm/qualcomm-ui/commit/eaf76b1))
+
+### Code Refactoring
+
+- support nodenext resolution ([a4055d1](https://github.com/qualcomm/qualcomm-ui/commit/a4055d1))
+
 ## 1.3.1
 
 Jun 3rd, 2026

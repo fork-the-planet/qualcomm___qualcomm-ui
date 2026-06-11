@@ -3,10 +3,10 @@ import {render} from "@testing-library/angular"
 import {describe, expect, test, vi} from "vitest"
 import {page, userEvent} from "vitest/browser"
 
-import {ButtonModule} from "@qualcomm-ui/angular/button"
 import {provideDialogContext} from "@qualcomm-ui/angular-core/dialog"
 import {PortalDirective} from "@qualcomm-ui/angular-core/portal"
 import {providePresenceContext} from "@qualcomm-ui/angular-core/presence"
+import {ButtonModule} from "@qualcomm-ui/angular/button"
 import type {QdsDialogEmphasis} from "@qualcomm-ui/qds-core/dialog"
 
 import {DialogRootDirective} from "./dialog-root.directive"

@@ -1,9 +1,9 @@
 import type {ReactNode} from "react"
 
 import {createTreeCollection} from "@qualcomm-ui/core/tree"
-import {SideNav} from "@qualcomm-ui/react/side-nav"
 import {SimpleReactDemo} from "@qualcomm-ui/react-mdx/code-demo"
 import {CodeHighlight} from "@qualcomm-ui/react-mdx/code-highlight"
+import {SideNav} from "@qualcomm-ui/react/side-nav"
 import {dedent} from "@qualcomm-ui/utils/dedent"
 
 interface NavItem {

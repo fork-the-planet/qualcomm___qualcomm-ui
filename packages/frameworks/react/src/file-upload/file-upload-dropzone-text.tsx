@@ -9,7 +9,7 @@ import {
 } from "@qualcomm-ui/react-core/system"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useQdsFileUploadContext} from "./qds-file-upload-context"
+import {useQdsFileUploadContext} from "./qds-file-upload-context.js"
 
 export interface FileUploadDropzoneTextProps extends ElementRenderProp<"span"> {}
 

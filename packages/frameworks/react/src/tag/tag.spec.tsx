@@ -2,8 +2,8 @@ import {useState} from "react"
 
 import {Plus, Star} from "lucide-react"
 import {describe, expect, test, vi} from "vitest"
-import {page} from "vitest/browser"
 import {render} from "vitest-browser-react"
+import {page} from "vitest/browser"
 
 import {Tag} from "@qualcomm-ui/react/tag"
 

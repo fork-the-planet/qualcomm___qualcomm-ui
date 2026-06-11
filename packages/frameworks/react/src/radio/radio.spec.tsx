@@ -1,8 +1,8 @@
 import {type HTMLAttributes, useState} from "react"
 
 import {describe, expect, test} from "vitest"
-import {page} from "vitest/browser"
 import {render} from "vitest-browser-react"
+import {page} from "vitest/browser"
 
 import {type MultiComponentTestCase, runTests} from "~test-utils/runner"
 

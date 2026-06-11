@@ -9,7 +9,7 @@ import {Button, type ButtonProps} from "@qualcomm-ui/react/button"
 import {Icon} from "@qualcomm-ui/react/icon"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useQdsMenuContext} from "./qds-menu-context"
+import {useQdsMenuContext} from "./qds-menu-context.js"
 
 export interface MenuButtonProps extends Omit<ButtonProps, "endIcon"> {
   /**

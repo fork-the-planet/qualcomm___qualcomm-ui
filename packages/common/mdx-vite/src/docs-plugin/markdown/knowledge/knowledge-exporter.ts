@@ -21,30 +21,30 @@ import type {
   KnowledgeFrontmatterConfig,
   PagesExportConfig,
   SectionExportConfig,
-} from "../../config"
+} from "../../config/index.js"
 import {
   getPathnameFromPathSegments,
   getPathSegmentsFromFileName,
-} from "../../nav-builder"
-import {remarkSerializeJsxKnowledge} from "../../remark"
-import type {MdxFileReader} from "../markdown-file-reader"
-import {createRemarkProcessor} from "../remark-pipeline"
+} from "../../nav-builder/index.js"
+import {remarkSerializeJsxKnowledge} from "../../remark/index.js"
+import type {MdxFileReader} from "../markdown-file-reader.js"
+import {createRemarkProcessor} from "../remark-pipeline.js"
 
-import {filterFrontmatter} from "./filter-frontmatter"
+import {filterFrontmatter} from "./filter-frontmatter.js"
 import {
   filterTextDirectives,
   formatDemos,
   formatNpmInstallTabs,
   formatThemeNodes,
   PropFormatter,
-} from "./plugins"
-import {SectionExtractor} from "./section-extractor"
+} from "./plugins/index.js"
+import {SectionExtractor} from "./section-extractor.js"
 import type {
   KnowledgePageCache,
   MdxFlowExpression,
   ProcessedPage,
-} from "./types"
-import {computeMd5} from "./utils"
+} from "./types.js"
+import {computeMd5} from "./utils.js"
 
 export interface KnowledgeExporterConfig {
   baseUrl?: string

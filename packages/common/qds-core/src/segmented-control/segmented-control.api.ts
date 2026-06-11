@@ -4,7 +4,7 @@
 import type {Explicit} from "@qualcomm-ui/utils/guard"
 import type {PropNormalizer} from "@qualcomm-ui/utils/machine"
 
-import {segmentedControlClasses} from "./segmented-control.classes"
+import {segmentedControlClasses} from "./segmented-control.classes.js"
 import type {
   QdsSegmentedControlApi,
   QdsSegmentedControlApiProps,
@@ -12,7 +12,7 @@ import type {
   QdsSegmentedControlItemBindings,
   QdsSegmentedControlItemHiddenInputBindings,
   QdsSegmentedControlItemTextBindings,
-} from "./segmented-control.types"
+} from "./segmented-control.types.js"
 
 export function createQdsSegmentedControlApi(
   props: Explicit<QdsSegmentedControlApiProps>,

@@ -4,18 +4,18 @@
 import type {ReactNode} from "react"
 
 import type {PagePropTypes} from "@qualcomm-ui/mdx-common"
-import {Link} from "@qualcomm-ui/react/link"
 import {CodeHighlight} from "@qualcomm-ui/react-mdx/code-highlight"
 import {useMdxDocsContext} from "@qualcomm-ui/react-mdx/context"
 import {useMdxDocsLayoutContext} from "@qualcomm-ui/react-mdx/docs-layout"
 import {dummyTypePrefix} from "@qualcomm-ui/react-mdx/shiki"
+import {Link} from "@qualcomm-ui/react/link"
 import type {QuiPropDeclaration} from "@qualcomm-ui/typedoc-common"
 import {pascalCase} from "@qualcomm-ui/utils/change-case"
 
-import {DocsExternalLink} from "../docs-external-link"
-import {usePropsContext} from "../use-props-context"
+import {DocsExternalLink} from "../docs-external-link.js"
+import {usePropsContext} from "../use-props-context.js"
 
-import {SimpleType} from "./simple-type"
+import {SimpleType} from "./simple-type.js"
 
 interface Props {
   /**

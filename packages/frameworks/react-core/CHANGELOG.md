@@ -1,5 +1,22 @@
 # @qualcomm-ui/react-core Changelog
 
+## 1.5.7
+
+Jun 10th, 2026
+
+### Miscellaneous Chores
+
+- lint ([996b90a](https://github.com/qualcomm/qualcomm-ui/commit/996b90a))
+- **deps:** update dependencies [@qualcomm-ui/utils@1.3.2, @qualcomm-ui/dom@1.1.4, @qualcomm-ui/core@1.11.5]
+
+### Code Refactoring
+
+- support nodenext resolution ([067b4de](https://github.com/qualcomm/qualcomm-ui/commit/067b4de))
+
+### Styles
+
+- apply lint updates ([9fec50d](https://github.com/qualcomm/qualcomm-ui/commit/9fec50d))
+
 ## 1.5.6
 
 Jun 5th, 2026

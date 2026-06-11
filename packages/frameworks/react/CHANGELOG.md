@@ -1,5 +1,21 @@
 # @qualcomm-ui/react Changelog
 
+## 1.24.4
+
+Jun 10th, 2026
+
+### Code Refactoring
+
+- support nodenext resolution ([a81a991](https://github.com/qualcomm/qualcomm-ui/commit/a81a991))
+
+### Styles
+
+- apply lint updates ([40c2768](https://github.com/qualcomm/qualcomm-ui/commit/40c2768))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react-core@1.5.7, @qualcomm-ui/utils@1.3.2, @qualcomm-ui/qds-core@1.29.3, @qualcomm-ui/core@1.11.5]
+
 ## 1.24.3
 
 Jun 5th, 2026

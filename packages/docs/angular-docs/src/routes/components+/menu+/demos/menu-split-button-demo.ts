@@ -1,9 +1,9 @@
 import {Component} from "@angular/core"
 import {Download, FileArchive, FileJson, FileText} from "lucide-angular"
 
-import {MenuModule} from "@qualcomm-ui/angular/menu"
 import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 import {PortalDirective} from "@qualcomm-ui/angular-core/portal"
+import {MenuModule} from "@qualcomm-ui/angular/menu"
 
 @Component({
   imports: [MenuModule, PortalDirective],

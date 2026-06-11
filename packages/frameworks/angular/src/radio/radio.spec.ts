@@ -3,7 +3,7 @@ import {
   FormControl,
   FormGroup,
   FormsModule,
-  NgForm,
+  type NgForm,
   ReactiveFormsModule,
   Validators,
 } from "@angular/forms"

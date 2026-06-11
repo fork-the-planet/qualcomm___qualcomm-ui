@@ -6,7 +6,6 @@ import type {ReactElement, ReactNode} from "react"
 import {X} from "lucide-react"
 
 import {createQdsTagApi, type QdsTagApiProps} from "@qualcomm-ui/qds-core/tag"
-import {IconOrNode} from "@qualcomm-ui/react/icon"
 import type {LucideIconOrElement} from "@qualcomm-ui/react-core/lucide"
 import {normalizeProps} from "@qualcomm-ui/react-core/machine"
 import {useControlledState} from "@qualcomm-ui/react-core/state"
@@ -14,6 +13,7 @@ import {
   type ElementRenderProp,
   PolymorphicElement,
 } from "@qualcomm-ui/react-core/system"
+import {IconOrNode} from "@qualcomm-ui/react/icon"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 export interface TagProps extends QdsTagApiProps, ElementRenderProp<"button"> {

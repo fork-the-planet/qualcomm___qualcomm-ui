@@ -10,11 +10,11 @@ import {render} from "@testing-library/angular"
 import {describe, expect, test, vi} from "vitest"
 import {page, userEvent} from "vitest/browser"
 
+import {requiredNumberValidator} from "@qualcomm-ui/angular-core/number-input"
 import {
   NumberInputModule,
   type UnitOption,
 } from "@qualcomm-ui/angular/number-input"
-import {requiredNumberValidator} from "@qualcomm-ui/angular-core/number-input"
 import type {
   NumberInputValueChangeDetails,
   NumberInputValueInvalidDetails,

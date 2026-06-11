@@ -3,12 +3,12 @@
 
 import {NgModule} from "@angular/core"
 
+import {QBindDirective} from "@qualcomm-ui/angular-core/machine"
 import {IconDirective} from "@qualcomm-ui/angular/icon"
 import {
   InputEndIconComponent,
   InputStartIconComponent,
 } from "@qualcomm-ui/angular/input"
-import {QBindDirective} from "@qualcomm-ui/angular-core/machine"
 
 import {FileInputClearTriggerDirective} from "./file-input-clear-trigger.directive"
 import {FileInputControlDirective} from "./file-input-control.directive"

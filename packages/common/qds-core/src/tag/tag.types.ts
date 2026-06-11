@@ -7,8 +7,8 @@ import type {
   BooleanDataAttr,
 } from "@qualcomm-ui/utils/attributes"
 
-import type {tagAnatomy} from "./tag.anatomy"
-import type {tagClasses} from "./tag.classes"
+import type {tagAnatomy} from "./tag.anatomy.js"
+import type {tagClasses} from "./tag.classes.js"
 
 /** @deprecated use "lime" */
 // eslint-disable-next-line @typescript-eslint/naming-convention

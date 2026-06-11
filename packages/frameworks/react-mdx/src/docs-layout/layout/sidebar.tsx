@@ -14,17 +14,17 @@ import {
 
 import {createTreeCollection} from "@qualcomm-ui/core/tree"
 import type {NavItem} from "@qualcomm-ui/mdx-common"
-import {SideNav} from "@qualcomm-ui/react/side-nav"
 import {useSafeLayoutEffect} from "@qualcomm-ui/react-core/effects"
 import type {ElementRenderProp} from "@qualcomm-ui/react-core/system"
 import {useMdxDocsContext} from "@qualcomm-ui/react-mdx/context"
+import {SideNav} from "@qualcomm-ui/react/side-nav"
 import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 import type {TreeCollection} from "@qualcomm-ui/utils/collection"
 import {isDefined} from "@qualcomm-ui/utils/guard"
 import {matchSorter} from "@qualcomm-ui/utils/match-sorter"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useMdxDocsLayoutContext} from "./use-mdx-docs-layout"
+import {useMdxDocsLayoutContext} from "./use-mdx-docs-layout.js"
 
 export interface SidebarProps extends Omit<ElementRenderProp<"div">, "dir"> {
   /**
@@ -122,6 +122,8 @@ export function Sidebar({
     if (node) {
       const parents = collection.getParentNodes(node.id)
       if (parents.length) {
+        // TODO: fix
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setExpandedValue((prev) => [...prev, ...parents.map((node) => node.id)])
       }
     }

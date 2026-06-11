@@ -9,13 +9,13 @@ import type {
   QdsBadgeCategoryEmphasis,
   QdsBadgeSemanticEmphasis,
 } from "@qualcomm-ui/qds-core/badge"
-import type {BreadcrumbsItemProps} from "@qualcomm-ui/react/breadcrumbs"
 import type {
   DemoSettings,
   MdxDocsContextValue,
   PackageManager,
   RouteDemoState,
 } from "@qualcomm-ui/react-mdx/context"
+import type {BreadcrumbsItemProps} from "@qualcomm-ui/react/breadcrumbs"
 
 export type TocHighlightStrategy = "nearest" | "viewport"
 

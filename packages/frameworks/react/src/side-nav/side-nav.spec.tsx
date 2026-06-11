@@ -2,8 +2,8 @@ import {type HTMLAttributes, useState} from "react"
 
 import {FileText, FolderIcon, MoreHorizontal} from "lucide-react"
 import {describe, expect, test, vi} from "vitest"
-import {page, userEvent} from "vitest/browser"
 import {render} from "vitest-browser-react"
+import {page, userEvent} from "vitest/browser"
 
 import {createTreeCollection} from "@qualcomm-ui/core/tree"
 import {SideNav} from "@qualcomm-ui/react/side-nav"

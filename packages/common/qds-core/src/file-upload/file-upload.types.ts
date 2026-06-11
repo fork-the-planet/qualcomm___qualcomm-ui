@@ -6,7 +6,7 @@ import type {
   QdsButtonSize,
 } from "@qualcomm-ui/qds-core/button"
 
-import type {fileUploadClasses} from "./file-upload.classes"
+import type {fileUploadClasses} from "./file-upload.classes.js"
 
 export type QdsFileUploadSize = "sm" | "md" | "lg"
 

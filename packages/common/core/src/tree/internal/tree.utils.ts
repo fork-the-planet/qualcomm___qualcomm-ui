@@ -18,7 +18,7 @@ import type {
   CheckedValueMap,
   NodeWithError,
   TreeSchema,
-} from "../tree.types"
+} from "../tree.types.js"
 
 export function skipFn(
   params: Pick<Params<TreeSchema>, "prop" | "context">,
@@ -121,7 +121,8 @@ export function expandBranches(
     // Read up to date collection to avoid stale data
     let collection = prop("collection")
 
-    results.forEach((result, index) => {
+    for (const result of results) {
+      const index = results.indexOf(result)
       const {id, indexPath, node, valuePath} = nodesToLoad[index]
       if (result.status === "fulfilled") {
         nextLoadingStatus[id] = "loaded"
@@ -132,7 +133,7 @@ export function expandBranches(
         Reflect.deleteProperty(nextLoadingStatus, id)
         nodeWithErrors.push({error: result.reason, indexPath, node, valuePath})
       }
-    })
+    }
 
     context.set("loadingStatus", nextLoadingStatus)
 

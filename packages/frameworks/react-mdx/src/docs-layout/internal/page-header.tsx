@@ -6,8 +6,8 @@ import type {ComponentPropsWithRef, ReactElement} from "react"
 import {useMdxDocsContext} from "@qualcomm-ui/react-mdx/context"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useMdxDocsLayoutContext} from "../layout"
-import type {FrontmatterBadge} from "../types"
+import {useMdxDocsLayoutContext} from "../layout/index.js"
+import type {FrontmatterBadge} from "../types.js"
 
 export interface PageHeaderProps extends ComponentPropsWithRef<"h1"> {}
 

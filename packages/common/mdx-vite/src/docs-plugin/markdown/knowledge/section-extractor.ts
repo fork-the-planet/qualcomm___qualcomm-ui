@@ -17,10 +17,10 @@ import type {
   SimplifiedProp,
 } from "@qualcomm-ui/mdx-common"
 
-import {isSpoilerBlock, isStepBlock} from "../../remark"
-import {SlugGenerator, slugify} from "../create-slug"
+import {isSpoilerBlock, isStepBlock} from "../../remark/index.js"
+import {SlugGenerator, slugify} from "../create-slug.js"
 
-import {computeMd5} from "./utils"
+import {computeMd5} from "./utils.js"
 
 export interface SectionExtractorOptions {
   /**

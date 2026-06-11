@@ -5,7 +5,7 @@ import remarkLintCodeFormat from "./remark-lint-code-format.js"
 import remarkLintMdxJsxFormat from "./remark-lint-mdx-jsx-format.js"
 import remarkPreserveAlertMarkers from "./remark-preserve-alert-markers.js"
 
-const remarkConfig = {
+const remarkConfig: any = {
   plugins: [
     "remark-frontmatter",
     "remark-lint-fenced-code-flag",

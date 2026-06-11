@@ -3,9 +3,9 @@
 
 import {NgModule} from "@angular/core"
 
+import {QBindDirective} from "@qualcomm-ui/angular-core/machine"
 import {ButtonModule} from "@qualcomm-ui/angular/button"
 import {IconDirective} from "@qualcomm-ui/angular/icon"
-import {QBindDirective} from "@qualcomm-ui/angular-core/machine"
 
 import {FileUploadClearTriggerDirective} from "./file-upload-clear-trigger.directive"
 import {FileUploadContextDirective} from "./file-upload-context.directive"

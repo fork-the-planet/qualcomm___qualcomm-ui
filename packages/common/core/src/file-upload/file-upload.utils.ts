@@ -14,7 +14,7 @@ import {
 import type {Params} from "@qualcomm-ui/utils/machine"
 import {warn} from "@qualcomm-ui/utils/warning"
 
-import type {FileRejection, FileUploadSchema} from "./file-upload.types"
+import type {FileRejection, FileUploadSchema} from "./file-upload.types.js"
 
 export function isEventWithFiles(
   event: Pick<DragEvent, "dataTransfer" | "target">,
@@ -64,7 +64,7 @@ export function getEventFiles(
     rejectedFiles: currentRejectedFiles,
   }
 
-  files.forEach((file) => {
+  for (const file of files) {
     const [accepted, acceptError] = isValidFileType(
       file,
       computed("acceptAttr"),
@@ -95,12 +95,12 @@ export function getEventFiles(
       }
       rejectedFiles.push({errors: errors.filter(Boolean) as FileError[], file})
     }
-  })
+  }
 
   if (!isFilesWithinRange(ctx, acceptedFiles.length, currentAcceptedFiles)) {
-    acceptedFiles.forEach((file) => {
+    for (const file of acceptedFiles) {
       rejectedFiles.push({errors: ["TOO_MANY_FILES"], file})
-    })
+    }
     acceptedFiles.splice(0)
   }
 
@@ -115,9 +115,9 @@ export function setInputFiles(inputEl: HTMLInputElement, files: File[]): void {
   try {
     if ("DataTransfer" in win) {
       const dataTransfer = new win.DataTransfer()
-      files.forEach((file) => {
+      for (const file of files) {
         dataTransfer.items.add(file)
-      })
+      }
       inputEl.files = dataTransfer.files
     }
   } catch (err) {

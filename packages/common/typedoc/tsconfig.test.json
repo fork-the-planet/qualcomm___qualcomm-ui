@@ -2,9 +2,9 @@
   "extends": "@qualcomm-ui/tsconfig/tsconfig.strict.json",
   "compilerOptions": {
     "jsx": "preserve",
-    "noEmit": true,
     "strictPropertyInitialization": false,
-    "composite": true
+    "composite": true,
+    "rootDir": "./tests"
   },
   "include": [
     "./tests"

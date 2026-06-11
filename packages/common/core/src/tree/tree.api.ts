@@ -31,8 +31,8 @@ import {
   getCheckedValueMap,
   getNodeId,
   getNodeTextId,
-} from "./internal"
-import {treeAnatomy} from "./tree.anatomy"
+} from "./internal/index.js"
+import {treeAnatomy} from "./tree.anatomy.js"
 import type {
   NodeProps,
   NodeState,
@@ -52,7 +52,7 @@ import type {
   TreeNodeTextBindings,
   TreeRootBindings,
   TreeSchema,
-} from "./tree.types"
+} from "./tree.types.js"
 
 const parts = treeAnatomy.parts
 

@@ -2,9 +2,9 @@ import {Component, signal} from "@angular/core"
 import {FormsModule} from "@angular/forms"
 import {Upload} from "lucide-angular"
 
+import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 import {CheckboxModule} from "@qualcomm-ui/angular/checkbox"
 import {FileInputModule} from "@qualcomm-ui/angular/file-input"
-import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 
 @Component({
   imports: [CheckboxModule, FileInputModule, FormsModule],

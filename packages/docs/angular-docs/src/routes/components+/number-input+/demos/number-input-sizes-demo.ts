@@ -1,8 +1,8 @@
 import {Component} from "@angular/core"
 import {Sigma} from "lucide-angular"
 
-import {NumberInputModule} from "@qualcomm-ui/angular/number-input"
 import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
+import {NumberInputModule} from "@qualcomm-ui/angular/number-input"
 
 @Component({
   imports: [NumberInputModule],

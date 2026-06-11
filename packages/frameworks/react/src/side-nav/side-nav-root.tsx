@@ -11,7 +11,7 @@ import {
 import type {TreeNode} from "@qualcomm-ui/utils/collection"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {qdsSideNavApi} from "./qds-side-nav-context"
+import {qdsSideNavApi} from "./qds-side-nav-context.js"
 
 export interface SideNavRootProps<T = TreeNode>
   extends CoreSideNavRootProps<T>, QdsSideNavRootProps {}

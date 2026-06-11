@@ -7,7 +7,7 @@ import {resolveAlertBannerButtonProps} from "@qualcomm-ui/qds-core/alert-banner"
 import {Button, type ButtonProps} from "@qualcomm-ui/react/button"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useAlertBannerContext} from "./qds-alert-banner-context"
+import {useAlertBannerContext} from "./qds-alert-banner-context.js"
 
 /**
  * @since 1.21.0

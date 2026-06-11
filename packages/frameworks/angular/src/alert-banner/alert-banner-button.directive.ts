@@ -10,14 +10,14 @@ import {
   type OnInit,
 } from "@angular/core"
 
+import type {LucideIconOrString} from "@qualcomm-ui/angular-core/lucide"
+import {useTrackBindings} from "@qualcomm-ui/angular-core/machine"
 import {useButtonApi} from "@qualcomm-ui/angular/button"
 import {
   END_ICON_CONTEXT_TOKEN,
   type IconTokenContext,
   START_ICON_CONTEXT_TOKEN,
 } from "@qualcomm-ui/angular/icon"
-import type {LucideIconOrString} from "@qualcomm-ui/angular-core/lucide"
-import {useTrackBindings} from "@qualcomm-ui/angular-core/machine"
 import {resolveAlertBannerButtonProps} from "@qualcomm-ui/qds-core/alert-banner"
 import type {Booleanish} from "@qualcomm-ui/utils/coercion"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"

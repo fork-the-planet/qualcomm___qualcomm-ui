@@ -3,8 +3,8 @@
 
 import {useEffect, useState} from "react"
 
-import {Table} from "@qualcomm-ui/react/table"
 import {useTheme} from "@qualcomm-ui/react-router-utils/client"
+import {Table} from "@qualcomm-ui/react/table"
 import type {ColorData} from "@qualcomm-ui/tailwind-plugin/theme"
 
 import {TableWrapper} from "./table-wrapper"

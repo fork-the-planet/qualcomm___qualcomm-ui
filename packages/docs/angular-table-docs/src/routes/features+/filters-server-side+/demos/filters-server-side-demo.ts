@@ -5,6 +5,7 @@ import {injectQuery} from "@tanstack/angular-query-experimental"
 import {Search} from "lucide-angular"
 import {debounceTime} from "rxjs"
 
+import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 import {PaginationModule} from "@qualcomm-ui/angular/pagination"
 import {PopoverModule} from "@qualcomm-ui/angular/popover"
 import {ProgressRingModule} from "@qualcomm-ui/angular/progress-ring"
@@ -15,7 +16,6 @@ import {
   TableModule,
 } from "@qualcomm-ui/angular/table"
 import {TextInputModule} from "@qualcomm-ui/angular/text-input"
-import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 import {
   type ColumnFiltersState,
   getCoreRowModel,

@@ -4,9 +4,9 @@ import {Download} from "lucide-angular"
 import {describe, expect, test, vi} from "vitest"
 import {page} from "vitest/browser"
 
-import {MenuModule} from "@qualcomm-ui/angular/menu"
 import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 import {PortalDirective} from "@qualcomm-ui/angular-core/portal"
+import {MenuModule} from "@qualcomm-ui/angular/menu"
 
 function menu() {
   return page.getByRole("menu")

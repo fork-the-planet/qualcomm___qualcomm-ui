@@ -16,7 +16,7 @@ function getSerializeJsxEndMatch(text: string) {
 /**
  * @since 3.8.0
  */
-export function isSerializeJsxBlock(text: string) {
+export function isSerializeJsxBlock(text: string): boolean {
   return !!getSerializeJsxStartMatch(text) || !!getSerializeJsxEndMatch(text)
 }
 

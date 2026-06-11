@@ -1,22 +1,14 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {
-  AST_NODE_TYPES,
-  ESLintUtils,
-  type TSESTree,
-} from "@typescript-eslint/utils"
+import {AST_NODE_TYPES, type TSESTree} from "@typescript-eslint/utils"
 
 import {
+  createRule,
   forEachJsxChildElement,
   isTrackedQuiComponent,
   trackQuiComponentImports,
-} from "./utils"
-
-const createRule = ESLintUtils.RuleCreator(
-  (name) =>
-    `https://github.com/qualcomm/qualcomm-ui/tree/main/packages/configs/eslint-plugin-react#${name}`,
-)
+} from "./utils.js"
 
 type MessageIds =
   | "preferHeaderBarActionButton"
@@ -24,7 +16,9 @@ type MessageIds =
 
 const TRACKED_COMPONENTS = ["Button", "HeaderBar", "IconButton"] as const
 
-export const preferHeaderBarActions = createRule<[], MessageIds>({
+export const preferHeaderBarActions: ReturnType<
+  typeof createRule<[], MessageIds>
+> = createRule<[], MessageIds>({
   create(context) {
     const importedComponents = new Map<string, string>()
     const namespaceImports = new Set<string>()

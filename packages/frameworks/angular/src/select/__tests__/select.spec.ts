@@ -3,8 +3,8 @@ import {render} from "@testing-library/angular"
 import {describe, expect, test, vi} from "vitest"
 import {page, userEvent} from "vitest/browser"
 
-import {SelectModule} from "@qualcomm-ui/angular/select"
 import {PortalDirective} from "@qualcomm-ui/angular-core/portal"
+import {SelectModule} from "@qualcomm-ui/angular/select"
 import {selectCollection} from "@qualcomm-ui/core/select"
 
 import {type MultiComponentTest, runTests} from "~test-utils"

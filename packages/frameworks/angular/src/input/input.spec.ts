@@ -4,13 +4,13 @@ import {CircleAlert, Search} from "lucide-angular"
 import {describe, expect, test} from "vitest"
 import {page} from "vitest/browser"
 
+import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 import {
   ErrorTextComponent,
   HintDirective,
   InputEndIconComponent,
   InputStartIconComponent,
 } from "@qualcomm-ui/angular/input"
-import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 
 describe("Input primitives", () => {
   test("renders standalone hint and error text content", async () => {

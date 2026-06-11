@@ -1,8 +1,8 @@
 import {Component} from "@angular/core"
 import {Link2} from "lucide-angular"
 
-import {TagDirective} from "@qualcomm-ui/angular/tag"
 import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
+import {TagDirective} from "@qualcomm-ui/angular/tag"
 
 @Component({
   imports: [TagDirective],

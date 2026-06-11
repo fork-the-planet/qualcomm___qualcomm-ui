@@ -3,9 +3,9 @@
 
 import {booleanAttribute, Component, input} from "@angular/core"
 
+import {provideFileUploadContext} from "@qualcomm-ui/angular-core/file-upload"
 import {provideQdsFileUploadContext} from "@qualcomm-ui/angular/file-upload"
 import {provideQdsInputContext} from "@qualcomm-ui/angular/input"
-import {provideFileUploadContext} from "@qualcomm-ui/angular-core/file-upload"
 import type {Booleanish} from "@qualcomm-ui/utils/coercion"
 
 import {FileInputRootDirective} from "./file-input-root.directive"

@@ -1,5 +1,26 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 3.8.4
+
+Jun 10th, 2026
+
+### Bug Fixes
+
+- [shiki]: remove diffed code from copyable examples ([834d30a](https://github.com/qualcomm/qualcomm-ui/commit/834d30a))
+
+### Code Refactoring
+
+- [open-web-ui]: remove unused class ([96c6399](https://github.com/qualcomm/qualcomm-ui/commit/96c6399))
+- support nodenext resolution ([bb2a702](https://github.com/qualcomm/qualcomm-ui/commit/bb2a702))
+
+### Styles
+
+- apply lint updates ([a70177d](https://github.com/qualcomm/qualcomm-ui/commit/a70177d))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/typedoc-common@1.0.8, @qualcomm-ui/utils@1.3.2, @qualcomm-ui/mdx-common@2.4.2]
+
 ## 3.8.3
 
 Jun 5th, 2026

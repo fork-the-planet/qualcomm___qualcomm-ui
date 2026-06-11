@@ -25,7 +25,7 @@ import type {
   ScopeWithIds,
 } from "@qualcomm-ui/utils/machine"
 
-import type {fileUploadAnatomy} from "./file-upload.anatomy"
+import type {fileUploadAnatomy} from "./file-upload.anatomy.js"
 
 export interface FileRejection {
   errors: FileError[]

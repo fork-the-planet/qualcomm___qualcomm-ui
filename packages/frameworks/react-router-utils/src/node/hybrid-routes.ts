@@ -138,11 +138,11 @@ export function hybridRoutes(
     },
   )
   // update undefined parentIds to 'root'
-  Object.values(routes).forEach((route) => {
+  for (const route of Object.values(routes)) {
     if (route.parentId === undefined) {
       route.parentId = "root"
     }
-  })
+  }
 
   return routes
 }
@@ -213,10 +213,10 @@ function _flatRoutes(
     })
   }
   // update parentIds for all routes
-  Array.from(routeMap.values()).forEach((routeInfo) => {
+  for (const routeInfo of Array.from(routeMap.values())) {
     const parentId = findParentRouteId(routeInfo, nameMap)
     routeInfo.parentId = parentId
-  })
+  }
 
   // Then, recurse through all routes using the public defineRoutes() API
   function defineNestedRoutes(
@@ -294,7 +294,14 @@ export function getRouteInfo(
   routeDir: string,
   file: string,
   options: FlatRoutesOptions,
-) {
+): {
+  file: string
+  id: string
+  index: boolean
+  name: string
+  path: string
+  segments: string[]
+} {
   const filePath = normalizeSlashes(join(routeDir, file))
   const routeId = createRouteId(filePath)
   const routeIdWithoutRoutes = routeId.slice(routeDir.length + 1)
@@ -385,7 +392,7 @@ export function getRouteSegments(
   index: boolean,
   paramPrefixChar: string = "$",
   routingStrategy?: RoutingStrategy,
-) {
+): string[] {
   let routeSegments: string[] = []
   let i = 0
   let routeSegment = ""
@@ -522,9 +529,9 @@ function isPathSeparator(char: string) {
 export function defaultVisitFiles(
   dir: string,
   visitor: (file: string) => void,
-  baseDir = dir,
+  baseDir: string = dir,
   visitOptions?: {excludePrivateFolders?: boolean},
-) {
+): void {
   for (const filename of readdirSync(dir)) {
     const file = resolve(dir, filename)
     const stat = statSync(file)
@@ -544,11 +551,11 @@ export function defaultVisitFiles(
   }
 }
 
-export function createRouteId(file: string) {
+export function createRouteId(file: string): string {
   return normalizeSlashes(stripFileExtension(file))
 }
 
-export function normalizeSlashes(file: string) {
+export function normalizeSlashes(file: string): string {
   return file.split(win32.sep).join("/")
 }
 

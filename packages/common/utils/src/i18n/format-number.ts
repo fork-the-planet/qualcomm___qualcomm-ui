@@ -4,7 +4,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {i18nCache} from "./cache"
+import {i18nCache} from "./cache.js"
 
 const getNumberFormatter = i18nCache(Intl.NumberFormat)
 

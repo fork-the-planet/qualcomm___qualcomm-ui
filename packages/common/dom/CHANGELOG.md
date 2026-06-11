@@ -1,5 +1,21 @@
 # @qualcomm-ui/dom Changelog
 
+## 1.1.4
+
+Jun 10th, 2026
+
+### Styles
+
+- apply lint updates ([277ab8d](https://github.com/qualcomm/qualcomm-ui/commit/277ab8d))
+
+### Code Refactoring
+
+- support nodenext resolution ([8cf0690](https://github.com/qualcomm/qualcomm-ui/commit/8cf0690))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils@1.3.2]
+
 ## 1.1.3
 
 Jun 3rd, 2026

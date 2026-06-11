@@ -1,5 +1,5 @@
 name = "docs"
-model_reasoning_effort="xhigh"
+model_reasoning_effort = "xhigh"
 
 description = """
 Writes technical documentation for *.mdx files. Produces clear, direct documentation without marketing language, fake friendliness, or unnecessary verbosity.

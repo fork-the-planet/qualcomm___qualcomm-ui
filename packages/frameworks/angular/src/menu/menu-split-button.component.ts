@@ -11,21 +11,21 @@ import {
   output,
 } from "@angular/core"
 
-import {
-  type ButtonGroupContextValue,
-  provideQdsButtonGroupContext,
-  QdsButtonGroupContextService,
-} from "@qualcomm-ui/angular/button"
 import type {LucideIconOrString} from "@qualcomm-ui/angular-core/lucide"
 import {
   normalizeProps,
   useTrackBindings,
 } from "@qualcomm-ui/angular-core/machine"
 import {
-  type QdsButtonDensity,
-  type QdsButtonEmphasis,
-  type QdsButtonSize,
-  type QdsButtonVariant,
+  type ButtonGroupContextValue,
+  provideQdsButtonGroupContext,
+  QdsButtonGroupContextService,
+} from "@qualcomm-ui/angular/button"
+import type {
+  QdsButtonDensity,
+  QdsButtonEmphasis,
+  QdsButtonSize,
+  QdsButtonVariant,
 } from "@qualcomm-ui/qds-core/button"
 import {getQdsSplitButtonBindings} from "@qualcomm-ui/qds-core/menu"
 import type {Booleanish} from "@qualcomm-ui/utils/coercion"

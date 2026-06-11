@@ -15,7 +15,7 @@ import type {
   ScopeWithIds,
 } from "@qualcomm-ui/utils/machine"
 
-import type {progressAnatomy} from "./progress.anatomy"
+import type {progressAnatomy} from "./progress.anatomy.js"
 
 export type ProgressState = "indeterminate" | "complete" | "loading"
 

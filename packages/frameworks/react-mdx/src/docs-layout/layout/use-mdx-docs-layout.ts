@@ -17,7 +17,7 @@ import type {
 } from "@qualcomm-ui/mdx-common"
 import type {PropsContextValue} from "@qualcomm-ui/react-mdx/typedoc"
 
-import type {NavDensity} from "../types"
+import type {NavDensity} from "../types.js"
 
 export interface MdxDocsLayoutContextState {
   hidePageLinks: boolean

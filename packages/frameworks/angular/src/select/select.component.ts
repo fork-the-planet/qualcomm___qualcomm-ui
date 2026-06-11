@@ -8,8 +8,8 @@ import {
   input,
 } from "@angular/core"
 
-import {provideQdsInputContext} from "@qualcomm-ui/angular/input"
 import {provideSelectContext} from "@qualcomm-ui/angular-core/select"
+import {provideQdsInputContext} from "@qualcomm-ui/angular/input"
 import type {Booleanish} from "@qualcomm-ui/utils/coercion"
 
 import {

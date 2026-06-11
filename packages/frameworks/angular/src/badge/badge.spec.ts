@@ -4,13 +4,13 @@ import {Plus} from "lucide-angular"
 import {describe, expect, test} from "vitest"
 import {page} from "vitest/browser"
 
+import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 import {
   BadgeDirective,
   IconBadgeDirective,
   NumberBadgeDirective,
   StatusBadgeDirective,
 } from "@qualcomm-ui/angular/badge"
-import {provideIcons} from "@qualcomm-ui/angular-core/lucide"
 
 describe("Badge", () => {
   test("renders text badge content with configured bindings", async () => {

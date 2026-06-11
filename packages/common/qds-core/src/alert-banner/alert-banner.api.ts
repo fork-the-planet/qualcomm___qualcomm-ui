@@ -5,8 +5,8 @@ import type {QdsButtonApiProps} from "@qualcomm-ui/qds-core/button"
 import type {Explicit} from "@qualcomm-ui/utils/guard"
 import type {PropNormalizer} from "@qualcomm-ui/utils/machine"
 
-import {alertBannerAnatomy} from "./alert-banner.anatomy"
-import {alertBannerClasses} from "./alert-banner.classes"
+import {alertBannerAnatomy} from "./alert-banner.anatomy.js"
+import {alertBannerClasses} from "./alert-banner.classes.js"
 import type {
   QdsAlertBannerActionBindings,
   QdsAlertBannerApi,
@@ -18,7 +18,7 @@ import type {
   QdsAlertBannerIconBindings,
   QdsAlertBannerRootBindings,
   QdsAlertBannerVariant,
-} from "./alert-banner.types"
+} from "./alert-banner.types.js"
 
 const parts = alertBannerAnatomy.parts
 

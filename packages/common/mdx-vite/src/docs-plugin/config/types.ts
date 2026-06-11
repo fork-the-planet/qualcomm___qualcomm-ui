@@ -4,7 +4,7 @@
 import type {TocHeading} from "@qualcomm-ui/mdx-common"
 import type {QuiPropTypes} from "@qualcomm-ui/typedoc-common"
 
-import type {NavConfig} from "../nav-builder/types"
+import type {NavConfig} from "../nav-builder/types.js"
 
 export type RoutingStrategy =
   | "react-router-directory-groups"

@@ -3,15 +3,15 @@
 
 import type {ReactElement, ReactNode} from "react"
 
-import {IconOrNode} from "@qualcomm-ui/react/icon"
 import {
   CoreFileUpload,
   type CoreFileUploadErrorTextProps,
 } from "@qualcomm-ui/react-core/file-upload"
 import type {LucideIconOrElement} from "@qualcomm-ui/react-core/lucide"
+import {IconOrNode} from "@qualcomm-ui/react/icon"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {useQdsFileUploadContext} from "./qds-file-upload-context"
+import {useQdsFileUploadContext} from "./qds-file-upload-context.js"
 
 export interface FileUploadErrorTextProps extends CoreFileUploadErrorTextProps {
   children?: ReactNode

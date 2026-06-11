@@ -1,8 +1,8 @@
 import {type HTMLAttributes, type SVGAttributes, useState} from "react"
 
 import {describe, expect, test} from "vitest"
-import {page} from "vitest/browser"
 import {render} from "vitest-browser-react"
+import {page} from "vitest/browser"
 
 import {ProgressRing} from "@qualcomm-ui/react/progress-ring"
 

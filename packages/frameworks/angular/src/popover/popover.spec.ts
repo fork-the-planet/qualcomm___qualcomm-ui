@@ -3,8 +3,8 @@ import {render} from "@testing-library/angular"
 import {describe, expect, test, vi} from "vitest"
 import {page, userEvent} from "vitest/browser"
 
-import {PopoverModule} from "@qualcomm-ui/angular/popover"
 import {PortalDirective} from "@qualcomm-ui/angular-core/portal"
+import {PopoverModule} from "@qualcomm-ui/angular/popover"
 
 import {type MultiComponentTest, runTests} from "~test-utils"
 

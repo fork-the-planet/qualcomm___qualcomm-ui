@@ -1,8 +1,8 @@
 import {type ReactElement, useRef} from "react"
 
+import {Portal} from "@qualcomm-ui/react-core/portal"
 import {Button} from "@qualcomm-ui/react/button"
 import {Drawer} from "@qualcomm-ui/react/drawer"
-import {Portal} from "@qualcomm-ui/react-core/portal"
 
 export function DrawerCustomContainerDemo(): ReactElement {
   const containerRef = useRef<HTMLDivElement | null>(null)

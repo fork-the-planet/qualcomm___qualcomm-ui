@@ -1,5 +1,21 @@
 # @qualcomm-ui/react-router-utils Changelog
 
+## 2.1.4
+
+Jun 10th, 2026
+
+### Styles
+
+- apply lint updates ([97fb9ab](https://github.com/qualcomm/qualcomm-ui/commit/97fb9ab))
+
+### Code Refactoring
+
+- support nodenext resolution ([9808c49](https://github.com/qualcomm/qualcomm-ui/commit/9808c49))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/mdx-vite@3.8.4, @qualcomm-ui/mdx-common@2.4.2]
+
 ## 2.1.3
 
 Jun 5th, 2026

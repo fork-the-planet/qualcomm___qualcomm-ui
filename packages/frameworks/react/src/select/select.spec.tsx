@@ -2,12 +2,12 @@ import {useState} from "react"
 
 import {Star} from "lucide-react"
 import {describe, expect, test, vi} from "vitest"
-import {page, userEvent} from "vitest/browser"
 import {render} from "vitest-browser-react"
+import {page, userEvent} from "vitest/browser"
 
 import {selectCollection} from "@qualcomm-ui/core/select"
-import {Select, type SelectRootProps} from "@qualcomm-ui/react/select"
 import {Portal} from "@qualcomm-ui/react-core/portal"
+import {Select, type SelectRootProps} from "@qualcomm-ui/react/select"
 import type {DataAttributes} from "@qualcomm-ui/utils/attributes"
 
 import {type MultiComponentTestCase, runTests} from "~test-utils/runner"

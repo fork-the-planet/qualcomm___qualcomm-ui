@@ -2,8 +2,8 @@ import type {ReactNode} from "react"
 
 import {Moon, Sun} from "lucide-react"
 
-import {Button} from "@qualcomm-ui/react/button"
 import {Theme, useTheme} from "@qualcomm-ui/react-router-utils/client"
+import {Button} from "@qualcomm-ui/react/button"
 
 // This site is based on react-router and uses `@qualcomm-ui/react-router-utils` to
 // manage the active theme.

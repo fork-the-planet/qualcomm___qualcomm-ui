@@ -1,6 +1,12 @@
+import angularEslint from "angular-eslint"
+import oxfmtPlugin from "eslint-plugin-oxfmt"
 import {defineConfig} from "eslint/config"
 
 export default defineConfig({
+  extends: [
+    angularEslint.configs.templateRecommended,
+    oxfmtPlugin.configs.recommendedWithoutParser,
+  ],
   rules: {
     "@angular-eslint/template/attributes-order": [
       "error",
@@ -16,5 +22,7 @@ export default defineConfig({
         ],
       },
     ],
+    "@angular-eslint/template/prefer-self-closing-tags": "error",
+    "oxfmt/oxfmt": "error",
   },
 })

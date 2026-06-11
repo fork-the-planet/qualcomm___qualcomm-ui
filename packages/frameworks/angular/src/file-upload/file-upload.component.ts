@@ -297,9 +297,9 @@ export class FileUploadComponent extends FileUploadRootDirective {
 
     this.destroyRef.onDestroy(() => {
       subscription.unsubscribe()
-      Object.values(this.fileUrls()).forEach((url) => {
+      for (const url of Object.values(this.fileUrls())) {
         URL.revokeObjectURL(url)
-      })
+      }
     })
   }
 
@@ -308,19 +308,19 @@ export class FileUploadComponent extends FileUploadRootDirective {
     const newUrls: Record<string, string> = {}
     const currentFileNames = new Set(details.acceptedFiles.map((f) => f.name))
 
-    details.acceptedFiles.forEach((file) => {
+    for (const file of details.acceptedFiles) {
       if (currentUrls[file.name]) {
         newUrls[file.name] = currentUrls[file.name]
       } else if (this.isImageFile(file)) {
         newUrls[file.name] = URL.createObjectURL(file)
       }
-    })
+    }
 
-    Object.keys(currentUrls).forEach((fileName) => {
+    for (const fileName of Object.keys(currentUrls)) {
       if (!currentFileNames.has(fileName)) {
         URL.revokeObjectURL(currentUrls[fileName])
       }
-    })
+    }
 
     this.fileUrls.set(newUrls)
     this.fileCount.set(

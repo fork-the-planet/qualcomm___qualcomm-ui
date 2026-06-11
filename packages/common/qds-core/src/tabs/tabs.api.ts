@@ -5,7 +5,7 @@ import {booleanDataAttr} from "@qualcomm-ui/utils/attributes"
 import {defined, type Explicit} from "@qualcomm-ui/utils/guard"
 import type {PropNormalizer} from "@qualcomm-ui/utils/machine"
 
-import {tabClasses, tabsClasses} from "./tabs.classes"
+import {tabClasses, tabsClasses} from "./tabs.classes.js"
 import type {
   QdsTabsApi,
   QdsTabsApiProps,
@@ -18,7 +18,7 @@ import type {
   QdsTabsTabDismissButtonBindings,
   QdsTabsTabEndIconBindings,
   QdsTabsTabStartIconBindings,
-} from "./tabs.types"
+} from "./tabs.types.js"
 
 export function createQdsTabsApi(
   props: Explicit<QdsTabsApiProps>,

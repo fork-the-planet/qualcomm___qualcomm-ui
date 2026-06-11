@@ -14,7 +14,7 @@ import {
 } from "@qualcomm-ui/react-core/system"
 import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
-import {CheckmarkIcon} from "./checkmark-icon"
+import {CheckmarkIcon} from "./checkmark-icon.js"
 
 export interface CheckmarkProps
   extends ElementRenderProp<"div">, QdsCheckmarkApiProps {}

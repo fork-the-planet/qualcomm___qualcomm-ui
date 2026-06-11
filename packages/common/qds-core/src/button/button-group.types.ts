@@ -6,9 +6,9 @@ import type {AnatomyPart, AnatomyPartName} from "@qualcomm-ui/utils/anatomy"
 import type {
   QdsButtonGroupCommonBindings,
   QdsButtonGroupCommonProps,
-} from "./button-group-shared.types"
-import type {buttonGroupAnatomy} from "./button-group.anatomy"
-import type {buttonClasses} from "./button.classes"
+} from "./button-group-shared.types.js"
+import type {buttonGroupAnatomy} from "./button-group.anatomy.js"
+import type {buttonClasses} from "./button.classes.js"
 
 /**
  * The button group layouts

@@ -1,5 +1,13 @@
 # @qualcomm-ui/eslint-plugin-path-alias Changelog
 
+## 1.1.2
+
+Jun 10th, 2026
+
+### Miscellaneous Chores
+
+- update shared eslint configs ([5ae86dc](https://github.com/qualcomm/qualcomm-ui/commit/5ae86dc))
+
 ## 1.1.1
 
 May 22nd, 2026

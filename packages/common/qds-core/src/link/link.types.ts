@@ -5,8 +5,8 @@ import type {AnatomyPart, AnatomyPartName} from "@qualcomm-ui/utils/anatomy"
 import type {BooleanDataAttr} from "@qualcomm-ui/utils/attributes"
 import type {DirectionProperty} from "@qualcomm-ui/utils/direction"
 
-import type {linkAnatomy} from "./link.anatomy"
-import type {linkClasses} from "./link.classes"
+import type {linkAnatomy} from "./link.anatomy.js"
+import type {linkClasses} from "./link.classes.js"
 
 export type QdsLinkEmphasis =
   | "default"

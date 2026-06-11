@@ -5,7 +5,7 @@ import type {ReactElement} from "react"
 
 import {
   createQdsStatusBadgeApi,
-  type QdsStatusBadgeProps as QdsStatusBadgeProps,
+  type QdsStatusBadgeProps,
 } from "@qualcomm-ui/qds-core/badge"
 import {normalizeProps} from "@qualcomm-ui/react-core/machine"
 import {

@@ -2,7 +2,8 @@
   "extends": "@qualcomm-ui/tsconfig/tsconfig.strict.json",
   "compilerOptions": {
     "composite": true,
-    "noEmit": true,
+    "jsx": "react-jsx",
+    "tsBuildInfoFile": "node_modules/.tmp/tsbuildinfo-spec"
   },
   "include": ["./src/**/*.spec.ts"],
   "references": [
