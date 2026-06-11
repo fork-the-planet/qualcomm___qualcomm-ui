@@ -7,6 +7,7 @@ import importPlugin from "eslint-plugin-import"
 import eslintPluginOxfmt from "eslint-plugin-oxfmt"
 import perfectionist from "eslint-plugin-perfectionist"
 import promisePlugin from "eslint-plugin-promise"
+import eslintPluginUnicorn from "eslint-plugin-unicorn"
 import unusedImportsPlugin from "eslint-plugin-unused-imports"
 import {defineConfig} from "eslint/config"
 
@@ -101,6 +102,21 @@ const oxlintParityRules = {
   "valid-typeof": "error",
 }
 
+const unicornRules = {
+  "unicorn/no-array-for-each": "warn",
+  "unicorn/no-await-in-promise-methods": "error",
+  "unicorn/no-invalid-fetch-options": "error",
+  "unicorn/no-invalid-remove-event-listener": "error",
+  "unicorn/no-static-only-class": "error",
+  "unicorn/no-unnecessary-await": "error",
+  "unicorn/no-unreadable-iife": "error",
+  "unicorn/no-useless-length-check": "error",
+  "unicorn/prefer-array-find": "error",
+  "unicorn/prefer-node-protocol": "error",
+  "unicorn/prefer-set-size": "error",
+  "unicorn/prefer-string-trim-start-end": "error",
+}
+
 export default defineConfig({
   languageOptions: typescriptLanguageOptions,
   name: "qui-style-guide",
@@ -112,10 +128,12 @@ export default defineConfig({
     oxfmt: eslintPluginOxfmt,
     perfectionist,
     promise: promisePlugin,
+    unicorn: eslintPluginUnicorn,
     "unused-imports": unusedImportsPlugin,
   },
   rules: {
     ...oxlintParityRules,
+    ...unicornRules,
     ...commentLength.configs["flat/recommended"].rules,
     "@stylistic/spaced-comment": ["error", "always", {block: {balanced: true}}],
     "@typescript-eslint/ban-ts-comment": "off",
