@@ -1,5 +1,21 @@
 # @qualcomm-ui/react-mdx Changelog
 
+## 2.9.7
+
+Jun 10th, 2026
+
+### Code Refactoring
+
+- support nodenext resolution ([c65ce97](https://github.com/qualcomm/qualcomm-ui/commit/c65ce97))
+
+### Styles
+
+- apply lint updates ([a4aa073](https://github.com/qualcomm/qualcomm-ui/commit/a4aa073))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react-core@1.5.7, @qualcomm-ui/utils@1.3.2, @qualcomm-ui/mdx-common@2.4.2, @qualcomm-ui/react@1.24.4, @qualcomm-ui/core@1.11.5]
+
 ## 2.9.6
 
 Jun 5th, 2026

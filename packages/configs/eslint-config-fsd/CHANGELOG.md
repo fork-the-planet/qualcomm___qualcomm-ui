@@ -1,5 +1,17 @@
 # @qualcomm-ui/eslint-config-fsd Changelog
 
+## 1.0.3
+
+Jun 10th, 2026
+
+### Tests
+
+- account for index in forEach refactor ([54cad7c](https://github.com/qualcomm/qualcomm-ui/commit/54cad7c))
+
+### Miscellaneous Chores
+
+- update shared eslint configs ([5ae86dc](https://github.com/qualcomm/qualcomm-ui/commit/5ae86dc))
+
 ## 1.0.2
 
 May 22nd, 2026

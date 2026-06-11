@@ -1,5 +1,21 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.29.3
+
+Jun 10th, 2026
+
+### Styles
+
+- apply lint updates ([52b5982](https://github.com/qualcomm/qualcomm-ui/commit/52b5982))
+
+### Code Refactoring
+
+- support nodenext resolution ([42b9222](https://github.com/qualcomm/qualcomm-ui/commit/42b9222))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils@1.3.2, @qualcomm-ui/core@1.11.5]
+
 ## 1.29.2
 
 Jun 5th, 2026

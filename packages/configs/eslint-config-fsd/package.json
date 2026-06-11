@@ -1,6 +1,6 @@
 {
   "name": "@qualcomm-ui/eslint-config-fsd",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "QUI ESLint config for feature-sliced design",
   "keywords": [
     "config",

@@ -1,5 +1,21 @@
 # @qualcomm-ui/core Changelog
 
+## 1.11.5
+
+Jun 10th, 2026
+
+### Code Refactoring
+
+- support nodenext resolution ([5259f2e](https://github.com/qualcomm/qualcomm-ui/commit/5259f2e))
+
+### Styles
+
+- apply lint updates ([c37eff5](https://github.com/qualcomm/qualcomm-ui/commit/c37eff5))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils@1.3.2, @qualcomm-ui/dom@1.1.4]
+
 ## 1.11.4
 
 Jun 5th, 2026

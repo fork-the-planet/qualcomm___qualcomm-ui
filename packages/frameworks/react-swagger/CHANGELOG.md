@@ -1,5 +1,17 @@
 # @qualcomm-ui/react-swagger Changelog
 
+## 1.3.16
+
+Jun 10th, 2026
+
+### Styles
+
+- apply lint updates ([4f67114](https://github.com/qualcomm/qualcomm-ui/commit/4f67114))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/react-core@1.5.7, @qualcomm-ui/utils@1.3.2, @qualcomm-ui/qds-core@1.29.3, @qualcomm-ui/core@1.11.5]
+
 ## 1.3.15
 
 Jun 5th, 2026

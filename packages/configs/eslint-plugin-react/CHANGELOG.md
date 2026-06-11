@@ -1,5 +1,17 @@
 # @qualcomm-ui/eslint-plugin-react Changelog
 
+## 1.2.2
+
+Jun 10th, 2026
+
+### Miscellaneous Chores
+
+- update shared eslint configs ([5ae86dc](https://github.com/qualcomm/qualcomm-ui/commit/5ae86dc))
+
+### Code Refactoring
+
+- support nodenext resolution ([fc89d84](https://github.com/qualcomm/qualcomm-ui/commit/fc89d84))
+
 ## 1.2.1
 
 Jun 3rd, 2026

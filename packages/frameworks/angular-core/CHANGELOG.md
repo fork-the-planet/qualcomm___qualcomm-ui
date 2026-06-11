@@ -1,5 +1,17 @@
 # @qualcomm-ui/angular-core Changelog
 
+## 2.4.5
+
+Jun 10th, 2026
+
+### Styles
+
+- apply lint updates ([2e1d59d](https://github.com/qualcomm/qualcomm-ui/commit/2e1d59d))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/utils@1.3.2, @qualcomm-ui/dom@1.1.4, @qualcomm-ui/core@1.11.5]
+
 ## 2.4.4
 
 Jun 5th, 2026

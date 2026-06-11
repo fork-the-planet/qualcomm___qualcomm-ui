@@ -1,5 +1,18 @@
 # @qualcomm-ui/eslint-plugin-angular Changelog
 
+## 1.2.2
+
+Jun 10th, 2026
+
+### Code Refactoring
+
+- support nodenext resolution ([782a5e1](https://github.com/qualcomm/qualcomm-ui/commit/782a5e1))
+- support nodenext resolution ([5302784](https://github.com/qualcomm/qualcomm-ui/commit/5302784))
+
+### Miscellaneous Chores
+
+- update shared eslint configs ([5ae86dc](https://github.com/qualcomm/qualcomm-ui/commit/5ae86dc))
+
 ## 1.2.1
 
 Jun 3rd, 2026

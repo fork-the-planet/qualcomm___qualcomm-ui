@@ -1,5 +1,17 @@
 # @qualcomm-ui/node-utils Changelog
 
+## 1.0.4
+
+Jun 10th, 2026
+
+### Styles
+
+- apply lint updates ([071fdf4](https://github.com/qualcomm/qualcomm-ui/commit/071fdf4))
+
+### Code Refactoring
+
+- support nodenext resolution ([8198e32](https://github.com/qualcomm/qualcomm-ui/commit/8198e32))
+
 ## 1.0.3
 
 Jun 3rd, 2026
