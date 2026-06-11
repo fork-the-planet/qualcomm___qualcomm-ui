@@ -911,10 +911,10 @@ export class TreeCollection<T> {
     const groupMap = new Map<string, Array<{indexPath: IndexPath; node: T}>>()
     const children = this.getNodeChildren(parentNode)
 
-    for (const node of children) {
-      const index = children.indexOf(node)
-      const key = groupBy(node, index)
-      const indexPath = [...parentIndexPath, index]
+    for (let i = 0; i < children.length; i++) {
+      const node = children[i]
+      const key = groupBy(node, i)
+      const indexPath = [...parentIndexPath, i]
       const group = groupMap.get(key)
       if (!group) {
         groupMap.set(key, [{indexPath, node}])
@@ -1024,8 +1024,8 @@ export function filePathToTree(
     const parts = path.split("/")
     let currentNode = rootNode
 
-    for (const part of parts) {
-      const index = parts.indexOf(part)
+    for (let i = 0; i < parts.length; i++) {
+      const part = parts[i]
       let childNode = currentNode.children?.find(
         (child: any) => child.text === part,
       )
@@ -1033,7 +1033,7 @@ export function filePathToTree(
       if (!childNode) {
         childNode = {
           text: part,
-          value: parts.slice(0, index + 1).join("/"),
+          value: parts.slice(0, i + 1).join("/"),
         }
         currentNode.children ||= []
         currentNode.children.push(childNode)

@@ -178,9 +178,9 @@ export function filter<T>(node: T, options: FilterOptions<T>): T {
     const filteredChildren: T[] = []
 
     // Recursively filter children
-    for (const child of children) {
-      const index = children.indexOf(child)
-      const childIndexPath = [...indexPath, index]
+    for (let i = 0; i < children.length; i++) {
+      const child = children[i]
+      const childIndexPath = [...indexPath, i]
       const filteredChild = filterRecursive(child, childIndexPath)
       if (filteredChild) {
         filteredChildren.push(filteredChild)
