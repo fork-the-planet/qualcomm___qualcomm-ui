@@ -1,0 +1,163 @@
+---
+title: TypeScript Configs
+---
+
+# {frontmatter.title}
+
+Use this guide as a reference for setting up modern TypeScript projects.
+
+Most packages should start with a [solution-style](https://www.typescriptlang.org/docs/handbook/project-references.html#guidance) `tsconfig.json` and add narrow, purpose-specific configs for the code that needs typechecking. Prefer separate configs for library source, tests, Node scripts, and specialized workflows so each compiler run uses the options and file set it needs.
+
+## Package root config
+
+The package root `tsconfig.json` describes the TypeScript project graph. It does not compile source files directly.
+
+```json
+{
+  "files": [],
+  "references": [
+    {"path": "./tsconfig.lib.json"},
+    {"path": "./tsconfig.node.json"},
+    {"path": "./tsconfig.spec.json"},
+  ]
+}
+```
+
+## Library config
+
+The library config typechecks source code and emits declarations for published entry points. Package scripts should run it through `tsc -b tsconfig.lib.json`.
+
+Use Node-style module settings for consumable packages. A package that publishes modules for other packages or applications should compile with `module` set to `NodeNext` and `moduleResolution` set to `NodeNext`. These settings make TypeScript follow the same package boundary rules that Node uses for ESM packages, including `package.json` `exports`, file extensions, and package conditions. These settings are enabled by default if you extend the `@qualcomm-ui/tsconfig/tsconfig.lib.json`.
+
+```json
+{
+  "extends": "@qualcomm-ui/tsconfig/tsconfig.lib.json",
+  "compilerOptions": {
+    "composite": true,
+    "incremental": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "tsBuildInfoFile": "node_modules/.tmp/.tsbuildinfo-lib",
+    "paths": {
+      "@acme/example/*": ["./src/*/index.ts"]
+    }
+  },
+  "include": ["./src"],
+  "exclude": ["./src/**/*.spec.ts"]
+}
+```
+
+With `moduleResolution` set to `NodeNext`, relative ESM imports must use the file extension that exists after TypeScript emits JavaScript. TypeScript source files still end in `.ts` or `.tsx`, but imports point at the emitted `.js` file so Node can resolve the compiled package.
+
+Consider the following example:
+
+```ts
+// foo.ts
+export const foo: string = "foobar"
+```
+
+```ts
+// bar.ts
+// This will cause an error
+import {foo} from "./foo" // [!code --]
+// Add the extension to resolve the issue.
+import {foo} from "./foo.js" // [!code ++]
+```
+
+Use `.js` for imports that resolve to `.ts` and `.tsx` source files. Keep package self-imports and dependency imports unchanged, such as `@qualcomm-ui/react/button` or `react`.
+
+Use `@qualcomm-ui/tsconfig/tsconfig.lib.json` as the base for shared modules. This ruleset enables strict `compilerOptions` with an emphasis on TypeScript 7.0 compatibility. Keep `rootDir` pointed at `src` and emit package artifacts into `dist`. Store build info under `node_modules/.tmp` instead of `dist` because package clean scripts should be able to delete the full output directory before each build. Cleaning `dist` removes stale JavaScript, declaration files, and other artifacts left by previous builds without deleting TypeScript's incremental build cache.
+
+Applications usually have a different job. An app build is owned by a bundler, so app configs should usually set `module` to `ESNext` and `moduleResolution` to `Bundler`. Use app-style settings for Vite, React Router, Next.js, and similar application projects when the bundler owns import rewriting and asset handling. Do not use `Bundler` as the default for published libraries unless the package has a clear framework reason and the tradeoff is documented in the config.
+
+React packages usually add React-specific compiler options to the library config:
+
+```json
+{
+  "compilerOptions": {
+    "isolatedDeclarations": false,
+    "jsx": "react-jsx",
+    "paths": {
+      "@acme/components/*": ["./src/*/index.ts"]
+    }
+  }
+}
+```
+
+Do not include tests, Figma files, generated examples, or tool scripts in the library build. Give those files their own config when they need typechecking.
+
+## Test config
+
+The test config typechecks only tests and test utilities. It should reference the library config so tests compile against the same package source that the build uses.
+
+```json
+{
+  "extends": "@qualcomm-ui/tsconfig/tsconfig.strict.json",
+  "compilerOptions": {
+    "composite": true,
+    "moduleResolution": "Bundler",
+    "types": ["vitest"],
+    "paths": {
+      "@acme/components/*": ["./src/*/index.ts"]
+    }
+  },
+  "include": ["./src/**/*.spec.tsx", "./test-utils"],
+  "references": [
+    {"path": "./tsconfig.lib.json"}
+  ]
+}
+```
+
+Use `tsconfig.strict.json` for browser-oriented tests and `tsconfig.node.json` for packages whose tests run only in Node.js. Add Vitest types where tests use Vitest globals or APIs. Add more references only when tests import workspace packages, such as shared test utilities.
+
+## Node and tooling config
+
+The node config covers package scripts, build tooling, and root-level TypeScript config files such as `vite.config.ts` or `vitest.config.ts`.
+
+```json
+{
+  "extends": "@qualcomm-ui/tsconfig/tsconfig.node.json",
+  "compilerOptions": {
+    "composite": true
+  },
+  "include": ["./scripts", "*.ts"]
+}
+```
+
+Keep Node-only imports out of the library config. Scripts can use `node:` module imports and Node type definitions without leaking those assumptions into browser packages.
+
+## Specialized configs
+
+Add a specialized config when a workflow needs different compiler options, different includes, or a temporary output directory. Generated design-tool files are a common example.
+
+```json
+{
+  "extends": "@qualcomm-ui/tsconfig/tsconfig.strict.json",
+  "compilerOptions": {
+    "composite": true,
+    "incremental": true,
+    "rootDir": "./src",
+    "outDir": "./node_modules/.tmp/figma",
+    "tsBuildInfoFile": "node_modules/.tmp/.tsbuildinfo-figma",
+    "strict": false
+  },
+  "include": ["./src/**/*.figma.tsx", "./generated/figma/**/*.tsx"],
+  "references": [{"path": "./tsconfig.lib.json"}]
+}
+```
+
+Keep specialized configs narrow. They should not become a second library build. Reference `tsconfig.lib.json` when specialized files import package source.
+
+## Adding a package
+
+Use this checklist for new packages and for packages that need cleanup:
+
+- Create `tsconfig.json`, `tsconfig.lib.json`, and `tsconfig.node.json`.
+- Add `tsconfig.spec.json` when the package has tests.
+- Add specialized configs only for workflows with different compiler needs.
+- Reference every workspace package imported by source, tests, scripts, or specialized files.
+- Keep `paths` aligned with the package `exports` shape.
+- Exclude tests, generated files, and specialized files from `tsconfig.lib.json`.
+- Run the package type build, such as `pnpm example build:ts`.
