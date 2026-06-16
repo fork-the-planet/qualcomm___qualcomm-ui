@@ -39,7 +39,7 @@ export type QdsTagRadius = QdsTagShape
 
 export type QdsTagShape = "square" | "rounded"
 
-export type QdsTagSize = "sm" | "md" | "lg"
+export type QdsTagSize = "sm" | "md" | "lg" | "xl"
 
 /** @deprecated use `render` */
 // eslint-disable-next-line @typescript-eslint/naming-convention

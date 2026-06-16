@@ -47,6 +47,20 @@
     }
   }
 
+  &[data-size="xl"] {
+    --tag-size: var(--sizing-125);
+    --tag-icon-size: var(--sizing-70);
+    font: var(--font-static-body-sm-bold);
+    padding-inline: var(--spacing-100);
+
+    > .qui-tag__icon[data-tag-part="start-icon"] {
+      margin-inline-end: var(--spacing-70);
+    }
+    > .qui-tag__icon[data-tag-part="end-icon"] {
+      margin-inline-start: var(--spacing-70);
+    }
+  }
+
   &[data-shape="rounded"] {
     --tag-radius: var(--border-radius-rounded);
   }
