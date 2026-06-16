@@ -1,11 +1,11 @@
 {
-  "extends": "@qualcomm-ui/tsconfig/tsconfig.node.json",
+  "extends": "@qualcomm-ui/tsconfig/tsconfig.vitest.json",
   "compilerOptions": {
     "composite": true,
     "incremental": true,
-    "outDir": "./dist",
     "rootDir": "./src",
-    "tsBuildInfoFile": "node_modules/.tmp/tsbuildinfo-spec"
+    "outDir": "node_modules/.tmp/spec-out-tsc",
+    "tsBuildInfoFile": "node_modules/.tmp/.tsbuildinfo-spec"
   },
   "include": ["./src/**/*.spec.ts", "./src/**/__tests__/**/*.ts"],
   "references": [

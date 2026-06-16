@@ -2,7 +2,8 @@
   "extends": "./tsconfig.analog-vitest.json",
   "compilerOptions": {
     "composite": true,
-    "tsBuildInfoFile": "node_modules/.tmp/tsbuild-info-spec"
+    "outDir": "node_modules/.tmp/spec-out-tsc",
+    "tsBuildInfoFile": "node_modules/.tmp/.tsbuildinfo-spec"
   },
   "references": [
     {
