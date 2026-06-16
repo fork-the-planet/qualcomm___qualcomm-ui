@@ -4,7 +4,10 @@ title: TypeScript Configs
 
 # {frontmatter.title}
 
-A `tsconfig` file defines a TypeScript project. It controls which files TypeScript reads, which compiler options it uses, which projects it references, and where build output goes. This guide will help you find the optimal configuration for your project.
+> [!tip]
+> This guide features tsconfig files that extend configurations from the [@qualcomm-ui/tsconfig](https://github.com/qualcomm/qualcomm-ui-utils/tree/main/packages/tsconfig) package.
+
+A `tsconfig` file defines a TypeScript project. It controls which files TypeScript reads, which compiler options it uses, which projects it references, and where build output goes. This guide will help you find the optimal configuration for modules in your project.
 
 ## Why most packages should use multiple configs
 
@@ -40,7 +43,6 @@ The library config checks package source code and emits the declaration files co
   "extends": "@qualcomm-ui/tsconfig/tsconfig.lib.json",
   "compilerOptions": {
     "composite": true,
-    "incremental": true,
     "outDir": "./dist",
     "rootDir": "./src",
     "tsBuildInfoFile": "node_modules/.tmp/.tsbuildinfo-lib"
@@ -98,7 +100,7 @@ For React apps, extend the `@qualcomm-ui/tsconfig/tsconfig.react-app.json` base 
   "compilerOptions": {
     "composite": true,
     "rootDir": "./src",
-    "outDir": "node_modules/.tmp/react-app",
+    "outDir": "node_modules/.tmp/react-app-out-tsc",
     "tsBuildInfoFile": "node_modules/.tmp/.tsbuildinfo-app"
   },
   "include": ["./src"],
@@ -119,7 +121,7 @@ The test config checks tests and test utilities. It should reference the library
   "extends": "@qualcomm-ui/tsconfig/tsconfig.vitest.json",
   "compilerOptions": {
     "composite": true,
-    "outDir": "node_modules/.tmp/tests",
+    "outDir": "node_modules/.tmp/tests-out-tsc",
     "tsBuildInfoFile": "node_modules/.tmp/.tsbuildinfo-tests"
   },
   "include": [
@@ -142,7 +144,7 @@ The scripts tsconfig covers package scripts, build tooling, and root-level TypeS
   "extends": "@qualcomm-ui/tsconfig/tsconfig.scripts.json",
   "compilerOptions": {
     "composite": true,
-    "outDir": "node_modules/.tmp/scripts",
+    "outDir": "node_modules/.tmp/scripts-out-tsc",
     "tsBuildInfoFile": "node_modules/.tmp/.tsbuildinfo-scripts"
   },
   "include": ["./scripts", "*.ts"]
@@ -153,8 +155,12 @@ The scripts tsconfig covers package scripts, build tooling, and root-level TypeS
 
 Use this checklist for new packages and for packages that need cleanup. The result should be one config per compilation use case, with each config owning the files, references, output, and cache location for that job.
 
-- Create `tsconfig.json` and `tsconfig.lib.json`
+- Create `tsconfig.lib.json`
+  - If building a library, extend the `@qualcomm-ui/tsconfig/tsconfig.lib.json`
+  - If building a React application, extend the `@qualcomm-ui/tsconfig/tsconfig.react-app.json`
+  - If building an Angular application, extend the `@qualcomm-ui/tsconfig/tsconfig.angular-app.json`
 - Add `tsconfig.scripts.json` when the package has build or utility scripts
 - Add `tsconfig.spec.json` when the package has tests
 - Add additional configs as needed for workflows with different compiler needs
 - Exclude tests, generated files, and specialized files from `tsconfig.lib.json`
+- Create `tsconfig.json` with references to each of your tsconfig files
