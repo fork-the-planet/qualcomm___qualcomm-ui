@@ -45,7 +45,7 @@ const icons = [
 ]
 const needsIcon = icons.length > 0
 
-const example = figma.code`<button${disabledAttr}${emphasisAttr} q-tag${shapeAttr}${sizeAttr}${startIconAttr}${endIconAttr} variant="link">${label}</button>`
+const example = figma.code`<a${disabledAttr}${emphasisAttr} q-tag${shapeAttr}${sizeAttr}${startIconAttr}${endIconAttr} href="#">${label}</a>`
 
 export default {
   example,
