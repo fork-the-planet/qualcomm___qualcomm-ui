@@ -32,10 +32,15 @@ Icons are supplied using the [startIcon](./#startIcon) and [endIcon](./#endIcon)
 ### Variants
 
 ::: terms
-clickable, removable, closable
+clickable, removable, closable, chip, pill, filter, toggle, anchor, hyperlink, navigation, active, current
 :::
 
-Choose from three [variants](./#variant): `link`, `selectable` and `dismissable`.
+A tag renders as one of four types:
+
+- **read-only** (default) renders static metadata.
+- **dismissable** adds a close button. Set [variant](./#variant) to `dismissable` and pair it with the dismiss callback.
+- **selectable** renders as a toggle `<button>`. Set [variant](./#variant) to `selectable`.
+- **link** renders the tag as an anchor. Use the [render](./#render) prop to supply `<Link to="…" />` or `<a href="…" />`. Set [`aria-current`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current) on the active anchor for accessibility. The optional [active](./#active) prop applies the current-item styling.
 
 <Demo name="TagVariantsDemo" component={demos.TagVariantsDemo} />
 
@@ -59,7 +64,7 @@ Set the initial value using the [defaultSelected](./#defaultSelected) prop, or u
 status indicator
 :::
 
-Control the visual emphasis with different colors via the [emphasis](./#emphasis) prop.
+Control the visual emphasis with different colors via the [emphasis](./#emphasis) prop. The default emphasis is `outline-brand`.
 
 <Demo name="TagEmphasisDemo" component={demos.TagEmphasisDemo} />
 
@@ -69,7 +74,7 @@ Control the visual emphasis with different colors via the [emphasis](./#emphasis
 small, medium, large
 :::
 
-Choose from three [sizes](./#size): `sm`, `md` and `lg`. The default size is `md`.
+Choose from four [sizes](./#size): `sm`, `md`, `lg`, and `xl`. The default size is `md`.
 
 <Demo name="TagSizesDemo" component={demos.TagSizesDemo} />
 
@@ -99,7 +104,7 @@ Control the shape of the tag with the [shape](./#shape-1) prop. The default shap
 
 <TypeDocProps name="TagProps" />
 
-<TypeDocAttributes name="QdsTagButtonRootBindings" />
+<TypeDocAttributes name="QdsTagRootBindings" />
 
 ### StartIcon
 
