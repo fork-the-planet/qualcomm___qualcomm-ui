@@ -1,8 +1,0 @@
-{
-  "extends": "@qualcomm-ui/tsconfig/tsconfig.node.json",
-  "compilerOptions": {
-    "tsBuildInfoFile": "node_modules/.tmp/tsbuildinfo-node",
-    "composite": true
-  },
-  "include": ["*.ts"]
-}

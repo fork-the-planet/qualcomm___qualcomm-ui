@@ -1,5 +1,13 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 3.8.5
+
+Jun 15th, 2026
+
+### Bug Fixes
+
+- [types]: downgrade to ES2023 for broader compatibility ([81854ec](https://github.com/qualcomm/qualcomm-ui/commit/81854ec))
+
 ## 3.8.4
 
 Jun 10th, 2026

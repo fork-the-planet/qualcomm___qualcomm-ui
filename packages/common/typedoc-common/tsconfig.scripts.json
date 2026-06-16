@@ -2,7 +2,8 @@
   "extends": "@qualcomm-ui/tsconfig/tsconfig.strict.json",
   "compilerOptions": {
     "composite": true,
-    "tsBuildInfoFile": "node_modules/.tmp/tsbuildinfo-node"
+    "outDir": "node_modules/.tmp/scripts-out-tsc",
+    "tsBuildInfoFile": "node_modules/.tmp/.tsbuildinfo-scripts"
   },
   "include": ["*.ts"]
 }
