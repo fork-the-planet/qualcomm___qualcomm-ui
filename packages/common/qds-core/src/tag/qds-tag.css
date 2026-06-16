@@ -58,13 +58,17 @@
     color: var(--color-interactive-text-primary-idle);
     --icon-color: var(--color-interactive-icon-primary-idle);
 
+    /* emphasis specific hover/pressed rules */
+
     &[data-variant="link"]:hover,
-    &[data-variant="selectable"]:hover {
+    &[data-variant="selectable"]:hover,
+    &:where(a):not([data-active]):hover {
       color: var(--color-interactive-text-primary-hover);
       --icon-color: var(--color-interactive-icon-primary-hover);
     }
 
-    &[data-variant="link"]:active {
+    &[data-variant="link"]:active,
+    &:where(a):not([data-active]):active {
       color: var(--color-interactive-text-primary-pressed);
       --icon-color: var(--color-interactive-icon-primary-pressed);
     }
@@ -172,17 +176,24 @@
   }
 
   &[data-variant="link"],
-  &[data-variant="selectable"] {
+  &[data-variant="selectable"],
+  &:where(a) {
     cursor: pointer;
+  }
+
+  &:where(a) {
+    color: var(--color-interactive-text-neutral-idle);
+    text-decoration: none;
   }
 
   &[data-variant="dismissable"] {
     padding-inline-end: 0;
   }
 
-  /* interactive variants: hover */
+  /* interactive: hover */
   &[data-variant="link"]:hover,
-  &[data-variant="selectable"]:hover {
+  &[data-variant="selectable"]:hover,
+  &:where(a):not([data-active]):hover {
     background:
       linear-gradient(var(--color-interactive-background-ghost-hover) 0 0),
       var(--tag-bg-base);
@@ -190,13 +201,14 @@
     --icon-color: var(--color-interactive-icon-neutral-hover);
   }
 
-  /* link variant: underline */
-  &[data-variant="link"]:hover {
+  &[data-variant="link"]:hover,
+  &:where(a):not([data-active]):hover {
     text-decoration: underline;
   }
 
-  /* link variant: pressed state */
-  &[data-variant="link"]:active {
+  /* interactive: pressed state */
+  &[data-variant="link"]:active,
+  &:where(a):not([data-active]):active {
     background:
       linear-gradient(var(--color-interactive-background-ghost-pressed) 0 0),
       var(--tag-bg-base);
@@ -204,8 +216,8 @@
     --icon-color: var(--color-interactive-icon-neutral-pressed);
   }
 
-  /* selected */
-  &[data-selected] {
+  &[data-selected],
+  &:where(a)[data-active] {
     background: var(--tag-bg-selected);
     border-color: var(--tag-border-selected);
     color: var(--tag-text-selected);
@@ -221,7 +233,8 @@
 
   /* focus */
   &[data-variant="link"]:focus-visible,
-  &[data-variant="selectable"]:focus-visible {
+  &[data-variant="selectable"]:focus-visible,
+  &:where(a):focus-visible {
     border-color: var(--color-utility-focus-border);
     outline: solid 2px var(--color-utility-focus-border);
     outline-offset: -1px;
@@ -235,6 +248,7 @@
     border-color: var(--color-utility-disabled-border);
     color: var(--color-utility-disabled-text);
     cursor: default;
+    pointer-events: none;
     --icon-color: var(--color-utility-disabled-icon);
   }
 }

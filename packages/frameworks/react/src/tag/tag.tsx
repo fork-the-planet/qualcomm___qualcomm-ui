@@ -18,6 +18,18 @@ import {mergeProps} from "@qualcomm-ui/utils/merge-props"
 
 export interface TagProps extends QdsTagApiProps, ElementRenderProp<"button"> {
   /**
+   * Applies the active style to a link tag. Honored only when it is rendered as an
+   * anchor via {@link render}. This is purely visual; set
+   * [`aria-current`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current)
+   * on the anchor for accessibility.
+   *
+   * @since next-release
+   *
+   * @default false
+   */
+  active?: boolean
+
+  /**
    * React {@link https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children children} prop.
    */
   children?: ReactNode
@@ -75,6 +87,7 @@ export interface TagProps extends QdsTagApiProps, ElementRenderProp<"button"> {
 }
 
 export function Tag({
+  active,
   children,
   defaultSelected,
   disabled,
@@ -99,7 +112,7 @@ export function Tag({
   })
 
   const qdsApi = createQdsTagApi(
-    {disabled, emphasis, radius, selected, shape, size, variant},
+    {active, disabled, emphasis, radius, selected, shape, size, variant},
     normalizeProps,
   )
 
@@ -108,7 +121,7 @@ export function Tag({
     qdsApi.getRootBindings(),
     {
       onClick: () => {
-        if (variant === "selectable") {
+        if (variant === "selectable" && !disabled) {
           setSelected(!selected)
         }
       },
