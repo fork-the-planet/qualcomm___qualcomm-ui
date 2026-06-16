@@ -25,23 +25,23 @@ catalog:
   "@analogjs/vite-plugin-angular": 2.4.0
   "@analogjs/vitest-angular": 2.4.0
   "@angular-devkit/architect": 0.2102.1
-  "@angular-devkit/build-angular": ~21.2.12
-  "@angular-devkit/core": ~21.2.12
-  "@angular/animations": ~21.2.14
-  "@angular/build": ~21.2.12
-  "@angular/cdk": ~21.2.12
-  "@angular/cdk-experimental": ~21.2.12
-  "@angular/cli": ~21.2.12
-  "@angular/common": ~21.2.14
-  "@angular/compiler": ~21.2.14
-  "@angular/compiler-cli": ~21.2.14
-  "@angular/core": ~21.2.14
-  "@angular/forms": ~21.2.14
-  "@angular/platform-browser": ~21.2.14
-  "@angular/platform-browser-dynamic": ~21.2.14
-  "@angular/platform-server": ~21.2.14
-  "@angular/router": ~21.2.14
-  "@angular/ssr": ~21.2.12
+  "@angular-devkit/build-angular": ~21.2.15
+  "@angular-devkit/core": ~21.2.15
+  "@angular/animations": ~21.2.17
+  "@angular/build": ~21.2.15
+  "@angular/cdk": ~21.2.14
+  "@angular/cdk-experimental": ~21.2.14
+  "@angular/cli": ~21.2.15
+  "@angular/common": ~21.2.17
+  "@angular/compiler": ~21.2.17
+  "@angular/compiler-cli": ~21.2.17
+  "@angular/core": ~21.2.17
+  "@angular/forms": ~21.2.17
+  "@angular/platform-browser": ~21.2.17
+  "@angular/platform-browser-dynamic": ~21.2.17
+  "@angular/platform-server": ~21.2.17
+  "@angular/router": ~21.2.17
+  "@angular/ssr": ~21.2.15
   "@commander-js/extra-typings": 14.0.0
   "@eslint/js": 9.39.4
   "@mdx-js/react": 3.1.1
@@ -76,7 +76,7 @@ catalog:
   chalk: 5.6.2
   chokidar: 5.0.0
   execa: 9.6.0
-  esbuild: 0.27.3
+  esbuild: 0.28.1
   eslint: 9.39.4
   glob: 13.0.3
   lodash-es: 4.18.1
