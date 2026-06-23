@@ -103,8 +103,8 @@ const oxlintParityRules = {
 }
 
 const unicornRules = {
-  "unicorn/no-array-for-each": "warn",
   "unicorn/no-await-in-promise-methods": "error",
+  "unicorn/no-for-each": "warn",
   "unicorn/no-invalid-fetch-options": "error",
   "unicorn/no-invalid-remove-event-listener": "error",
   "unicorn/no-static-only-class": "error",
