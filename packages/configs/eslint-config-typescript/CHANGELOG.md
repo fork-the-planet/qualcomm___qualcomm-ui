@@ -1,5 +1,13 @@
 # @qualcomm-ui/eslint-config-typescript Changelog
 
+## 3.0.1
+
+Jun 23rd, 2026
+
+### Bug Fixes
+
+- [dependencies]: adjust rule name to account for unicorn api change ([7b782df](https://github.com/qualcomm/qualcomm-ui/commit/7b782df))
+
 ## 3.0.0
 
 Jun 10th, 2026
