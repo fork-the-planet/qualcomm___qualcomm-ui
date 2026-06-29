@@ -23,7 +23,7 @@ export interface TagProps extends QdsTagApiProps, ElementRenderProp<"button"> {
    * {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current aria-current}
    * on the anchor for accessibility.
    *
-   * @since next-release
+   * @since 1.25.0
    *
    * @default false
    */
