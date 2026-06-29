@@ -20,7 +20,7 @@ export interface TagProps extends QdsTagApiProps, ElementRenderProp<"button"> {
   /**
    * Applies the active style to a link tag. Honored only when it is rendered as an
    * anchor via {@link render}. This is purely visual; set
-   * [`aria-current`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current)
+   * {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current aria-current}
    * on the anchor for accessibility.
    *
    * @since next-release

@@ -127,8 +127,7 @@ export class TagDirective implements SignalifyInput<QdsTagApiProps>, OnInit {
 
   /**
    * Applies the active style to a link tag. Honored only on an `<a q-tag>` host.
-   * This is purely visual; set
-   * [`aria-current`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current)
+   * This is purely visual; set {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current aria-current}
    * on the anchor for accessibility.
    *
    * @since next-release
