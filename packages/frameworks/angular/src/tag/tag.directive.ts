@@ -79,7 +79,7 @@ import {QdsTagContextService} from "./qds-tag-context.service"
       },
     },
   ],
-  selector: "span[q-tag], button[q-tag], div[q-tag]",
+  selector: "span[q-tag], button[q-tag], a[q-tag], div[q-tag]",
   template: `
     <ng-content select="[q-start-icon]">
       @if (startIcon()) {
@@ -124,6 +124,19 @@ export class TagDirective implements SignalifyInput<QdsTagApiProps>, OnInit {
    * Pair with {@link selected} to enable two-way binding via `[(selected)]`.
    */
   readonly selectedChange = output<boolean>()
+
+  /**
+   * Applies the active style to a link tag. Honored only on an `<a q-tag>` host.
+   * This is purely visual; set {@link https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current aria-current}
+   * on the anchor for accessibility.
+   *
+   * @since 2.12.0
+   *
+   * @default false
+   */
+  readonly active = input<boolean | undefined, Booleanish>(undefined, {
+    transform: booleanAttribute,
+  })
 
   /**
    * Initial selected state when the component is uncontrolled.
@@ -223,8 +236,10 @@ export class TagDirective implements SignalifyInput<QdsTagApiProps>, OnInit {
 
   protected readonly trackBindings = useTrackBindings(() =>
     mergeProps(this.qdsTagApi.context().getRootBindings(), {
+      // remove `disabled` from the host to avoid invalid HTML
+      disabled: undefined,
       onclick: () => {
-        if (this.variant() === "selectable") {
+        if (this.variant() === "selectable" && !this.disabled()) {
           const state = this.selectedState()
           state.setValue(!state.value())
         }
@@ -239,6 +254,7 @@ export class TagDirective implements SignalifyInput<QdsTagApiProps>, OnInit {
       computed(() =>
         createQdsTagApi(
           {
+            active: this.active(),
             disabled: this.disabled(),
             emphasis: this.emphasis(),
             radius: this.radius(),
@@ -247,6 +263,7 @@ export class TagDirective implements SignalifyInput<QdsTagApiProps>, OnInit {
             size: this.size(),
             variant: this.variant(),
           } satisfies Explicit<QdsTagApiProps> & {
+            active?: boolean | undefined
             selected?: boolean | undefined
           },
           normalizeProps,

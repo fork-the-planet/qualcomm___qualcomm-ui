@@ -39,9 +39,16 @@ export type QdsTagRadius = QdsTagShape
 
 export type QdsTagShape = "square" | "rounded"
 
-export type QdsTagSize = "sm" | "md" | "lg"
+export type QdsTagSize = "sm" | "md" | "lg" | "xl"
 
-export type QdsTagVariant = "link" | "selectable" | "dismissable"
+/** @deprecated use `render` */
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export type QdsTagVariant__deprecated = "link"
+
+export type QdsTagVariant =
+  | "selectable"
+  | "dismissable"
+  | QdsTagVariant__deprecated
 
 export interface QdsTagApiProps {
   /**
@@ -91,28 +98,28 @@ type TagClasses = typeof tagClasses
 type PartName = AnatomyPartName<typeof tagAnatomy>
 interface Part<P extends PartName> extends AnatomyPart<"tag", P> {}
 
-export interface QdsTagSpanRootBindings extends Part<"root"> {
+export interface QdsTagCommonRootBindings extends Part<"root"> {
+  "aria-disabled"?: BooleanAriaAttr
   className: TagClasses["root"]
   "data-disabled": BooleanDataAttr
   "data-emphasis": QdsTagEmphasis
+  "data-selected": BooleanDataAttr
   "data-shape": QdsTagShape
   "data-size": QdsTagSize
   "data-variant"?: QdsTagVariant
+  tabIndex?: -1
 }
 
-export interface QdsTagButtonRootBindings extends Part<"root"> {
+export interface QdsTagElementRootBindings extends QdsTagCommonRootBindings {
+  "data-active"?: BooleanDataAttr
+}
+
+export interface QdsTagButtonRootBindings extends QdsTagCommonRootBindings {
   "aria-pressed"?: BooleanAriaAttr
-  className: TagClasses["root"]
-  "data-disabled": BooleanDataAttr
-  "data-emphasis": QdsTagEmphasis
-  "data-shape": QdsTagShape
-  "data-size": QdsTagSize
-  "data-variant"?: QdsTagVariant
-  disabled: boolean | undefined
 }
 
 export type QdsTagRootBindings =
-  | QdsTagSpanRootBindings
+  | QdsTagElementRootBindings
   | QdsTagButtonRootBindings
 
 export interface QdsTagStartIconBindings extends Part<"startIcon"> {

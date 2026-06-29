@@ -123,10 +123,11 @@ describe("Tag", () => {
     )
 
     const tag = page.getByRole("button", {name: "Label"})
-    await expect.element(tag).toBeDisabled()
+    await expect.element(tag).toHaveAttribute("aria-disabled", "true")
+    await expect.element(tag).toHaveAttribute("tabindex", "-1")
 
     await tag.click({force: true}).catch(() => {
-      // disabled buttons reject pointer events; swallow so the assertion runs
+      // pointer-events are disabled via CSS; swallow so the assertion runs
     })
 
     expect(onClick).not.toHaveBeenCalled()
@@ -249,5 +250,49 @@ describe("Tag", () => {
     })
 
     expect(onDismiss).not.toHaveBeenCalled()
+  })
+
+  test("exposes a tag rendered as an anchor as a link with an accessible name", async () => {
+    await render(<Tag render={<a href="/blog/ai" />}>Label</Tag>)
+
+    await expect.element(page.getByRole("link", {name: "Label"})).toBeVisible()
+  })
+
+  test("does not expose an anchor tag as a button", async () => {
+    await render(<Tag render={<a href="/blog/ai" />}>Label</Tag>)
+
+    await expect.element(page.getByRole("link", {name: "Label"})).toBeVisible()
+    await expect
+      .element(page.getByRole("button", {name: "Label"}))
+      .not.toBeInTheDocument()
+  })
+
+  test("does not expose pressed state on an anchor tag", async () => {
+    await render(<Tag render={<a href="/blog/ai" />}>Label</Tag>)
+
+    await expect
+      .element(page.getByRole("link", {name: "Label"}))
+      .not.toHaveAttribute("aria-pressed")
+  })
+
+  test("marks a disabled anchor tag inert via aria-disabled and tabindex without an invalid disabled attribute", async () => {
+    await render(
+      <Tag disabled render={<a href="/blog/ai" />}>
+        Label
+      </Tag>,
+    )
+
+    const link = page.getByRole("link", {name: "Label"})
+    await expect.element(link).toHaveAttribute("aria-disabled", "true")
+    await expect.element(link).toHaveAttribute("tabindex", "-1")
+    await expect.element(link).not.toHaveAttribute("disabled")
+  })
+
+  test("does not set aria-disabled or tabindex on an enabled anchor tag", async () => {
+    await render(<Tag render={<a href="/blog/ai" />}>Label</Tag>)
+
+    const link = page.getByRole("link", {name: "Label"})
+    await expect.element(link).not.toHaveAttribute("aria-disabled")
+    await expect.element(link).not.toHaveAttribute("tabindex")
   })
 })

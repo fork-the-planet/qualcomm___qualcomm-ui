@@ -34,13 +34,15 @@ Icons are supplied using the [startIcon](./#startIcon) and [endIcon](./#endIcon)
 ### Variants
 
 ::: terms
-clickable, removable, closable
+clickable, removable, closable, chip, pill, filter, toggle, anchor, hyperlink, navigation, active, current
 :::
 
-Choose from three [variants](./#variant): `link`, `selectable` and `dismissable`.
+A tag renders as one of four types:
 
-The `link` and `selectable` variants are interactive and should use a `<button>` element.
-The `dismissable` variant and tags without a variant are non-interactive and should use a `<span>` element.
+- **read-only** (default) renders static metadata. Use a `<span>`.
+- **dismissable** adds a close button. Use a `<span>`, set [variant](./#variant) to `dismissable` and pair it with the dismiss output.
+- **selectable** renders as a toggle button. Use a `<button>` and set [variant](./#variant) to `selectable`.
+- **link** renders the tag as an anchor. Use an `<a q-tag>` host with `routerLink` or `href`. Set [`aria-current`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current) on the active `<a q-tag>` host for accessibility. The optional [active](./#active) input applies the current-item styling.
 
 <QdsDemo name="TagVariantsDemo" />
 
@@ -60,7 +62,7 @@ Set the initial value using the [defaultSelected](./#defaultSelected) input, or 
 status indicator
 :::
 
-Control the visual emphasis with different colors via the [emphasis](./#emphasis) property.
+Control the visual emphasis with different colors via the [emphasis](./#emphasis) property. The default emphasis is `outline-brand`.
 
 <QdsDemo name="TagEmphasisDemo" />
 
@@ -70,7 +72,7 @@ Control the visual emphasis with different colors via the [emphasis](./#emphasis
 small, medium, large
 :::
 
-Choose from three [sizes](./#size): `sm`, `md` and `lg`. The default size is `md`.
+Choose from four [sizes](./#size): `sm`, `md`, `lg`, and `xl`. The default size is `md`.
 
 <QdsDemo name="TagSizesDemo" />
 

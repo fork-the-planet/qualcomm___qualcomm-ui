@@ -44,7 +44,7 @@ const icons = [
   ),
 ]
 
-const example = figma.code`<Tag${disabledAttr}${emphasisAttr}${shapeAttr}${sizeAttr}${startIconAttr}${endIconAttr} variant="link">${label}</Tag>`
+const example = figma.code`<Tag${disabledAttr}${emphasisAttr}${shapeAttr}${sizeAttr}${startIconAttr}${endIconAttr} render={<a href="#" />}>${label}</Tag>`
 
 export default {
   example,

@@ -1,5 +1,14 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.30.0
+
+Jun 29th, 2026
+
+### Features
+
+- [tag]: support anchor navigation with active and disabled states ([841b3b6](https://github.com/qualcomm/qualcomm-ui/commit/841b3b6))
+- [tag]: add xl size ([0e185b7](https://github.com/qualcomm/qualcomm-ui/commit/0e185b7))
+
 ## 1.29.3
 
 Jun 10th, 2026
