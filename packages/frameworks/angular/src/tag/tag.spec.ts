@@ -208,7 +208,9 @@ describe("Tag", () => {
     })
 
     const tag = page.getByRole("button", {name: "Label"})
-    await expect.element(tag).toBeDisabled()
+    await expect.element(tag).toHaveAttribute("aria-disabled", "true")
+    await expect.element(tag).toHaveAttribute("tabindex", "-1")
+    await expect.element(tag).not.toHaveAttribute("disabled")
 
     await tag.click({force: true}).catch(() => {})
 
@@ -389,5 +391,68 @@ describe("Tag", () => {
     await dismissButton.click({force: true}).catch(() => {})
 
     expect(dismissed).not.toHaveBeenCalled()
+  })
+
+  test("exposes an anchor tag as a link with an accessible name", async () => {
+    @Component({
+      imports: [TagDirective],
+      template: `
+        <a href="/blog/ai" q-tag>Label</a>
+      `,
+    })
+    class AnchorTagComponent {}
+
+    await render(AnchorTagComponent)
+
+    await expect.element(page.getByRole("link", {name: "Label"})).toBeVisible()
+  })
+
+  test("does not expose an anchor tag as a button", async () => {
+    @Component({
+      imports: [TagDirective],
+      template: `
+        <a href="/blog/ai" q-tag>Label</a>
+      `,
+    })
+    class AnchorTagNotButtonComponent {}
+
+    await render(AnchorTagNotButtonComponent)
+
+    await expect
+      .element(page.getByRole("button", {name: "Label"}))
+      .not.toBeInTheDocument()
+  })
+
+  test("marks a disabled anchor tag inert via aria-disabled and tabindex and strips the invalid disabled attribute", async () => {
+    @Component({
+      imports: [TagDirective],
+      template: `
+        <a disabled href="/blog/ai" q-tag>Label</a>
+      `,
+    })
+    class DisabledAnchorTagComponent {}
+
+    await render(DisabledAnchorTagComponent)
+
+    const link = page.getByRole("link", {name: "Label"})
+    await expect.element(link).toHaveAttribute("aria-disabled", "true")
+    await expect.element(link).toHaveAttribute("tabindex", "-1")
+    await expect.element(link).not.toHaveAttribute("disabled")
+  })
+
+  test("does not set aria-disabled or tabindex on an enabled anchor tag", async () => {
+    @Component({
+      imports: [TagDirective],
+      template: `
+        <a href="/blog/ai" q-tag>Label</a>
+      `,
+    })
+    class EnabledAnchorTagComponent {}
+
+    await render(EnabledAnchorTagComponent)
+
+    const link = page.getByRole("link", {name: "Label"})
+    await expect.element(link).not.toHaveAttribute("aria-disabled")
+    await expect.element(link).not.toHaveAttribute("tabindex")
   })
 })

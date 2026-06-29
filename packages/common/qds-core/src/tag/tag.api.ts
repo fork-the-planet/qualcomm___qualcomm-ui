@@ -9,6 +9,7 @@ import {tagClasses} from "./tag.classes.js"
 import type {
   QdsTagApi,
   QdsTagApiProps,
+  QdsTagCommonRootBindings,
   QdsTagDismissButtonBindings,
   QdsTagEndIconBindings,
   QdsTagRootBindings,
@@ -18,18 +19,23 @@ import type {
 const parts = tagAnatomy.parts
 
 export function createQdsTagApi(
-  props: QdsTagApiProps & {selected?: boolean | undefined},
+  props: QdsTagApiProps & {
+    active?: boolean | undefined
+    selected?: boolean | undefined
+  },
   normalize: PropNormalizer,
 ): QdsTagApi {
   const size = props.size || "md"
   const selected = props.variant === "selectable" && props.selected
+  const active = Boolean(props.active && props.variant == null)
 
   function isInteractiveVariant(): boolean {
     return props.variant === "link" || props.variant === "selectable"
   }
 
-  const commonBindings = {
+  const commonBindings: QdsTagCommonRootBindings = {
     ...parts.root,
+    "aria-disabled": booleanAriaAttr(props.disabled, null),
     className: tagClasses.root,
     "data-disabled": booleanDataAttr(props.disabled),
     "data-emphasis": props.emphasis || "outline-brand",
@@ -37,6 +43,7 @@ export function createQdsTagApi(
     "data-shape": props.shape || props.radius || "square",
     "data-size": size,
     "data-variant": props.variant,
+    tabIndex: props.disabled ? -1 : undefined,
   }
 
   return {
@@ -59,7 +66,10 @@ export function createQdsTagApi(
     },
     getRootBindings(): QdsTagRootBindings {
       if (!isInteractiveVariant()) {
-        return normalize.element(commonBindings)
+        return normalize.element({
+          ...commonBindings,
+          "data-active": booleanDataAttr(active),
+        })
       }
       return normalize.button({
         ...commonBindings,
@@ -67,7 +77,6 @@ export function createQdsTagApi(
           props.variant === "selectable"
             ? booleanAriaAttr(selected)
             : undefined,
-        disabled: props.disabled,
       })
     },
     getStartIconBindings(): QdsTagStartIconBindings {

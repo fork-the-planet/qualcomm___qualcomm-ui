@@ -12,11 +12,10 @@ const disabled = instance.getEnum("state", {disabled: true})
 const emphasis = instance.getString("emphasis")
 const label = instance.getString("label") || "Label"
 const shape = instance.getEnum("radius", {rounded: "rounded"})
-const size = instance.getEnum("size", {large: "lg", small: "sm"})
+const size = instance.getString("size")
 const startIcon = instance.getBoolean("icon")
 
-const figmaSize = instance.getString("size")
-const swapPropName = figmaSize === "small" ? "iconXxs" : "iconXs"
+const swapPropName = size === "sm" ? "iconXxs" : "iconXs"
 
 const startIconInstance = startIcon
   ? instance.getInstanceSwap(swapPropName)
@@ -28,7 +27,7 @@ const startIconName = startIconInstance
 const disabledAttr = disabled ? " disabled" : ""
 const emphasisAttr = emphasis ? ` emphasis="${emphasis}"` : ""
 const shapeAttr = shape ? ` shape="${shape}"` : ""
-const sizeAttr = size ? ` size="${size}"` : ""
+const sizeAttr = size === "md" ? "" : ` size="${size}"`
 const startIconAttr = startIcon ? ` startIcon="${startIconName}"` : ""
 
 const example = figma.code`<span${disabledAttr}${emphasisAttr} q-tag${shapeAttr}${sizeAttr}${startIconAttr} variant="dismissable">${label}</span>`

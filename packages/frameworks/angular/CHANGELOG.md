@@ -1,5 +1,22 @@
 # @qualcomm-ui/angular Changelog
 
+## 2.12.0
+
+Jun 29th, 2026
+
+### Features
+
+- [tag]: support anchor navigation with active and disabled states ([841b3b6](https://github.com/qualcomm/qualcomm-ui/commit/841b3b6))
+
+### Miscellaneous Chores
+
+- [code-connect]: update tag link and dismissible mappings ([700e036](https://github.com/qualcomm/qualcomm-ui/commit/700e036))
+- **deps:** update dependencies [@qualcomm-ui/qds-core@1.30.0]
+
+### Tests
+
+- [tag]: cover anchor navigation and disabled states ([ac75267](https://github.com/qualcomm/qualcomm-ui/commit/ac75267))
+
 ## 2.11.3
 
 Jun 10th, 2026
