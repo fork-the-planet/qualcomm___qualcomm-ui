@@ -155,6 +155,7 @@ export const layerStack = {
     }
   },
   syncLayers(): void {
+    let floor = 0
     for (let i = 0; i < this.layers.length; i++) {
       const layer = this.layers[i]
       layer.node.style.setProperty("--layer-index", `${i}`)
@@ -177,11 +178,39 @@ export const layerStack = {
 
       // Set the nested layer count
       layer.node.style.setProperty("--nested-layer-count", `${nestedCount}`)
+
+      // Maximum z-index of every layer below the current one. Exposed as
+      // `--layer-z-floor`
+      if (floor > 0) {
+        layer.node.style.setProperty("--layer-z-floor", `${floor}`)
+      } else {
+        layer.node.style.removeProperty("--layer-z-floor")
+      }
+
+      floor = Math.max(floor, resolveLayerZIndex(layer.node))
     }
   },
   topMostPointerBlockingLayer(): Layer | undefined {
     return [...this.pointerBlockingLayers()].slice(-1)[0]
   },
+}
+
+/**
+ * Effective z-index value for a layer which can be on the layer node itself or on
+ * the positioner parent
+ */
+function resolveLayerZIndex(node: HTMLElement): number {
+  const win = node.ownerDocument.defaultView || window
+  for (const el of [node, node.parentElement]) {
+    if (!el) {
+      continue
+    }
+    const zIndex = Number.parseInt(win.getComputedStyle(el).zIndex, 10)
+    if (!Number.isNaN(zIndex)) {
+      return zIndex
+    }
+  }
+  return 0
 }
 
 function fireCustomEvent(
