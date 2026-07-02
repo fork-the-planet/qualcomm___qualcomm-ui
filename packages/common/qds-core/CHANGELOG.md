@@ -1,5 +1,17 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.30.1
+
+Jul 1st, 2026
+
+### Bug Fixes
+
+- nested overlay z-index and unit selector position ([7d800e7](https://github.com/qualcomm/qualcomm-ui/commit/7d800e7))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/core@1.11.6]
+
 ## 1.30.0
 
 Jun 29th, 2026
