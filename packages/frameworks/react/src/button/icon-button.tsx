@@ -43,12 +43,7 @@ export function IconButton({
   return (
     <PolymorphicElement as="button" {...mergedProps}>
       {isValidElement(icon) ? (
-        <IconOrNode
-          icon={icon}
-          size={resolved.size}
-          skipWrapper
-          {...api.getIconBindings()}
-        />
+        <IconOrNode icon={icon} skipWrapper {...api.getIconBindings()} />
       ) : (
         <Icon icon={icon} {...api.getIconBindings()} />
       )}

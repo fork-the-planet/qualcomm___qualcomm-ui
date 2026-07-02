@@ -1,5 +1,13 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.30.2
+
+Jul 2nd, 2026
+
+### Bug Fixes
+
+- [button]: icon sizes ([e0994ba](https://github.com/qualcomm/qualcomm-ui/commit/e0994ba))
+
 ## 1.30.1
 
 Jul 1st, 2026
