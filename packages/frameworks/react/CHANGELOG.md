@@ -1,5 +1,17 @@
 # @qualcomm-ui/react Changelog
 
+## 1.25.2
+
+Jul 2nd, 2026
+
+### Bug Fixes
+
+- [button]: icon sizes ([e0994ba](https://github.com/qualcomm/qualcomm-ui/commit/e0994ba))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core@1.30.2]
+
 ## 1.25.1
 
 Jul 1st, 2026
