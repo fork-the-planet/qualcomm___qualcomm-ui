@@ -48,10 +48,13 @@ export function IconOrNode({
   className,
   icon: iconOrNode,
   ref,
+  size,
   skipWrapper,
   ...props
 }: IconOrNodeProps) {
   if (isValidElement(iconOrNode)) {
+    // `size` intentionally does not apply to a ReactNode icon: forwarding a QDS
+    // size token onto a raw svg produces an invalid `width`/`height` attribute.
     return skipWrapper ? (
       cloneElement(
         iconOrNode,
@@ -75,6 +78,7 @@ export function IconOrNode({
       className={className}
       data-test-id="qui-icon"
       icon={iconOrNode as LucideIcon}
+      size={size}
       {...(props as any)}
     />
   )

@@ -488,24 +488,30 @@
   min-width: var(--icon-width, var(--icon-size));
   width: var(--icon-width, var(--icon-size));
 
-  &[data-size="sm"] {
-    /* same size for default and compact densities */
-    --icon-size: 12px;
+  & > svg {
+    display: block;
+    height: 100%;
+    width: 100%;
   }
-  &[data-size="md"] {
-    --icon-size: 16px;
+
+  /* Scoped to the icon part so this scale outranks `.qui-icon__root[data-size]`
+     when a component icon routes through `<Icon>`. */
+  &[data-button-part="icon"] {
+    &[data-size="sm"] {
+      --icon-size: 12px;
+    }
+    &[data-size="md"] {
+      --icon-size: 16px;
+    }
+    &[data-size="lg"] {
+      --icon-size: 20px;
+    }
     &[data-density="compact"] {
       --icon-size: 12px;
     }
   }
-  &[data-size="lg"] {
-    --icon-size: 20px;
-    &[data-density="compact"] {
-      --icon-size: 16px;
-    }
-  }
 
-  &[data-icon-button-part="root"] {
+  &[data-icon-button-part="icon"] {
     &[data-size="sm"] {
       --icon-size: 16px;
       &[data-density="compact"] {
