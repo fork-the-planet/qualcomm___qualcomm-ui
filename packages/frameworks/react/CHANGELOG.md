@@ -1,5 +1,17 @@
 # @qualcomm-ui/react Changelog
 
+## 1.25.1
+
+Jul 1st, 2026
+
+### Bug Fixes
+
+- nested overlay z-index and unit selector position ([7d800e7](https://github.com/qualcomm/qualcomm-ui/commit/7d800e7))
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core@1.30.1, @qualcomm-ui/core@1.11.6, @qualcomm-ui/react-core@1.5.8]
+
 ## 1.25.0
 
 Jun 29th, 2026
