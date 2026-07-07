@@ -54,8 +54,8 @@ export function NumberInputUnitSelect({
 
   return (
     <Menu.Root size={menuSize}>
-      <Menu.Trigger>
-        <button id={id} {...buttonBindings}>
+      <Menu.Trigger id={id}>
+        <button {...buttonBindings}>
           <span>{displayLabel}</span>
           <NumberInputUnitSelectTriggerContent />
         </button>

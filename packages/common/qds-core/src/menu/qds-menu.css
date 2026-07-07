@@ -75,7 +75,10 @@
   outline: none;
   padding: var(--spacing-40) 0;
   transform-origin: var(--transform-origin);
-  z-index: calc(var(--z-index-dropdown) + var(--layer-index));
+  z-index: max(
+    calc(var(--z-index-dropdown) + var(--layer-index)),
+    calc(var(--layer-z-floor, 0) + 1)
+  );
 
   &[data-state="open"] {
     animation-duration: var(--animation-duration-fast);
