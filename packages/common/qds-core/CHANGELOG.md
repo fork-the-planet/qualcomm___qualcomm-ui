@@ -1,5 +1,13 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.30.3
+
+Jul 7th, 2026
+
+### Bug Fixes
+
+- [select]: use updated label size from figma ([277ee34](https://github.com/qualcomm/qualcomm-ui/commit/277ee34))
+
 ## 1.30.2
 
 Jul 2nd, 2026
