@@ -185,6 +185,7 @@
     min-height: 42px;
     min-width: var(--reference-width);
     overflow: hidden;
+    overscroll-behavior: unset;
   }
 
   &[data-focus-visible]:not([data-disabled]) {
