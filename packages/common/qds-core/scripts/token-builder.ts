@@ -120,6 +120,9 @@ export class FigmaTokenBuilder {
     const formattedVariableOutput = formattedVariables({
       dictionary,
       format: propertyFormatNames.css,
+      formatting: {
+        commentStyle: "none",
+      },
       outputReferences,
       usesDtcg: true,
     })
