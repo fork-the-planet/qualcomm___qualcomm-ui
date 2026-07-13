@@ -33,7 +33,7 @@ export function FontTable({data = []}: FontTableProps): ReactElement {
   return (
     <div key={key} className="w-full">
       <div className="doc-props-list__root bottom-border block md:hidden">
-        {data.map(({tailwindClass, variable}) => {
+        {data.map(({tailwindClasses, variable}) => {
           return (
             <div key={variable} className="doc-props-list-item__root">
               <div className="doc-props-list-item__name-wrapper"></div>
@@ -41,7 +41,7 @@ export function FontTable({data = []}: FontTableProps): ReactElement {
                 <div className="doc-props__content">
                   <div className="doc-props__title">Tailwind Class</div>
                   <code className="fit bg-transparent! font-mono text-sm">
-                    {tailwindClass}
+                    {tailwindClasses.join("\n")}
                   </code>
                 </div>
                 <div className="doc-props__content">
@@ -80,10 +80,10 @@ export function FontTable({data = []}: FontTableProps): ReactElement {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {data.map(({tailwindClass, variable}) => {
+          {data.map(({tailwindClasses, variable}) => {
             return (
               <Table.Row key={variable}>
-                <Table.Cell>{tailwindClass}</Table.Cell>
+                <Table.Cell>{tailwindClasses.join("\n")}</Table.Cell>
                 <Table.Cell>{variable}</Table.Cell>
                 <Table.Cell>
                   <span

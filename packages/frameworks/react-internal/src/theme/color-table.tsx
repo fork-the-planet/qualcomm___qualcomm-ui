@@ -36,7 +36,7 @@ export function ColorTable({data = []}: ColorTableProps): ReactElement {
   return (
     <div key={key} className="w-full">
       <div className="doc-props-list__root bottom-border block sm:hidden">
-        {data.map(({tailwindClass, variable}) => {
+        {data.map(({tailwindClasses, variable}) => {
           return (
             <div key={variable} className="doc-props-list-item__root">
               <div className="doc-props-list-item__name-wrapper"></div>
@@ -49,8 +49,8 @@ export function ColorTable({data = []}: ColorTableProps): ReactElement {
                 </div>
                 <div className="doc-props__content">
                   <div className="doc-props__title">Tailwind Class</div>
-                  <code className="fit bg-transparent! font-mono">
-                    {tailwindClass}
+                  <code className="fit bg-transparent! font-mono whitespace-pre-line">
+                    {tailwindClasses.join("\n")}
                   </code>
                 </div>
                 <div className="doc-props__content">
@@ -85,11 +85,13 @@ export function ColorTable({data = []}: ColorTableProps): ReactElement {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {data.map(({tailwindClass, variable}) => {
+          {data.map(({tailwindClasses, variable}) => {
             return (
               <Table.Row key={variable}>
                 <Table.Cell>{variable}</Table.Cell>
-                <Table.Cell>{tailwindClass}</Table.Cell>
+                <Table.Cell className="whitespace-pre-line">
+                  {tailwindClasses.join("\n")}
+                </Table.Cell>
                 <Table.Cell
                   className="h-8"
                   style={{
