@@ -1,7 +1,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {useEffect, useState} from "react"
+import {type ReactElement, useEffect, useState} from "react"
 
 import {Table} from "@qualcomm-ui/react/table"
 import type {BasicThemeData} from "@qualcomm-ui/tailwind-plugin/theme"
@@ -12,7 +12,7 @@ interface SpacingTableProps {
   data: Required<BasicThemeData>[]
 }
 
-export function SpacingTable({data = []}: SpacingTableProps) {
+export function SpacingTable({data = []}: SpacingTableProps): ReactElement {
   // we need to force a re-render after mount to reflect the computed property
   // values.
   const [key, setKey] = useState<number>(0)

@@ -1,7 +1,7 @@
 // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-import {useEffect, useState} from "react"
+import {type ReactElement, useEffect, useState} from "react"
 
 import {useTheme} from "@qualcomm-ui/react-router-utils/client"
 import {Table} from "@qualcomm-ui/react/table"
@@ -13,7 +13,7 @@ interface ColorTableProps {
   data: ColorData[]
 }
 
-export function ColorTable({data = []}: ColorTableProps) {
+export function ColorTable({data = []}: ColorTableProps): ReactElement {
   // we need to force a re-render after mount and on theme change to reflect the
   // computed property values.
   const [theme] = useTheme()
