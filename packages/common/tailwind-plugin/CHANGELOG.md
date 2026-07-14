@@ -1,5 +1,13 @@
 # @qualcomm-ui/tailwind-plugin Changelog
 
+## 1.8.0
+
+Jul 13th, 2026
+
+### Features
+
+- [next-gen-plugin]: consolidate plugin generation and variable documentation, update exported variables ([e9264eb](https://github.com/qualcomm/qualcomm-ui/commit/e9264eb))
+
 ## 1.7.4
 
 Jun 10th, 2026

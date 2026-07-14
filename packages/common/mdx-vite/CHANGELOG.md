@@ -1,5 +1,13 @@
 # @qualcomm-ui/mdx-vite Changelog
 
+## 3.8.6
+
+Jul 13th, 2026
+
+### Code Refactoring
+
+- remove unused internal functions ([7163ecc](https://github.com/qualcomm/qualcomm-ui/commit/7163ecc))
+
 ## 3.8.5
 
 Jun 15th, 2026

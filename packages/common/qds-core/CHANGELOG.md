@@ -1,5 +1,21 @@
 # @qualcomm-ui/qds-core Changelog
 
+## 1.31.0
+
+Jul 13th, 2026
+
+### Features
+
+- [tokens]: build and export design token data with comments ([31708c9](https://github.com/qualcomm/qualcomm-ui/commit/31708c9))
+
+### Styles
+
+- update design tokens ([a56caa6](https://github.com/qualcomm/qualcomm-ui/commit/a56caa6))
+
+### Build System
+
+- omit token comments from CSS output ([68c2602](https://github.com/qualcomm/qualcomm-ui/commit/68c2602))
+
 ## 1.30.4
 
 Jul 10th, 2026
