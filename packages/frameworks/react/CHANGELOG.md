@@ -1,5 +1,13 @@
 # @qualcomm-ui/react Changelog
 
+## 1.25.5
+
+Jul 13th, 2026
+
+### Miscellaneous Chores
+
+- **deps:** update dependencies [@qualcomm-ui/qds-core@1.31.0]
+
 ## 1.25.4
 
 Jul 10th, 2026
