@@ -1,5 +1,13 @@
 # @qualcomm-ui/react Changelog
 
+## 1.26.1
+
+Jul 17th, 2026
+
+### Bug Fixes
+
+- [docs]: use correct since tags for component interfaces that extend from another package ([1fc6c24](https://github.com/qualcomm/qualcomm-ui/commit/1fc6c24))
+
 ## 1.26.0
 
 Jul 16th, 2026
